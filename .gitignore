@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+/Data
+/MzghLib
+/packages
+/Test
+/Api
+/CoreTest/bin/Debug/netcoreapp3.1
+/CoreTest/obj
+/CoreData/bin
+/CoreData/obj
+/CoreApi/bin
+/CoreApi/obj
+/Client/bin
+/Client/obj
