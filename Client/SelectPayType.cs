@@ -464,9 +464,9 @@ namespace Client
                     log.Info("挂号成功");
                     UIMessageTip.ShowOk("挂号成功!");
 
-                    //打印单据
-                    MessageBox.Show("打印单据");
+                    //打印单据 
                     Print(pay_string);
+                    Print(pay_string, 2);
 
                     this.Close();
                 }
@@ -488,12 +488,10 @@ namespace Client
             }
 
         }
-        string title = "挂号收费明细";
-        public void Print(string paystring)
+        string printPaystr = "";
+        public void Print(string paystring, int type = 1)
         {
-            title = paystring;
-          
-
+            printPaystr = paystring;
             //打印预览            
             PrintPreviewDialog ppd = new PrintPreviewDialog();
             PrintDocument pd = new PrintDocument();
@@ -501,13 +499,20 @@ namespace Client
             Margins margin = new Margins(10, 10, 10, 10);
             pd.DefaultPageSettings.Margins = margin;
             int height = 300;
-             
+
             //纸张设置默认
             PaperSize pageSize = new PaperSize("First custom size", (int)(58 * 100 / 25.4), height);//58mm   转绘图宽度
             //PaperSize pageSize = new PaperSize("First custom size", 300,400);//58mm   转绘图宽度
             pd.DefaultPageSettings.PaperSize = pageSize;
             //打印事件设置            
-            pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            if (type == 1)
+            {
+                pd.PrintPage += new PrintPageEventHandler(pd_PrintPage);
+            }
+            else if (type == 2)
+            {
+                pd.PrintPage += new PrintPageEventHandler(yy_PrintPage);
+            }
             ppd.Document = pd;
             ppd.ShowDialog();
             try
@@ -522,26 +527,48 @@ namespace Client
 
         }
 
+        /// <summary>
+        /// 患者打印内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        { 
+            ComboPrintContent(e, 1);
+        }
+
+        /// <summary>
+        /// 医院打印内容
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void yy_PrintPage(object sender, PrintPageEventArgs e)
         {
-            Font font = new Font("Arial", 14, System.Drawing.FontStyle.Bold);
-            string text = title;
+
+            ComboPrintContent(e, 2);
+        }
+
+        public void ComboPrintContent(PrintPageEventArgs e,int type = 1)
+        {
+            Font font = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
+
             int yLocation = e.MarginBounds.Y;
             int center = e.PageSettings.PaperSize.Width / 2;
             int heightStep = 0;
 
-            //打印标题
-            SizeF size = e.Graphics.MeasureString("挂号收费明细", font);
+            //打印标题 
+            string title = "挂号收费明细";
+            SizeF size = e.Graphics.MeasureString(title, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
-            e.Graphics.DrawString("挂号收费明细", font, System.Drawing.Brushes.Black, center - size.Width / 2, yLocation);
+            e.Graphics.DrawString(title, font, System.Drawing.Brushes.Black, center - size.Width / 2, yLocation);
             yLocation += heightStep;
 
             yLocation += 5;
 
             //患者信息
-            font = new Font("Arial", 10, System.Drawing.FontStyle.Bold);
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
             var ptext = "卡号：" + GuaHao.PatientVM.patient_id;
-             size = e.Graphics.MeasureString(ptext, font);
+            size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
             e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
             yLocation += heightStep;
@@ -550,16 +577,24 @@ namespace Client
             heightStep = Convert.ToInt32(size.Height * 1.3);
             e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
             yLocation += heightStep;
-             
 
-            //挂号信息（科室，号类，医生，序号）
-            font = new Font("Arial", 10, System.Drawing.FontStyle.Bold);
-            //ptext = vm.record_sn + " " + vm.group_name + " " + vm.clinic_name + " " + vm.doctor_name;
-            //size = e.Graphics.MeasureString(ptext, font);
-            //heightStep = Convert.ToInt32(size.Height * 1.3);
-            //e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, center - size.Width / 2, yLocation);
-            //yLocation += heightStep;
-            ptext = vm.unit_name + " " + vm.group_name + " " + vm.clinic_name + " " + vm.doctor_name;
+
+
+            //挂号信息（时间，科室，号类，医生，序号）
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
+            ptext = "时间：" + vm.request_date.ToShortDateString() + " " + (vm.ap == "a" ? "上午" : "下午");
+            size = e.Graphics.MeasureString(ptext, font);
+            heightStep = Convert.ToInt32(size.Height * 1.3);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
+            yLocation += heightStep;
+
+            ptext = vm.unit_name + " " + vm.group_name;
+            size = e.Graphics.MeasureString(ptext, font);
+            heightStep = Convert.ToInt32(size.Height * 1.3);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
+            yLocation += heightStep;
+
+            ptext = vm.clinic_name + " " + vm.doctor_name;
             size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
             e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
@@ -567,17 +602,19 @@ namespace Client
 
 
             //打印收费项目
-            font = new Font("Arial",8, System.Drawing.FontStyle.Bold);
-            size = e.Graphics.MeasureString("收费项目", font);
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
+            ptext = "收费项目" + "(总计"+ chargeItems.Sum(p=>p.effective_price)+")";
+            //ptext = "收费项目";
+            size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
-            e.Graphics.DrawString("收费项目", font, System.Drawing.Brushes.Black, 10 , yLocation);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
             yLocation += heightStep;
 
             foreach (var item in chargeItems)
             {
                 //打印支付内容
-                font = new Font("Arial", 6, System.Drawing.FontStyle.Regular); 
-                string payitem = "项目" + item.item_no+ ":"+ item.name.Trim() + "，金额:" + item.effective_price + "元";
+                font = new Font("Arial", 6, System.Drawing.FontStyle.Regular);
+                string payitem = "项目" + item.item_no + ":" + item.name.Trim() + "，金额:" + item.effective_price + "元";
                 size = e.Graphics.MeasureString(payitem, font);
                 heightStep = Convert.ToInt32(size.Height * 1.3);
                 e.Graphics.DrawString(payitem, font, System.Drawing.Brushes.Black, 10, yLocation);
@@ -586,15 +623,16 @@ namespace Client
 
             yLocation += 5;
 
-            font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
-            size = e.Graphics.MeasureString("支付信息", font);
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
+            ptext = "支付信息" + "(总计：" + vm.je + ")";
+            size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
-            e.Graphics.DrawString("支付信息", font, System.Drawing.Brushes.Black, 10, yLocation);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
             yLocation += heightStep;
 
             //处理多重支付
-            var pay_method_arr = title.Split(',');
-           
+            var pay_method_arr = printPaystr.Split(',');
+
             foreach (var pay_method in pay_method_arr)
             {
                 var pay_detail = pay_method.Split('-');
@@ -603,38 +641,35 @@ namespace Client
                 var out_trade_no = pay_detail[2];//订单编号
 
                 //打印支付内容
-                font = new Font("Arial", 6, System.Drawing.FontStyle.Regular); 
-                string payitem ="支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge+"元";
+                font = new Font("Arial", 6, System.Drawing.FontStyle.Regular);
+                string payitem = "支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge + "元";
                 size = e.Graphics.MeasureString(payitem, font);
                 heightStep = Convert.ToInt32(size.Height * 1.3);
-                e.Graphics.DrawString(payitem, font, System.Drawing.Brushes.Black, 10, yLocation); 
+                e.Graphics.DrawString(payitem, font, System.Drawing.Brushes.Black, 10, yLocation);
                 yLocation += heightStep;
             }
             yLocation += 5;
-            font = new Font("Arial",6, System.Drawing.FontStyle.Regular);
-            size = e.Graphics.MeasureString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font);
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Regular);
+            ptext = "打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
-            e.Graphics.DrawString("打印时间：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), font, System.Drawing.Brushes.Black, 10, yLocation);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
             yLocation += heightStep;
 
-            //while (text.Length > 0)
-            //{
-            //    string printStr;
-            //    if (text.Length > 13)
-            //    {
-            //        printStr = text.Substring(0, 13);
-            //        text = text.Substring(13);
-            //    }
-            //    else
-            //    {
-            //        printStr = text;
-            //        text = "";
-            //    }
-            //    SizeF size = e.Graphics.MeasureString(printStr, font);
-            //    heightStep = Convert.ToInt32(size.Height * 1.3);
-            //    e.Graphics.DrawString(printStr, font, System.Drawing.Brushes.Black, center - size.Width / 2, yLocation);
-            //    yLocation += heightStep;
-            //}
+            if (type == 1)
+            { 
+                ptext = "患者存单"; 
+            }
+            else if(type == 2)
+            {
+                ptext = "医院存单"; 
+            }
+            font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
+            size = e.Graphics.MeasureString(ptext, font);
+            heightStep = Convert.ToInt32(size.Height * 1.3);
+            e.Graphics.DrawString(ptext, font, System.Drawing.Brushes.Black, 10, yLocation);
+            yLocation += heightStep;
+
         }
 
         private void btnSubmitCombi_Click(object sender, EventArgs e)

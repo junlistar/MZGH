@@ -16,9 +16,9 @@ namespace CoreApi.Controllers
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class GuaHaoController : ApiControllerBase
-    { 
+    {
         private readonly ILogger<WeatherForecastController> _logger;
-          
+
         private readonly IUnitRepository _unitRepository;
         private readonly IGhRequestRepository _repository;
         private readonly IPatientRepository _patientRepository;
@@ -86,7 +86,7 @@ namespace CoreApi.Controllers
             {
                 var ar = client.BeginConnect("10.102.41.147", 1433, null, null);//host是主机不包含端口,port就是端口了
                 ar.AsyncWaitHandle.WaitOne(1000);
-                return Result<bool>( ResultStatus.Success, client.Connected, wt.ElapsedMilliseconds.ToString());
+                return Result<bool>(ResultStatus.Success, client.Connected, wt.ElapsedMilliseconds.ToString());
             }
             catch (Exception e)
             {
@@ -99,7 +99,7 @@ namespace CoreApi.Controllers
                 client.Close();
                 wt.Stop();
                 Log.Information(string.Format("耗时:{0}", wt.ElapsedMilliseconds));
-            } 
+            }
             //return _patientRepository.TestDBConnection();
         }
 
@@ -153,7 +153,7 @@ namespace CoreApi.Controllers
 
 
         }
-     
+
 
         /// <summary>
         /// 根据卡号获取用户信息
@@ -203,8 +203,24 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
-            } 
+            }
+        } 
+        public ResponseResult<int> EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
+           string home_district, string home_street, string occupation_type, string response_type, string charge_type,
+           string relation_name, int marrycode, string addition_no1, string employer_name, string opera)
+        {
+            Log.Information($"EditUserInfoPage,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{relation_name},{marrycode},{addition_no1},{employer_name},{opera}");
+            try
+            {
+                return _patientRepository.EditUserInfoPage(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, relation_name, marrycode, addition_no1, employer_name, opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
         }
+
 
         public ResponseResult<bool> GuaHao(string patient_id, string record_sn, string pay_string, string opera)
         {
@@ -259,7 +275,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        public ResponseResult<List<GhDeposit>> GetGhDepositByStatus(string pid, int times, int status, int cheque_type,int item_no)
+        public ResponseResult<List<GhDeposit>> GetGhDepositByStatus(string pid, int times, int status, int cheque_type, int item_no)
         {
             Log.Information($"GetGhDepositByStatus,{pid},{times},{status},{cheque_type},{item_no}");
             var list = new List<GhDeposit>();
@@ -274,7 +290,7 @@ namespace CoreApi.Controllers
             }
             return list;
         }
- 
+
         public ResponseResult<string> Refund(string patient_id, int ledger_sn, string cheque_type, string item_no, decimal charge, string opera, int manual = 0)
         {
             Log.Information($"Refund,{patient_id},{ledger_sn},{cheque_type},{item_no},{charge},{opera},{manual}");
@@ -286,7 +302,7 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<string>(ex.Message);
-            } 
+            }
         }
 
         public ResponseResult<List<Unit>> GetUnits()
@@ -319,7 +335,7 @@ namespace CoreApi.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex.Message); 
+                Log.Error(ex.Message);
                 return ErrorResult<IEnumerable<GhSearch>>(ex.Message);
             }
             return list;
@@ -449,7 +465,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        public ResponseResult<List<Patient>>  GetPatientByBarcode(string barcode)
+        public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {
             Log.Information($"GetPatientByBarcode");
             var list = new List<Patient>();
@@ -511,10 +527,11 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
-            } 
+            }
         }
 
-        public ResponseResult<int> DeleteBaseRequest(string request_sn) {
+        public ResponseResult<int> DeleteBaseRequest(string request_sn)
+        {
 
             Log.Information($"DeleteBaseRequest,{request_sn}");
             try
@@ -525,7 +542,7 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
-            } 
+            }
         }
         public ResponseResult<List<BaseRequest>> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day)
         {
@@ -539,7 +556,7 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<BaseRequest>>(ex.Message);
-            } 
+            }
         }
 
         public ResponseResult<List<BaseRequest>> GetRequestsByDate(string begin, string end)
@@ -554,7 +571,7 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<BaseRequest>>(ex.Message);
-            } 
+            }
         }
 
         public ResponseResult<int> CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
@@ -569,8 +586,8 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
-            } 
-        } 
+            }
+        }
 
         public ResponseResult<string> GetNewPatientId()
         {
@@ -584,7 +601,7 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<string>(ex.Message);
-            } 
+            }
 
         }
 

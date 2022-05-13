@@ -35,12 +35,13 @@
             this.txtbarcode = new Sunny.UI.UITextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtname = new Sunny.UI.UITextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtpname = new Sunny.UI.UITextBox();
+            this.txtrelationname = new Sunny.UI.UITextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtsno = new Sunny.UI.UITextBox();
@@ -48,13 +49,13 @@
             this.txthicno = new Sunny.UI.UITextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.uiTextBox13 = new Sunny.UI.UITextBox();
+            this.txtemployer_name = new Sunny.UI.UITextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtZhiye = new Sunny.UI.UITextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.uiTextBox15 = new Sunny.UI.UITextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.uiTextBox16 = new Sunny.UI.UITextBox();
+            this.txtsbh = new Sunny.UI.UITextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtTel = new Sunny.UI.UITextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -72,7 +73,6 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -167,6 +167,15 @@
             this.txtname.TabIndex = 7;
             this.txtname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(206, 8);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(17, 21);
+            this.label21.TabIndex = 40;
+            this.label21.Text = "*";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -212,18 +221,18 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "生日";
             // 
-            // txtpname
+            // txtrelationname
             // 
-            this.txtpname.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtpname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtpname.Location = new System.Drawing.Point(700, 200);
-            this.txtpname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtpname.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtpname.Name = "txtpname";
-            this.txtpname.ShowText = false;
-            this.txtpname.Size = new System.Drawing.Size(158, 29);
-            this.txtpname.TabIndex = 17;
-            this.txtpname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtrelationname.Location = new System.Drawing.Point(700, 200);
+            this.txtrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtrelationname.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtrelationname.Name = "txtrelationname";
+            this.txtrelationname.ShowText = false;
+            this.txtrelationname.Size = new System.Drawing.Size(158, 29);
+            this.txtrelationname.TabIndex = 17;
+            this.txtrelationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label9
             // 
@@ -281,11 +290,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(635, 241);
+            this.label12.Location = new System.Drawing.Point(620, 241);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(58, 21);
+            this.label12.Size = new System.Drawing.Size(74, 21);
             this.label12.TabIndex = 22;
-            this.label12.Text = "医疗证";
+            this.label12.Text = "医疗证号";
             // 
             // label13
             // 
@@ -296,18 +305,18 @@
             this.label13.TabIndex = 20;
             this.label13.Text = "婚姻";
             // 
-            // uiTextBox13
+            // txtemployer_name
             // 
-            this.uiTextBox13.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTextBox13.Location = new System.Drawing.Point(418, 278);
-            this.uiTextBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox13.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox13.Name = "uiTextBox13";
-            this.uiTextBox13.ShowText = false;
-            this.uiTextBox13.Size = new System.Drawing.Size(440, 29);
-            this.uiTextBox13.TabIndex = 23;
-            this.uiTextBox13.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtemployer_name.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtemployer_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtemployer_name.Location = new System.Drawing.Point(418, 278);
+            this.txtemployer_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtemployer_name.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtemployer_name.Name = "txtemployer_name";
+            this.txtemployer_name.ShowText = false;
+            this.txtemployer_name.Size = new System.Drawing.Size(440, 29);
+            this.txtemployer_name.TabIndex = 23;
+            this.txtemployer_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label14
             // 
@@ -354,6 +363,7 @@
             this.uiTextBox15.Size = new System.Drawing.Size(187, 29);
             this.uiTextBox15.TabIndex = 27;
             this.uiTextBox15.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiTextBox15.Visible = false;
             // 
             // label16
             // 
@@ -363,19 +373,20 @@
             this.label16.Size = new System.Drawing.Size(74, 21);
             this.label16.TabIndex = 26;
             this.label16.Text = "合同单位";
+            this.label16.Visible = false;
             // 
-            // uiTextBox16
+            // txtsbh
             // 
-            this.uiTextBox16.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox16.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTextBox16.Location = new System.Drawing.Point(700, 317);
-            this.uiTextBox16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox16.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox16.Name = "uiTextBox16";
-            this.uiTextBox16.ShowText = false;
-            this.uiTextBox16.Size = new System.Drawing.Size(158, 29);
-            this.uiTextBox16.TabIndex = 29;
-            this.uiTextBox16.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtsbh.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtsbh.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtsbh.Location = new System.Drawing.Point(700, 317);
+            this.txtsbh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtsbh.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtsbh.Name = "txtsbh";
+            this.txtsbh.ShowText = false;
+            this.txtsbh.Size = new System.Drawing.Size(158, 29);
+            this.txtsbh.TabIndex = 29;
+            this.txtsbh.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label17
             // 
@@ -577,6 +588,7 @@
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "重新";
             this.btnReset.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnExit
             // 
@@ -590,6 +602,7 @@
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblTitle
             // 
@@ -610,15 +623,6 @@
             this.label20.Size = new System.Drawing.Size(17, 21);
             this.label20.TabIndex = 39;
             this.label20.Text = "*";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(206, 8);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(17, 21);
-            this.label21.TabIndex = 40;
-            this.label21.Text = "*";
             // 
             // label22
             // 
@@ -663,9 +667,11 @@
             // lblmsg
             // 
             this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmsg.ForeColor = System.Drawing.Color.Red;
             this.lblmsg.Location = new System.Drawing.Point(107, 426);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(751, 23);
+            this.lblmsg.Style = Sunny.UI.UIStyle.Custom;
             this.lblmsg.TabIndex = 44;
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -689,13 +695,13 @@
             this.Controls.Add(this.label19);
             this.Controls.Add(this.txtTel);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.uiTextBox16);
+            this.Controls.Add(this.txtsbh);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.uiTextBox15);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.txtZhiye);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.uiTextBox13);
+            this.Controls.Add(this.txtemployer_name);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txthicno);
@@ -704,7 +710,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txthomedistrict);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.txtpname);
+            this.Controls.Add(this.txtrelationname);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -745,7 +751,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private Sunny.UI.UITextBox txtpname;
+        private Sunny.UI.UITextBox txtrelationname;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private Sunny.UI.UITextBox txtsno;
@@ -753,13 +759,13 @@
         private Sunny.UI.UITextBox txthicno;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private Sunny.UI.UITextBox uiTextBox13;
+        private Sunny.UI.UITextBox txtemployer_name;
         private System.Windows.Forms.Label label14;
         private Sunny.UI.UITextBox txtZhiye;
         private System.Windows.Forms.Label label15;
         private Sunny.UI.UITextBox uiTextBox15;
         private System.Windows.Forms.Label label16;
-        private Sunny.UI.UITextBox uiTextBox16;
+        private Sunny.UI.UITextBox txtsbh;
         private System.Windows.Forms.Label label17;
         private Sunny.UI.UITextBox txtTel;
         private System.Windows.Forms.Label label18;

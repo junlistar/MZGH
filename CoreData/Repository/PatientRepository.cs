@@ -95,7 +95,7 @@ a.patient_id=@patient_id ";
 
                 string sql = @"update mz_patient_mi
 set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
-home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera
+home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera 
 where patient_id=@patient_id";
                 para = new DynamicParameters();
                 para.Add("@social_no", sno);
@@ -155,6 +155,95 @@ home_district,home_street,occupation_type,response_type,charge_type,enter_date,u
 
 
         }
+
+        public int EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
+            string home_district, string home_street, string occupation_type, string response_type, string charge_type,
+            string relation_name, int marrycode, string addition_no1, string employer_name, string opera)
+        {
+            //查询是否存在
+            string issql = "select * from mz_patient_mi where patient_id = @patient_id";
+            var para = new DynamicParameters();
+            if (pid.Length == 7)
+            {
+                pid = "000" + pid + "00";
+            }
+            para.Add("@patient_id", pid);
+            var list = Select(issql, para);
+            if (list != null && list.Count > 0)
+            {
+                //修改
+
+                string sql = @"update mz_patient_mi
+set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
+home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,
+update_date=@update_date,update_opera=@update_opera,relation_name=@relation_name,marry_code=@marry_code,addition_no1=@addition_no1,employer_name=@employer_name
+where patient_id=@patient_id";
+                para = new DynamicParameters();
+                para.Add("@social_no", sno);
+                para.Add("@hic_no", hicno);
+                para.Add("@p_bar_code", barcode);
+                para.Add("@name", name);
+                para.Add("@sex", sex);
+                para.Add("@birthday", birthday);
+                para.Add("@tel", tel);
+                para.Add("@home_district", home_district);
+                para.Add("@home_street", home_street);
+                para.Add("@occupation_type", occupation_type);
+                para.Add("@response_type", response_type);
+                para.Add("@charge_type", charge_type);
+                para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
+                para.Add("@update_opera", opera);
+                para.Add("@relation_name", relation_name);
+                para.Add("@marry_code", marrycode);
+                para.Add("@addition_no1", addition_no1);
+                para.Add("@employer_name", employer_name);
+                para.Add("@patient_id", pid);
+
+                return Update(sql, para);
+            }
+            else
+            {
+                //新增
+
+                string sql = @"insert into mz_patient_mi(patient_id,social_no,hic_no,p_bar_code,name,sex,birthday,home_tel,
+balance,max_times,max_ledger_sn,max_item_sn,max_receipt_sn,
+home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date,enter_opera,update_opera,
+relation_name,marry_code,addition_no1,employer_name) values
+(@patient_id,@social_no,@hic_no,@p_bar_code,@name,@sex,@birthday,@home_tel,'0',0,0,0,0,
+@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date,@enter_opera,@update_opera,
+@relation_name,@marry_code,@addition_no1,@employer_name)";
+
+                para = new DynamicParameters();
+                para.Add("@patient_id", pid);
+                para.Add("@social_no", sno);
+                para.Add("@hic_no", hicno);
+                para.Add("@p_bar_code", barcode);
+                para.Add("@name", name);
+                para.Add("@sex", int.Parse(sex));
+                para.Add("@birthday", birthday);
+                para.Add("@home_tel", tel);
+
+                para.Add("@home_district", home_district);
+                para.Add("@home_street", home_street);
+                para.Add("@occupation_type", occupation_type);
+                para.Add("@response_type", response_type);
+                para.Add("@charge_type", charge_type);
+
+                para.Add("@enter_date", DateTime.Now);
+                para.Add("@update_date", DateTime.Now);
+
+                para.Add("@enter_opera", opera);
+                para.Add("@update_opera", opera);
+
+                para.Add("@relation_name", relation_name);
+                para.Add("@marry_code", marrycode);
+                para.Add("@addition_no1", addition_no1);
+                para.Add("@employer_name", employer_name);
+
+                return Update(sql, para);
+            }
+             
+        } 
 
         //未加事务
         public bool GuaHao11(string patient_id, string record_sn, string pay_string, string opera)

@@ -18,6 +18,11 @@ namespace Data.IRepository
         int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera);
 
+        int EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
+            string home_district, string home_street, string occupation_type, string response_type, string charge_type,
+            string relation_name, int marrycode, string addition_no1, string employer_name, string opera);
+
+         
         bool GuaHao(string patient_id, string record_sn, string pay_string, string opera);
 
         string GetNewPatientId();

@@ -10,6 +10,8 @@ using Client.ViewModel;
 using log4net;
 using Sunny.UI;
 using Client.Forms.Pages;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Client
 {
@@ -61,8 +63,8 @@ namespace Client
             Footer.Text = "PageIndex: " + pageIndex;
 
             //UIMessageTip.Show(node.Text);
-             
-            if (pageIndex==1001)
+
+            if (pageIndex == 1001)
             {
                 if (!ExistPage(1001))
                 {
@@ -104,8 +106,46 @@ namespace Client
             }
         }
 
+        BackgroundWorker _demoBGWorker = new BackgroundWorker();
+
+
+        private void BGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //修改进度条的显示。
+            var percent = e.ProgressPercentage;
+
+            //如果有更多的信息需要传递，可以使用 e.UserState 传递一个自定义的类型。
+            //这是一个 object 类型的对象，您可以通过它传递任何类型。
+            //我们仅把当前 sum 的值通过 e.UserState 传回，并通过显示在窗口上。
+            ResponseResult<bool> result = e.UserState as ResponseResult<bool>;
+
+            if (result.status == 1 && result.data)
+            {
+                //uiSignal1.Level = 5;
+                uiSignal1.OnColor = Color.FromArgb(80, 160, 255);
+                tlsInfo.Text = "";
+            }
+            else if (result.status == 2)
+            {
+                uiSignal1.OnColor = Color.Red;
+                tlsInfo.Text = result.message;
+            }
+            else
+            {
+                //uiSignal1.Level = 0;
+                uiSignal1.OnColor = Color.Red;
+                tlsInfo.Text = "数据库服务器连接失败！";
+            }
+
+            toolTip1.AutoPopDelay = 5000; toolTip1.InitialDelay = 500; toolTip1.ReshowDelay = 500;
+            toolTip1.ShowAlways = true;
+            toolTip1.SetToolTip(uiSignal1, "ping:" + result.message);  //设置提示信息为自定义
+
+
+        }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
+
             AddPage(new Client.Forms.Pages.DefaultPage());
             // SelectPage(1000);
             Header.Hide();
@@ -148,7 +188,15 @@ namespace Client
                 SessionHelper.clientHeight = this.Height;
                 SessionHelper.clientWidth = this.Width;
 
-                //timerSignal.Interval = 1000 * 10;//10s
+
+                //ping
+                _demoBGWorker.DoWork += BGWorker_DoWork;
+                _demoBGWorker.RunWorkerAsync();
+                _demoBGWorker.WorkerReportsProgress = true;
+                _demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+
+
+                //timerSignal.Interval = 1000 * 5;//10s
                 //timerSignal.Start();
             }
             else
@@ -159,6 +207,60 @@ namespace Client
 
         }
         ToolTip toolTip1 = new ToolTip();
+
+        public void BGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (1 == 1)
+            {
+                BackgroundWorker bgWorker = sender as BackgroundWorker;
+                //UIMessageTip.Show("BGWorker_DoWork");
+                try
+                {
+                    //获取用户费别信息
+                    Task<HttpResponseMessage> task = null;
+                    string json = "";
+                    string paramurl = string.Format($"/api/GuaHao/TestDBConnection");
+
+                    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                    task.Wait();
+                    var response = task.Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var read = response.Content.ReadAsStringAsync();
+                        read.Wait();
+                        json = read.Result;
+                    }
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                    bgWorker.ReportProgress(1, result);
+
+                    Thread.Sleep(5000);
+                }
+                catch (Exception ex)
+                {
+                    ResponseResult<bool> result = new ResponseResult<bool>();
+                    if (ex.InnerException != null && ex.InnerException.InnerException != null)
+                    {
+                        log.Error(ex.InnerException.InnerException.Message.ToString());
+
+                        result.message = ex.InnerException.InnerException.Message.ToString();
+
+                    }
+                    else
+                    {
+                        log.Error(ex.InnerException.ToString());
+                        result.message = ex.InnerException.InnerException.Message.ToString();
+
+                    }
+                    result.status = 2;
+
+                    bgWorker.ReportProgress(2, result);
+
+                }
+            }
+        }
 
         public void LoadSingnal()
         {
@@ -189,7 +291,7 @@ namespace Client
                 //uiSignal1.Level = 0;
                 uiSignal1.OnColor = Color.Red;
 
-            } 
+            }
 
             toolTip1.AutoPopDelay = 5000; toolTip1.InitialDelay = 500; toolTip1.ReshowDelay = 500;
             toolTip1.ShowAlways = true;
@@ -320,7 +422,7 @@ namespace Client
                 json = read.Result;
             }
             SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
-              
+
             //获取用户
             json = "";
             paramurl = string.Format($"/api/GuaHao/GetUserDic");
@@ -429,6 +531,7 @@ namespace Client
         {
             //MessageBox.Show("1");
         }
+
 
         private void timerSignal_Tick(object sender, EventArgs e)
         {

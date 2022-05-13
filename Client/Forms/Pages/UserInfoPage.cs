@@ -41,6 +41,8 @@ namespace Client.Forms.Pages
             this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             this.txtZhiye.TextChanged += txtZhiye_TextChanged;
 
+            lblmsg.ForeColor = Color.Red;
+
         }
 
         UIDataGridView dgv_district = new UIDataGridView();
@@ -267,32 +269,38 @@ namespace Client.Forms.Pages
 
             log.Info("初始化数据字典：InitDic");
 
-            //获取用户费别信息
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/GuaHao/GetMzHaomings");
+            //获取信息
+            //Task<HttpResponseMessage> task = null;
+            //string json = "";
+            //string paramurl = string.Format($"/api/GuaHao/GetMzHaomings");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            var hmlist = WebApiHelper.DeserializeObject<ResponseResult<List<MzHaomingVM>>>(json).data;
+            //task.Wait();
+            //var response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //var hmlist = WebApiHelper.DeserializeObject<ResponseResult<List<MzHaomingVM>>>(json).data;
 
-            MzHaomingVM vm = new MzHaomingVM();
-            vm.code = "";
-            vm.name = "";
-            hmlist.Insert(0, vm);
-            this.cbxhm.DataSource = hmlist;
+            //MzHaomingVM vm = new MzHaomingVM();
+            //vm.code = "";
+            //vm.name = "";
+            //hmlist.Insert(0, vm);
+            //this.cbxhm.DataSource = hmlist;
 
-            cbxhm.DisplayMember = "name";
-            cbxhm.ValueMember = "code";
+            //cbxhm.DisplayMember = "name";
+            //cbxhm.ValueMember = "code";
+
+            cbxhm.Items.Add("");
+            cbxhm.Items.Add("新病人");
+            cbxhm.Items.Add("病人ID");
+            cbxhm.Items.Add("磁卡号");
+
 
             this.cbxShenfen.DataSource = SessionHelper.responseTypes;
             cbxShenfen.DisplayMember = "name";
@@ -385,18 +393,21 @@ namespace Client.Forms.Pages
             if (string.IsNullOrWhiteSpace(cardId))
             {
                 UIMessageTip.ShowError("卡号不能为空!");
+                lblmsg.Text = "卡号不能为空";
                 txtbarcode.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(userName))
             {
                 UIMessageTip.ShowWarning("姓名不能为空!");
+                lblmsg.Text = "姓名不能为空";
                 txtname.Focus();
                 return;
             }
             if (string.IsNullOrWhiteSpace(tel))
             {
                 UIMessageTip.ShowWarning("手机号码不能为空!");
+                lblmsg.Text = "手机号码不能为空";
                 txtTel.Focus();
                 return;
             }
@@ -404,6 +415,7 @@ namespace Client.Forms.Pages
             if (!StringUtil.IsMobile(tel))
             {
                 UIMessageTip.ShowWarning("手机号码格式有误!");
+                lblmsg.Text = "手机号码格式有误";
                 txtTel.Focus();
                 return;
             }
@@ -429,10 +441,29 @@ namespace Client.Forms.Pages
             var hicno = "";
             var barcode = "";
 
-            var pname = txtpname.Text;
+            //家长姓名
+            var relation_name = txtrelationname.Text;
 
-
-
+            var marrycode = 1;
+            switch (this.cbxmarrycode.Text)
+            {
+                case "已婚":
+                    marrycode = 1; break;
+                case "未婚":
+                    marrycode = 2; break;
+                case "丧偶":
+                    marrycode = 3; break;
+                case "离婚":
+                    marrycode = 4; break;
+                case "其他":
+                    marrycode = 5; break;
+                default:
+                    break;
+            }
+            //社保号
+            var addition_no1 = txtsbh.Text;
+            //工作单位 
+            var employer_name = txtemployer_name.Text;
 
             if (!string.IsNullOrWhiteSpace(sfzId))
             {
@@ -440,6 +471,7 @@ namespace Client.Forms.Pages
                 if (!StringUtil.CheckIDCard(sfzId))
                 {
                     UIMessageTip.ShowError("身份证号码不正确!");
+                    lblmsg.Text = "身份证号码不正确";
                     txtsno.Focus();
                     return;
                 }
@@ -485,7 +517,7 @@ namespace Client.Forms.Pages
                         //    return;
                         //}
                         //else
-                        if (pid.Substring(3,7) != patientId)
+                        if (pid.Substring(3, 7) != patientId)
                         {
                             lblmsg.Text = "系统中已存在此卡号!";
                             UIMessageTip.ShowError("系统中已存在此卡号!");
@@ -516,25 +548,18 @@ namespace Client.Forms.Pages
                     for (int i = 0; i < listApi.Count; i++)
                     {
                         var pid = listApi[i].patient_id;
-                        //if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
-                        //{
-                        //    UIMessageTip.ShowError("系统中已存在此身份证号!");
-                        //    txtsno.Focus();
-                        //    return;
-                        //}
-                        //else 
                         if (pid.Substring(3, 7) != patientId)
                         {
-                            lblmsg.Text = "系统中已存在此身份证号!";
-                            UIMessageTip.ShowError("系统中已存在此身份证号!");
-                            txtsno.Focus();
-                            return;
+                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                            {
+                                txtsno.Focus();
+                                return;
+                            }
+                            //清空相同身份证号信息
+                            DeleteSocialNo(sno);
                         }
                     }
-
                 }
-
-
 
                 var d = new
                 {
@@ -551,11 +576,15 @@ namespace Client.Forms.Pages
                     occupation_type = zhiye,
                     response_type = response_type,
                     charge_type = charge_type,
+                    relation_name = relation_name,
+                    marrycode = marrycode,
+                    addition_no1 = addition_no1,
+                    employer_name = employer_name,
                     opera = SessionHelper.uservm.user_mi
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+                paramurl = string.Format($"/api/GuaHao/EditUserInfoPage?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&relation_name={d.relation_name}&marrycode={d.marrycode}&addition_no1={d.addition_no1}&employer_name={d.employer_name}&opera={d.opera}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
@@ -563,11 +592,12 @@ namespace Client.Forms.Pages
                 if (responseJson.data == 1 || responseJson.data == 2)
                 {
                     UIMessageTip.ShowOk("操作成功!");
-                    SessionHelper.cardno = barcode;
-                    //this.Close();
+                    lblmsg.Text = "操作成功!";
+
                 }
                 else
                 {
+                    lblmsg.Text = responseJson.message;
                     log.Error(responseJson.message);
                     UIMessageBox.ShowError(responseJson.message);
                 }
@@ -579,7 +609,21 @@ namespace Client.Forms.Pages
             }
 
         }
+        public void DeleteSocialNo(string sno)
+        {
+            var json = "";
+            var paramurl = string.Format($"/api/GuaHao/DeleteSocialNo?sno={sno}");
+            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+        }
         private void txtId_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && cbxhm.SelectedText == "病人ID")
@@ -614,7 +658,7 @@ namespace Client.Forms.Pages
 
         private void txtbarcode_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && cbxhm.SelectedText =="磁卡号")
+            if (e.KeyCode == Keys.Enter && cbxhm.SelectedText == "磁卡号")
             {
                 //搜索bardcode 并赋值
 
@@ -651,11 +695,11 @@ namespace Client.Forms.Pages
             this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
             this.txtZhiye.TextChanged -= txtZhiye_TextChanged;
 
-            txtId.Text = item.patient_id.Substring(3,7);
+            txtId.Text = item.patient_id.Substring(3, 7);
             txtbarcode.Text = item.p_bar_code;
             txtsno.Text = item.social_no;
             txthicno.Text = item.hic_no;
- 
+
             txtname.Text = item.name;
 
             if (item.birthday.HasValue)
@@ -665,9 +709,6 @@ namespace Client.Forms.Pages
             //this.txtAge.Text = userInfo["age"].ToString();
 
             this.txtTel.Text = item.home_tel;
-
-            //cbxmarrycode.Text = EnumExtension.GetDescription()
-
 
             if (!string.IsNullOrWhiteSpace(item.home_district))
             {
@@ -704,11 +745,77 @@ namespace Client.Forms.Pages
             //费别
             this.cbxFeibie.SelectedValue = item.charge_type;
 
-            this.cbxsex.Text = item.sex == "1"? "男" : "女";
+            this.cbxsex.Text = item.sex == "1" ? "男" : "女";
+
+            //婚姻
+            var marrycode = "";
+            switch (item.marry_code)
+            {
+                case "1":
+                    marrycode = "已婚"; break;
+                case "2":
+                    marrycode = "未婚"; break;
+                case "3":
+                    marrycode = "丧偶"; break;
+                case "4":
+                    marrycode = "离婚"; break;
+                case "5":
+                    marrycode = "其他"; break;
+                default:
+                    break;
+            }
+            this.cbxmarrycode.Text = marrycode;
+
+            //家长姓名
+            //relation_name
+            txtrelationname.Text = item.relation_name;
+
+            //社保号码
+            //addition_no1
+            txtsbh.Text = item.addition_no1;
+
+            //工作单位
+            //employer_name
+            txtemployer_name.Text = item.employer_name;
+
+            //合同单位contract_code
 
 
             this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             this.txtZhiye.TextChanged += txtZhiye_TextChanged;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
+            this.txtZhiye.TextChanged -= txtZhiye_TextChanged;
+
+            cbxhm.Text = "";
+            txtId.Text = "";
+            txtbarcode.Text = "";
+            txtname.Text = "";
+            cbxShenfen.SelectedValue = "";
+            cbxFeibie.SelectedValue = "";
+            cbxsex.Text = "";
+            txtbirth.Text = "";
+            txtrelationname.Text = "";
+            txtTel.Text = "";
+            txtsno.Text = "";
+            txthicno.Text = "";
+            cbxmarrycode.Text = "";
+            txtemployer_name.Text = "";
+            txtZhiye.Text = "";
+            txtsbh.Text = "";
+            txthomedistrict.Text = "";
+            txthomestreet.Text = "";
+
+            this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
+            this.txtZhiye.TextChanged += txtZhiye_TextChanged;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

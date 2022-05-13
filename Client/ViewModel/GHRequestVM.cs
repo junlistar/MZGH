@@ -41,6 +41,8 @@ namespace Client.ViewModel
         public string ap { get; set; }
         public int end_no { get; set; }
 
+        public DateTime request_date { get; set; }
+
 
     }
 
