@@ -11,8 +11,7 @@ namespace Data
 
         
         //private static string DefaultSqlConnectionString = @"Data Source = 10.102.41.147; Initial Catalog = his; User ID = sa; Password=gx@2019;";
-        private static string DefaultSqlConnectionString = Helpers.ConfigHelper.GetConnectionString("ConnectionString");
-        //private static string DefaultSqlConnectionString = ConfigurationManager.AppSettings.Get("ConnString");
+        private static string DefaultSqlConnectionString = Helpers.ConfigHelper.GetConnectionString("ConnectionString"); 
         private static string DefaultRedisString = "localhost, abortConnect=false";
         private static ConnectionMultiplexer redis;
 

@@ -53,7 +53,28 @@ namespace Client.ClassLib
             return "其他";
 
         }
+        public static string GetPayStringByEnumValue(int payMethod)
+        {
+            switch (payMethod)
+            {
+                case (int)PayMethodEnum.WeiXin:
+                    return "微信";
+                case (int)PayMethodEnum.Zhifubao:
+                    return "支付宝";
+                case (int)PayMethodEnum.Yinlian:
+                    return "银联";
+                case (int)PayMethodEnum.Yibao:
+                    return "医保卡";
+                case (int)PayMethodEnum.Xianjin:
+                    return "现金";
+                default:
+                    break;
+            }
+            return "其他";
+
+        }
     }
+
 
     public enum MarryCodeEnum
     {

@@ -47,6 +47,7 @@ namespace Client
 
         //定义当前用户信息
         public string patient_id = "";
+        public static PatientVM PatientVM;
 
         Color cur_color = Color.FromArgb(0, 150, 136);
 
@@ -466,6 +467,7 @@ namespace Client
                 if (listApi.Count > 0)
                 {
                     var userInfo = listApi[0];
+                    PatientVM = userInfo;
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
                         return;

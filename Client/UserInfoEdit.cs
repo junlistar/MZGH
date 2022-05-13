@@ -211,15 +211,26 @@ namespace Client
                         var pid = listApi[i].patient_id;
                         if (string.IsNullOrEmpty(patientId)|| patientId.Length==7)
                         {
-                            UIMessageTip.ShowError("系统中已存在此身份证号!");
-                            txtsfz.Focus();
-                            return;
+                            //UIMessageTip.ShowError("系统中已存在此身份证号!");
+                           
+                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                            {
+                                txtsfz.Focus();
+                                return;
+                            }
+                            //清空相同身份证号信息
+                            DeleteSocialNo(sno);
                         }
                         else if (pid != patientId)
                         {
-                            UIMessageTip.ShowError("系统中已存在此身份证号!");
-                            txtsfz.Focus();
-                            return;
+                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                            {
+                                txtsfz.Focus();
+                                return;
+                            }
+                            //清空相同身份证号信息
+                            DeleteSocialNo(sno);
+                           
                         }
                     }
 
@@ -268,6 +279,21 @@ namespace Client
             catch (Exception ex)
             {
                 log.Debug(ex.Message);
+            }
+        }
+        public void DeleteSocialNo(string sno)
+        {
+           var json = "";
+           var paramurl = string.Format($"/api/GuaHao/DeleteSocialNo?sno={sno}");
+           var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+           var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
             }
         }
 

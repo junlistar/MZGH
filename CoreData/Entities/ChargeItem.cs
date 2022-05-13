@@ -11,6 +11,8 @@ namespace Data.Entities
         public string audit_code { get; set; }
         public string mz_bill_item { get; set; }
         public string mz_charge_group { get; set; }
-         
+        public string item_no { get; set; }
+        public string name { get; set; }
+
     }
 }

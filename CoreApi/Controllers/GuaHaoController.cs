@@ -602,5 +602,20 @@ namespace CoreApi.Controllers
             }
 
         }
+
+        public ResponseResult<int> DeleteSocialNo(string sno)
+        {
+            Log.Information($"DeleteSocialNo,{sno}");
+            try
+            {
+                return _patientRepository.DeleteSocialNo(sno);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+
+        }
     }
 }

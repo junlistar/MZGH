@@ -68,10 +68,18 @@ a.patient_id=@patient_id ";
             return Select(selectSql, para);
         }
 
+        public int DeleteSocialNo(string sno)
+        {
+            string sql = "UPDATE mz_patient_mi SET social_no='' WHERE social_no=@sno";
+            var para = new DynamicParameters();
+            para.Add("@sno", sno);
+            return Update(sql, para);
+        }
+
 
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type,string opera)
-        {
+        { 
             //查询是否存在
             string issql = "select * from mz_patient_mi where patient_id = @patient_id";
             var para = new DynamicParameters();
