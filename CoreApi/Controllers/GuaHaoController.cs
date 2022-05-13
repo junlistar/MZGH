@@ -34,12 +34,14 @@ namespace CoreApi.Controllers
         private readonly IResponceTypeRepository _responceTypeRepository;
         private readonly IBaseRequestRepository _baseRequestRepository;
         private readonly IChargeItemRepository _chargeItemRepository;
-         
+        private readonly IMzHaomingRepository _mzHaomingRepository;
+
 
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
-            IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository, IChargeItemRepository chargeItemRepository)
+            IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
+            IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -57,6 +59,7 @@ namespace CoreApi.Controllers
             _responceTypeRepository = responceTypeRepository;
             _baseRequestRepository = baseRequestRepository;
             _chargeItemRepository = chargeItemRepository;
+            _mzHaomingRepository = mzHaomingRepository;
         }
 
         [HttpGet]
@@ -189,12 +192,12 @@ namespace CoreApi.Controllers
         /// <param name="tel"></param>
         /// <returns></returns>
         public ResponseResult<int> EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-            string home_district, string home_street, string occupation_type, string response_type, string charge_type)
+            string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera)
         {
-            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type}");
+            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{opera}");
             try
             {
-                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type);
+                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, opera);
             }
             catch (Exception ex)
             {
@@ -426,6 +429,54 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<ResponceType>>(ex.Message);
+            }
+            return list;
+        }
+
+        public ResponseResult<List<MzHaoming>> GetMzHaomings()
+        {
+            Log.Information($"GetMzHaomings");
+            var list = new List<MzHaoming>();
+            try
+            {
+                list = _mzHaomingRepository.GetMzHaomings();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzHaoming>>(ex.Message);
+            }
+            return list;
+        }
+
+        public ResponseResult<List<Patient>>  GetPatientByBarcode(string barcode)
+        {
+            Log.Information($"GetPatientByBarcode");
+            var list = new List<Patient>();
+            try
+            {
+                list = _patientRepository.GetPatientByBarcode(barcode);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Patient>>(ex.Message);
+            }
+            return list;
+        }
+
+        public ResponseResult<List<Patient>> GetPatientByPatientId(string pid)
+        {
+            Log.Information($"GetPatientByPatientId");
+            var list = new List<Patient>();
+            try
+            {
+                list = _patientRepository.GetPatientByPatientId(pid);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Patient>>(ex.Message);
             }
             return list;
         }

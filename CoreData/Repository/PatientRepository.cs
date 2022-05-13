@@ -44,12 +44,33 @@ a.patient_id=@patient_id ";
             para.Add("@patient_id", pid);
 
             return Select(selectSql, para);
+        }
+        public List<Patient> GetPatientByBarcode(string barcode)
+        {
+            string selectSql = @"select * from mz_patient_mi a where a.p_bar_code=@barcode ";
 
+            var para = new DynamicParameters();
+            para.Add("@barcode", barcode);
 
+            return Select(selectSql, para);
         }
 
+        public List<Patient> GetPatientByPatientId(string pid)
+        {
+            string selectSql = @"select * from mz_patient_mi a where a.patient_id=@patient_id ";
+            if (pid.Length == 7)
+            {
+                pid = "000" + pid + "00";
+            }
+            var para = new DynamicParameters();
+            para.Add("@patient_id", pid);
+
+            return Select(selectSql, para);
+        }
+
+
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-             string home_district, string home_street, string occupation_type, string response_type, string charge_type)
+             string home_district, string home_street, string occupation_type, string response_type, string charge_type,string opera)
         {
             //查询是否存在
             string issql = "select * from mz_patient_mi where patient_id = @patient_id";
@@ -66,7 +87,7 @@ a.patient_id=@patient_id ";
 
                 string sql = @"update mz_patient_mi
 set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
-home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date
+home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera
 where patient_id=@patient_id";
                 para = new DynamicParameters();
                 para.Add("@social_no", sno);
@@ -82,6 +103,7 @@ where patient_id=@patient_id";
                 para.Add("@response_type", response_type);
                 para.Add("@charge_type", charge_type);
                 para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
+                para.Add("@update_opera", opera);
                 para.Add("@patient_id", pid);
 
                 return Update(sql, para);
@@ -92,9 +114,9 @@ where patient_id=@patient_id";
                
                 string sql = @"insert into mz_patient_mi(patient_id,social_no,hic_no,p_bar_code,name,sex,birthday,home_tel,
 balance,max_times,max_ledger_sn,max_item_sn,max_receipt_sn,
-home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date) values
+home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date,enter_opera,update_opera) values
 (@patient_id,@social_no,@hic_no,@p_bar_code,@name,@sex,@birthday,@home_tel,'0',0,0,0,0,
-@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date)";
+@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date,@enter_opera,@update_opera)";
 
                 para = new DynamicParameters();
                 para.Add("@patient_id", pid);
@@ -114,6 +136,9 @@ home_district,home_street,occupation_type,response_type,charge_type,enter_date,u
 
                 para.Add("@enter_date", DateTime.Now);
                 para.Add("@update_date", DateTime.Now);
+
+                para.Add("@enter_opera", opera);
+                para.Add("@update_opera", opera);
 
 
                 return Update(sql, para);
@@ -441,6 +466,7 @@ values
 
                 var chargeItems = chargeItemResp.GetChargeItemsByRecordSN(record_sn);
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo();
+              
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
                 {
@@ -453,14 +479,15 @@ values
                         int result = 0;
 
                         //查询当前号是否超过数量
-                        string exsitsql = "select count(1) from gh_request where record_sn = @record_sn and current_no<= end_no";
+                        string exsitsql = "select * from gh_request where record_sn = @record_sn and current_no<= end_no";
                         DynamicParameters para = new DynamicParameters();
                         para.Add("@record_sn", record_sn);
-                        var obj = connection.ExecuteScalar(exsitsql, para,transaction);
-                        if (obj.ToString()=="0")
+                        var obj = connection.QueryFirstOrDefault<GhRequest>(exsitsql, para,transaction);
+                        if (obj==null)
                         {
                             throw new Exception("没有号了！");
                         }
+                        var visit_date = obj.request_date;
 
                         //更新挂号表 当前号haole
                         string sql1 = "UPDATE gh_request SET current_no =current_no+1 WHERE record_sn = @record_sn";
@@ -515,7 +542,7 @@ age,group_sn,clinic_type,req_type,gh_sequence,ampm,visit_flag,gh_opera,gh_date) 
                             para.Add("@times", max_times);
                             para.Add("@visit_dept", recorditem.unit_sn);
                             para.Add("@doctor_code", recorditem.doctor_sn);
-                            para.Add("@visit_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@visit_date", visit_date);
                             para.Add("@name", patient.name);
                             para.Add("@response_type", "01");
                             para.Add("@haoming_code", "07");

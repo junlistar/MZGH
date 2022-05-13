@@ -55,6 +55,10 @@ namespace Client.Forms.Wedgit
             if (e.KeyCode == Keys.Down)
             {
                 this.lstunits.Focus();
+                if (lstunits.Items.Count > 0)
+                {
+                    lstunits.SelectedIndex = 0;
+                }
             }
             else if (e.KeyCode == Keys.Enter)
             {

@@ -73,7 +73,7 @@ namespace Client
 
             //lib.GuaHao(patientId, vm.record_sn);
 
-            MessageBox.Show("打印发票");
+           // MessageBox.Show("打印发票");
 
             //this.FormClosed += mainwindow.Main_Load;
 

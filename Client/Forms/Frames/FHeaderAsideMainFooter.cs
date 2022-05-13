@@ -9,7 +9,7 @@ using Client.ClassLib;
 using Client.ViewModel;
 using log4net;
 using Sunny.UI;
-
+using Client.Forms.Pages;
 
 namespace Client
 {
@@ -47,6 +47,7 @@ namespace Client
             Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
             Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
             Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
+            Aside.CreateChildNode(parent, 61674, 24, "发新卡", 1005);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
@@ -60,9 +61,8 @@ namespace Client
             Footer.Text = "PageIndex: " + pageIndex;
 
             //UIMessageTip.Show(node.Text);
-
-
-            if (node.Text == "挂号")
+             
+            if (pageIndex==1001)
             {
                 if (!ExistPage(1001))
                 {
@@ -93,6 +93,14 @@ namespace Client
                     AddPage(new CreateRequestRecord());
                 }
                 SelectPage(1004);
+            }
+            else if (node.Text == "发新卡")
+            {
+                if (!ExistPage(1005))
+                {
+                    AddPage(new UserInfoPage());
+                }
+                SelectPage(1005);
             }
         }
 
@@ -140,8 +148,8 @@ namespace Client
                 SessionHelper.clientHeight = this.Height;
                 SessionHelper.clientWidth = this.Width;
 
-                timerSignal.Interval = 1000 * 10;//10s
-                timerSignal.Start();
+                //timerSignal.Interval = 1000 * 10;//10s
+                //timerSignal.Start();
             }
             else
             {

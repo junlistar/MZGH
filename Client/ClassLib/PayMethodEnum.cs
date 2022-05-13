@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +52,61 @@ namespace Client.ClassLib
             }
             return "其他";
 
+        }
+    }
+
+    public enum MarryCodeEnum
+    {
+        /// <summary>
+        /// 已婚
+        /// </summary>
+        [Description("已婚")]
+        Yihun = 1,
+        /// <summary>
+        /// 未婚
+        /// </summary>
+        [Description("未婚")]
+        Weinhun = 2,
+        /// <summary>
+        /// 丧偶
+        /// </summary>
+        [Description("丧偶")] 
+        Sangou = 3,
+        /// <summary>
+        /// 离婚
+        /// </summary>
+        [Description("离婚")] 
+        Lihun = 4,
+        /// <summary>
+        /// 其他
+        /// </summary>
+        [Description("其他")]
+        Qita = 5,
+    }
+  
+    /// <summary>
+    /// 枚举扩展类
+    /// </summary>
+    public static class EnumExtension
+    {
+        /// <summary>
+        /// 获取枚举描述
+        /// </summary>
+        /// <param name="en"></param>
+        /// <returns></returns>
+        public static string GetDescription(this Enum en)
+        {
+            Type type = en.GetType();
+            FieldInfo fd = type.GetField(en.ToString());
+            if (fd == null)
+                return string.Empty;
+            object[] attrs = fd.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            string name = string.Empty;
+            foreach (DescriptionAttribute attr in attrs)
+            {
+                name = attr.Description;
+            }
+            return name;
         }
     }
 

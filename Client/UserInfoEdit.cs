@@ -19,8 +19,7 @@ namespace Client
 {
     public partial class UserInfoEdit : UIForm
     {
-        public string barCode = ""; CardReader _dto;
-        public static HttpClient client = null;
+        public string barCode = ""; CardReader _dto; 
         PatientVM userInfo;
 
         private static ILog log = LogManager.GetLogger(typeof(UserInfoEdit));//typeof放当前类
@@ -30,9 +29,7 @@ namespace Client
         public UserInfoEdit(string _barCode, CardReader dto)
         {
             InitializeComponent();
-            this.barCode = _barCode; _dto = dto;
-            client = new HttpClient();
-            client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+            this.barCode = _barCode; _dto = dto; 
 
         }
 
@@ -45,7 +42,7 @@ namespace Client
             Task<HttpResponseMessage> task = null;
             json = "";
             paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
-            task = client.GetAsync(paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
             task.Wait();
             var response = task.Result;
@@ -158,7 +155,7 @@ namespace Client
                 Task<HttpResponseMessage> task = null;
                 json = "";
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
-                task = client.GetAsync(paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 var response = task.Result;
@@ -194,7 +191,7 @@ namespace Client
 
                 json = "";
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={sno}");
-                task = client.GetAsync(paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 response = task.Result;
@@ -245,12 +242,13 @@ namespace Client
                     occupation_type = zhiye,
                     response_type = response_type,
                     charge_type = charge_type,
+                    opera = SessionHelper.uservm.user_mi
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}");
+                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
 
-                string res = client.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
                 if (responseJson.data == 1 || responseJson.data == 2)
@@ -385,7 +383,7 @@ namespace Client
                 Task<HttpResponseMessage> task = null;
                 string json = "";
                 string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={code}");
-                task = client.GetAsync(paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 var response = task.Result;

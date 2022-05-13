@@ -460,11 +460,14 @@ namespace Client
                 {
                     log.Info("挂号成功");
                     UIMessageTip.ShowOk("挂号成功!");
+
+                    //打印单据
+                    MessageBox.Show("打印单据");
+
                 }
                 else
                 {
                     log.Error(result.message);
-                    // UIMessageTip.ShowError(result.message,3000);
                     UIMessageBox.ShowError(result.message);
                     //挂号失败，退款处理
                     Refund();
@@ -478,7 +481,6 @@ namespace Client
                 log.Error(ex.ToString());
 
             }
-            this.Close();
 
         }
 

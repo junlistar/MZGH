@@ -11,8 +11,11 @@ namespace Data.IRepository
          
         List<Patient> GetPatientByCard(string cardno);
 
+        List<Patient> GetPatientByBarcode(string barcode);
+        List<Patient> GetPatientByPatientId(string pid);
+
         int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-             string home_district, string home_street, string occupation_type, string response_type, string charge_type);
+             string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera);
 
         bool GuaHao(string patient_id, string record_sn, string pay_string, string opera);
 
