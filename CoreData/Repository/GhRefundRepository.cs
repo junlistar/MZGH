@@ -72,7 +72,7 @@ WHERE
     
       d.ledger_sn > 0 AND
       f.ledger_sn = d.ledger_sn AND  
-      v.visit_flag <> '9' AND
+     -- v.visit_flag <> '9' AND
       DATEDIFF(dd, v.visit_date, @request_date) = 0 AND 
       ISNULL(v.visit_dept, '') LIKE @unit_sn AND
       ISNULL(v.group_sn, '-1') LIKE @group_sn AND
@@ -82,7 +82,7 @@ WHERE
       ISNULL(CONVERT(VARCHAR, v.times), '0') LIKE @times AND
       ISNULL(f.receipt_no, '') LIKE @rcp_no
    
-order by v.gh_date";
+order by v.gh_date desc";
 
             var para = new DynamicParameters();
             para.Add("@request_date", datestr);

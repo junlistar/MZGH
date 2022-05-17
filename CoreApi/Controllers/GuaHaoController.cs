@@ -291,17 +291,18 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        public ResponseResult<string> Refund(string patient_id, int ledger_sn, string cheque_type, string item_no, decimal charge, string opera, int manual = 0)
+        public ResponseResult<int> Refund(string patient_id, int times, string opera, int manual = 0)
         {
-            Log.Information($"Refund,{patient_id},{ledger_sn},{cheque_type},{item_no},{charge},{opera},{manual}");
+            Log.Information($"Refund,{patient_id},{times},{opera},{manual}");
             try
             {
-                return _ghDepositRepository.Refund(patient_id, ledger_sn, cheque_type, item_no, charge, opera, manual).ToString();
+                return _ghDepositRepository.Refund(patient_id, times, opera, manual);
+                 
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<string>(ex.Message);
+                return ErrorResult<int>(ex.Message);
             }
         }
 

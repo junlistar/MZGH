@@ -153,15 +153,39 @@ namespace Client
                     UIMessageTip.ShowWarning("此记录已经退号!");
                     return;
                 }
+                else if (vm.sname == "已就诊")
+                {
+                    UIMessageTip.ShowWarning("此记录已经就诊!");
+                    return;
+                }
+                else if (vm.sname == "取消分诊")
+                {
+                    UIMessageTip.ShowWarning("此记录已经退号!");
+                    return;
+                }
 
                 vm.patient_id = lblhidid.Text;
                 //vm.item_no =Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
                 vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
-                vm.times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
-                vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
-                vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
-                vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
-                vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
+                vm.times = 0;
+               var sel_index = dgvDeposit.SelectedIndex;
+                while (vm.times == 0)
+                {
+                    var cel_value = this.dgvDeposit.Rows[sel_index].Cells["times"].Value.ToString();
+                    if (cel_value == null || cel_value.ToString()=="")
+                    {
+                        sel_index--;
+                    }
+                    else
+                    {
+                        vm.times = Convert.ToInt32(cel_value);
+                    }
+                }
+
+                //vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
+                //vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
+                //vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
+                //vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
 
 
                 //vm.depo_status = this.dgvDeposit.SelectedRows[0].Cells["depo_status"].Value.ToString();
@@ -214,6 +238,7 @@ namespace Client
                 {
                     patient_id = vm.patient_id,
                     ledger_sn = vm.ledger_sn,
+                    times = vm.times,
                     cheque_type = vm.cheque_type,
                     item_no = vm.item_no,
                     charge = vm.charge,
@@ -224,7 +249,7 @@ namespace Client
                 var data = WebApiHelper.SerializeObject(aa);
                 HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                string paramurl2 = string.Format($"/api/GuaHao/Refund?patient_id={aa.patient_id}&ledger_sn={aa.ledger_sn}&cheque_type={aa.cheque_type}&item_no={aa.item_no}&charge={aa.charge}&opera={SessionHelper.uservm.user_mi}");
+                string paramurl2 = string.Format($"/api/GuaHao/Refund?patient_id={aa.patient_id}&times={aa.times}&opera={SessionHelper.uservm.user_mi}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl2);
 
@@ -244,7 +269,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.InnerException.ToString());
+                log.Error(ex.Message);
             }
 
         }
@@ -412,8 +437,31 @@ namespace Client
                         item.visit_flag_name = "已退号";
                     }
                 }
+                var list = result.data;
 
-                var viewlist = result.data.Select(p => new
+                //整理数据，便于审阅
+                string times = "";
+                foreach (var item in list)
+                {
+                    if (item.times != times)
+                    {
+                        times = item.times;
+                    }
+                    else
+                    {
+                        item.gh_date = DateTime.MinValue;
+                        item.unit_name = "";
+                        item.group_name = "";
+                        //item.visit_flag_name = "";
+                        item.times = "";
+                        item.doctor_name = "";
+                        item.ampm = ""; 
+                        item.cheque_type = "";
+                        item.clinic_name = "";
+                    }
+                }
+
+                var viewlist = list.Select(p => new
                 {
                     p.gh_date_str,
                     //p.visit_dept,
@@ -430,8 +478,10 @@ namespace Client
                     p.group_name,
                     p.cheque_type,
                     p.ledger_sn,
-                    p.item_no
+                    p.item_no, 
                 }).ToList();
+               
+
 
                 this.dgvDeposit.DataSource = viewlist;
                 this.dgvDeposit.AutoResizeColumns();
@@ -502,24 +552,39 @@ namespace Client
                     return;
                 }
 
-                vm.patient_id = lblhidid.Text;
-                //vm.item_no =Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
+                vm.patient_id = lblhidid.Text; 
                 vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
-                vm.times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
-                vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
-                vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
-                vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
-                vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
+               // vm.times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
+
+                vm.times = 0;
+                var sel_index = dgvDeposit.SelectedIndex;
+                while (vm.times == 0)
+                {
+                    var cel_value = this.dgvDeposit.Rows[sel_index].Cells["times"].Value.ToString();
+                    if (cel_value == null || cel_value.ToString() == "")
+                    {
+                        sel_index--;
+                    }
+                    else
+                    {
+                        vm.times = Convert.ToInt32(cel_value);
+                    }
+                }
+                //vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
+                //vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
+                //vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
+                //vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
 
                 var je = (double)vm.charge;
-
-                //if (UIInputDialog.InputDoubleDialog(ref je, 2, true, $"请核对本次退款金额："))
-                if (UIMessageBox.ShowAsk("本次退款金额："+ vm.charge + "元，是否确定？"))
-                {
+                 
+                //if (UIMessageBox.ShowAsk("本次退款金额：" + vm.charge + "元，是否确定？"))
+                if (UIMessageBox.ShowAsk("进行现金退款，是否确定？"))
+                    {
                     var aa = new
                     {
                         patient_id = vm.patient_id,
                         ledger_sn = vm.ledger_sn,
+                        times = vm.times,
                         cheque_type = vm.cheque_type,
                         item_no = vm.item_no,
                         charge = vm.charge,
@@ -530,7 +595,7 @@ namespace Client
                     var data = WebApiHelper.SerializeObject(aa);
                     HttpContent httpContent = new StringContent(data);
                     httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    string paramurl2 = string.Format($"/api/GuaHao/Refund?patient_id={aa.patient_id}&ledger_sn={aa.ledger_sn}&cheque_type={aa.cheque_type}&item_no={aa.item_no}&charge={aa.charge}&opera={SessionHelper.uservm.user_mi}&manual=1");
+                    string paramurl2 = string.Format($"/api/GuaHao/Refund?patient_id={aa.patient_id}&times={aa.times}&opera={SessionHelper.uservm.user_mi}&manual=1");
 
                     log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl2);
 
@@ -555,6 +620,29 @@ namespace Client
 
             }
 
+        }
+
+        private void dgvDeposit_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            //if (e.RowIndex >= dgvDeposit.Rows.Count - 1)
+            //{
+            //    return;
+            //}
+            DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
+
+            if (dr.Cells["visit_flag_name"].Value.ToString()=="已退号")
+            {
+                // 设置单元格的背景色
+                //dr.DefaultCellStyle.BackColor = Color.Yellow;
+                // 设置单元格的前景色
+                dr.DefaultCellStyle.ForeColor = Color.Gray;
+            }
+            else
+            {
+                dr.DefaultCellStyle.ForeColor = Color.Green;
+                // dr.DefaultCellStyle.BackColor = Color.Blue;
+                //dr.DefaultCellStyle.ForeColor = Color.White;
+            }
         }
     }
 }

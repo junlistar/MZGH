@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using Client.FastReportLib;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace Client
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FHeaderAsideMainFooter());
-            //Application.Run(new Form1());
+            //Application.Run(new FHeaderAsideMainFooter());
+            Application.Run(new Form1());
 
             log.Debug("关闭了程序");
         }

@@ -150,7 +150,7 @@ namespace Client.ViewModel
         public string name { get; set; }
 
         public string times { get; set; }
-        public decimal charge { get; set; }
+        public string charge { get; set; }
 
         public int ledger_sn { get; set; }
 
@@ -163,9 +163,20 @@ namespace Client.ViewModel
         public string request_name { get; set; }
         public string gh_opera { get; set; }
         public DateTime gh_date { get; set; }
-        public string gh_date_str { get {
-                return gh_date.ToString("yyyy-MM-dd HH:mm:ss");
-            } }
+        public string gh_date_str { 
+            get {
+                if (gh_date!= DateTime.MinValue)
+                {
+                    return gh_date.ToString("yyyy-MM-dd HH:mm:ss");
+                }
+                else
+                {
+                    return "";
+                }
+                    
+            }
+           
+        }
         public string gh_sequence_c { get; set; }
         public string cheque_name { get; set; }
         public string cheque_type { get; set; }

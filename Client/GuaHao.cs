@@ -14,6 +14,11 @@ using System.Net.Http.Headers;
 using Client.ClassLib;
 using System.Configuration;
 using log4net;
+using System.Net;
+using System.IO;
+using System.Web;
+using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace Client
 {
@@ -609,10 +614,147 @@ namespace Client
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
             btnCika.FillColor = Color.LightSteelBlue;
-            ReadCard rc = new ReadCard("医保卡");
-            //关闭，刷新
-            rc.FormClosed += Rc_FormClosed;
-            rc.ShowDialog();
+            //ReadCard rc = new ReadCard("医保卡");
+            ////关闭，刷新
+            //rc.FormClosed += Rc_FormClosed;
+            //rc.ShowDialog();
+
+            Task<HttpResponseMessage> task = null;
+            string json = "{\"infno\":\"1101\",\"msgid\":\"H42100300513202109271813033258\",\"mdtrtarea_admvs\":\"421300\",\"insuplc_admdvs\":\"421300\",\"recer_sys_code\":\"1\",\"dev_no\":\"\",\"dev_safe_info\":\"\",\"cainfo\":\"\",\"signtype\":\"\",\"infver\":\"v2.0\",\"opter_type\":\"1\",\"opter\":\"00000\",\"opter_name\":\"全院\",\"inf_time\":\"2021-09-27 18:13:03\",\"fixmedins_code\":\"H42100300513\",\"fixmedins_name\":\"荆州市中心医院\",\"sign_no\":\"421000G0000000244038\",\"input\":{\"data\":{\"mdtrt_cert_type\":\"02\",\"mdtrt_cert_no\":\"                    \",\"card_sn\":\"                    \",\"begntime\":\"                    \",\"psn_cert_type\":\"1\",\"certno\":\"                    \",\"psn_name\":\"                    \"}}}" ;
+
+            var data = WebApiHelper.SerializeObject(json); HttpContent httpContent = new StringContent(data);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //string paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://10.87.82.212:8080");
+            
+             
+            try
+            {
+                //var res = DataPost("http://10.87.82.212:8080", json);
+                
+                //调用 com名称  方法  参数
+                string BusinessID = "1101";
+                string Dataxml= json;
+                string Outputxml = "";
+                var parm = new object[] { BusinessID, json, Outputxml };
+
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call",ref parm);
+
+                log.Debug(parm[2]);
+
+                //string res = client.PostAsync("", httpContent).Result.Content.ReadAsStringAsync().Result;
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("请求接口数据出错：" + ex.Message);
+            }
+
+        }
+
+        [DllImport("ole32.dll")]
+        static extern int CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid pclsid);
+
+        public static object InvokeMethod(string comName, string methodName,ref object[] args)
+        {
+             
+            object ret = null;
+            COMInfo com = GetCOMInfo(comName);
+            try
+            {
+                //用参数的索引属性来指出哪些参数是一个返回的参数
+                //对于那些是[in]或ByRef的参数可以不用指定
+                ParameterModifier[] ParamMods = new ParameterModifier[1];
+                ParamMods[0] = new ParameterModifier(3); // 初始化为接口参数的个数
+                ParamMods[0][2] = true; // 设置第三个参数为返回参数
+
+
+                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args,ParamMods,
+                                                         null,
+                                                         null);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ret;
+        }
+
+
+        public static COMInfo GetCOMInfo(string comName)
+        {
+            COMInfo comInfo;
+            Type type;
+            object instance = null;
+            instance = CreateInstance(comName, out type);
+            comInfo = new COMInfo(type, instance);
+            return comInfo;
+        }
+
+
+        private static object CreateInstance(string progName, out Type type)
+        {
+            object instance = null;
+            type = null;
+            try
+            {
+                Guid clsid;
+                int result = CLSIDFromProgID(progName, out clsid);
+                type = Type.GetTypeFromCLSID(clsid, true);
+                instance = Activator.CreateInstance(type);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return instance;
+        }
+         
+
+
+
+        public static string DataPost(string url, string content)
+        {
+            //申明一个容器result接收数据
+            string result = "";
+            try
+            {
+                //首先创建一个HttpWebRequest,申明传输方式POST
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "POST";
+                req.ContentType = "application/json";
+
+                //添加POST参数
+                byte[] data = Encoding.UTF8.GetBytes(content);
+                req.ContentLength = data.Length;
+                using (Stream reqStream = req.GetRequestStream())
+                {
+                    reqStream.Write(data, 0, data.Length);
+                    reqStream.Close();
+                }
+
+                //申明一个容器resp接收返回数据
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                Stream stream = resp.GetResponseStream();
+                //获取响应内容 
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    result = reader.ReadToEnd();
+                    var stringstr = "<stream><return_code>SUCCESS</return_code></stream>";
+                    //Response.Write(stringstr);
+                    //Response.End();
+                }
+            }
+            catch (Exception ex)
+            {
+                var stringstr = "<stream><return_code>FAIL</return_code></stream>";
+                //Response.Write(stringstr);
+                //Response.End();
+
+            }
+            return result;
         }
 
         private void btntest_Click(object sender, EventArgs e)

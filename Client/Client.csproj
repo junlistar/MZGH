@@ -29,7 +29,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,6 +56,38 @@
     </Reference>
     <Reference Include="EasySDKKernel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AlipayEasySDK.Kernel.1.0.6\lib\net461\EasySDKKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport, Version=2021.3.22.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars, Version=2021.3.22.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Compat, Version=2021.2.0.0, Culture=neutral, PublicKeyToken=406e1f4c3c8ef97e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.DataVisualization, Version=2021.2.0.0, Culture=neutral, PublicKeyToken=5ceb240df42bf6e8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=2021.3.22.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Service, Version=2021.3.22.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.VSDesign, Version=1.0.0.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.VSDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Web, Version=2021.3.22.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>FastReport\dll\FastReport.Web.dll</HintPath>
     </Reference>
     <Reference Include="LitJson, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -134,10 +166,12 @@
     <Compile Include="CardPay.Designer.cs">
       <DependentUpon>CardPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClassLib\ComUtil.cs" />
     <Compile Include="ClassLib\DataTimeUtil.cs" />
     <Compile Include="ClassLib\HttpClientUtil.cs" />
     <Compile Include="ClassLib\PayMethodEnum.cs" />
     <Compile Include="ClassLib\ReadIdCardHelper.cs" />
+    <Compile Include="ClassLib\YBResponse.cs" />
     <Compile Include="ClassLib\ResponseResult.cs" />
     <Compile Include="ClassLib\SessionHelper.cs" />
     <Compile Include="ClassLib\StringUtil.cs" />
@@ -147,6 +181,12 @@
     </Compile>
     <Compile Include="CreateRequestRecord.Designer.cs">
       <DependentUpon>CreateRequestRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FastReport\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FastReport\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Frames\FHeaderAsideMainFooter.cs">
       <SubType>Form</SubType>
@@ -293,6 +333,9 @@
     <EmbeddedResource Include="CreateRequestRecord.resx">
       <DependentUpon>CreateRequestRecord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FastReport\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frames\FHeaderAsideMainFooter.resx">
       <DependentUpon>FHeaderAsideMainFooter.cs</DependentUpon>
     </EmbeddedResource>
@@ -354,6 +397,10 @@
     <EmbeddedResource Include="WxPay.resx">
       <DependentUpon>WxPay.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="FastReport\dll\FastReport.Service.dll.config" />
+    <None Include="FastReport\File\gh_pay.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -371,6 +418,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="FastReport\dll\FastReport.Bars.dll" />
+    <Content Include="FastReport\dll\FastReport.Compat.dll" />
+    <Content Include="FastReport\dll\FastReport.DataVisualization.dll" />
+    <Content Include="FastReport\dll\FastReport.dll" />
+    <Content Include="FastReport\dll\FastReport.Editor.dll" />
+    <Content Include="FastReport\dll\FastReport.Service.dll" />
+    <Content Include="FastReport\dll\FastReport.VSDesign.dll" />
+    <Content Include="FastReport\dll\FastReport.Web.dll" />
+    <Content Include="FastReport\dll\FastReport.Web.XML" />
+    <Content Include="FastReport\dll\FastReport.xml" />
+    <None Include="FastReport\File\test.frx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="idCardDll\sdtapi.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

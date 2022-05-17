@@ -54,9 +54,10 @@ namespace Client
 
             //设置上午下午
             this.cbxSXW.Items.Clear();
+            cbxSXW.Items.Add("全部");
             cbxSXW.Items.Add("上午");
             cbxSXW.Items.Add("下午");
-            cbxSXW.Text = DateTime.Now.Hour > 12 ? "下午" : "上午";
+            cbxSXW.Text = "全部";
 
             //挂号状态 
             this.cbxStatus.Items.Clear();
@@ -92,7 +93,15 @@ namespace Client
             //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
             //group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}
             var gh_date = txtRiqi.Text;
-            var ampm = cbxSXW.Text == "上午" ? "a" : "p";
+            var ampm = "%";
+            if (cbxSXW.Text == "上午")
+            {
+                ampm = "a";
+            }
+            else if (cbxSXW.Text == "下午")
+            {
+                ampm = "p";
+            }
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
             var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "%" : txtDoct.TagString;
@@ -132,7 +141,7 @@ namespace Client
 
             var source = list.Select(p => new
             {
-                ampm = p.ampm, 
+                ampm = p.ampm,
                 charge_fee = p.charge_fee,
                 charge_name = p.charge_name,
                 clinic_name = p.clinic_name,
@@ -510,7 +519,7 @@ namespace Client
 
         private void txtGhUser_TextChanged(object sender, EventArgs e)
         {
-            if (txtGhUser.Text=="")
+            if (txtGhUser.Text == "")
             {
                 return;
             }
@@ -659,7 +668,7 @@ namespace Client
                     dgvks_CellContentClick(sender, ev);
                 }
             }
-           
+
         }
 
         private void txtzk_KeyUp(object sender, KeyEventArgs e)
@@ -675,7 +684,7 @@ namespace Client
 
                     var unit_sn = dgvzk.Rows[0].Cells["unit_sn"].Value.ToString();
                     var name = dgvzk.Rows[0].Cells["name"].Value.ToString();
-                     
+
                     txtzk.TextChanged -= txtzk_TextChanged;
                     txtzk.Text = name;
                     txtzk.TagString = unit_sn;
@@ -755,7 +764,7 @@ namespace Client
                     var code = dgvhl.Rows[0].Cells["code"].Value.ToString();
                     var name = dgvhl.Rows[0].Cells["name"].Value.ToString();
 
-                    
+
                     txtHaolei.TextChanged -= txtHaolei_TextChanged;
                     txtHaolei.Text = name;
                     txtHaolei.TagString = code;
