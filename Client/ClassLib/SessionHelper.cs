@@ -45,5 +45,8 @@ namespace Client.ClassLib
         /// 身份证读卡数据
         /// </summary>
         public static CardReader_Data CardReader;
+
+
+       
     }
 }

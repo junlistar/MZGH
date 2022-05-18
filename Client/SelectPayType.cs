@@ -24,6 +24,10 @@ using Alipay.EasySDK.Payment.FaceToFace.Models;
 using Alipay.EasySDK.Kernel.Util;
 using Alipay.EasySDK.Payment.Common.Models;
 using System.Drawing.Printing;
+using FastReport;
+using Client.FastReportLib;
+using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace Client
 {
@@ -230,7 +234,7 @@ namespace Client
                 }
 
             }
-            else if (payMethod == PayMethodEnum.Yinlian || payMethod == PayMethodEnum.Yibao)
+            else if (payMethod == PayMethodEnum.Yinlian)
             {
                 CardPay card = new CardPay(((int)payMethod).ToString(), left_je.ToString());
                 card.ShowDialog();
@@ -251,6 +255,26 @@ namespace Client
                     log.Info("取消支付：" + (int)payMethod + ",金额：" + left_je);
 
 
+                }
+            }
+            else if (payMethod == PayMethodEnum.Yibao)
+            {
+                //刷医保卡，再挂号 
+                if (YiBaoPay())
+                {
+                    log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
+                    //保存支付数据，用于退款
+                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je));
+
+                    this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
+
+                    //总金额-支付金额
+                    lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
+                    lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
+                }
+                else
+                {
+                    log.Info("支付失败：" + (int)payMethod + ",金额：" + left_je);
                 }
             }
             else if (payMethod == PayMethodEnum.Xianjin)
@@ -305,6 +329,194 @@ namespace Client
             }
         }
 
+        public bool YiBaoPay()
+        {
+            YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+            request.infno = ((int)InfoNoEnum.人员信息).ToString();
+            request.msgid = YBHelper.msgid;
+            request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+            request.insuplc_admdvs = "421002";
+            request.recer_sys_code = YBHelper.recer_sys_code;
+            request.dev_no = "";
+            request.dev_safe_info = "";
+            request.cainfo = "";
+            request.signtype = "";
+            request.infver = YBHelper.infver;
+            request.opter_type = YBHelper.opter_type;
+            request.opter = SessionHelper.uservm.user_mi;
+            request.opter_name = SessionHelper.uservm.name;
+            request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            request.fixmedins_code = YBHelper.fixmedins_code;
+            request.fixmedins_name = YBHelper.fixmedins_name;
+            request.sign_no = YBHelper.msgid;
+
+            request.input = new RepModel<UserInfoRequestModel>();
+            request.input.data = new UserInfoRequestModel();
+            request.input.data.mdtrt_cert_type = "03";
+            request.input.data.psn_cert_type = "1";
+
+            string json = WebApiHelper.SerializeObject(request);
+
+
+            try
+            {
+                //var res = DataPost("http://10.87.82.212:8080", json);
+
+                //调用 com名称  方法  参数
+                string BusinessID = "1101";
+                string Dataxml = json;
+                string Outputxml = "";
+                var parm = new object[] { BusinessID, json, Outputxml };
+
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                log.Debug(parm[2]);
+
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+
+                if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                {
+                    MessageBox.Show(yBResponse.err_msg);
+                    log.Error(yBResponse.err_msg);
+                }
+                else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
+                {
+                    SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+
+                    YBHelper.currentYBInfo = yBResponse;
+
+                    //门诊挂号
+                    YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
+                    ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
+
+                    ghRequest.msgid = YBHelper.msgid;
+                    ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                    ghRequest.insuplc_admdvs = "421002";
+                    ghRequest.recer_sys_code = YBHelper.recer_sys_code;
+                    ghRequest.dev_no = "";
+                    ghRequest.dev_safe_info = "";
+                    ghRequest.cainfo = "";
+                    ghRequest.signtype = "";
+                    ghRequest.infver = YBHelper.infver;
+                    ghRequest.opter_type = YBHelper.opter_type;
+                    ghRequest.opter = SessionHelper.uservm.user_mi;
+                    ghRequest.opter_name = SessionHelper.uservm.name;
+                    ghRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    ghRequest.fixmedins_code = YBHelper.fixmedins_code;
+                    ghRequest.fixmedins_name = YBHelper.fixmedins_name;
+                    ghRequest.sign_no = YBHelper.msgid;
+
+                    ghRequest.input = new RepModel<GHRequestModel>();
+                    ghRequest.input.data = new GHRequestModel();
+
+                    ghRequest.input.data.psn_no = yBResponse.output.baseinfo.psn_no;
+                    if (yBResponse.output.insuinfo != null)
+                    {
+                        ghRequest.input.data.insutype = yBResponse.output.insuinfo[0].insutype;
+                    }
+                    ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
+                    ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
+                    ghRequest.input.data.ipt_otp_no = ""; //机制号 唯一" ipt_otp_no": "1533956",
+                    ghRequest.input.data.atddr_no = ""; //医生医保编号 "atddr_no": "D421003007628",
+                    ghRequest.input.data.dr_name = vm.doctor_name;
+                    ghRequest.input.data.dept_code = vm.unit_name;
+                    ghRequest.input.data.dept_name = vm.unit_name;
+                    ghRequest.input.data.caty = vm.clinic_name;
+
+                    json = WebApiHelper.SerializeObject(ghRequest);
+
+                    BusinessID = "2201";
+                    Dataxml = json;
+                    Outputxml = "";
+                    parm = new object[] { BusinessID, json, Outputxml };
+
+                    result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                    log.Debug(parm[2]);
+
+                    var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                    if (!string.IsNullOrEmpty(resp.err_msg))
+                    {
+                        MessageBox.Show(resp.err_msg);
+                        log.Error(resp.err_msg);
+                    }
+                    else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
+                    {
+                        MessageBox.Show(resp.output.data.mdtrt_id);
+
+                        //保存医保支付信息，用于退款
+                        YBHelper.currentYBPay = resp;
+
+                        //就诊ID 医保返回唯一流水
+                        string mdtrt_id = resp.output.data.mdtrt_id;
+                        //人员编号
+                        string psn_no = resp.output.data.psn_no;
+                        //住院/门诊号
+                        string ipt_otp_no = resp.output.data.ipt_otp_no;
+
+                        return true;
+
+                        #region 退款代码 （备用）
+
+                        //门诊挂号撤销
+                        YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
+                        ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
+
+                        ghRefund.msgid = YBHelper.msgid;
+                        ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                        ghRefund.insuplc_admdvs = "421002";
+                        ghRefund.recer_sys_code = YBHelper.recer_sys_code;
+                        ghRefund.dev_no = "";
+                        ghRefund.dev_safe_info = "";
+                        ghRefund.cainfo = "";
+                        ghRefund.signtype = "";
+                        ghRefund.infver = YBHelper.infver;
+                        ghRefund.opter_type = YBHelper.opter_type;
+                        ghRefund.opter = SessionHelper.uservm.user_mi;
+                        ghRefund.opter_name = SessionHelper.uservm.name;
+                        ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        ghRefund.fixmedins_code = YBHelper.fixmedins_code;
+                        ghRefund.fixmedins_name = YBHelper.fixmedins_name;
+                        ghRefund.sign_no = YBHelper.msgid;
+
+                        ghRefund.input = new RepModel<GHRefundRequestModel>();
+                        ghRefund.input.data = new GHRefundRequestModel();
+                        ghRefund.input.data.mdtrt_id = resp.output.data.mdtrt_id;
+                        ghRefund.input.data.psn_no = resp.output.data.psn_no;
+                        ghRefund.input.data.ipt_otp_no = resp.output.data.ipt_otp_no;
+                         
+                        json = WebApiHelper.SerializeObject(ghRefund);
+
+                        BusinessID = "2202";
+                        Dataxml = json;
+                        Outputxml = "";
+                        parm = new object[] { BusinessID, json, Outputxml };
+
+                        result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                        log.Debug(parm[2]);
+
+                        var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                        if (!string.IsNullOrEmpty(refund_resp.err_msg))
+                        {
+                            MessageBox.Show(refund_resp.err_msg);
+                            log.Error(refund_resp.err_msg);
+                        }
+
+                        #endregion
+                    } 
+                }
+                MessageBox.Show("支付失败！"); 
+            }
+            catch (Exception ex)
+            {
+                log.Error("请求接口数据出错：" + ex.Message);
+            } 
+            return false;
+        }
 
 
         private void SelectPayType_Load(object sender, EventArgs e)
@@ -314,8 +526,7 @@ namespace Client
 
             //获取实际金额
             GetEffectivePriceByRecordSN();
-
-
+             
             lblzje.Text = vm.je;
             lblsyje.Text = vm.je;
             lblyfje.Text = "0.00";
@@ -465,10 +676,19 @@ namespace Client
                     UIMessageTip.ShowOk("挂号成功!");
 
                     //打印单据 
-                    Print(pay_string);
-                    Print(pay_string, 2);
+                    //Print(pay_string);
+                    //Print(pay_string, 2);
 
-                    this.Close();
+                    var report = CreateReportAndLoadFrx(pay_string);
+
+                    PreviewFrom pf = new PreviewFrom(report);
+
+
+                    DialogResult res = pf.ShowDialog();
+                    if (res == DialogResult.Cancel)
+                    {
+                        this.Close();
+                    }
                 }
                 else
                 {
@@ -486,8 +706,38 @@ namespace Client
                 log.Error(ex.ToString());
 
             }
-
         }
+        /// <summary>
+        /// fastreport打印
+        /// </summary>
+        /// <returns></returns>
+        public Report CreateReportAndLoadFrx(string pay_string)
+        {
+            Report report = new Report();
+
+            report.Load(Application.StartupPath + @"\FastReport\file\gh_pay.frx");//这里是模板的路径 
+
+            report.SetParameterValue("pid", GuaHao.PatientVM.patient_id);
+            report.SetParameterValue("record_sn", vm.record_sn);
+
+
+            //处理多重支付
+            var pay_method_arr = pay_string.Split(',');
+            var result = "";
+
+            foreach (var pay_method in pay_method_arr)
+            {
+                var pay_detail = pay_method.Split('-');
+                var cheque_type = pay_detail[0];
+                var charge = decimal.Parse(pay_detail[1]);
+                var out_trade_no = pay_detail[2];//订单编号
+
+                result += "支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge + "元" + "\r\n";
+            }
+            report.SetParameterValue("paystr", result);
+            return report;
+        }
+
         string printPaystr = "";
         public void Print(string paystring, int type = 1)
         {
@@ -533,7 +783,7 @@ namespace Client
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
-        { 
+        {
             ComboPrintContent(e, 1);
         }
 
@@ -548,7 +798,7 @@ namespace Client
             ComboPrintContent(e, 2);
         }
 
-        public void ComboPrintContent(PrintPageEventArgs e,int type = 1)
+        public void ComboPrintContent(PrintPageEventArgs e, int type = 1)
         {
             Font font = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
 
@@ -603,7 +853,7 @@ namespace Client
 
             //打印收费项目
             font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
-            ptext = "收费项目" + "(总计"+ chargeItems.Sum(p=>p.effective_price)+")";
+            ptext = "收费项目" + "(总计" + chargeItems.Sum(p => p.effective_price) + ")";
             //ptext = "收费项目";
             size = e.Graphics.MeasureString(ptext, font);
             heightStep = Convert.ToInt32(size.Height * 1.3);
@@ -657,12 +907,12 @@ namespace Client
             yLocation += heightStep;
 
             if (type == 1)
-            { 
-                ptext = "患者存单"; 
-            }
-            else if(type == 2)
             {
-                ptext = "医院存单"; 
+                ptext = "患者存单";
+            }
+            else if (type == 2)
+            {
+                ptext = "医院存单";
             }
             font = new Font("Arial", 6, System.Drawing.FontStyle.Bold);
             size = e.Graphics.MeasureString(ptext, font);
@@ -1355,5 +1605,69 @@ namespace Client
 
             //MessageBox.Show(chkcomb.Checked.ToString());
         }
+
+
+
+        #region 医保组件调用
+
+        [DllImport("ole32.dll")]
+        static extern int CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid pclsid);
+
+        public static object InvokeMethod(string comName, string methodName, ref object[] args)
+        {
+
+            object ret = null;
+            COMInfo com = GetCOMInfo(comName);
+            try
+            {
+                //用参数的索引属性来指出哪些参数是一个返回的参数
+                //对于那些是[in]或ByRef的参数可以不用指定
+                ParameterModifier[] ParamMods = new ParameterModifier[1];
+                ParamMods[0] = new ParameterModifier(3); // 初始化为接口参数的个数
+                ParamMods[0][2] = true; // 设置第三个参数为返回参数
+
+
+                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args, ParamMods,
+                                                         null,
+                                                         null);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return ret;
+        }
+
+
+        public static COMInfo GetCOMInfo(string comName)
+        {
+            COMInfo comInfo;
+            Type type;
+            object instance = null;
+            instance = CreateInstance(comName, out type);
+            comInfo = new COMInfo(type, instance);
+            return comInfo;
+        }
+
+
+        private static object CreateInstance(string progName, out Type type)
+        {
+            object instance = null;
+            type = null;
+            try
+            {
+                Guid clsid;
+                int result = CLSIDFromProgID(progName, out clsid);
+                type = Type.GetTypeFromCLSID(clsid, true);
+                instance = Activator.CreateInstance(type);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return instance;
+        }
+
+        #endregion
     }
 }

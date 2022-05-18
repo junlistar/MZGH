@@ -171,6 +171,7 @@
     <Compile Include="ClassLib\HttpClientUtil.cs" />
     <Compile Include="ClassLib\PayMethodEnum.cs" />
     <Compile Include="ClassLib\ReadIdCardHelper.cs" />
+    <Compile Include="ClassLib\YBHelper.cs" />
     <Compile Include="ClassLib\YBResponse.cs" />
     <Compile Include="ClassLib\ResponseResult.cs" />
     <Compile Include="ClassLib\SessionHelper.cs" />
@@ -187,6 +188,12 @@
     </Compile>
     <Compile Include="FastReport\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FastReport\PreviewFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FastReport\PreviewFrom.Designer.cs">
+      <DependentUpon>PreviewFrom.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Frames\FHeaderAsideMainFooter.cs">
       <SubType>Form</SubType>
@@ -335,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FastReport\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FastReport\PreviewFrom.resx">
+      <DependentUpon>PreviewFrom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Frames\FHeaderAsideMainFooter.resx">
       <DependentUpon>FHeaderAsideMainFooter.cs</DependentUpon>

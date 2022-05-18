@@ -45,7 +45,7 @@ namespace Client
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
-        } 
+        }
         //定义挂号数据字典 
         public Dictionary<string, List<GHRequestVM>> requestDic = new Dictionary<string, List<GHRequestVM>>();
         public string request_key = "";
@@ -74,7 +74,7 @@ namespace Client
             InitUIText();
 
             parentForm = this.Parent as UIHeaderAsideMainFooterFrame;
-              
+
             log.Debug("加载挂号数据");
             LoadRequestInfo();
 
@@ -277,8 +277,8 @@ namespace Client
             }
             //整理数据
             requestDic = new Dictionary<string, List<GHRequestVM>>();
-            foreach (var item in listApi.data) 
-            { 
+            foreach (var item in listApi.data)
+            {
 
                 if (!requestDic.Keys.Contains(item.unit_name))
                 {
@@ -415,7 +415,7 @@ namespace Client
             SelctClinic sc = new SelctClinic(requestDic[btn.Tag.ToString()], btnEditUser.TagString);
 
             sc.FormClosed += Sc_FormClosed;
-             
+
             sc.ShowDialog();
         }
 
@@ -436,7 +436,7 @@ namespace Client
                 btnEditUser.TagString = ""; btnEditUser.Hide();
                 lblName.Text = "";
                 lblAge.Text = "";
-                lbldistrict.Text = ""; 
+                lbldistrict.Text = "";
                 lblsfz.Text = "";
                 lblhometel.Text = "";
                 lblSex.Text = "";
@@ -485,7 +485,7 @@ namespace Client
                     lblhometel.Text = userInfo.home_tel.ToString();
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
                     if (!string.IsNullOrEmpty(userInfo.home_district))
-                    { 
+                    {
                         var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
 
                         if (model != null)
@@ -494,7 +494,7 @@ namespace Client
                         }
                         else
                         {
-                            
+
                         }
                     }
                     else
@@ -536,7 +536,7 @@ namespace Client
                     lblAge.Text = ""; lblhometel.Text = "";
                     lblSex.Text = ""; lbldistrict.Text = ""; lblsfz.Text = "";
 
-                    if (SessionHelper.CardReader!=null)
+                    if (SessionHelper.CardReader != null)
                     {
                         //自动打开创建新用户窗口
                         UserInfoEdit ue = new UserInfoEdit("", null);
@@ -614,35 +614,65 @@ namespace Client
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
             btnCika.FillColor = Color.LightSteelBlue;
-            //ReadCard rc = new ReadCard("医保卡");
-            ////关闭，刷新
-            //rc.FormClosed += Rc_FormClosed;
-            //rc.ShowDialog();
 
-            Task<HttpResponseMessage> task = null;
-            string json = "{\"infno\":\"1101\",\"msgid\":\"H42100300513202109271813033258\",\"mdtrtarea_admvs\":\"421300\",\"insuplc_admdvs\":\"421300\",\"recer_sys_code\":\"1\",\"dev_no\":\"\",\"dev_safe_info\":\"\",\"cainfo\":\"\",\"signtype\":\"\",\"infver\":\"v2.0\",\"opter_type\":\"1\",\"opter\":\"00000\",\"opter_name\":\"全院\",\"inf_time\":\"2021-09-27 18:13:03\",\"fixmedins_code\":\"H42100300513\",\"fixmedins_name\":\"荆州市中心医院\",\"sign_no\":\"421000G0000000244038\",\"input\":{\"data\":{\"mdtrt_cert_type\":\"02\",\"mdtrt_cert_no\":\"                    \",\"card_sn\":\"                    \",\"begntime\":\"                    \",\"psn_cert_type\":\"1\",\"certno\":\"                    \",\"psn_name\":\"                    \"}}}" ;
 
-            var data = WebApiHelper.SerializeObject(json); HttpContent httpContent = new StringContent(data);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //string paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+            // string json = "{\"infno\":\"1101\",\"msgid\":\"H42100300513202109271813033258\",\"mdtrtarea_admvs\":\"421300\",\"insuplc_admdvs\":\"421300\",\"recer_sys_code\":\"1\",\"dev_no\":\"\",\"dev_safe_info\":\"\",\"cainfo\":\"\",\"signtype\":\"\",\"infver\":\"v2.0\",\"opter_type\":\"1\",\"opter\":\"00000\",\"opter_name\":\"全院\",\"inf_time\":\"2021-09-27 18:13:03\",\"fixmedins_code\":\"H42100300513\",\"fixmedins_name\":\"荆州市中心医院\",\"sign_no\":\"421000G0000000244038\",\"input\":{\"data\":{\"mdtrt_cert_type\":\"02\",\"mdtrt_cert_no\":\"                    \",\"card_sn\":\"                    \",\"begntime\":\"                    \",\"psn_cert_type\":\"1\",\"certno\":\"                    \",\"psn_name\":\"                    \"}}}" ;
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://10.87.82.212:8080");
-            
-             
+            YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+            request.infno = ((int)InfoNoEnum.人员信息).ToString();
+            request.msgid = YBHelper.msgid;
+            request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+            request.insuplc_admdvs = "421002";
+            request.recer_sys_code = YBHelper.recer_sys_code;
+            request.dev_no = "";
+            request.dev_safe_info = "";
+            request.cainfo = "";
+            request.signtype = "";
+            request.infver = YBHelper.infver;
+            request.opter_type = YBHelper.opter_type;
+            request.opter = SessionHelper.uservm.user_mi;
+            request.opter_name = SessionHelper.uservm.name;
+            request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            request.fixmedins_code = YBHelper.fixmedins_code;
+            request.fixmedins_name = YBHelper.fixmedins_name;
+            request.sign_no = YBHelper.msgid;
+
+            request.input = new RepModel<UserInfoRequestModel>();
+            request.input.data = new UserInfoRequestModel();
+            request.input.data.mdtrt_cert_type = "03";
+            request.input.data.psn_cert_type = "1";
+
+            string json = WebApiHelper.SerializeObject(request);
+
+
             try
             {
                 //var res = DataPost("http://10.87.82.212:8080", json);
-                
+
                 //调用 com名称  方法  参数
                 string BusinessID = "1101";
-                string Dataxml= json;
+                string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
 
-                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call",ref parm);
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                 log.Debug(parm[2]);
+
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+
+                if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                {
+                    MessageBox.Show(yBResponse.err_msg);
+                }
+                else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
+                {
+                    SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+                    txtCode.Text = SessionHelper.cardno;
+                }
+
+
+                YBHelper.currentYBInfo = yBResponse;
 
                 //string res = client.PostAsync("", httpContent).Result.Content.ReadAsStringAsync().Result;
 
@@ -657,9 +687,9 @@ namespace Client
         [DllImport("ole32.dll")]
         static extern int CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid pclsid);
 
-        public static object InvokeMethod(string comName, string methodName,ref object[] args)
+        public static object InvokeMethod(string comName, string methodName, ref object[] args)
         {
-             
+
             object ret = null;
             COMInfo com = GetCOMInfo(comName);
             try
@@ -671,7 +701,7 @@ namespace Client
                 ParamMods[0][2] = true; // 设置第三个参数为返回参数
 
 
-                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args,ParamMods,
+                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args, ParamMods,
                                                          null,
                                                          null);
             }
@@ -711,7 +741,7 @@ namespace Client
             }
             return instance;
         }
-         
+
 
 
 
@@ -794,7 +824,7 @@ namespace Client
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             InitUIText();
-            
+
         }
 
         private void gbxUnits_Click(object sender, EventArgs e)
@@ -851,7 +881,7 @@ namespace Client
             gbxUnits.Invalidate(true);
         }
 
-        
+
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
@@ -888,7 +918,7 @@ namespace Client
             //ks.txtKeySearch.TextChanged += TxtKeySearch_TextChanged;
 
             //ks.txtKeySearch.Text = e.KeyData.DisplayText();
-             
+
             ks.Deactivate += Ks_LostFocus;
 
             ks.FormClosing += Ks_FormClosing;
@@ -916,14 +946,14 @@ namespace Client
         {
             //throw new NotImplementedException();
 
-           
+
         }
 
         private void Ks_LostFocus(object sender, EventArgs e)
         {
-            ks.Close(); 
-            
-           
+            ks.Close();
+
+
         }
 
         private void GuaHao_KeyDown(object sender, KeyEventArgs e)
@@ -935,7 +965,7 @@ namespace Client
             //pnlKeySuggest.Left = 1000;
             //pnlKeySuggest.BringToFront();
             //pnlKeySuggest.BackColor = Color.Red;
-             
+
             //txtKeySearch.Focus();
             //pnlKeySuggest.Visible = true; 
         }

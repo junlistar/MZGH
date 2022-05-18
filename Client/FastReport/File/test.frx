@@ -1,1 +1,111 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/18/2022 08:19:17" ReportInfo.Modified="05/18/2022 09:03:10" ReportInfo.CreatorVersion="2021.3.22.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+    
+
+    private void Table8_ManualBuild(object sender, EventArgs e)
+    {
+      DataSourceBase data1 = Report.GetDataSource(&quot;Table&quot;); // 获取DataSet中表名为Table1的数据源
+      data1.Init(); // 初始化 
+       
+      Table8.PrintRow(0); // 控件Table打印第0行
+      Table8.PrintColumns(); // 每打印一行，都要调用 PrintColumn或PrintColumns    
+      MessageBox.Show(data1.RowCount.ToString());
+      int i=1;
+      while(data1.HasMoreRows) // 打印重复循环的行
+      {                     //  MessageBox.Show(i.ToString());
+        Table8.PrintRow(1);
+        Table8.PrintColumns();
+        data1.Next(); // 读取下一行
+        i++;
+      }                                                                      
+    }
+  }
+}
+</ScriptText>
+  <Styles Name="Standard">
+    <Style Name="Title" Font="宋体, 12pt, style=Bold"/>
+    <Style Name="Header" Font="宋体, 10pt, style=Bold"/>
+    <Style Name="Group" Font="宋体, 10pt, style=Bold"/>
+    <Style Name="Data" Font="宋体, 9pt"/>
+    <Style Name="Footer" Font="宋体, 9pt"/>
+    <Style Name="EvenRows" Fill.Color="WhiteSmoke" Font="宋体, 9pt"/>
+  </Styles>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Blsg/3dwNM9paKHKGjEZ3NFA==">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="  select top 10 emp_sn,name from a_employee_mi where name like @name+'%'">
+        <Column Name="emp_sn" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+        <CommandParameter Name="name" DataType="22" Size="10" Expression="name"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlVcQnHazkanIOyK9YROS0Qw==">
+      <TableDataSource Name="Table7" DataType="System.Int32" Enabled="true" SelectCommand="select top 10 code,name from gh_zd_clinic_type">
+        <Column Name="code" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="name" DataType="System.String"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="宋体, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="37.8" Dock="Fill" Text="用户信息" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" Style="Title"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="264.6" CanGrow="true" Style="Data">
+      <TextObject Name="Text3" Width="359.1" Height="18.9" Text="代码" Font="宋体, 10pt, style=Bold" Style="Header"/>
+      <TextObject Name="Text5" Left="359.1" Width="359.1" Height="18.9" Text="名称" Font="宋体, 10pt, style=Bold" Style="Header"/>
+      <TableObject Name="Table8" Left="28.35" Top="85.05" Width="321.24" Height="94.5" ManualBuildEvent="Table8_ManualBuild">
+        <TableColumn Name="Column1" Width="160.62"/>
+        <TableColumn Name="Column2" Width="160.62"/>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Font="宋体, 9pt">
+            <TextObject Name="Text11" Left="9.45" Width="94.5" Height="18.9" Text="代码" Font="宋体, 9pt"/>
+          </TableCell>
+          <TableCell Name="Cell2" Font="宋体, 9pt">
+            <TextObject Name="Text12" Left="18.9" Width="94.5" Height="18.9" Text="名称" Font="宋体, 9pt"/>
+          </TableCell>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Text="[Table.emp_sn]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Text="[Table.name]" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell11" Font="宋体, 9pt"/>
+          <TableCell Name="Cell12" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell16" Font="宋体, 9pt"/>
+          <TableCell Name="Cell17" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row5">
+          <TableCell Name="Cell21" Font="宋体, 9pt"/>
+          <TableCell Name="Cell22" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="310.4" Width="718.2" Height="18.9" EvenStyle="EvenRows" DataSource="Table7">
+      <TextObject Name="Text9" Left="28.35" Width="94.5" Height="18.9" Text="[Table7.code]" Font="宋体, 9pt"/>
+      <TextObject Name="Text10" Left="378" Width="94.5" Height="18.9" Text="[Table7.name]" Font="宋体, 9pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="333.3" Width="718.2" Height="18.9">
+      <TextObject Name="Text8" Width="718.2" Height="18.9" Dock="Fill" Text="[PageN]" HorzAlign="Right" Font="宋体, 9pt" Style="Footer"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

@@ -16,7 +16,7 @@ namespace Client.ClassLib
         public string signtype { get; set; }
         public string cainfo { get; set; } 
         public string detail_msg { get; set; }
-        public RepModel<T> output { get; set; }
+        public T output { get; set; }
     }
 
     public class RepModel<T>
