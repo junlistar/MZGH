@@ -67,6 +67,7 @@
             this.cheque_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cheque_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -172,7 +173,8 @@
             this.visit_flag_name,
             this.cheque_type,
             this.cheque_no,
-            this.item_no});
+            this.item_no,
+            this.receipt_sn});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -573,6 +575,14 @@
             this.item_no.ReadOnly = true;
             this.item_no.Visible = false;
             // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "receipt_sn";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            this.receipt_sn.Visible = false;
+            // 
             // Refund
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -632,5 +642,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receipt_sn;
     }
 }

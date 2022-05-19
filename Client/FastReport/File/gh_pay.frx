@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="05/17/2022 11:15:42" ReportInfo.Modified="05/18/2022 15:25:36" ReportInfo.CreatorVersion="2021.3.22.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/17/2022 11:15:42" ReportInfo.Modified="05/19/2022 12:51:27" ReportInfo.CreatorVersion="2021.3.22.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,7 +26,11 @@ namespace FastReport
       if (Report.GetParameter(&quot;paystr&quot;)!=null)
       {
         Text11.Text =Report.GetParameter(&quot;paystr&quot;).AsString;
-      }         
+      } 
+      if (Report.GetParameter(&quot;dat&quot;)!=null)
+      {
+           
+      }        
       lbl_printtime.Text =&quot;打印时间：&quot; + DateTime.Now.ToString(&quot;yyyy-MM-dd HH:mm:ss&quot;);
      
     }        
@@ -52,8 +56,8 @@ namespace FastReport
 }
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlXNo/2Gh9sC7l+GUIIheURw=="/>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlPb+bX3hc+JCS4Glj9+s8tA==">
+    <MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlSjQaZ5EYSgVGsVxB5FonMg=="/>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BluGwkiV+IFc6snonAe5P6Vg==">
       <TableDataSource Name="Table7" Alias="baseInfo" DataType="System.Int32" Enabled="true" SelectCommand="select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date&#13;&#10;	,ap = CASE WHEN b.ampm = 'a' THEN '上午' &#13;&#10;                     ELSE '下午' &#13;&#10;                     END &#13;&#10;					  ,u1.name unit_name&#13;&#10;		  ,[group_sn]		  &#13;&#10;		  ,u2.name group_name&#13;&#10;	 &#13;&#10;		  ,a.name doctor_name&#13;&#10;		  ,b.[clinic_type]&#13;&#10;		  ,t.name clinic_name&#13;&#10;		  ,[req_type]&#13;&#10;		  ,q.name req_name&#13;&#10;	from mz_visit_table b&#13;&#10;	 LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code&#13;&#10;	LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn&#13;&#10;		  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn&#13;&#10;		  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn&#13;&#10;		    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code &#13;&#10;	 where patient_id=@pid&#13;&#10;	 order by b.times desc">
         <Column Name="visit_date" DataType="System.DateTime"/>
         <Column Name="name" DataType="System.String"/>
@@ -72,7 +76,7 @@ namespace FastReport
         <CommandParameter Name="pid" DataType="22" Size="20" Expression="pid"/>
       </TableDataSource>
     </MsSqlDataConnection>
-    <MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlGe7uPwyVvXOFhc6H8qp6bQ==">
+    <MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl+NduZQnO6LkZk6pXJdkUKQ==">
       <TableDataSource Name="Table" Alias="Table_item" DataType="System.Int32" Enabled="true" SelectCommand="select c.name,c.charge_price,c.effective_price from gh_zd_clinic_type a &#13;&#10;left join gh_zd_clinic_charge b on a.code = b.code&#13;&#10;left join zd_charge_item c on b.charge_code = c.code &#13;&#10;where a.code=(select clinic_type from gh_request where record_sn=@record_sn)">
         <Column Name="name" DataType="System.String"/>
         <Column Name="charge_price" DataType="System.Double"/>
@@ -80,14 +84,14 @@ namespace FastReport
         <CommandParameter Name="record_sn" DataType="22" Size="10" Expression="record_sn"/>
       </TableDataSource>
     </MsSqlDataConnection>
-    <MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl3iOnTGbUfcfTQl4wmZJvMA==">
+    <MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BloeUj7muPIGIO9GAbj+G99g==">
       <TableDataSource Name="Table8" Alias="Table_pay" DataType="System.Int32" Enabled="true" SelectCommand="select  (case cheque_type &#13;&#10; when 1 then '现金' &#13;&#10; when 6 then '医保' &#13;&#10;  when 11 then '支付宝'&#13;&#10;   when 12 then '微信'&#13;&#10;    when 14 then '银联'&#13;&#10; end) as cheque_type,charge &#13;&#10;from gh_deposit &#13;&#10;where patient_id='000296903300'&#13;&#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&#13;&#10;order by price_date desc">
         <Column Name="cheque_type" DataType="System.String"/>
         <Column Name="charge" DataType="System.Decimal"/>
         <CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/>
       </TableDataSource>
     </MsSqlDataConnection>
-    <MsSqlDataConnection Name="MsSqlDataConnection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlH8XEBSWpBjxF5Qx8bKnufg==">
+    <MsSqlDataConnection Name="MsSqlDataConnection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlrfZyKSwFC1s4zqHS3l94ew==">
       <TableDataSource Name="TableDataSource1" Alias="Table_paystring" DataType="System.Int32" PropName="Table8" Enabled="true" SelectCommand=" select stuff((select '\r\n'+a.cheque_type + ':'+ CONVERT(varchar,  + charge) &#13;&#10; from &#13;&#10; (select  (case cheque_type &#13;&#10; when 1 then '现金' &#13;&#10; when 6 then '医保' &#13;&#10;  when 11 then '支付宝'&#13;&#10;   when 12 then '微信'&#13;&#10;    when 14 then '银联'&#13;&#10; end) as cheque_type ,charge&#13;&#10;from gh_deposit &#13;&#10;where patient_id='000296903300' &#13;&#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&#13;&#10; ) a&#13;&#10;   for xml path('')),1,4,'') paystr&#13;&#10;">
         <Column Name="paystr" DataType="System.String" PropName="Column1"/>
         <CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/>
@@ -96,24 +100,24 @@ namespace FastReport
     <Parameter Name="pid" DataType="System.String"/>
     <Parameter Name="record_sn" DataType="System.String"/>
   </Dictionary>
-  <ReportPage Name="Page1" Tag="卡号" PaperWidth="150" PaperHeight="150" Watermark.Font="宋体, 60pt" StartPageEvent="Page1_StartPage">
+  <ReportPage Name="Page1" Tag="卡号" PaperWidth="150" PaperHeight="130" Watermark.Font="宋体, 60pt" StartPageEvent="Page1_StartPage">
     <ReportTitleBand Name="ReportTitle1" Width="491.4" Height="28.35">
       <TextObject Name="Text1" Left="151.2" Top="9.45" Width="141.75" Height="18.9" Text="挂号收费明细" Font="宋体, 14.25pt, style=Bold"/>
     </ReportTitleBand>
-    <PageHeaderBand Name="PageHeader1" Top="32.35" Width="491.4" Height="406.35">
-      <TextObject Name="Text2" Left="28.35" Top="9.45" Width="56.7" Height="18.9" Text="卡号：" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="Text3" Left="28.35" Top="37.8" Width="56.7" Height="18.9" Text="姓名：" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="Text4" Left="236.25" Top="37.8" Width="56.7" Height="18.9" Text="年龄：" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_time" Left="28.35" Top="66.15" Width="198.45" Height="18.9" Text="[baseInfo.gh_date]" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_unit" Left="28.35" Top="94.5" Width="198.45" Height="18.9" Text="[baseInfo.unit_name]" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_doct" Left="28.35" Top="122.85" Width="198.45" Height="18.9" Text="[baseInfo.clinic_name]" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_name" Left="85.05" Top="37.8" Width="141.75" Height="18.9" Text="[baseInfo.name]" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_age" Left="292.95" Top="37.8" Width="75.6" Height="18.9" Text="[baseInfo.age]" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="lbl_cardno" Left="94.5" Top="9.45" Width="132.3" Height="18.9" Text="[baseInfo.patient_id]" Font="宋体, 9pt"/>
-      <TextObject Name="Text6" Left="236.25" Top="66.15" Width="132.3" Height="18.9" Text="[baseInfo.ap]" Font="宋体, 9pt, style=Bold"/>
-      <TextObject Name="Text7" Left="236.25" Top="94.5" Width="132.3" Height="18.9" Text="[baseInfo.group_name]" Font="宋体, 9pt, style=Bold"/>
-      <TextObject Name="Text8" Left="236.25" Top="122.85" Width="132.3" Height="28.35" Text="[baseInfo.doctor_name]" Font="宋体, 9pt, style=Bold"/>
-      <TextObject Name="lblsf" Left="28.35" Top="151.2" Width="340.2" Height="18.9" Text="收费项目" Font="宋体, 10.5pt, style=Bold"/>
+    <PageHeaderBand Name="PageHeader1" Top="32.35" Width="491.4" Height="359.1">
+      <TextObject Name="Text2" Left="28.35" Top="9.45" Width="56.7" Height="18.9" Text="卡号：" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text3" Left="28.35" Top="37.8" Width="56.7" Height="18.9" Text="姓名：" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text4" Left="245.7" Top="37.8" Width="56.7" Height="18.9" Text="年龄：" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_time" Left="28.35" Top="66.15" Width="207.9" Height="18.9" Text="[baseInfo.gh_date]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_unit" Left="28.35" Top="94.5" Width="207.9" Height="18.9" Text="[baseInfo.unit_name]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_doct" Left="28.35" Top="122.85" Width="207.9" Height="18.9" Text="[baseInfo.clinic_name]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_name" Left="85.05" Top="37.8" Width="141.75" Height="18.9" Text="[baseInfo.name]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_age" Left="302.4" Top="37.8" Width="75.6" Height="18.9" Text="[baseInfo.age]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lbl_cardno" Left="85.05" Top="9.45" Width="132.3" Height="18.9" Text="[baseInfo.patient_id]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text6" Left="245.7" Top="66.15" Width="226.8" Height="18.9" Text="[baseInfo.ap]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text7" Left="245.7" Top="94.5" Width="226.8" Height="18.9" Text="[baseInfo.group_name]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text8" Left="245.7" Top="122.85" Width="226.8" Height="18.9" Text="[baseInfo.doctor_name]" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="lblsf" Left="28.35" Top="151.2" Width="340.2" Height="18.9" Text="收费项目" Font="宋体, 9pt, style=Bold"/>
       <TableObject Name="Table_item" Left="28.35" Top="179.55" Width="340.22" Height="37.8" ManualBuildEvent="Table_item_ManualBuild">
         <TableColumn Name="Column1" Width="170.11"/>
         <TableColumn Name="Column2" Width="170.11"/>
@@ -130,11 +134,11 @@ namespace FastReport
           <TableCell Name="Cell7" Text="[Table_item.effective_price]" Font="宋体, 9pt"/>
         </TableRow>
       </TableObject>
-      <TextObject Name="Text5" Left="28.35" Top="255.15" Width="340.2" Height="18.9" Text="支付信息" Font="宋体, 10.5pt, style=Bold"/>
-      <TextObject Name="Text11" Left="28.35" Top="292.95" Width="340.2" Height="103.95" Font="宋体, 9pt"/>
+      <TextObject Name="Text5" Left="28.35" Top="255.15" Width="340.2" Height="18.9" Text="支付信息" Font="宋体, 9pt, style=Bold"/>
+      <TextObject Name="Text11" Left="28.35" Top="283.5" Width="340.2" Height="75.6" Font="宋体, 9pt"/>
     </PageHeaderBand>
-    <DataBand Name="Data1" Top="442.7" Width="491.4" Height="28.35" DataSource="Table8"/>
-    <PageFooterBand Name="PageFooter1" Top="475.05" Width="491.4" Height="37.8">
+    <DataBand Name="Data1" Top="395.45" Width="491.4" DataSource="Table8"/>
+    <PageFooterBand Name="PageFooter1" Top="399.45" Width="491.4" Height="37.8">
       <TextObject Name="lbl_printtime" Left="28.35" Top="9.45" Width="340.2" Height="18.9" Text="打印时间：" Font="宋体, 10.5pt, style=Bold"/>
     </PageFooterBand>
   </ReportPage>

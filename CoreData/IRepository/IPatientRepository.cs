@@ -15,6 +15,9 @@ namespace Data.IRepository
         List<Patient> GetPatientByPatientId(string pid);
 
         int DeleteSocialNo(string sno);
+
+        int UpdateUserYBInfo(string pid, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs);
+
         int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera);
 

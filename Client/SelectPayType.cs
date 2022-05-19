@@ -264,7 +264,7 @@ namespace Client
                 {
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je));
+                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je,YBHelper.currentYBPay.output.data.mdtrt_id));
 
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -415,10 +415,13 @@ namespace Client
                         ghRequest.input.data.insutype = yBResponse.output.insuinfo[0].insutype;
                     }
                     ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
+                    //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
+                    //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
+                    ghRequest.input.data.mdtrt_cert_type = "02";
                     ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
-                    ghRequest.input.data.ipt_otp_no = ""; //机制号 唯一" ipt_otp_no": "1533956",
-                    ghRequest.input.data.atddr_no = ""; //医生医保编号 "atddr_no": "D421003007628",
+
+                    ghRequest.input.data.ipt_otp_no = "1533956"; //机制号 唯一" ipt_otp_no": "1533956",
+                    ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
                     ghRequest.input.data.dr_name = vm.doctor_name;
                     ghRequest.input.data.dept_code = vm.unit_name;
                     ghRequest.input.data.dept_name = vm.unit_name;
@@ -448,13 +451,39 @@ namespace Client
 
                         //保存医保支付信息，用于退款
                         YBHelper.currentYBPay = resp;
-
                         //就诊ID 医保返回唯一流水
                         string mdtrt_id = resp.output.data.mdtrt_id;
                         //人员编号
                         string psn_no = resp.output.data.psn_no;
                         //住院/门诊号
                         string ipt_otp_no = resp.output.data.ipt_otp_no;
+
+                        //保存用户的医保信息
+                        var d = new
+                        {
+                            yb_psn_no = psn_no,
+                            pid = patientId,
+                            yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
+                            yb_insutype = yBResponse.output.insuinfo[0].insutype,
+                            opera = SessionHelper.uservm.user_mi
+                        };
+                        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+                      
+                        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                        if (responseJson.data == 1 )
+                        {
+                            log.Debug("修改用户医保信息成功");
+               
+                        }
+                        else
+                        {
+                            log.Error(responseJson.message); 
+                        }
+
 
                         return true;
 
@@ -735,6 +764,14 @@ namespace Client
                 result += "支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge + "元" + "\r\n";
             }
             report.SetParameterValue("paystr", result);
+
+            List<string> list = new List<string>();
+            list.Add("aaaa");
+            list.Add("bbbb");
+            list.Add("cccc");
+            list.Add("dddd");
+
+            report.SetParameterValue("dat", list);
             return report;
         }
 

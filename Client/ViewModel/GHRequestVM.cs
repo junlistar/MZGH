@@ -94,7 +94,9 @@ namespace Client.ViewModel
         public string update_opera { get; set; }
         public string update_date { get; set; }
 
-
+        public string yb_psn_no { get; set; }
+        public string yb_insuplc_admdvs { get; set; }
+        public string yb_insutype { get; set; }
 
     }
 

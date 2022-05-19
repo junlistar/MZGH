@@ -204,7 +204,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
             }
-        } 
+        }
         public ResponseResult<int> EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
            string home_district, string home_street, string occupation_type, string response_type, string charge_type,
            string relation_name, int marrycode, string addition_no1, string employer_name, string opera)
@@ -297,7 +297,7 @@ namespace CoreApi.Controllers
             try
             {
                 return _ghDepositRepository.Refund(patient_id, times, opera, manual);
-                 
+
             }
             catch (Exception ex)
             {
@@ -627,6 +627,30 @@ namespace CoreApi.Controllers
             try
             {
                 return _patientRepository.DeleteSocialNo(sno);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// 更新用户医保信息
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <param name="yb_psn_no"></param>
+        /// <param name="yb_insutype"></param>
+        /// <param name="yb_insuplc_admdvs"></param>
+        /// <returns></returns>
+        public ResponseResult<int> UpdateUserYBInfo(string pid, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs)
+        {
+
+            Log.Information($"UpdateUserYBInfo,{pid} , {yb_psn_no}, {yb_insutype}, {yb_insuplc_admdvs}");
+            try
+            {
+                return _patientRepository.UpdateUserYBInfo(pid, yb_psn_no, yb_insutype, yb_insuplc_admdvs);
             }
             catch (Exception ex)
             {

@@ -21,7 +21,7 @@ namespace Data.Repository
         {
             string selectSql = @"select distinct a.patient_id, a.max_times times, a.[name], a.sex, a.birthday, cast(DateDiff(YY,a.birthday, GetDate()) as float) age, a.response_type, a.contract_code, a.occupation_type, a.charge_type, '07' haoming_code, '2969317' code, inpatient_no, getdate() visit_date, 
 a.social_no, '07' real_haoming_code, a.home_district, a.home_street, a.relation_tel, a.hic_no, a.addition_no1, a.home_tel, a.relation_name, a.relation_code, a.max_times real_times, a.p_bar_code, a.p_bar_code2, a.black_flag, a.address, a.poverty_code, a.employer_name, a.employer_street, employer_district,
-a.employer_tel, a.allergic_diag, a.marry_code, a.max_times, a.max_ledger_sn, a.max_receipt_sn, a.max_item_sn, a.enter_opera, a.enter_date, a.update_opera, a.update_date from 
+a.employer_tel, a.allergic_diag, a.marry_code, a.max_times, a.max_ledger_sn, a.max_receipt_sn, a.max_item_sn, a.enter_opera, a.enter_date, a.update_opera, a.update_date,a.yb_psn_no,a.yb_insuplc_admdvs,a.yb_insutype from 
  mz_patient_mi a where 
 a.p_bar_code = @cardno or a.social_no=@cardno or a.hic_no=@cardno order by max_ledger_sn desc";
 
@@ -36,7 +36,7 @@ a.p_bar_code = @cardno or a.social_no=@cardno or a.hic_no=@cardno order by max_l
         {
             string selectSql = @"select distinct a.patient_id, a.max_times times, a.[name], a.sex, a.birthday, cast(DateDiff(YY,a.birthday, GetDate()) as float) age, a.response_type, a.contract_code, a.occupation_type, a.charge_type, '07' haoming_code, '2969317' code, inpatient_no, getdate() visit_date, 
 a.social_no, '07' real_haoming_code, a.home_district, a.home_street, a.relation_tel, a.hic_no, a.addition_no1, a.home_tel, a.relation_name, a.relation_code, a.max_times real_times, a.p_bar_code, a.p_bar_code2, a.black_flag, a.address, a.poverty_code, a.employer_name, a.employer_street, employer_district,
-a.employer_tel, a.allergic_diag, a.marry_code, a.max_times, a.max_ledger_sn, a.max_receipt_sn, a.max_item_sn, a.enter_opera, a.enter_date, a.update_opera, a.update_date from 
+a.employer_tel, a.allergic_diag, a.marry_code, a.max_times, a.max_ledger_sn, a.max_receipt_sn, a.max_item_sn, a.enter_opera, a.enter_date, a.update_opera, a.update_date,a.yb_psn_no,a.yb_insuplc_admdvs,a.yb_insutype from 
  mz_patient_mi a where 
 a.patient_id=@patient_id ";
 
@@ -73,6 +73,17 @@ a.patient_id=@patient_id ";
             string sql = "UPDATE mz_patient_mi SET social_no='' WHERE social_no=@sno";
             var para = new DynamicParameters();
             para.Add("@sno", sno);
+            return Update(sql, para);
+        }
+
+        public int UpdateUserYBInfo(string pid,string yb_psn_no,string yb_insutype,string yb_insuplc_admdvs)
+        {
+            string sql = "UPDATE mz_patient_mi SET yb_psn_no=@yb_psn_no,yb_insutype=@yb_insutype,yb_insuplc_admdvs=@yb_insuplc_admdvs WHERE patient_id=@pid";
+            var para = new DynamicParameters();
+            para.Add("@yb_psn_no", yb_psn_no);
+            para.Add("@yb_insutype", yb_insutype);
+            para.Add("@yb_insuplc_admdvs", yb_insuplc_admdvs);
+            para.Add("@pid", pid);
             return Update(sql, para);
         }
 
@@ -596,9 +607,7 @@ values
                         //更新门诊用户信息 max_times
                         string sql2 = "update mz_patient_mi set max_times = max_times+1,max_ledger_sn =max_ledger_sn+1 where  patient_id=@patient_id " +
                             "select max_ledger_sn,max_times from mz_patient_mi where  patient_id=@patient_id";
-                        //, name = 'test0328', sex = '1', response_type = '01',
-                        //charge_type = '01', black_flag = '', birthday = '2009-03-28', p_bar_code = '2969317',
-                        //relation_name = 'test0328' where patient_id like '000296931700'
+                         
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
 
@@ -611,8 +620,7 @@ values
                             max_ledger_sn = Convert.ToInt32(dt1[0].max_ledger_sn);
                             max_times = Convert.ToInt32(dt1[0].max_times);
                         }
-
-
+                         
                         //更新发票号
                         string sql3 = @"UPDATE mz_order_generator  
      SET max_sn = max_sn + 1
