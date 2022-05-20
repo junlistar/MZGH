@@ -567,15 +567,14 @@ values
         /// <param name="pay_string"></param>
         /// <param name="opera"></param>
         /// <returns></returns>
-        public bool GuaHao(string patient_id, string record_sn, string pay_string, string opera)
+        public bool GuaHao(string patient_id, string record_sn, string pay_string,int max_sn=0, string opera="")
         {
             try
             {
 
                 var chargeItems = chargeItemResp.GetChargeItemsByRecordSN(record_sn);
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo();
-              
-
+           
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
@@ -628,7 +627,13 @@ values
 SELECT mz_order_generator.max_sn
    FROM mz_order_generator
    WHERE(mz_order_generator.define = 'gh_receipt_sn') ";
-                        int max_sn = Convert.ToInt32(connection.ExecuteScalar(sql3, null, transaction));
+
+                        if (max_sn==0)
+                        {
+                            max_sn = Convert.ToInt32(connection.ExecuteScalar(sql3, null, transaction));
+                        } 
+                           
+                          
 
                         if (relist.Count > 0)
                         {
@@ -909,6 +914,37 @@ values
                 throw ex;
             }
              
+        }
+
+        /// <summary>
+        /// 获取最新机制号
+        /// </summary>
+        /// <returns></returns>
+        public string GetNewReceiptMaxSN()
+        { 
+            try
+            {
+                //更新发票号
+                string sql = @"UPDATE mz_order_generator  
+     SET max_sn = max_sn + 1
+   WHERE(mz_order_generator.define = 'gh_receipt_sn')
+SELECT mz_order_generator.max_sn
+   FROM mz_order_generator
+   WHERE(mz_order_generator.define = 'gh_receipt_sn') ";
+
+                var dtconfig = ExcuteScalar(sql, null);
+
+                if (dtconfig != null)
+                {
+                    return dtconfig.ToString();
+                }
+                throw new Exception("获取最新机制号配置表失败！mz_order_generator");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

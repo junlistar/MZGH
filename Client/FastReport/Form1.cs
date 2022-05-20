@@ -26,10 +26,13 @@ namespace Client.FastReportLib
             report.Prepare();
             //report.Show();
             report.Print();
+
+            report.Save("aaa.xml");
         } 
         private void button1_Click(object sender, EventArgs e)
         {
             Preview(this.previewControl1);
+           
         }
 
         public static Report CreateReportAndLoadFrx()

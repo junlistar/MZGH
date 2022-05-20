@@ -751,7 +751,7 @@ namespace Client
                 // 设置单元格的背景色
                 //dr.DefaultCellStyle.BackColor = Color.Yellow;
                 // 设置单元格的前景色
-                dr.DefaultCellStyle.ForeColor = Color.Gray;
+                dr.DefaultCellStyle.ForeColor = Color.Red;
             }
             else
             {

@@ -50,6 +50,41 @@ namespace Data.Repository
 
         }
 
+        public bool IsExistRecord(BaseRequest item)
+        { 
+            string sql = "";
+            var para = new DynamicParameters();
+            //准备数据
+            if (string.IsNullOrWhiteSpace(item.doctor_sn))
+            {
+                //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
+                sql = @"select * from gh_request where request_date=@request_date
+                            and unit_sn=@unit_sn and group_sn=@group_sn and ampm=@ampm and clinic_type=@clinic_type";
+            }
+            else
+            {
+                //医生不为空，则日期，上下午，医生 唯一条件
+                sql = @"select * from gh_request where request_date=@request_date
+                            and ampm=@ampm and doctor_sn=@doctor_sn";
+            }
+            para.Add("@request_date", item.request_date);
+            para.Add("@ampm", item.ampm);
+            para.Add("@unit_sn", item.unit_sn);
+            para.Add("@group_sn", item.group_sn);
+            para.Add("@doctor_sn", item.doctor_sn);
+            para.Add("@clinic_type", item.clinic_type);
+             
+
+            var requestlist = Select(sql, para);
+
+            if (requestlist!=null && requestlist.Count>0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
 
         public int CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
@@ -61,29 +96,12 @@ namespace Data.Repository
             para.Add("@end", end);
 
             var requestlist = Select(sql1, para);
-
-
+             
             var baselist = baseRequestRepository.GetBaseRequestsByWeekDay(begin, end, weeks, day);
 
-
-            //var docoutList = doctoutResponse.GetGhDoctorOuts();
-            //if (docoutList != null && docoutList.Count > 0)
-            //{
-            //    // 移除医生列表
-            //    foreach (var item in docoutList)
-            //    {
-            //        var doc_id = item.doctor_id;
-
-            //    }
-
-
-            //}
-
-
-            //先删除，再写入
-            string deletesql = "delete from gh_request where request_date between @begin and @end";
-
-            Update(deletesql, para);
+            ////先删除，再写入（不能删除，重复不写入）
+            //string deletesql = "delete from gh_request where request_date between @begin and @end";
+            //Update(deletesql, para);
 
             string insertsql = @"insert into gh_request
   (request_date, ampm, unit_sn, group_sn, doctor_sn, clinic_type, req_type, begin_no, current_no, end_no, enter_opera, enter_date, open_flag, window_no)
@@ -98,6 +116,13 @@ values
 
                 foreach (var item in baselist)
                 {
+                    //写入之前，判断是否存在，存在则跳过
+                    item.request_date = request_date;
+                    if (IsExistRecord(item))
+                    {
+                        continue;
+                    }
+
                     para = new DynamicParameters();
                     para.Add("@request_date", request_date);
                     para.Add("@ampm", item.ampm);
@@ -132,8 +157,7 @@ values
                 {
                     //组装当日数据
                     var weeklist = baselist.Where(p => p.week.ToString() == week_arr[i]).OrderBy(p => p.week).OrderBy(p => p.day).ToList();
-                    //foreach (var witem in weeklist)
-                    //{
+                
                     int _day = 1;  
                     if (i==0)
                     {
@@ -151,6 +175,11 @@ values
 
                         foreach (var item in daylist)
                         {
+                            item.request_date = request_date;
+                            if (IsExistRecord(item))
+                            {
+                                continue;
+                            }
                             para = new DynamicParameters();
                             para.Add("@request_date", request_date);
                             para.Add("@ampm", item.ampm);
@@ -176,13 +205,10 @@ values
                             break;
                         }
                     } while (_day <8);
-                    // }
+                
                 }
-            }
-
-
+            } 
             return 1;
-        }
-
+        } 
     }
 }

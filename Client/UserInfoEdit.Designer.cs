@@ -60,12 +60,13 @@
             this.uiLabel13 = new Sunny.UI.UILabel();
             this.txtpatientid = new Sunny.UI.UITextBox();
             this.lklduka = new Sunny.UI.UILinkLabel();
+            this.uiLine1 = new Sunny.UI.UILine();
             this.SuspendLayout();
             // 
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(102, 66);
+            this.uiLabel1.Location = new System.Drawing.Point(99, 84);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel1.Size = new System.Drawing.Size(100, 23);
@@ -77,7 +78,7 @@
             // uiLabel2
             // 
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(102, 105);
+            this.uiLabel2.Location = new System.Drawing.Point(99, 123);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel2.Size = new System.Drawing.Size(100, 23);
@@ -89,7 +90,7 @@
             // uiLabel3
             // 
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(102, 144);
+            this.uiLabel3.Location = new System.Drawing.Point(99, 162);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel3.Size = new System.Drawing.Size(100, 23);
@@ -101,7 +102,7 @@
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(436, 144);
+            this.uiLabel4.Location = new System.Drawing.Point(433, 162);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel4.Size = new System.Drawing.Size(100, 23);
@@ -113,7 +114,7 @@
             // uiLabel5
             // 
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(102, 186);
+            this.uiLabel5.Location = new System.Drawing.Point(99, 204);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel5.Size = new System.Drawing.Size(100, 23);
@@ -125,7 +126,7 @@
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(436, 186);
+            this.uiLabel6.Location = new System.Drawing.Point(433, 204);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel6.Size = new System.Drawing.Size(100, 23);
@@ -139,7 +140,7 @@
             this.rdoMale.Checked = true;
             this.rdoMale.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rdoMale.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rdoMale.Location = new System.Drawing.Point(543, 144);
+            this.rdoMale.Location = new System.Drawing.Point(540, 162);
             this.rdoMale.MinimumSize = new System.Drawing.Size(1, 1);
             this.rdoMale.Name = "rdoMale";
             this.rdoMale.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -153,7 +154,7 @@
             // 
             this.rdoFemale.Cursor = System.Windows.Forms.Cursors.Hand;
             this.rdoFemale.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.rdoFemale.Location = new System.Drawing.Point(605, 144);
+            this.rdoFemale.Location = new System.Drawing.Point(602, 162);
             this.rdoFemale.MinimumSize = new System.Drawing.Size(1, 1);
             this.rdoFemale.Name = "rdoFemale";
             this.rdoFemale.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -166,7 +167,7 @@
             // uiLabel7
             // 
             this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(102, 228);
+            this.uiLabel7.Location = new System.Drawing.Point(99, 246);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel7.Size = new System.Drawing.Size(100, 23);
@@ -186,7 +187,7 @@
             this.txtCardId.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCardId.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtCardId.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCardId.Location = new System.Drawing.Point(209, 105);
+            this.txtCardId.Location = new System.Drawing.Point(206, 123);
             this.txtCardId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCardId.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtCardId.Name = "txtCardId";
@@ -210,7 +211,7 @@
             this.txtUserName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUserName.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtUserName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtUserName.Location = new System.Drawing.Point(209, 144);
+            this.txtUserName.Location = new System.Drawing.Point(206, 162);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUserName.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtUserName.Name = "txtUserName";
@@ -233,7 +234,7 @@
             this.txtTel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtTel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtTel.Location = new System.Drawing.Point(543, 186);
+            this.txtTel.Location = new System.Drawing.Point(540, 204);
             this.txtTel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTel.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTel.Name = "txtTel";
@@ -256,7 +257,7 @@
             this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomedistrict.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomedistrict.Location = new System.Drawing.Point(209, 225);
+            this.txthomedistrict.Location = new System.Drawing.Point(206, 243);
             this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthomedistrict.Name = "txthomedistrict";
@@ -274,7 +275,7 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(102, 270);
+            this.uiLabel8.Location = new System.Drawing.Point(99, 288);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel8.Size = new System.Drawing.Size(100, 23);
@@ -286,7 +287,7 @@
             // uiLabel9
             // 
             this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(102, 309);
+            this.uiLabel9.Location = new System.Drawing.Point(99, 327);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel9.Size = new System.Drawing.Size(100, 23);
@@ -298,7 +299,7 @@
             // uiLabel10
             // 
             this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(604, 351);
+            this.uiLabel10.Location = new System.Drawing.Point(601, 369);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel10.Size = new System.Drawing.Size(100, 23);
@@ -319,7 +320,7 @@
             this.txthomestreet.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomestreet.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txthomestreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomestreet.Location = new System.Drawing.Point(209, 270);
+            this.txthomestreet.Location = new System.Drawing.Point(206, 288);
             this.txthomestreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomestreet.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthomestreet.Name = "txthomestreet";
@@ -342,7 +343,7 @@
             this.txtZhiye.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtZhiye.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtZhiye.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtZhiye.Location = new System.Drawing.Point(209, 309);
+            this.txtZhiye.Location = new System.Drawing.Point(206, 327);
             this.txtZhiye.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtZhiye.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtZhiye.Name = "txtZhiye";
@@ -367,7 +368,7 @@
             this.txtShenfen.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtShenfen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtShenfen.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtShenfen.Location = new System.Drawing.Point(742, 316);
+            this.txtShenfen.Location = new System.Drawing.Point(742, 331);
             this.txtShenfen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtShenfen.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtShenfen.Name = "txtShenfen";
@@ -391,7 +392,7 @@
             this.btnSave.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnSave.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(293, 394);
+            this.btnSave.Location = new System.Drawing.Point(299, 486);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -415,7 +416,7 @@
             this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(431, 394);
+            this.btnCancel.Location = new System.Drawing.Point(437, 486);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
@@ -443,7 +444,7 @@
             "磁卡"});
             this.cbxCardType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.cbxCardType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.cbxCardType.Location = new System.Drawing.Point(752, 277);
+            this.cbxCardType.Location = new System.Drawing.Point(752, 292);
             this.cbxCardType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxCardType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxCardType.Name = "cbxCardType";
@@ -461,7 +462,7 @@
             this.dtpBirth.FillColor = System.Drawing.Color.White;
             this.dtpBirth.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.dtpBirth.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dtpBirth.Location = new System.Drawing.Point(209, 186);
+            this.dtpBirth.Location = new System.Drawing.Point(206, 204);
             this.dtpBirth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpBirth.MaxLength = 10;
             this.dtpBirth.MinimumSize = new System.Drawing.Size(63, 0);
@@ -487,7 +488,7 @@
             this.cbxChargeType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(242)))), ((int)(((byte)(238)))));
             this.cbxChargeType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.cbxChargeType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.cbxChargeType.Location = new System.Drawing.Point(742, 398);
+            this.cbxChargeType.Location = new System.Drawing.Point(742, 413);
             this.cbxChargeType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxChargeType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxChargeType.Name = "cbxChargeType";
@@ -502,7 +503,7 @@
             // uiLabel11
             // 
             this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel11.Location = new System.Drawing.Point(635, 398);
+            this.uiLabel11.Location = new System.Drawing.Point(635, 413);
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel11.Size = new System.Drawing.Size(100, 23);
@@ -522,7 +523,7 @@
             this.cbxShenfen.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(242)))), ((int)(((byte)(238)))));
             this.cbxShenfen.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.cbxShenfen.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
-            this.cbxShenfen.Location = new System.Drawing.Point(742, 355);
+            this.cbxShenfen.Location = new System.Drawing.Point(742, 370);
             this.cbxShenfen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxShenfen.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxShenfen.Name = "cbxShenfen";
@@ -545,7 +546,7 @@
             this.txtsfz.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtsfz.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtsfz.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtsfz.Location = new System.Drawing.Point(543, 66);
+            this.txtsfz.Location = new System.Drawing.Point(540, 84);
             this.txtsfz.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtsfz.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtsfz.Name = "txtsfz";
@@ -561,7 +562,7 @@
             // uiLabel12
             // 
             this.uiLabel12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel12.Location = new System.Drawing.Point(436, 66);
+            this.uiLabel12.Location = new System.Drawing.Point(433, 84);
             this.uiLabel12.Name = "uiLabel12";
             this.uiLabel12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel12.Size = new System.Drawing.Size(100, 23);
@@ -581,7 +582,7 @@
             this.txtybk.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtybk.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtybk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtybk.Location = new System.Drawing.Point(543, 105);
+            this.txtybk.Location = new System.Drawing.Point(540, 123);
             this.txtybk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtybk.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtybk.Name = "txtybk";
@@ -596,7 +597,7 @@
             // uiLabel13
             // 
             this.uiLabel13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel13.Location = new System.Drawing.Point(436, 108);
+            this.uiLabel13.Location = new System.Drawing.Point(433, 126);
             this.uiLabel13.Name = "uiLabel13";
             this.uiLabel13.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel13.Size = new System.Drawing.Size(100, 23);
@@ -616,7 +617,7 @@
             this.txtpatientid.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtpatientid.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
             this.txtpatientid.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtpatientid.Location = new System.Drawing.Point(209, 66);
+            this.txtpatientid.Location = new System.Drawing.Point(206, 84);
             this.txtpatientid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtpatientid.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtpatientid.Name = "txtpatientid";
@@ -635,7 +636,7 @@
             this.lklduka.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lklduka.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
             this.lklduka.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.lklduka.Location = new System.Drawing.Point(748, 72);
+            this.lklduka.Location = new System.Drawing.Point(748, 87);
             this.lklduka.Name = "lklduka";
             this.lklduka.Size = new System.Drawing.Size(100, 23);
             this.lklduka.Style = Sunny.UI.UIStyle.Colorful;
@@ -645,11 +646,24 @@
             this.lklduka.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.lklduka.Click += new System.EventHandler(this.lklduka_Click);
             // 
+            // uiLine1
+            // 
+            this.uiLine1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.uiLine1.Location = new System.Drawing.Point(3, 437);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(870, 29);
+            this.uiLine1.Style = Sunny.UI.UIStyle.Colorful;
+            this.uiLine1.TabIndex = 36;
+            // 
             // UserInfoEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(864, 444);
+            this.ClientSize = new System.Drawing.Size(876, 536);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.Controls.Add(this.uiLine1);
             this.Controls.Add(this.lklduka);
             this.Controls.Add(this.txtpatientid);
             this.Controls.Add(this.txtybk);
@@ -728,5 +742,6 @@
         private Sunny.UI.UILabel uiLabel13;
         private Sunny.UI.UITextBox txtpatientid;
         private Sunny.UI.UILinkLabel lklduka;
+        private Sunny.UI.UILine uiLine1;
     }
 }

@@ -220,14 +220,13 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
-
-
-        public ResponseResult<bool> GuaHao(string patient_id, string record_sn, string pay_string, string opera)
+         
+        public ResponseResult<bool> GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
         {
             Log.Information($"GuaHao,{patient_id},{record_sn},{pay_string},{opera}");
             try
             {
-                return _patientRepository.GuaHao(patient_id, record_sn, pay_string, opera);
+                return _patientRepository.GuaHao(patient_id, record_sn, pay_string, max_sn ,opera);
             }
             catch (Exception ex)
             {
@@ -658,6 +657,25 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
 
+        }
+
+        /// <summary>
+        /// 获取最新机制号
+        /// </summary>
+        /// <returns></returns>
+        public ResponseResult<string> GetNewReceiptMaxSN()
+        {
+
+            Log.Information($"GetNewReceiptMaxSN");
+            try
+            {
+                return _patientRepository.GetNewReceiptMaxSN();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
         }
     }
 }

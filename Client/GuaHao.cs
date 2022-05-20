@@ -134,7 +134,7 @@ namespace Client
             lblMsg.Text = "";
             lblhometel.Text = "";
             lblSex.Text = "";
-            lbldistrict.Text = "";
+            lblstreet.Text = "";
             lblsfz.Text = "";
 
 
@@ -429,133 +429,7 @@ namespace Client
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
 
-            var barcode = this.txtCode.Text.Trim();
-            lblMsg.Text = "";
-            if (string.IsNullOrEmpty(barcode))
-            {
-                btnEditUser.TagString = ""; btnEditUser.Hide();
-                lblName.Text = "";
-                lblAge.Text = "";
-                lbldistrict.Text = "";
-                lblsfz.Text = "";
-                lblhometel.Text = "";
-                lblSex.Text = "";
-                return;
-            }
-
-
-            List<PatientVM> listApi = new List<PatientVM>();
-            //获取数据 
-            //MzghLib lib = new MzghLib();
-            //var dt = lib.GetUserInfoByCard(barcode);
-
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
-            {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                    listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-                }
-
-
-                if (listApi.Count > 0)
-                {
-                    var userInfo = listApi[0];
-                    PatientVM = userInfo;
-                    if (string.IsNullOrEmpty(userInfo.name))
-                    {
-                        return;
-                    }
-
-                    btnEditUser.TagString = userInfo.patient_id.ToString(); btnEditUser.Show();
-                    //this.txtpatientid.Text = userInfo["patient_id"].ToString();
-                    lblName.Text = userInfo.name.ToString();
-                    lblAge.Text = userInfo.age.ToString();
-                    lblhometel.Text = userInfo.home_tel.ToString();
-                    lblSex.Text = userInfo.sex == "1" ? "男" : "女";
-                    if (!string.IsNullOrEmpty(userInfo.home_district))
-                    {
-                        var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
-
-                        if (model != null)
-                        {
-                            lbldistrict.Text = model.name;
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                    else
-                    {
-                        lbldistrict.Text = userInfo.home_street;
-                    }
-
-                    lblsfz.Text = userInfo.social_no; ;
-
-                    //自动设置对应卡类型按钮样式
-                    if (barcode == userInfo.social_no)
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = Color.LightSteelBlue;
-                        btnSFZ.FillColor = cur_color;
-                        btnYBK.FillColor = Color.LightSteelBlue;
-                    }
-                    else if (barcode == userInfo.hic_no)
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = Color.LightSteelBlue;
-                        btnSFZ.FillColor = Color.LightSteelBlue;
-                        btnYBK.FillColor = cur_color;
-                    }
-                    else
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = cur_color;
-                        btnSFZ.FillColor = Color.LightSteelBlue;
-                        btnYBK.FillColor = Color.LightSteelBlue;
-                    }
-                }
-                else
-                {
-
-                    lblMsg.Text = "没有查询到数据";
-                    btnEditUser.TagString = ""; btnEditUser.Hide();
-                    lblName.Text = "";
-                    lblAge.Text = ""; lblhometel.Text = "";
-                    lblSex.Text = ""; lbldistrict.Text = ""; lblsfz.Text = "";
-
-                    if (SessionHelper.CardReader != null)
-                    {
-                        //自动打开创建新用户窗口
-                        UserInfoEdit ue = new UserInfoEdit("", null);
-                        ue.FormClosed += Ue_FormClosed;
-                        ue.ShowDialog();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
-            }
-            finally
-            {
-
-            }
+           
         }
 
         private void dtpGhrq_ValueChanged(object sender, DateTime value)
@@ -578,15 +452,17 @@ namespace Client
 
         private void btnCika_Click(object sender, EventArgs e)
         {
+            SearchUser();
+
             //更改刷卡方式按钮样式
             btnCika.FillColor = cur_color;
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = Color.LightSteelBlue;
 
-            ReadCard rc = new ReadCard("磁卡");
-            //关闭，刷新
-            rc.FormClosed += Rc_FormClosed;
-            rc.ShowDialog();
+            //ReadCard rc = new ReadCard("磁卡");
+            ////关闭，刷新
+            //rc.FormClosed += Rc_FormClosed;
+            //rc.ShowDialog();
 
         }
 
@@ -973,6 +849,174 @@ namespace Client
         private void GuaHao_KeyPress(object sender, KeyPressEventArgs e)
         {
             //MessageBox.Show("2");
+
+        }
+
+        private void lblmarry_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchUser();
+            }
+        }
+
+        public void SearchUser()
+        {
+
+            var barcode = this.txtCode.Text.Trim();
+            lblMsg.Text = "";
+            if (string.IsNullOrEmpty(barcode))
+            {
+                btnEditUser.TagString = ""; btnEditUser.Hide();
+                lblName.Text = "";
+                lblAge.Text = "";
+                lblstreet.Text = "";
+                lbldistrict.Text = "";
+                lblsfz.Text = "";
+                lblhometel.Text = "";
+                lblSex.Text = "";
+                lblbirth.Text = "";
+                lblmarry.Text = "";
+                return;
+            }
+
+
+            List<PatientVM> listApi = new List<PatientVM>();
+            //获取数据 
+            //MzghLib lib = new MzghLib();
+            //var dt = lib.GetUserInfoByCard(barcode);
+
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                    listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
+                }
+
+
+                if (listApi.Count > 0)
+                {
+                    var userInfo = listApi[0];
+                    PatientVM = userInfo;
+                    if (string.IsNullOrEmpty(userInfo.name))
+                    {
+                        return;
+                    }
+
+                    btnEditUser.TagString = userInfo.patient_id.ToString(); btnEditUser.Show();
+                    //this.txtpatientid.Text = userInfo["patient_id"].ToString();
+                    lblName.Text = userInfo.name.ToString();
+                    lblAge.Text = userInfo.age.ToString();
+                    lblhometel.Text = userInfo.home_tel.ToString();
+                    lblSex.Text = userInfo.sex == "1" ? "男" : "女";
+                    lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";
+                    if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
+                    {
+                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
+                    }
+                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
+                    {
+                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
+                    }
+                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
+                    {
+                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
+                    }
+                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
+                    {
+                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
+                    }
+                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
+                    {
+                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
+                    }
+                    else
+                    {
+                        lblmarry.Text = userInfo.marry_code;
+                    }
+                    if (!string.IsNullOrEmpty(userInfo.home_district))
+                    {
+                        var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
+
+                        if (model != null)
+                        {
+                            lbldistrict.Text = model.name;
+                        }
+                    }
+
+                    lblstreet.Text = userInfo.home_street;
+                    lblsfz.Text = userInfo.social_no; ;
+
+                    //自动设置对应卡类型按钮样式
+                    if (barcode == userInfo.social_no)
+                    {
+                        //初始化刷卡方式按钮样式
+                        btnCika.FillColor = Color.LightSteelBlue;
+                        btnSFZ.FillColor = cur_color;
+                        btnYBK.FillColor = Color.LightSteelBlue;
+                    }
+                    else if (barcode == userInfo.hic_no)
+                    {
+                        //初始化刷卡方式按钮样式
+                        btnCika.FillColor = Color.LightSteelBlue;
+                        btnSFZ.FillColor = Color.LightSteelBlue;
+                        btnYBK.FillColor = cur_color;
+                    }
+                    else
+                    {
+                        //初始化刷卡方式按钮样式
+                        btnCika.FillColor = cur_color;
+                        btnSFZ.FillColor = Color.LightSteelBlue;
+                        btnYBK.FillColor = Color.LightSteelBlue;
+                    }
+                }
+                else
+                {
+
+                    lblMsg.Text = "没有查询到数据";
+                    btnEditUser.TagString = ""; btnEditUser.Hide();
+                    lblName.Text = "";
+                    lblAge.Text = ""; lblhometel.Text = "";
+                    lblSex.Text = ""; lblstreet.Text = ""; lblsfz.Text = "";
+                    lblbirth.Text = ""; lbldistrict.Text = ""; lblmarry.Text = "";
+
+                    if (SessionHelper.CardReader != null)
+                    {
+                        //自动打开创建新用户窗口
+                        UserInfoEdit ue = new UserInfoEdit("", null);
+                        ue.FormClosed += Ue_FormClosed;
+                        ue.ShowDialog();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
+            finally
+            {
+
+            }
 
         }
     }

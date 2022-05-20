@@ -37,7 +37,7 @@ namespace Client
 
 
         GHRequestVM vm = new GHRequestVM();
-        string patientId = "";
+        string patientId = ""; int max_sn = 0;
         Dictionary<int, double> dicPay = new Dictionary<int, double>();
         List<GHPayModel> paylist = new List<GHPayModel>();
         List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
@@ -264,7 +264,7 @@ namespace Client
                 {
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je,YBHelper.currentYBPay.output.data.mdtrt_id));
+                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
 
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -383,6 +383,10 @@ namespace Client
                 {
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
 
+                    //机制号
+                    var sn_no = GetReceiptMaxNo();
+                    max_sn = int.Parse(sn_no);
+
                     YBHelper.currentYBInfo = yBResponse;
 
                     //门诊挂号
@@ -391,7 +395,7 @@ namespace Client
 
                     ghRequest.msgid = YBHelper.msgid;
                     ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                    ghRequest.insuplc_admdvs = "421002";
+                    ghRequest.insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
                     ghRequest.recer_sys_code = YBHelper.recer_sys_code;
                     ghRequest.dev_no = "";
                     ghRequest.dev_safe_info = "";
@@ -417,10 +421,10 @@ namespace Client
                     ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
                     //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
-                    ghRequest.input.data.mdtrt_cert_type = "02";
+                    ghRequest.input.data.mdtrt_cert_type = "02";//身份证
                     ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
 
-                    ghRequest.input.data.ipt_otp_no = "1533956"; //机制号 唯一" ipt_otp_no": "1533956",
+                    ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
                     ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
                     ghRequest.input.data.dr_name = vm.doctor_name;
                     ghRequest.input.data.dept_code = vm.unit_name;
@@ -470,18 +474,18 @@ namespace Client
                         var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                         var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
-                      
+
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (responseJson.data == 1 )
+                        if (responseJson.data == 1)
                         {
                             log.Debug("修改用户医保信息成功");
-               
+
                         }
                         else
                         {
-                            log.Error(responseJson.message); 
+                            log.Error(responseJson.message);
                         }
 
 
@@ -515,7 +519,7 @@ namespace Client
                         ghRefund.input.data.mdtrt_id = resp.output.data.mdtrt_id;
                         ghRefund.input.data.psn_no = resp.output.data.psn_no;
                         ghRefund.input.data.ipt_otp_no = resp.output.data.ipt_otp_no;
-                         
+
                         json = WebApiHelper.SerializeObject(ghRefund);
 
                         BusinessID = "2202";
@@ -536,15 +540,56 @@ namespace Client
                         }
 
                         #endregion
-                    } 
+                    }
                 }
-                MessageBox.Show("支付失败！"); 
+                MessageBox.Show("支付失败！");
             }
             catch (Exception ex)
             {
                 log.Error("请求接口数据出错：" + ex.Message);
-            } 
+            }
             return false;
+        }
+
+        public string GetReceiptMaxNo()
+        {
+            try
+            {
+
+                string paramurl = string.Format($"/api/GuaHao/GetNewReceiptMaxSN");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                var json = "";
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
+
+                if (result.status == 1)
+                {
+                    return result.data;
+                }
+                else
+                {
+                    log.Error(result.message);
+                    UIMessageBox.ShowError(result.message);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                UIMessageBox.ShowError(ex.Message);
+            }
+            return "";
         }
 
 
@@ -555,7 +600,7 @@ namespace Client
 
             //获取实际金额
             GetEffectivePriceByRecordSN();
-             
+
             lblzje.Text = vm.je;
             lblsyje.Text = vm.je;
             lblyfje.Text = "0.00";
@@ -690,7 +735,7 @@ namespace Client
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 HttpClient client = new HttpClient();
                 client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
-                string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&opera={SessionHelper.uservm.user_mi}");
+                string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&max_sn={max_sn}&opera={SessionHelper.uservm.user_mi}");
 
                 //client.DefaultRequestHeaders.Add("user_mi", MdiForm.uservm.user_mi);
 
@@ -1594,6 +1639,12 @@ namespace Client
 
         private void btnybk_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(vm.doctor_name))
+            {
+                MessageBox.Show("医生名称为空，不能选择医保支付！");
+                return;
+            }
+
             OpenPayWindow(PayMethodEnum.Yibao);
         }
 

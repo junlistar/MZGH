@@ -25,10 +25,18 @@ namespace Data.IRepository
             string home_district, string home_street, string occupation_type, string response_type, string charge_type,
             string relation_name, int marrycode, string addition_no1, string employer_name, string opera);
 
-         
-        bool GuaHao(string patient_id, string record_sn, string pay_string, string opera);
+
+        bool GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "");
 
         string GetNewPatientId();
+
+        /// <summary>
+        /// 获取最新机制号
+        /// </summary>
+        /// <returns></returns>
+        string GetNewReceiptMaxSN();
+
+
         #endregion
     }
 }
