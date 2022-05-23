@@ -13,6 +13,7 @@ namespace Client.ClassLib
         public static HttpClient MyHttpClient = null;
 
         public static LoginUsersVM uservm = new LoginUsersVM();
+        public static PatientVM patientVM;
 
         public static int gh_pay_countdown = 120;//second
 

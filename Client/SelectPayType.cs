@@ -92,6 +92,12 @@ namespace Client
                         break;
                     case (int)PayMethodEnum.Yibao:
                         UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
+
+                        if (YBRefund())
+                        {
+
+                        }
+
                         //UIMessageTip.ShowOk("处理医保退款,金额：" + item.pay_je); Thread.Sleep(1000);
                         break;
                     case (int)PayMethodEnum.Yinlian:
@@ -135,6 +141,66 @@ namespace Client
             log.Info("结束取消支付,退款处理");
 
         }
+
+        public bool YBRefund()
+        {
+            //查询用户医保信息 
+            var insuplc_admdvs = GuaHao.PatientVM.yb_insuplc_admdvs.Trim();
+            var mdtrt_id = YBHelper.currentYBPay.output.data.mdtrt_id;
+            var ipt_otp_no = YBHelper.currentYBPay.output.data.ipt_otp_no;
+            var psn_no = YBHelper.currentYBPay.output.data.psn_no;
+
+
+
+            YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
+            ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
+
+            ghRefund.msgid = YBHelper.msgid;
+            ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+            ghRefund.insuplc_admdvs = insuplc_admdvs;
+            ghRefund.recer_sys_code = YBHelper.recer_sys_code;
+            ghRefund.dev_no = "";
+            ghRefund.dev_safe_info = "";
+            ghRefund.cainfo = "";
+            ghRefund.signtype = "";
+            ghRefund.infver = YBHelper.infver;
+            ghRefund.opter_type = YBHelper.opter_type;
+            ghRefund.opter = SessionHelper.uservm.user_mi;
+            ghRefund.opter_name = SessionHelper.uservm.name;
+            ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            ghRefund.fixmedins_code = YBHelper.fixmedins_code;
+            ghRefund.fixmedins_name = YBHelper.fixmedins_name;
+            ghRefund.sign_no = YBHelper.msgid;
+
+            ghRefund.input = new RepModel<GHRefundRequestModel>();
+            ghRefund.input.data = new GHRefundRequestModel();
+            ghRefund.input.data.mdtrt_id = mdtrt_id;
+            ghRefund.input.data.psn_no = psn_no;
+            ghRefund.input.data.ipt_otp_no = ipt_otp_no;
+
+
+            var json = WebApiHelper.SerializeObject(ghRefund);
+
+            var BusinessID = "2202";
+            var Dataxml = json;
+            var Outputxml = "";
+            var parm = new object[] { BusinessID, json, Outputxml };
+
+            InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+            log.Debug(parm[2]);
+
+            var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+            if (!string.IsNullOrEmpty(refund_resp.err_msg))
+            {
+                MessageBox.Show(refund_resp.err_msg);
+                log.Error(refund_resp.err_msg);
+                return false;
+            }
+            return true;
+        }
+
 
         private void btnwx_Click(object sender, EventArgs e)
         {
@@ -319,153 +385,92 @@ namespace Client
             else
             {
 
-                //单个支付，支付完成，自动提交
-                var sy_je = Convert.ToDouble(lblsyje.Text);
-                if (sy_je == 0)
-                {
-                    TiJiaoZhifu();
-                }
+                ////单个支付，支付完成，自动提交
+                //var sy_je = Convert.ToDouble(lblsyje.Text);
+                //if (sy_je == 0)
+                //{
+                //    TiJiaoZhifu();
+                //}
 
             }
         }
 
         public bool YiBaoPay()
         {
-            YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
-            request.infno = ((int)InfoNoEnum.人员信息).ToString();
-            request.msgid = YBHelper.msgid;
-            request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-            request.insuplc_admdvs = "421002";
-            request.recer_sys_code = YBHelper.recer_sys_code;
-            request.dev_no = "";
-            request.dev_safe_info = "";
-            request.cainfo = "";
-            request.signtype = "";
-            request.infver = YBHelper.infver;
-            request.opter_type = YBHelper.opter_type;
-            request.opter = SessionHelper.uservm.user_mi;
-            request.opter_name = SessionHelper.uservm.name;
-            request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            request.fixmedins_code = YBHelper.fixmedins_code;
-            request.fixmedins_name = YBHelper.fixmedins_name;
-            request.sign_no = YBHelper.msgid;
 
-            request.input = new RepModel<UserInfoRequestModel>();
-            request.input.data = new UserInfoRequestModel();
-            request.input.data.mdtrt_cert_type = "03";
-            request.input.data.psn_cert_type = "1";
-
-            string json = WebApiHelper.SerializeObject(request);
 
 
             try
             {
-                //var res = DataPost("http://10.87.82.212:8080", json);
-
-                //调用 com名称  方法  参数
+                string json = "";
                 string BusinessID = "1101";
                 string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
+                 
 
-                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                //var res = DataPost("http://10.87.82.212:8080", json);
 
-                log.Debug(parm[2]);
-
-                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
-
-                if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs)
+                   || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
                 {
-                    MessageBox.Show(yBResponse.err_msg);
-                    log.Error(yBResponse.err_msg);
-                }
-                else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                {
-                    SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+                    YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+                    request.infno = ((int)InfoNoEnum.人员信息).ToString();
+                    request.msgid = YBHelper.msgid;
+                    request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                    request.insuplc_admdvs = "421002";
+                    request.recer_sys_code = YBHelper.recer_sys_code;
+                    request.dev_no = "";
+                    request.dev_safe_info = "";
+                    request.cainfo = "";
+                    request.signtype = "";
+                    request.infver = YBHelper.infver;
+                    request.opter_type = YBHelper.opter_type;
+                    request.opter = SessionHelper.uservm.user_mi;
+                    request.opter_name = SessionHelper.uservm.name;
+                    request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    request.fixmedins_code = YBHelper.fixmedins_code;
+                    request.fixmedins_name = YBHelper.fixmedins_name;
+                    request.sign_no = YBHelper.msgid;
 
-                    //机制号
-                    var sn_no = GetReceiptMaxNo();
-                    max_sn = int.Parse(sn_no);
+                    request.input = new RepModel<UserInfoRequestModel>();
+                    request.input.data = new UserInfoRequestModel();
+                    request.input.data.mdtrt_cert_type = "03";
+                    request.input.data.psn_cert_type = "1";
 
-                    YBHelper.currentYBInfo = yBResponse;
+                    json = WebApiHelper.SerializeObject(request);
 
-                    //门诊挂号
-                    YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
-                    ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
-
-                    ghRequest.msgid = YBHelper.msgid;
-                    ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                    ghRequest.insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
-                    ghRequest.recer_sys_code = YBHelper.recer_sys_code;
-                    ghRequest.dev_no = "";
-                    ghRequest.dev_safe_info = "";
-                    ghRequest.cainfo = "";
-                    ghRequest.signtype = "";
-                    ghRequest.infver = YBHelper.infver;
-                    ghRequest.opter_type = YBHelper.opter_type;
-                    ghRequest.opter = SessionHelper.uservm.user_mi;
-                    ghRequest.opter_name = SessionHelper.uservm.name;
-                    ghRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    ghRequest.fixmedins_code = YBHelper.fixmedins_code;
-                    ghRequest.fixmedins_name = YBHelper.fixmedins_name;
-                    ghRequest.sign_no = YBHelper.msgid;
-
-                    ghRequest.input = new RepModel<GHRequestModel>();
-                    ghRequest.input.data = new GHRequestModel();
-
-                    ghRequest.input.data.psn_no = yBResponse.output.baseinfo.psn_no;
-                    if (yBResponse.output.insuinfo != null)
-                    {
-                        ghRequest.input.data.insutype = yBResponse.output.insuinfo[0].insutype;
-                    }
-                    ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
-                    //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
-                    ghRequest.input.data.mdtrt_cert_type = "02";//身份证
-                    ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
-
-                    ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
-                    ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
-                    ghRequest.input.data.dr_name = vm.doctor_name;
-                    ghRequest.input.data.dept_code = vm.unit_name;
-                    ghRequest.input.data.dept_name = vm.unit_name;
-                    ghRequest.input.data.caty = vm.clinic_name;
-
-                    json = WebApiHelper.SerializeObject(ghRequest);
-
-                    BusinessID = "2201";
+                    //调用 com名称  方法  参数
+                    BusinessID = "1101";
                     Dataxml = json;
                     Outputxml = "";
                     parm = new object[] { BusinessID, json, Outputxml };
 
-                    result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                    InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                     log.Debug(parm[2]);
 
-                    var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+                    YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
 
-                    if (!string.IsNullOrEmpty(resp.err_msg))
+                    if (!string.IsNullOrEmpty(yBResponse.err_msg))
                     {
-                        MessageBox.Show(resp.err_msg);
-                        log.Error(resp.err_msg);
+                        MessageBox.Show(yBResponse.err_msg);
+                        log.Error(yBResponse.err_msg);
                     }
-                    else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
+                    else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
                     {
-                        MessageBox.Show(resp.output.data.mdtrt_id);
+                        SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+                         
+                        YBHelper.currentYBInfo = yBResponse;
 
-                        //保存医保支付信息，用于退款
-                        YBHelper.currentYBPay = resp;
-                        //就诊ID 医保返回唯一流水
-                        string mdtrt_id = resp.output.data.mdtrt_id;
-                        //人员编号
-                        string psn_no = resp.output.data.psn_no;
-                        //住院/门诊号
-                        string ipt_otp_no = resp.output.data.ipt_otp_no;
+                        GuaHao.PatientVM.yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
+                        GuaHao.PatientVM.yb_insutype = yBResponse.output.insuinfo[0].insutype;
+                        GuaHao.PatientVM.yb_psn_no = yBResponse.output.baseinfo.psn_no;
 
                         //保存用户的医保信息
                         var d = new
                         {
-                            yb_psn_no = psn_no,
+                            yb_psn_no = yBResponse.output.baseinfo.psn_no,
                             pid = patientId,
                             yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
                             yb_insutype = yBResponse.output.insuinfo[0].insutype,
@@ -487,61 +492,138 @@ namespace Client
                         {
                             log.Error(responseJson.message);
                         }
-
-
-                        return true;
-
-                        #region 退款代码 （备用）
-
-                        //门诊挂号撤销
-                        YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
-                        ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
-
-                        ghRefund.msgid = YBHelper.msgid;
-                        ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                        ghRefund.insuplc_admdvs = "421002";
-                        ghRefund.recer_sys_code = YBHelper.recer_sys_code;
-                        ghRefund.dev_no = "";
-                        ghRefund.dev_safe_info = "";
-                        ghRefund.cainfo = "";
-                        ghRefund.signtype = "";
-                        ghRefund.infver = YBHelper.infver;
-                        ghRefund.opter_type = YBHelper.opter_type;
-                        ghRefund.opter = SessionHelper.uservm.user_mi;
-                        ghRefund.opter_name = SessionHelper.uservm.name;
-                        ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        ghRefund.fixmedins_code = YBHelper.fixmedins_code;
-                        ghRefund.fixmedins_name = YBHelper.fixmedins_name;
-                        ghRefund.sign_no = YBHelper.msgid;
-
-                        ghRefund.input = new RepModel<GHRefundRequestModel>();
-                        ghRefund.input.data = new GHRefundRequestModel();
-                        ghRefund.input.data.mdtrt_id = resp.output.data.mdtrt_id;
-                        ghRefund.input.data.psn_no = resp.output.data.psn_no;
-                        ghRefund.input.data.ipt_otp_no = resp.output.data.ipt_otp_no;
-
-                        json = WebApiHelper.SerializeObject(ghRefund);
-
-                        BusinessID = "2202";
-                        Dataxml = json;
-                        Outputxml = "";
-                        parm = new object[] { BusinessID, json, Outputxml };
-
-                        result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
-
-                        log.Debug(parm[2]);
-
-                        var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
-
-                        if (!string.IsNullOrEmpty(refund_resp.err_msg))
-                        {
-                            MessageBox.Show(refund_resp.err_msg);
-                            log.Error(refund_resp.err_msg);
-                        }
-
-                        #endregion
                     }
+
                 }
+                //机制号
+                var sn_no = GetReceiptMaxNo();
+                max_sn = int.Parse(sn_no);
+
+                //门诊挂号
+                YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
+                ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
+
+                ghRequest.msgid = YBHelper.msgid;
+                ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                ghRequest.insuplc_admdvs = GuaHao.PatientVM.yb_insuplc_admdvs.Trim();
+                ghRequest.recer_sys_code = YBHelper.recer_sys_code;
+                ghRequest.dev_no = "";
+                ghRequest.dev_safe_info = "";
+                ghRequest.cainfo = "";
+                ghRequest.signtype = "";
+                ghRequest.infver = YBHelper.infver;
+                ghRequest.opter_type = YBHelper.opter_type;
+                ghRequest.opter = SessionHelper.uservm.user_mi;
+                ghRequest.opter_name = SessionHelper.uservm.name;
+                ghRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                ghRequest.fixmedins_code = YBHelper.fixmedins_code;
+                ghRequest.fixmedins_name = YBHelper.fixmedins_name;
+                ghRequest.sign_no = YBHelper.msgid;
+
+                ghRequest.input = new RepModel<GHRequestModel>();
+                ghRequest.input.data = new GHRequestModel();
+
+                ghRequest.input.data.psn_no = GuaHao.PatientVM.yb_psn_no.Trim();
+                 ghRequest.input.data.insutype = GuaHao.PatientVM.yb_insutype.Trim();
+                
+                ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
+                //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
+                ghRequest.input.data.mdtrt_cert_type = "02";//身份证
+                ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.social_no;
+
+                ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
+                ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
+                ghRequest.input.data.dr_name = vm.doctor_name;
+                ghRequest.input.data.dept_code = vm.unit_name;
+                ghRequest.input.data.dept_name = vm.unit_name;
+                ghRequest.input.data.caty = vm.clinic_name;
+
+                json = WebApiHelper.SerializeObject(ghRequest);
+
+                BusinessID = "2201";
+                Dataxml = json;
+                Outputxml = "";
+                parm = new object[] { BusinessID, json, Outputxml };
+
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                log.Debug(parm[2]);
+
+                var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                if (!string.IsNullOrEmpty(resp.err_msg))
+                {
+                    MessageBox.Show(resp.err_msg);
+                    log.Error(resp.err_msg);
+                }
+                else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
+                {
+                    MessageBox.Show(resp.output.data.mdtrt_id);
+
+                    //保存医保支付信息，用于退款
+                    YBHelper.currentYBPay = resp;
+                    //就诊ID 医保返回唯一流水
+                    string mdtrt_id = resp.output.data.mdtrt_id;
+                    //人员编号
+                    string psn_no = resp.output.data.psn_no;
+                    //住院/门诊号
+                    string ipt_otp_no = resp.output.data.ipt_otp_no;
+
+                     
+                    return true;
+
+                    #region 退款代码 （备用）
+
+                    //门诊挂号撤销
+                    YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
+                    ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
+
+                    ghRefund.msgid = YBHelper.msgid;
+                    ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                    ghRefund.insuplc_admdvs = "421002";
+                    ghRefund.recer_sys_code = YBHelper.recer_sys_code;
+                    ghRefund.dev_no = "";
+                    ghRefund.dev_safe_info = "";
+                    ghRefund.cainfo = "";
+                    ghRefund.signtype = "";
+                    ghRefund.infver = YBHelper.infver;
+                    ghRefund.opter_type = YBHelper.opter_type;
+                    ghRefund.opter = SessionHelper.uservm.user_mi;
+                    ghRefund.opter_name = SessionHelper.uservm.name;
+                    ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    ghRefund.fixmedins_code = YBHelper.fixmedins_code;
+                    ghRefund.fixmedins_name = YBHelper.fixmedins_name;
+                    ghRefund.sign_no = YBHelper.msgid;
+
+                    ghRefund.input = new RepModel<GHRefundRequestModel>();
+                    ghRefund.input.data = new GHRefundRequestModel();
+                    ghRefund.input.data.mdtrt_id = resp.output.data.mdtrt_id.Trim();
+                    ghRefund.input.data.psn_no = resp.output.data.psn_no.Trim();
+                    ghRefund.input.data.ipt_otp_no = resp.output.data.ipt_otp_no.Trim();
+
+                    json = WebApiHelper.SerializeObject(ghRefund);
+
+                    BusinessID = "2202";
+                    Dataxml = json;
+                    Outputxml = "";
+                    parm = new object[] { BusinessID, json, Outputxml };
+
+                    result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                    log.Debug(parm[2]);
+
+                    var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                    if (!string.IsNullOrEmpty(refund_resp.err_msg))
+                    {
+                        MessageBox.Show(refund_resp.err_msg);
+                        log.Error(refund_resp.err_msg);
+                    }
+
+                    #endregion
+                }
+
                 MessageBox.Show("支付失败！");
             }
             catch (Exception ex)

@@ -333,7 +333,36 @@ namespace Client
                     {
                         this.dtpBirth.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
                     }
-                    
+
+                }
+                else if (YBHelper.currentYBInfo!=null)
+                {
+                    try
+                    {
+                    this.cbxCardType.Text = "身份证";
+                    this.txtsfz.Text = YBHelper.currentYBInfo.output.baseinfo.certno;
+                    this.txtUserName.Text = YBHelper.currentYBInfo.output.baseinfo.psn_name; 
+
+
+                    if (YBHelper.currentYBInfo.output.baseinfo.gend == "1")
+                    {
+                        this.rdoMale.Checked = true;
+                    }
+                    else
+                    {
+                        this.rdoFemale.Checked = true;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(YBHelper.currentYBInfo.output.baseinfo.brdy))
+                    {
+                        this.dtpBirth.Value = Convert.ToDateTime(YBHelper.currentYBInfo.output.baseinfo.brdy);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("医保数据为空：" + ex.Message);
+                    }
                 }
             }
             else

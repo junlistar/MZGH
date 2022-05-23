@@ -87,25 +87,22 @@ namespace Client
             //timer1.Interval = 3000;
             //timer1.Start();
 
+
         }
 
         /// <summary>
         /// 初始化界面控件显示
         /// </summary>
         public void InitUIText()
-        {
-
-
+        { 
             cur_color = (this as UIPage).RectColor;
 
             this.gbxUnits.RectColor = Color.Transparent;
-
-
+             
             gbxUnits.Controls.Clear();
-
-            txtCode.Text = "";
+             
             patient_id = "";
-            btnEditUser.TagString = ""; btnEditUser.Hide();
+            InitUserInfo();
 
             lblTitle.ForeColor = cur_color;
             lblMsg.ForeColor = Color.Red;
@@ -128,16 +125,7 @@ namespace Client
                 btnAM.FillColor = Color.LightSteelBlue;
                 btnPM.FillColor = cur_color;
             }
-
-            this.lblAge.Text = "";
-            this.lblName.Text = "";
-            lblMsg.Text = "";
-            lblhometel.Text = "";
-            lblSex.Text = "";
-            lblstreet.Text = "";
-            lblsfz.Text = "";
-
-
+             
             this.dtpGhrq.Value = DateTime.Now;
 
             request_key = "";
@@ -171,23 +159,28 @@ namespace Client
             var code = this.txtCode.Text.Trim();
             UserInfoEdit ue = new UserInfoEdit(code, dto);
             //关闭，刷新
-            ue.FormClosed += txtCode_TextChanged;
+            ue.FormClosed += Ue_FormClosed1;
 
             //先停止读卡器
             log.Debug("打开编辑界面，关闭读卡器");
-            timer1.Stop();
+            //timer1.Stop();
 
 
             ue.ShowDialog();
 
             if (ue.DialogResult == DialogResult.Cancel)
             {
-                txtCode.Text = ue.barCode;
+                //txtCode.Text = ue.barCode;
 
-                //关闭编辑界面，打卡读卡器
-                timer1.Start();
-                log.Debug("关闭编辑界面，打开读卡器");
+                //关闭编辑界面，读卡器
+                //timer1.Start();
+                log.Debug("关闭编辑界面，读卡器");
             }
+        }
+
+        private void Ue_FormClosed1(object sender, FormClosedEventArgs e)
+        {
+            SearchUser();
         }
 
         private void btnAM_Click(object sender, EventArgs e)
@@ -404,11 +397,21 @@ namespace Client
             }
             if (!string.IsNullOrEmpty(txtCode.Text) && string.IsNullOrEmpty(btnEditUser.TagString))
             {
-                UIMessageTip.ShowError("请先编辑保存用户信息!");
-                lblMsg.Text = "请先编辑保存用户信息！";
+                UIMessageTip.ShowError("未获取到用户信息!");
+                lblMsg.Text = "未获到取用户信息！";
                 txtCode.Focus();
                 return;
             }
+
+            if (string.IsNullOrWhiteSpace(PatientVM.social_no))
+            {
+                UIMessageTip.ShowError("用户身份证信息为空，请编辑保存!");
+                lblMsg.Text = "未获到取用户身份证信息，请编辑保存！";
+                txtCode.Focus();
+                return;
+            }
+
+            SessionHelper.patientVM = PatientVM;
 
             var btn = sender as UIButton;
 
@@ -428,7 +431,7 @@ namespace Client
 
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
-
+            InitUserInfo();
            
         }
 
@@ -459,6 +462,13 @@ namespace Client
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = Color.LightSteelBlue;
 
+            var barcode = this.txtCode.Text.Trim();
+            lblMsg.Text = "";
+            if (string.IsNullOrEmpty(barcode))
+            {
+                this.txtCode.Focus();
+            }
+
             //ReadCard rc = new ReadCard("磁卡");
             ////关闭，刷新
             //rc.FormClosed += Rc_FormClosed;
@@ -471,6 +481,7 @@ namespace Client
             if (!string.IsNullOrWhiteSpace(SessionHelper.cardno))
             {
                 txtCode.Text = SessionHelper.cardno;
+                SearchUser();
             }
         }
 
@@ -487,11 +498,13 @@ namespace Client
 
         private void btnYBK_Click(object sender, EventArgs e)
         {
+            YBHelper.currentYBInfo = null;
+
+
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
             btnCika.FillColor = Color.LightSteelBlue;
-
-
+               
             // string json = "{\"infno\":\"1101\",\"msgid\":\"H42100300513202109271813033258\",\"mdtrtarea_admvs\":\"421300\",\"insuplc_admdvs\":\"421300\",\"recer_sys_code\":\"1\",\"dev_no\":\"\",\"dev_safe_info\":\"\",\"cainfo\":\"\",\"signtype\":\"\",\"infver\":\"v2.0\",\"opter_type\":\"1\",\"opter\":\"00000\",\"opter_name\":\"全院\",\"inf_time\":\"2021-09-27 18:13:03\",\"fixmedins_code\":\"H42100300513\",\"fixmedins_name\":\"荆州市中心医院\",\"sign_no\":\"421000G0000000244038\",\"input\":{\"data\":{\"mdtrt_cert_type\":\"02\",\"mdtrt_cert_no\":\"                    \",\"card_sn\":\"                    \",\"begntime\":\"                    \",\"psn_cert_type\":\"1\",\"certno\":\"                    \",\"psn_name\":\"                    \"}}}" ;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
@@ -532,7 +545,7 @@ namespace Client
                 var parm = new object[] { BusinessID, json, Outputxml };
 
                 var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
-
+                 
                 log.Debug(parm[2]);
 
                 YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
@@ -542,13 +555,46 @@ namespace Client
                     MessageBox.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                {
+                { 
+                    YBHelper.currentYBInfo = yBResponse;
+
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
                     txtCode.Text = SessionHelper.cardno;
+                    SearchUser();
+
+                    if (!string.IsNullOrEmpty(btnEditUser.TagString))
+                    {
+                        //保存用户的医保信息
+                        var d = new
+                        {
+                            yb_psn_no = yBResponse.output.baseinfo.psn_no,
+                            pid = btnEditUser.TagString,
+                            yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
+                            yb_insutype = yBResponse.output.insuinfo[0].insutype,
+                            opera = SessionHelper.uservm.user_mi
+                        };
+                        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+
+                        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                        if (responseJson.data == 1)
+                        {
+                            log.Debug("修改用户医保信息成功");
+
+                        }
+                        else
+                        {
+                            log.Error(responseJson.message);
+                        }
+                    }
+
+                   
                 }
 
 
-                YBHelper.currentYBInfo = yBResponse;
 
                 //string res = client.PostAsync("", httpContent).Result.Content.ReadAsStringAsync().Result;
 
@@ -620,49 +666,6 @@ namespace Client
 
 
 
-
-        public static string DataPost(string url, string content)
-        {
-            //申明一个容器result接收数据
-            string result = "";
-            try
-            {
-                //首先创建一个HttpWebRequest,申明传输方式POST
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                req.Method = "POST";
-                req.ContentType = "application/json";
-
-                //添加POST参数
-                byte[] data = Encoding.UTF8.GetBytes(content);
-                req.ContentLength = data.Length;
-                using (Stream reqStream = req.GetRequestStream())
-                {
-                    reqStream.Write(data, 0, data.Length);
-                    reqStream.Close();
-                }
-
-                //申明一个容器resp接收返回数据
-                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                Stream stream = resp.GetResponseStream();
-                //获取响应内容 
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-                {
-                    result = reader.ReadToEnd();
-                    var stringstr = "<stream><return_code>SUCCESS</return_code></stream>";
-                    //Response.Write(stringstr);
-                    //Response.End();
-                }
-            }
-            catch (Exception ex)
-            {
-                var stringstr = "<stream><return_code>FAIL</return_code></stream>";
-                //Response.Write(stringstr);
-                //Response.End();
-
-            }
-            return result;
-        }
-
         private void btntest_Click(object sender, EventArgs e)
         {
             //static HttpClient client = new HttpClient();
@@ -684,9 +687,12 @@ namespace Client
             //}
             //else
             //{
+            //    Refund rf = new Refund(txtCode.Text.Trim());
+            //    rf.ShowDialog();
+            //}
+
             Refund rf = new Refund(txtCode.Text.Trim());
             rf.ShowDialog();
-            //}
 
         }
 
@@ -758,11 +764,16 @@ namespace Client
         }
 
 
-
+        /// <summary>
+        /// 新用户
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uiButton1_Click(object sender, EventArgs e)
         {
             //清空缓存
             SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
 
             UserInfoEdit ue = new UserInfoEdit("", null);
             ue.FormClosed += Ue_FormClosed;
@@ -774,6 +785,7 @@ namespace Client
             if (!string.IsNullOrEmpty(SessionHelper.cardno))
             {
                 txtCode.Text = SessionHelper.cardno;
+                SearchUser();
             }
         }
 
@@ -861,8 +873,27 @@ namespace Client
         {
             if (e.KeyCode == Keys.Enter)
             {
+                //清空缓存
+                SessionHelper.CardReader = null;
+                YBHelper.currentYBInfo = null;
                 SearchUser();
             }
+        }
+
+        public void InitUserInfo()
+        {
+            lblMsg.Text = "";
+            btnEditUser.TagString = ""; btnEditUser.Hide();
+            lblName.Text = "";
+            lblAge.Text = "";
+            lblstreet.Text = "";
+            lbldistrict.Text = "";
+            lblsfz.Text = "";
+            lblhometel.Text = "";
+            lblSex.Text = "";
+            lblbirth.Text = "";
+            lblmarry.Text = "";
+          
         }
 
         public void SearchUser()
@@ -872,25 +903,14 @@ namespace Client
             lblMsg.Text = "";
             if (string.IsNullOrEmpty(barcode))
             {
-                btnEditUser.TagString = ""; btnEditUser.Hide();
-                lblName.Text = "";
-                lblAge.Text = "";
-                lblstreet.Text = "";
-                lbldistrict.Text = "";
-                lblsfz.Text = "";
-                lblhometel.Text = "";
-                lblSex.Text = "";
-                lblbirth.Text = "";
-                lblmarry.Text = "";
+                InitUIText();
                 return;
             }
 
 
             List<PatientVM> listApi = new List<PatientVM>();
             //获取数据 
-            //MzghLib lib = new MzghLib();
-            //var dt = lib.GetUserInfoByCard(barcode);
-
+           
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
@@ -991,18 +1011,20 @@ namespace Client
                 {
 
                     lblMsg.Text = "没有查询到数据";
-                    btnEditUser.TagString = ""; btnEditUser.Hide();
-                    lblName.Text = "";
-                    lblAge.Text = ""; lblhometel.Text = "";
-                    lblSex.Text = ""; lblstreet.Text = ""; lblsfz.Text = "";
-                    lblbirth.Text = ""; lbldistrict.Text = ""; lblmarry.Text = "";
 
-                    if (SessionHelper.CardReader != null)
+                    InitUserInfo();
+
+                    //身份证
+                    if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                     {
                         //自动打开创建新用户窗口
                         UserInfoEdit ue = new UserInfoEdit("", null);
                         ue.FormClosed += Ue_FormClosed;
                         ue.ShowDialog();
+
+                    }
+                    else if (true)
+                    {
 
                     }
                 }

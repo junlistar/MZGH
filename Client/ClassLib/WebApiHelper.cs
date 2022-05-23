@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Script.Serialization;
+using System.IO;
 
 namespace Client.ClassLib
 {
@@ -374,7 +375,50 @@ namespace Client.ClassLib
             }
             return response;
         }
- 
-         
+
+
+
+
+        public static string DataPost(string url, string content)
+        {
+            //申明一个容器result接收数据
+            string result = "";
+            try
+            {
+                //首先创建一个HttpWebRequest,申明传输方式POST
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.Method = "POST";
+                req.ContentType = "application/json";
+
+                //添加POST参数
+                byte[] data = Encoding.UTF8.GetBytes(content);
+                req.ContentLength = data.Length;
+                using (Stream reqStream = req.GetRequestStream())
+                {
+                    reqStream.Write(data, 0, data.Length);
+                    reqStream.Close();
+                }
+
+                //申明一个容器resp接收返回数据
+                HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                Stream stream = resp.GetResponseStream();
+                //获取响应内容 
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    result = reader.ReadToEnd();
+                    var stringstr = "<stream><return_code>SUCCESS</return_code></stream>";
+                    //Response.Write(stringstr);
+                    //Response.End();
+                }
+            }
+            catch (Exception ex)
+            {
+                var stringstr = "<stream><return_code>FAIL</return_code></stream>";
+                //Response.Write(stringstr);
+                //Response.End();
+
+            }
+            return result;
+        }
     }
 }

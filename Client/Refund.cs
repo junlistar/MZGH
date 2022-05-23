@@ -395,6 +395,13 @@ namespace Client
 
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
+            
+
+        }
+
+        public void Search()
+        {
+
             string barcode = this.txtCode.Text.Trim();
             if (string.IsNullOrWhiteSpace(barcode))
             {
@@ -823,5 +830,13 @@ namespace Client
         }
 
         #endregion
+
+        private void txtCode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Search();
+            } 
+        }
     }
 }

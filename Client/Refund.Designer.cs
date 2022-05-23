@@ -40,19 +40,6 @@
             this.lblSex = new Sunny.UI.UILabel();
             this.lblAge = new Sunny.UI.UILabel();
             this.dgvDeposit = new Sunny.UI.UIDataGridView();
-            this.uiLabel4 = new Sunny.UI.UILabel();
-            this.dtprq = new Sunny.UI.UIDatePicker();
-            this.uiLabel5 = new Sunny.UI.UILabel();
-            this.txtCode = new Sunny.UI.UITextBox();
-            this.pnlTitle = new Sunny.UI.UIPanel();
-            this.btnCashRefund = new Sunny.UI.UISymbolButton();
-            this.lblhidid = new Sunny.UI.UILabel();
-            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
-            this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
-            this.btnTuihao = new Sunny.UI.UISymbolButton();
-            this.lblTitle = new Sunny.UI.UILabel();
-            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
-            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.gh_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,6 +55,19 @@
             this.cheque_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiLabel4 = new Sunny.UI.UILabel();
+            this.dtprq = new Sunny.UI.UIDatePicker();
+            this.uiLabel5 = new Sunny.UI.UILabel();
+            this.txtCode = new Sunny.UI.UITextBox();
+            this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnCashRefund = new Sunny.UI.UISymbolButton();
+            this.lblhidid = new Sunny.UI.UILabel();
+            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
+            this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
+            this.btnTuihao = new Sunny.UI.UISymbolButton();
+            this.lblTitle = new Sunny.UI.UILabel();
+            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -214,6 +214,116 @@
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvDeposit_RowPrePaint);
             // 
+            // gh_date_str
+            // 
+            this.gh_date_str.DataPropertyName = "gh_date_str";
+            this.gh_date_str.HeaderText = "挂号时间";
+            this.gh_date_str.Name = "gh_date_str";
+            this.gh_date_str.ReadOnly = true;
+            // 
+            // unit_name
+            // 
+            this.unit_name.DataPropertyName = "unit_name";
+            this.unit_name.HeaderText = "挂号专科";
+            this.unit_name.Name = "unit_name";
+            this.unit_name.ReadOnly = true;
+            // 
+            // group_name
+            // 
+            this.group_name.DataPropertyName = "group_name";
+            this.group_name.HeaderText = "科室";
+            this.group_name.Name = "group_name";
+            this.group_name.ReadOnly = true;
+            // 
+            // doctor_name
+            // 
+            this.doctor_name.DataPropertyName = "doctor_name";
+            this.doctor_name.HeaderText = "医生";
+            this.doctor_name.Name = "doctor_name";
+            this.doctor_name.ReadOnly = true;
+            // 
+            // ampm
+            // 
+            this.ampm.DataPropertyName = "ampm";
+            this.ampm.HeaderText = "上/下午";
+            this.ampm.Name = "ampm";
+            this.ampm.ReadOnly = true;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "挂号次数";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            this.ledger_sn.HeaderText = "ledger_sn";
+            this.ledger_sn.Name = "ledger_sn";
+            this.ledger_sn.ReadOnly = true;
+            this.ledger_sn.Visible = false;
+            // 
+            // charge
+            // 
+            this.charge.DataPropertyName = "charge";
+            this.charge.HeaderText = "金额";
+            this.charge.Name = "charge";
+            this.charge.ReadOnly = true;
+            // 
+            // clinic_name
+            // 
+            this.clinic_name.DataPropertyName = "clinic_name";
+            this.clinic_name.HeaderText = "号类";
+            this.clinic_name.Name = "clinic_name";
+            this.clinic_name.ReadOnly = true;
+            // 
+            // cheque_name
+            // 
+            this.cheque_name.DataPropertyName = "cheque_name";
+            this.cheque_name.HeaderText = "支付类型";
+            this.cheque_name.Name = "cheque_name";
+            this.cheque_name.ReadOnly = true;
+            // 
+            // visit_flag_name
+            // 
+            this.visit_flag_name.DataPropertyName = "visit_flag_name";
+            this.visit_flag_name.HeaderText = "挂号状态";
+            this.visit_flag_name.Name = "visit_flag_name";
+            this.visit_flag_name.ReadOnly = true;
+            // 
+            // cheque_type
+            // 
+            this.cheque_type.DataPropertyName = "cheque_type";
+            this.cheque_type.HeaderText = "cheque_type";
+            this.cheque_type.Name = "cheque_type";
+            this.cheque_type.ReadOnly = true;
+            this.cheque_type.Visible = false;
+            // 
+            // cheque_no
+            // 
+            this.cheque_no.DataPropertyName = "cheque_no";
+            this.cheque_no.HeaderText = "cheque_no";
+            this.cheque_no.Name = "cheque_no";
+            this.cheque_no.ReadOnly = true;
+            this.cheque_no.Visible = false;
+            // 
+            // item_no
+            // 
+            this.item_no.DataPropertyName = "item_no";
+            this.item_no.HeaderText = "item_no";
+            this.item_no.Name = "item_no";
+            this.item_no.ReadOnly = true;
+            this.item_no.Visible = false;
+            // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "receipt_sn";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            this.receipt_sn.Visible = false;
+            // 
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -282,6 +392,7 @@
             this.txtCode.TabIndex = 12;
             this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
+            this.txtCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCode_KeyUp);
             // 
             // pnlTitle
             // 
@@ -472,116 +583,6 @@
             this.uiGroupBox2.Text = "用户信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox2.Click += new System.EventHandler(this.uiGroupBox2_Click);
-            // 
-            // gh_date_str
-            // 
-            this.gh_date_str.DataPropertyName = "gh_date_str";
-            this.gh_date_str.HeaderText = "挂号时间";
-            this.gh_date_str.Name = "gh_date_str";
-            this.gh_date_str.ReadOnly = true;
-            // 
-            // unit_name
-            // 
-            this.unit_name.DataPropertyName = "unit_name";
-            this.unit_name.HeaderText = "挂号专科";
-            this.unit_name.Name = "unit_name";
-            this.unit_name.ReadOnly = true;
-            // 
-            // group_name
-            // 
-            this.group_name.DataPropertyName = "group_name";
-            this.group_name.HeaderText = "科室";
-            this.group_name.Name = "group_name";
-            this.group_name.ReadOnly = true;
-            // 
-            // doctor_name
-            // 
-            this.doctor_name.DataPropertyName = "doctor_name";
-            this.doctor_name.HeaderText = "医生";
-            this.doctor_name.Name = "doctor_name";
-            this.doctor_name.ReadOnly = true;
-            // 
-            // ampm
-            // 
-            this.ampm.DataPropertyName = "ampm";
-            this.ampm.HeaderText = "上/下午";
-            this.ampm.Name = "ampm";
-            this.ampm.ReadOnly = true;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "挂号次数";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "ledger_sn";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            this.ledger_sn.Visible = false;
-            // 
-            // charge
-            // 
-            this.charge.DataPropertyName = "charge";
-            this.charge.HeaderText = "金额";
-            this.charge.Name = "charge";
-            this.charge.ReadOnly = true;
-            // 
-            // clinic_name
-            // 
-            this.clinic_name.DataPropertyName = "clinic_name";
-            this.clinic_name.HeaderText = "号类";
-            this.clinic_name.Name = "clinic_name";
-            this.clinic_name.ReadOnly = true;
-            // 
-            // cheque_name
-            // 
-            this.cheque_name.DataPropertyName = "cheque_name";
-            this.cheque_name.HeaderText = "支付类型";
-            this.cheque_name.Name = "cheque_name";
-            this.cheque_name.ReadOnly = true;
-            // 
-            // visit_flag_name
-            // 
-            this.visit_flag_name.DataPropertyName = "visit_flag_name";
-            this.visit_flag_name.HeaderText = "挂号状态";
-            this.visit_flag_name.Name = "visit_flag_name";
-            this.visit_flag_name.ReadOnly = true;
-            // 
-            // cheque_type
-            // 
-            this.cheque_type.DataPropertyName = "cheque_type";
-            this.cheque_type.HeaderText = "cheque_type";
-            this.cheque_type.Name = "cheque_type";
-            this.cheque_type.ReadOnly = true;
-            this.cheque_type.Visible = false;
-            // 
-            // cheque_no
-            // 
-            this.cheque_no.DataPropertyName = "cheque_no";
-            this.cheque_no.HeaderText = "cheque_no";
-            this.cheque_no.Name = "cheque_no";
-            this.cheque_no.ReadOnly = true;
-            this.cheque_no.Visible = false;
-            // 
-            // item_no
-            // 
-            this.item_no.DataPropertyName = "item_no";
-            this.item_no.HeaderText = "item_no";
-            this.item_no.Name = "item_no";
-            this.item_no.ReadOnly = true;
-            this.item_no.Visible = false;
-            // 
-            // receipt_sn
-            // 
-            this.receipt_sn.DataPropertyName = "receipt_sn";
-            this.receipt_sn.HeaderText = "receipt_sn";
-            this.receipt_sn.Name = "receipt_sn";
-            this.receipt_sn.ReadOnly = true;
-            this.receipt_sn.Visible = false;
             // 
             // Refund
             // 
