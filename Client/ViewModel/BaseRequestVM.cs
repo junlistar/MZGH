@@ -28,6 +28,9 @@ namespace Client.ViewModel
 
         public string segment { get; set; }
         public string req_type { get; set; }
+        public string req_name { get; set; }
+
+        
         public int begin_no { get; set; }
 
         public int current_no { get; set; }
@@ -35,6 +38,8 @@ namespace Client.ViewModel
 
 
         //查询显示字段
+
+        public string record_sn { get; set; }
         public string unit_name { get; set; }
         public string group_name { get; set; }
         public string doct_name { get; set; }
@@ -91,7 +96,7 @@ namespace Client.ViewModel
                     case "1": return "开放";
                     case "0": return "不开放";
                     default:
-                        return window_no.ToString();
+                        return open_flag;
                 }
             } }
 

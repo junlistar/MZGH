@@ -19,6 +19,8 @@ using System.IO;
 using System.Web;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Threading;
+using Client.Forms.Wedgit;
 
 namespace Client
 {
@@ -543,9 +545,9 @@ namespace Client
                 string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
-
-                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
                  
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                   
                 log.Debug(parm[2]);
 
                 YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
@@ -1041,5 +1043,6 @@ namespace Client
             }
 
         }
+         
     }
 }

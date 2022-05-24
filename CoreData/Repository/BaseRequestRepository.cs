@@ -251,7 +251,7 @@ where  b.open_flag='1' ";
 
         public List<BaseRequest> GetRequestsByDate(string begin, string end)
         {
-            string ghsql = @"select b.request_date,
+            string ghsql = @"select b.record_sn,b.request_date,
        case b.ampm when 'a' then '上午' else '下午' end ampm,
        b.unit_sn,
        b.group_sn,

@@ -28,10 +28,10 @@ namespace CoreTest
             //BaseRequestRepository _baseRequestRepository = new BaseRequestRepository() ;
             //var list = _baseRequestRepository.GetBaseRequests("","","","","","3","","","");
 
-            //GhRequestRepository rsp = new GhRequestRepository();
-            //rsp.CreateRequestRecord("2022-05-05", "2022-05-05", "3", 3, "00000");
+            GhRequestRepository rsp = new GhRequestRepository();
+            rsp.CreateRequestRecord("2022-05-24", "2022-05-24", "1", 1, "00040");
 
-
+            //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
             //BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
             //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-03 00:00:00", "2022-05-09 23:59:59", "3,3", -1);

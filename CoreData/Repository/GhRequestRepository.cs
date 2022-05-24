@@ -59,7 +59,7 @@ namespace Data.Repository
             {
                 //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
                 sql = @"select * from gh_request where request_date=@request_date
-                            and unit_sn=@unit_sn and group_sn=@group_sn and ampm=@ampm and clinic_type=@clinic_type";
+                            and unit_sn=@unit_sn and ampm=@ampm and clinic_type=@clinic_type";
             }
             else
             {
@@ -70,7 +70,18 @@ namespace Data.Repository
             para.Add("@request_date", item.request_date);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
-            para.Add("@group_sn", item.group_sn);
+            if (string.IsNullOrWhiteSpace(item.group_sn))
+            {
+                sql += " and group_sn is null";
+                 
+            }
+            else
+            {
+                sql += " and group_sn = @group_sn";
+                
+                para.Add("@group_sn",item.group_sn);
+            }
+            
             para.Add("@doctor_sn", item.doctor_sn);
             para.Add("@clinic_type", item.clinic_type);
              
@@ -209,6 +220,41 @@ values
                 }
             } 
             return 1;
-        } 
+        }
+
+        public int EditRequest(string record_sn,string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
+         string ampm, int totle_num, string window_no, string open_flag, string op_id)
+        {
+
+            //修改
+            if (!string.IsNullOrEmpty(record_sn))
+            {
+                string sql = @"update gh_request set request_date=@request_date,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,clinic_type=@clinic_type,
+req_type=@req_type,end_no=@end_no, enter_opera=@enter_opera, enter_date=@enter_date, open_flag=@open_flag, window_no=@window_no
+where record_sn=@record_sn";
+                var para = new DynamicParameters();
+                para.Add("@record_sn", record_sn);
+                para.Add("@request_date", request_date);
+
+                para.Add("@ampm", ampm);
+                para.Add("@unit_sn", unit_sn);
+                para.Add("@group_sn", group_sn);
+                para.Add("@doctor_sn", doctor_sn);
+                para.Add("@clinic_type", clinic_type);
+                para.Add("@req_type", request_type);
+
+                para.Add("@end_no", totle_num); 
+
+                para.Add("@enter_opera", op_id);
+                para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                para.Add("@open_flag", open_flag);
+                para.Add("@window_no", window_no);
+
+               return Update(sql, para); 
+            }
+            return 0; 
+
+
+        }
     }
 }

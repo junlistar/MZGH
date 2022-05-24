@@ -667,11 +667,9 @@
             // lblmsg
             // 
             this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.ForeColor = System.Drawing.Color.Red;
             this.lblmsg.Location = new System.Drawing.Point(107, 426);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(751, 23);
-            this.lblmsg.Style = Sunny.UI.UIStyle.Custom;
             this.lblmsg.TabIndex = 44;
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -725,7 +723,7 @@
             this.Controls.Add(this.cbxhm);
             this.Controls.Add(this.label1);
             this.Name = "UserInfoPage";
-            this.PageIndex = 1005;
+            this.PageIndex = 1006;
             this.Text = "UserInfoPage";
             this.Initialize += new System.EventHandler(this.UserInfoPage_Initialize);
             this.Load += new System.EventHandler(this.UserInfoPage_Load);

@@ -98,7 +98,7 @@ namespace CoreApi.Controllers
             {
                 client.Close();
                 wt.Stop();
-                Log.Information(string.Format("耗时:{0}", wt.ElapsedMilliseconds));
+                //Log.Information(string.Format("耗时:{0}", wt.ElapsedMilliseconds));
             }
             //return _patientRepository.TestDBConnection();
         }
@@ -559,6 +559,21 @@ namespace CoreApi.Controllers
             }
         }
 
+        public ResponseResult<int> EditRequest(string record_sn, string request_date,string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
+         string ampm, int totle_num, string window_no, string open_flag, string op_id)
+        {
+            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id}");
+            try
+            {
+                return _repository.EditRequest(record_sn, request_date,unit_sn, group_sn, doctor_sn, clinic_type, request_type,ampm, totle_num, window_no, open_flag, op_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+        }
+
         public ResponseResult<List<BaseRequest>> GetRequestsByDate(string begin, string end)
         {
 
@@ -588,6 +603,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
+         
 
         public ResponseResult<string> GetNewPatientId()
         {
@@ -675,6 +691,21 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<string>(ex.Message);
+            }
+        }
+
+        public ResponseResult<GhRequest> GetGhRecord(string record_sn)
+        {
+
+            Log.Information($"GetGhRecord,{record_sn}");
+            try
+            {
+                return _repository.GetGhRecord(record_sn).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<GhRequest>(ex.Message);
             }
         }
     }

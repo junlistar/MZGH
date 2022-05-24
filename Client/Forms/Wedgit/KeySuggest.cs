@@ -46,8 +46,8 @@ namespace Client.Forms.Wedgit
 
         private void lstunits_ItemClick(object sender, EventArgs e)
         {
-            //_mf.request_key = lstunits.SelectedItem.ToString();
-             
+            _mf.request_key = lstunits.SelectedItem.ToString();
+            this.Close();
         }
 
         private void txtKeySearch_KeyUp(object sender, KeyEventArgs e)

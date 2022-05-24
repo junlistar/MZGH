@@ -395,8 +395,7 @@ namespace Client
 
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
-            
-
+            Search();
         }
 
         public void Search()
@@ -444,6 +443,7 @@ namespace Client
                     lblName.Text = userInfo.name.ToString();
                     lblAge.Text = userInfo.age.ToString();
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
+                    lblSno.Text = userInfo.social_no;
 
                     BindGridView();
                 }

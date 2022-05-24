@@ -23,7 +23,7 @@ namespace Client
         static HttpClient client = null;
         List<BaseRequestVM> list = null;
         string localweeks = "";
-        int localday =-1;
+        int localday = -1;
         public CreateRequestRecord()
         {
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace Client
             var from = txtFrom.Value.Date;
             var to = txtTo.Value.Date;
 
-            if (from>to)
+            if (from > to)
             {
                 UIMessageTip.ShowError("开始日期不能大于结束日期！");
                 return;
@@ -44,8 +44,8 @@ namespace Client
             DateTime end = Convert.ToDateTime(to.ToShortDateString());
 
             TimeSpan sp = end.Subtract(start);
-             
-            if (sp.Days>35)
+
+            if (sp.Days > 35)
             {
                 UIMessageTip.ShowWarning("日期区间相差太大，建议选择一个月之内的日期！");
                 return;
@@ -62,7 +62,7 @@ namespace Client
 
                 DateTime endWeek = startWeek.AddDays(6);  //本周周日 
 
-                if (from> startWeek )
+                if (from > startWeek)
                 {
                     ts.from = from.ToShortDateString();
                     ts.from_day = Client.ClassLib.DataTimeUtil.GetDayFromEnum(from.DayOfWeek);
@@ -73,7 +73,7 @@ namespace Client
                     ts.from_day = Client.ClassLib.DataTimeUtil.GetDayFromEnum(startWeek.DayOfWeek);
                 }
 
-                if (to< endWeek)
+                if (to < endWeek)
                 {
                     flag = false;
                     ts.to = to.ToShortDateString();
@@ -95,7 +95,7 @@ namespace Client
 
 
             } while (flag);
-            if (txtFrom.Value.Date.ToShortDateString()!= txtTo.Value.Date.ToShortDateString())
+            if (txtFrom.Value.Date.ToShortDateString() != txtTo.Value.Date.ToShortDateString())
             {
                 this.dgvDate.Columns["day"].Visible = false;
             }
@@ -111,14 +111,20 @@ namespace Client
         UIListBox uiListBox1 = new UIListBox();
         int crow = 0; int ccol = 0;
         private void dgvDate_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        { 
+        {
             crow = e.RowIndex;
             ccol = e.ColumnIndex;
 
-            //点击的周
-            if (e.ColumnIndex==4)
+            if (e.RowIndex==-1)
             {
-                 
+                return;
+
+            }
+
+            //点击的周
+            if (e.ColumnIndex == 4)
+            {
+
                 uiListBox1.Items.Add("第一周");
                 uiListBox1.Items.Add("第二周");
                 uiListBox1.Items.Add("第三周");
@@ -130,7 +136,7 @@ namespace Client
 
                 uiListBox1.Style = UIStyle.LayuiGreen;
                 uiListBox1.Parent = this;
-                uiListBox1.Top = dgvDate.Top+  55 + (23 * (e.RowIndex));
+                uiListBox1.Top = dgvDate.Top + 55 + (23 * (e.RowIndex));
                 uiListBox1.Width = 100;
                 uiListBox1.Left = 445;
                 uiListBox1.BringToFront();
@@ -170,7 +176,7 @@ namespace Client
 
         private void Cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             dgvDate.Rows[crow].Cells[ccol].Value = uiListBox1.SelectedItem.ToString();
             uiListBox1.Hide(); InitData();
         }
@@ -179,7 +185,7 @@ namespace Client
         {
             List<string> lis = new List<string>();
             var weeks = "";
-            int day = -1; 
+            int day = -1;
 
             if (this.dgvDate.Columns["day"].Visible)
             {
@@ -187,7 +193,7 @@ namespace Client
                 var _week = dgvDate.Rows[0].Cells["week"].Value.ToString();
                 var _day = dgvDate.Rows[0].Cells["day"].Value.ToString();
                 if ((_week == "选择") || (_day == "选择"))
-                { 
+                {
                     return;
                 }
                 weeks = DataTimeUtil.GetIntByWeekStr(_week).ToString();
@@ -200,7 +206,7 @@ namespace Client
                 {
                     var _week = dgvDate.Rows[i].Cells["week"].Value.ToString();
                     if (_week == "选择")
-                    { 
+                    {
                         return;
                     }
                     var _tmp = DataTimeUtil.GetIntByWeekStr(_week).ToString();
@@ -211,7 +217,7 @@ namespace Client
 
                     lis.Add(_tmp);
                 }
-                weeks = string.Join(",", lis); 
+                weeks = string.Join(",", lis);
             }
             else
             {
@@ -225,12 +231,12 @@ namespace Client
 
                 var begin = txtFrom.Value.ToString("yyyy-MM-dd 00:00:00");
                 var end = txtTo.Value.ToString("yyyy-MM-dd 23:59:59");
-                 
+
                 Task<HttpResponseMessage> task = null;
                 string json = "";
 
                 var param = $"?begin={begin}&end={end}&weeks={weeks}&day={day}";
-                string paramurl = string.Format($"/api/GuaHao/GetBaseRequestsByWeekDay" + param); 
+                string paramurl = string.Format($"/api/GuaHao/GetBaseRequestsByWeekDay" + param);
 
                 log.Info(client.BaseAddress + paramurl);
                 task = client.GetAsync(paramurl);
@@ -252,8 +258,8 @@ namespace Client
                 if (list != null && list.Count > 0)
                 {
                     var ds = list.Select(p => new
-                    { 
-                        
+                    {
+
                         weekstr = p.weekstr,
                         daystr = p.daystr,
                         apstr = p.apstr,
@@ -262,7 +268,7 @@ namespace Client
                         doct_name = p.doct_name,
                         clinic_name = p.clinic_name,
                         totle_num = p.totle_num,
-                        winnostr = p.winnostr, 
+                        winnostr = p.winnostr,
                     }).ToList();
                     dgvbase.DataSource = ds;
                     dgvbase.AutoResizeColumns();
@@ -270,7 +276,8 @@ namespace Client
                 else
                 {
                     var tmp = new List<BaseRequestVM>();
-                    var ds = tmp.Select(p => new { 
+                    var ds = tmp.Select(p => new
+                    {
                         weekstr,
                         daystr,
                         apstr,
@@ -279,7 +286,7 @@ namespace Client
                         doct_name,
                         clinic_name,
                         totle_num,
-                        winnostr, 
+                        winnostr,
                     }).ToList();
                     dgvbase.DataSource = ds;
                 }
@@ -307,12 +314,12 @@ namespace Client
 
                 list = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
 
-                if (list != null && list.Count > 0)
+                if (list != null)
                 {
                     var ds = list.Select(p => new
                     {
                         request_date_str = p.request_date_str,
-                        ampm = p.ampm, 
+                        ampm = p.ampm,
                         unit_name = p.unit_name,
                         group_name = p.group_name,
                         doct_name = p.doct_name,
@@ -328,23 +335,24 @@ namespace Client
                 }
                 else
                 {
-                    //var tmp = new List<BaseRequestVM>();
-                    //var ds = tmp.Select(p => new
-                    //{
-                    //    request_date,
-                    //    ampm,
-                    //    unit_name,
-                    //    group_name,
-                    //    doct_name,
-                    //    clinic_name,
-                    //    begin_no,
-                    //    current_no,
-                    //    totle_num,
-                    //    winnostr,
-                    //    open_flag_str
-                    //}).ToList();
-                    //dgvRequest.DataSource = ds;
-                    dgvRequest.DataSource =null;
+
+                    var tmp = new List<BaseRequestVM>();
+                    var ds2 = tmp.Select(p => new
+                    {
+                        request_date_str = p.request_date_str,
+                        ampm = p.ampm,
+                        unit_name,
+                        group_name,
+                        doct_name,
+                        clinic_name,
+                        begin_no = p.begin_no,
+                        current_no = p.current_no,
+                        totle_num,
+                        winnostr,
+                        open_flag = p.open_flag,
+                    }).ToList();
+                    dgvRequest.DataSource = ds2;
+                    // dgvRequest.DataSource =null;
                 }
 
 
@@ -369,13 +377,27 @@ namespace Client
         }
 
         public void InitUI()
-        { 
-            txtFrom.Text = DateTime.Now.AddDays(7).ToShortDateString();
-            txtTo.Text = DateTime.Now.AddDays(7).ToShortDateString();
+        {
+            txtFrom.Text = DateTime.Now.ToShortDateString();
+            txtTo.Text = DateTime.Now.ToShortDateString();
 
 
-            dgvbase.DataSource = null;
-            dgvRequest.DataSource = null;
+            var tmp = new List<BaseRequestVM>();
+            var ds = tmp.Select(p => new
+            {
+                weekstr,
+                daystr,
+                apstr,
+                unit_name,
+                group_name,
+                doct_name,
+                clinic_name,
+                totle_num,
+                winnostr,
+            }).ToList();
+            dgvbase.DataSource = ds;
+
+            //dgvRequest.DataSource = null;
 
         }
 
@@ -383,9 +405,14 @@ namespace Client
         {
             InitUI();
         }
-
+        bool isRun = false;
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            if (isRun)
+            {
+                return;
+            }
+
             try
             {
 
@@ -398,13 +425,14 @@ namespace Client
                     return;
                 }
 
+                isRun = true;
+
                 string json = ""; string paramurl = "";
-
-
+                 
                 //根据patientId查找已存在的病人
                 Task<HttpResponseMessage> task = null;
-                json = ""; 
-                  
+                json = "";
+
                 var d = new
                 {
                     begin = begin,
@@ -421,7 +449,7 @@ namespace Client
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
 
                 if (responseJson == 1 || responseJson == 2)
-                { 
+                {
                     UIMessageTip.ShowOk("操作成功!");
                     //刷新挂号数据
                     InitData();
@@ -430,8 +458,9 @@ namespace Client
                 {
                     UIMessageTip.ShowOk("操作失败!");
                 }
-
-               // this.Close();
+                isRun = false;
+                //this.Enabled = true;
+                // this.Close();
 
             }
             catch (Exception ex)
@@ -443,15 +472,20 @@ namespace Client
         private void uiGroupBox1_Click(object sender, EventArgs e)
         {
 
-        } 
+        }
 
         private void txtFrom_ValueChanged(object sender, DateTime value)
         {
             List<RecordTimeSpan> list = new List<RecordTimeSpan>();
             this.dgvDate.DataSource = list;
-             
+
             localweeks = "";
             localday = -1;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

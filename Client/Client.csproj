@@ -163,6 +163,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RequestEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RequestEdit.Designer.cs">
+      <DependentUpon>RequestEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BaseWeiHu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseWeiHu.Designer.cs">
+      <DependentUpon>BaseWeiHu.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseRequest.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +264,12 @@
     </Compile>
     <Compile Include="Forms\Wedgit\KeySuggest.Designer.cs">
       <DependentUpon>KeySuggest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\LoadingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\LoadingForm.Designer.cs">
+      <DependentUpon>LoadingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GhList.cs">
       <SubType>Form</SubType>
@@ -344,6 +362,12 @@
     <Compile Include="WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RequestEdit.resx">
+      <DependentUpon>RequestEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BaseWeiHu.resx">
+      <DependentUpon>BaseWeiHu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BaseRequest.resx">
       <DependentUpon>BaseRequest.cs</DependentUpon>
     </EmbeddedResource>

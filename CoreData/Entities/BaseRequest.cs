@@ -35,7 +35,9 @@ namespace Data.Entities
         public string group_name { get; set; }
         public string doct_name { get; set; }
         public string clinic_name { get; set; } 
+        public string req_name { get; set; }
 
         public DateTime request_date { get; set; }
+        public string record_sn { get; set; }
     }
 }

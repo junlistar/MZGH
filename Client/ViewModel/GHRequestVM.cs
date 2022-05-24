@@ -46,6 +46,31 @@ namespace Client.ViewModel
 
     }
 
+    public class GHRequestEditVM
+    {
+
+        public string record_sn { get; set; }
+        public int current_no { get; set; } 
+        public string unit_sn { get; set; }
+        public string group_sn { get; set; }
+        public string doctor_sn { get; set; }
+        public string clinic_type { get; set; }
+        public string req_type { get; set; }
+        public string clinic_name { get; set; } 
+        public string doctor_name { get; set; }
+        public string group_name { get; set; }
+        public string req_name { get; set; }
+        public string ampm { get; set; }
+        public int begin_no { get; set; }
+        public int end_no { get; set; }
+        public int open_flag { get; set; }
+        public int window_no { get; set; }
+
+        public DateTime request_date { get; set; }
+
+
+    }
+
     public class PatientVM
     {
         public string patient_id { get; set; }

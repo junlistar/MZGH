@@ -61,6 +61,8 @@
             this.txtpatientid = new Sunny.UI.UITextBox();
             this.lklduka = new Sunny.UI.UILinkLabel();
             this.uiLine1 = new Sunny.UI.UILine();
+            this.uiLabel14 = new Sunny.UI.UILabel();
+            this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.SuspendLayout();
             // 
             // uiLabel1
@@ -264,7 +266,7 @@
             this.txthomedistrict.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.txthomedistrict.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
             this.txthomedistrict.ShowText = false;
-            this.txthomedistrict.Size = new System.Drawing.Size(436, 29);
+            this.txthomedistrict.Size = new System.Drawing.Size(200, 29);
             this.txthomedistrict.Style = Sunny.UI.UIStyle.Colorful;
             this.txthomedistrict.TabIndex = 16;
             this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -658,11 +660,51 @@
             this.uiLine1.Style = Sunny.UI.UIStyle.Colorful;
             this.uiLine1.TabIndex = 36;
             // 
+            // uiLabel14
+            // 
+            this.uiLabel14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel14.Location = new System.Drawing.Point(433, 246);
+            this.uiLabel14.Name = "uiLabel14";
+            this.uiLabel14.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel14.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel14.Style = Sunny.UI.UIStyle.Colorful;
+            this.uiLabel14.TabIndex = 37;
+            this.uiLabel14.Text = "婚姻状况";
+            this.uiLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbxmarrycode
+            // 
+            this.cbxmarrycode.DataSource = null;
+            this.cbxmarrycode.FillColor = System.Drawing.Color.White;
+            this.cbxmarrycode.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.cbxmarrycode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxmarrycode.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(242)))), ((int)(((byte)(238)))));
+            this.cbxmarrycode.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxmarrycode.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.cbxmarrycode.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(251)))), ((int)(((byte)(250)))));
+            this.cbxmarrycode.Location = new System.Drawing.Point(540, 243);
+            this.cbxmarrycode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxmarrycode.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxmarrycode.Name = "cbxmarrycode";
+            this.cbxmarrycode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxmarrycode.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.cbxmarrycode.Size = new System.Drawing.Size(200, 29);
+            this.cbxmarrycode.Style = Sunny.UI.UIStyle.Colorful;
+            this.cbxmarrycode.TabIndex = 38;
+            this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // UserInfoEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(876, 536);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.Controls.Add(this.cbxmarrycode);
+            this.Controls.Add(this.uiLabel14);
             this.Controls.Add(this.uiLine1);
             this.Controls.Add(this.lklduka);
             this.Controls.Add(this.txtpatientid);
@@ -743,5 +785,7 @@
         private Sunny.UI.UITextBox txtpatientid;
         private Sunny.UI.UILinkLabel lklduka;
         private Sunny.UI.UILine uiLine1;
+        private Sunny.UI.UILabel uiLabel14;
+        private Sunny.UI.UIComboBox cbxmarrycode;
     }
 }

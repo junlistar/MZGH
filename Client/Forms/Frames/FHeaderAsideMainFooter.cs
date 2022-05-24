@@ -18,8 +18,8 @@ namespace Client
     public partial class FHeaderAsideMainFooter : UIHeaderAsideMainFooterFrame
     {
         private static ILog log = LogManager.GetLogger(typeof(GuaHao));//typeof放当前类
-
-
+         
+    
         public FHeaderAsideMainFooter()
         {
             InitializeComponent();
@@ -27,6 +27,7 @@ namespace Client
             SessionHelper.MyHttpClient = new HttpClient();
             SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
 
+             
 
             //设置关联
             Aside.TabControl = MainTabControl;
@@ -49,7 +50,7 @@ namespace Client
             Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
             Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
             Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
-            Aside.CreateChildNode(parent, 61674, 24, "发新卡", 1005);
+            Aside.CreateChildNode(parent, 61674, 24, "号表维护", 1005);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
@@ -96,13 +97,21 @@ namespace Client
                 }
                 SelectPage(1004);
             }
-            else if (node.Text == "发新卡")
+            else if (node.Text == "号表维护")
             {
                 if (!ExistPage(1005))
                 {
-                    AddPage(new UserInfoPage());
+                    AddPage(new BaseWeiHu());
                 }
                 SelectPage(1005);
+            }
+            else if (node.Text == "发新卡")
+            {
+                if (!ExistPage(1006))
+                {
+                    AddPage(new UserInfoPage());
+                }
+                SelectPage(1006);
             }
         }
 
@@ -145,6 +154,7 @@ namespace Client
         }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
+            this.MinimumSize = new Size(this.Width, this.Height);
 
             AddPage(new Client.Forms.Pages.DefaultPage());
             // SelectPage(1000);
@@ -269,7 +279,7 @@ namespace Client
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/TestDBConnection");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
             task.Wait();

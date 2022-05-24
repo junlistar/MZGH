@@ -156,7 +156,6 @@ namespace Client
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 720);
-            this.MaximizeBox = false;
             this.Name = "FHeaderAsideMainFooter";
             this.Text = "门诊挂号系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

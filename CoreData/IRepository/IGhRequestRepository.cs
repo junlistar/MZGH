@@ -15,6 +15,9 @@ namespace Data.IRepository
 
 
         int CreateRequestRecord(string begin, string end, string weeks, int day, string op_id);
+
+        int EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
+          string ampm, int totle_num, string window_no, string open_flag, string op_id);
         #endregion
     }
 }
