@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<ResponceType> GetResponceTypes()
         {
-            string ghsql = "select * from zd_responce_type";
+            string ghsql =GetSqlByTag(220025);
              
             return  Select(ghsql);
 

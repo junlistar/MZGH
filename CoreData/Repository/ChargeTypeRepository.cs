@@ -13,7 +13,8 @@ namespace Data.Repository
    
         public List<ChargeType> GetChargeTypes()
         {
-            string ghsql = "select * from zd_charge_type";
+            
+            string ghsql = GetSqlByTag(220031);
              
             return  Select(ghsql);
 

@@ -7,6 +7,10 @@ namespace CoreTest
     {
         static void Main(string[] args)
         {
+
+          var ds =  Data.Helpers.ConfigHelper.GetSectionValue("sql1");
+
+           var a = 1;
             //GhRefundRepository ghRefundRepository = new GhRefundRepository();
             //var listttt = ghRefundRepository.GetGhRefund("2022-04-22", "00029694400");
 
@@ -28,8 +32,8 @@ namespace CoreTest
             //BaseRequestRepository _baseRequestRepository = new BaseRequestRepository() ;
             //var list = _baseRequestRepository.GetBaseRequests("","","","","","3","","","");
 
-            GhRequestRepository rsp = new GhRequestRepository();
-            rsp.CreateRequestRecord("2022-05-24", "2022-05-24", "1", 1, "00040");
+            //GhRequestRepository rsp = new GhRequestRepository();
+            //rsp.CreateRequestRecord("2022-05-24", "2022-05-24", "1", 1, "00040");
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
@@ -37,8 +41,8 @@ namespace CoreTest
             //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-03 00:00:00", "2022-05-09 23:59:59", "3,3", -1);
             // ?begin=&end=&weeks=3&day=-1
 
-            GhSearchRepository resp = new GhSearchRepository();
-            var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
+            //GhSearchRepository resp = new GhSearchRepository();
+            //var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
 
             Console.WriteLine("Hello World!");
         }

@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<MzHaoming> GetMzHaomings()
         {
-            string ghsql = @"SELECT * from mz_zd_haoming WHERE mz_zd_haoming.delete_flag = '0' ORDER BY mz_zd_haoming.sort_order ASC";
+            string ghsql = GetSqlByTag(220027);
              
             return  Select(ghsql);
 

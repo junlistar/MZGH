@@ -14,28 +14,7 @@ namespace Data.Repository
         public List<BaseRequest> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
             string week, string day, string ampm, string window_no, string open_flag)
         {
-            string ghsql = @"select a.*,b.name unit_name,c.name group_name,d.name doct_name,e.name clinic_name from gh_base_request a
-left join zd_unit_code b on a.unit_sn = b.unit_sn
-left join zd_unit_code c on a.group_sn = c.unit_sn
-left join a_employee_mi d on a.doctor_sn = d.emp_sn
-left join gh_zd_clinic_type e on a.clinic_type = e.code
-where a.unit_sn like @unit_sn and
-      isnull(a.group_sn,'''') like @group_sn and
-      isnull(a.doctor_sn,'''') like @doctor_sn and
-      a.clinic_type like @clinic_type and
-      isnull(cast(a.week as char),'''') like @week and
-      isnull(cast(a.day as char),'''') like @day and
-      a.ampm like @ampm and
-      isnull(cast(a.window_no as char),'''') like @window_no and
-      a.open_flag like @open_flag
-order by op_date desc,unit_sn,
-         group_sn,
-         doctor_sn,
-         clinic_type,
-         week,
-         day,
-         ampm,
-         window_no";
+            string ghsql = GetSqlByTag(220053);
 
             var para = new DynamicParameters();
 
@@ -106,8 +85,7 @@ where patient_id=@patient_id";
             else
             {
                 //新增
-                string snosql = @"update gh_config set base_request_sn=base_request_sn+1 where op_receipt_table='gh_op_receipt';
-select base_request_sn from gh_config where op_receipt_table='gh_op_receipt';";
+                string snosql = GetSqlByTag(220054);
 
                 var dtconfig = ExcuteScalar(snosql, null);
 
@@ -117,10 +95,7 @@ select base_request_sn from gh_config where op_receipt_table='gh_op_receipt';";
                 }
 
 
-                string sql = @"insert into gh_base_request(request_sn,[week],[day],ampm,unit_sn,group_sn,doctor_sn,
-clinic_type,totle_num,op_id,op_date,open_flag,window_no)
-values(@request_sn,@week,@day,@ampm,@unit_sn,@group_sn,@doctor_sn,
-@clinic_type,@totle_num,@op_id,@op_date,@open_flag,@window_no)";
+                string sql = GetSqlByTag(220055);
 
                 var para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
@@ -143,8 +118,7 @@ values(@request_sn,@week,@day,@ampm,@unit_sn,@group_sn,@doctor_sn,
 
 
                 //挂号区间表
-                string segsql = @"insert into gh_base_request_segment(request_sn,req_type,begin_no,end_no)
-values(@request_sn,@req_type,@begin_no,@end_no)";
+                string segsql = GetSqlByTag(220056);
                 para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
                 para.Add("@req_type", "01");
@@ -162,7 +136,7 @@ values(@request_sn,@req_type,@begin_no,@end_no)";
         {
 
             //挂号区间表
-            string segsql = @"delete from gh_base_request where request_sn=@request_sn;delete from gh_base_request_segment where request_sn=@request_sn";
+            string segsql = GetSqlByTag(220057);
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
 
@@ -172,22 +146,7 @@ values(@request_sn,@req_type,@begin_no,@end_no)";
 
         public List<BaseRequest> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day)
         {
-            string ghsql = @"select b.*,
-	w.name window_name,	
-        t.name clinic_name, 
-	u1.name unit_name,
-        u2.name group_name,
-	a.name doct_name,
-        c.req_type,
-        c.begin_no,
-        c.end_no      
-from 	gh_base_request as b left join gh_zd_clinic_type as t on  b.clinic_type=t.code  
-	left join gh_zd_window_no as w on b.window_no =w.window_no  
-	left join zd_unit_code as u1 on b.unit_sn =u1.unit_sn  
-	left join zd_unit_code as u2 on b.group_sn=u2.unit_sn 
-	left join a_employee_mi as a on b.doctor_sn=a.emp_sn 
-        inner join gh_base_request_segment c on b.request_sn = c.request_sn 
-where  b.open_flag='1' ";
+            string ghsql = GetSqlByTag(220058);
 
             if (day > 0)
             {
@@ -251,29 +210,7 @@ where  b.open_flag='1' ";
 
         public List<BaseRequest> GetRequestsByDate(string begin, string end)
         {
-            string ghsql = @"select b.record_sn,b.request_date,
-       case b.ampm when 'a' then '上午' else '下午' end ampm,
-       b.unit_sn,
-       b.group_sn,
-       b.doctor_sn,
-       b.clinic_type,
-       b.req_type,
-       u1.name unit_name,
-       u2.name group_name,
-       a.name doct_name,
-       c.name clinic_name,
-       r.name req_name,
-       b.begin_no,
-       b.current_no,
-       b.end_no,
-       b.window_no,
-       case b.open_flag when '1' then '开放' else '不开放' end open_flag
-from gh_request b left join a_employee_mi a on b.doctor_sn = a.emp_sn 
-     inner join zd_unit_code u1 on b.unit_sn = u1.unit_sn  
-     left join zd_unit_code u2 on b.group_sn = u2.unit_sn 
-     inner join gh_zd_clinic_type  c on b.clinic_type = c.code 
-     inner join gh_zd_request_type r on b.req_type = r.code  
-where b.request_date between @P1 and @P2  ";
+            string ghsql = GetSqlByTag(220058);
 
             var para = new DynamicParameters();
             para.Add("@P1", begin);

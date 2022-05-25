@@ -18,16 +18,7 @@ namespace Data.Repository
 
         public List<GhRequest> GetGhRequest(string request_date, string ampm, string unit_sn = "%", string clinic_type = "%", string doctor_sn = "%", string group_sn = "%", string req_type = "01", string win_no = "%")
         {
-            //            string selectSql = @"select   zd_unit_code.code,
-            //       zd_unit_code.name,
-            //       zd_unit_code.py_code,
-            //       zd_unit_code.d_code,
-            //       zd_unit_code.unit_sn
-            //from zd_unit_code
-            //where  
-            //      zd_unit_code.deleted_flag = '0'
-            //order by code";
-            //            return  Select(selectSql);
+             
             var para = new DynamicParameters();
             para.Add("@request_date", request_date);
             para.Add("@unit_sn", unit_sn);
@@ -45,8 +36,10 @@ namespace Data.Repository
 
         public List<GhRequest> GetGhRecord(string record_sn)
         {
-            string ghsql = @"select * from gh_request where record_sn = '" + record_sn + "'";
-            return Select(ghsql);
+            string ghsql = GetSqlByTag(220033);
+            var para = new DynamicParameters();
+            para.Add("@record_sn", record_sn);
+            return Select(ghsql, para);
 
         }
 
@@ -58,14 +51,12 @@ namespace Data.Repository
             if (string.IsNullOrWhiteSpace(item.doctor_sn))
             {
                 //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
-                sql = @"select * from gh_request where request_date=@request_date
-                            and unit_sn=@unit_sn and ampm=@ampm and clinic_type=@clinic_type";
+                sql = GetSqlByTag(220034);
             }
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = @"select * from gh_request where request_date=@request_date
-                            and ampm=@ampm and doctor_sn=@doctor_sn";
+                sql = GetSqlByTag(220035);
             }
             para.Add("@request_date", item.request_date);
             para.Add("@ampm", item.ampm);
@@ -100,13 +91,13 @@ namespace Data.Repository
 
         public int CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
         {
-            //准备数据
-            string sql1 = @"select * from gh_request where request_date between @begin and @end";
+            ////准备数据
+            //string sql1 = @"select * from gh_request where request_date between @begin and @end";
             var para = new DynamicParameters();
-            para.Add("@begin", begin);
-            para.Add("@end", end);
+            //para.Add("@begin", begin);
+            //para.Add("@end", end);
 
-            var requestlist = Select(sql1, para);
+            //var requestlist = Select(sql1, para);
              
             var baselist = baseRequestRepository.GetBaseRequestsByWeekDay(begin, end, weeks, day);
 
@@ -114,11 +105,12 @@ namespace Data.Repository
             //string deletesql = "delete from gh_request where request_date between @begin and @end";
             //Update(deletesql, para);
 
-            string insertsql = @"insert into gh_request
-  (request_date, ampm, unit_sn, group_sn, doctor_sn, clinic_type, req_type, begin_no, current_no, end_no, enter_opera, enter_date, open_flag, window_no)
-values
-  (@request_date, @ampm, @unit_sn, @group_sn, @doctor_sn, @clinic_type, @req_type, @begin_no, @current_no, @end_no, @enter_opera, @enter_date, @open_flag, @window_no)";
-
+//            string insertsql = @"insert into gh_request
+//  (request_date, ampm, unit_sn, group_sn, doctor_sn, clinic_type, req_type, begin_no, current_no, end_no, enter_opera, enter_date, open_flag, window_no)
+//values
+//  (@request_date, @ampm, @unit_sn, @group_sn, @doctor_sn, @clinic_type, @req_type, @begin_no, @current_no, @end_no, @enter_opera, @enter_date, @open_flag, @window_no)";
+            string insertsql = GetSqlByTag(220036);
+            
             //生成日期只有一天
             if (day > 0 && (begin == end))
             {
@@ -229,9 +221,11 @@ values
             //修改
             if (!string.IsNullOrEmpty(record_sn))
             {
-                string sql = @"update gh_request set request_date=@request_date,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,clinic_type=@clinic_type,
-req_type=@req_type,end_no=@end_no, enter_opera=@enter_opera, enter_date=@enter_date, open_flag=@open_flag, window_no=@window_no
-where record_sn=@record_sn";
+//                string sql = @"update gh_request set request_date=@request_date,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,clinic_type=@clinic_type,
+//req_type=@req_type,end_no=@end_no, enter_opera=@enter_opera, enter_date=@enter_date, open_flag=@open_flag, window_no=@window_no
+//where record_sn=@record_sn";
+
+                string sql =GetSqlByTag(220037);
                 var para = new DynamicParameters();
                 para.Add("@record_sn", record_sn);
                 para.Add("@request_date", request_date);

@@ -65,6 +65,17 @@ namespace Data
         //    }
         //}
 
+        public string GetSqlByTag(int tag)
+        {
+            string tag_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
+
+            var para = new DynamicParameters();
+            para.Add("@tag", tag);
+
+            return Convert.ToString(ExcuteScalar(tag_sql, para));
+        }
+             
+
         public int Delete(Guid Id, string deleteSql)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection())

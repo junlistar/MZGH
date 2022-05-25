@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<UserDic> GetUserDic()
         {
-            string sql = "select * from a_employee_mi where deleted_flag=0  order by emp_sn";
+            string sql =GetSqlByTag(220024);
 
             return Select(sql);
 

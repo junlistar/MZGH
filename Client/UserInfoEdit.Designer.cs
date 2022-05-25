@@ -671,6 +671,7 @@
             this.uiLabel14.TabIndex = 37;
             this.uiLabel14.Text = "婚姻状况";
             this.uiLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel14.Visible = false;
             // 
             // cbxmarrycode
             // 
@@ -697,6 +698,7 @@
             this.cbxmarrycode.Style = Sunny.UI.UIStyle.Colorful;
             this.cbxmarrycode.TabIndex = 38;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxmarrycode.Visible = false;
             // 
             // UserInfoEdit
             // 

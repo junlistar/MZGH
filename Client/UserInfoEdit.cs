@@ -200,7 +200,7 @@ namespace Client
                 }
 
                 json = "";
-                paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={sno}");
+                paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();

@@ -3,8 +3,7 @@ using Data.Entities;
 using Data.IRepository;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Data.Repository
 {
@@ -13,24 +12,31 @@ namespace Data.Repository
 
         public List<LoginUsers> GetLoginUser(string uname, string pwd)
         {
-            string sql = @"SELECT xt_user.user_name,
-         xt_user.subsys_id,   
-         xt_user.user_group,
-         xt_user.user_mi, 
-         a_employee_mi.dept_sn,
-          a_employee_mi.name
-    FROM xt_user,   
-         a_employee_mi  
-   WHERE ( xt_user.user_mi = a_employee_mi.emp_sn ) and  
-         ( ( xt_user.subsys_id = 'mzgh' ) AND  
-         ( xt_user.user_name = @uname )  And
-           xt_user.pass_word =@pwd )  ";
+            //         string sql = @"SELECT xt_user.user_name,
+            //      xt_user.subsys_id,   
+            //      xt_user.user_group,
+            //      xt_user.user_mi, 
+            //      a_employee_mi.dept_sn,
+            //       a_employee_mi.name
+            // FROM xt_user,   
+            //      a_employee_mi  
+            //WHERE ( xt_user.user_mi = a_employee_mi.emp_sn ) and  
+            //      ( ( xt_user.subsys_id = 'mzgh' ) AND  
+            //      ( xt_user.user_name = @uname )  And
+            //        xt_user.pass_word =@pwd )  ";
 
-            if(string.IsNullOrEmpty(pwd) ){
+            string login_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
+
+            var para = new DynamicParameters();
+            para.Add("@tag", Helpers.ConfigHelper.GetSectionValue("UserLogin"));
+
+            string sql =Convert.ToString(base.ExcuteScalar(login_sql, para));
+             
+            if (string.IsNullOrEmpty(pwd) ){
                 pwd = "";
             }
 
-            var para = new DynamicParameters();
+            para = new DynamicParameters();
             para.Add("@uname", uname);
             para.Add("@pwd", pwd);
 

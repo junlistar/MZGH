@@ -14,10 +14,7 @@ namespace Data.Repository
 
         public List<GhDeposit> GetGhDeposit(string patient_id)
         {
-            string selectSql = @"select gh_deposit.*,zd_cheque_type.name tname,zd_deposit_status.name sname from gh_deposit 
-left join zd_cheque_type on gh_deposit.cheque_type = zd_cheque_type.code
-left join zd_deposit_status on gh_deposit.depo_status = zd_deposit_status.code
-where patient_id =@patient_id order by price_date desc";
+            string selectSql =GetSqlByTag(220043);
 
             var para = new DynamicParameters();
             para.Add("@patient_id", patient_id);
@@ -26,8 +23,7 @@ where patient_id =@patient_id order by price_date desc";
         }
         public List<GhDeposit> GetGhDepositByStatus(string pid, int times, int status, int cheque_type, int item_no)
         {
-            string selectSql = @"select gh_deposit.* from gh_deposit
-where patient_id =@patient_id and times=@times and depo_status=@status and item_no=@item_no";
+            string selectSql = GetSqlByTag(220044);
 
             var para = new DynamicParameters();
             para.Add("@patient_id", pid);
@@ -51,7 +47,8 @@ where patient_id =@patient_id and times=@times and depo_status=@status and item_
             int depo_refund_status = 7;
 
             //判断挂号数据是否存在
-            string seldeposit = @"select * from gh_deposit where patient_id=@patient_id and times =@times and depo_status=@depo_status";
+            //string seldeposit = @"select * from gh_deposit where patient_id=@patient_id and times =@times and depo_status=@depo_status";
+            string seldeposit =GetSqlByTag(220045);
             para.Add("@patient_id", patient_id);
             para.Add("@times", times); 
             para.Add("@depo_status", 4);
@@ -63,7 +60,7 @@ where patient_id =@patient_id and times=@times and depo_status=@status and item_
                 throw new Exception("数据错误，没有找到匹配的退号数据");
             }
             //判断是否已经退号了
-            seldeposit = @"select * from gh_deposit where patient_id=@patient_id and times =@times and depo_status=@depo_status";
+            //seldeposit = @"select * from gh_deposit where patient_id=@patient_id and times =@times and depo_status=@depo_status";
             para = new DynamicParameters();
             para.Add("@patient_id", patient_id);
             para.Add("@times", times);
@@ -91,12 +88,14 @@ where patient_id =@patient_id and times=@times and depo_status=@status and item_
                         foreach (var item in depolist)
                         {
                             //写入一条反向记录到现金流表
-                            string sql = @"insert into gh_deposit(patient_id, item_no, ledger_sn, times, charge, 
-cheque_type, cheque_no,depo_status, price_opera, price_date, mz_dept_no)
-values(@patient_id,@item_no,@ledger_sn,@times,@charge,@cheque_type,@cheque_no,
-@depo_status,@price_opera,@price_date,@mz_dept_no)";
+                            //                            string sql = @"insert into gh_deposit(patient_id, item_no, ledger_sn, times, charge, 
+                            //cheque_type, cheque_no,depo_status, price_opera, price_date, mz_dept_no)
+                            //values(@patient_id,@item_no,@ledger_sn,@times,@charge,@cheque_type,@cheque_no,
+                            //@depo_status,@price_opera,@price_date,@mz_dept_no)";
                             //@report_date,
-                            para = new DynamicParameters();
+
+                            string sql = GetSqlByTag(220047);
+                           para = new DynamicParameters();
 
                             para.Add("@patient_id", item.patient_id);
                             para.Add("@item_no", item.item_no);
@@ -115,7 +114,8 @@ values(@patient_id,@item_no,@ledger_sn,@times,@charge,@cheque_type,@cheque_no,
                             connection.Execute(sql, para, transaction);
                         } 
                         //如果有组合付款没有退完 择不更新主表
-                        string selectSql = @"select sum(ledger_sn) from gh_deposit where patient_id=@patient_id and times=@times";
+                        //string selectSql = @"select sum(ledger_sn) from gh_deposit where patient_id=@patient_id and times=@times";
+                        string selectSql = GetSqlByTag(220048);
                         para = new DynamicParameters();
                         para.Add("@patient_id", vm.patient_id);
                         para.Add("@times", vm.times);
@@ -123,16 +123,18 @@ values(@patient_id,@item_no,@ledger_sn,@times,@charge,@cheque_type,@cheque_no,
                         if (sum.ToString() == "0")
                         {
                             //更新mz_visit_table状态
-                            string updatesql = @"update mz_visit_table set visit_flag=9 where patient_id=@patient_id and times=@times";
+                            //string updatesql = @"update mz_visit_table set visit_flag=9 where patient_id=@patient_id and times=@times";
+                            string updatesql = GetSqlByTag(220049);
                             para = new DynamicParameters();
                             para.Add("@patient_id", vm.patient_id);
                             para.Add("@times", vm.times);
                             connection.Execute(updatesql, para, transaction);
 
                             //gh_receipt 写入反向记录
-                            string s1 = @"insert into gh_receipt(patient_id,times,ledger_sn,receipt_sn,pay_unit,charge_total,settle_opera,settle_date,price_opera,price_date,report_date,receipt_no,charge_status,mz_dept_no,op_receipt_sn)  
-select patient_id,times,-ledger_sn,receipt_sn,pay_unit,-charge_total,@settle_opera,settle_date,@price_opera,price_date,report_date,receipt_no,7,mz_dept_no,op_receipt_sn
-from gh_receipt  where patient_id =@patient_id and ledger_sn=@ledger_sn";
+//                            string s1 = @"insert into gh_receipt(patient_id,times,ledger_sn,receipt_sn,pay_unit,charge_total,settle_opera,settle_date,price_opera,price_date,report_date,receipt_no,charge_status,mz_dept_no,op_receipt_sn)  
+//select patient_id,times,-ledger_sn,receipt_sn,pay_unit,-charge_total,@settle_opera,settle_date,@price_opera,price_date,report_date,receipt_no,7,mz_dept_no,op_receipt_sn
+//from gh_receipt  where patient_id =@patient_id and ledger_sn=@ledger_sn";
+                            string s1 = GetSqlByTag(220050);
                             para = new DynamicParameters();
 
                             para.Add("@patient_id", vm.patient_id);
@@ -142,10 +144,11 @@ from gh_receipt  where patient_id =@patient_id and ledger_sn=@ledger_sn";
                             connection.Execute(s1, para, transaction);
 
                             //gh_receipt_charge 写入反向记录
-                            string s2 = @"insert into gh_receipt_charge (patient_id,times,ledger_sn,receipt_sn,bill_code,charge,pay_unit)
-select patient_id,times,-ledger_sn,receipt_sn,bill_code,-charge,pay_unit
-from gh_receipt_charge
-where patient_id =@patient_id and ledger_sn=@ledger_sn";
+//                            string s2 = @"insert into gh_receipt_charge (patient_id,times,ledger_sn,receipt_sn,bill_code,charge,pay_unit)
+//select patient_id,times,-ledger_sn,receipt_sn,bill_code,-charge,pay_unit
+//from gh_receipt_charge
+//where patient_id =@patient_id and ledger_sn=@ledger_sn";
+                            string s2 = GetSqlByTag(220051);
                             para = new DynamicParameters();
 
                             para.Add("@patient_id", vm.patient_id);
@@ -153,12 +156,14 @@ where patient_id =@patient_id and ledger_sn=@ledger_sn";
                             connection.Execute(s2, para, transaction);
 
                             // gh_detail_charge写入反向记录
-                            string s3 = @"insert into gh_detail_charge (patient_id,times,item_no,ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,charge_amount,
-charge_group,enter_opera,enter_date,enter_win_no,confirm_opera,confirm_date,confirm_win_no,charge_status,trans_flag,fit_type,report_date,mz_dept_no)
-select patient_id,times,item_no,-ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,-charge_amount,
-charge_group,@enter_opera,enter_date,enter_win_no,@confirm_opera,confirm_date,confirm_win_no,7,trans_flag,fit_type,report_date,mz_dept_no
-from gh_detail_charge
-where patient_id =@patient_id and ledger_sn=@ledger_sn";
+//                            string s3 = @"insert into gh_detail_charge (patient_id,times,item_no,ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,charge_amount,
+//charge_group,enter_opera,enter_date,enter_win_no,confirm_opera,confirm_date,confirm_win_no,charge_status,trans_flag,fit_type,report_date,mz_dept_no)
+//select patient_id,times,item_no,-ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,-charge_amount,
+//charge_group,@enter_opera,enter_date,enter_win_no,@confirm_opera,confirm_date,confirm_win_no,7,trans_flag,fit_type,report_date,mz_dept_no
+//from gh_detail_charge
+//where patient_id =@patient_id and ledger_sn=@ledger_sn";
+
+                            string s3 = GetSqlByTag(220052);
 
                             para = new DynamicParameters();
 

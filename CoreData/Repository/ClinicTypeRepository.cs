@@ -13,20 +13,16 @@ namespace Data.Repository
    
         public List<ClinicType> GetClinicTypes()
         {
-            string ghsql = "select * from gh_zd_clinic_type where deleted_flag=0";
-             
-            return  Select(ghsql);
+            string ghsql = GetSqlByTag(220029);
 
-
+            return  Select(ghsql); 
         }
 
         public List<ClinicType> GetRequestTypes()
         {
-            string ghsql = "select * from gh_zd_request_type where deleted_flag=0";
+            string ghsql = GetSqlByTag(220030);
 
-            return Select(ghsql);
-
-
+            return Select(ghsql); 
         }
     }
 }

@@ -107,7 +107,7 @@
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlTitle.Size = new System.Drawing.Size(1710, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1196, 66);
             this.pnlTitle.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlTitle.TabIndex = 0;
             this.pnlTitle.Text = null;
@@ -212,7 +212,7 @@
             this.pnlSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlSearch.Size = new System.Drawing.Size(1710, 236);
+            this.pnlSearch.Size = new System.Drawing.Size(1196, 236);
             this.pnlSearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlSearch.TabIndex = 1;
             this.pnlSearch.Text = null;
@@ -304,7 +304,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiGroupBox1.Size = new System.Drawing.Size(908, 208);
+            this.uiGroupBox1.Size = new System.Drawing.Size(741, 208);
             this.uiGroupBox1.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiGroupBox1.TabIndex = 22;
             this.uiGroupBox1.Text = "患者信息";
@@ -909,7 +909,7 @@
             this.gbxUnits.Name = "gbxUnits";
             this.gbxUnits.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
             this.gbxUnits.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.gbxUnits.Size = new System.Drawing.Size(1710, 360);
+            this.gbxUnits.Size = new System.Drawing.Size(1196, 360);
             this.gbxUnits.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.gbxUnits.TabIndex = 2;
             this.gbxUnits.Text = "选择科室";
@@ -929,6 +929,7 @@
             this.lblmarry.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblmarry.TabIndex = 30;
             this.lblmarry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblmarry.Visible = false;
             this.lblmarry.Click += new System.EventHandler(this.lblmarry_Click);
             // 
             // uiLabel13
@@ -941,6 +942,7 @@
             this.uiLabel13.TabIndex = 29;
             this.uiLabel13.Text = "婚姻:";
             this.uiLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.uiLabel13.Visible = false;
             // 
             // lbldistrict
             // 
@@ -1011,7 +1013,7 @@
             // GuaHao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1718, 709);
+            this.ClientSize = new System.Drawing.Size(1204, 709);
             this.Controls.Add(this.gbxUnits);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlTitle);

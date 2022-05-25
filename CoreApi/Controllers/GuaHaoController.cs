@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Data.Helpers;
 using Data.IRepository;
 using Data.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,7 @@ namespace CoreApi.Controllers
             _baseRequestRepository = baseRequestRepository;
             _chargeItemRepository = chargeItemRepository;
             _mzHaomingRepository = mzHaomingRepository;
+             
         }
 
         [HttpGet]
