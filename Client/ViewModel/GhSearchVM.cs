@@ -49,4 +49,23 @@ namespace Client.ViewModel
 
 
     }
+
+    public class GhRefundPayVM
+    {
+        public string patient_id { get; set; }
+
+        public int item_no { get; set; }
+        public int ledger_sn { get; set; }
+        public int times { get; set; }
+        public decimal charge { get; set; }
+        public int cheque_type { get; set; }
+        public string cheque_name { get; set; }
+        public string cheque_no { get; set; }
+        public string receipt_sn { get; set; }
+        public string receipt_no { get; set; }
+        public string price_opera { get; set; }
+        public DateTime price_date { get; set; }
+
+
+    }
 }

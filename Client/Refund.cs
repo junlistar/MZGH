@@ -38,7 +38,8 @@ namespace Client
         private void Refund_Load(object sender, EventArgs e)
         {
             this.dtprq.Value = DateTime.Now;
-            this.txtCode.Focus();
+            this.txtCode.Text=_barcode;
+
             //LoadData();
         }
 
@@ -169,13 +170,19 @@ namespace Client
                 }
 
                 vm.patient_id = lblhidid.Text;
-
-
-
+                 
                 //vm.item_no =Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
                 vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
                 vm.cheque_no = this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value.ToString();
                 var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
+
+
+                var datestr = dtprq.Value.ToString("yyyy-MM-dd");
+                var patient_id = lblhidid.Text;
+                RefundPayList payList = new RefundPayList(datestr, patient_id,vm.ledger_sn);
+
+                payList.ShowDialog();
+
                 vm.times = 0;
                 var sel_index = dgvDeposit.SelectedIndex;
                 while (vm.times == 0)
@@ -192,8 +199,8 @@ namespace Client
                 }
                 //查询出关联的组合支付记录
                 //查询列表
-                var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-                var patient_id = lblhidid.Text;
+                //var datestr = dtprq.Value.ToString("yyyy-MM-dd");
+                //var patient_id = lblhidid.Text;
                 Task<HttpResponseMessage> task = null; var json = "";
                 var paramurl = string.Format($"/api/GuaHao/GetGhRefund?datestr={datestr}&patient_id={patient_id}");
 
@@ -533,32 +540,32 @@ namespace Client
                     return;
                 }
 
-                foreach (var item in result.data)
-                {
-                    paramurl = string.Format($"/api/GuaHao/GetGhDepositByStatus?pid={patient_id}&times={item.times}&status=7&cheque_type={item.cheque_type}&item_no={item.item_no}");
+                //foreach (var item in result.data)
+                //{
+                //    paramurl = string.Format($"/api/GuaHao/GetGhDepositByStatus?pid={patient_id}&times={item.times}&status=7&cheque_type={item.cheque_type}&item_no={item.item_no}");
 
-                    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                //    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                //    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                    task.Wait();
-                    response = task.Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var read = response.Content.ReadAsStringAsync();
-                        read.Wait();
-                        json = read.Result;
-                    }
-                    else
-                    {
-                        log.Info(response.ReasonPhrase);
-                    }
-                    var lst = WebApiHelper.DeserializeObject<ResponseResult<List<GhDepositVM>>>(json).data;
-                    if (lst.Count > 0)
-                    {
-                        item.visit_flag_name = "已退号";
-                    }
-                }
+                //    task.Wait();
+                //    response = task.Result;
+                //    if (response.IsSuccessStatusCode)
+                //    {
+                //        var read = response.Content.ReadAsStringAsync();
+                //        read.Wait();
+                //        json = read.Result;
+                //    }
+                //    else
+                //    {
+                //        log.Info(response.ReasonPhrase);
+                //    }
+                //    var lst = WebApiHelper.DeserializeObject<ResponseResult<List<GhDepositVM>>>(json).data;
+                //    if (lst.Count > 0)
+                //    {
+                //        item.visit_flag_name = "已退号";
+                //    }
+                //}
                 var list = result.data;
 
                 //整理数据，便于审阅
@@ -753,19 +760,19 @@ namespace Client
             //}
             DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
 
-            if (dr.Cells["visit_flag_name"].Value.ToString() == "已退号")
-            {
-                // 设置单元格的背景色
-                //dr.DefaultCellStyle.BackColor = Color.Yellow;
-                // 设置单元格的前景色
-                dr.DefaultCellStyle.ForeColor = Color.Red;
-            }
-            else
-            {
-                dr.DefaultCellStyle.ForeColor = Color.Green;
-                // dr.DefaultCellStyle.BackColor = Color.Blue;
-                //dr.DefaultCellStyle.ForeColor = Color.White;
-            }
+            //if (dr.Cells["visit_flag_name"].Value.ToString() == "已退号")
+            //{
+            //    // 设置单元格的背景色
+            //    //dr.DefaultCellStyle.BackColor = Color.Yellow;
+            //    // 设置单元格的前景色
+            //    dr.DefaultCellStyle.ForeColor = Color.Red;
+            //}
+            //else
+            //{
+            //    dr.DefaultCellStyle.ForeColor = Color.Green;
+            //    // dr.DefaultCellStyle.BackColor = Color.Blue;
+            //    //dr.DefaultCellStyle.ForeColor = Color.White;
+            //}
         }
 
 

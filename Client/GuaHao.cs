@@ -405,7 +405,7 @@ namespace Client
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(PatientVM.social_no))
+            if (string.IsNullOrWhiteSpace(PatientVM.hic_no))
             {
                 UIMessageTip.ShowError("用户身份证信息为空，请编辑保存!");
                 lblMsg.Text = "未获到取用户身份证信息，请编辑保存！";
@@ -680,21 +680,21 @@ namespace Client
 
         private void btnTuihao_Click(object sender, EventArgs e)
         {
-            //if (string.IsNullOrEmpty(btnEditUser.TagString))
-            //{
-            //    UIMessageTip.ShowError("请刷卡!");
-            //    lblMsg.Text = "请刷卡！";
-            //    txtCode.Focus();
-            //    return;
-            //}
-            //else
-            //{
-            //    Refund rf = new Refund(txtCode.Text.Trim());
-            //    rf.ShowDialog();
-            //}
+            if (string.IsNullOrEmpty(btnEditUser.TagString))
+            {
+                UIMessageTip.ShowError("请刷卡!");
+                lblMsg.Text = "请刷卡！";
+                txtCode.Focus();
+                return;
+            }
+            else
+            {
+                Refund rf = new Refund(txtCode.Text.Trim());
+                rf.ShowDialog();
+            }
 
-            Refund rf = new Refund(txtCode.Text.Trim());
-            rf.ShowDialog();
+            //Refund rf = new Refund(txtCode.Text.Trim());
+            //rf.ShowDialog();
 
         }
 
@@ -984,17 +984,17 @@ namespace Client
                     }
 
                     lblstreet.Text = userInfo.home_street;
-                    lblsfz.Text = userInfo.social_no; ;
+                    lblsfz.Text = userInfo.hic_no; ;
 
                     //自动设置对应卡类型按钮样式
-                    if (barcode == userInfo.social_no)
+                    if (barcode == userInfo.hic_no)
                     {
                         //初始化刷卡方式按钮样式
                         btnCika.FillColor = Color.LightSteelBlue;
                         btnSFZ.FillColor = cur_color;
                         btnYBK.FillColor = Color.LightSteelBlue;
                     }
-                    else if (barcode == userInfo.hic_no)
+                    else if (barcode == userInfo.social_no)
                     {
                         //初始化刷卡方式按钮样式
                         btnCika.FillColor = Color.LightSteelBlue;

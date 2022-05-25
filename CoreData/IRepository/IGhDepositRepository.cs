@@ -19,6 +19,8 @@ namespace Data.IRepository
 
         int Refund(string patient_id, int times, string opera, int manual = 0);
 
+        List<GhDeposit> GetGhRefundPayList(string request_date, string patient_id, string ledger_sn);
+
         #endregion
     }
 }

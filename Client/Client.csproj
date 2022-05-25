@@ -163,6 +163,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RefundPayList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RefundPayList.Designer.cs">
+      <DependentUpon>RefundPayList.cs</DependentUpon>
+    </Compile>
     <Compile Include="RequestEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -362,6 +368,9 @@
     <Compile Include="WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RefundPayList.resx">
+      <DependentUpon>RefundPayList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RequestEdit.resx">
       <DependentUpon>RequestEdit.cs</DependentUpon>
     </EmbeddedResource>

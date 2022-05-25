@@ -136,6 +136,22 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        [HttpGet]
+        public ResponseResult<List<GhDeposit>> GetGhRefundPayList(string request_date, string patient_id, string ledger_sn)
+        {
+
+            Log.Information($"GetGhRefundPayList,{request_date},{patient_id},{ledger_sn}");
+            var list = new List<GhDeposit>();
+            try
+            {
+                return _ghDepositRepository.GetGhRefundPayList(request_date, patient_id, ledger_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+            }
+            return list;
+        }
 
         public ResponseResult<IEnumerable<GhRequest>> GetGhRequest(string request_date, string ampm, string unit_sn = "%", string clinic_type = "%", string doctor_sn = "%", string group_sn = "%", string req_type = "01", string win_no = "%")
         {

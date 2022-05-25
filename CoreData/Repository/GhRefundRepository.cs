@@ -32,7 +32,6 @@ namespace Data.Repository
             //return ExecQuerySP("mzgh_GetRequestBack", para);
             return Select(sql, para);
         }
-
-        
+       
     }
 }

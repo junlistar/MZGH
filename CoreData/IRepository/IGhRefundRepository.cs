@@ -10,8 +10,7 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
 
-        List<GhRefund> GetGhRefund(string datestr, string patient_id);
-
+        List<GhRefund> GetGhRefund(string datestr, string patient_id); 
 
         #endregion
     }

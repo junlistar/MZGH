@@ -20,9 +20,11 @@ namespace Data.Entities
          
         public string print_flag { get; set; }
         public string tname { get; set; }
-        public string sname { get; set; } 
-          
+        public string sname { get; set; }
 
+        public string cheque_name { get; set; } 
+        public string receipt_sn { get; set; }
+        public string receipt_no { get; set; }
     }
 
     public class TuiHao : BaseModel

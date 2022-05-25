@@ -210,7 +210,7 @@ where patient_id=@patient_id";
 
         public List<BaseRequest> GetRequestsByDate(string begin, string end)
         {
-            string ghsql = GetSqlByTag(220058);
+            string ghsql = GetSqlByTag(220059);
 
             var para = new DynamicParameters();
             para.Add("@P1", begin);
