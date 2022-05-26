@@ -137,14 +137,14 @@ namespace CoreApi.Controllers
             return list;
         }
         [HttpGet]
-        public ResponseResult<List<GhDeposit>> GetGhRefundPayList(string request_date, string patient_id, string ledger_sn)
+        public ResponseResult<List<GhDeposit>> GetGhRefundPayList(string request_date, string patient_id, int times)
         {
 
-            Log.Information($"GetGhRefundPayList,{request_date},{patient_id},{ledger_sn}");
+            Log.Information($"GetGhRefundPayList,{request_date},{patient_id},{times}");
             var list = new List<GhDeposit>();
             try
             {
-                return _ghDepositRepository.GetGhRefundPayList(request_date, patient_id, ledger_sn);
+                return _ghDepositRepository.GetGhRefundPayList(request_date, patient_id, times);
             }
             catch (Exception ex)
             {

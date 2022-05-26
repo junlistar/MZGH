@@ -446,6 +446,11 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            txtks.TextChanged -= txtks_TextChanged;
+            txtzk.TextChanged -= txtzk_TextChanged;
+
+            //设置日期
+            this.txtRiqi.Value = DateTime.Now;
             txtks.Text = "";
             txtHaobie.Text = "";
             txtzk.Text = "";
@@ -454,6 +459,10 @@ namespace Client
             txtcode.Text = "";
             txtDoct.Text = "";
             txtGhUser.Text = "";
+
+            txtks.TextChanged += txtks_TextChanged;
+            txtzk.TextChanged += txtzk_TextChanged;
+
         }
 
         private void txtDoct_TextChanged(object sender, EventArgs e)

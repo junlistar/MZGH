@@ -529,7 +529,7 @@
             // 
             // ampm
             // 
-            this.ampm.DataPropertyName = "ampm";
+            this.ampm.DataPropertyName = "ampmstr";
             this.ampm.HeaderText = "上/下午";
             this.ampm.Name = "ampm";
             this.ampm.ReadOnly = true;
@@ -569,6 +569,7 @@
             this.cheque_name.HeaderText = "支付类型";
             this.cheque_name.Name = "cheque_name";
             this.cheque_name.ReadOnly = true;
+            this.cheque_name.Visible = false;
             // 
             // visit_flag_name
             // 

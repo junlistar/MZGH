@@ -186,7 +186,7 @@ namespace Data.Repository
             }
         }
 
-        public List<GhDeposit> GetGhRefundPayList(string request_date, string patient_id, string ledger_sn)
+        public List<GhDeposit> GetGhRefundPayList(string request_date, string patient_id, int times)
         {
 
             string sql = @"SELECT
@@ -211,13 +211,13 @@ FROM  view_mz_visit_table v
 WHERE 
       DATEDIFF(dd, v.visit_date, @request_date) = 0  and
 	    v.patient_id=@patient_id
-	  and d.ledger_sn=@ledger_sn
+	  and d.times=@times
 order by ledger_sn desc,d.item_no";
 
             var para = new DynamicParameters();
             para.Add("@request_date", request_date);
             para.Add("@patient_id", patient_id);
-            para.Add("@ledger_sn", ledger_sn);
+            para.Add("@times", times);
 
 
             return Select(sql, para);

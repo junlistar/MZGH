@@ -169,6 +169,22 @@ namespace Client.ViewModel
         public string group_sn { get; set; }
         public string doctor_code { get; set; }
         public string ampm { get; set; }
+        public string ampmstr { 
+            get
+            {
+                switch (ampm)
+                {
+                    case "a":return "上午"; 
+                    case "p":return "下午"; 
+                    case "m":return "中午"; 
+                    case "e":return "夜间";
+                    default:
+                        return ampm;
+                        
+                }
+
+            }
+        }
         public string unit_name { get; set; }
         public string group_name { get; set; }
         public string doctor_name { get; set; }

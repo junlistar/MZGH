@@ -38,8 +38,9 @@ namespace Client
         private void Refund_Load(object sender, EventArgs e)
         {
             this.dtprq.Value = DateTime.Now;
-            this.txtCode.Text=_barcode;
+            this.txtCode.Text = _barcode;
 
+             
             //LoadData();
         }
 
@@ -170,18 +171,25 @@ namespace Client
                 }
 
                 vm.patient_id = lblhidid.Text;
-                 
+
                 //vm.item_no =Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
-                vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
-                vm.cheque_no = this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value.ToString();
+                //vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
+                //vm.cheque_no = this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value.ToString();
                 var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
 
+                var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
 
                 var datestr = dtprq.Value.ToString("yyyy-MM-dd");
                 var patient_id = lblhidid.Text;
-                RefundPayList payList = new RefundPayList(datestr, patient_id,vm.ledger_sn);
+                RefundPayList payList = new RefundPayList(userInfo,datestr, patient_id, times);
 
-                payList.ShowDialog();
+                if (payList.ShowDialog() == DialogResult.OK)
+                {
+                    this.Close();
+                };
+
+                return;
+
 
                 vm.times = 0;
                 var sel_index = dgvDeposit.SelectedIndex;
@@ -223,10 +231,10 @@ namespace Client
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
 
-                if (result!=null)
+                if (result != null)
                 {
                     var list = result.data.Where(p => p.times == vm.times.ToString() && p.visit_flag == "1").ToList();
-                    if (list!=null && list.Count>0)
+                    if (list != null && list.Count > 0)
                     {
                         foreach (var item in list)
                         {
@@ -328,7 +336,7 @@ namespace Client
                                         MessageBox.Show(refund_resp.err_msg);
                                         log.Error(refund_resp.err_msg);
                                         return;
-                                    } 
+                                    }
                                 }
                             }
                         }
@@ -342,7 +350,7 @@ namespace Client
 
 
                 //vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
-               // vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
+                // vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
                 //vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
                 //vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
 
@@ -353,7 +361,7 @@ namespace Client
                 //vm.mz_dept_no = this.dgvDeposit.SelectedRows[0].Cells["mz_dept_no"].Value.ToString();
                 // vm.price_date = DateTime.Now;
 
-                
+
 
                 var aa = new
                 {
@@ -450,7 +458,7 @@ namespace Client
                     lblName.Text = userInfo.name.ToString();
                     lblAge.Text = userInfo.age.ToString();
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
-                    lblSno.Text = userInfo.social_no;
+                    lblSno.Text = userInfo.hic_no;
 
                     BindGridView();
                 }
@@ -524,7 +532,7 @@ namespace Client
                         p.unit_name,
                         p.visit_flag_name,
                         p.times,
-                        p.ampm,
+                        p.ampmstr,
                         p.charge,
                         //p.charge_type,
                         p.cheque_name,
@@ -568,38 +576,36 @@ namespace Client
                 //}
                 var list = result.data;
 
-                //整理数据，便于审阅
-                string times = "";
-                foreach (var item in list)
-                {
-                    if (item.times != times)
-                    {
-                        times = item.times;
-                    }
-                    else
-                    {
-                        item.gh_date = DateTime.MinValue;
-                        item.unit_name = "";
-                        item.group_name = "";
-                        //item.visit_flag_name = "";
-                        item.times = "";
-                        item.doctor_name = "";
-                        item.ampm = "";
-                        item.cheque_type = "";
-                        item.clinic_name = "";
-                    }
-                }
+                ////整理数据，便于审阅
+                //string times = "";
+                //foreach (var item in list)
+                //{
+                //    if (item.times != times)
+                //    {
+                //        times = item.times;
+                //    }
+                //    else
+                //    {
+                //        item.gh_date = DateTime.MinValue;
+                //        item.unit_name = "";
+                //        item.group_name = "";
+                //        //item.visit_flag_name = "";
+                //        item.times = "";
+                //        item.doctor_name = "";
+                //        item.ampm = "";
+                //        item.cheque_type = "";
+                //        item.clinic_name = "";
+                //    }
+                //}
 
                 var viewlist = list.Select(p => new
                 {
                     p.gh_date_str,
-                    //p.visit_dept,
                     p.unit_name,
                     p.visit_flag_name,
                     p.times,
-                    p.ampm,
+                    p.ampmstr,
                     p.charge,
-                    //p.charge_type,
                     p.cheque_name,
                     p.cheque_no,
                     p.clinic_name,
@@ -733,7 +739,8 @@ namespace Client
                     var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
                     if (responseJson.data == 1)
                     {
-                        UIMessageTip.ShowOk("退号成功!");
+                        MessageBox.Show("退号成功!");
+                        
                     }
                     else
                     {
@@ -760,19 +767,18 @@ namespace Client
             //}
             DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
 
-            //if (dr.Cells["visit_flag_name"].Value.ToString() == "已退号")
-            //{
-            //    // 设置单元格的背景色
-            //    //dr.DefaultCellStyle.BackColor = Color.Yellow;
-            //    // 设置单元格的前景色
-            //    dr.DefaultCellStyle.ForeColor = Color.Red;
-            //}
-            //else
-            //{
-            //    dr.DefaultCellStyle.ForeColor = Color.Green;
-            //    // dr.DefaultCellStyle.BackColor = Color.Blue;
-            //    //dr.DefaultCellStyle.ForeColor = Color.White;
-            //}
+            if (dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
+            {
+                // 设置单元格的背景色
+                //dr.DefaultCellStyle.BackColor = Color.Yellow;
+                // 设置单元格的前景色
+                dr.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else
+            {
+                //dr.DefaultCellStyle.ForeColor = Color.Green;
+              
+            }
         }
 
 
@@ -843,7 +849,7 @@ namespace Client
             if (e.KeyCode == Keys.Enter)
             {
                 Search();
-            } 
+            }
         }
     }
 }

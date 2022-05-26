@@ -455,11 +455,19 @@ namespace Client
                     if (!string.IsNullOrEmpty(yBResponse.err_msg))
                     {
                         MessageBox.Show(yBResponse.err_msg);
-                        log.Error(yBResponse.err_msg);
+                        log.Error(yBResponse.err_msg); 
+                        return false;
                     }
                     else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
                     {
                         SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+
+                        if (yBResponse.output.baseinfo.certno!=GuaHao.PatientVM.hic_no)
+                        {
+                            //如果号码不一致，提示返回
+                            MessageBox.Show("医保卡与患者身份不一致！");
+                            return false;
+                        }
                          
                         YBHelper.currentYBInfo = yBResponse;
 
