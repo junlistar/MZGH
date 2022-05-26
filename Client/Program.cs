@@ -25,7 +25,7 @@ namespace Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FHeaderAsideMainFooter());
-           // Application.Run(new Form1());
+            //Application.Run(new Create());
 
             log.Debug("关闭了程序");
         }

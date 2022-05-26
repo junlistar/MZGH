@@ -22,12 +22,12 @@ namespace Client.FastReportLib
         public static void Preview(PreviewControl previewControl)
         {
             var report = CreateReportAndLoadFrx();
-            //report.Preview = previewControl;
+            report.Preview = previewControl;
             report.Prepare();
-            //report.Show();
-            report.Print();
+            report.Show();
+           // report.Print();
 
-            report.Save("aaa.xml");
+            //report.Save("aaa.xml");
         } 
         private void button1_Click(object sender, EventArgs e)
         {

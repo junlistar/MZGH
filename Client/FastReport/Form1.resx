@@ -122,123 +122,147 @@
   </metadata>
   <data name="report1.ReportResourceString" xml:space="preserve">
     <value>﻿&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Report ScriptLanguage="CSharp" ReportInfo.Created="05/20/2022 16:29:32" ReportInfo.Modified="05/20/2022 16:47:11" ReportInfo.CreatorVersion="2021.3.22.0"&gt;
-  &lt;Styles Name="Standard"&gt;
-    &lt;Style Name="Title" Font="宋体, 12pt, style=Bold"/&gt;
-    &lt;Style Name="Header" Font="宋体, 10pt, style=Bold"/&gt;
-    &lt;Style Name="Group" Font="宋体, 10pt, style=Bold"/&gt;
-    &lt;Style Name="Data" Font="宋体, 9pt"/&gt;
-    &lt;Style Name="Footer" Font="宋体, 9pt"/&gt;
-    &lt;Style Name="EvenRows" Fill.Color="WhiteSmoke" Font="宋体, 9pt"/&gt;
-  &lt;/Styles&gt;
+&lt;Report ScriptLanguage="CSharp" ReportInfo.Created="05/17/2022 11:15:42" ReportInfo.Modified="05/26/2022 16:21:18" ReportInfo.CreatorVersion="2021.3.22.0"&gt;
+  &lt;ScriptText&gt;using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+        
+
+    private void Page1_StartPage(object sender, EventArgs e)
+    {       
+             
+      if (Report.GetParameter(&amp;quot;paystr&amp;quot;)!=null)
+      {
+        Text11.Text =Report.GetParameter(&amp;quot;paystr&amp;quot;).AsString;
+      } 
+      if (Report.GetParameter(&amp;quot;dat&amp;quot;)!=null)
+      {
+           
+      }        
+      lbl_printtime.Text =&amp;quot;打印时间：&amp;quot; + DateTime.Now.ToString(&amp;quot;yyyy-MM-dd HH:mm:ss&amp;quot;);
+     
+    }        
+    private void Table_item_ManualBuild(object sender, EventArgs e)
+    {                  
+      DataSourceBase data1= Report.GetDataSource(&amp;quot;Table_item&amp;quot;); 
+      // 获取DataSet中表名为Table1的数据源
+      data1.Init(); // 初始化      
+      Table_item.PrintRow(0); // 控件Table打印第0行
+      Table_item.PrintColumns(); // 每打印一行，都要调用 PrintColumn或PrintColumns    
+      //MessageBox.Show(&amp;quot;1&amp;quot;);
+      while(data1.HasMoreRows) // 打印重复循环的行
+      {                     //  
+        Table_item.PrintRow(1);
+        Table_item.PrintColumns();
+        data1.Next(); // 读取下一行
+      
+      }   
+    
+      
+    }   
+  }
+}
+&lt;/ScriptText&gt;
   &lt;Dictionary&gt;
-    &lt;MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZs01Cl7j3waFsfiIE1Csx6FO0wQp/QcAEIaip98sd13pdd63ufYSbuafE99sQ1zHgCA=="&gt;
-      &lt;TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="select&amp;#13;&amp;#10;        a.patient_id,&amp;#13;&amp;#10;        a.times,&amp;#13;&amp;#10;        a.gh_date,&amp;#13;&amp;#10;        a.name patient_name,&amp;#13;&amp;#10;        a.gh_sequence,&amp;#13;&amp;#10;        a.visit_flag,&amp;#13;&amp;#10;        b.name unit_name,&amp;#13;&amp;#10;        d.name clinic_name,&amp;#13;&amp;#10;        c.name doctor_name,&amp;#13;&amp;#10;        b1.name group_name,&amp;#13;&amp;#10;        e.name req_name,&amp;#13;&amp;#10;        f.name response_name,&amp;#13;&amp;#10;        g.name charge_name,&amp;#13;&amp;#10;        h.name haoming_name,&amp;#13;&amp;#10;        c1.name opera_name,&amp;#13;&amp;#10;        case a.ampm when 'a' then '上午' when 'p' then '下午' end ampm,&amp;#13;&amp;#10;        case when a.gh_sequence &amp;gt; 0 then cast(a.gh_sequence as varchar) else '加号' + cast(abs(a.gh_sequence) as varchar) end gh_order,&amp;#13;&amp;#10;        case when a.gh_sequence &amp;gt; 0 then gh_sequence else abs(gh_sequence) + 10000 end gh_sequence_f,&amp;#13;&amp;#10;        case a.visit_flag when '0' then '未到' when '9' then '退号' when '8' then '已打印' else '已到' end visit_status,&amp;#13;&amp;#10;        case a.flag when 'a' then '未转移' else '已转移' end flag,&amp;#13;&amp;#10;        sum(i.charge_total) charge_fee,&amp;#13;&amp;#10;        i.receipt_sn,&amp;#13;&amp;#10;        i.receipt_no,&amp;#13;&amp;#10;        p.p_bar_code &amp;#13;&amp;#10;from    view_mz_visit_table a left join  zd_unit_code b on a.visit_dept = b.unit_sn&amp;#13;&amp;#10;        left join  zd_unit_code b1 on a.group_sn = b1.unit_sn &amp;#13;&amp;#10;        left join  a_employee_mi c on a.doctor_code = c.emp_sn&amp;#13;&amp;#10;        left join  a_employee_mi c1 on a.gh_opera = c1.emp_sn&amp;#13;&amp;#10;        left join  gh_zd_clinic_type d on a.clinic_type = d.code&amp;#13;&amp;#10;        left join  gh_zd_request_type e on a.req_type = e.code&amp;#13;&amp;#10;        left join  zd_responce_type f on a.response_type = f.code&amp;#13;&amp;#10;        left join  zd_charge_type g on a.charge_type = g.code&amp;#13;&amp;#10;        left join  mz_zd_haoming h on a.haoming_code = h.code&amp;#13;&amp;#10;        left join  gh_receipt i on a.patient_id = i.patient_id and&amp;#13;&amp;#10;                     a.times = i.times &amp;#13;&amp;#10;        left join  view_mz_allpatient p on a.patient_id = p.patient_id  &amp;#13;&amp;#10;where datediff(dd,a.gh_date,@gh_date)=0 and &amp;#13;&amp;#10;        a.visit_dept like @visit_dept and&amp;#13;&amp;#10;        a.clinic_type like @clinic_type and&amp;#13;&amp;#10;        isnull(a.doctor_code, '-1') like @doctor_code and&amp;#13;&amp;#10;        isnull(a.group_sn, '-1') like @group_sn and&amp;#13;&amp;#10;        a.req_type like @req_type and&amp;#13;&amp;#10;        a.ampm like @ampm and&amp;#13;&amp;#10;        a.gh_opera like @gh_opera and &amp;#13;&amp;#10;        isnull(a.name,'-1') like @name and&amp;#13;&amp;#10;        isnull(p.p_bar_code, '') like @p_bar_code&amp;#13;&amp;#10;group by&amp;#13;&amp;#10;        a.patient_id,&amp;#13;&amp;#10;        a.times,&amp;#13;&amp;#10;        a.gh_date,&amp;#13;&amp;#10;        a.name,&amp;#13;&amp;#10;        a.gh_sequence,&amp;#13;&amp;#10;        a.visit_flag,&amp;#13;&amp;#10;        b.name,&amp;#13;&amp;#10;        d.name,&amp;#13;&amp;#10;        c.name,&amp;#13;&amp;#10;        b1.name,&amp;#13;&amp;#10;        e.name,&amp;#13;&amp;#10;        f.name,&amp;#13;&amp;#10;        g.name,&amp;#13;&amp;#10;        h.name,&amp;#13;&amp;#10;        c1.name,&amp;#13;&amp;#10;        a.ampm,&amp;#13;&amp;#10;        a.flag,&amp;#13;&amp;#10;        i.receipt_sn,&amp;#13;&amp;#10;        i.receipt_no,&amp;#13;&amp;#10;        p.p_bar_code        &amp;#13;&amp;#10;order by&amp;#13;&amp;#10;        a.gh_date,&amp;#13;&amp;#10;        i.receipt_sn,&amp;#13;&amp;#10;        unit_name,&amp;#13;&amp;#10;        clinic_name,&amp;#13;&amp;#10;        doctor_name,&amp;#13;&amp;#10;        group_name,&amp;#13;&amp;#10;        req_name,&amp;#13;&amp;#10;        gh_sequence_f"&gt;
-        &lt;Column Name="patient_id" DataType="System.String"/&gt;
-        &lt;Column Name="times" DataType="System.Int32"/&gt;
+    &lt;MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlMTom6uO5qjc60cHFV5blQw=="/&gt;
+    &lt;MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl4rAadkNqtrSmgz/Ag3oI0w=="&gt;
+      &lt;TableDataSource Name="Table7" Alias="baseInfo" DataType="System.Int32" Enabled="true" SelectCommand="select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date&amp;#13;&amp;#10;	,ap = CASE WHEN b.ampm = 'a' THEN '上午' &amp;#13;&amp;#10;                     ELSE '下午' &amp;#13;&amp;#10;                     END &amp;#13;&amp;#10;					  ,u1.name unit_name&amp;#13;&amp;#10;		  ,[group_sn]		  &amp;#13;&amp;#10;		  ,u2.name group_name&amp;#13;&amp;#10;	 &amp;#13;&amp;#10;		  ,a.name doctor_name&amp;#13;&amp;#10;		  ,b.[clinic_type]&amp;#13;&amp;#10;		  ,t.name clinic_name&amp;#13;&amp;#10;		  ,[req_type]&amp;#13;&amp;#10;		  ,q.name req_name&amp;#13;&amp;#10;	from mz_visit_table b&amp;#13;&amp;#10;	 LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code&amp;#13;&amp;#10;	LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn&amp;#13;&amp;#10;		  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn&amp;#13;&amp;#10;		  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn&amp;#13;&amp;#10;		    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code &amp;#13;&amp;#10;	 where patient_id=@pid&amp;#13;&amp;#10;	 order by b.times desc"&gt;
+        &lt;Column Name="visit_date" DataType="System.DateTime"/&gt;
+        &lt;Column Name="name" DataType="System.String"/&gt;
+        &lt;Column Name="age" DataType="System.Double"/&gt;
         &lt;Column Name="gh_date" DataType="System.DateTime"/&gt;
-        &lt;Column Name="patient_name" DataType="System.String"/&gt;
-        &lt;Column Name="gh_sequence" DataType="System.Int16"/&gt;
-        &lt;Column Name="visit_flag" DataType="System.String"/&gt;
+        &lt;Column Name="ap" DataType="System.String"/&gt;
         &lt;Column Name="unit_name" DataType="System.String"/&gt;
-        &lt;Column Name="clinic_name" DataType="System.String"/&gt;
-        &lt;Column Name="doctor_name" DataType="System.String"/&gt;
+        &lt;Column Name="group_sn" DataType="System.String"/&gt;
         &lt;Column Name="group_name" DataType="System.String"/&gt;
+        &lt;Column Name="doctor_name" DataType="System.String"/&gt;
+        &lt;Column Name="clinic_type" DataType="System.String"/&gt;
+        &lt;Column Name="clinic_name" DataType="System.String"/&gt;
+        &lt;Column Name="req_type" DataType="System.String"/&gt;
         &lt;Column Name="req_name" DataType="System.String"/&gt;
-        &lt;Column Name="response_name" DataType="System.String"/&gt;
-        &lt;Column Name="charge_name" DataType="System.String"/&gt;
-        &lt;Column Name="haoming_name" DataType="System.String"/&gt;
-        &lt;Column Name="opera_name" DataType="System.String"/&gt;
-        &lt;Column Name="ampm" DataType="System.String"/&gt;
-        &lt;Column Name="gh_order" DataType="System.String"/&gt;
-        &lt;Column Name="gh_sequence_f" DataType="System.Int32"/&gt;
-        &lt;Column Name="visit_status" DataType="System.String"/&gt;
-        &lt;Column Name="flag" DataType="System.String"/&gt;
-        &lt;Column Name="charge_fee" DataType="System.Double"/&gt;
-        &lt;Column Name="receipt_sn" DataType="System.Int32"/&gt;
-        &lt;Column Name="receipt_no" DataType="System.String"/&gt;
-        &lt;Column Name="p_bar_code" DataType="System.String"/&gt;
-        &lt;CommandParameter Name="gh_date" DataType="22" Expression="gh_date" DefaultValue="2022-05-20"/&gt;
-        &lt;CommandParameter Name="visit_dept" DataType="22" Expression="visit_dept" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="clinic_type" DataType="22" Expression="clinic_type" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="doctor_code" DataType="22" Expression="doctor_code" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="group_sn" DataType="22" Expression="group_sn" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="req_type" DataType="22" Expression="req_type" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="ampm" DataType="22" Expression="ampm" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="gh_opera" DataType="22" Expression="gh_opera" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="name" DataType="22" Expression="name" DefaultValue="%"/&gt;
-        &lt;CommandParameter Name="p_bar_code" DataType="22" Expression="p_bar_code" DefaultValue="%"/&gt;
+        &lt;Column Name="patient_id" DataType="System.String"/&gt;
+        &lt;CommandParameter Name="pid" DataType="22" Size="20" Expression="pid"/&gt;
       &lt;/TableDataSource&gt;
     &lt;/MsSqlDataConnection&gt;
-    &lt;Parameter Name="gh_date" DataType="System.String"/&gt;
-    &lt;Parameter Name="visit_dept" DataType="System.String"/&gt;
-    &lt;Parameter Name="clinic_type" DataType="System.String"/&gt;
-    &lt;Parameter Name="doctor_code" DataType="System.String"/&gt;
-    &lt;Parameter Name="group_sn" DataType="System.String"/&gt;
-    &lt;Parameter Name="req_type" DataType="System.String"/&gt;
-    &lt;Parameter Name="ampm" DataType="System.String"/&gt;
-    &lt;Parameter Name="gh_opera" DataType="System.String"/&gt;
-    &lt;Parameter Name="name" DataType="System.String"/&gt;
-    &lt;Parameter Name="p_bar_code" DataType="System.String"/&gt;
+    &lt;MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BldfhMXgaExZnK3RMRr0d2hw=="&gt;
+      &lt;TableDataSource Name="Table" Alias="Table_item" DataType="System.Int32" Enabled="true" SelectCommand="select c.name,c.charge_price,c.effective_price from gh_zd_clinic_type a &amp;#13;&amp;#10;left join gh_zd_clinic_charge b on a.code = b.code&amp;#13;&amp;#10;left join zd_charge_item c on b.charge_code = c.code &amp;#13;&amp;#10;where a.code=(select clinic_type from gh_request where record_sn=@record_sn)"&gt;
+        &lt;Column Name="name" DataType="System.String"/&gt;
+        &lt;Column Name="charge_price" DataType="System.Double"/&gt;
+        &lt;Column Name="effective_price" DataType="System.Double"/&gt;
+        &lt;CommandParameter Name="record_sn" DataType="22" Size="10" Expression="record_sn"/&gt;
+      &lt;/TableDataSource&gt;
+    &lt;/MsSqlDataConnection&gt;
+    &lt;MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlOARisDkS7Ja5qv+BnSsfYQ=="&gt;
+      &lt;TableDataSource Name="Table8" Alias="Table_pay" DataType="System.Int32" Enabled="true" SelectCommand="select  (case cheque_type &amp;#13;&amp;#10; when 1 then '现金' &amp;#13;&amp;#10; when 6 then '医保' &amp;#13;&amp;#10;  when 11 then '支付宝'&amp;#13;&amp;#10;   when 12 then '微信'&amp;#13;&amp;#10;    when 14 then '银联'&amp;#13;&amp;#10; end) as cheque_type,charge &amp;#13;&amp;#10;from gh_deposit &amp;#13;&amp;#10;where patient_id='000296903300'&amp;#13;&amp;#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&amp;#13;&amp;#10;order by price_date desc"&gt;
+        &lt;Column Name="cheque_type" DataType="System.String"/&gt;
+        &lt;Column Name="charge" DataType="System.Decimal"/&gt;
+        &lt;CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/&gt;
+      &lt;/TableDataSource&gt;
+    &lt;/MsSqlDataConnection&gt;
+    &lt;MsSqlDataConnection Name="MsSqlDataConnection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlaMOupbBKwUaRoyYle+I+PA=="&gt;
+      &lt;TableDataSource Name="TableDataSource1" Alias="Table_paystring" DataType="System.Int32" PropName="Table8" Enabled="true" SelectCommand=" select stuff((select '\r\n'+a.cheque_type + ':'+ CONVERT(varchar,  + charge) &amp;#13;&amp;#10; from &amp;#13;&amp;#10; (select  (case cheque_type &amp;#13;&amp;#10; when 1 then '现金' &amp;#13;&amp;#10; when 6 then '医保' &amp;#13;&amp;#10;  when 11 then '支付宝'&amp;#13;&amp;#10;   when 12 then '微信'&amp;#13;&amp;#10;    when 14 then '银联'&amp;#13;&amp;#10; end) as cheque_type ,charge&amp;#13;&amp;#10;from gh_deposit &amp;#13;&amp;#10;where patient_id='000296903300' &amp;#13;&amp;#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&amp;#13;&amp;#10; ) a&amp;#13;&amp;#10;   for xml path('')),1,4,'') paystr&amp;#13;&amp;#10;"&gt;
+        &lt;Column Name="paystr" DataType="System.String" PropName="Column1"/&gt;
+        &lt;CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/&gt;
+      &lt;/TableDataSource&gt;
+    &lt;/MsSqlDataConnection&gt;
+    &lt;Parameter Name="pid" DataType="System.String"/&gt;
+    &lt;Parameter Name="record_sn" DataType="System.String"/&gt;
   &lt;/Dictionary&gt;
-  &lt;ReportPage Name="Page1" Watermark.Font="宋体, 60pt"&gt;
-    &lt;ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8"&gt;
-      &lt;TextObject Name="Text1" Width="718.2" Height="37.8" Dock="Fill" Text="挂号数据表" HorzAlign="Center" VertAlign="Center" Font="宋体, 12pt, style=Bold" Style="Title"/&gt;
+  &lt;ReportPage Name="Page1" Tag="卡号" PaperWidth="150" PaperHeight="130" Watermark.Font="宋体, 60pt" StartPageEvent="Page1_StartPage"&gt;
+    &lt;ReportTitleBand Name="ReportTitle1" Width="491.4" Height="28.35"&gt;
+      &lt;TextObject Name="Text1" Left="151.2" Top="9.45" Width="141.75" Height="18.9" Text="挂号收费明细" Font="宋体, 14.25pt, style=Bold"/&gt;
     &lt;/ReportTitleBand&gt;
-    &lt;PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="28.35"&gt;
-      &lt;TextObject Name="Text3" Width="37.8" Height="18.9" Text="patient_id" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text5" Left="37.8" Width="37.8" Height="18.9" Text="times" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text7" Left="75.6" Width="37.8" Height="18.9" Text="gh_date" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text9" Left="113.4" Width="37.8" Height="18.9" Text="patient_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text11" Left="151.2" Width="28.35" Height="18.9" Text="gh_sequence" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text13" Left="179.55" Width="28.35" Height="18.9" Text="visit_flag" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text15" Left="207.9" Width="28.35" Height="18.9" Text="unit_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text17" Left="236.25" Width="28.35" Height="18.9" Text="clinic_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text19" Left="264.6" Width="28.35" Height="18.9" Text="doctor_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text21" Left="292.95" Width="28.35" Height="18.9" Text="group_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text23" Left="321.3" Width="28.35" Height="18.9" Text="req_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text25" Left="349.65" Width="28.35" Height="18.9" Text="response_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text27" Left="378" Width="28.35" Height="18.9" Text="charge_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text29" Left="406.35" Width="28.35" Height="18.9" Text="haoming_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text31" Left="434.7" Width="28.35" Height="18.9" Text="opera_name" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text33" Left="463.05" Width="28.35" Height="18.9" Text="ampm" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text35" Left="491.4" Width="28.35" Height="18.9" Text="gh_order" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text37" Left="519.75" Width="28.35" Height="18.9" Text="gh_sequence_f" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text39" Left="548.1" Width="28.35" Height="18.9" Text="visit_status" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text41" Left="576.45" Width="28.35" Height="18.9" Text="flag" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text43" Left="604.8" Width="28.35" Height="18.9" Text="charge_fee" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text45" Left="633.15" Width="28.35" Height="18.9" Text="receipt_sn" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text47" Left="661.5" Width="28.35" Height="18.9" Text="receipt_no" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
-      &lt;TextObject Name="Text49" Left="689.85" Width="28.35" Height="18.9" Text="p_bar_code" Font="宋体, 10pt, style=Bold" Style="Header"/&gt;
+    &lt;PageHeaderBand Name="PageHeader1" Top="32.35" Width="491.4" Height="359.1"&gt;
+      &lt;TextObject Name="Text2" Left="28.35" Top="9.45" Width="56.7" Height="18.9" Text="卡号：" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text3" Left="28.35" Top="37.8" Width="56.7" Height="18.9" Text="姓名：" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text4" Left="245.7" Top="37.8" Width="56.7" Height="18.9" Text="年龄：" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_time" Left="28.35" Top="66.15" Width="207.9" Height="18.9" Text="[baseInfo.gh_date]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_unit" Left="28.35" Top="94.5" Width="207.9" Height="18.9" Text="[baseInfo.unit_name]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_doct" Left="28.35" Top="122.85" Width="207.9" Height="18.9" Text="[baseInfo.clinic_name]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_name" Left="85.05" Top="37.8" Width="141.75" Height="18.9" Text="[baseInfo.name]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_age" Left="302.4" Top="37.8" Width="75.6" Height="18.9" Text="[baseInfo.age]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lbl_cardno" Left="85.05" Top="9.45" Width="132.3" Height="18.9" Text="[baseInfo.patient_id]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text6" Left="245.7" Top="66.15" Width="226.8" Height="18.9" Text="[baseInfo.ap]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text7" Left="245.7" Top="94.5" Width="226.8" Height="18.9" Text="[baseInfo.group_name]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text8" Left="245.7" Top="122.85" Width="226.8" Height="18.9" Text="[baseInfo.doctor_name]" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="lblsf" Left="28.35" Top="151.2" Width="340.2" Height="18.9" Text="收费项目" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TableObject Name="Table_item" Left="28.35" Top="179.55" Width="340.22" Height="37.8" ManualBuildEvent="Table_item_ManualBuild"&gt;
+        &lt;TableColumn Name="Column1" Width="170.11"/&gt;
+        &lt;TableColumn Name="Column2" Width="170.11"/&gt;
+        &lt;TableRow Name="Row1"&gt;
+          &lt;TableCell Name="Cell1" Font="宋体, 9pt"&gt;
+            &lt;TextObject Name="Text9" Width="94.5" Height="18.9" Text="项目" Font="宋体, 9pt"/&gt;
+          &lt;/TableCell&gt;
+          &lt;TableCell Name="Cell2" Font="宋体, 9pt"&gt;
+            &lt;TextObject Name="Text10" Width="94.5" Height="18.9" Text="金额（￥）" Font="宋体, 9pt"/&gt;
+          &lt;/TableCell&gt;
+        &lt;/TableRow&gt;
+        &lt;TableRow Name="Row2"&gt;
+          &lt;TableCell Name="Cell6" Text="[Table_item.name]" Font="宋体, 9pt"/&gt;
+          &lt;TableCell Name="Cell7" Text="[Table_item.effective_price]" Font="宋体, 9pt"/&gt;
+        &lt;/TableRow&gt;
+      &lt;/TableObject&gt;
+      &lt;TextObject Name="Text5" Left="28.35" Top="255.15" Width="340.2" Height="18.9" Text="支付信息" Font="宋体, 9pt, style=Bold"/&gt;
+      &lt;TextObject Name="Text11" Left="28.35" Top="283.5" Width="340.2" Height="75.6" Font="宋体, 9pt"/&gt;
     &lt;/PageHeaderBand&gt;
-    &lt;DataBand Name="Data1" Top="74.15" Width="718.2" Height="18.9" EvenStyle="EvenRows" DataSource="Table"&gt;
-      &lt;TextObject Name="Text2" Width="37.8" Height="18.9" Text="[Table.patient_id]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text4" Left="37.8" Width="37.8" Height="18.9" Text="[Table.times]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text6" Left="75.6" Width="37.8" Height="18.9" Text="[Table.gh_date]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text8" Left="113.4" Width="37.8" Height="18.9" Text="[Table.patient_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text10" Left="151.2" Width="28.35" Height="18.9" Text="[Table.gh_sequence]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text12" Left="179.55" Width="28.35" Height="18.9" Text="[Table.visit_flag]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text14" Left="207.9" Width="28.35" Height="18.9" Text="[Table.unit_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text16" Left="236.25" Width="28.35" Height="18.9" Text="[Table.clinic_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text18" Left="264.6" Width="28.35" Height="18.9" Text="[Table.doctor_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text20" Left="292.95" Width="28.35" Height="18.9" Text="[Table.group_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text22" Left="321.3" Width="28.35" Height="18.9" Text="[Table.req_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text24" Left="349.65" Width="28.35" Height="18.9" Text="[Table.response_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text26" Left="378" Width="28.35" Height="18.9" Text="[Table.charge_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text28" Left="406.35" Width="28.35" Height="18.9" Text="[Table.haoming_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text30" Left="434.7" Width="28.35" Height="18.9" Text="[Table.opera_name]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text32" Left="463.05" Width="28.35" Height="18.9" Text="[Table.ampm]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text34" Left="491.4" Width="28.35" Height="18.9" Text="[Table.gh_order]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text36" Left="519.75" Width="28.35" Height="18.9" Text="[Table.gh_sequence_f]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text38" Left="548.1" Width="28.35" Height="18.9" Text="[Table.visit_status]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text40" Left="576.45" Width="28.35" Height="18.9" Text="[Table.flag]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text42" Left="604.8" Width="28.35" Height="18.9" Text="[Table.charge_fee]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text44" Left="633.15" Width="28.35" Height="18.9" Text="[Table.receipt_sn]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text46" Left="661.5" Width="28.35" Height="18.9" Text="[Table.receipt_no]" Font="宋体, 9pt" Style="Data"/&gt;
-      &lt;TextObject Name="Text48" Left="689.85" Width="28.35" Height="18.9" Text="[Table.p_bar_code]" Font="宋体, 9pt" Style="Data"/&gt;
-    &lt;/DataBand&gt;
-    &lt;PageFooterBand Name="PageFooter1" Top="97.05" Width="718.2" Height="9.45"&gt;
-      &lt;TextObject Name="Text50" Width="718.2" Height="9.45" Dock="Fill" Text="[PageN]" HorzAlign="Right" Font="宋体, 9pt" Style="Footer"/&gt;
+    &lt;DataBand Name="Data1" Top="395.45" Width="491.4" DataSource="Table8"/&gt;
+    &lt;PageFooterBand Name="PageFooter1" Top="399.45" Width="491.4" Height="37.8"&gt;
+      &lt;TextObject Name="lbl_printtime" Left="28.35" Top="9.45" Width="340.2" Height="18.9" Text="打印时间：" Font="宋体, 10.5pt, style=Bold"/&gt;
     &lt;/PageFooterBand&gt;
   &lt;/ReportPage&gt;
 &lt;/Report&gt;

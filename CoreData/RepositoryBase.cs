@@ -74,7 +74,49 @@ namespace Data
 
             return Convert.ToString(ExcuteScalar(tag_sql, para));
         }
-             
+
+        // sql语句
+        public DataTable ExecuteTable(string sql)
+        {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                DataTable table = new DataTable();
+                var reader = conn.ExecuteReader(sql);
+                table.Load(reader);
+                return table;
+            } 
+        }
+        // sql语句
+        public DataSet ExecuteDataSet(string sql,string tbname, object param, CommandType commandType)
+        {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                DataTable table = new DataTable();
+                var reader = conn.ExecuteReader(sql,param, null, null, commandType);
+                table.Load(reader);
+                DataSet ds = new DataSet();
+                ds.Tables.Add(tbname);
+                ds.Tables[0].Load(reader);
+                return ds;
+            }
+        }
+
+        //执行存储过程，返回DT
+
+        public DataTable ExecuteTable(string sql, object param, CommandType commandType)
+        {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                DataTable table = new DataTable();
+                var reader = conn.ExecuteReader(sql, param, null, null, commandType);
+                table.Load(reader);
+                return table;
+            } 
+           
+        }
+
+         
+
 
         public int Delete(Guid Id, string deleteSql)
         {

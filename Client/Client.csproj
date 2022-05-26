@@ -163,6 +163,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FastReport\Create.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FastReport\Create.Designer.cs">
+      <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
     <Compile Include="RefundPayList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     <Compile Include="WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FastReport\Create.resx">
+      <DependentUpon>Create.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RefundPayList.resx">
       <DependentUpon>RefundPayList.cs</DependentUpon>
     </EmbeddedResource>
@@ -533,6 +542,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MzghLib\MzghLib.csproj">
+      <Project>{c4467e37-d433-4937-9b83-8ab2f29d7677}</Project>
+      <Name>MzghLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
