@@ -91,9 +91,9 @@ namespace Data
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
             {
-                DataTable table = new DataTable();
+                //DataTable table = new DataTable();
                 var reader = conn.ExecuteReader(sql,param, null, null, commandType);
-                table.Load(reader);
+                //table.Load(reader);
                 DataSet ds = new DataSet();
                 ds.Tables.Add(tbname);
                 ds.Tables[0].Load(reader);

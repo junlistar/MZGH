@@ -59,7 +59,9 @@ namespace Client
             this.cbxSXW.Items.Clear();
             cbxSXW.Items.Add("全部");
             cbxSXW.Items.Add("上午");
+            cbxSXW.Items.Add("中午");
             cbxSXW.Items.Add("下午");
+            cbxSXW.Items.Add("夜间");
             cbxSXW.Text = "全部";
 
             //挂号状态 
@@ -97,14 +99,15 @@ namespace Client
             //group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}
             var gh_date = txtRiqi.Text;
             var ampm = "%";
-            if (cbxSXW.Text == "上午")
+            switch (cbxSXW.Text)
             {
-                ampm = "a";
-            }
-            else if (cbxSXW.Text == "下午")
-            {
-                ampm = "p";
-            }
+                case "上午": ampm = "a";break;
+                case "下午": ampm = "p";break;
+                case "中午": ampm = "m";break;
+                case "夜间": ampm = "e";break;
+                default:
+                    break;
+            } 
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
             var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "%" : txtDoct.TagString;
@@ -462,6 +465,9 @@ namespace Client
 
             txtks.TextChanged += txtks_TextChanged;
             txtzk.TextChanged += txtzk_TextChanged;
+
+            //查询列表
+            InitData();
 
         }
 

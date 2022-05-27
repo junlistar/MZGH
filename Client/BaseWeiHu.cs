@@ -57,6 +57,8 @@ namespace Client
             cbxRequestType.DisplayMember = "name";
             cbxRequestType.ValueMember = "code";
 
+            txtDate.Value = DateTime.Now;
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -82,7 +84,7 @@ namespace Client
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
             var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "%" : txtDoct.TagString;
             var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "%" : txtzk.TagString;
-            //var req_type = string.IsNullOrWhiteSpace(txtHaolei.Text) ? "%" : txtHaolei.TagString;
+            var req_type = cbxRequestType.SelectedValue;
             //var gh_opera = string.IsNullOrWhiteSpace(txtGhUser.Text) ? "%" : txtGhUser.TagString;
             //var name = string.IsNullOrWhiteSpace(txtName.Text) ? "%" : txtName.Text.Trim();
             //var p_bar_code = string.IsNullOrWhiteSpace(txtcode.Text) ? "%" : txtcode.Text.Trim();
@@ -94,38 +96,16 @@ namespace Client
             var open_flag = "%";
 
 
-            if (cbxSXW.Text == "上午")
+            switch (cbxSXW.Text)
             {
-                ampm = "a";
+                case "上午": ampm = "a"; break;
+                case "下午": ampm = "p"; break;
+                case "中午": ampm = "m"; break;
+                case "夜间": ampm = "e"; break;
+                default:
+                    break;
             }
-            else if (cbxSXW.Text == "下午")
-            {
-                ampm = "p";
-            }
-
-            //switch (cbxWeek.Text)
-            //{
-            //    case "第一周": week = "1"; break;
-            //    case "第二周": week = "2"; break;
-            //    case "第三周": week = "3"; break;
-            //    case "第四周": week = "4"; break;
-            //    default:
-            //        break;
-            //}
-
-            //switch (cbxDay.Text)
-            //{
-            //    case "星期一": day = "1"; break;
-            //    case "星期二": day = "2"; break;
-            //    case "星期三": day = "3"; break;
-            //    case "星期四": day = "4"; break;
-            //    case "星期五": day = "5"; break;
-            //    case "星期六": day = "6"; break;
-            //    case "星期日": day = "7"; break;
-            //    default:
-            //        break;
-            //}
-
+             
             if (cbxOpenFlag.Text == "开放")
             {
                 open_flag = "1";
@@ -136,23 +116,12 @@ namespace Client
             }
 
             #endregion
-
-            if (list != null && list.Count > 0)
-            {
-                //var ds = list.CopyTo(ds);
-
-                //if (visit_dept!="%")
-                //{
-                //    ds= list.Where(p => p.unit_sn.StartsWith(visit_dept));
-                //}
-            }
-
+             
             var begin = txtDate.Value.ToShortDateString();
 
-            var para = $"?begin={begin}&end={begin}";
+            var para = $"?begin={begin}&end={begin}&unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&req_type={req_type}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
 
-            //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
-            string paramurl = string.Format($"/api/GuaHao/GetRequestsByDate" + para);
+            string paramurl = string.Format($"/api/GuaHao/GetRequestsByParams" + para);
 
             log.Info(client.BaseAddress + paramurl);
             try
@@ -507,6 +476,8 @@ namespace Client
             txtzk.TextChanged += txtzk_TextChanged;
             txtDoct.TextChanged += txtDoct_TextChanged;
             txtHaobie.TextChanged += txtHaobie_TextChanged;
+
+            InitData();
 
         }
 

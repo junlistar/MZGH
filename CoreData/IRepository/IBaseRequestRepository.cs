@@ -20,8 +20,9 @@ namespace Data.IRepository
         List<BaseRequest> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day);
 
         List<BaseRequest> GetRequestsByDate(string begin, string end);
-         
 
+        List<BaseRequest> GetRequestsByParams(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
+             string ampm, string window_no, string open_flag);
         #endregion
     }
 }

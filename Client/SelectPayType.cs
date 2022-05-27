@@ -381,10 +381,13 @@ namespace Client
                 UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
             }
 
+
+            ShowMessage();
+
             if (chkcomb.Checked)
             {
 
-                ShowMessage();
+                //ShowMessage();
             }
             else
             {
@@ -415,7 +418,7 @@ namespace Client
 
                 //var res = DataPost("http://10.87.82.212:8080", json);
 
-                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs)
+                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs)|| string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
                    || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
                 {
                     YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
@@ -483,6 +486,7 @@ namespace Client
                         var d = new
                         {
                             yb_psn_no = yBResponse.output.baseinfo.psn_no,
+                            social_no = yBResponse.output.baseinfo.certno,
                             pid = patientId,
                             yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
                             yb_insutype = yBResponse.output.insuinfo[0].insutype,
@@ -490,7 +494,7 @@ namespace Client
                         };
                         var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
 
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
@@ -542,7 +546,7 @@ namespace Client
                 //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
                 //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
                 ghRequest.input.data.mdtrt_cert_type = "02";//身份证
-                ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.social_no;
+                ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.hic_no;
 
                 ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
                 ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
@@ -571,7 +575,7 @@ namespace Client
                 }
                 else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
                 {
-                    MessageBox.Show(resp.output.data.mdtrt_id);
+                    //MessageBox.Show(resp.output.data.mdtrt_id);
 
                     //保存医保支付信息，用于退款
                     YBHelper.currentYBPay = resp;
@@ -827,27 +831,33 @@ namespace Client
 
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
                 string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&max_sn={max_sn}&opera={SessionHelper.uservm.user_mi}");
-
-                //client.DefaultRequestHeaders.Add("user_mi", MdiForm.uservm.user_mi);
-
-                log.Info("接口：" + client.BaseAddress + paramurl);
-                string responseJson = client.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                 
+                log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
 
                 if (result.status == 1 && result.data)
                 {
                     log.Info("挂号成功");
-                    UIMessageTip.ShowOk("挂号成功!");
+                    UIMessageTip.ShowOk("挂号成功!",3000);
 
                     //打印单据 
                     //Print(pay_string);
                     //Print(pay_string, 2);
+                    Task.Run(() =>
+                    {
 
-                    InitializeReport("DESIGN");
+                        //InitializeReport("DESIGN");
+                        InitializeReport("PREVIEW");
+                        //InitializeReport("PRINT");
+                    });
+
+                    //InitializeReport("DESIGN");
+
+                    this.Close();
+
 
                     //var report = CreateReportAndLoadFrx(pay_string);
 
@@ -887,9 +897,37 @@ namespace Client
         //初始化报表
         private void InitializeReport(string RptMode)
         {
-            // DataSet Ds = mymeans.GetDataSet("SELECT RPT_NO,RPT_NAME,FILEDATA FROM AT_REPORT WHERE FORMID='" + FormID + "' AND RPT_NO='" + RptNo + "'", "REPORT");
-            string sql = "select * from rt_report_data_fast where report_code = 5555";
+            string sql = "select * from rt_report_data_fast where report_code = 220001";
             DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
+
+            //Task<HttpResponseMessage> task = null; var json = "";
+            ////var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={220001}&tb_name={"REPORT"}");
+            //var paramurl = string.Format($"/api/GuaHao/GetReportData?code={220001}");
+
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //task.Wait();
+            //var response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //else
+            //{
+            //    log.Info(response.ReasonPhrase);
+            //}
+
+            //var resp = WebApiHelper.DeserializeObject<ResponseResult<List<ReportDataVM>>>(json);
+
+            //if (!string.IsNullOrEmpty(resp.message))
+            //{
+            //    MessageBox.Show(resp.message);
+            //    log.Error(resp.message);
+            //    return;
+            //}
+            //DataSet Ds = resp.data;
 
             RptTable = Ds.Tables[0];
             RptRow = RptTable.Rows[0];
@@ -922,6 +960,20 @@ namespace Client
                 var result = DbHelper.ExecuteNonQuery(sql, para);
 
 
+                //string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={220001}&report_com={stream.ToArray()}");
+
+                //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                //string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                //var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+
+                //if (result.status == 1 && result.data)
+                //{
+                //    log.Info("保存报表成功");
+                //}
+                //else
+                //{
+                //    log.Error(result.message);
+                //}
 
             }
         }
@@ -937,6 +989,7 @@ namespace Client
                 if (RptRow["report_com"].ToString().Length > 0)
                 {
                     byte[] ReportBytes = (byte[])RptRow["report_com"];
+                    string sql = RptRow["report_sql"].ToString();
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
                         TargetReport.Load(Stream);
@@ -944,26 +997,42 @@ namespace Client
 
                         //report.SetParameterValue("pid", GuaHao.PatientVM.patient_id);
                         //report.SetParameterValue("record_sn", vm.record_sn);
-                        string sql = @"select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date
-	,ap = CASE WHEN b.ampm = 'a' THEN '上午' 
-                     ELSE '下午' 
-                     END 
-					  ,u1.name unit_name
-		  ,[group_sn]		  
-		  ,u2.name group_name
-		  ,a.name doctor_name
-		  ,t.name clinic_name
-		  ,q.name req_name,
-		  (select max(r.charge_total) from gh_receipt r where b.patient_id=r.patient_id and r.times=b.times) charge_total
-	from mz_visit_table b
-	 LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code
-	LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn
-		  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn
-		  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn
-		    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code 
-	 where b.patient_id='" + GuaHao.PatientVM.patient_id + "' order by b.times desc";
-	// where b.patient_id='" + GuaHao.PatientVM.patient_id + "' and b.times= "+ vm.record_sn + " order by b.times desc";
+                        //                       string sql = @"select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date
+                        //,ap = CASE WHEN b.ampm = 'a' THEN '上午' 
+                        //                    ELSE '下午' 
+                        //                    END 
+                        //				  ,u1.name unit_name
+                        //	  ,[group_sn]		  
+                        //	  ,u2.name group_name
+                        //	  ,a.name doctor_name
+                        //	  ,t.name clinic_name
+                        //	  ,q.name req_name,
+                        //	  (select max(r.charge_total) from gh_receipt r where b.patient_id=r.patient_id and r.times=b.times) charge_total
+                        //from mz_visit_table b
+                        // LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code
+                        //LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn
+                        //	  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn
+                        //	  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn
+                        //	    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code 
+                        // where b.patient_id=? order by b.times desc";
+                        // where b.patient_id='" + GuaHao.PatientVM.patient_id + "' and b.times= "+ vm.record_sn + " order by b.times desc";
+
+                        //查询参数
+                        string param_sql = "select * from  rt_report_params_fast where report_code = 220001";
+                        var dt_param = DbHelper.ExecuteDataTable(param_sql);
+                        if (dt_param!=null && dt_param.Rows.Count>0)
+                        {
+                           // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
+
+                            for (int i = 0; i < dt_param.Rows.Count; i++)
+                            {
+                                sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(),"'"+ GuaHao.PatientVM.patient_id+"'");
+                            }
+                            //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
+                            //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
+                        }
                         var ds = DbHelper.GetDataSet(sql, "ghinfo");
+
                         TargetReport.RegisterData(ds);
                     }
                 }
@@ -1221,297 +1290,7 @@ namespace Client
         {
             log.Info("提交支付");
 
-            TiJiaoZhifu();
-
-
-
-
-            return;
-
-
-
-            //如果是组合支付
-            //if (chkCombi.Checked)
-            //{
-            //    //判断金额组合是否正确
-
-            //    var je = Convert.ToDecimal(vm.je);
-
-            //    if (je > 0)
-            //    {
-            //        var money1 = Convert.ToDecimal(this.txtwx.Text);
-            //        var money2 = Convert.ToDecimal(this.txtzfb.Text);
-            //        var money3 = Convert.ToDecimal(this.txtyl.Text);
-            //        var money4 = Convert.ToDecimal(this.txtxj.Text);
-            //        var money5 = Convert.ToDecimal(this.txtybk.Text);
-
-            //        var current = money1 + money2 + money3 + money4 + money5;
-
-
-            //        if (current != je)
-            //        {
-            //            log.Info("金额组合不正确");
-            //            UIMessageTip.ShowError("金额组合不正确!");
-            //            return;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    //如果是单个支付方式
-
-
-
-            //}
-            //Dictionary<string, string> paylist = new Dictionary<string, string>();
-
-            ////判断当前选择的支付方式 便利所有checkbox
-            //foreach (var item in this.Controls)
-            //{
-            //    if (item is UIPanel)
-            //    {
-            //        foreach (var pnlItem in (item as UIPanel).Controls)
-            //        {
-            //            if (pnlItem is UICheckBox)
-            //            {
-            //                var uichk = pnlItem as UICheckBox;
-
-
-            //                if (uichk.Checked)
-            //                {
-            //                    //获取当前选择项的金额
-            //                    foreach (var ct in uichk.Parent.Controls)
-            //                    {
-            //                        if (ct is UITextBox)
-            //                        {
-            //                            var money = (ct as UITextBox).Text;
-            //                            //if (money=="" || (decimal.Parse(money)==0))
-            //                            //{
-            //                            //    break;
-            //                            //}
-            //                            paylist.Add(uichk.TagString, money); break;
-            //                        }
-            //                    }
-            //                }
-
-            //            }
-            //        }
-            //    }
-            //}
-            //if (paylist.Keys.Count == 0)
-            //{
-            //    UIMessageTip.ShowError("请选择支付方式!");
-            //    return;
-            //}
-
-            //if (paylist.Keys.Count == 1)
-            //{
-            //    paylist[paylist.ElementAt(0).Key] = vm.je;
-            //}
-            //string pay_string = "";
-            //bool cancelTrade = false;
-
-            //Dictionary<string, string> dicPay = new Dictionary<string, string>();
-            //foreach (var key in paylist.Keys)
-            //{
-
-            //    log.Info("支付方式：" + key + ",金额：" + paylist[key]);
-            //    //UIMessageTip.ShowOk("支付方式：" + key + ",金额：" + paylist[key]);
-
-            //    //生成商户订单号
-            //    string out_trade_no = System.DateTime.Now.ToString("yyyyMMddHHmmss") + (new Random().Next(1000, 9999));
-
-
-            //    pay_string += "," + key + "-" + paylist[key] + "-" + out_trade_no;
-
-            //    //打开对应的支付扫码界面
-            //    if (int.Parse(key) == (int)PayMethodEnum.WeiXin || int.Parse(key) == (int)PayMethodEnum.Zhifubao)//微信,支付宝
-            //    {
-
-            //        WxPay wxPay = new WxPay(key, paylist[key], out_trade_no);
-            //        wxPay.ShowDialog();
-            //        if (wxPay.DialogResult == DialogResult.OK)
-            //        {
-            //            log.Info("完成支付：" + key + ",金额：" + paylist[key]);
-            //            //保存支付数据，用于退款
-            //            dicPay.Add(key, paylist[key]);
-            //        }
-            //        else
-            //        {
-            //            log.Info("取消支付：" + key + ",金额：" + paylist[key]);
-            //            //取消支付
-            //            cancelTrade = true;
-            //            break;
-
-            //        }
-
-            //    }
-            //    else if (int.Parse(key) == (int)PayMethodEnum.Yinlian || int.Parse(key) == (int)PayMethodEnum.Yibao)//银联，医保卡
-            //    {
-
-            //        CardPay card = new CardPay(key, paylist[key]);
-            //        card.ShowDialog();
-            //        if (card.DialogResult == DialogResult.OK)
-            //        {
-            //            log.Info("完成支付：" + key + ",金额：" + paylist[key]);
-            //            //保存支付数据，用于退款
-            //            dicPay.Add(key, paylist[key]);
-            //        }
-            //        else
-            //        {
-            //            log.Info("取消支付：" + key + ",金额：" + paylist[key]);
-            //            //取消支付
-            //            cancelTrade = true;
-            //            break;
-
-            //        }
-            //    }
-            //    else if (int.Parse(key) == (int)PayMethodEnum.Xianjin)
-            //    {
-            //        JKZL xjzf = new JKZL(key, paylist[key]);
-            //        xjzf.ShowDialog();
-            //        if (xjzf.DialogResult == DialogResult.OK)
-            //        {
-            //            log.Info("完成支付：" + key + ",金额：" + paylist[key]);
-            //            //保存支付数据，用于退款
-            //            dicPay.Add(key, paylist[key]);
-            //        }
-            //        else
-            //        {
-            //            log.Info("取消支付：" + key + ",金额：" + paylist[key]);
-            //            //取消支付
-            //            cancelTrade = true;
-            //            break;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        log.Info("其他支付：" + key + ",金额：" + paylist[key]);
-            //        //其他支付
-            //        UIMessageTip.ShowOk("支付方式：" + key + ",金额：" + paylist[key]);
-            //    }
-
-            //}
-            ////如果取消交易
-            //if (cancelTrade)
-            //{
-
-            //    log.Info("取消支付处理：");
-            //    UIMessageTip.ShowOk("取消支付");
-
-            //    //如果组合支付，完成了一笔或多笔支付，但还未完成全部支付，此时取消，退款处理
-            //    if (dicPay.Keys.Count > 0)
-            //    {
-            //        foreach (var key in dicPay.Keys)
-            //        {
-            //            log.Info("处理退款:" + key + ",金额：" + paylist[key]);
-            //            switch (int.Parse(key))
-            //            {
-            //                case (int)PayMethodEnum.Xianjin:
-            //                    UIMessageTip.ShowOk("处理现金退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //                case (int)PayMethodEnum.WeiXin:
-
-            //                    var transaction_id = "";
-            //                    var out_trade_no = "";
-            //                    var total_fee = "";
-            //                    var redfund_fee = "";
-
-            //                    var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-            //                    log.Info("微信退款返回字符串：" + wx_response);
-
-
-            //                    UIMessageTip.ShowOk("处理微信退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //                case (int)PayMethodEnum.Yibao:
-            //                    UIMessageTip.ShowOk("处理医保退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //                case (int)PayMethodEnum.Yinlian:
-            //                    UIMessageTip.ShowOk("处理银联退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //                case (int)PayMethodEnum.Zhifubao:
-
-
-            //                    var cof = AliConfig.GetConfig();
-            //                    Factory.SetOptions(cof);
-
-            //                    //全部退款
-            //                    AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
-            //                    //部分退款
-            //                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
-
-            //                    if (ResponseChecker.Success(response))
-            //                    {
-            //                        log.Info("支付宝退款调用成功");
-            //                    }
-            //                    else
-            //                    {
-            //                        log.Error("支付宝退款调用失败，原因：" + response.Msg);
-            //                    }
-
-            //                    UIMessageTip.ShowOk("处理支付宝退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //                default:
-
-            //                    UIMessageTip.ShowOk("处理其他退款,金额：" + paylist[key]); Thread.Sleep(1000);
-            //                    break;
-            //            }
-
-            //        }
-
-            //    }
-
-            //    log.Info("结束取消支付处理");
-
-            //    this.Close();
-
-            //    return;
-            //}
-
-            //if (pay_string.Length > 0)
-            //{
-            //    pay_string = pay_string.Substring(1);
-            //}
-            ////MessageBox.Show(pay_string);
-
-            ////todo:处理各个支付方式和金额，写入数据库表
-            //var d = new
-            //{
-            //    patient_id = patientId,
-            //    record_sn = vm.record_sn,
-            //    pay_string = pay_string,
-            //    opera = SessionHelper.uservm.user_mi
-            //};
-
-            //try
-            //{
-
-            //    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-            //    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //    HttpClient client = new HttpClient();
-            //    client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
-            //    string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&opera={SessionHelper.uservm.user_mi}");
-
-            //    //client.DefaultRequestHeaders.Add("user_mi", MdiForm.uservm.user_mi);
-
-            //    log.Info("接口：" + client.BaseAddress + paramurl);
-            //    string responseJson = client.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-
-            //    if (responseJson == "true")
-            //    {
-            //        log.Info("挂号成功");
-            //        UIMessageTip.ShowOk("挂号成功!");
-            //    }
-
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    log.Info(ex.ToString());
-
-            //}
-            //this.Close();
-
+            TiJiaoZhifu(); 
         }
 
         private void btnAdd1_Click(object sender, EventArgs e)
@@ -1534,42 +1313,7 @@ namespace Client
                     return true;
                 }
                 var je = Convert.ToDecimal(vm.je);
-
-                //var money1 = Convert.ToDecimal(this.txtwx.Text);
-                //var money2 = Convert.ToDecimal(this.txtzfb.Text);
-                //var money3 = Convert.ToDecimal(this.txtyl.Text);
-                //var money4 = Convert.ToDecimal(this.txtxj.Text);
-                //var money5 = Convert.ToDecimal(this.txtybk.Text);
-
-                //var current = money1 + money2 + money3 + money4 + money5;
-
-
-                //if (current < je)
-                //{
-                //    switch (type)
-                //    {
-                //        case "wx":
-                //            txtwx.Text = (money1 + (je - current)).ToString(); break;
-
-                //        case "zfb":
-                //            txtzfb.Text = (money2 + (je - current)).ToString(); break;
-
-                //        case "yl":
-                //            txtyl.Text = (money3 + (je - current)).ToString(); break;
-
-                //        case "xj":
-                //            txtxj.Text = (money4 + (je - current)).ToString(); break;
-                //        case "ybk":
-                //            txtybk.Text = (money5 + (je - current)).ToString(); break;
-                //        default:
-                //            break;
-                //    }
-                //}
-                //else if (current > je)
-                //{
-                //    UIMessageTip.ShowError("金额组合不正确!");
-                //    return false;
-                //}
+ 
             }
 
             catch (Exception ex)
@@ -1687,135 +1431,9 @@ namespace Client
         private void uiPanel3_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void uiCheckBox5_CheckedChanged(object sender, EventArgs e)
-        {
-
-            //chkyl.CheckedChanged -= uiCheckBox5_CheckedChanged;
-            //chkwx.CheckedChanged -= uiCheckBox5_CheckedChanged;
-            //chkzfb.CheckedChanged -= uiCheckBox5_CheckedChanged;
-            //chkybk.CheckedChanged -= uiCheckBox5_CheckedChanged;
-            //chkxj.CheckedChanged -= uiCheckBox5_CheckedChanged;
-
-            //var ui = sender as UICheckBox;
-
-            //Color colxz = Color.FromArgb(0, 192, 192);
-            //Color colmr = Color.FromArgb(238, 251, 250);
-
-            ////如果打开组合支付按钮
-            //if (chkCombi.Checked)
-            //{
-            //    if (ui.Checked)
-            //    {
-            //        var uipanel = ui.Parent as UIPanel;
-            //        uipanel.FillColor = colxz;
-            //    }
-            //    else
-            //    {
-            //        var uipanel = ui.Parent as UIPanel;
-            //        uipanel.FillColor = colmr;
-            //    }
-            //}
-            //else
-            //{
-            //    //单选
-            //    foreach (var item in this.Controls)
-            //    {
-            //        if (item is UIPanel)
-            //        {
-            //            foreach (var pnlItem in (item as UIPanel).Controls)
-            //            {
-            //                if (pnlItem is UICheckBox)
-            //                {
-            //                    var uichk = pnlItem as UICheckBox;
-
-
-            //                    if (uichk.Checked && uichk.Name != ui.Name)
-            //                    {
-            //                        uichk.Checked = false;
-            //                        var pnl = uichk.Parent as UIPanel;
-            //                        pnl.FillColor = colmr;
-            //                    }
-
-            //                }
-            //            }
-            //        }
-            //    }
-            //    ////ui.Checked = true;
-            //    if (ui.Checked)
-            //    {
-            //        var uipanel = ui.Parent as UIPanel;
-            //        uipanel.FillColor = colxz;
-            //    }
-            //    else
-            //    {
-            //        var uipanel = ui.Parent as UIPanel;
-            //        uipanel.FillColor = colmr;
-            //    };
-            //}
-
-
-            //chkyl.CheckedChanged += uiCheckBox5_CheckedChanged;
-            //chkwx.CheckedChanged += uiCheckBox5_CheckedChanged;
-            //chkzfb.CheckedChanged += uiCheckBox5_CheckedChanged;
-            //chkybk.CheckedChanged += uiCheckBox5_CheckedChanged;
-            //chkxj.CheckedChanged += uiCheckBox5_CheckedChanged;
-
-        }
-
-
-        /// <summary>
-        /// 点击选中事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pnlxj_Click(object sender, EventArgs e)
-        {
-            ////没选颜色
-            //Color colmr = Color.FromArgb(238, 251, 250);
-            //Color colxz = Color.FromArgb(0, 192, 192);
-            //pnlwx.FillColor = colmr;
-            //pnlxj.FillColor = colmr;
-            //pnlybk.FillColor = colmr;
-            //pnlyl.FillColor = colmr;
-            //pnlzfb.FillColor = colmr;
-
-
-            //(sender as UIPanel).FillColor = colxz;
-        }
-
-        private void chkCombi_CheckedChanged(object sender, EventArgs e)
-        {
-            //txtwx.Visible = chkCombi.Checked;
-            //txtzfb.Visible = chkCombi.Checked;
-            //txtyl.Visible = chkCombi.Checked;
-            //txtxj.Visible = chkCombi.Checked;
-            //txtybk.Visible = chkCombi.Checked;
-
-            //btnAdd1.Visible = chkCombi.Checked;
-            //btnAdd2.Visible = chkCombi.Checked;
-            //btnAdd3.Visible = chkCombi.Checked;
-            //btnAdd4.Visible = chkCombi.Checked;
-            //btnAdd5.Visible = chkCombi.Checked;
-
-            //if (!chkCombi.Checked)
-            //{
-            //    txtxj.Text = vm.je;
-
-            //    this.chkxj.Checked = true;
-            //}
-            //else
-            //{
-            //    txtxj.Text = "0";
-            //}
-
-            //txtzfb.Text = "0";
-            //txtyl.Text = "0";
-            //txtybk.Text = "0";
-            //txtwx.Text = "0";
-        }
-
+        } 
+ 
+         
         private void txtybk_Leave(object sender, EventArgs e)
         {
             var ui = sender as UITextBox;

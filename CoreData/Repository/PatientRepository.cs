@@ -84,10 +84,11 @@ namespace Data.Repository
             return Update(sql, para);
         }
 
-        public int UpdateUserYBInfo(string pid, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs)
+        public int UpdateUserYBInfo(string pid, string social_no, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs)
         {
             string sql = GetSqlByTag(220007);//"UPDATE mz_patient_mi SET yb_psn_no=@yb_psn_no,yb_insutype=@yb_insutype,yb_insuplc_admdvs=@yb_insuplc_admdvs WHERE patient_id=@pid";
             var para = new DynamicParameters();
+            para.Add("@social_no", social_no);
             para.Add("@yb_psn_no", yb_psn_no);
             para.Add("@yb_insutype", yb_insutype);
             para.Add("@yb_insuplc_admdvs", yb_insuplc_admdvs);
@@ -377,11 +378,7 @@ namespace Data.Repository
                             var recorditem = relist[0];
                             var patient = plist[0];
 
-                            //                            //写入mz_visit_table
-                            //                            string visit_sql = @"insert into mz_visit_table(patient_id,times,visit_dept,doctor_code,visit_date,name,response_type,haoming_code,charge_type,
-                            //age,group_sn,clinic_type,req_type,gh_sequence,ampm,visit_flag,gh_opera,gh_date) values
-                            //(@patient_id,@times,@visit_dept,@doctor_code,@visit_date,@name,@response_type,@haoming_code,@charge_type,
-                            //@age,@group_sn,@clinic_type,@req_type,@gh_sequence,@ampm,@visit_flag,@gh_opera,@gh_date)";
+                             //写入mz_visit_table 
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@times", max_times);
@@ -428,16 +425,7 @@ namespace Data.Repository
                             audit_code = Convert.ToString(item.audit_code);
                             mz_bill_item = Convert.ToString(item.mz_bill_item);
                             mz_charge_group = Convert.ToString(item.mz_charge_group);
-
-
-                            //                            string sql4 = @"insert into gh_detail_charge
-                            //  (patient_id, times, item_no, ledger_sn, happen_date, charge_code, audit_code, bill_code, exec_sn, apply_sn,
-                            //org_price, charge_price, charge_amount, charge_group, enter_opera, enter_date, enter_win_no, 
-                            //confirm_opera, confirm_date, confirm_win_no, charge_status, trans_flag, mz_dept_no)
-                            //values (@patient_id, @max_times, @item_no, @ledger_sn, @happen_date, @charge_code, @audit_code, @bill_code, @exec_sn, @apply_sn,
-                            //@org_price, @charge_price, @charge_amount, @charge_group,@enter_opera, @enter_date, @enter_win_no,
-                            //@confirm_opera,@confirm_date, @confirm_win_no, @charge_status, @trans_flag, @mz_dept_no)";
-
+                             
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@max_times", max_times);
@@ -487,19 +475,11 @@ namespace Data.Repository
                             receipt_type = dtreceipt[0].receipt_type;
 
                         }
-                        //                        //写入现金流表
-                        //                        string sql7 = @"insert into gh_deposit
-                        //  (patient_id, item_no, ledger_sn, times, charge, cheque_type, cheque_no, depo_status, price_opera, price_date, mz_dept_no)
-                        //values
-                        //  (@patient_id, @item_no, @ledger_sn, @times, @charge, @cheque_type,@cheque_no, @depo_status, @price_opera, @price_date, @mz_dept_no)";
-
+                        //写入现金流表
+                       
                         //处理多重支付
                         var pay_method_arr = pay_string.Split(',');
-                        int item_no = 1;
-                        //if (pay_method_arr.Length > 1)
-                        //{
-                        //    max_ledger_sn = 1;
-                        //}
+                        int item_no = 1; 
                         foreach (var pay_method in pay_method_arr)
                         {
                             var pay_detail = pay_method.Split('-');
@@ -526,11 +506,7 @@ namespace Data.Repository
                             item_no++;
                         }
 
-                        //                        //写入挂号发票明细表
-                        //                        string sql6 = @"insert into gh_receipt_charge
-                        //  (patient_id, times, ledger_sn, receipt_sn, bill_code, charge, pay_unit)
-                        //values
-                        //  (@patient_id, @times, @ledger_sn, @receipt_sn, @bill_code, @charge, @pay_unit) ";
+                        //写入挂号发票明细表 
 
                         decimal to_price = 0;
 
@@ -551,11 +527,7 @@ namespace Data.Repository
 
                             result = connection.Execute(sql6, para, transaction);
                         }
-                        //                        //写入挂号发票表
-                        //                        string sql5 = @"insert into gh_receipt
-                        //  (patient_id, times, ledger_sn, receipt_sn, pay_unit, charge_total, settle_opera, settle_date, price_opera, price_date, receipt_no, charge_status, mz_dept_no)
-                        //values
-                        //  (@patient_id,@times,@ledger_sn, @receipt_sn, @pay_unit, @charge_total, @settle_opera,@settle_date, @price_opera, @price_date, @receipt_no, @charge_status, @mz_dept_no)";
+                        //写入挂号发票表
                         para = new DynamicParameters();
 
                         para.Add("@patient_id", patient_id);
@@ -576,19 +548,6 @@ namespace Data.Repository
 
                         int new_no = Convert.ToInt32(current_no) + step_length;
                         ////更新挂号发票记录表
-                        //string sql8 = @"update gh_op_receipt  set
-                        //         current_no = @new_no 
-                        //         where
-                        //         operator = @operator and
-                        //         happen_date = @happen_date and
-                        //         start_no = @start_no and
-                        //         current_no = @current_no and
-                        //         end_no = @end_no and
-                        //         step_length =@step_length and
-                        //         deleted_flag = @deleted_flag and
-                        //         report_flag = @report_flag and
-                        //         receipt_type = @receipt_type";
-
 
                         para = new DynamicParameters();
 

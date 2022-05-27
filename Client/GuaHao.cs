@@ -127,7 +127,9 @@ namespace Client
                 btnAM.FillColor = Color.LightSteelBlue;
                 btnPM.FillColor = cur_color;
             }
-             
+            btnMid.FillColor = Color.LightSteelBlue;
+            btnEve.FillColor = Color.LightSteelBlue;
+
             this.dtpGhrq.Value = DateTime.Now;
 
             request_key = "";
@@ -564,34 +566,34 @@ namespace Client
                     txtCode.Text = SessionHelper.cardno;
                     SearchUser();
 
-                    if (!string.IsNullOrEmpty(btnEditUser.TagString))
-                    {
-                        //保存用户的医保信息
-                        var d = new
-                        {
-                            yb_psn_no = yBResponse.output.baseinfo.psn_no,
-                            pid = btnEditUser.TagString,
-                            yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
-                            yb_insutype = yBResponse.output.insuinfo[0].insutype,
-                            opera = SessionHelper.uservm.user_mi
-                        };
-                        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+                    //if (!string.IsNullOrEmpty(btnEditUser.TagString))
+                    //{
+                    //    //保存用户的医保信息
+                    //    var d = new
+                    //    {
+                    //        yb_psn_no = yBResponse.output.baseinfo.psn_no,
+                    //        pid = btnEditUser.TagString,
+                    //        yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
+                    //        yb_insutype = yBResponse.output.insuinfo[0].insutype,
+                    //        opera = SessionHelper.uservm.user_mi
+                    //    };
+                    //    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                    //    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    //    var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
 
-                        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+                    //    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                    //    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (responseJson.data == 1)
-                        {
-                            log.Debug("修改用户医保信息成功");
+                    //    if (responseJson.data == 1)
+                    //    {
+                    //        log.Debug("修改用户医保信息成功");
 
-                        }
-                        else
-                        {
-                            log.Error(responseJson.message);
-                        }
-                    }
+                    //    }
+                    //    else
+                    //    {
+                    //        log.Error(responseJson.message);
+                    //    }
+                    //}
 
                    
                 }
@@ -707,6 +709,9 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            txtCode.TextChanged -= txtCode_TextChanged;
+            txtCode.Text = "";
+            txtCode.TextChanged += txtCode_TextChanged;
             InitUIText();
 
         }
@@ -1016,13 +1021,14 @@ namespace Client
                         {
                             yb_psn_no = YBHelper.currentYBInfo.output.baseinfo.psn_no,
                             pid = userInfo.patient_id,
+                            social_no = YBHelper.currentYBInfo.output.baseinfo.certno,
                             yb_insuplc_admdvs = YBHelper.currentYBInfo.output.insuinfo[0].insuplc_admdvs,
                             yb_insutype = YBHelper.currentYBInfo.output.insuinfo[0].insutype,
                             opera = SessionHelper.uservm.user_mi
                         };
                         var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+                        paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
 
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
@@ -1031,6 +1037,11 @@ namespace Client
                         {
                             log.Debug("修改用户医保信息成功");
 
+                            PatientVM.yb_insuplc_admdvs = d.yb_insuplc_admdvs;
+                            PatientVM.yb_insutype = d.yb_insutype;
+                            PatientVM.yb_psn_no = d.yb_psn_no;
+
+                            YBHelper.currentYBInfo = null;
                         }
                         else
                         {

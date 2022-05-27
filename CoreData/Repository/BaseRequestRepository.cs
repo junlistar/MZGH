@@ -221,5 +221,29 @@ where patient_id=@patient_id";
 
         }
 
+        public List<BaseRequest> GetRequestsByParams(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
+             string ampm, string window_no, string open_flag)
+        {
+            string ghsql = GetSqlByTag(220060);
+             
+
+            var para = new DynamicParameters();
+            para.Add("@P1", begin);
+            para.Add("@P2", end);
+            para.Add("@unit_sn", string.IsNullOrWhiteSpace(unit_sn) ? "%" : unit_sn.Trim());
+            para.Add("@group_sn", string.IsNullOrWhiteSpace(group_sn) ? "%" : group_sn.Trim());
+            para.Add("@doctor_sn", string.IsNullOrWhiteSpace(doctor_sn) ? "%" : doctor_sn.Trim());
+            para.Add("@clinic_type", string.IsNullOrWhiteSpace(clinic_type) ? "%" : clinic_type.Trim());
+            para.Add("@req_type", string.IsNullOrWhiteSpace(req_type) ? "%" : req_type.Trim());
+              
+            para.Add("@ampm", string.IsNullOrWhiteSpace(ampm) ? "%" : ampm.Trim());
+            para.Add("@window_no", string.IsNullOrWhiteSpace(window_no) ? "%" : window_no.Trim());
+            para.Add("@open_flag", string.IsNullOrWhiteSpace(open_flag) ? "%" : open_flag.Trim());
+
+
+            return Select(ghsql, para);
+
+
+        }
     }
 }

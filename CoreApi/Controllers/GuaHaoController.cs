@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Sockets;
@@ -36,13 +37,14 @@ namespace CoreApi.Controllers
         private readonly IBaseRequestRepository _baseRequestRepository;
         private readonly IChargeItemRepository _chargeItemRepository;
         private readonly IMzHaomingRepository _mzHaomingRepository;
+        private readonly IReportDataFastRepository _reportDataFastRepository;
 
 
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
-            IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository)
+            IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -61,7 +63,8 @@ namespace CoreApi.Controllers
             _baseRequestRepository = baseRequestRepository;
             _chargeItemRepository = chargeItemRepository;
             _mzHaomingRepository = mzHaomingRepository;
-             
+            _reportDataFastRepository = reportDataFastRepository;
+
         }
 
         [HttpGet]
@@ -607,6 +610,22 @@ namespace CoreApi.Controllers
             }
         }
 
+        public ResponseResult<List<BaseRequest>> GetRequestsByParams(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
+             string ampm, string window_no, string open_flag)
+        {
+
+            Log.Information($"GetRequestsByParams,{begin},{end}, {unit_sn},  {group_sn},  {doctor_sn},  {clinic_type},  {req_type},{ampm},  {window_no},  {open_flag}");
+            try
+            {
+                return _baseRequestRepository.GetRequestsByParams(begin, end,  unit_sn,  group_sn,  doctor_sn,  clinic_type,  req_type,ampm,  window_no,  open_flag);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<BaseRequest>>(ex.Message);
+            }
+        } 
+
         public ResponseResult<int> CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
         {
 
@@ -677,13 +696,13 @@ namespace CoreApi.Controllers
         /// <param name="yb_insutype"></param>
         /// <param name="yb_insuplc_admdvs"></param>
         /// <returns></returns>
-        public ResponseResult<int> UpdateUserYBInfo(string pid, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs)
+        public ResponseResult<int> UpdateUserYBInfo(string pid,string social_no, string yb_psn_no, string yb_insutype, string yb_insuplc_admdvs)
         {
 
-            Log.Information($"UpdateUserYBInfo,{pid} , {yb_psn_no}, {yb_insutype}, {yb_insuplc_admdvs}");
+            Log.Information($"UpdateUserYBInfo,{pid} ,{social_no}, {yb_psn_no}, {yb_insutype}, {yb_insuplc_admdvs}");
             try
             {
-                return _patientRepository.UpdateUserYBInfo(pid, yb_psn_no, yb_insutype, yb_insuplc_admdvs);
+                return _patientRepository.UpdateUserYBInfo(pid, social_no, yb_psn_no, yb_insutype, yb_insuplc_admdvs);
             }
             catch (Exception ex)
             {
@@ -726,5 +745,49 @@ namespace CoreApi.Controllers
                 return ErrorResult<GhRequest>(ex.Message);
             }
         }
+
+
+        public ResponseResult<DataSet> GetReportDataByCode(string code, string tb_name)
+        {
+
+            Log.Information($"GetReportDataByCode,{code},{tb_name}");
+            try
+            {
+                return _reportDataFastRepository.GetReportDataByCode(code, tb_name);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<DataSet>(ex.Message);
+            }
+        }
+        public ResponseResult<int> UpdateReportDataByCode(string code, byte[] report_com)
+        {
+
+            Log.Information($"UpdateReportDataByCode,{code},{report_com.Length}");
+            try
+            {
+                return _reportDataFastRepository.UpdateReportDataByCode(code, report_com);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+        }
+        public ResponseResult<List<ReportData>> GetReportData(string code)
+        {
+
+            Log.Information($"GetReportData,{code}");
+            try
+            {
+                return _reportDataFastRepository.GetReportData(code);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<ReportData>>(ex.Message);
+            }
+        } 
     }
 }

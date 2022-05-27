@@ -25,6 +25,7 @@ namespace Client
         List<GhRefundPayVM> paylist=new List<GhRefundPayVM>();
 
         PatientVM _userInfo;
+   
         string _datestr = "";
         string _patient_id = "";
         int _times = 0;

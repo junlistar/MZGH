@@ -140,6 +140,10 @@ namespace Client.FastReportLib
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        { 
+        }
+
         public static Report CreateReportAndLoadFrx()
         {
             Report report = new Report();

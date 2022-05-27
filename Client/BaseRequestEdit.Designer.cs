@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txtTotalNum = new Sunny.UI.UITextBox();
+            this.uiLabel9 = new Sunny.UI.UILabel();
+            this.cbxHaobie = new Sunny.UI.UIComboBox();
             this.cbxWinNo = new Sunny.UI.UIComboBox();
             this.uiLabel6 = new Sunny.UI.UILabel();
             this.cbxWeek = new Sunny.UI.UIComboBox();
@@ -48,9 +51,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.cbxHaobie = new Sunny.UI.UIComboBox();
-            this.uiLabel9 = new Sunny.UI.UILabel();
-            this.txtTotalNum = new Sunny.UI.UITextBox();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +92,64 @@
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.Text = "新增";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtTotalNum
+            // 
+            this.txtTotalNum.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.txtTotalNum.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.txtTotalNum.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.txtTotalNum.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.txtTotalNum.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.txtTotalNum.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.txtTotalNum.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTotalNum.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.txtTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtTotalNum.Location = new System.Drawing.Point(163, 234);
+            this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtTotalNum.Name = "txtTotalNum";
+            this.txtTotalNum.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.txtTotalNum.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.txtTotalNum.ShowText = false;
+            this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
+            this.txtTotalNum.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtTotalNum.TabIndex = 44;
+            this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiLabel9
+            // 
+            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel9.Location = new System.Drawing.Point(95, 234);
+            this.uiLabel9.Name = "uiLabel9";
+            this.uiLabel9.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel9.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel9.TabIndex = 43;
+            this.uiLabel9.Text = "总号数";
+            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cbxHaobie
+            // 
+            this.cbxHaobie.DataSource = null;
+            this.cbxHaobie.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxHaobie.FillColor = System.Drawing.Color.White;
+            this.cbxHaobie.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbxHaobie.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxHaobie.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
+            this.cbxHaobie.Items.AddRange(new object[] {
+            "上午",
+            "下午"});
+            this.cbxHaobie.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbxHaobie.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbxHaobie.Location = new System.Drawing.Point(412, 115);
+            this.cbxHaobie.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxHaobie.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxHaobie.Name = "cbxHaobie";
+            this.cbxHaobie.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHaobie.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbxHaobie.Size = new System.Drawing.Size(166, 29);
+            this.cbxHaobie.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.cbxHaobie.TabIndex = 28;
+            this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbxWinNo
             // 
@@ -369,7 +427,9 @@
             this.cbxSXW.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
             this.cbxSXW.Items.AddRange(new object[] {
             "上午",
-            "下午"});
+            "中午",
+            "下午",
+            "夜间"});
             this.cbxSXW.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.cbxSXW.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.cbxSXW.Location = new System.Drawing.Point(412, 154);
@@ -440,64 +500,6 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // cbxHaobie
-            // 
-            this.cbxHaobie.DataSource = null;
-            this.cbxHaobie.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxHaobie.FillColor = System.Drawing.Color.White;
-            this.cbxHaobie.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.cbxHaobie.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxHaobie.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
-            this.cbxHaobie.Items.AddRange(new object[] {
-            "上午",
-            "下午"});
-            this.cbxHaobie.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.cbxHaobie.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.cbxHaobie.Location = new System.Drawing.Point(412, 115);
-            this.cbxHaobie.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxHaobie.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxHaobie.Name = "cbxHaobie";
-            this.cbxHaobie.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxHaobie.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.cbxHaobie.Size = new System.Drawing.Size(166, 29);
-            this.cbxHaobie.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.cbxHaobie.TabIndex = 28;
-            this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiLabel9
-            // 
-            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(95, 234);
-            this.uiLabel9.Name = "uiLabel9";
-            this.uiLabel9.Size = new System.Drawing.Size(63, 23);
-            this.uiLabel9.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.uiLabel9.TabIndex = 43;
-            this.uiLabel9.Text = "总号数";
-            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtTotalNum
-            // 
-            this.txtTotalNum.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtTotalNum.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtTotalNum.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txtTotalNum.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtTotalNum.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtTotalNum.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txtTotalNum.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTotalNum.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.txtTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtTotalNum.Location = new System.Drawing.Point(163, 234);
-            this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtTotalNum.Name = "txtTotalNum";
-            this.txtTotalNum.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtTotalNum.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtTotalNum.ShowText = false;
-            this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
-            this.txtTotalNum.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.txtTotalNum.TabIndex = 44;
-            this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BaseRequestEdit
             // 

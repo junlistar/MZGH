@@ -8,9 +8,9 @@ namespace CoreTest
         static void Main(string[] args)
         {
 
-          var ds =  Data.Helpers.ConfigHelper.GetSectionValue("sql1");
+          //var ds =  Data.Helpers.ConfigHelper.GetSectionValue("sql1");
 
-           var a = 1;
+          // var a = 1;
             //GhRefundRepository ghRefundRepository = new GhRefundRepository();
             //var listttt = ghRefundRepository.GetGhRefund("2022-04-22", "00029694400");
 
@@ -44,6 +44,8 @@ namespace CoreTest
             //GhSearchRepository resp = new GhSearchRepository();
             //var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
 
+            ReportDataFastRepository rdf = new ReportDataFastRepository();
+           var ds = rdf.GetReportDataByCode("220001","test");
             Console.WriteLine("Hello World!");
         }
     }

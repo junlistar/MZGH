@@ -9,6 +9,7 @@ using System;
 using System.IO; 
 using System.Reflection; 
 
+
 namespace CoreApi
 {
     public class Startup
@@ -29,12 +30,12 @@ namespace CoreApi
             services.AddLogDashboard();
 
             services.AddControllers().AddControllersAsServices();
-               
+
             //services.AddMvc(opt =>
             //{
             //    opt.UseCentralRoutePrefix(new RouteAttribute("[controller]/[action]"));
             //});
-
+          
 
         }
 
