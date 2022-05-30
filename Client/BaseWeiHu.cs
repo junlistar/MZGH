@@ -62,7 +62,7 @@ namespace Client
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
-        {
+        { 
             InitData();
         }
 
@@ -163,7 +163,9 @@ namespace Client
                         end_no = p.end_no,
 
                         //op_date_str = p.op_date_str
-                    }).OrderBy(p => p.apstr).ToList();
+                    }).OrderBy(p => p.apstr).OrderBy(p => p.unit_name).OrderBy(p => p.group_name).OrderBy(p => p.clinic_name).OrderBy(p => p.doct_name).ToList();
+
+                    dgvlist.Init();
                     dgvlist.DataSource = ds;
                     dgvlist.AutoResizeColumns();
                 }

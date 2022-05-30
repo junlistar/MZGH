@@ -1,8 +1,10 @@
-﻿using Dapper;
+﻿using CoreData.Helpers;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,12 +69,25 @@ namespace Data
 
         public string GetSqlByTag(int tag)
         {
-            string tag_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
+            //string tag_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
 
-            var para = new DynamicParameters();
-            para.Add("@tag", tag);
+            //var para = new DynamicParameters();
+            //para.Add("@tag", tag);
 
-            return Convert.ToString(ExcuteScalar(tag_sql, para));
+            //return Convert.ToString(ExcuteScalar(tag_sql, para));
+
+            //if (!CacheHelper.Exsits(tag.ToString()))
+            //{
+                string str = File.ReadAllText(System.Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
+                CacheHelper.Add(tag.ToString(), str);
+                return str;
+            //}
+            //else
+            //{
+            //    return CacheHelper.Get<string>(tag.ToString());
+            //}
+
+
         }
 
         // sql语句
@@ -84,15 +99,15 @@ namespace Data
                 var reader = conn.ExecuteReader(sql);
                 table.Load(reader);
                 return table;
-            } 
+            }
         }
         // sql语句
-        public DataSet ExecuteDataSet(string sql,string tbname, object param, CommandType commandType)
+        public DataSet ExecuteDataSet(string sql, string tbname, object param, CommandType commandType)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
             {
                 //DataTable table = new DataTable();
-                var reader = conn.ExecuteReader(sql,param, null, null, commandType);
+                var reader = conn.ExecuteReader(sql, param, null, null, commandType);
                 //table.Load(reader);
                 DataSet ds = new DataSet();
                 ds.Tables.Add(tbname);
@@ -111,11 +126,11 @@ namespace Data
                 var reader = conn.ExecuteReader(sql, param, null, null, commandType);
                 table.Load(reader);
                 return table;
-            } 
-           
+            }
+
         }
 
-         
+
 
 
         public int Delete(Guid Id, string deleteSql)
@@ -200,6 +215,6 @@ namespace Data
             {
                 return conn.Execute(updateSql, entity);
             }
-        } 
+        }
     }
 }

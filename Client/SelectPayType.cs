@@ -841,7 +841,7 @@ namespace Client
                 if (result.status == 1 && result.data)
                 {
                     log.Info("挂号成功");
-                    UIMessageTip.ShowOk("挂号成功!",3000);
+                    UIMessageTip.ShowOk("挂号成功!",1500);
 
                     //打印单据 
                     //Print(pay_string);

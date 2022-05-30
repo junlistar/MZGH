@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
+using Client.Forms.Wedgit;
 using Client.ViewModel;
 using log4net;
 using Sunny.UI;
@@ -115,7 +116,7 @@ namespace Client
             crow = e.RowIndex;
             ccol = e.ColumnIndex;
 
-            if (e.RowIndex==-1)
+            if (e.RowIndex == -1)
             {
                 return;
 
@@ -381,6 +382,8 @@ namespace Client
             txtFrom.Text = DateTime.Now.ToShortDateString();
             txtTo.Text = DateTime.Now.ToShortDateString();
 
+            lblmsg.ForeColor = Color.Red;
+            lblmsg.Hide();
 
             var tmp = new List<BaseRequestVM>();
             var ds = tmp.Select(p => new
@@ -408,13 +411,12 @@ namespace Client
         bool isRun = false;
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            if (isRun)
-            {
-                return;
-            }
 
             try
             {
+                lblmsg.Show();
+                btnCreate.Enabled = false;
+                Application.DoEvents();
 
                 var begin = txtFrom.Value.ToString("yyyy-MM-dd");
                 var end = txtTo.Value.ToString("yyyy-MM-dd");
@@ -425,14 +427,11 @@ namespace Client
                     return;
                 }
 
-                isRun = true;
+                string paramurl = "";
 
-                string json = ""; string paramurl = "";
-                 
                 //根据patientId查找已存在的病人
                 Task<HttpResponseMessage> task = null;
-                json = "";
-
+                 
                 var d = new
                 {
                     begin = begin,
@@ -451,21 +450,24 @@ namespace Client
                 if (responseJson == 1 || responseJson == 2)
                 {
                     UIMessageTip.ShowOk("操作成功!");
-                    //刷新挂号数据
-                    InitData();
                 }
                 else
                 {
                     UIMessageTip.ShowOk("操作失败!");
                 }
-                isRun = false;
-                //this.Enabled = true;
-                // this.Close();
 
             }
             catch (Exception ex)
             {
                 log.Debug(ex.Message);
+            }
+            finally
+            {
+                btnCreate.Enabled = true;
+                lblmsg.Hide();
+
+                //刷新挂号数据
+                InitData();
             }
         }
 

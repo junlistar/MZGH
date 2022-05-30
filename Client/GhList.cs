@@ -172,10 +172,11 @@ namespace Client
                 unit_name = p.unit_name,
                 visit_flag = p.visit_flag,
                 visit_status = p.visit_status,
-            }).ToList();
-
+            }).ToList(); 
+            //dgvlist.AutoResizeColumns();
+            dgvlist.Init();
             dgvlist.DataSource = source;
-            dgvlist.AutoResizeColumns();
+         
 
 
         }
@@ -255,7 +256,8 @@ namespace Client
         private void btnSearch_Click(object sender, EventArgs e)
         {
             //查询列表
-            InitData();
+            InitData(); 
+             
         }
 
         private void btnExit_Click(object sender, EventArgs e)

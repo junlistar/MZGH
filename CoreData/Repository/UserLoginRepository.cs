@@ -12,7 +12,7 @@ namespace Data.Repository
 
         public List<LoginUsers> GetLoginUser(string uname, string pwd)
         {
-            //         string sql = @"SELECT xt_user.user_name,
+            //string sql = @"SELECT xt_user.user_name,
             //      xt_user.subsys_id,   
             //      xt_user.user_group,
             //      xt_user.user_mi, 
@@ -30,13 +30,15 @@ namespace Data.Repository
             var para = new DynamicParameters();
             para.Add("@tag", Helpers.ConfigHelper.GetSectionValue("UserLogin"));
 
-            string sql =Convert.ToString(base.ExcuteScalar(login_sql, para));
-             
+            string sql = Convert.ToString(base.ExcuteScalar(login_sql, para));
+
+
+            //string sql = GetSqlByTag(220001);
             if (string.IsNullOrEmpty(pwd) ){
                 pwd = "";
             }
-
-            para = new DynamicParameters();
+            //var para = new DynamicParameters();
+            //para = new DynamicParameters();
             para.Add("@uname", uname);
             para.Add("@pwd", pwd);
 

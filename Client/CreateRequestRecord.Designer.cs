@@ -83,6 +83,7 @@
             this.end_no1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.winnostr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.open_flag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblmsg = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDate)).BeginInit();
@@ -199,6 +200,7 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.lblmsg);
             this.uiGroupBox1.Controls.Add(this.btnCreate);
             this.uiGroupBox1.Controls.Add(this.btnOk);
             this.uiGroupBox1.Controls.Add(this.uiLabel2);
@@ -671,6 +673,17 @@
             this.open_flag1.HeaderText = "开放";
             this.open_flag1.Name = "open_flag1";
             // 
+            // lblmsg
+            // 
+            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmsg.Location = new System.Drawing.Point(851, 42);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(282, 23);
+            this.lblmsg.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.lblmsg.TabIndex = 15;
+            this.lblmsg.Text = "数据生成中，请稍后。。。";
+            this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // CreateRequestRecord
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -737,5 +750,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn end_no1;
         private System.Windows.Forms.DataGridViewTextBoxColumn winnostr1;
         private System.Windows.Forms.DataGridViewTextBoxColumn open_flag1;
+        private Sunny.UI.UILabel lblmsg;
     }
 }

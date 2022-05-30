@@ -38,8 +38,7 @@ namespace CoreApi.Controllers
         private readonly IChargeItemRepository _chargeItemRepository;
         private readonly IMzHaomingRepository _mzHaomingRepository;
         private readonly IReportDataFastRepository _reportDataFastRepository;
-
-
+         
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
@@ -64,7 +63,7 @@ namespace CoreApi.Controllers
             _chargeItemRepository = chargeItemRepository;
             _mzHaomingRepository = mzHaomingRepository;
             _reportDataFastRepository = reportDataFastRepository;
-
+             
         }
 
         [HttpGet]
@@ -628,7 +627,9 @@ namespace CoreApi.Controllers
 
         public ResponseResult<int> CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
         {
-
+            Stopwatch wt = new Stopwatch();
+            wt.Reset();
+            wt.Start();
             Log.Information($"CreateRequestRecord,{begin},{end},{weeks},{day},{op_id}");
             try
             {
@@ -638,6 +639,11 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
+            }
+            finally
+            {
+                wt.Stop();
+                Log.Information(string.Format("耗时:{0}", wt.ElapsedMilliseconds));
             }
         }
          

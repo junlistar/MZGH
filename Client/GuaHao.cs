@@ -66,7 +66,7 @@ namespace Client
         {
 
         }
-
+       
         public void GuaHao_Load(object sender, EventArgs e)
         {
             log.Debug("Load");
@@ -89,7 +89,8 @@ namespace Client
             //timer1.Interval = 3000;
             //timer1.Start();
 
-
+            //ControlHelper.InitScroll(gbxUnits);
+            ControlHelper.InitPanelScroll(gbxUnits);
         }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace Client
         { 
             cur_color = (this as UIPage).RectColor;
 
-            this.gbxUnits.RectColor = Color.Transparent;
+            //this.gbxUnits.RectColor = Color.Transparent;
              
             gbxUnits.Controls.Clear();
              
@@ -189,28 +190,42 @@ namespace Client
 
         private void btnAM_Click(object sender, EventArgs e)
         {
-            if (btnAM.FillColor != cur_color)
-            {
-                btnAM.FillColor = cur_color;
-                btnPM.FillColor = Color.LightSteelBlue;
+            //if (btnAM.FillColor != cur_color)
+            //{
+            //    btnAM.FillColor = cur_color;
+            //    btnPM.FillColor = Color.LightSteelBlue;
 
-                //todo:查询
-                LoadRequestInfo();
-            }
-
+            //    //todo:查询
+            //    LoadRequestInfo();
+            //}
+            APButtonClick(sender);
         }
-
         private void btnPM_Click(object sender, EventArgs e)
         {
-            if (btnPM.FillColor != cur_color)
-            {
-                btnAM.FillColor = Color.LightSteelBlue;
-                btnPM.FillColor = cur_color;
-                //todo:查询
-                LoadRequestInfo();
-
-            }
+           
+            APButtonClick(sender);
         }
+        private void btnMid_Click(object sender, EventArgs e)
+        {
+            APButtonClick(sender);
+        }
+
+        private void btnEve_Click(object sender, EventArgs e)
+        {
+            APButtonClick(sender);
+        }
+        public void APButtonClick(object sender)
+        {
+            btnAM.FillColor = Color.LightSteelBlue;
+            btnPM.FillColor = Color.LightSteelBlue;
+            btnMid.FillColor = Color.LightSteelBlue;
+            btnEve.FillColor = Color.LightSteelBlue;
+
+            var btn = sender as UIButton;
+            btn.FillColor = cur_color;
+
+            LoadRequestInfo();
+        } 
 
         //public void LoadRequestInfo()
         //{ 
@@ -228,7 +243,24 @@ namespace Client
         {
 
             string dh_data = this.dtpGhrq.Text;
-            string ampm = btnAM.FillColor == cur_color ? "a" : "p";
+
+            string ampm = "";
+
+            if (btnAM.FillColor == cur_color)
+            {
+                ampm = "a";
+            }else if (btnPM.FillColor == cur_color)
+            {
+                ampm = "p";
+            }
+            else if (btnMid.FillColor == cur_color)
+            {
+                ampm = "m";
+            }
+            else if (btnEve.FillColor == cur_color)
+            {
+                ampm = "e";
+            }
 
             Task<HttpResponseMessage> task = null;
             string json = "";
@@ -300,8 +332,9 @@ namespace Client
             int left = 0, top = 0;
             int btnWidth = 220;
             int btnHeight = 60;
-            int btnmargin = 25;
-            int leftmargin = 50;
+            int btnmargin = 10;
+            int leftmargin = 10;
+            int topmargin = 10;
 
             int textsize = 11;
 
@@ -350,11 +383,12 @@ namespace Client
                     }
                     if (top != 0)
                     {
-                        top += (int)(btn1.Height * 1.5);
+                        top += (int)(btn1.Height * 1.3);
                     }
                     else
                     {
-                        top = (int)(btn1.Height);
+                        top = topmargin;
+                        //top = (int)(btn1.Height);
                     }
                 }
                 btn1.Top = top;
@@ -459,7 +493,7 @@ namespace Client
 
         private void btnCika_Click(object sender, EventArgs e)
         {
-            SearchUser();
+            
 
             //更改刷卡方式按钮样式
             btnCika.FillColor = cur_color;
@@ -471,6 +505,10 @@ namespace Client
             if (string.IsNullOrEmpty(barcode))
             {
                 this.txtCode.Focus();
+            }
+            else
+            {
+                SearchUser();
             }
 
             //ReadCard rc = new ReadCard("磁卡");

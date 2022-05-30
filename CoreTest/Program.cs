@@ -8,9 +8,9 @@ namespace CoreTest
         static void Main(string[] args)
         {
 
-          //var ds =  Data.Helpers.ConfigHelper.GetSectionValue("sql1");
+            //var ds =  Data.Helpers.ConfigHelper.GetSectionValue("sql1");
 
-          // var a = 1;
+            // var a = 1;
             //GhRefundRepository ghRefundRepository = new GhRefundRepository();
             //var listttt = ghRefundRepository.GetGhRefund("2022-04-22", "00029694400");
 
@@ -32,7 +32,7 @@ namespace CoreTest
             //BaseRequestRepository _baseRequestRepository = new BaseRequestRepository() ;
             //var list = _baseRequestRepository.GetBaseRequests("","","","","","3","","","");
 
-            //GhRequestRepository rsp = new GhRequestRepository();
+            GhRequestRepository rsp = new GhRequestRepository();
             //rsp.CreateRequestRecord("2022-05-24", "2022-05-24", "1", 1, "00040");
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
@@ -44,8 +44,15 @@ namespace CoreTest
             //GhSearchRepository resp = new GhSearchRepository();
             //var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
 
-            ReportDataFastRepository rdf = new ReportDataFastRepository();
-           var ds = rdf.GetReportDataByCode("220001","test");
+            //ReportDataFastRepository rdf = new ReportDataFastRepository();
+            //var sql = rdf.GetSqlByTag(220001);
+
+            //var ds = rdf.GetReportDataByCode("220001","test");
+
+
+            //GetRequestsByDate,2022-05-30 00:00:00,2022-05-30 23:59:59 
+            //CreateRequestRecord,,2022-05-30,1,1,00040
+            rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
             Console.WriteLine("Hello World!");
         }
     }

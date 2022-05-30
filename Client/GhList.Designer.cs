@@ -549,6 +549,7 @@
             this.cbxJiahao.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.cbxJiahao.TabIndex = 4;
             this.cbxJiahao.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxJiahao.Visible = false;
             // 
             // uiLabel6
             // 
@@ -560,6 +561,7 @@
             this.uiLabel6.TabIndex = 7;
             this.uiLabel6.Text = "加号";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel6.Visible = false;
             // 
             // uiLabel12
             // 

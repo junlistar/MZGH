@@ -17,5 +17,10 @@ namespace Client.Forms.Wedgit
             InitializeComponent();
             this.BackColor = Color.White; this.TransparencyKey = Color.White;//设置窗体透明
         }
+
+        private void LoadingForm_Load(object sender, EventArgs e)
+        {
+           
+        }
     }
 }

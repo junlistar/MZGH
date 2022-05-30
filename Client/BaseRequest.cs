@@ -40,6 +40,7 @@ namespace Client
             InitDic();
 
             //InitData();
+             
 
         }
 
@@ -131,16 +132,6 @@ namespace Client
 
             #endregion
 
-            if (list != null && list.Count > 0)
-            {
-                //var ds = list.CopyTo(ds);
-
-                //if (visit_dept!="%")
-                //{
-                //    ds= list.Where(p => p.unit_sn.StartsWith(visit_dept));
-                //}
-            }
-
 
             var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
 
@@ -166,9 +157,16 @@ namespace Client
                 }
 
                 list = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
+                 
+                //设置分页控件总数
+                uiPagination1.TotalCount = list.Count;
+
+                //设置分页控件每页数量
+                uiPagination1.PageSize = 50;
+
                 if (list != null && list.Count > 0)
-                {
-                    var ds = list.Select(p => new
+                { 
+                    var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
                     {
                         request_sn = p.request_sn,
                         unit_name = p.unit_name,
@@ -183,8 +181,10 @@ namespace Client
                         open_flag_str = p.open_flag_str,
                         op_date_str = p.op_date_str
                     }).ToList();
+                    dgvlist.Init();
                     dgvlist.DataSource = ds;
                     dgvlist.AutoResizeColumns();
+                   
                 }
                 else
                 {
@@ -588,6 +588,30 @@ namespace Client
 
                 }
             }
+        }
+
+        private void uiPagination1_PageChanged(object sender, object pagingSource, int pageIndex, int count)
+        {
+            var data = list.Skip((pageIndex - 1) * count).Take(count).ToList();
+            var ds = data.Select(p => new
+            {
+                request_sn = p.request_sn,
+                unit_name = p.unit_name,
+                group_name = p.group_name,
+                doct_name = p.doct_name,
+                clinic_name = p.clinic_name,
+                weekstr = p.weekstr,
+                daystr = p.daystr,
+                apstr = p.apstr,
+                winnostr = p.winnostr,
+                totle_num = p.totle_num,
+                open_flag_str = p.open_flag_str,
+                op_date_str = p.op_date_str
+            }).ToList();
+            dgvlist.AutoResizeColumns();
+            dgvlist.DataSource = ds; 
+
+            lblTotalCount.Text = "总数据：" + list.Count.ToString(); 
         }
     }
 }
