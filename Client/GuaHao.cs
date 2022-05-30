@@ -1084,6 +1084,15 @@ namespace Client
             }
 
         }
-         
+
+        private void btnMingtian_Click(object sender, EventArgs e)
+        {
+            dtpGhrq.Value = DateTime.Now.AddDays(1);
+        }
+
+        private void btnHoutian_Click(object sender, EventArgs e)
+        {
+            dtpGhrq.Value = DateTime.Now.AddDays(2);
+        }
     }
 }
