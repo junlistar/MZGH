@@ -59,11 +59,11 @@ namespace Client
             {
                 RecordTimeSpan ts = new RecordTimeSpan();
 
-                DateTime startWeek = from.AddDays(1 - Convert.ToInt32(from.DayOfWeek.ToString("d")));  //本周周一
+                DateTime startWeek = DataTimeUtil.getMonday(from);// from.AddDays(1 - Convert.ToInt32(from.DayOfWeek.ToString("d")));  //本周周一
 
-                DateTime endWeek = startWeek.AddDays(6);  //本周周日 
+                DateTime endWeek = DataTimeUtil.getSunday(from); //startWeek.AddDays(6);  //本周周日 
 
-                if (from > startWeek)
+                if (from >= startWeek)
                 {
                     ts.from = from.ToShortDateString();
                     ts.from_day = Client.ClassLib.DataTimeUtil.GetDayFromEnum(from.DayOfWeek);
@@ -400,7 +400,22 @@ namespace Client
             }).ToList();
             dgvbase.DataSource = ds;
 
-            //dgvRequest.DataSource = null;
+            tmp = new List<BaseRequestVM>();
+            var ds2 = tmp.Select(p => new
+            {
+                request_date_str = p.request_date_str,
+                ampm = p.ampm,
+                unit_name,
+                group_name,
+                doct_name,
+                clinic_name,
+                begin_no = p.begin_no,
+                current_no = p.current_no,
+                totle_num,
+                winnostr,
+                open_flag = p.open_flag,
+            }).ToList();
+            dgvRequest.DataSource = ds2;
 
         }
 
@@ -408,7 +423,6 @@ namespace Client
         {
             InitUI();
         }
-        bool isRun = false;
         private void btnCreate_Click(object sender, EventArgs e)
         {
 

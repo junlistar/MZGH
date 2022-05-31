@@ -59,6 +59,15 @@ namespace Client
 
             txtDate.Value = DateTime.Now;
 
+            //设置上午下午
+            this.cbxSXW.Items.Clear();
+            cbxSXW.Items.Add("全部");
+            cbxSXW.Items.Add("上午");
+            cbxSXW.Items.Add("中午");
+            cbxSXW.Items.Add("下午");
+            cbxSXW.Items.Add("夜间");
+            cbxSXW.Text = "全部";
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

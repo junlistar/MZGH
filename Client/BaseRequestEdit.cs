@@ -298,13 +298,15 @@ namespace Client
             int total_num = 0;
 
 
-            if (cbxSXW.Text == "上午")
+
+            switch (cbxSXW.Text)
             {
-                ampm = "a";
-            }
-            else if (cbxSXW.Text == "下午")
-            {
-                ampm = "p";
+                case "上午": ampm = "a"; break;
+                case "中午": ampm = "m"; break;
+                case "下午": ampm = "p"; break;
+                case "夜间": ampm = "e"; break;
+                default:
+                    break;
             }
 
             switch (cbxWeek.Text)

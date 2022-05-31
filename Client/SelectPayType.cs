@@ -951,6 +951,10 @@ namespace Client
             //SaveReport(e.Report);
             using (MemoryStream stream = new MemoryStream())
             {
+                //解决多次保存问题
+                Config.DesignerSettings.CustomSaveDialog -= new OpenSaveDialogEventHandler(DesignerSettings_CustomSaveDialog);
+                Config.DesignerSettings.CustomSaveReport -= new OpenSaveReportEventHandler(DesignerSettings_CustomSaveReport);
+
                 //保存 
                 TargetReport.Save(stream);
 

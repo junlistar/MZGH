@@ -76,16 +76,16 @@ namespace Data
 
             //return Convert.ToString(ExcuteScalar(tag_sql, para));
 
-            //if (!CacheHelper.Exsits(tag.ToString()))
-            //{
+            if (!CacheHelper.Exsits(tag.ToString()))
+            {
                 string str = File.ReadAllText(System.Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
                 CacheHelper.Add(tag.ToString(), str);
                 return str;
-            //}
-            //else
-            //{
-            //    return CacheHelper.Get<string>(tag.ToString());
-            //}
+            }
+            else
+            {
+                return CacheHelper.Get<string>(tag.ToString());
+            }
 
 
         }

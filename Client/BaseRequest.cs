@@ -52,6 +52,15 @@ namespace Client
             clinicTypes = SessionHelper.clinicTypes;
             userDics = SessionHelper.userDics;
 
+            //设置上午下午
+            this.cbxSXW.Items.Clear();
+            cbxSXW.Items.Add("全部");
+            cbxSXW.Items.Add("上午");
+            cbxSXW.Items.Add("中午");
+            cbxSXW.Items.Add("下午");
+            cbxSXW.Items.Add("夜间");
+            cbxSXW.Text = "全部";
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -89,13 +98,14 @@ namespace Client
             var open_flag = "%";
 
 
-            if (cbxSXW.Text == "上午")
+            switch (cbxSXW.Text)
             {
-                ampm = "a";
-            }
-            else if (cbxSXW.Text == "下午")
-            {
-                ampm = "p";
+                case "上午": ampm = "a"; break;
+                case "下午": ampm = "p"; break;
+                case "中午": ampm = "m"; break;
+                case "夜间": ampm = "e"; break;
+                default:
+                    break;
             }
 
             switch (cbxWeek.Text)
@@ -495,6 +505,7 @@ namespace Client
             txtDoct.TextChanged += txtDoct_TextChanged;
             txtHaobie.TextChanged += txtHaobie_TextChanged;
 
+            InitData();
         }
 
         private void txtDoct_Leave(object sender, EventArgs e)

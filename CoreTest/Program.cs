@@ -32,13 +32,13 @@ namespace CoreTest
             //BaseRequestRepository _baseRequestRepository = new BaseRequestRepository() ;
             //var list = _baseRequestRepository.GetBaseRequests("","","","","","3","","","");
 
-            GhRequestRepository rsp = new GhRequestRepository();
+            //GhRequestRepository rsp = new GhRequestRepository();
             //rsp.CreateRequestRecord("2022-05-24", "2022-05-24", "1", 1, "00040");
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
-            //BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
-            //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-03 00:00:00", "2022-05-09 23:59:59", "3,3", -1);
+            BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
+            baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
             // ?begin=&end=&weeks=3&day=-1
 
             //GhSearchRepository resp = new GhSearchRepository();
@@ -52,7 +52,7 @@ namespace CoreTest
 
             //GetRequestsByDate,2022-05-30 00:00:00,2022-05-30 23:59:59 
             //CreateRequestRecord,,2022-05-30,1,1,00040
-            rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
+           // rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
             Console.WriteLine("Hello World!");
         }
     }

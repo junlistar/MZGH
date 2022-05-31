@@ -76,7 +76,7 @@ namespace Client
             var ybkId = txtybk.Text.Trim();
             var patientId = this.txtpatientid.Text;
             var userName = this.txtUserName.Text;
-            var sex = this.rdoMale.Checked ? "1" : "0";
+            var sex = this.rdoMale.Checked ? "1" : "2";
             var birth = this.dtpBirth.Text;
             var tel = this.txtTel.Text.Trim();
 

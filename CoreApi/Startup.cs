@@ -65,6 +65,8 @@ namespace CoreApi
             string IServicePath = Path.Combine(basePath, "CoreData.dll");
             Assembly IService = Assembly.LoadFrom(IServicePath);
             builder.RegisterAssemblyTypes(IService).InstancePerDependency().PropertiesAutowired().AsImplementedInterfaces();
+
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
         }
 
     }

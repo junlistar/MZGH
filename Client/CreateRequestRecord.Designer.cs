@@ -49,6 +49,7 @@
             this.lblTitle = new Sunny.UI.UILabel();
             this.btnCreate = new Sunny.UI.UISymbolButton();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.lblmsg = new Sunny.UI.UILabel();
             this.btnOk = new Sunny.UI.UISymbolButton();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.txtTo = new Sunny.UI.UIDatePicker();
@@ -83,7 +84,6 @@
             this.end_no1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.winnostr1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.open_flag1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblmsg = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDate)).BeginInit();
@@ -121,7 +121,7 @@
             this.btnReset.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnReset.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnReset.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Location = new System.Drawing.Point(691, 21);
+            this.btnReset.Location = new System.Drawing.Point(294, 16);
             this.btnReset.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReset.Name = "btnReset";
             this.btnReset.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -134,7 +134,6 @@
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "重新";
             this.btnReset.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Visible = false;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // btnExit
@@ -146,7 +145,7 @@
             this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(277, 14);
+            this.btnExit.Location = new System.Drawing.Point(413, 16);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -222,6 +221,17 @@
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
+            // 
+            // lblmsg
+            // 
+            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmsg.Location = new System.Drawing.Point(851, 42);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(282, 23);
+            this.lblmsg.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.lblmsg.TabIndex = 15;
+            this.lblmsg.Text = "数据生成中，请稍后。。。";
+            this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnOk
             // 
@@ -672,17 +682,6 @@
             this.open_flag1.DataPropertyName = "open_flag";
             this.open_flag1.HeaderText = "开放";
             this.open_flag1.Name = "open_flag1";
-            // 
-            // lblmsg
-            // 
-            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.Location = new System.Drawing.Point(851, 42);
-            this.lblmsg.Name = "lblmsg";
-            this.lblmsg.Size = new System.Drawing.Size(282, 23);
-            this.lblmsg.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.lblmsg.TabIndex = 15;
-            this.lblmsg.Text = "数据生成中，请稍后。。。";
-            this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CreateRequestRecord
             // 

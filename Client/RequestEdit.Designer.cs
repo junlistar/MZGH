@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txtDate = new Sunny.UI.UIDatePicker();
+            this.uiLabel1 = new Sunny.UI.UILabel();
             this.cbxRequestType = new Sunny.UI.UIComboBox();
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.txtTotalNum = new Sunny.UI.UITextBox();
@@ -49,8 +51,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.txtDate = new Sunny.UI.UIDatePicker();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -92,6 +92,38 @@
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.Text = "编辑";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtDate
+            // 
+            this.txtDate.FillColor = System.Drawing.Color.White;
+            this.txtDate.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate.Location = new System.Drawing.Point(423, 156);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate.MaxLength = 10;
+            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.txtDate.Size = new System.Drawing.Size(166, 29);
+            this.txtDate.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtDate.SymbolDropDown = 61555;
+            this.txtDate.SymbolNormal = 61555;
+            this.txtDate.TabIndex = 48;
+            this.txtDate.Text = "2022-05-24";
+            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate.Value = new System.DateTime(2022, 5, 24, 16, 53, 39, 51);
+            // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Location = new System.Drawing.Point(371, 156);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel1.TabIndex = 47;
+            this.uiLabel1.Text = "开放";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbxRequestType
             // 
@@ -382,7 +414,9 @@
             this.cbxSXW.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
             this.cbxSXW.Items.AddRange(new object[] {
             "上午",
-            "下午"});
+            "中午",
+            "下午",
+            "夜间"});
             this.cbxSXW.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.cbxSXW.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.cbxSXW.Location = new System.Drawing.Point(423, 194);
@@ -453,37 +487,6 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(371, 156);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(42, 23);
-            this.uiLabel1.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.uiLabel1.TabIndex = 47;
-            this.uiLabel1.Text = "开放";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // txtDate
-            // 
-            this.txtDate.FillColor = System.Drawing.Color.White;
-            this.txtDate.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(423, 156);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtDate.MaxLength = 10;
-            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtDate.Size = new System.Drawing.Size(166, 29);
-            this.txtDate.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.txtDate.SymbolDropDown = 61555;
-            this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 48;
-            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(2022, 5, 24, 16, 53, 39, 51);
             // 
             // RequestEdit
             // 

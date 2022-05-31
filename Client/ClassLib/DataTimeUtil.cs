@@ -176,14 +176,31 @@ namespace Client.ClassLib
 
         }
 
+        //获取周一
+        public static DateTime getMonday(DateTime now)
+        { 
+            DateTime temp = new DateTime(now.Year, now.Month, now.Day);
+            int count = now.DayOfWeek - DayOfWeek.Monday;
+            if (count == -1) count = 6;
 
+            return temp.AddDays(-count);
+        }
+        //获取周天
+        public static DateTime getSunday(DateTime now)
+        { 
+            DateTime temp = new DateTime(now.Year, now.Month, now.Day);
+            int count = now.DayOfWeek - DayOfWeek.Sunday;
+            if (count != 0) count = 7 - count;
+
+            return temp.AddDays(count);
+        }
 
         /// <summary>
         /// 当前周的第一天(星期一)
         /// </summary>
         /// <param name="yearWeek">周数，格式：yyyywww</param>
         /// <returns></returns>
-        private static DateTime GetWeekStartTime(string yearWeek)
+        public static DateTime GetWeekStartTime(string yearWeek)
         {
             int year = int.Parse(yearWeek.Substring(0, 4));
             //本年1月1日
@@ -203,7 +220,7 @@ namespace Client.ClassLib
          /// </summary>
          /// <param name="yearWeek">周数，格式：yyyywww</param>
          /// <returns></returns>
-        private static DateTime GetWeekEndTime(string yearWeek)
+        public static DateTime GetWeekEndTime(string yearWeek)
         {
             //当前周的星期一
             DateTime firstDayOfThisWeek = GetWeekStartTime(yearWeek);
