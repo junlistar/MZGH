@@ -97,7 +97,7 @@ namespace FastReportClient
         public string param_label { get; set; }
         public string param_type { get; set; }
         public string param_defaultvalue { get; set; }
-        public string param_logic_name { get; set; }
+        public string sqltag { get; set; }
         public string sort_no { get; set; }
     }
 }

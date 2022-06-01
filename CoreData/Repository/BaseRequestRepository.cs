@@ -61,24 +61,27 @@ namespace Data.Repository
             //修改
             if (!string.IsNullOrEmpty(request_sn))
             {
-                string sql = @"update mz_patient_mi
-set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
-home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type
-where patient_id=@patient_id";
+                //                string sql = @"update gh_base_request
+                //set [week]=@week,[day]=@day,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,
+                //clinic_type=@clinic_type,totle_num=@totle_num,op_id=@op_id,op_date=@op_date,open_flag=@open_flag,window_no=@window_no 
+                //where request_sn = @request_sn";
+
+                string sql = GetSqlByTag(220062);
                 var para = new DynamicParameters();
-                //para.Add("@social_no", sno);
-                //para.Add("@hic_no", hicno);
-                //para.Add("@p_bar_code", barcode);
-                //para.Add("@name", name);
-                //para.Add("@sex", sex);
-                //para.Add("@birthday", birthday);
-                //para.Add("@tel", tel);
-                //para.Add("@home_district", home_district);
-                //para.Add("@home_street", home_street);
-                //para.Add("@occupation_type", occupation_type);
-                //para.Add("@response_type", response_type);
-                //para.Add("@charge_type", charge_type);
-                //para.Add("@patient_id", pid);
+                para.Add("@request_sn", request_sn);
+                para.Add("@week", week);
+                para.Add("@day", day);
+                para.Add("@ampm", ampm);
+                para.Add("@unit_sn", unit_sn);
+                para.Add("@group_sn", group_sn);
+                para.Add("@doctor_sn", doctor_sn);
+                para.Add("@clinic_type", clinic_type);
+
+                para.Add("@totle_num", totle_num);
+                para.Add("@op_id", op_id);
+                para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                para.Add("@open_flag", open_flag);
+                para.Add("@window_no", window_no);
 
                 return Update(sql, para);
             }
@@ -133,14 +136,22 @@ where patient_id=@patient_id";
         }
 
         public int DeleteBaseRequest(string request_sn)
-        {
-
-            //挂号区间表
+        { 
             string segsql = GetSqlByTag(220057);
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
 
             return Update(segsql, para);
+        }
+        public List<BaseRequest> GetBaseRequestsBySN(string request_sn)
+        { 
+           // string segsql = @"select * from gh_base_request where request_sn=@request_sn";
+
+            string segsql = GetSqlByTag(220061);
+            var para = new DynamicParameters();
+            para.Add("@request_sn", request_sn);
+
+            return Select(segsql, para);
         }
 
 

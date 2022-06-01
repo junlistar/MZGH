@@ -17,6 +17,8 @@ namespace Data.IRepository
            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id);
         int DeleteBaseRequest(string request_sn);
 
+        List<BaseRequest> GetBaseRequestsBySN(string request_sn);
+
         List<BaseRequest> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day);
 
         List<BaseRequest> GetRequestsByDate(string begin, string end);

@@ -131,15 +131,13 @@ namespace Client
             try
             { 
                 Task<HttpResponseMessage> task = null;
-                string json = "";
-                HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
-                client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+                string json = ""; 
+                //client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken); 
                 string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={userName}&pwd={password}");
 
-                log.InfoFormat(client.BaseAddress+ paramurl);
+                log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress+ paramurl);
 
-                task = client.GetAsync(paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 var response = task.Result;

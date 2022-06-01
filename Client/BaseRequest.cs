@@ -20,28 +20,37 @@ namespace Client
     public partial class BaseRequest : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(BaseRequest));//typeof放当前类
-        static HttpClient client = null;
+       
         List<BaseRequestVM> list = null;
 
         public List<UnitVM> units = null;
         public List<ClinicTypeVM> clinicTypes = null;
         public List<UserDicVM> userDics = null;
 
+        public string current_sn = "";
+
         public BaseRequest()
         {
             InitializeComponent();
         }
         private void BaseRequest_Load(object sender, EventArgs e)
-        {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
-
+        { 
 
             InitDic();
 
             //InitData();
-             
 
+            dgv.CellClick += dgvks_CellContentClick;
+            dgv.KeyDown += dgvks_KeyDown;
+
+            dgvzk.CellClick += dgvzk_CellContentClick;
+            dgvzk.KeyDown += Dgvzk_KeyDown;
+
+            dgvhb.CellClick += dgvhb_CellContentClick;
+            dgvhb.KeyDown += Dgvhb_KeyDown;
+
+            dgvys.CellClick += dgvys_CellContentClick;
+            dgvys.KeyDown += Dgvys_KeyDown;
         }
 
         public void InitDic()
@@ -148,10 +157,10 @@ namespace Client
             //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
             string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
 
-            log.Info(client.BaseAddress + paramurl);
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = client.GetAsync(paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 var response = task.Result;
@@ -167,7 +176,9 @@ namespace Client
                 }
 
                 list = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
-                 
+
+                lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
+
                 //设置分页控件总数
                 uiPagination1.TotalCount = list.Count;
 
@@ -194,27 +205,11 @@ namespace Client
                     dgvlist.Init();
                     dgvlist.DataSource = ds;
                     dgvlist.AutoResizeColumns();
-                   
+                    dgvlist.ShowGridLine = true;
                 }
                 else
                 {
-                    var tmp = new List<BaseRequestVM>();
-                    var ds = tmp.Select(p => new
-                    {
-                        request_sn,
-                        unit_name,
-                        group_name,
-                        doct_name,
-                        clinic_name,
-                        weekstr,
-                        daystr,
-                        apstr,
-                        winnostr,
-                        totle_num,
-                        open_flag_str,
-                        op_date_str
-                    }).ToList();
-                    dgvlist.DataSource = ds;
+                    BindNullData();
                 }
 
             }
@@ -277,7 +272,6 @@ namespace Client
                 dgv.Columns["unit_sn"].Visible = false;
                 dgv.AutoResizeColumns();
 
-                dgv.CellClick += dgvks_CellContentClick;
                 dgv.Show();
             }
 
@@ -338,7 +332,6 @@ namespace Client
                 dgvzk.Columns["unit_sn"].Visible = false;
                 dgvzk.AutoResizeColumns();
 
-                dgvzk.CellClick += dgvzk_CellContentClick;
                 dgvzk.Show();
             }
         }
@@ -397,7 +390,6 @@ namespace Client
                 dgvys.Columns["emp_sn"].Visible = false;
                 dgvys.AutoResizeColumns();
 
-                dgvys.CellClick += dgvys_CellContentClick;
                 dgvys.Show();
             }
         }
@@ -455,7 +447,6 @@ namespace Client
                 dgvhb.Columns["d_code"].Visible = false;
                 dgvhb.AutoResizeColumns();
 
-                dgvhb.CellClick += dgvhb_CellContentClick;
                 dgvhb.Show();
             }
         }
@@ -500,12 +491,37 @@ namespace Client
             cbxDay.Text = "";
             cbxOpenFlag.Text = "";
 
+            lblTotalCount.Text = "总计：" + 0 + "条";
+
             txtks.TextChanged += txtks_TextChanged;
             txtzk.TextChanged += txtzk_TextChanged;
             txtDoct.TextChanged += txtDoct_TextChanged;
             txtHaobie.TextChanged += txtHaobie_TextChanged;
 
-            InitData();
+            //InitData();
+
+            BindNullData();
+        }
+
+        public void BindNullData()
+        {
+            var tmp = new List<BaseRequestVM>();
+            var ds = tmp.Select(p => new
+            {
+                request_sn,
+                unit_name,
+                group_name,
+                doct_name,
+                clinic_name,
+                weekstr,
+                daystr,
+                apstr,
+                winnostr,
+                totle_num,
+                open_flag_str,
+                op_date_str
+            }).ToList();
+            dgvlist.DataSource = ds;
         }
 
         private void txtDoct_Leave(object sender, EventArgs e)
@@ -559,6 +575,7 @@ namespace Client
         private void btnAdd_Click(object sender, EventArgs e)
         {
             BaseRequestEdit edit = new BaseRequestEdit(this);
+
             edit.ShowDialog();
         }
 
@@ -583,7 +600,7 @@ namespace Client
                     httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                     var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
 
-                    string res = client.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                     var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
 
                     if (responseJson == 1 || responseJson == 2)
@@ -622,7 +639,196 @@ namespace Client
             dgvlist.AutoResizeColumns();
             dgvlist.DataSource = ds; 
 
-            lblTotalCount.Text = "总数据：" + list.Count.ToString(); 
+            
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var index = dgvlist.SelectedIndex;
+
+            if (index >= 0)
+            { 
+                try
+                { 
+                    var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
+
+                    current_sn = request_sn;
+
+                    BaseRequestEdit edit = new BaseRequestEdit(this);
+                    edit.FormClosed += Edit_FormClosed;
+                    edit.ShowDialog();
+
+                    current_sn = "";
+                }
+                catch (Exception ex)
+                {
+                    UIMessageTip.ShowError(ex.ToString());
+
+                }
+            }
+        }
+
+        private void Edit_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            InitData();
+        }
+
+        private void txtks_KeyUp(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgv.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgv.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgv.Rows[0].Cells["unit_sn"].Value.ToString();
+                    var name = dgv.Rows[0].Cells["name"].Value.ToString();
+
+                    txtks.TextChanged -= txtks_TextChanged;
+                    txtks.Text = name;
+                    txtks.TagString = unit_sn;
+                    txtks.TextChanged += txtks_TextChanged;
+
+                    dgv.Hide();
+                }
+            }
+        }
+
+        private void dgvks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgv.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgv.SelectedIndex);
+
+                    dgvks_CellContentClick(sender, ev);
+                }
+            }
+
+        }
+
+        private void txtzk_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvzk.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvzk.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvzk.Rows[0].Cells["unit_sn"].Value.ToString();
+                    var name = dgvzk.Rows[0].Cells["name"].Value.ToString();
+
+                    txtzk.TextChanged -= txtzk_TextChanged;
+                    txtzk.Text = name;
+                    txtzk.TagString = unit_sn;
+                    txtzk.TextChanged += txtzk_TextChanged;
+
+                    dgvzk.Hide();
+                }
+            }
+        }
+
+
+
+        private void Dgvzk_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvzk.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvzk.SelectedIndex);
+
+                    dgvzk_CellContentClick(sender, ev);
+                }
+            }
+        }
+
+        private void txtHaobie_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvhb.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvhb.Rows.Count > 0)
+                {
+
+                    var code = dgvhb.Rows[0].Cells["code"].Value.ToString();
+                    var name = dgvhb.Rows[0].Cells["name"].Value.ToString();
+
+                    txtHaobie.TextChanged -= txtHaobie_TextChanged;
+                    txtHaobie.Text = name;
+                    txtHaobie.TagString = code;
+                    txtHaobie.TextChanged += txtHaobie_TextChanged;
+
+
+                    dgvhb.Hide();
+                }
+            }
+        }
+
+        private void Dgvhb_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvhb.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvhb.SelectedIndex);
+
+                    dgvhb_CellContentClick(sender, ev);
+                }
+            }
+        }
+
+        private void txtDoct_KeyUp(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvys.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvys.Rows[0].Cells["code"].Value.ToString();
+                    var name = dgvys.Rows[0].Cells["name"].Value.ToString();
+
+                    txtDoct.TextChanged -= txtDoct_TextChanged;
+                    txtDoct.Text = name;
+                    txtDoct.TagString = unit_sn;
+                    txtDoct.TextChanged += txtDoct_TextChanged;
+
+                    dgvys.Hide();
+                }
+            }
+        }
+        private void Dgvys_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvys.SelectedIndex);
+
+                    dgvys_CellContentClick(sender, ev);
+                }
+            }
+        }
+
     }
 }

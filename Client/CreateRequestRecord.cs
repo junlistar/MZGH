@@ -21,7 +21,7 @@ namespace Client
     public partial class CreateRequestRecord : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(BaseRequest));//typeof放当前类
-        static HttpClient client = null;
+       
         List<BaseRequestVM> list = null;
         string localweeks = "";
         int localday = -1;
@@ -107,6 +107,17 @@ namespace Client
             this.dgvDate.DataSource = list;
 
         }
+
+        private void UiListBox1_Leave(object sender, EventArgs e)
+        {
+            uiListBox1.Hide();
+        }
+
+        private void Listday_Leave(object sender, EventArgs e)
+        {
+            listday.Hide();
+        }
+
         UIListBox listday = new UIListBox();
 
         UIListBox uiListBox1 = new UIListBox();
@@ -143,7 +154,7 @@ namespace Client
                 uiListBox1.BringToFront();
                 uiListBox1.SelectedIndexChanged -= Cbx_SelectedIndexChanged;
                 uiListBox1.SelectedIndexChanged += Cbx_SelectedIndexChanged;
-                uiListBox1.Show();
+                uiListBox1.Show(); uiListBox1.Focus();
             }
             else if (e.ColumnIndex == 5)
             {
@@ -164,7 +175,7 @@ namespace Client
                 listday.BringToFront();
                 listday.SelectedIndexChanged -= Listday_SelectedIndexChanged;
                 listday.SelectedIndexChanged += Listday_SelectedIndexChanged;
-                listday.Show();
+                listday.Show(); listday.Focus();
             }
         }
 
@@ -239,8 +250,8 @@ namespace Client
                 var param = $"?begin={begin}&end={end}&weeks={weeks}&day={day}";
                 string paramurl = string.Format($"/api/GuaHao/GetBaseRequestsByWeekDay" + param);
 
-                log.Info(client.BaseAddress + paramurl);
-                task = client.GetAsync(paramurl);
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 var response = task.Result;
@@ -297,8 +308,8 @@ namespace Client
                 param = $"?begin={begin}&end={end}";
                 paramurl = string.Format($"/api/GuaHao/GetRequestsByDate" + param);
 
-                log.Info(client.BaseAddress + paramurl);
-                task = client.GetAsync(paramurl);
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
                 response = task.Result;
@@ -368,12 +379,13 @@ namespace Client
         }
 
         private void CreateRequestRecord_Load(object sender, EventArgs e)
-        {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
-
+        { 
 
             InitUI();
+
+
+            listday.Leave += Listday_Leave;
+            uiListBox1.Leave += UiListBox1_Leave;
 
         }
 
@@ -384,6 +396,11 @@ namespace Client
 
             lblmsg.ForeColor = Color.Red;
             lblmsg.Hide();
+
+            localweeks = "";
+            localday = -1;
+            List<RecordTimeSpan> list = new List<RecordTimeSpan>();
+            this.dgvDate.DataSource = list;
 
             var tmp = new List<BaseRequestVM>();
             var ds = tmp.Select(p => new
@@ -458,12 +475,15 @@ namespace Client
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");//begin, string end, string weeks, int day, string op_id
                 paramurl = string.Format($"/api/GuaHao/CreateRequestRecord?begin={d.begin}&end={d.end}&weeks={d.weeks}&day={d.day}&op_id={d.op_id}");
 
-                string res = client.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
 
                 if (responseJson == 1 || responseJson == 2)
                 {
                     UIMessageTip.ShowOk("操作成功!");
+
+                    //刷新挂号数据
+                    InitData();
                 }
                 else
                 {
@@ -480,8 +500,6 @@ namespace Client
                 btnCreate.Enabled = true;
                 lblmsg.Hide();
 
-                //刷新挂号数据
-                InitData();
             }
         }
 

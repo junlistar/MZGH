@@ -44,11 +44,23 @@ namespace Client
 
             dgv.CellClick += dgvks_CellContentClick;
             dgv.KeyDown += dgvks_KeyDown;
-
+             
+            dgvzk.CellClick += dgvzk_CellContentClick;
             dgvzk.KeyDown += Dgvzk_KeyDown;
+
+            dgvhb.CellClick += dgvhb_CellContentClick;
             dgvhb.KeyDown += Dgvhb_KeyDown;
+
+            dgvhl.CellClick += dgvhl_CellContentClick;
             dgvhl.KeyDown += Dgvhl_KeyDown;
+
+            dgvys.KeyDown += Dgvys_KeyDown;
+
+            dgvghy.CellClick += dgvghy_CellContentClick;
+            dgvghy.KeyDown += Dgvghy_KeyDown;
         }
+
+      
 
         public void InitUI()
         {
@@ -172,15 +184,48 @@ namespace Client
                 unit_name = p.unit_name,
                 visit_flag = p.visit_flag,
                 visit_status = p.visit_status,
-            }).ToList(); 
-            //dgvlist.AutoResizeColumns();
+            }).ToList();  
             dgvlist.Init();
             dgvlist.DataSource = source;
-         
+            dgvlist.AutoResizeColumns();
+            dgvlist.ShowGridLine = true;
 
 
         }
-
+        public void BindNullData()
+        {
+            List<GhSearchVM> list = new List<GhSearchVM>();
+            var source = list.Select(p => new
+            {
+                ampm = p.ampm,
+                charge_fee = p.charge_fee,
+                charge_name = p.charge_name,
+                clinic_name = p.clinic_name,
+                doctor_name = p.doctor_name,
+                flag = p.flag,
+                gh_date = p.gh_date,
+                gh_order = p.gh_order,
+                gh_sequence = p.gh_sequence,
+                gh_sequence_f = p.gh_sequence_f,
+                gh_time = p.gh_time,
+                group_name = p.group_name,
+                haoming_name = p.haoming_name,
+                opera_name = p.opera_name,
+                patient_id = p.patient_id,
+                patient_name = p.patient_name.Trim(),
+                p_bar_code = p.p_bar_code,
+                receipt_no = p.receipt_no,
+                receipt_sn = p.receipt_sn,
+                req_name = p.req_name,
+                response_name = p.response_name,
+                times = p.times,
+                unit_name = p.unit_name,
+                visit_flag = p.visit_flag,
+                visit_status = p.visit_status,
+            }).ToList(); 
+            dgvlist.Init();
+            dgvlist.DataSource = source;
+        }
 
         UIDataGridView dgv = new UIDataGridView();
         UIDataGridView dgvzk = new UIDataGridView();
@@ -303,7 +348,6 @@ namespace Client
                 dgvzk.Columns["unit_sn"].Visible = false;
                 dgvzk.AutoResizeColumns();
 
-                dgvzk.CellClick += dgvzk_CellContentClick;
                 dgvzk.Show();
             }
         }
@@ -365,7 +409,6 @@ namespace Client
                 dgvhb.Columns["d_code"].Visible = false;
                 dgvhb.AutoResizeColumns();
 
-                dgvhb.CellClick += dgvhb_CellContentClick;
                 dgvhb.Show();
             }
         }
@@ -428,7 +471,6 @@ namespace Client
                 dgvhl.Columns["d_code"].Visible = false;
                 dgvhl.AutoResizeColumns();
 
-                dgvhl.CellClick += dgvhl_CellContentClick;
                 dgvhl.Show();
             }
         }
@@ -469,8 +511,8 @@ namespace Client
             txtzk.TextChanged += txtzk_TextChanged;
 
             //查询列表
-            InitData();
-
+            //InitData();
+            BindNullData();
         }
 
         private void txtDoct_TextChanged(object sender, EventArgs e)
@@ -516,6 +558,7 @@ namespace Client
                 dgvys.Columns["emp_sn"].Visible = false;
                 dgvys.AutoResizeColumns();
 
+                dgvys.CellClick -= dgvys_CellContentClick;
                 dgvys.CellClick += dgvys_CellContentClick;
                 dgvys.Show();
             }
@@ -580,7 +623,6 @@ namespace Client
                 dgvghy.Columns["emp_sn"].Visible = false;
                 dgvghy.AutoResizeColumns();
 
-                dgvghy.CellClick += dgvghy_CellContentClick;
                 dgvghy.Show();
             }
         }
@@ -891,10 +933,86 @@ namespace Client
             dir.Add("address", "住址");
 
             //使用helper类导出DataTable数据到excel表格中,参数依次是 （DataTable数据源;  excel表名;  excel存放位置的绝对路径; 列名对应字典; 是否清空以前的数据，设置为false，表示内容追加; 每个sheet放的数据条数,如果超过该条数就会新建一个sheet存储）
-            ExcelHelper.ExportDTtoExcel(dataTable, "挂号数据查询", filePathAndName, dir, false, 400);
+            //ExcelHelper.ExportDTtoExcel(dataTable, "挂号数据查询", filePathAndName, dir, false, 400);
 
             //导出成功提示
             //ExportSuccessTips(filePathAndName);
+        }
+
+        private void txtDoct_KeyUp(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvys.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvys.Rows[0].Cells["code"].Value.ToString();
+                    var name = dgvys.Rows[0].Cells["name"].Value.ToString();
+
+                    txtDoct.TextChanged -= txtDoct_TextChanged;
+                    txtDoct.Text = name;
+                    txtDoct.TagString = unit_sn;
+                    txtDoct.TextChanged += txtDoct_TextChanged;
+
+                    dgvys.Hide();
+                }
+            }
+        }
+
+        private void txtGhUser_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvghy.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvghy.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvghy.Rows[0].Cells["code"].Value.ToString();
+                    var name = dgvghy.Rows[0].Cells["name"].Value.ToString();
+
+                    txtGhUser.TextChanged -= txtGhUser_TextChanged;
+                    txtGhUser.Text = name;
+                    txtGhUser.TagString = unit_sn;
+                    txtGhUser.TextChanged += txtGhUser_TextChanged;
+
+                    dgvghy.Hide();
+                }
+            }
+        }
+        private void Dgvghy_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvghy.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvghy.SelectedIndex);
+
+                    dgvghy_CellContentClick(sender, ev);
+                }
+            }
+        }
+
+        private void Dgvys_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvys.SelectedIndex);
+
+                    dgvys_CellContentClick(sender, ev);
+                }
+            }
         }
     }
 }

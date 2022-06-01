@@ -46,6 +46,16 @@ namespace Client
             cbxRequestType.DataSource = SessionHelper.requestTypes;
             cbxRequestType.ValueMember = "code";
             cbxRequestType.DisplayMember = "name";
+
+            dgv.CellClick += dgvks_CellContentClick;
+            dgv.KeyDown += dgvks_KeyDown;
+
+            dgvzk.CellClick += dgvzk_CellContentClick;
+            dgvzk.KeyDown += Dgvzk_KeyDown;
+
+
+            dgvys.CellClick += dgvys_CellContentClick;
+            dgvys.KeyDown += Dgvys_KeyDown;
         }
 
         public void InitDate()
@@ -138,16 +148,7 @@ namespace Client
                             break;
                     }
 
-                    switch (data.open_flag)
-                    {
-                        case 1:
-                            cbxOpenFlag.Text = "开放"; break;
-                        case 0:
-                            cbxOpenFlag.Text = "不开放"; break;
-                        default:
-                            cbxOpenFlag.Text = data.open_flag.ToString();
-                            break;
-                    }
+                  
                     switch (data.window_no)
                     {
                         case 0: cbxWinNo.Text = "所有窗口"; break;
@@ -515,6 +516,124 @@ namespace Client
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtks_KeyUp(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgv.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgv.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgv.Rows[0].Cells["unit_sn"].Value.ToString();
+                    var name = dgv.Rows[0].Cells["name"].Value.ToString();
+
+                    txtks.TextChanged -= txtks_TextChanged;
+                    txtks.Text = name;
+                    txtks.TagString = unit_sn;
+                    txtks.TextChanged += txtks_TextChanged;
+
+                    dgv.Hide();
+                }
+            }
+        }
+
+        private void dgvks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgv.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgv.SelectedIndex);
+
+                    dgvks_CellContentClick(sender, ev);
+                }
+            }
+
+        }
+
+        private void txtzk_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvzk.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvzk.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvzk.Rows[0].Cells["unit_sn"].Value.ToString();
+                    var name = dgvzk.Rows[0].Cells["name"].Value.ToString();
+
+                    txtzk.TextChanged -= txtzk_TextChanged;
+                    txtzk.Text = name;
+                    txtzk.TagString = unit_sn;
+                    txtzk.TextChanged += txtzk_TextChanged;
+
+                    dgvzk.Hide();
+                }
+            }
+        }
+
+
+
+        private void Dgvzk_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvzk.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvzk.SelectedIndex);
+
+                    dgvzk_CellContentClick(sender, ev);
+                }
+            }
+        }
+
+        private void txtDoct_KeyUp(object sender, KeyEventArgs e)
+        {
+            //MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyCode == Keys.Down)
+            {
+                this.dgvys.Focus();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.Rows.Count > 0)
+                {
+
+                    var unit_sn = dgvys.Rows[0].Cells["code"].Value.ToString();
+                    var name = dgvys.Rows[0].Cells["name"].Value.ToString();
+
+                    txtDoct.TextChanged -= txtDoct_TextChanged;
+                    txtDoct.Text = name;
+                    txtDoct.TagString = unit_sn;
+                    txtDoct.TextChanged += txtDoct_TextChanged;
+
+                    dgvys.Hide();
+                }
+            }
+        }
+        private void Dgvys_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvys.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvys.SelectedIndex);
+
+                    dgvys_CellContentClick(sender, ev);
+                }
+            }
         }
     }
 }

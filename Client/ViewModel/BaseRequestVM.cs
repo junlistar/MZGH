@@ -77,6 +77,8 @@ namespace Client.ViewModel
                 {
                     case "a": return "上午";
                     case "p": return "下午"; 
+                    case "m": return "中午"; 
+                    case "e": return "夜间";
                     default:
                         return ampm.ToString();
                 }

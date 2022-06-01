@@ -200,6 +200,12 @@
     <None Update="SQLS\220059.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\220062.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\220061.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\220060.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

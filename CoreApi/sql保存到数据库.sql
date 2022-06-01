@@ -597,4 +597,13 @@ and b.unit_sn like @unit_sn and
 
 
 
- 
+ --¹ÒºÅ  ²éÑ¯»ù´¡ºÅ±í 
+insert into wh_tag_sql(tag,[sql],[description])
+values(220061,'select * from gh_base_request where request_sn=@request_sn','¹ÒºÅ-²éÑ¯»ù´¡ºÅ±í');
+
+ --¹ÒºÅ  ±à¼­»ù´¡ºÅ±í 
+insert into wh_tag_sql(tag,[sql],[description])
+values(220062,'update gh_base_request
+set [week]=@week,[day]=@day,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,
+clinic_type=@clinic_type,totle_num=@totle_num,op_id=@op_id,op_date=@op_date,open_flag=@open_flag,window_no=@window_no 
+where request_sn = @request_sn','¹ÒºÅ-±à¼­»ù´¡ºÅ±í');

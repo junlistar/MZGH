@@ -564,6 +564,21 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
+
+        public ResponseResult<BaseRequest> GetBaseRequestsBySN(string request_sn)
+        {
+            Log.Information($"GetBaseRequestsBySN,{request_sn}");
+            try
+            {
+                return _baseRequestRepository.GetBaseRequestsBySN(request_sn).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<BaseRequest>(ex.Message);
+            }
+        }
+
         public ResponseResult<List<BaseRequest>> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day)
         {
 

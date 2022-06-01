@@ -988,7 +988,7 @@ namespace Client
                     btnEditUser.TagString = userInfo.patient_id.ToString(); btnEditUser.Show();
                     //this.txtpatientid.Text = userInfo["patient_id"].ToString();
                     lblName.Text = userInfo.name.ToString();
-                    lblAge.Text = userInfo.age.ToString();
+                    lblAge.Text = userInfo.age.ToString()+"岁";
                     lblhometel.Text = userInfo.home_tel.ToString();
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
                     lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";

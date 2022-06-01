@@ -484,6 +484,7 @@
             this.txtHaobie.TabIndex = 25;
             this.txtHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtHaobie.TextChanged += new System.EventHandler(this.txtHaobie_TextChanged);
+            this.txtHaobie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtHaobie_KeyUp);
             this.txtHaobie.Leave += new System.EventHandler(this.txtHaobie_Leave);
             // 
             // cbxWinNo
@@ -543,6 +544,7 @@
             this.txtDoct.TabIndex = 20;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.TextChanged += new System.EventHandler(this.txtDoct_TextChanged);
+            this.txtDoct.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDoct_KeyUp);
             this.txtDoct.Leave += new System.EventHandler(this.txtDoct_Leave);
             // 
             // txtzk
@@ -568,6 +570,7 @@
             this.txtzk.TabIndex = 15;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.TextChanged += new System.EventHandler(this.txtzk_TextChanged);
+            this.txtzk.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtzk_KeyUp);
             this.txtzk.Leave += new System.EventHandler(this.txtzk_Leave);
             // 
             // txtks
@@ -593,6 +596,7 @@
             this.txtks.TabIndex = 14;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.TextChanged += new System.EventHandler(this.txtks_TextChanged);
+            this.txtks.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtks_KeyUp);
             this.txtks.Leave += new System.EventHandler(this.txtks_Leave);
             // 
             // uiLabel10

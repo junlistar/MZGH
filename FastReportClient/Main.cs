@@ -245,18 +245,18 @@ namespace FastReportClient
                         if (item.report_code==-1)
                         {
                             //新增
-                            string sql2 = $@"insert into rt_report_params(report_code,param_name,param_label,param_type,param_defaultvalue,param_logic_name,sort_no)
-                                    values({item.report_code},{item.param_name},{item.param_label},{item.param_type},{item.param_defaultvalue},{item.param_logic_name},{item.sort_no})";
+                            string sql2 = $@"insert into rt_report_params_fast(report_code,param_name,param_label,param_type,param_defaultvalue,sqltag,sort_no)
+                                    values({code},'{item.param_name}','{item.param_label.Trim()}','{item.param_type}','{item.param_defaultvalue}','{item.sqltag}','{item.sort_no}')";
                             result = DbHelper.ExecuteNonQuery(sql2);
 
                         }
                         else
                         {
                             //修改
-                            string sql2 = $@"update rt_report_params 
-                                    set param_name={item.param_name},param_label={item.param_label},param_defaultvalue={item.param_defaultvalue},
-                                    param_logic_name={item.param_logic_name},param_type={item.param_type},sort_no={item.sort_no},
-                                    where report_code={item.report_code}";
+                            string sql2 = $@"update rt_report_params_fast 
+                                    set param_label='{item.param_label.Trim()}',param_defaultvalue='{item.param_defaultvalue}',
+                                    sqltag='{item.sqltag}',param_type='{item.param_type}',sort_no='{item.sort_no}'
+                                    where report_code={item.report_code} and  param_name='{item.param_name}'";
                             result = DbHelper.ExecuteNonQuery(sql2);
                         }  
                     }

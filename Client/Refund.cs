@@ -40,7 +40,7 @@ namespace Client
             this.dtprq.Value = DateTime.Now;
             this.txtCode.Text = _barcode;
 
-             
+            Search();
             //LoadData();
         }
 
@@ -100,15 +100,7 @@ namespace Client
                     if (depositList == null)
                     {
                         return;
-                    }
-                    //this.dgvDeposit.DataSource = depositList.Select(p => new
-                    //{
-                    //    p.charge,
-                    //    p.ledger_sn,
-                    //    p.sname,
-                    //    p.times,
-                    //    p.tname
-                    //}).ToList();
+                    } 
 
 
                     var showlist = depositList.Where(p => p.depo_status == "4").ToList();
@@ -410,7 +402,7 @@ namespace Client
 
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
-            Search();
+            //Search();
         }
 
         public void Search()
@@ -465,26 +457,8 @@ namespace Client
                 else
                 {
 
-                    var lis = new List<GhRefundVM>();
-                    this.dgvDeposit.DataSource = lis.Select(p => new
-                    {
-                        p.gh_date_str,
-                        //p.visit_dept,
-                        p.unit_name,
-                        p.visit_flag_name,
-                        p.times,
-                        p.ampm,
-                        p.charge,
-                        //p.charge_type,
-                        p.cheque_name,
-                        p.cheque_no,
-                        p.clinic_name,
-                        p.doctor_name,
-                        p.group_name,
-                        p.cheque_type,
-                        p.ledger_sn,
-                        p.item_no
-                    }).ToList();
+                    InitUserInfo();
+                    BindNullData();
                 }
             }
             catch (Exception ex)
@@ -524,80 +498,12 @@ namespace Client
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
                 if (result.data == null || result.data.Count == 0)
                 {
-                    var lis = new List<GhRefundVM>();
-                    this.dgvDeposit.DataSource = lis.Select(p => new
-                    {
-                        p.gh_date_str,
-                        //p.visit_dept,
-                        p.unit_name,
-                        p.visit_flag_name,
-                        p.times,
-                        p.ampmstr,
-                        p.charge,
-                        //p.charge_type,
-                        p.cheque_name,
-                        p.cheque_no,
-                        p.clinic_name,
-                        p.doctor_name,
-                        p.group_name,
-                        p.cheque_type,
-                        p.ledger_sn,
-                        p.item_no,
-                        p.receipt_sn
-                    }).ToList();
+                    BindNullData();
                     return;
                 }
-
-                //foreach (var item in result.data)
-                //{
-                //    paramurl = string.Format($"/api/GuaHao/GetGhDepositByStatus?pid={patient_id}&times={item.times}&status=7&cheque_type={item.cheque_type}&item_no={item.item_no}");
-
-                //    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
-                //    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                //    task.Wait();
-                //    response = task.Result;
-                //    if (response.IsSuccessStatusCode)
-                //    {
-                //        var read = response.Content.ReadAsStringAsync();
-                //        read.Wait();
-                //        json = read.Result;
-                //    }
-                //    else
-                //    {
-                //        log.Info(response.ReasonPhrase);
-                //    }
-                //    var lst = WebApiHelper.DeserializeObject<ResponseResult<List<GhDepositVM>>>(json).data;
-                //    if (lst.Count > 0)
-                //    {
-                //        item.visit_flag_name = "已退号";
-                //    }
-                //}
+                  
                 var list = result.data;
-
-                ////整理数据，便于审阅
-                //string times = "";
-                //foreach (var item in list)
-                //{
-                //    if (item.times != times)
-                //    {
-                //        times = item.times;
-                //    }
-                //    else
-                //    {
-                //        item.gh_date = DateTime.MinValue;
-                //        item.unit_name = "";
-                //        item.group_name = "";
-                //        //item.visit_flag_name = "";
-                //        item.times = "";
-                //        item.doctor_name = "";
-                //        item.ampm = "";
-                //        item.cheque_type = "";
-                //        item.clinic_name = "";
-                //    }
-                //}
-
+                 
                 var viewlist = list.Select(p => new
                 {
                     p.gh_date_str,
@@ -618,9 +524,10 @@ namespace Client
                 }).ToList();
 
 
-
+                dgvDeposit.Init();
                 this.dgvDeposit.DataSource = viewlist;
                 this.dgvDeposit.AutoResizeColumns();
+                dgvDeposit.ShowGridLine = true;
 
             }
             catch (Exception ex)
@@ -630,6 +537,29 @@ namespace Client
             }
         }
 
+        public void BindNullData()
+        {
+            var lis = new List<GhRefundVM>();
+            this.dgvDeposit.DataSource = lis.Select(p => new
+            {
+                p.gh_date_str,
+                p.unit_name,
+                p.visit_flag_name,
+                p.times,
+                p.ampmstr,
+                p.charge,
+                p.cheque_name,
+                p.cheque_no,
+                p.clinic_name,
+                p.doctor_name,
+                p.group_name,
+                p.cheque_type,
+                p.ledger_sn,
+                p.item_no,
+                p.receipt_sn
+            }).ToList();
+        }
+
         private void uiSymbolButton2_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -637,13 +567,28 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
-            this.txtCode.Text = "";
+
+            InitUI();
+            BindNullData();
+        }
+        public void InitUI()
+        {
+            txtCode.TextChanged -= txtCode_TextChanged;
+
+            this.txtCode.Text = ""; 
+
+            txtCode.TextChanged += txtCode_TextChanged;
+
+            InitUserInfo();
+        }
+        public void InitUserInfo()
+        {  
             this.lblAge.Text = "";
             this.lblhidid.Text = "";
             this.lblName.Text = "";
             this.lblSex.Text = "";
-
-            this.dtprq.Value = DateTime.Now;
+            lblSno.Text = "";
+            this.dtprq.Value = DateTime.Now; 
         }
 
         private void dtprq_ValueChanged(object sender, DateTime value)

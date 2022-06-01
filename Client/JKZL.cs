@@ -62,11 +62,7 @@ namespace Client
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (this.txtzlje.Text == "交款不足")
-            {
-                return;
-            }
+        { 
 
             ////获取数据 
             //MzghLib lib = new MzghLib();
@@ -91,10 +87,12 @@ namespace Client
             if (pay > ipt)
             {
                 this.txtzlje.Text = "交款不足";
+                btnSave.Enabled = false;
             }
             else
             {
                 this.txtzlje.Text = (ipt - pay).ToString("N2");
+                btnSave.Enabled = true;
 
             }
         }
