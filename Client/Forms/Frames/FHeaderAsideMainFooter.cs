@@ -64,12 +64,13 @@ namespace Client
             Footer.Text = "PageIndex: " + pageIndex;
 
             //UIMessageTip.Show(node.Text);
+            UIPage page = new UIPage();
 
             if (pageIndex == 1001)
             {
                 if (!ExistPage(1001))
                 {
-                    AddPage(new GuaHao());
+                    page = AddPage(new GuaHao());
                 }
                 SelectPage(1001);
             }
@@ -77,7 +78,7 @@ namespace Client
             {
                 if (!ExistPage(1002))
                 {
-                    AddPage(new GhList());
+                    page = AddPage(new GhList());
                 }
                 SelectPage(1002);
             }
@@ -85,7 +86,7 @@ namespace Client
             {
                 if (!ExistPage(1003))
                 {
-                    AddPage(new BaseRequest());
+                    page = AddPage(new BaseRequest());
                 }
                 SelectPage(1003);
             }
@@ -93,7 +94,7 @@ namespace Client
             {
                 if (!ExistPage(1004))
                 {
-                    AddPage(new CreateRequestRecord());
+                    page = AddPage(new CreateRequestRecord());
                 }
                 SelectPage(1004);
             }
@@ -113,6 +114,7 @@ namespace Client
                 }
                 SelectPage(1006);
             }
+            //page.Focus();page.Activate();  
         }
 
         BackgroundWorker _demoBGWorker = new BackgroundWorker();

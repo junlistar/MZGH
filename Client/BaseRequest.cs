@@ -20,7 +20,7 @@ namespace Client
     public partial class BaseRequest : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(BaseRequest));//typeof放当前类
-       
+
         List<BaseRequestVM> list = null;
 
         public List<UnitVM> units = null;
@@ -34,7 +34,7 @@ namespace Client
             InitializeComponent();
         }
         private void BaseRequest_Load(object sender, EventArgs e)
-        { 
+        {
 
             InitDic();
 
@@ -186,7 +186,7 @@ namespace Client
                 uiPagination1.PageSize = 50;
 
                 if (list != null && list.Count > 0)
-                { 
+                {
                     var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
                     {
                         request_sn = p.request_sn,
@@ -475,6 +475,11 @@ namespace Client
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        public void Reset()
+        {
             txtks.TextChanged -= txtks_TextChanged;
             txtzk.TextChanged -= txtzk_TextChanged;
             txtDoct.TextChanged -= txtDoct_TextChanged;
@@ -574,6 +579,11 @@ namespace Client
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            Add();
+        }
+
+        public void Add()
+        {
             BaseRequestEdit edit = new BaseRequestEdit(this);
 
             edit.ShowDialog();
@@ -581,39 +591,44 @@ namespace Client
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            Delete();
+        }
+
+        public void Delete()
+        {
             var index = dgvlist.SelectedIndex;
 
             if (index >= 0)
             {
 
-                try
+                if (UIMessageBox.ShowAsk("进行删除操作，是否确定？"))
                 {
-
-                    var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
-
-
-                    var d = new
+                    try
                     {
-                        request_sn = request_sn,
-                    };
-                    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
+                        var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
 
-                    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+                        var d = new
+                        {
+                            request_sn = request_sn,
+                        };
+                        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                        var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
 
-                    if (responseJson == 1 || responseJson == 2)
-                    {
-                        UIMessageTip.ShowOk("操作成功!");
-                        return;
+                        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+
+                        if (responseJson == 1 || responseJson == 2)
+                        {
+                            UIMessageTip.ShowOk("操作成功!");
+                            return;
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        UIMessageTip.ShowError(ex.ToString());
 
-                }
-                catch (Exception ex)
-                {
-                    UIMessageTip.ShowError(ex.ToString());
-
+                    }
                 }
             }
         }
@@ -637,19 +652,24 @@ namespace Client
                 op_date_str = p.op_date_str
             }).ToList();
             dgvlist.AutoResizeColumns();
-            dgvlist.DataSource = ds; 
+            dgvlist.DataSource = ds;
 
-            
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            Edit();
+        }
+
+        public void Edit()
+        {
             var index = dgvlist.SelectedIndex;
 
             if (index >= 0)
-            { 
+            {
                 try
-                { 
+                {
                     var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
 
                     current_sn = request_sn;
@@ -830,5 +850,32 @@ namespace Client
             }
         }
 
+        private void BaseRequest_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    InitData(); //查询
+                    break;
+                case Keys.F2:
+                    Reset();//重新
+                    break;
+                case Keys.F3:
+
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
+                case Keys.F5:
+                    Add();
+                    break;
+                case Keys.F6:
+                    Edit();
+                    break;
+                case Keys.F7:
+                    Delete();
+                    break;
+            }
+        }
     }
 }

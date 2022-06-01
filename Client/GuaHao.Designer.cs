@@ -79,6 +79,7 @@
             this.btnPM = new Sunny.UI.UIButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gbxUnits = new System.Windows.Forms.Panel();
+            this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlKeySuggest.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.uiSymbolButton4);
             this.pnlTitle.Controls.Add(this.uiSymbolButton1);
             this.pnlTitle.Controls.Add(this.uiSymbolButton3);
             this.pnlTitle.Controls.Add(this.uiSymbolButton2);
@@ -130,7 +132,7 @@
             this.uiSymbolButton1.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
-            this.uiSymbolButton1.Text = "重新";
+            this.uiSymbolButton1.Text = "重新(F1)";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
             // 
@@ -143,7 +145,7 @@
             this.uiSymbolButton3.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton3.Location = new System.Drawing.Point(496, 16);
+            this.uiSymbolButton3.Location = new System.Drawing.Point(627, 16);
             this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton3.Name = "uiSymbolButton3";
             this.uiSymbolButton3.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -167,7 +169,7 @@
             this.uiSymbolButton2.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton2.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton2.Location = new System.Drawing.Point(383, 16);
+            this.uiSymbolButton2.Location = new System.Drawing.Point(489, 16);
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
             this.uiSymbolButton2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -178,7 +180,7 @@
             this.uiSymbolButton2.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
-            this.uiSymbolButton2.Text = "退出";
+            this.uiSymbolButton2.Text = "退出(F4)";
             this.uiSymbolButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton2.Click += new System.EventHandler(this.uiSymbolButton2_Click);
             // 
@@ -191,7 +193,7 @@
             this.btnTuihao.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnTuihao.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnTuihao.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuihao.Location = new System.Drawing.Point(277, 16);
+            this.btnTuihao.Location = new System.Drawing.Point(383, 16);
             this.btnTuihao.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuihao.Name = "btnTuihao";
             this.btnTuihao.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -202,7 +204,7 @@
             this.btnTuihao.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnTuihao.Symbol = 62005;
             this.btnTuihao.TabIndex = 7;
-            this.btnTuihao.Text = "退号";
+            this.btnTuihao.Text = "退号(F3)";
             this.btnTuihao.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTuihao.Click += new System.EventHandler(this.btnTuihao_Click);
             // 
@@ -939,6 +941,30 @@
             this.gbxUnits.Size = new System.Drawing.Size(1196, 363);
             this.gbxUnits.TabIndex = 2;
             // 
+            // uiSymbolButton4
+            // 
+            this.uiSymbolButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton4.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton4.Location = new System.Drawing.Point(277, 16);
+            this.uiSymbolButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton4.Name = "uiSymbolButton4";
+            this.uiSymbolButton4.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton4.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.Size = new System.Drawing.Size(101, 35);
+            this.uiSymbolButton4.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiSymbolButton4.Symbol = 61487;
+            this.uiSymbolButton4.TabIndex = 11;
+            this.uiSymbolButton4.Text = "检索(F2)";
+            this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton4.Click += new System.EventHandler(this.uiSymbolButton4_Click);
+            // 
             // GuaHao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -953,6 +979,7 @@
             this.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.Text = "门诊挂号子系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Initialize += new System.EventHandler(this.GuaHao_Initialize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GuaHao_FormClosing);
             this.Load += new System.EventHandler(this.GuaHao_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyDown);
@@ -1019,5 +1046,6 @@
         private Sunny.UI.UIButton btnHoutian;
         private Sunny.UI.UIButton btnMingtian;
         private System.Windows.Forms.Panel gbxUnits;
+        private Sunny.UI.UISymbolButton uiSymbolButton4;
     }
 }

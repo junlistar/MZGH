@@ -719,6 +719,11 @@ namespace Client
         }
 
         private void btnTuihao_Click(object sender, EventArgs e)
+        { 
+            Refund();
+        }
+
+        public void Refund()
         {
             if (string.IsNullOrEmpty(btnEditUser.TagString))
             {
@@ -732,26 +737,25 @@ namespace Client
                 Refund rf = new Refund(txtCode.Text.Trim());
                 rf.ShowDialog();
             }
-
-            //Refund rf = new Refund(txtCode.Text.Trim());
-            //rf.ShowDialog();
-
         }
 
         private void uiSymbolButton2_Click(object sender, EventArgs e)
-        {
-
-
+        { 
             this.Close();
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            Reset();
+
+        }
+
+        public void Reset()
+        {
             txtCode.TextChanged -= txtCode_TextChanged;
             txtCode.Text = "";
             txtCode.TextChanged += txtCode_TextChanged;
             InitUIText();
-
         }
 
         private void gbxUnits_Click(object sender, EventArgs e)
@@ -840,7 +844,17 @@ namespace Client
             {
                 return;
             }
+            else
+            {
+                if (e.KeyCode!= Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
+                { 
+                    ShowSearchWindoe();
+                }
+            } 
+        }
 
+        public void ShowSearchWindoe()
+        {
             ks = new Forms.Wedgit.KeySuggest(this);
             Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
 
@@ -857,7 +871,6 @@ namespace Client
             ks.FormClosing += Ks_FormClosing;
 
             ks.Show();
-
         }
 
         private void Ks_FormClosing(object sender, FormClosingEventArgs e)
@@ -891,16 +904,23 @@ namespace Client
 
         private void GuaHao_KeyDown(object sender, KeyEventArgs e)
         {
-            //pnlKeySuggest.Top = this.Height - pnlKeySuggest.Height;
-            //pnlKeySuggest.Left = this.Width - pnlKeySuggest.Width;
+            switch (e.KeyCode)
+            {
 
-            //pnlKeySuggest.Top = 600;
-            //pnlKeySuggest.Left = 1000;
-            //pnlKeySuggest.BringToFront();
-            //pnlKeySuggest.BackColor = Color.Red;
+                case Keys.F1:
+                    Reset();//重新
+                    break;
 
-            //txtKeySearch.Focus();
-            //pnlKeySuggest.Visible = true; 
+                case Keys.F2:
+                    ShowSearchWindoe();//搜索
+                    break;
+                case Keys.F3:
+                    Refund();//退号
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
+            }
         }
 
         private void GuaHao_KeyPress(object sender, KeyPressEventArgs e)
@@ -1131,6 +1151,16 @@ namespace Client
         private void btnHoutian_Click(object sender, EventArgs e)
         {
             dtpGhrq.Value = DateTime.Now.AddDays(2);
+        }
+
+        private void uiSymbolButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GuaHao_Initialize(object sender, EventArgs e)
+        {
+            this.Focus();
         }
     }
 }

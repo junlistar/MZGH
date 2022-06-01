@@ -136,6 +136,11 @@ namespace Client
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
+            TuiHao();
+        }
+
+        public void TuiHao()
+        {
             if (this.dgvDeposit.SelectedRows.Count == 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
@@ -173,7 +178,7 @@ namespace Client
 
                 var datestr = dtprq.Value.ToString("yyyy-MM-dd");
                 var patient_id = lblhidid.Text;
-                RefundPayList payList = new RefundPayList(userInfo,datestr, patient_id, times);
+                RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
 
                 if (payList.ShowDialog() == DialogResult.OK)
                 {
@@ -338,21 +343,7 @@ namespace Client
                         UIMessageTip.ShowWarning("数据已过期，请重新查询！");
                         return;
                     }
-                }
-
-
-                //vm.charge = Convert.ToDecimal(this.dgvDeposit.SelectedRows[0].Cells["charge"].Value);
-                // vm.cheque_type = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["cheque_type"].Value);
-                //vm.cheque_no = Convert.ToString(this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value);
-                //vm.item_no = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
-
-
-                //vm.depo_status = this.dgvDeposit.SelectedRows[0].Cells["depo_status"].Value.ToString();
-                //vm.price_opera = this.dgvDeposit.SelectedRows[0].Cells["price_opera"].Value.ToString();
-                //vm.price_date = Convert.ToDateTime(this.dgvDeposit.SelectedRows[0].Cells["price_date_str"].Value);
-                //vm.mz_dept_no = this.dgvDeposit.SelectedRows[0].Cells["mz_dept_no"].Value.ToString();
-                // vm.price_date = DateTime.Now;
-
+                } 
 
 
                 var aa = new
@@ -567,10 +558,15 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
 
+        public void Reset()
+        {
             InitUI();
             BindNullData();
         }
+
         public void InitUI()
         {
             txtCode.TextChanged -= txtCode_TextChanged;
@@ -616,6 +612,11 @@ namespace Client
         }
 
         private void btnCashRefund_Click(object sender, EventArgs e)
+        {
+            XianJinTuiHao();
+
+        }
+        public void XianJinTuiHao()
         {
             if (this.dgvDeposit.SelectedRows.Count == 0)
             {
@@ -685,7 +686,7 @@ namespace Client
                     if (responseJson.data == 1)
                     {
                         MessageBox.Show("退号成功!");
-                        
+
                     }
                     else
                     {
@@ -701,9 +702,7 @@ namespace Client
             {
 
             }
-
         }
-
         private void dgvDeposit_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
             //if (e.RowIndex >= dgvDeposit.Rows.Count - 1)
@@ -794,6 +793,43 @@ namespace Client
             if (e.KeyCode == Keys.Enter)
             {
                 Search();
+            }
+        }
+
+        private void dgvDeposit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
+            if (dgvDeposit.SelectedIndex!=-1)
+            {
+                var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
+
+                var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
+
+                var datestr = dtprq.Value.ToString("yyyy-MM-dd");
+                var patient_id = lblhidid.Text;
+                RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
+                payList.ShowDialog();
+            }
+        }
+
+        private void Refund_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+
+                case Keys.F1:
+                    Reset();
+                    break;
+
+                case Keys.F2:
+                    TuiHao();
+                    break;
+                case Keys.F3:
+                    XianJinTuiHao();
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
             }
         }
     }

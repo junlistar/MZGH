@@ -499,12 +499,14 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.uiGroupBox1);
+            this.KeyPreview = true;
             this.Name = "RequestEdit";
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.Text = "基础号表编辑";
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Load += new System.EventHandler(this.BaseRequestEdit_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RequestEdit_KeyDown);
             this.uiGroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 

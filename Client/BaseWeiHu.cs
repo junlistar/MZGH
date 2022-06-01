@@ -483,6 +483,11 @@ namespace Client
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        public void Reset()
+        {
             txtks.TextChanged -= txtks_TextChanged;
             txtzk.TextChanged -= txtzk_TextChanged;
             txtDoct.TextChanged -= txtDoct_TextChanged;
@@ -559,9 +564,14 @@ namespace Client
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            try
-            {
+            Edit();
 
+        }
+
+        public void Edit()
+        {
+            try
+            {  
                 if (dgvlist.Rows.Count > 0 && dgvlist.SelectedIndex >= 0)
                 {
                     var record_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["record_sn"].Value;
@@ -571,7 +581,7 @@ namespace Client
                 }
                 else
                 {
-                     
+
                 }
 
             }
@@ -579,7 +589,6 @@ namespace Client
             {
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -774,6 +783,27 @@ namespace Client
 
                     dgvys_CellContentClick(sender, ev);
                 }
+            }
+        }
+
+        private void BaseWeiHu_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+
+                case Keys.F1:
+                    InitData();
+                    break;
+
+                case Keys.F2:
+                    Reset();
+                    break;
+                case Keys.F3:
+                    Edit();
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
             }
         }
     }

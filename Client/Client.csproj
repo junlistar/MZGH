@@ -158,6 +158,12 @@
     <Compile Include="FastReport\Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetailPayList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailPayList.Designer.cs">
+      <DependentUpon>DetailPayList.cs</DependentUpon>
+    </Compile>
     <Compile Include="RefundPayList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -368,6 +374,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\LoadingForm.resx">
       <DependentUpon>LoadingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailPayList.resx">
+      <DependentUpon>DetailPayList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RefundPayList.resx">
       <DependentUpon>RefundPayList.cs</DependentUpon>

@@ -635,5 +635,13 @@ namespace Client
                 }
             }
         }
+
+        private void RequestEdit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

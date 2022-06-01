@@ -120,7 +120,7 @@
             this.btnAdd.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnAdd.Symbol = 61508;
             this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "编辑";
+            this.btnAdd.Text = "编辑(F3)";
             this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -144,7 +144,7 @@
             this.btnSearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnSearch.Symbol = 61442;
             this.btnSearch.TabIndex = 11;
-            this.btnSearch.Text = "查询";
+            this.btnSearch.Text = "查询(F1)";
             this.btnSearch.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
@@ -168,7 +168,7 @@
             this.btnReset.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnReset.Symbol = 61473;
             this.btnReset.TabIndex = 10;
-            this.btnReset.Text = "重新";
+            this.btnReset.Text = "重新(F2)";
             this.btnReset.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -192,7 +192,7 @@
             this.btnExit.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
-            this.btnExit.Text = "退出";
+            this.btnExit.Text = "退出(F4)";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -718,12 +718,14 @@
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.dgvlist);
             this.Controls.Add(this.pnlTitle);
+            this.KeyPreview = true;
             this.Name = "BaseWeiHu";
             this.PageIndex = 1005;
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.Text = "基础号表维护";
             this.Load += new System.EventHandler(this.BaseRequest_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseWeiHu_KeyDown);
             this.pnlTitle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).EndInit();
             this.uiGroupBox1.ResumeLayout(false);

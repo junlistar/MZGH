@@ -493,6 +493,11 @@ namespace Client
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        public void Reset()
+        {
             txtks.TextChanged -= txtks_TextChanged;
             txtzk.TextChanged -= txtzk_TextChanged;
 
@@ -1012,6 +1017,25 @@ namespace Client
 
                     dgvys_CellContentClick(sender, ev);
                 }
+            }
+        }
+
+        private void GhList_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            { 
+                case Keys.F1:
+                    InitData(); //查询
+                    break; 
+                case Keys.F2:
+                    Reset();//重新
+                    break;
+                case Keys.F3:
+                     
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
             }
         }
     }
