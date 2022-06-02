@@ -114,7 +114,10 @@ namespace Client
                 }
                 SelectPage(1006);
             }
-            //page.Focus();page.Activate();  
+            //page.Focus();
+            //MainTabControl.Select();//.uit.MainContainer.SelectedTab.Activate();
+
+            //MessageBox.Show(UIHeaderAsideMainFrame.ActiveForm.ToString());
         }
 
         BackgroundWorker _demoBGWorker = new BackgroundWorker();

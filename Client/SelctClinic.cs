@@ -111,7 +111,7 @@ namespace Client
         /// <param name="e"></param>
         private void btnClinic_Click(object sender, EventArgs e)
         {
-            
+
 
             var btn = sender as UIButton;
             foreach (var item in list)
@@ -125,8 +125,8 @@ namespace Client
                     fe.ShowDialog();
                 }
 
-            } 
-             
+            }
+
 
             this.Close();
         }

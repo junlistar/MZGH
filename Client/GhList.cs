@@ -58,6 +58,8 @@ namespace Client
 
             dgvghy.CellClick += dgvghy_CellContentClick;
             dgvghy.KeyDown += Dgvghy_KeyDown;
+
+            this.Focus();
         }
 
       
@@ -1037,6 +1039,15 @@ namespace Client
                     this.Close();//退出
                     break;
             }
+        }
+
+        private void GhList_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.Focused)
+            {
+                this.Focus();
+            }
+            
         }
     }
 }

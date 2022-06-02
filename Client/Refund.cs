@@ -140,13 +140,12 @@ namespace Client
         }
 
         public void TuiHao()
-        {
+        { 
             if (this.dgvDeposit.SelectedRows.Count == 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
                 return;
             }
-
             try
             {
                 GhDepositVM vm = new GhDepositVM();
@@ -164,6 +163,12 @@ namespace Client
                 else if (vm.sname == "取消分诊")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
+                    return;
+                }
+
+                if (dtprq.Value.Date<DateTime.Now.Date)
+                {
+                    UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
                     return;
                 }
 
@@ -631,6 +636,11 @@ namespace Client
                 if (vm.sname == "已退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
+                    return;
+                }
+                if (dtprq.Value.Date < DateTime.Now.Date)
+                {
+                    UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
                     return;
                 }
 

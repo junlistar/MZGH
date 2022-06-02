@@ -33,6 +33,7 @@
             this.previewControl1 = new FastReport.Preview.PreviewControl();
             this.report1 = new FastReport.Report();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.uiFlowLayoutPanel1 = new Sunny.UI.UIFlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.report1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             this.previewControl1.PageOffset = new System.Drawing.Point(10, 10);
             this.previewControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.previewControl1.SaveInitialDirectory = null;
-            this.previewControl1.Size = new System.Drawing.Size(776, 399);
+            this.previewControl1.Size = new System.Drawing.Size(776, 85);
             this.previewControl1.TabIndex = 1;
             // 
             // report1
@@ -74,16 +75,32 @@
             this.textBox1.Size = new System.Drawing.Size(100, 21);
             this.textBox1.TabIndex = 2;
             // 
+            // uiFlowLayoutPanel1
+            // 
+            this.uiFlowLayoutPanel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiFlowLayoutPanel1.Location = new System.Drawing.Point(23, 153);
+            this.uiFlowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiFlowLayoutPanel1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiFlowLayoutPanel1.Name = "uiFlowLayoutPanel1";
+            this.uiFlowLayoutPanel1.Padding = new System.Windows.Forms.Padding(2);
+            this.uiFlowLayoutPanel1.ShowText = false;
+            this.uiFlowLayoutPanel1.Size = new System.Drawing.Size(610, 235);
+            this.uiFlowLayoutPanel1.TabIndex = 3;
+            this.uiFlowLayoutPanel1.Text = "uiFlowLayoutPanel1";
+            this.uiFlowLayoutPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.uiFlowLayoutPanel1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.previewControl1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.report1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -96,5 +113,6 @@
         private FastReport.Preview.PreviewControl previewControl1;
         private FastReport.Report report1;
         private System.Windows.Forms.TextBox textBox1;
+        private Sunny.UI.UIFlowLayoutPanel uiFlowLayoutPanel1;
     }
 }

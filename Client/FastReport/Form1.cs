@@ -1,5 +1,6 @@
 ﻿using FastReport;
 using FastReport.Preview;
+using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -54,6 +55,21 @@ namespace Client.FastReportLib
 
 
             return report;
-        } 
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            int btnWidth = 220;
+            int btnHeight = 60;
+            for (int i = 0; i < 200; i++)
+            {
+                var btn = new UIButton();
+                btn.Width = btnWidth;
+                btn.Height = btnHeight;
+                btn.Text = "按钮" + (i + 1);
+                uiFlowLayoutPanel1.Add(btn);
+                
+            }
+        }
     }
 }

@@ -37,10 +37,22 @@ namespace FastReportClient
 
         private void SelectReportFrom_Load(object sender, EventArgs e)
         {
-            string sql = "select report_code,short_name,long_name,report_sql from rt_report_data_fast ";//where report_code = 220001
+            string sql = "select report_code,short_name,long_name,report_sql from rt_report_data_fast order by report_code";//where report_code = 220001
             DataTable dt = DbHelper.ExecuteDataTable(sql);
             dataGridView1.DataSource = dt;
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string sql = $"select report_code,short_name,long_name,report_sql from rt_report_data_fast where report_code like '%{txtcode.Text.Trim()}%' order by report_code";//where report_code = 220001
+            DataTable dt = DbHelper.ExecuteDataTable(sql);
+            dataGridView1.DataSource = dt;
         }
     }
 }

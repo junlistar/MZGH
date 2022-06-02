@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
@@ -78,8 +79,8 @@
             this.btnAM = new Sunny.UI.UIButton();
             this.btnPM = new Sunny.UI.UIButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.gbxUnits = new System.Windows.Forms.Panel();
-            this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
+            this.uiBreadcrumb2 = new Sunny.UI.UIBreadcrumb();
+            this.gbxUnits = new Sunny.UI.UIFlowLayoutPanel();
             this.pnlTitle.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlKeySuggest.SuspendLayout();
@@ -111,6 +112,30 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.Click += new System.EventHandler(this.pnlTitle_Click);
+            // 
+            // uiSymbolButton4
+            // 
+            this.uiSymbolButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton4.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton4.Location = new System.Drawing.Point(277, 16);
+            this.uiSymbolButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton4.Name = "uiSymbolButton4";
+            this.uiSymbolButton4.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton4.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton4.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton4.Size = new System.Drawing.Size(101, 35);
+            this.uiSymbolButton4.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiSymbolButton4.Symbol = 61487;
+            this.uiSymbolButton4.TabIndex = 11;
+            this.uiSymbolButton4.Text = "检索(F2)";
+            this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton4.Click += new System.EventHandler(this.uiSymbolButton4_Click);
             // 
             // uiSymbolButton1
             // 
@@ -229,12 +254,12 @@
             this.pnlSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlSearch.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlSearch.Location = new System.Drawing.Point(4, 89);
+            this.pnlSearch.Location = new System.Drawing.Point(4, 90);
             this.pnlSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlSearch.Name = "pnlSearch";
             this.pnlSearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlSearch.Size = new System.Drawing.Size(1196, 236);
+            this.pnlSearch.Size = new System.Drawing.Size(1196, 222);
             this.pnlSearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlSearch.TabIndex = 1;
             this.pnlSearch.Text = null;
@@ -930,46 +955,51 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // uiBreadcrumb2
+            // 
+            this.uiBreadcrumb2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiBreadcrumb2.ItemIndex = 0;
+            this.uiBreadcrumb2.Items.AddRange(new object[] {
+            "选择科室",
+            "选择医生"});
+            this.uiBreadcrumb2.Location = new System.Drawing.Point(4, 316);
+            this.uiBreadcrumb2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiBreadcrumb2.Name = "uiBreadcrumb2";
+            this.uiBreadcrumb2.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiBreadcrumb2.Size = new System.Drawing.Size(541, 29);
+            this.uiBreadcrumb2.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiBreadcrumb2.TabIndex = 4;
+            this.uiBreadcrumb2.Text = "uiBreadcrumb2";
+            this.uiBreadcrumb2.UnSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(213)))), ((int)(((byte)(207)))));
+            this.uiBreadcrumb2.ItemIndexChanged += new Sunny.UI.UIBreadcrumb.OnValueChanged(this.uiBreadcrumb2_ItemIndexChanged);
+            // 
             // gbxUnits
             // 
             this.gbxUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbxUnits.AutoScroll = true;
-            this.gbxUnits.Location = new System.Drawing.Point(4, 334);
+            this.gbxUnits.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.gbxUnits.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.gbxUnits.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gbxUnits.Location = new System.Drawing.Point(4, 349);
+            this.gbxUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxUnits.MinimumSize = new System.Drawing.Size(1, 1);
             this.gbxUnits.Name = "gbxUnits";
-            this.gbxUnits.Size = new System.Drawing.Size(1196, 363);
-            this.gbxUnits.TabIndex = 2;
-            // 
-            // uiSymbolButton4
-            // 
-            this.uiSymbolButton4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton4.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton4.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiSymbolButton4.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton4.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton4.Location = new System.Drawing.Point(277, 16);
-            this.uiSymbolButton4.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton4.Name = "uiSymbolButton4";
-            this.uiSymbolButton4.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton4.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiSymbolButton4.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton4.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton4.Size = new System.Drawing.Size(101, 35);
-            this.uiSymbolButton4.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.uiSymbolButton4.Symbol = 61487;
-            this.uiSymbolButton4.TabIndex = 11;
-            this.uiSymbolButton4.Text = "检索(F2)";
-            this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton4.Click += new System.EventHandler(this.uiSymbolButton4_Click);
+            this.gbxUnits.Padding = new System.Windows.Forms.Padding(2);
+            this.gbxUnits.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.gbxUnits.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.gbxUnits.ShowText = false;
+            this.gbxUnits.Size = new System.Drawing.Size(1196, 355);
+            this.gbxUnits.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.gbxUnits.TabIndex = 5;
+            this.gbxUnits.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GuaHao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1204, 709);
             this.Controls.Add(this.gbxUnits);
+            this.Controls.Add(this.uiBreadcrumb2);
             this.Controls.Add(this.pnlSearch);
             this.Controls.Add(this.pnlTitle);
             this.KeyPreview = true;
@@ -985,6 +1015,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GuaHao_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyUp);
+            this.MouseEnter += new System.EventHandler(this.GuaHao_MouseEnter);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GuaHao_MouseMove);
             this.pnlTitle.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlKeySuggest.ResumeLayout(false);
@@ -1045,7 +1077,8 @@
         private Sunny.UI.UIButton btnMid;
         private Sunny.UI.UIButton btnHoutian;
         private Sunny.UI.UIButton btnMingtian;
-        private System.Windows.Forms.Panel gbxUnits;
         private Sunny.UI.UISymbolButton uiSymbolButton4;
+        private Sunny.UI.UIBreadcrumb uiBreadcrumb2;
+        private Sunny.UI.UIFlowLayoutPanel gbxUnits;
     }
 }

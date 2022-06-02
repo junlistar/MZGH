@@ -122,7 +122,7 @@
   </metadata>
   <data name="report1.ReportResourceString" xml:space="preserve">
     <value>﻿&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Report ScriptLanguage="CSharp" ReportInfo.Created="05/17/2022 11:15:42" ReportInfo.Modified="05/26/2022 16:21:18" ReportInfo.CreatorVersion="2021.3.22.0"&gt;
+&lt;Report ScriptLanguage="CSharp" ReportInfo.Created="05/17/2022 11:15:42" ReportInfo.Modified="06/02/2022 16:32:32" ReportInfo.CreatorVersion="2021.3.22.0"&gt;
   &lt;ScriptText&gt;using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -179,8 +179,8 @@ namespace FastReport
 }
 &lt;/ScriptText&gt;
   &lt;Dictionary&gt;
-    &lt;MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlMTom6uO5qjc60cHFV5blQw=="/&gt;
-    &lt;MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl4rAadkNqtrSmgz/Ag3oI0w=="&gt;
+    &lt;MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlZzv/hpJqrQz6AMV3KIKZpA=="/&gt;
+    &lt;MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BltzVvEeN1eZBZY/M7aRDokQ=="&gt;
       &lt;TableDataSource Name="Table7" Alias="baseInfo" DataType="System.Int32" Enabled="true" SelectCommand="select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date&amp;#13;&amp;#10;	,ap = CASE WHEN b.ampm = 'a' THEN '上午' &amp;#13;&amp;#10;                     ELSE '下午' &amp;#13;&amp;#10;                     END &amp;#13;&amp;#10;					  ,u1.name unit_name&amp;#13;&amp;#10;		  ,[group_sn]		  &amp;#13;&amp;#10;		  ,u2.name group_name&amp;#13;&amp;#10;	 &amp;#13;&amp;#10;		  ,a.name doctor_name&amp;#13;&amp;#10;		  ,b.[clinic_type]&amp;#13;&amp;#10;		  ,t.name clinic_name&amp;#13;&amp;#10;		  ,[req_type]&amp;#13;&amp;#10;		  ,q.name req_name&amp;#13;&amp;#10;	from mz_visit_table b&amp;#13;&amp;#10;	 LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code&amp;#13;&amp;#10;	LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn&amp;#13;&amp;#10;		  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn&amp;#13;&amp;#10;		  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn&amp;#13;&amp;#10;		    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code &amp;#13;&amp;#10;	 where patient_id=@pid&amp;#13;&amp;#10;	 order by b.times desc"&gt;
         &lt;Column Name="visit_date" DataType="System.DateTime"/&gt;
         &lt;Column Name="name" DataType="System.String"/&gt;
@@ -199,7 +199,7 @@ namespace FastReport
         &lt;CommandParameter Name="pid" DataType="22" Size="20" Expression="pid"/&gt;
       &lt;/TableDataSource&gt;
     &lt;/MsSqlDataConnection&gt;
-    &lt;MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BldfhMXgaExZnK3RMRr0d2hw=="&gt;
+    &lt;MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlDZNpVHjQBygxSXgKNkD66Q=="&gt;
       &lt;TableDataSource Name="Table" Alias="Table_item" DataType="System.Int32" Enabled="true" SelectCommand="select c.name,c.charge_price,c.effective_price from gh_zd_clinic_type a &amp;#13;&amp;#10;left join gh_zd_clinic_charge b on a.code = b.code&amp;#13;&amp;#10;left join zd_charge_item c on b.charge_code = c.code &amp;#13;&amp;#10;where a.code=(select clinic_type from gh_request where record_sn=@record_sn)"&gt;
         &lt;Column Name="name" DataType="System.String"/&gt;
         &lt;Column Name="charge_price" DataType="System.Double"/&gt;
@@ -207,14 +207,14 @@ namespace FastReport
         &lt;CommandParameter Name="record_sn" DataType="22" Size="10" Expression="record_sn"/&gt;
       &lt;/TableDataSource&gt;
     &lt;/MsSqlDataConnection&gt;
-    &lt;MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlOARisDkS7Ja5qv+BnSsfYQ=="&gt;
+    &lt;MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl3lTtDvf41au1dNaQFO56/g=="&gt;
       &lt;TableDataSource Name="Table8" Alias="Table_pay" DataType="System.Int32" Enabled="true" SelectCommand="select  (case cheque_type &amp;#13;&amp;#10; when 1 then '现金' &amp;#13;&amp;#10; when 6 then '医保' &amp;#13;&amp;#10;  when 11 then '支付宝'&amp;#13;&amp;#10;   when 12 then '微信'&amp;#13;&amp;#10;    when 14 then '银联'&amp;#13;&amp;#10; end) as cheque_type,charge &amp;#13;&amp;#10;from gh_deposit &amp;#13;&amp;#10;where patient_id='000296903300'&amp;#13;&amp;#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&amp;#13;&amp;#10;order by price_date desc"&gt;
         &lt;Column Name="cheque_type" DataType="System.String"/&gt;
         &lt;Column Name="charge" DataType="System.Decimal"/&gt;
         &lt;CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/&gt;
       &lt;/TableDataSource&gt;
     &lt;/MsSqlDataConnection&gt;
-    &lt;MsSqlDataConnection Name="MsSqlDataConnection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlaMOupbBKwUaRoyYle+I+PA=="&gt;
+    &lt;MsSqlDataConnection Name="MsSqlDataConnection1" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/BlMgLeJNKNAsUOEPrP407z2g=="&gt;
       &lt;TableDataSource Name="TableDataSource1" Alias="Table_paystring" DataType="System.Int32" PropName="Table8" Enabled="true" SelectCommand=" select stuff((select '\r\n'+a.cheque_type + ':'+ CONVERT(varchar,  + charge) &amp;#13;&amp;#10; from &amp;#13;&amp;#10; (select  (case cheque_type &amp;#13;&amp;#10; when 1 then '现金' &amp;#13;&amp;#10; when 6 then '医保' &amp;#13;&amp;#10;  when 11 then '支付宝'&amp;#13;&amp;#10;   when 12 then '微信'&amp;#13;&amp;#10;    when 14 then '银联'&amp;#13;&amp;#10; end) as cheque_type ,charge&amp;#13;&amp;#10;from gh_deposit &amp;#13;&amp;#10;where patient_id='000296903300' &amp;#13;&amp;#10;and times=(select max(times) from mz_visit_table where patient_id='000296903300')&amp;#13;&amp;#10; ) a&amp;#13;&amp;#10;   for xml path('')),1,4,'') paystr&amp;#13;&amp;#10;"&gt;
         &lt;Column Name="paystr" DataType="System.String" PropName="Column1"/&gt;
         &lt;CommandParameter Name="pid" DataType="22" Size="10" Expression="pid"/&gt;

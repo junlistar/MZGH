@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace FastReportClient
 {
-  
+
     public partial class SetSelectParams : Form
     {
         public SetSelectParams()
@@ -38,21 +38,22 @@ namespace FastReportClient
                 //查询参数
                 string param_sql = $"select * from  rt_report_params_fast where report_code ={code}";
                 var dt_param = DbHelper.ExecuteDataTable(param_sql);
-                if (dt_param != null && dt_param.Rows.Count > 0)
-                {
-                     list = new List<ReportParam>();
 
-                    foreach (var item in paralist)
+                list = new List<ReportParam>();
+
+                foreach (var item in paralist)
+                {
+                    bool isExist = false;
+                    if (dt_param != null && dt_param.Rows.Count > 0)
                     {
-                        bool isExist = false;
                         for (int i = 0; i < dt_param.Rows.Count; i++)
                         {
                             var name = dt_param.Rows[i]["param_name"];
-                            if (name!=null&& name.ToString() == item)
+                            if (name != null && name.ToString() == item)
                             {
                                 ReportParam rp = new ReportParam();
-                                rp.report_code =int.Parse(code);
-                                rp.param_name = dt_param.Rows[i]["param_name"].ToString(); 
+                                rp.report_code = int.Parse(code);
+                                rp.param_name = dt_param.Rows[i]["param_name"].ToString();
                                 rp.param_label = dt_param.Rows[i]["param_label"].ToString();
                                 rp.param_type = dt_param.Rows[i]["param_type"].ToString();
                                 rp.param_defaultvalue = dt_param.Rows[i]["param_defaultvalue"].ToString();
@@ -62,21 +63,22 @@ namespace FastReportClient
                                 break;
                             }
                         }
-                        if (!isExist)
-                        {
-                            ReportParam rp = new ReportParam();
-                            rp.report_code = -1;
-                            rp.param_name = item;
-                            rp.param_label = item; 
-                            rp.param_type = "string";
-                            rp.param_defaultvalue = "";
-                            rp.sort_no = ""; list.Add(rp);
-                        }
-                    } 
-                    dataGridView1.DataSource = list;
-                    
-                } 
+                    }
+                    if (!isExist)
+                    {
+                        ReportParam rp = new ReportParam();
+                        rp.report_code = -1;
+                        rp.param_name = item;
+                        rp.param_label = item;
+                        rp.param_type = "string";
+                        rp.param_defaultvalue = "";
+                        rp.sort_no = ""; list.Add(rp);
+                    }
+                }
+                dataGridView1.DataSource = list;
+
             }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -87,7 +89,7 @@ namespace FastReportClient
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close(); 
+            this.Close();
         }
     }
     public class ReportParam

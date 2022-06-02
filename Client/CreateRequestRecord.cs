@@ -31,6 +31,11 @@ namespace Client
         }
 
         private void btnOk_Click(object sender, EventArgs e)
+        { 
+            SCWeekDay();
+        }
+
+        public void SCWeekDay()
         {
             var from = txtFrom.Value.Date;
             var to = txtTo.Value.Date;
@@ -105,7 +110,6 @@ namespace Client
                 this.dgvDate.Columns["day"].Visible = true;
             }
             this.dgvDate.DataSource = list;
-
         }
 
         private void UiListBox1_Leave(object sender, EventArgs e)
@@ -442,7 +446,11 @@ namespace Client
         }
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            SaveData();
+        }
 
+        public void SaveData()
+        { 
             try
             {
                 lblmsg.Show();
@@ -462,7 +470,7 @@ namespace Client
 
                 //根据patientId查找已存在的病人
                 Task<HttpResponseMessage> task = null;
-                 
+
                 var d = new
                 {
                     begin = begin,
@@ -520,6 +528,33 @@ namespace Client
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void CreateRequestRecord_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F1:
+                    InitUI();
+                    break;
+                case Keys.F2:
+                    SCWeekDay();
+                    break;
+                case Keys.F3:
+                    SaveData();
+                    break;
+                case Keys.F4:
+                    this.Close();//退出
+                    break;
+            }
+        }
+
+        private void CreateRequestRecord_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.Focused)
+            {
+                this.Focus();
+            }
         }
     }
 }

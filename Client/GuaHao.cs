@@ -50,6 +50,7 @@ namespace Client
         }
         //定义挂号数据字典 
         public Dictionary<string, List<GHRequestVM>> requestDic = new Dictionary<string, List<GHRequestVM>>();
+        public List<GHRequestVM> clinicList;
         public string request_key = "";
 
         //定义当前用户信息
@@ -61,12 +62,13 @@ namespace Client
         UIHeaderAsideMainFooterFrame parentForm;
 
         Client.Forms.Wedgit.KeySuggest ks;
+        bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
 
         private void uiLabel2_Click(object sender, EventArgs e)
         {
 
         }
-       
+
         public void GuaHao_Load(object sender, EventArgs e)
         {
             log.Debug("Load");
@@ -89,21 +91,26 @@ namespace Client
             //timer1.Interval = 3000;
             //timer1.Start();
 
-            //ControlHelper.InitScroll(gbxUnits);
-            ControlHelper.InitPanelScroll(gbxUnits);
+            
+            //ControlHelper.InitPanelScroll(gbxUnits);
+            this.Focus();
         }
 
         /// <summary>
         /// 初始化界面控件显示
         /// </summary>
         public void InitUIText()
-        { 
+        {
             cur_color = (this as UIPage).RectColor;
 
             //this.gbxUnits.RectColor = Color.Transparent;
-             
-            gbxUnits.Controls.Clear();
-             
+
+            //gbxUnits.Controls.Clear();
+
+            isBreadHandleSet = true;
+            uiBreadcrumb2.ItemIndex = 0;
+            clinicList = null;
+
             patient_id = "";
             InitUserInfo();
 
@@ -140,20 +147,6 @@ namespace Client
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            //var code = this.btnEditUser.TagString;
-            //if (string.IsNullOrEmpty(this.btnEditUser.TagString))
-            //{
-            //    if (string.IsNullOrEmpty(this.txtCode.Text))
-            //    {
-            //        lblMsg.Text = "请刷卡！";
-            //        lblMsg.Focus();
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        code = this.txtCode.Text.Trim();
-            //    }
-            //}
             if (string.IsNullOrEmpty(this.txtCode.Text))
             {
                 UIMessageTip.ShowError("请刷卡!");
@@ -190,19 +183,11 @@ namespace Client
 
         private void btnAM_Click(object sender, EventArgs e)
         {
-            //if (btnAM.FillColor != cur_color)
-            //{
-            //    btnAM.FillColor = cur_color;
-            //    btnPM.FillColor = Color.LightSteelBlue;
-
-            //    //todo:查询
-            //    LoadRequestInfo();
-            //}
             APButtonClick(sender);
         }
         private void btnPM_Click(object sender, EventArgs e)
         {
-           
+
             APButtonClick(sender);
         }
         private void btnMid_Click(object sender, EventArgs e)
@@ -225,17 +210,7 @@ namespace Client
             btn.FillColor = cur_color;
 
             LoadRequestInfo();
-        } 
-
-        //public void LoadRequestInfo()
-        //{ 
-        //    Action action = () =>
-        //    {
-        //        InvokeGhData();
-        //    };
-        //    Invoke(action);
-        //}
-
+        }
         /// <summary>
         /// 加载挂号信息
         /// </summary>
@@ -249,7 +224,8 @@ namespace Client
             if (btnAM.FillColor == cur_color)
             {
                 ampm = "a";
-            }else if (btnPM.FillColor == cur_color)
+            }
+            else if (btnPM.FillColor == cur_color)
             {
                 ampm = "p";
             }
@@ -276,7 +252,6 @@ namespace Client
                 ampm = ampm,
                 win_no = "",
             };
-            //string paramurl = string.Format($"GetGhRequest/?request_date={d.request_date}&ampm={d.ampm}&unit_sn={d.unit_sn}&clinic_type={d.clinic_type}&doctor_sn={d.doctor_sn}&group_sn={d.group_sn}&req_type={d.req_type}&win_no={d.win_no}");
             string paramurl = string.Format($"/api/GuaHao/GetGhRequest?request_date={d.request_date}&ampm={d.ampm}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -326,29 +301,83 @@ namespace Client
 
         public void BindUnit(Dictionary<string, List<GHRequestVM>> source)
         {
-            #region 绑定可选科室信息
+            #region 绑定可选科室信息 使用系统panel控件
 
-            gbxUnits.Controls.Clear();
-            int left = 0, top = 0;
+            //gbxUnits.Controls.Clear();
+            //int left = 0, top = 0;
+            //int btnWidth = 220;
+            //int btnHeight = 60;
+            //int btnmargin = 10;
+            //int leftmargin = 10;
+            //int topmargin = 10;
+
+            //int textsize = 11;
+
+            ////计算rowCount 
+            //int rowCount = (gbxUnits.Width - leftmargin) / (btnWidth + btnmargin);
+
+            //for (int i = 0; i < source.Keys.Count; i++)
+            //{
+            //    UIButton btn1 = new UIButton();
+
+
+            //    btn1.Style = UIStyle.LayuiGreen;
+            //    btn1.Width = btnWidth;
+            //    btn1.Height = btnHeight;
+            //    btn1.Text = source.Keys.ElementAt(i);
+            //    btn1.Tag = source.Keys.ElementAt(i);
+            //    if (btn1.Text.Length > textsize * 2)
+            //    {
+            //        btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize, textsize) + "\r\n" + btn1.Text.Substring(textsize * 2);
+            //    }
+            //    else if (btn1.Text.Length > textsize)
+            //    {
+            //        btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
+            //    }
+
+            //    if (i % rowCount == 0)
+            //    {
+            //        left = 0;
+            //    }
+
+            //    if (left != 0)
+            //    {
+            //        left += (int)(btn1.Width + btnmargin);
+            //    }
+            //    else
+            //    { 
+            //        left = leftmargin;
+            //        if (left < 0)
+            //        {
+            //            left = 0;
+            //        }
+            //        if (top != 0)
+            //        {
+            //            top += (int)(btn1.Height * 1.3);
+            //        }
+            //        else
+            //        {
+            //            top = topmargin; 
+            //        }
+            //    }
+            //    btn1.Top = top;
+            //    btn1.Left = left;
+            //    btn1.Click += btnks_Click;
+            //    gbxUnits.Controls.Add(btn1);
+            //}
+
+            #endregion
+
+            #region 绑定可选科室信息 使用系统uiFlowLayoutPanel控件
+              
+            gbxUnits.Clear(); 
             int btnWidth = 220;
             int btnHeight = 60;
-            int btnmargin = 10;
-            int leftmargin = 10;
-            int topmargin = 10;
-
+             
             int textsize = 11;
-
-            //int rowCount = 4;
-
-            //计算rowCount
-
-            //gbxUnits.Width = 1000;
-            int rowCount = (gbxUnits.Width - leftmargin) / (btnWidth + btnmargin);
-
             for (int i = 0; i < source.Keys.Count; i++)
             {
                 UIButton btn1 = new UIButton();
-
 
                 btn1.Style = UIStyle.LayuiGreen;
                 btn1.Width = btnWidth;
@@ -363,43 +392,148 @@ namespace Client
                 {
                     btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
                 }
-
-                if (i % rowCount == 0)
-                {
-                    left = 0;
-                }
-
-                if (left != 0)
-                {
-                    left += (int)(btn1.Width + btnmargin);
-                }
-                else
-                {
-                    //left = (gbxUnits.Width - (rowCount * btn1.Width + (rowCount - 1) * btnmargin)) / 2;
-                    left = leftmargin;
-                    if (left < 0)
-                    {
-                        left = 0;
-                    }
-                    if (top != 0)
-                    {
-                        top += (int)(btn1.Height * 1.3);
-                    }
-                    else
-                    {
-                        top = topmargin;
-                        //top = (int)(btn1.Height);
-                    }
-                }
-                btn1.Top = top;
-                btn1.Left = left;
-                btn1.Click += btnks_Click;
-                gbxUnits.Controls.Add(btn1);
+                 
+                btn1.Click += btnks_Click; 
+                gbxUnits.Add(btn1);
             }
 
             #endregion
         }
 
+        /// <summary>
+        /// 绑定专科医生数据
+        /// </summary>
+        /// <param name="source"></param>
+        public void BindClinic()
+        {
+            if (clinicList==null)
+            {
+                return;               
+            }
+            List<GHRequestVM> list = clinicList;
+
+            #region 绑定可选科室信息  使用系统panel控件
+
+            //gbxUnits.Controls.Clear();
+            //int left = 0, top = 0;
+            //int btnWidth = 220;
+            //int btnHeight = 60;
+            //int btnmargin = 10;
+            //int leftmargin = 10;
+            //int topmargin = 10;
+
+            ////计算rowCount 
+            //int rowCount = (gbxUnits.Width - leftmargin) / (btnWidth + btnmargin);
+
+            ////foreach (var item in source)
+            //for (int i = 0; i < list.Count; i++)
+            //{ 
+
+            //    UIButton btn1 = new UIButton();
+            //    btn1.Style = UIStyle.LayuiGreen;
+            //    btn1.Width = btnWidth;
+            //    btn1.Height = btnHeight;
+            //    btn1.Text = list[i].clinic_name;
+            //    btn1.TagString = list[i].record_sn;
+
+            //    //处理剩余号数
+            //    btn1.TipsText = (list[i].end_no - list[i].current_no + 1).ToString();
+            //    btn1.ShowTips = true;
+            //    btn1.TipsColor = Color.FromArgb(80, 160, 255);// Color.Blue;
+
+            //    if (!string.IsNullOrEmpty(list[i].doctor_name))
+            //    {
+            //        btn1.Text += "\r\n" + list[i].doctor_name;
+            //    }
+            //    btn1.Text += " (￥" + list[i].je + "元)";
+
+            //    if (i % rowCount == 0)
+            //    {
+            //        left = 0;
+            //    }
+
+            //    if (left != 0)
+            //    {
+            //        left += (int)(btn1.Width + btnmargin);
+            //    }
+            //    else
+            //    {
+            //        //left = (gbxUnits.Width - (rowCount * btn1.Width + (rowCount - 1) * btnmargin)) / 2;
+            //        left = leftmargin;
+            //        if (left < 0)
+            //        {
+            //            left = 0;
+            //        }
+            //        if (top != 0)
+            //        {
+            //            top += (int)(btn1.Height * 1.3);
+            //        }
+            //        else
+            //        {
+            //            top = topmargin;
+            //            //top = (int)(btn1.Height);
+            //        }
+            //    }
+            //    btn1.Top = top;
+            //    btn1.Left = left;
+            //    btn1.Click += btnClinic_Click;
+            //    gbxUnits.Controls.Add(btn1);
+
+            //}
+            #endregion
+
+            #region 绑定可选科室信息  使用系统uiFlowLayoutPanel控件
+
+            gbxUnits.Clear();
+            int btnWidth = 220;
+            int btnHeight = 60;
+
+            for (int i = 0; i < list.Count; i++)
+            { 
+                UIButton btn1 = new UIButton();
+                btn1.Style = UIStyle.LayuiGreen;
+                btn1.Width = btnWidth;
+                btn1.Height = btnHeight;
+                btn1.Text = list[i].clinic_name;
+                btn1.TagString = list[i].record_sn;
+
+                //处理剩余号数
+                btn1.TipsText = (list[i].end_no - list[i].current_no + 1).ToString();
+                btn1.ShowTips = true;
+                btn1.TipsColor = Color.FromArgb(80, 160, 255);// Color.Blue;
+
+                if (!string.IsNullOrEmpty(list[i].doctor_name))
+                {
+                    btn1.Text += "\r\n" + list[i].doctor_name;
+                }
+                btn1.Text += " (￥" + list[i].je + "元)";
+                  
+                btn1.Click += btnClinic_Click;
+                gbxUnits.Add(btn1); 
+            }
+            #endregion
+        }
+
+        /// <summary>
+        /// 选择医生，进行挂号操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClinic_Click(object sender, EventArgs e)
+        {
+            var btn = sender as UIButton;
+            foreach (var item in clinicList)
+            {
+                if (item.record_sn == btn.TagString)
+                { 
+                    SelectPayType fe = new SelectPayType(item, btnEditUser.TagString);
+                    fe.ShowDialog();
+
+                    uiBreadcrumb2.ItemIndex = 0;
+                }
+            }
+           
+        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -423,8 +557,7 @@ namespace Client
                 lblMsg.Text = "请选择下午的号进行挂号操作！";
 
                 return;
-            }
-
+            } 
 
             if (string.IsNullOrEmpty(txtCode.Text))
             {
@@ -453,11 +586,20 @@ namespace Client
 
             var btn = sender as UIButton;
 
-            SelctClinic sc = new SelctClinic(requestDic[btn.Tag.ToString()], btnEditUser.TagString);
+            #region 弹窗方式 更改为当前页
+            //SelctClinic sc = new SelctClinic(requestDic[btn.Tag.ToString()], btnEditUser.TagString);
+            //sc.FormClosed += Sc_FormClosed;
+            //sc.ShowDialog();
+            #endregion
 
-            sc.FormClosed += Sc_FormClosed;
+            #region 当前页 加载方式
+            isBreadHandleSet = true;
+            uiBreadcrumb2.ItemIndex = 1;
 
-            sc.ShowDialog();
+            clinicList = requestDic[btn.Tag.ToString()];
+            BindClinic();
+            #endregion
+
         }
 
         private void Sc_FormClosed(object sender, FormClosedEventArgs e)
@@ -470,7 +612,7 @@ namespace Client
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
             InitUserInfo();
-           
+
         }
 
         private void dtpGhrq_ValueChanged(object sender, DateTime value)
@@ -492,9 +634,7 @@ namespace Client
 
 
         private void btnCika_Click(object sender, EventArgs e)
-        {
-            
-
+        { 
             //更改刷卡方式按钮样式
             btnCika.FillColor = cur_color;
             btnSFZ.FillColor = Color.LightSteelBlue;
@@ -541,13 +681,10 @@ namespace Client
         private void btnYBK_Click(object sender, EventArgs e)
         {
             YBHelper.currentYBInfo = null;
-
-
+             
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
-            btnCika.FillColor = Color.LightSteelBlue;
-               
-            // string json = "{\"infno\":\"1101\",\"msgid\":\"H42100300513202109271813033258\",\"mdtrtarea_admvs\":\"421300\",\"insuplc_admdvs\":\"421300\",\"recer_sys_code\":\"1\",\"dev_no\":\"\",\"dev_safe_info\":\"\",\"cainfo\":\"\",\"signtype\":\"\",\"infver\":\"v2.0\",\"opter_type\":\"1\",\"opter\":\"00000\",\"opter_name\":\"全院\",\"inf_time\":\"2021-09-27 18:13:03\",\"fixmedins_code\":\"H42100300513\",\"fixmedins_name\":\"荆州市中心医院\",\"sign_no\":\"421000G0000000244038\",\"input\":{\"data\":{\"mdtrt_cert_type\":\"02\",\"mdtrt_cert_no\":\"                    \",\"card_sn\":\"                    \",\"begntime\":\"                    \",\"psn_cert_type\":\"1\",\"certno\":\"                    \",\"psn_name\":\"                    \"}}}" ;
+            btnCika.FillColor = Color.LightSteelBlue; 
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
             request.infno = ((int)InfoNoEnum.人员信息).ToString();
@@ -585,9 +722,9 @@ namespace Client
                 string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
-                 
+
                 var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
-                   
+
                 log.Debug(parm[2]);
 
                 YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
@@ -597,49 +734,13 @@ namespace Client
                     MessageBox.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                { 
+                {
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
                     txtCode.Text = SessionHelper.cardno;
-                    SearchUser();
-
-                    //if (!string.IsNullOrEmpty(btnEditUser.TagString))
-                    //{
-                    //    //保存用户的医保信息
-                    //    var d = new
-                    //    {
-                    //        yb_psn_no = yBResponse.output.baseinfo.psn_no,
-                    //        pid = btnEditUser.TagString,
-                    //        yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
-                    //        yb_insutype = yBResponse.output.insuinfo[0].insutype,
-                    //        opera = SessionHelper.uservm.user_mi
-                    //    };
-                    //    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                    //    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    //    var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
-
-                    //    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                    //    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
-                    //    if (responseJson.data == 1)
-                    //    {
-                    //        log.Debug("修改用户医保信息成功");
-
-                    //    }
-                    //    else
-                    //    {
-                    //        log.Error(responseJson.message);
-                    //    }
-                    //}
-
-                   
-                }
-
-
-
-                //string res = client.PostAsync("", httpContent).Result.Content.ReadAsStringAsync().Result;
-
+                    SearchUser(); 
+                } 
             }
             catch (Exception ex)
             {
@@ -719,7 +820,7 @@ namespace Client
         }
 
         private void btnTuihao_Click(object sender, EventArgs e)
-        { 
+        {
             Refund();
         }
 
@@ -740,7 +841,7 @@ namespace Client
         }
 
         private void uiSymbolButton2_Click(object sender, EventArgs e)
-        { 
+        {
             this.Close();
         }
 
@@ -846,17 +947,22 @@ namespace Client
             }
             else
             {
-                if (e.KeyCode!= Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
-                { 
-                    ShowSearchWindoe();
+                if (e.KeyCode != Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
+                {
+                    ShowSearchWindow();
                 }
-            } 
+            }
         }
 
-        public void ShowSearchWindoe()
+        public void ShowSearchWindow()
         {
-            ks = new Forms.Wedgit.KeySuggest(this);
-            Rectangle rect = System.Windows.Forms.SystemInformation.VirtualScreen;
+            if (ks != null && ks.Visible)
+            {
+                ks.Hide();
+                return;
+            }
+            ks = new KeySuggest(this);
+            Rectangle rect = SystemInformation.VirtualScreen;
 
             ks.Top = SessionHelper.clientHeight - ks.Height;
             ks.Left = SessionHelper.clientWidth - ks.Width;
@@ -869,8 +975,11 @@ namespace Client
             ks.Deactivate += Ks_LostFocus;
 
             ks.FormClosing += Ks_FormClosing;
+            ks.FormClosing += GuaHao_MouseEnter;
 
             ks.Show();
+
+            this.MouseEnter -= GuaHao_MouseEnter;
         }
 
         private void Ks_FormClosing(object sender, FormClosingEventArgs e)
@@ -884,7 +993,10 @@ namespace Client
                 Dictionary<string, List<GHRequestVM>> source = new Dictionary<string, List<GHRequestVM>>();
                 source.Add(request_key, requestDic[request_key]);
                 BindUnit(source);
-                gbxUnits.Text = "选择科室(" + request_key + ")";
+                //gbxUnits.Text = "选择科室(" + request_key + ")";
+                //uiBreadcrumb2.Items[0]= "选择科室(" + request_key + ")";
+                isBreadHandleSet = true;
+                uiBreadcrumb2.ItemIndex = 0;
             }
         }
 
@@ -912,7 +1024,7 @@ namespace Client
                     break;
 
                 case Keys.F2:
-                    ShowSearchWindoe();//搜索
+                    ShowSearchWindow();//搜索
                     break;
                 case Keys.F3:
                     Refund();//退号
@@ -958,7 +1070,7 @@ namespace Client
             lblSex.Text = "";
             lblbirth.Text = "";
             lblmarry.Text = "";
-          
+
         }
 
         public void SearchUser()
@@ -975,7 +1087,7 @@ namespace Client
 
             List<PatientVM> listApi = new List<PatientVM>();
             //获取数据 
-           
+
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
@@ -1008,7 +1120,7 @@ namespace Client
                     btnEditUser.TagString = userInfo.patient_id.ToString(); btnEditUser.Show();
                     //this.txtpatientid.Text = userInfo["patient_id"].ToString();
                     lblName.Text = userInfo.name.ToString();
-                    lblAge.Text = userInfo.age.ToString()+"岁";
+                    lblAge.Text = userInfo.age.ToString() + "岁";
                     lblhometel.Text = userInfo.home_tel.ToString();
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
                     lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";
@@ -1073,7 +1185,7 @@ namespace Client
                     }
 
                     if (YBHelper.currentYBInfo != null)
-                    { 
+                    {
                         //保存用户的医保信息
                         var d = new
                         {
@@ -1155,12 +1267,49 @@ namespace Client
 
         private void uiSymbolButton4_Click(object sender, EventArgs e)
         {
-
+            ShowSearchWindow();//搜索
         }
 
         private void GuaHao_Initialize(object sender, EventArgs e)
         {
-            this.Focus();
+            // this.Focus();
+        }
+
+        private void GuaHao_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.Focused)
+            {
+                this.Focus();
+            }
+        }
+
+        private void GuaHao_MouseMove(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void uiBreadcrumb2_ItemIndexChanged(object sender, int value)
+        {
+            if (uiBreadcrumb2.ItemIndex==0)
+            {
+                if (!isBreadHandleSet)
+                {
+                    clinicList = null;
+                    BindUnit(requestDic);
+                }
+                //if (uiBreadcrumb2.Items[0] != "选择科室")
+                //{
+                //    uiBreadcrumb2.Items[0] = "选择科室";
+                //} 
+
+            }
+            else if (uiBreadcrumb2.ItemIndex == 1)
+            {
+                if (!isBreadHandleSet && clinicList==null)
+                {
+                    uiBreadcrumb2.ItemIndex = 0;
+                } 
+            }
+            isBreadHandleSet = false;
         }
     }
 }

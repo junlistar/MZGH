@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/02/2022 11:35:47" ReportInfo.Modified="06/02/2022 11:57:17" ReportInfo.CreatorVersion="2021.3.22.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  
+      
+
+    private void Table1_ManualBuild(object sender, EventArgs e)
+    {
+      DataSourceBase data1= Report.GetDataSource(&quot;ghinfo&quot;); 
+      // 获取DataSet中表名为Table1的数据源
+      data1.Init(); // 初始化      
+      Table1.PrintRow(0); // 控件Table打印第0行
+      Table1.PrintColumns(); // 每打印一行，都要调用 PrintColumn或PrintColumns    
+      //MessageBox.Show(&amp;quot;1&amp;quot;);
+      while(data1.HasMoreRows) // 打印重复循环的行
+      {                     //  
+        Table1.PrintRow(1);
+        Table1.PrintColumns();
+        data1.Next(); // 读取下一行
+    }
+  }   
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlquQ+MGUuFmwCkhAb0ntbeLMrySLsqnbOaAlmwyEvqtkZtTCXLnWY8yt2gDluD8LwGCYm+i2hYKT1atcmIj0Y0+z+VKy6xgij3e5SUyP0eT0zYHiImeSvGRArsvSQz4FegeqBe50zQDLhivU5FXJQZsxSEYkvHH8lJeMo/O5ywXGYSU4KeTCL+h8OFRejCN/Bl7rfUyR8fI/pA5PVMfA73fQ==">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="select top 10 patient_id,name from mz_patient_mi order by patient_id desc">
+        <Column Name="patient_id" DataType="System.String"/>
+        <Column Name="name" DataType="System.String"/>
+        <Column Name="ccc" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <TableDataSource Name="ghinfo" ReferenceName="Data.ghinfo" DataType="System.Int32" Enabled="true">
+      <Column Name="patient_id" DataType="System.String"/>
+      <Column Name="name" DataType="System.String"/>
+      <Column Name="sex" DataType="System.Int32" PropName="Column"/>
+      <Column Name="outpatient_no" DataType="System.String"/>
+      <Column Name="inpatient_no" DataType="System.String"/>
+      <Column Name="social_no" DataType="System.String"/>
+      <Column Name="hic_no" DataType="System.String"/>
+      <Column Name="p_bar_code" DataType="System.String"/>
+      <Column Name="marry_code" DataType="System.String"/>
+      <Column Name="country_code" DataType="System.String"/>
+      <Column Name="nation_code" DataType="System.String"/>
+      <Column Name="birth_place" DataType="System.String"/>
+      <Column Name="home_district" DataType="System.String"/>
+      <Column Name="home_street" DataType="System.String"/>
+      <Column Name="home_tel" DataType="System.String"/>
+      <Column Name="home_zipcode" DataType="System.String"/>
+      <Column Name="relation_name" DataType="System.String"/>
+      <Column Name="relation_code" DataType="System.String"/>
+      <Column Name="relation_tel" DataType="System.String"/>
+      <Column Name="response_type" DataType="System.String"/>
+      <Column Name="contract_code" DataType="System.String"/>
+      <Column Name="insurl_code" DataType="System.String"/>
+      <Column Name="balance" DataType="System.Double"/>
+      <Column Name="max_times" DataType="System.Int32"/>
+      <Column Name="lv_data" DataType="System.DateTime"/>
+      <Column Name="birthday" DataType="System.DateTime"/>
+      <Column Name="occupation_type" DataType="System.String"/>
+      <Column Name="black_flag" DataType="System.String"/>
+      <Column Name="py_code" DataType="System.String"/>
+      <Column Name="cpy" DataType="System.String"/>
+      <Column Name="max_ledger_sn" DataType="System.Int16"/>
+      <Column Name="max_item_sn" DataType="System.Int16"/>
+      <Column Name="max_receipt_sn" DataType="System.Int16"/>
+      <Column Name="charge_type" DataType="System.String"/>
+      <Column Name="addition_no1" DataType="System.String"/>
+      <Column Name="address" DataType="System.String"/>
+      <Column Name="poverty_code" DataType="System.String"/>
+      <Column Name="employer_name" DataType="System.String"/>
+      <Column Name="employer_street" DataType="System.String"/>
+      <Column Name="employer_tel" DataType="System.String"/>
+      <Column Name="employer_district" DataType="System.String"/>
+      <Column Name="allergic_diag" DataType="System.String"/>
+      <Column Name="p_bar_code2" DataType="System.String"/>
+      <Column Name="enter_opera" DataType="System.String"/>
+      <Column Name="update_opera" DataType="System.String"/>
+      <Column Name="enter_date" DataType="System.DateTime"/>
+      <Column Name="update_date" DataType="System.DateTime"/>
+      <Column Name="area" DataType="System.String"/>
+      <Column Name="icd_date" DataType="System.DateTime"/>
+      <Column Name="icd_source_name" DataType="System.String"/>
+      <Column Name="jm_card" DataType="System.String"/>
+      <Column Name="jcjyname" DataType="System.String"/>
+      <Column Name="yb_psn_no" DataType="System.String"/>
+      <Column Name="yb_insuplc_admdvs" DataType="System.String"/>
+      <Column Name="yb_insutype" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="宋体, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Left="94.5" Width="94.5" Height="18.9" Text="突突突突突突拖拖拖拖拖拖拖拖拖拖拖拖" Font="宋体, 9pt"/>
+      <TextObject Name="Text2" Left="302.4" Top="9.45" Width="94.5" Height="18.9" Text="[ghinfo.name]" Font="宋体, 9pt"/>
+      <TextObject Name="Text3" Left="481.95" Width="94.5" Height="18.9" Text="[ghinfo.patient_id]" Font="宋体, 9pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="245.7">
+      <TableObject Name="Table1" Left="28.35" Top="37.8" Width="387.52" Height="37.8" ManualBuildEvent="Table1_ManualBuild">
+        <TableColumn Name="Column1" Width="193.76"/>
+        <TableColumn Name="Column2" Width="193.76"/>
+        <TableRow Name="Row1">
+          <TableCell Name="Cell1" Text="姓名" Font="宋体, 9pt"/>
+          <TableCell Name="Cell2" Text="卡号" Font="宋体, 9pt"/>
+        </TableRow>
+        <TableRow Name="Row2">
+          <TableCell Name="Cell6" Text="[ghinfo.patient_id]" Font="宋体, 9pt"/>
+          <TableCell Name="Cell7" Text="[ghinfo.name]" Font="宋体, 9pt"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="291.5" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

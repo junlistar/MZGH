@@ -806,5 +806,13 @@ namespace Client
                     break;
             }
         }
+
+        private void BaseWeiHu_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.Focused)
+            {
+                this.Focus();
+            }
+        }
     }
 }

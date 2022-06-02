@@ -113,6 +113,7 @@
             this.Controls.Add(this.txtsname);
             this.Controls.Add(this.label1);
             this.Name = "SetSelectParams";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "确认参数";
             this.Load += new System.EventHandler(this.SetSelectParams_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

@@ -877,5 +877,13 @@ namespace Client
                     break;
             }
         }
+
+        private void BaseRequest_MouseEnter(object sender, EventArgs e)
+        {
+            if (!this.Focused)
+            {
+                this.Focus();
+            }
+        }
     }
 }

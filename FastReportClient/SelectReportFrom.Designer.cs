@@ -33,7 +33,7 @@
             this.report_sql = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.short_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.long_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtcode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -87,12 +87,13 @@
             this.long_name.Name = "long_name";
             this.long_name.Visible = false;
             // 
-            // textBox1
+            // txtcode
             // 
-            this.textBox1.Location = new System.Drawing.Point(72, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(195, 21);
-            this.textBox1.TabIndex = 1;
+            this.txtcode.Location = new System.Drawing.Point(72, 23);
+            this.txtcode.Name = "txtcode";
+            this.txtcode.Size = new System.Drawing.Size(195, 21);
+            this.txtcode.TabIndex = 1;
+            this.txtcode.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -159,6 +160,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "取消";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // SelectReportFrom
             // 
@@ -171,9 +173,10 @@
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtcode);
             this.Controls.Add(this.dataGridView1);
             this.Name = "SelectReportFrom";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "选择报表";
             this.Load += new System.EventHandler(this.SelectReportFrom_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -186,7 +189,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtcode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;

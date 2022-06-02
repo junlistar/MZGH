@@ -132,7 +132,7 @@
             this.btnReset.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnReset.Symbol = 61473;
             this.btnReset.TabIndex = 10;
-            this.btnReset.Text = "重新";
+            this.btnReset.Text = "重新(F1)";
             this.btnReset.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
@@ -156,7 +156,7 @@
             this.btnExit.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
-            this.btnExit.Text = "退出";
+            this.btnExit.Text = "退出(F4)";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -191,7 +191,7 @@
             this.btnCreate.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnCreate.Symbol = 61639;
             this.btnCreate.TabIndex = 11;
-            this.btnCreate.Text = "生成";
+            this.btnCreate.Text = "生成(F3)";
             this.btnCreate.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
@@ -209,13 +209,13 @@
             this.uiGroupBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.uiGroupBox1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(4, 81);
+            this.uiGroupBox1.Location = new System.Drawing.Point(13, 81);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiGroupBox1.Size = new System.Drawing.Size(1380, 103);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1362, 103);
             this.uiGroupBox1.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiGroupBox1.TabIndex = 4;
             this.uiGroupBox1.Text = "查询条件";
@@ -253,7 +253,7 @@
             this.btnOk.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnOk.Symbol = 61442;
             this.btnOk.TabIndex = 14;
-            this.btnOk.Text = "确认";
+            this.btnOk.Text = "确认(F2)";
             this.btnOk.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -358,7 +358,7 @@
             this.dgvDate.EnableHeadersVisualStyles = false;
             this.dgvDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvDate.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(164)))), ((int)(((byte)(152)))));
-            this.dgvDate.Location = new System.Drawing.Point(4, 193);
+            this.dgvDate.Location = new System.Drawing.Point(12, 193);
             this.dgvDate.Name = "dgvDate";
             this.dgvDate.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -378,7 +378,7 @@
             this.dgvDate.RowTemplate.Height = 23;
             this.dgvDate.SelectedIndex = -1;
             this.dgvDate.ShowGridLine = true;
-            this.dgvDate.Size = new System.Drawing.Size(919, 174);
+            this.dgvDate.Size = new System.Drawing.Size(911, 174);
             this.dgvDate.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dgvDate.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.dgvDate.TabIndex = 5;
@@ -461,7 +461,7 @@
             this.dgvbase.EnableHeadersVisualStyles = false;
             this.dgvbase.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvbase.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(164)))), ((int)(((byte)(152)))));
-            this.dgvbase.Location = new System.Drawing.Point(4, 373);
+            this.dgvbase.Location = new System.Drawing.Point(12, 373);
             this.dgvbase.Name = "dgvbase";
             this.dgvbase.ReadOnly = true;
             this.dgvbase.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -482,7 +482,7 @@
             this.dgvbase.RowTemplate.Height = 23;
             this.dgvbase.SelectedIndex = -1;
             this.dgvbase.ShowGridLine = true;
-            this.dgvbase.Size = new System.Drawing.Size(919, 367);
+            this.dgvbase.Size = new System.Drawing.Size(911, 367);
             this.dgvbase.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dgvbase.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.dgvbase.TabIndex = 6;
@@ -612,7 +612,7 @@
             this.dgvRequest.RowTemplate.Height = 23;
             this.dgvRequest.SelectedIndex = -1;
             this.dgvRequest.ShowGridLine = true;
-            this.dgvRequest.Size = new System.Drawing.Size(455, 547);
+            this.dgvRequest.Size = new System.Drawing.Size(447, 547);
             this.dgvRequest.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dgvRequest.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.dgvRequest.TabIndex = 7;
@@ -692,12 +692,15 @@
             this.Controls.Add(this.dgvDate);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.pnlTitle);
+            this.KeyPreview = true;
             this.Name = "CreateRequestRecord";
             this.PageIndex = 1004;
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.Text = "CreateRequestRecord";
             this.Load += new System.EventHandler(this.CreateRequestRecord_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateRequestRecord_KeyDown);
+            this.MouseEnter += new System.EventHandler(this.CreateRequestRecord_MouseEnter);
             this.pnlTitle.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDate)).EndInit();
