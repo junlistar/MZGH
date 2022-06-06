@@ -139,7 +139,6 @@ select
 
 
 
-
 USE [his]
 GO
 
@@ -163,7 +162,7 @@ GO
     
   exec mzgh_CreateRequestNo_List '1','2018-06-08','2018-06-08'      
 */  
-CREATE Proc [dbo].[mzgh_CreateRequestNo_List]   
+alter Proc [dbo].[mzgh_CreateRequestNo_List]   
    @Op_type smallint ,  
    @sDate datetime,  
    @eDate datetime,  
@@ -173,9 +172,11 @@ as
   
 declare @errcode integer  
 DECLARE @ErrorMessage NVARCHAR(4000)  
-declare @start_time varchar(10),@end_time varchar(10)   
+declare @start_time varchar(10),@end_time varchar(10),@mid_time varchar(10),@eve_time varchar(10) 
 declare @amss dec(12, 2)  
 declare @pmss dec(12, 2)  
+declare @midss dec(12, 2)
+declare @evess dec(12, 2)
 /*  
 set @Op_type=2  
 set @sDate='2017-10-16'  
@@ -186,9 +187,13 @@ set @Doctor='%'
 begin try   
 
 set @start_time='08:00:00' --上午上班时间
+set @mid_time='12:00:00'  --中午上班时间
 set @end_time='14:00:00'  --下午上班时间
+set @eve_time='19:00:00'  --夜间上班时间
 set @amss=4 * 60 *60 --上午工作秒数  
 set @pmss=3 * 60 *60 --下午工作秒数  
+set @amss=2 * 60 *60 --上午工作秒数  
+set @pmss=2 * 60 *60 --下午工作秒数  
 if (@Op_type=2)  --删除  
 begin  
   if exists(select * from gh_request a inner join gh_request_list b  on a.record_sn=b.record_sn 
@@ -231,17 +236,23 @@ where DATEDIFF(DD,aa.request_date ,@sDate)<=0  and
 --if (@Op_type=1 or @Op_type=2)   
 begin    
  select top  300 IDENTITY(integer,1,1) as req_no,  
-     cast(CONVERT(char(10),GETDATE(),21)++' ' + @start_time as datetime) am, /*上午开始上班时间*/  
-     cast(CONVERT(char(10),GETDATE(),21)+' '+@end_time as datetime) pm /*下午开始上班时间*/  
+     cast(CONVERT(char(10),GETDATE(),21)++' ' + @start_time as datetime) am, /*上午开始上班时间*/    
+     cast(CONVERT(char(10),GETDATE(),21)++' ' + @mid_time as datetime) mid, /*中午开始上班时间*/ 
+     cast(CONVERT(char(10),GETDATE(),21)+' '+@end_time as datetime) pm, /*下午开始上班时间*/  
+     cast(CONVERT(char(10),GETDATE(),21)+' ' + @eve_time as datetime) eve /*夜间开始上班时间*/ 
   into #req_tmp  
  from gh_base_request  
   
 
  select a.record_sn,b.req_no,  
- RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,(b.req_no -1) * (CEILING(@amss /(end_no - begin_no +1))),am)   
-      else DATEADD(ss,(b.req_no-1) *(CEILING(@pmss  /(end_no - begin_no+ 1 ))),pm) end,21),5) as start_time,  
- RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,b.req_no * (CEILING(@amss /(end_no - begin_no +1))) ,am)   
-      else DATEADD(ss,b.req_no * (CEILING(@pmss  /(end_no - begin_no+1 ))) ,pm) end,21),5)   
+ RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,(b.req_no -1) * (CEILING(@amss /(end_no - begin_no +1))),am)
+					when 'm' then DATEADD(ss,(b.req_no -1) * (CEILING(@midss /(end_no - begin_no +1))),mid)   
+					when 'p' then DATEADD(ss,(b.req_no -1) * (CEILING(@pmss /(end_no - begin_no +1))),pm)    
+					else DATEADD(ss,(b.req_no-1) *(CEILING(@evess  /(end_no - begin_no+ 1 ))),eve) end,21),5) as start_time,
+ RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,b.req_no * (CEILING(@evess /(end_no - begin_no +1))) ,am)  
+					when 'm' then DATEADD(ss,(b.req_no) * (CEILING(@midss /(end_no - begin_no +1))),mid)   
+					when 'p' then DATEADD(ss,(b.req_no) * (CEILING(@pmss /(end_no - begin_no +1))),pm)    
+					else DATEADD(ss,b.req_no * (CEILING(@evess  /(end_no - begin_no+1 ))) ,eve) end,21),5)    
   as end_time,  
   '0' as isout_flag 
   into #request   
@@ -268,8 +279,6 @@ begin catch
 end catch    
 
 GO
-
-
 
 
 USE [his]
