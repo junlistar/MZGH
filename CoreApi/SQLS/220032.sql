@@ -16,7 +16,7 @@ select
         g.name charge_name,
         h.name haoming_name,
         c1.name opera_name,
-        case a.ampm when 'a' then '上午' when 'p' then '下午' end ampm,
+        case a.ampm when 'a' then '上午' when 'p' then '下午' when 'p' then '下午' else '夜间' end ampm,
         case when a.gh_sequence > 0 then cast(a.gh_sequence as varchar) else '加号' + cast(abs(a.gh_sequence) as varchar) end gh_order,
         case when a.gh_sequence > 0 then gh_sequence else abs(gh_sequence) + 10000 end gh_sequence_f,
         case a.visit_flag when '0' then '未到' when '9' then '退号' when '8' then '已打印' else '已到' end visit_status,

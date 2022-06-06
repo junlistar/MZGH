@@ -1,7 +1,7 @@
  
 --220059挂号  挂号数据日期查询 
 select b.record_sn,b.request_date,
-       case b.ampm when 'a' then '上午' else '下午' end ampm,
+       case b.ampm when 'a' then '上午' when 'm' then '中午' when 'p' then '下午' else '夜间' end ampm,
        b.unit_sn,
        b.group_sn,
        b.doctor_sn,

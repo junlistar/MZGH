@@ -101,12 +101,12 @@
             this.pnlTitle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlTitle.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlTitle.Location = new System.Drawing.Point(4, 5);
+            this.pnlTitle.Location = new System.Drawing.Point(12, 5);
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlTitle.Size = new System.Drawing.Size(1380, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1364, 66);
             this.pnlTitle.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlTitle.TabIndex = 3;
             this.pnlTitle.Text = null;
@@ -168,7 +168,7 @@
             this.lblTitle.Size = new System.Drawing.Size(165, 51);
             this.lblTitle.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "基础号表维护";
+            this.lblTitle.Text = "生成号表";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCreate

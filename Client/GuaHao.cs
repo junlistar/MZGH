@@ -138,6 +138,10 @@ namespace Client
             btnMid.FillColor = Color.LightSteelBlue;
             btnEve.FillColor = Color.LightSteelBlue;
 
+            //初始化明天，后天按钮
+            btnMingtian.FillColor = Color.LightSteelBlue;
+            btnHoutian.FillColor = Color.LightSteelBlue;
+
             this.dtpGhrq.Value = DateTime.Now;
 
             request_key = "";
@@ -1257,11 +1261,15 @@ namespace Client
 
         private void btnMingtian_Click(object sender, EventArgs e)
         {
+            btnHoutian.FillColor = Color.LightSteelBlue;
+            btnMingtian.FillColor = cur_color;
             dtpGhrq.Value = DateTime.Now.AddDays(1);
         }
 
         private void btnHoutian_Click(object sender, EventArgs e)
         {
+            btnMingtian.FillColor = Color.LightSteelBlue;
+            btnHoutian.FillColor = cur_color;
             dtpGhrq.Value = DateTime.Now.AddDays(2);
         }
 

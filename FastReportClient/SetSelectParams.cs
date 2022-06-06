@@ -36,7 +36,7 @@ namespace FastReportClient
             {
                 //search
                 //查询参数
-                string param_sql = $"select * from  rt_report_params_fast where report_code ={code}";
+                string param_sql = $"select * from  rt_report_params_fast_net where report_code ={code}";
                 var dt_param = DbHelper.ExecuteDataTable(param_sql);
 
                 list = new List<ReportParam>();

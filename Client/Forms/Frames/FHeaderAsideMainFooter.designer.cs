@@ -159,7 +159,6 @@ namespace Client
             this.Name = "FHeaderAsideMainFooter";
             this.Text = "门诊挂号系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FHeaderAsideMainFooter_FormClosing);
             this.Load += new System.EventHandler(this.FHeaderAsideMainFooter_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FHeaderAsideMainFooter_KeyUp);
             this.Footer.ResumeLayout(false);

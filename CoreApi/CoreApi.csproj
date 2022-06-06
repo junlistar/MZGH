@@ -212,7 +212,7 @@
     <None Update="sql保存到数据库.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="字段修改.sql">
+    <None Update="数据库修改\字段修改.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

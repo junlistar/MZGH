@@ -216,7 +216,7 @@ insert into wh_tag_sql(tag,[sql],[description])
 values(220031,'select * from zd_charge_type','挂号-费别')
 
 --挂号 查询
---delete from wh_tag_sql where tag=220032
+delete from wh_tag_sql where tag=220032
 insert into wh_tag_sql(tag,[sql],[description])
 values(220032,'select
         a.patient_id,
@@ -234,7 +234,7 @@ values(220032,'select
         g.name charge_name,
         h.name haoming_name,
         c1.name opera_name,
-        case a.ampm when ''a'' then ''上午'' when ''p'' then ''下午'' end ampm,
+        case a.ampm when ''a'' then ''上午'' when ''p'' then ''下午'' when ''p'' then ''下午'' else ''夜间'' end ampm,
         case when a.gh_sequence > 0 then cast(a.gh_sequence as varchar) else ''加号'' + cast(abs(a.gh_sequence) as varchar) end gh_order,
         case when a.gh_sequence > 0 then gh_sequence else abs(gh_sequence) + 10000 end gh_sequence_f,
         case a.visit_flag when ''0'' then ''未到'' when ''9'' then ''退号'' when ''8'' then ''已打印'' else ''已到'' end visit_status,
@@ -534,7 +534,7 @@ where  b.open_flag=''1''','挂号-查询基础号表')
 --挂号  挂号数据日期查询 
 insert into wh_tag_sql(tag,[sql],[description])
 values(220059,'select b.record_sn,b.request_date,
-       case b.ampm when ''a'' then ''上午'' else ''下午'' end ampm,
+        case b.ampm when ''a'' then ''上午'' when ''m'' then ''中午'' when ''p'' then ''下午'' else ''夜间'' end ampm,
        b.unit_sn,
        b.group_sn,
        b.doctor_sn,
@@ -564,7 +564,7 @@ where b.request_date between @P1 and @P2 ','挂号-挂号数据日期查询');
 --挂号  挂号数据条件查询 
 insert into wh_tag_sql(tag,[sql],[description])
 values(220060,'select b.record_sn,b.request_date,
-       case b.ampm when ''a'' then ''上午'' else ''下午'' end ampm,
+        case b.ampm when ''a'' then ''上午'' when ''m'' then ''中午'' when ''p'' then ''下午'' else ''夜间'' end ampm,
        b.unit_sn,
        b.group_sn,
        b.doctor_sn,

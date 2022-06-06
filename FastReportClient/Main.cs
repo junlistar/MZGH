@@ -166,7 +166,7 @@ namespace FastReportClient
         {
             if (!string.IsNullOrWhiteSpace(code))
             {
-                string sql = $"select * from rt_report_data_fast where report_code = {code}";
+                string sql = $"select * from rt_report_data_fast_net where report_code = {code}";
                 DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
 
                 RptTable = Ds.Tables[0];
@@ -206,7 +206,7 @@ namespace FastReportClient
                 if (string.IsNullOrWhiteSpace(code))
                 {
                     int _code =int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
-                    string sql = $@"insert into rt_report_data_fast (report_code,short_name,long_name,report_sql,report_com,report_flag,datasetn)
+                    string sql = $@"insert into rt_report_data_fast_net (report_code,short_name,long_name,report_sql,report_com,report_flag,datasetn)
 values(?, ?, ?, ?,?, 1, 0)";
                     var para = new System.Data.OleDb.OleDbParameter[5];
                     para[0] = new System.Data.OleDb.OleDbParameter("p1", _code);
@@ -219,7 +219,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                 else
                 {
 
-                    string sql = $"update rt_report_data_fast set report_com=? where report_code = {code}";
+                    string sql = $"update rt_report_data_fast_net set report_com=? where report_code = {code}";
                     var para = new System.Data.OleDb.OleDbParameter[1];
                     para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
                     var result = DbHelper.ExecuteNonQuery(sql, para);
@@ -264,11 +264,11 @@ values(?, ?, ?, ?,?, 1, 0)";
 
                 //保存sql和参数
                 string sqltext = txtsql.Text.Trim();
-                string sql1 = $"update rt_report_data_fast set report_sql=? where report_code=?";
+                string sql1 = $"update rt_report_data_fast_net set report_sql=? where report_code=?";
 
                 var para = new System.Data.OleDb.OleDbParameter[2];
                 para[0] = new System.Data.OleDb.OleDbParameter("p1", sqltext);
-                para[1] = new System.Data.OleDb.OleDbParameter("p2", code);
+                para[1] = new System.Data.OleDb.OleDbParameter("p2",int.Parse(code));
                 var result = DbHelper.ExecuteNonQuery(sql1, para);
 
 
@@ -280,7 +280,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                         if (item.report_code == -1)
                         {
                             //新增
-                            string sql2 = $@"insert into rt_report_params_fast(report_code,param_name,param_label,param_type,param_defaultvalue,sqltag,sort_no)
+                            string sql2 = $@"insert into rt_report_params_fast_net(report_code,param_name,param_label,param_type,param_defaultvalue,sqltag,sort_no)
                                     values({code},'{item.param_name}','{item.param_label.Trim()}','{item.param_type}','{item.param_defaultvalue}','{item.sqltag}','{item.sort_no}')";
                             result = DbHelper.ExecuteNonQuery(sql2);
 
@@ -288,7 +288,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                         else
                         {
                             //修改
-                            string sql2 = $@"update rt_report_params_fast 
+                            string sql2 = $@"update rt_report_params_fast_net 
                                     set param_label='{item.param_label.Trim()}',param_defaultvalue='{item.param_defaultvalue}',
                                     sqltag='{item.sqltag}',param_type='{item.param_type}',sort_no='{item.sort_no}'
                                     where report_code={item.report_code} and  param_name='{item.param_name}'";
@@ -336,7 +336,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                         TargetReport.Load(Stream);
 
                         //查询参数
-                        string param_sql = $"select * from  rt_report_params_fast where report_code = {code}";
+                        string param_sql = $"select * from  rt_report_params_fast_net where report_code = {code}";
                         var dt_param = DbHelper.ExecuteDataTable(param_sql);                 
                         if (dt_param != null && dt_param.Rows.Count > 0)
                         {
@@ -349,7 +349,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                             //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
-                        var ds = DbHelper.GetDataSet(sql, "testDB");
+                        var ds = DbHelper.GetDataSet(sql, "ghinfo");
 
                         TargetReport.RegisterData(ds);
 

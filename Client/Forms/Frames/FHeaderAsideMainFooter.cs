@@ -12,6 +12,7 @@ using Sunny.UI;
 using Client.Forms.Pages;
 using System.ComponentModel;
 using System.Threading;
+using Client.Forms.Wedgit;
 
 namespace Client
 {
@@ -171,23 +172,32 @@ namespace Client
 
             log.Debug((new System.Diagnostics.StackTrace().GetFrame(0).GetMethod()).Name);
 
-            UILoginForm frm = new UILoginForm();
-            frm.ShowInTaskbar = true;
-            frm.Text = "荆州中心医院";
-            frm.Title = "门诊挂号";
-            frm.SubText = "荆州中心医院 v0.1";
-            frm.OnLogin += Frm_OnLogin;
-            frm.ButtonCancelClick += btnCancel_Click;
-            frm.LoginImage = UILoginForm.UILoginImage.Login2;
+            //UILoginForm frm = new UILoginForm();
+            //frm.ShowInTaskbar = true;
+            //frm.Text = "荆州中心医院";
+            //frm.Title = "门诊挂号";
+            //frm.SubText = "荆州中心医院 v0.1";
+            //frm.OnLogin += Frm_OnLogin;
+            //frm.ButtonCancelClick += btnCancel_Click;
+            //frm.LoginImage = UILoginForm.UILoginImage.Login2;
+            //frm.ShowDialog();
+            //if (frm.IsLogin)
+            //{
+                //frm.Dispose();
+            //}
+            //else
+            //{
+            //    
+            //}
+            //return;
+
+            Login frm = new Login();
             frm.ShowDialog();
             if (frm.IsLogin)
             {
                 UIMessageTip.ShowOk("登录成功");
                 this.WindowState = FormWindowState.Maximized;
                 this.Show();
-
-                frm.Dispose();
-
 
                 //statusstrip信息
                 tsslblName.Text = SessionHelper.uservm.name;
@@ -203,6 +213,7 @@ namespace Client
                 SessionHelper.clientHeight = this.Height;
                 SessionHelper.clientWidth = this.Width;
 
+                this.FormClosing += FHeaderAsideMainFooter_FormClosing;
 
                 //ping
                 _demoBGWorker.DoWork += BGWorker_DoWork;
@@ -210,16 +221,13 @@ namespace Client
                 _demoBGWorker.WorkerReportsProgress = true;
                 _demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
 
-
                 //timerSignal.Interval = 1000 * 5;//10s
                 //timerSignal.Start();
             }
             else
             {
-
-            }
-
-
+                this.Close();
+            } 
         }
         ToolTip toolTip1 = new ToolTip();
 
@@ -463,16 +471,11 @@ namespace Client
             {
                 UIMessageTip.ShowWarning("请输入登录名!");
                 return false;
-            }
-
-            //return userName == "admin" && password == "admin";
+            } 
             try
             {
                 Task<HttpResponseMessage> task = null;
-                string json = "";
-                //HttpClient client = new HttpClient();
-                ////client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accessToken);
-                //client.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+                string json = ""; 
                 string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={userName}&pwd={password}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);

@@ -897,37 +897,9 @@ namespace Client
         //初始化报表
         private void InitializeReport(string RptMode)
         {
-            string sql = "select * from rt_report_data_fast where report_code = 220001";
+            string sql = "select * from rt_report_data_fast_net where report_code = 220001";
             DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
-
-            //Task<HttpResponseMessage> task = null; var json = "";
-            ////var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={220001}&tb_name={"REPORT"}");
-            //var paramurl = string.Format($"/api/GuaHao/GetReportData?code={220001}");
-
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-            //task.Wait();
-            //var response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //else
-            //{
-            //    log.Info(response.ReasonPhrase);
-            //}
-
-            //var resp = WebApiHelper.DeserializeObject<ResponseResult<List<ReportDataVM>>>(json);
-
-            //if (!string.IsNullOrEmpty(resp.message))
-            //{
-            //    MessageBox.Show(resp.message);
-            //    log.Error(resp.message);
-            //    return;
-            //}
-            //DataSet Ds = resp.data;
+             
 
             RptTable = Ds.Tables[0];
             RptRow = RptTable.Rows[0];
@@ -958,7 +930,7 @@ namespace Client
                 //保存 
                 TargetReport.Save(stream);
 
-                string sql = @"update rt_report_data_fast set report_com=? where report_code = 220001";
+                string sql = @"update rt_report_data_fast_net set report_com=? where report_code = 220001";
                 var para = new System.Data.OleDb.OleDbParameter[1];
                 para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
                 var result = DbHelper.ExecuteNonQuery(sql, para);
@@ -997,32 +969,9 @@ namespace Client
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
                         TargetReport.Load(Stream);
-
-
-                        //report.SetParameterValue("pid", GuaHao.PatientVM.patient_id);
-                        //report.SetParameterValue("record_sn", vm.record_sn);
-                        //                       string sql = @"select top 1 b.patient_id,b.visit_date,b.name,b.age,b.gh_date
-                        //,ap = CASE WHEN b.ampm = 'a' THEN '上午' 
-                        //                    ELSE '下午' 
-                        //                    END 
-                        //				  ,u1.name unit_name
-                        //	  ,[group_sn]		  
-                        //	  ,u2.name group_name
-                        //	  ,a.name doctor_name
-                        //	  ,t.name clinic_name
-                        //	  ,q.name req_name,
-                        //	  (select max(r.charge_total) from gh_receipt r where b.patient_id=r.patient_id and r.times=b.times) charge_total
-                        //from mz_visit_table b
-                        // LEFT JOIN gh_zd_clinic_type AS t ON b.clinic_type = t.code
-                        //LEFT JOIN zd_unit_code AS u1 ON b.visit_dept = u1.unit_sn
-                        //	  LEFT JOIN zd_unit_code AS u2 ON b.group_sn = u2.unit_sn
-                        //	  LEFT JOIN a_employee_mi AS a ON b.doctor_code = a.emp_sn
-                        //	    LEFT JOIN gh_zd_request_type AS q ON b.req_type = q.code 
-                        // where b.patient_id=? order by b.times desc";
-                        // where b.patient_id='" + GuaHao.PatientVM.patient_id + "' and b.times= "+ vm.record_sn + " order by b.times desc";
-
+                         
                         //查询参数
-                        string param_sql = "select * from  rt_report_params_fast where report_code = 220001";
+                        string param_sql = "select * from  rt_report_params_fast_net where report_code = 220001";
                         var dt_param = DbHelper.ExecuteDataTable(param_sql);
                         if (dt_param!=null && dt_param.Rows.Count>0)
                         {
