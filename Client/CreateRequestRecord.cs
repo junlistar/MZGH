@@ -140,21 +140,18 @@ namespace Client
             //点击的周
             if (e.ColumnIndex == 4)
             {
-
+                uiListBox1.Items.Clear();
                 uiListBox1.Items.Add("第一周");
                 uiListBox1.Items.Add("第二周");
                 uiListBox1.Items.Add("第三周");
                 uiListBox1.Items.Add("第四周");
                 uiListBox1.Items.Add("第五周");
-                uiListBox1.Items.Add("第六周");
-                uiListBox1.Items.Add("第七周");
-                uiListBox1.Items.Add("第八周");
 
                 uiListBox1.Style = UIStyle.LayuiGreen;
                 uiListBox1.Parent = this;
                 uiListBox1.Top = dgvDate.Top + 55 + (23 * (e.RowIndex));
                 uiListBox1.Width = 100;
-                uiListBox1.Left = 445;
+                uiListBox1.Left = 455;
                 uiListBox1.BringToFront();
                 uiListBox1.SelectedIndexChanged -= Cbx_SelectedIndexChanged;
                 uiListBox1.SelectedIndexChanged += Cbx_SelectedIndexChanged;
@@ -163,7 +160,7 @@ namespace Client
             else if (e.ColumnIndex == 5)
             {
                 //点击的天
-
+                listday.Items.Clear();
                 listday.Items.Add("星期一");
                 listday.Items.Add("星期二");
                 listday.Items.Add("星期三");
@@ -175,7 +172,7 @@ namespace Client
                 listday.Parent = this;
                 listday.Top = dgvDate.Top + 55 + (23 * (e.RowIndex));
                 listday.Width = 100;
-                listday.Left = 545;
+                listday.Left = 555;
                 listday.BringToFront();
                 listday.SelectedIndexChanged -= Listday_SelectedIndexChanged;
                 listday.SelectedIndexChanged += Listday_SelectedIndexChanged;
@@ -185,16 +182,22 @@ namespace Client
 
         private void Listday_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dgvDate.Rows[crow].Cells[ccol].Value = listday.SelectedItem.ToString();
-            listday.Hide();
-            InitData();
+            if (listday.SelectedItem!=null)
+            {
+                dgvDate.Rows[crow].Cells[ccol].Value = listday.SelectedItem.ToString();
+                listday.Hide();
+                InitData(); 
+            }
         }
 
         private void Cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (uiListBox1.SelectedItem!=null)
+            { 
+                dgvDate.Rows[crow].Cells[ccol].Value = uiListBox1.SelectedItem.ToString();
+                uiListBox1.Hide(); InitData();
+            }
 
-            dgvDate.Rows[crow].Cells[ccol].Value = uiListBox1.SelectedItem.ToString();
-            uiListBox1.Hide(); InitData();
         }
 
         public void InitData()
@@ -391,6 +394,12 @@ namespace Client
             listday.Leave += Listday_Leave;
             uiListBox1.Leave += UiListBox1_Leave;
 
+
+            //设置按钮提示文字信息
+            uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F1]");
+            uiToolTip1.SetToolTip(btnOk, btnOk.Text + "[F2]");
+            uiToolTip1.SetToolTip(btnCreate, btnCreate.Text + "[F3]");
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
         }
 
         public void InitUI()
@@ -555,6 +564,60 @@ namespace Client
             {
                 this.Focus();
             }
+        }
+
+        public void CreateRequestNo_List(string begin,string end,int type)
+        {
+            /*  
+功能：荆州中心医院预约分时挂号的号源表生成过程  
+参数：  
+   @Op_type 操作类别，1:生成，2：重新生成，3：补生成  
+   @sDate   生成号源表开始日期  
+   @eDate   生成号源表结束日期  
+   @Dept    生成的科室，%表示全部  
+   @Doctor  生成的医生，%表示全部  
+返回：0，成功，非0，失败   
+
+ exec mzgh_CreateRequestNo_List '1','2018-06-08','2018-06-08'      
+*/
+
+            var d = new
+            {
+                begin = begin,
+                end = end,
+                type = type
+            };
+            var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var paramurl = string.Format($"/api/GuaHao/CreateRequestNoList?begin={d.begin}&end={d.end}&type={d.type}");
+
+            string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+            var dat = WebApiHelper.DeserializeObject<ResponseResult<bool>>(res);
+
+            if (dat.status == 1)
+            {
+                UIMessageTip.ShowOk("操作成功!");
+            }
+            else
+            {
+                UIMessageBox.ShowError(dat.message);
+            }
+        }
+
+        private void btnhysc_Click(object sender, EventArgs e)
+        {
+            CreateRequestNo_List(txtFrom.Text, txtTo.Text, 1);
+
+        }
+
+        private void btnhycx_Click(object sender, EventArgs e)
+        {
+            CreateRequestNo_List(txtFrom.Text, txtTo.Text, 2);
+        }
+
+        private void btnhybsc_Click(object sender, EventArgs e)
+        {
+            CreateRequestNo_List(txtFrom.Text, txtTo.Text, 3);
         }
     }
 }

@@ -61,6 +61,9 @@ namespace Client
 
         UIHeaderAsideMainFooterFrame parentForm;
 
+        //科室搜索框
+        UIListBox lstunits=new UIListBox();
+
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
 
@@ -94,6 +97,14 @@ namespace Client
             
             //ControlHelper.InitPanelScroll(gbxUnits);
             this.Focus();
+
+
+            //设置按钮提示文字信息
+            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text+"[F1]");
+            uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text+"[F2]");
+            uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text+"[F3]");
+            uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text+"[F4]");
+
         }
 
         /// <summary>
@@ -116,12 +127,36 @@ namespace Client
 
             lblTitle.ForeColor = cur_color;
             lblMsg.ForeColor = Color.Red;
-            gbxUnits.ForeColor = cur_color;
+            gbxUnits.ForeColor = cur_color; 
+            pnlHours.ForeColor = Color.Red;//必须要设置这个值，不然给里面的按钮设置颜色不起作用
 
             //初始化刷卡方式按钮样式
             btnCika.FillColor = cur_color;
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = Color.LightSteelBlue;
+
+            int currentHour = DateTime.Now.Hour;
+            pnlHours.Clear();
+            foreach (var item in SessionHelper.requestHours)
+            {
+                UIButton btn1 = new UIButton();
+                btn1.Style = UIStyle.LayuiGreen;
+                btn1.Text = item.name;
+                btn1.TagString = item.code;
+                btn1.Width = 86;
+                btn1.Height = 31;
+                btn1.FillColor = Color.LightSteelBlue;
+                if (currentHour>=item.start_hour&& currentHour < item.end_hour)
+                {
+                    btn1.FillColor = cur_color;
+                }
+                btn1.Click += Btn1_Click;
+                pnlHours.Add(btn1);
+            }
+            //pnlHours.AutoScroll = false;
+            //pnlHours.ForeColor = Color.Transparent;
+            pnlHours.RectColor = Color.Transparent;
+ 
 
             //初始化上午，下午按钮样式
             if (DateTime.Now.Hour < 12)
@@ -146,8 +181,25 @@ namespace Client
 
             request_key = "";
             gbxUnits.Text = "选择科室";
+
+            //lstunits.Parent = this;
+            //lstunits.Top = txtSearch.Top + txtSearch.Height;
+            //lstunits.Left = txtSearch.Left;
+            //lstunits.Width = txtSearch.Width;
+            //lstunits.Height = 200;
         }
 
+        private void Btn1_Click(object sender, EventArgs e)
+        {  
+            foreach (var control in pnlHours.FlowLayoutPanel.Controls)
+            {
+                var cc = control as UIButton;
+                cc.FillColor = Color.LightSteelBlue;
+            }
+            var btn = sender as UIButton;
+            btn.FillColor = cur_color;
+            LoadRequestInfo(); 
+        }
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
@@ -225,22 +277,31 @@ namespace Client
 
             string ampm = "";
 
-            if (btnAM.FillColor == cur_color)
+            foreach (var control in pnlHours.FlowLayoutPanel.Controls)
             {
-                ampm = "a";
+                var cc = control as UIButton;
+                if (cc.FillColor == cur_color)
+                {
+                    ampm = cc.TagString;
+                    break;
+                }  
             }
-            else if (btnPM.FillColor == cur_color)
-            {
-                ampm = "p";
-            }
-            else if (btnMid.FillColor == cur_color)
-            {
-                ampm = "m";
-            }
-            else if (btnEve.FillColor == cur_color)
-            {
-                ampm = "e";
-            }
+            //if (btnAM.FillColor == cur_color)
+            //{
+            //    ampm = "a";
+            //}
+            //else if (btnPM.FillColor == cur_color)
+            //{
+            //    ampm = "p";
+            //}
+            //else if (btnMid.FillColor == cur_color)
+            //{
+            //    ampm = "m";
+            //}
+            //else if (btnEve.FillColor == cur_color)
+            //{
+            //    ampm = "e";
+            //}
 
             Task<HttpResponseMessage> task = null;
             string json = "";
@@ -395,8 +456,7 @@ namespace Client
                 else if (btn1.Text.Length > textsize)
                 {
                     btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
-                }
-                 
+                } 
                 btn1.Click += btnks_Click; 
                 gbxUnits.Add(btn1);
             }
@@ -553,13 +613,64 @@ namespace Client
         private void btnks_Click(object sender, EventArgs e)
         {
             //判断当前是否可以挂号
+            bool isWrong = false;
 
-            //如果当前时间是下午，不允许挂上午的号
-            if (DateTime.Now.ToString("yyyy-MM-dd") == this.dtpGhrq.Text && DateTime.Now.Hour > 12 && btnAM.FillColor == cur_color)
+            //当前日期是今天
+            if (DateTime.Now.ToString("yyyy-MM-dd") == this.dtpGhrq.Text)
             {
-                UIMessageTip.ShowError("请选择下午的号进行挂号操作!");
-                lblMsg.Text = "请选择下午的号进行挂号操作！";
 
+                foreach (var control in pnlHours.FlowLayoutPanel.Controls)
+                {
+                    var cc = control as UIButton;
+                    if (cc.FillColor == cur_color)
+                    {
+                        var code = cc.TagString;
+                        var requestHour = SessionHelper.requestHours.Where(p => p.code == code).FirstOrDefault();
+                        if (DateTime.Now.Hour>requestHour.end_hour)
+                        {
+                            isWrong = true; 
+                        }
+                        break;
+                    }
+                }
+                ////如果选择的是上午
+                //if (btnAM.FillColor == cur_color)
+                //{
+                //    if (DateTime.Now.Hour > 12)
+                //    {
+                //        isWrong = true; 
+                //    }
+                //}
+                //else if (btnMid.FillColor == cur_color)
+                //{
+                //    //如果选择的是中午
+                //    if (DateTime.Now.Hour > 14)
+                //    {
+                //        isWrong = true;
+                //    }
+                //}
+                //else if (btnPM.FillColor == cur_color)
+                //{
+                //    //如果选择的是下午
+                //    if (DateTime.Now.Hour > 17)
+                //    {
+                //        isWrong = true;
+                //    }
+                //}
+                //else if (btnEve.FillColor == cur_color)
+                //{
+                //    //如果选择的是夜间
+                //    if (DateTime.Now.Hour > 21)
+                //    {
+                //        isWrong = true;
+                //    }
+                //}
+
+            }
+            if (isWrong)
+            {
+                UIMessageTip.ShowError("请选择正确的时间段进行挂号操作!");
+                lblMsg.Text = "请选择正确的时间段进行挂号操作！";
                 return;
             } 
 
@@ -945,17 +1056,17 @@ namespace Client
 
         private void GuaHao_KeyUp(object sender, KeyEventArgs e)
         {
-            if (txtCode.Focused)
-            {
-                return;
-            }
-            else
-            {
-                if (e.KeyCode != Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
-                {
-                    ShowSearchWindow();
-                }
-            }
+            //if (txtCode.Focused)
+            //{
+            //    return;
+            //}
+            //else
+            //{
+            //    if (e.KeyCode != Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
+            //    {
+            //        ShowSearchWindow();
+            //    }
+            //}
         }
 
         public void ShowSearchWindow()
@@ -1285,10 +1396,10 @@ namespace Client
 
         private void GuaHao_MouseEnter(object sender, EventArgs e)
         {
-            if (!this.Focused)
-            {
-                this.Focus();
-            }
+            //if (!this.Focused)
+            //{
+            //    this.Focus();
+            //}
         }
 
         private void GuaHao_MouseMove(object sender, MouseEventArgs e)
@@ -1318,6 +1429,57 @@ namespace Client
                 } 
             }
             isBreadHandleSet = false;
+        }
+         
+
+        private void uiGroupBox2_MouseEnter(object sender, EventArgs e)
+        { 
+        }
+
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        { 
+            var py_code = txtSearch.Text.Trim().ToUpper();
+
+            if (string.IsNullOrWhiteSpace(py_code))
+            {
+                lstunits.Hide();
+            }
+            else
+            {
+                lstunits.Show(); lstunits.BackColor = Color.Red; lstunits.BringToFront();
+            }
+            var list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
+
+            lstunits.Items.Clear();
+
+            foreach (var key in requestDic.Keys)
+            {
+                if (list.Where(p => p.name == key).Count() > 0)
+                {
+                    lstunits.Items.Add(key);
+                }
+            }
+
+        }
+
+        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down)
+            {
+                this.lstunits.Focus();
+                if (lstunits.Items.Count > 0)
+                {
+                    lstunits.SelectedIndex = 0;
+                }
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                if (lstunits.Items.Count > 0)
+                {
+                    request_key = lstunits.Items[0].ToString();
+                } 
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ select
         g.name charge_name,
         h.name haoming_name,
         c1.name opera_name,
-        case a.ampm when 'a' then '上午' when 'p' then '下午' when 'p' then '下午' else '夜间' end ampm,
+        case a.ampm when 'a' then '上午' when 'm' then '中午' when 'p' then '下午' else '夜间' end ampm,
         case when a.gh_sequence > 0 then cast(a.gh_sequence as varchar) else '加号' + cast(abs(a.gh_sequence) as varchar) end gh_order,
         case when a.gh_sequence > 0 then gh_sequence else abs(gh_sequence) + 10000 end gh_sequence_f,
         case a.visit_flag when '0' then '未到' when '9' then '退号' when '8' then '已打印' else '已到' end visit_status,
@@ -37,7 +37,7 @@ from    view_mz_visit_table a left join  zd_unit_code b on a.visit_dept = b.unit
         left join  gh_receipt i on a.patient_id = i.patient_id and
                      a.times = i.times 
         left join  view_mz_allpatient p on a.patient_id = p.patient_id  
-where datediff(dd,a.gh_date,@gh_date)=0 and 
+where datediff(dd,a.visit_date,@gh_date)=0 and 
         a.visit_dept like @visit_dept and
         a.clinic_type like @clinic_type and
         isnull(a.doctor_code, '-1') like @doctor_code and

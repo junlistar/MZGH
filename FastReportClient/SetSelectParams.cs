@@ -77,6 +77,7 @@ namespace FastReportClient
                 }
                 dataGridView1.DataSource = list;
 
+                dataGridView1.AutoResizeColumns();
             }
 
         }

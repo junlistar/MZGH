@@ -361,6 +361,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\RequestHourVM.cs" />
     <Compile Include="ViewModel\ComboxItem.cs" />
     <Compile Include="ViewModel\GHPayModel.cs" />
     <Compile Include="ViewModel\GHRequestVM.cs" />

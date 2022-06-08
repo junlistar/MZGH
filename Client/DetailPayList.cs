@@ -82,5 +82,17 @@ namespace Client
         {
 
         }
+
+        private void DetailPayList_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    this.Close();//退出
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

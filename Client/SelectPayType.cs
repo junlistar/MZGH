@@ -890,19 +890,54 @@ namespace Client
         }
 
         public string FormID { get; set; } = "PRDT"; //单据ID
-        private string RptNo, RptName; //报表编号、名称
-        private DataTable RptTable; //数据表
-        private DataRow RptRow; //数据行(报表数据源)
+        //private string RptNo, RptName; //报表编号、名称
+        //private DataTable RptTable; //数据表
+        //private DataRow RptRow; //数据行(报表数据源)
         private bool isSaveAs = false; //另存为
+
+        ReportDataVM rdvm;
         //初始化报表
         private void InitializeReport(string RptMode)
         {
-            string sql = "select * from rt_report_data_fast_net where report_code = 220001";
-            DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
-             
+            //string sql = "select * from rt_report_data_fast_net where report_code = 220001";
+            //DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
 
-            RptTable = Ds.Tables[0];
-            RptRow = RptTable.Rows[0];
+
+            Task<HttpResponseMessage> task = null; var json = "";
+            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={220001}");
+
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            else
+            {
+                log.Info(response.ReasonPhrase);
+            }
+
+            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
+            //var resp = WebApiHelper.DeserializeObject<ResponseResult<DataTable>>(json);
+
+            if (resp.status==1)
+            {
+                rdvm = resp.data;
+            }
+            else
+            {
+                MessageBox.Show(resp.message);
+                log.Error(resp.message);
+                return;
+            }
+            //DataSet Ds = resp.data;
+
+            //RptTable = Ds.Tables[0];
+            //RptRow = RptTable.Rows[0];
             RegisterDesignerEvents();
             DesignReport(RptMode);
         }
@@ -962,10 +997,12 @@ namespace Client
                 TargetReport = new Report();
 
                 TargetReport.FileName = RptMode;
-                if (RptRow["report_com"].ToString().Length > 0)
-                {
-                    byte[] ReportBytes = (byte[])RptRow["report_com"];
-                    string sql = RptRow["report_sql"].ToString();
+               // if (RptRow["report_com"].ToString().Length > 0)
+                if (rdvm!=null && rdvm.report_com.Length > 0)
+                    {
+                    //byte[] ReportBytes = (byte[])RptRow["report_com"];
+                    byte[] ReportBytes = System.Text.Encoding.UTF8.GetBytes(rdvm.report_com); 
+                    string sql = rdvm.report_sql;
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
                         TargetReport.Load(Stream);
@@ -1005,10 +1042,9 @@ namespace Client
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show(ex.ToString());
             }
 
 

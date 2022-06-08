@@ -29,13 +29,13 @@ namespace CoreApi
 
             services.AddLogDashboard();
 
-            services.AddControllers().AddControllersAsServices();
+            services.AddControllers().AddControllersAsServices();//
 
             //services.AddMvc(opt =>
             //{
             //    opt.UseCentralRoutePrefix(new RouteAttribute("[controller]/[action]"));
             //});
-          
+
 
         }
 

@@ -39,6 +39,11 @@ namespace Client
 
             //InitData();
 
+            //设置按钮提示文字信息
+            uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
+            uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
+            uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F3]");
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
         }
 
         public void InitDic()

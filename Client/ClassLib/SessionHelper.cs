@@ -10,6 +10,8 @@ namespace Client.ClassLib
 {
     public class SessionHelper
     {
+       
+
         public static HttpClient MyHttpClient = null;
 
         public static LoginUsersVM uservm = new LoginUsersVM();
@@ -21,6 +23,8 @@ namespace Client.ClassLib
 
         public static int clientWidth;
         public static int clientHeight;
+
+        public static List<RequestHourVM> requestHours;
 
 
         //费别

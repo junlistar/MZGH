@@ -51,6 +51,15 @@ namespace Client
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
+
+
+            //设置按钮提示文字信息
+            uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
+            uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
+            uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F5]"); 
+            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");  
+            uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");  
+            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F4]"); 
         }
 
         public void InitDic()
@@ -884,6 +893,11 @@ namespace Client
             {
                 this.Focus();
             }
+        }
+
+        private void BaseRequest_Initialize(object sender, EventArgs e)
+        {
+
         }
     }
 }

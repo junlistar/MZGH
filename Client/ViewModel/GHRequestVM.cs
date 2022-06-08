@@ -162,7 +162,8 @@ namespace Client.ViewModel
 
     public class GhRefundVM
     {
-        public string visit_date { get; set; }
+        public DateTime visit_date { get; set; }
+        public string visit_date_str { get { return visit_date.ToShortDateString(); } }
 
         public string visit_dept { get; set; }
 
@@ -245,6 +246,7 @@ namespace Client.ViewModel
 
     }
 
+    [Serializable]
     public class ReportDataVM 
     {
         public int report_code { get; set; }
@@ -253,9 +255,9 @@ namespace Client.ViewModel
 
         public string long_name { get; set; }
         public string report_sql { get; set; }
-        public byte[] report_com { get; set; }
+        public string report_com { get; set; }
         public string report_flag { get; set; }
-        public string datasetn { get; set; }
+        public int datasetn { get; set; }
 
     }
 

@@ -37,18 +37,18 @@ namespace CoreTest
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
-            BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
-            baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
+            //BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
+            //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
             // ?begin=&end=&weeks=3&day=-1
 
             //GhSearchRepository resp = new GhSearchRepository();
             //var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
 
-            //ReportDataFastRepository rdf = new ReportDataFastRepository();
+            ReportDataFastRepository rdf = new ReportDataFastRepository();
             //var sql = rdf.GetSqlByTag(220001);
 
-            //var ds = rdf.GetReportDataByCode("220001","test");
-
+          //  var ds = rdf.GetReportDataByCode("220001","test");
+             
 
             //GetRequestsByDate,2022-05-30 00:00:00,2022-05-30 23:59:59 
             //CreateRequestRecord,,2022-05-30,1,1,00040

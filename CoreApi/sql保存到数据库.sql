@@ -234,7 +234,7 @@ values(220032,'select
         g.name charge_name,
         h.name haoming_name,
         c1.name opera_name,
-        case a.ampm when ''a'' then ''上午'' when ''p'' then ''下午'' when ''p'' then ''下午'' else ''夜间'' end ampm,
+        case a.ampm when ''a'' then ''上午'' when ''m'' then ''中午'' when ''p'' then ''下午'' else ''夜间'' end ampm,
         case when a.gh_sequence > 0 then cast(a.gh_sequence as varchar) else ''加号'' + cast(abs(a.gh_sequence) as varchar) end gh_order,
         case when a.gh_sequence > 0 then gh_sequence else abs(gh_sequence) + 10000 end gh_sequence_f,
         case a.visit_flag when ''0'' then ''未到'' when ''9'' then ''退号'' when ''8'' then ''已打印'' else ''已到'' end visit_status,
@@ -607,3 +607,13 @@ values(220062,'update gh_base_request
 set [week]=@week,[day]=@day,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,
 clinic_type=@clinic_type,totle_num=@totle_num,op_id=@op_id,op_date=@op_date,open_flag=@open_flag,window_no=@window_no 
 where request_sn = @request_sn','挂号-编辑基础号表');
+
+
+ 
+--220063挂号  生成分时段号源
+insert into wh_tag_sql(tag,[sql],[description])
+values(220063,'exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate','挂号-生成分时段号源');
+
+--220063挂号  查询挂号时间段
+insert into wh_tag_sql(tag,[sql],[description])
+values(220064,'select * from  gh_zd_request_hour','挂号-查询挂号时间段');

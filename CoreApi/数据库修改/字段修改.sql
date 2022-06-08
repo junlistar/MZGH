@@ -139,6 +139,7 @@ select
 
 
 
+
 USE [his]
 GO
 
@@ -192,8 +193,8 @@ set @end_time='14:00:00'  --下午上班时间
 set @eve_time='19:00:00'  --夜间上班时间
 set @amss=4 * 60 *60 --上午工作秒数  
 set @pmss=3 * 60 *60 --下午工作秒数  
-set @amss=2 * 60 *60 --上午工作秒数  
-set @pmss=2 * 60 *60 --下午工作秒数  
+set @midss=2 * 60 *60 --中午工作秒数  
+set @evess=2 * 60 *60 --夜间工作秒数  
 if (@Op_type=2)  --删除  
 begin  
   if exists(select * from gh_request a inner join gh_request_list b  on a.record_sn=b.record_sn 
@@ -249,7 +250,7 @@ begin
 					when 'm' then DATEADD(ss,(b.req_no -1) * (CEILING(@midss /(end_no - begin_no +1))),mid)   
 					when 'p' then DATEADD(ss,(b.req_no -1) * (CEILING(@pmss /(end_no - begin_no +1))),pm)    
 					else DATEADD(ss,(b.req_no-1) *(CEILING(@evess  /(end_no - begin_no+ 1 ))),eve) end,21),5) as start_time,
- RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,b.req_no * (CEILING(@evess /(end_no - begin_no +1))) ,am)  
+ RIGHT(CONVERT(varchar(16),case a.ampm when 'a' then DATEADD(ss,b.req_no * (CEILING(@amss /(end_no - begin_no +1))) ,am)  
 					when 'm' then DATEADD(ss,(b.req_no) * (CEILING(@midss /(end_no - begin_no +1))),mid)   
 					when 'p' then DATEADD(ss,(b.req_no) * (CEILING(@pmss /(end_no - begin_no +1))),pm)    
 					else DATEADD(ss,b.req_no * (CEILING(@evess  /(end_no - begin_no+1 ))) ,eve) end,21),5)    
@@ -279,6 +280,8 @@ begin catch
 end catch    
 
 GO
+
+
 
 
 USE [his]
@@ -336,3 +339,23 @@ as
  end  
   select isnull(@out_no,0) as  out_request_no,@out_text as out_msg
 GO
+
+
+
+CREATE TABLE [dbo].[gh_zd_request_hour](
+	[code] [varchar](10) NULL,
+	[name] [varchar](10) NULL,
+	[start_hour] [smallint] NULL,
+	[end_hour] [smallint] NULL
+) ON [PRIMARY]
+
+GO
+
+ insert gh_zd_request_hour
+ select 'a','上午',0,12
+ union all
+ select 'm','中午',12,14
+ union all
+ select 'p','下午',14,17
+ union all
+ select 'e','夜间',19,21 

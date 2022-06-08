@@ -36,18 +36,18 @@
             this.txtcode = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.dgvparams = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvparams)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.report_code,
@@ -56,22 +56,27 @@
             this.long_name});
             this.dataGridView1.Location = new System.Drawing.Point(27, 50);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(369, 287);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // report_code
             // 
             this.report_code.DataPropertyName = "report_code";
             this.report_code.HeaderText = "报表号";
             this.report_code.Name = "report_code";
+            this.report_code.ReadOnly = true;
             // 
             // report_sql
             // 
             this.report_sql.DataPropertyName = "report_sql";
             this.report_sql.HeaderText = "report_sql";
             this.report_sql.Name = "report_sql";
+            this.report_sql.ReadOnly = true;
             this.report_sql.Visible = false;
             // 
             // short_name
@@ -79,12 +84,14 @@
             this.short_name.DataPropertyName = "short_name";
             this.short_name.HeaderText = "报表名称";
             this.short_name.Name = "short_name";
+            this.short_name.ReadOnly = true;
             // 
             // long_name
             // 
             this.long_name.DataPropertyName = "long_name";
             this.long_name.HeaderText = "long_name";
             this.long_name.Name = "long_name";
+            this.long_name.ReadOnly = true;
             this.long_name.Visible = false;
             // 
             // txtcode
@@ -113,34 +120,22 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "报表名称";
             // 
-            // textBox2
+            // txtName
             // 
-            this.textBox2.Location = new System.Drawing.Point(353, 23);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(435, 21);
-            this.textBox2.TabIndex = 4;
+            this.txtName.Location = new System.Drawing.Point(353, 23);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(435, 21);
+            this.txtName.TabIndex = 4;
+            this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
-            // dataGridView2
+            // dgvparams
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this.dataGridView2.Location = new System.Drawing.Point(419, 50);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(369, 287);
-            this.dataGridView2.TabIndex = 5;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "报表号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "报表名称";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dgvparams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvparams.Location = new System.Drawing.Point(419, 50);
+            this.dgvparams.Name = "dgvparams";
+            this.dgvparams.RowTemplate.Height = 23;
+            this.dgvparams.Size = new System.Drawing.Size(369, 287);
+            this.dgvparams.TabIndex = 5;
             // 
             // button1
             // 
@@ -169,8 +164,8 @@
             this.ClientSize = new System.Drawing.Size(804, 399);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.dgvparams);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtcode);
@@ -180,7 +175,7 @@
             this.Text = "选择报表";
             this.Load += new System.EventHandler(this.SelectReportFrom_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvparams)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,10 +187,8 @@
         private System.Windows.Forms.TextBox txtcode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.DataGridView dgvparams;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn report_code;

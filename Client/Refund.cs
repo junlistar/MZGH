@@ -506,6 +506,7 @@ namespace Client
                     p.unit_name,
                     p.visit_flag_name,
                     p.times,
+                    p.visit_date_str,
                     p.ampmstr,
                     p.charge,
                     p.cheque_name,
@@ -542,6 +543,7 @@ namespace Client
                 p.unit_name,
                 p.visit_flag_name,
                 p.times,
+                p.visit_date_str,
                 p.ampmstr,
                 p.charge,
                 p.cheque_name,
@@ -808,7 +810,7 @@ namespace Client
 
         private void dgvDeposit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
+            //MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
             if (dgvDeposit.SelectedIndex!=-1)
             {
                 var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
@@ -817,7 +819,8 @@ namespace Client
 
                 var datestr = dtprq.Value.ToString("yyyy-MM-dd");
                 var patient_id = lblhidid.Text;
-                RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
+                //RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
+                DetailPayList payList = new DetailPayList(userInfo, datestr, patient_id, times);
                 payList.ShowDialog();
             }
         }
@@ -827,17 +830,20 @@ namespace Client
             switch (e.KeyCode)
             {
 
-                case Keys.F1:
-                    Reset();
-                    break;
+                //case Keys.F1:
+                //    Reset();
+                //    break;
 
-                case Keys.F2:
-                    TuiHao();
-                    break;
-                case Keys.F3:
-                    XianJinTuiHao();
-                    break;
-                case Keys.F4:
+                //case Keys.F2:
+                //    TuiHao();
+                //    break;
+                //case Keys.F3:
+                //    XianJinTuiHao();
+                //    break;
+                //case Keys.F4:
+                //    this.Close();//退出
+                //    break;
+                case Keys.Escape:
                     this.Close();//退出
                     break;
             }

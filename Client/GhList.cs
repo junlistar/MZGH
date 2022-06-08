@@ -60,6 +60,11 @@ namespace Client
             dgvghy.KeyDown += Dgvghy_KeyDown;
 
             this.Focus();
+
+            //设置按钮提示文字信息
+            uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
+            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F2]"); 
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
         }
 
       
@@ -513,6 +518,10 @@ namespace Client
             txtcode.Text = "";
             txtDoct.Text = "";
             txtGhUser.Text = "";
+
+            cbxSXW.Text = "全部";
+             
+            cbxStatus.Text = "全部";
 
             txtks.TextChanged += txtks_TextChanged;
             txtzk.TextChanged += txtzk_TextChanged;

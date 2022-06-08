@@ -4,6 +4,7 @@ using Data.IRepository;
 using Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -38,12 +39,13 @@ namespace CoreApi.Controllers
         private readonly IChargeItemRepository _chargeItemRepository;
         private readonly IMzHaomingRepository _mzHaomingRepository;
         private readonly IReportDataFastRepository _reportDataFastRepository;
-         
+        private readonly IRequestHourRepository _requestHourRepository;
+
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
-            IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository)
+            IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository, IRequestHourRepository requestHourRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -63,7 +65,8 @@ namespace CoreApi.Controllers
             _chargeItemRepository = chargeItemRepository;
             _mzHaomingRepository = mzHaomingRepository;
             _reportDataFastRepository = reportDataFastRepository;
-             
+            _requestHourRepository = requestHourRepository;
+
         }
 
         [HttpGet]
@@ -638,8 +641,23 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<BaseRequest>>(ex.Message);
             }
-        } 
+        }
 
+
+        public ResponseResult<bool> CreateRequestNoList(string begin, string end, int type)
+        {
+
+            Log.Information($"CreateRequestNoList,{begin},{end}, {type}");
+            try
+            {
+                return _baseRequestRepository.CreateRequestNoList(begin, end, type);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
         public ResponseResult<int> CreateRequestRecord(string begin, string end, string weeks, int day, string op_id)
         {
             Stopwatch wt = new Stopwatch();
@@ -768,20 +786,36 @@ namespace CoreApi.Controllers
         }
 
 
-        public ResponseResult<DataSet> GetReportDataByCode(string code, string tb_name)
+        //public ResponseResult<DataSet> GetReportDataByCode(string code, string tb_name)
+        //{
+
+        //    Log.Information($"GetReportDataByCode,{code},{tb_name}");
+        //    try
+        //    {
+        //        return _reportDataFastRepository.GetReportDataByCode(code, tb_name);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Error(ex.Message);
+        //        return ErrorResult<DataSet>(ex.Message);
+        //    }
+        //}
+        public ResponseResult<ReportData> GetReportDataByCode(string code)
         {
 
-            Log.Information($"GetReportDataByCode,{code},{tb_name}");
+            Log.Information($"GetReportDataByCode,{code}");
             try
             {
-                return _reportDataFastRepository.GetReportDataByCode(code, tb_name);
+                //return JsonSerializer.Serialize(_reportDataFastRepository.GetReportDataByCode(code));
+                return _reportDataFastRepository.GetReportDataByCode(code);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<DataSet>(ex.Message);
+                return  ErrorResult<ReportData>(ex.Message);
             }
-        }
+        } 
+
         public ResponseResult<int> UpdateReportDataByCode(string code, byte[] report_com)
         {
 
@@ -809,6 +843,21 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<ReportData>>(ex.Message);
             }
-        } 
+        }
+
+        public ResponseResult<List<RequestHour>> GetRequestHours()
+        {
+
+            Log.Information($"GetRequestHour");
+            try
+            {
+                return _requestHourRepository.GetRequestHours();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<RequestHour>>(ex.Message);
+            }
+        }
     }
 }

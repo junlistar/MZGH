@@ -42,6 +42,7 @@ namespace Client
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.uiSignal1 = new Sunny.UI.UISignal();
             this.timerSignal = new System.Windows.Forms.Timer(this.components);
+            this.timerlogout = new System.Windows.Forms.Timer(this.components);
             this.Footer.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +153,11 @@ namespace Client
             this.timerSignal.Interval = 1000;
             this.timerSignal.Tick += new System.EventHandler(this.timerSignal_Tick);
             // 
+            // timerlogout
+            // 
+            this.timerlogout.Interval = 1000;
+            this.timerlogout.Tick += new System.EventHandler(this.timerlogout_Tick);
+            // 
             // FHeaderAsideMainFooter
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -181,5 +187,6 @@ namespace Client
         private System.Windows.Forms.Timer timer1;
         private UISignal uiSignal1;
         private System.Windows.Forms.Timer timerSignal;
+        private System.Windows.Forms.Timer timerlogout;
     }
 }

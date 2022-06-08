@@ -34,6 +34,9 @@ namespace FastReportClient
             srf.FormClosed += Srf_FormClosed;
             srf.ShowDialog();
 
+            lblcode.Text = code;
+            lblname.Text = sname;
+
         }
 
         private void Srf_FormClosed(object sender, FormClosedEventArgs e)
@@ -176,7 +179,7 @@ namespace FastReportClient
             {
 
             }
-            
+
             RegisterDesignerEvents();
             DesignReport(RptMode);
         }
@@ -205,14 +208,14 @@ namespace FastReportClient
                 TargetReport.Save(stream);
                 if (string.IsNullOrWhiteSpace(code))
                 {
-                    int _code =int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+                    int _code = int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
                     string sql = $@"insert into rt_report_data_fast_net (report_code,short_name,long_name,report_sql,report_com,report_flag,datasetn)
 values(?, ?, ?, ?,?, 1, 0)";
                     var para = new System.Data.OleDb.OleDbParameter[5];
                     para[0] = new System.Data.OleDb.OleDbParameter("p1", _code);
-                    para[1] = new System.Data.OleDb.OleDbParameter("p2","test");
+                    para[1] = new System.Data.OleDb.OleDbParameter("p2", "test");
                     para[2] = new System.Data.OleDb.OleDbParameter("p3", "test");
-                    para[3] = new System.Data.OleDb.OleDbParameter("p4",txtsql.Text);
+                    para[3] = new System.Data.OleDb.OleDbParameter("p4", txtsql.Text);
                     para[4] = new System.Data.OleDb.OleDbParameter("p5", stream.ToArray());
                     var result = DbHelper.ExecuteNonQuery(sql, para);
                 }
@@ -225,7 +228,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                     var result = DbHelper.ExecuteNonQuery(sql, para);
 
                 }
-               // RegisterDesignerEvents();
+                // RegisterDesignerEvents();
             }
         }
         Report TargetReport;
@@ -257,7 +260,7 @@ values(?, ?, ?, ?,?, 1, 0)";
         {
             try
             {
-                if (code=="")
+                if (code == "")
                 {
                     return;
                 }
@@ -268,7 +271,7 @@ values(?, ?, ?, ?,?, 1, 0)";
 
                 var para = new System.Data.OleDb.OleDbParameter[2];
                 para[0] = new System.Data.OleDb.OleDbParameter("p1", sqltext);
-                para[1] = new System.Data.OleDb.OleDbParameter("p2",int.Parse(code));
+                para[1] = new System.Data.OleDb.OleDbParameter("p2", int.Parse(code));
                 var result = DbHelper.ExecuteNonQuery(sql1, para);
 
 
@@ -318,8 +321,31 @@ values(?, ?, ?, ?,?, 1, 0)";
 
         }
 
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            Add add = new Add();
+            add.ShowDialog();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+
+        }
+        public static string ByteArrayToString(byte[] ba)
+        {
+            string hex = BitConverter.ToString(ba);
+            return hex.Replace("-", "");
+        }
+
         private void DesignReport(string RptMode)
         {
+
+            if (string.IsNullOrEmpty(code))
+            {
+                MessageBox.Show("请选择报表");
+                return;
+            }
+
             try
             {
 
@@ -330,14 +356,19 @@ values(?, ?, ?, ?,?, 1, 0)";
                 if (!string.IsNullOrEmpty(code) && RptRow["report_com"].ToString().Length > 0)
                 {
                     byte[] ReportBytes = (byte[])RptRow["report_com"];
+                    var str = RptRow["report_com"].ToString();
+
+                    var str1 = ByteArrayToString(ReportBytes);
+                    str1 = System.Text.Encoding.UTF8.GetString(ReportBytes);
+
                     string sql = RptRow["report_sql"].ToString();
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
-                        TargetReport.Load(Stream);
+                        TargetReport.Load(str1);
 
                         //查询参数
                         string param_sql = $"select * from  rt_report_params_fast_net where report_code = {code}";
-                        var dt_param = DbHelper.ExecuteDataTable(param_sql);                 
+                        var dt_param = DbHelper.ExecuteDataTable(param_sql);
                         if (dt_param != null && dt_param.Rows.Count > 0)
                         {
                             // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
@@ -349,7 +380,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                             //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
-                        var ds = DbHelper.GetDataSet(sql, "ghinfo");
+                        var ds = DbHelper.GetDataSet(sql, "DataTable");
 
                         TargetReport.RegisterData(ds);
 
@@ -358,13 +389,27 @@ values(?, ?, ?, ?,?, 1, 0)";
                 }
                 else
                 {
-                       string sql = txtsql.Text;
-                     
-                        var ds = DbHelper.GetDataSet(sql, "testDB");
+                    string sql = txtsql.Text;
+                    //查询参数
+                    string param_sql = $"select * from  rt_report_params_fast_net where report_code = {code}";
+                    var dt_param = DbHelper.ExecuteDataTable(param_sql);
+                    if (dt_param != null && dt_param.Rows.Count > 0)
+                    {
+                        // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
 
-                        TargetReport.RegisterData(ds);
+                        for (int i = 0; i < dt_param.Rows.Count; i++)
+                        {
+                            sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(), "'" + dt_param.Rows[i]["param_defaultvalue"].ToString() + "'");
+                        }
+                        //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
+                        //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
+                    }
+                    var ds = DbHelper.GetDataSet(sql, "DataTable");
+                    TargetReport.Load(Application.StartupPath + @"\file\Untitled.frx");//这里是模板的路径
 
-                     
+                    TargetReport.RegisterData(ds);
+
+
                 }
                 //操作方式：DESIGN-设计;PREVIEW-预览;PRINT-打印
                 if (RptMode == "DESIGN")

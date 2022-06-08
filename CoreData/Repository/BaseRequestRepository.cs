@@ -256,5 +256,31 @@ namespace Data.Repository
 
 
         }
+
+        public bool CreateRequestNoList(string begin, string end,int type)
+        {
+            string ghsql = GetSqlByTag(220063);
+
+            var para = new DynamicParameters();
+            para.Add("@Op_type", type);
+            para.Add("@sDate", begin);
+            para.Add("@eDate", end);
+            //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
+
+           var dt =  base.ExecuteTable(ghsql, para, CommandType.Text);
+            if (dt!=null && dt.Rows.Count>0)
+            {
+                var code = dt.Rows[0][0].ToString();
+                if (code=="0")
+                {
+                    return true;
+                }
+                else
+                {
+                    throw new Exception(dt.Rows[0][1].ToString());
+                }
+            }
+            return false; 
+        }
     }
 }

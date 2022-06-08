@@ -13,9 +13,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Client.Forms.Wedgit
 {
-    public partial class Login : Form
+    public partial class Login : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(Login));//typeof放当前类
         public bool IsLogin = false;

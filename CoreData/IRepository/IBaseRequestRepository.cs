@@ -25,6 +25,8 @@ namespace Data.IRepository
 
         List<BaseRequest> GetRequestsByParams(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
              string ampm, string window_no, string open_flag);
+
+        bool CreateRequestNoList(string begin, string end, int type);
         #endregion
     }
 }

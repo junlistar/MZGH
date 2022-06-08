@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel3 = new Sunny.UI.UILabel();
@@ -40,21 +40,6 @@
             this.lblSex = new Sunny.UI.UILabel();
             this.lblAge = new Sunny.UI.UILabel();
             this.dgvDeposit = new Sunny.UI.UIDataGridView();
-            this.gh_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.visit_flag_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiLabel4 = new Sunny.UI.UILabel();
             this.dtprq = new Sunny.UI.UIDatePicker();
             this.uiLabel5 = new Sunny.UI.UILabel();
@@ -70,6 +55,22 @@
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.lblSno = new Sunny.UI.UILabel();
             this.uiLabel6 = new Sunny.UI.UILabel();
+            this.gh_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.visit_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.visit_flag_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -145,20 +146,20 @@
             // 
             this.dgvDeposit.AllowUserToAddRows = false;
             this.dgvDeposit.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dgvDeposit.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.dgvDeposit.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDeposit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDeposit.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dgvDeposit.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeposit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDeposit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDeposit.ColumnHeadersHeight = 32;
             this.dgvDeposit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDeposit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -166,8 +167,8 @@
             this.unit_name,
             this.group_name,
             this.doctor_name,
+            this.visit_date_str,
             this.ampm,
-            this.times,
             this.ledger_sn,
             this.charge,
             this.clinic_name,
@@ -176,15 +177,16 @@
             this.cheque_type,
             this.cheque_no,
             this.item_no,
-            this.receipt_sn});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDeposit.DefaultCellStyle = dataGridViewCellStyle8;
+            this.receipt_sn,
+            this.times});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDeposit.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDeposit.EnableHeadersVisualStyles = false;
             this.dgvDeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvDeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(164)))), ((int)(((byte)(152)))));
@@ -192,20 +194,20 @@
             this.dgvDeposit.Name = "dgvDeposit";
             this.dgvDeposit.ReadOnly = true;
             this.dgvDeposit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDeposit.RowTemplate.Height = 23;
             this.dgvDeposit.SelectedIndex = -1;
             this.dgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -216,117 +218,6 @@
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeposit_CellDoubleClick);
             this.dgvDeposit.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dgvDeposit_RowPrePaint);
-            // 
-            // gh_date_str
-            // 
-            this.gh_date_str.DataPropertyName = "gh_date_str";
-            this.gh_date_str.HeaderText = "挂号时间";
-            this.gh_date_str.Name = "gh_date_str";
-            this.gh_date_str.ReadOnly = true;
-            // 
-            // unit_name
-            // 
-            this.unit_name.DataPropertyName = "unit_name";
-            this.unit_name.HeaderText = "挂号专科";
-            this.unit_name.Name = "unit_name";
-            this.unit_name.ReadOnly = true;
-            // 
-            // group_name
-            // 
-            this.group_name.DataPropertyName = "group_name";
-            this.group_name.HeaderText = "科室";
-            this.group_name.Name = "group_name";
-            this.group_name.ReadOnly = true;
-            // 
-            // doctor_name
-            // 
-            this.doctor_name.DataPropertyName = "doctor_name";
-            this.doctor_name.HeaderText = "医生";
-            this.doctor_name.Name = "doctor_name";
-            this.doctor_name.ReadOnly = true;
-            // 
-            // ampm
-            // 
-            this.ampm.DataPropertyName = "ampmstr";
-            this.ampm.HeaderText = "上/下午";
-            this.ampm.Name = "ampm";
-            this.ampm.ReadOnly = true;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "挂号次数";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "ledger_sn";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            this.ledger_sn.Visible = false;
-            // 
-            // charge
-            // 
-            this.charge.DataPropertyName = "charge";
-            this.charge.HeaderText = "金额";
-            this.charge.Name = "charge";
-            this.charge.ReadOnly = true;
-            // 
-            // clinic_name
-            // 
-            this.clinic_name.DataPropertyName = "clinic_name";
-            this.clinic_name.HeaderText = "号类";
-            this.clinic_name.Name = "clinic_name";
-            this.clinic_name.ReadOnly = true;
-            // 
-            // cheque_name
-            // 
-            this.cheque_name.DataPropertyName = "cheque_name";
-            this.cheque_name.HeaderText = "支付类型";
-            this.cheque_name.Name = "cheque_name";
-            this.cheque_name.ReadOnly = true;
-            this.cheque_name.Visible = false;
-            // 
-            // visit_flag_name
-            // 
-            this.visit_flag_name.DataPropertyName = "visit_flag_name";
-            this.visit_flag_name.HeaderText = "挂号状态";
-            this.visit_flag_name.Name = "visit_flag_name";
-            this.visit_flag_name.ReadOnly = true;
-            // 
-            // cheque_type
-            // 
-            this.cheque_type.DataPropertyName = "cheque_type";
-            this.cheque_type.HeaderText = "cheque_type";
-            this.cheque_type.Name = "cheque_type";
-            this.cheque_type.ReadOnly = true;
-            this.cheque_type.Visible = false;
-            // 
-            // cheque_no
-            // 
-            this.cheque_no.DataPropertyName = "cheque_no";
-            this.cheque_no.HeaderText = "cheque_no";
-            this.cheque_no.Name = "cheque_no";
-            this.cheque_no.ReadOnly = true;
-            this.cheque_no.Visible = false;
-            // 
-            // item_no
-            // 
-            this.item_no.DataPropertyName = "item_no";
-            this.item_no.HeaderText = "item_no";
-            this.item_no.Name = "item_no";
-            this.item_no.ReadOnly = true;
-            this.item_no.Visible = false;
-            // 
-            // receipt_sn
-            // 
-            this.receipt_sn.DataPropertyName = "receipt_sn";
-            this.receipt_sn.HeaderText = "receipt_sn";
-            this.receipt_sn.Name = "receipt_sn";
-            this.receipt_sn.ReadOnly = true;
-            this.receipt_sn.Visible = false;
             // 
             // uiLabel4
             // 
@@ -442,7 +333,7 @@
             this.btnCashRefund.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnCashRefund.Symbol = 62005;
             this.btnCashRefund.TabIndex = 16;
-            this.btnCashRefund.Text = "现金退(F3)";
+            this.btnCashRefund.Text = "现金退";
             this.btnCashRefund.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCashRefund.Click += new System.EventHandler(this.btnCashRefund_Click);
             // 
@@ -478,7 +369,7 @@
             this.uiSymbolButton1.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
-            this.uiSymbolButton1.Text = "重新(F1)";
+            this.uiSymbolButton1.Text = "重新";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
             // 
@@ -502,7 +393,7 @@
             this.uiSymbolButton2.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
-            this.uiSymbolButton2.Text = "退出(F4)";
+            this.uiSymbolButton2.Text = "退出";
             this.uiSymbolButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton2.Click += new System.EventHandler(this.uiSymbolButton2_Click);
             // 
@@ -526,7 +417,7 @@
             this.btnTuihao.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.btnTuihao.Symbol = 62005;
             this.btnTuihao.TabIndex = 7;
-            this.btnTuihao.Text = "退号(F2)";
+            this.btnTuihao.Text = "退号";
             this.btnTuihao.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTuihao.Click += new System.EventHandler(this.uiButton1_Click);
             // 
@@ -611,6 +502,125 @@
             this.uiLabel6.Text = "身份证：";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // gh_date_str
+            // 
+            this.gh_date_str.DataPropertyName = "gh_date_str";
+            this.gh_date_str.HeaderText = "挂号时间";
+            this.gh_date_str.Name = "gh_date_str";
+            this.gh_date_str.ReadOnly = true;
+            // 
+            // unit_name
+            // 
+            this.unit_name.DataPropertyName = "unit_name";
+            this.unit_name.HeaderText = "挂号专科";
+            this.unit_name.Name = "unit_name";
+            this.unit_name.ReadOnly = true;
+            // 
+            // group_name
+            // 
+            this.group_name.DataPropertyName = "group_name";
+            this.group_name.HeaderText = "科室";
+            this.group_name.Name = "group_name";
+            this.group_name.ReadOnly = true;
+            // 
+            // doctor_name
+            // 
+            this.doctor_name.DataPropertyName = "doctor_name";
+            this.doctor_name.HeaderText = "医生";
+            this.doctor_name.Name = "doctor_name";
+            this.doctor_name.ReadOnly = true;
+            // 
+            // visit_date_str
+            // 
+            this.visit_date_str.DataPropertyName = "visit_date_str";
+            this.visit_date_str.HeaderText = "就诊日期";
+            this.visit_date_str.Name = "visit_date_str";
+            this.visit_date_str.ReadOnly = true;
+            // 
+            // ampm
+            // 
+            this.ampm.DataPropertyName = "ampmstr";
+            this.ampm.HeaderText = "上/下午";
+            this.ampm.Name = "ampm";
+            this.ampm.ReadOnly = true;
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            this.ledger_sn.HeaderText = "ledger_sn";
+            this.ledger_sn.Name = "ledger_sn";
+            this.ledger_sn.ReadOnly = true;
+            this.ledger_sn.Visible = false;
+            // 
+            // charge
+            // 
+            this.charge.DataPropertyName = "charge";
+            this.charge.HeaderText = "金额";
+            this.charge.Name = "charge";
+            this.charge.ReadOnly = true;
+            // 
+            // clinic_name
+            // 
+            this.clinic_name.DataPropertyName = "clinic_name";
+            this.clinic_name.HeaderText = "号类";
+            this.clinic_name.Name = "clinic_name";
+            this.clinic_name.ReadOnly = true;
+            // 
+            // cheque_name
+            // 
+            this.cheque_name.DataPropertyName = "cheque_name";
+            this.cheque_name.HeaderText = "支付类型";
+            this.cheque_name.Name = "cheque_name";
+            this.cheque_name.ReadOnly = true;
+            this.cheque_name.Visible = false;
+            // 
+            // visit_flag_name
+            // 
+            this.visit_flag_name.DataPropertyName = "visit_flag_name";
+            this.visit_flag_name.HeaderText = "挂号状态";
+            this.visit_flag_name.Name = "visit_flag_name";
+            this.visit_flag_name.ReadOnly = true;
+            // 
+            // cheque_type
+            // 
+            this.cheque_type.DataPropertyName = "cheque_type";
+            this.cheque_type.HeaderText = "cheque_type";
+            this.cheque_type.Name = "cheque_type";
+            this.cheque_type.ReadOnly = true;
+            this.cheque_type.Visible = false;
+            // 
+            // cheque_no
+            // 
+            this.cheque_no.DataPropertyName = "cheque_no";
+            this.cheque_no.HeaderText = "cheque_no";
+            this.cheque_no.Name = "cheque_no";
+            this.cheque_no.ReadOnly = true;
+            this.cheque_no.Visible = false;
+            // 
+            // item_no
+            // 
+            this.item_no.DataPropertyName = "item_no";
+            this.item_no.HeaderText = "item_no";
+            this.item_no.Name = "item_no";
+            this.item_no.ReadOnly = true;
+            this.item_no.Visible = false;
+            // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "receipt_sn";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            this.receipt_sn.Visible = false;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "times";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
+            this.times.Visible = false;
+            // 
             // Refund
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -664,8 +674,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn group_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn doctor_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn visit_date_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn ampm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn times;
         private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge;
         private System.Windows.Forms.DataGridViewTextBoxColumn clinic_name;
@@ -675,5 +685,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn receipt_sn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn times;
     }
 }

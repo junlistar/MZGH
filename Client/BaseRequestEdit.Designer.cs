@@ -197,7 +197,8 @@
             "第一周",
             "第二周",
             "第三周",
-            "第四周"});
+            "第四周",
+            "第五周"});
             this.cbxWeek.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.cbxWeek.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.cbxWeek.Location = new System.Drawing.Point(163, 155);

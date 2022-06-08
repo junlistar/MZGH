@@ -2,6 +2,7 @@
 
 namespace Data.Entities
 {
+    [Serializable]
     public class ReportData : BaseModel
     { 
         public int report_code { get; set; }
@@ -10,9 +11,9 @@ namespace Data.Entities
          
         public string long_name { get; set; }
         public string report_sql { get; set; }
-        public byte[] report_com { get; set; }
+        public string report_com { get; set; }
         public string report_flag { get; set; }
-        public string datasetn { get; set; }
+        public int datasetn { get; set; }
 
     }
 }

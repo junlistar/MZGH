@@ -8,7 +8,8 @@ namespace Data.IRepository
 {
     public interface IReportDataFastRepository : IRepositoryBase<ReportData> 
     {
-        DataSet GetReportDataByCode(string code, string tb_name);
+        // DataSet GetReportDataByCode(string code, string tb_name);
+        ReportData GetReportDataByCode(string code);
 
         List<ReportData> GetReportData(string code);
 
