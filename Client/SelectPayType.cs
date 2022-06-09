@@ -73,77 +73,83 @@ namespace Client
             UIMessageTip.ShowOk("取消支付,退款处理开始");
             foreach (var item in paylist)
             {
-                log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
-                switch (item.pay_type)
-                {
-                    case (int)PayMethodEnum.Xianjin:
-                        UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
-                        //UIMessageTip.ShowOk("处理现金退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-                    case (int)PayMethodEnum.WeiXin:
-
-                        //var transaction_id = "";
-                        //var out_trade_no = "";
-                        //var total_fee = "";
-                        //var redfund_fee = "";
-
-                        //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                        //log.Info("微信退款返回字符串：" + wx_response);
-
-
-                        UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
-                        //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-                    case (int)PayMethodEnum.Yibao:
-                        UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
-
-                        if (YBRefund())
-                        {
-
-                        }
-
-                        //UIMessageTip.ShowOk("处理医保退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-                    case (int)PayMethodEnum.Yinlian:
-                        UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
-                        //UIMessageTip.ShowOk("处理银联退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-                    case (int)PayMethodEnum.Zhifubao:
-
-
-                        //var cof = AliConfig.GetConfig();
-                        //Factory.SetOptions(cof);
-
-                        ////全部退款
-                        //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
-                        ////部分退款
-                        ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
-
-                        //if (ResponseChecker.Success(response))
-                        //{
-                        //    log.Info("支付宝退款调用成功");
-                        //}
-                        //else
-                        //{
-                        //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                        //}
-
-                        UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
-                        //UIMessageTip.ShowOk("处理支付宝退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-                    default:
-
-                        UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
-                        //UIMessageTip.ShowOk("处理其他退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                        break;
-
-
-
-                }
+                RefundType(item);
             }
 
             log.Info("结束取消支付,退款处理");
 
+        }
+
+        public void RefundType(GHPayModel item)
+        {
+
+            log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
+            switch (item.pay_type)
+            {
+                case (int)PayMethodEnum.Xianjin:
+                    UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理现金退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+                case (int)PayMethodEnum.WeiXin:
+
+                    //var transaction_id = "";
+                    //var out_trade_no = "";
+                    //var total_fee = "";
+                    //var redfund_fee = "";
+
+                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                    //log.Info("微信退款返回字符串：" + wx_response);
+
+
+                    UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+                case (int)PayMethodEnum.Yibao:
+                    UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
+
+                    if (YBRefund())
+                    {
+
+                    }
+
+                    //UIMessageTip.ShowOk("处理医保退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+                case (int)PayMethodEnum.Yinlian:
+                    UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理银联退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+                case (int)PayMethodEnum.Zhifubao:
+
+
+                    //var cof = AliConfig.GetConfig();
+                    //Factory.SetOptions(cof);
+
+                    ////全部退款
+                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
+                    ////部分退款
+                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                    //if (ResponseChecker.Success(response))
+                    //{
+                    //    log.Info("支付宝退款调用成功");
+                    //}
+                    //else
+                    //{
+                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                    //}
+
+                    UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理支付宝退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+                default:
+
+                    UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理其他退款,金额：" + item.pay_je); Thread.Sleep(1000);
+                    break;
+
+
+
+            }
         }
 
         public bool YBRefund()
@@ -223,6 +229,10 @@ namespace Client
                 timer1.Interval = 500;
                 timer1.Start();
             }
+            else
+            {
+                timer1.Stop(); lblmsg.Visible = false;
+            }
         }
 
 
@@ -290,7 +300,7 @@ namespace Client
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
                     paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, out_trade_no));
-
+                    
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
                     //总金额-支付金额
@@ -414,11 +424,11 @@ namespace Client
                 string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
-                 
+
 
                 //var res = DataPost("http://10.87.82.212:8080", json);
 
-                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs)|| string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
+                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
                    || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
                 {
                     YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
@@ -462,20 +472,20 @@ namespace Client
                     if (!string.IsNullOrEmpty(yBResponse.err_msg))
                     {
                         MessageBox.Show(yBResponse.err_msg);
-                        log.Error(yBResponse.err_msg); 
+                        log.Error(yBResponse.err_msg);
                         return false;
                     }
                     else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
                     {
                         SessionHelper.cardno = yBResponse.output.baseinfo.certno;
 
-                        if (yBResponse.output.baseinfo.certno!=GuaHao.PatientVM.hic_no)
+                        if (yBResponse.output.baseinfo.certno != GuaHao.PatientVM.hic_no)
                         {
                             //如果号码不一致，提示返回
                             MessageBox.Show("医保卡与患者身份不一致！");
                             return false;
                         }
-                         
+
                         YBHelper.currentYBInfo = yBResponse;
 
                         GuaHao.PatientVM.yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
@@ -540,8 +550,8 @@ namespace Client
                 ghRequest.input.data = new GHRequestModel();
 
                 ghRequest.input.data.psn_no = GuaHao.PatientVM.yb_psn_no.Trim();
-                 ghRequest.input.data.insutype = GuaHao.PatientVM.yb_insutype.Trim();
-                
+                ghRequest.input.data.insutype = GuaHao.PatientVM.yb_insutype.Trim();
+
                 ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
                 //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
@@ -586,7 +596,7 @@ namespace Client
                     //住院/门诊号
                     string ipt_otp_no = resp.output.data.ipt_otp_no;
 
-                     
+
                     return true;
 
                     #region 退款代码 （备用）
@@ -708,40 +718,7 @@ namespace Client
             this.lbltop.ForeColor = Color.Red;
             CountDown();
 
-            ShowMessage();
-            //txtwx.Visible = false;
-            //txtzfb.Visible = false;
-            //txtyl.Visible = false;
-            //txtxj.Visible = false;
-            //txtybk.Visible = false;
-
-            //btnAdd1.Visible = false;
-            //btnAdd2.Visible = false;
-            //btnAdd3.Visible = false;
-            //btnAdd4.Visible = false;
-            //btnAdd5.Visible = false;
-
-            //lblTotal.Text += vm.je + "元";
-            //txtxj.Text = vm.je;
-            //txtzfb.Text = "0";
-            //txtyl.Text = "0";
-            //txtybk.Text = "0";
-            //txtwx.Text = "0";
-
-
-            //ShieldNumberTextBoxOtherKeys(txtwx);
-            //ShieldNumberTextBoxOtherKeys(txtzfb);
-            //ShieldNumberTextBoxOtherKeys(txtyl);
-            //ShieldNumberTextBoxOtherKeys(txtwx);
-            //ShieldNumberTextBoxOtherKeys(txtxj);
-
-            //txtwx.KeyPress += txtje_KeyPress;
-            //txtzfb.KeyPress += txtje_KeyPress;
-            //txtyl.KeyPress += txtje_KeyPress;
-            //txtxj.KeyPress += txtje_KeyPress;
-            //txtybk.KeyPress += txtje_KeyPress;
-
-            // this.chkxj.Checked = true;
+            ShowMessage(); 
         }
         public void GetEffectivePriceByRecordSN()
         {
@@ -832,7 +809,7 @@ namespace Client
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
                 string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&max_sn={max_sn}&opera={SessionHelper.uservm.user_mi}");
-                 
+
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
@@ -841,24 +818,21 @@ namespace Client
                 if (result.status == 1 && result.data)
                 {
                     log.Info("挂号成功");
-                    UIMessageTip.ShowOk("挂号成功!",1500);
-
-                    //打印单据 
-                    //Print(pay_string);
-                    //Print(pay_string, 2);
-                    Task.Run(() =>
-                    {
-
-                        //InitializeReport("DESIGN");
-                        InitializeReport("PREVIEW");
-                        //InitializeReport("PRINT");
-                    });
-
-                    //InitializeReport("DESIGN");
+                    UIMessageTip.ShowOk("挂号成功!", 1500);
 
                     this.Close();
 
+                    //打印单据  
+                     InitializeReport("PREVIEW");
+                    //Print(pay_string);
+                    //Task.Run(() =>
+                    //{
 
+                    //    //InitializeReport("DESIGN");
+                    //    InitializeReport("PREVIEW");
+                    //    //InitializeReport("PRINT");
+                    //});
+                     
                     //var report = CreateReportAndLoadFrx(pay_string);
 
                     //PreviewFrom pf = new PreviewFrom(report);
@@ -904,7 +878,7 @@ namespace Client
 
 
             Task<HttpResponseMessage> task = null; var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={220001}");
+            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.mzgh_report_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -924,7 +898,7 @@ namespace Client
             var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
             //var resp = WebApiHelper.DeserializeObject<ResponseResult<DataTable>>(json);
 
-            if (resp.status==1)
+            if (resp.status == 1)
             {
                 rdvm = resp.data;
             }
@@ -965,26 +939,32 @@ namespace Client
                 //保存 
                 TargetReport.Save(stream);
 
-                string sql = @"update rt_report_data_fast_net set report_com=? where report_code = 220001";
-                var para = new System.Data.OleDb.OleDbParameter[1];
-                para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
-                var result = DbHelper.ExecuteNonQuery(sql, para);
+                #region sql直连
+                //string sql = @"update rt_report_data_fast_net set report_com=? where report_code = 220001";
+                //var para = new System.Data.OleDb.OleDbParameter[1];
+                //para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
+                //var result = DbHelper.ExecuteNonQuery(sql, para);
+                #endregion
 
+                #region 接口方式
 
-                //string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={220001}&report_com={stream.ToArray()}");
+                var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
 
-                //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                //string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
-                //var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={SessionHelper.mzgh_report_code}&report_com={report_data}");
 
-                //if (result.status == 1 && result.data)
-                //{
-                //    log.Info("保存报表成功");
-                //}
-                //else
-                //{
-                //    log.Error(result.message);
-                //}
+                log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
+
+                if (result.status == 1 )
+                {
+                    log.Info("保存报表成功");
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+                #endregion
 
             }
         }
@@ -997,33 +977,70 @@ namespace Client
                 TargetReport = new Report();
 
                 TargetReport.FileName = RptMode;
-               // if (RptRow["report_com"].ToString().Length > 0)
-                if (rdvm!=null && rdvm.report_com.Length > 0)
-                    {
+                // if (RptRow["report_com"].ToString().Length > 0)
+                if (rdvm != null && rdvm.report_com.Length > 0)
+                {
                     //byte[] ReportBytes = (byte[])RptRow["report_com"];
-                    byte[] ReportBytes = System.Text.Encoding.UTF8.GetBytes(rdvm.report_com); 
+                    byte[] ReportBytes = System.Text.Encoding.UTF8.GetBytes(rdvm.report_com);
                     string sql = rdvm.report_sql;
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
                         TargetReport.Load(Stream);
-                         
-                        //查询参数
-                        string param_sql = "select * from  rt_report_params_fast_net where report_code = 220001";
-                        var dt_param = DbHelper.ExecuteDataTable(param_sql);
-                        if (dt_param!=null && dt_param.Rows.Count>0)
+
+                        #region sql语句直连方式
+                        ////查询参数
+                        //string param_sql = "select * from  rt_report_params_fast_net where report_code = 220001";
+                        //var dt_param = DbHelper.ExecuteDataTable(param_sql);
+                        //if (dt_param != null && dt_param.Rows.Count > 0)
+                        //{
+                        //    for (int i = 0; i < dt_param.Rows.Count; i++)
+                        //    {
+                        //        sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(), "'" + GuaHao.PatientVM.patient_id + "'");
+                        //    }
+                        //}
+                        //var ds = DbHelper.GetDataSet(sql, "ghinfo");
+
+                        //TargetReport.RegisterData(ds);
+                        #endregion
+
+
+                        #region 接口方式
+                        //查询数据 
+                        string paramurl = string.Format($"/api/GuaHao/GetReportParam?code={SessionHelper.mzgh_report_code}");
+
+                        log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                        string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        var result = WebApiHelper.DeserializeObject<ResponseResult<List<ReportParamVM>>>(responseJson);
+                        if (result.status == 1)
                         {
-                           // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
-
-                            for (int i = 0; i < dt_param.Rows.Count; i++)
+                            foreach (var item in result.data)
                             {
-                                sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(),"'"+ GuaHao.PatientVM.patient_id+"'");
+                                if (item.param_name == "patient_id")
+                                {
+                                    sql = sql.Replace(":" + item.param_name, "'" + GuaHao.PatientVM.patient_id + "'");
+                                }
+                                //else if (item.param_name == "times")
+                                //{
+                                //    sql = sql.Replace(":" + item.param_name, "'" + item.param_defaultvalue + "'");
+                                //}
+                                
                             }
-                            //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
-                            //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
-                        var ds = DbHelper.GetDataSet(sql, "ghinfo");
+                        paramurl = string.Format($"/api/GuaHao/GetReportDataBySql?sql={sql}&tb_name={"ghinfo"}");
 
-                        TargetReport.RegisterData(ds);
+                        log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                        responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
+                        if (ds_result.status == 1)
+                        {
+                            var jsontb = ds_result.data;
+                            var dt = DataTableHelper.ToDataTable(jsontb);
+                            var dataset = new DataSet();
+                            dataset.Tables.Add(dt);
+                            dataset.Tables[0].TableName = "ghinfo";
+                            TargetReport.RegisterData(dataset);
+                        }
+                        #endregion
                     }
                 }
                 //操作方式：DESIGN-设计;PREVIEW-预览;PRINT-打印
@@ -1279,7 +1296,7 @@ namespace Client
         {
             log.Info("提交支付");
 
-            TiJiaoZhifu(); 
+            TiJiaoZhifu();
         }
 
         private void btnAdd1_Click(object sender, EventArgs e)
@@ -1302,7 +1319,7 @@ namespace Client
                     return true;
                 }
                 var je = Convert.ToDecimal(vm.je);
- 
+
             }
 
             catch (Exception ex)
@@ -1420,9 +1437,9 @@ namespace Client
         private void uiPanel3_Click(object sender, EventArgs e)
         {
 
-        } 
- 
-         
+        }
+
+
         private void txtybk_Leave(object sender, EventArgs e)
         {
             var ui = sender as UITextBox;
@@ -1509,9 +1526,7 @@ namespace Client
             {
                 UIMessageTip.ShowWarning("存在支付记录！");
                 chkcomb.Checked = true;
-            }
-
-            //MessageBox.Show(chkcomb.Checked.ToString());
+            } 
         }
 
 
@@ -1577,5 +1592,35 @@ namespace Client
         }
 
         #endregion
+
+        private void btnTuikuan_Click(object sender, EventArgs e)
+        {
+            var index = uiListBox1.SelectedIndex;
+            if (index==-1)
+            {
+                MessageBox.Show("请选择付款项目进行退款操作！");return;
+            }
+            if (MessageBox.Show(uiListBox1.SelectedItem.ToString(),"是否确认退款？",MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                //退款
+                RefundType(paylist[index]);
+
+                uiListBox1.Items.Remove(uiListBox1.SelectedItem); 
+                //总金额-支付金额
+                lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) - paylist[index].pay_je).ToString();
+                lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
+                paylist.RemoveAt(index);
+                ShowMessage();
+
+                //uiListBox2.Items.Clear();
+                //if (paylist != null && paylist.Count > 0)
+                //{ 
+                //    foreach (var item in paylist)
+                //    {
+                //        uiListBox2.Items.Add("支付方式：" + item.pay_type + "，金额： " + item.pay_je);
+                //    }
+                //}
+            } 
+        }
     }
 }

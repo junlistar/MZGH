@@ -330,12 +330,7 @@ values(?, ?, ?, ?,?, 1, 0)";
         private void Main_Load(object sender, EventArgs e)
         {
 
-        }
-        public static string ByteArrayToString(byte[] ba)
-        {
-            string hex = BitConverter.ToString(ba);
-            return hex.Replace("-", "");
-        }
+        } 
 
         private void DesignReport(string RptMode)
         {
@@ -357,14 +352,14 @@ values(?, ?, ?, ?,?, 1, 0)";
                 {
                     byte[] ReportBytes = (byte[])RptRow["report_com"];
                     var str = RptRow["report_com"].ToString();
-
-                    var str1 = ByteArrayToString(ReportBytes);
-                    str1 = System.Text.Encoding.UTF8.GetString(ReportBytes);
+                     
+                    //str1 = System.Text.Encoding.UTF8.GetString(ReportBytes);
 
                     string sql = RptRow["report_sql"].ToString();
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
-                        TargetReport.Load(str1);
+                        TargetReport.Load(Stream);
+                        //TargetReport.ReportResourceString=str1;
 
                         //查询参数
                         string param_sql = $"select * from  rt_report_params_fast_net where report_code = {code}";
@@ -380,7 +375,13 @@ values(?, ?, ?, ?,?, 1, 0)";
                             //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
-                        var ds = DbHelper.GetDataSet(sql, "DataTable");
+                        var ds = DbHelper.GetDataSet(sql, "DataTable2");
+
+
+                        //var dt = ds.Tables[0].Copy();
+                        //var ds2 = new DataSet();
+                        //ds2.Tables.Add(dt);
+                        //////ds2.Tables[0].TableName = ""
 
                         TargetReport.RegisterData(ds);
 

@@ -51,7 +51,10 @@ namespace Client.ClassLib
         /// </summary>
         public static CardReader_Data CardReader;
 
+        //门诊挂号，收费打印，报表编号
+        public static int mzgh_report_code;
 
-       
+
+
     }
 }

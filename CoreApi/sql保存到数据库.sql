@@ -131,9 +131,9 @@ values (@patient_id, @max_times, @item_no, @ledger_sn, @happen_date, @charge_cod
 --挂号 新增现金流表
 insert into wh_tag_sql(tag,[sql],[description])
 values(220018,'insert into gh_deposit
-  (patient_id, item_no, ledger_sn, times, charge, cheque_type, cheque_no, depo_status, price_opera, price_date, mz_dept_no)
+  (patient_id, item_no, ledger_sn, times, charge, cheque_type, cheque_no, depo_status, price_opera, price_date, mz_dept_no,out_trade_no)
 values
-  (@patient_id, @item_no, @ledger_sn, @times, @charge, @cheque_type,@cheque_no, @depo_status, @price_opera, @price_date, @mz_dept_no)','挂号-新增现金流表')
+  (@patient_id, @item_no, @ledger_sn, @times, @charge, @cheque_type,@cheque_no, @depo_status, @price_opera, @price_date, @mz_dept_no,@out_trade_no)','挂号-新增现金流表')
 
 --挂号 写入挂号发票明细表
 insert into wh_tag_sql(tag,[sql],[description])

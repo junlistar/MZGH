@@ -486,20 +486,21 @@ namespace Data.Repository
                             var cheque_type = pay_detail[0];
                             var charge = decimal.Parse(pay_detail[1]);
                             var out_trade_no = pay_detail[2];//订单编号
-
+                            var cheque_no = current_no;
                             para = new DynamicParameters();
 
                             para.Add("@patient_id", patient_id);
                             para.Add("@item_no", item_no);
                             para.Add("@ledger_sn", max_ledger_sn);
                             para.Add("@times", max_times);
-                            para.Add("@cheque_no", out_trade_no);
+                            para.Add("@cheque_no", cheque_no);
                             para.Add("@charge", charge);
                             para.Add("@cheque_type", cheque_type);
                             para.Add("@depo_status", "4");
                             para.Add("@price_opera", opera);
                             para.Add("@price_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                             para.Add("@mz_dept_no", "1");
+                            para.Add("@out_trade_no", out_trade_no);
 
                             result = connection.Execute(sql7, para, transaction);
 

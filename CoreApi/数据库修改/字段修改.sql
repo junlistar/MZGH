@@ -359,3 +359,7 @@ GO
  select 'p','下午',14,17
  union all
  select 'e','夜间',19,21 
+
+--增加 外部订单号字段
+alter table gh_deposit add out_trade_no varchar(30);
+alter table gh_deposit_b add out_trade_no varchar(30);

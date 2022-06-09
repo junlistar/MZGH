@@ -62,7 +62,7 @@ namespace Client
         UIHeaderAsideMainFooterFrame parentForm;
 
         //科室搜索框
-        UIListBox lstunits=new UIListBox();
+        UIListBox lstunits = new UIListBox();
 
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
@@ -94,16 +94,16 @@ namespace Client
             //timer1.Interval = 3000;
             //timer1.Start();
 
-            
+
             //ControlHelper.InitPanelScroll(gbxUnits);
             this.Focus();
 
 
             //设置按钮提示文字信息
-            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text+"[F1]");
-            uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text+"[F2]");
-            uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text+"[F3]");
-            uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text+"[F4]");
+            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]");
+            uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text + "[F2]");
+            uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text + "[F3]");
+            uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text + "[F4]");
 
         }
 
@@ -127,7 +127,7 @@ namespace Client
 
             lblTitle.ForeColor = cur_color;
             lblMsg.ForeColor = Color.Red;
-            gbxUnits.ForeColor = cur_color; 
+            gbxUnits.ForeColor = cur_color;
             pnlHours.ForeColor = Color.Red;//必须要设置这个值，不然给里面的按钮设置颜色不起作用
 
             //初始化刷卡方式按钮样式
@@ -137,26 +137,60 @@ namespace Client
 
             int currentHour = DateTime.Now.Hour;
             pnlHours.Clear();
-            foreach (var item in SessionHelper.requestHours)
+            var hourslist = SessionHelper.requestHours.OrderBy(p => p.start_hour).ToList();
+            //foreach (var item in hourslist)
+            for (int i = 0; i < hourslist.Count; i++)
             {
                 UIButton btn1 = new UIButton();
                 btn1.Style = UIStyle.LayuiGreen;
-                btn1.Text = item.name;
-                btn1.TagString = item.code;
+                btn1.Text = hourslist[i].name;
+                btn1.TagString = hourslist[i].code;
                 btn1.Width = 86;
                 btn1.Height = 31;
                 btn1.FillColor = Color.LightSteelBlue;
-                if (currentHour>=item.start_hour&& currentHour < item.end_hour)
+
+                //if (currentHour < hourslist[i].start_hour)
+                //{
+                //    btn1.FillColor = cur_color;
+                //}
+                //else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                //{
+                //    btn1.FillColor = cur_color;
+                //}
+                if (i == 0)
                 {
-                    btn1.FillColor = cur_color;
+                    if (currentHour < hourslist[i].start_hour)
+                    {
+                        btn1.FillColor = cur_color;
+                    }
+                    else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                    {
+                        btn1.FillColor = cur_color;
+                    }
                 }
+                else if (i > 0 && i < hourslist.Count)
+                {
+                    if (currentHour < hourslist[i].start_hour && currentHour >= hourslist[i - 1].end_hour)
+                    {
+                        btn1.FillColor = cur_color;
+                    }
+                    else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                    {
+                        btn1.FillColor = cur_color;
+                    }
+                }
+
+                //if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                //{
+                //    btn1.FillColor = cur_color;
+                //}
                 btn1.Click += Btn1_Click;
                 pnlHours.Add(btn1);
             }
             //pnlHours.AutoScroll = false;
             //pnlHours.ForeColor = Color.Transparent;
             pnlHours.RectColor = Color.Transparent;
- 
+
 
             //初始化上午，下午按钮样式
             if (DateTime.Now.Hour < 12)
@@ -190,7 +224,7 @@ namespace Client
         }
 
         private void Btn1_Click(object sender, EventArgs e)
-        {  
+        {
             foreach (var control in pnlHours.FlowLayoutPanel.Controls)
             {
                 var cc = control as UIButton;
@@ -198,7 +232,7 @@ namespace Client
             }
             var btn = sender as UIButton;
             btn.FillColor = cur_color;
-            LoadRequestInfo(); 
+            LoadRequestInfo();
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
@@ -284,7 +318,7 @@ namespace Client
                 {
                     ampm = cc.TagString;
                     break;
-                }  
+                }
             }
             //if (btnAM.FillColor == cur_color)
             //{
@@ -434,11 +468,11 @@ namespace Client
             #endregion
 
             #region 绑定可选科室信息 使用系统uiFlowLayoutPanel控件
-              
-            gbxUnits.Clear(); 
+
+            gbxUnits.Clear();
             int btnWidth = 220;
             int btnHeight = 60;
-             
+
             int textsize = 11;
             for (int i = 0; i < source.Keys.Count; i++)
             {
@@ -456,8 +490,8 @@ namespace Client
                 else if (btn1.Text.Length > textsize)
                 {
                     btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
-                } 
-                btn1.Click += btnks_Click; 
+                }
+                btn1.Click += btnks_Click;
                 gbxUnits.Add(btn1);
             }
 
@@ -470,9 +504,9 @@ namespace Client
         /// <param name="source"></param>
         public void BindClinic()
         {
-            if (clinicList==null)
+            if (clinicList == null)
             {
-                return;               
+                return;
             }
             List<GHRequestVM> list = clinicList;
 
@@ -553,7 +587,7 @@ namespace Client
             int btnHeight = 60;
 
             for (int i = 0; i < list.Count; i++)
-            { 
+            {
                 UIButton btn1 = new UIButton();
                 btn1.Style = UIStyle.LayuiGreen;
                 btn1.Width = btnWidth;
@@ -571,9 +605,9 @@ namespace Client
                     btn1.Text += "\r\n" + list[i].doctor_name;
                 }
                 btn1.Text += " (￥" + list[i].je + "元)";
-                  
+
                 btn1.Click += btnClinic_Click;
-                gbxUnits.Add(btn1); 
+                gbxUnits.Add(btn1);
             }
             #endregion
         }
@@ -589,14 +623,14 @@ namespace Client
             foreach (var item in clinicList)
             {
                 if (item.record_sn == btn.TagString)
-                { 
+                {
                     SelectPayType fe = new SelectPayType(item, btnEditUser.TagString);
                     fe.ShowDialog();
 
                     uiBreadcrumb2.ItemIndex = 0;
                 }
             }
-           
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -626,9 +660,9 @@ namespace Client
                     {
                         var code = cc.TagString;
                         var requestHour = SessionHelper.requestHours.Where(p => p.code == code).FirstOrDefault();
-                        if (DateTime.Now.Hour>requestHour.end_hour)
+                        if (DateTime.Now.Hour >= requestHour.end_hour)
                         {
-                            isWrong = true; 
+                            isWrong = true;
                         }
                         break;
                     }
@@ -672,7 +706,7 @@ namespace Client
                 UIMessageTip.ShowError("请选择正确的时间段进行挂号操作!");
                 lblMsg.Text = "请选择正确的时间段进行挂号操作！";
                 return;
-            } 
+            }
 
             if (string.IsNullOrEmpty(txtCode.Text))
             {
@@ -749,7 +783,7 @@ namespace Client
 
 
         private void btnCika_Click(object sender, EventArgs e)
-        { 
+        {
             //更改刷卡方式按钮样式
             btnCika.FillColor = cur_color;
             btnSFZ.FillColor = Color.LightSteelBlue;
@@ -796,10 +830,10 @@ namespace Client
         private void btnYBK_Click(object sender, EventArgs e)
         {
             YBHelper.currentYBInfo = null;
-             
+
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
-            btnCika.FillColor = Color.LightSteelBlue; 
+            btnCika.FillColor = Color.LightSteelBlue;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
             request.infno = ((int)InfoNoEnum.人员信息).ToString();
@@ -854,8 +888,8 @@ namespace Client
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
                     txtCode.Text = SessionHelper.cardno;
-                    SearchUser(); 
-                } 
+                    SearchUser();
+                }
             }
             catch (Exception ex)
             {
@@ -1073,7 +1107,7 @@ namespace Client
         {
             if (ks != null && ks.Visible)
             {
-                ks.Hide();
+                ks.Dispose();
                 return;
             }
             ks = new KeySuggest(this);
@@ -1082,37 +1116,33 @@ namespace Client
             ks.Top = SessionHelper.clientHeight - ks.Height;
             ks.Left = SessionHelper.clientWidth - ks.Width;
 
-            //340 280
-            //ks.txtKeySearch.TextChanged += TxtKeySearch_TextChanged;
-
-            //ks.txtKeySearch.Text = e.KeyData.DisplayText();
-
-            ks.Deactivate += Ks_LostFocus;
+            //ks.Deactivate += Ks_LostFocus;
 
             ks.FormClosing += Ks_FormClosing;
-            ks.FormClosing += GuaHao_MouseEnter;
 
             ks.Show();
 
-            this.MouseEnter -= GuaHao_MouseEnter;
         }
 
         private void Ks_FormClosing(object sender, FormClosingEventArgs e)
         {
             //MessageBox.Show(request_key);
-
-            if (!string.IsNullOrWhiteSpace(request_key))
-            {
-                //var source = requestDic.Where(p=>p.Key==request_key);
-
-                Dictionary<string, List<GHRequestVM>> source = new Dictionary<string, List<GHRequestVM>>();
-                source.Add(request_key, requestDic[request_key]);
-                BindUnit(source);
-                //gbxUnits.Text = "选择科室(" + request_key + ")";
-                //uiBreadcrumb2.Items[0]= "选择科室(" + request_key + ")";
-                isBreadHandleSet = true;
-                uiBreadcrumb2.ItemIndex = 0;
+            if (requestDic != null && requestDic.Count > 0)
+            { 
+                if (!string.IsNullOrWhiteSpace(request_key))
+                {
+                    //var source = requestDic.Where(p=>p.Key==request_key);
+                      
+                    Dictionary<string, List<GHRequestVM>> source = new Dictionary<string, List<GHRequestVM>>();
+                    source.Add(request_key, requestDic[request_key]);
+                    BindUnit(source);
+                    //gbxUnits.Text = "选择科室(" + request_key + ")";
+                    //uiBreadcrumb2.Items[0]= "选择科室(" + request_key + ")";
+                    isBreadHandleSet = true;
+                    uiBreadcrumb2.ItemIndex = 0;
+                }
             }
+
         }
 
         private void TxtKeySearch_TextChanged(object sender, EventArgs e)
@@ -1121,13 +1151,7 @@ namespace Client
 
 
         }
-
-        private void Ks_LostFocus(object sender, EventArgs e)
-        {
-            ks.Close();
-
-
-        }
+         
 
         private void GuaHao_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1394,21 +1418,10 @@ namespace Client
             // this.Focus();
         }
 
-        private void GuaHao_MouseEnter(object sender, EventArgs e)
-        {
-            //if (!this.Focused)
-            //{
-            //    this.Focus();
-            //}
-        }
-
-        private void GuaHao_MouseMove(object sender, MouseEventArgs e)
-        {
-        }
-
+      
         private void uiBreadcrumb2_ItemIndexChanged(object sender, int value)
         {
-            if (uiBreadcrumb2.ItemIndex==0)
+            if (uiBreadcrumb2.ItemIndex == 0)
             {
                 if (!isBreadHandleSet)
                 {
@@ -1423,22 +1436,22 @@ namespace Client
             }
             else if (uiBreadcrumb2.ItemIndex == 1)
             {
-                if (!isBreadHandleSet && clinicList==null)
+                if (!isBreadHandleSet && clinicList == null)
                 {
                     uiBreadcrumb2.ItemIndex = 0;
-                } 
+                }
             }
             isBreadHandleSet = false;
         }
-         
+
 
         private void uiGroupBox2_MouseEnter(object sender, EventArgs e)
-        { 
+        {
         }
 
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
-        { 
+        {
             var py_code = txtSearch.Text.Trim().ToUpper();
 
             if (string.IsNullOrWhiteSpace(py_code))
@@ -1478,7 +1491,7 @@ namespace Client
                 if (lstunits.Items.Count > 0)
                 {
                     request_key = lstunits.Items[0].ToString();
-                } 
+                }
             }
         }
     }

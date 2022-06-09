@@ -63,6 +63,8 @@ namespace Client
             // Aside.SelectFirst();
 
             LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
+
+            SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
         }
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)

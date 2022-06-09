@@ -100,7 +100,7 @@ namespace Client
                     if (depositList == null)
                     {
                         return;
-                    } 
+                    }
 
 
                     var showlist = depositList.Where(p => p.depo_status == "4").ToList();
@@ -140,7 +140,7 @@ namespace Client
         }
 
         public void TuiHao()
-        { 
+        {
             if (this.dgvDeposit.SelectedRows.Count == 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
@@ -166,7 +166,7 @@ namespace Client
                     return;
                 }
 
-                if (dtprq.Value.Date<DateTime.Now.Date)
+                if (dtprq.Value.Date < DateTime.Now.Date)
                 {
                     UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
                     return;
@@ -348,7 +348,7 @@ namespace Client
                         UIMessageTip.ShowWarning("数据已过期，请重新查询！");
                         return;
                     }
-                } 
+                }
 
 
                 var aa = new
@@ -432,11 +432,11 @@ namespace Client
                     log.Info(response.ReasonPhrase);
                 }
 
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
-                if (listApi != null && listApi.Count > 0)
+                if (result.status == 1 && result.data.Count > 0)
                 {
-                    userInfo = listApi[0];
+                    userInfo = result.data[0];
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
                         return;
@@ -452,6 +452,7 @@ namespace Client
                 }
                 else
                 {
+                    UIMessageTip.Show("没有查到数据");
 
                     InitUserInfo();
                     BindNullData();
@@ -492,39 +493,42 @@ namespace Client
                     log.Info(response.ReasonPhrase);
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
-                if (result.data == null || result.data.Count == 0)
+
+                if (result.status == 1 && result.data != null && result.data.Count > 0)
+                {
+                    var list = result.data;
+
+                    var viewlist = list.Select(p => new
+                    {
+                        p.gh_date_str,
+                        p.unit_name,
+                        p.visit_flag_name,
+                        p.times,
+                        p.visit_date_str,
+                        p.ampmstr,
+                        p.charge,
+                        p.cheque_name,
+                        p.cheque_no,
+                        p.clinic_name,
+                        p.doctor_name,
+                        p.group_name,
+                        p.cheque_type,
+                        p.ledger_sn,
+                        p.item_no,
+                        p.receipt_sn
+                    }).ToList();
+
+                    dgvDeposit.Init();
+                    this.dgvDeposit.DataSource = viewlist;
+                    this.dgvDeposit.AutoResizeColumns();
+                    dgvDeposit.ShowGridLine = true;
+                }
+                else
                 {
                     BindNullData();
-                    return;
                 }
-                  
-                var list = result.data;
-                 
-                var viewlist = list.Select(p => new
-                {
-                    p.gh_date_str,
-                    p.unit_name,
-                    p.visit_flag_name,
-                    p.times,
-                    p.visit_date_str,
-                    p.ampmstr,
-                    p.charge,
-                    p.cheque_name,
-                    p.cheque_no,
-                    p.clinic_name,
-                    p.doctor_name,
-                    p.group_name,
-                    p.cheque_type,
-                    p.ledger_sn,
-                    p.item_no,
-                    p.receipt_sn
-                }).ToList();
 
 
-                dgvDeposit.Init();
-                this.dgvDeposit.DataSource = viewlist;
-                this.dgvDeposit.AutoResizeColumns();
-                dgvDeposit.ShowGridLine = true;
 
             }
             catch (Exception ex)
@@ -578,20 +582,20 @@ namespace Client
         {
             txtCode.TextChanged -= txtCode_TextChanged;
 
-            this.txtCode.Text = ""; 
+            this.txtCode.Text = "";
 
             txtCode.TextChanged += txtCode_TextChanged;
 
             InitUserInfo();
         }
         public void InitUserInfo()
-        {  
+        {
             this.lblAge.Text = "";
             this.lblhidid.Text = "";
             this.lblName.Text = "";
             this.lblSex.Text = "";
             lblSno.Text = "";
-            this.dtprq.Value = DateTime.Now; 
+            this.dtprq.Value = DateTime.Now;
         }
 
         private void dtprq_ValueChanged(object sender, DateTime value)
@@ -717,13 +721,10 @@ namespace Client
         }
         private void dgvDeposit_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-            //if (e.RowIndex >= dgvDeposit.Rows.Count - 1)
-            //{
-            //    return;
-            //}
+             
             DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
 
-            if (dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
+            if (dr.Cells["visit_flag_name"].Value!=null && dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
             {
                 // 设置单元格的背景色
                 //dr.DefaultCellStyle.BackColor = Color.Yellow;
@@ -733,7 +734,7 @@ namespace Client
             else
             {
                 //dr.DefaultCellStyle.ForeColor = Color.Green;
-              
+
             }
         }
 
@@ -811,7 +812,7 @@ namespace Client
         private void dgvDeposit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
-            if (dgvDeposit.SelectedIndex!=-1)
+            if (dgvDeposit.SelectedIndex != -1)
             {
                 var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
 

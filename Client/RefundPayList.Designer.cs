@@ -34,6 +34,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvpaylist = new Sunny.UI.UIDataGridView();
+            this.btnOk = new Sunny.UI.UIButton();
+            this.btnCacel = new Sunny.UI.UIButton();
+            this.uiLabel1 = new Sunny.UI.UILabel();
+            this.uiLabel2 = new Sunny.UI.UILabel();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,10 +50,6 @@
             this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price_opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnOk = new Sunny.UI.UIButton();
-            this.btnCacel = new Sunny.UI.UIButton();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiLabel2 = new Sunny.UI.UILabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpaylist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -118,6 +118,53 @@
             this.dgvpaylist.Size = new System.Drawing.Size(794, 262);
             this.dgvpaylist.TabIndex = 0;
             // 
+            // btnOk
+            // 
+            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.Location = new System.Drawing.Point(536, 398);
+            this.btnOk.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(100, 35);
+            this.btnOk.TabIndex = 1;
+            this.btnOk.Text = "确认";
+            this.btnOk.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCacel
+            // 
+            this.btnCacel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCacel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCacel.Location = new System.Drawing.Point(672, 398);
+            this.btnCacel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnCacel.Name = "btnCacel";
+            this.btnCacel.Size = new System.Drawing.Size(100, 35);
+            this.btnCacel.TabIndex = 2;
+            this.btnCacel.Text = "取消";
+            this.btnCacel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCacel.Click += new System.EventHandler(this.btnCacel_Click);
+            // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Location = new System.Drawing.Point(3, 88);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(94, 23);
+            this.uiLabel1.TabIndex = 3;
+            this.uiLabel1.Text = "支付信息";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiLabel2
+            // 
+            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel2.Location = new System.Drawing.Point(210, 55);
+            this.uiLabel2.Name = "uiLabel2";
+            this.uiLabel2.Size = new System.Drawing.Size(403, 32);
+            this.uiLabel2.TabIndex = 4;
+            this.uiLabel2.Text = "是否确认？";
+            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // patient_id
             // 
             this.patient_id.DataPropertyName = "patient_id";
@@ -174,7 +221,7 @@
             // cheque_no
             // 
             this.cheque_no.DataPropertyName = "cheque_no";
-            this.cheque_no.HeaderText = "订单号";
+            this.cheque_no.HeaderText = "发票号";
             this.cheque_no.Name = "cheque_no";
             this.cheque_no.ReadOnly = true;
             // 
@@ -207,53 +254,6 @@
             this.price_date.HeaderText = "支付时间";
             this.price_date.Name = "price_date";
             this.price_date.ReadOnly = true;
-            // 
-            // btnOk
-            // 
-            this.btnOk.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOk.Location = new System.Drawing.Point(536, 398);
-            this.btnOk.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(100, 35);
-            this.btnOk.TabIndex = 1;
-            this.btnOk.Text = "确认";
-            this.btnOk.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnCacel
-            // 
-            this.btnCacel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCacel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCacel.Location = new System.Drawing.Point(672, 398);
-            this.btnCacel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnCacel.Name = "btnCacel";
-            this.btnCacel.Size = new System.Drawing.Size(100, 35);
-            this.btnCacel.TabIndex = 2;
-            this.btnCacel.Text = "取消";
-            this.btnCacel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCacel.Click += new System.EventHandler(this.btnCacel_Click);
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(3, 88);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(94, 23);
-            this.uiLabel1.TabIndex = 3;
-            this.uiLabel1.Text = "支付信息";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiLabel2
-            // 
-            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(210, 55);
-            this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(403, 32);
-            this.uiLabel2.TabIndex = 4;
-            this.uiLabel2.Text = "是否确认？";
-            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RefundPayList
             // 

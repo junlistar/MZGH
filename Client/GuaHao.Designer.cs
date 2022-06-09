@@ -1021,7 +1021,7 @@
             this.gbxUnits.Size = new System.Drawing.Size(1196, 355);
             this.gbxUnits.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.gbxUnits.TabIndex = 5;
-            this.gbxUnits.Text = null;
+            this.gbxUnits.Text = "111111111";
             this.gbxUnits.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiToolTip1
@@ -1078,8 +1078,7 @@
             this.Load += new System.EventHandler(this.GuaHao_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.GuaHao_KeyPress);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyUp);
-            this.MouseEnter += new System.EventHandler(this.GuaHao_MouseEnter);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GuaHao_KeyUp); 
             this.pnlTitle.ResumeLayout(false);
             this.pnlSearch.ResumeLayout(false);
             this.pnlKeySuggest.ResumeLayout(false);

@@ -175,14 +175,13 @@ namespace Client
                     read.Wait();
                     json = read.Result;
                 }
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
-
-                if (listApi.Count > 0)
+                if (result.status == 1 && result.data.Count > 0)
                 {
-                    for (int i = 0; i < listApi.Count; i++)
+                    for (int i = 0; i < result.data.Count; i++)
                     {
-                        var pid = listApi[i].patient_id;
+                        var pid = result.data[i].patient_id;
                         if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
                         {
                             UIMessageTip.ShowError("系统中已存在此卡号!");
@@ -196,8 +195,9 @@ namespace Client
                             return;
                         }
                     }
-
                 }
+
+
 
                 json = "";
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
@@ -211,14 +211,13 @@ namespace Client
                     read.Wait();
                     json = read.Result;
                 }
-                listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-
-
-                if (listApi.Count > 0)
+                result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                 
+                if (result.status == 1 && result.data.Count > 0)
                 {
-                    for (int i = 0; i < listApi.Count; i++)
+                    for (int i = 0; i < result.data.Count; i++)
                     {
-                        var pid = listApi[i].patient_id;
+                        var pid = result.data[i].patient_id;
                         if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
                         {
                             //UIMessageTip.ShowError("系统中已存在此身份证号!");
