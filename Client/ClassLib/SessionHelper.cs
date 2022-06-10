@@ -53,8 +53,8 @@ namespace Client.ClassLib
 
         //门诊挂号，收费打印，报表编号
         public static int mzgh_report_code;
-
-
+        //标志 挂号操作是否需要打印
+        public static bool do_gh_print = false;
 
     }
 }

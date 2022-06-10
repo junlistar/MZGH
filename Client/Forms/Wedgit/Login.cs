@@ -110,7 +110,10 @@ namespace Client.Forms.Wedgit
 
         private void txtPwd_KeyUp(object sender, KeyEventArgs e)
         {
-            btnLogin_Click(sender, e);
+            if (e.KeyCode == Keys.Enter)
+            { 
+                btnLogin_Click(sender, e);
+            }
         }
 
         private void Login_Load(object sender, EventArgs e)

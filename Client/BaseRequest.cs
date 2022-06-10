@@ -59,7 +59,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F5]"); 
             uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");  
             uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");  
-            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F4]"); 
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]"); 
         }
 
         public void InitDic()
@@ -183,41 +183,45 @@ namespace Client
                 {
                     log.Error(response.ReasonPhrase);
                 }
-
-                list = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
-
-                lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
-
-                //设置分页控件总数
-                uiPagination1.TotalCount = list.Count;
-
-                //设置分页控件每页数量
-                uiPagination1.PageSize = 50;
-
-                if (list != null && list.Count > 0)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+                if (result.status ==1 && result.data!=null)
                 {
-                    var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
+                    list = result.data;
+
+                    lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
+
+                    //设置分页控件总数
+                    uiPagination1.TotalCount = list.Count;
+
+                    //设置分页控件每页数量
+                    uiPagination1.PageSize = 50;
+
+                    if (list != null && list.Count > 0)
                     {
-                        request_sn = p.request_sn,
-                        unit_name = p.unit_name,
-                        group_name = p.group_name,
-                        doct_name = p.doct_name,
-                        clinic_name = p.clinic_name,
-                        weekstr = p.weekstr,
-                        daystr = p.daystr,
-                        apstr = p.apstr,
-                        winnostr = p.winnostr,
-                        totle_num = p.totle_num,
-                        open_flag_str = p.open_flag_str,
-                        op_date_str = p.op_date_str
-                    }).ToList();
-                    dgvlist.Init();
-                    dgvlist.DataSource = ds;
-                    dgvlist.AutoResizeColumns();
-                    dgvlist.ShowGridLine = true;
-                }
+                        var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
+                        {
+                            request_sn = p.request_sn,
+                            unit_name = p.unit_name,
+                            group_name = p.group_name,
+                            doct_name = p.doct_name,
+                            clinic_name = p.clinic_name,
+                            weekstr = p.weekstr,
+                            daystr = p.daystr,
+                            apstr = p.apstr,
+                            winnostr = p.winnostr,
+                            totle_num = p.totle_num,
+                            open_flag_str = p.open_flag_str,
+                            op_date_str = p.op_date_str
+                        }).ToList();
+                        dgvlist.Init();
+                        dgvlist.DataSource = ds;
+                        dgvlist.AutoResizeColumns();
+                        dgvlist.ShowGridLine = true;
+                    }
+                } 
                 else
                 {
+                    log.Error(result.message);
                     BindNullData();
                 }
 
@@ -625,9 +629,9 @@ namespace Client
                         var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
 
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+                        var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (responseJson == 1 || responseJson == 2)
+                        if (result.status == 1 )
                         {
                             UIMessageTip.ShowOk("操作成功!");
                             return;
@@ -875,13 +879,13 @@ namespace Client
                 case Keys.F4:
                     this.Close();//退出
                     break;
-                case Keys.F5:
+                case Keys.F5://添加
                     Add();
                     break;
-                case Keys.F6:
+                case Keys.F6://编辑
                     Edit();
                     break;
-                case Keys.F7:
+                case Keys.F7://删除
                     Delete();
                     break;
             }

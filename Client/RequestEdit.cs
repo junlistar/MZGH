@@ -41,7 +41,7 @@ namespace Client
             cbxHaobie.DisplayMember = "name";
 
             cbxWinNo.Text = "所有窗口";
-            cbxOpenFlag.Text = "全部";
+            cbxOpenFlag.Text = "开放";
 
             cbxRequestType.DataSource = SessionHelper.requestTypes;
             cbxRequestType.ValueMember = "code";
@@ -75,10 +75,10 @@ namespace Client
                     read.Wait();
                     json = read.Result;
                 }
-                var data = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json).data;
-                if (data != null)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json);
+                if (result.status==1 && result.data != null)
                 {
-
+                    var data = result.data;
                     txtks.TextChanged -= txtks_TextChanged;
                     txtzk.TextChanged -= txtzk_TextChanged;
                     txtDoct.TextChanged -= txtDoct_TextChanged;

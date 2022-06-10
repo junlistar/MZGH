@@ -1,25 +1,18 @@
 
 --π“∫≈-µ«¬º
 insert into wh_tag_sql(tag,[sql],[description])
-values(220001,'select a.*,b.name unit_name,c.name group_name,d.name doct_name,e.name clinic_name from gh_base_request a left join zd_unit_code b on a.unit_sn = b.unit_sn left join zd_unit_code c on a.group_sn = c.unit_sn left join a_employee_mi d on a.doctor_sn = d.emp_sn
-left join gh_zd_clinic_type e on a.clinic_type = e.code
-where a.unit_sn like @unit_sn and
-      isnull(a.group_sn,'''') like @group_sn and
-      isnull(a.doctor_sn,'''') like @doctor_sn and
-      a.clinic_type like @clinic_type and
-      isnull(cast(a.week as char),'''') like @week and
-      isnull(cast(a.day as char),'''') like @day and
-      a.ampm like @ampm and
-      isnull(cast(a.window_no as char),'''') like @window_no and
-      a.open_flag like @open_flag
-order by op_date desc,unit_sn,
-         group_sn,
-         doctor_sn,
-         clinic_type,
-         week,
-         day,
-         ampm,
-         window_no','π“∫≈-µ«¬º')
+values(220001,'SELECT xt_user.user_name,
+         xt_user.subsys_id,   
+         xt_user.user_group,
+         xt_user.user_mi, 
+         a_employee_mi.dept_sn,
+          a_employee_mi.name
+    FROM xt_user,   
+         a_employee_mi  
+   WHERE ( xt_user.user_mi = a_employee_mi.emp_sn ) and  
+         ( ( xt_user.subsys_id = ''mzgh'' ) AND  
+         ( xt_user.user_name = @uname )  And
+           xt_user.pass_word =@pwd )','π“∫≈-µ«¬º')
 
 --π“∫≈ ∏˘æ›ø®∫≈≤È—Ø”√ªß
 insert into wh_tag_sql(tag,[sql],[description])
@@ -614,6 +607,18 @@ where request_sn = @request_sn','π“∫≈-±‡º≠ª˘¥°∫≈±Ì');
 insert into wh_tag_sql(tag,[sql],[description])
 values(220063,'exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate','π“∫≈-…˙≥…∑÷ ±∂Œ∫≈‘¥');
 
---220063π“∫≈  ≤È—Øπ“∫≈ ±º‰∂Œ
+--220064π“∫≈  ≤È—Øπ“∫≈ ±º‰∂Œ
 insert into wh_tag_sql(tag,[sql],[description])
 values(220064,'select * from  gh_zd_request_hour','π“∫≈-≤È—Øπ“∫≈ ±º‰∂Œ');
+
+--220065π“∫≈  ≈–∂œ”√ªß «∑ÒÕ¨“ª ±∂Œ÷ÿ∏¥π“∫≈
+insert into wh_tag_sql(tag,[sql],[description])
+values(220065,'select COUNT(*) from view_mz_visit_table a
+inner join gh_request b on a.visit_date = b.request_date 
+and a.visit_dept= b.unit_sn 
+and a.clinic_type = b.clinic_type
+and ISNULL(a.group_sn,''0'') =ISNULL(b.group_sn,''0'') 
+and ISNULL(a.doctor_code,''0'') LIKE ISNULL(b.doctor_sn,''0'')
+and a.ampm=b.ampm
+where patient_id = @patient_id
+and record_sn = @record_sn"','π“∫≈-≈–∂œ”√ªß «∑ÒÕ¨“ª ±∂Œ÷ÿ∏¥π“∫≈');

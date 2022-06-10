@@ -127,6 +127,16 @@ namespace Client
                 default:
                     break;
             } 
+            var visit_flag = "";
+            switch (cbxStatus.Text)
+            {
+                case "已到院":visit_flag = "1";break;
+                case "未到院":visit_flag = "0"; break;
+                case "退号": visit_flag = "9"; break;
+                default:
+                    break;
+            }
+
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
             var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "%" : txtDoct.TagString;
@@ -135,7 +145,7 @@ namespace Client
             var gh_opera = string.IsNullOrWhiteSpace(txtGhUser.Text) ? "%" : txtGhUser.TagString;
             var name = string.IsNullOrWhiteSpace(txtName.Text) ? "%" : txtName.Text.Trim();
             var p_bar_code = string.IsNullOrWhiteSpace(txtcode.Text) ? "%" : txtcode.Text.Trim();
-
+             
             string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -162,40 +172,55 @@ namespace Client
                 log.Error(ex.InnerException.ToString());
             }
 
-            var list = WebApiHelper.DeserializeObject<ResponseResult<List<GhSearchVM>>>(json).data;
+            var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhSearchVM>>>(json);
+            if (result.status==1)
+            { 
+                //筛选状态
+                if (visit_flag!="")
+                {
+                    result.data = result.data.Where(p => p.visit_flag == visit_flag).ToList();
+                }
+                var list = result.data;
 
-            var source = list.Select(p => new
+                var source = list.Select(p => new
+                {
+                    ampm = p.ampm,
+                    charge_fee = p.charge_fee,
+                    charge_name = p.charge_name,
+                    clinic_name = p.clinic_name,
+                    doctor_name = p.doctor_name,
+                    flag = p.flag,
+                    gh_date = p.gh_date,
+                    gh_order = p.gh_order,
+                    gh_sequence = p.gh_sequence,
+                    gh_sequence_f = p.gh_sequence_f,
+                    gh_time = p.gh_time,
+                    group_name = p.group_name,
+                    haoming_name = p.haoming_name,
+                    opera_name = p.opera_name,
+                    patient_id = p.patient_id,
+                    patient_name = p.patient_name.Trim(),
+                    p_bar_code = p.p_bar_code,
+                    receipt_no = p.receipt_no,
+                    receipt_sn = p.receipt_sn,
+                    req_name = p.req_name,
+                    response_name = p.response_name,
+                    times = p.times,
+                    unit_name = p.unit_name,
+                    visit_flag = p.visit_flag,
+                    visit_status = p.visit_status,
+                }).ToList();
+                dgvlist.Init();
+                dgvlist.DataSource = source;
+                dgvlist.AutoResizeColumns();
+                dgvlist.ShowGridLine = true;
+            }
+            else
             {
-                ampm = p.ampm,
-                charge_fee = p.charge_fee,
-                charge_name = p.charge_name,
-                clinic_name = p.clinic_name,
-                doctor_name = p.doctor_name,
-                flag = p.flag,
-                gh_date = p.gh_date,
-                gh_order = p.gh_order,
-                gh_sequence = p.gh_sequence,
-                gh_sequence_f = p.gh_sequence_f,
-                gh_time = p.gh_time,
-                group_name = p.group_name,
-                haoming_name = p.haoming_name,
-                opera_name = p.opera_name,
-                patient_id = p.patient_id,
-                patient_name = p.patient_name.Trim(),
-                p_bar_code = p.p_bar_code,
-                receipt_no = p.receipt_no,
-                receipt_sn = p.receipt_sn,
-                req_name = p.req_name,
-                response_name = p.response_name,
-                times = p.times,
-                unit_name = p.unit_name,
-                visit_flag = p.visit_flag,
-                visit_status = p.visit_status,
-            }).ToList();  
-            dgvlist.Init();
-            dgvlist.DataSource = source;
-            dgvlist.AutoResizeColumns();
-            dgvlist.ShowGridLine = true;
+                UIMessageBox.ShowError(result.message);
+                log.Error(result.message);
+            }
+            
 
 
         }

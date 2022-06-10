@@ -788,30 +788,13 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<GhRequest>(ex.Message);
             }
-        }
-
-
-        //public ResponseResult<DataSet> GetReportDataByCode(string code, string tb_name)
-        //{
-
-        //    Log.Information($"GetReportDataByCode,{code},{tb_name}");
-        //    try
-        //    {
-        //        return _reportDataFastRepository.GetReportDataByCode(code, tb_name);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.Error(ex.Message);
-        //        return ErrorResult<DataSet>(ex.Message);
-        //    }
-        //}
+        } 
         public ResponseResult<ReportData> GetReportDataByCode(string code)
         {
 
             Log.Information($"GetReportDataByCode,{code}");
             try
-            {
-                //return JsonSerializer.Serialize(_reportDataFastRepository.GetReportDataByCode(code));
+            { 
                 return _reportDataFastRepository.GetReportDataByCode(code);
             }
             catch (Exception ex)
@@ -886,12 +869,26 @@ namespace CoreApi.Controllers
             {
                 var ds = _reportDataFastRepository.GetReportDataBySql(sql, tb_name);
 
-                return JsonConvert.SerializeObject(ds.Tables[0], new DataTableConverter()); //DataTableHelper.ToJson(ds.Tables[0]);
+                return JsonConvert.SerializeObject(ds.Tables[0], new DataTableConverter()); 
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return ErrorResult<string>(ex.Message);
+            }
+        } 
+
+        public ResponseResult<bool> CheckGhRepeat(string patient_id, string record_sn)
+        {
+            Log.Information($"CheckGhRepeat,{patient_id},{record_sn}");
+            try
+            {
+                return _baseRequestRepository.CheckGhRepeat(patient_id, record_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
             }
         }
     }

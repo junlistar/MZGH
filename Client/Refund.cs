@@ -233,7 +233,7 @@ namespace Client
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
 
-                if (result != null)
+                if (result.status==1)
                 {
                     var list = result.data.Where(p => p.times == vm.times.ToString() && p.visit_flag == "1").ToList();
                     if (list != null && list.Count > 0)
@@ -372,7 +372,7 @@ namespace Client
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl2, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-                if (responseJson.data == 1)
+                if (responseJson.status == 1)
                 {
                     UIMessageTip.ShowOk("退号成功!");
                 }
@@ -699,7 +699,7 @@ namespace Client
 
                     string res = SessionHelper.MyHttpClient.PostAsync(paramurl2, httpContent).Result.Content.ReadAsStringAsync().Result;
                     var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-                    if (responseJson.data == 1)
+                    if (responseJson.status == 1)
                     {
                         MessageBox.Show("退号成功!");
 

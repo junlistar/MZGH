@@ -530,17 +530,25 @@ namespace Client
                     UIMessageTip.ShowWarning(" 访问登录接口失败!");
                     return false;
                 }
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
-
-                if (listApi.data != null && listApi.data.Count > 0)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
+                if (result.status==1)
                 {
-                    SessionHelper.uservm = listApi.data[0];
-                    return true;
+                    if (result.data != null && result.data.Count > 0)
+                    {
+                        SessionHelper.uservm = result.data[0];
+                        return true;
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowWarning(" 登录名或密码有误!");
+                    }
                 }
                 else
                 {
-                    UIMessageTip.ShowWarning(" 登录名或密码有误!");
+                    UIMessageBox.ShowError(result.message);
+                    log.Error(result.message);
                 }
+               
 
             }
             catch (Exception ex)

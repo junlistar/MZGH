@@ -619,18 +619,74 @@ namespace Client
         /// <param name="e"></param>
         private void btnClinic_Click(object sender, EventArgs e)
         {
+            //todo:判断是否挂了相同的号
+
+
             var btn = sender as UIButton;
             foreach (var item in clinicList)
             {
                 if (item.record_sn == btn.TagString)
                 {
+                    if (CheckGhRepeat(btnEditUser.TagString, item.record_sn))
+                    {
+                        UIMessageBox.ShowWarning("同时段存在相同挂号记录！");
+                        break;
+                    } 
+
                     SelectPayType fe = new SelectPayType(item, btnEditUser.TagString);
                     fe.ShowDialog();
 
                     uiBreadcrumb2.ItemIndex = 0;
+
+                    //打印发票
+                    if (SessionHelper.do_gh_print)
+                    {
+                        SessionHelper.do_gh_print = false;
+                        GhPrint ghprint = new GhPrint();
+                        ghprint.Show();
+                    }
                 }
             }
 
+        }
+
+        public bool CheckGhRepeat(string patient_id, string record_sn)
+        {
+            Task<HttpResponseMessage> task = null; 
+            string json = "";
+            string paramurl = string.Format($"/api/GuaHao/CheckGhRepeat?patient_id={patient_id}&record_sn={record_sn}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (result.status==1)
+                {
+                    return result.data;
+                }
+                else
+                {
+
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+            return false;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -1128,11 +1184,11 @@ namespace Client
         {
             //MessageBox.Show(request_key);
             if (requestDic != null && requestDic.Count > 0)
-            { 
+            {
                 if (!string.IsNullOrWhiteSpace(request_key))
                 {
                     //var source = requestDic.Where(p=>p.Key==request_key);
-                      
+
                     Dictionary<string, List<GHRequestVM>> source = new Dictionary<string, List<GHRequestVM>>();
                     source.Add(request_key, requestDic[request_key]);
                     BindUnit(source);
@@ -1151,7 +1207,7 @@ namespace Client
 
 
         }
-         
+
 
         private void GuaHao_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1243,13 +1299,12 @@ namespace Client
                     var read = response.Content.ReadAsStringAsync();
                     read.Wait();
                     json = read.Result;
-                    listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
                 }
 
-
-                if (listApi.Count > 0)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                    var userInfo = listApi[0];
+                    var userInfo = result.data[0];
                     PatientVM = userInfo;
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
@@ -1342,7 +1397,7 @@ namespace Client
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (responseJson.data == 1)
+                        if (responseJson.status == 1)
                         {
                             log.Debug("修改用户医保信息成功");
 
@@ -1375,11 +1430,8 @@ namespace Client
                         ue.ShowDialog();
 
                     }
-                    else if (true)
-                    {
-
-                    }
                 }
+
             }
             catch (Exception ex)
             {
@@ -1418,7 +1470,7 @@ namespace Client
             // this.Focus();
         }
 
-      
+
         private void uiBreadcrumb2_ItemIndexChanged(object sender, int value)
         {
             if (uiBreadcrumb2.ItemIndex == 0)

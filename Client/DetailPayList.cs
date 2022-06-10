@@ -66,9 +66,17 @@ namespace Client
                 log.Info(response.ReasonPhrase);
             }
             var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundPayVM>>>(json);
-            paylist = result.data;
-            this.dgvpaylist.DataSource = result.data;
-            this.dgvpaylist.AutoResizeColumns();
+            if (result.status==1)
+            {
+                paylist = result.data;
+                this.dgvpaylist.DataSource = result.data;
+                this.dgvpaylist.AutoResizeColumns();
+            }
+            else
+            { 
+                UIMessageTip.ShowError("查询失败!");
+                log.Error(result.message);
+            }
 
         }
 

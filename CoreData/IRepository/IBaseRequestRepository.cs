@@ -27,6 +27,10 @@ namespace Data.IRepository
              string ampm, string window_no, string open_flag);
 
         bool CreateRequestNoList(string begin, string end, int type);
+
+
+        bool CheckGhRepeat(string patient_id, string record_sn);
+
         #endregion
     }
 }

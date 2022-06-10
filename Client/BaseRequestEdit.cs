@@ -12,12 +12,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
 using Client.ViewModel;
+using log4net;
 using Sunny.UI;
 
 namespace Client
 {
     public partial class BaseRequestEdit : UIForm
     {
+        private static ILog log = LogManager.GetLogger(typeof(BaseRequestEdit));//typeof放当前类
         BaseRequest _baseRequest;
 
         public BaseRequestEdit(BaseRequest baseRequest)
@@ -119,6 +121,7 @@ namespace Client
                     case 2: cbxWeek.Text = "第二周"; break;
                     case 3: cbxWeek.Text = "第三周"; break;
                     case 4: cbxWeek.Text = "第四周"; break;
+                    case 5: cbxWeek.Text = "第五周"; break;
                     default:
                         break;
                 }
@@ -169,7 +172,7 @@ namespace Client
             cbxHaobie.DisplayMember = "name";
 
             cbxWinNo.Text = "所有窗口";
-            cbxOpenFlag.Text = "全部";
+            cbxOpenFlag.Text = "开放";
 
             dgv.CellClick += dgvks_CellContentClick;
             dgv.KeyDown += dgvks_KeyDown;
@@ -454,6 +457,7 @@ namespace Client
                 case "第二周": week = "2"; break;
                 case "第三周": week = "3"; break;
                 case "第四周": week = "4"; break;
+                case "第五周": week = "5"; break;
                 default:
                     break;
             }
@@ -479,10 +483,10 @@ namespace Client
             {
                 open_flag = 0;
             }
-            int result = 0;
-            if (int.TryParse(txtTotalNum.Text, out result))
+            int num = 0;
+            if (int.TryParse(txtTotalNum.Text, out num))
             {
-                total_num = result;
+                total_num = num;
             }
 
             if (string.IsNullOrWhiteSpace(visit_dept))
@@ -540,9 +544,8 @@ namespace Client
                 read.Wait();
                 json = read.Result;
             }
-            var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
-
-            if (listApi != null && listApi.Count > 0)
+            var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+            if (result.status==1 && result.data.Count>0)
             {
                 if (string.IsNullOrEmpty(_baseRequest.current_sn))
                 {
@@ -551,13 +554,21 @@ namespace Client
                 }
                 else
                 {
-                    if (listApi[0].request_sn != _baseRequest.current_sn)
+                    if (result.data[0].request_sn != _baseRequest.current_sn)
                     {
                         UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
                         return;
                     }
                 }
             }
+            else
+            {
+                UIMessageTip.Show("验证数据出错！");
+                log.Error(result.message);
+                return;
+
+            }
+             
 
 
             //UIMessageTip.Show("验证成功 ，提交数据！");
@@ -583,11 +594,17 @@ namespace Client
 
             string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
-            var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+            var result1 = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-            if (responseJson == 1 || responseJson == 2)
+            if (result1.status == 1 )
             {
                 UIMessageTip.ShowOk("操作成功!");
+            }
+            else
+            {
+                UIMessageTip.ShowError("保存失败!");
+                log.Error(result1.message);
+                return;
             }
 
             this.Close();

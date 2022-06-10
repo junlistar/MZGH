@@ -493,9 +493,9 @@ namespace Client
                 paramurl = string.Format($"/api/GuaHao/CreateRequestRecord?begin={d.begin}&end={d.end}&weeks={d.weeks}&day={d.day}&op_id={d.op_id}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                if (responseJson == 1 || responseJson == 2)
+                if (result.status == 1 )
                 {
                     UIMessageTip.ShowOk("操作成功!");
 
@@ -505,6 +505,7 @@ namespace Client
                 else
                 {
                     UIMessageTip.ShowOk("操作失败!");
+                    log.Error(result.message);
                 }
 
             }
@@ -601,6 +602,7 @@ namespace Client
             else
             {
                 UIMessageBox.ShowError(dat.message);
+                log.Error(dat.message);
             }
         }
 

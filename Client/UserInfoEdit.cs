@@ -52,10 +52,18 @@ namespace Client
                 read.Wait();
                 json = read.Result;
             }
-            var newid = WebApiHelper.DeserializeObject<ResponseResult<string>>(json).data;
+            var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
+            if (result.status==1)
+            {
+                var newid = result.data;
+                this.txtpatientid.Text = newid;
+                this.txtCardId.Text = newid;
+            }
+            else
+            {
+                log.Error(result.message);
+            }
 
-            this.txtpatientid.Text = newid;
-            this.txtCardId.Text = newid;
 
         }
 
@@ -461,7 +469,7 @@ namespace Client
                 var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
 
 
-                if (listApi.Count > 0)
+                if (listApi!=null &&listApi.Count > 0)
                 {
                     userInfo = listApi[0];
 

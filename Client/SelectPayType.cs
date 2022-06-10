@@ -32,12 +32,13 @@ using FastReport.Utils;
 using MyMzghLib;
 using FastReport.Design;
 using System.IO;
+using Client.Forms.Wedgit;
 
 namespace Client
 {
     public partial class SelectPayType : UIForm
     {
-        private static ILog log = LogManager.GetLogger(typeof(GuaHao));//typeof放当前类
+        private static ILog log = LogManager.GetLogger(typeof(SelectPayType));//typeof放当前类
 
 
         GHRequestVM vm = new GHRequestVM();
@@ -819,9 +820,9 @@ namespace Client
                 {
                     log.Info("挂号成功");
                     UIMessageTip.ShowOk("挂号成功!", 1500);
-
+                    SessionHelper.do_gh_print = true;
                     this.Close();
-
+                    return;
                     //打印单据  
                      InitializeReport("PREVIEW");
                     //Print(pay_string);
@@ -895,8 +896,7 @@ namespace Client
                 log.Info(response.ReasonPhrase);
             }
 
-            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
-            //var resp = WebApiHelper.DeserializeObject<ResponseResult<DataTable>>(json);
+            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json); 
 
             if (resp.status == 1)
             {

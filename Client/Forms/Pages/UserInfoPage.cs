@@ -341,8 +341,6 @@ namespace Client.Forms.Pages
         {
             string json = ""; string paramurl = "";
 
-
-            //根据patientId查找已存在的病人
             Task<HttpResponseMessage> task = null;
             json = "";
             paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
@@ -356,13 +354,20 @@ namespace Client.Forms.Pages
                 read.Wait();
                 json = read.Result;
             }
-            var newid = WebApiHelper.DeserializeObject<ResponseResult<string>>(json).data;
-
-            this.txtId.Text = newid;
-            this.txtbarcode.Text = newid;
-            txtname.Text = "新病人";
-            cbxsex.Text = "男";
-
+            var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
+            if (result.status == 1)
+            {
+                var newid = result.data;
+                this.txtId.Text = newid;
+                this.txtbarcode.Text = newid;
+                txtname.Text = "新病人";
+                cbxsex.Text = "男";
+            }
+            else
+            {
+                UIMessageBox.ShowError(result.message);
+                log.Error(result.message);
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -502,20 +507,13 @@ namespace Client.Forms.Pages
                     read.Wait();
                     json = read.Result;
                 }
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-
-
-                if (listApi.Count > 0)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1)
                 {
-                    for (int i = 0; i < listApi.Count; i++)
+                    for (int i = 0; i < result.data.Count; i++)
                     {
-                        var pid = listApi[i].patient_id;
-                        //if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
-                        //{
-                        //    UIMessageTip.ShowError("系统中已存在此卡号!");
-                        //    txtbarcode.Focus();
-                        //    return;
-                        //}
+                        var pid = result.data[i].patient_id;
+
                         //else
                         if (pid.Substring(3, 7) != patientId)
                         {
@@ -525,8 +523,15 @@ namespace Client.Forms.Pages
                             return;
                         }
                     }
-
                 }
+                else
+                {
+                    UIMessageBox.ShowError(result.message);
+                    log.Error(result.message);
+                    return;
+                }
+
+
 
                 json = "";
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={sno}");
@@ -540,14 +545,12 @@ namespace Client.Forms.Pages
                     read.Wait();
                     json = read.Result;
                 }
-                listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-
-
-                if (listApi.Count > 0)
+                result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1)
                 {
-                    for (int i = 0; i < listApi.Count; i++)
+                    for (int i = 0; i < result.data.Count; i++)
                     {
-                        var pid = listApi[i].patient_id;
+                        var pid = result.data[i].patient_id;
                         if (pid.Substring(3, 7) != patientId)
                         {
                             if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
@@ -560,7 +563,12 @@ namespace Client.Forms.Pages
                         }
                     }
                 }
-
+                else
+                {
+                    UIMessageBox.ShowError(result.message);
+                    log.Error(result.message);
+                    return;
+                }
                 var d = new
                 {
                     pid = patientId,
@@ -589,7 +597,7 @@ namespace Client.Forms.Pages
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                if (responseJson.data == 1 || responseJson.data == 2)
+                if (responseJson.status == 1 )
                 {
                     UIMessageTip.ShowOk("操作成功!");
                     lblmsg.Text = "操作成功!";
@@ -643,13 +651,22 @@ namespace Client.Forms.Pages
                         read.Wait();
                         json = read.Result;
                     }
-                    var dat = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-                    if (dat != null && dat.Count > 0)
+                    var dat = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                    if (dat.status==1)
                     {
-                        var item = dat[0];
+                        if (dat.data != null && dat.data.Count > 0)
+                        {
+                            var item = dat.data[0];
 
-                        BindUserInfo(item);
+                            BindUserInfo(item);
+                        }
                     }
+                    else
+                    {
+                        UIMessageBox.ShowError(dat.message);
+                        log.Error(dat.message);
+                    }
+                    
                 }
             }
         }
@@ -676,12 +693,20 @@ namespace Client.Forms.Pages
                         read.Wait();
                         json = read.Result;
                     }
-                    var dat = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-                    if (dat != null && dat.Count > 0)
+                    var dat = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                    if (dat.status == 1)
                     {
-                        var item = dat[0];
+                        if (dat.data != null && dat.data.Count > 0)
+                        {
+                            var item = dat.data[0];
 
-                        BindUserInfo(item);
+                            BindUserInfo(item);
+                        }
+                    }
+                    else
+                    {
+                        UIMessageBox.ShowError(dat.message);
+                        log.Error(dat.message);
                     }
 
                 }

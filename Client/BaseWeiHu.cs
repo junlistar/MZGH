@@ -164,10 +164,10 @@ namespace Client
                     log.Error(response.ReasonPhrase);
                 }
 
-                list = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json).data;
-                if (list != null && list.Count > 0)
-                {
-                    var ds = list.Select(p => new
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+                if (result.status==1 && result.data!=null)
+                {  
+                    var ds = result.data.Select(p => new
                     {
                         record_sn = p.record_sn,
                         request_date = p.request_date,
@@ -196,6 +196,8 @@ namespace Client
                 }
                 else
                 {
+                    UIMessageTip.ShowError("查询失败!");
+                    log.Error(result.message);
                     BindNullData();
                 }
 
@@ -203,7 +205,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.InnerException.ToString());
+                log.Error(ex.ToString());
             }
 
 
@@ -618,12 +620,17 @@ namespace Client
                     var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
 
                     string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                    if (responseJson == 1 || responseJson == 2)
+                    if (result.status == 1)
                     {
                         UIMessageTip.ShowOk("操作成功!");
                         return;
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError("查询失败!");
+                        log.Error(result.message); 
                     }
 
                 }
