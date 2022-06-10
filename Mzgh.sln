@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTest", "CoreTest\CoreTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastReportClient", "FastReportClient\FastReportClient.csproj", "{C045063B-580C-4043-9296-3D1A54952136}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mzsf", "Mzsf\Mzsf.csproj", "{B481A143-6898-462C-80B6-B4875C5E2B47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MzsfApi", "MzsfApi\MzsfApi.csproj", "{07ABCE60-3682-4BE7-ABF2-B3127B6D9D5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{C045063B-580C-4043-9296-3D1A54952136}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C045063B-580C-4043-9296-3D1A54952136}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C045063B-580C-4043-9296-3D1A54952136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B481A143-6898-462C-80B6-B4875C5E2B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B481A143-6898-462C-80B6-B4875C5E2B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B481A143-6898-462C-80B6-B4875C5E2B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B481A143-6898-462C-80B6-B4875C5E2B47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07ABCE60-3682-4BE7-ABF2-B3127B6D9D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07ABCE60-3682-4BE7-ABF2-B3127B6D9D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07ABCE60-3682-4BE7-ABF2-B3127B6D9D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07ABCE60-3682-4BE7-ABF2-B3127B6D9D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

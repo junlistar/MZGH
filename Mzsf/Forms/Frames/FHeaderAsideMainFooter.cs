@@ -5,16 +5,15 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-using Client.ClassLib;
-using Client.ViewModel;
+using Mzsf.ClassLib;
+using Mzsf.ViewModel;
 using log4net;
-using Sunny.UI;
-using Client.Forms.Pages;
+using Sunny.UI; 
 using System.ComponentModel;
 using System.Threading;
-using Client.Forms.Wedgit;
+using Mzsf.Forms.Wedgit;
 
-namespace Client
+namespace Mzsf
 {
     public partial class FHeaderAsideMainFooter : UIHeaderAsideMainFooterFrame
     {
@@ -50,11 +49,13 @@ namespace Client
 
             //Aside.CreateChildNode(parent, AddPage(new GuaHao(), ++pageIndex));
             //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
-            Aside.CreateChildNode(parent, 61447, 24, "挂号", 1001);
-            Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
-            Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
-            Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
-            Aside.CreateChildNode(parent, 61674, 24, "号表维护", 1005);
+
+
+            //Aside.CreateChildNode(parent, 61447, 24, "挂号", 1001);
+            //Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
+            //Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
+            //Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
+            //Aside.CreateChildNode(parent, 61674, 24, "号表维护", 1005);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
@@ -62,9 +63,9 @@ namespace Client
             //显示默认界面
             // Aside.SelectFirst();
 
-            LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
+            //LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
 
-            SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
+            //SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
         }
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
@@ -77,50 +78,10 @@ namespace Client
             {
                 if (!ExistPage(1001))
                 {
-                    page = AddPage(new GuaHao());
+                    page = AddPage(new Form1());
                 }
                 SelectPage(1001); 
-            }
-            else if (node.Text == "挂号查询")
-            {
-                if (!ExistPage(1002))
-                {
-                    page = AddPage(new GhList());
-                }
-                SelectPage(1002);
-            }
-            else if (node.Text == "基础号表维护")
-            {
-                if (!ExistPage(1003))
-                {
-                    page = AddPage(new BaseRequest());
-                }
-                SelectPage(1003);
-            }
-            else if (node.Text == "生成号表")
-            {
-                if (!ExistPage(1004))
-                {
-                    page = AddPage(new CreateRequestRecord());
-                }
-                SelectPage(1004);
-            }
-            else if (node.Text == "号表维护")
-            {
-                if (!ExistPage(1005))
-                {
-                    page = AddPage(new BaseWeiHu());
-                }
-                SelectPage(1005);
-            }
-            else if (node.Text == "发新卡")
-            {
-                if (!ExistPage(1006))
-                {
-                    page = AddPage(new UserInfoPage());
-                }
-                SelectPage(1006);
-            }
+            } 
 
             //设置激活 用户键盘事件
             Task.Run(async () =>
@@ -176,7 +137,7 @@ namespace Client
         {
             this.MinimumSize = new Size(this.Width, this.Height);
 
-            AddPage(new Client.Forms.Pages.DefaultPage());
+            AddPage(new Mzsf.Forms.Pages.DefaultPage());
             // SelectPage(1000);
             Header.Hide();
 
@@ -479,23 +440,7 @@ namespace Client
                 json = read.Result;
             }
             SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
-
-            //获取挂号时间段
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetRequestHours");
-
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+ 
         }
 
 
