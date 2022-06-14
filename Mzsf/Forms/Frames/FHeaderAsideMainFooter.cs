@@ -12,6 +12,7 @@ using Sunny.UI;
 using System.ComponentModel;
 using System.Threading;
 using Mzsf.Forms.Wedgit;
+using Mzsf.Forms.Pages;
 
 namespace Mzsf
 {
@@ -21,37 +22,41 @@ namespace Mzsf
 
         static int iOperCount = 0;//记录上时间未操作的时间
         static int LogOutSeconds = 0;
+        static string midHost = "";
 
         public FHeaderAsideMainFooter()
         {
             InitializeComponent();
 
             SessionHelper.MyHttpClient = new HttpClient();
-            SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+            try
+            {
 
+                SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+                midHost = ConfigurationManager.AppSettings.Get("apihost");
+                LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds")); 
+                //SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("读取配置文件失败！");
+                return;
+            }
+
+            //用于监听多长时间不操作后弹出登录框
             MyMessager msg = new MyMessager();
             Application.AddMessageFilter(msg);
 
             //设置关联
             Aside.TabControl = MainTabControl;
-
-            //增加页面到Main
-            //AddPage(new FTitlePage1(), 1001);
-            //AddPage(new FTitlePage2(), 1002);
-            //AddPage(new FTitlePage3(), 1003);
-
+             
             int pageIndex = 1000;
             TreeNode parent = Aside.CreateNode("业务", 61451, 24, pageIndex);
+             
+            //Aside.CreateChildNode(parent, 61447, 24, "划价收费", 1101);
 
-            //设置Header节点索引
+            Aside.CreateChildNode(parent,  "划价收费", 61447, 24, 1101);
 
-            //Aside.CreateNode("业务", 1001);
-
-            //Aside.CreateChildNode(parent, AddPage(new GuaHao(), ++pageIndex));
-            //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
-
-
-            //Aside.CreateChildNode(parent, 61447, 24, "挂号", 1001);
             //Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
             //Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
             //Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
@@ -63,9 +68,7 @@ namespace Mzsf
             //显示默认界面
             // Aside.SelectFirst();
 
-            //LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
 
-            //SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
         }
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
@@ -74,13 +77,13 @@ namespace Mzsf
              
             UIPage page = new UIPage();
 
-            if (pageIndex == 1001)
+            if (pageIndex == 1101)
             {
-                if (!ExistPage(1001))
+                if (!ExistPage(1101))
                 {
-                    page = AddPage(new Form1());
+                    page = AddPage(new ChargePage());
                 }
-                SelectPage(1001); 
+                SelectPage(1101); 
             } 
 
             //设置激活 用户键盘事件
@@ -138,7 +141,7 @@ namespace Mzsf
             this.MinimumSize = new Size(this.Width, this.Height);
 
             AddPage(new Mzsf.Forms.Pages.DefaultPage());
-            // SelectPage(1000);
+      
             Header.Hide();
 
             this.Hide();
@@ -146,26 +149,7 @@ namespace Mzsf
             tlsInfo.Text = "";
 
             log.Debug((new System.Diagnostics.StackTrace().GetFrame(0).GetMethod()).Name);
-
-            //UILoginForm frm = new UILoginForm();
-            //frm.ShowInTaskbar = true;
-            //frm.Text = "荆州中心医院";
-            //frm.Title = "门诊挂号";
-            //frm.SubText = "荆州中心医院 v0.1";
-            //frm.OnLogin += Frm_OnLogin;
-            //frm.ButtonCancelClick += btnCancel_Click;
-            //frm.LoginImage = UILoginForm.UILoginImage.Login2;
-            //frm.ShowDialog();
-            //if (frm.IsLogin)
-            //{
-                //frm.Dispose();
-            //}
-            //else
-            //{
-            //    
-            //}
-            //return;
-
+ 
             Login frm = new Login();
             frm.ShowDialog();
             if (frm.IsLogin)
@@ -177,12 +161,12 @@ namespace Mzsf
                 //statusstrip信息
                 tsslblName.Text = SessionHelper.uservm.name;
 
-                tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
+                tsslblMidhost.Text = midHost;
                 timer1.Interval = 1000;
                 timer1.Start();
 
-                timerlogout.Interval = 1000;
-                timerlogout.Start();
+                //timerlogout.Interval = 1000;
+                //timerlogout.Start();
 
                 //加载字典数据
 
@@ -194,10 +178,10 @@ namespace Mzsf
                 this.FormClosing += FHeaderAsideMainFooter_FormClosing;
 
                 //ping
-                _demoBGWorker.DoWork += BGWorker_DoWork;
-                _demoBGWorker.RunWorkerAsync();
-                _demoBGWorker.WorkerReportsProgress = true;
-                _demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+                //_demoBGWorker.DoWork += BGWorker_DoWork;
+                //_demoBGWorker.RunWorkerAsync();
+                //_demoBGWorker.WorkerReportsProgress = true;
+                //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
 
                 //timerSignal.Interval = 1000 * 5;//10s
                 //timerSignal.Start();
@@ -220,7 +204,7 @@ namespace Mzsf
                     //获取用户费别信息
                     Task<HttpResponseMessage> task = null;
                     string json = "";
-                    string paramurl = string.Format($"/api/GuaHao/TestDBConnection");
+                    string paramurl = string.Format($"/api/mzsf/TestDBConnection");
 
                     log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                     task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -268,7 +252,7 @@ namespace Mzsf
             //获取用户费别信息
             Task<HttpResponseMessage> task = null;
             string json = "";
-            string paramurl = string.Format($"/api/GuaHao/TestDBConnection");
+            string paramurl = string.Format($"/api/mzsf/TestDBConnection");
 
             //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -303,143 +287,143 @@ namespace Mzsf
         {
             log.Info("初始化数据字典：InitDic");
              
-            //获取用户费别信息
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
+            ////获取用户费别信息
+            //Task<HttpResponseMessage> task = null;
+            //string json = "";
+            //string paramurl = string.Format($"/api/mzsf/GetChargeTypes");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
+            //task.Wait();
+            //var response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
 
-            //获取地区信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetDistrictCodes");
+            ////获取地区信息
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetDistrictCodes");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
-
-
-            //获取职业信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetOccupationCodes");
-
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
-
-            //获取身份信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetResponceTypes");
-
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
 
 
-            //获取科室
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetUnits");
+            ////获取职业信息
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetOccupationCodes");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
 
-            //获取号别
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetClinicTypes");
+            ////获取身份信息
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetResponceTypes");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
 
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetRequestTypes");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            ////获取科室
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetUnits");
 
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            //获取用户
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetUserDic");
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            ////获取号别
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetClinicTypes");
 
-            task.Wait();
-            response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetRequestTypes");
+
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
+
+            ////获取用户
+            //json = "";
+            //paramurl = string.Format($"/api/mzsf/GetUserDic");
+
+            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            //task.Wait();
+            //response = task.Result;
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    var read = response.Content.ReadAsStringAsync();
+            //    read.Wait();
+            //    json = read.Result;
+            //}
+            //SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
  
         }
 
@@ -455,7 +439,7 @@ namespace Mzsf
             {
                 Task<HttpResponseMessage> task = null;
                 string json = ""; 
-                string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={userName}&pwd={password}");
+                string paramurl = string.Format($"/api/mzsf/GetLoginUser?uname={userName}&pwd={password}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 

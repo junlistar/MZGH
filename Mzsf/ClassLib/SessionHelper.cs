@@ -16,7 +16,8 @@ namespace Mzsf.ClassLib
         public static HttpClient MyHttpClient = null;
 
         public static LoginUsersVM uservm = new LoginUsersVM();
-         
+        public static PatientVM PatientVM;
+
         public static int clientWidth;
         public static int clientHeight;
          
@@ -45,10 +46,17 @@ namespace Mzsf.ClassLib
         /// </summary>
         public static CardReader_Data CardReader;
 
+        public static string cardno;
+
         //门诊挂号，收费打印，报表编号
         public static int mzgh_report_code;
         //标志 挂号操作是否需要打印
         public static bool do_gh_print = false;
+
+        //门诊处方
+        public static List<MzOrderVM> mzOrders;
+        //门诊处方详情
+        public static List<CprChargesVM> cprCharges;
 
     }
 }

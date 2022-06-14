@@ -48,7 +48,7 @@ namespace Mzsf.Forms.Wedgit
             {
                 Task<HttpResponseMessage> task = null;
                 string json = "";
-                string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={username}&pwd={password}");
+                string paramurl = string.Format($"/api/mzsf/GetLoginUser?uname={username}&pwd={password}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 

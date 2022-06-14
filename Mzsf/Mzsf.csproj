@@ -60,14 +60,22 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\Client\Pay\WxPayAPI\third\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassLib\ComUtil.cs" />
+    <Compile Include="ClassLib\GHPayModel.cs" />
     <Compile Include="ClassLib\HttpClientUtil.cs" />
+    <Compile Include="ClassLib\PayMethodEnum.cs" />
     <Compile Include="ClassLib\ReadIdCardHelper.cs" />
     <Compile Include="ClassLib\ResponseResult.cs" />
     <Compile Include="ClassLib\SessionHelper.cs" />
     <Compile Include="ClassLib\StringUtil.cs" />
     <Compile Include="ClassLib\WebApiHelper.cs" />
+    <Compile Include="ClassLib\YBHelper.cs" />
+    <Compile Include="ClassLib\YBResponse.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,11 +88,47 @@
     <Compile Include="Forms\Frames\FHeaderAsideMainFooter.designer.cs">
       <DependentUpon>FHeaderAsideMainFooter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\CardPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\CardPay.Designer.cs">
+      <DependentUpon>CardPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\ChargePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\ChargePage.Designer.cs">
+      <DependentUpon>ChargePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\Check.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\Check.Designer.cs">
+      <DependentUpon>Check.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\DefaultPage.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Pages\DefaultPage.Designer.cs">
       <DependentUpon>DefaultPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\JKZL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\JKZL.Designer.cs">
+      <DependentUpon>JKZL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\OrderItemPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\OrderItemPage.Designer.cs">
+      <DependentUpon>OrderItemPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\WxPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\WxPay.Designer.cs">
+      <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Wedgit\Login.cs">
       <SubType>Form</SubType>
@@ -92,19 +136,48 @@
     <Compile Include="Forms\Wedgit\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\ReadCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\ReadCard.Designer.cs">
+      <DependentUpon>ReadCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ClinicTypeVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
+    <Compile Include="ViewModel\CprChargesVM.cs" />
+    <Compile Include="ViewModel\MzOrderVM.cs" />
     <Compile Include="ViewModel\UnitVM.cs" />
     <EmbeddedResource Include="Forms\Frames\FHeaderAsideMainFooter.resx">
       <DependentUpon>FHeaderAsideMainFooter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\CardPay.resx">
+      <DependentUpon>CardPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\ChargePage.resx">
+      <DependentUpon>ChargePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\Check.resx">
+      <DependentUpon>Check.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\DefaultPage.resx">
       <DependentUpon>DefaultPage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\JKZL.resx">
+      <DependentUpon>JKZL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\OrderItemPage.resx">
+      <DependentUpon>OrderItemPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\WxPay.resx">
+      <DependentUpon>WxPay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\ReadCard.resx">
+      <DependentUpon>ReadCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
