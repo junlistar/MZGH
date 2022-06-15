@@ -44,3 +44,10 @@
 /Client/bin
 /Client/obj
 /CoreApi/Properties/PublishProfiles
+/Mzsf/bin
+/Mzsf/obj
+/MzsfData/bin
+/MzsfData/obj
+/MzsfApi/bin
+/MzsfApi/obj
+/.vs/Mzgh/v17/.suo
