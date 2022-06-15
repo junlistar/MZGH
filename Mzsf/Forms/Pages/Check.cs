@@ -146,11 +146,6 @@ namespace Mzsf.Forms.Pages
                     //保存支付数据，用于退款
                     paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, out_trade_no));
 
-                    this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
-
-                    //总金额-支付金额
-                    lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
-                    lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
                 }
                 else
                 {
@@ -168,12 +163,7 @@ namespace Mzsf.Forms.Pages
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
                     paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je));
-
-                    this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
-
-                    //总金额-支付金额
-                    lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
-                    lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
+                     
                 }
                 else
                 {
@@ -190,12 +180,7 @@ namespace Mzsf.Forms.Pages
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
                     paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
-
-                    this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
-
-                    //总金额-支付金额
-                    lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
-                    lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
+                     
                 }
                 else
                 {
@@ -216,12 +201,7 @@ namespace Mzsf.Forms.Pages
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
                     paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je));
-
-                    this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
-
-                    //总金额-支付金额
-                    lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
-                    lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
+                     
                 }
                 else
                 {
@@ -235,6 +215,17 @@ namespace Mzsf.Forms.Pages
                 //其他支付
                 UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
             }
+
+
+            this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
+
+            //总金额-支付金额
+            lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
+            lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
+
+            //发票tab，数据更新
+            BindReceiptData();
+
 
             if (chkcomb.Checked)
             {
@@ -250,6 +241,17 @@ namespace Mzsf.Forms.Pages
                 //    TiJiaoZhifu();
                 //}
             }
+        }
+
+        private void BindReceiptData()
+        {
+            var dgv_data = paylist.Select(p => new
+            {
+                pay_type_name = p.type_name,
+                pay_je = p.pay_je
+            }).ToList();
+            dgvfk.DataSource = dgv_data;
+            dgvfk.ShowGridLine = true;
         }
 
         public bool YiBaoPay()

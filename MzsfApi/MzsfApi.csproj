@@ -40,6 +40,12 @@
     <None Update="SQLS\220031.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\221004 - 复制.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\221004.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\221003.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -126,3 +126,4 @@ D:\lijun\github\Mzgh\MzsfApi\bin\Release\netcoreapp3.1\SQLS\220031.sql
 D:\lijun\github\Mzgh\MzsfApi\bin\Release\netcoreapp3.1\SQLS\220002.sql
 D:\lijun\github\Mzgh\MzsfApi\bin\Release\netcoreapp3.1\SQLS\221002.sql
 D:\lijun\github\Mzgh\MzsfApi\bin\Release\netcoreapp3.1\SQLS\221003.sql
+D:\lijun\github\Mzgh\MzsfApi\bin\Release\netcoreapp3.1\SQLS\221004.sql

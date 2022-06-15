@@ -21,9 +21,9 @@ namespace MzsfData.Entities
         public string bill_code { get; set; }
         public string audit_code { get; set; }
         public string exec_sn { get; set; }
-        public string charge_amount { get; set; }
+        public int charge_amount { get; set; }
         public string orig_price { get; set; }
-        public string charge_price { get; set; }
+        public decimal charge_price { get; set; }
         public string charge_group { get; set; }
         public string caoyao_fu { get; set; }
         public string back_amount { get; set; }

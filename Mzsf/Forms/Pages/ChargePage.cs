@@ -23,6 +23,9 @@ namespace Mzsf.Forms.Pages
         private static ILog log = LogManager.GetLogger(typeof(ChargePage));//typeof放当前类
 
         Color cur_color = Color.FromArgb(80, 160, 255);
+        public static int current_times = 0;
+        public static string current_unit_name = "";
+        public static string current_doct_name = "";
 
 
         public ChargePage()
@@ -43,8 +46,7 @@ namespace Mzsf.Forms.Pages
                 return;
             }
 
-            //获取数据 
-
+            //获取数据  
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
@@ -76,58 +78,14 @@ namespace Mzsf.Forms.Pages
                         }
                         SessionHelper.PatientVM = userInfo;
 
-                        txtCode.TagString = userInfo.patient_id;
-                        txtName.Text = userInfo.name.ToString();
-                        txtAge.Text = userInfo.age.ToString() + "岁";
-                        txtTel.Text = userInfo.home_tel.ToString();
-                        if (userInfo.sex == "1")
-                        {
-                            txtSex.Text = "男";
-                        }
-                        else if (userInfo.sex == "2")
-                        {
-                            txtSex.Text = "女";
-                        }
-                        txtHicno.Text = userInfo.hic_no;
 
-                        lblTimes.Text = "来访号：" + userInfo.max_times;
-                        lblTimes.Tag = userInfo.max_times;
+                        //当前最大记录次数
+                        current_times = userInfo.max_times;
 
-                        if (!string.IsNullOrEmpty(userInfo.home_district))
-                        {
-                            var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
+                        BindUserInfo(userInfo);
 
-                            if (model != null)
-                            {
-                                txtdistrict.Text = model.name;
-                            }
-                        }
+                        BindOrders(userInfo.patient_id);
 
-                        if (!string.IsNullOrEmpty(userInfo.response_type))
-                        {
-                            var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
-
-                            if (model != null)
-                            {
-                                cbxResponseType.Text = model.name;
-                            }
-                        }
-                        if (!string.IsNullOrEmpty(userInfo.charge_type))
-                        {
-                            var model = SessionHelper.chargeTypes.Where(p => p.code == userInfo.charge_type).FirstOrDefault();
-
-                            if (model != null)
-                            {
-                                cbxChargeTypes.Text = model.name;
-                            }
-                        }
-
-
-                        //查询处方
-                        GetOrders(userInfo.patient_id, userInfo.max_times);
-
-                        //锁定处方
-                        //LockOrder();
                     }
                     else
                     {
@@ -155,6 +113,133 @@ namespace Mzsf.Forms.Pages
 
         }
 
+        /// <summary>
+        /// 查询处方记录
+        /// </summary>
+        /// <param name="patient_id"></param>
+        private void BindOrders(string patient_id)
+        {
+            //查询近两日就诊处方记录，如果有多条，要今天选择 
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+
+            string begin = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
+            string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
+
+            string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzVisitVM>>>(json);
+                if (result.status == 1)
+                {
+                    if (result.data.Count > 0)
+                    {
+                        //绑定科室 医生信息
+                        txtUnit.Text = result.data[0].unit_name;
+                        txtDoct.Text = result.data[0].doct_name;
+
+                        if (result.data.Count > 1)
+                        {
+                            SelectOrder selectOrder = new SelectOrder(result.data); 
+                            selectOrder.ShowDialog();
+
+                            //绑定科室 医生信息
+                            txtUnit.Text = current_unit_name;
+                            txtDoct.Text = current_doct_name;
+                            lblTimes.Text = "来访号：" + current_times;
+                        }
+                         
+                        //查询处方
+                        GetOrders(patient_id, current_times);
+
+                        //锁定处方
+                        //LockOrder();
+                    }
+                    else
+                    {
+                        lblMsg.Text = "没有查询到数据";
+                    }
+
+                }
+                else
+                {
+                    lblMsg.Text = "没有查询到数据";
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
+
+        }
+
+        public void BindUserInfo(PatientVM userInfo)
+        {
+
+            txtCode.TagString = userInfo.patient_id;
+            txtName.Text = userInfo.name.ToString();
+            txtAge.Text = userInfo.age.ToString() + "岁";
+            txtTel.Text = userInfo.home_tel.ToString();
+            if (userInfo.sex == "1")
+            {
+                txtSex.Text = "男";
+            }
+            else if (userInfo.sex == "2")
+            {
+                txtSex.Text = "女";
+            }
+            txtHicno.Text = userInfo.hic_no;
+
+            lblTimes.Text = "来访号：" + userInfo.max_times;
+            lblTimes.Tag = userInfo.max_times;
+
+            if (!string.IsNullOrEmpty(userInfo.home_district))
+            {
+                var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
+
+                if (model != null)
+                {
+                    txtdistrict.Text = model.name;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(userInfo.response_type))
+            {
+                var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
+
+                if (model != null)
+                {
+                    cbxResponseType.Text = model.name;
+                }
+            }
+            if (!string.IsNullOrEmpty(userInfo.charge_type))
+            {
+                var model = SessionHelper.chargeTypes.Where(p => p.code == userInfo.charge_type).FirstOrDefault();
+
+                if (model != null)
+                {
+                    cbxChargeTypes.Text = model.name;
+                }
+            }
+        }
+
         private void txtCode_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -167,7 +252,7 @@ namespace Mzsf.Forms.Pages
         /// </summary>
         public void GetOrders(string patient_id, int times)
         {
-
+            lblNodata.Text = "没有查询到数据";
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetMzOrdersByPatientId?patient_id={patient_id}&times={times}");
@@ -227,6 +312,8 @@ namespace Mzsf.Forms.Pages
                         }
                         else
                         {
+                            lblNodata.Text = "已收费处方";
+
                             lblNodata.Show();
                         }
                     }

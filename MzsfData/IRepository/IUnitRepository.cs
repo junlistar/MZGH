@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 
 namespace MzsfData.IRepository
 {
-    public interface IMzOrderRepository : IRepositoryBase<MzOrder> 
+    public interface IUnitRepository : IRepositoryBase<Unit> 
     {
         #region 扩展的dapper操作
-
-
-        List<MzOrder> GetMzOrdersByPatientId(string patient_id,int times);
          
 
-
+        List<Unit> GetUnits();
+  
 
         #endregion
     }

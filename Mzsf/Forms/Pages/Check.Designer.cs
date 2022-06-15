@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.lblZongji = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblYouhui = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.chkcomb = new Sunny.UI.UICheckBox();
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.lblsyje = new Sunny.UI.UILabel();
             this.lblyfje = new Sunny.UI.UILabel();
@@ -65,33 +66,32 @@
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnSubmitCombi = new Sunny.UI.UIButton();
-            this.btnBack = new Sunny.UI.UIButton();
-            this.lblfpje = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblfpzje = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.uiPanel2 = new Sunny.UI.UIPanel();
             this.uiTabControl2 = new Sunny.UI.UITabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.dgvzd = new Sunny.UI.UIDataGridView();
             this.dgvfk = new Sunny.UI.UIDataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkcomb = new Sunny.UI.UICheckBox();
+            this.dgvzd = new Sunny.UI.UIDataGridView();
             this.type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiPanel2 = new Sunny.UI.UIPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblfpzje = new System.Windows.Forms.Label();
+            this.lblfpje = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnSubmitCombi = new Sunny.UI.UIButton();
+            this.btnBack = new Sunny.UI.UIButton();
+            this.pay_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pay_je = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.uiPanel2.SuspendLayout();
             this.uiTabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvzd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfk)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvzd)).BeginInit();
+            this.uiPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -155,8 +155,22 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(737, 309);
             this.uiPanel1.TabIndex = 4;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // chkcomb
+            // 
+            this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkcomb.Location = new System.Drawing.Point(295, 281);
+            this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
+            this.chkcomb.Name = "chkcomb";
+            this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.chkcomb.Size = new System.Drawing.Size(90, 23);
+            this.chkcomb.TabIndex = 51;
+            this.chkcomb.Text = "组合支付";
+            this.chkcomb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel7
             // 
@@ -172,11 +186,9 @@
             // lblsyje
             // 
             this.lblsyje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblsyje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lblsyje.Location = new System.Drawing.Point(169, 278);
             this.lblsyje.Name = "lblsyje";
             this.lblsyje.Size = new System.Drawing.Size(120, 23);
-            this.lblsyje.Style = Sunny.UI.UIStyle.Custom;
             this.lblsyje.TabIndex = 49;
             this.lblsyje.Text = "0.00";
             this.lblsyje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -185,11 +197,9 @@
             // lblyfje
             // 
             this.lblyfje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblyfje.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblyfje.Location = new System.Drawing.Point(169, 233);
             this.lblyfje.Name = "lblyfje";
             this.lblyfje.Size = new System.Drawing.Size(120, 23);
-            this.lblyfje.Style = Sunny.UI.UIStyle.Custom;
             this.lblyfje.TabIndex = 48;
             this.lblyfje.Text = "0.00";
             this.lblyfje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -198,11 +208,9 @@
             // lblzje
             // 
             this.lblzje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblzje.ForeColor = System.Drawing.Color.Red;
             this.lblzje.Location = new System.Drawing.Point(169, 190);
             this.lblzje.Name = "lblzje";
             this.lblzje.Size = new System.Drawing.Size(120, 23);
-            this.lblzje.Style = Sunny.UI.UIStyle.Custom;
             this.lblzje.TabIndex = 47;
             this.lblzje.Text = "0.00";
             this.lblzje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -432,6 +440,226 @@
             this.tabPage2.Text = "发票";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // uiTabControl2
+            // 
+            this.uiTabControl2.Controls.Add(this.tabPage3);
+            this.uiTabControl2.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.uiTabControl2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl2.ItemSize = new System.Drawing.Size(150, 40);
+            this.uiTabControl2.Location = new System.Drawing.Point(4, 77);
+            this.uiTabControl2.MainPage = "";
+            this.uiTabControl2.Name = "uiTabControl2";
+            this.uiTabControl2.SelectedIndex = 0;
+            this.uiTabControl2.Size = new System.Drawing.Size(739, 238);
+            this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl2.TabIndex = 9;
+            this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dgvfk);
+            this.tabPage3.Controls.Add(this.dgvzd);
+            this.tabPage3.Location = new System.Drawing.Point(0, 40);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(739, 198);
+            this.tabPage3.TabIndex = 0;
+            this.tabPage3.Text = "发票1";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dgvfk
+            // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvfk.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvfk.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvfk.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvfk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvfk.ColumnHeadersHeight = 32;
+            this.dgvfk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvfk.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.pay_type_name,
+            this.pay_je});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvfk.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvfk.EnableHeadersVisualStyles = false;
+            this.dgvfk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgvfk.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
+            this.dgvfk.Location = new System.Drawing.Point(346, 3);
+            this.dgvfk.Name = "dgvfk";
+            this.dgvfk.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvfk.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvfk.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvfk.RowTemplate.Height = 23;
+            this.dgvfk.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvfk.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.dgvfk.SelectedIndex = -1;
+            this.dgvfk.Size = new System.Drawing.Size(390, 192);
+            this.dgvfk.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvfk.Style = Sunny.UI.UIStyle.Red;
+            this.dgvfk.TabIndex = 1;
+            this.dgvfk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // dgvzd
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvzd.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvzd.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvzd.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvzd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvzd.ColumnHeadersHeight = 32;
+            this.dgvzd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvzd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.type_name,
+            this.type,
+            this.charge});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvzd.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvzd.EnableHeadersVisualStyles = false;
+            this.dgvzd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgvzd.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
+            this.dgvzd.Location = new System.Drawing.Point(3, 3);
+            this.dgvzd.Name = "dgvzd";
+            this.dgvzd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvzd.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvzd.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvzd.RowTemplate.Height = 23;
+            this.dgvzd.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvzd.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.dgvzd.SelectedIndex = -1;
+            this.dgvzd.Size = new System.Drawing.Size(337, 192);
+            this.dgvzd.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.dgvzd.Style = Sunny.UI.UIStyle.Red;
+            this.dgvzd.TabIndex = 0;
+            this.dgvzd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // type_name
+            // 
+            this.type_name.DataPropertyName = "type_name";
+            this.type_name.HeaderText = "账单";
+            this.type_name.Name = "type_name";
+            // 
+            // type
+            // 
+            this.type.DataPropertyName = "type";
+            this.type.HeaderText = "type";
+            this.type.Name = "type";
+            this.type.Visible = false;
+            // 
+            // charge
+            // 
+            this.charge.DataPropertyName = "charge";
+            this.charge.HeaderText = "账单金额";
+            this.charge.Name = "charge";
+            // 
+            // uiPanel2
+            // 
+            this.uiPanel2.Controls.Add(this.label6);
+            this.uiPanel2.Controls.Add(this.lblfpzje);
+            this.uiPanel2.Controls.Add(this.lblfpje);
+            this.uiPanel2.Controls.Add(this.label8);
+            this.uiPanel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiPanel2.Location = new System.Drawing.Point(4, 15);
+            this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiPanel2.Name = "uiPanel2";
+            this.uiPanel2.Size = new System.Drawing.Size(739, 53);
+            this.uiPanel2.TabIndex = 8;
+            this.uiPanel2.Text = null;
+            this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label6.Location = new System.Drawing.Point(442, 13);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 25);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "发票金额(￥)：";
+            // 
+            // lblfpzje
+            // 
+            this.lblfpzje.AutoSize = true;
+            this.lblfpzje.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblfpzje.ForeColor = System.Drawing.Color.Blue;
+            this.lblfpzje.Location = new System.Drawing.Point(153, 13);
+            this.lblfpzje.Name = "lblfpzje";
+            this.lblfpzje.Size = new System.Drawing.Size(50, 25);
+            this.lblfpzje.TabIndex = 5;
+            this.lblfpzje.Text = "0.00";
+            // 
+            // lblfpje
+            // 
+            this.lblfpje.AutoSize = true;
+            this.lblfpje.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblfpje.ForeColor = System.Drawing.Color.Blue;
+            this.lblfpje.Location = new System.Drawing.Point(589, 13);
+            this.lblfpje.Name = "lblfpje";
+            this.lblfpje.Size = new System.Drawing.Size(50, 25);
+            this.lblfpje.TabIndex = 7;
+            this.lblfpje.Text = "0.00";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label8.Location = new System.Drawing.Point(28, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(119, 25);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "总金额(￥)：";
+            // 
             // btnSubmitCombi
             // 
             this.btnSubmitCombi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -462,247 +690,17 @@
             this.btnBack.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // lblfpje
+            // pay_type_name
             // 
-            this.lblfpje.AutoSize = true;
-            this.lblfpje.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblfpje.ForeColor = System.Drawing.Color.Blue;
-            this.lblfpje.Location = new System.Drawing.Point(589, 13);
-            this.lblfpje.Name = "lblfpje";
-            this.lblfpje.Size = new System.Drawing.Size(50, 25);
-            this.lblfpje.TabIndex = 7;
-            this.lblfpje.Text = "0.00";
+            this.pay_type_name.DataPropertyName = "pay_type_name";
+            this.pay_type_name.HeaderText = "付款类型";
+            this.pay_type_name.Name = "pay_type_name";
             // 
-            // label6
+            // pay_je
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label6.Location = new System.Drawing.Point(442, 13);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(138, 25);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "发票金额(￥)：";
-            // 
-            // lblfpzje
-            // 
-            this.lblfpzje.AutoSize = true;
-            this.lblfpzje.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblfpzje.ForeColor = System.Drawing.Color.Blue;
-            this.lblfpzje.Location = new System.Drawing.Point(153, 13);
-            this.lblfpzje.Name = "lblfpzje";
-            this.lblfpzje.Size = new System.Drawing.Size(50, 25);
-            this.lblfpzje.TabIndex = 5;
-            this.lblfpzje.Text = "0.00";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.label8.Location = new System.Drawing.Point(28, 13);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(119, 25);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "总金额(￥)：";
-            // 
-            // uiPanel2
-            // 
-            this.uiPanel2.Controls.Add(this.label6);
-            this.uiPanel2.Controls.Add(this.lblfpzje);
-            this.uiPanel2.Controls.Add(this.lblfpje);
-            this.uiPanel2.Controls.Add(this.label8);
-            this.uiPanel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiPanel2.Location = new System.Drawing.Point(4, 15);
-            this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiPanel2.Name = "uiPanel2";
-            this.uiPanel2.Size = new System.Drawing.Size(739, 53);
-            this.uiPanel2.TabIndex = 8;
-            this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiTabControl2
-            // 
-            this.uiTabControl2.Controls.Add(this.tabPage3);
-            this.uiTabControl2.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTabControl2.ItemSize = new System.Drawing.Size(150, 40);
-            this.uiTabControl2.Location = new System.Drawing.Point(4, 77);
-            this.uiTabControl2.MainPage = "";
-            this.uiTabControl2.Name = "uiTabControl2";
-            this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(739, 238);
-            this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
-            this.uiTabControl2.TabIndex = 9;
-            this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTabControl2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.dgvfk);
-            this.tabPage3.Controls.Add(this.dgvzd);
-            this.tabPage3.Location = new System.Drawing.Point(0, 40);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(739, 198);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "发票1";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // dgvzd
-            // 
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvzd.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
-            this.dgvzd.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvzd.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvzd.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvzd.ColumnHeadersHeight = 32;
-            this.dgvzd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvzd.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.type_name,
-            this.type,
-            this.charge});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvzd.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvzd.EnableHeadersVisualStyles = false;
-            this.dgvzd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvzd.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
-            this.dgvzd.Location = new System.Drawing.Point(3, 3);
-            this.dgvzd.Name = "dgvzd";
-            this.dgvzd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvzd.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvzd.RowsDefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvzd.RowTemplate.Height = 23;
-            this.dgvzd.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvzd.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.dgvzd.SelectedIndex = -1;
-            this.dgvzd.Size = new System.Drawing.Size(337, 192);
-            this.dgvzd.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvzd.Style = Sunny.UI.UIStyle.Red;
-            this.dgvzd.TabIndex = 0;
-            this.dgvzd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // dgvfk
-            // 
-            dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvfk.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
-            this.dgvfk.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvfk.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvfk.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
-            this.dgvfk.ColumnHeadersHeight = 32;
-            this.dgvfk.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvfk.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column3,
-            this.Column4});
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvfk.DefaultCellStyle = dataGridViewCellStyle18;
-            this.dgvfk.EnableHeadersVisualStyles = false;
-            this.dgvfk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvfk.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(104)))), ((int)(((byte)(104)))));
-            this.dgvfk.Location = new System.Drawing.Point(346, 3);
-            this.dgvfk.Name = "dgvfk";
-            this.dgvfk.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            dataGridViewCellStyle19.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvfk.RowHeadersDefaultCellStyle = dataGridViewCellStyle19;
-            dataGridViewCellStyle20.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle20.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvfk.RowsDefaultCellStyle = dataGridViewCellStyle20;
-            this.dgvfk.RowTemplate.Height = 23;
-            this.dgvfk.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvfk.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.dgvfk.SelectedIndex = -1;
-            this.dgvfk.Size = new System.Drawing.Size(390, 192);
-            this.dgvfk.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.dgvfk.Style = Sunny.UI.UIStyle.Red;
-            this.dgvfk.TabIndex = 1;
-            this.dgvfk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "付款类型";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "付款金额";
-            this.Column4.Name = "Column4";
-            // 
-            // chkcomb
-            // 
-            this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkcomb.Location = new System.Drawing.Point(295, 281);
-            this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
-            this.chkcomb.Name = "chkcomb";
-            this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.chkcomb.Size = new System.Drawing.Size(90, 23);
-            this.chkcomb.TabIndex = 51;
-            this.chkcomb.Text = "组合支付";
-            this.chkcomb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // type_name
-            // 
-            this.type_name.DataPropertyName = "type_name";
-            this.type_name.HeaderText = "账单";
-            this.type_name.Name = "type_name";
-            // 
-            // type
-            // 
-            this.type.DataPropertyName = "type";
-            this.type.HeaderText = "type";
-            this.type.Name = "type";
-            this.type.Visible = false;
-            // 
-            // charge
-            // 
-            this.charge.DataPropertyName = "charge";
-            this.charge.HeaderText = "账单金额";
-            this.charge.Name = "charge";
+            this.pay_je.DataPropertyName = "pay_je";
+            this.pay_je.HeaderText = "付款金额";
+            this.pay_je.Name = "pay_je";
             // 
             // Check
             // 
@@ -727,12 +725,12 @@
             this.uiTabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.uiPanel2.ResumeLayout(false);
-            this.uiPanel2.PerformLayout();
             this.uiTabControl2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvzd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvfk)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvzd)).EndInit();
+            this.uiPanel2.ResumeLayout(false);
+            this.uiPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -777,12 +775,12 @@
         private Sunny.UI.UITabControl uiTabControl2;
         private System.Windows.Forms.TabPage tabPage3;
         private Sunny.UI.UIDataGridView dgvfk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private Sunny.UI.UIDataGridView dgvzd;
         private Sunny.UI.UICheckBox chkcomb;
         private System.Windows.Forms.DataGridViewTextBoxColumn type_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pay_type_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pay_je;
     }
 }

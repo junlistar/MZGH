@@ -30,12 +30,15 @@ namespace MzsfApi.Controllers
         private readonly IChargeItemRepository _chargeItemRepository;
         private readonly IPatientRepository _patientRepository;
         private readonly IMzOrderRepository _mzOrderRepository;
+        private readonly IMzVisitRepository _mzVisitRepository;
         private readonly ICprChargesRepository _cprChargesRepository;
+        private readonly IUnitRepository _unitRepository;
 
         public MzsfController(IUserLoginRepository userLoginRepository, IClinicTypeRepository clinicTypeRepository,
              IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository,IChargeItemRepository chargeItemRepository,
-            IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository)
+            IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository, 
+            IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository; 
@@ -48,6 +51,8 @@ namespace MzsfApi.Controllers
             _patientRepository = patientRepository;
             _mzOrderRepository = mzOrderRepository;
             _cprChargesRepository = cprChargesRepository;
+            _unitRepository = unitRepository;
+            _mzVisitRepository = mzVisitRepository;
         }
 
 
@@ -204,7 +209,21 @@ namespace MzsfApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<IEnumerable<Patient>>(ex.Message);
             }
-            return list; 
+            return list;
+        }
+        public ResponseResult<List<MzVisit>> GetMzVisitsByDate(string patient_id, string begin, string end) {
+            Log.Information($"GetMzVisitsByDate,{patient_id},{begin},{end}");
+            var list = new List<MzVisit>();
+            try
+            {
+                list = _mzVisitRepository.GetMzVisitsByDate(patient_id, begin, end);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzVisit>>(ex.Message);
+            }
+            return list;
         }
 
         public ResponseResult<List<MzOrder>> GetMzOrdersByPatientId(string patient_id, int times)
@@ -234,6 +253,20 @@ namespace MzsfApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<CprCharges>>(ex.Message);
+            }
+            return list;
+        }
+        public ResponseResult<List<Unit>> GetUnits()
+        {
+            var list = new List<Unit>();
+            try
+            {
+                list = _unitRepository.GetUnits();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Unit>>(ex.Message);
             }
             return list;
         }

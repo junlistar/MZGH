@@ -286,145 +286,145 @@ namespace Mzsf
         public void InitDic()
         {
             log.Info("初始化数据字典：InitDic");
-             
-            ////获取用户费别信息
-            //Task<HttpResponseMessage> task = null;
-            //string json = "";
-            //string paramurl = string.Format($"/api/mzsf/GetChargeTypes");
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //获取用户费别信息
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/mzsf/GetChargeTypes");
 
-            //task.Wait();
-            //var response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            ////获取地区信息
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetDistrictCodes");
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //获取地区信息
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetDistrictCodes");
 
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-
-            ////获取职业信息
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetOccupationCodes");
-
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
-
-            ////获取身份信息
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetResponceTypes");
-
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
 
 
-            ////获取科室
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetUnits");
+            //获取职业信息
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetOccupationCodes");
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
 
-            ////获取号别
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetClinicTypes");
+            //获取身份信息
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetResponceTypes");
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
 
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetRequestTypes");
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //获取科室
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetUnits");
 
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            ////获取用户
-            //json = "";
-            //paramurl = string.Format($"/api/mzsf/GetUserDic");
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            //获取号别
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetClinicTypes");
 
-            //task.Wait();
-            //response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
- 
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetRequestTypes");
+
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
+
+            //获取用户
+            json = "";
+            paramurl = string.Format($"/api/mzsf/GetUserDic");
+
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+            response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
+
         }
 
 
