@@ -575,9 +575,9 @@ namespace Mzsf.Forms.Pages
         {
             var order = SessionHelper.cprCharges.Where(p => p.order_no == tabindex + 1);
 
-            lblOrderCharge.Text = Math.Round(order.Sum(p => p.charge_price), 2).ToString();
+            lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
             lblOrderItemCount.Text = order.Count().ToString();
-            lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.charge_price), 2).ToString();
+            lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
         }
 
         private void btnHuajia_Click(object sender, EventArgs e)
@@ -585,6 +585,7 @@ namespace Mzsf.Forms.Pages
             if (SessionHelper.PatientVM != null && lblNodata.Visible == false)
             {
                 Check check = new Check();
+                check.times = current_times;
                 check.Show();
             }
 

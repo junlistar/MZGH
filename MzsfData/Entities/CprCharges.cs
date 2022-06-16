@@ -54,8 +54,11 @@ namespace MzsfData.Entities
         public string poision_flag { get; set; }
         public string slave_flag { get; set; }
         public string ope_flag { get; set; }
-        //太多了，暂时省略
 
+        public decimal sum_total { get; set; }
+
+        //太多了，暂时省略
+        
 
 
         public string apply_unit { get; set; }
@@ -67,7 +70,14 @@ namespace MzsfData.Entities
         public string order_sn { get; set; } 
 
 
+        //退款详情增加字段
+        public string back { get; set; }
+        public string charge_name { get; set; }
+        public string bill_name { get; set; }
+        public string haoming_code { get; set; }
 
-         
+        
+
+
     }
 }

@@ -11,7 +11,8 @@ namespace MzsfData.IRepository
 
 
         List<CprCharges> GetCprCharges(string patient_id,int times,string charge_status);
-         
+        List<CprCharges> GetDrugDetails(string p_id, int ledger_sn, string tbl_flag);
+
 
         #endregion
     }

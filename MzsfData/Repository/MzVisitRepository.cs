@@ -21,7 +21,6 @@ namespace MzsfData.Repository
             para.Add("@begin", begin);
             para.Add("@end", end);
             return Select(ghsql, para);
-        }
-
+        } 
     }
 }

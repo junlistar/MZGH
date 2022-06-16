@@ -1,4 +1,5 @@
 ﻿using Data.Repository;
+using MzsfData.Repository;
 using System;
 
 namespace CoreTest
@@ -44,15 +45,20 @@ namespace CoreTest
             //GhSearchRepository resp = new GhSearchRepository();
             //var list = resp.GhSearchList("2022-05-11", "%","%", "%", "%", "%", "a", "%", "任慧","%" );//GhSearchList,||  ||end
 
-            ReportDataFastRepository rdf = new ReportDataFastRepository();
+            // ReportDataFastRepository rdf = new ReportDataFastRepository();
             //var sql = rdf.GetSqlByTag(220001);
 
-          //  var ds = rdf.GetReportDataByCode("220001","test");
-             
+            //  var ds = rdf.GetReportDataByCode("220001","test");
+
 
             //GetRequestsByDate,2022-05-30 00:00:00,2022-05-30 23:59:59 
             //CreateRequestRecord,,2022-05-30,1,1,00040
-           // rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
+            // rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
+
+            MzOrderRepository mzOrderRepository = new MzOrderRepository();
+            //http://localhost:5010//api/mzsf/pay?patient_id=000296903300&times=307&pay_string=11-86-202206161056566431&opera=00000
+            var re = mzOrderRepository.Pay("000296903300", 307, "11-86-202206161056566431", "00000");
+
             Console.WriteLine("Hello World!");
         }
     }

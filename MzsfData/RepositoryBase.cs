@@ -79,7 +79,8 @@ namespace MzsfData
 
             if (!CacheHelper.Exsits(tag.ToString()))
             {
-                string str = File.ReadAllText(System.Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
+                //string str = File.ReadAllText(System.Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
+                string str = File.ReadAllText(System.Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.UTF8);
                 CacheHelper.Add(tag.ToString(), str);
                 return str;
             }

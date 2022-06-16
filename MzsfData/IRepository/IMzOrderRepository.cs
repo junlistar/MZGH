@@ -11,9 +11,9 @@ namespace MzsfData.IRepository
 
 
         List<MzOrder> GetMzOrdersByPatientId(string patient_id,int times);
-         
 
 
+        bool Pay(string patient_id, int times, string pay_string, string opera);
 
         #endregion
     }

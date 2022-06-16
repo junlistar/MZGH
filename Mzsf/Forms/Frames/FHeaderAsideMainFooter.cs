@@ -56,6 +56,7 @@ namespace Mzsf
             //Aside.CreateChildNode(parent, 61447, 24, "划价收费", 1101);
 
             Aside.CreateChildNode(parent,  "划价收费", 61447, 24, 1101);
+            Aside.CreateChildNode(parent,  "退费", 61447, 24, 1102);
 
             //Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
             //Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
@@ -83,8 +84,16 @@ namespace Mzsf
                 {
                     page = AddPage(new ChargePage());
                 }
-                SelectPage(1101); 
-            } 
+                SelectPage(1101);
+            }
+            else if (pageIndex == 1102)
+            {
+                if (!ExistPage(1102))
+                {
+                    page = AddPage(new RefundPage());
+                }
+                SelectPage(1102);
+            }
 
             //设置激活 用户键盘事件
             Task.Run(async () =>

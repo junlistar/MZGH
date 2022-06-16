@@ -33,12 +33,14 @@ namespace MzsfApi.Controllers
         private readonly IMzVisitRepository _mzVisitRepository;
         private readonly ICprChargesRepository _cprChargesRepository;
         private readonly IUnitRepository _unitRepository;
+        private readonly IMzOrderReceiptRepository _mzOrderReceiptRepository;
+        
 
         public MzsfController(IUserLoginRepository userLoginRepository, IClinicTypeRepository clinicTypeRepository,
              IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository,IChargeItemRepository chargeItemRepository,
             IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository, 
-            IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository)
+            IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository; 
@@ -53,6 +55,7 @@ namespace MzsfApi.Controllers
             _cprChargesRepository = cprChargesRepository;
             _unitRepository = unitRepository;
             _mzVisitRepository = mzVisitRepository;
+            _mzOrderReceiptRepository = mzOrderReceiptRepository;
         }
 
 
@@ -256,8 +259,25 @@ namespace MzsfApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<CprCharges>> GetDrugDetails(string p_id, int ledger_sn, string tbl_flag)
+        {
+            Log.Information($"GetDrugDetails,{p_id},{ledger_sn},{tbl_flag}");
+            var list = new List<CprCharges>();
+            try
+            {
+                list = _cprChargesRepository.GetDrugDetails(p_id, ledger_sn, tbl_flag);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<CprCharges>>(ex.Message);
+            }
+            return list;
+        }
+         
         public ResponseResult<List<Unit>> GetUnits()
         {
+            Log.Information($"GetUnits");
             var list = new List<Unit>();
             try
             {
@@ -269,6 +289,33 @@ namespace MzsfApi.Controllers
                 return ErrorResult<List<Unit>>(ex.Message);
             }
             return list;
+        }
+
+        public ResponseResult<bool> Pay(string patient_id, int times, string pay_string, string opera)
+        {
+            Log.Information($"Pay,{patient_id},{times},{pay_string},{opera}");
+            try
+            {
+                return _mzOrderRepository.Pay(patient_id,  times,  pay_string,  opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            } 
+        }
+        public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date)
+        {
+            Log.Information($"GetReceipts,{cash_opera},{begin_date},{end_date}");
+            try
+            {
+                return _mzOrderReceiptRepository.GetReceipts(cash_opera, begin_date, end_date);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzOrderReceipt>>(ex.Message);
+            }
         }
     }
 }

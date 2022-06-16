@@ -26,6 +26,7 @@ namespace Mzsf.Forms.Pages
         //List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
 
         decimal total_charge = 0;
+        public int times = 0;
 
         public Check()
         {
@@ -36,7 +37,7 @@ namespace Mzsf.Forms.Pages
         {
             dgvzd.Init();
             dgvfk.Init();
-            total_charge = Math.Round(SessionHelper.cprCharges.Sum(p => p.charge_price), 2);
+            total_charge = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2);
 
             lblZongji.Text = total_charge.ToString();
             lblzje.Text = total_charge.ToString();
@@ -772,42 +773,39 @@ namespace Mzsf.Forms.Pages
             try
             {
 
-                //todo:交款提交
+                //todo:交款提交 
+                var d = new
+                {
+                    patient_id = SessionHelper.PatientVM.patient_id,
+                    times = times,
+                    pay_string = pay_string,
+                    opera = SessionHelper.uservm.user_mi
+                }; 
+                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                string paramurl = string.Format($"/api/mzsf/pay?patient_id={d.patient_id}&times={d.times}&pay_string={d.pay_string}&opera={d.opera}");
 
+                log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
-                
-                //var d = new
-                //{
-                //    patient_id = patientId,
-                //    record_sn = vm.record_sn,
-                //    pay_string = pay_string,
-                //    opera = SessionHelper.uservm.user_mi
-                //};
-                //var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                //string paramurl = string.Format($"/api/GuaHao/GuaHao?patient_id={patientId}&record_sn={vm.record_sn}&pay_string={pay_string}&max_sn={max_sn}&opera={SessionHelper.uservm.user_mi}");
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
 
-                //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                //string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                if (result.status == 1 && result.data)
+                {
+                    log.Info("缴费成功");
+                    UIMessageTip.ShowOk("缴费成功!", 1500);
+                    SessionHelper.do_gh_print = true;
+                    this.Close();
+                    return;
+                }
+                else
+                {
+                    log.Error(result.message);
+                    UIMessageBox.ShowError(result.message);
+                    //失败，退款处理
+                    //Refund();
 
-                //var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
-
-                //if (result.status == 1 && result.data)
-                //{
-                //    log.Info("挂号成功");
-                //    UIMessageTip.ShowOk("挂号成功!", 1500);
-                //    SessionHelper.do_gh_print = true;
-                //    this.Close();
-                //    return; 
-                //}
-                //else
-                //{
-                //    log.Error(result.message);
-                //    UIMessageBox.ShowError(result.message);
-                //    //失败，退款处理
-                //    Refund();
-
-                //}
+                }
 
 
             }

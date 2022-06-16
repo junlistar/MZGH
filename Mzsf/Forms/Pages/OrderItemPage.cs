@@ -65,6 +65,7 @@ namespace Mzsf.Forms.Pages
                 dgvOrderDetail.Init();
                 dgvOrderDetail.DataSource = dgv_data;
                 dgvOrderDetail.AutoResizeColumns();
+                dgvOrderDetail.ShowGridLine = true;
 
                 if (dgv_data.Count>0)
                 {

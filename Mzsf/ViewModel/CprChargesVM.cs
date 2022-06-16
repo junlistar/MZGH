@@ -58,6 +58,8 @@ namespace Mzsf.ViewModel
         public string poision_flag { get; set; }
         public string slave_flag { get; set; }
         public string ope_flag { get; set; }
+
+        public decimal sum_total { get; set; }
         //太多了，暂时省略
 
 
@@ -65,10 +67,16 @@ namespace Mzsf.ViewModel
         public string apply_unit { get; set; }
         public string doctor_code { get; set; }
         public string name { get; set; }
-
-
-
+         
         public string order_sn { get; set; }
+
+
+        //退款详情增加字段
+        public string back { get; set; }
+        public string charge_name { get; set; }
+        public string bill_name { get; set; }
+        public string haoming_code { get; set; }
+
 
 
         //自定义
