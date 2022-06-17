@@ -71,15 +71,6 @@
             this.lblPatientId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
-            this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cf_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.caoyao_fu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orig_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sum_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -92,6 +83,15 @@
             this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cf_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.caoyao_fu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orig_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sum_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -625,60 +625,6 @@
             this.dgvCpr.TabIndex = 7;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // chkback
-            // 
-            this.chkback.DataPropertyName = "chkback";
-            this.chkback.HeaderText = "选择";
-            this.chkback.Name = "chkback";
-            // 
-            // charge_amount
-            // 
-            this.charge_amount.DataPropertyName = "charge_amount";
-            this.charge_amount.HeaderText = "数量";
-            this.charge_amount.Name = "charge_amount";
-            // 
-            // charge_name
-            // 
-            this.charge_name.DataPropertyName = "charge_name";
-            this.charge_name.HeaderText = "项目名称";
-            this.charge_name.Name = "charge_name";
-            // 
-            // cf_amount
-            // 
-            this.cf_amount.DataPropertyName = "cf_amount";
-            this.cf_amount.HeaderText = "处方数量";
-            this.cf_amount.Name = "cf_amount";
-            // 
-            // caoyao_fu
-            // 
-            this.caoyao_fu.DataPropertyName = "caoyao_fu";
-            this.caoyao_fu.HeaderText = "付数";
-            this.caoyao_fu.Name = "caoyao_fu";
-            // 
-            // orig_price
-            // 
-            this.orig_price.DataPropertyName = "orig_price";
-            this.orig_price.HeaderText = "价格(标准)";
-            this.orig_price.Name = "orig_price";
-            // 
-            // charge_price
-            // 
-            this.charge_price.DataPropertyName = "charge_price";
-            this.charge_price.HeaderText = "价格(实收)";
-            this.charge_price.Name = "charge_price";
-            // 
-            // sum_total
-            // 
-            this.sum_total.DataPropertyName = "sum_total";
-            this.sum_total.HeaderText = "合计";
-            this.sum_total.Name = "sum_total";
-            // 
-            // back
-            // 
-            this.back.DataPropertyName = "back";
-            this.back.HeaderText = "退药数量";
-            this.back.Name = "back";
-            // 
             // receipt_no
             // 
             this.receipt_no.DataPropertyName = "receipt_no";
@@ -763,6 +709,59 @@
             this.report_date.Name = "report_date";
             this.report_date.ReadOnly = true;
             // 
+            // chkback
+            // 
+            this.chkback.HeaderText = "选择";
+            this.chkback.Name = "chkback";
+            // 
+            // charge_amount
+            // 
+            this.charge_amount.DataPropertyName = "charge_amount";
+            this.charge_amount.HeaderText = "数量";
+            this.charge_amount.Name = "charge_amount";
+            // 
+            // charge_name
+            // 
+            this.charge_name.DataPropertyName = "charge_name";
+            this.charge_name.HeaderText = "项目名称";
+            this.charge_name.Name = "charge_name";
+            // 
+            // cf_amount
+            // 
+            this.cf_amount.DataPropertyName = "cf_amount";
+            this.cf_amount.HeaderText = "处方数量";
+            this.cf_amount.Name = "cf_amount";
+            // 
+            // caoyao_fu
+            // 
+            this.caoyao_fu.DataPropertyName = "caoyao_fu";
+            this.caoyao_fu.HeaderText = "付数";
+            this.caoyao_fu.Name = "caoyao_fu";
+            // 
+            // orig_price
+            // 
+            this.orig_price.DataPropertyName = "orig_price";
+            this.orig_price.HeaderText = "价格(标准)";
+            this.orig_price.Name = "orig_price";
+            // 
+            // charge_price
+            // 
+            this.charge_price.DataPropertyName = "charge_price";
+            this.charge_price.HeaderText = "价格(实收)";
+            this.charge_price.Name = "charge_price";
+            // 
+            // sum_total
+            // 
+            this.sum_total.DataPropertyName = "sum_total";
+            this.sum_total.HeaderText = "合计";
+            this.sum_total.Name = "sum_total";
+            // 
+            // back
+            // 
+            this.back.DataPropertyName = "back";
+            this.back.HeaderText = "退药数量";
+            this.back.Name = "back";
+            // 
             // RefundPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -823,15 +822,6 @@
         private System.Windows.Forms.Label lblPatientId;
         private System.Windows.Forms.Label label3;
         private Sunny.UI.UIDataGridView dgvCpr;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn chkback;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cf_amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn caoyao_fu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orig_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge_price;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sum_total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn back;
         private System.Windows.Forms.DataGridViewTextBoxColumn receipt_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
@@ -844,5 +834,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_status;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn report_date;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn chkback;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cf_amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn caoyao_fu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orig_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge_price;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sum_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn back;
     }
 }

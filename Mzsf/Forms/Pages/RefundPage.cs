@@ -107,6 +107,8 @@ namespace Mzsf.Forms.Pages
             dgvRefund.DataSource = list;
             dgvRefund.ShowGridLine = true;
             dgvRefund.AutoResizeColumns();
+
+           
         }
 
         private void RefundPage_Load(object sender, EventArgs e)
@@ -213,6 +215,15 @@ namespace Mzsf.Forms.Pages
                     dgvCpr.Init();
                     dgvCpr.DataSource = list;
                     dgvCpr.ShowGridLine = true;
+
+                    //选择框处理
+                    for (int i = 0; i < this.dgvCpr.Rows.Count; i++)
+                    {
+                        if (dgvCpr.Rows[i].Cells["chkback"].EditedFormattedValue.ToString().ToLower() == "false")
+                        {
+                            dgvCpr.Rows[i].Cells["chkback"].Value = "True";
+                        }
+                    }
                 }
                 else
                 {
