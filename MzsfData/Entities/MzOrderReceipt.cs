@@ -23,6 +23,8 @@ namespace MzsfData.Entities
         public string cheque_type_name { get; set; }
         public string cash_name { get; set; }
         public string tableflag { get; set; }
-        public string responce_group { get; set; } 
-	} 
+        public string responce_group { get; set; }
+        public string backfee_date { get; set; }
+         
+    } 
 }

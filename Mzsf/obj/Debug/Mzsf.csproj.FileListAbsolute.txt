@@ -32,3 +32,4 @@ D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.WxPay.resources
 D:\lijun\github\Mzgh\Mzsf\bin\Debug\ThoughtWorks.QRCode.dll
 D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Wedgit.SelectOrder.resources
 D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.RefundPage.resources
+D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.RefundConfirm.resources

@@ -34,13 +34,16 @@ namespace MzsfApi.Controllers
         private readonly ICprChargesRepository _cprChargesRepository;
         private readonly IUnitRepository _unitRepository;
         private readonly IMzOrderReceiptRepository _mzOrderReceiptRepository;
+        private readonly IMzDepositRepository _mzDepositRepository;
         
+
 
         public MzsfController(IUserLoginRepository userLoginRepository, IClinicTypeRepository clinicTypeRepository,
              IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository,IChargeItemRepository chargeItemRepository,
             IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository, 
-            IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository)
+            IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository,
+            IMzDepositRepository mzDepositRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository; 
@@ -56,6 +59,7 @@ namespace MzsfApi.Controllers
             _unitRepository = unitRepository;
             _mzVisitRepository = mzVisitRepository;
             _mzOrderReceiptRepository = mzOrderReceiptRepository;
+            _mzDepositRepository = mzDepositRepository;
         }
 
 
@@ -317,5 +321,48 @@ namespace MzsfApi.Controllers
                 return ErrorResult<List<MzOrderReceipt>>(ex.Message);
             }
         }
+
+        public ResponseResult<List<MzDeposit>> GetMzDepositsByPatientId(string patient_id, int ledger_sn)
+        {
+            Log.Information($"GetMzDepositsByPatientId,{patient_id},{ledger_sn}");
+            try
+            {
+                return _mzDepositRepository.GetMzDepositsByPatientId(patient_id, ledger_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzDeposit>>(ex.Message);
+            }
+
+        }
+
+        public ResponseResult<bool> BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1")
+        {
+            Log.Information($"BackFee,{opera},{pid},{ledger_sn},{receipt_sn},{receipt_no},{cheque_cash},{isall}");
+            try
+            {
+                return _mzOrderRepository.BackFee(opera,pid,ledger_sn,receipt_sn,receipt_no,cheque_cash,isall);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> CallCprCharges(string user_mi, string patient_id, int times, string status)
+        {
+            Log.Information($"CallCprCharges,{user_mi},{patient_id},{times},{status}");
+            try
+            {
+                return _cprChargesRepository.CallCprCharges(user_mi, patient_id, times, status);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        } 
     }
 }

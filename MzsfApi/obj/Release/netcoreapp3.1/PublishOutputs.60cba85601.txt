@@ -25,6 +25,8 @@ D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221016.sq
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221017.sql
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221018.sql
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221019.sql
+D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221020.sql
+D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\SQLS\221021.sql
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\MzsfApi.exe
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
 D:\lijun\github\Mzgh\MzsfApi\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json

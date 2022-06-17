@@ -48,6 +48,7 @@ namespace Mzsf.Forms.Wedgit
                     ChargePage.current_times = times;
                     ChargePage.current_doct_name = dgvOrders.Rows[e.RowIndex].Cells["doct_name"].Value.ToString();
                     ChargePage.current_unit_name = dgvOrders.Rows[e.RowIndex].Cells["unit_name"].Value.ToString(); ;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
             }
@@ -57,6 +58,14 @@ namespace Mzsf.Forms.Wedgit
                 log.Error(ex.Message);
             }
             
+        }
+
+        private void SelectOrder_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }

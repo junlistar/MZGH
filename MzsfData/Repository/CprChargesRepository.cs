@@ -40,13 +40,17 @@ namespace MzsfData.Repository
             para.Add("@tbl_flag", tbl_flag);
             return ExecQuerySP("mzsf_GetDrugDetails", para); 
         }
-
-
-        public bool Refund()
+         
+        public bool CallCprCharges(string user_mi,string patient_id, int times, string status)
         {
+            var para = new DynamicParameters();
 
+            para.Add("@user_mi", user_mi);
+            para.Add("@patient_id", patient_id);
+            para.Add("@times", times);
+            para.Add("@status", status);
+            ExecQuerySP("mzsf_CallCprCharges", para);
             return true;
-
         }
     }
 }

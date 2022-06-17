@@ -27,6 +27,7 @@ namespace Mzsf.Forms.Pages
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            ClearDataBind();
             Search();
 
         }
@@ -61,10 +62,10 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzOrderReceiptVM>>>(json);
                 if (result.status == 1)
                 {
-                    ds = result.data; 
+                    ds = result.data;
                 }
                 else
-                { 
+                {
                     log.Error(result.message);
                 }
                 BindDgvDate();
@@ -84,9 +85,28 @@ namespace Mzsf.Forms.Pages
 
         private void BindDgvDate()
         {
-            dgvRefund.Init();
-            dgvRefund.DataSource = ds;
+             dgvRefund.Init();
+
+            var list = ds.Select(p => new
+            {
+                patient_id =p.patient_id,
+                patient_name = p.patient_name,
+                p_bar_code = p.p_bar_code,
+                receipt_no = p.receipt_no,
+                receipt_sn = p.receipt_sn,
+                cash_opera = p.cash_opera,
+                cash_date = p.cash_date,
+                times = p.times,
+                //ledger_sn = p.ledger_sn,
+                charge_total = p.charge_total,
+                charge_status  = p.charge_status,
+                cheque_type_name = p.cheque_type_name,
+                cash_name = p.cash_name,
+            }).ToList();
+
+            dgvRefund.DataSource = list;
             dgvRefund.ShowGridLine = true;
+            dgvRefund.AutoResizeColumns();
         }
 
         private void RefundPage_Load(object sender, EventArgs e)
@@ -107,6 +127,24 @@ namespace Mzsf.Forms.Pages
 
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
+
+
+            ClearDataBind();
+        }
+
+        public void ClearDataBind()
+        {
+            dgvCpr.DataSource = null;
+            dgvRefund.DataSource = null;
+
+            lblPatientId.Text = "";
+            lblName.Text = "";
+            lblTimes.Text = "";
+            lblReceiptNo.Text = "";
+            lblRecriptSn.Text = "";
+            lblDateTime.Text = "";
+            lblPayType.Text = "";
+            lblCharge.Text = "";
         }
 
         private void dgvRefund_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -116,7 +154,7 @@ namespace Mzsf.Forms.Pages
 
         private void dgvRefund_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex!=-1)
+            if (e.RowIndex != -1)
             {
                 var dat = ds[e.RowIndex];
                 lblPatientId.Text = dat.patient_id;
@@ -129,13 +167,13 @@ namespace Mzsf.Forms.Pages
                 lblCharge.Text = dat.charge_total.ToString();
 
                 //处方详情数据
-                BindDrugDetails(dat.patient_id, dat.ledger_sn,dat.tableflag);
-                
+                BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
+
             }
         }
 
         private void BindDrugDetails(string p_id, int ledger_sn, string tbl_flag)
-        {  
+        {
 
             //获取数据  
             Task<HttpResponseMessage> task = null;
@@ -172,9 +210,9 @@ namespace Mzsf.Forms.Pages
                         sum_total = p.sum_total,
 
                     }).ToList();
-
+                    dgvCpr.Init();
                     dgvCpr.DataSource = list;
-
+                    dgvCpr.ShowGridLine = true;
                 }
                 else
                 {
@@ -193,7 +231,33 @@ namespace Mzsf.Forms.Pages
 
         private void btnHuajia_Click(object sender, EventArgs e)
         {
+            var index = dgvRefund.SelectedIndex;
+            if (index != -1)
+            {
+                var dat = ds[index];
 
+                if (!string.IsNullOrEmpty(dat.backfee_date))
+                {
+                    UIMessageTip.ShowWarning("该记录已经退号！");
+                    return;
+                }
+
+
+                //弹出支付详情，进行退款 
+                RefundConfirm refundConfirm = new RefundConfirm();
+                refundConfirm.total_charge = Math.Round(dat.charge_total, 2);
+                refundConfirm.patient_id = dat.patient_id;
+                refundConfirm.ledger_sn = dat.ledger_sn;
+                refundConfirm.receipt_no = dat.receipt_no;
+                refundConfirm.receipt_sn = dat.receipt_sn;
+                refundConfirm.Show();
+            }
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

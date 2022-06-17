@@ -26,6 +26,9 @@ namespace Mzsf.Forms.Pages
         public static int current_times = 0;
         public static string current_unit_name = "";
         public static string current_doct_name = "";
+        public static string current_patient_id = "";
+
+        bool is_order_lock = false;
 
 
         public ChargePage()
@@ -73,7 +76,8 @@ namespace Mzsf.Forms.Pages
                         var userInfo = result.data[0];
                         if (string.IsNullOrEmpty(userInfo.name))
                         {
-                            lblMsg.Text = "没有查询到数据";
+                            lblNodata.Text = "没有查到用户数据";
+                            lblNodata.Show();
                             return;
                         }
                         SessionHelper.PatientVM = userInfo;
@@ -81,6 +85,7 @@ namespace Mzsf.Forms.Pages
 
                         //当前最大记录次数
                         current_times = userInfo.max_times;
+                        current_patient_id = userInfo.patient_id;
 
                         BindUserInfo(userInfo);
 
@@ -89,14 +94,15 @@ namespace Mzsf.Forms.Pages
                     }
                     else
                     {
-                        lblMsg.Text = "没有查询到数据";
+                        lblNodata.Text = "没有查到用户数据";
+                        lblNodata.Show();
                     }
 
                 }
                 else
                 {
-                    lblMsg.Text = "没有查询到数据";
-                    log.Error(result.message);
+                    lblNodata.Text = "没有查到用户数据";
+                    lblNodata.Show();
                 }
 
             }
@@ -153,30 +159,33 @@ namespace Mzsf.Forms.Pages
 
                         if (result.data.Count > 1)
                         {
-                            SelectOrder selectOrder = new SelectOrder(result.data); 
-                            selectOrder.ShowDialog();
-
-                            //绑定科室 医生信息
-                            txtUnit.Text = current_unit_name;
-                            txtDoct.Text = current_doct_name;
-                            lblTimes.Text = "来访号：" + current_times;
+                            SelectOrder selectOrder = new SelectOrder(result.data);
+                            if (selectOrder.ShowDialog() == DialogResult.OK)
+                            {
+                                //绑定科室 医生信息
+                                txtUnit.Text = current_unit_name;
+                                txtDoct.Text = current_doct_name;
+                                lblTimes.Text = "来访号：" + current_times;
+                                //查询处方
+                                GetOrders(patient_id, current_times);
+                            }
                         }
-                         
-                        //查询处方
-                        GetOrders(patient_id, current_times);
+                        else
+                        {
+                            //查询处方
+                            GetOrders(patient_id, current_times);
+                        } 
 
-                        //锁定处方
-                        //LockOrder();
                     }
                     else
                     {
-                        lblMsg.Text = "没有查询到数据";
+                        lblNodata.Text = "没有处方数据";
+                        lblNodata.Show();
                     }
 
                 }
                 else
                 {
-                    lblMsg.Text = "没有查询到数据";
                     log.Error(result.message);
                 }
 
@@ -188,6 +197,53 @@ namespace Mzsf.Forms.Pages
 
             }
 
+        }
+
+        /// <summary>
+        /// 锁定处方，解锁处方
+        /// </summary>
+        /// <param name="user_mi"></param>
+        /// <param name="patient_id"></param>
+        /// <param name="times"></param>
+        /// <param name="status"></param>
+        public void LockOrder(string user_mi, string patient_id, int times, string status)
+        {
+            // CallCprCharges(string user_mi, string patient_id, int times, string status)
+             
+            Task<HttpResponseMessage> task = null;
+            string json = ""; 
+            string paramurl = string.Format($"/api/mzsf/CallCprCharges?user_mi={user_mi}&patient_id={patient_id}&times={times}&status={status}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzVisitVM>>>(json);
+                if (result.status == 1)
+                { 
+                }
+                else
+                { 
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
         }
 
         public void BindUserInfo(PatientVM userInfo)
@@ -276,10 +332,22 @@ namespace Mzsf.Forms.Pages
                 {
                     var pageCount = uiTabControl1.TabPages.Count;
 
+                    if (result.data.Count== 0)
+                    {
+                        lblNodata.Text = "没有处方数据";
+                        lblNodata.Show();
+                        return;
+                    }
+
+                    #region tabcontrol 重置
+
                     for (int i = 0; i < pageCount; i++)
                     {
                         uiTabControl1.TabPages.RemoveAt(uiTabControl1.TabPages.Count - 1);
                     }
+
+                    #endregion
+
                     //查询处方详情 
                     var charge_status = "1";
                     paramurl = string.Format($"/api/mzsf/GetCprCharges?patient_id={patient_id}&times={times}&charge_status={charge_status}");
@@ -301,6 +369,7 @@ namespace Mzsf.Forms.Pages
                         SessionHelper.cprCharges = detail_result.data;
                         if (detail_result.data.Count > 0)
                         {
+
                             for (int i = 0; i < result.data.Count; i++)
                             {
                                 uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
@@ -308,7 +377,11 @@ namespace Mzsf.Forms.Pages
                             }
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
-                            pblSum.Show();
+                            pblSum.Show(); 
+
+                            //锁定处方
+                            LockOrder(SessionHelper.uservm.user_mi, patient_id,times,"2");
+                            is_order_lock = true;
                         }
                         else
                         {
@@ -553,9 +626,11 @@ namespace Mzsf.Forms.Pages
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if (SessionHelper.PatientVM != null)
+            if (is_order_lock)
             {
-                //todo 解除锁定处方
+                //解除锁定处方
+                LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
+                is_order_lock = false;
 
             }
             this.Close();

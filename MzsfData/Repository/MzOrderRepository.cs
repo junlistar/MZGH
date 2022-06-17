@@ -37,12 +37,12 @@ namespace MzsfData.Repository
 
                 int max_ledger_sn = 0;
                 int max_item_sn = 0;
-                 
+
                 string mxa_ledger_sql = GetSqlByTag(221005);
 
                 para = new DynamicParameters();
                 para.Add("@patient_id", patient_id);
-                max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para))+1;
+                max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
 
 
                 var op_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -56,7 +56,7 @@ namespace MzsfData.Repository
 
                 var chargeList = chargesRepository.GetCprCharges(patient_id, times, "1");
 
-                if (chargeList==null || chargeList.Count==0)
+                if (chargeList == null || chargeList.Count == 0)
                 {
                     throw new Exception("该处方已经缴费");
                 }
@@ -216,11 +216,11 @@ namespace MzsfData.Repository
 
                         //9.更新detail_charge项目
                         foreach (var item in chargeList)
-                        { 
+                        {
                             if (item.order_type == "01")//诊疗
-                            { 
+                            {
                                 para = new DynamicParameters();
-                                para.Add("@ledger_sn", max_ledger_sn);
+                                para.Add("@current_ledger_sn", max_ledger_sn);
                                 para.Add("@price_data", op_date);
                                 para.Add("@price_opera", opera);
                                 para.Add("@confirm_date", op_date);
@@ -239,7 +239,7 @@ namespace MzsfData.Repository
                             else if (item.order_type == "02")//西药
                             {
                                 para = new DynamicParameters();
-                                para.Add("@ledger_sn", max_ledger_sn);
+                                para.Add("@current_ledger_sn", max_ledger_sn);
                                 para.Add("@price_data", op_date);
                                 para.Add("@price_opera", opera);
                                 para.Add("@confirm_date", op_date);
@@ -270,8 +270,8 @@ namespace MzsfData.Repository
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
-                        var chargeItemList= connection.Query<DetailChargeItem>(sql10, para, transaction);
-                          
+                        var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
+
                         foreach (var item in chargeItemList)
                         {
                             //写入
@@ -285,20 +285,21 @@ namespace MzsfData.Repository
 
                             connection.Execute(sql11, para, transaction);
                         }
-                         
+
                         //11.写入mz_receipt 
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@ledger_sn", max_ledger_sn);
-                        para.Add("@receipt_sn", current_no);
+                        para.Add("@receipt_sn", max_sn);
                         para.Add("@pay_unit", "01");
-                        para.Add("@charge_total", chargeItemList.Sum(p=>p.charge));
+                        para.Add("@charge_total", chargeItemList.Sum(p => p.charge));
                         para.Add("@charge_status", "4");
                         para.Add("@cash_date", op_date);
                         para.Add("@cash_opera", opera);
                         para.Add("@windows_no", drugwin.window_no);
+                        para.Add("@receipt_no", current_no);
                         para.Add("@mz_dept_no", "1");
-                        para.Add("@contract_code", "0100"); 
+                        para.Add("@contract_code", "0100");
 
                         connection.Execute(sql12, para, transaction);
 
@@ -332,10 +333,10 @@ namespace MzsfData.Repository
                             para.Add("@out_trade_no", out_trade_no);
 
                             connection.Execute(sql13, para, transaction);
-                             
+
 
                             item_no++;
-                        } 
+                        }
 
                         transaction.Commit();
                     }
@@ -357,6 +358,52 @@ namespace MzsfData.Repository
 
         }
 
-         
+
+        public bool BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1")
+        {
+            try
+            { 
+                var para = new DynamicParameters();
+
+                para.Add("@opera", opera);
+                para.Add("@pid", pid);
+                para.Add("@ledger_sn", ledger_sn);
+                para.Add("@receipt_sn", receipt_sn);
+                para.Add("@receipt_no", receipt_no);
+                para.Add("@cheque_cash", cheque_cash);
+                para.Add("@isall", isall);
+                ExecQuerySP("mzsf_BackFee2", para);
+
+                string sql = @"INSERT INTO mz_receipt_cancel
+         ( operator,   
+           happen_date,   
+           report_date,   
+           receipt_sn,
+           receipt_no,   
+           subsys_id,
+           mz_dept_no )  
+  VALUES ( @operator,
+            cast( convert(char(19),getdate(),121) as datetime) ,   
+           null,
+           @receipt_sn,
+           @receipt_no,   
+           @subsys_id,
+           @mz_dept_no)";
+                para = new DynamicParameters();
+                para.Add("@operator", opera);
+                para.Add("@receipt_sn", receipt_sn);
+                para.Add("@receipt_no", receipt_no); 
+                para.Add("@subsys_id", "mz");
+                para.Add("@mz_dept_no", "1");
+
+                Update(sql, para);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }

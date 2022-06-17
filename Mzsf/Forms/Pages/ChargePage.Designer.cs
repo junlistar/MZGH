@@ -34,7 +34,9 @@
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
+            this.lblNodata = new System.Windows.Forms.Label();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.txtdistrict = new Sunny.UI.UITextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblTimes = new System.Windows.Forms.Label();
@@ -52,7 +54,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtSex = new Sunny.UI.UITextBox();
             this.txtAge = new Sunny.UI.UITextBox();
-            this.lblNodata = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtName = new Sunny.UI.UITextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -74,7 +75,6 @@
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiDatePicker1 = new Sunny.UI.UIDatePicker();
-            this.label14 = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.pblSum.SuspendLayout();
@@ -96,7 +96,7 @@
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1205, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1225, 66);
             this.pnlTitle.TabIndex = 2;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -173,6 +173,17 @@
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // lblNodata
+            // 
+            this.lblNodata.AutoSize = true;
+            this.lblNodata.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.lblNodata.ForeColor = System.Drawing.Color.Red;
+            this.lblNodata.Location = new System.Drawing.Point(804, 17);
+            this.lblNodata.Name = "lblNodata";
+            this.lblNodata.Size = new System.Drawing.Size(182, 31);
+            this.lblNodata.TabIndex = 6;
+            this.lblNodata.Text = "没有查询到数据";
+            // 
             // uiGroupBox1
             // 
             this.uiGroupBox1.Controls.Add(this.label14);
@@ -209,6 +220,15 @@
             this.uiGroupBox1.Text = "患者信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(341, 73);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(42, 21);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "性别";
             // 
             // txtdistrict
             // 
@@ -409,17 +429,6 @@
             this.txtAge.TabIndex = 4;
             this.txtAge.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtAge.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // lblNodata
-            // 
-            this.lblNodata.AutoSize = true;
-            this.lblNodata.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.lblNodata.ForeColor = System.Drawing.Color.Red;
-            this.lblNodata.Location = new System.Drawing.Point(804, 17);
-            this.lblNodata.Name = "lblNodata";
-            this.lblNodata.Size = new System.Drawing.Size(182, 31);
-            this.lblNodata.TabIndex = 6;
-            this.lblNodata.Text = "没有查询到数据";
             // 
             // label4
             // 
@@ -686,15 +695,6 @@
             this.uiDatePicker1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiDatePicker1.Value = new System.DateTime(2022, 6, 14, 11, 58, 39, 701);
             this.uiDatePicker1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(341, 73);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(42, 21);
-            this.label14.TabIndex = 23;
-            this.label14.Text = "性别";
             // 
             // ChargePage
             // 

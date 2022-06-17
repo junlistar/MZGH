@@ -127,12 +127,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(635, 250);
             this.Controls.Add(this.dgvOrders);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectOrder";
             this.Text = "选择处方记录";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.SelectOrder_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelectOrder_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.ResumeLayout(false);
 

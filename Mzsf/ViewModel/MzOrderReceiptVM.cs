@@ -19,7 +19,17 @@ namespace Mzsf.ViewModel
         public int times { get; set; }
         public int ledger_sn { get; set; }
         public decimal charge_total { get; set; }
-        public string charge_status { get; set; }
+        public string charge_status { get {
+
+                if (!string.IsNullOrEmpty(backfee_date))
+                {
+                    return "退费";
+                }
+                else
+                {
+                    return "收费";
+                }
+            } }
         public int status { get; set; }
 
         public string report_date { get; set; }
@@ -28,5 +38,7 @@ namespace Mzsf.ViewModel
         public string cash_name { get; set; }
         public string tableflag { get; set; }
         public string responce_group { get; set; }
+        public string backfee_date { get; set; }
+        
     }
 }

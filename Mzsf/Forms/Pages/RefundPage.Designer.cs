@@ -53,25 +53,6 @@
             this.txtEndDate = new Sunny.UI.UIDatePicker();
             this.txtBeginDate = new Sunny.UI.UIDatePicker();
             this.dgvRefund = new Sunny.UI.UIDataGridView();
-            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableflag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.social_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.responce_group = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.lblCharge = new System.Windows.Forms.Label();
             this.lblPayType = new System.Windows.Forms.Label();
@@ -99,6 +80,18 @@
             this.charge_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sum_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -185,6 +178,7 @@
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblTitle
             // 
@@ -344,13 +338,6 @@
             this.cash_date,
             this.cash_name,
             this.cheque_type_name,
-            this.tableflag,
-            this.cheque_type,
-            this.cash_opera,
-            this.status,
-            this.social_no,
-            this.responce_group,
-            this.ledger_sn,
             this.receipt_sn,
             this.charge_status,
             this.charge_total,
@@ -390,146 +377,6 @@
             this.dgvRefund.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvRefund.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellClick);
             this.dgvRefund.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellContentClick);
-            // 
-            // receipt_no
-            // 
-            this.receipt_no.DataPropertyName = "receipt_no";
-            this.receipt_no.HeaderText = "发票号";
-            this.receipt_no.Name = "receipt_no";
-            this.receipt_no.ReadOnly = true;
-            // 
-            // patient_name
-            // 
-            this.patient_name.DataPropertyName = "patient_name";
-            this.patient_name.HeaderText = "病人姓名";
-            this.patient_name.Name = "patient_name";
-            this.patient_name.ReadOnly = true;
-            // 
-            // patient_id
-            // 
-            this.patient_id.DataPropertyName = "patient_id";
-            this.patient_id.HeaderText = "病人ID";
-            this.patient_id.Name = "patient_id";
-            this.patient_id.ReadOnly = true;
-            // 
-            // p_bar_code
-            // 
-            this.p_bar_code.DataPropertyName = "p_bar_code";
-            this.p_bar_code.HeaderText = "磁卡号";
-            this.p_bar_code.Name = "p_bar_code";
-            this.p_bar_code.ReadOnly = true;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "账页";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            // 
-            // cash_date
-            // 
-            this.cash_date.DataPropertyName = "cash_date";
-            this.cash_date.HeaderText = "收费时间";
-            this.cash_date.Name = "cash_date";
-            this.cash_date.ReadOnly = true;
-            // 
-            // cash_name
-            // 
-            this.cash_name.DataPropertyName = "cash_name";
-            this.cash_name.HeaderText = "收费员";
-            this.cash_name.Name = "cash_name";
-            this.cash_name.ReadOnly = true;
-            // 
-            // cheque_type_name
-            // 
-            this.cheque_type_name.DataPropertyName = "cheque_type_name";
-            this.cheque_type_name.HeaderText = "支付方式";
-            this.cheque_type_name.Name = "cheque_type_name";
-            this.cheque_type_name.ReadOnly = true;
-            // 
-            // tableflag
-            // 
-            this.tableflag.DataPropertyName = "tableflag";
-            this.tableflag.HeaderText = "tableflag";
-            this.tableflag.Name = "tableflag";
-            this.tableflag.ReadOnly = true;
-            this.tableflag.Visible = false;
-            // 
-            // cheque_type
-            // 
-            this.cheque_type.DataPropertyName = "cheque_type";
-            this.cheque_type.HeaderText = "cheque_type";
-            this.cheque_type.Name = "cheque_type";
-            this.cheque_type.ReadOnly = true;
-            this.cheque_type.Visible = false;
-            // 
-            // cash_opera
-            // 
-            this.cash_opera.DataPropertyName = "cash_opera";
-            this.cash_opera.HeaderText = "cash_opera";
-            this.cash_opera.Name = "cash_opera";
-            this.cash_opera.ReadOnly = true;
-            this.cash_opera.Visible = false;
-            // 
-            // status
-            // 
-            this.status.DataPropertyName = "status";
-            this.status.HeaderText = "status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
-            this.status.Visible = false;
-            // 
-            // social_no
-            // 
-            this.social_no.DataPropertyName = "social_no";
-            this.social_no.HeaderText = "social_no";
-            this.social_no.Name = "social_no";
-            this.social_no.ReadOnly = true;
-            this.social_no.Visible = false;
-            // 
-            // responce_group
-            // 
-            this.responce_group.DataPropertyName = "responce_group";
-            this.responce_group.HeaderText = "responce_group";
-            this.responce_group.Name = "responce_group";
-            this.responce_group.ReadOnly = true;
-            this.responce_group.Visible = false;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "ledger_sn";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            this.ledger_sn.Visible = false;
-            // 
-            // receipt_sn
-            // 
-            this.receipt_sn.DataPropertyName = "receipt_sn";
-            this.receipt_sn.HeaderText = "机制号";
-            this.receipt_sn.Name = "receipt_sn";
-            this.receipt_sn.ReadOnly = true;
-            // 
-            // charge_status
-            // 
-            this.charge_status.DataPropertyName = "charge_status";
-            this.charge_status.HeaderText = "状态";
-            this.charge_status.Name = "charge_status";
-            this.charge_status.ReadOnly = true;
-            // 
-            // charge_total
-            // 
-            this.charge_total.DataPropertyName = "charge_total";
-            this.charge_total.HeaderText = "总额";
-            this.charge_total.Name = "charge_total";
-            this.charge_total.ReadOnly = true;
-            // 
-            // report_date
-            // 
-            this.report_date.DataPropertyName = "report_date";
-            this.report_date.HeaderText = "结账日期";
-            this.report_date.Name = "report_date";
-            this.report_date.ReadOnly = true;
             // 
             // uiGroupBox2
             // 
@@ -832,6 +679,90 @@
             this.back.HeaderText = "退药数量";
             this.back.Name = "back";
             // 
+            // receipt_no
+            // 
+            this.receipt_no.DataPropertyName = "receipt_no";
+            this.receipt_no.HeaderText = "发票号";
+            this.receipt_no.Name = "receipt_no";
+            this.receipt_no.ReadOnly = true;
+            // 
+            // patient_name
+            // 
+            this.patient_name.DataPropertyName = "patient_name";
+            this.patient_name.HeaderText = "病人姓名";
+            this.patient_name.Name = "patient_name";
+            this.patient_name.ReadOnly = true;
+            // 
+            // patient_id
+            // 
+            this.patient_id.DataPropertyName = "patient_id";
+            this.patient_id.HeaderText = "病人ID";
+            this.patient_id.Name = "patient_id";
+            this.patient_id.ReadOnly = true;
+            // 
+            // p_bar_code
+            // 
+            this.p_bar_code.DataPropertyName = "p_bar_code";
+            this.p_bar_code.HeaderText = "磁卡号";
+            this.p_bar_code.Name = "p_bar_code";
+            this.p_bar_code.ReadOnly = true;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "账页";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
+            // 
+            // cash_date
+            // 
+            this.cash_date.DataPropertyName = "cash_date";
+            this.cash_date.HeaderText = "收费时间";
+            this.cash_date.Name = "cash_date";
+            this.cash_date.ReadOnly = true;
+            // 
+            // cash_name
+            // 
+            this.cash_name.DataPropertyName = "cash_name";
+            this.cash_name.HeaderText = "收费员";
+            this.cash_name.Name = "cash_name";
+            this.cash_name.ReadOnly = true;
+            // 
+            // cheque_type_name
+            // 
+            this.cheque_type_name.DataPropertyName = "cheque_type_name";
+            this.cheque_type_name.HeaderText = "支付方式";
+            this.cheque_type_name.Name = "cheque_type_name";
+            this.cheque_type_name.ReadOnly = true;
+            // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "机制号";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            // 
+            // charge_status
+            // 
+            this.charge_status.DataPropertyName = "charge_status";
+            this.charge_status.HeaderText = "状态";
+            this.charge_status.Name = "charge_status";
+            this.charge_status.ReadOnly = true;
+            // 
+            // charge_total
+            // 
+            this.charge_total.DataPropertyName = "charge_total";
+            this.charge_total.HeaderText = "总额";
+            this.charge_total.Name = "charge_total";
+            this.charge_total.ReadOnly = true;
+            // 
+            // report_date
+            // 
+            this.report_date.DataPropertyName = "report_date";
+            this.report_date.HeaderText = "结账日期";
+            this.report_date.Name = "report_date";
+            this.report_date.ReadOnly = true;
+            // 
             // RefundPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -892,25 +823,6 @@
         private System.Windows.Forms.Label lblPatientId;
         private System.Windows.Forms.Label label3;
         private Sunny.UI.UIDataGridView dgvCpr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receipt_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patient_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn p_bar_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn times;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cash_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cash_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_type_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tableflag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cash_opera;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn social_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn responce_group;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn receipt_sn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge_status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge_total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn report_date;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkback;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
@@ -920,5 +832,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn sum_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn back;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receipt_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patient_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn p_bar_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn times;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cash_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cash_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_type_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn receipt_sn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge_status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn report_date;
     }
 }
