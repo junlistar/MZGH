@@ -35,23 +35,25 @@ namespace MzsfApi.Controllers
         private readonly IUnitRepository _unitRepository;
         private readonly IMzOrderReceiptRepository _mzOrderReceiptRepository;
         private readonly IMzDepositRepository _mzDepositRepository;
-        
+        private readonly IOrderTypeRepository _orderTypeRepository;
+        private readonly IMzOrderItemRepository _mzOrderItemRepository;
+
 
 
         public MzsfController(IUserLoginRepository userLoginRepository, IClinicTypeRepository clinicTypeRepository,
              IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
-            IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository,IChargeItemRepository chargeItemRepository,
-            IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository, 
+            IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IChargeItemRepository chargeItemRepository,
+            IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository,
             IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository,
-            IMzDepositRepository mzDepositRepository)
+            IMzDepositRepository mzDepositRepository, IOrderTypeRepository orderTypeRepository, IMzOrderItemRepository mzOrderItemRepository)
         {
             _userLoginRepository = userLoginRepository;
-            _clinicTypeRepository = clinicTypeRepository; 
+            _clinicTypeRepository = clinicTypeRepository;
             _userDicRepository = userDicRepository;
             _chargeTypeRepository = chargeTypeRepository;
             _districtCodeRepository = districtCodeRepository;
             _occupationCodeRepository = occupationCodeRepository;
-            _responceTypeRepository = responceTypeRepository; 
+            _responceTypeRepository = responceTypeRepository;
             _chargeItemRepository = chargeItemRepository;
             _patientRepository = patientRepository;
             _mzOrderRepository = mzOrderRepository;
@@ -60,6 +62,8 @@ namespace MzsfApi.Controllers
             _mzVisitRepository = mzVisitRepository;
             _mzOrderReceiptRepository = mzOrderReceiptRepository;
             _mzDepositRepository = mzDepositRepository;
+            _orderTypeRepository = orderTypeRepository;
+            _mzOrderItemRepository = mzOrderItemRepository;
         }
 
 
@@ -218,7 +222,8 @@ namespace MzsfApi.Controllers
             }
             return list;
         }
-        public ResponseResult<List<MzVisit>> GetMzVisitsByDate(string patient_id, string begin, string end) {
+        public ResponseResult<List<MzVisit>> GetMzVisitsByDate(string patient_id, string begin, string end)
+        {
             Log.Information($"GetMzVisitsByDate,{patient_id},{begin},{end}");
             var list = new List<MzVisit>();
             try
@@ -278,7 +283,7 @@ namespace MzsfApi.Controllers
             }
             return list;
         }
-         
+
         public ResponseResult<List<Unit>> GetUnits()
         {
             Log.Information($"GetUnits");
@@ -300,13 +305,13 @@ namespace MzsfApi.Controllers
             Log.Information($"Pay,{patient_id},{times},{pay_string},{opera}");
             try
             {
-                return _mzOrderRepository.Pay(patient_id,  times,  pay_string,  opera);
+                return _mzOrderRepository.Pay(patient_id, times, pay_string, opera);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
-            } 
+            }
         }
         public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date)
         {
@@ -342,7 +347,7 @@ namespace MzsfApi.Controllers
             Log.Information($"BackFee,{opera},{pid},{ledger_sn},{receipt_sn},{receipt_no},{cheque_cash},{isall}");
             try
             {
-                return _mzOrderRepository.BackFee(opera,pid,ledger_sn,receipt_sn,receipt_no,cheque_cash,isall);
+                return _mzOrderRepository.BackFee(opera, pid, ledger_sn, receipt_sn, receipt_no, cheque_cash, isall);
             }
             catch (Exception ex)
             {
@@ -350,6 +355,20 @@ namespace MzsfApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+
+        public ResponseResult<bool> SaveOrder(string patient_id, int times, string order_string, string opera)
+        {
+            Log.Information($"SaveOrder,{patient_id},{times},{order_string},{opera}");
+            try
+            {
+                return _mzOrderRepository.SaveOrder(patient_id, times, order_string, opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }  
 
         public ResponseResult<bool> CallCprCharges(string user_mi, string patient_id, int times, string status)
         {
@@ -363,6 +382,34 @@ namespace MzsfApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        } 
+        }
+        public ResponseResult<List<OrderType>> GetOrderTypes()
+        {
+            Log.Information($"GetOrderTypes,");
+            try
+            {
+                return _orderTypeRepository.GetOrderTypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<OrderType>>(ex.Message);
+            }
+        }
+
+
+        public ResponseResult<List<MzOrderItem>> GetMzOrderItem(string order_type, string py_code)
+        {
+            Log.Information($"GetMzOrderItem,{order_type},{py_code}");
+            try
+            {
+                return _mzOrderItemRepository.GetMzOrderItem(order_type, py_code);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzOrderItem>>(ex.Message);
+            }
+        }
     }
 }

@@ -440,6 +440,8 @@ namespace Mzsf.Forms.Pages
                 //}
 
                 //MessageBox.Show("支付失败！");
+
+                return true;
             }
             catch (Exception ex)
             {

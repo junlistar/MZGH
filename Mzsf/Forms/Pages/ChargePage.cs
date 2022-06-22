@@ -40,7 +40,11 @@ namespace Mzsf.Forms.Pages
         {
             lblMsg.Text = "";
             txtCode.Focus();
-            InitUI();
+
+            this.uiTabControl1.Hide();
+            this.pblSum.Hide();
+
+            ClearUserInfo();
 
             var barcode = this.txtCode.Text.Trim();
 
@@ -129,8 +133,8 @@ namespace Mzsf.Forms.Pages
             Task<HttpResponseMessage> task = null;
             string json = "";
 
-            string begin = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
-            string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
+            string begin = txtDate.Value.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
+            string end = txtDate.Value.ToString("yyyy-MM-dd 23:59:59");
 
             string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
 
@@ -174,7 +178,7 @@ namespace Mzsf.Forms.Pages
                         {
                             //查询处方
                             GetOrders(patient_id, current_times);
-                        } 
+                        }
 
                     }
                     else
@@ -209,9 +213,9 @@ namespace Mzsf.Forms.Pages
         public void LockOrder(string user_mi, string patient_id, int times, string status)
         {
             // CallCprCharges(string user_mi, string patient_id, int times, string status)
-             
+
             Task<HttpResponseMessage> task = null;
-            string json = ""; 
+            string json = "";
             string paramurl = string.Format($"/api/mzsf/CallCprCharges?user_mi={user_mi}&patient_id={patient_id}&times={times}&status={status}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -230,10 +234,10 @@ namespace Mzsf.Forms.Pages
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzVisitVM>>>(json);
                 if (result.status == 1)
-                { 
+                {
                 }
                 else
-                { 
+                {
                     log.Error(result.message);
                 }
 
@@ -298,10 +302,10 @@ namespace Mzsf.Forms.Pages
 
         private void txtCode_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchUser();
-            }
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    SearchUser();
+            //}
         }
         /// <summary>
         /// 获取病人处方存储过程
@@ -332,7 +336,7 @@ namespace Mzsf.Forms.Pages
                 {
                     var pageCount = uiTabControl1.TabPages.Count;
 
-                    if (result.data.Count== 0)
+                    if (result.data.Count == 0)
                     {
                         lblNodata.Text = "没有处方数据";
                         lblNodata.Show();
@@ -372,15 +376,20 @@ namespace Mzsf.Forms.Pages
 
                             for (int i = 0; i < result.data.Count; i++)
                             {
-                                uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
+                                var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
+                                page.TagString = result.data[i].order_no.ToString();
+                                uiTabControl1.AddPage(page);
+                                //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
                                 uiTabControl1.TabPages[i].Text = result.data[i].title;
+
                             }
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
-                            pblSum.Show(); 
+                            pblSum.Show();
+                            uiTabControl1.ShowCloseButton = true;
 
                             //锁定处方
-                            LockOrder(SessionHelper.uservm.user_mi, patient_id,times,"2");
+                            LockOrder(SessionHelper.uservm.user_mi, patient_id, times, "2");
                             is_order_lock = true;
                         }
                         else
@@ -423,6 +432,52 @@ namespace Mzsf.Forms.Pages
             cbxChargeTypes.DataSource = SessionHelper.chargeTypes;
             cbxChargeTypes.ValueMember = "code";
             cbxChargeTypes.DisplayMember = "name";
+
+            BindOrderTypes();
+        }
+
+        public void BindOrderTypes()
+        {
+            //查询 处方类型列表
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/mzsf/GetOrderTypes");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
+                if (result.status == 1)
+                {
+                    var orderTypes = result.data;
+
+                    cbxOrderType.DataSource = orderTypes;
+                    cbxOrderType.ValueMember = "code";
+                    cbxOrderType.DisplayMember = "name";
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
         }
 
         private void InitUI()
@@ -433,8 +488,14 @@ namespace Mzsf.Forms.Pages
             lblNodata.Top = 350;
             lblNodata.Left = 300;
 
+            txtDate.Value = DateTime.Now;
+
             lblNodata.Hide();
             //txtCode.Text = "";
+            ClearUserInfo();
+        }
+        public void ClearUserInfo()
+        {
             txtName.Text = "";
             txtHicno.Text = "";
             txtAge.Text = "";
@@ -453,24 +514,46 @@ namespace Mzsf.Forms.Pages
             SessionHelper.cprCharges = null;
         }
 
+
         private void btnCika_Click(object sender, EventArgs e)
         {
 
             //更改刷卡方式按钮样式
             btnCika.FillColor = cur_color;
+            btnIDCard.FillColor = Color.LightSteelBlue;
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = Color.LightSteelBlue;
-            if (string.IsNullOrWhiteSpace(txtCode.Text))
-            {
-                txtCode.Focus();
-                return;
-            }
-            SearchUser();
+
+            ReadCika rc = new ReadCika("磁卡");
+            rc.FormClosed += Rc_FormClosed1;
+            rc.ShowDialog();
         }
 
+        private void Rc_FormClosed1(object sender, FormClosedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(SessionHelper.cardno))
+            {
+                txtCode.Text = SessionHelper.cardno;
+                SearchUser();
+            }
+        }
+
+        private void btnIDCard_Click(object sender, EventArgs e)
+        {
+            //更改刷卡方式按钮样式
+            btnCika.FillColor = Color.LightSteelBlue;
+            btnIDCard.FillColor = cur_color;
+            btnSFZ.FillColor = Color.LightSteelBlue;
+            btnYBK.FillColor = Color.LightSteelBlue;
+
+            ReadCika rc = new ReadCika("ID号");
+            rc.FormClosed += Rc_FormClosed1;
+            rc.ShowDialog();
+        }
         private void btnSFZ_Click(object sender, EventArgs e)
         {
             btnSFZ.FillColor = cur_color;
+            btnIDCard.FillColor = Color.LightSteelBlue;
             btnCika.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = Color.LightSteelBlue;
 
@@ -495,6 +578,7 @@ namespace Mzsf.Forms.Pages
 
             btnSFZ.FillColor = Color.LightSteelBlue;
             btnYBK.FillColor = cur_color;
+            btnIDCard.FillColor = Color.LightSteelBlue;
             btnCika.FillColor = Color.LightSteelBlue;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
@@ -621,6 +705,10 @@ namespace Mzsf.Forms.Pages
         {
             txtCode.Text = "";
             txtCode.Focus();
+
+
+            txtDate.Value = DateTime.Now;
+
             InitUI();
         }
 
@@ -644,11 +732,15 @@ namespace Mzsf.Forms.Pages
         private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             BindBottomChargeInfo(uiTabControl1.SelectedIndex);
+            //var page = uiTabControl1.TabPages[uiTabControl1.SelectedIndex] as OrderItemPage;
+            //var page = uiTabControl1.page(uiTabControl1.SelectedIndex).TabPage as OrderItemPage;
+
         }
 
         public void BindBottomChargeInfo(int tabindex)
         {
             var order = SessionHelper.cprCharges.Where(p => p.order_no == tabindex + 1);
+
 
             lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
             lblOrderItemCount.Text = order.Count().ToString();
@@ -669,6 +761,77 @@ namespace Mzsf.Forms.Pages
         private void uiGroupBox2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void uiSymbolButton5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 增加处方
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddOrder_Click(object sender, EventArgs e)
+        {
+            int max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
+
+            var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
+            page.TagString = (max_order_no + 1).ToString();
+            uiTabControl1.AddPage(page);
+            uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + uiTabControl1.TabCount + "：" + cbxOrderType.Text;
+            uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
+        }
+
+        /// <summary>
+        /// 保存操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            //搜集数据
+            var add_list = SessionHelper.cprCharges.Where(p => p.times == 0);
+
+            var order_list = add_list.Select(p => p.order_type).ToList();
+            var order_string = ";";//order_type-charge_code-charge_amount,order_type-charge_code-charge_amount;order_type-charge_code-charge_amount;
+            foreach (var order_type in order_list)
+            {
+                var item_list = add_list.Where(p => p.order_type == order_type);
+
+                var item_str = "";
+                foreach (var item in item_list)
+                {
+                    item_str += "," + item.order_type + "-" + item.charge_code + "-" + item.charge_amount;
+                }
+                if (item_str != "")
+                {
+                    item_str = item_str.Substring(1);
+                    order_string += ";" + item_str;
+                }
+            }
+            if (order_string != "")
+            {
+                order_string = order_string.Substring(1);
+            }
+
+
+            MessageBox.Show(order_string);
+        }
+
+        private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
+        {
+
+            var pages = uiTabControl1.GetPages<OrderItemPage>();
+
+            var page = pages[index];
+
+            // var page=  uiTabControl1.GetPage(index);
+
+            MessageBox.Show(page.TagString);
+
+            return true;
         }
     }
 }

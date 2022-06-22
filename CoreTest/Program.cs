@@ -57,7 +57,8 @@ namespace CoreTest
 
             MzOrderRepository mzOrderRepository = new MzOrderRepository();
             //http://localhost:5010//api/mzsf/pay?patient_id=000296903300&times=307&pay_string=11-86-202206161056566431&opera=00000
-            var re = mzOrderRepository.Pay("000296903300", 307, "11-86-202206161056566431", "00000");
+            //patient_id=000296903300&times=317&pay_string=12-292.8-202206201617482429&opera=00000
+            var re = mzOrderRepository.Pay("000296903300", 317, "12-292.8-202206201617482429", "00000");
 
             Console.WriteLine("Hello World!");
         }

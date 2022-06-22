@@ -154,6 +154,12 @@
     <Compile Include="Forms\Wedgit\ReadCard.Designer.cs">
       <DependentUpon>ReadCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\ReadCika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\ReadCika.Designer.cs">
+      <DependentUpon>ReadCika.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\SelectOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +174,8 @@
     <Compile Include="ViewModel\MzOrderReceiptVM.cs" />
     <Compile Include="ViewModel\MzOrderVM.cs" />
     <Compile Include="ViewModel\MzDepositVM.cs" />
+    <Compile Include="ViewModel\MzOrderItemVM.cs" />
+    <Compile Include="ViewModel\OrderTypeVM.cs" />
     <Compile Include="ViewModel\UnitVM.cs" />
     <EmbeddedResource Include="Forms\Frames\FHeaderAsideMainFooter.resx">
       <DependentUpon>FHeaderAsideMainFooter.cs</DependentUpon>
@@ -204,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\ReadCard.resx">
       <DependentUpon>ReadCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\ReadCika.resx">
+      <DependentUpon>ReadCika.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\SelectOrder.resx">
       <DependentUpon>SelectOrder.cs</DependentUpon>

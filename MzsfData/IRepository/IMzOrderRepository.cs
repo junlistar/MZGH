@@ -17,6 +17,8 @@ namespace MzsfData.IRepository
 
         bool BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1");
 
+        bool SaveOrder(string patient_id, int times, string order_string, string opera);
+
         #endregion
     }
 }

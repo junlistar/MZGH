@@ -8,7 +8,7 @@ namespace MzsfData.Entities
         public string exec_SN_lookup { get; set; }
 
         public string patient_id { get; set; }
-        public string times { get; set; }
+        public int times { get; set; }
         public string order_type { get; set; }
 
         public string order_no { get; set; }
@@ -22,7 +22,7 @@ namespace MzsfData.Entities
         public string audit_code { get; set; }
         public string exec_sn { get; set; }
         public int charge_amount { get; set; }
-        public string orig_price { get; set; }
+        public decimal orig_price { get; set; }
         public decimal charge_price { get; set; }
         public string charge_group { get; set; }
         public string caoyao_fu { get; set; }
@@ -57,8 +57,9 @@ namespace MzsfData.Entities
 
         public decimal sum_total { get; set; }
 
-        //太多了，暂时省略
-        
+        public string parent_no { get; set; }
+        // 省略部分
+
 
 
         public string apply_unit { get; set; }

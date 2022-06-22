@@ -34,8 +34,9 @@ namespace Mzsf.Forms.Wedgit
                 visit_date = p.visit_date,
                 doct_name = p.doct_name,
                 unit_name=  p.unit_name
-            }).ToList();
+            }).OrderBy(o=>o.times).ToList();
             dgvOrders.ShowGridLine = true;
+            dgvOrders.AutoResizeColumns();
         }
 
         private void dgvOrders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

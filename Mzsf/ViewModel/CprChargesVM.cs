@@ -8,15 +8,31 @@ namespace Mzsf.ViewModel
 {
     public class CprChargesVM
     {
+        public string code { get; set; }
         public string charge_code_lookup { get; set; }
+        public string charge_code_lookup_str
+        {
+            get
+            {
+                if (parent_no!="0")
+                {
+                   // return "　　" + charge_code_lookup;
+                    return "　└  " + charge_code_lookup;
+                }
+                else
+                {
+                    return charge_code_lookup;
+                }
+            }
+        }
         public string exec_SN_lookup { get; set; }
 
         public string patient_id { get; set; }
-        public string times { get; set; }
+        public int times { get; set; }
         public string order_type { get; set; }
 
         public int order_no { get; set; }
-        public string item_no { get; set; }
+        public int item_no { get; set; }
         public string ledger_sn { get; set; }
         public string charge_code { get; set; }
         public string serial_no { get; set; }
@@ -60,6 +76,7 @@ namespace Mzsf.ViewModel
         public string ope_flag { get; set; }
 
         public decimal sum_total { get; set; }
+        public string parent_no { get; set; }
         //太多了，暂时省略
 
 
@@ -67,7 +84,7 @@ namespace Mzsf.ViewModel
         public string apply_unit { get; set; }
         public string doctor_code { get; set; }
         public string name { get; set; }
-         
+
         public string order_sn { get; set; }
 
 
@@ -80,10 +97,13 @@ namespace Mzsf.ViewModel
 
 
         //自定义
-        public decimal total_price { get
+        public decimal total_price
+        {
+            get
             {
                 return charge_amount * charge_price;
-            } }
+            }
+        }
 
     }
 

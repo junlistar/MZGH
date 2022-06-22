@@ -29,14 +29,17 @@ namespace Mzsf.Forms.Wedgit
             this.Text = "读" + _cardName;
             SessionHelper.cardno = ""; SessionHelper.CardReader = null;
             lblmsg.ForeColor = Color.Red;
-            timer1.Interval = 2000;
-            timer1.Start();
+            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         { 
             if (_cardName == "身份证")
             {
+                timer1.Interval = 2000;
+                timer1.Start();
+
+
                 dto = ReadIdCardHelper.Reader();
                 if (dto.Data != null)
                 {

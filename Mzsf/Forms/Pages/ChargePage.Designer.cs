@@ -30,7 +30,6 @@
         {
             this.pnlTitle = new Sunny.UI.UIPanel();
             this.btnHuajia = new Sunny.UI.UISymbolButton();
-            this.btnSearch = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
@@ -60,33 +59,40 @@
             this.txtCode = new Sunny.UI.UITextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMsg = new System.Windows.Forms.Label();
-            this.uiLabel3 = new Sunny.UI.UILabel();
             this.btnYBK = new Sunny.UI.UIButton();
             this.btnSFZ = new Sunny.UI.UIButton();
             this.btnCika = new Sunny.UI.UIButton();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
+            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.txtDate = new Sunny.UI.UIDatePicker();
+            this.uiLine1 = new Sunny.UI.UILine();
+            this.btnIDCard = new Sunny.UI.UIButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbxOrderType = new Sunny.UI.UIComboBox();
+            this.btnAddOrder = new Sunny.UI.UISymbolButton();
+            this.btnDeleteOrder = new Sunny.UI.UISymbolButton();
+            this.btnAddItem = new Sunny.UI.UISymbolButton();
+            this.btnDeleteItem = new Sunny.UI.UISymbolButton();
+            this.pblSum = new Sunny.UI.UIPanel();
             this.label8 = new System.Windows.Forms.Label();
+            this.lblOrderItemCount = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lblOrderCharge = new System.Windows.Forms.Label();
             this.lblOrderTotalCharge = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.lblOrderItemCount = new System.Windows.Forms.Label();
-            this.pblSum = new Sunny.UI.UIPanel();
-            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiDatePicker1 = new Sunny.UI.UIDatePicker();
+            this.btnSave = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
-            this.pblSum.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
+            this.pblSum.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitle
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.btnSave);
             this.pnlTitle.Controls.Add(this.btnHuajia);
-            this.pnlTitle.Controls.Add(this.btnSearch);
             this.pnlTitle.Controls.Add(this.uiSymbolButton1);
             this.pnlTitle.Controls.Add(this.btnExit);
             this.pnlTitle.Controls.Add(this.lblTitle);
@@ -106,7 +112,7 @@
             // 
             this.btnHuajia.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHuajia.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnHuajia.Location = new System.Drawing.Point(428, 17);
+            this.btnHuajia.Location = new System.Drawing.Point(371, 17);
             this.btnHuajia.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHuajia.Name = "btnHuajia";
             this.btnHuajia.Size = new System.Drawing.Size(100, 35);
@@ -117,26 +123,11 @@
             this.btnHuajia.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnHuajia.Click += new System.EventHandler(this.btnHuajia_Click);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSearch.Location = new System.Drawing.Point(216, 17);
-            this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 35);
-            this.btnSearch.Symbol = 61442;
-            this.btnSearch.TabIndex = 11;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // uiSymbolButton1
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton1.Location = new System.Drawing.Point(322, 17);
+            this.uiSymbolButton1.Location = new System.Drawing.Point(265, 17);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 35);
@@ -151,7 +142,7 @@
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(536, 17);
+            this.btnExit.Location = new System.Drawing.Point(590, 17);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(107, 35);
@@ -178,7 +169,7 @@
             this.lblNodata.AutoSize = true;
             this.lblNodata.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblNodata.ForeColor = System.Drawing.Color.Red;
-            this.lblNodata.Location = new System.Drawing.Point(804, 17);
+            this.lblNodata.Location = new System.Drawing.Point(720, 21);
             this.lblNodata.Name = "lblNodata";
             this.lblNodata.Size = new System.Drawing.Size(182, 31);
             this.lblNodata.TabIndex = 6;
@@ -210,7 +201,7 @@
             this.uiGroupBox1.Controls.Add(this.txtCode);
             this.uiGroupBox1.Controls.Add(this.label2);
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(273, 90);
+            this.uiGroupBox1.Location = new System.Drawing.Point(303, 90);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
@@ -495,25 +486,14 @@
             this.lblMsg.Size = new System.Drawing.Size(0, 21);
             this.lblMsg.TabIndex = 19;
             // 
-            // uiLabel3
-            // 
-            this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(26, 74);
-            this.uiLabel3.Name = "uiLabel3";
-            this.uiLabel3.Size = new System.Drawing.Size(45, 23);
-            this.uiLabel3.TabIndex = 18;
-            this.uiLabel3.Text = "刷卡";
-            this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // btnYBK
             // 
             this.btnYBK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(73, 150);
+            this.btnYBK.Location = new System.Drawing.Point(145, 133);
             this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBK.Name = "btnYBK";
-            this.btnYBK.Size = new System.Drawing.Size(151, 31);
+            this.btnYBK.Size = new System.Drawing.Size(120, 31);
             this.btnYBK.TabIndex = 17;
             this.btnYBK.Text = "医保卡";
             this.btnYBK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -524,10 +504,10 @@
             // 
             this.btnSFZ.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Location = new System.Drawing.Point(74, 110);
+            this.btnSFZ.Location = new System.Drawing.Point(19, 133);
             this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSFZ.Name = "btnSFZ";
-            this.btnSFZ.Size = new System.Drawing.Size(150, 31);
+            this.btnSFZ.Size = new System.Drawing.Size(120, 31);
             this.btnSFZ.TabIndex = 15;
             this.btnSFZ.Text = "身份证";
             this.btnSFZ.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -538,10 +518,10 @@
             // 
             this.btnCika.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Location = new System.Drawing.Point(74, 68);
+            this.btnCika.Location = new System.Drawing.Point(19, 90);
             this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCika.Name = "btnCika";
-            this.btnCika.Size = new System.Drawing.Size(150, 31);
+            this.btnCika.Size = new System.Drawing.Size(120, 31);
             this.btnCika.TabIndex = 16;
             this.btnCika.Text = "磁卡";
             this.btnCika.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -556,16 +536,185 @@
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
-            this.uiTabControl1.Location = new System.Drawing.Point(12, 295);
+            this.uiTabControl1.Location = new System.Drawing.Point(12, 342);
             this.uiTabControl1.MainPage = "";
             this.uiTabControl1.Name = "uiTabControl1";
             this.uiTabControl1.SelectedIndex = 0;
-            this.uiTabControl1.Size = new System.Drawing.Size(1226, 331);
+            this.uiTabControl1.Size = new System.Drawing.Size(1226, 283);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.TabIndex = 4;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiTabControl1.BeforeRemoveTabPage += new Sunny.UI.UITabControl.OnBeforeRemoveTabPage(this.uiTabControl1_BeforeRemoveTabPage);
             this.uiTabControl1.SelectedIndexChanged += new System.EventHandler(this.uiTabControl1_SelectedIndexChanged);
+            // 
+            // uiGroupBox2
+            // 
+            this.uiGroupBox2.Controls.Add(this.btnIDCard);
+            this.uiGroupBox2.Controls.Add(this.txtDate);
+            this.uiGroupBox2.Controls.Add(this.btnCika);
+            this.uiGroupBox2.Controls.Add(this.btnSFZ);
+            this.uiGroupBox2.Controls.Add(this.btnYBK);
+            this.uiGroupBox2.Controls.Add(this.lblMsg);
+            this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiGroupBox2.Location = new System.Drawing.Point(13, 90);
+            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox2.Name = "uiGroupBox2";
+            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox2.Size = new System.Drawing.Size(282, 197);
+            this.uiGroupBox2.TabIndex = 14;
+            this.uiGroupBox2.Text = "刷卡查询";
+            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiGroupBox2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiGroupBox2.Click += new System.EventHandler(this.uiGroupBox2_Click);
+            // 
+            // txtDate
+            // 
+            this.txtDate.FillColor = System.Drawing.Color.White;
+            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate.Location = new System.Drawing.Point(19, 40);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate.MaxLength = 10;
+            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.Size = new System.Drawing.Size(120, 29);
+            this.txtDate.SymbolDropDown = 61555;
+            this.txtDate.SymbolNormal = 61555;
+            this.txtDate.TabIndex = 20;
+            this.txtDate.Text = "2022-06-14";
+            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate.Value = new System.DateTime(2022, 6, 14, 11, 58, 39, 701);
+            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLine1
+            // 
+            this.uiLine1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine1.Location = new System.Drawing.Point(12, 295);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(1226, 10);
+            this.uiLine1.TabIndex = 15;
+            this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnIDCard
+            // 
+            this.btnIDCard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnIDCard.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnIDCard.Location = new System.Drawing.Point(145, 90);
+            this.btnIDCard.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnIDCard.Name = "btnIDCard";
+            this.btnIDCard.Size = new System.Drawing.Size(120, 31);
+            this.btnIDCard.TabIndex = 22;
+            this.btnIDCard.Text = "ID卡";
+            this.btnIDCard.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnIDCard.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnIDCard.Click += new System.EventHandler(this.btnIDCard_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 308);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(74, 21);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "处方类型";
+            // 
+            // cbxOrderType
+            // 
+            this.cbxOrderType.DataSource = null;
+            this.cbxOrderType.FillColor = System.Drawing.Color.White;
+            this.cbxOrderType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxOrderType.Location = new System.Drawing.Point(99, 305);
+            this.cbxOrderType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxOrderType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxOrderType.Name = "cbxOrderType";
+            this.cbxOrderType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxOrderType.Size = new System.Drawing.Size(150, 29);
+            this.cbxOrderType.TabIndex = 25;
+            this.cbxOrderType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxOrderType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnAddOrder
+            // 
+            this.btnAddOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddOrder.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAddOrder.Location = new System.Drawing.Point(264, 305);
+            this.btnAddOrder.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAddOrder.Name = "btnAddOrder";
+            this.btnAddOrder.Size = new System.Drawing.Size(100, 29);
+            this.btnAddOrder.Symbol = 362139;
+            this.btnAddOrder.TabIndex = 26;
+            this.btnAddOrder.Text = "增处方";
+            this.btnAddOrder.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnAddOrder.Click += new System.EventHandler(this.btnAddOrder_Click);
+            // 
+            // btnDeleteOrder
+            // 
+            this.btnDeleteOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteOrder.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDeleteOrder.Location = new System.Drawing.Point(371, 305);
+            this.btnDeleteOrder.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnDeleteOrder.Name = "btnDeleteOrder";
+            this.btnDeleteOrder.Size = new System.Drawing.Size(100, 29);
+            this.btnDeleteOrder.Symbol = 362139;
+            this.btnDeleteOrder.TabIndex = 27;
+            this.btnDeleteOrder.Text = "删处方";
+            this.btnDeleteOrder.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDeleteOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddItem.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAddItem.Location = new System.Drawing.Point(477, 305);
+            this.btnAddItem.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(100, 29);
+            this.btnAddItem.Symbol = 362139;
+            this.btnAddItem.TabIndex = 28;
+            this.btnAddItem.Text = "增细目";
+            this.btnAddItem.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAddItem.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteItem.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDeleteItem.Location = new System.Drawing.Point(583, 305);
+            this.btnDeleteItem.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(100, 29);
+            this.btnDeleteItem.Symbol = 362139;
+            this.btnDeleteItem.TabIndex = 29;
+            this.btnDeleteItem.Text = "删细目";
+            this.btnDeleteItem.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDeleteItem.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnDeleteItem.Click += new System.EventHandler(this.uiSymbolButton5_Click);
+            // 
+            // pblSum
+            // 
+            this.pblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pblSum.Controls.Add(this.label8);
+            this.pblSum.Controls.Add(this.lblOrderItemCount);
+            this.pblSum.Controls.Add(this.label13);
+            this.pblSum.Controls.Add(this.label16);
+            this.pblSum.Controls.Add(this.lblOrderCharge);
+            this.pblSum.Controls.Add(this.lblOrderTotalCharge);
+            this.pblSum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pblSum.Location = new System.Drawing.Point(12, 633);
+            this.pblSum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pblSum.MinimumSize = new System.Drawing.Size(1, 1);
+            this.pblSum.Name = "pblSum";
+            this.pblSum.Size = new System.Drawing.Size(643, 48);
+            this.pblSum.TabIndex = 30;
+            this.pblSum.Text = null;
+            this.pblSum.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pblSum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label8
             // 
@@ -576,6 +725,16 @@
             this.label8.TabIndex = 7;
             this.label8.Text = "处方金额(元)：";
             // 
+            // lblOrderItemCount
+            // 
+            this.lblOrderItemCount.AutoSize = true;
+            this.lblOrderItemCount.ForeColor = System.Drawing.Color.Red;
+            this.lblOrderItemCount.Location = new System.Drawing.Point(320, 3);
+            this.lblOrderItemCount.Name = "lblOrderItemCount";
+            this.lblOrderItemCount.Size = new System.Drawing.Size(19, 21);
+            this.lblOrderItemCount.TabIndex = 12;
+            this.lblOrderItemCount.Text = "0";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -584,6 +743,15 @@
             this.label13.Size = new System.Drawing.Size(84, 21);
             this.label13.TabIndex = 8;
             this.label13.Text = "总计(元)：";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(224, 3);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(90, 21);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "细目合计：";
             // 
             // lblOrderCharge
             // 
@@ -605,103 +773,34 @@
             this.lblOrderTotalCharge.TabIndex = 10;
             this.lblOrderTotalCharge.Text = "111110.00";
             // 
-            // label16
+            // btnSave
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(224, 3);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(90, 21);
-            this.label16.TabIndex = 11;
-            this.label16.Text = "细目合计：";
-            // 
-            // lblOrderItemCount
-            // 
-            this.lblOrderItemCount.AutoSize = true;
-            this.lblOrderItemCount.ForeColor = System.Drawing.Color.Red;
-            this.lblOrderItemCount.Location = new System.Drawing.Point(320, 3);
-            this.lblOrderItemCount.Name = "lblOrderItemCount";
-            this.lblOrderItemCount.Size = new System.Drawing.Size(19, 21);
-            this.lblOrderItemCount.TabIndex = 12;
-            this.lblOrderItemCount.Text = "0";
-            // 
-            // pblSum
-            // 
-            this.pblSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pblSum.Controls.Add(this.label8);
-            this.pblSum.Controls.Add(this.lblOrderItemCount);
-            this.pblSum.Controls.Add(this.label13);
-            this.pblSum.Controls.Add(this.label16);
-            this.pblSum.Controls.Add(this.lblOrderCharge);
-            this.pblSum.Controls.Add(this.lblOrderTotalCharge);
-            this.pblSum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pblSum.Location = new System.Drawing.Point(13, 634);
-            this.pblSum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pblSum.MinimumSize = new System.Drawing.Size(1, 1);
-            this.pblSum.Name = "pblSum";
-            this.pblSum.Size = new System.Drawing.Size(643, 48);
-            this.pblSum.TabIndex = 13;
-            this.pblSum.Text = null;
-            this.pblSum.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.pblSum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiGroupBox2
-            // 
-            this.uiGroupBox2.Controls.Add(this.uiLabel1);
-            this.uiGroupBox2.Controls.Add(this.uiDatePicker1);
-            this.uiGroupBox2.Controls.Add(this.btnCika);
-            this.uiGroupBox2.Controls.Add(this.btnSFZ);
-            this.uiGroupBox2.Controls.Add(this.btnYBK);
-            this.uiGroupBox2.Controls.Add(this.lblMsg);
-            this.uiGroupBox2.Controls.Add(this.uiLabel3);
-            this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox2.Location = new System.Drawing.Point(13, 90);
-            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox2.Name = "uiGroupBox2";
-            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(252, 198);
-            this.uiGroupBox2.TabIndex = 14;
-            this.uiGroupBox2.Text = "查询";
-            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiGroupBox2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.uiGroupBox2.Click += new System.EventHandler(this.uiGroupBox2_Click);
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(27, 31);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(45, 23);
-            this.uiLabel1.TabIndex = 21;
-            this.uiLabel1.Text = "日期";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiDatePicker1
-            // 
-            this.uiDatePicker1.FillColor = System.Drawing.Color.White;
-            this.uiDatePicker1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDatePicker1.Location = new System.Drawing.Point(74, 31);
-            this.uiDatePicker1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDatePicker1.MaxLength = 10;
-            this.uiDatePicker1.MinimumSize = new System.Drawing.Size(63, 0);
-            this.uiDatePicker1.Name = "uiDatePicker1";
-            this.uiDatePicker1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.uiDatePicker1.Size = new System.Drawing.Size(150, 29);
-            this.uiDatePicker1.SymbolDropDown = 61555;
-            this.uiDatePicker1.SymbolNormal = 61555;
-            this.uiDatePicker1.TabIndex = 20;
-            this.uiDatePicker1.Text = "2022-06-14";
-            this.uiDatePicker1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiDatePicker1.Value = new System.DateTime(2022, 6, 14, 11, 58, 39, 701);
-            this.uiDatePicker1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(477, 17);
+            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(107, 35);
+            this.btnSave.Symbol = 61639;
+            this.btnSave.TabIndex = 13;
+            this.btnSave.Text = "保存";
+            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1259, 686);
-            this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.pblSum);
+            this.Controls.Add(this.btnDeleteItem);
+            this.Controls.Add(this.btnAddItem);
+            this.Controls.Add(this.btnDeleteOrder);
+            this.Controls.Add(this.btnAddOrder);
+            this.Controls.Add(this.cbxOrderType);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.uiLine1);
+            this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiTabControl1);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.pnlTitle);
@@ -713,18 +812,18 @@
             this.pnlTitle.PerformLayout();
             this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox1.PerformLayout();
-            this.pblSum.ResumeLayout(false);
-            this.pblSum.PerformLayout();
             this.uiGroupBox2.ResumeLayout(false);
             this.uiGroupBox2.PerformLayout();
+            this.pblSum.ResumeLayout(false);
+            this.pblSum.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private Sunny.UI.UIPanel pnlTitle;
-        private Sunny.UI.UISymbolButton btnSearch;
         private Sunny.UI.UISymbolButton uiSymbolButton1;
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UILabel lblTitle;
@@ -749,7 +848,6 @@
         private System.Windows.Forms.Label label11;
         private Sunny.UI.UITextBox txtHicno;
         private System.Windows.Forms.Label label12;
-        private Sunny.UI.UILabel uiLabel3;
         private Sunny.UI.UIButton btnYBK;
         private Sunny.UI.UIButton btnSFZ;
         private Sunny.UI.UIButton btnCika;
@@ -758,17 +856,25 @@
         private Sunny.UI.UITextBox txtdistrict;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UITabControl uiTabControl1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label lblOrderCharge;
-        private System.Windows.Forms.Label lblOrderTotalCharge;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label lblOrderItemCount;
-        private Sunny.UI.UIPanel pblSum;
         private Sunny.UI.UISymbolButton btnHuajia;
         private Sunny.UI.UIGroupBox uiGroupBox2;
-        private Sunny.UI.UILabel uiLabel1;
-        private Sunny.UI.UIDatePicker uiDatePicker1;
+        private Sunny.UI.UIDatePicker txtDate;
         private System.Windows.Forms.Label label14;
+        private Sunny.UI.UILine uiLine1;
+        private Sunny.UI.UIButton btnIDCard;
+        private System.Windows.Forms.Label label5;
+        private Sunny.UI.UIComboBox cbxOrderType;
+        private Sunny.UI.UISymbolButton btnAddOrder;
+        private Sunny.UI.UISymbolButton btnDeleteOrder;
+        private Sunny.UI.UISymbolButton btnAddItem;
+        private Sunny.UI.UISymbolButton btnDeleteItem;
+        private Sunny.UI.UIPanel pblSum;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblOrderItemCount;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label lblOrderCharge;
+        private System.Windows.Forms.Label lblOrderTotalCharge;
+        private Sunny.UI.UISymbolButton btnSave;
     }
 }

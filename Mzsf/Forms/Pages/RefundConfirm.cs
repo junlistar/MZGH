@@ -101,8 +101,7 @@ namespace Mzsf.Forms.Pages
         {
 
             try
-            {
-                //BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1")
+            { 
                 //todo:退款提交 
                 var d = new
                 {

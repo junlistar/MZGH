@@ -375,7 +375,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                             //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
-                        var ds = DbHelper.GetDataSet(sql, "DataTable2");
+                        var ds = DbHelper.GetDataSet(sql, "DataTable");
 
 
                         //var dt = ds.Tables[0].Copy();
