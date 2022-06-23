@@ -754,6 +754,23 @@ namespace Mzsf.Forms.Pages
                 return;
             }
 
+            //搜集数据 处方
+            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+   .Select(g => g.First())
+   .ToList();
+
+            var order_no_str = "";//order_type-charge_code-charge_amount,order_type-charge_code-charge_amount;order_type-charge_code-charge_amount;
+            foreach (var order in order_list)
+            {
+                order_no_str += "-" + order.order_no;
+
+            }
+            if (order_no_str != "")
+            {
+                order_no_str = order_no_str.Substring(1);
+            }
+
+            //支付数据
             string pay_string = "";
             foreach (var item in paylist)
             {
@@ -781,6 +798,7 @@ namespace Mzsf.Forms.Pages
                     patient_id = SessionHelper.PatientVM.patient_id,
                     times = times,
                     pay_string = pay_string,
+                    order_no_str = order_no_str,
                     opera = SessionHelper.uservm.user_mi
                 }; 
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);

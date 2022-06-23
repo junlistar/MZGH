@@ -31,13 +31,13 @@
 			 INNER JOIN view_mz_detail_charge n ON a.patient_id = n.patient_id AND a.ledger_sn = n.ledger_sn
 		     LEFT JOIN zd_responce_type l ON n.response_type = l.code 
 		WHERE a.cash_opera LIKE @cash_opera AND
-			  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date AND
-			  a.ledger_sn > 0
+			  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date
+			  --AND a.ledger_sn > 0
 			  -- AND dbo.Is_mzReceiptReturn(a.patient_id, a.ledger_sn, @tflag) = 0
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 
 				a.receipt_sn, a.cash_opera, a.cash_date, a.charge_total, a.charge_status, 
 				a.ledger_sn, a.charge_status, a.report_date, m.[name], l.responce_group,a.backfee_date
-		ORDER BY receipt_no
+		ORDER BY receipt_no,cash_date  
 	END ELSE
 	BEGIN
 		SELECT 
@@ -66,11 +66,11 @@
 			 INNER JOIN mz_detail_charge n ON a.patient_id = n.patient_id AND a.ledger_sn = n.ledger_sn
 		     LEFT JOIN zd_responce_type l ON n.response_type = l.code 
 		WHERE a.cash_opera LIKE @cash_opera AND
-	  		  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date AND
-	 			a.ledger_sn > 0
+	  		  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date
+	 			-- AND a.ledger_sn > 0  
 				-- AND dbo.Is_mzReceiptReturn(a.patient_id, a.ledger_sn, @tflag) = 0
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 
 				a.receipt_sn, a.cash_opera, a.cash_date, a.charge_total, a.charge_status, 
 				a.ledger_sn, a.charge_status, a.report_date, m.[name], l.responce_group,a.backfee_date
-	  ORDER BY receipt_no        
+	  ORDER BY receipt_no,cash_date       
 	END

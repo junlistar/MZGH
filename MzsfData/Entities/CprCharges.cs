@@ -13,7 +13,7 @@ namespace MzsfData.Entities
 
         public string order_no { get; set; }
         public string item_no { get; set; }
-        public string ledger_sn { get; set; }
+        public int ledger_sn { get; set; }
         public string charge_code { get; set; }
         public string serial_no { get; set; }
         public string group_no { get; set; }
@@ -58,10 +58,15 @@ namespace MzsfData.Entities
         public decimal sum_total { get; set; }
 
         public string parent_no { get; set; }
+        public string order_properties { get; set; }
+        public string skin_test_flag { get; set; }
+        public string change_drug_code { get; set; }
         // 省略部分
 
+        
 
-
+        public int charge_no { get; set; }
+        public string mz_dept_no { get; set; }
         public string apply_unit { get; set; }
         public string doctor_code { get; set; }
         public string name { get; set; }

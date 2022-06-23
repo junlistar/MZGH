@@ -339,6 +339,7 @@
             // 
             // code
             // 
+            this.code.DataPropertyName = "code";
             this.code.HeaderText = "code";
             this.code.Name = "code";
             this.code.Visible = false;

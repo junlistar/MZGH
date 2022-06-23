@@ -43,8 +43,7 @@ namespace Mzsf.Forms.Pages
 
 
             // GetMzDepositsByPatientId(string patient_id, int ledger_sn)
-
-            //查询近两日就诊处方记录，如果有多条，要今天选择 
+             
             Task<HttpResponseMessage> task = null;
             string json = "";
 
@@ -143,6 +142,17 @@ namespace Mzsf.Forms.Pages
                 log.Error(ex.ToString());
 
             }
+        }
+
+        private void btnBufenTuikuan_Click(object sender, EventArgs e)
+        {
+            RefundApart refundApart = new RefundApart();
+            refundApart.patient_id = patient_id;
+            refundApart.ledger_sn = ledger_sn;
+            refundApart.receipt_no = receipt_no;
+            refundApart.receipt_sn = receipt_sn;
+            refundApart.ShowDialog();
+            this.Close();
         }
     }
 }

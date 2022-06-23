@@ -45,8 +45,8 @@ namespace MzsfData.Repository
                     {
                         //查询挂号信息exec sp_executesql N'exec mzcpr_GetVisitInfo  @P1, @P2',N'@P1 varchar(20),@P2 int','000296903300',319
                         para = new DynamicParameters();
-                        para.Add("@P1", patient_id);
-                        para.Add("@P2", times);
+                        para.Add("@patient_id", patient_id);
+                        para.Add("@times", times);
                         var visit_info = connection.QueryFirstOrDefault<MzVisit>("mzcpr_GetVisitInfo", para, transaction, null, CommandType.StoredProcedure);
 
                         //                    string sql = @"INSERT INTO mz_detail_charge 
@@ -90,8 +90,9 @@ namespace MzsfData.Repository
                                 //类型，名称，数量
                                 var obj = item.Split("-");
                                 string order_type = obj[0];
-                                string charge_code = obj[1];
-                                string charge_amount = obj[2];
+                                string order_no = obj[1];
+                                string charge_code = obj[2];
+                                string charge_amount = obj[3];
 
                                 //其他数据根据charge_code查询获取
 
@@ -107,7 +108,7 @@ namespace MzsfData.Repository
                                 {
                                     //诊疗
                                     order_item_sql = @"SELECT code,  
-        case when  serial =''**'' then  name  else  name end name,
+        case when  serial ='**' then  name  else  name end name,
         specification,
         orig_price, 
         manufactory,
@@ -142,12 +143,12 @@ ORDER BY len(py_code) ,d_code, name,amount1";
                                 {
                                     //西药
                                     order_item_sql = @"SELECT code,  
-        name=case when  serial =''**'' then  name
+        name=case when  serial ='**' then  name
   else  
-name +''(''+specification+'')'' +'' ''+isnull(abname,'''') 
+name +'('+specification+')' +' '+isnull(abname,'') 
 end,
         py_code,
-        d_code
+        d_code,
         cast(orig_price as decimal(38,6)) orig_price,
         stock_amount,
         specification, 
@@ -184,7 +185,7 @@ ORDER BY d_code,py_code, name,serial DESC";
                                 {
                                     //草药
                                     order_item_sql = @"SELECT code,  
-        name=case when  serial =''**'' then  name  else  name end,
+        name=case when  serial ='**' then  name  else  name end,
         py_code,
         d_code,
         specification,
@@ -241,7 +242,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                     para.Add("@patient_id", patient_id);
                                     para.Add("@times", times);
                                     para.Add("@order_type", order_type);
-                                    para.Add("@order_no", i + 1);//todo:要加上已有的处方数量
+                                    para.Add("@order_no", order_no);//todo:要加上已有的处方数量
                                     para.Add("@item_no", j + 1);
                                     para.Add("@ledger_sn", 0);
                                     para.Add("@charge_code", charge_code);
@@ -289,7 +290,7 @@ happen_date, enter_date, enter_opera, windows_no, confirm_flag, supply_code, dos
 separate_flag, supprice_flag, poision_flag, charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn) 
 Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @charge_code, @serial_no, @group_no, 
 @charge_status, @bill_code, @audit_code, @exec_sn, @charge_amount, @orig_price, @charge_group, @caoyao_fu, @back_amount,
-@happen_date, @enter_date, @enter_opera, @windows_no, @confirm_flag, @supply_code, @dosage, @persist_days, @dosage_unit, @comment, @fit_type, @self_flag,
+@happen_date, @enter_date, @enter_opera, @windows_no, @confirm_flag, @supply_code, null, @persist_days, null, @comment, @fit_type, @self_flag,
 @separate_flag, @supprice_flag, @poision_flag, @charge_no, @mz_dept_no, @apply_unit, @doctor_code, @name, @parent_no, @order_properties, @skin_test_flag, @change_drug_code, @order_sn) ";
 
                                     para = new DynamicParameters();
@@ -302,7 +303,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                     para.Add("@patient_id", patient_id);
                                     para.Add("@times", times);
                                     para.Add("@order_type", order_type);
-                                    para.Add("@order_no", i + 1);//todo:要加上已有的处方数量
+                                    para.Add("@order_no", order_no);//todo:要加上已有的处方数量
                                     para.Add("@item_no", j + 1);
                                     para.Add("@ledger_sn", 0);
                                     para.Add("@charge_code", charge_code);
@@ -325,9 +326,9 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                     para.Add("@windows_no", drugwin.window_no);
                                     para.Add("@confirm_flag", 1);
                                     para.Add("@supply_code", "");
-                                    para.Add("@dosage", order_item.dosage);
+                                    //para.Add("@dosage", order_item.dosage);
                                     para.Add("@persist_days", 1);
-                                    para.Add("@dosage_unit", "");
+                                    //para.Add("@dosage_unit", "");
                                     para.Add("@comment", "");
                                     para.Add("@fit_type", "0");
                                     para.Add("@self_flag", order_item.self_flag);
@@ -353,6 +354,12 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
 
                             }
                         }
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", patient_id);
+                        para.Add("@times", times);
+
+                        connection.Execute("mzcpr_UpdatePatientInfo", para, transaction, null, CommandType.StoredProcedure);
+
 
                         transaction.Commit();
                     }
@@ -368,7 +375,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
 
@@ -378,7 +385,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
         /// <param name="patient_id"></param>
         /// <param name="times"></param>
         /// <returns></returns>
-        public bool Pay(string patient_id, int times, string pay_string, string opera)
+        public bool Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
         {
 
             try
@@ -387,6 +394,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
 
                 int max_ledger_sn = 0;
                 int max_item_sn = 0;
+                string order_no_param = "";
 
                 string mxa_ledger_sql = GetSqlByTag(221005);
 
@@ -409,6 +417,15 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 if (chargeList == null || chargeList.Count == 0)
                 {
                     throw new Exception("该处方已经缴费");
+                }
+
+                if (!string.IsNullOrWhiteSpace(order_no_str))
+                {
+                    var order_no_arr = order_no_str.Split("-");
+
+                    chargeList = chargeList.Where(p => order_no_arr.Contains(p.order_no)).ToList();
+
+                    order_no_param = string.Join(',', order_no_arr);
                 }
 
                 //门诊机制发票号
@@ -542,7 +559,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 para.Add("@P1", item.charge_amount);
                                 para.Add("@P2", item.caoyao_fu);
                                 para.Add("@P3", item.charge_code);
-                                para.Add("@P4", "01"); //@serial ??
+                                para.Add("@P4", item.serial_no); //@serial ??
                                 para.Add("@P5", drugwin.group_no);
                                 connection.Execute(sql6, para, transaction);
                             }
@@ -656,6 +673,9 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
+                        para.Add("@order_no_str", order_no_param);
+
+
                         var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
 
                         //根据收费项目类型分组写入
@@ -799,6 +819,312 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
             {
                 throw ex;
             }
+
+        }
+
+        public bool BackFeePart(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string refund_item_str)
+        {
+            try
+            {
+                DynamicParameters para = new DynamicParameters();
+                var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                //门诊发票号 根据当前用户获取  
+                GhOpReceiptRepository opreceiptResp = new GhOpReceiptRepository();
+                //p1: usermi,p2:1
+                var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
+
+                //更新发票号
+                string sql3 = GetSqlByTag(221008);
+
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                {
+                    IDbTransaction transaction = connection.BeginTransaction();
+
+                    try
+                    {
+                        para = new DynamicParameters();
+
+                        para.Add("@opera", opera);
+                        para.Add("@pid", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        para.Add("@receipt_sn", receipt_sn);
+                        para.Add("@receipt_no", receipt_no);
+                        para.Add("@cheque_cash", cheque_cash);
+                        para.Add("@isall", '0');
+                        connection.Execute("mzsf_BackFee2", para, transaction, null, CommandType.StoredProcedure);
+
+
+                        string user_sql = @"select * from mz_patient_mi where patient_id=@patient_id";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        var patient = connection.Query<Patient>(user_sql, para, transaction).FirstOrDefault();
+                        int max_item_sn = patient.max_item_sn + 1;
+
+                        string mxa_ledger_sql = GetSqlByTag(221005);
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        int max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
+
+                        string update_user_sql = @"update mz_patient_mi set max_ledger_sn = @max_ledger_sn, max_item_sn = @max_item_sn where patient_id = @patient_id";
+                        para = new DynamicParameters();
+                        para.Add("@max_ledger_sn", max_ledger_sn);
+                        para.Add("@max_item_sn", max_item_sn);
+                        para.Add("@patient_id", pid);
+                        connection.Execute(update_user_sql, para, transaction);
+
+
+
+                        //门诊机制发票号
+                        int max_sn = 0;
+
+                        string sql1 = GetSqlByTag(221006);
+
+                        //1.获取机制号
+                        max_sn = Convert.ToInt32(connection.ExecuteScalar(sql1, null, transaction));
+
+                        //2.获取发票号 
+                        var current_no = "";
+                        var start_no = "";
+                        var end_no = "";
+                        DateTime happen_date = DateTime.MaxValue;
+                        var step_length = 1;
+                        var deleted_flag = "0";
+                        var report_flag = "0";
+                        var receipt_type = "0";
+                        if (dtreceipt != null && dtreceipt.Count > 0)
+                        {
+                            current_no = dtreceipt[0].current_no.ToString();
+                            start_no = dtreceipt[0].start_no.ToString();
+                            end_no = dtreceipt[0].end_no.ToString();
+                            happen_date = dtreceipt[0].happen_date;
+
+                            step_length = dtreceipt[0].step_length;
+                            deleted_flag = dtreceipt[0].deleted_flag;
+                            report_flag = dtreceipt[0].report_flag;
+                            receipt_type = dtreceipt[0].receipt_type;
+                        }
+                        //3.更新发票号
+                        para = new DynamicParameters();
+                        para.Add("@current_no", int.Parse(current_no) + step_length);
+                        para.Add("@operator", opera);
+                        para.Add("@happen_date", happen_date);
+                        connection.Execute(sql3, para, transaction);
+
+
+                        //查询当前处方的数据
+
+                        //1.mz_detail_charge
+
+                        string sql_1 = @"SELECT* FROM mz_detail_charge WHERE patient_id = @patient_id AND ledger_sn =@ledger_sn";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        var detail_charge_list = connection.Query<CprCharges>(sql_1, para, transaction).ToList();
+
+                        //2.mz_deposit
+                        string sql_2 = @"SELECT* FROM mz_deposit WHERE patient_id = @patient_id AND ledger_sn = @ledger_sn";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        var deposit_list = connection.Query<MzDeposit>(sql_2, para, transaction).ToList();
+
+                        //3.mz_receipt
+                        string sql_3 = @"SELECT* FROM mz_receipt WHERE patient_id = @patient_id  AND ledger_sn =@ledger_sn AND receipt_sn = @receipt_sn";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        para.Add("@receipt_sn", receipt_sn);
+                        var receipt_list = connection.Query<MzReceipt>(sql_3, para, transaction).ToList();
+
+                        //4.mz_receipt_charge
+                        string sql_4 = @"SELECT* FROM mz_receipt_charge WHERE patient_id = @patient_id  AND ledger_sn =@ledger_sn AND receipt_sn = @receipt_sn";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        para.Add("@receipt_sn", receipt_sn);
+                        var receipt_charge_list = connection.Query<MzReceiptCharge>(sql_4, para, transaction).ToList();
+
+
+                        // mz_receipt_charge receipt_sn 不是统一的？？
+
+                        //todo： 排除掉未勾选的项目进行写入操作
+
+                        //写入没有退款的数据 leder_sn +1
+                        string insert_1 = @"INSERT INTO mz_detail_charge ( patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, 
+serial_no, group_no, charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_price, charge_group, caoyao_fu, back_amount,
+happen_date, price_data, price_opera, enter_date, enter_opera, windows_no, confirm_date, dosage, 
+persist_days, fit_type, infant_flag, self_flag, poision_flag, ope_flag, emergency_flag, charge_no, mz_dept_no, 
+apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, sum_total, change_drug_code, response_type, charge_type, order_sn) 
+Values (@patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @charge_code, 
+@serial_no, @group_no, @charge_status, @bill_code, @audit_code, @exec_sn, @charge_amount, @orig_price, @charge_price, @charge_group, @caoyao_fu, @back_amount,
+@happen_date, @price_data, @price_opera, @enter_date, @enter_opera, @windows_no, @confirm_date,@dosage, 
+@persist_days, @fit_type, @infant_flag, @self_flag, @poision_flag, @ope_flag, @emergency_flag, @charge_no, @mz_dept_no, 
+@apply_unit, @doctor_code, @name, @parent_no, @order_properties, @skin_test_flag, @sum_total, @change_drug_code, @response_type, @charge_type, @order_sn) ";
+
+                        foreach (var item in detail_charge_list)
+                        {
+                            item.ledger_sn = max_item_sn;
+                            item.confirm_date = dt_now;
+                            item.enter_date = dt_now;
+                            item.happen_date = dt_now;
+                            item.price_date = dt_now;
+
+
+                            //写入 
+                            para = new DynamicParameters();
+
+                            para.Add("@charge_price", item.charge_price);
+                            para.Add("@patient_id", item.patient_id);
+                            para.Add("@times", item.times);
+                            para.Add("@order_type", item.order_type);
+                            para.Add("@order_no", item.order_no);
+                            para.Add("@item_no", item.item_no);
+                            para.Add("@ledger_sn", item.ledger_sn);
+                            para.Add("@charge_code", item.charge_code);
+                            para.Add("@serial_no", item.serial_no);
+                            para.Add("@group_no", item.group_no);
+
+                            para.Add("@charge_status", item.charge_status);
+                            para.Add("@bill_code", item.bill_code);
+                            para.Add("@audit_code", item.audit_code);
+                            para.Add("@exec_sn", item.exec_sn);
+                            para.Add("@charge_amount", item.charge_amount);
+                            para.Add("@orig_price", item.orig_price);
+                            para.Add("@charge_group", item.charge_group);
+                            para.Add("@caoyao_fu", item.caoyao_fu);
+                            para.Add("@back_amount", item.back_amount);
+
+                            para.Add("@happen_date", item.haoming_code);
+                            para.Add("@enter_date", item.enter_date);
+                            para.Add("@enter_opera", opera);
+                            para.Add("@windows_no", item.windows_no);
+                            para.Add("@confirm_flag", item.confirm_flag);
+                            para.Add("@supply_code", item.supply_code);
+                            para.Add("@dosage", item.dosage);
+                            para.Add("@persist_days", item.persist_days);
+                            para.Add("@dosage_unit", item.dosage_unit);
+                            para.Add("@comment", item.comment);
+                            para.Add("@fit_type", item.fit_type);
+                            para.Add("@self_flag", item.self_flag);
+                            para.Add("@separate_flag", item.seperate_flag);
+                            para.Add("@supprice_flag", item.supprice_flag);
+                            para.Add("@poision_flag", item.poision_flag);
+
+
+                            para.Add("@charge_no", item.charge_no);  //todo 查询charge_no
+                            para.Add("@mz_dept_no", item.mz_dept_no);
+                            para.Add("@apply_unit", item.apply_unit);
+                            para.Add("@doctor_code", item.doctor_code);
+                            para.Add("@name", item.name);
+                            para.Add("@parent_no", item.parent_no);
+                            para.Add("@order_properties", item.order_properties);
+                            para.Add("@skin_test_flag", item.skin_test_flag);
+                            para.Add("@change_drug_code", item.change_drug_code);
+                            para.Add("@order_sn", item.order_sn);//todo 查询 order_sn
+
+
+                            connection.Execute(insert_1, para, transaction);
+
+                        }
+
+                        string insert_2 = @"INSERT INTO mz_deposit 
+( patient_id, item_no, ledger_sn, cheque_type, cheque_no, charge, depo_status, windows_no, dcount_date, dcount_id, mz_dept_no)
+Values ( @patient_id, @item_no, @ledger_sn, @cheque_type, @cheque_no, @charge, @depo_status, @windows_no, @dcount_date, @dcount_id, @mz_dept_no) ";
+                        foreach (var item in deposit_list)
+                        {
+
+                            item.ledger_sn = max_item_sn;
+                            item.dcount_date =Convert.ToDateTime(dt_now);
+                            var charge = deposit_list.Sum(p => p.charge);//todo：要减去退费的金额
+
+                            para = new DynamicParameters();
+                            para.Add("@patient_id", item.patient_id);
+                            para.Add("@item_no", item.item_no);
+                            para.Add("@ledger_sn", item.ledger_sn);
+                            para.Add("@cheque_type", 1); ///这里的支付类型 是否是默认现金 ，金额
+                            para.Add("@cheque_no", item.cheque_no);
+                            para.Add("@charge", charge);
+                            para.Add("@depo_status", item.depo_status);
+                            para.Add("@windows_no", item.windows_no);
+                            para.Add("@dcount_date", item.dcount_date);
+                            para.Add("@dcount_id", item.dcount_id);
+                            para.Add("@mz_dept_no", item.mz_dept_no);
+                            para.Add("@out_trade_no", "");
+                             
+                            connection.Execute(insert_2, para, transaction);
+
+                            break;//执行一次就行了
+
+                        }
+
+
+                        string insert_3 = @"INSERT INTO mz_receipt ( patient_id, ledger_sn, receipt_sn, pay_unit, charge_total,
+charge_status, cash_date, cash_opera, windows_no, receipt_no, mz_dept_no, contract_code, backfee_date)  
+Values ( @patient_id, @ledger_sn, @receipt_sn, @pay_unit, @charge_total,
+@charge_status, @cash_date, @cash_opera, @windows_no, @receipt_no, @mz_dept_no, @contract_code, @backfee_date) ";
+
+                        foreach (var item in receipt_list)
+                        {
+                            item.ledger_sn = max_item_sn;
+                            item.backfee_date = dt_now;
+                            item.cash_date = Convert.ToDateTime(dt_now);
+
+                            para = new DynamicParameters();
+                            para.Add("@patient_id", item.patient_id);
+                            para.Add("@ledger_sn", item.ledger_sn);
+                            para.Add("@receipt_sn", item.receipt_sn);
+                            para.Add("@pay_unit", item.pay_unit);
+                            para.Add("@charge_total", item.charge_total);
+                            para.Add("@charge_status", item.charge_status);
+                            para.Add("@cash_date", item.cash_date);
+                            para.Add("@cash_opera", opera);
+                            para.Add("@windows_no", item.windows_no);
+                            para.Add("@receipt_no", item.receipt_no);
+                            para.Add("@mz_dept_no", item.mz_dept_no);
+                            para.Add("@contract_code", item.contract_code);
+                            para.Add("@backfee_date", dt_now);
+
+                            connection.Execute(insert_3, para, transaction);
+                        }
+
+                        //这个sql有问题 缺少字段bill_code
+                        string insert_4 = @"INSERT INTO mz_receipt_charge ( patient_id, ledger_sn, receipt_sn, pay_unit)  Values ( '000296903300', 319, 2581049, '01') ";
+
+                        foreach (var item in receipt_charge_list)
+                        {
+                            item.ledger_sn = max_item_sn;
+                             
+                            //写入
+                            para = new DynamicParameters();
+                            para.Add("@patient_id", item.patient_id);
+                            para.Add("@ledger_sn", item.ledger_sn);
+                            para.Add("@receipt_sn", current_no);
+                            para.Add("@bill_code", item.bill_code);
+                            para.Add("@charge", item.charge);
+                            para.Add("@pay_unit", item.pay_unit);//现金
+
+                            connection.Execute(insert_4, para, transaction);
+                        }
+
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
 
         }
     }

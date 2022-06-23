@@ -124,6 +124,12 @@
     <Compile Include="Forms\Pages\OrderItemPage.Designer.cs">
       <DependentUpon>OrderItemPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\RefundApart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\RefundApart.Designer.cs">
+      <DependentUpon>RefundApart.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\RefundConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\OrderItemPage.resx">
       <DependentUpon>OrderItemPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\RefundApart.resx">
+      <DependentUpon>RefundApart.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\RefundConfirm.resx">
       <DependentUpon>RefundConfirm.cs</DependentUpon>

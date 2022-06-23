@@ -21,7 +21,15 @@ namespace Mzsf.ViewModel
         public decimal charge_total { get; set; }
         public string charge_status { get {
 
-                if (!string.IsNullOrEmpty(backfee_date))
+                //if (!string.IsNullOrEmpty(backfee_date))
+                //{
+                //    return "退费";
+                //}
+                //else
+                //{
+                //    return "收费";
+                //}
+                if (charge_total<0)
                 {
                     return "退费";
                 }

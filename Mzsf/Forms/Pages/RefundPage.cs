@@ -85,11 +85,11 @@ namespace Mzsf.Forms.Pages
 
         private void BindDgvDate()
         {
-             dgvRefund.Init();
+            dgvRefund.Init();
 
             var list = ds.Select(p => new
             {
-                patient_id =p.patient_id,
+                patient_id = p.patient_id,
                 patient_name = p.patient_name,
                 p_bar_code = p.p_bar_code,
                 receipt_no = p.receipt_no,
@@ -97,9 +97,9 @@ namespace Mzsf.Forms.Pages
                 cash_opera = p.cash_opera,
                 cash_date = p.cash_date,
                 times = p.times,
-                //ledger_sn = p.ledger_sn,
+                ledger_sn = p.ledger_sn,
                 charge_total = p.charge_total,
-                charge_status  = p.charge_status,
+                charge_status = p.charge_status,
                 cheque_type_name = p.cheque_type_name,
                 cash_name = p.cash_name,
             }).ToList();
@@ -108,7 +108,7 @@ namespace Mzsf.Forms.Pages
             dgvRefund.ShowGridLine = true;
             dgvRefund.AutoResizeColumns();
 
-           
+
         }
 
         private void RefundPage_Load(object sender, EventArgs e)
@@ -124,8 +124,6 @@ namespace Mzsf.Forms.Pages
         private void InitUI()
         {
             lblNodata.Visible = false;
-            txtFilterValue.Text = "";
-            cbxType.Text = "";
 
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
@@ -136,7 +134,6 @@ namespace Mzsf.Forms.Pages
 
         public void ClearDataBind()
         {
-            dgvCpr.DataSource = null;
             dgvRefund.DataSource = null;
 
             lblPatientId.Text = "";
@@ -169,76 +166,11 @@ namespace Mzsf.Forms.Pages
                 lblCharge.Text = dat.charge_total.ToString();
 
                 //处方详情数据
-                BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
+                //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
 
             }
         }
 
-        private void BindDrugDetails(string p_id, int ledger_sn, string tbl_flag)
-        {
-
-            //获取数据  
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/mzsf/GetDrugDetails?p_id={p_id}&ledger_sn={ledger_sn}&tbl_flag={tbl_flag}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
-            {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<CprChargesVM>>>(json);
-                if (result.status == 1)
-                {
-                    var list = result.data.Select(p => new
-                    {
-                        chkback = 1,
-                        back = p.back,
-                        charge_amount = p.charge_amount,
-                        charge_name = p.charge_name,
-                        cf_amount = p.charge_amount,
-                        caoyao_fu = p.caoyao_fu,
-                        orig_price = p.orig_price,
-                        charge_price = p.charge_price,
-                        sum_total = p.sum_total,
-
-                    }).ToList();
-                    dgvCpr.Init();
-                    dgvCpr.DataSource = list;
-                    dgvCpr.ShowGridLine = true;
-
-                    //选择框处理
-                    for (int i = 0; i < this.dgvCpr.Rows.Count; i++)
-                    {
-                        if (dgvCpr.Rows[i].Cells["chkback"].EditedFormattedValue.ToString().ToLower() == "false")
-                        {
-                            dgvCpr.Rows[i].Cells["chkback"].Value = "True";
-                        }
-                    }
-                }
-                else
-                {
-
-                    log.Error(result.message);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
-            }
-        }
 
         private void btnHuajia_Click(object sender, EventArgs e)
         {
@@ -247,7 +179,7 @@ namespace Mzsf.Forms.Pages
             {
                 var dat = ds[index];
 
-                if (!string.IsNullOrEmpty(dat.backfee_date))
+                if (!string.IsNullOrEmpty(dat.backfee_date) || dat.charge_total < 0)
                 {
                     UIMessageTip.ShowWarning("该记录已经退号！");
                     return;
@@ -261,14 +193,35 @@ namespace Mzsf.Forms.Pages
                 refundConfirm.ledger_sn = dat.ledger_sn;
                 refundConfirm.receipt_no = dat.receipt_no;
                 refundConfirm.receipt_sn = dat.receipt_sn;
-                refundConfirm.Show();
-            }
 
+                //关闭 刷新
+                refundConfirm.FormClosed += RefundConfirm_FormClosed;
+
+                refundConfirm.ShowDialog(); 
+            } 
+        }
+
+        private void RefundConfirm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ClearDataBind();
+            Search();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvRefund_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var charge_total = Convert.ToDecimal(dgvRefund.Rows[e.RowIndex].Cells["charge_total"].Value);
+                if (charge_total < 0)
+                {
+                    dgvRefund.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

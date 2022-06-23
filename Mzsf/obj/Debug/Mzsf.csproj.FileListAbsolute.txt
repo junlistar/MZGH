@@ -34,3 +34,4 @@ D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Wedgit.SelectOrder.resources
 D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.RefundPage.resources
 D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.RefundConfirm.resources
 D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Wedgit.ReadCika.resources
+D:\lijun\github\Mzgh\Mzsf\obj\Debug\Mzsf.Forms.Pages.RefundApart.resources

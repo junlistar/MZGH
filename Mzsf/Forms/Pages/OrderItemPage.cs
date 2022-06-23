@@ -73,10 +73,16 @@ namespace Mzsf.Forms.Pages
         {
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
+                var kucun = dgv.Rows[e.RowIndex].Cells["amount"].Value.ToString();
+                if (kucun=="0" && _order_type!="01")
+                {
+                    MessageBox.Show("库存不足");return;
+                }
+
                 dgv.Hide();
 
                 //MessageBox.Show(dgv.Rows[e.RowIndex].Cells["name"].Value.ToString());
-
+                
                 txtName.TextChanged -= txtName_TextChanged;
 
                 txtName.Text = dgv.Rows[e.RowIndex].Cells["name"].Value.ToString();
@@ -84,7 +90,7 @@ namespace Mzsf.Forms.Pages
                 var exec_unit = dgv.Rows[e.RowIndex].Cells["exec_unit"].Value.ToString();
                 var code = dgv.Rows[e.RowIndex].Cells["code"].Value.ToString();
                 txtCharge.Text = dgv.Rows[e.RowIndex].Cells["price"].Value.ToString();
-                txtAmount.Text = "1";//dgv.Rows[e.RowIndex].Cells["amount"].Value.ToString();
+                txtAmount.Text = "1";
 
                 int index = dgvOrderDetail.SelectedIndex;
 
@@ -125,7 +131,8 @@ namespace Mzsf.Forms.Pages
                     comment = q.comment,
                     dosage = q.dosage,
                     freq_code = q.freq_code,
-                    parent_no = q.parent_no
+                    parent_no = q.parent_no,
+                    code=q.charge_code
                 }).ToList();
                 dgvOrderDetail.Init();
                 dgvOrderDetail.DataSource = dgv_data;
@@ -157,7 +164,7 @@ namespace Mzsf.Forms.Pages
             if (row.Cells["charge_code_lookup"].Value != null)
             {
 
-                txtName.Text = row.Cells["charge_code_lookup"].Value.ToString();
+                txtName.Text = row.Cells["charge_code_lookup_str"].Value.ToString();
                 txtUnit.Text = row.Cells["exec_SN_lookup"].Value.ToString();
                 txtCharge.Text = row.Cells["charge_price"].Value.ToString();
                 txtAmount.Text = row.Cells["charge_amount"].Value.ToString();
@@ -212,7 +219,7 @@ namespace Mzsf.Forms.Pages
                     exec_unit_str = p.exec_unit_str,
                     exec_unit = p.exec_unit,
                     price = p.orig_price,
-                    amount = p.stock_amount,
+                    amount = p.stock_amount2,
                 }).ToList();
                 dgv.Init();
                 dgv.Columns["code"].HeaderText = "编号";
@@ -286,6 +293,8 @@ namespace Mzsf.Forms.Pages
 
                 dgvOrderDetail.SelectedRows[0].Cells["charge_amount"].Value = txtAmount.Text;
 
+                //更新金额（当前金额和总金额）
+                CalcPrice();
 
                 if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
                 {
@@ -301,8 +310,6 @@ namespace Mzsf.Forms.Pages
 
                 txtName.Focus();
 
-                //更新金额（当前金额和总金额）
-                CalcPrice();
             }
         }
 
@@ -321,62 +328,59 @@ namespace Mzsf.Forms.Pages
 
             var item_list = SessionHelper.cprCharges.Where(p => p.order_no == _order_no).ToList();
 
-            if (item_list.Count == 0)
+            var index = dgvOrderDetail.SelectedIndex;
+
+            var obj = dgvOrderDetail.Rows[index].Cells["charge_code_lookup_str"].Value;
+            if (obj == null)
             {
-                //不存在 
-                for (int i = 0; i < row_count; i++)
-                {
-                    CprChargesVM vm = new CprChargesVM();
+                return;
+            }
 
-                    var obj = dgvOrderDetail.Rows[i].Cells["charge_code_lookup_str"].Value;
-                    if (obj == null)
-                    {
-                        continue;
-                    }
+            var _charge_code_lookup = dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value.ToString();
+            var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
+            var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
+            var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
+              
+            CprChargesVM vm = new CprChargesVM();
+            vm.charge_code_lookup = _charge_code_lookup;
+            vm.charge_price = _charge_price;
+            vm.charge_amount = _charge_amount;
+            vm.item_no = (index + 1);
+            vm.order_no = _order_no;
 
-                    var _charge_code_lookup = dgvOrderDetail.Rows[i].Cells["charge_code_lookup"].Value.ToString();
-                    var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[i].Cells["charge_price"].Value);
-                    var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[i].Cells["charge_amount"].Value);
-                    var _code = dgvOrderDetail.Rows[i].Cells["code"].Value.ToString();
+            vm.charge_code = _code;
+            vm.order_type = _order_type;
 
-                    vm.charge_code_lookup = _charge_code_lookup;
-                    vm.charge_price = _charge_price;
-                    vm.charge_amount = _charge_amount;
-                    vm.item_no = (i + 1);
-                    vm.order_no = _order_no;
+            if (item_list.Count == 0)
+            { 
+                page_total += _charge_price * _charge_amount;
+                page_items++;
+                item_amount += _charge_amount;
 
-                    vm.code = _code;
+                SessionHelper.cprCharges.Add(vm);
 
-                    page_total += _charge_price * _charge_amount;
-                    page_items++;
-                    item_amount += _charge_amount;
-
-                    SessionHelper.cprCharges.Add(vm);
-
-                }
             }
             else
             {
-                var index = dgvOrderDetail.SelectedIndex;
-                var obj = dgvOrderDetail.Rows[index].Cells["charge_code_lookup_str"].Value;
-                if (obj == null)
+                //存在处方，判断是否存在项目
+                var item = item_list.Where(p => p.charge_code == _code).FirstOrDefault();
+                if (item!=null&& index < dgvOrderDetail.Rows.Count)
                 {
-                    return;
-                }
-
-                var _charge_code_lookup = dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value.ToString();
-                var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
-                var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
-                var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
-
-                //vm.charge_code_lookup = _charge_code_lookup;
-                for (int i = 0; i < item_list.Count; i++)
-                {
-                    if (item_list[i].code == _code)
+                    //更新数量
+                    for (int i = 0; i < item_list.Count; i++)
                     {
-                        item_list[i].charge_amount = _charge_amount;
-                        break;
+                        if (item_list[i].charge_code == _code)
+                        {
+                            item_list[i].charge_amount = _charge_amount;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+
+                    //新增一条项目
+                    SessionHelper.cprCharges.Add(vm);
                 }
             }
         }

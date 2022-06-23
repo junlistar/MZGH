@@ -16,6 +16,7 @@ namespace Mzsf.ViewModel
         public string orig_price { get; set; }
         public string manufactory { get; set; }
         public int stock_amount { get; set; }
+        public int stock_amount2 { get; set; }
         public string serial { get; set; }
         public string dosage { get; set; }
         public string bill_item_code { get; set; }

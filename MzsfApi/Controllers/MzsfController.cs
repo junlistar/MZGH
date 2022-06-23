@@ -300,12 +300,12 @@ namespace MzsfApi.Controllers
             return list;
         }
 
-        public ResponseResult<bool> Pay(string patient_id, int times, string pay_string, string opera)
+        public ResponseResult<bool> Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
         {
-            Log.Information($"Pay,{patient_id},{times},{pay_string},{opera}");
+            Log.Information($"Pay,{patient_id},{times},{pay_string},{order_no_str},{opera}");
             try
             {
-                return _mzOrderRepository.Pay(patient_id, times, pay_string, opera);
+                return _mzOrderRepository.Pay(patient_id, times, pay_string, order_no_str, opera);
             }
             catch (Exception ex)
             {
@@ -348,6 +348,19 @@ namespace MzsfApi.Controllers
             try
             {
                 return _mzOrderRepository.BackFee(opera, pid, ledger_sn, receipt_sn, receipt_no, cheque_cash, isall);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> BackFeePart(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string refund_item_str)
+        {
+            Log.Information($"BackFeePart,{opera},{pid},{ledger_sn},{receipt_sn},{receipt_no},{cheque_cash},{refund_item_str}");
+            try
+            {
+                return _mzOrderRepository.BackFeePart(opera, pid, ledger_sn, receipt_sn, receipt_no, cheque_cash, refund_item_str);
             }
             catch (Exception ex)
             {

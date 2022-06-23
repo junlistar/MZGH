@@ -190,6 +190,7 @@ namespace Mzsf.Forms.Pages
                 }
                 else
                 {
+                    MessageBox.Show(result.message);
                     log.Error(result.message);
                 }
 
@@ -232,7 +233,7 @@ namespace Mzsf.Forms.Pages
                     json = read.Result;
                 }
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzVisitVM>>>(json);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)
                 {
                 }
@@ -750,7 +751,12 @@ namespace Mzsf.Forms.Pages
         private void btnHuajia_Click(object sender, EventArgs e)
         {
             if (SessionHelper.PatientVM != null && lblNodata.Visible == false)
-            {
+            { 
+                if (SessionHelper.cprCharges == null)
+                {
+                    return;
+                }
+               
                 Check check = new Check();
                 check.times = current_times;
                 check.Show();
@@ -775,6 +781,17 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
+            if (current_patient_id=="")
+            {
+                MessageBox.Show("没有病人信息");
+                return;
+            }
+
+            if (SessionHelper.cprCharges == null)
+            { 
+                return;
+            }
+
             int max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
 
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
@@ -791,19 +808,29 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (SessionHelper.cprCharges==null)
+            {
+                return;
+            }
+
             //搜集数据
             var add_list = SessionHelper.cprCharges.Where(p => p.times == 0);
 
-            var order_list = add_list.Select(p => p.order_type).ToList();
-            var order_string = ";";//order_type-charge_code-charge_amount,order_type-charge_code-charge_amount;order_type-charge_code-charge_amount;
-            foreach (var order_type in order_list)
+            //var order_list = add_list.Distinct<string>(p => p.order_type).ToList();
+
+            var order_list = add_list.GroupBy(p => new { p.order_no })
+   .Select(g => g.First())
+   .ToList();
+
+            var order_string = "";//order_type-charge_code-charge_amount,order_type-charge_code-charge_amount;order_type-charge_code-charge_amount;
+            foreach (var order in order_list)
             {
-                var item_list = add_list.Where(p => p.order_type == order_type);
+                var item_list = add_list.Where(p => p.order_no == order.order_no);
 
                 var item_str = "";
                 foreach (var item in item_list)
                 {
-                    item_str += "," + item.order_type + "-" + item.charge_code + "-" + item.charge_amount;
+                    item_str += "," + item.order_type + "-" + item.order_no + "-" + item.charge_code + "-" + item.charge_amount;
                 }
                 if (item_str != "")
                 {
@@ -816,22 +843,91 @@ namespace Mzsf.Forms.Pages
                 order_string = order_string.Substring(1);
             }
 
+            if (order_string=="")
+            {
+                MessageBox.Show("没有新添加的处方，无需保存！");
+                return;
+            }
+
+            var d =new
+            {
+                patient_id = current_patient_id,
+                times = current_times,
+                order_string = order_string,
+                opera = SessionHelper.uservm.user_mi
+            };
+             
+            //保存收费员处方
+            Task<HttpResponseMessage> task = null;
+            string json = ""; 
+            string paramurl = string.Format($"/api/mzsf/SaveOrder?patient_id={d.patient_id}&times={d.times}&order_string={d.order_string}&opera={d.opera}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
+                if (result.status == 1)
+                {
+                    var orderTypes = result.data;
+                     
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
+
 
             MessageBox.Show(order_string);
         }
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
-        {
+        { 
+            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+.Select(g => g.First()).Select(p=>p.order_no)
+.ToList();
+            if (index>=order_list.Count)
+            {
+                return true;
+            }
+            var order_no = order_list[index];
+
+            foreach (var item in SessionHelper.cprCharges.ToArray())
+            {
+                if (item.order_no == order_no)
+                {
+                    SessionHelper.cprCharges.Remove(item);
+                }
+            } 
 
             var pages = uiTabControl1.GetPages<OrderItemPage>();
-
+             
             var page = pages[index];
 
             // var page=  uiTabControl1.GetPage(index);
 
-            MessageBox.Show(page.TagString);
+            //MessageBox.Show(page.TagString);
 
             return true;
         }
+         
     }
 }
