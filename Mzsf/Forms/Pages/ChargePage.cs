@@ -29,6 +29,7 @@ namespace Mzsf.Forms.Pages
         public static string current_patient_id = "";
 
         bool is_order_lock = false;
+        int current_tab_index = 0;
 
 
         public ChargePage()
@@ -43,6 +44,7 @@ namespace Mzsf.Forms.Pages
 
             this.uiTabControl1.Hide();
             this.pblSum.Hide();
+            this.pnlAddOrder.Hide();
 
             ClearUserInfo();
 
@@ -98,6 +100,7 @@ namespace Mzsf.Forms.Pages
                     }
                     else
                     {
+                        MessageBox.Show("没有查到用户数据");
                         lblNodata.Text = "没有查到用户数据";
                         lblNodata.Show();
                     }
@@ -105,6 +108,7 @@ namespace Mzsf.Forms.Pages
                 }
                 else
                 {
+                    MessageBox.Show("没有查到用户数据");
                     lblNodata.Text = "没有查到用户数据";
                     lblNodata.Show();
                 }
@@ -378,7 +382,7 @@ namespace Mzsf.Forms.Pages
                             for (int i = 0; i < result.data.Count; i++)
                             {
                                 if (detail_result.data.Where(p => p.order_no == result.data[i].order_no).Count() > 0)
-                                { 
+                                {
                                     var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
                                     page.TagString = result.data[i].order_no.ToString();
                                     uiTabControl1.AddPage(page);
@@ -386,12 +390,10 @@ namespace Mzsf.Forms.Pages
                                     uiTabControl1.TabPages[pageIndex].Text = result.data[i].title;
                                     pageIndex++;
                                 }
-
-
                             }
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
-                            pblSum.Show();
+                            pblSum.Show(); this.pnlAddOrder.Show();
                             uiTabControl1.ShowCloseButton = true;
 
                             //锁定处方
@@ -445,7 +447,7 @@ namespace Mzsf.Forms.Pages
         public void BindOrderTypes()
         {
             //查询 处方类型列表
-            Task<HttpResponseMessage> task = null;
+            Task<HttpResponseMessage> task;
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetOrderTypes");
 
@@ -490,6 +492,7 @@ namespace Mzsf.Forms.Pages
         {
             this.uiTabControl1.Hide();
             this.pblSum.Hide();
+            this.pnlAddOrder.Hide();
             lblNodata.Parent = this;
             lblNodata.Top = 350;
             lblNodata.Left = 300;
@@ -749,7 +752,28 @@ namespace Mzsf.Forms.Pages
 
         public void BindBottomChargeInfo(int tabindex)
         {
-            var order = SessionHelper.cprCharges.Where(p => p.order_no == tabindex + 1);
+            //var order = SessionHelper.cprCharges.Where(p => p.order_no == tabindex + 1);
+
+            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+.Select(g => g.First()).Select(p => p.order_no)
+.ToList();
+
+
+            if (tabindex >= order_list.Count)
+            {
+                return;
+            }
+            var order_no = order_list[tabindex];
+
+            var order = SessionHelper.cprCharges.Where(p => p.order_no == order_no);
+
+            //foreach (var item in SessionHelper.cprCharges.ToArray())
+            //{
+            //    if (item.order_no == order_no)
+            //    {
+
+            //    }
+            //}
 
 
             lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
@@ -759,21 +783,23 @@ namespace Mzsf.Forms.Pages
 
         private void btnHuajia_Click(object sender, EventArgs e)
         {
-            if (SessionHelper.PatientVM != null&& SessionHelper.cprCharges != null)
-            {  
+            if (SessionHelper.PatientVM != null && SessionHelper.cprCharges != null)
+            {
                 Check check = new Check();
                 check.times = current_times;
+                check.FormClosed += Check_FormClosed;
                 check.Show();
             }
 
         }
 
-        private void uiGroupBox2_Click(object sender, EventArgs e)
+        private void Check_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            //查询处方
+            SearchUser();
         }
 
-        private void uiSymbolButton5_Click(object sender, EventArgs e)
+        private void uiGroupBox2_Click(object sender, EventArgs e)
         {
 
         }
@@ -786,8 +812,7 @@ namespace Mzsf.Forms.Pages
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
             if (current_patient_id == "")
-            {
-                MessageBox.Show("没有病人信息");
+            { 
                 return;
             }
 
@@ -801,7 +826,7 @@ namespace Mzsf.Forms.Pages
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
             uiTabControl1.AddPage(page);
-            uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + uiTabControl1.TabCount + "：" + cbxOrderType.Text;
+            uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + max_order_no + 1 + "：" + cbxOrderType.Text;
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
         }
 
@@ -880,11 +905,11 @@ namespace Mzsf.Forms.Pages
                     json = read.Result;
                 }
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)
                 {
-                    var orderTypes = result.data;
-
+                    UIMessageTip.Show("保存成功");
+                    GetOrders(current_patient_id,current_times);
                 }
                 else
                 {
@@ -900,7 +925,7 @@ namespace Mzsf.Forms.Pages
             }
 
 
-            MessageBox.Show(order_string);
+            //MessageBox.Show(order_string);
         }
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
@@ -922,19 +947,76 @@ namespace Mzsf.Forms.Pages
                 }
             }
 
-            var pages = uiTabControl1.GetPages<OrderItemPage>();
-
-            var page = pages[index];
-
-            // var page=  uiTabControl1.GetPage(index);
-
-            //MessageBox.Show(page.TagString);
 
             return true;
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
+            if (current_patient_id == "")
+            {
+                return;
+            }
+
+            if (SessionHelper.cprCharges == null)
+            {
+                return;
+            }
+            try
+            { 
+
+                 var pages = uiTabControl1.GetPages<OrderItemPage>();
+
+                var aa = pages[uiTabControl1.SelectedIndex].Controls.Find("dgvOrderDetail", true);
+
+                var dgv = aa[0] as UIDataGridView;
+
+                //dgv.DataSource = null;
+
+                int new_index = dgv.Rows.Add();
+
+                dgv.SelectedIndex = new_index;
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show("现有处方不允许修改");
+                log.Error(ex.ToString()); 
+            }
+
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (current_patient_id == "")
+            {
+                return;
+            }
+
+            if (SessionHelper.cprCharges == null)
+            {
+                return;
+            }
+            try
+            {
+                var pages = uiTabControl1.GetPages<OrderItemPage>();
+
+                var aa = pages[uiTabControl1.SelectedIndex].Controls.Find("dgvOrderDetail", true);
+
+                var dgv = aa[0] as UIDataGridView;
+                if (dgv.SelectedRows.Count>0)
+                { 
+                    dgv.Rows.Remove(dgv.SelectedRows[0]);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show("现有处方不允许修改");
+
+                log.Error(ex.ToString());
+
+            }
 
         }
     }

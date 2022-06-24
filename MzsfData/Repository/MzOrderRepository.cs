@@ -48,31 +48,7 @@ namespace MzsfData.Repository
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
                         var visit_info = connection.QueryFirstOrDefault<MzVisit>("mzcpr_GetVisitInfo", para, transaction, null, CommandType.StoredProcedure);
-
-                        //                    string sql = @"INSERT INTO mz_detail_charge 
-                        //( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no, 
-                        //charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
-                        //happen_date, enter_date, enter_opera, windows_no, dosage, persist_days, dosage_unit, fit_type, poision_flag, 
-                        //charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn) 
-                        //Values ( 25.000000, '000296903300', 319, '01', 1, 1, 0, '100097', '**', '%', '1', '009', '00009', '1021100', 1.000000, 25.000000, '12', 1, 0,
-                        //'2022-06- 10:49:55', '2022-06-21 10:49:55', '00000', 1, 1.000000, 1, '', 0, '0',
-                        //-2100301, '1', '1021100', '00000', 'IC卡测试', 0, '001', '0', 0, '935774') ";
-                        //                    string sql = @"INSERT INTO mz_detail_charge 
-                        //( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no,
-                        //charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
-                        //happen_date, enter_date, enter_opera, windows_no, confirm_flag, supply_code, dosage, persist_days, dosage_unit, comment, fit_type, self_flag,
-                        //separate_flag, supprice_flag, poision_flag, charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn) 
-                        //Values ( 41.029900, '000296903300', 319, '02', 2, 2, 0, '002377', '01', '000003', '1', '001', '00001', '1021100', 1.000000, 41.029900, '02', 1, 0, 
-                        //'2022-06-21 10:54:42', '2022-06-21 10:54:42', '00000', 1, '1', '001', 0.400000, 1, '17', 'hdaa', 0, '0', '0', '0', '0', -2100306, '1', '1021100', '00000', 'IC卡测试', 0, '001', '0', 0, '935775') ";
-
-                        //                    string sql = @"INSERT INTO mz_detail_charge 
-                        //( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no,
-                        //charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
-                        //happen_date, enter_date, enter_opera, windows_no, confirm_flag, freq_code, persist_days, dosage_unit, comment, fit_type, self_flag,
-                        //separate_flag, supprice_flag, poision_flag, charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn)
-                        //Values ( 61.580000, '000296903300', 319, '04', 3, 1, 0, '000771', '00', '000004', '1', '001', '00001', '1021100', 1.000000, 61.580000, '02', 1, 0,
-                        //'2022-06-21 10:54:57', '2022-06-21 10:54:57', '00000', 1, '1', 'ONCE', 1, '', 'bvbbxvcxvc', 0, '0', '0', '0', '0', -2100307, '1', '1021100', '00000', 'IC卡测试', 0, '001', '0', 0, '935776') ";
-
+                         
                         string insert_sql = "";
 
                         //处方数
@@ -425,7 +401,8 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
 
                     chargeList = chargeList.Where(p => order_no_arr.Contains(p.order_no)).ToList();
 
-                    order_no_param = string.Join(',', order_no_arr);
+                    // order_no_param = string.Join(""','", order_no_arr);
+                     
                 }
 
                 //门诊机制发票号
@@ -673,10 +650,15 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
-                        para.Add("@order_no_str", order_no_param);
-
+                        //para.Add("@order_no_str", order_no_param);
 
                         var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
+
+                        if (!string.IsNullOrWhiteSpace(order_no_str))
+                        {
+                            var order_no_arr = order_no_str.Split("-");
+                            chargeItemList = chargeItemList.Where(p => order_no_arr.Contains(p.order_no)).ToList();
+                        } 
 
                         //根据收费项目类型分组写入
                         var bill_list = (from c in chargeItemList

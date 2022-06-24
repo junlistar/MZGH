@@ -206,6 +206,8 @@ namespace Mzsf.Forms.Pages
                 if (is_delete)
                 {
                     dgvCpr.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    //dgvCpr.Rows[e.RowIndex].Cells["charge_name"].Style.Font = new Font("微软雅黑",12, FontStyle.Strikeout);
+                    dgvCpr.Rows[e.RowIndex].DefaultCellStyle.Font = new Font("微软雅黑",12, FontStyle.Strikeout);
                 }
             }
         }

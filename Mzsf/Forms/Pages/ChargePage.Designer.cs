@@ -67,9 +67,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cbxOrderType = new Sunny.UI.UIComboBox();
             this.btnAddOrder = new Sunny.UI.UISymbolButton();
-            this.btnDeleteOrder = new Sunny.UI.UISymbolButton();
-            this.btnAddItem = new Sunny.UI.UISymbolButton();
-            this.btnDeleteItem = new Sunny.UI.UISymbolButton();
             this.pblSum = new Sunny.UI.UIPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.lblOrderItemCount = new System.Windows.Forms.Label();
@@ -81,10 +78,12 @@
             this.btnSFZ = new Sunny.UI.UISymbolButton();
             this.btnCika = new Sunny.UI.UISymbolButton();
             this.btnIDCard = new Sunny.UI.UISymbolButton();
+            this.pnlAddOrder = new Sunny.UI.UIPanel();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.pblSum.SuspendLayout();
+            this.pnlAddOrder.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitle
@@ -522,11 +521,11 @@
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
-            this.uiTabControl1.Location = new System.Drawing.Point(12, 342);
+            this.uiTabControl1.Location = new System.Drawing.Point(12, 357);
             this.uiTabControl1.MainPage = "";
             this.uiTabControl1.Name = "uiTabControl1";
             this.uiTabControl1.SelectedIndex = 0;
-            this.uiTabControl1.Size = new System.Drawing.Size(1226, 283);
+            this.uiTabControl1.Size = new System.Drawing.Size(1226, 268);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.TabIndex = 4;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -589,7 +588,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 308);
+            this.label5.Location = new System.Drawing.Point(8, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 24;
@@ -598,9 +597,10 @@
             // cbxOrderType
             // 
             this.cbxOrderType.DataSource = null;
+            this.cbxOrderType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxOrderType.FillColor = System.Drawing.Color.White;
             this.cbxOrderType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxOrderType.Location = new System.Drawing.Point(99, 305);
+            this.cbxOrderType.Location = new System.Drawing.Point(89, 6);
             this.cbxOrderType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxOrderType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxOrderType.Name = "cbxOrderType";
@@ -614,7 +614,7 @@
             // 
             this.btnAddOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddOrder.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddOrder.Location = new System.Drawing.Point(264, 305);
+            this.btnAddOrder.Location = new System.Drawing.Point(254, 6);
             this.btnAddOrder.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAddOrder.Name = "btnAddOrder";
             this.btnAddOrder.Size = new System.Drawing.Size(100, 29);
@@ -624,50 +624,6 @@
             this.btnAddOrder.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnAddOrder.Click += new System.EventHandler(this.btnAddOrder_Click);
-            // 
-            // btnDeleteOrder
-            // 
-            this.btnDeleteOrder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteOrder.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDeleteOrder.Location = new System.Drawing.Point(371, 305);
-            this.btnDeleteOrder.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnDeleteOrder.Name = "btnDeleteOrder";
-            this.btnDeleteOrder.Size = new System.Drawing.Size(100, 29);
-            this.btnDeleteOrder.Symbol = 362139;
-            this.btnDeleteOrder.TabIndex = 27;
-            this.btnDeleteOrder.Text = "删处方";
-            this.btnDeleteOrder.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDeleteOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddItem.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddItem.Location = new System.Drawing.Point(477, 305);
-            this.btnAddItem.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(100, 29);
-            this.btnAddItem.Symbol = 362139;
-            this.btnAddItem.TabIndex = 28;
-            this.btnAddItem.Text = "增细目";
-            this.btnAddItem.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddItem.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
-            // 
-            // btnDeleteItem
-            // 
-            this.btnDeleteItem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeleteItem.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(583, 305);
-            this.btnDeleteItem.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.Size = new System.Drawing.Size(100, 29);
-            this.btnDeleteItem.Symbol = 362139;
-            this.btnDeleteItem.TabIndex = 29;
-            this.btnDeleteItem.Text = "删细目";
-            this.btnDeleteItem.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDeleteItem.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnDeleteItem.Click += new System.EventHandler(this.uiSymbolButton5_Click);
             // 
             // pblSum
             // 
@@ -850,17 +806,27 @@
             this.btnIDCard.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnIDCard.Click += new System.EventHandler(this.btnIDCard_Click);
             // 
+            // pnlAddOrder
+            // 
+            this.pnlAddOrder.Controls.Add(this.btnAddOrder);
+            this.pnlAddOrder.Controls.Add(this.label5);
+            this.pnlAddOrder.Controls.Add(this.cbxOrderType);
+            this.pnlAddOrder.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pnlAddOrder.Location = new System.Drawing.Point(13, 308);
+            this.pnlAddOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlAddOrder.MinimumSize = new System.Drawing.Size(1, 1);
+            this.pnlAddOrder.Name = "pnlAddOrder";
+            this.pnlAddOrder.Size = new System.Drawing.Size(1225, 41);
+            this.pnlAddOrder.TabIndex = 31;
+            this.pnlAddOrder.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pnlAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1259, 686);
+            this.Controls.Add(this.pnlAddOrder);
             this.Controls.Add(this.pblSum);
-            this.Controls.Add(this.btnDeleteItem);
-            this.Controls.Add(this.btnAddItem);
-            this.Controls.Add(this.btnDeleteOrder);
-            this.Controls.Add(this.btnAddOrder);
-            this.Controls.Add(this.cbxOrderType);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.uiLine1);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiTabControl1);
@@ -878,8 +844,9 @@
             this.uiGroupBox2.PerformLayout();
             this.pblSum.ResumeLayout(false);
             this.pblSum.PerformLayout();
+            this.pnlAddOrder.ResumeLayout(false);
+            this.pnlAddOrder.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -923,9 +890,6 @@
         private System.Windows.Forms.Label label5;
         private Sunny.UI.UIComboBox cbxOrderType;
         private Sunny.UI.UISymbolButton btnAddOrder;
-        private Sunny.UI.UISymbolButton btnDeleteOrder;
-        private Sunny.UI.UISymbolButton btnAddItem;
-        private Sunny.UI.UISymbolButton btnDeleteItem;
         private Sunny.UI.UIPanel pblSum;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lblOrderItemCount;
@@ -938,5 +902,6 @@
         private Sunny.UI.UISymbolButton btnCika;
         private Sunny.UI.UISymbolButton btnYBK;
         private Sunny.UI.UISymbolButton btnSFZ;
+        private Sunny.UI.UIPanel pnlAddOrder;
     }
 }

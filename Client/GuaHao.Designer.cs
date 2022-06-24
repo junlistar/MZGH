@@ -37,9 +37,11 @@
             this.btnTuihao = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.pnlSearch = new Sunny.UI.UIPanel();
+            this.btnNewUser = new Sunny.UI.UISymbolButton();
             this.pnlKeySuggest = new Sunny.UI.UIPanel();
             this.txtKeySearch = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
+            this.btnYBK = new Sunny.UI.UISymbolButton();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.lblbirth = new Sunny.UI.UILabel();
             this.uiLabel16 = new Sunny.UI.UILabel();
@@ -63,6 +65,8 @@
             this.lblName = new Sunny.UI.UILabel();
             this.lblAge = new Sunny.UI.UILabel();
             this.uiLabel7 = new Sunny.UI.UILabel();
+            this.btnSFZ = new Sunny.UI.UISymbolButton();
+            this.btnCika = new Sunny.UI.UISymbolButton();
             this.pnlHours = new Sunny.UI.UIFlowLayoutPanel();
             this.btnHoutian = new Sunny.UI.UIButton();
             this.btnMingtian = new Sunny.UI.UIButton();
@@ -72,10 +76,6 @@
             this.gbxUnits = new Sunny.UI.UIFlowLayoutPanel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.txtSearch = new Sunny.UI.UITextBox();
-            this.btnCika = new Sunny.UI.UISymbolButton();
-            this.btnSFZ = new Sunny.UI.UISymbolButton();
-            this.btnYBK = new Sunny.UI.UISymbolButton();
-            this.btnNewUser = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.pnlKeySuggest.SuspendLayout();
@@ -158,11 +158,21 @@
             // uiSymbolButton3
             // 
             this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton3.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton3.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton3.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton3.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton3.Location = new System.Drawing.Point(627, 16);
             this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton3.Name = "uiSymbolButton3";
+            this.uiSymbolButton3.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.uiSymbolButton3.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.uiSymbolButton3.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.uiSymbolButton3.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.Size = new System.Drawing.Size(101, 35);
+            this.uiSymbolButton3.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton3.Symbol = 61487;
             this.uiSymbolButton3.TabIndex = 9;
             this.uiSymbolButton3.Text = "重打";
@@ -252,6 +262,31 @@
             this.pnlSearch.Text = null;
             this.pnlSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnNewUser
+            // 
+            this.btnNewUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewUser.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnNewUser.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNewUser.Location = new System.Drawing.Point(38, 160);
+            this.btnNewUser.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnNewUser.Name = "btnNewUser";
+            this.btnNewUser.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnNewUser.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.Size = new System.Drawing.Size(102, 39);
+            this.btnNewUser.Style = Sunny.UI.UIStyle.Orange;
+            this.btnNewUser.StyleCustomMode = true;
+            this.btnNewUser.Symbol = 62140;
+            this.btnNewUser.TabIndex = 17;
+            this.btnNewUser.Text = "新用户";
+            this.btnNewUser.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
+            // 
             // pnlKeySuggest
             // 
             this.pnlKeySuggest.Controls.Add(this.txtKeySearch);
@@ -304,6 +339,31 @@
             this.uiLabel11.TabIndex = 0;
             this.uiLabel11.Text = "查询到 3 条记录";
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // btnYBK
+            // 
+            this.btnYBK.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnYBK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnYBK.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnYBK.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnYBK.Location = new System.Drawing.Point(38, 115);
+            this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnYBK.Name = "btnYBK";
+            this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnYBK.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnYBK.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnYBK.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnYBK.Size = new System.Drawing.Size(102, 39);
+            this.btnYBK.Style = Sunny.UI.UIStyle.Green;
+            this.btnYBK.StyleCustomMode = true;
+            this.btnYBK.Symbol = 62140;
+            this.btnYBK.TabIndex = 16;
+            this.btnYBK.Text = "医保卡";
+            this.btnYBK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnYBK.Click += new System.EventHandler(this.btnYBK_Click);
             // 
             // uiGroupBox1
             // 
@@ -617,6 +677,56 @@
             this.uiLabel7.Text = "年龄:";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // btnSFZ
+            // 
+            this.btnSFZ.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSFZ.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSFZ.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSFZ.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnSFZ.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSFZ.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSFZ.Location = new System.Drawing.Point(38, 72);
+            this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSFZ.Name = "btnSFZ";
+            this.btnSFZ.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSFZ.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnSFZ.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSFZ.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSFZ.Size = new System.Drawing.Size(102, 37);
+            this.btnSFZ.Style = Sunny.UI.UIStyle.Green;
+            this.btnSFZ.StyleCustomMode = true;
+            this.btnSFZ.Symbol = 62140;
+            this.btnSFZ.TabIndex = 15;
+            this.btnSFZ.Text = "身份证";
+            this.btnSFZ.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSFZ.Click += new System.EventHandler(this.btnSFZ_Click);
+            // 
+            // btnCika
+            // 
+            this.btnCika.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCika.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnCika.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnCika.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnCika.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnCika.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCika.Location = new System.Drawing.Point(38, 28);
+            this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnCika.Name = "btnCika";
+            this.btnCika.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnCika.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnCika.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnCika.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnCika.Size = new System.Drawing.Size(102, 38);
+            this.btnCika.Style = Sunny.UI.UIStyle.Green;
+            this.btnCika.StyleCustomMode = true;
+            this.btnCika.Symbol = 62140;
+            this.btnCika.TabIndex = 14;
+            this.btnCika.Text = "磁   卡";
+            this.btnCika.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCika.Click += new System.EventHandler(this.btnCika_Click);
+            // 
             // pnlHours
             // 
             this.pnlHours.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
@@ -630,7 +740,7 @@
             this.pnlHours.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlHours.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlHours.ShowText = false;
-            this.pnlHours.Size = new System.Drawing.Size(471, 47);
+            this.pnlHours.Size = new System.Drawing.Size(471, 44);
             this.pnlHours.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlHours.TabIndex = 18;
             this.pnlHours.Text = "uiFlowLayoutPanel1";
@@ -725,6 +835,7 @@
             this.uiBreadcrumb2.StyleCustomMode = true;
             this.uiBreadcrumb2.TabIndex = 4;
             this.uiBreadcrumb2.Text = "uiBreadcrumb2";
+            this.uiBreadcrumb2.UnSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiBreadcrumb2.ItemIndexChanged += new Sunny.UI.UIBreadcrumb.OnValueChanged(this.uiBreadcrumb2_ItemIndexChanged);
             // 
             // gbxUnits
@@ -781,106 +892,6 @@
             this.txtSearch.Watermark = "筛选科室";
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
-            // 
-            // btnCika
-            // 
-            this.btnCika.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCika.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnCika.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnCika.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnCika.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnCika.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Location = new System.Drawing.Point(38, 28);
-            this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnCika.Name = "btnCika";
-            this.btnCika.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnCika.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnCika.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnCika.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnCika.Size = new System.Drawing.Size(102, 38);
-            this.btnCika.Style = Sunny.UI.UIStyle.Green;
-            this.btnCika.StyleCustomMode = true;
-            this.btnCika.Symbol = 62140;
-            this.btnCika.TabIndex = 14;
-            this.btnCika.Text = "磁   卡";
-            this.btnCika.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Click += new System.EventHandler(this.btnCika_Click);
-            // 
-            // btnSFZ
-            // 
-            this.btnSFZ.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSFZ.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSFZ.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSFZ.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSFZ.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSFZ.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Location = new System.Drawing.Point(38, 72);
-            this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSFZ.Name = "btnSFZ";
-            this.btnSFZ.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSFZ.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSFZ.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSFZ.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSFZ.Size = new System.Drawing.Size(102, 37);
-            this.btnSFZ.Style = Sunny.UI.UIStyle.Green;
-            this.btnSFZ.StyleCustomMode = true;
-            this.btnSFZ.Symbol = 62140;
-            this.btnSFZ.TabIndex = 15;
-            this.btnSFZ.Text = "身份证";
-            this.btnSFZ.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Click += new System.EventHandler(this.btnSFZ_Click);
-            // 
-            // btnYBK
-            // 
-            this.btnYBK.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnYBK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnYBK.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnYBK.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(38, 115);
-            this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnYBK.Name = "btnYBK";
-            this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnYBK.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnYBK.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnYBK.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnYBK.Size = new System.Drawing.Size(102, 39);
-            this.btnYBK.Style = Sunny.UI.UIStyle.Green;
-            this.btnYBK.StyleCustomMode = true;
-            this.btnYBK.Symbol = 62140;
-            this.btnYBK.TabIndex = 16;
-            this.btnYBK.Text = "医保卡";
-            this.btnYBK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Click += new System.EventHandler(this.btnYBK_Click);
-            // 
-            // btnNewUser
-            // 
-            this.btnNewUser.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnNewUser.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnNewUser.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnNewUser.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnNewUser.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnNewUser.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnNewUser.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNewUser.Location = new System.Drawing.Point(38, 160);
-            this.btnNewUser.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnNewUser.Name = "btnNewUser";
-            this.btnNewUser.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnNewUser.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnNewUser.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnNewUser.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnNewUser.Size = new System.Drawing.Size(102, 39);
-            this.btnNewUser.Style = Sunny.UI.UIStyle.Orange;
-            this.btnNewUser.StyleCustomMode = true;
-            this.btnNewUser.Symbol = 62140;
-            this.btnNewUser.TabIndex = 17;
-            this.btnNewUser.Text = "新用户";
-            this.btnNewUser.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
             // 
             // GuaHao
             // 

@@ -205,7 +205,7 @@ namespace Mzsf.Forms.Pages
                 //提交部分退款
                 if (refund_item_str != "")
                 {
-                    refund_item_str = refund_item_str.Substring(1); MessageBox.Show(refund_item_str);
+                    refund_item_str = refund_item_str.Substring(1); 
                 }
                 else
                 {
@@ -215,7 +215,6 @@ namespace Mzsf.Forms.Pages
 
                 if (lblZongji.Text == lblTuikuan.Text)
                 {
-                    MessageBox.Show("全部退款");
                     log.Debug("全部退款"); 
                     RefundAll();
                 }

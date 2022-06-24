@@ -33,6 +33,12 @@ namespace Mzsf.Forms.Pages
 
         private void OrderItemPage_Load(object sender, EventArgs e)
         {
+            if (SessionHelper.cprCharges.Count(p => p.order_no == _order_no)>0)
+            {
+                btnAddItem.Visible = false;
+                btnDeleteItem.Visible = false;
+            }
+
             InitUI();
             GetData();
         }
@@ -139,13 +145,12 @@ namespace Mzsf.Forms.Pages
                     parent_no = q.parent_no,
                     code=q.charge_code
                 }).ToList();
-                dgvOrderDetail.Init();
-                dgvOrderDetail.DataSource = dgv_data;
-                dgvOrderDetail.AutoResizeColumns();
-                dgvOrderDetail.ShowGridLine = true;
 
                 if (dgv_data.Count > 0)
-                {
+                { 
+                    dgvOrderDetail.DataSource = dgv_data;
+                    dgvOrderDetail.AutoResizeColumns();
+                    dgvOrderDetail.ShowGridLine = true;
                     BindSelectedRowData(0);
                 }
                 else
@@ -168,9 +173,15 @@ namespace Mzsf.Forms.Pages
 
             if (row.Cells["charge_code_lookup"].Value != null)
             {
+                if (row.Cells["charge_code_lookup_str"].Value!=null)
+                {
+                    txtName.Text = row.Cells["charge_code_lookup_str"].Value.ToString(); 
+                }
+                if (row.Cells["exec_SN_lookup"].Value!=null)
+                {
 
-                txtName.Text = row.Cells["charge_code_lookup_str"].Value.ToString();
-                txtUnit.Text = row.Cells["exec_SN_lookup"].Value.ToString();
+                    txtUnit.Text = row.Cells["exec_SN_lookup"].Value.ToString();
+                }
                 txtCharge.Text = row.Cells["charge_price"].Value.ToString();
                 txtAmount.Text = row.Cells["charge_amount"].Value.ToString();
             }
@@ -400,6 +411,33 @@ namespace Mzsf.Forms.Pages
         private void txtAmount_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
+            {
+                try
+                {
+                    int new_index = dgvOrderDetail.Rows.Add();
+                    //增加新的一行，并设焦点
+                    this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
+                    BindSelectedRowData(new_index);
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message);
+                }
+            } 
+           
+        } 
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (dgvOrderDetail.SelectedRows.Count > 0)
+            {
+                //dgv.Rows.Remove(dgv.SelectedRows[0]);
+                dgvOrderDetail.Rows.RemoveAt(dgvOrderDetail.SelectedIndex);
+            }
         }
     }
 }

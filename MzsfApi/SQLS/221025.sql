@@ -38,4 +38,4 @@ bill_item_code <> 'aa') AND
          (group_no  like @group_no OR group_no = '%') 
 ORDER BY len(name)
  
- 
+  

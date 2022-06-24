@@ -449,19 +449,18 @@
             this.lblCharge.AutoSize = true;
             this.lblCharge.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblCharge.ForeColor = System.Drawing.Color.Red;
-            this.lblCharge.Location = new System.Drawing.Point(94, 267);
+            this.lblCharge.Location = new System.Drawing.Point(94, 233);
             this.lblCharge.Name = "lblCharge";
             this.lblCharge.Size = new System.Drawing.Size(0, 21);
             this.lblCharge.TabIndex = 15;
             // 
             // lblPayType
             // 
-            this.lblPayType.AutoSize = true;
             this.lblPayType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblPayType.ForeColor = System.Drawing.Color.Red;
-            this.lblPayType.Location = new System.Drawing.Point(94, 235);
+            this.lblPayType.Location = new System.Drawing.Point(94, 267);
             this.lblPayType.Name = "lblPayType";
-            this.lblPayType.Size = new System.Drawing.Size(0, 21);
+            this.lblPayType.Size = new System.Drawing.Size(154, 231);
             this.lblPayType.TabIndex = 14;
             // 
             // lblDateTime
@@ -526,7 +525,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(32, 235);
+            this.label10.Location = new System.Drawing.Point(32, 267);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(46, 21);
             this.label10.TabIndex = 7;
@@ -571,7 +570,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(32, 267);
+            this.label5.Location = new System.Drawing.Point(32, 233);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 21);
             this.label5.TabIndex = 2;
