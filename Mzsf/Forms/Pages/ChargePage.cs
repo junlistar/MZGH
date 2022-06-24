@@ -335,8 +335,6 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzOrderVM>>>(json);
                 if (result.status == 1)
                 {
-                    var pageCount = uiTabControl1.TabPages.Count;
-
                     if (result.data.Count == 0)
                     {
                         lblNodata.Text = "没有处方数据";
@@ -345,6 +343,8 @@ namespace Mzsf.Forms.Pages
                     }
 
                     #region tabcontrol 重置
+
+                    var pageCount = uiTabControl1.TabPages.Count;
 
                     for (int i = 0; i < pageCount; i++)
                     {
@@ -374,14 +374,19 @@ namespace Mzsf.Forms.Pages
                         SessionHelper.cprCharges = detail_result.data;
                         if (detail_result.data.Count > 0)
                         {
-
+                            int pageIndex = 0;
                             for (int i = 0; i < result.data.Count; i++)
                             {
-                                var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
-                                page.TagString = result.data[i].order_no.ToString();
-                                uiTabControl1.AddPage(page);
-                                //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
-                                uiTabControl1.TabPages[i].Text = result.data[i].title;
+                                if (detail_result.data.Where(p => p.order_no == result.data[i].order_no).Count() > 0)
+                                { 
+                                    var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
+                                    page.TagString = result.data[i].order_no.ToString();
+                                    uiTabControl1.AddPage(page);
+                                    //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
+                                    uiTabControl1.TabPages[pageIndex].Text = result.data[i].title;
+                                    pageIndex++;
+                                }
+
 
                             }
                             uiTabControl1.Show();
@@ -520,10 +525,10 @@ namespace Mzsf.Forms.Pages
         {
 
             //更改刷卡方式按钮样式
-            btnCika.FillColor = cur_color;
-            btnIDCard.FillColor = Color.LightSteelBlue;
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            btnCika.FillColor = hongse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = lvse;
 
             ReadCika rc = new ReadCika("磁卡");
             rc.FormClosed += Rc_FormClosed1;
@@ -539,13 +544,16 @@ namespace Mzsf.Forms.Pages
             }
         }
 
+        Color lvse = Color.FromArgb(110, 190, 40);
+        Color hongse = Color.FromArgb(230, 80, 80);
+
         private void btnIDCard_Click(object sender, EventArgs e)
         {
             //更改刷卡方式按钮样式
-            btnCika.FillColor = Color.LightSteelBlue;
-            btnIDCard.FillColor = cur_color;
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = hongse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = lvse;
 
             ReadCika rc = new ReadCika("ID号");
             rc.FormClosed += Rc_FormClosed1;
@@ -553,10 +561,11 @@ namespace Mzsf.Forms.Pages
         }
         private void btnSFZ_Click(object sender, EventArgs e)
         {
-            btnSFZ.FillColor = cur_color;
-            btnIDCard.FillColor = Color.LightSteelBlue;
-            btnCika.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = hongse;
+            btnYBK.FillColor = lvse;
+
 
             ReadCard rc = new ReadCard("身份证");
             //关闭，刷新
@@ -577,10 +586,10 @@ namespace Mzsf.Forms.Pages
         {
             YBHelper.currentYBInfo = null;
 
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = cur_color;
-            btnIDCard.FillColor = Color.LightSteelBlue;
-            btnCika.FillColor = Color.LightSteelBlue;
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = hongse;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
             request.infno = ((int)InfoNoEnum.人员信息).ToString();
@@ -750,13 +759,8 @@ namespace Mzsf.Forms.Pages
 
         private void btnHuajia_Click(object sender, EventArgs e)
         {
-            if (SessionHelper.PatientVM != null && lblNodata.Visible == false)
-            { 
-                if (SessionHelper.cprCharges == null)
-                {
-                    return;
-                }
-               
+            if (SessionHelper.PatientVM != null&& SessionHelper.cprCharges != null)
+            {  
                 Check check = new Check();
                 check.times = current_times;
                 check.Show();
@@ -781,14 +785,14 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
-            if (current_patient_id=="")
+            if (current_patient_id == "")
             {
                 MessageBox.Show("没有病人信息");
                 return;
             }
 
             if (SessionHelper.cprCharges == null)
-            { 
+            {
                 return;
             }
 
@@ -808,7 +812,7 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (SessionHelper.cprCharges==null)
+            if (SessionHelper.cprCharges == null)
             {
                 return;
             }
@@ -843,23 +847,23 @@ namespace Mzsf.Forms.Pages
                 order_string = order_string.Substring(1);
             }
 
-            if (order_string=="")
+            if (order_string == "")
             {
                 MessageBox.Show("没有新添加的处方，无需保存！");
                 return;
             }
 
-            var d =new
+            var d = new
             {
                 patient_id = current_patient_id,
                 times = current_times,
                 order_string = order_string,
                 opera = SessionHelper.uservm.user_mi
             };
-             
+
             //保存收费员处方
             Task<HttpResponseMessage> task = null;
-            string json = ""; 
+            string json = "";
             string paramurl = string.Format($"/api/mzsf/SaveOrder?patient_id={d.patient_id}&times={d.times}&order_string={d.order_string}&opera={d.opera}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -880,7 +884,7 @@ namespace Mzsf.Forms.Pages
                 if (result.status == 1)
                 {
                     var orderTypes = result.data;
-                     
+
                 }
                 else
                 {
@@ -900,11 +904,11 @@ namespace Mzsf.Forms.Pages
         }
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
-        { 
+        {
             var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
-.Select(g => g.First()).Select(p=>p.order_no)
+.Select(g => g.First()).Select(p => p.order_no)
 .ToList();
-            if (index>=order_list.Count)
+            if (index >= order_list.Count)
             {
                 return true;
             }
@@ -916,10 +920,10 @@ namespace Mzsf.Forms.Pages
                 {
                     SessionHelper.cprCharges.Remove(item);
                 }
-            } 
+            }
 
             var pages = uiTabControl1.GetPages<OrderItemPage>();
-             
+
             var page = pages[index];
 
             // var page=  uiTabControl1.GetPage(index);
@@ -928,6 +932,10 @@ namespace Mzsf.Forms.Pages
 
             return true;
         }
-         
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

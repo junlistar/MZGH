@@ -803,7 +803,7 @@ namespace Mzsf.Forms.Pages
                 }; 
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                string paramurl = string.Format($"/api/mzsf/pay?patient_id={d.patient_id}&times={d.times}&pay_string={d.pay_string}&opera={d.opera}");
+                string paramurl = string.Format($"/api/mzsf/pay?patient_id={d.patient_id}&times={d.times}&pay_string={d.pay_string}&order_no_str={d.order_no_str}&opera={d.opera}");
 
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;

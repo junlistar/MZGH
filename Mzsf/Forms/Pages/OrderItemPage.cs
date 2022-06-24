@@ -86,8 +86,13 @@ namespace Mzsf.Forms.Pages
                 txtName.TextChanged -= txtName_TextChanged;
 
                 txtName.Text = dgv.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                txtUnit.Text = dgv.Rows[e.RowIndex].Cells["exec_unit_str"].Value.ToString();
-                var exec_unit = dgv.Rows[e.RowIndex].Cells["exec_unit"].Value.ToString();
+                var exec_unit = "";
+                if (dgv.Rows[e.RowIndex].Cells["exec_unit"].Value!=null)
+                {
+
+                    txtUnit.Text = dgv.Rows[e.RowIndex].Cells["exec_unit_str"].Value.ToString();
+                    exec_unit = dgv.Rows[e.RowIndex].Cells["exec_unit"].Value.ToString();
+                }
                 var code = dgv.Rows[e.RowIndex].Cells["code"].Value.ToString();
                 txtCharge.Text = dgv.Rows[e.RowIndex].Cells["price"].Value.ToString();
                 txtAmount.Text = "1";
@@ -298,10 +303,17 @@ namespace Mzsf.Forms.Pages
 
                 if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
                 {
-                    int new_index = dgvOrderDetail.Rows.Add();
-                    //增加新的一行，并设焦点
-                    this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
-                    BindSelectedRowData(new_index);
+                    try
+                    { 
+                        int new_index = dgvOrderDetail.Rows.Add();
+                        //增加新的一行，并设焦点
+                        this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
+                        BindSelectedRowData(new_index);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error(ex.Message);
+                    } 
                 }
                 else
                 {

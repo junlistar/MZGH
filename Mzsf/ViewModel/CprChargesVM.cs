@@ -105,6 +105,11 @@ namespace Mzsf.ViewModel
             }
         }
 
+        //是否是退款标记
+        public bool is_delete
+        {
+            get;set;
+        }
     }
 
     public class SFChargeVM

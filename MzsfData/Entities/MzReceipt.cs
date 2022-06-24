@@ -6,7 +6,7 @@ namespace MzsfData.Entities
     { 
         public string patient_id { get; set; }
         public int ledger_sn { get; set; }
-        public string receipt_sn { get; set; }
+        public int receipt_sn { get; set; }
         public string pay_unit { get; set; }
         public decimal charge_total { get; set; }
         public string charge_status { get; set; }

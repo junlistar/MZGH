@@ -37,7 +37,7 @@
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 
 				a.receipt_sn, a.cash_opera, a.cash_date, a.charge_total, a.charge_status, 
 				a.ledger_sn, a.charge_status, a.report_date, m.[name], l.responce_group,a.backfee_date
-		ORDER BY receipt_no,cash_date  
+		ORDER BY receipt_no,charge_total desc   
 	END ELSE
 	BEGIN
 		SELECT 
@@ -72,5 +72,5 @@
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 
 				a.receipt_sn, a.cash_opera, a.cash_date, a.charge_total, a.charge_status, 
 				a.ledger_sn, a.charge_status, a.report_date, m.[name], l.responce_group,a.backfee_date
-	  ORDER BY receipt_no,cash_date       
+	  ORDER BY receipt_no,charge_total desc 
 	END

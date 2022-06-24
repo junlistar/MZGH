@@ -53,10 +53,6 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.btnxj = new System.Windows.Forms.Button();
-            this.btnybk = new System.Windows.Forms.Button();
-            this.btnyl = new System.Windows.Forms.Button();
-            this.btnzfb = new System.Windows.Forms.Button();
-            this.btnwx = new System.Windows.Forms.Button();
             this.lblyb = new Sunny.UI.UILabel();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel5 = new Sunny.UI.UILabel();
@@ -69,6 +65,8 @@
             this.uiTabControl2 = new Sunny.UI.UITabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dgvfk = new Sunny.UI.UIDataGridView();
+            this.pay_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pay_je = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvzd = new Sunny.UI.UIDataGridView();
             this.type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,8 +78,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnSubmitCombi = new Sunny.UI.UIButton();
             this.btnBack = new Sunny.UI.UIButton();
-            this.pay_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pay_je = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnybk = new System.Windows.Forms.Button();
+            this.btnyl = new System.Windows.Forms.Button();
+            this.btnzfb = new System.Windows.Forms.Button();
+            this.btnwx = new System.Windows.Forms.Button();
             this.uiPanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiTabControl1.SuspendLayout();
@@ -279,6 +279,7 @@
             // 
             // btnxj
             // 
+            this.btnxj.BackgroundImage = global::Mzsf.Properties.Resources.xj;
             this.btnxj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnxj.Location = new System.Drawing.Point(556, 35);
             this.btnxj.Name = "btnxj";
@@ -286,46 +287,6 @@
             this.btnxj.TabIndex = 35;
             this.btnxj.UseVisualStyleBackColor = true;
             this.btnxj.Click += new System.EventHandler(this.btnxj_Click);
-            // 
-            // btnybk
-            // 
-            this.btnybk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnybk.Location = new System.Drawing.Point(427, 35);
-            this.btnybk.Name = "btnybk";
-            this.btnybk.Size = new System.Drawing.Size(98, 65);
-            this.btnybk.TabIndex = 34;
-            this.btnybk.UseVisualStyleBackColor = true;
-            this.btnybk.Click += new System.EventHandler(this.btnybk_Click);
-            // 
-            // btnyl
-            // 
-            this.btnyl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnyl.Location = new System.Drawing.Point(301, 35);
-            this.btnyl.Name = "btnyl";
-            this.btnyl.Size = new System.Drawing.Size(98, 65);
-            this.btnyl.TabIndex = 33;
-            this.btnyl.UseVisualStyleBackColor = true;
-            this.btnyl.Click += new System.EventHandler(this.btnyl_Click);
-            // 
-            // btnzfb
-            // 
-            this.btnzfb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnzfb.Location = new System.Drawing.Point(177, 35);
-            this.btnzfb.Name = "btnzfb";
-            this.btnzfb.Size = new System.Drawing.Size(98, 65);
-            this.btnzfb.TabIndex = 32;
-            this.btnzfb.UseVisualStyleBackColor = true;
-            this.btnzfb.Click += new System.EventHandler(this.btnzfb_Click);
-            // 
-            // btnwx
-            // 
-            this.btnwx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnwx.Location = new System.Drawing.Point(48, 35);
-            this.btnwx.Name = "btnwx";
-            this.btnwx.Size = new System.Drawing.Size(98, 65);
-            this.btnwx.TabIndex = 31;
-            this.btnwx.UseVisualStyleBackColor = true;
-            this.btnwx.Click += new System.EventHandler(this.btnwx_Click);
             // 
             // lblyb
             // 
@@ -524,6 +485,18 @@
             this.dgvfk.TabIndex = 1;
             this.dgvfk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // pay_type_name
+            // 
+            this.pay_type_name.DataPropertyName = "pay_type_name";
+            this.pay_type_name.HeaderText = "付款类型";
+            this.pay_type_name.Name = "pay_type_name";
+            // 
+            // pay_je
+            // 
+            this.pay_je.DataPropertyName = "pay_je";
+            this.pay_je.HeaderText = "付款金额";
+            this.pay_je.Name = "pay_je";
+            // 
             // dgvzd
             // 
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
@@ -690,17 +663,49 @@
             this.btnBack.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // pay_type_name
+            // btnybk
             // 
-            this.pay_type_name.DataPropertyName = "pay_type_name";
-            this.pay_type_name.HeaderText = "付款类型";
-            this.pay_type_name.Name = "pay_type_name";
+            this.btnybk.BackgroundImage = global::Mzsf.Properties.Resources.ybk;
+            this.btnybk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnybk.Location = new System.Drawing.Point(427, 35);
+            this.btnybk.Name = "btnybk";
+            this.btnybk.Size = new System.Drawing.Size(98, 65);
+            this.btnybk.TabIndex = 34;
+            this.btnybk.UseVisualStyleBackColor = true;
+            this.btnybk.Click += new System.EventHandler(this.btnybk_Click);
             // 
-            // pay_je
+            // btnyl
             // 
-            this.pay_je.DataPropertyName = "pay_je";
-            this.pay_je.HeaderText = "付款金额";
-            this.pay_je.Name = "pay_je";
+            this.btnyl.BackgroundImage = global::Mzsf.Properties.Resources.yl;
+            this.btnyl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnyl.Location = new System.Drawing.Point(301, 35);
+            this.btnyl.Name = "btnyl";
+            this.btnyl.Size = new System.Drawing.Size(98, 65);
+            this.btnyl.TabIndex = 33;
+            this.btnyl.UseVisualStyleBackColor = true;
+            this.btnyl.Click += new System.EventHandler(this.btnyl_Click);
+            // 
+            // btnzfb
+            // 
+            this.btnzfb.BackgroundImage = global::Mzsf.Properties.Resources.zfb;
+            this.btnzfb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnzfb.Location = new System.Drawing.Point(177, 35);
+            this.btnzfb.Name = "btnzfb";
+            this.btnzfb.Size = new System.Drawing.Size(98, 65);
+            this.btnzfb.TabIndex = 32;
+            this.btnzfb.UseVisualStyleBackColor = true;
+            this.btnzfb.Click += new System.EventHandler(this.btnzfb_Click);
+            // 
+            // btnwx
+            // 
+            this.btnwx.BackgroundImage = global::Mzsf.Properties.Resources.wxzf;
+            this.btnwx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnwx.Location = new System.Drawing.Point(48, 35);
+            this.btnwx.Name = "btnwx";
+            this.btnwx.Size = new System.Drawing.Size(98, 65);
+            this.btnwx.TabIndex = 31;
+            this.btnwx.UseVisualStyleBackColor = true;
+            this.btnwx.Click += new System.EventHandler(this.btnwx_Click);
             // 
             // Check
             // 

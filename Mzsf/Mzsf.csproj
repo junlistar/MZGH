@@ -130,6 +130,12 @@
     <Compile Include="Forms\Pages\RefundApart.Designer.cs">
       <DependentUpon>RefundApart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\RefundHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\RefundHistory.Designer.cs">
+      <DependentUpon>RefundHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\RefundConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +213,9 @@
     <EmbeddedResource Include="Forms\Pages\RefundApart.resx">
       <DependentUpon>RefundApart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\RefundHistory.resx">
+      <DependentUpon>RefundHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\RefundConfirm.resx">
       <DependentUpon>RefundConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -236,6 +245,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -264,6 +274,17 @@
     <Content Include="idCardDll\WltRS.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\shy.jpeg" />
+    <Content Include="Images\wx.jpeg" />
+    <Content Include="Images\wxzf.jpeg" />
+    <Content Include="Images\xj.jpeg" />
+    <Content Include="Images\ybk.jpeg" />
+    <Content Include="Images\yl.jpeg" />
+    <Content Include="Images\yy.jpeg" />
+    <Content Include="Images\yy2.ico" />
+    <Content Include="Images\yy3.ico" />
+    <Content Include="Images\zfb.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -146,11 +146,6 @@ namespace Mzsf.Forms.Pages
             lblCharge.Text = "";
         }
 
-        private void dgvRefund_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void dgvRefund_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
@@ -197,8 +192,8 @@ namespace Mzsf.Forms.Pages
                 //关闭 刷新
                 refundConfirm.FormClosed += RefundConfirm_FormClosed;
 
-                refundConfirm.ShowDialog(); 
-            } 
+                refundConfirm.ShowDialog();
+            }
         }
 
         private void RefundConfirm_FormClosed(object sender, FormClosedEventArgs e)
@@ -221,6 +216,49 @@ namespace Mzsf.Forms.Pages
                 {
                     dgvRefund.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
                 }
+            }
+        }
+
+        private void dgvRefund_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                var dat = ds[e.RowIndex];
+                //lblPatientId.Text = dat.patient_id;
+                //lblName.Text = dat.patient_name;
+                //lblTimes.Text = dat.times.ToString();
+                //lblReceiptNo.Text = dat.receipt_no;
+                //lblRecriptSn.Text = dat.receipt_sn;
+                //lblDateTime.Text = dat.cash_date.ToString("yyyy-MM-dd HH:mm:ss");
+                //lblPayType.Text = dat.cheque_type_name;
+                //lblCharge.Text = dat.charge_total.ToString();
+
+                if (dat.charge_total < 0)
+                {
+                    var times = dat.times;
+                    var ledger_sn = dat.ledger_sn;
+                    var receipt_no = dat.receipt_no;
+                    var receipt_sn = dat.receipt_sn;
+                    var patient_id = dat.patient_id;
+
+                    RefundHistory refundHistory = new RefundHistory();
+
+                    refundHistory.total_charge = Math.Round(dat.charge_total, 2);
+                    refundHistory.patient_id = dat.patient_id;
+                    refundHistory.ledger_sn = dat.ledger_sn;
+                    refundHistory.receipt_no = dat.receipt_no;
+                    refundHistory.receipt_sn = dat.receipt_sn;
+                    refundHistory.tbl_flag = dat.tableflag;
+
+                    refundHistory.ShowDialog();
+
+
+
+                }
+
+                //处方详情数据
+                //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
+
             }
         }
     }

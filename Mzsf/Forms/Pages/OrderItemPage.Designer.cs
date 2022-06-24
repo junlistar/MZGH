@@ -34,15 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrderDetail = new Sunny.UI.UIDataGridView();
-            this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.txtAmount = new Sunny.UI.UITextBox();
-            this.txtCharge = new Sunny.UI.UITextBox();
-            this.txtUnit = new Sunny.UI.UITextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new Sunny.UI.UITextBox();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code_lookup_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code_lookup = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +49,15 @@
             this.freq_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parent_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.txtAmount = new Sunny.UI.UITextBox();
+            this.txtCharge = new Sunny.UI.UITextBox();
+            this.txtUnit = new Sunny.UI.UITextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtName = new Sunny.UI.UITextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -127,12 +127,105 @@
             this.dgvOrderDetail.RowTemplate.Height = 23;
             this.dgvOrderDetail.SelectedIndex = -1;
             this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetail.Size = new System.Drawing.Size(1234, 446);
+            this.dgvOrderDetail.Size = new System.Drawing.Size(1234, 502);
             this.dgvOrderDetail.TabIndex = 1;
             this.dgvOrderDetail.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvOrderDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetail_CellClick);
             this.dgvOrderDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetail_CellContentClick);
             this.dgvOrderDetail.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrderDetail_RowPostPaint);
+            // 
+            // item_no
+            // 
+            this.item_no.DataPropertyName = "item_no";
+            this.item_no.HeaderText = "序号";
+            this.item_no.Name = "item_no";
+            // 
+            // charge_code_lookup_str
+            // 
+            this.charge_code_lookup_str.DataPropertyName = "charge_code_lookup_str";
+            this.charge_code_lookup_str.HeaderText = "项目名称";
+            this.charge_code_lookup_str.Name = "charge_code_lookup_str";
+            // 
+            // charge_code_lookup
+            // 
+            this.charge_code_lookup.DataPropertyName = "charge_code_lookup";
+            this.charge_code_lookup.HeaderText = "项目名称1";
+            this.charge_code_lookup.Name = "charge_code_lookup";
+            this.charge_code_lookup.Visible = false;
+            // 
+            // exec_SN_lookup
+            // 
+            this.exec_SN_lookup.DataPropertyName = "exec_SN_lookup";
+            this.exec_SN_lookup.HeaderText = "执行科室";
+            this.exec_SN_lookup.Name = "exec_SN_lookup";
+            // 
+            // charge_price
+            // 
+            this.charge_price.DataPropertyName = "charge_price";
+            this.charge_price.HeaderText = "价格";
+            this.charge_price.Name = "charge_price";
+            // 
+            // charge_amount
+            // 
+            this.charge_amount.DataPropertyName = "charge_amount";
+            this.charge_amount.HeaderText = "数量";
+            this.charge_amount.Name = "charge_amount";
+            // 
+            // caoyao_fu
+            // 
+            this.caoyao_fu.DataPropertyName = "caoyao_fu";
+            this.caoyao_fu.HeaderText = "付数";
+            this.caoyao_fu.Name = "caoyao_fu";
+            // 
+            // total_price
+            // 
+            this.total_price.DataPropertyName = "total_price";
+            this.total_price.HeaderText = "合计";
+            this.total_price.Name = "total_price";
+            // 
+            // fybl
+            // 
+            this.fybl.DataPropertyName = "fybl";
+            this.fybl.HeaderText = "费用比例";
+            this.fybl.Name = "fybl";
+            // 
+            // yongfa
+            // 
+            this.yongfa.DataPropertyName = "yongfa";
+            this.yongfa.HeaderText = "用法";
+            this.yongfa.Name = "yongfa";
+            // 
+            // comment
+            // 
+            this.comment.DataPropertyName = "comment";
+            this.comment.HeaderText = "嘱托";
+            this.comment.Name = "comment";
+            // 
+            // dosage
+            // 
+            this.dosage.DataPropertyName = "dosage";
+            this.dosage.HeaderText = "单次用量";
+            this.dosage.Name = "dosage";
+            // 
+            // freq_code
+            // 
+            this.freq_code.DataPropertyName = "freq_code";
+            this.freq_code.HeaderText = "执行频率";
+            this.freq_code.Name = "freq_code";
+            // 
+            // parent_no
+            // 
+            this.parent_no.DataPropertyName = "parent_no";
+            this.parent_no.HeaderText = "parent_no";
+            this.parent_no.Name = "parent_no";
+            this.parent_no.Visible = false;
+            // 
+            // code
+            // 
+            this.code.DataPropertyName = "code";
+            this.code.HeaderText = "code";
+            this.code.Name = "code";
+            this.code.Visible = false;
             // 
             // uiPanel1
             // 
@@ -151,6 +244,7 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(936, 78);
             this.uiPanel1.TabIndex = 3;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -250,99 +344,6 @@
             this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
-            // 
-            // item_no
-            // 
-            this.item_no.DataPropertyName = "item_no";
-            this.item_no.HeaderText = "序号";
-            this.item_no.Name = "item_no";
-            // 
-            // charge_code_lookup_str
-            // 
-            this.charge_code_lookup_str.DataPropertyName = "charge_code_lookup_str";
-            this.charge_code_lookup_str.HeaderText = "项目名称";
-            this.charge_code_lookup_str.Name = "charge_code_lookup_str";
-            // 
-            // charge_code_lookup
-            // 
-            this.charge_code_lookup.DataPropertyName = "charge_code_lookup";
-            this.charge_code_lookup.HeaderText = "项目名称1";
-            this.charge_code_lookup.Name = "charge_code_lookup";
-            this.charge_code_lookup.Visible = false;
-            // 
-            // exec_SN_lookup
-            // 
-            this.exec_SN_lookup.DataPropertyName = "exec_SN_lookup";
-            this.exec_SN_lookup.HeaderText = "执行科室";
-            this.exec_SN_lookup.Name = "exec_SN_lookup";
-            // 
-            // charge_price
-            // 
-            this.charge_price.DataPropertyName = "charge_price";
-            this.charge_price.HeaderText = "价格";
-            this.charge_price.Name = "charge_price";
-            // 
-            // charge_amount
-            // 
-            this.charge_amount.DataPropertyName = "charge_amount";
-            this.charge_amount.HeaderText = "数量";
-            this.charge_amount.Name = "charge_amount";
-            // 
-            // caoyao_fu
-            // 
-            this.caoyao_fu.DataPropertyName = "caoyao_fu";
-            this.caoyao_fu.HeaderText = "付数";
-            this.caoyao_fu.Name = "caoyao_fu";
-            // 
-            // total_price
-            // 
-            this.total_price.DataPropertyName = "total_price";
-            this.total_price.HeaderText = "合计";
-            this.total_price.Name = "total_price";
-            // 
-            // fybl
-            // 
-            this.fybl.DataPropertyName = "fybl";
-            this.fybl.HeaderText = "费用比例";
-            this.fybl.Name = "fybl";
-            // 
-            // yongfa
-            // 
-            this.yongfa.DataPropertyName = "yongfa";
-            this.yongfa.HeaderText = "用法";
-            this.yongfa.Name = "yongfa";
-            // 
-            // comment
-            // 
-            this.comment.DataPropertyName = "comment";
-            this.comment.HeaderText = "嘱托";
-            this.comment.Name = "comment";
-            // 
-            // dosage
-            // 
-            this.dosage.DataPropertyName = "dosage";
-            this.dosage.HeaderText = "单次用量";
-            this.dosage.Name = "dosage";
-            // 
-            // freq_code
-            // 
-            this.freq_code.DataPropertyName = "freq_code";
-            this.freq_code.HeaderText = "执行频率";
-            this.freq_code.Name = "freq_code";
-            // 
-            // parent_no
-            // 
-            this.parent_no.DataPropertyName = "parent_no";
-            this.parent_no.HeaderText = "parent_no";
-            this.parent_no.Name = "parent_no";
-            this.parent_no.Visible = false;
-            // 
-            // code
-            // 
-            this.code.DataPropertyName = "code";
-            this.code.HeaderText = "code";
-            this.code.Name = "code";
-            this.code.Visible = false;
             // 
             // OrderItemPage
             // 

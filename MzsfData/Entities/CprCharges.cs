@@ -54,8 +54,12 @@ namespace MzsfData.Entities
         public string poision_flag { get; set; }
         public string slave_flag { get; set; }
         public string ope_flag { get; set; }
-
+        public string emergency_flag { get; set; }
+        
         public decimal sum_total { get; set; }
+        public string response_type { get; set; }
+        public string charge_type { get; set; }
+        
 
         public string parent_no { get; set; }
         public string order_properties { get; set; }

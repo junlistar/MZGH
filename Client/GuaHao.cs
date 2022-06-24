@@ -87,7 +87,7 @@ namespace Client
 
             this.dtpGhrq.ValueChanged += dtpGhrq_ValueChanged;
 
-            this.uiButton1.Style = UIStyle.Orange;
+            //this.uiButton1.Style = UIStyle.Orange;
 
             //加载身份证读卡器（精伦）
             //log.Debug("启动身份证读卡器（精伦）");
@@ -130,10 +130,10 @@ namespace Client
             gbxUnits.ForeColor = cur_color;
             pnlHours.ForeColor = Color.Red;//必须要设置这个值，不然给里面的按钮设置颜色不起作用
 
-            //初始化刷卡方式按钮样式
-            btnCika.FillColor = cur_color;
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            ////初始化刷卡方式按钮样式
+            //btnCika.FillColor = cur_color;
+            //btnSFZ.FillColor = Color.LightSteelBlue;
+            //btnYBK.FillColor = Color.LightSteelBlue;
 
             int currentHour = DateTime.Now.Hour;
             pnlHours.Clear();
@@ -142,12 +142,12 @@ namespace Client
             for (int i = 0; i < hourslist.Count; i++)
             {
                 UIButton btn1 = new UIButton();
-                btn1.Style = UIStyle.LayuiGreen;
+                btn1.Style = UIStyle.Green;
+                btn1.StyleCustomMode = true;
                 btn1.Text = hourslist[i].name;
                 btn1.TagString = hourslist[i].code;
                 btn1.Width = 86;
                 btn1.Height = 31;
-                btn1.FillColor = Color.LightSteelBlue;
 
                 //if (currentHour < hourslist[i].start_hour)
                 //{
@@ -161,22 +161,22 @@ namespace Client
                 {
                     if (currentHour < hourslist[i].start_hour)
                     {
-                        btn1.FillColor = cur_color;
+                        btn1.FillColor = Color.FromArgb(230, 80, 80);
                     }
                     else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
                     {
-                        btn1.FillColor = cur_color;
+                        btn1.FillColor = Color.FromArgb(230, 80, 80);
                     }
                 }
                 else if (i > 0 && i < hourslist.Count)
                 {
                     if (currentHour < hourslist[i].start_hour && currentHour >= hourslist[i - 1].end_hour)
                     {
-                        btn1.FillColor = cur_color;
+                        btn1.FillColor = Color.FromArgb(230, 80, 80);
                     }
                     else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
                     {
-                        btn1.FillColor = cur_color;
+                        btn1.FillColor = Color.FromArgb(230, 80, 80);
                     }
                 }
 
@@ -191,36 +191,17 @@ namespace Client
             //pnlHours.ForeColor = Color.Transparent;
             pnlHours.RectColor = Color.Transparent;
 
-
-            //初始化上午，下午按钮样式
-            if (DateTime.Now.Hour < 12)
-            {
-
-                btnAM.FillColor = cur_color;
-                btnPM.FillColor = Color.LightSteelBlue;
-            }
-            else
-            {
-                btnAM.FillColor = Color.LightSteelBlue;
-                btnPM.FillColor = cur_color;
-            }
-            btnMid.FillColor = Color.LightSteelBlue;
-            btnEve.FillColor = Color.LightSteelBlue;
+ 
 
             //初始化明天，后天按钮
-            btnMingtian.FillColor = Color.LightSteelBlue;
-            btnHoutian.FillColor = Color.LightSteelBlue;
+            btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
+            btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
 
             this.dtpGhrq.Value = DateTime.Now;
 
             request_key = "";
             gbxUnits.Text = "选择科室";
-
-            //lstunits.Parent = this;
-            //lstunits.Top = txtSearch.Top + txtSearch.Height;
-            //lstunits.Left = txtSearch.Left;
-            //lstunits.Width = txtSearch.Width;
-            //lstunits.Height = 200;
+ 
         }
 
         private void Btn1_Click(object sender, EventArgs e)
@@ -228,10 +209,10 @@ namespace Client
             foreach (var control in pnlHours.FlowLayoutPanel.Controls)
             {
                 var cc = control as UIButton;
-                cc.FillColor = Color.LightSteelBlue;
+                cc.FillColor = Color.FromArgb(110, 190, 40);
             }
             var btn = sender as UIButton;
-            btn.FillColor = cur_color;
+            btn.FillColor = Color.FromArgb(230, 80, 80); ;
             LoadRequestInfo();
         }
 
@@ -290,11 +271,7 @@ namespace Client
             APButtonClick(sender);
         }
         public void APButtonClick(object sender)
-        {
-            btnAM.FillColor = Color.LightSteelBlue;
-            btnPM.FillColor = Color.LightSteelBlue;
-            btnMid.FillColor = Color.LightSteelBlue;
-            btnEve.FillColor = Color.LightSteelBlue;
+        { 
 
             var btn = sender as UIButton;
             btn.FillColor = cur_color;
@@ -314,7 +291,7 @@ namespace Client
             foreach (var control in pnlHours.FlowLayoutPanel.Controls)
             {
                 var cc = control as UIButton;
-                if (cc.FillColor == cur_color)
+                if (cc.FillColor == Color.FromArgb(230, 80, 80))
                 {
                     ampm = cc.TagString;
                     break;
@@ -479,6 +456,7 @@ namespace Client
                 UIButton btn1 = new UIButton();
 
                 btn1.Style = UIStyle.LayuiGreen;
+                btn1.StyleCustomMode = true;
                 btn1.Width = btnWidth;
                 btn1.Height = btnHeight;
                 btn1.Text = source.Keys.ElementAt(i);
@@ -840,10 +818,11 @@ namespace Client
 
         private void btnCika_Click(object sender, EventArgs e)
         {
-            //更改刷卡方式按钮样式
-            btnCika.FillColor = cur_color;
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            ////更改刷卡方式按钮样式
+            //btnCika.FillColor = cur_color;
+            //btnSFZ.FillColor = Color.LightSteelBlue;
+            //btnYBK.FillColor = Color.LightSteelBlue;
+
 
             var barcode = this.txtCode.Text.Trim();
             lblMsg.Text = "";
@@ -874,9 +853,9 @@ namespace Client
 
         private void btnSFZ_Click(object sender, EventArgs e)
         {
-            btnSFZ.FillColor = cur_color;
-            btnCika.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = Color.LightSteelBlue;
+            //btnSFZ.FillColor = cur_color;
+            //btnCika.FillColor = Color.LightSteelBlue;
+            //btnYBK.FillColor = Color.LightSteelBlue;
             ReadCard rc = new ReadCard("身份证");
             //关闭，刷新
             rc.FormClosed += Rc_FormClosed;
@@ -887,9 +866,9 @@ namespace Client
         {
             YBHelper.currentYBInfo = null;
 
-            btnSFZ.FillColor = Color.LightSteelBlue;
-            btnYBK.FillColor = cur_color;
-            btnCika.FillColor = Color.LightSteelBlue;
+            //btnSFZ.FillColor = Color.LightSteelBlue;
+            //btnYBK.FillColor = cur_color;
+            //btnCika.FillColor = Color.LightSteelBlue;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
             request.infno = ((int)InfoNoEnum.人员信息).ToString();
@@ -1355,28 +1334,28 @@ namespace Client
                     lblstreet.Text = userInfo.home_street;
                     lblsfz.Text = userInfo.hic_no; ;
 
-                    //自动设置对应卡类型按钮样式
-                    if (barcode == userInfo.hic_no)
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = Color.LightSteelBlue;
-                        btnSFZ.FillColor = cur_color;
-                        btnYBK.FillColor = Color.LightSteelBlue;
-                    }
-                    else if (barcode == userInfo.social_no)
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = Color.LightSteelBlue;
-                        btnSFZ.FillColor = Color.LightSteelBlue;
-                        btnYBK.FillColor = cur_color;
-                    }
-                    else
-                    {
-                        //初始化刷卡方式按钮样式
-                        btnCika.FillColor = cur_color;
-                        btnSFZ.FillColor = Color.LightSteelBlue;
-                        btnYBK.FillColor = Color.LightSteelBlue;
-                    }
+                    ////自动设置对应卡类型按钮样式
+                    //if (barcode == userInfo.hic_no)
+                    //{
+                    //    //初始化刷卡方式按钮样式
+                    //    btnCika.FillColor = Color.LightSteelBlue;
+                    //    btnSFZ.FillColor = cur_color;
+                    //    btnYBK.FillColor = Color.LightSteelBlue;
+                    //}
+                    //else if (barcode == userInfo.social_no)
+                    //{
+                    //    //初始化刷卡方式按钮样式
+                    //    btnCika.FillColor = Color.LightSteelBlue;
+                    //    btnSFZ.FillColor = Color.LightSteelBlue;
+                    //    btnYBK.FillColor = cur_color;
+                    //}
+                    //else
+                    //{
+                    //    //初始化刷卡方式按钮样式
+                    //    btnCika.FillColor = cur_color;
+                    //    btnSFZ.FillColor = Color.LightSteelBlue;
+                    //    btnYBK.FillColor = Color.LightSteelBlue;
+                    //}
 
                     if (YBHelper.currentYBInfo != null)
                     {
@@ -1448,15 +1427,15 @@ namespace Client
 
         private void btnMingtian_Click(object sender, EventArgs e)
         {
-            btnHoutian.FillColor = Color.LightSteelBlue;
-            btnMingtian.FillColor = cur_color;
+            btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
+            btnMingtian.FillColor = Color.FromArgb(230, 80, 80);
             dtpGhrq.Value = DateTime.Now.AddDays(1);
         }
 
         private void btnHoutian_Click(object sender, EventArgs e)
         {
-            btnMingtian.FillColor = Color.LightSteelBlue;
-            btnHoutian.FillColor = cur_color;
+            btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
+            btnHoutian.FillColor = Color.FromArgb(230, 80, 80);
             dtpGhrq.Value = DateTime.Now.AddDays(2);
         }
 
@@ -1545,6 +1524,17 @@ namespace Client
                     request_key = lstunits.Items[0].ToString();
                 }
             }
+        }
+
+        private void btnNewUser_Click(object sender, EventArgs e)
+        {
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
+            UserInfoEdit ue = new UserInfoEdit("", null);
+            ue.FormClosed += Ue_FormClosed;
+            ue.ShowDialog();
         }
     }
 }
