@@ -32,6 +32,8 @@
 		     LEFT JOIN zd_responce_type l ON n.response_type = l.code 
 		WHERE a.cash_opera LIKE @cash_opera AND
 			  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date
+			   and t.p_bar_code like @bar_code
+			    and a.charge_status like @status
 			  --AND a.ledger_sn > 0
 			  -- AND dbo.Is_mzReceiptReturn(a.patient_id, a.ledger_sn, @tflag) = 0
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 
@@ -67,6 +69,8 @@
 		     LEFT JOIN zd_responce_type l ON n.response_type = l.code 
 		WHERE a.cash_opera LIKE @cash_opera AND
 	  		  CONVERT(DATETIME, a.cash_date) BETWEEN @begin_date AND @end_date
+			   and t.p_bar_code like @bar_code
+			    and a.charge_status like @status
 	 			-- AND a.ledger_sn > 0  
 				-- AND dbo.Is_mzReceiptReturn(a.patient_id, a.ledger_sn, @tflag) = 0
 		GROUP BY t.name, a.patient_id, n.times, t.social_no, t.p_bar_code, a.receipt_no, 

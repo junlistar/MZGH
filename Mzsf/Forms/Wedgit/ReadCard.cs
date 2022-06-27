@@ -71,5 +71,13 @@ namespace Mzsf.Forms.Wedgit
         {
             timer1.Dispose();
         }
+
+        private void ReadCard_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

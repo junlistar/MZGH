@@ -313,12 +313,12 @@ namespace MzsfApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-        public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date)
+        public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date, string bar_code,string status)
         {
-            Log.Information($"GetReceipts,{cash_opera},{begin_date},{end_date}");
+            Log.Information($"GetReceipts,{cash_opera},{begin_date},{end_date},{bar_code},{status}");
             try
             {
-                return _mzOrderReceiptRepository.GetReceipts(cash_opera, begin_date, end_date);
+                return _mzOrderReceiptRepository.GetReceipts(cash_opera, begin_date, end_date, bar_code, status);
             }
             catch (Exception ex)
             {

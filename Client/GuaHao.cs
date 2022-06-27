@@ -218,7 +218,7 @@ namespace Client
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.txtCode.Text))
+            if (string.IsNullOrEmpty(this.txtCode.Text) || btnEditUser1.TagString=="")
             {
                 UIMessageTip.ShowError("请刷卡!");
                 lblMsg.Text = "请刷卡！";
@@ -605,13 +605,13 @@ namespace Client
             {
                 if (item.record_sn == btn.TagString)
                 {
-                    if (CheckGhRepeat(btnEditUser.TagString, item.record_sn))
+                    if (CheckGhRepeat(btnEditUser1.TagString, item.record_sn))
                     {
                         UIMessageBox.ShowWarning("同时段存在相同挂号记录！");
                         break;
                     } 
 
-                    SelectPayType fe = new SelectPayType(item, btnEditUser.TagString);
+                    SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
                     fe.ShowDialog();
 
                     uiBreadcrumb2.ItemIndex = 0;
@@ -749,7 +749,7 @@ namespace Client
                 txtCode.Focus();
                 return;
             }
-            if (!string.IsNullOrEmpty(txtCode.Text) && string.IsNullOrEmpty(btnEditUser.TagString))
+            if (!string.IsNullOrEmpty(txtCode.Text) && string.IsNullOrEmpty(btnEditUser1.TagString))
             {
                 UIMessageTip.ShowError("未获取到用户信息!");
                 lblMsg.Text = "未获到取用户信息！";
@@ -816,12 +816,20 @@ namespace Client
 
 
 
+        Color lvse = Color.FromArgb(110, 190, 40);
+        Color hongse = Color.FromArgb(230, 80, 80);
         private void btnCika_Click(object sender, EventArgs e)
-        {
-            ////更改刷卡方式按钮样式
-            //btnCika.FillColor = cur_color;
-            //btnSFZ.FillColor = Color.LightSteelBlue;
-            //btnYBK.FillColor = Color.LightSteelBlue;
+        { 
+
+            //更改刷卡方式按钮样式
+            btnCika.FillColor = hongse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = lvse;
+
+            ReadCika rc = new ReadCika("磁卡");
+            rc.FormClosed += Rc_FormClosed;
+            rc.ShowDialog();
 
 
             var barcode = this.txtCode.Text.Trim();
@@ -852,10 +860,13 @@ namespace Client
         }
 
         private void btnSFZ_Click(object sender, EventArgs e)
-        {
-            //btnSFZ.FillColor = cur_color;
-            //btnCika.FillColor = Color.LightSteelBlue;
-            //btnYBK.FillColor = Color.LightSteelBlue;
+        { 
+            //更改刷卡方式按钮样式
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = hongse;
+            btnYBK.FillColor = lvse;
+
             ReadCard rc = new ReadCard("身份证");
             //关闭，刷新
             rc.FormClosed += Rc_FormClosed;
@@ -866,9 +877,11 @@ namespace Client
         {
             YBHelper.currentYBInfo = null;
 
-            //btnSFZ.FillColor = Color.LightSteelBlue;
-            //btnYBK.FillColor = cur_color;
-            //btnCika.FillColor = Color.LightSteelBlue;
+            //更改刷卡方式按钮样式
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = lvse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = hongse;
 
             YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
             request.infno = ((int)InfoNoEnum.人员信息).ToString();
@@ -1010,7 +1023,7 @@ namespace Client
 
         public void Refund()
         {
-            if (string.IsNullOrEmpty(btnEditUser.TagString))
+            if (string.IsNullOrEmpty(btnEditUser1.TagString))
             {
                 UIMessageTip.ShowError("请刷卡!");
                 lblMsg.Text = "请刷卡！";
@@ -1234,7 +1247,7 @@ namespace Client
         public void InitUserInfo()
         {
             lblMsg.Text = "";
-            btnEditUser.TagString = ""; btnEditUser.Hide();
+            btnEditUser1.TagString = ""; //btnEditUser1.Hide();
             lblName.Text = "";
             lblAge.Text = "";
             lblstreet.Text = "";
@@ -1290,7 +1303,7 @@ namespace Client
                         return;
                     }
 
-                    btnEditUser.TagString = userInfo.patient_id.ToString(); btnEditUser.Show();
+                    btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
                     //this.txtpatientid.Text = userInfo["patient_id"].ToString();
                     lblName.Text = userInfo.name.ToString();
                     lblAge.Text = userInfo.age.ToString() + "岁";
@@ -1535,6 +1548,19 @@ namespace Client
             UserInfoEdit ue = new UserInfoEdit("", null);
             ue.FormClosed += Ue_FormClosed;
             ue.ShowDialog();
+        }
+
+        private void btnIDCard_Click(object sender, EventArgs e)
+        {
+            //更改刷卡方式按钮样式
+            btnCika.FillColor = lvse;
+            btnIDCard.FillColor = hongse;
+            btnSFZ.FillColor = lvse;
+            btnYBK.FillColor = lvse;
+
+            ReadCika rc = new ReadCika("ID号");
+            rc.FormClosed += Rc_FormClosed;
+            rc.ShowDialog();
         }
     }
 }

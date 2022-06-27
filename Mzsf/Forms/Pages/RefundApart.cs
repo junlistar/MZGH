@@ -287,8 +287,8 @@ namespace Mzsf.Forms.Pages
                     ledger_sn = ledger_sn,
                     receipt_sn = receipt_sn,
                     receipt_no = receipt_no,
-                    cheque_cash = ";14;11;12",
-                    isall = "1",
+                    cheque_cash ="", //";14;11;12",
+                    isall = "0",
                     refund_item_str= refund_item_str,
                     opera = SessionHelper.uservm.user_mi
                 };

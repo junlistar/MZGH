@@ -131,7 +131,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectOrder";
-            this.Text = "选择处方记录";
+            this.Text = "选择处方记录(按ESC退出)";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.SelectOrder_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelectOrder_KeyUp);

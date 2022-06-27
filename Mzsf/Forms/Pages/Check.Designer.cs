@@ -53,6 +53,10 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.btnxj = new System.Windows.Forms.Button();
+            this.btnybk = new System.Windows.Forms.Button();
+            this.btnyl = new System.Windows.Forms.Button();
+            this.btnzfb = new System.Windows.Forms.Button();
+            this.btnwx = new System.Windows.Forms.Button();
             this.lblyb = new Sunny.UI.UILabel();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel5 = new Sunny.UI.UILabel();
@@ -78,10 +82,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnSubmitCombi = new Sunny.UI.UIButton();
             this.btnBack = new Sunny.UI.UIButton();
-            this.btnybk = new System.Windows.Forms.Button();
-            this.btnyl = new System.Windows.Forms.Button();
-            this.btnzfb = new System.Windows.Forms.Button();
-            this.btnwx = new System.Windows.Forms.Button();
             this.uiPanel1.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiTabControl1.SuspendLayout();
@@ -138,7 +138,6 @@
             // 
             // uiPanel1
             // 
-            this.uiPanel1.Controls.Add(this.chkcomb);
             this.uiPanel1.Controls.Add(this.uiLabel7);
             this.uiPanel1.Controls.Add(this.lblsyje);
             this.uiPanel1.Controls.Add(this.lblyfje);
@@ -163,7 +162,7 @@
             // 
             this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkcomb.Location = new System.Drawing.Point(295, 281);
+            this.chkcomb.Location = new System.Drawing.Point(265, 473);
             this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
             this.chkcomb.Name = "chkcomb";
             this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -226,7 +225,7 @@
             this.uiListBox1.Name = "uiListBox1";
             this.uiListBox1.Padding = new System.Windows.Forms.Padding(2);
             this.uiListBox1.ShowText = false;
-            this.uiListBox1.Size = new System.Drawing.Size(420, 87);
+            this.uiListBox1.Size = new System.Drawing.Size(420, 115);
             this.uiListBox1.TabIndex = 46;
             this.uiListBox1.Text = "uiListBox1";
             this.uiListBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -287,6 +286,50 @@
             this.btnxj.TabIndex = 35;
             this.btnxj.UseVisualStyleBackColor = true;
             this.btnxj.Click += new System.EventHandler(this.btnxj_Click);
+            // 
+            // btnybk
+            // 
+            this.btnybk.BackgroundImage = global::Mzsf.Properties.Resources.ybk;
+            this.btnybk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnybk.Location = new System.Drawing.Point(427, 35);
+            this.btnybk.Name = "btnybk";
+            this.btnybk.Size = new System.Drawing.Size(98, 65);
+            this.btnybk.TabIndex = 34;
+            this.btnybk.UseVisualStyleBackColor = true;
+            this.btnybk.Click += new System.EventHandler(this.btnybk_Click);
+            // 
+            // btnyl
+            // 
+            this.btnyl.BackgroundImage = global::Mzsf.Properties.Resources.yl;
+            this.btnyl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnyl.Location = new System.Drawing.Point(301, 35);
+            this.btnyl.Name = "btnyl";
+            this.btnyl.Size = new System.Drawing.Size(98, 65);
+            this.btnyl.TabIndex = 33;
+            this.btnyl.UseVisualStyleBackColor = true;
+            this.btnyl.Click += new System.EventHandler(this.btnyl_Click);
+            // 
+            // btnzfb
+            // 
+            this.btnzfb.BackgroundImage = global::Mzsf.Properties.Resources.zfb;
+            this.btnzfb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnzfb.Location = new System.Drawing.Point(177, 35);
+            this.btnzfb.Name = "btnzfb";
+            this.btnzfb.Size = new System.Drawing.Size(98, 65);
+            this.btnzfb.TabIndex = 32;
+            this.btnzfb.UseVisualStyleBackColor = true;
+            this.btnzfb.Click += new System.EventHandler(this.btnzfb_Click);
+            // 
+            // btnwx
+            // 
+            this.btnwx.BackgroundImage = global::Mzsf.Properties.Resources.wxzf;
+            this.btnwx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnwx.Location = new System.Drawing.Point(48, 35);
+            this.btnwx.Name = "btnwx";
+            this.btnwx.Size = new System.Drawing.Size(98, 65);
+            this.btnwx.TabIndex = 31;
+            this.btnwx.UseVisualStyleBackColor = true;
+            this.btnwx.Click += new System.EventHandler(this.btnwx_Click);
             // 
             // lblyb
             // 
@@ -396,7 +439,7 @@
             this.tabPage2.Controls.Add(this.uiPanel2);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(747, 318);
+            this.tabPage2.Size = new System.Drawing.Size(200, 60);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "发票";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -663,54 +706,11 @@
             this.btnBack.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // btnybk
-            // 
-            this.btnybk.BackgroundImage = global::Mzsf.Properties.Resources.ybk;
-            this.btnybk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnybk.Location = new System.Drawing.Point(427, 35);
-            this.btnybk.Name = "btnybk";
-            this.btnybk.Size = new System.Drawing.Size(98, 65);
-            this.btnybk.TabIndex = 34;
-            this.btnybk.UseVisualStyleBackColor = true;
-            this.btnybk.Click += new System.EventHandler(this.btnybk_Click);
-            // 
-            // btnyl
-            // 
-            this.btnyl.BackgroundImage = global::Mzsf.Properties.Resources.yl;
-            this.btnyl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnyl.Location = new System.Drawing.Point(301, 35);
-            this.btnyl.Name = "btnyl";
-            this.btnyl.Size = new System.Drawing.Size(98, 65);
-            this.btnyl.TabIndex = 33;
-            this.btnyl.UseVisualStyleBackColor = true;
-            this.btnyl.Click += new System.EventHandler(this.btnyl_Click);
-            // 
-            // btnzfb
-            // 
-            this.btnzfb.BackgroundImage = global::Mzsf.Properties.Resources.zfb;
-            this.btnzfb.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnzfb.Location = new System.Drawing.Point(177, 35);
-            this.btnzfb.Name = "btnzfb";
-            this.btnzfb.Size = new System.Drawing.Size(98, 65);
-            this.btnzfb.TabIndex = 32;
-            this.btnzfb.UseVisualStyleBackColor = true;
-            this.btnzfb.Click += new System.EventHandler(this.btnzfb_Click);
-            // 
-            // btnwx
-            // 
-            this.btnwx.BackgroundImage = global::Mzsf.Properties.Resources.wxzf;
-            this.btnwx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnwx.Location = new System.Drawing.Point(48, 35);
-            this.btnwx.Name = "btnwx";
-            this.btnwx.Size = new System.Drawing.Size(98, 65);
-            this.btnwx.TabIndex = 31;
-            this.btnwx.UseVisualStyleBackColor = true;
-            this.btnwx.Click += new System.EventHandler(this.btnwx_Click);
-            // 
             // Check
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(758, 504);
+            this.Controls.Add(this.chkcomb);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSubmitCombi);
             this.Controls.Add(this.uiTabControl1);
@@ -718,10 +718,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblZongji);
             this.Controls.Add(this.label1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Check";
-            this.Text = "划价交款窗口（ESC取消，F9确认）";
+            this.Text = "划价交款窗口（ESC取消）";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.Check_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Check_KeyUp);

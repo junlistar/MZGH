@@ -10,7 +10,7 @@ namespace MzsfData.IRepository
         #region 扩展的dapper操作
 
 
-        List<MzOrderReceipt> GetReceipts(string cash_opera, string begin_date,string end_date);
+        List<MzOrderReceipt> GetReceipts(string cash_opera, string begin_date,string end_date, string bar_code,string status);
 
          
         #endregion

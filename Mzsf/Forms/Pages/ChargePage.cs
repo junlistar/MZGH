@@ -44,7 +44,7 @@ namespace Mzsf.Forms.Pages
 
             this.uiTabControl1.Hide();
             this.pblSum.Hide();
-            this.pnlAddOrder.Hide();
+            //this.pnlAddOrder.Hide();
 
             ClearUserInfo();
 
@@ -120,11 +120,6 @@ namespace Mzsf.Forms.Pages
                 log.Debug("接口数据：" + json);
 
             }
-            finally
-            {
-
-            }
-
         }
 
         /// <summary>
@@ -393,7 +388,7 @@ namespace Mzsf.Forms.Pages
                             }
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
-                            pblSum.Show(); this.pnlAddOrder.Show();
+                            pblSum.Show(); //this.pnlAddOrder.Show();
                             uiTabControl1.ShowCloseButton = true;
 
                             //锁定处方
@@ -424,6 +419,7 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 log.Error(ex.Message);
             }
         }
@@ -473,6 +469,8 @@ namespace Mzsf.Forms.Pages
                     cbxOrderType.DataSource = orderTypes;
                     cbxOrderType.ValueMember = "code";
                     cbxOrderType.DisplayMember = "name";
+
+                    cbxOrderType.SelectedValue = "02";
                 }
                 else
                 {
@@ -492,9 +490,9 @@ namespace Mzsf.Forms.Pages
         {
             this.uiTabControl1.Hide();
             this.pblSum.Hide();
-            this.pnlAddOrder.Hide();
+            //this.pnlAddOrder.Hide();
             lblNodata.Parent = this;
-            lblNodata.Top = 350;
+            lblNodata.Top = 400;
             lblNodata.Left = 300;
 
             txtDate.Value = DateTime.Now;
@@ -502,6 +500,8 @@ namespace Mzsf.Forms.Pages
             lblNodata.Hide();
             //txtCode.Text = "";
             ClearUserInfo();
+
+            cbxOrderType.Text = "西药";
         }
         public void ClearUserInfo()
         {
@@ -727,13 +727,6 @@ namespace Mzsf.Forms.Pages
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            if (is_order_lock)
-            {
-                //解除锁定处方
-                LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
-                is_order_lock = false;
-
-            }
             this.Close();
         }
 
@@ -744,7 +737,11 @@ namespace Mzsf.Forms.Pages
 
         private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BindBottomChargeInfo(uiTabControl1.SelectedIndex);
+            if (uiTabControl1.SelectedIndex!=-1)
+            {
+                BindBottomChargeInfo(uiTabControl1.SelectedIndex); 
+            }
+
             //var page = uiTabControl1.TabPages[uiTabControl1.SelectedIndex] as OrderItemPage;
             //var page = uiTabControl1.page(uiTabControl1.SelectedIndex).TabPage as OrderItemPage;
 
@@ -787,14 +784,20 @@ namespace Mzsf.Forms.Pages
             {
                 Check check = new Check();
                 check.times = current_times;
-                check.FormClosed += Check_FormClosed;
-                check.Show();
+                //check.FormClosed += Check_FormClosed;
+                var dresult = check.ShowDialog();
+                if (dresult == DialogResult.OK)
+                {
+                    //查询处方
+                    SearchUser();
+                }
             }
 
         }
 
         private void Check_FormClosed(object sender, FormClosedEventArgs e)
         {
+
             //查询处方
             SearchUser();
         }
@@ -812,22 +815,37 @@ namespace Mzsf.Forms.Pages
         private void btnAddOrder_Click(object sender, EventArgs e)
         {
             if (current_patient_id == "")
-            { 
+            {
+                UIMessageTip.ShowWarning("患者请刷卡！");
                 return;
             }
 
             if (SessionHelper.cprCharges == null)
             {
-                return;
+                SessionHelper.cprCharges = new List<CprChargesVM>();
             }
 
-            int max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
+            int max_order_no = 0;
+            if (SessionHelper.cprCharges.Count > 0)
+            {
+                max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
+            }
+            else
+            {
+                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有医生处方，是否确定添加处方？"))
+                {
+                    this.uiTabControl1.Show();
+                    this.pblSum.Show();
+                } 
+               
+            }
 
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
             uiTabControl1.AddPage(page);
-            uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + max_order_no + 1 + "：" + cbxOrderType.Text;
+            uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + (max_order_no + 1) + "：" + cbxOrderType.Text;
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
+            uiTabControl1.ShowCloseButton = true;
         }
 
         /// <summary>
@@ -909,7 +927,7 @@ namespace Mzsf.Forms.Pages
                 if (result.status == 1)
                 {
                     UIMessageTip.Show("保存成功");
-                    GetOrders(current_patient_id,current_times);
+                    GetOrders(current_patient_id, current_times);
                 }
                 else
                 {
@@ -963,9 +981,9 @@ namespace Mzsf.Forms.Pages
                 return;
             }
             try
-            { 
+            {
 
-                 var pages = uiTabControl1.GetPages<OrderItemPage>();
+                var pages = uiTabControl1.GetPages<OrderItemPage>();
 
                 var aa = pages[uiTabControl1.SelectedIndex].Controls.Find("dgvOrderDetail", true);
 
@@ -981,7 +999,7 @@ namespace Mzsf.Forms.Pages
             catch (Exception ex)
             {
                 UIMessageTip.Show("现有处方不允许修改");
-                log.Error(ex.ToString()); 
+                log.Error(ex.ToString());
             }
 
         }
@@ -1004,8 +1022,8 @@ namespace Mzsf.Forms.Pages
                 var aa = pages[uiTabControl1.SelectedIndex].Controls.Find("dgvOrderDetail", true);
 
                 var dgv = aa[0] as UIDataGridView;
-                if (dgv.SelectedRows.Count>0)
-                { 
+                if (dgv.SelectedRows.Count > 0)
+                {
                     dgv.Rows.Remove(dgv.SelectedRows[0]);
                 }
 
@@ -1018,6 +1036,16 @@ namespace Mzsf.Forms.Pages
 
             }
 
+        }
+
+        private void ChargePage_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (is_order_lock)
+            {
+                //解除锁定处方
+                LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
+                is_order_lock = false;
+            }
         }
     }
 }

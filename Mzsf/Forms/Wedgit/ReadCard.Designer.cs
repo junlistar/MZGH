@@ -44,6 +44,7 @@
             this.uiWaitingBar1.Size = new System.Drawing.Size(582, 23);
             this.uiWaitingBar1.TabIndex = 0;
             this.uiWaitingBar1.Text = "uiWaitingBar1";
+            this.uiWaitingBar1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // lblInfo
             // 
@@ -54,6 +55,7 @@
             this.lblInfo.TabIndex = 1;
             this.lblInfo.Text = "请将卡片放置在读卡器上";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblInfo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // timer1
             // 
@@ -67,6 +69,7 @@
             this.lblmsg.Size = new System.Drawing.Size(284, 23);
             this.lblmsg.TabIndex = 2;
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // ReadCard
             // 
@@ -75,12 +78,15 @@
             this.Controls.Add(this.lblmsg);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.uiWaitingBar1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadCard";
-            this.Text = "读卡";
+            this.Text = "读卡(按ESC退出)";
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 783, 295);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ReadCard_FormClosed);
             this.Load += new System.EventHandler(this.ReadCard_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ReadCard_KeyUp);
             this.ResumeLayout(false);
 
         }

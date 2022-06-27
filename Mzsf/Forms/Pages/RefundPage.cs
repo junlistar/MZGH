@@ -39,11 +39,22 @@ namespace Mzsf.Forms.Pages
             var cash_opera = SessionHelper.uservm.user_mi;
             var begin_date = txtBeginDate.Value.ToString("yyyy-MM-dd 00:00:00");
             var end_date = txtEndDate.Value.ToString("yyyy-MM-dd 23:59:59");
+            var bar_code = txtBarcode.Text.Trim();
+
+            string status = "%";
+            if (cbxRefundStatus.Text == "收费")
+            {
+                status = "4";
+            }
+            else if (cbxRefundStatus.Text == "退款")
+            {
+                status = "7";
+            }
 
             //获取数据  
             Task<HttpResponseMessage> task = null;
             string json = "";
-            string paramurl = string.Format($"/api/mzsf/GetReceipts?cash_opera={cash_opera}&begin_date={begin_date}&end_date={end_date}");
+            string paramurl = string.Format($"/api/mzsf/GetReceipts?cash_opera={cash_opera}&begin_date={begin_date}&end_date={end_date}&bar_code={bar_code}&status={status}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -128,6 +139,9 @@ namespace Mzsf.Forms.Pages
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
 
+            txtBarcode.Text = "";
+
+            cbxRefundStatus.Text = "全部";
 
             ClearDataBind();
         }
@@ -157,9 +171,10 @@ namespace Mzsf.Forms.Pages
                 lblReceiptNo.Text = dat.receipt_no;
                 lblRecriptSn.Text = dat.receipt_sn;
                 lblDateTime.Text = dat.cash_date.ToString("yyyy-MM-dd HH:mm:ss");
-                lblPayType.Text = dat.cheque_type_name;
+                lblPayType.Text = dat.cheque_type_name.Replace(") ", ")\r\n"); ;
                 lblCharge.Text = dat.charge_total.ToString();
 
+                 
                 //处方详情数据
                 //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
 
@@ -251,14 +266,60 @@ namespace Mzsf.Forms.Pages
                     refundHistory.tbl_flag = dat.tableflag;
 
                     refundHistory.ShowDialog();
-
-
-
+                }
+                else
+                {
+                    UIMessageTip.ShowWarning("请选择退款数据进行查看！");
                 }
 
                 //处方详情数据
                 //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
 
+            }
+        }
+
+        private void btnRefundDetail_Click(object sender, EventArgs e)
+        {
+            var index = dgvRefund.SelectedIndex;
+            if (index != -1)
+            {
+                var dat = ds[index]; 
+                if (dat.charge_total < 0)
+                {
+                    var times = dat.times;
+                    var ledger_sn = dat.ledger_sn;
+                    var receipt_no = dat.receipt_no;
+                    var receipt_sn = dat.receipt_sn;
+                    var patient_id = dat.patient_id;
+
+                    RefundHistory refundHistory = new RefundHistory();
+
+                    refundHistory.total_charge = Math.Round(dat.charge_total, 2);
+                    refundHistory.patient_id = dat.patient_id;
+                    refundHistory.ledger_sn = dat.ledger_sn;
+                    refundHistory.receipt_no = dat.receipt_no;
+                    refundHistory.receipt_sn = dat.receipt_sn;
+                    refundHistory.tbl_flag = dat.tableflag;
+
+                    refundHistory.ShowDialog();
+                }
+                else
+                {
+                    UIMessageTip.ShowWarning("请选择退款数据进行查看！");
+                }
+
+                //处方详情数据
+                //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
+
+            }
+        }
+
+        private void txtBarcode_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                ClearDataBind();
+                Search(); 
             }
         }
     }

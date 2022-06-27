@@ -211,5 +211,13 @@ namespace Mzsf.Forms.Pages
                 }
             }
         }
+
+        private void RefundHistory_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

@@ -108,7 +108,7 @@ namespace Mzsf.Forms.Pages
                     ledger_sn = ledger_sn,
                     receipt_sn = receipt_sn,
                     receipt_no = receipt_no,
-                    cheque_cash = "14;11;12",
+                    cheque_cash = "",//"14;11;12"
                     isall = "1", 
                     opera = SessionHelper.uservm.user_mi
                 };

@@ -151,7 +151,7 @@ namespace Mzsf.Forms.Pages
                 else
                 {
                     log.Info("取消支付：" + (int)PayMethodEnum.Zhifubao + ",金额：" + left_je);
-
+                    return;
                 }
 
             }
@@ -169,7 +169,7 @@ namespace Mzsf.Forms.Pages
                 else
                 {
                     log.Info("取消支付：" + (int)payMethod + ",金额：" + left_je);
-
+                    return;
 
                 }
             }
@@ -186,6 +186,7 @@ namespace Mzsf.Forms.Pages
                 else
                 {
                     log.Info("支付失败：" + (int)payMethod + ",金额：" + left_je);
+                    return;
                 }
             }
             else if (payMethod == PayMethodEnum.Xianjin)
@@ -207,7 +208,7 @@ namespace Mzsf.Forms.Pages
                 else
                 {
                     log.Info("取消支付：" + (int)payMethod + ",金额：" + left_je);
-
+                    return;
                 }
             }
             else

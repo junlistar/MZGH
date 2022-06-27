@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Mzsf.ClassLib;
+using Client.ClassLib;
 using Sunny.UI;
 
-namespace Mzsf.Forms.Wedgit
+namespace Client.Forms.Wedgit
 {
     public partial class ReadCika : UIForm
     {
@@ -26,12 +26,12 @@ namespace Mzsf.Forms.Wedgit
             txtCode.Focus();
             if (_cardName=="磁卡")
             {
-                this.Text = "读磁卡(按ESC退出)";
+                this.Text = "读磁卡";
                 lblkahao.Text = "磁卡号";
             }
             else if (_cardName == "ID号")
             {
-                this.Text = "读ID号(按ESC退出)";
+                this.Text = "读ID号";
                 lblkahao.Text = "ID号"; 
             }
 
@@ -51,14 +51,6 @@ namespace Mzsf.Forms.Wedgit
                 SessionHelper.cardno = code; this.Close();
             }
             else if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
-            }
-        }
-
-        private void ReadCika_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
             }
