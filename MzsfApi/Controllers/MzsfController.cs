@@ -238,6 +238,23 @@ namespace MzsfApi.Controllers
             return list;
         }
 
+        public ResponseResult<List<MzVisit>> CreateVisitRecord(string haoming_code, string patient_id, int times, int expertflag, string unit_sn, string doctor_sn)
+        {
+            Log.Information($"GetMzVisitsByDate,{haoming_code},{patient_id},{patient_id},{times},{expertflag},{unit_sn}, {doctor_sn}");
+            var list = new List<MzVisit>();
+            try
+            {
+                list = _mzVisitRepository.CreateVisitRecord(haoming_code,  patient_id,  times,  expertflag,  unit_sn,  doctor_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzVisit>>(ex.Message);
+            }
+            return list;
+        }
+
+
         public ResponseResult<List<MzOrder>> GetMzOrdersByPatientId(string patient_id, int times)
         {
             Log.Information($"GetMzOrdersByPatientId,{patient_id},{times}");

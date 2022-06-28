@@ -89,7 +89,7 @@ namespace Mzsf.Forms.Pages
 
             if (left_je == 0)
             {
-                UIMessageTip.ShowWarning("金额为0，无需支付！");
+                UIMessageTip.ShowWarning("剩余应付金额为0，无需支付！");
                 return;
             }
 
@@ -104,8 +104,9 @@ namespace Mzsf.Forms.Pages
 
                     if (left_je > Convert.ToDouble(lblsyje.Text))
                     {
-                        UIMessageTip.ShowWarning("金额大于剩余付款金额！");
-                        return;
+                        left_je = Convert.ToDouble(lblsyje.Text);
+                        //UIMessageTip.ShowWarning("金额大于剩余付款金额！");
+                        //return;
                     }
                     //else if (left_je == 0)
                     //{
@@ -816,6 +817,7 @@ namespace Mzsf.Forms.Pages
                     log.Info("缴费成功");
                     UIMessageTip.ShowOk("缴费成功!", 1500);
                     SessionHelper.do_gh_print = true;
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                     return;
                 }

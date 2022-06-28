@@ -380,6 +380,8 @@ namespace Mzsf.Forms.Pages
                                 {
                                     var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
                                     page.TagString = result.data[i].order_no.ToString();
+                                    page.setData = UpdateBottomPrice;
+
                                     uiTabControl1.AddPage(page);
                                     //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
                                     uiTabControl1.TabPages[pageIndex].Text = result.data[i].title;
@@ -746,15 +748,17 @@ namespace Mzsf.Forms.Pages
             //var page = uiTabControl1.page(uiTabControl1.SelectedIndex).TabPage as OrderItemPage;
 
         }
+        public void UpdateBottomPrice()
+        {
+            BindBottomChargeInfo(uiTabControl1.SelectedIndex);
+        }
+
 
         public void BindBottomChargeInfo(int tabindex)
-        {
-            //var order = SessionHelper.cprCharges.Where(p => p.order_no == tabindex + 1);
-
+        { 
             var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
 .Select(g => g.First()).Select(p => p.order_no)
 .ToList();
-
 
             if (tabindex >= order_list.Count)
             {
@@ -763,16 +767,7 @@ namespace Mzsf.Forms.Pages
             var order_no = order_list[tabindex];
 
             var order = SessionHelper.cprCharges.Where(p => p.order_no == order_no);
-
-            //foreach (var item in SessionHelper.cprCharges.ToArray())
-            //{
-            //    if (item.order_no == order_no)
-            //    {
-
-            //    }
-            //}
-
-
+ 
             lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
             lblOrderItemCount.Text = order.Count().ToString();
             lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
@@ -787,7 +782,14 @@ namespace Mzsf.Forms.Pages
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
                 if (dresult == DialogResult.OK)
-                {
+                { 
+                    //打印发票
+                    if (SessionHelper.do_gh_print)
+                    {
+                        SessionHelper.do_gh_print = false;
+                        //GhPrint ghprint = new GhPrint();
+                        //ghprint.Show();
+                    }
                     //查询处方
                     SearchUser();
                 }
@@ -832,20 +834,78 @@ namespace Mzsf.Forms.Pages
             }
             else
             {
-                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有医生处方，是否确定添加处方？"))
-                {
+                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有挂号，是否添加挂号信息？"))
+                { 
+                    CreateVisitRecord();
+
                     this.uiTabControl1.Show();
                     this.pblSum.Show();
-                } 
+                }
+                else
+                {
+                    return;
+                }
                
             }
 
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
+            page.setData = UpdateBottomPrice;
             uiTabControl1.AddPage(page);
             uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + (max_order_no + 1) + "：" + cbxOrderType.Text;
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
             uiTabControl1.ShowCloseButton = true;
+        }
+
+        public bool CreateVisitRecord()
+        {
+            var d = new
+            {
+                haoming_code = SessionHelper.PatientVM.haoming_code,
+                patient_id = SessionHelper.PatientVM.patient_id,
+                times = SessionHelper.PatientVM.times,
+                expertflag = 1,
+                unit_sn = SessionHelper.uservm.dept_sn,
+                doctor_sn = SessionHelper.uservm.user_mi
+            };
+
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/mzsf/CreateVisitRecord?haoming_code={d.haoming_code}&patient_id={d.patient_id}&times={d.times}&expertflag={d.expertflag}&unit_sn={d.unit_sn}&doctor_sn={d.doctor_sn}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzVisitVM>>>(json);
+                if (result.status == 1)
+                {
+                    var mzvisit = result.data[0];
+                    GetOrders(mzvisit.patient_id, mzvisit.times);
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
+            return true;
         }
 
         /// <summary>

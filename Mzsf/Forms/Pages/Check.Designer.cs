@@ -43,7 +43,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblYouhui = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.chkcomb = new Sunny.UI.UICheckBox();
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.lblsyje = new Sunny.UI.UILabel();
             this.lblyfje = new Sunny.UI.UILabel();
@@ -63,6 +62,7 @@
             this.uiLabel3 = new Sunny.UI.UILabel();
             this.uiLabel4 = new Sunny.UI.UILabel();
             this.lblTotal = new Sunny.UI.UILabel();
+            this.chkcomb = new Sunny.UI.UICheckBox();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -157,19 +157,6 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // chkcomb
-            // 
-            this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkcomb.Location = new System.Drawing.Point(265, 473);
-            this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
-            this.chkcomb.Name = "chkcomb";
-            this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.chkcomb.Size = new System.Drawing.Size(90, 23);
-            this.chkcomb.TabIndex = 51;
-            this.chkcomb.Text = "组合支付";
-            this.chkcomb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel7
             // 
@@ -405,6 +392,21 @@
             this.lblTotal.Text = "应付金额(￥)：";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotal.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // chkcomb
+            // 
+            this.chkcomb.Checked = true;
+            this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chkcomb.Location = new System.Drawing.Point(303, 461);
+            this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
+            this.chkcomb.Name = "chkcomb";
+            this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.chkcomb.Size = new System.Drawing.Size(90, 23);
+            this.chkcomb.TabIndex = 51;
+            this.chkcomb.Text = "组合支付";
+            this.chkcomb.Visible = false;
+            this.chkcomb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiTabControl1
             // 
