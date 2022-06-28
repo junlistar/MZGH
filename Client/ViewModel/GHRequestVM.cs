@@ -100,7 +100,7 @@ namespace Client.ViewModel
         public string relation_name { get; set; }
         public string relation_code { get; set; }
         public string real_times { get; set; }
-        public string max_times { get; set; }
+        public int max_times { get; set; }
         public string p_bar_code { get; set; }
         public string p_bar_code2 { get; set; }
         public string address { get; set; }

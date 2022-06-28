@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,13 @@ namespace Client.ViewModel
         public decimal pay_je { get; set; }
 
         public string out_trade_no { get; set; }
+        public string type_name
+        {
+            get
+            {
+                return PayMethod.GetPayStringByEnumValue(pay_type);
+            }
+        }
 
     }
 }

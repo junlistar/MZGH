@@ -13,6 +13,7 @@ using Client.Forms.Pages;
 using System.ComponentModel;
 using System.Threading;
 using Client.Forms.Wedgit;
+using Mzsf.Forms.Pages;
 
 namespace Client
 {
@@ -42,7 +43,7 @@ namespace Client
             //AddPage(new FTitlePage3(), 1003);
 
             int pageIndex = 1000;
-            TreeNode parent = Aside.CreateNode("业务", 61451, 24, pageIndex);
+            TreeNode parent = Aside.CreateNode("挂号业务", 61734, 24, pageIndex);
 
             //设置Header节点索引
 
@@ -50,11 +51,26 @@ namespace Client
 
             //Aside.CreateChildNode(parent, AddPage(new GuaHao(), ++pageIndex));
             //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
-            Aside.CreateChildNode(parent, 61447, 24, "挂号", 1001);
-            Aside.CreateChildNode(parent, 62160, 24, "挂号查询", 1002);
-            Aside.CreateChildNode(parent, 61508, 24, "基础号表维护", 1003);
-            Aside.CreateChildNode(parent, 61674, 24, "生成号表", 1004);
-            Aside.CreateChildNode(parent, 61674, 24, "号表维护", 1005);
+            Aside.CreateChildNode(parent,  "挂号", 62004, 24, 1001);
+            Aside.CreateChildNode(parent,  "挂号查询", 61442, 24, 1002);
+
+
+            pageIndex = 1100;
+            parent = Aside.CreateNode("收费业务", 362656, 24, pageIndex); 
+            Aside.CreateChildNode(parent,  "划价收费", 363203, 24, 1101);
+            Aside.CreateChildNode(parent,  "退费", 362782, 24, 1102);
+
+            pageIndex = 1200;
+            parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
+
+            pageIndex = 1300;
+            parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
+            Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1003);
+            Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1004);
+            Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1005);
+
+            pageIndex = 1400;
+            parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
@@ -121,7 +137,22 @@ namespace Client
                 }
                 SelectPage(1006);
             }
-
+            if (pageIndex == 1101)
+            {
+                if (!ExistPage(1101))
+                {
+                    page = AddPage(new ChargePage());
+                }
+                SelectPage(1101);
+            }
+            else if (pageIndex == 1102)
+            {
+                if (!ExistPage(1102))
+                {
+                    page = AddPage(new RefundPage());
+                }
+                SelectPage(1102);
+            }
             //设置激活 用户键盘事件
             Task.Run(async () =>
             {
@@ -233,10 +264,10 @@ namespace Client
                 this.FormClosing += FHeaderAsideMainFooter_FormClosing;
 
                 //ping
-                _demoBGWorker.DoWork += BGWorker_DoWork;
-                _demoBGWorker.RunWorkerAsync();
-                _demoBGWorker.WorkerReportsProgress = true;
-                _demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+                //_demoBGWorker.DoWork += BGWorker_DoWork;
+                //_demoBGWorker.RunWorkerAsync();
+                //_demoBGWorker.WorkerReportsProgress = true;
+                //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
 
                 //timerSignal.Interval = 1000 * 5;//10s
                 //timerSignal.Start();

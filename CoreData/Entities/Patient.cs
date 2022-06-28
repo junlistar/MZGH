@@ -44,7 +44,7 @@ namespace Data.Entities
         public string marry_code { get; set; }
         public string max_ledger_sn { get; set; }
         public string max_receipt_sn { get; set; }
-        public string max_item_sn { get; set; }
+        public int max_item_sn { get; set; }
         public string enter_opera { get; set; }
         public string enter_date { get; set; }
         public string update_opera { get; set; }

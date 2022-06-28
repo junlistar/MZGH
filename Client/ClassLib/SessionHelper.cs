@@ -56,5 +56,12 @@ namespace Client.ClassLib
         //标志 挂号操作是否需要打印
         public static bool do_gh_print = false;
 
+
+
+        //门诊处方
+        public static List<MzOrderVM> mzOrders;
+        //门诊处方详情
+        public static List<CprChargesVM> cprCharges;
+
     }
 }
