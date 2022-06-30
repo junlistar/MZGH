@@ -362,7 +362,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
         /// <param name="patient_id"></param>
         /// <param name="times"></param>
         /// <returns></returns>
-        public bool Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
+        public int Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
         {
 
             try
@@ -745,16 +745,13 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         throw ex;
                     }
 
-                    return true;
-                }
-
+                    return max_ledger_sn;
+                } 
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-
-
+            } 
         }
 
 

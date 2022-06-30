@@ -29,12 +29,7 @@ namespace Client
         private static ILog log = LogManager.GetLogger(typeof(GuaHao));//typeof放当前类
         public GuaHao()
         {
-            InitializeComponent();
-
-            //this.DoubleBuffered = true;//设置本窗体
-            //SetStyle(ControlStyles.UserPaint, true);
-            //SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
-            //SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+            InitializeComponent(); 
         }
         /// <summary>
         /// 解决页面频繁刷新时界面闪烁问题

@@ -85,6 +85,7 @@
             this.txtsql.Location = new System.Drawing.Point(24, 71);
             this.txtsql.Multiline = true;
             this.txtsql.Name = "txtsql";
+            this.txtsql.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtsql.Size = new System.Drawing.Size(1066, 385);
             this.txtsql.TabIndex = 4;
             // 

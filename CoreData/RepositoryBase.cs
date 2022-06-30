@@ -138,6 +138,14 @@ namespace Data
                 return conn.Query<T>(selectSql, param).ToList();
             }
         }
+        public List<string> SelectStringList(string selectSql, DynamicParameters param)
+        {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                return conn.Query<string>(selectSql, param).ToList();
+            }
+        }
+
 
         public object ExcuteScalar(string selectSql, DynamicParameters param)
         {

@@ -77,6 +77,7 @@ namespace FastReportClient
                 sql = sql.Substring(param_index);
                 var p1 = sql.IndexOf("\r\n");
                 var p2 = sql.IndexOf(' ');
+                var p3 = sql.IndexOf(')');
 
                 var str = "";
                 if (p1 != -1 && p2 != -1)
@@ -228,7 +229,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                     var result = DbHelper.ExecuteNonQuery(sql, para);
 
                 }
-                // RegisterDesignerEvents();
+                RegisterDesignerEvents();
             }
         }
         Report TargetReport;
@@ -376,6 +377,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
                         var ds = DbHelper.GetDataSet(sql, "DataTable");
+                        var ds2 = DbHelper.GetDataSet(sql, "DataTable2");
 
 
                         //var dt = ds.Tables[0].Copy();
@@ -384,6 +386,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                         //////ds2.Tables[0].TableName = ""
 
                         TargetReport.RegisterData(ds);
+                        TargetReport.RegisterData(ds2);
 
 
                     }

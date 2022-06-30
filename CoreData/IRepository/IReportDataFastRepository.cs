@@ -9,6 +9,8 @@ namespace Data.IRepository
     public interface IReportDataFastRepository : IRepositoryBase<ReportData> 
     {
         DataSet GetReportDataBySql(string sql, string tb_name);
+        DataTable GetDateTableBySql(string sql);
+
         ReportData GetReportDataByCode(string code);
 
         List<ReportData> GetReportData(string code);

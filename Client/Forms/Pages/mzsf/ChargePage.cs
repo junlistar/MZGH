@@ -785,11 +785,12 @@ namespace Mzsf.Forms.Pages
                 if (dresult == DialogResult.OK)
                 { 
                     //打印发票
-                    if (SessionHelper.do_gh_print)
+                    if (SessionHelper.do_sf_print)
                     {
-                        SessionHelper.do_gh_print = false;
-                        //GhPrint ghprint = new GhPrint();
-                        //ghprint.Show();
+                        SessionHelper.do_sf_print = false; 
+                        //打印发票 
+                        Print ghprint = new Print(SessionHelper.mzsf_report_code);
+                        ghprint.Show(); 
                     }
                     //查询处方
                     SearchUser();
@@ -835,7 +836,7 @@ namespace Mzsf.Forms.Pages
             }
             else
             {
-                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有挂号，是否添加挂号信息？"))
+                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有医生处方，是否确认添加？"))
                 { 
                     CreateVisitRecord();
 
@@ -1107,6 +1108,14 @@ namespace Mzsf.Forms.Pages
                 LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
                 is_order_lock = false;
             }
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            SessionHelper.sf_print_user_ledger = 352;
+               //打印发票 
+               Print ghprint = new Print(SessionHelper.mzsf_report_code);
+            ghprint.Show();
         }
     }
 }

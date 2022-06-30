@@ -810,13 +810,14 @@ namespace Mzsf.Forms.Pages
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
 
-                if (result.status == 1 && result.data)
+                if (result.status == 1)
                 {
                     log.Info("缴费成功");
                     UIMessageTip.ShowOk("缴费成功!", 1500);
-                    SessionHelper.do_gh_print = true;
+                    SessionHelper.do_sf_print = true;
+                    SessionHelper.sf_print_user_ledger = result.data;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                     return;

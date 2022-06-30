@@ -13,7 +13,7 @@ namespace Data.IRepository.Mzsf
         List<MzOrder> GetMzOrdersByPatientId(string patient_id,int times);
 
 
-        bool Pay(string patient_id, int times, string pay_string, string order_no_str, string opera);
+        int Pay(string patient_id, int times, string pay_string, string order_no_str, string opera);
 
         bool BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1");
 

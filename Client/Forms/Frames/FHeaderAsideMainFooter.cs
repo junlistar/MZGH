@@ -14,6 +14,8 @@ using System.ComponentModel;
 using System.Threading;
 using Client.Forms.Wedgit;
 using Mzsf.Forms.Pages;
+using Client.Forms.Pages.hbgl;
+using Client.Forms.Pages.cwgl;
 
 namespace Client
 {
@@ -62,12 +64,15 @@ namespace Client
 
             pageIndex = 1200;
             parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
+            Aside.CreateChildNode(parent, "挂号日结", 61508, 24, 1201);
+            Aside.CreateChildNode(parent, "收费日结", 61508, 24, 1202);
 
             pageIndex = 1300;
             parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
             Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1003);
             Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1004);
             Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1005);
+            Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
 
             pageIndex = 1400;
             parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
@@ -80,7 +85,10 @@ namespace Client
 
             LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
 
+
+            //报表编号获取（门诊挂号，门诊收费）
             SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
+            SessionHelper.mzsf_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
         }
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
@@ -153,6 +161,25 @@ namespace Client
                 }
                 SelectPage(1102);
             }
+            else if (pageIndex == 1301)
+            {
+                if (!ExistPage(1301))
+                {
+                    page = AddPage(new RequestHour());
+                }
+                SelectPage(1301);
+            }
+            else if (pageIndex == 1201)
+            {
+                if (!ExistPage(1201))
+                {
+                    page = AddPage(new GuahaoRijie());
+                }
+                SelectPage(1201);
+            }
+
+
+
             //设置激活 用户键盘事件
             Task.Run(async () =>
             {

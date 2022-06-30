@@ -847,6 +847,35 @@ namespace CoreApi.Controllers
             }
         }
 
+        public ResponseResult<bool> EditRequestHour(string code, string name, string start_hour, string end_hour)
+        {
+
+            Log.Information($"EditRequestHour,{code},{name},{start_hour},{end_hour}");
+            try
+            {
+                return _requestHourRepository.EditRequestHour(code, name, start_hour, end_hour);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> DeleteRequestHour(string code)
+        {
+
+            Log.Information($"DeleteRequestHour,{code}");
+            try
+            {
+                return _requestHourRepository.DeleteRequestHour(code);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+          
         public ResponseResult<List<ReportParam>> GetReportParam(string code)
         {
 
@@ -876,7 +905,23 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<string>(ex.Message);
             }
-        } 
+        }
+        public ResponseResult<string> GetDateTableBySql(string sql)
+        {
+            Log.Information($"GetDateTableBySql,{sql}");
+            try
+            {
+                var dt = _reportDataFastRepository.GetDateTableBySql(sql);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
+        }
+         
 
         public ResponseResult<bool> CheckGhRepeat(string patient_id, string record_sn)
         {

@@ -1,0 +1,187 @@
+﻿using System;
+using System.Collections.Generic; 
+using System.Linq;
+using System.Net.Http; 
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Client.ClassLib;
+using Client.ViewModel;
+using log4net;
+using Sunny.UI;
+
+namespace Client.Forms.Pages.hbgl
+{
+    public partial class RequestHour : UIPage
+    {
+        private static ILog log = LogManager.GetLogger(typeof(GuaHao));//typeof放当前类
+
+        public RequestHour()
+        {
+            InitializeComponent();
+        }
+
+        private void RequestHour_Load(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
+        public void BindData()
+        {
+            GetData();
+
+            dgvRequestHour.Init();
+            this.dgvRequestHour.DataSource = SessionHelper.requestHours;
+
+            dgvRequestHour.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+        }
+
+
+        public void GetData()
+        {
+            //获取挂号时间段
+            var json = "";
+            var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
+
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+        }
+
+        private void uiSymbolButton2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
+        private void dgvRequestHour_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                txtCode.Text = dgvRequestHour.Rows[e.RowIndex].Cells["code"].Value.ToString();
+                txtName.Text = dgvRequestHour.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
+                txtHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            var d = new
+            {
+                code = txtCode.Text,
+                name = txtName.Text,
+                start_hour = txtHour1.Text,
+                end_hour = txtHour2.Text,
+
+            };
+            if (string.IsNullOrWhiteSpace(d.code)|| string.IsNullOrWhiteSpace(d.name) || string.IsNullOrWhiteSpace(d.start_hour) || string.IsNullOrWhiteSpace(d.end_hour))
+            {
+                UIMessageTip.ShowError("请将数据填写完整！");
+                return;
+            }
+
+            Task<HttpResponseMessage> task;
+            string json = "";
+            string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.ShowOk("保存成功！");
+                    BindData();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            var d = new
+            {
+                code = txtCode.Text,
+            };
+
+            if (string.IsNullOrWhiteSpace(d.code))
+            {
+                UIMessageTip.ShowError("请选择数据项目进行操作！");
+                return;
+            }
+
+            if (!UIMessageDialog.ShowAskDialog(this,"确定要进行删除操作吗？"))
+            {
+                return;
+            }
+
+            Task<HttpResponseMessage> task;
+            string json = "";
+            string paramurl = string.Format($"/api/GuaHao/DeleteRequestHour?code={d.code}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.ShowOk("删除成功！");
+                    BindData();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+    }
+}

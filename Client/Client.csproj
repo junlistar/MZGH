@@ -160,11 +160,23 @@
     <Compile Include="FastReport\Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\cwgl\GuahaoRijie.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\cwgl\GuahaoRijie.Designer.cs">
+      <DependentUpon>GuahaoRijie.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\mzgh\DetailPayList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Pages\mzgh\DetailPayList.Designer.cs">
       <DependentUpon>DetailPayList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\RequestHour.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\RequestHour.Designer.cs">
+      <DependentUpon>RequestHour.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\mzsf\CardPay.cs">
       <SubType>Form</SubType>
@@ -231,6 +243,12 @@
     </Compile>
     <Compile Include="Forms\Pages\mzsf\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\Print.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\Print.Designer.cs">
+      <DependentUpon>Print.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Wedgit\GhPrint.cs">
       <SubType>Form</SubType>
@@ -472,6 +490,12 @@
       <DependentUpon>Create.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\cwgl\GuahaoRijie.resx">
+      <DependentUpon>GuahaoRijie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\hbgl\RequestHour.resx">
+      <DependentUpon>RequestHour.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\CardPay.resx">
       <DependentUpon>CardPay.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,6 +528,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\WxPay.resx">
       <DependentUpon>WxPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\Print.resx">
+      <DependentUpon>Print.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\GhPrint.resx">
       <DependentUpon>GhPrint.cs</DependentUpon>
@@ -697,7 +724,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Pages\cwgl\" />
     <Folder Include="Forms\Pages\yhbb\" />
     <Folder Include="Resources\" />
   </ItemGroup>

@@ -16,6 +16,11 @@ namespace Data.Repository
             return ExecuteDataSet(sql, tb_name,null, CommandType.Text);
 
         }
+        public DataTable GetDateTableBySql(string sql)
+        {
+            return ExecuteTable(sql,null, CommandType.Text);
+
+        }
         public ReportData GetReportDataByCode(string code)
         {
 

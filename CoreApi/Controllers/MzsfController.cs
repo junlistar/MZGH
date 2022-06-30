@@ -320,7 +320,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        public ResponseResult<bool> Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
+        public ResponseResult<int> Pay(string patient_id, int times, string pay_string, string order_no_str, string opera)
         {
             Log.Information($"Pay,{patient_id},{times},{pay_string},{order_no_str},{opera}");
             try
@@ -330,7 +330,7 @@ namespace CoreApi.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<bool>(ex.Message);
+                return ErrorResult<int>(ex.Message);
             }
         }
         public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date, string bar_code,string status)
