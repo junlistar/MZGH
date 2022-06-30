@@ -24,10 +24,12 @@ namespace CoreApi.Controllers
     public class CwglController : ApiControllerBase
     {
         private readonly IGhDailyReportRepository _ghDailyReportRepository;
+        private readonly IReportDataFastRepository _reportDataFastRepository;
 
-        public CwglController(IGhDailyReportRepository ghDailyReportRepository)
+        public CwglController(IGhDailyReportRepository ghDailyReportRepository, IReportDataFastRepository reportDataFastRepository)
         {
             _ghDailyReportRepository = ghDailyReportRepository;
+            _reportDataFastRepository = reportDataFastRepository;
         }
 
         [HttpGet]
@@ -57,6 +59,24 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<string>>(ex.Message);
             }
             return list;
+        }
+
+
+
+        public ResponseResult<string> GetGhDailyByReportCode(string code, string report_date, string price_opera, string mz_dept_no)
+        {
+            Log.Information($"GetGhDailyByReportCode,{code},{report_date},{price_opera},{mz_dept_no}");
+            try
+            {
+                var dt = _reportDataFastRepository.GetGhDailyByReportCode(code, report_date, price_opera, mz_dept_no);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
         }
     }
 }

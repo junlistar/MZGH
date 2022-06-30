@@ -921,7 +921,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<string>(ex.Message);
             }
         }
-         
+
 
         public ResponseResult<bool> CheckGhRepeat(string patient_id, string record_sn)
         {

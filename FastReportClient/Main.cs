@@ -79,30 +79,61 @@ namespace FastReportClient
                 var p2 = sql.IndexOf(' ');
                 var p3 = sql.IndexOf(')');
 
+                var text= sql.Substring(1,1);int outnum = 0;
+                if (int.TryParse(text,out outnum))
+                {
+                    sql = sql.Substring(1+1);
+                    continue;
+                }
+
+                List<int> idx = new List<int>();
+                if (p1!=-1)
+                {
+                    idx.Add(p1);
+                }
+                if (p2 != -1)
+                {
+                    idx.Add(p2);
+                }
+                if (p3 != -1)
+                {
+                    idx.Add(p3);
+                }
+
                 var str = "";
-                if (p1 != -1 && p2 != -1)
+                var minvalue = idx.Min();
+                try
                 {
-                    if (p1 < p2)
-                    {
-                        str = sql.Substring(1, p1 - 1);
-                    }
-                    else
-                    {
-                        str = sql.Substring(1, p2 - 1);
-                    }
+                    str = sql.Substring(1, minvalue - 1); 
                 }
-                else if (p1 != -1)
+                catch (Exception ex)
                 {
-                    str = sql.Substring(1, p1 - 1);
+                    MessageBox.Show("数据库格式有误！");
+                    break;
                 }
-                else if (p2 != -1)
-                {
-                    str = sql.Substring(1, p2 - 1);
-                }
-                else
-                {
-                    MessageBox.Show("数据库格式有误！"); break;
-                }
+                //if (p1 != -1 && p2 != -1)
+                //{
+                //    if (p1 < p2)
+                //    {
+                //        str = sql.Substring(1, p1 - 1);
+                //    }
+                //    else
+                //    {
+                //        str = sql.Substring(1, p2 - 1);
+                //    }
+                //}
+                //else if (p1 != -1)
+                //{
+                //    str = sql.Substring(1, p1 - 1);
+                //}
+                //else if (p2 != -1)
+                //{
+                //    str = sql.Substring(1, p2 - 1);
+                //}
+                //else
+                //{
+                //    MessageBox.Show("数据库格式有误！"); break;
+                //}
 
 
                 paramlist.Add(str);

@@ -10,6 +10,7 @@ namespace Data.Repository
 {
     public class ReportDataFastRepository : RepositoryBase<ReportData>, IReportDataFastRepository
     {
+        ReportParamFastRepository reportParamFastRepository = new ReportParamFastRepository();
 
         public DataSet GetReportDataBySql(string sql, string tb_name)
         { 
@@ -19,6 +20,29 @@ namespace Data.Repository
         public DataTable GetDateTableBySql(string sql)
         {
             return ExecuteTable(sql,null, CommandType.Text);
+
+        }
+        public DataTable GetGhDailyByReportCode(string code,string report_date, string price_opera ,string mz_dept_no)
+        {
+            var reportData = GetReportDataByCode(code);
+            string sql = reportData.report_sql;
+            var paramlist = reportParamFastRepository.GetReportParam(code);
+            foreach (var item in paramlist)
+            {
+                if (item.param_name == "Reportdate")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'"+ report_date +"'");
+                }
+                else if (item.param_name == "opera")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + price_opera + "'");
+                }
+                else if (item.param_name == "dept_no")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'"+ mz_dept_no + "'");
+                }
+            } 
+            return ExecuteTable(sql, null, CommandType.Text);
 
         }
         public ReportData GetReportDataByCode(string code)
@@ -73,5 +97,6 @@ namespace Data.Repository
             return Update(sql, para);
 
         }
+         
     }
 }

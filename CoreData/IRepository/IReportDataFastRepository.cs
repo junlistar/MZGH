@@ -10,6 +10,7 @@ namespace Data.IRepository
     {
         DataSet GetReportDataBySql(string sql, string tb_name);
         DataTable GetDateTableBySql(string sql);
+        DataTable GetGhDailyByReportCode(string code, string report_date, string price_opera, string mz_dept_no);
 
         ReportData GetReportDataByCode(string code);
 
