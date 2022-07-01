@@ -10,7 +10,9 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
         List<string> GetGhDailyReport(string opera, string report_date, string mz_dept_no);
-         
+
+        bool SaveGhDaily(string opera);
+
         #endregion
     }
 }

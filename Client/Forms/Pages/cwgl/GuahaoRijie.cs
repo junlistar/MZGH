@@ -14,6 +14,7 @@ using MyMzghLib;
 using FastReport.Design;
 using log4net;
 using Sunny.UI;
+using System.Drawing;
 
 namespace Client.Forms.Pages.cwgl
 {
@@ -21,6 +22,8 @@ namespace Client.Forms.Pages.cwgl
     {
         private static ILog log = LogManager.GetLogger(typeof(GuahaoRijie));//typeof放当前类
 
+        public Color sel_color = Color.FromArgb(230, 80, 80);
+        public string _searchKey = "jkmx";
         public int _report_code;
 
         public GuahaoRijie()
@@ -37,12 +40,15 @@ namespace Client.Forms.Pages.cwgl
         {
             txtDate.Value = DateTime.Now;
 
-            GetGhDailyReport();
+            btn_jkmx.FillColor = sel_color;
 
             _report_code = 220008;
              
         }
          
+        /// <summary>
+        /// 查询
+        /// </summary>
         public void GetGhDailyReport()
         {
             try
@@ -74,18 +80,23 @@ namespace Client.Forms.Pages.cwgl
                     json = read.Result;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<string>>>(json);
-                cbxStatus.Clear();
+                cbxStatus.Items.Clear();
                 if (result.status == 1)
                 {
-                    if (result.data.Count>0&& result.data[0]!=null)
+                    foreach (var item in result.data)
                     {
-                        cbxStatus.Items.AddRange(result.data.ToArray());
-                    }
-                    else
-                    {
-                        cbxStatus.Items.Add("未结");
-                        cbxStatus.SelectedIndex = 0;
-                    }
+                        if (item==null)
+                        {
+                            cbxStatus.Items.Add("未结");
+                        }
+                        else
+                        {
+                            var dt_text = Convert.ToDateTime(item).ToString("yyyy-MM-dd HH:mm:ss");
+                            cbxStatus.Items.Add(dt_text);
+                        }
+                    } 
+                     cbxStatus.SelectedIndex = result.data.Count-1;
+                  
                 }
                 else
                 {
@@ -231,8 +242,14 @@ namespace Client.Forms.Pages.cwgl
                                     sql = sql.Replace(":" + item.param_name, "'1'");
                                 } 
                             }
-                        } 
-                        paramurl = string.Format($"/api/cwgl/GetGhDailyByReportCode?code={_report_code}&report_date={"1900-01-01 00:00:00"}&price_opera={SessionHelper.uservm.user_mi}&mz_dept_no={"1"}");
+                        }
+                        var report_date = cbxStatus.SelectedText;
+                        if (report_date=="未结")
+                        {
+                            report_date = "1900-01-01 00:00:00";
+                        }
+
+                        paramurl = string.Format($"/api/cwgl/GetGhDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&mz_dept_no={"1"}");
                         //paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -252,7 +269,7 @@ namespace Client.Forms.Pages.cwgl
                             TargetReport.RegisterData(dataset2);
 
                             //TargetReport.Design();
-
+                           
                             TargetReport.Preview = previewControl1;
                             TargetReport.Prepare();
                             TargetReport.Show();
@@ -285,17 +302,64 @@ namespace Client.Forms.Pages.cwgl
         private void uiSymbolButton5_Click(object sender, EventArgs e)
         {
 
-            InitializeReport("PREVIEW");
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var d = new
+                {
+                    opera = SessionHelper.uservm.user_mi,
+                    report_date = txtDate.Text,
+                    mz_dept_no = "1"
+                };
 
+                var param = $"opera={d.opera}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/cwgl/SaveGhDaily?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+               
+                if (result.status == 1 && result.data)
+                {
+                    UIMessageTip.ShowOk("保存成功");
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            previewControl1.Clear();
+            InitializeReport("PREVIEW");
+        }
 
+        private void txtDate_ValueChanged(object sender, DateTime value)
+        { 
+            //查询日结记录
+            GetGhDailyReport();
         }
     }
 }

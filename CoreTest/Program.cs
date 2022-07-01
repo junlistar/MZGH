@@ -55,7 +55,7 @@ namespace CoreTest
             //CreateRequestRecord,,2022-05-30,1,1,00040
             // rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
 
-            MzOrderRepository mzOrderRepository = new MzOrderRepository();
+            //MzOrderRepository mzOrderRepository = new MzOrderRepository();
             //http://localhost:5010//api/mzsf/pay?patient_id=000296903300&times=307&pay_string=11-86-202206161056566431&opera=00000
             //patient_id=000296903300&times=317&pay_string=12-292.8-202206201617482429&opera=00000
             //var re = mzOrderRepository.Pay("000296903300", 320, "12-156.34-202206231105297670", "00000");
@@ -66,6 +66,10 @@ namespace CoreTest
 
 
             ///api/mzsf/BackFeePart?opera=00000&pid=000296995400&ledger_sn=6&receipt_sn=2581058&receipt_no=1012067632&cheque_cash=;14;11;12&refund_item_str=01-201252-1
+
+
+            GhDailyReportRepository ghDailyReport = new GhDailyReportRepository();
+           var re = ghDailyReport.SaveGhDaily("00000");
 
             Console.WriteLine("Hello World!");
         }

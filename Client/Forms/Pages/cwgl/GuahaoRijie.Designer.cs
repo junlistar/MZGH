@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnRefresh = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
-            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDate = new Sunny.UI.UIDatePicker();
             this.cbxStatus = new Sunny.UI.UIComboBox();
+            this.txtDate = new Sunny.UI.UIDatePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
-            this.uiSymbolButton5 = new Sunny.UI.UISymbolButton();
+            this.btn_jkmx = new Sunny.UI.UISymbolButton();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
@@ -67,6 +67,20 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiSymbolButton1
+            // 
+            this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Location = new System.Drawing.Point(653, 18);
+            this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton1.Name = "uiSymbolButton1";
+            this.uiSymbolButton1.Size = new System.Drawing.Size(110, 35);
+            this.uiSymbolButton1.Symbol = 61473;
+            this.uiSymbolButton1.TabIndex = 12;
+            this.uiSymbolButton1.Text = "刷新";
+            this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnSave
             // 
@@ -124,20 +138,6 @@
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiSymbolButton1
-            // 
-            this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton1.Location = new System.Drawing.Point(653, 18);
-            this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton1.Name = "uiSymbolButton1";
-            this.uiSymbolButton1.Size = new System.Drawing.Size(110, 35);
-            this.uiSymbolButton1.Symbol = 61473;
-            this.uiSymbolButton1.TabIndex = 12;
-            this.uiSymbolButton1.Text = "刷新";
-            this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // uiPanel1
             // 
             this.uiPanel1.Controls.Add(this.cbxStatus);
@@ -151,26 +151,25 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(1224, 71);
             this.uiPanel1.TabIndex = 16;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // label1
+            // cbxStatus
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "日期";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(273, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "结账状态";
+            this.cbxStatus.DataSource = null;
+            this.cbxStatus.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxStatus.FillColor = System.Drawing.Color.White;
+            this.cbxStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxStatus.Location = new System.Drawing.Point(354, 22);
+            this.cbxStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxStatus.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxStatus.Name = "cbxStatus";
+            this.cbxStatus.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxStatus.Size = new System.Drawing.Size(187, 29);
+            this.cbxStatus.TabIndex = 3;
+            this.cbxStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxStatus.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtDate
             // 
@@ -186,25 +185,29 @@
             this.txtDate.SymbolDropDown = 61555;
             this.txtDate.SymbolNormal = 61555;
             this.txtDate.TabIndex = 2;
+            this.txtDate.Text = "2022-06-29";
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDate.Value = new System.DateTime(2022, 6, 29, 15, 4, 28, 767);
             this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtDate.ValueChanged += new Sunny.UI.UIDatePicker.OnDateTimeChanged(this.txtDate_ValueChanged);
             // 
-            // cbxStatus
+            // label2
             // 
-            this.cbxStatus.DataSource = null;
-            this.cbxStatus.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxStatus.FillColor = System.Drawing.Color.White;
-            this.cbxStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxStatus.Location = new System.Drawing.Point(354, 22);
-            this.cbxStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxStatus.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxStatus.Name = "cbxStatus";
-            this.cbxStatus.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxStatus.Size = new System.Drawing.Size(150, 29);
-            this.cbxStatus.TabIndex = 3;
-            this.cbxStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxStatus.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(273, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 21);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "结账状态";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(51, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "日期";
             // 
             // uiSymbolButton2
             // 
@@ -245,19 +248,18 @@
             this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiSymbolButton5
+            // btn_jkmx
             // 
-            this.uiSymbolButton5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton5.Location = new System.Drawing.Point(454, 185);
-            this.uiSymbolButton5.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton5.Name = "uiSymbolButton5";
-            this.uiSymbolButton5.Size = new System.Drawing.Size(141, 35);
-            this.uiSymbolButton5.TabIndex = 20;
-            this.uiSymbolButton5.Text = "缴款明细";
-            this.uiSymbolButton5.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.uiSymbolButton5.Click += new System.EventHandler(this.uiSymbolButton5_Click);
+            this.btn_jkmx.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_jkmx.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_jkmx.Location = new System.Drawing.Point(454, 185);
+            this.btn_jkmx.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btn_jkmx.Name = "btn_jkmx";
+            this.btn_jkmx.Size = new System.Drawing.Size(141, 35);
+            this.btn_jkmx.TabIndex = 20;
+            this.btn_jkmx.Text = "缴款明细";
+            this.btn_jkmx.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_jkmx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // previewControl1
             // 
@@ -279,7 +281,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1250, 675);
             this.Controls.Add(this.previewControl1);
-            this.Controls.Add(this.uiSymbolButton5);
+            this.Controls.Add(this.btn_jkmx);
             this.Controls.Add(this.uiSymbolButton4);
             this.Controls.Add(this.uiSymbolButton3);
             this.Controls.Add(this.uiSymbolButton2);
@@ -312,7 +314,7 @@
         private Sunny.UI.UISymbolButton uiSymbolButton2;
         private Sunny.UI.UISymbolButton uiSymbolButton3;
         private Sunny.UI.UISymbolButton uiSymbolButton4;
-        private Sunny.UI.UISymbolButton uiSymbolButton5;
+        private Sunny.UI.UISymbolButton btn_jkmx;
         private FastReport.Preview.PreviewControl previewControl1;
     }
 }

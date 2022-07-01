@@ -60,8 +60,20 @@ namespace CoreApi.Controllers
             }
             return list;
         }
-
-
+        public ResponseResult<bool> SaveGhDaily(string opera)
+        {
+            Log.Information($"GetGhDailyReport,{opera}");
+         
+            try
+            {
+                return _ghDailyReportRepository.SaveGhDaily(opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            } 
+        } 
 
         public ResponseResult<string> GetGhDailyByReportCode(string code, string report_date, string price_opera, string mz_dept_no)
         {

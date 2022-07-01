@@ -4,8 +4,9 @@ namespace Data.Entities
 {
     public class GhOpReceipt : BaseModel
     { 
+        public string @operator { get; set; }
         public string current_no { get; set; }
-         
+
         public string start_no { get; set; }
          
         public string end_no { get; set; }
