@@ -24,12 +24,14 @@ namespace CoreApi.Controllers
     public class CwglController : ApiControllerBase
     {
         private readonly IGhDailyReportRepository _ghDailyReportRepository;
+        private readonly IMzsfDailyReportRepository _mzsfDailyReportRepository;
         private readonly IReportDataFastRepository _reportDataFastRepository;
 
-        public CwglController(IGhDailyReportRepository ghDailyReportRepository, IReportDataFastRepository reportDataFastRepository)
+        public CwglController(IGhDailyReportRepository ghDailyReportRepository, IReportDataFastRepository reportDataFastRepository, IMzsfDailyReportRepository mzsfDailyReportRepository)
         {
             _ghDailyReportRepository = ghDailyReportRepository;
             _reportDataFastRepository = reportDataFastRepository;
+            _mzsfDailyReportRepository = mzsfDailyReportRepository;
         }
 
         [HttpGet]
@@ -90,5 +92,51 @@ namespace CoreApi.Controllers
                 return ErrorResult<string>(ex.Message);
             }
         }
+       public ResponseResult<string> GetMzsfDailyByReportCode(string code, string report_date, string price_opera, string cash_date)
+        {
+            Log.Information($"GetMzsfDailyByReportCode,{code},{report_date},{price_opera},{cash_date}");
+            try
+            {
+                var dt = _reportDataFastRepository.GetMzsfDailyByReportCode(code, report_date, price_opera, cash_date);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
+        }
+
+        public ResponseResult<List<string>> GetMzsfReport(string opera, string report_date)
+        {
+            Log.Information($"GetMzsfReport,{opera},{report_date}");
+            List<string> list;
+            try
+            {
+                list = _mzsfDailyReportRepository.GetMzsfReport(opera, report_date);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<string>>(ex.Message);
+            }
+            return list;
+        }
+        public ResponseResult<bool> SaveMzsfDaily(string opera, string cash_date)
+        {
+            Log.Information($"SaveMzsfDaily,{opera},{cash_date}");
+            try
+            {
+                return _mzsfDailyReportRepository.SaveMzsfDaily(opera, cash_date);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+         
     }
 }

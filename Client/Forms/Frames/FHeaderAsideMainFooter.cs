@@ -177,6 +177,14 @@ namespace Client
                 }
                 SelectPage(1201);
             }
+            else if (pageIndex == 1202)
+            {
+                if (!ExistPage(1202))
+                {
+                    page = AddPage(new ShoufeiRijie());
+                }
+                SelectPage(1202);
+            }
 
 
 

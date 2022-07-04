@@ -18,15 +18,15 @@ using System.Drawing;
 
 namespace Client.Forms.Pages.cwgl
 {
-    public partial class GuahaoRijie : UIPage
+    public partial class ShoufeiRijie : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(GuahaoRijie));//typeof放当前类
 
         public Color sel_color = Color.FromArgb(230, 80, 80);
-        public string _searchKey = "jkmx";
+        public string _searchKey = "hzrb";
         public int _report_code;
 
-        public GuahaoRijie()
+        public ShoufeiRijie()
         {
             InitializeComponent();
         }
@@ -40,39 +40,39 @@ namespace Client.Forms.Pages.cwgl
         {
             txtDate.Value = DateTime.Now;
 
-            btn_jkmx.FillColor = sel_color;
+            btn_hzrb.FillColor = sel_color;
 
-            _report_code = 220008;
+            _report_code = 220010;
 
             btnSave.Enabled = false;
-             
+
             previewControl1.Hide();
 
-            pnlReport.Text = "选择日期和结账状态，进行预览和结算操作";
+            pnlReport.Text = "选择日期时间，进行预览和结算操作";
 
         }
          
         /// <summary>
         /// 查询
         /// </summary>
-        public void GetGhDailyReport()
+        public void GetMzsfReport()
         {
             try
             {
 
-                //查询当日扎帐记录
+                //查询当日扎帐记录  GetMzsfReport(string opera, string report_date)
                 //ResponseResult<List<string>> GetGhDailyReport(string opera, string report_date, string mz_dept_no)
                 var d = new
                 {
                     opera = SessionHelper.uservm.user_mi,
-                    report_date = txtDate.Text,
+                    report_date = txtDate.Value.ToShortDateString(),
                     mz_dept_no = "1"
                 }; 
 
-                var param = $"opera={d.opera}&report_date={d.report_date}&mz_dept_no={d.mz_dept_no}";
+                var param = $"opera={d.opera}&report_date={d.report_date}";
 
                 var json = "";
-                var paramurl = string.Format($"/api/cwgl/GetGhDailyReport?{param}");
+                var paramurl = string.Format($"/api/cwgl/GetMzsfReport?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -89,6 +89,7 @@ namespace Client.Forms.Pages.cwgl
                 cbxStatus.Items.Clear();
                 if (result.status == 1)
                 {
+                    cbxStatus.Items.Add("未结");
                     foreach (var item in result.data)
                     {
                         if (item==null)
@@ -101,7 +102,7 @@ namespace Client.Forms.Pages.cwgl
                             cbxStatus.Items.Add(dt_text);
                         }
                     } 
-                     cbxStatus.SelectedIndex = result.data.Count-1;
+                     cbxStatus.SelectedIndex = cbxStatus.Items.Count-1;
                   
                 }
                 else
@@ -250,18 +251,22 @@ namespace Client.Forms.Pages.cwgl
                             }
                         }
                         var report_date = cbxStatus.SelectedText;
+                        var cash_date = txtDate.Text;
                         if (report_date=="未结")
                         {
                             report_date = "1900-01-01 00:00:00";
                         }
-
-                        paramurl = string.Format($"/api/cwgl/GetGhDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&mz_dept_no={"1"}");
-                        //paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
-
+                        else
+                        {
+                            cash_date = "6008-01-01";
+                        } 
+                         
+                        paramurl = string.Format($"/api/cwgl/GetMzsfDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&cash_date={cash_date}");
+                       
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
-                        if (ds_result.status == 1)
+                        if (ds_result.status == 1 )
                         {
                             if (ds_result.data != "[]")
                             {
@@ -276,21 +281,28 @@ namespace Client.Forms.Pages.cwgl
                                 dataset2.Tables[0].TableName = "DataTable2";
                                 TargetReport.RegisterData(dataset2);
 
-                                if (cbxStatus.SelectedText == "未结")
+                                //TargetReport.Design();
+                                if (report_date == "1900-01-01 00:00:00")
                                 {
                                     btnSave.Enabled = true;
                                 }
-                                //TargetReport.Design();
+                                
                                 previewControl1.Show();
                                 TargetReport.Preview = previewControl1;
                                 TargetReport.Prepare();
                                 TargetReport.Show();
+
                             }
                             else
                             {
-                                MessageBox.Show("该报表无数据");
+                                MessageBox.Show("该报表无数据"); 
                             }
-
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show(ds_result.message);
+                            log.Error(ds_result.message);
                         }
                         #endregion
                     }
@@ -330,14 +342,12 @@ namespace Client.Forms.Pages.cwgl
                 var d = new
                 {
                     opera = SessionHelper.uservm.user_mi,
-                    report_date = txtDate.Text,
-                    mz_dept_no = "1"
-                };
-
-                var param = $"opera={d.opera}";
+                    cash_date = txtDate.Text, 
+                }; 
+                var param = $"opera={d.opera}&cash_date={d.cash_date}";
 
                 var json = "";
-                var paramurl = string.Format($"/api/cwgl/SaveGhDaily?{param}");
+                var paramurl = string.Format($"/api/cwgl/SaveMzsfDaily?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -378,7 +388,8 @@ namespace Client.Forms.Pages.cwgl
         private void txtDate_ValueChanged(object sender, DateTime value)
         { 
             //查询日结记录
-            GetGhDailyReport();
+            GetMzsfReport();
         }
+         
     }
 }

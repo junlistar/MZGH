@@ -40,7 +40,7 @@ order by report_date";
         /// <param name="opera"></param>
         /// <returns></returns>
         public bool SaveGhDaily(string opera)
-        { 
+        {
             try
             {
                 DynamicParameters para;
@@ -197,7 +197,7 @@ values
                                 para = new DynamicParameters();
                                 para.Add("@P1", item.@operator);
                                 para.Add("@P2", dtNow);
-                                para.Add("@P3", item.start_no);
+                                para.Add("@P3", item.current_no);
                                 para.Add("@P4", item.current_no);
                                 para.Add("@P5", item.end_no);
                                 para.Add("@P6", item.step_length);
@@ -230,7 +230,7 @@ values
                         var in_amount = deposit_list.Where(p => p > 0).Sum();
                         var out_amount = deposit_list.Where(p => p < 0).Sum();
 
-
+                        /////???挂号费+诊疗费=01
                         sql = @"insert into a_daily_report_data
                           (report_sn, code, in_amount, out_amount)
                         values
@@ -242,31 +242,53 @@ values
                         para.Add("@P4", out_amount);
                         connection.Execute(sql, para, transaction);
 
-                        //todo:这里需要重新处理，获取挂号相关发票号 写入
-                        sql = @"select receipt_no from mz_receipt where cash_opera='00000' 
-	and backfee_date>(select top 1 report_date from a_daily_report
-where opera_id='00000' and subsys_id = 'mzgh'
- order by report_date desc)";
-                        var receipt_no_list = connection.Query<int>(sql, para, transaction);
-                        foreach (var receipt_no in receipt_no_list)
+                        //                        //todo:这里需要重新处理，获取挂号相关发票号 写入
+                        //                        sql = @"select receipt_no from mz_receipt where cash_opera=@cash_opera 
+                        //	and backfee_date>(select top 1 report_date from a_daily_report
+                        //where opera_id=@cash_opera and subsys_id = 'mzgh'
+                        // order by report_date desc)";
+                        //                        para = new DynamicParameters();
+                        //                        para.Add("@cash_opera", opera);
+                        //                        var receipt_no_list = connection.Query<int>(sql, para, transaction);
+                        //                        foreach (var receipt_no in receipt_no_list)
+                        //                        {
+                        //                            sql = @"insert into a_daily_report_receipt
+                        //                                  (report_sn, begin_no, end_no, flag)
+                        //                                values
+                        //                                  (@P1, @P2, @P3, @P4)";
+                        //                            para = new DynamicParameters();
+                        //                            para.Add("@P1", hospital.report_sn);
+                        //                            para.Add("@P2", receipt_no);
+                        //                            para.Add("@P3", receipt_no);
+                        //                            para.Add("@P4", "3");
+
+                        //                            connection.Execute(sql, para, transaction);
+                        //                        }
+
+                        foreach (var item in ghOpReceiptCancelList)
                         {
                             sql = @"insert into a_daily_report_receipt
-                                  (report_sn, begin_no, end_no, flag)
-                                values
-                                  (@P1, @P2, @P3, @P4)";
+                                                          (report_sn, begin_no, end_no, flag)
+                                                        values
+                                                          (@P1, @P2, @P3, @P4)";
+                            var end_no = (int.Parse(item.start_no) - 1).ToString();
+                            end_no = end_no.PadLeft(item.start_no.Length - end_no.Length, '0');
+
                             para = new DynamicParameters();
                             para.Add("@P1", hospital.report_sn);
-                            para.Add("@P2", receipt_no);
-                            para.Add("@P3", receipt_no);
-                            para.Add("@P4", "3");
+                            para.Add("@P2", item.start_no);
+                            para.Add("@P3", end_no);
+                            para.Add("@P4", 1);
 
                             connection.Execute(sql, para, transaction);
                         }
+
+
                         sql = @"update a_hospital set report_sn=@new_sn where no =@no and report_sn=@report_sn";
                         para = new DynamicParameters();
-                        para.Add("@new_sn", hospital.report_sn+1);
+                        para.Add("@new_sn", hospital.report_sn + 1);
                         para.Add("@no", hospital.no);
-                        para.Add("@report_sn", hospital.report_sn); 
+                        para.Add("@report_sn", hospital.report_sn);
                         connection.Execute(sql, para, transaction);
 
                         transaction.Commit();

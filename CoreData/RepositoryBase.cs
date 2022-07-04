@@ -113,6 +113,14 @@ namespace Data
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
             {
                 return conn.Query<T>(SPName, param, null, true, null, CommandType.StoredProcedure).ToList();
+                 
+            }
+        }
+        public int ExecuteSP(string SPName, DynamicParameters param)
+        {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                return conn.Execute(SPName, param, null, null, CommandType.StoredProcedure); 
             }
         }
 

@@ -42,9 +42,38 @@ namespace Data.Repository
                     sql = sql.Replace(":" + item.param_name, "'"+ mz_dept_no + "'");
                 }
             } 
+            return ExecuteTable(sql, null, CommandType.Text); 
+        }
+        public DataTable GetMzsfDailyByReportCode(string code, string report_date, string price_opera,string cash_date)
+        {
+            var reportData = GetReportDataByCode(code);
+            string sql = reportData.report_sql;
+            var paramlist = reportParamFastRepository.GetReportParam(code);
+            foreach (var item in paramlist)
+            {
+                if (item.param_name == "rep_date")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + report_date + "'");
+                }
+                else if (item.param_name == "op_id")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + price_opera + "'");
+                }
+                else if (item.param_name == "mz_dept_no")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'1'");
+                }
+                else if (item.param_name == "cash_date")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + cash_date + "'");
+                }
+                
+            }
             return ExecuteTable(sql, null, CommandType.Text);
 
         }
+
+
         public ReportData GetReportDataByCode(string code)
         {
 

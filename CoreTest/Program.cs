@@ -68,8 +68,12 @@ namespace CoreTest
             ///api/mzsf/BackFeePart?opera=00000&pid=000296995400&ledger_sn=6&receipt_sn=2581058&receipt_no=1012067632&cheque_cash=;14;11;12&refund_item_str=01-201252-1
 
 
-            GhDailyReportRepository ghDailyReport = new GhDailyReportRepository();
-           var re = ghDailyReport.SaveGhDaily("00000");
+           // GhDailyReportRepository ghDailyReport = new GhDailyReportRepository();
+           //var re = ghDailyReport.SaveGhDaily("00000");
+
+
+            ReportDataFastRepository reportDataFastRepository = new ReportDataFastRepository();
+            reportDataFastRepository.GetMzsfDailyByReportCode("220010","1900-01-01 00:00:00","00000","1");
 
             Console.WriteLine("Hello World!");
         }
