@@ -284,12 +284,12 @@ values
                         }
 
 
-                        sql = @"update a_hospital set report_sn=@new_sn where no =@no and report_sn=@report_sn";
-                        para = new DynamicParameters();
-                        para.Add("@new_sn", hospital.report_sn + 1);
-                        para.Add("@no", hospital.no);
-                        para.Add("@report_sn", hospital.report_sn);
-                        connection.Execute(sql, para, transaction);
+                        sql = @"update a_hospital set report_sn=report_sn+1";
+                        //para = new DynamicParameters();
+                        //para.Add("@new_sn", hospital.report_sn + 1);
+                        //para.Add("@no", hospital.no);
+                        //para.Add("@report_sn", hospital.report_sn);
+                        connection.Execute(sql, null, transaction);
 
                         transaction.Commit();
                     }

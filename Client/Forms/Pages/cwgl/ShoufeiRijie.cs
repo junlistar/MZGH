@@ -365,6 +365,12 @@ namespace Client.Forms.Pages.cwgl
                 if (result.status == 1 && result.data)
                 {
                     UIMessageTip.ShowOk("保存成功");
+                      
+                    //查询日结记录
+                    GetMzsfReport();
+                    previewControl1.Hide();
+                    previewControl1.Clear();
+                    InitializeReport("PREVIEW");
                 }
                 else
                 {

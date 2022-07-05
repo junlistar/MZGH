@@ -16,6 +16,7 @@ using Client.Forms.Wedgit;
 using Mzsf.Forms.Pages;
 using Client.Forms.Pages.hbgl;
 using Client.Forms.Pages.cwgl;
+using Client.Forms.Pages.qxgl;
 
 namespace Client
 {
@@ -64,8 +65,8 @@ namespace Client
 
             pageIndex = 1200;
             parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
-            Aside.CreateChildNode(parent, "挂号日结", 61508, 24, 1201);
-            Aside.CreateChildNode(parent, "收费日结", 61508, 24, 1202);
+            Aside.CreateChildNode(parent, "挂号日结", 62004, 24, 1201);
+            Aside.CreateChildNode(parent, "收费日结", 57581, 24, 1202);
 
             pageIndex = 1300;
             parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
@@ -76,6 +77,11 @@ namespace Client
 
             pageIndex = 1400;
             parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
+
+
+            pageIndex = 1500;
+            parent = Aside.CreateNode("权限管理", 61953, 24, pageIndex);
+            Aside.CreateChildNode(parent, "用户管理", 61508, 24, 1501);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
@@ -185,7 +191,15 @@ namespace Client
                 }
                 SelectPage(1202);
             }
-
+            else if (pageIndex == 1501)
+            {
+                if (!ExistPage(1501))
+                {
+                    page = AddPage(new UserManage());
+                }
+                SelectPage(1501);
+            }
+            
 
 
             //设置激活 用户键盘事件

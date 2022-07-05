@@ -250,6 +250,36 @@
     <Compile Include="Forms\Pages\mzsf\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddReport.Designer.cs">
+      <DependentUpon>AddReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddFunction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddFunction.Designer.cs">
+      <DependentUpon>AddFunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddUser.Designer.cs">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\AddGroup.Designer.cs">
+      <DependentUpon>AddGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\UserManage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\UserManage.Designer.cs">
+      <DependentUpon>UserManage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,6 +501,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
     <Compile Include="ViewModel\MzDepositVM.cs" />
@@ -537,6 +568,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\WxPay.resx">
       <DependentUpon>WxPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\AddReport.resx">
+      <DependentUpon>AddReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\AddFunction.resx">
+      <DependentUpon>AddFunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\AddUser.resx">
+      <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\AddGroup.resx">
+      <DependentUpon>AddGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\UserManage.resx">
+      <DependentUpon>UserManage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\Print.resx">
       <DependentUpon>Print.cs</DependentUpon>

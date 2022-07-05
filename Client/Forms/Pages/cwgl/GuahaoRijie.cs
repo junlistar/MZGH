@@ -355,6 +355,14 @@ namespace Client.Forms.Pages.cwgl
                 if (result.status == 1 && result.data)
                 {
                     UIMessageTip.ShowOk("保存成功");
+
+                    //重新加载时间 和内容
+
+                    //查询日结记录
+                    GetGhDailyReport();
+                    previewControl1.Hide();
+                    previewControl1.Clear();
+                    InitializeReport("PREVIEW");
                 }
                 else
                 {
@@ -379,6 +387,11 @@ namespace Client.Forms.Pages.cwgl
         { 
             //查询日结记录
             GetGhDailyReport();
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

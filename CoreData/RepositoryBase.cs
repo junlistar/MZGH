@@ -32,8 +32,6 @@ namespace Data
             {
                 return CacheHelper.Get<string>(tag.ToString());
             }
-
-
         }
 
         // sql语句
@@ -130,7 +128,7 @@ namespace Data
             {
                 return conn.Execute(insertSql, entity);
             }
-        }
+        } 
 
         public List<T> Select(string selectSql)
         {
