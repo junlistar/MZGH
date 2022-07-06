@@ -10,8 +10,11 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
 
-        List<XTUserGroup> GetXTUserGroupsBySysId(string subsys_id, string user_group);
-         
+        List<XTUserGroup> GetXTUserGroupsByGroupId(string subsys_id, string user_group);
+
+        List<XTUserGroup> GetXTUserGroups(string subsys_id);
+
+        bool AddXtUserGroups(string func_str, string subsys_id, string user_group);
 
         #endregion
     }

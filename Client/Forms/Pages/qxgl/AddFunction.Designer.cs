@@ -31,9 +31,9 @@
             this.uiLine1 = new Sunny.UI.UILine();
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
-            this.uiTransfer1 = new Sunny.UI.UITransfer();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiLabel2 = new Sunny.UI.UILabel();
+            this.tsf_functions = new Sunny.UI.UITransfer();
             this.SuspendLayout();
             // 
             // uiLine1
@@ -46,7 +46,7 @@
             this.uiLine1.Location = new System.Drawing.Point(3, 549);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(704, 29);
+            this.uiLine1.Size = new System.Drawing.Size(696, 29);
             this.uiLine1.Style = Sunny.UI.UIStyle.Red;
             this.uiLine1.TabIndex = 10;
             this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -61,7 +61,7 @@
             this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(544, 584);
+            this.btnCancel.Location = new System.Drawing.Point(536, 584);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -88,7 +88,7 @@
             this.btnSave.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSave.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(405, 584);
+            this.btnSave.Location = new System.Drawing.Point(397, 584);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -103,58 +103,6 @@
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // uiTransfer1
-            // 
-            this.uiTransfer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiTransfer1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.uiTransfer1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.uiTransfer1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTransfer1.ItemsLeft.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "0"});
-            this.uiTransfer1.ItemsRight.AddRange(new object[] {
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "66",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6",
-            "6"});
-            this.uiTransfer1.Location = new System.Drawing.Point(12, 78);
-            this.uiTransfer1.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
-            this.uiTransfer1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiTransfer1.Name = "uiTransfer1";
-            this.uiTransfer1.Padding = new System.Windows.Forms.Padding(1);
-            this.uiTransfer1.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
-            this.uiTransfer1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.uiTransfer1.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiTransfer1.ShowText = false;
-            this.uiTransfer1.Size = new System.Drawing.Size(687, 474);
-            this.uiTransfer1.Style = Sunny.UI.UIStyle.Red;
-            this.uiTransfer1.TabIndex = 13;
-            this.uiTransfer1.Text = "uiTransfer1";
-            this.uiTransfer1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiTransfer1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel1
             // 
@@ -184,14 +132,36 @@
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // tsf_functions
+            // 
+            this.tsf_functions.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.tsf_functions.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.tsf_functions.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tsf_functions.Location = new System.Drawing.Point(31, 89);
+            this.tsf_functions.Margin = new System.Windows.Forms.Padding(7, 9, 7, 9);
+            this.tsf_functions.MinimumSize = new System.Drawing.Size(1, 1);
+            this.tsf_functions.Name = "tsf_functions";
+            this.tsf_functions.Padding = new System.Windows.Forms.Padding(1);
+            this.tsf_functions.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
+            this.tsf_functions.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.tsf_functions.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.tsf_functions.ShowMulti = false;
+            this.tsf_functions.ShowText = false;
+            this.tsf_functions.Size = new System.Drawing.Size(642, 458);
+            this.tsf_functions.Style = Sunny.UI.UIStyle.Red;
+            this.tsf_functions.TabIndex = 16;
+            this.tsf_functions.Text = "uiTransfer1";
+            this.tsf_functions.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tsf_functions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // AddFunction
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(710, 643);
+            this.ClientSize = new System.Drawing.Size(702, 643);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.Controls.Add(this.tsf_functions);
             this.Controls.Add(this.uiLabel2);
             this.Controls.Add(this.uiLabel1);
-            this.Controls.Add(this.uiTransfer1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.uiLine1);
@@ -205,6 +175,7 @@
             this.Text = "功能选择(按Enter保存，ESC退出)";
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
+            this.Load += new System.EventHandler(this.AddFunction_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddGroup_KeyUp);
             this.ResumeLayout(false);
 
@@ -214,8 +185,8 @@
         private Sunny.UI.UILine uiLine1;
         private Sunny.UI.UISymbolButton btnCancel;
         private Sunny.UI.UISymbolButton btnSave;
-        private Sunny.UI.UITransfer uiTransfer1;
         private Sunny.UI.UILabel uiLabel1;
         private Sunny.UI.UILabel uiLabel2;
+        private Sunny.UI.UITransfer tsf_functions;
     }
 }

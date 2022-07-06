@@ -151,7 +151,7 @@ namespace Client.ClassLib
 
             return _httpClient;
 
-        }
+        } 
 
     }
 }

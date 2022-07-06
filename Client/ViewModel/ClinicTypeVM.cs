@@ -31,6 +31,8 @@ namespace Client.ViewModel
         public string py_code { get; set; }
         public string d_code { get; set; }
 
+        public string dept_sn { get; set; }
+        public string dept_name { get; set; }
     }
 
     public class ChargeTypeVM

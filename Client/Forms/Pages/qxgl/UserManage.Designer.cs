@@ -35,17 +35,17 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.tv_groups = new Sunny.UI.UITreeView();
+            this.cms_group = new Sunny.UI.UIContextMenuStrip();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
             this.uiTitlePanel2 = new Sunny.UI.UITitlePanel();
             this.tv_users = new Sunny.UI.UITreeView();
+            this.cms_user = new Sunny.UI.UIContextMenuStrip();
             this.uiTitlePanel3 = new Sunny.UI.UITitlePanel();
             this.tv_functions = new Sunny.UI.UITreeView();
+            this.cms_functions = new Sunny.UI.UIContextMenuStrip();
             this.uiTitlePanel4 = new Sunny.UI.UITitlePanel();
             this.tv_reports = new Sunny.UI.UITreeView();
-            this.cms_group = new Sunny.UI.UIContextMenuStrip();
-            this.cms_functions = new Sunny.UI.UIContextMenuStrip();
-            this.cms_user = new Sunny.UI.UIContextMenuStrip();
             this.cms_reports = new Sunny.UI.UIContextMenuStrip();
             this.pnlTitle.SuspendLayout();
             this.uiTitlePanel1.SuspendLayout();
@@ -179,11 +179,20 @@
             this.tv_groups.ShowText = false;
             this.tv_groups.Size = new System.Drawing.Size(287, 553);
             this.tv_groups.Style = Sunny.UI.UIStyle.LayuiOrange;
+            this.tv_groups.StyleCustomMode = true;
             this.tv_groups.TabIndex = 17;
             this.tv_groups.Text = "uiTreeView1";
             this.tv_groups.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.tv_groups.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.tv_groups.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_groups_AfterSelect); 
+            this.tv_groups.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_groups_AfterSelect);
+            // 
+            // cms_group
+            // 
+            this.cms_group.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.cms_group.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cms_group.Name = "cms_group";
+            this.cms_group.Size = new System.Drawing.Size(61, 4);
+            this.cms_group.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // imageList1
             // 
@@ -207,7 +216,7 @@
             this.uiTitlePanel1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(184)))), ((int)(((byte)(0)))));
             this.uiTitlePanel1.ShowText = false;
             this.uiTitlePanel1.Size = new System.Drawing.Size(295, 600);
-            this.uiTitlePanel1.Style = Sunny.UI.UIStyle.LayuiOrange;
+            this.uiTitlePanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiTitlePanel1.StyleCustomMode = true;
             this.uiTitlePanel1.TabIndex = 19;
             this.uiTitlePanel1.Text = "用户组";
@@ -228,7 +237,7 @@
             this.uiTitlePanel2.Name = "uiTitlePanel2";
             this.uiTitlePanel2.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel2.ShowText = false;
-            this.uiTitlePanel2.Size = new System.Drawing.Size(513, 237);
+            this.uiTitlePanel2.Size = new System.Drawing.Size(513, 305);
             this.uiTitlePanel2.TabIndex = 20;
             this.uiTitlePanel2.Text = "用户";
             this.uiTitlePanel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -250,11 +259,19 @@
             this.tv_users.Name = "tv_users";
             this.tv_users.ShowLines = true;
             this.tv_users.ShowText = false;
-            this.tv_users.Size = new System.Drawing.Size(505, 192);
+            this.tv_users.Size = new System.Drawing.Size(505, 260);
             this.tv_users.TabIndex = 17;
             this.tv_users.Text = "uiTreeView1";
             this.tv_users.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tv_users.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0); 
+            this.tv_users.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cms_user
+            // 
+            this.cms_user.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.cms_user.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cms_user.Name = "cms_user";
+            this.cms_user.Size = new System.Drawing.Size(61, 4);
+            this.cms_user.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiTitlePanel3
             // 
@@ -294,7 +311,15 @@
             this.tv_functions.TabIndex = 0;
             this.tv_functions.Text = "uiTreeView2";
             this.tv_functions.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tv_functions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0); 
+            this.tv_functions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cms_functions
+            // 
+            this.cms_functions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.cms_functions.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cms_functions.Name = "cms_functions";
+            this.cms_functions.Size = new System.Drawing.Size(61, 4);
+            this.cms_functions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiTitlePanel4
             // 
@@ -303,13 +328,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uiTitlePanel4.Controls.Add(this.tv_reports);
             this.uiTitlePanel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel4.Location = new System.Drawing.Point(670, 332);
+            this.uiTitlePanel4.Location = new System.Drawing.Point(670, 405);
             this.uiTitlePanel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel4.Name = "uiTitlePanel4";
             this.uiTitlePanel4.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel4.ShowText = false;
-            this.uiTitlePanel4.Size = new System.Drawing.Size(513, 353);
+            this.uiTitlePanel4.Size = new System.Drawing.Size(513, 280);
             this.uiTitlePanel4.TabIndex = 22;
             this.uiTitlePanel4.Text = "报表";
             this.uiTitlePanel4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -331,35 +356,11 @@
             this.tv_reports.Name = "tv_reports";
             this.tv_reports.ShowLines = true;
             this.tv_reports.ShowText = false;
-            this.tv_reports.Size = new System.Drawing.Size(505, 309);
+            this.tv_reports.Size = new System.Drawing.Size(505, 236);
             this.tv_reports.TabIndex = 0;
             this.tv_reports.Text = "uiTreeView3";
             this.tv_reports.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tv_reports.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0); 
-            // 
-            // cms_group
-            // 
-            this.cms_group.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.cms_group.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cms_group.Name = "cms_group";
-            this.cms_group.Size = new System.Drawing.Size(61, 4);
-            this.cms_group.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cms_functions
-            // 
-            this.cms_functions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.cms_functions.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cms_functions.Name = "cms_functions";
-            this.cms_functions.Size = new System.Drawing.Size(61, 4);
-            this.cms_functions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cms_user
-            // 
-            this.cms_user.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.cms_user.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cms_user.Name = "cms_user";
-            this.cms_user.Size = new System.Drawing.Size(61, 4);
-            this.cms_user.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.tv_reports.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cms_reports
             // 

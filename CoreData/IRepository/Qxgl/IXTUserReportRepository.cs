@@ -10,8 +10,10 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
 
-        List<XTUserReport> GetXTUserReportsBySysId(string subsys_id, string user_group);
-         
+        List<XTUserReport> GetXTUserReportsByGroupId(string subsys_id, string user_group);
+
+        List<XTUserReport> GetXTUserReports(string subsys_id);
+
 
         #endregion
     }

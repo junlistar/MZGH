@@ -17,7 +17,8 @@ namespace Client.Forms.Pages.qxgl
     public partial class UserManage : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(UserManage));//typeof放当前类
-          
+        List<XTUserGroupVM> functions;
+
         public UserManage()
         {
             InitializeComponent();
@@ -73,8 +74,12 @@ namespace Client.Forms.Pages.qxgl
 
             if (item.Tag.ToString() == "A")
             {
-                AddGroup addGroup = new AddGroup();
-                addGroup.ShowDialog(); 
+                AddGroup addGroup = new AddGroup(); 
+                var dr = addGroup.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    InitGroupsData();
+                }
             }
             else if (item.Tag.ToString() == "D")
             {
@@ -83,17 +88,23 @@ namespace Client.Forms.Pages.qxgl
                 var _msg = "确定要删除用户组：" + _name + " 吗?";
                 if (UIMessageBox.ShowAsk(_msg))
                 {
-                    UIMessageTip.Show("todo:删除操作" + _key);
+                    DeleteGroup(_key); 
                 }
             }  
         }
+         
         private void FunctionItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
             if (item.Tag.ToString() == "A")
             {
-                AddFunction addFunction = new AddFunction();
-                addFunction.ShowDialog();
+                var _group_id = tv_groups.SelectedNode.Name;
+                AddFunction addFunction = new AddFunction(functions,"mz", _group_id);
+                if (addFunction.ShowDialog() == DialogResult.OK)
+                {
+                    //刷新 
+                    InitUserGroupData(_group_id); 
+                } ;
             }
             else if (item.Tag.ToString() == "D")
             {
@@ -109,18 +120,36 @@ namespace Client.Forms.Pages.qxgl
 
             if (item.Tag.ToString() == "A")
             {
-                AddUser addUser = new AddUser();
-                addUser.ShowDialog();
+                if (tv_groups.Nodes.Count>0)
+                {
+                    var _group_id =int.Parse(tv_groups.SelectedNode.Name);
+
+                    AddUser addUser = new AddUser(_group_id);
+                    if (addUser.ShowDialog()== DialogResult.OK)
+                    {
+                        //刷新 
+                        InitUserData(_group_id.ToString());
+                    } ;
+                }
+                else
+                {
+                    UIMessageTip.ShowError("没有用户组信息！" );
+                }
+                
             }
             else if (item.Tag.ToString() == "D")
             {
+                var _group_id = tv_groups.SelectedNode.Name;
+
                 //var _name = tv_users.SelectedNode.Text.Trim();
                 var _name = tv_users.SelectedNode.Tag.ToString().Trim();
                 var _key = tv_users.SelectedNode.Name.Trim();
                 var _msg = "确定要删除用户：" + _name + " 吗?";
                 if (UIMessageBox.ShowAsk(_msg))
                 {
-                    UIMessageTip.Show("todo:删除操作" + _key);
+                    string login_name = _key.Split(",")[1];
+
+                    DeleteUser(login_name, _group_id);
                 }
             }
         }
@@ -196,12 +225,12 @@ namespace Client.Forms.Pages.qxgl
 
         }
 
-        public void BindOtherTreeView(string subsys_id)
+        public void BindOtherTreeView(string user_group)
         {
             //MessageBox.Show(subsys_id);
-            InitUserData(subsys_id);
-            InitUserGroupData(subsys_id);
-            InitUserReportsData(subsys_id);
+            InitUserData(user_group);
+            InitUserGroupData(user_group);
+            InitUserReportsData(user_group);
         }
 
         public void InitUserData(string user_group)
@@ -238,9 +267,9 @@ namespace Client.Forms.Pages.qxgl
                     {
                         string view_text = "用户名：" + item.name + "\t" + "用户工号：" + item.user_mi + "\t" + "登录名：" + item.user_name;
                         TreeNode treeNode = new TreeNode();
-                        treeNode.Name = item.user_mi.ToString();
+                        treeNode.Name = item.user_mi +"," + item.user_name;
                         treeNode.Text = view_text;
-                        treeNode.Tag = item.name;
+                        treeNode.Tag = item.name; 
                         //tv_users.Nodes.Add(item.user_mi.ToString(), view_text);
                         tv_users.Nodes.Add(treeNode);
                     }
@@ -274,7 +303,7 @@ namespace Client.Forms.Pages.qxgl
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
 
                 var json = "";
-                var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsBySysId?{param}");
+                var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsByGroupId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -291,6 +320,7 @@ namespace Client.Forms.Pages.qxgl
                 tv_functions.Nodes.Clear();
                 if (result.status == 1)
                 {
+                    functions = result.data;
                     foreach (var item in result.data)
                     {
                         tv_functions.Nodes.Add(item.func_name, item.func_desc);
@@ -325,7 +355,7 @@ namespace Client.Forms.Pages.qxgl
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
 
                 var json = "";
-                var paramurl = string.Format($"/api/qxgl/GetXTUserReportsBySysId?{param}");
+                var paramurl = string.Format($"/api/qxgl/GetXTUserReportsByGroupId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -397,7 +427,98 @@ namespace Client.Forms.Pages.qxgl
             this.Close();
         }
 
-      
+      public void DeleteGroup(string user_group)
+        {
+            // DeleteXTGroup(string user_group, string subsys_id)
+            try
+            {
+                var d = new
+                {
+                    user_group = user_group,
+                    subsys_id = "mz"
+                };
+
+                var param = $"user_group={d.user_group}&subsys_id={d.subsys_id}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/DeleteXTGroup?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+                
+                if (result.status == 1)
+                { 
+                    UIMessageTip.Show("删除成功！");
+                    InitGroupsData();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        public void DeleteUser(string user_name, string user_group)
+        {
+            // DeleteXtUser(string user_name, string subsys_id, string user_group)
+            try
+            {
+                var d = new
+                {
+                    user_name = user_name,
+                    user_group = user_group,
+                    subsys_id = "mz"
+                };
+
+                var param = $"user_name={d.user_name}&user_group={d.user_group}&subsys_id={d.subsys_id}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/DeleteXtUser?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("删除成功！");
+                    InitUserData(user_group);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
     }
 
 }

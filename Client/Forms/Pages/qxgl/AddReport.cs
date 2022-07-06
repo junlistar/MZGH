@@ -7,12 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.ClassLib;
+using Client.ViewModel;
+using log4net;
 using Sunny.UI;
 
 namespace Client.Forms.Pages.qxgl
 {
     public partial class AddReport : UIForm
     {
+        private static ILog log = LogManager.GetLogger(typeof(AddReport));//typeof放当前类
+
         public AddReport()
         {
             InitializeComponent();
@@ -48,6 +53,83 @@ namespace Client.Forms.Pages.qxgl
             //todo:save
 
              
+        }
+
+        public void LoadData()
+        {
+            try
+            {
+                var d = new
+                {
+                    subsys_id = "mz"
+                };
+
+                var param = $"subsys_id={d.subsys_id}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/GetXTUserReports?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserReportVM>>>(json);
+                tv_reports.Nodes.Clear();
+                if (result.status == 1)
+                {
+                    foreach (var item in result.data)
+                    {
+                        if (item.parent_id == null || result.data.Where(p => p.rep_id == item.parent_id).Count() == 0)
+                        {
+                            tv_reports.Nodes.Add(item.rep_id, item.rep_name);
+
+                        }
+                    }
+                    if (tv_reports.Nodes.Count > 0)
+                    {
+                        LoadSubItems(tv_reports.Nodes, result.data);
+                        tv_reports.ExpandAll();
+                        tv_reports.SelectedNode = tv_reports.Nodes[0];
+                    }
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            } 
+        }
+        public void LoadSubItems(TreeNodeCollection treeNodeCollection, List<XTUserReportVM> data)
+        {
+
+            foreach (TreeNode node in treeNodeCollection)
+            {
+                var items = data.Where(p => p.parent_id == node.Name).ToList();
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var subitem in items)
+                    {
+                        node.Nodes.Add(subitem.rep_id, subitem.rep_name);
+                    }
+                    LoadSubItems(node.Nodes, data);
+                }
+            }
+        }
+
+        private void AddReport_Load(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

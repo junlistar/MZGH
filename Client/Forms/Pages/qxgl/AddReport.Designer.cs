@@ -32,7 +32,7 @@
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.uiLabel2 = new Sunny.UI.UILabel();
-            this.tv_groups = new Sunny.UI.UITreeView();
+            this.tv_reports = new Sunny.UI.UITreeView();
             this.SuspendLayout();
             // 
             // uiLine1
@@ -117,35 +117,33 @@
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // tv_groups
+            // tv_reports
             // 
-            this.tv_groups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tv_reports.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tv_groups.FillColor = System.Drawing.Color.White;
-            this.tv_groups.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.tv_groups.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tv_groups.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.tv_groups.Location = new System.Drawing.Point(18, 93);
-            this.tv_groups.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tv_groups.MinimumSize = new System.Drawing.Size(1, 1);
-            this.tv_groups.Name = "tv_groups";
-            this.tv_groups.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.tv_groups.ShowLines = true;
-            this.tv_groups.ShowText = false;
-            this.tv_groups.Size = new System.Drawing.Size(500, 524);
-            this.tv_groups.Style = Sunny.UI.UIStyle.Red;
-            this.tv_groups.TabIndex = 18;
-            this.tv_groups.Text = "uiTreeView1";
-            this.tv_groups.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.tv_groups.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.tv_reports.FillColor = System.Drawing.Color.White;
+            this.tv_reports.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tv_reports.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.tv_reports.Location = new System.Drawing.Point(18, 93);
+            this.tv_reports.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tv_reports.MinimumSize = new System.Drawing.Size(1, 1);
+            this.tv_reports.Name = "tv_reports";
+            this.tv_reports.ShowLines = true;
+            this.tv_reports.ShowText = false;
+            this.tv_reports.Size = new System.Drawing.Size(500, 524);
+            this.tv_reports.StyleCustomMode = true;
+            this.tv_reports.TabIndex = 18;
+            this.tv_reports.Text = "uiTreeView1";
+            this.tv_reports.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tv_reports.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // AddReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(534, 719);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.Controls.Add(this.tv_groups);
+            this.Controls.Add(this.tv_reports);
             this.Controls.Add(this.uiLabel2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -160,6 +158,7 @@
             this.Text = "添加报表(按Enter保存，ESC退出)";
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
+            this.Load += new System.EventHandler(this.AddReport_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddGroup_KeyUp);
             this.ResumeLayout(false);
 
@@ -170,6 +169,6 @@
         private Sunny.UI.UISymbolButton btnCancel;
         private Sunny.UI.UISymbolButton btnSave;
         private Sunny.UI.UILabel uiLabel2;
-        private Sunny.UI.UITreeView tv_groups;
+        private Sunny.UI.UITreeView tv_reports;
     }
 }
