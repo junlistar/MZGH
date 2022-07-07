@@ -196,7 +196,7 @@
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDate.Value = new System.DateTime(2022, 7, 4, 9, 56, 19, 773);
             this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtDate.ValueChanged += new Sunny.UI.UIDatetimePicker.OnDateTimeChanged(this.txtDate_ValueChanged);
+            this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
             // 
             // btn_hzrb
             // 

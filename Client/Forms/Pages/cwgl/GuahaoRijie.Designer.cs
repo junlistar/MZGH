@@ -255,7 +255,7 @@
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtDate.ValueChanged += new Sunny.UI.UIDatePicker.OnDateTimeChanged(this.txtDate_ValueChanged);
+            this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
             // 
             // uiSymbolButton3
             // 

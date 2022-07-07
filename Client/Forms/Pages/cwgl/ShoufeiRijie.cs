@@ -393,9 +393,7 @@ namespace Client.Forms.Pages.cwgl
 
         private void txtDate_ValueChanged(object sender, DateTime value)
         {
-            btnSave.Enabled = false;
-            //查询日结记录
-            GetMzsfReport();
+            
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -421,6 +419,13 @@ namespace Client.Forms.Pages.cwgl
         {
             txtDate.Value = DateTime.Now;
             previewControl1.Clear();
+        }
+
+        private void txtDate_TextChanged(object sender, EventArgs e)
+        {
+            btnSave.Enabled = false;
+            //查询日结记录
+            GetMzsfReport();
         }
     }
 }

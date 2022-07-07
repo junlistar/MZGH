@@ -383,12 +383,6 @@ namespace Client.Forms.Pages.cwgl
             InitializeReport("PREVIEW");
         }
 
-        private void txtDate_ValueChanged(object sender, DateTime value)
-        { 
-            //查询日结记录
-            GetGhDailyReport();
-        }
-
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
 
@@ -417,6 +411,13 @@ namespace Client.Forms.Pages.cwgl
         {
             txtDate.Value = DateTime.Now;
             previewControl1.Clear();
+        }
+
+        private void txtDate_TextChanged(object sender, EventArgs e)
+        {
+
+            //查询日结记录
+            GetGhDailyReport();
         }
     }
 }
