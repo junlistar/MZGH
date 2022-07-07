@@ -16,6 +16,14 @@ namespace Data.IRepository
 
         bool AddXtUserGroups(string func_str, string subsys_id, string user_group);
 
+        bool DeleteXtUserGroups(string func_str, string subsys_id, string user_group); 
+
+        bool AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag);
+
+        bool UpdateFuncton(string subsys_id, string func_name, string func_desc, string action_flag); 
+
+        bool DelFuncton(string subsys_id, string func_name, string func_desc, string action_flag);
+
         #endregion
     }
 }

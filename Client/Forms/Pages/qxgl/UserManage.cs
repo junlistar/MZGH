@@ -74,11 +74,17 @@ namespace Client.Forms.Pages.qxgl
 
             if (item.Tag.ToString() == "A")
             {
+                log.Info("添加组开始");
                 AddGroup addGroup = new AddGroup(); 
                 var dr = addGroup.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
+                    log.Info("添加组成功");
                     InitGroupsData();
+                }
+                else
+                { 
+                    log.Info("添加组取消");
                 }
             }
             else if (item.Tag.ToString() == "D")
@@ -86,9 +92,15 @@ namespace Client.Forms.Pages.qxgl
                 var _name = tv_groups.SelectedNode.Text.Trim();
                 var _key = tv_groups.SelectedNode.Name.Trim();
                 var _msg = "确定要删除用户组：" + _name + " 吗?";
+                log.Info("删除用户组开始：" + _name);
                 if (UIMessageBox.ShowAsk(_msg))
                 {
-                    DeleteGroup(_key); 
+                    log.Info("删除用户组成功：" + _name);
+                    DeleteGroup(_key);
+                }
+                else
+                {
+                    log.Info("删除用户组取消");
                 }
             }  
         }
@@ -108,11 +120,16 @@ namespace Client.Forms.Pages.qxgl
             }
             else if (item.Tag.ToString() == "D")
             {
-            
+                var _name = tv_functions.SelectedNode.Text.Trim();
+                var _key = tv_functions.SelectedNode.Name.Trim();
+                var _msg = "确定要删除功能：" + _name + " 吗?";
+                if (UIMessageBox.ShowAsk(_msg))
+                {
+                    var _group_id = tv_groups.SelectedNode.Name;
+                    DeleteFunction(_key, _group_id);
+                }
+               
             }
-                
-
-            MessageBox.Show("function");
         }
         private void UserItem_Click(object sender, EventArgs e)
         {
@@ -157,16 +174,30 @@ namespace Client.Forms.Pages.qxgl
         private void ReportItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = (ToolStripMenuItem)sender;
+            var _group_id = tv_groups.SelectedNode.Name;
 
             if (item.Tag.ToString() == "A")
             {
-                AddReport addReport = new AddReport();
+                AddReport addReport = new AddReport(_group_id);
+                addReport.setData = UpdateReportTreeData;
                 addReport.ShowDialog();
+                //InitUserReportsData(_group_id);
             }
-            else if (item.Tag.ToString() == "D") { 
-            
-            }
-
+            else if (item.Tag.ToString() == "D")
+            {  
+                var _name = tv_reports.SelectedNode.Text.Trim();
+                var _key = tv_reports.SelectedNode.Name.Trim();
+                var _msg = "确定要删除报表：" + _name + " 吗?";
+                if (UIMessageBox.ShowAsk(_msg))
+                {
+                    DeleteReport(_key, _group_id);
+                } 
+            } 
+        }
+        public void UpdateReportTreeData()
+        {
+            var _group_id = tv_groups.SelectedNode.Name;
+            InitUserReportsData(_group_id);
         }
         public void InitGroupsData()
         {
@@ -383,7 +414,8 @@ namespace Client.Forms.Pages.qxgl
                     if (tv_reports.Nodes.Count > 0)
                     {
                         LoadSubItems(tv_reports.Nodes, result.data);
-                         
+
+                        tv_reports.ExpandAll();
                         tv_reports.SelectedNode = tv_reports.Nodes[0];
                     }
                 }
@@ -518,6 +550,107 @@ namespace Client.Forms.Pages.qxgl
             {
                 log.Error(ex.Message);
             }
+        }
+
+        public void DeleteFunction(string func_str, string user_group)
+        { 
+            try
+            {
+                var d = new
+                {
+                    func_str = func_str,
+                    user_group = user_group,
+                    subsys_id = "mz"
+                };
+
+                var param = $"func_str={d.func_str}&subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/DeleteXtUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("删除成功！"); 
+                    InitUserGroupData(user_group);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        public void DeleteReport(string rep_id, string user_group)
+        {
+            //  DelXtUserReports(string rep_id, string subsys_id, string user_group)
+            try
+            {
+                var d = new
+                {
+                    rep_id = rep_id,
+                    subsys_id = "mz",
+                    user_group = user_group
+                };
+
+                var param = $"rep_id={d.rep_id}&subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/DelXtUserReports?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("删除成功！");
+                    InitUserReportsData(user_group);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        private void btnFunctions_Click(object sender, EventArgs e)
+        {
+            var _group_id = tv_groups.SelectedNode.Name;
+            FunctionList functionList = new FunctionList("mz", _group_id);
+            functionList.ShowDialog();
+           
         }
     }
 

@@ -8,6 +8,6 @@
              FROM xt_user,   
                   a_employee_mi  
             WHERE ( xt_user.user_mi = a_employee_mi.emp_sn ) and  
-                  ( ( xt_user.subsys_id = 'mzgh' ) AND  
+                  ( ( xt_user.subsys_id = 'mz' ) AND  
                   ( xt_user.user_name = @uname )  And
                     xt_user.pass_word =@pwd ) 

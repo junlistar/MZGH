@@ -118,9 +118,9 @@ namespace Client
                             item.sname = "已退号";
                         }
                     }
-
-                    this.dgvDeposit.DataSource = showlist;
-                    //this.dgvDeposit.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+                    dgvDeposit.Init();
+                    dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    this.dgvDeposit.DataSource = showlist; 
                     this.dgvDeposit.AutoResizeColumns();
                 }
             }
@@ -521,7 +521,7 @@ namespace Client
                     dgvDeposit.Init();
                     this.dgvDeposit.DataSource = viewlist;
                     this.dgvDeposit.AutoResizeColumns();
-                    dgvDeposit.ShowGridLine = true;
+                    dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single; 
                 }
                 else
                 {

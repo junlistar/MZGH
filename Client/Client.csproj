@@ -250,6 +250,18 @@
     <Compile Include="Forms\Pages\mzsf\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\qxgl\FunctionEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\FunctionEdit.Designer.cs">
+      <DependentUpon>FunctionEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\FunctionList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\qxgl\FunctionList.Designer.cs">
+      <DependentUpon>FunctionList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\qxgl\AddReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -568,6 +580,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\WxPay.resx">
       <DependentUpon>WxPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\FunctionEdit.resx">
+      <DependentUpon>FunctionEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\qxgl\FunctionList.resx">
+      <DependentUpon>FunctionList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\qxgl\AddReport.resx">
       <DependentUpon>AddReport.cs</DependentUpon>

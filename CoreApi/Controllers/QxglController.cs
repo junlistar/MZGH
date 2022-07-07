@@ -176,7 +176,59 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             } 
-        } 
+        }
+        public ResponseResult<bool> DeleteXtUserGroups(string func_str, string subsys_id, string user_group)
+        {
+            Log.Information($"DeleteXtUserGroups,{func_str},{subsys_id},{user_group}");
+            try
+            {
+                return _xTUserGroupRepository.DeleteXtUserGroups(func_str, subsys_id, user_group);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+            Log.Information($"AddFuncton,{subsys_id},{func_name},{func_desc},{action_flag}");
+            try
+            {
+                return _xTUserGroupRepository.AddFuncton(subsys_id, func_name, func_desc, action_flag);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> UpdateFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+            Log.Information($"UpdateFuncton,{subsys_id},{func_name},{func_desc},{action_flag}");
+            try
+            {
+                return _xTUserGroupRepository.UpdateFuncton(subsys_id, func_name, func_desc, action_flag);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> DelFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+            Log.Information($"DelFuncton,{subsys_id},{func_name},{func_desc},{action_flag}");
+            try
+            {
+                return _xTUserGroupRepository.DelFuncton(subsys_id, func_name, func_desc, action_flag);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
 
         public ResponseResult<List<XTUserReport>> GetXTUserReportsByGroupId(string subsys_id, string user_group)
         {
@@ -209,9 +261,32 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        
-
-
+        public ResponseResult<bool> AddXtUserReports(string rep_id, string subsys_id, string user_group)
+        {
+            Log.Information($"AddXtUserReports,{rep_id},{subsys_id},{user_group}"); 
+            try
+            {
+                return _xTUserReportRepository.AddXtUserReports(rep_id, subsys_id, user_group);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            } 
+        }
+        public ResponseResult<bool> DelXtUserReports(string rep_id, string subsys_id, string user_group)
+        {
+            Log.Information($"DelXtUserReports,{rep_id},{subsys_id},{user_group}");
+            try
+            {
+                return _xTUserReportRepository.DelXtUserReports(rep_id, subsys_id, user_group);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
 
     }
 }

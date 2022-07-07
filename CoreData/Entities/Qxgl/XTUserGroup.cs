@@ -8,6 +8,7 @@ namespace Data.Entities
         public int user_group { get; set; }
         public string func_name { get; set; } 
         public string func_desc { get; set; } 
+        public int action_flag { get; set; }
 
     }
 }

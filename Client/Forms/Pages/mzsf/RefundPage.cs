@@ -322,5 +322,10 @@ namespace Mzsf.Forms.Pages
                 Search(); 
             }
         }
+
+        private void pnlTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

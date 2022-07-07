@@ -43,7 +43,18 @@ namespace Client.Forms.Pages.qxgl
         public void SaveData()
         {
             try
-            { 
+            {
+                if (string.IsNullOrWhiteSpace(txtName.Text))
+                {
+                    UIMessageTip.Show("登录名不能为空;");
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(txtUserName.Text))
+                {
+                    UIMessageTip.Show("用户姓名不能为空;");
+                    return;
+                }
+
                 var d = new
                 {
                     user_name = txtName.Text.Trim(),
@@ -52,6 +63,7 @@ namespace Client.Forms.Pages.qxgl
                     user_group = _group_id,
                     user_mi = txtUserName.TagString, 
                 };
+                 
 
                 var param = $"user_name={d.user_name}&subsys_id={d.subsys_id}&pass_word={d.pass_word}&user_group={d.user_group}&user_mi={d.user_mi}";
 

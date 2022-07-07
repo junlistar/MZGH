@@ -80,8 +80,8 @@ namespace Client
 
 
             pageIndex = 1500;
-            parent = Aside.CreateNode("权限管理", 61953, 24, pageIndex);
-            Aside.CreateChildNode(parent, "用户管理", 61508, 24, 1501);
+            parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
+            Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);

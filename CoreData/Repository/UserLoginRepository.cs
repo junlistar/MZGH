@@ -25,20 +25,18 @@ namespace Data.Repository
             //      ( xt_user.user_name = @uname )  And
             //        xt_user.pass_word =@pwd )  ";
 
-            string login_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
+            //string login_sql = "select [sql] from wh_tag_sql  where tag = @tag ";
 
             var para = new DynamicParameters();
-            para.Add("@tag", Helpers.ConfigHelper.GetSectionValue("UserLogin"));
+            //para.Add("@tag", Helpers.ConfigHelper.GetSectionValue("UserLogin"));
 
-            string sql = Convert.ToString(base.ExcuteScalar(login_sql, para));
+            //string sql = Convert.ToString(base.ExcuteScalar(login_sql, para));
 
 
-            //string sql = GetSqlByTag(220001);
+            string sql = GetSqlByTag(220001);
             if (string.IsNullOrEmpty(pwd) ){
                 pwd = "";
-            }
-            //var para = new DynamicParameters();
-            //para = new DynamicParameters();
+            } 
             para.Add("@uname", uname);
             para.Add("@pwd", pwd);
 

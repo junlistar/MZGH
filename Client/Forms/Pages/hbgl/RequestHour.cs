@@ -73,8 +73,8 @@ namespace Client.Forms.Pages.hbgl
             {
                 txtCode.Text = dgvRequestHour.Rows[e.RowIndex].Cells["code"].Value.ToString();
                 txtName.Text = dgvRequestHour.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                txtHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
-                txtHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
+                cbxHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
+                cbxHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
             }
         }
 
@@ -84,8 +84,8 @@ namespace Client.Forms.Pages.hbgl
             {
                 code = txtCode.Text,
                 name = txtName.Text,
-                start_hour = txtHour1.Text,
-                end_hour = txtHour2.Text,
+                start_hour = cbxHour1.Text,
+                end_hour = cbxHour2.Text,
 
             };
             if (string.IsNullOrWhiteSpace(d.code)|| string.IsNullOrWhiteSpace(d.name) || string.IsNullOrWhiteSpace(d.start_hour) || string.IsNullOrWhiteSpace(d.end_hour))
@@ -94,13 +94,22 @@ namespace Client.Forms.Pages.hbgl
                 return;
             }
 
-            Task<HttpResponseMessage> task;
-            string json = "";
-            string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
 
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {
+            { 
+                int hour1 = int.Parse(d.start_hour);
+                int hour2 = int.Parse(d.end_hour);
+
+                if (hour1>=hour2)
+                {
+                    UIMessageTip.ShowWarning("开始小时数必须小于等于结束小时数！");
+                    return;
+                }
+                Task<HttpResponseMessage> task;
+                string json = "";
+                string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -182,6 +191,20 @@ namespace Client.Forms.Pages.hbgl
             {
                 log.Error(ex.Message);
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            ResetTextData();
+
+
+        }
+        public void ResetTextData()
+        {
+            txtCode.Text = "";
+            txtName.Text = "";
+            cbxHour1.Text = "0";
+            cbxHour2.Text = "23";
         }
     }
 }

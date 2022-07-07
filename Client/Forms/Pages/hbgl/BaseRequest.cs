@@ -216,7 +216,7 @@ namespace Client
                         dgvlist.Init();
                         dgvlist.DataSource = ds;
                         dgvlist.AutoResizeColumns();
-                        dgvlist.ShowGridLine = true;
+                        dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
                 } 
                 else

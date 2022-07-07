@@ -42,7 +42,7 @@
             this.lblkahao.TabIndex = 0;
             this.lblkahao.Text = "卡号";
             this.lblkahao.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-           // this.lblkahao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lblkahao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtCode
             // 
@@ -56,7 +56,7 @@
             this.txtCode.Size = new System.Drawing.Size(340, 57);
             this.txtCode.TabIndex = 1;
             this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCode_KeyUp);
             // 
             // lblmsg
@@ -67,7 +67,7 @@
             this.lblmsg.Size = new System.Drawing.Size(284, 23);
             this.lblmsg.TabIndex = 3;
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // ReadCika
             // 
@@ -80,8 +80,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadCika";
-            this.Text = "读磁卡";
-            //this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
+            this.Text = "读磁卡(按ESC退出)";
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 690, 203);
             this.Load += new System.EventHandler(this.ReadCika_Load);
             this.ResumeLayout(false);
 

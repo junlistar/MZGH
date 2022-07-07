@@ -46,12 +46,12 @@ where a.subsys_id = @subsys_id
                 IDbTransaction transaction = connection.BeginTransaction();
 
                 try
-                { 
+                {
                     var func_list = func_str.Split(",");
                     //先删除，后添加
                     string sql = @"delete from xt_user_group where subsys_id=@subsys_id and user_group=@user_group";
 
-                    var para = new DynamicParameters(); 
+                    var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@user_group", user_group);
                     connection.Execute(sql, para, transaction);
@@ -68,7 +68,7 @@ where a.subsys_id = @subsys_id
                         para.Add("@func_name", func);
 
                         connection.Execute(sql, para, transaction);
-                    } 
+                    }
 
                     transaction.Commit();
 
@@ -94,7 +94,7 @@ where a.subsys_id = @subsys_id
                 try
                 {
                     var func_list = func_str.Split(",");
-                   
+
 
                     foreach (var func in func_list)
                     {
@@ -120,6 +120,136 @@ where a.subsys_id = @subsys_id
             }
 
 
+        }
+
+        public bool AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    //查询是否存在相同数据
+                    string sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_name = @func_name";
+
+                    var para = new DynamicParameters();
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_name", func_name);
+                    int count = connection.QueryFirstOrDefault<int>(sql, para, transaction);
+                    if (count > 0)
+                    {
+                        throw new Exception("存在相同功能编号！");
+                    }
+
+                    sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_desc = @func_desc";
+                    para = new DynamicParameters();
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_desc", func_desc);
+                    count = connection.QueryFirstOrDefault<int>(sql, para, transaction);
+                    if (count > 0)
+                    {
+                        throw new Exception("存在相同功能描述！");
+                    } 
+                    sql = @"insert into xt_func(subsys_id,func_name,func_desc,action_flag)
+  values (@subsys_id,@func_name,@func_desc,@action_flag)";
+
+                    para = new DynamicParameters();
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_name", func_name);
+                    para.Add("@func_desc", func_desc);
+                    para.Add("@action_flag", action_flag);
+
+                    connection.Execute(sql, para, transaction);
+
+
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }  
+        }
+
+        public bool UpdateFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    //查询是否存在相同数据 
+                    var para = new DynamicParameters(); 
+                    string sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_desc = @func_desc and func_name!=@func_name";
+                    para = new DynamicParameters();
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_desc", func_desc);
+                    para.Add("@func_name", func_name);
+                   int count = connection.QueryFirstOrDefault<int>(sql, para, transaction);
+                    if (count > 0)
+                    {
+                        throw new Exception("存在相同功能描述！");
+                    }
+                    sql = @"update xt_func set func_desc=@func_desc,action_flag=@action_flag where subsys_id =@subsys_id and func_name = @func_name ";
+
+                    para = new DynamicParameters();
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_name", func_name);
+                    para.Add("@func_desc", func_desc);
+                    para.Add("@action_flag", action_flag);
+
+                    connection.Execute(sql, para, transaction);
+
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+        public bool DelFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        {
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    //查询是否存在相同数据
+                    string sql = @"delete from xt_func where subsys_id =@subsys_id and func_name = @func_name and func_desc=@func_desc and action_flag=@action_flag";
+
+                    var para = new DynamicParameters();
+
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@func_name", func_name);
+                    para.Add("@func_desc", func_desc);
+                    para.Add("@action_flag", action_flag);
+
+                    connection.Execute(sql, para, transaction);
+
+
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Data.IRepository
 {
-    public interface IXTUserReportRepository : IRepositoryBase<XTUserReport> 
+    public interface IXTUserReportRepository : IRepositoryBase<XTUserReport>
     {
         #region 扩展的dapper操作
 
@@ -13,7 +13,8 @@ namespace Data.IRepository
         List<XTUserReport> GetXTUserReportsByGroupId(string subsys_id, string user_group);
 
         List<XTUserReport> GetXTUserReports(string subsys_id);
-
+        bool AddXtUserReports(string rep_id, string subsys_id, string user_group);
+        bool DelXtUserReports(string rep_id, string subsys_id, string user_group);
 
         #endregion
     }

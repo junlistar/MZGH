@@ -71,6 +71,7 @@ namespace Client
                 paylist = result.data;
                 this.dgvpaylist.DataSource = result.data;
                 this.dgvpaylist.AutoResizeColumns();
+                dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             }
             else
             {

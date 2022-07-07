@@ -46,7 +46,7 @@ namespace Client.Forms.Pages.cwgl
 
             btnSave.Enabled = false;
 
-            previewControl1.Hide();
+            //previewControl1.Hide();
 
             pnlReport.Text = "选择日期时间，进行预览和结算操作";
 
@@ -392,10 +392,35 @@ namespace Client.Forms.Pages.cwgl
         }
 
         private void txtDate_ValueChanged(object sender, DateTime value)
-        { 
+        {
+            btnSave.Enabled = false;
             //查询日结记录
             GetMzsfReport();
         }
-         
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TargetReport != null)
+                {
+                    TargetReport.Print();
+                }
+                else
+                {
+                    UIMessageTip.Show("请选择日期，预览后操作！");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtDate.Value = DateTime.Now;
+            previewControl1.Clear();
+        }
     }
 }

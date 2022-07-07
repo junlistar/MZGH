@@ -43,7 +43,6 @@
             this.btnXianjintui = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
-            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,6 +54,7 @@
             this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ckall = new Sunny.UI.UICheckBox();
             this.uiPanel1.SuspendLayout();
             this.uiPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCpr)).BeginInit();
@@ -140,11 +140,22 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(375, 18);
+            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(401, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 35);
+            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.Size = new System.Drawing.Size(132, 65);
+            this.btnExit.Style = Sunny.UI.UIStyle.Red;
+            this.btnExit.StyleCustomMode = true;
             this.btnExit.TabIndex = 11;
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -154,11 +165,21 @@
             // btnXianjintui
             // 
             this.btnXianjintui.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXianjintui.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnXianjintui.Location = new System.Drawing.Point(263, 18);
+            this.btnXianjintui.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnXianjintui.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnXianjintui.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnXianjintui.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnXianjintui.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnXianjintui.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnXianjintui.Location = new System.Drawing.Point(263, 3);
             this.btnXianjintui.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnXianjintui.Name = "btnXianjintui";
-            this.btnXianjintui.Size = new System.Drawing.Size(100, 35);
+            this.btnXianjintui.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnXianjintui.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnXianjintui.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnXianjintui.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnXianjintui.Size = new System.Drawing.Size(132, 65);
+            this.btnXianjintui.Style = Sunny.UI.UIStyle.Green;
             this.btnXianjintui.TabIndex = 10;
             this.btnXianjintui.Text = "现金退款";
             this.btnXianjintui.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -228,6 +249,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvCpr.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvCpr.RowHeight = 0;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -236,25 +258,12 @@
             this.dgvCpr.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCpr.RowTemplate.Height = 23;
             this.dgvCpr.SelectedIndex = -1;
+            this.dgvCpr.ShowGridLine = false;
+            this.dgvCpr.ShowRect = false;
             this.dgvCpr.Size = new System.Drawing.Size(1018, 408);
             this.dgvCpr.TabIndex = 8;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
-            // 
-            // ckall
-            // 
-            this.ckall.BackColor = System.Drawing.Color.Transparent;
-            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(15, 193);
-            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ckall.Name = "ckall";
-            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.ckall.Size = new System.Drawing.Size(73, 30);
-            this.ckall.TabIndex = 9;
-            this.ckall.Text = "全选";
-            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // chkback
             // 
@@ -323,6 +332,21 @@
             this.order_type.HeaderText = "order_type";
             this.order_type.Name = "order_type";
             this.order_type.Visible = false;
+            // 
+            // ckall
+            // 
+            this.ckall.BackColor = System.Drawing.Color.Transparent;
+            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ckall.Location = new System.Drawing.Point(15, 193);
+            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ckall.Name = "ckall";
+            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.TabIndex = 9;
+            this.ckall.Text = "全选";
+            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // RefundApart
             // 

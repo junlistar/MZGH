@@ -39,15 +39,15 @@
             this.lblZongji = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvDeposit = new Sunny.UI.UIDataGridView();
+            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.btnExit = new Sunny.UI.UIButton();
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.btnTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -158,6 +158,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvDeposit.RowHeight = 0;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -166,78 +167,11 @@
             this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDeposit.RowTemplate.Height = 23;
             this.dgvDeposit.SelectedIndex = -1;
+            this.dgvDeposit.ShowGridLine = false;
+            this.dgvDeposit.ShowRect = false;
             this.dgvDeposit.Size = new System.Drawing.Size(726, 264);
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiPanel2
-            // 
-            this.uiPanel2.Controls.Add(this.btnExit);
-            this.uiPanel2.Controls.Add(this.btnBufenTuikuan);
-            this.uiPanel2.Controls.Add(this.btnTuikuan);
-            this.uiPanel2.Controls.Add(this.label1);
-            this.uiPanel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiPanel2.Location = new System.Drawing.Point(13, 40);
-            this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiPanel2.Name = "uiPanel2";
-            this.uiPanel2.Size = new System.Drawing.Size(727, 71);
-            this.uiPanel2.TabIndex = 7;
-            this.uiPanel2.Text = null;
-            this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(375, 18);
-            this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 35);
-            this.btnExit.TabIndex = 11;
-            this.btnExit.Text = "退出";
-            this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnBufenTuikuan
-            // 
-            this.btnBufenTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBufenTuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBufenTuikuan.Location = new System.Drawing.Point(263, 18);
-            this.btnBufenTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnBufenTuikuan.Name = "btnBufenTuikuan";
-            this.btnBufenTuikuan.Size = new System.Drawing.Size(100, 35);
-            this.btnBufenTuikuan.TabIndex = 10;
-            this.btnBufenTuikuan.Text = "部分退款";
-            this.btnBufenTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBufenTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnBufenTuikuan.Click += new System.EventHandler(this.btnBufenTuikuan_Click);
-            // 
-            // btnTuikuan
-            // 
-            this.btnTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuikuan.Location = new System.Drawing.Point(157, 18);
-            this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnTuikuan.Name = "btnTuikuan";
-            this.btnTuikuan.Size = new System.Drawing.Size(100, 35);
-            this.btnTuikuan.TabIndex = 9;
-            this.btnTuikuan.Text = "全部退款";
-            this.btnTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnTuikuan.Click += new System.EventHandler(this.btnTuikuan_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label1.Location = new System.Drawing.Point(12, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 35);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "退款";
             // 
             // cheque_name
             // 
@@ -263,6 +197,105 @@
             this.refund_charge.DataPropertyName = "refund_charge";
             this.refund_charge.HeaderText = "应退金额";
             this.refund_charge.Name = "refund_charge";
+            // 
+            // uiPanel2
+            // 
+            this.uiPanel2.Controls.Add(this.btnExit);
+            this.uiPanel2.Controls.Add(this.btnBufenTuikuan);
+            this.uiPanel2.Controls.Add(this.btnTuikuan);
+            this.uiPanel2.Controls.Add(this.label1);
+            this.uiPanel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiPanel2.Location = new System.Drawing.Point(13, 40);
+            this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiPanel2.Name = "uiPanel2";
+            this.uiPanel2.Size = new System.Drawing.Size(727, 71);
+            this.uiPanel2.TabIndex = 7;
+            this.uiPanel2.Text = null;
+            this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnExit
+            // 
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(413, 2);
+            this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.Size = new System.Drawing.Size(122, 65);
+            this.btnExit.Style = Sunny.UI.UIStyle.Red;
+            this.btnExit.TabIndex = 11;
+            this.btnExit.Text = "退出";
+            this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnBufenTuikuan
+            // 
+            this.btnBufenTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBufenTuikuan.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnBufenTuikuan.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnBufenTuikuan.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnBufenTuikuan.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnBufenTuikuan.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnBufenTuikuan.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBufenTuikuan.Location = new System.Drawing.Point(285, 2);
+            this.btnBufenTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnBufenTuikuan.Name = "btnBufenTuikuan";
+            this.btnBufenTuikuan.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnBufenTuikuan.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnBufenTuikuan.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnBufenTuikuan.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnBufenTuikuan.Size = new System.Drawing.Size(122, 65);
+            this.btnBufenTuikuan.Style = Sunny.UI.UIStyle.Green;
+            this.btnBufenTuikuan.TabIndex = 10;
+            this.btnBufenTuikuan.Text = "部分退款";
+            this.btnBufenTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnBufenTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnBufenTuikuan.Click += new System.EventHandler(this.btnBufenTuikuan_Click);
+            // 
+            // btnTuikuan
+            // 
+            this.btnTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTuikuan.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnTuikuan.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnTuikuan.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnTuikuan.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnTuikuan.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnTuikuan.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnTuikuan.Location = new System.Drawing.Point(157, 2);
+            this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnTuikuan.Name = "btnTuikuan";
+            this.btnTuikuan.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnTuikuan.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnTuikuan.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnTuikuan.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnTuikuan.Size = new System.Drawing.Size(122, 66);
+            this.btnTuikuan.Style = Sunny.UI.UIStyle.Green;
+            this.btnTuikuan.TabIndex = 9;
+            this.btnTuikuan.Text = "全部退款";
+            this.btnTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnTuikuan.Click += new System.EventHandler(this.btnTuikuan_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 20F);
+            this.label1.Location = new System.Drawing.Point(12, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 35);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "退款";
             // 
             // RefundConfirm
             // 

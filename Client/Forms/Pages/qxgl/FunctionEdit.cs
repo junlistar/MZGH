@@ -14,12 +14,21 @@ using log4net;
 
 namespace Client.Forms.Pages.qxgl
 {
-    public partial class AddGroup : UIForm
+    public partial class FunctionEdit : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(AddGroup));//typeof放当前类
-        public AddGroup()
+        string _method_type = "add";
+
+        public string subsys_id;
+        public string func_name;
+        public string func_desc;
+        public string action_flag;
+
+
+        public FunctionEdit(string method_type)
         {
             InitializeComponent();
+            _method_type = method_type;
         }
 
         private void AddGroup_KeyUp(object sender, KeyEventArgs e)
@@ -35,7 +44,7 @@ namespace Client.Forms.Pages.qxgl
             if (e.KeyCode == Keys.Enter)
             {
                 //save & close
-                SaveData();  
+                SaveData();
             }
         }
 
@@ -50,28 +59,40 @@ namespace Client.Forms.Pages.qxgl
         }
 
         public void SaveData()
-        { 
+        {
             try
-            { 
-                var d = new
+            {
+                if (string.IsNullOrWhiteSpace(txtName.Text.Trim()))
                 {
-                    group_name = txtName.Text.Trim(),
-                    subsys_id = "mz"
-                };
-
-
-                if (string.IsNullOrWhiteSpace(d.group_name))
-                {
-
-                    UIMessageTip.ShowError("名称不能为空！");
+                    UIMessageTip.Show("数据不能为空！");
                     txtName.Focus();
                     return;
                 }
+                if (string.IsNullOrWhiteSpace(txtDesc.Text.Trim()))
+                {
+                    UIMessageTip.Show("数据不能为空！");
+                    txtDesc.Focus();
+                    return;
+                }
 
-                var param = $"group_name={d.group_name}&subsys_id={d.subsys_id}";
+                //AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+                var d = new
+                {
+                    func_name = txtName.Text.Trim(),
+                    func_desc = txtDesc.Text.Trim(),
+                    action_flag = cbxStatus.Text == "启用" ? 1 : 0,
+                    subsys_id = "mz"
+                };
+
+                var param = $"subsys_id={d.subsys_id}&func_name={d.func_name}&func_desc={d.func_desc}&action_flag={d.action_flag}";
 
                 var json = "";
-                var paramurl = string.Format($"/api/qxgl/AddXTGroup?{param}");
+                var paramurl = string.Format($"/api/qxgl/AddFuncton?{param}");
+                if (_method_type == "edit")
+                {
+                    paramurl = string.Format($"/api/qxgl/UpdateFuncton?{param}");
+                }
+
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -84,11 +105,11 @@ namespace Client.Forms.Pages.qxgl
                     read.Wait();
                     json = read.Result;
                 }
-                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
-                 
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
                 if (result.status == 1)
                 {
-                    UIMessageTip.Show("添加成功！");
+                    UIMessageTip.Show("操作成功！");
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -103,6 +124,22 @@ namespace Client.Forms.Pages.qxgl
                 log.Error(ex.Message);
             }
 
+        }
+
+        private void FunctionEdit_Load(object sender, EventArgs e)
+        {
+
+            if (_method_type == "edit")
+            {
+                txtName.Text = func_name;
+                txtName.ReadOnly = true;
+                txtDesc.Text = func_desc;
+                cbxStatus.Text = action_flag == "1" ? "启用" : "不启用";
+            }
+            else
+            {
+                cbxStatus.Text = "启用";
+            }
         }
     }
 }

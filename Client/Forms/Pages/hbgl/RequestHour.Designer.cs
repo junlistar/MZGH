@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnDel = new Sunny.UI.UISymbolButton();
             this.btnRefresh = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
@@ -42,17 +43,17 @@
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDel = new Sunny.UI.UISymbolButton();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.txtHour2 = new Sunny.UI.UITextBox();
-            this.txtHour1 = new Sunny.UI.UITextBox();
+            this.btnSave = new Sunny.UI.UISymbolButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCode = new Sunny.UI.UITextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new Sunny.UI.UITextBox();
-            this.btnSave = new Sunny.UI.UISymbolButton();
+            this.btnAdd = new Sunny.UI.UISymbolButton();
+            this.cbxHour1 = new Sunny.UI.UIComboBox();
+            this.cbxHour2 = new Sunny.UI.UIComboBox();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequestHour)).BeginInit();
             this.uiPanel1.SuspendLayout();
@@ -62,6 +63,7 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.btnAdd);
             this.pnlTitle.Controls.Add(this.btnDel);
             this.pnlTitle.Controls.Add(this.btnRefresh);
             this.pnlTitle.Controls.Add(this.uiSymbolButton2);
@@ -77,14 +79,51 @@
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnDel
+            // 
+            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnDel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnDel.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnDel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnDel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDel.Location = new System.Drawing.Point(519, 3);
+            this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnDel.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnDel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnDel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnDel.Size = new System.Drawing.Size(110, 60);
+            this.btnDel.Style = Sunny.UI.UIStyle.Orange;
+            this.btnDel.StyleCustomMode = true;
+            this.btnDel.Symbol = 61532;
+            this.btnDel.TabIndex = 11;
+            this.btnDel.Text = "删除";
+            this.btnDel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRefresh.Location = new System.Drawing.Point(287, 18);
+            this.btnRefresh.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnRefresh.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnRefresh.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnRefresh.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnRefresh.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnRefresh.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRefresh.Location = new System.Drawing.Point(287, 3);
             this.btnRefresh.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(110, 35);
+            this.btnRefresh.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnRefresh.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnRefresh.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnRefresh.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnRefresh.Size = new System.Drawing.Size(110, 60);
+            this.btnRefresh.Style = Sunny.UI.UIStyle.Green;
+            this.btnRefresh.StyleCustomMode = true;
             this.btnRefresh.Symbol = 61473;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Text = "刷新";
@@ -95,11 +134,22 @@
             // uiSymbolButton2
             // 
             this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton2.Location = new System.Drawing.Point(519, 18);
+            this.uiSymbolButton2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiSymbolButton2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiSymbolButton2.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.uiSymbolButton2.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.uiSymbolButton2.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton2.Location = new System.Drawing.Point(635, 3);
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
-            this.uiSymbolButton2.Size = new System.Drawing.Size(119, 35);
+            this.uiSymbolButton2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiSymbolButton2.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.uiSymbolButton2.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.uiSymbolButton2.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.uiSymbolButton2.Size = new System.Drawing.Size(119, 60);
+            this.uiSymbolButton2.Style = Sunny.UI.UIStyle.Red;
+            this.uiSymbolButton2.StyleCustomMode = true;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
             this.uiSymbolButton2.Text = "退出";
@@ -207,26 +257,11 @@
             this.end_hour.Name = "end_hour";
             this.end_hour.ReadOnly = true;
             // 
-            // btnDel
-            // 
-            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDel.Location = new System.Drawing.Point(403, 18);
-            this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(110, 35);
-            this.btnDel.Symbol = 61532;
-            this.btnDel.TabIndex = 11;
-            this.btnDel.Text = "删除";
-            this.btnDel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.cbxHour2);
+            this.uiPanel1.Controls.Add(this.cbxHour1);
             this.uiPanel1.Controls.Add(this.btnSave);
-            this.uiPanel1.Controls.Add(this.txtHour2);
-            this.uiPanel1.Controls.Add(this.txtHour1);
             this.uiPanel1.Controls.Add(this.label4);
             this.uiPanel1.Controls.Add(this.label3);
             this.uiPanel1.Controls.Add(this.txtCode);
@@ -234,71 +269,61 @@
             this.uiPanel1.Controls.Add(this.label1);
             this.uiPanel1.Controls.Add(this.txtName);
             this.uiPanel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiPanel1.Location = new System.Drawing.Point(658, 90);
+            this.uiPanel1.Location = new System.Drawing.Point(658, 88);
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(580, 504);
             this.uiPanel1.TabIndex = 16;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // txtHour2
+            // btnSave
             // 
-            this.txtHour2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtHour2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtHour2.Location = new System.Drawing.Point(220, 179);
-            this.txtHour2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtHour2.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtHour2.Name = "txtHour2";
-            this.txtHour2.ShowText = false;
-            this.txtHour2.Size = new System.Drawing.Size(133, 29);
-            this.txtHour2.TabIndex = 3;
-            this.txtHour2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtHour2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txtHour1
-            // 
-            this.txtHour1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtHour1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtHour1.Location = new System.Drawing.Point(219, 139);
-            this.txtHour1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtHour1.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtHour1.Name = "txtHour1";
-            this.txtHour1.ShowText = false;
-            this.txtHour1.Size = new System.Drawing.Size(133, 29);
-            this.txtHour1.TabIndex = 3;
-            this.txtHour1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtHour1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(247, 295);
+            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(215, 44);
+            this.btnSave.Symbol = 61508;
+            this.btnSave.TabIndex = 12;
+            this.btnSave.Text = "保存";
+            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(123, 182);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(111, 205);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(90, 21);
+            this.label4.Size = new System.Drawing.Size(123, 30);
             this.label4.TabIndex = 5;
             this.label4.Text = "结束小时：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(123, 142);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(111, 158);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(90, 21);
+            this.label3.Size = new System.Drawing.Size(123, 30);
             this.label3.TabIndex = 4;
             this.label3.Text = "开始小时：";
             // 
             // txtCode
             // 
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCode.Location = new System.Drawing.Point(220, 95);
+            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCode.Location = new System.Drawing.Point(247, 103);
             this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtCode.Name = "txtCode";
             this.txtCode.ShowText = false;
-            this.txtCode.Size = new System.Drawing.Size(133, 29);
+            this.txtCode.Size = new System.Drawing.Size(215, 38);
             this.txtCode.TabIndex = 3;
             this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -306,49 +331,142 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(155, 98);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(155, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 21);
+            this.label2.Size = new System.Drawing.Size(79, 30);
             this.label2.TabIndex = 3;
             this.label2.Text = "代码：";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(155, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 21);
+            this.label1.Size = new System.Drawing.Size(79, 30);
             this.label1.TabIndex = 2;
             this.label1.Text = "名称：";
             // 
             // txtName
             // 
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtName.Location = new System.Drawing.Point(220, 52);
+            this.txtName.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtName.Location = new System.Drawing.Point(247, 52);
             this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtName.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtName.Name = "txtName";
             this.txtName.ShowText = false;
-            this.txtName.Size = new System.Drawing.Size(133, 29);
+            this.txtName.Size = new System.Drawing.Size(215, 37);
             this.txtName.TabIndex = 1;
             this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // btnSave
+            // btnAdd
             // 
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(219, 242);
-            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 35);
-            this.btnSave.Symbol = 61508;
-            this.btnSave.TabIndex = 12;
-            this.btnSave.Text = "保存";
-            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnAdd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.Location = new System.Drawing.Point(403, 3);
+            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnAdd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.Size = new System.Drawing.Size(110, 60);
+            this.btnAdd.Style = Sunny.UI.UIStyle.Colorful;
+            this.btnAdd.StyleCustomMode = true;
+            this.btnAdd.Symbol = 61543;
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "新增";
+            this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // cbxHour1
+            // 
+            this.cbxHour1.DataSource = null;
+            this.cbxHour1.FillColor = System.Drawing.Color.White;
+            this.cbxHour1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxHour1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbxHour1.Location = new System.Drawing.Point(247, 158);
+            this.cbxHour1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxHour1.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxHour1.Name = "cbxHour1";
+            this.cbxHour1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHour1.Size = new System.Drawing.Size(215, 37);
+            this.cbxHour1.TabIndex = 13;
+            this.cbxHour1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxHour1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxHour2
+            // 
+            this.cbxHour2.DataSource = null;
+            this.cbxHour2.FillColor = System.Drawing.Color.White;
+            this.cbxHour2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxHour2.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbxHour2.Location = new System.Drawing.Point(247, 205);
+            this.cbxHour2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxHour2.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxHour2.Name = "cbxHour2";
+            this.cbxHour2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHour2.Size = new System.Drawing.Size(215, 38);
+            this.cbxHour2.TabIndex = 14;
+            this.cbxHour2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxHour2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // RequestHour
             // 
@@ -383,13 +501,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn end_hour;
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UISymbolButton btnSave;
-        private Sunny.UI.UITextBox txtHour2;
-        private Sunny.UI.UITextBox txtHour1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private Sunny.UI.UITextBox txtCode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UITextBox txtName;
+        private Sunny.UI.UISymbolButton btnAdd;
+        private Sunny.UI.UIComboBox cbxHour2;
+        private Sunny.UI.UIComboBox cbxHour1;
     }
 }

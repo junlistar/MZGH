@@ -17,10 +17,16 @@ namespace Client.Forms.Pages.qxgl
     public partial class AddReport : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(AddReport));//typeof放当前类
+        string _group_id;
 
-        public AddReport()
+        //添加后 刷新主页数据
+        public delegate void SetData();
+        public SetData setData;
+
+        public AddReport(string group_id)
         {
             InitializeComponent();
+            _group_id = group_id;
         }
 
         private void AddGroup_KeyUp(object sender, KeyEventArgs e)
@@ -50,9 +56,51 @@ namespace Client.Forms.Pages.qxgl
 
         public void SaveData()
         {
-            //todo:save
+            try
+            { 
+                // AddXtUserReports(string rep_id, string subsys_id, string user_group)
+                var d = new
+                {
+                    rep_id = tv_reports.SelectedNode.Name,
+                    subsys_id = "mz", 
+                    user_group = _group_id
+                };
 
-             
+                var param = $"rep_id={d.rep_id}&subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/AddXtUserReports?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("添加成功！");
+                    setData();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+
+
         }
 
         public void LoadData()

@@ -213,7 +213,7 @@ namespace Client
                 dgvlist.Init();
                 dgvlist.DataSource = source;
                 dgvlist.AutoResizeColumns();
-                dgvlist.ShowGridLine = true;
+                dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             }
             else
             {

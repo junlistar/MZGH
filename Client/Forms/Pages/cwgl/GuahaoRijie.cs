@@ -46,7 +46,7 @@ namespace Client.Forms.Pages.cwgl
 
             btnSave.Enabled = false;
              
-            previewControl1.Hide();
+            //previewControl1.Hide();
 
             pnlReport.Text = "选择日期和结账状态，进行预览和结算操作";
 
@@ -392,6 +392,31 @@ namespace Client.Forms.Pages.cwgl
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TargetReport!=null)
+                {
+                    TargetReport.Print();
+                }
+                else
+                {
+                    UIMessageTip.Show("请选择日期，预览后操作！");
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtDate.Value = DateTime.Now;
+            previewControl1.Clear();
         }
     }
 }

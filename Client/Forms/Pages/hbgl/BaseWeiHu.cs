@@ -192,7 +192,7 @@ namespace Client
                     dgvlist.DataSource = ds;
                     dgvlist.AutoResizeColumns();
 
-                    dgvlist.ShowGridLine = true;
+                    dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
                 else
                 {
