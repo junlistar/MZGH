@@ -78,7 +78,7 @@ namespace Mzsf.Forms.Pages
                         }).ToList();
                         dgvDeposit.Init();
                         dgvDeposit.DataSource = dat;
-                        dgvDeposit.ShowGridLine = true;
+                        dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
 
                 }

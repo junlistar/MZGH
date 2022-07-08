@@ -108,7 +108,7 @@ namespace Mzsf.Forms.Pages
                     }).ToList();
                     //dgvCpr.Init();
                     dgvCpr.DataSource = list;
-                    dgvCpr.ShowGridLine = true;
+                    dgvCpr.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     dgvCpr.AutoResizeColumns();
 
                     //退款金额处理

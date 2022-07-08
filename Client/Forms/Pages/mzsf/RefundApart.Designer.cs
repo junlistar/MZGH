@@ -258,7 +258,7 @@
             this.dgvCpr.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvCpr.RowTemplate.Height = 23;
             this.dgvCpr.SelectedIndex = -1;
-            this.dgvCpr.ShowGridLine = false;
+            this.dgvCpr.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Single;
             this.dgvCpr.ShowRect = false;
             this.dgvCpr.Size = new System.Drawing.Size(1018, 408);
             this.dgvCpr.TabIndex = 8;

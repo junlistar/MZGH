@@ -36,7 +36,7 @@ namespace Client.Forms.Wedgit
                 doct_name = p.doct_name,
                 unit_name=  p.unit_name
             }).OrderBy(o=>o.times).ToList();
-            dgvOrders.ShowGridLine = true;
+            dgvOrders.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvOrders.AutoResizeColumns();
         }
 

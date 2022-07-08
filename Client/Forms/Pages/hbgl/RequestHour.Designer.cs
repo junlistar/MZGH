@@ -34,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnAdd = new Sunny.UI.UISymbolButton();
             this.btnDel = new Sunny.UI.UISymbolButton();
             this.btnRefresh = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
@@ -44,6 +45,8 @@
             this.start_hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_hour = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.cbxHour2 = new Sunny.UI.UIComboBox();
+            this.cbxHour1 = new Sunny.UI.UIComboBox();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,9 +54,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new Sunny.UI.UITextBox();
-            this.btnAdd = new Sunny.UI.UISymbolButton();
-            this.cbxHour1 = new Sunny.UI.UIComboBox();
-            this.cbxHour2 = new Sunny.UI.UIComboBox();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequestHour)).BeginInit();
             this.uiPanel1.SuspendLayout();
@@ -78,6 +78,32 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnAdd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.Location = new System.Drawing.Point(403, 3);
+            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnAdd.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnAdd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnAdd.Size = new System.Drawing.Size(110, 60);
+            this.btnAdd.Style = Sunny.UI.UIStyle.Colorful;
+            this.btnAdd.StyleCustomMode = true;
+            this.btnAdd.Symbol = 61543;
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "新增";
+            this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDel
             // 
@@ -279,6 +305,88 @@
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbxHour2
+            // 
+            this.cbxHour2.DataSource = null;
+            this.cbxHour2.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxHour2.FillColor = System.Drawing.Color.White;
+            this.cbxHour2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxHour2.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbxHour2.Location = new System.Drawing.Point(247, 205);
+            this.cbxHour2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxHour2.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxHour2.Name = "cbxHour2";
+            this.cbxHour2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHour2.Size = new System.Drawing.Size(215, 38);
+            this.cbxHour2.TabIndex = 14;
+            this.cbxHour2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxHour2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxHour1
+            // 
+            this.cbxHour1.DataSource = null;
+            this.cbxHour1.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxHour1.FillColor = System.Drawing.Color.White;
+            this.cbxHour1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxHour1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbxHour1.Location = new System.Drawing.Point(247, 158);
+            this.cbxHour1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxHour1.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxHour1.Name = "cbxHour1";
+            this.cbxHour1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHour1.Size = new System.Drawing.Size(215, 37);
+            this.cbxHour1.TabIndex = 13;
+            this.cbxHour1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxHour1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -361,112 +469,6 @@
             this.txtName.TabIndex = 1;
             this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnAdd.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnAdd.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnAdd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnAdd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.Location = new System.Drawing.Point(403, 3);
-            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnAdd.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnAdd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnAdd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnAdd.Size = new System.Drawing.Size(110, 60);
-            this.btnAdd.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnAdd.StyleCustomMode = true;
-            this.btnAdd.Symbol = 61543;
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "新增";
-            this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // cbxHour1
-            // 
-            this.cbxHour1.DataSource = null;
-            this.cbxHour1.FillColor = System.Drawing.Color.White;
-            this.cbxHour1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxHour1.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23"});
-            this.cbxHour1.Location = new System.Drawing.Point(247, 158);
-            this.cbxHour1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxHour1.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxHour1.Name = "cbxHour1";
-            this.cbxHour1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxHour1.Size = new System.Drawing.Size(215, 37);
-            this.cbxHour1.TabIndex = 13;
-            this.cbxHour1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxHour1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxHour2
-            // 
-            this.cbxHour2.DataSource = null;
-            this.cbxHour2.FillColor = System.Drawing.Color.White;
-            this.cbxHour2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxHour2.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "23"});
-            this.cbxHour2.Location = new System.Drawing.Point(247, 205);
-            this.cbxHour2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxHour2.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxHour2.Name = "cbxHour2";
-            this.cbxHour2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxHour2.Size = new System.Drawing.Size(215, 38);
-            this.cbxHour2.TabIndex = 14;
-            this.cbxHour2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxHour2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // RequestHour
             // 

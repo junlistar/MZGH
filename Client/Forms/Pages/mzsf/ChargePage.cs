@@ -520,6 +520,7 @@ namespace Mzsf.Forms.Pages
             txtUnit.Text = "";
             txtDoct.Text = "";
 
+            current_patient_id = "";
 
             SessionHelper.patientVM = null;
             SessionHelper.mzOrders = null;

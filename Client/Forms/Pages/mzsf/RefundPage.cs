@@ -115,8 +115,8 @@ namespace Mzsf.Forms.Pages
                 cash_name = p.cash_name,
             }).ToList();
 
-            dgvRefund.DataSource = list;
-            dgvRefund.ShowGridLine = true;
+            dgvRefund.DataSource = list; 
+            dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvRefund.AutoResizeColumns();
 
 

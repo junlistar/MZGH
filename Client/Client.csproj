@@ -154,6 +154,7 @@
     <Compile Include="ClassLib\ControlHelper.cs" />
     <Compile Include="ClassLib\DataTableHelper.cs" />
     <Compile Include="ClassLib\LinqHelper.cs" />
+    <Compile Include="ClassLib\LoadingHelper.cs" />
     <Compile Include="FastReport\Create.cs">
       <SubType>Form</SubType>
     </Compile>

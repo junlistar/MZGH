@@ -378,9 +378,15 @@ namespace Client.Forms.Pages.cwgl
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+
             previewControl1.Hide();
             previewControl1.Clear();
-            InitializeReport("PREVIEW");
+
+            LoadingHelper.ShowLoadingScreen();//显示
+
+            InitializeReport("PREVIEW"); 
+
+            LoadingHelper.CloseForm();//关闭
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)

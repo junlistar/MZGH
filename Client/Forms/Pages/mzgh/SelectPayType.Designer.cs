@@ -379,6 +379,7 @@
             // 
             // chkcomb
             // 
+            this.chkcomb.Checked = true;
             this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chkcomb.Location = new System.Drawing.Point(314, 418);
@@ -388,6 +389,7 @@
             this.chkcomb.Size = new System.Drawing.Size(90, 29);
             this.chkcomb.TabIndex = 40;
             this.chkcomb.Text = "组合支付";
+            this.chkcomb.Visible = false;
             this.chkcomb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.chkcomb.CheckedChanged += new System.EventHandler(this.chkcomb_CheckedChanged);
             this.chkcomb.Click += new System.EventHandler(this.chkcomb_Click);

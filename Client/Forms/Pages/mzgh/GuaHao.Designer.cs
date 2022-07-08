@@ -94,16 +94,12 @@
             this.pnlTitle.Controls.Add(this.uiSymbolButton2);
             this.pnlTitle.Controls.Add(this.btnTuihao);
             this.pnlTitle.Controls.Add(this.lblTitle);
-            this.pnlTitle.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.pnlTitle.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlTitle.Location = new System.Drawing.Point(4, 14);
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlTitle.Size = new System.Drawing.Size(1196, 66);
-            this.pnlTitle.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlTitle.TabIndex = 0;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -181,21 +177,11 @@
             // uiSymbolButton3
             // 
             this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton3.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton3.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiSymbolButton3.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton3.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton3.Location = new System.Drawing.Point(769, 16);
             this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton3.Name = "uiSymbolButton3";
-            this.uiSymbolButton3.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiSymbolButton3.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiSymbolButton3.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiSymbolButton3.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton3.Size = new System.Drawing.Size(101, 35);
-            this.uiSymbolButton3.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiSymbolButton3.Symbol = 61487;
             this.uiSymbolButton3.TabIndex = 9;
             this.uiSymbolButton3.Text = "重打";
@@ -261,7 +247,6 @@
             this.lblTitle.Location = new System.Drawing.Point(45, 5);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(70, 51);
-            this.lblTitle.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "挂号";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -277,16 +262,12 @@
             this.pnlSearch.Controls.Add(this.btnYBK);
             this.pnlSearch.Controls.Add(this.btnSFZ);
             this.pnlSearch.Controls.Add(this.btnCika);
-            this.pnlSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.pnlSearch.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlSearch.Location = new System.Drawing.Point(4, 90);
             this.pnlSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlSearch.Size = new System.Drawing.Size(1196, 222);
-            this.pnlSearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlSearch.TabIndex = 1;
             this.pnlSearch.Text = null;
             this.pnlSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -348,16 +329,12 @@
             // 
             this.pnlKeySuggest.Controls.Add(this.txtKeySearch);
             this.pnlKeySuggest.Controls.Add(this.uiLabel11);
-            this.pnlKeySuggest.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.pnlKeySuggest.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlKeySuggest.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlKeySuggest.Location = new System.Drawing.Point(1385, 37);
             this.pnlKeySuggest.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlKeySuggest.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlKeySuggest.Name = "pnlKeySuggest";
-            this.pnlKeySuggest.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlKeySuggest.Size = new System.Drawing.Size(270, 92);
-            this.pnlKeySuggest.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlKeySuggest.TabIndex = 7;
             this.pnlKeySuggest.Text = null;
             this.pnlKeySuggest.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -366,24 +343,14 @@
             // 
             // txtKeySearch
             // 
-            this.txtKeySearch.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtKeySearch.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtKeySearch.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txtKeySearch.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtKeySearch.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtKeySearch.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.txtKeySearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtKeySearch.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.txtKeySearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtKeySearch.Location = new System.Drawing.Point(21, 15);
             this.txtKeySearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtKeySearch.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtKeySearch.Name = "txtKeySearch";
-            this.txtKeySearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtKeySearch.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtKeySearch.ShowText = false;
             this.txtKeySearch.Size = new System.Drawing.Size(227, 29);
-            this.txtKeySearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtKeySearch.TabIndex = 1;
             this.txtKeySearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtKeySearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -394,7 +361,6 @@
             this.uiLabel11.Location = new System.Drawing.Point(17, 55);
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.Size = new System.Drawing.Size(231, 23);
-            this.uiLabel11.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel11.TabIndex = 0;
             this.uiLabel11.Text = "查询到 3 条记录";
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -501,17 +467,13 @@
             this.uiGroupBox1.Controls.Add(this.lblName);
             this.uiGroupBox1.Controls.Add(this.lblAge);
             this.uiGroupBox1.Controls.Add(this.uiLabel7);
-            this.uiGroupBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.uiGroupBox1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiGroupBox1.Location = new System.Drawing.Point(295, 95);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.uiGroupBox1.Size = new System.Drawing.Size(683, 208);
-            this.uiGroupBox1.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiGroupBox1.TabIndex = 22;
             this.uiGroupBox1.Text = "患者信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -524,7 +486,6 @@
             this.lblbirth.Location = new System.Drawing.Point(359, 66);
             this.lblbirth.Name = "lblbirth";
             this.lblbirth.Size = new System.Drawing.Size(109, 23);
-            this.lblbirth.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblbirth.TabIndex = 34;
             this.lblbirth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblbirth.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -535,7 +496,6 @@
             this.uiLabel16.Location = new System.Drawing.Point(305, 66);
             this.uiLabel16.Name = "uiLabel16";
             this.uiLabel16.Size = new System.Drawing.Size(48, 23);
-            this.uiLabel16.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel16.TabIndex = 33;
             this.uiLabel16.Text = "生日:";
             this.uiLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -548,7 +508,6 @@
             this.lbldistrict.Location = new System.Drawing.Point(88, 136);
             this.lbldistrict.Name = "lbldistrict";
             this.lbldistrict.Size = new System.Drawing.Size(181, 23);
-            this.lbldistrict.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lbldistrict.TabIndex = 32;
             this.lbldistrict.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbldistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -559,7 +518,6 @@
             this.uiLabel15.Location = new System.Drawing.Point(33, 136);
             this.uiLabel15.Name = "uiLabel15";
             this.uiLabel15.Size = new System.Drawing.Size(48, 23);
-            this.uiLabel15.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel15.TabIndex = 31;
             this.uiLabel15.Text = "地区:";
             this.uiLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -571,7 +529,6 @@
             this.lblmarry.Location = new System.Drawing.Point(574, 100);
             this.lblmarry.Name = "lblmarry";
             this.lblmarry.Size = new System.Drawing.Size(106, 23);
-            this.lblmarry.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblmarry.TabIndex = 30;
             this.lblmarry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblmarry.Visible = false;
@@ -584,7 +541,6 @@
             this.uiLabel13.Location = new System.Drawing.Point(520, 101);
             this.uiLabel13.Name = "uiLabel13";
             this.uiLabel13.Size = new System.Drawing.Size(50, 23);
-            this.uiLabel13.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel13.TabIndex = 29;
             this.uiLabel13.Text = "婚姻:";
             this.uiLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -598,7 +554,6 @@
             this.lblsfz.Location = new System.Drawing.Point(359, 135);
             this.lblsfz.Name = "lblsfz";
             this.lblsfz.Size = new System.Drawing.Size(271, 23);
-            this.lblsfz.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblsfz.TabIndex = 28;
             this.lblsfz.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblsfz.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -609,7 +564,6 @@
             this.uiLabel9.Location = new System.Drawing.Point(288, 135);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.Size = new System.Drawing.Size(66, 23);
-            this.uiLabel9.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel9.TabIndex = 27;
             this.uiLabel9.Text = "身份证:";
             this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -622,7 +576,6 @@
             this.lblSex.Location = new System.Drawing.Point(359, 101);
             this.lblSex.Name = "lblSex";
             this.lblSex.Size = new System.Drawing.Size(109, 23);
-            this.lblSex.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblSex.TabIndex = 26;
             this.lblSex.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -633,7 +586,6 @@
             this.uiLabel10.Location = new System.Drawing.Point(303, 101);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(50, 23);
-            this.uiLabel10.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel10.TabIndex = 25;
             this.uiLabel10.Text = "性别:";
             this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -646,7 +598,6 @@
             this.lblstreet.Location = new System.Drawing.Point(88, 167);
             this.lblstreet.Name = "lblstreet";
             this.lblstreet.Size = new System.Drawing.Size(542, 27);
-            this.lblstreet.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblstreet.TabIndex = 24;
             this.lblstreet.Text = "尼古拉斯,咆哮";
             this.lblstreet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -659,7 +610,6 @@
             this.lblhometel.Location = new System.Drawing.Point(88, 100);
             this.lblhometel.Name = "lblhometel";
             this.lblhometel.Size = new System.Drawing.Size(181, 23);
-            this.lblhometel.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblhometel.TabIndex = 23;
             this.lblhometel.Text = "尼古拉斯,咆哮";
             this.lblhometel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -671,7 +621,6 @@
             this.uiLabel8.Location = new System.Drawing.Point(34, 169);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(47, 23);
-            this.uiLabel8.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel8.TabIndex = 22;
             this.uiLabel8.Text = "住址:";
             this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -683,7 +632,6 @@
             this.uiLabel6.Location = new System.Drawing.Point(35, 100);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(47, 23);
-            this.uiLabel6.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel6.TabIndex = 21;
             this.uiLabel6.Text = "电话:";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -691,25 +639,15 @@
             // 
             // txtCode
             // 
-            this.txtCode.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtCode.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtCode.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txtCode.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtCode.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtCode.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCode.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtCode.Location = new System.Drawing.Point(88, 32);
             this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtCode.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtCode.ShowText = false;
             this.txtCode.Size = new System.Drawing.Size(181, 29);
-            this.txtCode.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtCode.TabIndex = 14;
             this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -722,7 +660,6 @@
             this.uiLabel4.Location = new System.Drawing.Point(35, 35);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(47, 23);
-            this.uiLabel4.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel4.TabIndex = 13;
             this.uiLabel4.Text = "卡号:";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -734,7 +671,6 @@
             this.lblMsg.Location = new System.Drawing.Point(276, 35);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(311, 23);
-            this.lblMsg.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblMsg.TabIndex = 20;
             this.lblMsg.Text = "msg";
             this.lblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -746,7 +682,6 @@
             this.uiLabel5.Location = new System.Drawing.Point(35, 67);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(47, 23);
-            this.uiLabel5.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel5.TabIndex = 15;
             this.uiLabel5.Text = "姓名:";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -759,7 +694,6 @@
             this.lblName.Location = new System.Drawing.Point(88, 66);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(181, 23);
-            this.lblName.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblName.TabIndex = 16;
             this.lblName.Text = "尼古拉斯,咆哮";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -772,7 +706,6 @@
             this.lblAge.Location = new System.Drawing.Point(574, 67);
             this.lblAge.Name = "lblAge";
             this.lblAge.Size = new System.Drawing.Size(56, 23);
-            this.lblAge.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.lblAge.TabIndex = 18;
             this.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblAge.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -783,7 +716,6 @@
             this.uiLabel7.Location = new System.Drawing.Point(522, 67);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(48, 23);
-            this.uiLabel7.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.uiLabel7.TabIndex = 17;
             this.uiLabel7.Text = "年龄:";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -791,19 +723,14 @@
             // 
             // pnlHours
             // 
-            this.pnlHours.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.pnlHours.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.pnlHours.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlHours.Location = new System.Drawing.Point(574, 315);
             this.pnlHours.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlHours.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlHours.Name = "pnlHours";
             this.pnlHours.Padding = new System.Windows.Forms.Padding(2);
-            this.pnlHours.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.pnlHours.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.pnlHours.ShowText = false;
             this.pnlHours.Size = new System.Drawing.Size(471, 44);
-            this.pnlHours.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.pnlHours.TabIndex = 18;
             this.pnlHours.Text = "uiFlowLayoutPanel1";
             this.pnlHours.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -862,7 +789,6 @@
             // dtpGhrq
             // 
             this.dtpGhrq.FillColor = System.Drawing.Color.White;
-            this.dtpGhrq.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dtpGhrq.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dtpGhrq.Location = new System.Drawing.Point(253, 321);
             this.dtpGhrq.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -870,10 +796,8 @@
             this.dtpGhrq.MinimumSize = new System.Drawing.Size(63, 0);
             this.dtpGhrq.Name = "dtpGhrq";
             this.dtpGhrq.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.dtpGhrq.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.dtpGhrq.ShowToday = true;
             this.dtpGhrq.Size = new System.Drawing.Size(126, 29);
-            this.dtpGhrq.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.dtpGhrq.SymbolDropDown = 61555;
             this.dtpGhrq.SymbolNormal = 61555;
             this.dtpGhrq.TabIndex = 6;
@@ -910,19 +834,14 @@
             this.gbxUnits.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbxUnits.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.gbxUnits.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.gbxUnits.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gbxUnits.Location = new System.Drawing.Point(4, 360);
             this.gbxUnits.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbxUnits.MinimumSize = new System.Drawing.Size(1, 1);
             this.gbxUnits.Name = "gbxUnits";
             this.gbxUnits.Padding = new System.Windows.Forms.Padding(2);
-            this.gbxUnits.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.gbxUnits.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.gbxUnits.ShowText = false;
             this.gbxUnits.Size = new System.Drawing.Size(1196, 344);
-            this.gbxUnits.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.gbxUnits.TabIndex = 5;
             this.gbxUnits.Text = "111111111";
             this.gbxUnits.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -936,24 +855,14 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtSearch.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtSearch.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txtSearch.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtSearch.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txtSearch.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtSearch.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.txtSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtSearch.Location = new System.Drawing.Point(983, 321);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txtSearch.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtSearch.ShowText = false;
             this.txtSearch.Size = new System.Drawing.Size(191, 29);
-            this.txtSearch.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtSearch.Visible = false;

@@ -388,7 +388,12 @@ namespace Client.Forms.Pages.cwgl
         {
             previewControl1.Hide();
             previewControl1.Clear();
+
+            LoadingHelper.ShowLoadingScreen();//显示
+
             InitializeReport("PREVIEW");
+
+            LoadingHelper.CloseForm();//关闭
         }
 
         private void txtDate_ValueChanged(object sender, DateTime value)

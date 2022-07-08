@@ -149,6 +149,10 @@ namespace Client
             try
             {
                 GhDepositVM vm = new GhDepositVM();
+                if (true)
+                {
+
+                }
                 vm.sname = this.dgvDeposit.SelectedRows[0].Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "已退号")
                 {

@@ -179,7 +179,7 @@ namespace Mzsf.Forms.Pages
                 {
                     dgvOrderDetail.DataSource = dgv_data;
                     dgvOrderDetail.AutoResizeColumns();
-                    dgvOrderDetail.ShowGridLine = true;
+                    dgvOrderDetail.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     BindSelectedRowData(0);
                 }
                 else
@@ -392,6 +392,7 @@ namespace Mzsf.Forms.Pages
 
             var _charge_code_lookup = dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value.ToString();
             var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
+            
             var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
             var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
 

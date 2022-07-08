@@ -75,7 +75,7 @@ namespace Mzsf.Forms.Pages
             }
 
             dgvzd.DataSource = list;
-            dgvzd.ShowGridLine = true;
+            dgvzd.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
 
 
@@ -254,7 +254,7 @@ namespace Mzsf.Forms.Pages
                 pay_je = p.pay_je
             }).ToList();
             dgvfk.DataSource = dgv_data;
-            dgvfk.ShowGridLine = true;
+            dgvfk.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         public bool YiBaoPay()
@@ -837,6 +837,36 @@ namespace Mzsf.Forms.Pages
             {
                 log.Error(ex.ToString());
 
+            }
+        }
+
+        private void btnTuikuan_Click(object sender, EventArgs e)
+        {
+            var index = uiListBox1.SelectedIndex;
+            if (index == -1)
+            {
+                MessageBox.Show("请选择付款项目进行退款操作！"); return;
+            }
+            if (MessageBox.Show(uiListBox1.SelectedItem.ToString(), "是否确认退款？", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                //退款
+                RefundType(paylist[index]);
+
+                uiListBox1.Items.Remove(uiListBox1.SelectedItem);
+                //总金额-支付金额
+                lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) - paylist[index].pay_je).ToString();
+                lblsyje.Text = (total_charge - Convert.ToDecimal(lblyfje.Text)).ToString();
+                paylist.RemoveAt(index);
+                //ShowMessage();
+
+                //uiListBox2.Items.Clear();
+                //if (paylist != null && paylist.Count > 0)
+                //{ 
+                //    foreach (var item in paylist)
+                //    {
+                //        uiListBox2.Items.Add("支付方式：" + item.pay_type + "，金额： " + item.pay_je);
+                //    }
+                //}
             }
         }
     }

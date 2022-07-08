@@ -92,7 +92,7 @@ namespace Mzsf.Forms.Pages
                     }).ToList();
                     dgvCpr.Init();
                     dgvCpr.DataSource = list;
-                    dgvCpr.ShowGridLine = true;
+                    dgvCpr.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     dgvCpr.AutoResizeColumns();
                     dgvCpr.Columns[0].Width = 75;
 

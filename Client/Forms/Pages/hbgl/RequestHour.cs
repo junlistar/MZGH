@@ -124,7 +124,7 @@ namespace Client.Forms.Pages.hbgl
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)
                 {
-                    UIMessageTip.ShowOk("保存成功！");
+                    UIMessageTip.ShowOk("保存成功！"); ResetTextData();
                     BindData();
                 }
                 else
