@@ -141,7 +141,10 @@ namespace Client
 
         public void TuiHao()
         {
-            if (this.dgvDeposit.SelectedRows.Count == 0)
+            var row_index = dgvDeposit.SelectedIndex;
+            var row = dgvDeposit.Rows[row_index];
+
+            if (row_index < 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
                 return;
@@ -149,11 +152,8 @@ namespace Client
             try
             {
                 GhDepositVM vm = new GhDepositVM();
-                if (true)
-                {
-
-                }
-                vm.sname = this.dgvDeposit.SelectedRows[0].Cells["visit_flag_name"].Value.ToString();
+                
+                vm.sname = row.Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "已退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
@@ -181,9 +181,9 @@ namespace Client
                 //vm.item_no =Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["item_no"].Value);
                 //vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
                 //vm.cheque_no = this.dgvDeposit.SelectedRows[0].Cells["cheque_no"].Value.ToString();
-                var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
+                var receipt_sn = row.Cells["receipt_sn"].Value.ToString();
 
-                var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
+                var times = Convert.ToInt32(row.Cells["times"].Value);
 
                 var datestr = dtprq.Value.ToString("yyyy-MM-dd");
                 var patient_id = lblhidid.Text;
@@ -522,7 +522,7 @@ namespace Client
                         p.receipt_sn
                     }).ToList();
 
-                    dgvDeposit.Init();
+                    //dgvDeposit.Init();
                     this.dgvDeposit.DataSource = viewlist;
                     this.dgvDeposit.AutoResizeColumns();
                     dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single; 

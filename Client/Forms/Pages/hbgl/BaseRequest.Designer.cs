@@ -714,7 +714,7 @@
             this.uiPagination1.Name = "uiPagination1";
             this.uiPagination1.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
             this.uiPagination1.ShowText = false;
-            this.uiPagination1.Size = new System.Drawing.Size(601, 35);
+            this.uiPagination1.Size = new System.Drawing.Size(1038, 35);
             this.uiPagination1.TabIndex = 5;
             this.uiPagination1.Text = "uiPagination1";
             this.uiPagination1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;

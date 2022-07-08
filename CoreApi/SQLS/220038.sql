@@ -37,7 +37,7 @@ SELECT
       visit_flag_name = CASE ISNULL(v.visit_flag, '0') WHEN '1' THEN '挂号'
                                                   WHEN '2' THEN '分诊'
                                                   WHEN '4' THEN '已就诊'
-                                                  WHEN '9' THEN '取消分诊'
+                                                  WHEN '9' THEN '退号'
                    END    
 FROM  view_mz_visit_table v 
       left join zd_unit_code u1 on v.visit_dept = u1.unit_sn 

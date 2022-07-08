@@ -76,11 +76,25 @@ namespace Client
 
             //设置上午下午
             this.cbxSXW.Items.Clear();
-            cbxSXW.Items.Add("全部");
-            cbxSXW.Items.Add("上午");
-            cbxSXW.Items.Add("中午");
-            cbxSXW.Items.Add("下午");
-            cbxSXW.Items.Add("夜间");
+            //cbxSXW.Items.Add("全部");
+            //cbxSXW.Items.Add("上午");
+            //cbxSXW.Items.Add("中午");
+            //cbxSXW.Items.Add("下午");
+            //cbxSXW.Items.Add("夜间");
+            //cbxSXW.Text = "全部";
+
+            var rh_list = new List<RequestHourVM>();
+            foreach (var item in SessionHelper.requestHours.ToArray())
+            {
+                rh_list.Add(item);
+            }
+            var rh = new RequestHourVM();
+            rh.code = "%";
+            rh.name = "全部";
+            rh_list.Insert(0, rh);
+            cbxSXW.DataSource = rh_list;
+            cbxSXW.DisplayMember = "name";
+            cbxSXW.ValueMember = "code"; 
             cbxSXW.Text = "全部";
 
             //挂号状态 
@@ -111,6 +125,12 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
+
+            decimal zje = 0;
+            int zrc = 0;
+            int ghrc = 0;
+            int thrc = 0;
+
 
             Task<HttpResponseMessage> task = null;
             string json = "";
@@ -210,18 +230,25 @@ namespace Client
                     visit_flag = p.visit_flag,
                     visit_status = p.visit_status,
                 }).ToList();
-                dgvlist.Init();
+                //dgvlist.Init();
                 dgvlist.DataSource = source;
                 dgvlist.AutoResizeColumns();
                 dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+                zje = list.Sum(p => p.charge_fee);
+                zrc = list.Count();
+                ghrc = list.Count(p => p.visit_flag != "9");
+                thrc = list.Count(p => p.visit_flag == "9");
             }
             else
             {
                 UIMessageBox.ShowError(result.message);
                 log.Error(result.message);
             }
-            
 
+            lblTotalCount.ForeColor = Color.Red;
+
+            lblTotalCount.Text = $"总金额：{zje}元， 总人次：{zrc}人次， 挂号人次：{ghrc}人次，  退号人次：{thrc}人次"; 
 
         }
         public void BindNullData()
@@ -1082,6 +1109,24 @@ namespace Client
                 this.Focus();
             }
             
+        }
+
+        private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
+
+            if (dr.Cells["visit_flag"].Value != null && dr.Cells["visit_flag"].Value.ToString() == "9")
+            {
+                // 设置单元格的背景色
+                //dr.DefaultCellStyle.BackColor = Color.Yellow;
+                // 设置单元格的前景色
+                dr.DefaultCellStyle.ForeColor = Color.Red;
+            }
+            else
+            {
+                //dr.DefaultCellStyle.ForeColor = Color.Green;
+
+            }
         }
     }
 }

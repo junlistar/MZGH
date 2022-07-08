@@ -31,6 +31,7 @@
             this.lblkahao = new Sunny.UI.UILabel();
             this.txtCode = new Sunny.UI.UITextBox();
             this.lblmsg = new Sunny.UI.UILabel();
+            this.btnOK = new Sunny.UI.UISymbolButton();
             this.SuspendLayout();
             // 
             // lblkahao
@@ -69,10 +70,36 @@
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnOK
+            // 
+            this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnOK.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnOK.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnOK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnOK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnOK.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOK.Location = new System.Drawing.Point(186, 154);
+            this.btnOK.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnOK.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnOK.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnOK.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnOK.Size = new System.Drawing.Size(340, 59);
+            this.btnOK.Style = Sunny.UI.UIStyle.Green;
+            this.btnOK.StyleCustomMode = true;
+            this.btnOK.TabIndex = 4;
+            this.btnOK.Text = "确 定";
+            this.btnOK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnOK.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // ReadCika
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(690, 203);
+            this.ClientSize = new System.Drawing.Size(673, 251);
+            this.Controls.Add(this.btnOK);
             this.Controls.Add(this.lblmsg);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.lblkahao);
@@ -92,5 +119,6 @@
         private Sunny.UI.UILabel lblkahao;
         private Sunny.UI.UITextBox txtCode;
         private Sunny.UI.UILabel lblmsg;
+        private Sunny.UI.UISymbolButton btnOK;
     }
 }

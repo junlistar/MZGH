@@ -77,5 +77,29 @@ namespace Client
                 this.Close();
             }
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            var card_no = txt_sfz.Text.Trim();
+
+            if (!string.IsNullOrWhiteSpace(card_no))
+            {
+                //验证卡号是否是身份证号
+                if (!StringUtil.CheckIDCard(card_no))
+                {
+                    UIMessageTip.ShowError("身份证号码不正确!");
+                    txt_sfz.Focus();
+                    return;
+                } 
+            }
+            else
+            {
+                UIMessageTip.ShowError("身份证号码为空!");
+                return;
+            }
+
+            SessionHelper.cardno = card_no;
+            this.Close();
+        }
     }
 }

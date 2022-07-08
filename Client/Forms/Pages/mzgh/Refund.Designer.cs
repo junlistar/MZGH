@@ -210,7 +210,7 @@
             this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDeposit.RowTemplate.Height = 23;
             this.dgvDeposit.SelectedIndex = -1;
-            this.dgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvDeposit.ShowGridLine = true;
             this.dgvDeposit.ShowRect = false;
             this.dgvDeposit.Size = new System.Drawing.Size(1060, 363);

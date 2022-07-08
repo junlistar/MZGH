@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,7 +31,7 @@ namespace Client.ViewModel
         public string req_type { get; set; }
         public string req_name { get; set; }
 
-        
+
         public int begin_no { get; set; }
 
         public int current_no { get; set; }
@@ -44,21 +45,26 @@ namespace Client.ViewModel
         public string group_name { get; set; }
         public string doct_name { get; set; }
         public string clinic_name { get; set; }
-        public string weekstr { get
+        public string weekstr
+        {
+            get
             {
                 switch (week)
                 {
-                    case 1:return "第一周";
-                    case 2:return "第二周";
-                    case 3:return "第三周";
-                    case 4:return "第四周";
-                    case 5:return "第五周";
+                    case 1: return "第一周";
+                    case 2: return "第二周";
+                    case 3: return "第三周";
+                    case 4: return "第四周";
+                    case 5: return "第五周";
                     default:
-                        return week.ToString(); 
+                        return week.ToString();
                 }
             }
         }
-        public string daystr { get {
+        public string daystr
+        {
+            get
+            {
                 switch (day)
                 {
                     case 1: return "星期一";
@@ -71,28 +77,51 @@ namespace Client.ViewModel
                     default:
                         return day.ToString();
                 }
-            } }
-        public string apstr { get {
-                switch (ampm)
+            }
+        }
+        public string apstr
+        {
+            get
+            {
+
+                if (SessionHelper.requestHours != null)
                 {
-                    case "a": return "上午";
-                    case "p": return "下午"; 
-                    case "m": return "中午"; 
-                    case "e": return "夜间";
-                    default:
-                        return ampm.ToString();
+                    var req_hour = SessionHelper.requestHours.Where(p => p.code == ampm).FirstOrDefault();
+                    if (req_hour != null)
+                    { 
+                        return req_hour.name;
+                    }
                 }
-            } }
-        public string winnostr { get {
+                return ampm.ToString();
+
+                //switch (ampm)
+                //{
+                //    case "a": return "上午";
+                //    case "p": return "下午"; 
+                //    case "m": return "中午"; 
+                //    case "e": return "夜间";
+                //    default:
+                //        return ampm.ToString();
+                //}
+            }
+        }
+        public string winnostr
+        {
+            get
+            {
                 switch (window_no)
                 {
-                    case 0: return "所有窗口"; 
+                    case 0: return "所有窗口";
                     default:
                         return window_no.ToString();
                 }
-            } }
+            }
+        }
 
-        public string open_flag_str { get {
+        public string open_flag_str
+        {
+            get
+            {
                 switch (open_flag)
                 {
                     case "1": return "开放";
@@ -100,7 +129,8 @@ namespace Client.ViewModel
                     default:
                         return open_flag;
                 }
-            } }
+            }
+        }
 
         public string op_date_str
         {

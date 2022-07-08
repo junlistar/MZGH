@@ -89,6 +89,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTitle.Controls.Add(this.btnEditUser1);
             this.pnlTitle.Controls.Add(this.uiSymbolButton4);
+            this.pnlTitle.Controls.Add(this.btnHoutian);
+            this.pnlTitle.Controls.Add(this.btnMingtian);
             this.pnlTitle.Controls.Add(this.uiSymbolButton1);
             this.pnlTitle.Controls.Add(this.uiSymbolButton3);
             this.pnlTitle.Controls.Add(this.uiSymbolButton2);
@@ -724,13 +726,13 @@
             // pnlHours
             // 
             this.pnlHours.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlHours.Location = new System.Drawing.Point(574, 315);
+            this.pnlHours.Location = new System.Drawing.Point(394, 313);
             this.pnlHours.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlHours.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlHours.Name = "pnlHours";
             this.pnlHours.Padding = new System.Windows.Forms.Padding(2);
             this.pnlHours.ShowText = false;
-            this.pnlHours.Size = new System.Drawing.Size(471, 44);
+            this.pnlHours.Size = new System.Drawing.Size(737, 44);
             this.pnlHours.TabIndex = 18;
             this.pnlHours.Text = "uiFlowLayoutPanel1";
             this.pnlHours.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -745,7 +747,7 @@
             this.btnHoutian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnHoutian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnHoutian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnHoutian.Location = new System.Drawing.Point(482, 321);
+            this.btnHoutian.Location = new System.Drawing.Point(989, 25);
             this.btnHoutian.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHoutian.Name = "btnHoutian";
             this.btnHoutian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -770,7 +772,7 @@
             this.btnMingtian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnMingtian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnMingtian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMingtian.Location = new System.Drawing.Point(389, 321);
+            this.btnMingtian.Location = new System.Drawing.Point(898, 25);
             this.btnMingtian.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnMingtian.Name = "btnMingtian";
             this.btnMingtian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -877,9 +879,7 @@
             this.ClientSize = new System.Drawing.Size(1204, 709);
             this.Controls.Add(this.pnlHours);
             this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.btnHoutian);
             this.Controls.Add(this.uiGroupBox1);
-            this.Controls.Add(this.btnMingtian);
             this.Controls.Add(this.gbxUnits);
             this.Controls.Add(this.uiBreadcrumb2);
             this.Controls.Add(this.pnlSearch);

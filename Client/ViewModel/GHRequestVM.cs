@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -173,17 +174,15 @@ namespace Client.ViewModel
         public string ampmstr { 
             get
             {
-                switch (ampm)
+                if (SessionHelper.requestHours != null)
                 {
-                    case "a":return "上午"; 
-                    case "p":return "下午"; 
-                    case "m":return "中午"; 
-                    case "e":return "夜间";
-                    default:
-                        return ampm;
-                        
+                    var req_hour = SessionHelper.requestHours.Where(p => p.code == ampm).FirstOrDefault();
+                    return req_hour.name;
                 }
-
+                else
+                {
+                    return ampm.ToString();
+                }  
             }
         }
         public string unit_name { get; set; }

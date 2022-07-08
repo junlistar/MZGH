@@ -72,11 +72,27 @@ namespace Client
 
             //设置上午下午
             this.cbxSXW.Items.Clear();
-            cbxSXW.Items.Add("全部");
-            cbxSXW.Items.Add("上午");
-            cbxSXW.Items.Add("中午");
-            cbxSXW.Items.Add("下午");
-            cbxSXW.Items.Add("夜间");
+
+
+            var rh_list = new List<RequestHourVM>();
+            foreach (var item in SessionHelper.requestHours.ToArray())
+            {
+                rh_list.Add(item);
+            } 
+            var rh = new RequestHourVM();
+            rh.code = "%";
+            rh.name = "全部";
+            rh_list.Insert(0, rh);
+            cbxSXW.DataSource = rh_list;
+            cbxSXW.DisplayMember = "name";
+            cbxSXW.ValueMember = "code";
+            cbxSXW.Text = "全部";
+
+            //cbxSXW.Items.Add("全部");
+            //cbxSXW.Items.Add("上午");
+            //cbxSXW.Items.Add("中午");
+            //cbxSXW.Items.Add("下午");
+            //cbxSXW.Items.Add("夜间");
             cbxSXW.Text = "全部";
 
         }
@@ -115,16 +131,20 @@ namespace Client
             var window_no = "%";
             var open_flag = "%";
 
-
-            switch (cbxSXW.Text)
+            if (cbxSXW.Text!="全部")
             {
-                case "上午": ampm = "a"; break;
-                case "下午": ampm = "p"; break;
-                case "中午": ampm = "m"; break;
-                case "夜间": ampm = "e"; break;
-                default:
-                    break;
+                ampm = cbxSXW.SelectedValue.ToString();
             }
+
+            //switch (cbxSXW.Text)
+            //{
+            //    case "上午": ampm = "a"; break;
+            //    case "下午": ampm = "p"; break;
+            //    case "中午": ampm = "m"; break;
+            //    case "夜间": ampm = "e"; break;
+            //    default:
+            //        break;
+            //}
 
             switch (cbxWeek.Text)
             {
@@ -184,18 +204,9 @@ namespace Client
                     log.Error(response.ReasonPhrase);
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-                if (result.status ==1 && result.data!=null)
+                if (result.status ==1 && result.data.Count>0)
                 {
-                    list = result.data;
-
-                    lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
-
-                    //设置分页控件总数
-                    uiPagination1.TotalCount = list.Count;
-
-                    //设置分页控件每页数量
-                    uiPagination1.PageSize = 50;
-
+                    list = result.data; 
                     if (list != null && list.Count > 0)
                     {
                         var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
@@ -222,19 +233,28 @@ namespace Client
                 else
                 {
                     log.Error(result.message);
+                    list = new List<BaseRequestVM>();
                     BindNullData();
                 }
+                BindBottomData();
 
             }
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
                 log.Error(ex.InnerException.ToString());
-            }
-
-
-
+            } 
         }
+
+        public void BindBottomData()
+        { 
+            lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
+            //设置分页控件总数
+            uiPagination1.TotalCount = list.Count;
+            //设置分页控件每页数量
+            uiPagination1.PageSize = 50;
+        }
+             
 
         UIDataGridView dgv = new UIDataGridView();
         UIDataGridView dgvzk = new UIDataGridView();

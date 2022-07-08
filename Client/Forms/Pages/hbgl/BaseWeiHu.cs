@@ -61,14 +61,21 @@ namespace Client
 
             txtDate.Value = DateTime.Now;
 
-            //设置上午下午
-            this.cbxSXW.Items.Clear();
-            cbxSXW.Items.Add("全部");
-            cbxSXW.Items.Add("上午");
-            cbxSXW.Items.Add("中午");
-            cbxSXW.Items.Add("下午");
-            cbxSXW.Items.Add("夜间");
-            cbxSXW.Text = "全部";
+            //设置上午下午 
+            this.cbxSXW.Items.Clear(); 
+
+            var rh_list = new List<RequestHourVM>();
+            foreach (var item in SessionHelper.requestHours.ToArray())
+            {
+                rh_list.Add(item);
+            }
+            var rh = new RequestHourVM();
+            rh.code = "%";
+            rh.name = "全部";
+            rh_list.Insert(0, rh);
+            cbxSXW.DataSource = rh_list;
+            cbxSXW.DisplayMember = "name";
+            cbxSXW.ValueMember = "code"; cbxSXW.Text = "全部";
 
 
             dgv.CellClick += dgvks_CellContentClick;
@@ -118,16 +125,20 @@ namespace Client
             var window_no = "%";
             var open_flag = "%";
 
-
-            switch (cbxSXW.Text)
+            if (cbxSXW.Text != "全部")
             {
-                case "上午": ampm = "a"; break;
-                case "下午": ampm = "p"; break;
-                case "中午": ampm = "m"; break;
-                case "夜间": ampm = "e"; break;
-                default:
-                    break;
+                ampm = cbxSXW.SelectedValue.ToString();
             }
+
+            //switch (cbxSXW.Text)
+            //{
+            //    case "上午": ampm = "a"; break;
+            //    case "下午": ampm = "p"; break;
+            //    case "中午": ampm = "m"; break;
+            //    case "夜间": ampm = "e"; break;
+            //    default:
+            //        break;
+            //}
              
             if (cbxOpenFlag.Text == "开放")
             {

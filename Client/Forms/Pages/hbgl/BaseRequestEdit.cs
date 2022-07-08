@@ -105,16 +105,22 @@ namespace Client
                 txtTotalNum.Text = data.totle_num.ToString();
 
 
-                switch (data.ampm)
+                //switch (data.ampm)
+                //{
+                //    case "a": cbxSXW.Text = "上午"; break;
+                //    case "m": cbxSXW.Text = "中午"; break;
+                //    case "p": cbxSXW.Text = "下午"; break;
+                //    case "e": cbxSXW.Text = "夜间"; break;
+                //    default:
+                //        cbxSXW.Text = data.ampm;
+                //        break;
+                //}
+                if (SessionHelper.requestHours!=null)
                 {
-                    case "a": cbxSXW.Text = "上午"; break;
-                    case "m": cbxSXW.Text = "中午"; break;
-                    case "p": cbxSXW.Text = "下午"; break;
-                    case "e": cbxSXW.Text = "夜间"; break;
-                    default:
-                        cbxSXW.Text = data.ampm;
-                        break;
+                    var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
+                    cbxSXW.Text = req_hour.name;
                 }
+
                 switch (data.week)
                 {
                     case 1: cbxWeek.Text = "第一周"; break;
@@ -170,6 +176,10 @@ namespace Client
             cbxHaobie.DataSource = _baseRequest.clinicTypes;
             cbxHaobie.ValueMember = "code";
             cbxHaobie.DisplayMember = "name";
+
+            cbxSXW.DataSource = SessionHelper.requestHours;
+            cbxSXW.ValueMember = "code";
+            cbxSXW.DisplayMember = "name";
 
             cbxWinNo.Text = "所有窗口";
             cbxOpenFlag.Text = "开放";
@@ -439,17 +449,17 @@ namespace Client
             int open_flag = 1;
             int total_num = 0;
 
+            ampm = cbxSXW.SelectedValue.ToString();
 
-
-            switch (cbxSXW.Text)
-            {
-                case "上午": ampm = "a"; break;
-                case "中午": ampm = "m"; break;
-                case "下午": ampm = "p"; break;
-                case "夜间": ampm = "e"; break;
-                default:
-                    break;
-            }
+            //switch (cbxSXW.Text)
+            //{
+            //    case "上午": ampm = "a"; break;
+            //    case "中午": ampm = "m"; break;
+            //    case "下午": ampm = "p"; break;
+            //    case "夜间": ampm = "e"; break;
+            //    default:
+            //        break;
+            //}
 
             switch (cbxWeek.Text)
             {

@@ -43,17 +43,29 @@ namespace Client.Forms.Wedgit
         {
             if (e.KeyCode == Keys.Enter)
             {
-                var code = txtCode.Text;
-                if (string.IsNullOrWhiteSpace(code))
-                {
-                    return;
-                }
-                SessionHelper.cardno = code; this.Close();
+                SaveData(); 
             }
             else if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
             }
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            SaveData(); 
+        }
+        public void SaveData()
+        {
+            var code = txtCode.Text;
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                return;
+            }
+            SessionHelper.cardno = code; 
+            this.Close();
+        }
+
+
     }
 }
