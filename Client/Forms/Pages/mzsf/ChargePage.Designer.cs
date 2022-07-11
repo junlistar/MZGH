@@ -66,7 +66,6 @@
             this.btnYBK = new Sunny.UI.UISymbolButton();
             this.btnIDCard = new Sunny.UI.UISymbolButton();
             this.btnSFZ = new Sunny.UI.UISymbolButton();
-            this.txtDate = new Sunny.UI.UIDatePicker();
             this.btnCika = new Sunny.UI.UISymbolButton();
             this.uiLine1 = new Sunny.UI.UILine();
             this.label5 = new System.Windows.Forms.Label();
@@ -599,7 +598,6 @@
             this.uiGroupBox2.Controls.Add(this.btnYBK);
             this.uiGroupBox2.Controls.Add(this.btnIDCard);
             this.uiGroupBox2.Controls.Add(this.btnSFZ);
-            this.uiGroupBox2.Controls.Add(this.txtDate);
             this.uiGroupBox2.Controls.Add(this.btnCika);
             this.uiGroupBox2.Controls.Add(this.lblMsg);
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -624,7 +622,7 @@
             this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(145, 133);
+            this.btnYBK.Location = new System.Drawing.Point(138, 110);
             this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBK.Name = "btnYBK";
             this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -650,7 +648,7 @@
             this.btnIDCard.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnIDCard.Location = new System.Drawing.Point(145, 83);
+            this.btnIDCard.Location = new System.Drawing.Point(138, 60);
             this.btnIDCard.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnIDCard.Name = "btnIDCard";
             this.btnIDCard.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -676,7 +674,7 @@
             this.btnSFZ.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Location = new System.Drawing.Point(19, 133);
+            this.btnSFZ.Location = new System.Drawing.Point(12, 110);
             this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSFZ.Name = "btnSFZ";
             this.btnSFZ.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -693,25 +691,6 @@
             this.btnSFZ.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnSFZ.Click += new System.EventHandler(this.btnSFZ_Click);
             // 
-            // txtDate
-            // 
-            this.txtDate.FillColor = System.Drawing.Color.White;
-            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(19, 40);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtDate.MaxLength = 10;
-            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.Size = new System.Drawing.Size(120, 29);
-            this.txtDate.SymbolDropDown = 61555;
-            this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 20;
-            this.txtDate.Text = "2022-06-14";
-            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(2022, 6, 14, 11, 58, 39, 701);
-            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // btnCika
             // 
             this.btnCika.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -721,7 +700,7 @@
             this.btnCika.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Location = new System.Drawing.Point(19, 83);
+            this.btnCika.Location = new System.Drawing.Point(12, 60);
             this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCika.Name = "btnCika";
             this.btnCika.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -947,7 +926,6 @@
         private Sunny.UI.UITabControl uiTabControl1;
         private Sunny.UI.UISymbolButton btnHuajia;
         private Sunny.UI.UIGroupBox uiGroupBox2;
-        private Sunny.UI.UIDatePicker txtDate;
         private System.Windows.Forms.Label label14;
         private Sunny.UI.UILine uiLine1;
         private System.Windows.Forms.Label label5;

@@ -64,12 +64,13 @@ namespace Data.Repository.Mzsf
                             for (int j = 0; j < item_arr.Length; j++)
                             {
                                 var item = item_arr[j];
-                                //类型，名称，数量
+                                //类型，序号，名称，数量
                                 var obj = item.Split("-");
                                 string order_type = obj[0];
                                 string order_no = obj[1];
                                 string charge_code = obj[2];
-                                string charge_amount = obj[3];
+                                string serial = obj[3];
+                                string charge_amount = obj[4];
 
                                 //其他数据根据charge_code查询获取
 
@@ -150,7 +151,7 @@ end,
         group_no,
         group_name 
     FROM view_mz_huajia_xiyao
-   WHERE code=@code AND  
+   WHERE code=@code AND  serial=@serial and
          (bill_item_code like '001' OR
           bill_item_code like '003') AND
           group_no  like '000003'
@@ -272,6 +273,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
 
                                     para = new DynamicParameters();
                                     para.Add("@code", charge_code);
+                                    para.Add("@serial", serial);
                                     var order_item = connection.QueryFirstOrDefault<MzOrderItem>(order_item_sql, para, transaction);
 
                                     para = new DynamicParameters();

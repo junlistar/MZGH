@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnPrint = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnRefresh = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -41,8 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
             this.pnlReport = new Sunny.UI.UIPanel();
-            this.btnPrint = new Sunny.UI.UISymbolButton();
-            this.btnReset = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.pnlReport.SuspendLayout();
@@ -52,7 +51,6 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTitle.Controls.Add(this.btnReset);
             this.pnlTitle.Controls.Add(this.btnPrint);
             this.pnlTitle.Controls.Add(this.btnSave);
             this.pnlTitle.Controls.Add(this.btnRefresh);
@@ -69,6 +67,32 @@
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnPrint
+            // 
+            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPrint.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnPrint.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnPrint.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnPrint.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnPrint.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnPrint.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPrint.Location = new System.Drawing.Point(445, 3);
+            this.btnPrint.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnPrint.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnPrint.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnPrint.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnPrint.Size = new System.Drawing.Size(119, 60);
+            this.btnPrint.Style = Sunny.UI.UIStyle.Colorful;
+            this.btnPrint.StyleCustomMode = true;
+            this.btnPrint.Symbol = 61487;
+            this.btnPrint.TabIndex = 13;
+            this.btnPrint.Text = "打印";
+            this.btnPrint.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnPrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -78,7 +102,7 @@
             this.btnSave.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnSave.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(455, 3);
+            this.btnSave.Location = new System.Drawing.Point(330, 3);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
@@ -130,7 +154,7 @@
             this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(695, 3);
+            this.btnExit.Location = new System.Drawing.Point(570, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -210,6 +234,7 @@
             this.btn_hzrb.TabIndex = 20;
             this.btn_hzrb.Text = "汇总日报";
             this.btn_hzrb.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_hzrb.Visible = false;
             this.btn_hzrb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cbxStatus
@@ -280,48 +305,6 @@
             this.pnlReport.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlReport.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // btnPrint
-            // 
-            this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPrint.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnPrint.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnPrint.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnPrint.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnPrint.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnPrint.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPrint.Location = new System.Drawing.Point(570, 3);
-            this.btnPrint.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnPrint.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnPrint.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnPrint.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnPrint.Size = new System.Drawing.Size(119, 60);
-            this.btnPrint.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnPrint.StyleCustomMode = true;
-            this.btnPrint.Symbol = 61487;
-            this.btnPrint.TabIndex = 13;
-            this.btnPrint.Text = "打印";
-            this.btnPrint.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnReset
-            // 
-            this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnReset.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Location = new System.Drawing.Point(330, 3);
-            this.btnReset.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(119, 60);
-            this.btnReset.StyleCustomMode = true;
-            this.btnReset.Symbol = 61473;
-            this.btnReset.TabIndex = 14;
-            this.btnReset.Text = "重新";
-            this.btnReset.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
-            // 
             // ShoufeiRijie
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -357,6 +340,5 @@
         private Sunny.UI.UIDatetimePicker txtDate;
         private Sunny.UI.UIPanel pnlReport;
         private Sunny.UI.UISymbolButton btnPrint;
-        private Sunny.UI.UISymbolButton btnReset;
     }
 }

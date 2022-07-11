@@ -173,6 +173,12 @@
     <Compile Include="Forms\Pages\cwgl\GuahaoRijie.Designer.cs">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\hbgl\RequestTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\RequestTime.Designer.cs">
+      <DependentUpon>RequestTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\mzgh\DetailPayList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -514,6 +520,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\RequestTimeVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
@@ -545,6 +552,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\cwgl\GuahaoRijie.resx">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\hbgl\RequestTime.resx">
+      <DependentUpon>RequestTime.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\RequestHour.resx">
       <DependentUpon>RequestHour.cs</DependentUpon>

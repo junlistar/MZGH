@@ -79,7 +79,7 @@ namespace Client
                     ts.from_day = Client.ClassLib.DataTimeUtil.GetDayFromEnum(startWeek.DayOfWeek);
                 }
 
-                if (to < endWeek)
+                if (to <= endWeek)
                 {
                     flag = false;
                     ts.to = to.ToShortDateString();

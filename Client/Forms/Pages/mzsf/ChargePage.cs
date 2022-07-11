@@ -133,8 +133,8 @@ namespace Mzsf.Forms.Pages
             Task<HttpResponseMessage> task = null;
             string json = "";
 
-            string begin = txtDate.Value.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
-            string end = txtDate.Value.ToString("yyyy-MM-dd 23:59:59");
+            string begin =DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
+            string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
 
             string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
 
@@ -497,8 +497,7 @@ namespace Mzsf.Forms.Pages
             lblNodata.Parent = this;
             lblNodata.Top = 400;
             lblNodata.Left = 300;
-
-            txtDate.Value = DateTime.Now;
+             
 
             lblNodata.Hide();
             //txtCode.Text = "";
@@ -721,10 +720,7 @@ namespace Mzsf.Forms.Pages
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             txtCode.Text = "";
-            txtCode.Focus();
-
-
-            txtDate.Value = DateTime.Now;
+            txtCode.Focus(); 
 
             InitUI();
         }
@@ -835,22 +831,22 @@ namespace Mzsf.Forms.Pages
             {
                 max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
             }
-            else
-            {
-                if (UIMessageDialog.ShowAskDialog(this, "当前患者没有医生处方，是否确认添加？"))
-                { 
-                    CreateVisitRecord();
+            //else
+            //{
+            //    if (UIMessageDialog.ShowAskDialog(this, "当前患者没有医生处方，是否确认添加？"))
+            //    { 
+            //        CreateVisitRecord();
 
-                    this.uiTabControl1.Show();
-                    this.pblSum.Show();
-                }
-                else
-                {
-                    return;
-                }
-               
-            }
-
+            //        this.uiTabControl1.Show();
+            //        this.pblSum.Show();
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    } 
+            //}
+            this.uiTabControl1.Show();
+            this.pblSum.Show();
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
             page.setData = UpdateBottomPrice;
@@ -940,7 +936,7 @@ namespace Mzsf.Forms.Pages
                 var item_str = "";
                 foreach (var item in item_list)
                 {
-                    item_str += "," + item.order_type + "-" + item.order_no + "-" + item.charge_code + "-" + item.charge_amount;
+                    item_str += "," + item.order_type + "-" + item.order_no + "-" + item.charge_code + "-" + item.serial_no + "-" + item.charge_amount;
                 }
                 if (item_str != "")
                 {
@@ -994,12 +990,14 @@ namespace Mzsf.Forms.Pages
                 }
                 else
                 {
+                    UIMessageTip.ShowError(result.message);
                     log.Error(result.message);
                 }
 
             }
             catch (Exception ex)
             {
+                UIMessageTip.ShowError(ex.Message);
                 log.Debug("请求接口数据出错：" + ex.Message);
                 log.Debug("接口数据：" + json);
 

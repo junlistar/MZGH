@@ -1,6 +1,6 @@
 ﻿--221026 门诊收费 -  查询处方项目 - 诊疗
  
-SELECT top 50 code ,  
+SELECT top 30 code ,  
         name=case when  serial ='**' then  name  else  name end,
         py_code ,
         d_code ,

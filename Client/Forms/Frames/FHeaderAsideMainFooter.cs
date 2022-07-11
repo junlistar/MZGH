@@ -56,6 +56,7 @@ namespace Client
             //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
             Aside.CreateChildNode(parent,  "挂号", 62004, 24, 1001);
             Aside.CreateChildNode(parent,  "挂号查询", 61442, 24, 1002);
+            Aside.CreateChildNode(parent,  "患者基本信息", 61442, 24, 1003);
 
 
             pageIndex = 1100;
@@ -70,10 +71,11 @@ namespace Client
 
             pageIndex = 1300;
             parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
-            Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1003);
-            Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1004);
-            Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1005);
+            Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+            Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
+            Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
             Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
+            Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
 
             pageIndex = 1400;
             parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
@@ -102,105 +104,45 @@ namespace Client
             Footer.Text = "PageIndex: " + pageIndex;
              
             UIPage page = new UIPage();
+            UIPage obj = new UIPage();
 
-            if (pageIndex == 1001)
+            if (!ExistPage(pageIndex))
             {
-                if (!ExistPage(1001))
+                switch (pageIndex)
                 {
-                    page = AddPage(new GuaHao());
+                    case 1001:
+                        obj = new GuaHao(); break;
+                    case 1002:
+                        obj = new GhList(); break; 
+                    case 1003:
+                        obj = new UserInfoPage(); break;
+                    case 1101:
+                        obj = new ChargePage(); break;
+                    case 1102:
+                        obj = new RefundPage(); break;
+                    case 1301:
+                        obj = new RequestHour(); break;
+                    case 1302:
+                        obj = new RequestTime(); break;
+                    case 1303:
+                        obj = new BaseRequest(); break;
+                    case 1304:
+                        obj = new CreateRequestRecord(); break;
+                    case 1305:
+                        obj = new BaseWeiHu(); break;
+                    case 1201:
+                        obj = new GuahaoRijie(); break;
+                    case 1202:
+                        obj = new ShoufeiRijie(); break;
+                    case 1501:
+                        obj = new UserManage(); break; 
+                    default:
+                        break;
                 }
-                SelectPage(1001); 
+                page = AddPage(obj);
             }
-            else if (node.Text == "挂号查询")
-            {
-                if (!ExistPage(1002))
-                {
-                    page = AddPage(new GhList());
-                }
-                SelectPage(1002);
-            }
-            else if (node.Text == "基础号表维护")
-            {
-                if (!ExistPage(1003))
-                {
-                    page = AddPage(new BaseRequest());
-                }
-                SelectPage(1003);
-            }
-            else if (node.Text == "生成号表")
-            {
-                if (!ExistPage(1004))
-                {
-                    page = AddPage(new CreateRequestRecord());
-                }
-                SelectPage(1004);
-            }
-            else if (node.Text == "号表维护")
-            {
-                if (!ExistPage(1005))
-                {
-                    page = AddPage(new BaseWeiHu());
-                }
-                SelectPage(1005);
-            }
-            else if (node.Text == "发新卡")
-            {
-                if (!ExistPage(1006))
-                {
-                    page = AddPage(new UserInfoPage());
-                }
-                SelectPage(1006);
-            }
-            if (pageIndex == 1101)
-            {
-                if (!ExistPage(1101))
-                {
-                    page = AddPage(new ChargePage());
-                }
-                SelectPage(1101);
-            }
-            else if (pageIndex == 1102)
-            {
-                if (!ExistPage(1102))
-                {
-                    page = AddPage(new RefundPage());
-                }
-                SelectPage(1102);
-            }
-            else if (pageIndex == 1301)
-            {
-                if (!ExistPage(1301))
-                {
-                    page = AddPage(new RequestHour());
-                }
-                SelectPage(1301);
-            }
-            else if (pageIndex == 1201)
-            {
-                if (!ExistPage(1201))
-                {
-                    page = AddPage(new GuahaoRijie());
-                }
-                SelectPage(1201);
-            }
-            else if (pageIndex == 1202)
-            {
-                if (!ExistPage(1202))
-                {
-                    page = AddPage(new ShoufeiRijie());
-                }
-                SelectPage(1202);
-            }
-            else if (pageIndex == 1501)
-            {
-                if (!ExistPage(1501))
-                {
-                    page = AddPage(new UserManage());
-                }
-                SelectPage(1501);
-            }
-            
-
+            SelectPage(pageIndex);
+             
 
             //设置激活 用户键盘事件
             Task.Run(async () =>

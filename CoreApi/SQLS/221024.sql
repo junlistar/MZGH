@@ -1,7 +1,7 @@
 ﻿--221024 门诊收费 -  查询处方项目 - 西药
 
  
-SELECT top 50 code,  
+SELECT top 30 code,  
         case when  serial ='**' then  name
   else  
 name +'('+specification+')' +' '+isnull(abname,'') 

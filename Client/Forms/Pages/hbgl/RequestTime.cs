@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http; 
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
@@ -11,11 +11,11 @@ using Sunny.UI;
 
 namespace Client.Forms.Pages.hbgl
 {
-    public partial class RequestHour : UIPage
+    public partial class RequestTime : UIPage
     {
-        private static ILog log = LogManager.GetLogger(typeof(RequestHour));//typeof放当前类
+        private static ILog log = LogManager.GetLogger(typeof(RequestTime));//typeof放当前类
 
-        public RequestHour()
+        public RequestTime()
         {
             InitializeComponent();
         }
@@ -27,21 +27,18 @@ namespace Client.Forms.Pages.hbgl
 
         public void BindData()
         {
-            GetData();
+            cbx_ampm.DataSource = SessionHelper.requestHours;
+            cbx_ampm.DisplayMember = "name";
+            cbx_ampm.ValueMember = "code";
 
-            dgvRequestHour.Init();
-            this.dgvRequestHour.DataSource = SessionHelper.requestHours;
-
-            dgvRequestHour.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-
+            GetData(); 
         }
-
-
+         
         public void GetData()
         {
             //获取挂号时间段
             var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
+            var paramurl = string.Format($"/api/GuaHao/GetRequestTimes");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -54,7 +51,13 @@ namespace Client.Forms.Pages.hbgl
                 read.Wait();
                 json = read.Result;
             }
-            SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+            var dat = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTimeVM>>>(json).data;
+
+            dgvRequestTime.Init();
+
+            dgvRequestTime.DataSource = dat;
+
+            dgvRequestTime.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void uiSymbolButton2_Click(object sender, EventArgs e)
@@ -71,10 +74,11 @@ namespace Client.Forms.Pages.hbgl
         {
             if (e.RowIndex != -1)
             {
-                txtCode.Text = dgvRequestHour.Rows[e.RowIndex].Cells["code"].Value.ToString();
-                txtName.Text = dgvRequestHour.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                cbxHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
-                cbxHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
+                txt_section.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number"].Value.ToString();
+                txtComment.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number_comment"].Value.ToString();
+                txt_start_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["start_time"].Value.ToString();
+                txt_end_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["end_time"].Value.ToString();
+                cbx_ampm.SelectedValue = dgvRequestTime.Rows[e.RowIndex].Cells["ampm"].Value.ToString();
             }
         }
 
@@ -82,13 +86,14 @@ namespace Client.Forms.Pages.hbgl
         {
             var d = new
             {
-                code = txtCode.Text,
-                name = txtName.Text,
-                start_hour = cbxHour1.Text,
-                end_hour = cbxHour2.Text,
+                section = txt_section.Text,
+                section_name = txtComment.Text,
+                start_time = txt_start_time.Text,
+                end_time = txt_end_time.Text,
+                ampm = cbx_ampm.SelectedValue,
 
             };
-            if (string.IsNullOrWhiteSpace(d.code)|| string.IsNullOrWhiteSpace(d.name) || string.IsNullOrWhiteSpace(d.start_hour) || string.IsNullOrWhiteSpace(d.end_hour))
+            if (string.IsNullOrWhiteSpace(d.section) || string.IsNullOrWhiteSpace(d.section_name))
             {
                 UIMessageTip.ShowError("请将数据填写完整！");
                 return;
@@ -96,18 +101,15 @@ namespace Client.Forms.Pages.hbgl
 
 
             try
-            { 
-                int hour1 = int.Parse(d.start_hour);
-                int hour2 = int.Parse(d.end_hour);
+            {
 
-                if (hour1>=hour2)
-                {
-                    UIMessageTip.ShowWarning("开始小时数必须小于等于结束小时数！");
-                    return;
-                }
+                // EditRequestTime(string section, string section_name, string start_time, string end_time,string ampm)
+                string time1 =  d.start_time;
+                string time2 = d.end_time;
+ 
                 Task<HttpResponseMessage> task;
                 string json = "";
-                string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
+                string paramurl = string.Format($"/api/GuaHao/EditRequestTime?section={d.section}&section_name={d.section_name}&start_time={d.start_time}&end_time={d.end_time}&ampm={d.ampm}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -141,25 +143,26 @@ namespace Client.Forms.Pages.hbgl
 
         private void btnDel_Click(object sender, EventArgs e)
         {
+            // DeleteRequestTime(string section)
             var d = new
             {
-                code = txtCode.Text,
+                section = txt_section.Text,
             };
 
-            if (string.IsNullOrWhiteSpace(d.code))
+            if (string.IsNullOrWhiteSpace(d.section))
             {
                 UIMessageTip.ShowError("请选择数据项目进行操作！");
                 return;
             }
 
-            if (!UIMessageDialog.ShowAskDialog(this,"确定要进行删除操作吗？"))
+            if (!UIMessageDialog.ShowAskDialog(this, "确定要进行删除操作吗？"))
             {
                 return;
             }
 
             Task<HttpResponseMessage> task;
             string json = "";
-            string paramurl = string.Format($"/api/GuaHao/DeleteRequestHour?code={d.code}");
+            string paramurl = string.Format($"/api/GuaHao/DeleteRequestTime?section={d.section}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -201,10 +204,10 @@ namespace Client.Forms.Pages.hbgl
         }
         public void ResetTextData()
         {
-            txtCode.Text = "";
-            txtName.Text = "";
-            cbxHour1.Text = "0";
-            cbxHour2.Text = "23";
+            txt_section.Text = "";
+            txtComment.Text = "";
+            txt_start_time.Text = "00:00:00";
+            txt_start_time.Text = "00:59:59"; 
         }
     }
 }

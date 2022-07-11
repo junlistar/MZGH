@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOrderDetail = new Sunny.UI.UIDataGridView();
+            this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.txtAmount = new Sunny.UI.UITextBox();
+            this.txtCharge = new Sunny.UI.UITextBox();
+            this.txtUnit = new Sunny.UI.UITextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtName = new Sunny.UI.UITextBox();
+            this.btnAddItem = new Sunny.UI.UISymbolButton();
+            this.btnDeleteItem = new Sunny.UI.UISymbolButton();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.serial = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code_lookup_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code_lookup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.exec_SN_lookup = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,17 +61,6 @@
             this.freq_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parent_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.txtAmount = new Sunny.UI.UITextBox();
-            this.txtCharge = new Sunny.UI.UITextBox();
-            this.txtUnit = new Sunny.UI.UITextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtName = new Sunny.UI.UITextBox();
-            this.btnAddItem = new Sunny.UI.UISymbolButton();
-            this.btnDeleteItem = new Sunny.UI.UISymbolButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -67,25 +68,26 @@
             // dgvOrderDetail
             // 
             this.dgvOrderDetail.AllowUserToAddRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgvOrderDetail.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgvOrderDetail.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrderDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrderDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvOrderDetail.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvOrderDetail.ColumnHeadersHeight = 32;
             this.dgvOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvOrderDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.item_no,
+            this.serial,
             this.charge_code_lookup_str,
             this.charge_code_lookup,
             this.exec_SN_lookup,
@@ -100,135 +102,45 @@
             this.freq_code,
             this.parent_no,
             this.code});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvOrderDetail.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvOrderDetail.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvOrderDetail.EnableHeadersVisualStyles = false;
             this.dgvOrderDetail.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvOrderDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvOrderDetail.Location = new System.Drawing.Point(0, 89);
             this.dgvOrderDetail.Name = "dgvOrderDetail";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvOrderDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvOrderDetail.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvOrderDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvOrderDetail.RowHeight = 0;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvOrderDetail.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvOrderDetail.RowTemplate.Height = 23;
             this.dgvOrderDetail.SelectedIndex = -1;
             this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrderDetail.ShowGridLine = false;
+            this.dgvOrderDetail.ShowRect = false;
             this.dgvOrderDetail.Size = new System.Drawing.Size(1234, 502);
             this.dgvOrderDetail.TabIndex = 1;
             this.dgvOrderDetail.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvOrderDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetail_CellClick);
             this.dgvOrderDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetail_CellContentClick);
             this.dgvOrderDetail.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvOrderDetail_RowPostPaint);
-            // 
-            // item_no
-            // 
-            this.item_no.DataPropertyName = "item_no";
-            this.item_no.HeaderText = "序号";
-            this.item_no.Name = "item_no";
-            // 
-            // charge_code_lookup_str
-            // 
-            this.charge_code_lookup_str.DataPropertyName = "charge_code_lookup_str";
-            this.charge_code_lookup_str.HeaderText = "项目名称";
-            this.charge_code_lookup_str.Name = "charge_code_lookup_str";
-            // 
-            // charge_code_lookup
-            // 
-            this.charge_code_lookup.DataPropertyName = "charge_code_lookup";
-            this.charge_code_lookup.HeaderText = "项目名称1";
-            this.charge_code_lookup.Name = "charge_code_lookup";
-            this.charge_code_lookup.Visible = false;
-            // 
-            // exec_SN_lookup
-            // 
-            this.exec_SN_lookup.DataPropertyName = "exec_SN_lookup";
-            this.exec_SN_lookup.HeaderText = "执行科室";
-            this.exec_SN_lookup.Name = "exec_SN_lookup";
-            // 
-            // charge_price
-            // 
-            this.charge_price.DataPropertyName = "charge_price";
-            this.charge_price.HeaderText = "价格";
-            this.charge_price.Name = "charge_price";
-            // 
-            // charge_amount
-            // 
-            this.charge_amount.DataPropertyName = "charge_amount";
-            this.charge_amount.HeaderText = "数量";
-            this.charge_amount.Name = "charge_amount";
-            // 
-            // caoyao_fu
-            // 
-            this.caoyao_fu.DataPropertyName = "caoyao_fu";
-            this.caoyao_fu.HeaderText = "付数";
-            this.caoyao_fu.Name = "caoyao_fu";
-            // 
-            // total_price
-            // 
-            this.total_price.DataPropertyName = "total_price";
-            this.total_price.HeaderText = "合计";
-            this.total_price.Name = "total_price";
-            // 
-            // fybl
-            // 
-            this.fybl.DataPropertyName = "fybl";
-            this.fybl.HeaderText = "费用比例";
-            this.fybl.Name = "fybl";
-            // 
-            // yongfa
-            // 
-            this.yongfa.DataPropertyName = "yongfa";
-            this.yongfa.HeaderText = "用法";
-            this.yongfa.Name = "yongfa";
-            // 
-            // comment
-            // 
-            this.comment.DataPropertyName = "comment";
-            this.comment.HeaderText = "嘱托";
-            this.comment.Name = "comment";
-            // 
-            // dosage
-            // 
-            this.dosage.DataPropertyName = "dosage";
-            this.dosage.HeaderText = "单次用量";
-            this.dosage.Name = "dosage";
-            // 
-            // freq_code
-            // 
-            this.freq_code.DataPropertyName = "freq_code";
-            this.freq_code.HeaderText = "执行频率";
-            this.freq_code.Name = "freq_code";
-            // 
-            // parent_no
-            // 
-            this.parent_no.DataPropertyName = "parent_no";
-            this.parent_no.HeaderText = "parent_no";
-            this.parent_no.Name = "parent_no";
-            this.parent_no.Visible = false;
-            // 
-            // code
-            // 
-            this.code.DataPropertyName = "code";
-            this.code.HeaderText = "code";
-            this.code.Name = "code";
-            this.code.Visible = false;
             // 
             // uiPanel1
             // 
@@ -263,6 +175,7 @@
             this.txtAmount.Size = new System.Drawing.Size(149, 29);
             this.txtAmount.TabIndex = 13;
             this.txtAmount.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtAmount.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txtAmount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             this.txtAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAmount_KeyUp);
@@ -380,6 +293,106 @@
             this.btnDeleteItem.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
+            // item_no
+            // 
+            this.item_no.DataPropertyName = "item_no";
+            this.item_no.HeaderText = "序号";
+            this.item_no.Name = "item_no";
+            // 
+            // serial
+            // 
+            this.serial.DataPropertyName = "serial";
+            this.serial.HeaderText = "serial";
+            this.serial.Name = "serial";
+            this.serial.Visible = false;
+            // 
+            // charge_code_lookup_str
+            // 
+            this.charge_code_lookup_str.DataPropertyName = "charge_code_lookup_str";
+            this.charge_code_lookup_str.HeaderText = "项目名称";
+            this.charge_code_lookup_str.Name = "charge_code_lookup_str";
+            // 
+            // charge_code_lookup
+            // 
+            this.charge_code_lookup.DataPropertyName = "charge_code_lookup";
+            this.charge_code_lookup.HeaderText = "项目名称1";
+            this.charge_code_lookup.Name = "charge_code_lookup";
+            this.charge_code_lookup.Visible = false;
+            // 
+            // exec_SN_lookup
+            // 
+            this.exec_SN_lookup.DataPropertyName = "exec_SN_lookup";
+            this.exec_SN_lookup.HeaderText = "执行科室";
+            this.exec_SN_lookup.Name = "exec_SN_lookup";
+            // 
+            // charge_price
+            // 
+            this.charge_price.DataPropertyName = "charge_price";
+            this.charge_price.HeaderText = "价格";
+            this.charge_price.Name = "charge_price";
+            // 
+            // charge_amount
+            // 
+            this.charge_amount.DataPropertyName = "charge_amount";
+            this.charge_amount.HeaderText = "数量";
+            this.charge_amount.Name = "charge_amount";
+            // 
+            // caoyao_fu
+            // 
+            this.caoyao_fu.DataPropertyName = "caoyao_fu";
+            this.caoyao_fu.HeaderText = "付数";
+            this.caoyao_fu.Name = "caoyao_fu";
+            // 
+            // total_price
+            // 
+            this.total_price.DataPropertyName = "total_price";
+            this.total_price.HeaderText = "合计";
+            this.total_price.Name = "total_price";
+            // 
+            // fybl
+            // 
+            this.fybl.DataPropertyName = "fybl";
+            this.fybl.HeaderText = "费用比例";
+            this.fybl.Name = "fybl";
+            // 
+            // yongfa
+            // 
+            this.yongfa.DataPropertyName = "yongfa";
+            this.yongfa.HeaderText = "用法";
+            this.yongfa.Name = "yongfa";
+            // 
+            // comment
+            // 
+            this.comment.DataPropertyName = "comment";
+            this.comment.HeaderText = "嘱托";
+            this.comment.Name = "comment";
+            // 
+            // dosage
+            // 
+            this.dosage.DataPropertyName = "dosage";
+            this.dosage.HeaderText = "单次用量";
+            this.dosage.Name = "dosage";
+            // 
+            // freq_code
+            // 
+            this.freq_code.DataPropertyName = "freq_code";
+            this.freq_code.HeaderText = "执行频率";
+            this.freq_code.Name = "freq_code";
+            // 
+            // parent_no
+            // 
+            this.parent_no.DataPropertyName = "parent_no";
+            this.parent_no.HeaderText = "parent_no";
+            this.parent_no.Name = "parent_no";
+            this.parent_no.Visible = false;
+            // 
+            // code
+            // 
+            this.code.DataPropertyName = "code";
+            this.code.HeaderText = "code";
+            this.code.Name = "code";
+            this.code.Visible = false;
+            // 
             // OrderItemPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -411,7 +424,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UITextBox txtName;
+        private Sunny.UI.UISymbolButton btnAddItem;
+        private Sunny.UI.UISymbolButton btnDeleteItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code_lookup_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code_lookup;
         private System.Windows.Forms.DataGridViewTextBoxColumn exec_SN_lookup;
@@ -426,7 +442,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn freq_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn parent_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private Sunny.UI.UISymbolButton btnAddItem;
-        private Sunny.UI.UISymbolButton btnDeleteItem;
     }
 }

@@ -750,7 +750,7 @@
             this.Controls.Add(this.pnltop);
             this.KeyPreview = true;
             this.Name = "BaseRequest";
-            this.PageIndex = 1003;
+            this.PageIndex = 1303;
             this.Text = "基础号表维护";
             this.Initialize += new System.EventHandler(this.BaseRequest_Initialize);
             this.Load += new System.EventHandler(this.BaseRequest_Load);

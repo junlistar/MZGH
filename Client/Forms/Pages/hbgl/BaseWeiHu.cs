@@ -596,12 +596,9 @@ namespace Client
 
                     RequestEdit edit = new RequestEdit(record_sn.ToString());
                     edit.ShowDialog();
+                    InitData();
                 }
-                else
-                {
-
-                }
-
+                
             }
             catch (Exception ex)
             {

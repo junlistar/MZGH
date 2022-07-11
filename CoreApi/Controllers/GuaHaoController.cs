@@ -43,13 +43,14 @@ namespace CoreApi.Controllers
         private readonly IReportDataFastRepository _reportDataFastRepository;
         private readonly IReportParamFastRepository _reportParamFastRepository;
         private readonly IRequestHourRepository _requestHourRepository;
+        private readonly IRequestTimeRepository _requestTimeRepository;
 
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
             IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository, IRequestHourRepository requestHourRepository,
-            IReportParamFastRepository reportParamFastRepository)
+            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -71,6 +72,7 @@ namespace CoreApi.Controllers
             _reportDataFastRepository = reportDataFastRepository;
             _requestHourRepository = requestHourRepository;
             _reportParamFastRepository = reportParamFastRepository;
+            _requestTimeRepository = requestTimeRepository;
 
         }
 
@@ -788,13 +790,13 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<GhRequest>(ex.Message);
             }
-        } 
+        }
         public ResponseResult<ReportData> GetReportDataByCode(string code)
         {
 
             Log.Information($"GetReportDataByCode,{code}");
             try
-            { 
+            {
                 return _reportDataFastRepository.GetReportDataByCode(code);
             }
             catch (Exception ex)
@@ -875,7 +877,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-          
+
         public ResponseResult<List<ReportParam>> GetReportParam(string code)
         {
 
@@ -898,7 +900,7 @@ namespace CoreApi.Controllers
             {
                 var ds = _reportDataFastRepository.GetReportDataBySql(sql, tb_name);
 
-                return JsonConvert.SerializeObject(ds.Tables[0], new DataTableConverter()); 
+                return JsonConvert.SerializeObject(ds.Tables[0], new DataTableConverter());
             }
             catch (Exception ex)
             {
@@ -936,5 +938,47 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+
+
+        public ResponseResult<List<RequestTime>> GetRequestTimes()
+        {
+            Log.Information($"GetRequestTimes");
+            try
+            {
+                return _requestTimeRepository.GetRequestTimes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<RequestTime>>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> EditRequestTime(string section, string section_name, string start_time, string end_time, string ampm)
+        {
+            Log.Information($"EditRequestTime,{section},{section_name},{start_time},{end_time},{ampm}");
+            try
+            {
+                return _requestTimeRepository.EditRequestTime(section, section_name, start_time, end_time, ampm);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> DeleteRequestTime(string section)
+        {
+            Log.Information($"DeleteRequestTime,{section}");
+            try
+            {
+                return _requestTimeRepository.DeleteRequestTime(section);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+         
     }
 }

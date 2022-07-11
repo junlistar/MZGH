@@ -672,7 +672,7 @@
             this.Controls.Add(this.pnlTitle);
             this.KeyPreview = true;
             this.Name = "BaseWeiHu";
-            this.PageIndex = 1005;
+            this.PageIndex = 1305;
             this.StyleCustomMode = true;
             this.Text = "基础号表维护";
             this.Load += new System.EventHandler(this.BaseRequest_Load);

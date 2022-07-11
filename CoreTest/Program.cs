@@ -72,8 +72,11 @@ namespace CoreTest
            //var re = ghDailyReport.SaveGhDaily("00000");
 
 
-            ReportDataFastRepository reportDataFastRepository = new ReportDataFastRepository();
-            reportDataFastRepository.GetMzsfDailyByReportCode("220010","1900-01-01 00:00:00","00000","1");
+            //ReportDataFastRepository reportDataFastRepository = new ReportDataFastRepository();
+            //reportDataFastRepository.GetMzsfDailyByReportCode("220010","1900-01-01 00:00:00","00000","1");
+
+            RequestTimeRepository rr = new RequestTimeRepository();
+           var aaa = rr.GetRequestTimes();
 
             Console.WriteLine("Hello World!");
         }
