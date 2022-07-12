@@ -133,7 +133,7 @@ namespace Mzsf.Forms.Pages
             Task<HttpResponseMessage> task = null;
             string json = "";
 
-            string begin =DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
+            string begin = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
             string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
 
             string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
@@ -170,23 +170,12 @@ namespace Mzsf.Forms.Pages
                                 txtUnit.Text = current_unit_name;
                                 txtDoct.Text = current_doct_name;
                                 lblTimes.Text = "来访号：" + current_times;
-                                //查询处方
-                                GetOrders(patient_id, current_times);
                             }
                         }
-                        else
-                        {
-                            //查询处方
-                            GetOrders(patient_id, current_times);
-                        }
 
                     }
-                    else
-                    {
-                        lblNodata.Text = "没有处方数据";
-                        lblNodata.Show();
-                    }
-
+                    //查询处方
+                    GetOrders(patient_id, current_times); 
                 }
                 else
                 {
@@ -497,7 +486,7 @@ namespace Mzsf.Forms.Pages
             lblNodata.Parent = this;
             lblNodata.Top = 400;
             lblNodata.Left = 300;
-             
+
 
             lblNodata.Hide();
             //txtCode.Text = "";
@@ -720,7 +709,7 @@ namespace Mzsf.Forms.Pages
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             txtCode.Text = "";
-            txtCode.Focus(); 
+            txtCode.Focus();
 
             InitUI();
         }
@@ -737,9 +726,9 @@ namespace Mzsf.Forms.Pages
 
         private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (uiTabControl1.SelectedIndex!=-1)
+            if (uiTabControl1.SelectedIndex != -1)
             {
-                BindBottomChargeInfo(uiTabControl1.SelectedIndex); 
+                BindBottomChargeInfo(uiTabControl1.SelectedIndex);
             }
 
             //var page = uiTabControl1.TabPages[uiTabControl1.SelectedIndex] as OrderItemPage;
@@ -753,7 +742,7 @@ namespace Mzsf.Forms.Pages
 
 
         public void BindBottomChargeInfo(int tabindex)
-        { 
+        {
             var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
 .Select(g => g.First()).Select(p => p.order_no)
 .ToList();
@@ -765,13 +754,20 @@ namespace Mzsf.Forms.Pages
             var order_no = order_list[tabindex];
 
             var order = SessionHelper.cprCharges.Where(p => p.order_no == order_no);
- 
+
             lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
             lblOrderItemCount.Text = order.Count().ToString();
             lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
         }
 
         private void btnHuajia_Click(object sender, EventArgs e)
+        {
+            SaveOrder();
+            Huajia();
+
+        }
+
+        public void Huajia()
         {
             if (SessionHelper.patientVM != null && SessionHelper.cprCharges != null)
             {
@@ -780,20 +776,19 @@ namespace Mzsf.Forms.Pages
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
                 if (dresult == DialogResult.OK)
-                { 
+                {
                     //打印发票
                     if (SessionHelper.do_sf_print)
                     {
-                        SessionHelper.do_sf_print = false; 
+                        SessionHelper.do_sf_print = false;
                         //打印发票 
                         Print ghprint = new Print(SessionHelper.mzsf_report_code);
-                        ghprint.Show(); 
+                        ghprint.Show();
                     }
                     //查询处方
                     SearchUser();
                 }
             }
-
         }
 
         private void Check_FormClosed(object sender, FormClosedEventArgs e)
@@ -914,6 +909,14 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+            SaveOrder();
+            //MessageBox.Show(order_string);
+        }
+
+        public void SaveOrder()
+        {
+
             if (SessionHelper.cprCharges == null)
             {
                 return;
@@ -951,7 +954,7 @@ namespace Mzsf.Forms.Pages
 
             if (order_string == "")
             {
-                MessageBox.Show("没有新添加的处方，无需保存！");
+                //MessageBox.Show("没有新添加的处方，无需保存！");
                 return;
             }
 
@@ -985,7 +988,7 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)
                 {
-                    UIMessageTip.Show("保存成功");
+                    //UIMessageTip.Show("保存成功");
                     GetOrders(current_patient_id, current_times);
                 }
                 else
@@ -1003,8 +1006,6 @@ namespace Mzsf.Forms.Pages
 
             }
 
-
-            //MessageBox.Show(order_string);
         }
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
@@ -1112,8 +1113,8 @@ namespace Mzsf.Forms.Pages
         private void uiButton1_Click(object sender, EventArgs e)
         {
             SessionHelper.sf_print_user_ledger = 352;
-               //打印发票 
-               Print ghprint = new Print(SessionHelper.mzsf_report_code);
+            //打印发票 
+            Print ghprint = new Print(SessionHelper.mzsf_report_code);
             ghprint.Show();
         }
     }

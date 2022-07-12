@@ -13,6 +13,7 @@ namespace Data.IRepository
             string group_sn = "%", string req_type = "%", string ampm = "%", string gh_opera = "%",
             string name = "%", string p_bar_code = "%");
 
+        List<GhSearch> GetRecordByPatientId(string patient_id);
 
         #endregion
     }

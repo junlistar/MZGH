@@ -28,42 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.txt_sfz_name = new Sunny.UI.UITextBox();
+            this.sfz_name = new Sunny.UI.UITextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtrelationname = new Sunny.UI.UITextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtsno = new Sunny.UI.UITextBox();
+            this.sfz_card_no = new Sunny.UI.UITextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txthicno = new Sunny.UI.UITextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtemployer_name = new Sunny.UI.UITextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.txtsbh = new Sunny.UI.UITextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtTel = new Sunny.UI.UITextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.txthomestreet = new Sunny.UI.UITextBox();
+            this.sfz_home_address = new Sunny.UI.UITextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.txthomedistrict = new Sunny.UI.UITextBox();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
-            this.txtbirth = new Sunny.UI.UIDatePicker();
+            this.sfz_birthday = new Sunny.UI.UIDatePicker();
             this.pnlTitle = new Sunny.UI.UIPanel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnReset = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
-            this.label24 = new System.Windows.Forms.Label();
+            this.lblmsg = new Sunny.UI.UILabel();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.sfz_address = new Sunny.UI.UITextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.uiGroupBox3 = new Sunny.UI.UIGroupBox();
             this.btnYBK = new Sunny.UI.UISymbolButton();
@@ -72,44 +76,60 @@
             this.btnCika = new Sunny.UI.UISymbolButton();
             this.label26 = new System.Windows.Forms.Label();
             this.uiGroupBox4 = new Sunny.UI.UIGroupBox();
-            this.lblmsg = new Sunny.UI.UILabel();
+            this.dgv_patient_sfz = new Sunny.UI.UIDataGridView();
+            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
-            this.cbxChargeTypes = new Sunny.UI.UIComboBox();
-            this.cbxResponseType = new Sunny.UI.UIComboBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
             this.txt_name = new Sunny.UI.UITextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.txtCode = new Sunny.UI.UITextBox();
             this.label37 = new System.Windows.Forms.Label();
+            this.sfz_sex = new Sunny.UI.UITextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.sfz_folk = new Sunny.UI.UITextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.cbxsex = new Sunny.UI.UIComboBox();
-            this.uiDataGridView1 = new Sunny.UI.UIDataGridView();
-            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_sfz_name.SuspendLayout();
+            this.label6 = new System.Windows.Forms.Label();
+            this.uiGroupBox6 = new Sunny.UI.UIGroupBox();
+            this.dgv_ghlist = new Sunny.UI.UIDataGridView();
+            this.gh_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.visit_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lklduka = new Sunny.UI.UILinkLabel();
+            this.txt_birth = new Sunny.UI.UIDatePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txt_sfz_no = new Sunny.UI.UITextBox();
+            this.sfz_name.SuspendLayout();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
             this.uiGroupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_patient_sfz)).BeginInit();
             this.uiGroupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).BeginInit();
+            this.sfz_sex.SuspendLayout();
+            this.sfz_folk.SuspendLayout();
+            this.uiGroupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ghlist)).BeginInit();
             this.SuspendLayout();
             // 
-            // txt_sfz_name
+            // sfz_name
             // 
-            this.txt_sfz_name.Controls.Add(this.label21);
-            this.txt_sfz_name.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_sfz_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_sfz_name.Location = new System.Drawing.Point(128, 76);
-            this.txt_sfz_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_sfz_name.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_sfz_name.Name = "txt_sfz_name";
-            this.txt_sfz_name.ShowText = false;
-            this.txt_sfz_name.Size = new System.Drawing.Size(205, 29);
-            this.txt_sfz_name.TabIndex = 7;
-            this.txt_sfz_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_sfz_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfz_name.Controls.Add(this.label21);
+            this.sfz_name.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_name.Location = new System.Drawing.Point(126, 100);
+            this.sfz_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_name.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_name.Name = "sfz_name";
+            this.sfz_name.ShowText = false;
+            this.sfz_name.Size = new System.Drawing.Size(205, 29);
+            this.sfz_name.TabIndex = 7;
+            this.sfz_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label21
             // 
@@ -123,7 +143,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(79, 79);
+            this.label4.Location = new System.Drawing.Point(77, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 21);
             this.label4.TabIndex = 6;
@@ -132,7 +152,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(370, 77);
+            this.label7.Location = new System.Drawing.Point(368, 102);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 21);
             this.label7.TabIndex = 12;
@@ -141,7 +161,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(370, 39);
+            this.label8.Location = new System.Drawing.Point(77, 144);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 21);
             this.label8.TabIndex = 14;
@@ -151,12 +171,13 @@
             // 
             this.txtrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtrelationname.Location = new System.Drawing.Point(419, 195);
+            this.txtrelationname.Location = new System.Drawing.Point(663, 76);
             this.txtrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtrelationname.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtrelationname.Name = "txtrelationname";
+            this.txtrelationname.ReadOnly = true;
             this.txtrelationname.ShowText = false;
-            this.txtrelationname.Size = new System.Drawing.Size(187, 29);
+            this.txtrelationname.Size = new System.Drawing.Size(151, 29);
             this.txtrelationname.TabIndex = 17;
             this.txtrelationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtrelationname.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -164,49 +185,40 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(339, 200);
+            this.label9.Location = new System.Drawing.Point(588, 81);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 21);
             this.label9.TabIndex = 16;
             this.label9.Text = "家长姓名";
             // 
-            // label10
+            // sfz_card_no
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(79, 197);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(42, 21);
-            this.label10.TabIndex = 18;
-            this.label10.Text = "来自";
-            // 
-            // txtsno
-            // 
-            this.txtsno.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtsno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtsno.Location = new System.Drawing.Point(128, 37);
-            this.txtsno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtsno.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtsno.Name = "txtsno";
-            this.txtsno.ShowText = false;
-            this.txtsno.Size = new System.Drawing.Size(205, 29);
-            this.txtsno.TabIndex = 21;
-            this.txtsno.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtsno.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfz_card_no.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_card_no.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_card_no.Location = new System.Drawing.Point(126, 61);
+            this.sfz_card_no.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_card_no.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_card_no.Name = "sfz_card_no";
+            this.sfz_card_no.ShowText = false;
+            this.sfz_card_no.Size = new System.Drawing.Size(205, 29);
+            this.sfz_card_no.TabIndex = 21;
+            this.sfz_card_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_card_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(63, 39);
+            this.label11.Location = new System.Drawing.Point(28, 64);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(58, 21);
+            this.label11.Size = new System.Drawing.Size(90, 21);
             this.label11.TabIndex = 20;
-            this.label11.Text = "身份证";
+            this.label11.Text = "身份证号码";
             // 
             // txthicno
             // 
             this.txthicno.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthicno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthicno.Location = new System.Drawing.Point(122, 32);
+            this.txthicno.Location = new System.Drawing.Point(130, 61);
             this.txthicno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthicno.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthicno.Name = "txthicno";
@@ -219,49 +231,26 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(42, 34);
+            this.label12.Location = new System.Drawing.Point(50, 63);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(74, 21);
             this.label12.TabIndex = 22;
-            this.label12.Text = "医疗证号";
+            this.label12.Text = "医保卡号";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(261, 44);
+            this.label13.Location = new System.Drawing.Point(333, 42);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 21);
             this.label13.TabIndex = 20;
             this.label13.Text = "婚姻";
             // 
-            // txtemployer_name
-            // 
-            this.txtemployer_name.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtemployer_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtemployer_name.Location = new System.Drawing.Point(128, 293);
-            this.txtemployer_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtemployer_name.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtemployer_name.Name = "txtemployer_name";
-            this.txtemployer_name.ShowText = false;
-            this.txtemployer_name.Size = new System.Drawing.Size(478, 29);
-            this.txtemployer_name.TabIndex = 23;
-            this.txtemployer_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtemployer_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(47, 293);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(74, 21);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "工作单位";
-            // 
             // txtsbh
             // 
             this.txtsbh.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtsbh.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtsbh.Location = new System.Drawing.Point(122, 82);
+            this.txtsbh.Location = new System.Drawing.Point(130, 100);
             this.txtsbh.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtsbh.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtsbh.Name = "txtsbh";
@@ -274,7 +263,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(58, 84);
+            this.label17.Location = new System.Drawing.Point(66, 102);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(58, 21);
             this.label17.TabIndex = 28;
@@ -284,10 +273,11 @@
             // 
             this.txtTel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtTel.Location = new System.Drawing.Point(518, 47);
+            this.txtTel.Location = new System.Drawing.Point(382, 76);
             this.txtTel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTel.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTel.Name = "txtTel";
+            this.txtTel.ReadOnly = true;
             this.txtTel.ShowText = false;
             this.txtTel.Size = new System.Drawing.Size(187, 29);
             this.txtTel.TabIndex = 31;
@@ -297,50 +287,35 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(478, 52);
+            this.label18.Location = new System.Drawing.Point(333, 81);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 21);
             this.label18.TabIndex = 30;
             this.label18.Text = "电话";
             // 
-            // txthomestreet
+            // sfz_home_address
             // 
-            this.txthomestreet.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txthomestreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomestreet.Location = new System.Drawing.Point(128, 246);
-            this.txthomestreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txthomestreet.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txthomestreet.Name = "txthomestreet";
-            this.txthomestreet.ShowText = false;
-            this.txthomestreet.Size = new System.Drawing.Size(478, 29);
-            this.txthomestreet.TabIndex = 33;
-            this.txthomestreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txthomestreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfz_home_address.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_home_address.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_home_address.Location = new System.Drawing.Point(117, 154);
+            this.sfz_home_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_home_address.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_home_address.Name = "sfz_home_address";
+            this.sfz_home_address.ReadOnly = true;
+            this.sfz_home_address.ShowText = false;
+            this.sfz_home_address.Size = new System.Drawing.Size(452, 29);
+            this.sfz_home_address.TabIndex = 33;
+            this.sfz_home_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_home_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(46, 250);
+            this.label19.Location = new System.Drawing.Point(40, 160);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 21);
             this.label19.TabIndex = 32;
             this.label19.Text = "家庭住址";
-            // 
-            // txthomedistrict
-            // 
-            this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomedistrict.Location = new System.Drawing.Point(128, 195);
-            this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txthomedistrict.Name = "txthomedistrict";
-            this.txthomedistrict.ShowText = false;
-            this.txthomedistrict.Size = new System.Drawing.Size(205, 29);
-            this.txthomedistrict.TabIndex = 19;
-            this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txthomedistrict.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txthomedistrict_KeyUp);
-            this.txthomedistrict.Leave += new System.EventHandler(this.txthomedistrict_Leave);
             // 
             // cbxmarrycode
             // 
@@ -353,35 +328,35 @@
             "丧偶",
             "离婚",
             "其他"});
-            this.cbxmarrycode.Location = new System.Drawing.Point(310, 44);
+            this.cbxmarrycode.Location = new System.Drawing.Point(382, 37);
             this.cbxmarrycode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxmarrycode.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxmarrycode.Name = "cbxmarrycode";
             this.cbxmarrycode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxmarrycode.Size = new System.Drawing.Size(150, 29);
+            this.cbxmarrycode.ReadOnly = true;
+            this.cbxmarrycode.Size = new System.Drawing.Size(187, 29);
             this.cbxmarrycode.TabIndex = 35;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // txtbirth
+            // sfz_birthday
             // 
-            this.txtbirth.FillColor = System.Drawing.Color.White;
-            this.txtbirth.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtbirth.Location = new System.Drawing.Point(419, 34);
-            this.txtbirth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtbirth.MaxLength = 10;
-            this.txtbirth.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtbirth.Name = "txtbirth";
-            this.txtbirth.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtbirth.ShowToday = true;
-            this.txtbirth.Size = new System.Drawing.Size(187, 29);
-            this.txtbirth.SymbolDropDown = 61555;
-            this.txtbirth.SymbolNormal = 61555;
-            this.txtbirth.TabIndex = 37;
-            this.txtbirth.Text = "1900-01-01";
-            this.txtbirth.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtbirth.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.txtbirth.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfz_birthday.FillColor = System.Drawing.Color.White;
+            this.sfz_birthday.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_birthday.Location = new System.Drawing.Point(126, 139);
+            this.sfz_birthday.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_birthday.MaxLength = 10;
+            this.sfz_birthday.MinimumSize = new System.Drawing.Size(63, 0);
+            this.sfz_birthday.Name = "sfz_birthday";
+            this.sfz_birthday.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.sfz_birthday.ShowToday = true;
+            this.sfz_birthday.Size = new System.Drawing.Size(205, 29);
+            this.sfz_birthday.SymbolDropDown = 61555;
+            this.sfz_birthday.SymbolNormal = 61555;
+            this.sfz_birthday.TabIndex = 37;
+            this.sfz_birthday.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_birthday.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.sfz_birthday.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // pnlTitle
             // 
@@ -397,7 +372,7 @@
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1161, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1218, 66);
             this.pnlTitle.TabIndex = 38;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -459,46 +434,74 @@
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // label24
+            // lblmsg
             // 
-            this.label24.AutoSize = true;
-            this.label24.ForeColor = System.Drawing.Color.Red;
-            this.label24.Location = new System.Drawing.Point(340, 79);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(17, 21);
-            this.label24.TabIndex = 42;
-            this.label24.Text = "*";
+            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmsg.Location = new System.Drawing.Point(603, 22);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(517, 23);
+            this.lblmsg.TabIndex = 44;
+            this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiGroupBox1
             // 
-            this.uiGroupBox1.Controls.Add(this.label24);
+            this.uiGroupBox1.Controls.Add(this.lklduka);
+            this.uiGroupBox1.Controls.Add(this.sfz_folk);
+            this.uiGroupBox1.Controls.Add(this.sfz_sex);
+            this.uiGroupBox1.Controls.Add(this.label2);
+            this.uiGroupBox1.Controls.Add(this.sfz_address);
+            this.uiGroupBox1.Controls.Add(this.label1);
             this.uiGroupBox1.Controls.Add(this.label4);
-            this.uiGroupBox1.Controls.Add(this.txt_sfz_name);
-            this.uiGroupBox1.Controls.Add(this.txtbirth);
+            this.uiGroupBox1.Controls.Add(this.sfz_name);
+            this.uiGroupBox1.Controls.Add(this.sfz_birthday);
             this.uiGroupBox1.Controls.Add(this.label7);
             this.uiGroupBox1.Controls.Add(this.label8);
-            this.uiGroupBox1.Controls.Add(this.cbxsex);
-            this.uiGroupBox1.Controls.Add(this.label9);
-            this.uiGroupBox1.Controls.Add(this.txthomestreet);
-            this.uiGroupBox1.Controls.Add(this.txtrelationname);
-            this.uiGroupBox1.Controls.Add(this.label19);
-            this.uiGroupBox1.Controls.Add(this.label10);
-            this.uiGroupBox1.Controls.Add(this.txthomedistrict);
             this.uiGroupBox1.Controls.Add(this.label11);
-            this.uiGroupBox1.Controls.Add(this.txtsno);
-            this.uiGroupBox1.Controls.Add(this.label14);
-            this.uiGroupBox1.Controls.Add(this.txtemployer_name);
+            this.uiGroupBox1.Controls.Add(this.sfz_card_no);
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(13, 257);
+            this.uiGroupBox1.Location = new System.Drawing.Point(15, 302);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(698, 335);
+            this.uiGroupBox1.Size = new System.Drawing.Size(646, 246);
             this.uiGroupBox1.TabIndex = 45;
             this.uiGroupBox1.Text = "身份证基本信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(368, 141);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 21);
+            this.label2.TabIndex = 45;
+            this.label2.Text = "名族";
+            // 
+            // sfz_address
+            // 
+            this.sfz_address.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_address.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_address.Location = new System.Drawing.Point(126, 180);
+            this.sfz_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_address.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_address.Name = "sfz_address";
+            this.sfz_address.ShowText = false;
+            this.sfz_address.Size = new System.Drawing.Size(496, 29);
+            this.sfz_address.TabIndex = 44;
+            this.sfz_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 183);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 21);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "身份证地址";
             // 
             // uiGroupBox2
             // 
@@ -507,12 +510,12 @@
             this.uiGroupBox2.Controls.Add(this.label17);
             this.uiGroupBox2.Controls.Add(this.txtsbh);
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox2.Location = new System.Drawing.Point(719, 257);
+            this.uiGroupBox2.Location = new System.Drawing.Point(669, 302);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(453, 335);
+            this.uiGroupBox2.Size = new System.Drawing.Size(562, 246);
             this.uiGroupBox2.TabIndex = 46;
             this.uiGroupBox2.Text = "医保卡基本信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -531,7 +534,7 @@
             this.uiGroupBox3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox3.Name = "uiGroupBox3";
             this.uiGroupBox3.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox3.Size = new System.Drawing.Size(321, 157);
+            this.uiGroupBox3.Size = new System.Drawing.Size(321, 202);
             this.uiGroupBox3.TabIndex = 47;
             this.uiGroupBox3.Text = "刷卡查询";
             this.uiGroupBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -546,7 +549,7 @@
             this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(156, 90);
+            this.btnYBK.Location = new System.Drawing.Point(160, 117);
             this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBK.Name = "btnYBK";
             this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -572,7 +575,7 @@
             this.btnIDCard.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnIDCard.Location = new System.Drawing.Point(156, 35);
+            this.btnIDCard.Location = new System.Drawing.Point(160, 62);
             this.btnIDCard.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnIDCard.Name = "btnIDCard";
             this.btnIDCard.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -598,7 +601,7 @@
             this.btnSFZ.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Location = new System.Drawing.Point(30, 90);
+            this.btnSFZ.Location = new System.Drawing.Point(34, 117);
             this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSFZ.Name = "btnSFZ";
             this.btnSFZ.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -624,7 +627,7 @@
             this.btnCika.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Location = new System.Drawing.Point(30, 35);
+            this.btnCika.Location = new System.Drawing.Point(34, 62);
             this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCika.Name = "btnCika";
             this.btnCika.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -654,232 +657,77 @@
             // 
             this.uiGroupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.uiGroupBox4.Controls.Add(this.uiDataGridView1);
+            this.uiGroupBox4.Controls.Add(this.dgv_patient_sfz);
             this.uiGroupBox4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox4.Location = new System.Drawing.Point(13, 602);
+            this.uiGroupBox4.Location = new System.Drawing.Point(13, 558);
             this.uiGroupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox4.Name = "uiGroupBox4";
             this.uiGroupBox4.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox4.Size = new System.Drawing.Size(698, 244);
+            this.uiGroupBox4.Size = new System.Drawing.Size(517, 288);
             this.uiGroupBox4.TabIndex = 48;
             this.uiGroupBox4.Text = "身份证和ID号绑定信息";
             this.uiGroupBox4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // lblmsg
+            // dgv_patient_sfz
             // 
-            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.Location = new System.Drawing.Point(588, 22);
-            this.lblmsg.Name = "lblmsg";
-            this.lblmsg.Size = new System.Drawing.Size(517, 23);
-            this.lblmsg.TabIndex = 44;
-            this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiGroupBox5
-            // 
-            this.uiGroupBox5.Controls.Add(this.cbxChargeTypes);
-            this.uiGroupBox5.Controls.Add(this.cbxResponseType);
-            this.uiGroupBox5.Controls.Add(this.label33);
-            this.uiGroupBox5.Controls.Add(this.label34);
-            this.uiGroupBox5.Controls.Add(this.txt_name);
-            this.uiGroupBox5.Controls.Add(this.cbxmarrycode);
-            this.uiGroupBox5.Controls.Add(this.label36);
-            this.uiGroupBox5.Controls.Add(this.txtCode);
-            this.uiGroupBox5.Controls.Add(this.label37);
-            this.uiGroupBox5.Controls.Add(this.label13);
-            this.uiGroupBox5.Controls.Add(this.txtTel);
-            this.uiGroupBox5.Controls.Add(this.label18);
-            this.uiGroupBox5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox5.Location = new System.Drawing.Point(352, 90);
-            this.uiGroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox5.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox5.Name = "uiGroupBox5";
-            this.uiGroupBox5.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox5.Size = new System.Drawing.Size(743, 157);
-            this.uiGroupBox5.TabIndex = 49;
-            this.uiGroupBox5.Text = "患者信息";
-            this.uiGroupBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxChargeTypes
-            // 
-            this.cbxChargeTypes.DataSource = null;
-            this.cbxChargeTypes.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxChargeTypes.FillColor = System.Drawing.Color.White;
-            this.cbxChargeTypes.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxChargeTypes.Location = new System.Drawing.Point(518, 90);
-            this.cbxChargeTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxChargeTypes.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxChargeTypes.Name = "cbxChargeTypes";
-            this.cbxChargeTypes.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxChargeTypes.ReadOnly = true;
-            this.cbxChargeTypes.Size = new System.Drawing.Size(187, 29);
-            this.cbxChargeTypes.TabIndex = 2;
-            this.cbxChargeTypes.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxChargeTypes.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxResponseType
-            // 
-            this.cbxResponseType.DataSource = null;
-            this.cbxResponseType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxResponseType.FillColor = System.Drawing.Color.White;
-            this.cbxResponseType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxResponseType.Location = new System.Drawing.Point(310, 90);
-            this.cbxResponseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxResponseType.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxResponseType.Name = "cbxResponseType";
-            this.cbxResponseType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxResponseType.ReadOnly = true;
-            this.cbxResponseType.Size = new System.Drawing.Size(150, 29);
-            this.cbxResponseType.TabIndex = 2;
-            this.cbxResponseType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxResponseType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(478, 94);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(42, 21);
-            this.label33.TabIndex = 8;
-            this.label33.Text = "费别";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(265, 94);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(42, 21);
-            this.label34.TabIndex = 7;
-            this.label34.Text = "身份";
-            // 
-            // txt_name
-            // 
-            this.txt_name.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_name.Location = new System.Drawing.Point(68, 90);
-            this.txt_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_name.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_name.Name = "txt_name";
-            this.txt_name.ReadOnly = true;
-            this.txt_name.ShowText = false;
-            this.txt_name.Size = new System.Drawing.Size(170, 29);
-            this.txt_name.TabIndex = 4;
-            this.txt_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(23, 94);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(42, 21);
-            this.label36.TabIndex = 4;
-            this.label36.Text = "姓名";
-            // 
-            // txtCode
-            // 
-            this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCode.Location = new System.Drawing.Point(68, 44);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.ReadOnly = true;
-            this.txtCode.ShowText = false;
-            this.txtCode.Size = new System.Drawing.Size(170, 29);
-            this.txtCode.TabIndex = 3;
-            this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(19, 47);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(42, 21);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "卡号";
-            // 
-            // cbxsex
-            // 
-            this.cbxsex.DataSource = null;
-            this.cbxsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxsex.FillColor = System.Drawing.Color.White;
-            this.cbxsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxsex.Items.AddRange(new object[] {
-            "男",
-            "女",
-            "不定"});
-            this.cbxsex.Location = new System.Drawing.Point(419, 75);
-            this.cbxsex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxsex.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxsex.Name = "cbxsex";
-            this.cbxsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxsex.Size = new System.Drawing.Size(187, 29);
-            this.cbxsex.TabIndex = 34;
-            this.cbxsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiDataGridView1
-            // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            this.uiDataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_patient_sfz.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_patient_sfz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
-            this.uiDataGridView1.ColumnHeadersHeight = 32;
-            this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.uiDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_patient_sfz.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_patient_sfz.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_patient_sfz.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_patient_sfz.ColumnHeadersHeight = 32;
+            this.dgv_patient_sfz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv_patient_sfz.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patient_id,
             this.sfz_id});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle8;
-            this.uiDataGridView1.EnableHeadersVisualStyles = false;
-            this.uiDataGridView1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.uiDataGridView1.Location = new System.Drawing.Point(14, 36);
-            this.uiDataGridView1.Name = "uiDataGridView1";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.uiDataGridView1.RowHeight = 0;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle10;
-            this.uiDataGridView1.RowTemplate.Height = 23;
-            this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.ShowGridLine = false;
-            this.uiDataGridView1.ShowRect = false;
-            this.uiDataGridView1.Size = new System.Drawing.Size(669, 194);
-            this.uiDataGridView1.TabIndex = 0;
-            this.uiDataGridView1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_patient_sfz.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_patient_sfz.EnableHeadersVisualStyles = false;
+            this.dgv_patient_sfz.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgv_patient_sfz.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgv_patient_sfz.Location = new System.Drawing.Point(14, 36);
+            this.dgv_patient_sfz.Name = "dgv_patient_sfz";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_patient_sfz.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgv_patient_sfz.RowHeight = 0;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_patient_sfz.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgv_patient_sfz.RowTemplate.Height = 23;
+            this.dgv_patient_sfz.SelectedIndex = -1;
+            this.dgv_patient_sfz.ShowGridLine = false;
+            this.dgv_patient_sfz.ShowRect = false;
+            this.dgv_patient_sfz.Size = new System.Drawing.Size(488, 238);
+            this.dgv_patient_sfz.TabIndex = 0;
+            this.dgv_patient_sfz.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgv_patient_sfz.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_patient_sfz_CellClick);
             // 
             // patient_id
             // 
@@ -893,11 +741,347 @@
             this.sfz_id.HeaderText = "身份证ID";
             this.sfz_id.Name = "sfz_id";
             // 
+            // uiGroupBox5
+            // 
+            this.uiGroupBox5.Controls.Add(this.label14);
+            this.uiGroupBox5.Controls.Add(this.txt_sfz_no);
+            this.uiGroupBox5.Controls.Add(this.txt_birth);
+            this.uiGroupBox5.Controls.Add(this.label10);
+            this.uiGroupBox5.Controls.Add(this.cbxsex);
+            this.uiGroupBox5.Controls.Add(this.label6);
+            this.uiGroupBox5.Controls.Add(this.txt_name);
+            this.uiGroupBox5.Controls.Add(this.cbxmarrycode);
+            this.uiGroupBox5.Controls.Add(this.txtrelationname);
+            this.uiGroupBox5.Controls.Add(this.label36);
+            this.uiGroupBox5.Controls.Add(this.label9);
+            this.uiGroupBox5.Controls.Add(this.sfz_home_address);
+            this.uiGroupBox5.Controls.Add(this.txtCode);
+            this.uiGroupBox5.Controls.Add(this.label19);
+            this.uiGroupBox5.Controls.Add(this.label37);
+            this.uiGroupBox5.Controls.Add(this.label13);
+            this.uiGroupBox5.Controls.Add(this.txtTel);
+            this.uiGroupBox5.Controls.Add(this.label18);
+            this.uiGroupBox5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiGroupBox5.Location = new System.Drawing.Point(352, 90);
+            this.uiGroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox5.Name = "uiGroupBox5";
+            this.uiGroupBox5.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox5.Size = new System.Drawing.Size(879, 202);
+            this.uiGroupBox5.TabIndex = 49;
+            this.uiGroupBox5.Text = "患者信息";
+            this.uiGroupBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiGroupBox5.Click += new System.EventHandler(this.uiGroupBox5_Click);
+            // 
+            // txt_name
+            // 
+            this.txt_name.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_name.Location = new System.Drawing.Point(117, 76);
+            this.txt_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_name.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.ReadOnly = true;
+            this.txt_name.ShowText = false;
+            this.txt_name.Size = new System.Drawing.Size(192, 29);
+            this.txt_name.TabIndex = 4;
+            this.txt_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(72, 80);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(42, 21);
+            this.label36.TabIndex = 4;
+            this.label36.Text = "姓名";
+            // 
+            // txtCode
+            // 
+            this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCode.Location = new System.Drawing.Point(117, 37);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
+            this.txtCode.ShowText = false;
+            this.txtCode.Size = new System.Drawing.Size(192, 29);
+            this.txtCode.TabIndex = 3;
+            this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(68, 40);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(42, 21);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "卡号";
+            // 
+            // sfz_sex
+            // 
+            this.sfz_sex.Controls.Add(this.label3);
+            this.sfz_sex.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_sex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_sex.Location = new System.Drawing.Point(417, 100);
+            this.sfz_sex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_sex.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_sex.Name = "sfz_sex";
+            this.sfz_sex.ShowText = false;
+            this.sfz_sex.Size = new System.Drawing.Size(205, 29);
+            this.sfz_sex.TabIndex = 41;
+            this.sfz_sex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_sex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(206, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 21);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "*";
+            // 
+            // sfz_folk
+            // 
+            this.sfz_folk.Controls.Add(this.label5);
+            this.sfz_folk.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_folk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_folk.Location = new System.Drawing.Point(417, 139);
+            this.sfz_folk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_folk.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_folk.Name = "sfz_folk";
+            this.sfz_folk.ShowText = false;
+            this.sfz_folk.Size = new System.Drawing.Size(205, 29);
+            this.sfz_folk.TabIndex = 42;
+            this.sfz_folk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_folk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(206, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 21);
+            this.label5.TabIndex = 40;
+            this.label5.Text = "*";
+            // 
+            // cbxsex
+            // 
+            this.cbxsex.DataSource = null;
+            this.cbxsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxsex.FillColor = System.Drawing.Color.White;
+            this.cbxsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxsex.Location = new System.Drawing.Point(382, 117);
+            this.cbxsex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxsex.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxsex.Name = "cbxsex";
+            this.cbxsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxsex.ReadOnly = true;
+            this.cbxsex.Size = new System.Drawing.Size(187, 29);
+            this.cbxsex.TabIndex = 8;
+            this.cbxsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(333, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 21);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "性别";
+            // 
+            // uiGroupBox6
+            // 
+            this.uiGroupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.uiGroupBox6.Controls.Add(this.dgv_ghlist);
+            this.uiGroupBox6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiGroupBox6.Location = new System.Drawing.Point(538, 558);
+            this.uiGroupBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox6.Name = "uiGroupBox6";
+            this.uiGroupBox6.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox6.Size = new System.Drawing.Size(693, 288);
+            this.uiGroupBox6.TabIndex = 48;
+            this.uiGroupBox6.Text = "ID号挂号记录";
+            this.uiGroupBox6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiGroupBox6.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // dgv_ghlist
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_ghlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgv_ghlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_ghlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_ghlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_ghlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgv_ghlist.ColumnHeadersHeight = 32;
+            this.dgv_ghlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv_ghlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gh_date,
+            this.unit_name,
+            this.doctor_name,
+            this.ampm,
+            this.visit_status});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ghlist.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgv_ghlist.EnableHeadersVisualStyles = false;
+            this.dgv_ghlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgv_ghlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgv_ghlist.Location = new System.Drawing.Point(14, 36);
+            this.dgv_ghlist.Name = "dgv_ghlist";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_ghlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgv_ghlist.RowHeight = 0;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_ghlist.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgv_ghlist.RowTemplate.Height = 23;
+            this.dgv_ghlist.SelectedIndex = -1;
+            this.dgv_ghlist.ShowGridLine = false;
+            this.dgv_ghlist.ShowRect = false;
+            this.dgv_ghlist.Size = new System.Drawing.Size(664, 238);
+            this.dgv_ghlist.TabIndex = 0;
+            this.dgv_ghlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgv_ghlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_ghlist_RowPostPaint);
+            // 
+            // gh_date
+            // 
+            this.gh_date.DataPropertyName = "gh_date";
+            this.gh_date.HeaderText = "挂号日期";
+            this.gh_date.Name = "gh_date";
+            // 
+            // unit_name
+            // 
+            this.unit_name.DataPropertyName = "unit_name";
+            this.unit_name.HeaderText = "科室";
+            this.unit_name.Name = "unit_name";
+            // 
+            // doctor_name
+            // 
+            this.doctor_name.DataPropertyName = "doctor_name";
+            this.doctor_name.HeaderText = "医生";
+            this.doctor_name.Name = "doctor_name";
+            // 
+            // ampm
+            // 
+            this.ampm.DataPropertyName = "ampm";
+            this.ampm.HeaderText = "时间";
+            this.ampm.Name = "ampm";
+            // 
+            // visit_status
+            // 
+            this.visit_status.DataPropertyName = "visit_status";
+            this.visit_status.HeaderText = "状态";
+            this.visit_status.Name = "visit_status";
+            // 
+            // lklduka
+            // 
+            this.lklduka.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.lklduka.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lklduka.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.lklduka.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lklduka.Location = new System.Drawing.Point(338, 64);
+            this.lklduka.Name = "lklduka";
+            this.lklduka.Size = new System.Drawing.Size(100, 23);
+            this.lklduka.Style = Sunny.UI.UIStyle.Red;
+            this.lklduka.StyleCustomMode = true;
+            this.lklduka.TabIndex = 50;
+            this.lklduka.TabStop = true;
+            this.lklduka.Text = "读卡";
+            this.lklduka.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lklduka.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lklduka.Click += new System.EventHandler(this.lklduka_Click);
+            // 
+            // txt_birth
+            // 
+            this.txt_birth.FillColor = System.Drawing.Color.White;
+            this.txt_birth.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_birth.Location = new System.Drawing.Point(663, 37);
+            this.txt_birth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_birth.MaxLength = 10;
+            this.txt_birth.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txt_birth.Name = "txt_birth";
+            this.txt_birth.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txt_birth.ReadOnly = true;
+            this.txt_birth.ShowToday = true;
+            this.txt_birth.Size = new System.Drawing.Size(151, 29);
+            this.txt_birth.SymbolDropDown = 61555;
+            this.txt_birth.SymbolNormal = 61555;
+            this.txt_birth.TabIndex = 39;
+            this.txt_birth.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_birth.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.txt_birth.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(614, 42);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(42, 21);
+            this.label10.TabIndex = 38;
+            this.label10.Text = "生日";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 118);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(90, 21);
+            this.label14.TabIndex = 40;
+            this.label14.Text = "身份证号码";
+            // 
+            // txt_sfz_no
+            // 
+            this.txt_sfz_no.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_sfz_no.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_sfz_no.Location = new System.Drawing.Point(117, 115);
+            this.txt_sfz_no.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_sfz_no.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_sfz_no.Name = "txt_sfz_no";
+            this.txt_sfz_no.ReadOnly = true;
+            this.txt_sfz_no.ShowText = false;
+            this.txt_sfz_no.Size = new System.Drawing.Size(192, 29);
+            this.txt_sfz_no.TabIndex = 41;
+            this.txt_sfz_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sfz_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // UserInfoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1187, 860);
+            this.ClientSize = new System.Drawing.Size(1244, 860);
             this.Controls.Add(this.uiGroupBox5);
+            this.Controls.Add(this.uiGroupBox6);
             this.Controls.Add(this.uiGroupBox4);
             this.Controls.Add(this.uiGroupBox3);
             this.Controls.Add(this.uiGroupBox2);
@@ -908,8 +1092,8 @@
             this.Text = "UserInfoPage";
             this.Initialize += new System.EventHandler(this.UserInfoPage_Initialize);
             this.Load += new System.EventHandler(this.UserInfoPage_Load);
-            this.txt_sfz_name.ResumeLayout(false);
-            this.txt_sfz_name.PerformLayout();
+            this.sfz_name.ResumeLayout(false);
+            this.sfz_name.PerformLayout();
             this.pnlTitle.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox1.PerformLayout();
@@ -918,44 +1102,45 @@
             this.uiGroupBox3.ResumeLayout(false);
             this.uiGroupBox3.PerformLayout();
             this.uiGroupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_patient_sfz)).EndInit();
             this.uiGroupBox5.ResumeLayout(false);
             this.uiGroupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).EndInit();
+            this.sfz_sex.ResumeLayout(false);
+            this.sfz_sex.PerformLayout();
+            this.sfz_folk.ResumeLayout(false);
+            this.sfz_folk.PerformLayout();
+            this.uiGroupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_ghlist)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Sunny.UI.UITextBox txt_sfz_name;
+        private Sunny.UI.UITextBox sfz_name;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private Sunny.UI.UITextBox txtrelationname;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private Sunny.UI.UITextBox txtsno;
+        private Sunny.UI.UITextBox sfz_card_no;
         private System.Windows.Forms.Label label11;
         private Sunny.UI.UITextBox txthicno;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private Sunny.UI.UITextBox txtemployer_name;
-        private System.Windows.Forms.Label label14;
         private Sunny.UI.UITextBox txtsbh;
         private System.Windows.Forms.Label label17;
         private Sunny.UI.UITextBox txtTel;
         private System.Windows.Forms.Label label18;
-        private Sunny.UI.UITextBox txthomestreet;
+        private Sunny.UI.UITextBox sfz_home_address;
         private System.Windows.Forms.Label label19;
-        private Sunny.UI.UITextBox txthomedistrict;
         private Sunny.UI.UIComboBox cbxmarrycode;
-        private Sunny.UI.UIDatePicker txtbirth;
+        private Sunny.UI.UIDatePicker sfz_birthday;
         private Sunny.UI.UIPanel pnlTitle;
         private Sunny.UI.UISymbolButton btnSave;
         private Sunny.UI.UISymbolButton btnReset;
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UILabel lblTitle;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label24;
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UIGroupBox uiGroupBox2;
         private Sunny.UI.UIGroupBox uiGroupBox3;
@@ -966,18 +1151,34 @@
         private System.Windows.Forms.Label label26;
         private Sunny.UI.UIGroupBox uiGroupBox4;
         private Sunny.UI.UILabel lblmsg;
-        private Sunny.UI.UIComboBox cbxsex;
         private Sunny.UI.UIGroupBox uiGroupBox5;
-        private Sunny.UI.UIComboBox cbxChargeTypes;
-        private Sunny.UI.UIComboBox cbxResponseType;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
         private Sunny.UI.UITextBox txt_name;
         private System.Windows.Forms.Label label36;
         private Sunny.UI.UITextBox txtCode;
         private System.Windows.Forms.Label label37;
-        private Sunny.UI.UIDataGridView uiDataGridView1;
+        private Sunny.UI.UIDataGridView dgv_patient_sfz;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn sfz_id;
+        private Sunny.UI.UITextBox sfz_address;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private Sunny.UI.UITextBox sfz_folk;
+        private System.Windows.Forms.Label label5;
+        private Sunny.UI.UITextBox sfz_sex;
+        private System.Windows.Forms.Label label3;
+        private Sunny.UI.UIComboBox cbxsex;
+        private System.Windows.Forms.Label label6;
+        private Sunny.UI.UIGroupBox uiGroupBox6;
+        private Sunny.UI.UIDataGridView dgv_ghlist;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gh_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn doctor_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ampm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn visit_status;
+        private Sunny.UI.UILinkLabel lklduka;
+        private System.Windows.Forms.Label label14;
+        private Sunny.UI.UITextBox txt_sfz_no;
+        private Sunny.UI.UIDatePicker txt_birth;
+        private System.Windows.Forms.Label label10;
     }
 }

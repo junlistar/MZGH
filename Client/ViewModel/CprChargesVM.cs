@@ -42,7 +42,7 @@ namespace Client.ViewModel
         public string audit_code { get; set; }
         public string exec_sn { get; set; }
         public int charge_amount { get; set; }
-        public string orig_price { get; set; }
+        public decimal orig_price { get; set; }
         public decimal charge_price { get; set; }
         public string charge_group { get; set; }
         public string caoyao_fu { get; set; }
@@ -101,7 +101,7 @@ namespace Client.ViewModel
         {
             get
             {
-                return charge_amount * charge_price;
+                return charge_amount * orig_price;
             }
         }
 

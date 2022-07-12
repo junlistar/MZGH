@@ -370,6 +370,23 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        [HttpGet]
+        public ResponseResult<IEnumerable<GhSearch>> GetRecordByPatientId(string patient_id)
+        {
+
+            Log.Information($"GetRecordByPatientId,{patient_id}");
+            var list = new List<GhSearch>();
+            try
+            {
+                list = _ghSearchRepository.GetRecordByPatientId(patient_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<IEnumerable<GhSearch>>(ex.Message);
+            }
+            return list;
+        } 
 
         public ResponseResult<List<ClinicType>> GetClinicTypes()
         {

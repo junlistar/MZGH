@@ -574,7 +574,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 para.Add("@confirm_date", op_date);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_amount * item.charge_price);
+                                para.Add("@sum_total", item.charge_price);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -595,7 +595,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 para.Add("@confirm_win", drugwin.window_no);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_amount * item.charge_price);
+                                para.Add("@sum_total", item.charge_price);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -617,7 +617,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 para.Add("@confirm_win", drugwin.window_no);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_amount * item.charge_price);
+                                para.Add("@sum_total", item.charge_price);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -636,7 +636,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 para.Add("@confirm_date", op_date);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_amount * item.charge_price);
+                                para.Add("@sum_total", item.charge_price);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -653,9 +653,10 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
-                        //para.Add("@order_no_str", order_no_param);
+                        para.Add("@ledger_sn", max_ledger_sn); 
+                         //para.Add("@order_no_str", order_no_param);
 
-                        var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
+                         var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
 
                         if (!string.IsNullOrWhiteSpace(order_no_str))
                         {

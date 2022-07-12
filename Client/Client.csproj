@@ -521,6 +521,7 @@
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
     <Compile Include="ViewModel\RequestTimeVM.cs" />
+    <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />

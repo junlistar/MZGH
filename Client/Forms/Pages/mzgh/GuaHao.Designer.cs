@@ -32,6 +32,8 @@
             this.pnlTitle = new Sunny.UI.UIPanel();
             this.btnEditUser1 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
+            this.btnHoutian = new Sunny.UI.UIButton();
+            this.btnMingtian = new Sunny.UI.UIButton();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
@@ -69,8 +71,6 @@
             this.lblAge = new Sunny.UI.UILabel();
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.pnlHours = new Sunny.UI.UIFlowLayoutPanel();
-            this.btnHoutian = new Sunny.UI.UIButton();
-            this.btnMingtian = new Sunny.UI.UIButton();
             this.dtpGhrq = new Sunny.UI.UIDatePicker();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.uiBreadcrumb2 = new Sunny.UI.UIBreadcrumb();
@@ -149,6 +149,58 @@
             this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton4.Click += new System.EventHandler(this.uiSymbolButton4_Click);
+            // 
+            // btnHoutian
+            // 
+            this.btnHoutian.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHoutian.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnHoutian.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnHoutian.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnHoutian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnHoutian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnHoutian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnHoutian.Location = new System.Drawing.Point(989, 25);
+            this.btnHoutian.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnHoutian.Name = "btnHoutian";
+            this.btnHoutian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnHoutian.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnHoutian.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnHoutian.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnHoutian.Size = new System.Drawing.Size(85, 31);
+            this.btnHoutian.Style = Sunny.UI.UIStyle.Green;
+            this.btnHoutian.StyleCustomMode = true;
+            this.btnHoutian.TabIndex = 17;
+            this.btnHoutian.Text = "后天";
+            this.btnHoutian.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnHoutian.Visible = false;
+            this.btnHoutian.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnHoutian.Click += new System.EventHandler(this.btnHoutian_Click);
+            // 
+            // btnMingtian
+            // 
+            this.btnMingtian.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMingtian.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnMingtian.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnMingtian.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnMingtian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnMingtian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnMingtian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMingtian.Location = new System.Drawing.Point(898, 25);
+            this.btnMingtian.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnMingtian.Name = "btnMingtian";
+            this.btnMingtian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnMingtian.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnMingtian.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnMingtian.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnMingtian.Size = new System.Drawing.Size(85, 31);
+            this.btnMingtian.Style = Sunny.UI.UIStyle.Green;
+            this.btnMingtian.StyleCustomMode = true;
+            this.btnMingtian.TabIndex = 16;
+            this.btnMingtian.Text = "明天";
+            this.btnMingtian.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMingtian.Visible = false;
+            this.btnMingtian.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnMingtian.Click += new System.EventHandler(this.btnMingtian_Click);
             // 
             // uiSymbolButton1
             // 
@@ -737,56 +789,6 @@
             this.pnlHours.Text = "uiFlowLayoutPanel1";
             this.pnlHours.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlHours.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnHoutian
-            // 
-            this.btnHoutian.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHoutian.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnHoutian.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnHoutian.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnHoutian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnHoutian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnHoutian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnHoutian.Location = new System.Drawing.Point(989, 25);
-            this.btnHoutian.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnHoutian.Name = "btnHoutian";
-            this.btnHoutian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnHoutian.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnHoutian.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnHoutian.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnHoutian.Size = new System.Drawing.Size(85, 31);
-            this.btnHoutian.Style = Sunny.UI.UIStyle.Green;
-            this.btnHoutian.StyleCustomMode = true;
-            this.btnHoutian.TabIndex = 17;
-            this.btnHoutian.Text = "后天";
-            this.btnHoutian.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnHoutian.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnHoutian.Click += new System.EventHandler(this.btnHoutian_Click);
-            // 
-            // btnMingtian
-            // 
-            this.btnMingtian.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMingtian.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnMingtian.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnMingtian.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnMingtian.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnMingtian.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnMingtian.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMingtian.Location = new System.Drawing.Point(898, 25);
-            this.btnMingtian.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnMingtian.Name = "btnMingtian";
-            this.btnMingtian.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnMingtian.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnMingtian.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnMingtian.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnMingtian.Size = new System.Drawing.Size(85, 31);
-            this.btnMingtian.Style = Sunny.UI.UIStyle.Green;
-            this.btnMingtian.StyleCustomMode = true;
-            this.btnMingtian.TabIndex = 16;
-            this.btnMingtian.Text = "明天";
-            this.btnMingtian.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMingtian.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnMingtian.Click += new System.EventHandler(this.btnMingtian_Click);
             // 
             // dtpGhrq
             // 

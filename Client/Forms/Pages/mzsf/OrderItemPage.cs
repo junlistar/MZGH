@@ -27,6 +27,8 @@ namespace Mzsf.Forms.Pages
         public delegate void SetData();
         public SetData setData;
 
+        Dictionary<string, int> kucun_dic = new Dictionary<string, int>();
+
         public OrderItemPage(int order_no, string order_type)
         {
             InitializeComponent();
@@ -122,7 +124,7 @@ namespace Mzsf.Forms.Pages
                 }
 
                 string code = "";
-                if (dgv.Rows[sel_index].Cells["code"].Value!=null)
+                if (dgv.Rows[sel_index].Cells["code"].Value != null)
                 {
                     code = dgv.Rows[sel_index].Cells["code"].Value.ToString();
                 }
@@ -136,9 +138,21 @@ namespace Mzsf.Forms.Pages
                         return false;
                     }
                 }
+                if (kucun != "")
+                {
+                    if (kucun_dic.Keys.Contains(code))
+                    {
+                        kucun_dic[code] = int.Parse(kucun);
+                    }
+                    else
+                    {
+                        kucun_dic.Add(code, int.Parse(kucun));
+                    }
+                }
+
 
                 dgv.Hide();
-                 
+
 
                 txtName.TextChanged -= txtName_TextChanged;
 
@@ -153,9 +167,11 @@ namespace Mzsf.Forms.Pages
 
                 txtCharge.Text = dgv.Rows[sel_index].Cells["price"].Value.ToString();
                 txtAmount.Text = "1";
-
-                var _serial = dgv.Rows[sel_index].Cells["serial"].Value.ToString();
-
+                var _serial = "";
+                if (dgv.Rows[sel_index].Cells["serial"].Value != null)
+                {
+                    _serial = dgv.Rows[sel_index].Cells["serial"].Value.ToString();
+                }
                 if (dgvOrderDetail.SelectedIndex == -1)
                 {
                     return false;
@@ -171,7 +187,7 @@ namespace Mzsf.Forms.Pages
                 dgvOrderDetail.Rows[index].Cells["charge_price"].Value = txtCharge.Text;
                 dgvOrderDetail.Rows[index].Cells["charge_amount"].Value = txtAmount.Text;
                 dgvOrderDetail.Rows[index].Cells["serial"].Value = _serial;
-                
+
                 dgvOrderDetail.Rows[index].Cells["code"].Value = code;
 
                 txtName.TextChanged += txtName_TextChanged;
@@ -199,10 +215,10 @@ namespace Mzsf.Forms.Pages
                     charge_code_lookup_str = q.charge_code_lookup_str,
                     charge_code_lookup = q.charge_code_lookup,
                     exec_SN_lookup = q.exec_SN_lookup,
-                    charge_price = q.charge_price,
+                    charge_price = q.orig_price,
                     charge_amount = q.charge_amount,
                     caoyao_fu = q.caoyao_fu,
-                    total_price = q.total_price,
+                    total_price = q.charge_price,
                     fybl = "",
                     yongfa = "",
                     comment = q.comment,
@@ -322,6 +338,13 @@ namespace Mzsf.Forms.Pages
                 dgv.Columns["d_code"].Visible = false;
                 dgv.Columns["exec_unit"].Visible = false;
                 dgv.Columns["serial"].Visible = false;
+
+                //诊疗 不显示数量
+                if (_order_type == "01")
+                {
+                    dgv.Columns["amount"].Visible = false;
+                }
+
                 dgv.AutoResizeColumns();
 
                 dgv.Show();
@@ -379,40 +402,61 @@ namespace Mzsf.Forms.Pages
 
         private void txtAmount_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
 
-                dgvOrderDetail.SelectedRows[0].Cells["charge_amount"].Value = txtAmount.Text;
-
-                //判断库存是否足够
-
-
-
-
-                //更新金额（当前金额和总金额）
-                CalcPrice();
-
-                if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
+                if (e.KeyCode == Keys.Enter)
                 {
-                    try
-                    {
-                        int new_index = dgvOrderDetail.Rows.Add();
-                        //增加新的一行，并设焦点
-                        this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
-                        BindSelectedRowData(new_index);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error(ex.Message);
-                    }
-                }
-                else
-                {
-                    BindSelectedRowData(dgvOrderDetail.Rows.Count - 1);
-                }
 
-                txtName.Focus();
+                    //判断库存是否足够 诊疗（01）不判断
+                    if (dgvOrderDetail.SelectedRows[0].Cells["code"].Value != null && _order_type != "01")
+                    {
+                        var _code = dgvOrderDetail.SelectedRows[0].Cells["code"].Value.ToString();
+                        if (kucun_dic.Keys.Contains(_code))
+                        {
+                            if (int.Parse(txtAmount.Text) > kucun_dic[_code])
+                            {
+                                MessageBox.Show($"库存不足！最大值:{kucun_dic[_code]}");
 
+                                return;
+                            }
+                        }
+
+                    }
+
+                    dgvOrderDetail.SelectedRows[0].Cells["charge_amount"].Value = txtAmount.Text;
+
+
+
+                    //更新金额（当前金额和总金额）
+                    CalcPrice();
+
+                    if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
+                    {
+                        try
+                        {
+                            int new_index = dgvOrderDetail.Rows.Add();
+                            //增加新的一行，并设焦点
+                            this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
+                            BindSelectedRowData(new_index);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        BindSelectedRowData(dgvOrderDetail.Rows.Count - 1);
+                    }
+
+                    txtName.Focus();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
             }
         }
 
@@ -443,10 +487,10 @@ namespace Mzsf.Forms.Pages
             var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
 
             var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
-            var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString(); 
-            var _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString(); 
+            var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
+            var _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString();
 
-             CprChargesVM vm = new CprChargesVM();
+            CprChargesVM vm = new CprChargesVM();
             vm.charge_code_lookup = _charge_code_lookup;
             vm.charge_price = _charge_price;
             vm.charge_amount = _charge_amount;
@@ -480,6 +524,7 @@ namespace Mzsf.Forms.Pages
                     var charge_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
                     var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
                     var code = row.Cells["code"].Value.ToString();
+                    var serial = row.Cells["serial"].Value.ToString();
 
                     var chargeVM = new CprChargesVM();
                     chargeVM.charge_code_lookup = charge_code_lookup;
@@ -487,6 +532,7 @@ namespace Mzsf.Forms.Pages
                     chargeVM.charge_amount = charge_amount;
                     chargeVM.item_no = index++;
                     chargeVM.order_no = _order_no;
+                    chargeVM.serial_no = serial;
 
                     chargeVM.charge_code = code;
                     chargeVM.order_type = _order_type;

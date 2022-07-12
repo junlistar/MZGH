@@ -56,7 +56,7 @@ namespace Client
             //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
             Aside.CreateChildNode(parent,  "挂号", 62004, 24, 1001);
             Aside.CreateChildNode(parent,  "挂号查询", 61442, 24, 1002);
-            Aside.CreateChildNode(parent,  "患者基本信息", 61442, 24, 1003);
+            Aside.CreateChildNode(parent,  "患者基本信息", 62140, 24, 1003);
 
 
             pageIndex = 1100;

@@ -330,6 +330,7 @@ namespace Client.ClassLib
                 Data.BirthDay = DateTime.ParseExact(GetBirthday(puiCHMsgLen, pucCHMsg), "yyyyMMdd", null).ToString();
                 Data.Address = GetAddress(puiCHMsgLen, pucCHMsg);
                 Data.IDCard = GetIDCode(puiCHMsgLen, pucCHMsg);
+                Data.Folk = GetPeople(puiCHMsgLen, pucCHMsg);
                 //保存wlt文件。然后从Wlt文件里面读取图片信息。保存图片
                 string uuid = Guid.NewGuid().ToString();
                 //string path = string.Format("{0}\\Images", Application.StartupPath);
