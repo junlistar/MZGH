@@ -13,10 +13,7 @@ namespace Data.Repository
 
         public List<MzPatientSfz> GetDataByPatientId(string patient_id)
         {
-            string selectSql = @"select * from mz_patient_sfz
-left join mz_patient_sfz_info on mz_patient_sfz.sfz_id= mz_patient_sfz_info.card_no
-left join mz_patient_ybk_info on mz_patient_sfz.sfz_id= mz_patient_ybk_info.certno
- where patient_id=@patient_id";
+            string selectSql = GetSqlByTag(221078);
 
             var para = new DynamicParameters();
 

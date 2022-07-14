@@ -23,15 +23,12 @@ namespace Data.Repository
             if (all.Where(p => p.code == code).Count() > 0)
             {
                 //存在：更新操作
-                sql = @"update gh_zd_request_hour
-set name = @name, start_hour = @start_hour, end_hour = @end_hour
-where code = @code";
+                sql = GetSqlByTag(220067);
             }
             else
             {
                 //不存在：添加操作
-                sql = @"insert into gh_zd_request_hour(code,name,start_hour,end_hour)
-values(@code,@name,@start_hour,@end_hour)";
+                sql = GetSqlByTag(220068);
 
             }
 
@@ -46,8 +43,8 @@ values(@code,@name,@start_hour,@end_hour)";
         }
         public bool DeleteRequestHour(string code)
         {
-            string sql =   @"delete from gh_zd_request_hour where code = @code";
-  
+            string sql = GetSqlByTag(220069);
+
             var param = new DynamicParameters();
             param.Add("@code", code); 
 

@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<XTUserReport> GetXTUserReportsByGroupId(string subsys_id, string user_group)
         {
-            string ghsql = @"select * from xt_user_report where user_group=@user_group and subsys_id=@subsys_id";
+            string ghsql = GetSqlByTag(221057);
             var para = new DynamicParameters();
 
             para.Add("@user_group", user_group);
@@ -22,8 +22,8 @@ namespace Data.Repository
 
         }
         public List<XTUserReport> GetXTUserReports(string subsys_id)
-        {
-            string ghsql = @"select * from rt_report_subsys where subsys_id =@subsys_id";
+        { 
+            string ghsql = GetSqlByTag(221058);
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -38,7 +38,7 @@ namespace Data.Repository
 
                 try
                 {
-                    string sql = @"select * from rt_report_subsys where subsys_id = @subsys_id and rep_id =@rep_id";
+                    string sql = GetSqlByTag(221059);
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -51,7 +51,7 @@ namespace Data.Repository
                     }
 
 
-                    sql = @"select count(*) from xt_user_report where user_group=@user_group and subsys_id=@subsys_id and rep_id =@rep_id";
+                    sql = GetSqlByTag(221060);
 
                     para = new DynamicParameters();
                     para.Add("@user_group", user_group);
@@ -64,8 +64,7 @@ namespace Data.Repository
                         throw new Exception("已经添加了该报表");
                     }
 
-                    sql = @"insert into xt_user_report(subsys_id,user_group,report_code,rep_id,rep_name,parent_id)
-values (@subsys_id,@user_group,@report_code,@rep_id,@rep_name,@parent_id)";
+                    sql = GetSqlByTag(221061);
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@user_group", user_group);
@@ -96,7 +95,7 @@ values (@subsys_id,@user_group,@report_code,@rep_id,@rep_name,@parent_id)";
 
                 try
                 {
-                    string sql = @"delete from xt_user_report where subsys_id = @subsys_id and rep_id =@rep_id and user_group=@user_group";
+                    string sql = GetSqlByTag(221062);
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);

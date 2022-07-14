@@ -13,18 +13,8 @@ namespace Data.Repository
     {
 
         public List<string> GetGhDailyReport(string opera, string report_date, string mz_dept_no)
-        {
-
-            //string ghsql = GetSqlByTag(220041);
-
-            string sql = @"select distinct
-       report_date 
-from view_GhDailyReport_op
-where (price_opera like @price_opera) and
-      (report_date is null or
-      convert(char(10), report_date, 121) = @report_date) and
-      (mz_dept_no like @mz_dept_no)
-order by report_date";
+        { 
+            string sql = GetSqlByTag(221027);
 
             var para = new DynamicParameters();
 
@@ -103,56 +93,33 @@ order by report_date";
                         //                        var mzReceiptCancelList = connection.Query<MzReceiptCancel>(sql4, para, transaction);
                         #endregion
 
-                        string sql5 = @"select * from gh_op_receipt
-                                    where operator = @P1 and
-                                          report_flag = '0'
-                                    order by happen_date";
+                        string sql5 = GetSqlByTag(221028);
                         para = new DynamicParameters();
                         para.Add("@P1", opera);
 
                         var ghOpReceiptCancelList = connection.Query<GhOpReceipt>(sql5, para, transaction);
 
-                        ////////////////////更新以上表的report_date
+                        ////////////////////更新以上表的report_date 
                         string dtNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        string upsql1 = @"update gh_deposit  set
-                                     report_date = @P1
-                                    where
-                                     price_opera = @P2
-                                     and mz_dept_no like @P3 and
-                                     report_date is null";
+                        string upsql1 = GetSqlByTag(221029);
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
                         connection.Execute(upsql1, para, transaction);
-                        string upsql2 = @"update gh_receipt  set
-                                         report_date = @P1
-                                        where price_opera = @P2 and mz_dept_no like @P3 and
-                                         report_date is null";
+                        string upsql2 = GetSqlByTag(221030);
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
-                        connection.Execute(upsql2, para, transaction);
-                        string upsql3 = @"update gh_detail_charge  set
-                                         report_date = @P1
-                                        where
-                                         confirm_opera = @P2 and
-                                         report_date is null and
-                                         charge_status in ('4', '7') and
-                                         mz_dept_no = @P3";
+                        connection.Execute(upsql2, para, transaction); 
+                        string upsql3 = GetSqlByTag(221031);
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
                         connection.Execute(upsql3, para, transaction);
-                        string upsql4 = @"update mz_receipt_cancel  set
-                                         report_date = @P1
-                                        where
-                                         operator = @P2 and
-                                         report_date is null and
-                                         subsys_id = @P3 and
-                                         mz_dept_no = @P4";
+                        string upsql4 = GetSqlByTag(221032);
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
@@ -164,19 +131,8 @@ order by report_date";
                         {
                             foreach (var item in ghOpReceiptCancelList)
                             {
-                                //更新report_flag
-                                string upsql5 = @"update gh_op_receipt  set
-                                         report_flag = @P1
-                                        where
-                                         operator = @P2 and
-                                         happen_date = @P3 and
-                                         start_no = @P4 and
-                                         current_no = @P5 and
-                                         end_no = @P6 and
-                                         step_length = @P7 and
-                                         deleted_flag = @P8 and
-                                         report_flag = @P9 and
-                                         receipt_type is null";
+                                //更新report_flag 
+                                string upsql5 = GetSqlByTag(221033);
                                 para = new DynamicParameters();
                                 para.Add("@P1", "1");
                                 para.Add("@P2", item.@operator);
@@ -190,10 +146,7 @@ order by report_date";
                                 connection.Execute(upsql5, para, transaction);
 
                                 //写入新数据
-                                upsql5 = @"insert into gh_op_receipt
-  (operator, happen_date, start_no, current_no, end_no, step_length, deleted_flag, report_flag)
-values
-  (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8)";
+                                upsql5 = GetSqlByTag(221034);
                                 para = new DynamicParameters();
                                 para.Add("@P1", item.@operator);
                                 para.Add("@P2", dtNow);
@@ -207,13 +160,10 @@ values
                             }
                         }
 
-                        string sql = "select report_sn from a_hospital";
+                        string sql = GetSqlByTag(221035);
                         var hospital = connection.QueryFirstOrDefault<Hosipital>(sql, para, transaction);
 
-                        sql = @"insert into a_daily_report
-                          (report_sn, report_date, opera_id, subsys_id, dept_no)
-                        values
-                          (@P1, @P2, @P3, @P4, @P5)";
+                        sql = GetSqlByTag(221036);
                         para = new DynamicParameters();
                         para.Add("@P1", hospital.report_sn);
                         para.Add("@P2", dtNow);
@@ -222,7 +172,7 @@ values
                         para.Add("@P5", "1");
                         connection.Execute(sql, para, transaction);
 
-                        sql = @"select charge from gh_deposit where report_date=@report_date and price_opera=@price_opera";
+                        sql = GetSqlByTag(221037);
                         para = new DynamicParameters();
                         para.Add("@report_date", dtNow);
                         para.Add("@price_opera", opera);
@@ -231,10 +181,7 @@ values
                         var out_amount = deposit_list.Where(p => p < 0).Sum();
 
                         /////???挂号费+诊疗费=01
-                        sql = @"insert into a_daily_report_data
-                          (report_sn, code, in_amount, out_amount)
-                        values
-                          (@P1, @P2, @P3, @P4)";
+                        sql = GetSqlByTag(221038);
                         para = new DynamicParameters();
                         para.Add("@P1", hospital.report_sn);
                         para.Add("@P2", "01");
@@ -267,10 +214,7 @@ values
 
                         foreach (var item in ghOpReceiptCancelList)
                         {
-                            sql = @"insert into a_daily_report_receipt
-                                                          (report_sn, begin_no, end_no, flag)
-                                                        values
-                                                          (@P1, @P2, @P3, @P4)";
+                            sql = GetSqlByTag(221039);
                             var end_no = (int.Parse(item.start_no) - 1).ToString();
                             end_no = end_no.PadLeft(item.start_no.Length - end_no.Length, '0');
 
@@ -284,7 +228,7 @@ values
                         }
 
 
-                        sql = @"update a_hospital set report_sn=report_sn+1";
+                        sql = GetSqlByTag(221040);
                         //para = new DynamicParameters();
                         //para.Add("@new_sn", hospital.report_sn + 1);
                         //para.Add("@no", hospital.no);

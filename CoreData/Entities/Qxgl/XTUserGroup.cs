@@ -10,5 +10,7 @@ namespace Data.Entities
         public string func_desc { get; set; } 
         public int action_flag { get; set; }
 
+        public string sys_type {  get; set; }
+
     }
 }

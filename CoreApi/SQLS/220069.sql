@@ -1,0 +1,1 @@
+﻿ delete from gh_zd_request_hour where code = @code

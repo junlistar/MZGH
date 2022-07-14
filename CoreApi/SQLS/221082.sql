@@ -1,0 +1,1 @@
+﻿ select * from rt_report_params_fast_net where report_code = @report_code

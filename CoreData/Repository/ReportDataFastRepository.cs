@@ -76,9 +76,8 @@ namespace Data.Repository
 
         public ReportData GetReportDataByCode(string code)
         {
-
-            //string ghsql = GetSqlByTag(220041);
-            string sql = "select * from rt_report_data_fast_net where report_code = @report_code";
+             
+            string sql = GetSqlByTag(220079);
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);
@@ -103,10 +102,8 @@ namespace Data.Repository
         }
 
         public List<ReportData> GetReportData(string code)
-        {
-
-            string ghsql = GetSqlByTag(220041);
-            string sql = "select * from rt_report_data_fast_net where report_code = @report_code";
+        { 
+            string sql = GetSqlByTag(220080);
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);
@@ -114,10 +111,8 @@ namespace Data.Repository
 
         }
         public int UpdateReportDataByCode(int code ,string report_com)
-        {
-
-            //string ghsql = GetSqlByTag(220041);
-            string sql = @"update rt_report_data_fast_net set report_com=@report_com where report_code =@report_code";
+        { 
+            string sql = GetSqlByTag(220081);
             var para = new DynamicParameters();
             byte[] ReportBytes = System.Text.Encoding.UTF8.GetBytes(report_com);
             para.Add("@report_com", ReportBytes);

@@ -10,9 +10,8 @@ namespace Data.Repository
     {
 
         public List<RequestTime> GetRequestTimes()
-        {
-            //string ghsql = GetSqlByTag(220064);
-            string ghsql = @"select * from gh_zd_request_time ";
+        { 
+            string ghsql = GetSqlByTag(220070);
 
             return Select(ghsql);
         }
@@ -23,16 +22,13 @@ namespace Data.Repository
             var all = GetRequestTimes();
             if (all.Where(p => p.Section_number == int.Parse(section)).Count() > 0)
             {
-                //存在：更新操作
-                sql = @"update gh_zd_request_time
-set Section_number_comment =@Section_number_comment,start_time=@start_time,end_time=@end_time,ampm=@ampm
-where Section_number=@Section_number";
+                //存在：更新操作 
+                sql = GetSqlByTag(220071);
             }
             else
             {
                 //不存在：添加操作
-                sql = @"insert into gh_zd_request_time(Section_number,Section_number_comment,start_time,end_time,ampm)
-values(@Section_number,@Section_number_comment,@start_time,@end_time,@ampm)";
+                sql = GetSqlByTag(220072);
 
             }
 
@@ -48,8 +44,8 @@ values(@Section_number,@Section_number_comment,@start_time,@end_time,@ampm)";
         }
         public bool DeleteRequestTime(string section)
         {
-            string sql = @"delete from gh_zd_request_time where Section_number=@Section_number";
-  
+            string sql = GetSqlByTag(220073);
+
             var param = new DynamicParameters();
             param.Add("@Section_number", section); 
 

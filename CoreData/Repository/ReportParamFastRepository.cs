@@ -12,10 +12,8 @@ namespace Data.Repository
     {
     
         public List<ReportParam> GetReportParam(string code)
-        {
-
-            //string ghsql = GetSqlByTag(220041);
-            string sql = "select * from rt_report_params_fast_net where report_code = @report_code";
+        { 
+            string sql = GetSqlByTag(221082);
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);

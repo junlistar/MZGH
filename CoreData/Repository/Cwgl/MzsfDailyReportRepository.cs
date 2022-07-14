@@ -17,9 +17,7 @@ namespace Data.Repository
 
             //string ghsql = GetSqlByTag(220041);
 
-            string sql = @"select report_date from a_daily_report
-where opera_id=@opera and datediff(dd,report_date,@rdate)=0 and subsys_id=@subsys
-order by report_date desc";
+            string sql = GetSqlByTag(221041);
 
             var para = new DynamicParameters();
 

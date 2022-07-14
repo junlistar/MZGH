@@ -213,7 +213,7 @@ namespace Client
             if (!ExistPage(pageIndex))
             {
                 switch (pageIndex)
-                {
+                { 
                     case 1001:
                         obj = new GuaHao(); break;
                     case 1002:

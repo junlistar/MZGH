@@ -1,0 +1,1 @@
+﻿ select report_sn from a_hospital

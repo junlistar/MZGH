@@ -13,10 +13,7 @@ namespace Data.Repository
    
         public List<XTUser> GetXTUsersBySysId(string subsys_id,string user_group)
         {
-            string ghsql = @"select a.*,b.name from xt_user a
-join a_employee_mi b on a.user_mi = b.code
-where subsys_id = @subsys_id
-  and user_group = @user_group";
+            string ghsql = GetSqlByTag(221063);
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -27,12 +24,9 @@ where subsys_id = @subsys_id
 
         public int AddXtUser(string user_name, string subsys_id, string pass_word, string user_group, string user_mi)
         {
-            string sql = @"insert into xt_user
-  (user_name, subsys_id, pass_word, user_group, create_pw_date, user_mi, outlookbar2, outlookbar)
-values
-  (@user_name, @subsys_id, @pass_word, @user_group, @create_pw_date, @user_mi,NULL,NULL  )";
+            string sql = GetSqlByTag(221064);
 
-           var para = new DynamicParameters();
+            var para = new DynamicParameters();
             if (string.IsNullOrEmpty(pass_word))
             {
                 pass_word = ""; 
@@ -50,7 +44,7 @@ values
 
         public int DeleteXtUser(string user_name, string subsys_id, string user_group)
         {
-            string sql = @"delete from  xt_user where user_name=@user_name and subsys_id=@subsys_id and user_group=@user_group";
+            string sql = GetSqlByTag(221065);
 
             var para = new DynamicParameters();
 

@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public bool UpdateSfzInfo(string name ,string sex,string address,string home_address,string folk,string birthday,string card_no)
         {
-            string selectSql = @"select count(1) from mz_patient_sfz_info where card_no=@card_no";
+            string selectSql = GetSqlByTag(221066);
 
             var para = new DynamicParameters();
             para.Add("@card_no", card_no);
@@ -23,18 +23,12 @@ namespace Data.Repository
             if (Convert.ToInt32(_count)>0)
             {
                 //编辑
-                selectSql = @"update mz_patient_sfz_info set name=@name,sex=@sex,address=@address,home_address=@home_address,folk=@folk,birthday=@birthday where card_no=@card_no"; 
+                selectSql = GetSqlByTag(221067);
             }
             else
             {
                 //新增
-                selectSql = @"insert into mz_patient_sfz_info([name]
-      ,[sex]
-      ,[address]
-      ,[home_address]
-      ,[folk]
-      ,[birthday]
-      ,[card_no]) values(@name,@sex,@address,@home_address,@folk,@birthday,@card_no"; 
+                selectSql = GetSqlByTag(221068);
             }
             para.Add("@name", name);
             para.Add("@sex", sex);

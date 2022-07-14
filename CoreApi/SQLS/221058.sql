@@ -1,0 +1,1 @@
+﻿ select * from rt_report_subsys where subsys_id =@subsys_id

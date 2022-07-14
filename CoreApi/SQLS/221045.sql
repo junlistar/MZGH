@@ -1,0 +1,1 @@
+﻿ delete from  xt_group where subsys_id=@subsys_id and user_group=@user_group and sys_type=@sys_type

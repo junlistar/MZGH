@@ -1,0 +1,1 @@
+﻿ select * from mz_patient_ybk_idetinfo where certno=@certno

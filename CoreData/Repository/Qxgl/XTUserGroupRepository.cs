@@ -13,13 +13,7 @@ namespace Data.Repository
 
         public List<XTUserGroup> GetXTUserGroupsByGroupId(string subsys_id, string user_group)
         {
-            string ghsql = @"select a.*,
-       b.func_desc
-from xt_user_group a
-join xt_func b on b.func_name = a.func_name
-               and b.subsys_id = a.subsys_id
-where a.subsys_id = @subsys_id
-  and a.user_group = @user_group and a.sys_type='2.0'";
+            string ghsql = GetSqlByTag(221046);
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -30,7 +24,7 @@ where a.subsys_id = @subsys_id
 
         public List<XTUserGroup> GetXTUserGroups(string subsys_id)
         {
-            string ghsql = @"select * from xt_func where subsys_id = @subsys_id and sys_type='2.0'";
+            string ghsql = GetSqlByTag(221047);
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -49,7 +43,7 @@ where a.subsys_id = @subsys_id
                 {
                     var func_list = func_str.Split(",");
                     //先删除，后添加
-                    string sql = @"delete from xt_user_group where subsys_id=@subsys_id and user_group=@user_group and sys_type='2.0'";
+                    string sql = GetSqlByTag(221048);
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -58,8 +52,7 @@ where a.subsys_id = @subsys_id
 
                     foreach (var func in func_list)
                     {
-                        sql = @"insert into xt_user_group(subsys_id,user_group,func_name,sys_type)
-  values (@subsys_id,@user_group,@func_name,'2.0')";
+                        sql = GetSqlByTag(221049);
 
                         para = new DynamicParameters();
 
@@ -99,7 +92,7 @@ where a.subsys_id = @subsys_id
                     foreach (var func in func_list)
                     {
                         //删除
-                        string sql = @"delete from xt_user_group where subsys_id=@subsys_id and user_group=@user_group and func_name=@func_name and sys_type='2.0'";
+                        string sql = GetSqlByTag(221050);
 
                         var para = new DynamicParameters();
                         para.Add("@subsys_id", subsys_id);
@@ -132,7 +125,7 @@ where a.subsys_id = @subsys_id
                 try
                 {
                     //查询是否存在相同数据
-                    string sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_name = @func_name and sys_type='2.0'";
+                    string sql = GetSqlByTag(221051);
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -143,7 +136,7 @@ where a.subsys_id = @subsys_id
                         throw new Exception("存在相同功能编号！");
                     }
 
-                    sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_desc = @func_desc and sys_type='2.0'";
+                    sql = GetSqlByTag(221052);
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_desc", func_desc);
@@ -152,8 +145,7 @@ where a.subsys_id = @subsys_id
                     {
                         throw new Exception("存在相同功能描述！");
                     } 
-                    sql = @"insert into xt_func(subsys_id,func_name,func_desc,action_flag,sys_type)
-  values (@subsys_id,@func_name,@func_desc,@action_flag,'2.0')";
+                    sql = GetSqlByTag(221053);
 
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -184,9 +176,9 @@ where a.subsys_id = @subsys_id
 
                 try
                 {
-                    //查询是否存在相同数据 
+                    //查询是否存在相同数据  
                     var para = new DynamicParameters(); 
-                    string sql = @"select count(*) from xt_func where subsys_id =@subsys_id and func_desc = @func_desc and func_name!=@func_name and sys_type='2.0'";
+                    string sql = GetSqlByTag(221054);
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_desc", func_desc);
@@ -196,7 +188,7 @@ where a.subsys_id = @subsys_id
                     {
                         throw new Exception("存在相同功能描述！");
                     }
-                    sql = @"update xt_func set func_desc=@func_desc,action_flag=@action_flag where subsys_id =@subsys_id and func_name = @func_name  and sys_type='2.0'";
+                    sql = GetSqlByTag(221055);
 
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -228,7 +220,7 @@ where a.subsys_id = @subsys_id
                 try
                 {
                     //查询是否存在相同数据
-                    string sql = @"delete from xt_func where subsys_id =@subsys_id and func_name = @func_name and func_desc=@func_desc and action_flag=@action_flag and sys_type='2.0'";
+                    string sql = GetSqlByTag(221056);
 
                     var para = new DynamicParameters();
 

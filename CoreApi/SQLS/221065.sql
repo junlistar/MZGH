@@ -1,0 +1,1 @@
+﻿ delete from  xt_user where user_name=@user_name and subsys_id=@subsys_id and user_group=@user_group

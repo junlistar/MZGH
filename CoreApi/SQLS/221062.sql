@@ -1,0 +1,1 @@
+﻿ delete from xt_user_report where subsys_id = @subsys_id and rep_id =@rep_id and user_group=@user_group
