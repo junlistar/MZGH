@@ -17,6 +17,7 @@ using Mzsf.Forms.Pages;
 using Client.Forms.Pages.hbgl;
 using Client.Forms.Pages.cwgl;
 using Client.Forms.Pages.qxgl;
+using System.Linq;
 
 namespace Client
 {
@@ -26,6 +27,8 @@ namespace Client
 
         static int iOperCount = 0;//记录上时间未操作的时间
         static int LogOutSeconds = 0;
+
+        List<XTUserGroupVM> function_list;
 
         public FHeaderAsideMainFooter()
         {
@@ -37,6 +40,18 @@ namespace Client
             MyMessager msg = new MyMessager();
             Application.AddMessageFilter(msg);
 
+
+            LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
+
+            //报表编号获取（门诊挂号，门诊收费）
+            SessionHelper.mzgh_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
+            SessionHelper.mzsf_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
+        }
+
+
+
+        public void MenuBind()
+        {
             //设置关联
             Aside.TabControl = MainTabControl;
 
@@ -45,8 +60,132 @@ namespace Client
             //AddPage(new FTitlePage2(), 1002);
             //AddPage(new FTitlePage3(), 1003);
 
-            int pageIndex = 1000;
-            TreeNode parent = Aside.CreateNode("挂号业务", 61734, 24, pageIndex);
+            TreeNode parent;
+            int pageIndex;
+
+            if (SessionHelper.uservm.user_mi== "00000")
+            {
+                pageIndex = 1000;
+                parent = Aside.CreateNode("挂号业务", 61734, 24, pageIndex);
+                Aside.CreateChildNode(parent, "挂号", 62004, 24, 1001);
+                Aside.CreateChildNode(parent, "挂号查询", 61442, 24, 1002);
+                Aside.CreateChildNode(parent, "患者基本信息", 62140, 24, 1003);
+
+                pageIndex = 1100;
+                parent = Aside.CreateNode("收费业务", 362656, 24, pageIndex);
+                Aside.CreateChildNode(parent, "划价收费", 363203, 24, 1101);
+                Aside.CreateChildNode(parent, "退费", 362782, 24, 1102);
+
+                pageIndex = 1200;
+                parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
+                Aside.CreateChildNode(parent, "挂号日结", 62004, 24, 1201);
+                Aside.CreateChildNode(parent, "收费日结", 57581, 24, 1202);
+
+                pageIndex = 1300;
+                parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
+                Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+                Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
+                Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
+                Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
+                Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
+
+                pageIndex = 1400;
+                parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
+
+
+                pageIndex = 1500;
+                parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
+                Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
+
+            }
+            else
+            {
+                pageIndex = 1000;
+                if (function_list.Where(p => p.func_desc.Trim() == "挂号业务").Count() > 0)
+                {
+                    parent = Aside.CreateNode("挂号业务", 61734, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim().Trim() == "挂号").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "挂号", 62004, 24, 1001);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "挂号查询").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "挂号查询", 61442, 24, 1002);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "患者基本信息").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "患者基本信息", 62140, 24, 1003);
+                    }
+
+                }
+                pageIndex = 1100;
+                if (function_list.Where(p => p.func_desc.Trim() == "收费业务").Count() > 0)
+                {
+                    parent = Aside.CreateNode("收费业务", 362656, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim() == "划价收费").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "划价收费", 363203, 24, 1101);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "退费").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "退费", 362782, 24, 1102);
+                    }
+                }
+                pageIndex = 1200;
+                if (function_list.Where(p => p.func_desc.Trim() == "财务管理").Count() > 0)
+                {
+                    parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim() == "挂号日结").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "挂号日结", 62004, 24, 1201);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "收费日结").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "收费日结", 57581, 24, 1202);
+                    }
+                }
+                pageIndex = 1300;
+                if (function_list.Where(p => p.func_desc.Trim() == "号表管理").Count() > 0)
+                {
+                    parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim() == "基础号表维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "生成号表").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "号表维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "时间段维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "分时段维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
+                    }
+                }
+                pageIndex = 1400;
+                if (function_list.Where(p => p.func_desc.Trim() == "用户报表").Count() > 0)
+                {
+                    parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
+
+                }
+                pageIndex = 1500;
+                if (function_list.Where(p => p.func_desc.Trim() == "权限管理").Count() > 0)
+                {
+                    parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim() == "用户管理").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
+                    }
+                }
+
+            }
 
             //设置Header节点索引
 
@@ -54,55 +193,20 @@ namespace Client
 
             //Aside.CreateChildNode(parent, AddPage(new GuaHao(), ++pageIndex));
             //Aside.CreateChildNode(parent, AddPage(new GhList(), ++pageIndex));
-            Aside.CreateChildNode(parent,  "挂号", 62004, 24, 1001);
-            Aside.CreateChildNode(parent,  "挂号查询", 61442, 24, 1002);
-            Aside.CreateChildNode(parent,  "患者基本信息", 62140, 24, 1003);
 
 
-            pageIndex = 1100;
-            parent = Aside.CreateNode("收费业务", 362656, 24, pageIndex); 
-            Aside.CreateChildNode(parent,  "划价收费", 363203, 24, 1101);
-            Aside.CreateChildNode(parent,  "退费", 362782, 24, 1102);
-
-            pageIndex = 1200;
-            parent = Aside.CreateNode("财务管理", 361783, 24, pageIndex);
-            Aside.CreateChildNode(parent, "挂号日结", 62004, 24, 1201);
-            Aside.CreateChildNode(parent, "收费日结", 57581, 24, 1202);
-
-            pageIndex = 1300;
-            parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
-            Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
-            Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
-            Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
-            Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
-            Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
-
-            pageIndex = 1400;
-            parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
-
-
-            pageIndex = 1500;
-            parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-            Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
 
             //Aside.CreateNode("Page2", ++pageIndex);
             //Aside.CreateNode("Page3", ++pageIndex);
 
             //显示默认界面
             // Aside.SelectFirst();
-
-            LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
-
-
-            //报表编号获取（门诊挂号，门诊收费）
-            SessionHelper.mzgh_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
-            SessionHelper.mzsf_report_code= int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
         }
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
         {
             Footer.Text = "PageIndex: " + pageIndex;
-             
+
             UIPage page = new UIPage();
             UIPage obj = new UIPage();
 
@@ -113,7 +217,7 @@ namespace Client
                     case 1001:
                         obj = new GuaHao(); break;
                     case 1002:
-                        obj = new GhList(); break; 
+                        obj = new GhList(); break;
                     case 1003:
                         obj = new UserInfoPage(); break;
                     case 1101:
@@ -135,14 +239,14 @@ namespace Client
                     case 1202:
                         obj = new ShoufeiRijie(); break;
                     case 1501:
-                        obj = new UserManage(); break; 
+                        obj = new UserManage(); break;
                     default:
                         break;
                 }
                 page = AddPage(obj);
             }
             SelectPage(pageIndex);
-             
+
 
             //设置激活 用户键盘事件
             Task.Run(async () =>
@@ -150,11 +254,11 @@ namespace Client
                 await Task.Delay(500);
 
                 this.Invoke(new Action(() =>
-                { 
+                {
                     page.Focus();
                 }));
             });
-              
+
         }
 
         BackgroundWorker _demoBGWorker = new BackgroundWorker();
@@ -219,7 +323,7 @@ namespace Client
             //frm.ShowDialog();
             //if (frm.IsLogin)
             //{
-                //frm.Dispose();
+            //frm.Dispose();
             //}
             //else
             //{
@@ -249,6 +353,13 @@ namespace Client
 
                 InitDic();
 
+                //获取菜单权限 
+                GetUserFunctions(SessionHelper.uservm.user_group);
+
+
+                //绑定菜单
+                MenuBind();
+
                 SessionHelper.clientHeight = this.Height;
                 SessionHelper.clientWidth = this.Width;
 
@@ -266,8 +377,46 @@ namespace Client
             else
             {
                 this.Close();
-            } 
+            }
         }
+        public void GetUserFunctions(string user_group)
+        {
+            try
+            {
+                var d = new
+                {
+                    subsys_id = "mz",
+                    user_group = user_group
+                };
+
+                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsByGroupId?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                function_list = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserGroupVM>>>(json).data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
+        }
+
+
+
         ToolTip toolTip1 = new ToolTip();
 
         public void BGWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -363,7 +512,7 @@ namespace Client
         public void InitDic()
         {
             log.Info("初始化数据字典：InitDic");
-             
+
             //获取用户费别信息
             Task<HttpResponseMessage> task = null;
             string json = "";
@@ -527,11 +676,11 @@ namespace Client
             {
                 UIMessageTip.ShowWarning("请输入登录名!");
                 return false;
-            } 
+            }
             try
             {
                 Task<HttpResponseMessage> task = null;
-                string json = ""; 
+                string json = "";
                 string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={userName}&pwd={password}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -553,7 +702,7 @@ namespace Client
                     return false;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
-                if (result.status==1)
+                if (result.status == 1)
                 {
                     if (result.data != null && result.data.Count > 0)
                     {
@@ -570,7 +719,7 @@ namespace Client
                     UIMessageBox.ShowError(result.message);
                     log.Error(result.message);
                 }
-               
+
 
             }
             catch (Exception ex)
@@ -661,7 +810,7 @@ namespace Client
         }
 
         private void timerlogout_Tick(object sender, EventArgs e)
-        { 
+        {
             iOperCount++;
             tlsInfo.Text = iOperCount.ToString();//屏幕长时间未操作，累计时间
 
@@ -677,21 +826,21 @@ namespace Client
                 {
                     UIMessageTip.ShowOk("登录成功");
                     var pages = GetPages<UIPage>();
-                    
+
                     foreach (var page in pages)
                     {
                         RemovePage(page.PageIndex);
-                    } 
-                    this.Show(); 
+                    }
+                    this.Show();
                     timerlogout.Start();
                 }
                 else
-                { 
-                    this.FormClosing-= FHeaderAsideMainFooter_FormClosing;
+                {
+                    this.FormClosing -= FHeaderAsideMainFooter_FormClosing;
                     this.Close();
                 }
             }
         }
-         
-    } 
+
+    }
 }

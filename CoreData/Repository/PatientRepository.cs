@@ -558,17 +558,11 @@ namespace Data.Repository
                         para.Add("@start_no", start_no);
                         para.Add("@current_no", current_no);
                         para.Add("@end_no", end_no);
-                        para.Add("@step_length", step_length);
-                        para.Add("@deleted_flag", deleted_flag);
-                        para.Add("@report_flag", report_flag);
-                        para.Add("@receipt_type", receipt_type);
+                        para.Add("@step_length", step_length); 
 
                         result = Update(sql8, para);
 
-                        max_ledger_sn++;
-
-
-
+                        max_ledger_sn++; 
 
                         transaction.Commit();
                     }

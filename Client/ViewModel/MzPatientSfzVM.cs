@@ -19,6 +19,27 @@ namespace Client.ViewModel
         public string folk { get; set; }
         public string birthday { get; set; }
         public string card_no { get; set; }
+        //医保卡信息
+        public string psn_no { get; set; }
+        public string psn_cert_type { get; set; }
+        public string psn_cert_type_str
+        {
+            get
+            {
+                switch (psn_cert_type)
+                {
+                    case "01":return "居民身份证（户口簿）"; 
+                    case "90": return "社会保障卡";
 
+                    default:return "其他身份证件";
+                }
+            }
+        }
+        public string certno { get; set; }
+        public string psn_name { get; set; }
+        public string gend { get; set; }
+        public string naty { get; set; }
+        public string brdy { get; set; }
+        public int age { get; set; }
     }
 }

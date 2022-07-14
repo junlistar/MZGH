@@ -314,6 +314,7 @@ values(?, ?, ?, ?,?, 1, 0)";
                     {
                         if (item.report_code == -1)
                         {
+                            item.report_code = int.Parse(code);
                             //新增
                             string sql2 = $@"insert into rt_report_params_fast_net(report_code,param_name,param_label,param_type,param_defaultvalue,sqltag,sort_no)
                                     values({code},'{item.param_name}','{item.param_label.Trim()}','{item.param_type}','{item.param_defaultvalue}','{item.sqltag}','{item.sort_no}')";

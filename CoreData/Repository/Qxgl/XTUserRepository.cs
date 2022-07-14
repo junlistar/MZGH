@@ -20,7 +20,7 @@ where subsys_id = @subsys_id
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
-            para.Add("@user_group", user_group);
+            para.Add("@user_group", user_group); 
             return  Select(ghsql,para); 
 
         } 

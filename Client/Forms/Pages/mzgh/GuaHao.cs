@@ -29,7 +29,7 @@ namespace Client
         private static ILog log = LogManager.GetLogger(typeof(GuaHao));//typeof放当前类
         public GuaHao()
         {
-            InitializeComponent(); 
+            InitializeComponent();
         }
         /// <summary>
         /// 解决页面频繁刷新时界面闪烁问题
@@ -186,7 +186,7 @@ namespace Client
             //pnlHours.ForeColor = Color.Transparent;
             pnlHours.RectColor = Color.Transparent;
 
- 
+
 
             //初始化明天，后天按钮
             btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
@@ -196,7 +196,7 @@ namespace Client
 
             request_key = "";
             gbxUnits.Text = "选择科室";
- 
+
         }
 
         private void Btn1_Click(object sender, EventArgs e)
@@ -213,7 +213,7 @@ namespace Client
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.txtCode.Text) || btnEditUser1.TagString=="")
+            if (string.IsNullOrEmpty(this.txtCode.Text) || btnEditUser1.TagString == "")
             {
                 UIMessageTip.ShowError("请刷卡!");
                 lblMsg.Text = "请刷卡！";
@@ -266,7 +266,7 @@ namespace Client
             APButtonClick(sender);
         }
         public void APButtonClick(object sender)
-        { 
+        {
 
             var btn = sender as UIButton;
             btn.FillColor = cur_color;
@@ -604,7 +604,7 @@ namespace Client
                     {
                         UIMessageBox.ShowWarning("同时段存在相同挂号记录！");
                         break;
-                    } 
+                    }
 
                     SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
                     fe.ShowDialog();
@@ -625,7 +625,7 @@ namespace Client
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
         {
-            Task<HttpResponseMessage> task = null; 
+            Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/CheckGhRepeat?patient_id={patient_id}&record_sn={record_sn}");
 
@@ -645,7 +645,7 @@ namespace Client
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
 
-                if (result.status==1)
+                if (result.status == 1)
                 {
                     return result.data;
                 }
@@ -814,7 +814,7 @@ namespace Client
         Color lvse = Color.FromArgb(110, 190, 40);
         Color hongse = Color.FromArgb(230, 80, 80);
         private void btnCika_Click(object sender, EventArgs e)
-        { 
+        {
 
             //更改刷卡方式按钮样式
             btnCika.FillColor = hongse;
@@ -855,7 +855,7 @@ namespace Client
         }
 
         private void btnSFZ_Click(object sender, EventArgs e)
-        { 
+        {
             //更改刷卡方式按钮样式
             btnCika.FillColor = lvse;
             btnIDCard.FillColor = lvse;
@@ -915,7 +915,7 @@ namespace Client
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
 
-                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                 log.Debug(parm[2]);
 
@@ -932,6 +932,11 @@ namespace Client
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
                     txtCode.Text = SessionHelper.cardno;
                     SearchUser();
+
+                    Task.Run(() =>
+                    {
+                        SaveCardData(yBResponse.output); SaveCardDataAll(parm[2].ToString());
+                    });
                 }
             }
             catch (Exception ex)
@@ -941,62 +946,57 @@ namespace Client
 
         }
 
-        [DllImport("ole32.dll")]
-        static extern int CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid pclsid);
+        public void SaveCardData(UserInfoResponseModel model)
+        { 
+            Task<HttpResponseMessage> task = null;
+            string json = "";
 
-        public static object InvokeMethod(string comName, string methodName, ref object[] args)
-        {
+            var d = new
+            {
+                psn_no = model.baseinfo.psn_no,
+                psn_cert_type = model.baseinfo.psn_cert_type,
+                certno = model.baseinfo.certno,
+                psn_name = model.baseinfo.psn_name,
+                gend = model.baseinfo.gend,
+                naty = model.baseinfo.naty,
+                brdy = model.baseinfo.brdy,
+                age = model.baseinfo.age,
+            };
 
-            object ret = null;
-            COMInfo com = GetCOMInfo(comName);
+            string paramurl = string.Format($"/api/user/UpdateYbkInfo?psn_no={d.psn_no}&psn_cert_type={d.psn_cert_type}&certno={d.certno}&psn_name={d.psn_name}&gend={d.gend}&naty={d.naty}&brdy={d.brdy}&age={d.age}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                //用参数的索引属性来指出哪些参数是一个返回的参数
-                //对于那些是[in]或ByRef的参数可以不用指定
-                ParameterModifier[] ParamMods = new ParameterModifier[1];
-                ParamMods[0] = new ParameterModifier(3); // 初始化为接口参数的个数
-                ParamMods[0][2] = true; // 设置第三个参数为返回参数
-
-
-                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args, ParamMods,
-                                                         null,
-                                                         null);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);  
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
             }
-            return ret;
+
         }
 
+        public void SaveCardDataAll(string jsonStr)
+        {   
 
-        public static COMInfo GetCOMInfo(string comName)
-        {
-            COMInfo comInfo;
-            Type type;
-            object instance = null;
-            instance = CreateInstance(comName, out type);
-            comInfo = new COMInfo(type, instance);
-            return comInfo;
-        }
+            //更新医保其他信息  
+            string paramurl = string.Format($"/api/user/UpdateYbkInfoAll");
 
-
-        private static object CreateInstance(string progName, out Type type)
-        {
-            object instance = null;
-            type = null;
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {
-                Guid clsid;
-                int result = CLSIDFromProgID(progName, out clsid);
-                type = Type.GetTypeFromCLSID(clsid, true);
-                instance = Activator.CreateInstance(type);
+            {  
+                HttpContent httpContent = new StringContent(jsonStr);
+
+                SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                log.Debug("请求接口数据出错：" + ex.Message); 
             }
-            return instance;
+
         }
 
 

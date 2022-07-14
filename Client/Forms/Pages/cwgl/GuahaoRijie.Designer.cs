@@ -135,7 +135,7 @@
             this.btnSave.StyleCustomMode = true;
             this.btnSave.Symbol = 61639;
             this.btnSave.TabIndex = 11;
-            this.btnSave.Text = "保存";
+            this.btnSave.Text = "结算";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -295,7 +295,6 @@
             this.txtDate.SymbolDropDown = 61555;
             this.txtDate.SymbolNormal = 61555;
             this.txtDate.TabIndex = 2;
-            this.txtDate.Text = "1900-01-01";
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
-namespace Client.ClassLib
+namespace Data.Entities
 {
     public class YBResponse<T>
     {
@@ -98,13 +98,14 @@ namespace Client.ClassLib
         public string insuplc_admdvs { get; set; }
         public string emp_name { get; set; }
     }
-    public class IdetInfo
-    {
+    public class IdetInfo {
+
         public string psn_idet_type { get; set; }
         public string psn_type_lv { get; set; }
         public string memo { get; set; }
         public string begntime { get; set; }
-        public string endtime { get; set; }
+        public string endtime { get; set; } 
+
     }
 
     #endregion

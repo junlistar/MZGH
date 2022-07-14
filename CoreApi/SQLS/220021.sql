@@ -8,9 +8,6 @@ update gh_op_receipt  set
                                  start_no = @start_no and
                                  current_no = @current_no and
                                  end_no = @end_no and
-                                 step_length =@step_length and
-                                 deleted_flag = @deleted_flag and
-                                 report_flag = @report_flag and
-                                 receipt_type = @receipt_type
+                                 step_length =@step_length 
  
  

@@ -680,7 +680,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@ledger_sn", max_ledger_sn);
-                            para.Add("@receipt_sn", current_no);
+                            para.Add("@receipt_sn", max_sn);
                             para.Add("@bill_code", item.bill_code);
                             para.Add("@charge", item.charge);
                             para.Add("@pay_unit", "01");//现金

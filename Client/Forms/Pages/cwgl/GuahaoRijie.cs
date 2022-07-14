@@ -276,7 +276,7 @@ namespace Client.Forms.Pages.cwgl
                                 dataset2.Tables[0].TableName = "DataTable2";
                                 TargetReport.RegisterData(dataset2);
 
-                                if (cbxStatus.SelectedText == "未结")
+                                if (cbxStatus.SelectedText == "未结" || cbxStatus.SelectedText == "")
                                 {
                                     btnSave.Enabled = true;
                                 }

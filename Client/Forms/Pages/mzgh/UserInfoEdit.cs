@@ -230,13 +230,21 @@ namespace Client
                         {
                             //UIMessageTip.ShowError("系统中已存在此身份证号!");
 
-                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                            //if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
                             {
                                 txtsfz.Focus();
                                 return;
                             }
-                            //清空相同身份证号信息
-                            DeleteSocialNo(sno);
+                            else
+                            {
+                                //调取最后一次记录Id 
+                                SessionHelper.cardno = result.data[0].p_bar_code;
+                                this.Close();
+                                return;
+                            }
+                            ////清空相同身份证号信息
+                            //DeleteSocialNo(sno);
                         }
                         else if (pid != patientId)
                         {

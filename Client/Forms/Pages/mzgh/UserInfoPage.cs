@@ -558,7 +558,7 @@ namespace Client.Forms.Pages
             //txtId.Text = item.patient_id.Substring(3, 7);
             //txtbarcode.Text = item.p_bar_code;
             txt_sfz_no.Text = item.hic_no;
-            txthicno.Text = item.social_no;
+            ybk_psn_no.Text = item.social_no;
 
             txt_name.Text = item.name;
 
@@ -631,7 +631,7 @@ namespace Client.Forms.Pages
 
             //社保号码
             //addition_no1
-            txtsbh.Text = item.addition_no1;
+            ybk_psn_cert_type.Text = item.addition_no1;
 
             //工作单位
             //employer_name
@@ -660,11 +660,11 @@ namespace Client.Forms.Pages
             txtrelationname.Text = "";
             txtTel.Text = "";
             sfz_card_no.Text = "";
-            txthicno.Text = "";
+            ybk_psn_no.Text = "";
             cbxmarrycode.Text = "";
             //txtemployer_name.Text = "";
             // txtZhiye.Text = "";
-            txtsbh.Text = "";
+            ybk_psn_cert_type.Text = "";
            // txthomedistrict.Text = "";
             sfz_home_address.Text = "";
 
@@ -979,6 +979,8 @@ namespace Client.Forms.Pages
 
             //查询patient_id 关联挂号记录
             GetRecordByPatientId(patient_id);
+             
+
         }
 
 
@@ -994,8 +996,73 @@ namespace Client.Forms.Pages
                 sfz_folk.Text = sfz_info.folk;
                 sfz_address.Text = sfz_info.address;
                 sfz_home_address.Text = sfz_info.home_address;
+
+                ybk_psn_no.Text = sfz_info.psn_no;
+                ybk_psn_cert_type.Text = sfz_info.psn_cert_type_str;
+                ybk_psn_name.Text = sfz_info.psn_name;
+                ybk_certno.Text = sfz_info.certno;
+
+
+                //查询医保卡其他信息
+                var cert_no = sfz_info.certno;
+
+                //
+                GetYbkDetailInfo(cert_no);
             }
         }
+
+        public void GetYbkDetailInfo(string certno)
+        {
+            //获取数据   UserInfoResponseModel> GetYbkDetailInfo(string certno)
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/user/GetYbkDetailInfo?certno={certno}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<UserInfoResponseModel>>(json);
+                if (result.status == 1)
+                {
+                    if (result.data!=null && result.data.insuinfo!=null)
+                    {
+                        dgv_cbxx.DataSource = result.data.insuinfo;
+                        dgv_cbxx.AutoResizeColumns();
+                        dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    }
+                    if (result.data != null && result.data.idetinfo != null)
+                    {
+                        dgv_sfxx.DataSource = result.data.idetinfo;
+                        dgv_sfxx.AutoResizeColumns();
+                        dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    }  
+                }
+                else
+                {
+                    //MessageBox.Show("没有查到用户数据");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
+
+            }
+        }
+
 
         public void GetRecordByPatientId(string patient_id)
         {

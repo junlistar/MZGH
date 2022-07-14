@@ -167,7 +167,7 @@ namespace Client.Forms.Pages.qxgl
 
                     foreach (var item in _functions_all)
                     {
-                        if (_functions.Where(p => p.func_name == item.func_name).Count() > 0)
+                        if (_functions!=null&& _functions.Where(p => p.func_name == item.func_name).Count() > 0)
                         {
                             continue;
                         }

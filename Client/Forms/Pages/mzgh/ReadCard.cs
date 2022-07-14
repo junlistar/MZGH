@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,6 +48,12 @@ namespace Client
 
                     log.Debug("读卡信息：" + dto.Data.IDCard + "," + dto.Data.Name + "," + dto.Data.Sex);
 
+                    Task.Run(() =>
+                    {
+                        SaveCardData(dto.Data);
+                    });
+                     
+
                     this.Close();
                 }
                 else if (!string.IsNullOrEmpty(dto.Msg))
@@ -60,6 +67,56 @@ namespace Client
             }
             else if (_cardName == "医保卡")
             {
+
+            }
+
+        }
+
+        public void SaveCardData(CardReader_Data data)
+        {
+            //获取数据  UpdateSfzInfo(string name, string sex, string address, string folk, string birthday, string card_no)
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+
+            var d = new
+            {
+                name = data.Name,
+                sex = data.Sex,
+                address = data.Address,
+                folk = data.Folk,
+                birthday = data.BirthDay,
+                card_no = data.IDCard,  
+            };
+
+            string paramurl = string.Format($"/api/user/UpdateSfzInfo?name={d.name}&sex={d.sex}&address={d.address}&folk={d.folk}&birthday={d.birthday}&card_no={d.card_no}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                //task.Wait();
+                //var response = task.Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var read = response.Content.ReadAsStringAsync();
+                //    read.Wait();
+                //    json = read.Result;
+                //} 
+                //var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                //if (result.status == 1)
+                //{
+                   
+                //}
+                //else
+                //{
+                //}
+
+            }
+            catch (Exception ex)
+            {
+                log.Debug("请求接口数据出错：" + ex.Message);
+                log.Debug("接口数据：" + json);
 
             }
 
