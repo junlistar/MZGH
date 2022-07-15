@@ -29,6 +29,54 @@ namespace Client.Forms.Pages.qxgl
         {
             InitializeComponent();
             _method_type = method_type;
+            LoadAllFunctions();
+        }
+
+        public void LoadAllFunctions()
+        {
+            try
+            {
+                var d = new
+                {
+                    subsys_id = "mz"
+                };
+
+                var param = $"subsys_id={d.subsys_id}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json);
+
+                if (result.status == 1)
+                {
+                    var _ds = result.data;
+                    _ds.Insert(0, new XTFunctionsVM());
+                    cbxFunctions.DataSource = _ds;
+                    cbxFunctions.DisplayMember = "func_desc";
+                    cbxFunctions.ValueMember = "func_name";
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
 
         private void AddGroup_KeyUp(object sender, KeyEventArgs e)
@@ -74,17 +122,22 @@ namespace Client.Forms.Pages.qxgl
                     txtDesc.Focus();
                     return;
                 }
-
-                //AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+                var _parent_func = "";
+                if (cbxFunctions.SelectedValue!=null)
+                {
+                    _parent_func = cbxFunctions.SelectedValue.ToString().Trim();
+                } 
+                 
                 var d = new
                 {
                     func_name = txtName.Text.Trim(),
                     func_desc = txtDesc.Text.Trim(),
                     action_flag = cbxStatus.Text == "启用" ? 1 : 0,
+                    parent_func = _parent_func,
                     subsys_id = "mz"
                 };
 
-                var param = $"subsys_id={d.subsys_id}&func_name={d.func_name}&func_desc={d.func_desc}&action_flag={d.action_flag}";
+                var param = $"subsys_id={d.subsys_id}&func_name={d.func_name}&func_desc={d.func_desc}&parent_func={d.parent_func}&action_flag={d.action_flag}";
 
                 var json = "";
                 var paramurl = string.Format($"/api/qxgl/AddFuncton?{param}");

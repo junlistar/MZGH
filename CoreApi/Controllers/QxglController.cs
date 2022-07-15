@@ -190,12 +190,12 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-        public ResponseResult<bool> AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        public ResponseResult<bool> AddFuncton(string subsys_id, string func_name, string func_desc, string parent_func, string action_flag)
         {
-            Log.Information($"AddFuncton,{subsys_id},{func_name},{func_desc},{action_flag}");
+            Log.Information($"AddFuncton,{subsys_id},{func_name},{func_desc},{parent_func},{action_flag}");
             try
             {
-                return _xTUserGroupRepository.AddFuncton(subsys_id, func_name, func_desc, action_flag);
+                return _xTUserGroupRepository.AddFuncton(subsys_id, func_name, func_desc,  parent_func, action_flag);
             }
             catch (Exception ex)
             {
@@ -203,12 +203,12 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-        public ResponseResult<bool> UpdateFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        public ResponseResult<bool> UpdateFuncton(string subsys_id, string func_name, string func_desc, string parent_func, string action_flag)
         {
-            Log.Information($"UpdateFuncton,{subsys_id},{func_name},{func_desc},{action_flag}");
+            Log.Information($"UpdateFuncton,{subsys_id},{func_name},{func_desc},{parent_func},{action_flag}");
             try
             {
-                return _xTUserGroupRepository.UpdateFuncton(subsys_id, func_name, func_desc, action_flag);
+                return _xTUserGroupRepository.UpdateFuncton(subsys_id, func_name, func_desc, parent_func, action_flag);
             }
             catch (Exception ex)
             {

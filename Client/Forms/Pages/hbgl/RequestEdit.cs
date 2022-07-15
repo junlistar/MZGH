@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
 using Client.ViewModel;
+using log4net;
 using Sunny.UI;
 
 namespace Client
@@ -19,6 +20,7 @@ namespace Client
     public partial class RequestEdit : UIForm
     {
         string _record_sn;
+        private static ILog log = LogManager.GetLogger(typeof(RequestEdit));//typeof放当前类
         public RequestEdit(string record_sn)
         {
             InitializeComponent();
@@ -64,118 +66,109 @@ namespace Client
 
         public void InitDate()
         {
-            if (!string.IsNullOrEmpty(_record_sn))
+            try
             {
-                Task<HttpResponseMessage> task = null;
-                string json = "";
-                string paramurl = string.Format($"/api/GuaHao/GetGhRecord?record_sn={_record_sn}");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
+                if (!string.IsNullOrEmpty(_record_sn))
                 {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
+                    Task<HttpResponseMessage> task = null;
+                    string json = "";
+                    string paramurl = string.Format($"/api/GuaHao/GetGhRecord?record_sn={_record_sn}");
+                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                    task.Wait();
+                    var response = task.Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var read = response.Content.ReadAsStringAsync();
+                        read.Wait();
+                        json = read.Result;
+                    }
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json);
+                    if (result.status == 1 && result.data != null)
+                    {
+                        var data = result.data;
+                        txtks.TextChanged -= txtks_TextChanged;
+                        txtzk.TextChanged -= txtzk_TextChanged;
+                        txtDoct.TextChanged -= txtDoct_TextChanged;
+
+
+                        if (!string.IsNullOrWhiteSpace(data.unit_sn))
+                        {
+                            this.txtks.TagString = data.unit_sn;
+
+                            var model = SessionHelper.units.Where(p => p.code == data.unit_sn).FirstOrDefault();
+
+                            if (model != null)
+                            {
+                                this.txtks.Text = model.name;
+                            }
+
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(data.group_sn))
+                        {
+                            this.txtzk.TagString = data.group_sn;
+
+                            var model = SessionHelper.units.Where(p => p.code == data.group_sn).FirstOrDefault();
+
+                            if (model != null)
+                            {
+                                this.txtzk.Text = model.name;
+                            }
+
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(data.doctor_sn))
+                        {
+                            this.txtDoct.TagString = data.doctor_sn;
+
+                            var model = SessionHelper.userDics.Where(p => p.code == data.doctor_sn).FirstOrDefault();
+
+                            if (model != null)
+                            {
+                                this.txtDoct.Text = model.name;
+                            }
+                        }
+                        cbxHaobie.SelectedValue = data.clinic_type;
+                        cbxRequestType.SelectedValue = data.req_type;
+                        txtTotalNum.Text = data.end_no.ToString();
+                        //cbxSXW.SelectedValue = dat
+                        txtDate.Value = data.request_date;
+
+                        if (SessionHelper.requestHours != null)
+                        {
+                            var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
+                            cbxSXW.Text = req_hour.name;
+                        } 
+                        switch (data.open_flag)
+                        {
+                            case 1:
+                                cbxOpenFlag.Text = "开放"; break;
+                            case 0:
+                                cbxOpenFlag.Text = "不开放"; break;
+                            default:
+                                cbxOpenFlag.Text = data.open_flag.ToString();
+                                break;
+                        }
+
+
+                        switch (data.window_no)
+                        {
+                            case 0: cbxWinNo.Text = "所有窗口"; break;
+                            default:
+                                data.window_no.ToString(); break;
+                        } 
+                        txtks.TextChanged += txtks_TextChanged;
+                        txtzk.TextChanged += txtzk_TextChanged;
+                        txtDoct.TextChanged += txtDoct_TextChanged; 
+                    } 
                 }
-                var result = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json);
-                if (result.status==1 && result.data != null)
-                {
-                    var data = result.data;
-                    txtks.TextChanged -= txtks_TextChanged;
-                    txtzk.TextChanged -= txtzk_TextChanged;
-                    txtDoct.TextChanged -= txtDoct_TextChanged;
-
-
-                    if (!string.IsNullOrWhiteSpace(data.unit_sn))
-                    {
-                        this.txtks.TagString = data.unit_sn;
-
-                        var model = SessionHelper.units.Where(p => p.code == data.unit_sn).FirstOrDefault();
-
-                        if (model != null)
-                        {
-                            this.txtks.Text = model.name;
-                        }
-
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(data.group_sn))
-                    {
-                        this.txtzk.TagString = data.group_sn;
-
-                        var model = SessionHelper.units.Where(p => p.code == data.group_sn).FirstOrDefault();
-
-                        if (model != null)
-                        {
-                            this.txtzk.Text = model.name;
-                        }
-
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(data.doctor_sn))
-                    {
-                        this.txtDoct.TagString = data.doctor_sn;
-
-                        var model = SessionHelper.userDics.Where(p => p.code == data.doctor_sn).FirstOrDefault();
-
-                        if (model != null)
-                        {
-                            this.txtDoct.Text = model.name;
-                        }
-                    }
-                    cbxHaobie.SelectedValue = data.clinic_type;
-                    cbxRequestType.SelectedValue = data.req_type;
-                    txtTotalNum.Text = data.end_no.ToString();
-                    //cbxSXW.SelectedValue = dat
-                    txtDate.Value = data.request_date;
-                     
-                    if (SessionHelper.requestHours != null)
-                    {
-                        var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
-                        cbxSXW.Text = req_hour.name;
-                    }
-                    //switch (data.ampm)
-                    //{
-                    //    case "a": cbxSXW.Text = "上午"; break;
-                    //    case "m": cbxSXW.Text = "中午"; break;
-                    //    case "p": cbxSXW.Text = "下午"; break;
-                    //    case "e": cbxSXW.Text = "夜间"; break;
-                    //    default:
-                    //        cbxSXW.Text = data.ampm;
-                    //        break;
-                    //}
-                    switch (data.open_flag)
-                    {
-                        case 1:
-                            cbxOpenFlag.Text = "开放"; break;
-                        case 0:
-                            cbxOpenFlag.Text = "不开放"; break;
-                        default:
-                            cbxOpenFlag.Text = data.open_flag.ToString();
-                            break;
-                    }
-
-                  
-                    switch (data.window_no)
-                    {
-                        case 0: cbxWinNo.Text = "所有窗口"; break;
-                        default:
-                            data.window_no.ToString(); break;
-                    }
-
-
-
-
-                    txtks.TextChanged += txtks_TextChanged;
-                    txtzk.TextChanged += txtzk_TextChanged;
-                    txtDoct.TextChanged += txtDoct_TextChanged;
-
-                }
-
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
 
@@ -488,7 +481,7 @@ namespace Client
 
             //判断是否存在
             Task<HttpResponseMessage> task = null;
-             
+
             var d = new
             {
                 record_sn = _record_sn,

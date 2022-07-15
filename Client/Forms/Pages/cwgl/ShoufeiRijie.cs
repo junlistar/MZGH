@@ -51,7 +51,7 @@ namespace Client.Forms.Pages.cwgl
             pnlReport.Text = "选择日期时间，进行预览和结算操作";
 
         }
-         
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -67,7 +67,7 @@ namespace Client.Forms.Pages.cwgl
                     opera = SessionHelper.uservm.user_mi,
                     report_date = txtDate.Value.ToShortDateString(),
                     mz_dept_no = "1"
-                }; 
+                };
 
                 var param = $"opera={d.opera}&report_date={d.report_date}";
 
@@ -92,7 +92,7 @@ namespace Client.Forms.Pages.cwgl
                     cbxStatus.Items.Add("未结");
                     foreach (var item in result.data)
                     {
-                        if (item==null)
+                        if (item == null)
                         {
                             cbxStatus.Items.Add("未结");
                         }
@@ -101,23 +101,24 @@ namespace Client.Forms.Pages.cwgl
                             var dt_text = Convert.ToDateTime(item).ToString("yyyy-MM-dd HH:mm:ss");
                             cbxStatus.Items.Add(dt_text);
                         }
-                    } 
-                     cbxStatus.SelectedIndex = cbxStatus.Items.Count-1;
-                  
+                    }
+                    cbxStatus.SelectedIndex = cbxStatus.Items.Count - 1;
+
                 }
                 else
                 {
                     UIMessageTip.ShowError(result.message);
                     log.Error(result.message);
-                } 
+                }
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
-         
+
 
         public string FormID { get; set; } = "PRDT"; //单据ID
         //private string RptNo, RptName; //报表编号、名称
@@ -129,38 +130,46 @@ namespace Client.Forms.Pages.cwgl
         //初始化报表
         private void InitializeReport(string RptMode)
         {
-            Task<HttpResponseMessage> task = null; var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
+            try
+            {
+                Task<HttpResponseMessage> task = null; var json = "";
+                var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
 
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            else
-            {
-                log.Info(response.ReasonPhrase);
-            }
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                else
+                {
+                    log.Info(response.ReasonPhrase);
+                }
 
-            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
+                var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
 
-            if (resp.status == 1)
-            {
-                rdvm = resp.data;
+                if (resp.status == 1)
+                {
+                    rdvm = resp.data;
+                }
+                else
+                {
+                    MessageBox.Show(resp.message);
+                    log.Error(resp.message);
+                    return;
+                }
+                RegisterDesignerEvents();
+                DesignReport(RptMode);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(resp.message);
-                log.Error(resp.message);
-                return;
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-            RegisterDesignerEvents();
-            DesignReport(RptMode);
         }
         //菜单事件注册
         private void RegisterDesignerEvents()
@@ -176,36 +185,44 @@ namespace Client.Forms.Pages.cwgl
         //保存菜单：委托函数
         private void DesignerSettings_CustomSaveReport(object sender, OpenSaveReportEventArgs e)
         {
-            //SaveReport(e.Report);
-            using (MemoryStream stream = new MemoryStream())
+            try
             {
-                //解决多次保存问题
-                Config.DesignerSettings.CustomSaveDialog -= new OpenSaveDialogEventHandler(DesignerSettings_CustomSaveDialog);
-                Config.DesignerSettings.CustomSaveReport -= new OpenSaveReportEventHandler(DesignerSettings_CustomSaveReport);
-
-                //保存 
-                TargetReport.Save(stream);
-
-                #region 接口方式
-
-                var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
-
-                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={_report_code}&report_com={report_data}");
-
-                log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
-                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
-
-                if (result.status == 1)
+                //SaveReport(e.Report);
+                using (MemoryStream stream = new MemoryStream())
                 {
-                    log.Info("保存报表成功");
-                }
-                else
-                {
-                    log.Error(result.message);
-                }
-                #endregion
+                    //解决多次保存问题
+                    Config.DesignerSettings.CustomSaveDialog -= new OpenSaveDialogEventHandler(DesignerSettings_CustomSaveDialog);
+                    Config.DesignerSettings.CustomSaveReport -= new OpenSaveReportEventHandler(DesignerSettings_CustomSaveReport);
 
+                    //保存 
+                    TargetReport.Save(stream);
+
+                    #region 接口方式
+
+                    var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
+
+                    string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={_report_code}&report_com={report_data}");
+
+                    log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                    string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
+
+                    if (result.status == 1)
+                    {
+                        log.Info("保存报表成功");
+                    }
+                    else
+                    {
+                        log.Error(result.message);
+                    }
+                    #endregion
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
         Report TargetReport;
@@ -235,7 +252,7 @@ namespace Client.Forms.Pages.cwgl
                         if (result.status == 1)
                         {
                             foreach (var item in result.data)
-                            { 
+                            {
                                 if (item.param_name == "report_date")
                                 {
                                     sql = sql.Replace(":" + item.param_name, "'1900-01-01 00:00:00'");
@@ -247,26 +264,26 @@ namespace Client.Forms.Pages.cwgl
                                 else if (item.param_name == "mz_dept_no")
                                 {
                                     sql = sql.Replace(":" + item.param_name, "'1'");
-                                } 
+                                }
                             }
                         }
                         var report_date = cbxStatus.SelectedText;
                         var cash_date = txtDate.Text;
-                        if (report_date=="未结")
+                        if (report_date == "未结")
                         {
                             report_date = "1900-01-01 00:00:00";
                         }
                         else
                         {
                             cash_date = "6008-01-01";
-                        } 
-                         
+                        }
+
                         paramurl = string.Format($"/api/cwgl/GetMzsfDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&cash_date={cash_date}");
-                       
+
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
-                        if (ds_result.status == 1 )
+                        if (ds_result.status == 1)
                         {
                             if (ds_result.data != "[]")
                             {
@@ -286,7 +303,7 @@ namespace Client.Forms.Pages.cwgl
                                 {
                                     btnSave.Enabled = true;
                                 }
-                                
+
                                 previewControl1.Show();
                                 TargetReport.Preview = previewControl1;
                                 TargetReport.Prepare();
@@ -295,9 +312,9 @@ namespace Client.Forms.Pages.cwgl
                             }
                             else
                             {
-                                MessageBox.Show("该报表无数据"); 
+                                MessageBox.Show("该报表无数据");
                             }
-                            
+
                         }
                         else
                         {
@@ -325,14 +342,15 @@ namespace Client.Forms.Pages.cwgl
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-            } 
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void uiSymbolButton5_Click(object sender, EventArgs e)
         {
 
-            
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -342,8 +360,8 @@ namespace Client.Forms.Pages.cwgl
                 var d = new
                 {
                     opera = SessionHelper.uservm.user_mi,
-                    cash_date = txtDate.Text, 
-                }; 
+                    cash_date = txtDate.Text,
+                };
                 var param = $"opera={d.opera}&cash_date={d.cash_date}";
 
                 var json = "";
@@ -361,11 +379,11 @@ namespace Client.Forms.Pages.cwgl
                     json = read.Result;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-               
+
                 if (result.status == 1 && result.data)
                 {
                     UIMessageTip.ShowOk("保存成功");
-                      
+
                     //查询日结记录
                     GetMzsfReport();
                     previewControl1.Hide();
@@ -380,7 +398,8 @@ namespace Client.Forms.Pages.cwgl
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -398,7 +417,7 @@ namespace Client.Forms.Pages.cwgl
 
         private void txtDate_ValueChanged(object sender, DateTime value)
         {
-            
+
         }
 
         private void btnPrint_Click(object sender, EventArgs e)

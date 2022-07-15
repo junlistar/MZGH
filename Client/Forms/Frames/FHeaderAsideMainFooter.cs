@@ -95,7 +95,8 @@ namespace Client
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-                Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
+                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
 
             }
             else
@@ -181,7 +182,11 @@ namespace Client
                     parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
                     if (function_list.Where(p => p.func_desc.Trim() == "用户管理").Count() > 0)
                     {
-                        Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1501);
+                        Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "菜单管理").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                     }
                 }
 
@@ -239,6 +244,8 @@ namespace Client
                     case 1202:
                         obj = new ShoufeiRijie(); break;
                     case 1501:
+                        obj = new FunctionList(); break;
+                    case 1502:
                         obj = new UserManage(); break;
                     default:
                         break;

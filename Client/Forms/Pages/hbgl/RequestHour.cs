@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http; 
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
@@ -39,22 +39,30 @@ namespace Client.Forms.Pages.hbgl
 
         public void GetData()
         {
-            //获取挂号时间段
-            var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
-
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
+                //获取挂号时间段
+                var json = "";
+                var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
             }
-            SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void uiSymbolButton2_Click(object sender, EventArgs e)
@@ -88,7 +96,7 @@ namespace Client.Forms.Pages.hbgl
                 end_hour = cbxHour2.Text,
 
             };
-            if (string.IsNullOrWhiteSpace(d.code)|| string.IsNullOrWhiteSpace(d.name) || string.IsNullOrWhiteSpace(d.start_hour) || string.IsNullOrWhiteSpace(d.end_hour))
+            if (string.IsNullOrWhiteSpace(d.code) || string.IsNullOrWhiteSpace(d.name) || string.IsNullOrWhiteSpace(d.start_hour) || string.IsNullOrWhiteSpace(d.end_hour))
             {
                 UIMessageTip.ShowError("请将数据填写完整！");
                 return;
@@ -96,11 +104,11 @@ namespace Client.Forms.Pages.hbgl
 
 
             try
-            { 
+            {
                 int hour1 = int.Parse(d.start_hour);
                 int hour2 = int.Parse(d.end_hour);
 
-                if (hour1>=hour2)
+                if (hour1 >= hour2)
                 {
                     UIMessageTip.ShowWarning("开始小时数必须小于等于结束小时数！");
                     return;
@@ -135,7 +143,8 @@ namespace Client.Forms.Pages.hbgl
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -152,7 +161,7 @@ namespace Client.Forms.Pages.hbgl
                 return;
             }
 
-            if (!UIMessageDialog.ShowAskDialog(this,"确定要进行删除操作吗？"))
+            if (!UIMessageDialog.ShowAskDialog(this, "确定要进行删除操作吗？"))
             {
                 return;
             }
@@ -189,7 +198,8 @@ namespace Client.Forms.Pages.hbgl
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 

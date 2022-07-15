@@ -82,18 +82,6 @@ namespace Client
 
             this.dtpGhrq.ValueChanged += dtpGhrq_ValueChanged;
 
-            //this.uiButton1.Style = UIStyle.Orange;
-
-            //加载身份证读卡器（精伦）
-            //log.Debug("启动身份证读卡器（精伦）");
-            //timer1.Interval = 3000;
-            //timer1.Start();
-
-
-            //ControlHelper.InitPanelScroll(gbxUnits);
-            this.Focus();
-
-
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]");
             uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text + "[F2]");
@@ -107,108 +95,96 @@ namespace Client
         /// </summary>
         public void InitUIText()
         {
-            cur_color = (this as UIPage).RectColor;
-
-            //this.gbxUnits.RectColor = Color.Transparent;
-
-            //gbxUnits.Controls.Clear();
-
-            isBreadHandleSet = true;
-            uiBreadcrumb2.ItemIndex = 0;
-            clinicList = null;
-
-            patient_id = "";
-            InitUserInfo();
-
-            lblTitle.ForeColor = cur_color;
-            lblMsg.ForeColor = Color.Red;
-            gbxUnits.ForeColor = cur_color;
-            pnlHours.ForeColor = Color.Red;//必须要设置这个值，不然给里面的按钮设置颜色不起作用
-
-            ////初始化刷卡方式按钮样式
-            //btnCika.FillColor = cur_color;
-            //btnSFZ.FillColor = Color.LightSteelBlue;
-            //btnYBK.FillColor = Color.LightSteelBlue;
-
-            int currentHour = DateTime.Now.Hour;
-            pnlHours.Clear();
-            var hourslist = SessionHelper.requestHours.OrderBy(p => p.start_hour).ToList();
-            //foreach (var item in hourslist)
-            for (int i = 0; i < hourslist.Count; i++)
+            try
             {
-                UIButton btn1 = new UIButton();
-                btn1.Style = UIStyle.Green;
-                btn1.StyleCustomMode = true;
-                btn1.Text = hourslist[i].name;
-                btn1.TagString = hourslist[i].code;
-                btn1.Width = 86;
-                btn1.Height = 31;
+                cur_color = (this as UIPage).RectColor;
+                isBreadHandleSet = true;
+                uiBreadcrumb2.ItemIndex = 0;
+                clinicList = null;
 
-                //if (currentHour < hourslist[i].start_hour)
-                //{
-                //    btn1.FillColor = cur_color;
-                //}
-                //else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
-                //{
-                //    btn1.FillColor = cur_color;
-                //}
-                if (i == 0)
-                {
-                    if (currentHour < hourslist[i].start_hour)
-                    {
-                        btn1.FillColor = Color.FromArgb(230, 80, 80);
-                    }
-                    else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
-                    {
-                        btn1.FillColor = Color.FromArgb(230, 80, 80);
-                    }
-                }
-                else if (i > 0 && i < hourslist.Count)
-                {
-                    if (currentHour < hourslist[i].start_hour && currentHour >= hourslist[i - 1].end_hour)
-                    {
-                        btn1.FillColor = Color.FromArgb(230, 80, 80);
-                    }
-                    else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
-                    {
-                        btn1.FillColor = Color.FromArgb(230, 80, 80);
-                    }
-                }
+                patient_id = "";
+                InitUserInfo();
 
-                //if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
-                //{
-                //    btn1.FillColor = cur_color;
-                //}
-                btn1.Click += Btn1_Click;
-                pnlHours.Add(btn1);
+                lblTitle.ForeColor = cur_color;
+                lblMsg.ForeColor = Color.Red;
+                gbxUnits.ForeColor = cur_color;
+
+                int currentHour = DateTime.Now.Hour;
+                pnlHours.Clear();
+                var hourslist = SessionHelper.requestHours.OrderBy(p => p.start_hour).ToList();
+                //foreach (var item in hourslist)
+                for (int i = 0; i < hourslist.Count; i++)
+                {
+                    UIButton btn1 = new UIButton();
+                    btn1.Style = UIStyle.Green;
+                    btn1.StyleCustomMode = true;
+                    btn1.Text = hourslist[i].name;
+                    btn1.TagString = hourslist[i].code;
+                    btn1.Width = 86;
+                    btn1.Height = 31;
+
+                    if (i == 0)
+                    {
+                        if (currentHour < hourslist[i].start_hour)
+                        {
+                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                        }
+                        else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                        {
+                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                        }
+                    }
+                    else if (i > 0 && i < hourslist.Count)
+                    {
+                        if (currentHour < hourslist[i].start_hour && currentHour >= hourslist[i - 1].end_hour)
+                        {
+                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                        }
+                        else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
+                        {
+                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                        }
+                    }
+
+                    btn1.Click += Btn1_Click;
+                    pnlHours.Add(btn1);
+                }
+                pnlHours.RectColor = Color.Transparent;
+
+                ////初始化明天，后天按钮
+                //btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
+                //btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
+
+                this.dtpGhrq.Value = DateTime.Now;
+
+                request_key = "";
+                gbxUnits.Text = "选择科室";
             }
-            //pnlHours.AutoScroll = false;
-            //pnlHours.ForeColor = Color.Transparent;
-            pnlHours.RectColor = Color.Transparent;
-
-
-
-            //初始化明天，后天按钮
-            btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
-            btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
-
-            this.dtpGhrq.Value = DateTime.Now;
-
-            request_key = "";
-            gbxUnits.Text = "选择科室";
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void Btn1_Click(object sender, EventArgs e)
         {
-            foreach (var control in pnlHours.FlowLayoutPanel.Controls)
+            try
             {
-                var cc = control as UIButton;
-                cc.FillColor = Color.FromArgb(110, 190, 40);
+                foreach (var control in pnlHours.FlowLayoutPanel.Controls)
+                {
+                    var cc = control as UIButton;
+                    cc.FillColor = Color.FromArgb(110, 190, 40);
+                }
+                var btn = sender as UIButton;
+                btn.FillColor = Color.FromArgb(230, 80, 80); ;
+                LoadRequestInfo();
             }
-            var btn = sender as UIButton;
-            btn.FillColor = Color.FromArgb(230, 80, 80); ;
-            LoadRequestInfo();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void btnEditUser_Click(object sender, EventArgs e)
@@ -279,56 +255,41 @@ namespace Client
         public void LoadRequestInfo()
         {
 
-            string dh_data = this.dtpGhrq.Text;
-
-            string ampm = "";
-
-            foreach (var control in pnlHours.FlowLayoutPanel.Controls)
-            {
-                var cc = control as UIButton;
-                if (cc.FillColor == Color.FromArgb(230, 80, 80))
-                {
-                    ampm = cc.TagString;
-                    break;
-                }
-            }
-            //if (btnAM.FillColor == cur_color)
-            //{
-            //    ampm = "a";
-            //}
-            //else if (btnPM.FillColor == cur_color)
-            //{
-            //    ampm = "p";
-            //}
-            //else if (btnMid.FillColor == cur_color)
-            //{
-            //    ampm = "m";
-            //}
-            //else if (btnEve.FillColor == cur_color)
-            //{
-            //    ampm = "e";
-            //}
-
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-
-            var d = new
-            {
-                request_date = dh_data,
-                unit_sn = "",
-                clinic_type = "",
-                doctor_sn = " ",
-                group_sn = " ",
-                req_type = "",
-                ampm = ampm,
-                win_no = "",
-            };
-            string paramurl = string.Format($"/api/GuaHao/GetGhRequest?request_date={d.request_date}&ampm={d.ampm}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
             try
             {
+                string dh_data = this.dtpGhrq.Text;
+
+                string ampm = "";
+
+                foreach (var control in pnlHours.FlowLayoutPanel.Controls)
+                {
+                    var cc = control as UIButton;
+                    if (cc.FillColor == Color.FromArgb(230, 80, 80))
+                    {
+                        ampm = cc.TagString;
+                        break;
+                    }
+                }
+
+
+                Task<HttpResponseMessage> task = null;
+                string json = "";
+
+                var d = new
+                {
+                    request_date = dh_data,
+                    unit_sn = "",
+                    clinic_type = "",
+                    doctor_sn = " ",
+                    group_sn = " ",
+                    req_type = "",
+                    ampm = ampm,
+                    win_no = "",
+                };
+                string paramurl = string.Format($"/api/GuaHao/GetGhRequest?request_date={d.request_date}&ampm={d.ampm}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -339,35 +300,35 @@ namespace Client
                     read.Wait();
                     json = read.Result;
                 }
-            }
+
+                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<GHRequestVM>>>(json);
+                if (listApi.data == null)
+                {
+                    return;
+                }
+                //整理数据
+                requestDic = new Dictionary<string, List<GHRequestVM>>();
+                foreach (var item in listApi.data)
+                {
+
+                    if (!requestDic.Keys.Contains(item.unit_name))
+                    {
+                        List<GHRequestVM> list = new List<GHRequestVM>();
+                        list.Add(item);
+                        requestDic.Add(item.unit_name, list);
+                    }
+                    else
+                    {
+                        requestDic[item.unit_name].Add(item);
+                    }
+                }
+                BindUnit(requestDic);
+            } 
             catch (Exception ex)
             {
-                log.Error("请求接口数据出错：" + ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-
-            var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<GHRequestVM>>>(json);
-            if (listApi.data == null)
-            {
-                return;
-            }
-            //整理数据
-            requestDic = new Dictionary<string, List<GHRequestVM>>();
-            foreach (var item in listApi.data)
-            {
-
-                if (!requestDic.Keys.Contains(item.unit_name))
-                {
-                    List<GHRequestVM> list = new List<GHRequestVM>();
-                    list.Add(item);
-                    requestDic.Add(item.unit_name, list);
-                }
-                else
-                {
-                    requestDic[item.unit_name].Add(item);
-                }
-            }
-            BindUnit(requestDic);
-
         }
 
         public void BindUnit(Dictionary<string, List<GHRequestVM>> source)
@@ -654,10 +615,11 @@ namespace Client
 
                     log.Error(result.message);
                 }
-            }
+            } 
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
             return false;
         }
@@ -696,39 +658,7 @@ namespace Client
                         break;
                     }
                 }
-                ////如果选择的是上午
-                //if (btnAM.FillColor == cur_color)
-                //{
-                //    if (DateTime.Now.Hour > 12)
-                //    {
-                //        isWrong = true; 
-                //    }
-                //}
-                //else if (btnMid.FillColor == cur_color)
-                //{
-                //    //如果选择的是中午
-                //    if (DateTime.Now.Hour > 14)
-                //    {
-                //        isWrong = true;
-                //    }
-                //}
-                //else if (btnPM.FillColor == cur_color)
-                //{
-                //    //如果选择的是下午
-                //    if (DateTime.Now.Hour > 17)
-                //    {
-                //        isWrong = true;
-                //    }
-                //}
-                //else if (btnEve.FillColor == cur_color)
-                //{
-                //    //如果选择的是夜间
-                //    if (DateTime.Now.Hour > 21)
-                //    {
-                //        isWrong = true;
-                //    }
-                //}
-
+                 
             }
             if (isWrong)
             {
@@ -947,7 +877,7 @@ namespace Client
         }
 
         public void SaveCardData(UserInfoResponseModel model)
-        { 
+        {
             Task<HttpResponseMessage> task = null;
             string json = "";
 
@@ -968,7 +898,7 @@ namespace Client
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);  
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
             }
             catch (Exception ex)
             {
@@ -980,24 +910,26 @@ namespace Client
         }
 
         public void SaveCardDataAll(string jsonStr)
-        {   
+        {
 
             //更新医保其他信息  
             string paramurl = string.Format($"/api/user/UpdateYbkInfoAll");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {  
+            {
                 HttpContent httpContent = new StringContent(jsonStr);
 
                 SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent);
-            }
+           
+            } 
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message); 
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
 
-        }
+}
 
 
 
@@ -1341,30 +1273,7 @@ namespace Client
 
                     lblstreet.Text = userInfo.home_street;
                     lblsfz.Text = userInfo.hic_no; ;
-
-                    ////自动设置对应卡类型按钮样式
-                    //if (barcode == userInfo.hic_no)
-                    //{
-                    //    //初始化刷卡方式按钮样式
-                    //    btnCika.FillColor = Color.LightSteelBlue;
-                    //    btnSFZ.FillColor = cur_color;
-                    //    btnYBK.FillColor = Color.LightSteelBlue;
-                    //}
-                    //else if (barcode == userInfo.social_no)
-                    //{
-                    //    //初始化刷卡方式按钮样式
-                    //    btnCika.FillColor = Color.LightSteelBlue;
-                    //    btnSFZ.FillColor = Color.LightSteelBlue;
-                    //    btnYBK.FillColor = cur_color;
-                    //}
-                    //else
-                    //{
-                    //    //初始化刷卡方式按钮样式
-                    //    btnCika.FillColor = cur_color;
-                    //    btnSFZ.FillColor = Color.LightSteelBlue;
-                    //    btnYBK.FillColor = Color.LightSteelBlue;
-                    //}
-
+ 
                     if (YBHelper.currentYBInfo != null)
                     {
                         //保存用户的医保信息
@@ -1419,17 +1328,12 @@ namespace Client
                     }
                 }
 
-            }
+            } 
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
-            }
-            finally
-            {
-
-            }
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            } 
 
         }
 

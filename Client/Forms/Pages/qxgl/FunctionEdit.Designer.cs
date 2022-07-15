@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxStatus = new Sunny.UI.UIComboBox();
+            this.cbxFunctions = new Sunny.UI.UIComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -82,18 +84,17 @@
             this.uiLine1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.uiLine1.Location = new System.Drawing.Point(3, 267);
+            this.uiLine1.Location = new System.Drawing.Point(3, 349);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(582, 29);
+            this.uiLine1.Size = new System.Drawing.Size(615, 29);
             this.uiLine1.Style = Sunny.UI.UIStyle.Red;
             this.uiLine1.TabIndex = 10;
             this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnCancel
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnCancel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -101,14 +102,14 @@
             this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(439, 302);
+            this.btnCancel.Location = new System.Drawing.Point(438, 384);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnCancel.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btnCancel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.Size = new System.Drawing.Size(135, 46);
+            this.btnCancel.Size = new System.Drawing.Size(138, 46);
             this.btnCancel.Style = Sunny.UI.UIStyle.Red;
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61534;
@@ -120,8 +121,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.btnSave.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -129,14 +129,14 @@
             this.btnSave.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSave.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(300, 302);
+            this.btnSave.Location = new System.Drawing.Point(299, 384);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.btnSave.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btnSave.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSave.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSave.Size = new System.Drawing.Size(131, 46);
+            this.btnSave.Size = new System.Drawing.Size(133, 46);
             this.btnSave.Style = Sunny.UI.UIStyle.Green;
             this.btnSave.StyleCustomMode = true;
             this.btnSave.TabIndex = 11;
@@ -184,7 +184,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label3.Location = new System.Drawing.Point(78, 211);
+            this.label3.Location = new System.Drawing.Point(78, 268);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 31);
             this.label3.TabIndex = 15;
@@ -203,7 +203,7 @@
             "不启用"});
             this.cbxStatus.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cbxStatus.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.cbxStatus.Location = new System.Drawing.Point(219, 206);
+            this.cbxStatus.Location = new System.Drawing.Point(219, 263);
             this.cbxStatus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxStatus.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxStatus.Name = "cbxStatus";
@@ -215,11 +215,48 @@
             this.cbxStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxStatus.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbxFunctions
+            // 
+            this.cbxFunctions.DataSource = null;
+            this.cbxFunctions.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxFunctions.FillColor = System.Drawing.Color.White;
+            this.cbxFunctions.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.cbxFunctions.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxFunctions.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.cbxFunctions.Items.AddRange(new object[] {
+            "启用",
+            "不启用"});
+            this.cbxFunctions.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.cbxFunctions.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.cbxFunctions.Location = new System.Drawing.Point(219, 202);
+            this.cbxFunctions.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxFunctions.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxFunctions.Name = "cbxFunctions";
+            this.cbxFunctions.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxFunctions.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.cbxFunctions.Size = new System.Drawing.Size(296, 41);
+            this.cbxFunctions.Style = Sunny.UI.UIStyle.Red;
+            this.cbxFunctions.TabIndex = 18;
+            this.cbxFunctions.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxFunctions.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.label4.Location = new System.Drawing.Point(78, 207);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(134, 31);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "父级菜单：";
+            // 
             // FunctionEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(588, 363);
+            this.ClientSize = new System.Drawing.Size(621, 456);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.Controls.Add(this.cbxFunctions);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.cbxStatus);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtDesc);
@@ -257,5 +294,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private Sunny.UI.UIComboBox cbxStatus;
+        private Sunny.UI.UIComboBox cbxFunctions;
+        private System.Windows.Forms.Label label4;
     }
 }

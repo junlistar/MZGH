@@ -115,7 +115,7 @@ namespace Data.Repository
 
         }
 
-        public bool AddFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        public bool AddFuncton(string subsys_id, string func_name, string func_desc,string parent_func, string action_flag)
         {
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
@@ -151,6 +151,7 @@ namespace Data.Repository
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_name", func_name);
                     para.Add("@func_desc", func_desc);
+                    para.Add("@parent_func", parent_func);
                     para.Add("@action_flag", action_flag);
 
                     connection.Execute(sql, para, transaction);
@@ -168,7 +169,7 @@ namespace Data.Repository
             }  
         }
 
-        public bool UpdateFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
+        public bool UpdateFuncton(string subsys_id, string func_name, string func_desc, string parent_func, string action_flag)
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
@@ -183,7 +184,7 @@ namespace Data.Repository
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_desc", func_desc);
                     para.Add("@func_name", func_name);
-                   int count = connection.QueryFirstOrDefault<int>(sql, para, transaction);
+                    int count = connection.QueryFirstOrDefault<int>(sql, para, transaction);
                     if (count > 0)
                     {
                         throw new Exception("存在相同功能描述！");
@@ -194,6 +195,7 @@ namespace Data.Repository
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_name", func_name);
                     para.Add("@func_desc", func_desc);
+                    para.Add("@parent_func", parent_func);
                     para.Add("@action_flag", action_flag);
 
                     connection.Execute(sql, para, transaction);

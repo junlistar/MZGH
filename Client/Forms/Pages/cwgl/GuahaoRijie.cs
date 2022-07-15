@@ -108,13 +108,14 @@ namespace Client.Forms.Pages.cwgl
                 {
                     UIMessageTip.ShowError(result.message);
                     log.Error(result.message);
-                } 
+                }
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-        }
+}
 
          
 
@@ -313,8 +314,9 @@ namespace Client.Forms.Pages.cwgl
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-            } 
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void uiSymbolButton5_Click(object sender, EventArgs e)

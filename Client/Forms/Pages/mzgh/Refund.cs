@@ -120,7 +120,7 @@ namespace Client
                     }
                     dgvDeposit.Init();
                     dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                    this.dgvDeposit.DataSource = showlist; 
+                    this.dgvDeposit.DataSource = showlist;
                     this.dgvDeposit.AutoResizeColumns();
                 }
             }
@@ -152,7 +152,7 @@ namespace Client
             try
             {
                 GhDepositVM vm = new GhDepositVM();
-                
+
                 vm.sname = row.Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "已退号")
                 {
@@ -237,7 +237,7 @@ namespace Client
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
 
-                if (result.status==1)
+                if (result.status == 1)
                 {
                     var list = result.data.Where(p => p.times == vm.times.ToString() && p.visit_flag == "1").ToList();
                     if (list != null && list.Count > 0)
@@ -525,7 +525,7 @@ namespace Client
                     //dgvDeposit.Init();
                     this.dgvDeposit.DataSource = viewlist;
                     this.dgvDeposit.AutoResizeColumns();
-                    dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single; 
+                    dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
                 else
                 {
@@ -716,19 +716,19 @@ namespace Client
                     BindGridView();
                 }
 
-
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
         private void dgvDeposit_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {
-             
+
             DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
 
-            if (dr.Cells["visit_flag_name"].Value!=null && dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
+            if (dr.Cells["visit_flag_name"].Value != null && dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
             {
                 // 设置单元格的背景色
                 //dr.DefaultCellStyle.BackColor = Color.Yellow;
@@ -815,18 +815,26 @@ namespace Client
 
         private void dgvDeposit_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
-            if (dgvDeposit.SelectedIndex != -1)
+            try
             {
-                var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
+                //MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
+                if (dgvDeposit.SelectedIndex != -1)
+                {
+                    var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
 
-                var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
+                    var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
 
-                var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-                var patient_id = lblhidid.Text;
-                //RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
-                DetailPayList payList = new DetailPayList(userInfo, datestr, patient_id, times);
-                payList.ShowDialog();
+                    var datestr = dtprq.Value.ToString("yyyy-MM-dd");
+                    var patient_id = lblhidid.Text;
+                    //RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
+                    DetailPayList payList = new DetailPayList(userInfo, datestr, patient_id, times);
+                    payList.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 

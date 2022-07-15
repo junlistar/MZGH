@@ -511,7 +511,8 @@ namespace Client
             }
             catch (Exception ex)
             {
-                log.Debug(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
             finally
             {

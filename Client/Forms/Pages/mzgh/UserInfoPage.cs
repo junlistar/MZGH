@@ -274,10 +274,10 @@ namespace Client.Forms.Pages
 
 
 
-           // dgv_district.KeyDown += Dgv_district_KeyDown;
+            // dgv_district.KeyDown += Dgv_district_KeyDown;
             // dgv_zhiye.KeyDown += Dgv_zhiye_KeyDown;
 
-            
+
         }
 
         private void cbxhm_SelectedIndexChanged(object sender, EventArgs e)
@@ -552,7 +552,7 @@ namespace Client.Forms.Pages
 
         public void BindUserInfo(PatientVM item)
         {
-           // this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
+            // this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
             // this.txtZhiye.TextChanged -= txtZhiye_TextChanged;
 
             //txtId.Text = item.patient_id.Substring(3, 7);
@@ -566,7 +566,7 @@ namespace Client.Forms.Pages
             {
                 this.txt_birth.Text = item.birthday.Value.ToShortDateString();
             }
-         
+
             this.txtTel.Text = item.home_tel;
 
             //if (!string.IsNullOrWhiteSpace(item.home_district))
@@ -640,7 +640,7 @@ namespace Client.Forms.Pages
             //合同单位contract_code
 
 
-           // this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
+            // this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             //  this.txtZhiye.TextChanged += txtZhiye_TextChanged;
         }
 
@@ -665,7 +665,7 @@ namespace Client.Forms.Pages
             //txtemployer_name.Text = "";
             // txtZhiye.Text = "";
             ybk_psn_cert_type.Text = "";
-           // txthomedistrict.Text = "";
+            // txthomedistrict.Text = "";
             sfz_home_address.Text = "";
 
             //this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
@@ -853,7 +853,7 @@ namespace Client.Forms.Pages
                     dgv_patient_sfz.DataSource = _source;
                     dgv_patient_sfz.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
-                    if (_source.Count>0)
+                    if (_source.Count > 0)
                     {
                         BindRelatedInfo(0);
                     }
@@ -942,7 +942,8 @@ namespace Client.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error("请求接口数据出错：" + ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -953,7 +954,7 @@ namespace Client.Forms.Pages
 
                 if (e.RowIndex != -1)
                 {
-                    BindRelatedInfo(e.RowIndex); 
+                    BindRelatedInfo(e.RowIndex);
                 }
             }
             catch (Exception ex)
@@ -966,21 +967,29 @@ namespace Client.Forms.Pages
 
         public void BindRelatedInfo(int row_index)
         {
-            if (row_index==-1)
+            try
             {
-                return;
+
+                if (row_index == -1)
+                {
+                    return;
+                }
+
+                var sfz_id = dgv_patient_sfz.Rows[row_index].Cells["sfz_id"].Value.ToString();
+                var patient_id = dgv_patient_sfz.Rows[row_index].Cells["patient_id"].Value.ToString();
+
+                //查询数据库身份证信息
+                BindSfzInfo(patient_id);
+
+                //查询patient_id 关联挂号记录
+                GetRecordByPatientId(patient_id);
+
             }
-
-            var sfz_id = dgv_patient_sfz.Rows[row_index].Cells["sfz_id"].Value.ToString();
-            var patient_id = dgv_patient_sfz.Rows[row_index].Cells["patient_id"].Value.ToString();
-
-            //查询数据库身份证信息
-            BindSfzInfo(patient_id);
-
-            //查询patient_id 关联挂号记录
-            GetRecordByPatientId(patient_id);
-             
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
 
@@ -1013,7 +1022,7 @@ namespace Client.Forms.Pages
 
         public void GetYbkDetailInfo(string certno)
         {
-            //获取数据   UserInfoResponseModel> GetYbkDetailInfo(string certno)
+            //获取数据   
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/user/GetYbkDetailInfo?certno={certno}");
@@ -1036,7 +1045,7 @@ namespace Client.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<UserInfoResponseModel>>(json);
                 if (result.status == 1)
                 {
-                    if (result.data!=null && result.data.insuinfo!=null)
+                    if (result.data != null && result.data.insuinfo != null)
                     {
                         dgv_cbxx.DataSource = result.data.insuinfo;
                         dgv_cbxx.AutoResizeColumns();
@@ -1047,21 +1056,20 @@ namespace Client.Forms.Pages
                         dgv_sfxx.DataSource = result.data.idetinfo;
                         dgv_sfxx.AutoResizeColumns();
                         dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                    }  
+                    }
                 }
                 else
                 {
                     //MessageBox.Show("没有查到用户数据");
                 }
 
-            }
+            } 
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-        }
+}
 
 
         public void GetRecordByPatientId(string patient_id)
@@ -1084,12 +1092,12 @@ namespace Client.Forms.Pages
                     read.Wait();
                     json = read.Result;
                 }
-                 
+
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhSearchVM>>>(json);
                 if (result.status == 1)
                 {
-                   var ghlist = result.data;
+                    var ghlist = result.data;
                     var _source = result.data.Select(p => new
                     {
                         gh_date = p.gh_date,
@@ -1113,9 +1121,8 @@ namespace Client.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -1156,7 +1163,7 @@ namespace Client.Forms.Pages
                 this.sfz_folk.Text = SessionHelper.CardReader.Folk;
                 this.sfz_sex.Text = SessionHelper.CardReader.Sex;
 
-                 
+
             }
         }
 

@@ -80,6 +80,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblPatientId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.lblTotalCount = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -440,7 +441,7 @@
             this.dgvRefund.SelectedIndex = -1;
             this.dgvRefund.ShowGridLine = false;
             this.dgvRefund.ShowRect = false;
-            this.dgvRefund.Size = new System.Drawing.Size(860, 496);
+            this.dgvRefund.Size = new System.Drawing.Size(860, 457);
             this.dgvRefund.TabIndex = 5;
             this.dgvRefund.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvRefund.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellClick);
@@ -723,10 +724,23 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "病人ID:";
             // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalCount.Location = new System.Drawing.Point(12, 671);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(692, 33);
+            this.lblTotalCount.TabIndex = 8;
+            this.lblTotalCount.Text = "总计：";
+            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // RefundPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1177, 713);
+            this.Controls.Add(this.lblTotalCount);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.dgvRefund);
             this.Controls.Add(this.uiGroupBox1);
@@ -796,5 +810,6 @@
         private Sunny.UI.UISymbolButton btnRefundDetail;
         private Sunny.UI.UIComboBox cbxRefundStatus;
         private System.Windows.Forms.Label label4;
+        private Sunny.UI.UILabel lblTotalCount;
     }
 }

@@ -31,33 +31,41 @@ namespace Client.Forms.Pages.hbgl
             cbx_ampm.DisplayMember = "name";
             cbx_ampm.ValueMember = "code";
 
-            GetData(); 
+            GetData();
         }
-         
+
         public void GetData()
         {
-            //获取挂号时间段
-            var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetRequestTimes");
-
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
+                //获取挂号时间段
+                var json = "";
+                var paramurl = string.Format($"/api/GuaHao/GetRequestTimes");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var dat = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTimeVM>>>(json).data;
+
+                dgvRequestTime.Init();
+
+                dgvRequestTime.DataSource = dat;
+
+                dgvRequestTime.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             }
-            var dat = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTimeVM>>>(json).data;
-
-            dgvRequestTime.Init();
-
-            dgvRequestTime.DataSource = dat;
-
-            dgvRequestTime.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void uiSymbolButton2_Click(object sender, EventArgs e)
@@ -104,9 +112,9 @@ namespace Client.Forms.Pages.hbgl
             {
 
                 // EditRequestTime(string section, string section_name, string start_time, string end_time,string ampm)
-                string time1 =  d.start_time;
+                string time1 = d.start_time;
                 string time2 = d.end_time;
- 
+
                 Task<HttpResponseMessage> task;
                 string json = "";
                 string paramurl = string.Format($"/api/GuaHao/EditRequestTime?section={d.section}&section_name={d.section_name}&start_time={d.start_time}&end_time={d.end_time}&ampm={d.ampm}");
@@ -137,7 +145,8 @@ namespace Client.Forms.Pages.hbgl
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -207,7 +216,7 @@ namespace Client.Forms.Pages.hbgl
             txt_section.Text = "";
             txtComment.Text = "";
             txt_start_time.Text = "00:00:00";
-            txt_start_time.Text = "00:59:59"; 
+            txt_start_time.Text = "00:59:59";
         }
     }
 }

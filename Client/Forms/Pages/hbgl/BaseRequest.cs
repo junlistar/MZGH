@@ -56,10 +56,10 @@ namespace Client
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
             uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
-            uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F5]"); 
-            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");  
-            uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");  
-            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]"); 
+            uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F5]");
+            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");
+            uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
         }
 
         public void InitDic()
@@ -78,7 +78,7 @@ namespace Client
             foreach (var item in SessionHelper.requestHours.ToArray())
             {
                 rh_list.Add(item);
-            } 
+            }
             var rh = new RequestHourVM();
             rh.code = "%";
             rh.name = "全部";
@@ -88,12 +88,6 @@ namespace Client
             cbxSXW.ValueMember = "code";
             cbxSXW.Text = "全部";
 
-            //cbxSXW.Items.Add("全部");
-            //cbxSXW.Items.Add("上午");
-            //cbxSXW.Items.Add("中午");
-            //cbxSXW.Items.Add("下午");
-            //cbxSXW.Items.Add("夜间");
-            cbxSXW.Text = "全部";
 
         }
 
@@ -131,20 +125,11 @@ namespace Client
             var window_no = "%";
             var open_flag = "%";
 
-            if (cbxSXW.Text!="全部")
+            if (cbxSXW.Text != "全部")
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
 
-            //switch (cbxSXW.Text)
-            //{
-            //    case "上午": ampm = "a"; break;
-            //    case "下午": ampm = "p"; break;
-            //    case "中午": ampm = "m"; break;
-            //    case "夜间": ampm = "e"; break;
-            //    default:
-            //        break;
-            //}
 
             switch (cbxWeek.Text)
             {
@@ -204,9 +189,9 @@ namespace Client
                     log.Error(response.ReasonPhrase);
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-                if (result.status ==1 && result.data.Count>0)
+                if (result.status == 1 && result.data.Count > 0)
                 {
-                    list = result.data; 
+                    list = result.data;
                     if (list != null && list.Count > 0)
                     {
                         var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
@@ -229,7 +214,7 @@ namespace Client
                         dgvlist.AutoResizeColumns();
                         dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
-                } 
+                }
                 else
                 {
                     log.Error(result.message);
@@ -243,18 +228,18 @@ namespace Client
             {
                 UIMessageBox.ShowError(ex.Message);
                 log.Error(ex.InnerException.ToString());
-            } 
+            }
         }
 
         public void BindBottomData()
-        { 
+        {
             lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
             //设置分页控件总数
             uiPagination1.TotalCount = list.Count;
             //设置分页控件每页数量
             uiPagination1.PageSize = 50;
         }
-             
+
 
         UIDataGridView dgv = new UIDataGridView();
         UIDataGridView dgvzk = new UIDataGridView();
@@ -370,135 +355,175 @@ namespace Client
         }
         private void dgvzk_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1)
+            try
             {
-                return;
-            }
-            var obj = sender as UIDataGridView;
-            var unit_sn = obj.Rows[e.RowIndex].Cells["unit_sn"].Value.ToString();
-            var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-            txtzk.TextChanged -= txtzk_TextChanged;
-            txtzk.Text = name;
-            txtzk.TagString = unit_sn;
-            txtzk.TextChanged += txtzk_TextChanged;
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                var obj = sender as UIDataGridView;
+                var unit_sn = obj.Rows[e.RowIndex].Cells["unit_sn"].Value.ToString();
+                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtzk.TextChanged -= txtzk_TextChanged;
+                txtzk.Text = name;
+                txtzk.TagString = unit_sn;
+                txtzk.TextChanged += txtzk_TextChanged;
 
-            dgvzk.Hide();
+                dgvzk.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void txtDoct_TextChanged(object sender, EventArgs e)
         {
-            //查询信息 显示到girdview
-            var tb = sender as UITextBox;
-            var pbl = tb.Parent as UIPanel;
-            //获取数据 
-
-            if (userDics != null && userDics.Count > 0)
+            try
             {
-                var ipt = txtDoct.Text.Trim();
+                //查询信息 显示到girdview
+                var tb = sender as UITextBox;
+                var pbl = tb.Parent as UIPanel;
+                //获取数据 
 
-                dgvys.Parent = this;
-                dgvys.Top = pbl.Top + tb.Top + tb.Height;
-                dgvys.Left = pbl.Left + tb.Left;
-                dgvys.Width = tb.Width;
-                dgvys.Height = 200;
-                dgvys.BringToFront();
-                dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvys.RowHeadersVisible = false;
-                dgvys.BackgroundColor = Color.White;
-                dgvys.ReadOnly = true;
-
-
-                List<UserDicVM> vm = userDics;
-
-                if (!string.IsNullOrWhiteSpace(ipt))
+                if (userDics != null && userDics.Count > 0)
                 {
-                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    var ipt = txtDoct.Text.Trim();
+
+                    dgvys.Parent = this;
+                    dgvys.Top = pbl.Top + tb.Top + tb.Height;
+                    dgvys.Left = pbl.Left + tb.Left;
+                    dgvys.Width = tb.Width;
+                    dgvys.Height = 200;
+                    dgvys.BringToFront();
+                    dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvys.RowHeadersVisible = false;
+                    dgvys.BackgroundColor = Color.White;
+                    dgvys.ReadOnly = true;
+
+
+                    List<UserDicVM> vm = userDics;
+
+                    if (!string.IsNullOrWhiteSpace(ipt))
+                    {
+                        vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    }
+                    dgvys.DataSource = vm;
+
+                    dgvys.Columns["code"].HeaderText = "编号";
+                    dgvys.Columns["name"].HeaderText = "名称";
+                    dgvys.Columns["py_code"].Visible = false;
+                    dgvys.Columns["d_code"].Visible = false;
+                    dgvys.Columns["emp_sn"].Visible = false;
+                    dgvys.AutoResizeColumns();
+
+                    dgvys.Show();
                 }
-                dgvys.DataSource = vm;
-
-                dgvys.Columns["code"].HeaderText = "编号";
-                dgvys.Columns["name"].HeaderText = "名称";
-                dgvys.Columns["py_code"].Visible = false;
-                dgvys.Columns["d_code"].Visible = false;
-                dgvys.Columns["emp_sn"].Visible = false;
-                dgvys.AutoResizeColumns();
-
-                dgvys.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
         private void dgvys_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1)
+            try
             {
-                return;
-            }
-            var obj = sender as UIDataGridView;
-            var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
-            var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-            txtDoct.TextChanged -= txtDoct_TextChanged;
-            txtDoct.Text = name;
-            txtDoct.TagString = unit_sn;
-            txtDoct.TextChanged += txtDoct_TextChanged;
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                var obj = sender as UIDataGridView;
+                var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
+                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtDoct.TextChanged -= txtDoct_TextChanged;
+                txtDoct.Text = name;
+                txtDoct.TagString = unit_sn;
+                txtDoct.TextChanged += txtDoct_TextChanged;
 
-            dgvys.Hide();
+                dgvys.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void txtHaobie_TextChanged(object sender, EventArgs e)
         {
-            //查询科室信息 显示到girdview
-            var tb = sender as UITextBox;
-            var pbl = tb.Parent as UIPanel;
-            //获取数据 
-
-            if (clinicTypes != null && clinicTypes.Count > 0)
+            try
             {
-                var ipt = txtHaobie.Text.Trim();
+                //查询科室信息 显示到girdview
+                var tb = sender as UITextBox;
+                var pbl = tb.Parent as UIPanel;
+                //获取数据 
 
-                dgvhb.Parent = this;
-                dgvhb.Top = pbl.Top + tb.Top + tb.Height;
-                dgvhb.Left = pbl.Left + tb.Left;
-                dgvhb.Width = tb.Width;
-                dgvhb.Height = 200;
-                dgvhb.BringToFront();
-                dgvhb.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                dgvhb.RowHeadersVisible = false;
-                dgvhb.BackgroundColor = Color.White;
-                dgvhb.ReadOnly = true;
-
-
-                List<ClinicTypeVM> vm = clinicTypes;
-
-                if (!string.IsNullOrWhiteSpace(ipt))
+                if (clinicTypes != null && clinicTypes.Count > 0)
                 {
-                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    var ipt = txtHaobie.Text.Trim();
+
+                    dgvhb.Parent = this;
+                    dgvhb.Top = pbl.Top + tb.Top + tb.Height;
+                    dgvhb.Left = pbl.Left + tb.Left;
+                    dgvhb.Width = tb.Width;
+                    dgvhb.Height = 200;
+                    dgvhb.BringToFront();
+                    dgvhb.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvhb.RowHeadersVisible = false;
+                    dgvhb.BackgroundColor = Color.White;
+                    dgvhb.ReadOnly = true;
+
+
+                    List<ClinicTypeVM> vm = clinicTypes;
+
+                    if (!string.IsNullOrWhiteSpace(ipt))
+                    {
+                        vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    }
+                    dgvhb.DataSource = vm;
+
+                    dgvhb.Columns["code"].HeaderText = "编号";
+                    dgvhb.Columns["name"].HeaderText = "名称";
+                    dgvhb.Columns["py_code"].Visible = false;
+                    dgvhb.Columns["d_code"].Visible = false;
+                    dgvhb.AutoResizeColumns();
+
+                    dgvhb.Show();
                 }
-                dgvhb.DataSource = vm;
-
-                dgvhb.Columns["code"].HeaderText = "编号";
-                dgvhb.Columns["name"].HeaderText = "名称";
-                dgvhb.Columns["py_code"].Visible = false;
-                dgvhb.Columns["d_code"].Visible = false;
-                dgvhb.AutoResizeColumns();
-
-                dgvhb.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
         private void dgvhb_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1)
+            try
             {
-                return;
-            }
-            var obj = sender as UIDataGridView;
-            var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
-            var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-            txtHaobie.TextChanged -= txtHaobie_TextChanged;
-            txtHaobie.Text = name;
-            txtHaobie.TagString = unit_sn;
-            txtHaobie.TextChanged += txtHaobie_TextChanged;
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                var obj = sender as UIDataGridView;
+                var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
+                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtHaobie.TextChanged -= txtHaobie_TextChanged;
+                txtHaobie.Text = name;
+                txtHaobie.TagString = unit_sn;
+                txtHaobie.TextChanged += txtHaobie_TextChanged;
 
-            dgvhb.Hide();
+                dgvhb.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -629,6 +654,7 @@ namespace Client
 
         public void Delete()
         {
+
             var index = dgvlist.SelectedIndex;
 
             if (index >= 0)
@@ -651,16 +677,20 @@ namespace Client
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (result.status == 1 )
+                        if (result.status == 1)
                         {
                             UIMessageTip.ShowOk("操作成功!");
                             return;
                         }
+                        else
+                        {
+                            UIMessageTip.ShowError(result.message);
+                        }
                     }
                     catch (Exception ex)
                     {
-                        UIMessageTip.ShowError(ex.ToString());
-
+                        MessageBox.Show(ex.Message);
+                        log.Error(ex.StackTrace);
                     }
                 }
             }
@@ -716,7 +746,7 @@ namespace Client
                 catch (Exception ex)
                 {
                     UIMessageTip.ShowError(ex.ToString());
-
+                    log.Error(ex.StackTrace);
                 }
             }
         }
@@ -728,26 +758,33 @@ namespace Client
 
         private void txtks_KeyUp(object sender, KeyEventArgs e)
         {
-            //MessageBox.Show(e.KeyCode.ToString());
-            if (e.KeyCode == Keys.Down)
+            try
             {
-                this.dgv.Focus();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                if (dgv.Rows.Count > 0)
+                if (e.KeyCode == Keys.Down)
                 {
-
-                    var unit_sn = dgv.Rows[0].Cells["unit_sn"].Value.ToString();
-                    var name = dgv.Rows[0].Cells["name"].Value.ToString();
-
-                    txtks.TextChanged -= txtks_TextChanged;
-                    txtks.Text = name;
-                    txtks.TagString = unit_sn;
-                    txtks.TextChanged += txtks_TextChanged;
-
-                    dgv.Hide();
+                    this.dgv.Focus();
                 }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (dgv.Rows.Count > 0)
+                    {
+
+                        var unit_sn = dgv.Rows[0].Cells["unit_sn"].Value.ToString();
+                        var name = dgv.Rows[0].Cells["name"].Value.ToString();
+
+                        txtks.TextChanged -= txtks_TextChanged;
+                        txtks.Text = name;
+                        txtks.TagString = unit_sn;
+                        txtks.TextChanged += txtks_TextChanged;
+
+                        dgv.Hide();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -768,25 +805,33 @@ namespace Client
 
         private void txtzk_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down)
+            try
             {
-                this.dgvzk.Focus();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                if (dgvzk.Rows.Count > 0)
+                if (e.KeyCode == Keys.Down)
                 {
-
-                    var unit_sn = dgvzk.Rows[0].Cells["unit_sn"].Value.ToString();
-                    var name = dgvzk.Rows[0].Cells["name"].Value.ToString();
-
-                    txtzk.TextChanged -= txtzk_TextChanged;
-                    txtzk.Text = name;
-                    txtzk.TagString = unit_sn;
-                    txtzk.TextChanged += txtzk_TextChanged;
-
-                    dgvzk.Hide();
+                    this.dgvzk.Focus();
                 }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (dgvzk.Rows.Count > 0)
+                    {
+
+                        var unit_sn = dgvzk.Rows[0].Cells["unit_sn"].Value.ToString();
+                        var name = dgvzk.Rows[0].Cells["name"].Value.ToString();
+
+                        txtzk.TextChanged -= txtzk_TextChanged;
+                        txtzk.Text = name;
+                        txtzk.TagString = unit_sn;
+                        txtzk.TextChanged += txtzk_TextChanged;
+
+                        dgvzk.Hide();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -808,26 +853,34 @@ namespace Client
 
         private void txtHaobie_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Down)
+            try
             {
-                this.dgvhb.Focus();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                if (dgvhb.Rows.Count > 0)
+                if (e.KeyCode == Keys.Down)
                 {
-
-                    var code = dgvhb.Rows[0].Cells["code"].Value.ToString();
-                    var name = dgvhb.Rows[0].Cells["name"].Value.ToString();
-
-                    txtHaobie.TextChanged -= txtHaobie_TextChanged;
-                    txtHaobie.Text = name;
-                    txtHaobie.TagString = code;
-                    txtHaobie.TextChanged += txtHaobie_TextChanged;
-
-
-                    dgvhb.Hide();
+                    this.dgvhb.Focus();
                 }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (dgvhb.Rows.Count > 0)
+                    {
+
+                        var code = dgvhb.Rows[0].Cells["code"].Value.ToString();
+                        var name = dgvhb.Rows[0].Cells["name"].Value.ToString();
+
+                        txtHaobie.TextChanged -= txtHaobie_TextChanged;
+                        txtHaobie.Text = name;
+                        txtHaobie.TagString = code;
+                        txtHaobie.TextChanged += txtHaobie_TextChanged;
+
+
+                        dgvhb.Hide();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -847,26 +900,33 @@ namespace Client
 
         private void txtDoct_KeyUp(object sender, KeyEventArgs e)
         {
-            //MessageBox.Show(e.KeyCode.ToString());
-            if (e.KeyCode == Keys.Down)
+            try
             {
-                this.dgvys.Focus();
-            }
-            else if (e.KeyCode == Keys.Enter)
-            {
-                if (dgvys.Rows.Count > 0)
+                if (e.KeyCode == Keys.Down)
                 {
-
-                    var unit_sn = dgvys.Rows[0].Cells["code"].Value.ToString();
-                    var name = dgvys.Rows[0].Cells["name"].Value.ToString();
-
-                    txtDoct.TextChanged -= txtDoct_TextChanged;
-                    txtDoct.Text = name;
-                    txtDoct.TagString = unit_sn;
-                    txtDoct.TextChanged += txtDoct_TextChanged;
-
-                    dgvys.Hide();
+                    this.dgvys.Focus();
                 }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (dgvys.Rows.Count > 0)
+                    {
+
+                        var unit_sn = dgvys.Rows[0].Cells["code"].Value.ToString();
+                        var name = dgvys.Rows[0].Cells["name"].Value.ToString();
+
+                        txtDoct.TextChanged -= txtDoct_TextChanged;
+                        txtDoct.Text = name;
+                        txtDoct.TagString = unit_sn;
+                        txtDoct.TextChanged += txtDoct_TextChanged;
+
+                        dgvys.Hide();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
         private void Dgvys_KeyDown(object sender, KeyEventArgs e)

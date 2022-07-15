@@ -106,9 +106,7 @@ namespace Client
             string json = "";
 
             #region 参数处理
-
-            //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
-            //group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}
+             
             //var gh_date = txtRiqi.Text;
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
@@ -129,16 +127,7 @@ namespace Client
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
-
-            //switch (cbxSXW.Text)
-            //{
-            //    case "上午": ampm = "a"; break;
-            //    case "下午": ampm = "p"; break;
-            //    case "中午": ampm = "m"; break;
-            //    case "夜间": ampm = "e"; break;
-            //    default:
-            //        break;
-            //}
+ 
              
             if (cbxOpenFlag.Text == "开放")
             {
@@ -644,8 +633,8 @@ namespace Client
                 }
                 catch (Exception ex)
                 {
-                    UIMessageTip.ShowError(ex.ToString());
-
+                    MessageBox.Show(ex.Message);
+                    log.Error(ex.StackTrace);
                 }
             }
         }

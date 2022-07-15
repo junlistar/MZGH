@@ -14,17 +14,15 @@ using log4net;
 
 namespace Client.Forms.Pages.qxgl
 {
-    public partial class FunctionList : UIForm
+    public partial class FunctionList : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(AddFunction));//typeof放当前类 
         List<XTFunctionsVM> _functions_all;
-        string _subsysy_id; string _group_id;
+        string _subsysy_id = "mz";
 
-        public FunctionList(string subsysy_id, string group_id)
+        public FunctionList()
         {
             InitializeComponent();
-            _subsysy_id = subsysy_id;
-            _group_id = group_id;
         }
 
         private void AddGroup_KeyUp(object sender, KeyEventArgs e)
@@ -95,19 +93,54 @@ namespace Client.Forms.Pages.qxgl
                 if (result.status == 1)
                 {
                     _functions_all = result.data;
-                    dgv_functions.Init();
+                   // dgv_functions.Init();
                     dgv_functions.DataSource = result.data;
+                    dgv_functions.AutoResizeColumns();
+                    dgv_functions.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     lblSumText.Text = result.data.Count + "条数据";
+
+                    tv_funcs.Nodes.Clear();
+                    foreach (var item in _functions_all)
+                    {
+                        if (string.IsNullOrWhiteSpace(item.parent_func))
+                        {
+                            tv_funcs.Nodes.Add(item.func_name.Trim(), item.func_desc.Trim()); 
+                        }
+                    }
+                    if (tv_funcs.Nodes.Count > 0)
+                    {
+                        LoadSubItems(tv_funcs.Nodes, _functions_all);
+
+                        tv_funcs.ExpandAll();
+                    }
                 }
                 else
                 {
                     UIMessageTip.ShowError(result.message);
                     log.Error(result.message);
                 }
+                 
             }
             catch (Exception ex)
             {
                 log.Error(ex.Message);
+            }
+        }
+
+        public void LoadSubItems(TreeNodeCollection treeNodeCollection, List<XTFunctionsVM> data)
+        {
+
+            foreach (TreeNode node in treeNodeCollection)
+            {
+                var items = data.Where(p => p.parent_func!=null &&p.parent_func.Trim() == node.Name).ToList();
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var subitem in items)
+                    {
+                        node.Nodes.Add(subitem.func_name.Trim(), subitem.func_desc.Trim());
+                    }
+                    LoadSubItems(node.Nodes, data);
+                }
             }
         }
 
@@ -187,6 +220,11 @@ namespace Client.Forms.Pages.qxgl
             {
                 log.Error(ex.Message);
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

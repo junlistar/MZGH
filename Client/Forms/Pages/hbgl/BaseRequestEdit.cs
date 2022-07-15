@@ -43,131 +43,129 @@ namespace Client
 
         public void InitData()
         {
-
-            var d = new
+            try
             {
-                request_sn = _baseRequest.current_sn,
-            };
-            var cdata = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(cdata);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var paramurl = string.Format($"/api/GuaHao/GetBaseRequestsBySN?request_sn={d.request_sn}");
 
-            string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-            var responseJson = WebApiHelper.DeserializeObject<ResponseResult<BaseRequestVM>>(res);
-
-            if (responseJson.status == 1)
-            {
-                txtks.TextChanged -= txtks_TextChanged;
-                txtzk.TextChanged -= txtzk_TextChanged;
-                txtDoct.TextChanged -= txtDoct_TextChanged;
-
-                var data = responseJson.data;
-
-                if (!string.IsNullOrWhiteSpace(data.unit_sn))
+                var d = new
                 {
-                    this.txtks.TagString = data.unit_sn;
+                    request_sn = _baseRequest.current_sn,
+                };
+                var cdata = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(cdata);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var paramurl = string.Format($"/api/GuaHao/GetBaseRequestsBySN?request_sn={d.request_sn}");
 
-                    var model = SessionHelper.units.Where(p => p.code == data.unit_sn).FirstOrDefault();
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<BaseRequestVM>>(res);
 
-                    if (model != null)
+                if (responseJson.status == 1)
+                {
+                    txtks.TextChanged -= txtks_TextChanged;
+                    txtzk.TextChanged -= txtzk_TextChanged;
+                    txtDoct.TextChanged -= txtDoct_TextChanged;
+
+                    var data = responseJson.data;
+
+                    if (!string.IsNullOrWhiteSpace(data.unit_sn))
                     {
-                        this.txtks.Text = model.name;
+                        this.txtks.TagString = data.unit_sn;
+
+                        var model = SessionHelper.units.Where(p => p.code == data.unit_sn).FirstOrDefault();
+
+                        if (model != null)
+                        {
+                            this.txtks.Text = model.name;
+                        }
+
                     }
 
-                }
-
-                if (!string.IsNullOrWhiteSpace(data.group_sn))
-                {
-                    this.txtzk.TagString = data.group_sn;
-
-                    var model = SessionHelper.units.Where(p => p.code == data.group_sn).FirstOrDefault();
-
-                    if (model != null)
+                    if (!string.IsNullOrWhiteSpace(data.group_sn))
                     {
-                        this.txtzk.Text = model.name;
+                        this.txtzk.TagString = data.group_sn;
+
+                        var model = SessionHelper.units.Where(p => p.code == data.group_sn).FirstOrDefault();
+
+                        if (model != null)
+                        {
+                            this.txtzk.Text = model.name;
+                        }
+
                     }
 
-                }
-
-                if (!string.IsNullOrWhiteSpace(data.doctor_sn))
-                {
-                    this.txtDoct.TagString = data.doctor_sn;
-
-                    var model = SessionHelper.userDics.Where(p => p.code == data.doctor_sn).FirstOrDefault();
-
-                    if (model != null)
+                    if (!string.IsNullOrWhiteSpace(data.doctor_sn))
                     {
-                        this.txtDoct.Text = model.name;
+                        this.txtDoct.TagString = data.doctor_sn;
+
+                        var model = SessionHelper.userDics.Where(p => p.code == data.doctor_sn).FirstOrDefault();
+
+                        if (model != null)
+                        {
+                            this.txtDoct.Text = model.name;
+                        }
                     }
-                }
-                cbxHaobie.SelectedValue = data.clinic_type;
-                //cbxRequestType.SelectedValue = data.req_type;
-                txtTotalNum.Text = data.totle_num.ToString();
+                    cbxHaobie.SelectedValue = data.clinic_type;
+                    //cbxRequestType.SelectedValue = data.req_type;
+                    txtTotalNum.Text = data.totle_num.ToString();
 
 
-                //switch (data.ampm)
-                //{
-                //    case "a": cbxSXW.Text = "上午"; break;
-                //    case "m": cbxSXW.Text = "中午"; break;
-                //    case "p": cbxSXW.Text = "下午"; break;
-                //    case "e": cbxSXW.Text = "夜间"; break;
-                //    default:
-                //        cbxSXW.Text = data.ampm;
-                //        break;
-                //}
-                if (SessionHelper.requestHours!=null)
-                {
-                    var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
-                    cbxSXW.Text = req_hour.name;
-                }
+                    if (SessionHelper.requestHours != null)
+                    {
+                        var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
+                        cbxSXW.Text = req_hour.name;
+                    }
 
-                switch (data.week)
-                {
-                    case 1: cbxWeek.Text = "第一周"; break;
-                    case 2: cbxWeek.Text = "第二周"; break;
-                    case 3: cbxWeek.Text = "第三周"; break;
-                    case 4: cbxWeek.Text = "第四周"; break;
-                    case 5: cbxWeek.Text = "第五周"; break;
-                    default:
-                        break;
-                }
+                    switch (data.week)
+                    {
+                        case 1: cbxWeek.Text = "第一周"; break;
+                        case 2: cbxWeek.Text = "第二周"; break;
+                        case 3: cbxWeek.Text = "第三周"; break;
+                        case 4: cbxWeek.Text = "第四周"; break;
+                        case 5: cbxWeek.Text = "第五周"; break;
+                        default:
+                            break;
+                    }
 
-                switch (data.day)
-                {
-                    case 1: cbxDay.Text = "星期一"; break;
-                    case 2: cbxDay.Text = "星期二"; break;
-                    case 3: cbxDay.Text = "星期三"; break;
-                    case 4: cbxDay.Text = "星期四"; break;
-                    case 5: cbxDay.Text = "星期五"; break;
-                    case 6: cbxDay.Text = "星期六"; break;
-                    case 7: cbxDay.Text = "星期日"; break;
-                    default:
-                        break;
-                }
-                switch (data.open_flag)
-                {
-                    case "1":
-                        cbxOpenFlag.Text = "开放"; break;
-                    case "0":
-                        cbxOpenFlag.Text = "不开放"; break;
-                    default:
-                        cbxOpenFlag.Text = data.open_flag.ToString();
-                        break;
-                }
-                switch (data.window_no)
-                {
-                    case 0: cbxWinNo.Text = "所有窗口"; break;
-                    default:
-                        data.window_no.ToString(); break;
-                }
+                    switch (data.day)
+                    {
+                        case 1: cbxDay.Text = "星期一"; break;
+                        case 2: cbxDay.Text = "星期二"; break;
+                        case 3: cbxDay.Text = "星期三"; break;
+                        case 4: cbxDay.Text = "星期四"; break;
+                        case 5: cbxDay.Text = "星期五"; break;
+                        case 6: cbxDay.Text = "星期六"; break;
+                        case 7: cbxDay.Text = "星期日"; break;
+                        default:
+                            break;
+                    }
+                    switch (data.open_flag)
+                    {
+                        case "1":
+                            cbxOpenFlag.Text = "开放"; break;
+                        case "0":
+                            cbxOpenFlag.Text = "不开放"; break;
+                        default:
+                            cbxOpenFlag.Text = data.open_flag.ToString();
+                            break;
+                    }
+                    switch (data.window_no)
+                    {
+                        case 0: cbxWinNo.Text = "所有窗口"; break;
+                        default:
+                            data.window_no.ToString(); break;
+                    }
 
-                txtks.TextChanged += txtks_TextChanged;
-                txtzk.TextChanged += txtzk_TextChanged;
-                txtDoct.TextChanged += txtDoct_TextChanged;
+                    txtks.TextChanged += txtks_TextChanged;
+                    txtzk.TextChanged += txtzk_TextChanged;
+                    txtDoct.TextChanged += txtDoct_TextChanged;
+                }
+                else
+                {
+                    UIMessageTip.ShowError(responseJson.message);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                UIMessageTip.ShowError(responseJson.message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -189,7 +187,7 @@ namespace Client
 
             dgvzk.CellClick += dgvzk_CellContentClick;
             dgvzk.KeyDown += Dgvzk_KeyDown;
-             
+
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
@@ -437,188 +435,181 @@ namespace Client
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "" : txtks.TagString;
-            var clinic_type = cbxHaobie.SelectedValue;
-            var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
-            var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
+            try
+            {
+                var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "" : txtks.TagString;
+                var clinic_type = cbxHaobie.SelectedValue;
+                var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
+                var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
 
-            var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
-            var week = "";
-            var day = "";
-            int window_no = 0;
-            int open_flag = 1;
-            int total_num = 0;
+                var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
+                var week = "";
+                var day = "";
+                int window_no = 0;
+                int open_flag = 1;
+                int total_num = 0;
 
-            ampm = cbxSXW.SelectedValue.ToString();
-
-            //switch (cbxSXW.Text)
-            //{
-            //    case "上午": ampm = "a"; break;
-            //    case "中午": ampm = "m"; break;
-            //    case "下午": ampm = "p"; break;
-            //    case "夜间": ampm = "e"; break;
-            //    default:
-            //        break;
-            //}
-
-            switch (cbxWeek.Text)
-            {
-                case "第一周": week = "1"; break;
-                case "第二周": week = "2"; break;
-                case "第三周": week = "3"; break;
-                case "第四周": week = "4"; break;
-                case "第五周": week = "5"; break;
-                default:
-                    break;
-            }
-
-            switch (cbxDay.Text)
-            {
-                case "星期一": day = "1"; break;
-                case "星期二": day = "2"; break;
-                case "星期三": day = "3"; break;
-                case "星期四": day = "4"; break;
-                case "星期五": day = "5"; break;
-                case "星期六": day = "6"; break;
-                case "星期日": day = "7"; break;
-                default:
-                    break;
-            }
-
-            if (cbxOpenFlag.Text == "开放")
-            {
-                open_flag = 1;
-            }
-            else if (cbxOpenFlag.Text == "不开放")
-            {
-                open_flag = 0;
-            }
-            int num = 0;
-            if (int.TryParse(txtTotalNum.Text, out num))
-            {
-                total_num = num;
-            }
-
-            if (string.IsNullOrWhiteSpace(visit_dept))
-            {
-                UIMessageTip.ShowError("请选择科室！");
-                txtks.Focus();
-                return;
-            }
-            if (clinic_type == null || clinic_type.ToString() == "")
-            {
-                UIMessageTip.ShowError("请选择号别！");
-                cbxHaobie.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(ampm))
-            {
-                UIMessageTip.ShowError("请选择上午下午！");
-                cbxSXW.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(week))
-            {
-                UIMessageTip.ShowError("请选择周！");
-                cbxWeek.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(day))
-            {
-                UIMessageTip.ShowError("请选择天！");
-                cbxDay.Focus();
-                return;
-            }
-            if (total_num <= 0)
-            {
-                UIMessageTip.ShowError("总号数不正确！");
-                txtTotalNum.Focus();
-                return;
-            }
-
-            //判断是否存在
-            Task<HttpResponseMessage> task = null;
-            var json = "";
+                ampm = cbxSXW.SelectedValue.ToString();
 
 
-            var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no=&open_flag=";
-
-            string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-            if (result.status==1 && result.data.Count>0)
-            {
-                if (string.IsNullOrEmpty(_baseRequest.current_sn))
+                switch (cbxWeek.Text)
                 {
-                    UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
+                    case "第一周": week = "1"; break;
+                    case "第二周": week = "2"; break;
+                    case "第三周": week = "3"; break;
+                    case "第四周": week = "4"; break;
+                    case "第五周": week = "5"; break;
+                    default:
+                        break;
+                }
+
+                switch (cbxDay.Text)
+                {
+                    case "星期一": day = "1"; break;
+                    case "星期二": day = "2"; break;
+                    case "星期三": day = "3"; break;
+                    case "星期四": day = "4"; break;
+                    case "星期五": day = "5"; break;
+                    case "星期六": day = "6"; break;
+                    case "星期日": day = "7"; break;
+                    default:
+                        break;
+                }
+
+                if (cbxOpenFlag.Text == "开放")
+                {
+                    open_flag = 1;
+                }
+                else if (cbxOpenFlag.Text == "不开放")
+                {
+                    open_flag = 0;
+                }
+                int num = 0;
+                if (int.TryParse(txtTotalNum.Text, out num))
+                {
+                    total_num = num;
+                }
+
+                if (string.IsNullOrWhiteSpace(visit_dept))
+                {
+                    UIMessageTip.ShowError("请选择科室！");
+                    txtks.Focus();
                     return;
                 }
-                else
+                if (clinic_type == null || clinic_type.ToString() == "")
                 {
-                    if (result.data[0].request_sn != _baseRequest.current_sn)
+                    UIMessageTip.ShowError("请选择号别！");
+                    cbxHaobie.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(ampm))
+                {
+                    UIMessageTip.ShowError("请选择上午下午！");
+                    cbxSXW.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(week))
+                {
+                    UIMessageTip.ShowError("请选择周！");
+                    cbxWeek.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(day))
+                {
+                    UIMessageTip.ShowError("请选择天！");
+                    cbxDay.Focus();
+                    return;
+                }
+                if (total_num <= 0)
+                {
+                    UIMessageTip.ShowError("总号数不正确！");
+                    txtTotalNum.Focus();
+                    return;
+                }
+
+                //判断是否存在
+                Task<HttpResponseMessage> task = null;
+                var json = "";
+
+
+                var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no=&open_flag=";
+
+                string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+                if (result.status == 1 && result.data.Count > 0)
+                {
+                    if (string.IsNullOrEmpty(_baseRequest.current_sn))
                     {
                         UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
                         return;
                     }
+                    else
+                    {
+                        if (result.data[0].request_sn != _baseRequest.current_sn)
+                        {
+                            UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
+                            return;
+                        }
+                    }
                 }
+                else
+                {
+                    UIMessageTip.Show("验证数据出错！");
+                    log.Error(result.message);
+                    return;
+
+                }
+                var d = new
+                {
+                    request_sn = _baseRequest.current_sn,
+                    unit_sn = visit_dept,
+                    group_sn = group_sn,
+                    doctor_sn = doctor_code,
+                    clinic_type = clinic_type,
+                    week = week,
+                    day = day,
+                    ampm = ampm,
+                    totle_num = total_num,
+                    window_no = window_no,
+                    open_flag = open_flag,
+                    op_id = SessionHelper.uservm.user_mi,
+                };
+                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}");
+
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+
+                var result1 = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                if (result1.status == 1)
+                {
+                    UIMessageTip.ShowOk("操作成功!");
+                }
+                else
+                {
+                    UIMessageTip.ShowError("保存失败!");
+                    log.Error(result1.message);
+                    return;
+                }
+
+                this.Close();
             }
-            else
+            catch (Exception ex)
             {
-                UIMessageTip.Show("验证数据出错！");
-                log.Error(result.message);
-                return;
-
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-             
-
-
-            //UIMessageTip.Show("验证成功 ，提交数据！");
-
-            var d = new
-            {
-                request_sn = _baseRequest.current_sn,
-                unit_sn = visit_dept,
-                group_sn = group_sn,
-                doctor_sn = doctor_code,
-                clinic_type = clinic_type,
-                week = week,
-                day = day,
-                ampm = ampm,
-                totle_num = total_num,
-                window_no = window_no,
-                open_flag = open_flag,
-                op_id = SessionHelper.uservm.user_mi,
-            };
-            var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}");
-
-            string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-
-            var result1 = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
-            if (result1.status == 1 )
-            {
-                UIMessageTip.ShowOk("操作成功!");
-            }
-            else
-            {
-                UIMessageTip.ShowError("保存失败!");
-                log.Error(result1.message);
-                return;
-            }
-
-            this.Close();
-
 
         }
 
@@ -706,7 +697,7 @@ namespace Client
                 }
             }
         }
-         
+
         private void txtDoct_KeyUp(object sender, KeyEventArgs e)
         {
             //MessageBox.Show(e.KeyCode.ToString());

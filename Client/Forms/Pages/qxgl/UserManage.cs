@@ -31,6 +31,7 @@ namespace Client.Forms.Pages.qxgl
             //菜单数据加载
             LoadMouseKeyMenu();
 
+
         }
 
         public void LoadMouseKeyMenu()
@@ -75,7 +76,7 @@ namespace Client.Forms.Pages.qxgl
             if (item.Tag.ToString() == "A")
             {
                 log.Info("添加组开始");
-                AddGroup addGroup = new AddGroup(); 
+                AddGroup addGroup = new AddGroup();
                 var dr = addGroup.ShowDialog();
                 if (dr == DialogResult.OK)
                 {
@@ -83,7 +84,7 @@ namespace Client.Forms.Pages.qxgl
                     InitGroupsData();
                 }
                 else
-                { 
+                {
                     log.Info("添加组取消");
                 }
             }
@@ -102,97 +103,119 @@ namespace Client.Forms.Pages.qxgl
                 {
                     log.Info("删除用户组取消");
                 }
-            }  
+            }
         }
-         
+
         private void FunctionItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            if (item.Tag.ToString() == "A")
+            try
             {
-                var _group_id = tv_groups.SelectedNode.Name;
-                AddFunction addFunction = new AddFunction(functions,"mz", _group_id);
-                if (addFunction.ShowDialog() == DialogResult.OK)
-                {
-                    //刷新 
-                    InitUserGroupData(_group_id); 
-                } ;
-            }
-            else if (item.Tag.ToString() == "D")
-            {
-                var _name = tv_functions.SelectedNode.Text.Trim();
-                var _key = tv_functions.SelectedNode.Name.Trim();
-                var _msg = "确定要删除功能：" + _name + " 吗?";
-                if (UIMessageBox.ShowAsk(_msg))
+
+                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                if (item.Tag.ToString() == "A")
                 {
                     var _group_id = tv_groups.SelectedNode.Name;
-                    DeleteFunction(_key, _group_id);
+                    AddFunction addFunction = new AddFunction(functions, "mz", _group_id);
+                    if (addFunction.ShowDialog() == DialogResult.OK)
+                    {
+                        //刷新 
+                        InitUserGroupData(_group_id);
+                    };
                 }
-               
+                else if (item.Tag.ToString() == "D")
+                {
+                    var _name = tv_functions.SelectedNode.Text.Trim();
+                    var _key = tv_functions.SelectedNode.Name.Trim();
+                    var _msg = "确定要删除功能：" + _name + " 吗?";
+                    if (UIMessageBox.ShowAsk(_msg))
+                    {
+                        var _group_id = tv_groups.SelectedNode.Name;
+                        DeleteFunction(_key, _group_id);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
             }
         }
         private void UserItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
-
-            if (item.Tag.ToString() == "A")
+            try
             {
-                if (tv_groups.Nodes.Count>0)
-                {
-                    var _group_id =int.Parse(tv_groups.SelectedNode.Name);
+                ToolStripMenuItem item = (ToolStripMenuItem)sender;
 
-                    AddUser addUser = new AddUser(_group_id);
-                    if (addUser.ShowDialog()== DialogResult.OK)
+                if (item.Tag.ToString() == "A")
+                {
+                    if (tv_groups.Nodes.Count > 0)
                     {
-                        //刷新 
-                        InitUserData(_group_id.ToString());
-                    } ;
+                        var _group_id = int.Parse(tv_groups.SelectedNode.Name);
+
+                        AddUser addUser = new AddUser(_group_id);
+                        if (addUser.ShowDialog() == DialogResult.OK)
+                        {
+                            //刷新 
+                            InitUserData(_group_id.ToString());
+                        };
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError("没有用户组信息！");
+                    }
+
                 }
-                else
+                else if (item.Tag.ToString() == "D")
                 {
-                    UIMessageTip.ShowError("没有用户组信息！" );
+                    var _group_id = tv_groups.SelectedNode.Name;
+
+                    //var _name = tv_users.SelectedNode.Text.Trim();
+                    var _name = tv_users.SelectedNode.Tag.ToString().Trim();
+                    var _key = tv_users.SelectedNode.Name.Trim();
+                    var _msg = "确定要删除用户：" + _name + " 吗?";
+                    if (UIMessageBox.ShowAsk(_msg))
+                    {
+                        string login_name = _key.Split(",")[1];
+
+                        DeleteUser(login_name, _group_id);
+                    }
                 }
-                
             }
-            else if (item.Tag.ToString() == "D")
+            catch (Exception ex)
             {
-                var _group_id = tv_groups.SelectedNode.Name;
-
-                //var _name = tv_users.SelectedNode.Text.Trim();
-                var _name = tv_users.SelectedNode.Tag.ToString().Trim();
-                var _key = tv_users.SelectedNode.Name.Trim();
-                var _msg = "确定要删除用户：" + _name + " 吗?";
-                if (UIMessageBox.ShowAsk(_msg))
-                {
-                    string login_name = _key.Split(",")[1];
-
-                    DeleteUser(login_name, _group_id);
-                }
+                log.Error(ex.Message);
             }
         }
 
         private void ReportItem_Click(object sender, EventArgs e)
         {
-            ToolStripMenuItem item = (ToolStripMenuItem)sender;
-            var _group_id = tv_groups.SelectedNode.Name;
-
-            if (item.Tag.ToString() == "A")
+            try
             {
-                AddReport addReport = new AddReport(_group_id);
-                addReport.setData = UpdateReportTreeData;
-                addReport.ShowDialog();
-                //InitUserReportsData(_group_id);
-            }
-            else if (item.Tag.ToString() == "D")
-            {  
-                var _name = tv_reports.SelectedNode.Text.Trim();
-                var _key = tv_reports.SelectedNode.Name.Trim();
-                var _msg = "确定要删除报表：" + _name + " 吗?";
-                if (UIMessageBox.ShowAsk(_msg))
+                ToolStripMenuItem item = (ToolStripMenuItem)sender;
+                var _group_id = tv_groups.SelectedNode.Name;
+
+                if (item.Tag.ToString() == "A")
                 {
-                    DeleteReport(_key, _group_id);
-                } 
-            } 
+                    AddReport addReport = new AddReport(_group_id);
+                    addReport.setData = UpdateReportTreeData;
+                    addReport.ShowDialog();
+                    //InitUserReportsData(_group_id);
+                }
+                else if (item.Tag.ToString() == "D")
+                {
+                    var _name = tv_reports.SelectedNode.Text.Trim();
+                    var _key = tv_reports.SelectedNode.Name.Trim();
+                    var _msg = "确定要删除报表：" + _name + " 吗?";
+                    if (UIMessageBox.ShowAsk(_msg))
+                    {
+                        DeleteReport(_key, _group_id);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
         public void UpdateReportTreeData()
         {
@@ -262,6 +285,8 @@ namespace Client.Forms.Pages.qxgl
             InitUserData(user_group);
             InitUserGroupData(user_group);
             InitUserReportsData(user_group);
+
+            LoadFuncTreeData();
         }
 
         public void InitUserData(string user_group)
@@ -298,9 +323,9 @@ namespace Client.Forms.Pages.qxgl
                     {
                         string view_text = "用户名：" + item.name + "\t" + "用户工号：" + item.user_mi + "\t" + "登录名：" + item.user_name;
                         TreeNode treeNode = new TreeNode();
-                        treeNode.Name = item.user_mi +"," + item.user_name;
+                        treeNode.Name = item.user_mi + "," + item.user_name;
                         treeNode.Text = view_text;
-                        treeNode.Tag = item.name; 
+                        treeNode.Tag = item.name;
                         //tv_users.Nodes.Add(item.user_mi.ToString(), view_text);
                         tv_users.Nodes.Add(treeNode);
                     }
@@ -408,7 +433,7 @@ namespace Client.Forms.Pages.qxgl
                         if (item.parent_id == null || result.data.Where(p => p.rep_id == item.parent_id).Count() == 0)
                         {
                             tv_reports.Nodes.Add(item.rep_id, item.rep_name);
-                       
+
                         }
                     }
                     if (tv_reports.Nodes.Count > 0)
@@ -428,7 +453,7 @@ namespace Client.Forms.Pages.qxgl
             catch (Exception ex)
             {
                 log.Error(ex.Message);
-            } 
+            }
         }
 
         public void LoadSubItems(TreeNodeCollection treeNodeCollection, List<XTUserReportVM> data)
@@ -441,7 +466,7 @@ namespace Client.Forms.Pages.qxgl
                 {
                     foreach (var subitem in items)
                     {
-                        node.Nodes.Add(subitem.rep_id, subitem.rep_name); 
+                        node.Nodes.Add(subitem.rep_id, subitem.rep_name);
                     }
                     LoadSubItems(node.Nodes, data);
                 }
@@ -459,7 +484,7 @@ namespace Client.Forms.Pages.qxgl
             this.Close();
         }
 
-      public void DeleteGroup(string user_group)
+        public void DeleteGroup(string user_group)
         {
             // DeleteXTGroup(string user_group, string subsys_id)
             try
@@ -487,9 +512,9 @@ namespace Client.Forms.Pages.qxgl
                     json = read.Result;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
-                
+
                 if (result.status == 1)
-                { 
+                {
                     UIMessageTip.Show("删除成功！");
                     InitGroupsData();
                 }
@@ -553,7 +578,7 @@ namespace Client.Forms.Pages.qxgl
         }
 
         public void DeleteFunction(string func_str, string user_group)
-        { 
+        {
             try
             {
                 var d = new
@@ -583,7 +608,7 @@ namespace Client.Forms.Pages.qxgl
 
                 if (result.status == 1)
                 {
-                    UIMessageTip.Show("删除成功！"); 
+                    UIMessageTip.Show("删除成功！");
                     InitUserGroupData(user_group);
                 }
                 else
@@ -647,10 +672,204 @@ namespace Client.Forms.Pages.qxgl
 
         private void btnFunctions_Click(object sender, EventArgs e)
         {
-            var _group_id = tv_groups.SelectedNode.Name;
-            FunctionList functionList = new FunctionList("mz", _group_id);
-            functionList.ShowDialog();
-           
+            try
+            {
+                //var _group_id = tv_groups.SelectedNode.Name;
+                var _group_id = "";
+                FunctionList functionList = new FunctionList();
+                functionList.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
+        }
+        /// <summary>
+        /// 加载树形选择控件
+        /// </summary>
+        public void LoadFuncTreeData()
+        {
+            try
+            {
+                var d = new
+                {
+                    subsys_id = "mz"
+                };
+
+                var param = $"subsys_id={d.subsys_id}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json);
+
+                if (result.status == 1)
+                {
+                    tv_func_select.Nodes.Clear();
+                    foreach (var item in result.data)
+                    {
+                        if (string.IsNullOrWhiteSpace(item.parent_func))
+                        {  
+                            tv_func_select.Nodes.Add(item.func_name.Trim(), item.func_desc.Trim());
+                        }
+                    }
+                    if (tv_func_select.Nodes.Count > 0)
+                    {
+                        LoadSubFuncItems(tv_func_select.Nodes, result.data);
+
+                        tv_func_select.ExpandAll();
+                    }
+                    //选中已经有的
+                    SetCheckBox(tv_func_select.Nodes);
+
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+
+        public void LoadSubFuncItems(TreeNodeCollection treeNodeCollection, List<XTFunctionsVM> data)
+        {
+
+            foreach (TreeNode node in treeNodeCollection)
+            {
+                var items = data.Where(p => p.parent_func != null && p.parent_func.Trim() == node.Name).ToList();
+                if (items != null && items.Count > 0)
+                {
+                    foreach (var subitem in items)
+                    {
+                        node.Nodes.Add(subitem.func_name.Trim(), subitem.func_desc.Trim());
+                    }
+                    LoadSubFuncItems(node.Nodes, data);
+                }
+            }
+        }
+
+        private void btnSaveMenu_Click(object sender, EventArgs e)
+        {
+            var func_str = "";
+
+            GetChildNode(tv_func_select.Nodes, ref func_str);
+
+
+            string user_group = tv_groups.SelectedNode.Name;
+
+            if (func_str != "")
+            {
+                func_str = func_str.Substring(1);
+            }
+            try
+            { 
+                var d = new
+                {
+                    func_str = func_str,
+                    subsys_id = "mz",
+                    user_group = user_group
+                };
+
+                var param = $"func_str={d.func_str}&subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var json = "";
+                var paramurl = string.Format($"/api/qxgl/AddXtUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                 
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("修改成功！");
+                    InitUserGroupData(user_group);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+        public string GetChildNode(TreeNodeCollection nodes, ref string func_str)
+        {
+            var node_str = "";
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    var _re = GetChildNode(node.Nodes, ref func_str);
+                    if (_re != "")
+                    {
+                        node_str += "," + node.Name;
+                    }
+                }
+                else
+                {
+                    if (node.Checked)
+                    {
+                        node_str += "," + node.Name;
+                    }
+                }
+
+            }
+            func_str += node_str;
+            return node_str;
+        }
+
+        public bool SetCheckBox(TreeNodeCollection nodes)
+        {
+            bool _re = false;
+            foreach (TreeNode node in nodes)
+            { 
+                if (node.Nodes.Count > 0)
+                {
+                    if (SetCheckBox(node.Nodes))
+                    {
+                        node.Checked = true;
+                    }   
+                }
+                else
+                {
+                    if (functions.Where(p => p.func_name.Trim() == node.Name).Count() > 0)
+                    {
+                        node.Checked = true;
+                        _re = true;
+                    }
+                }
+            }
+            return _re;
         }
     }
 

@@ -115,11 +115,16 @@ namespace Mzsf.Forms.Pages
                 cash_name = p.cash_name,
             }).ToList();
 
-            dgvRefund.DataSource = list; 
+            dgvRefund.DataSource = list;
             dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvRefund.AutoResizeColumns();
 
+            lblTotalCount.ForeColor = Color.Red;
 
+            var zje = list.Sum(p => p.charge_total);
+            var jkcs = list.Count(p => p.charge_total > 0);
+            var tkcs = list.Count(p => p.charge_total < 0);
+            lblTotalCount.Text = $" 缴款次数：{jkcs}人次， 退款次数：{tkcs}人次， 实收金额：{zje} 元";
         }
 
         private void RefundPage_Load(object sender, EventArgs e)
@@ -174,7 +179,7 @@ namespace Mzsf.Forms.Pages
                 lblPayType.Text = dat.cheque_type_name.Replace(") ", ")\r\n"); ;
                 lblCharge.Text = dat.charge_total.ToString();
 
-                 
+
                 //处方详情数据
                 //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
 
@@ -283,7 +288,7 @@ namespace Mzsf.Forms.Pages
             var index = dgvRefund.SelectedIndex;
             if (index != -1)
             {
-                var dat = ds[index]; 
+                var dat = ds[index];
                 if (dat.charge_total < 0)
                 {
                     var times = dat.times;
@@ -319,7 +324,7 @@ namespace Mzsf.Forms.Pages
             if (e.KeyCode == Keys.Enter)
             {
                 ClearDataBind();
-                Search(); 
+                Search();
             }
         }
 
