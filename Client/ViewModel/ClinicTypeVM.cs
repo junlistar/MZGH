@@ -92,4 +92,13 @@ namespace Client.ViewModel
         public string item_no { get; set; }
         public string name { get; set; }
     }
+    public class RelativeCodeVM
+    {
+
+        public string code { get; set; }
+        public string name { get; set; }
+        public string py_code { get; set; }
+        public string d_code { get; set; }
+
+    }
 }

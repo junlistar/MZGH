@@ -10,17 +10,7 @@ namespace Client.ClassLib
     public class HttpClientUtil
 
     {
-
-        /// <summary>
-
-        /// HttpClient的Get请求
-
-        /// </summary>
-
-        ///<param name="url">请求地址,含拼接数据 </param>
-
-        /// <returns></returns>
-
+         
         public static string Get(string url)
 
         {
@@ -132,6 +122,8 @@ namespace Client.ClassLib
             _httpClient.Timeout = new TimeSpan(0, 0, 10);
 
             _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
+
+            
 
         }
 

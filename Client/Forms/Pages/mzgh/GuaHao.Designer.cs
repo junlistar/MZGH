@@ -778,13 +778,13 @@
             // pnlHours
             // 
             this.pnlHours.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlHours.Location = new System.Drawing.Point(394, 313);
+            this.pnlHours.Location = new System.Drawing.Point(516, 313);
             this.pnlHours.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlHours.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlHours.Name = "pnlHours";
             this.pnlHours.Padding = new System.Windows.Forms.Padding(2);
             this.pnlHours.ShowText = false;
-            this.pnlHours.Size = new System.Drawing.Size(737, 44);
+            this.pnlHours.Size = new System.Drawing.Size(684, 44);
             this.pnlHours.TabIndex = 18;
             this.pnlHours.Text = "uiFlowLayoutPanel1";
             this.pnlHours.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -861,15 +861,14 @@
             // 
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtSearch.Location = new System.Drawing.Point(983, 321);
+            this.txtSearch.Location = new System.Drawing.Point(387, 321);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.ShowText = false;
-            this.txtSearch.Size = new System.Drawing.Size(191, 29);
+            this.txtSearch.Size = new System.Drawing.Size(121, 29);
             this.txtSearch.TabIndex = 6;
             this.txtSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtSearch.Visible = false;
             this.txtSearch.Watermark = "筛选科室";
             this.txtSearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);

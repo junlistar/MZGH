@@ -375,6 +375,7 @@ CREATE TABLE [dbo].[mz_patient_sfz](
 	[sfz_id] [varchar](30) NULL
 ) ON [PRIMARY]
 
+ 
+ insert into gh_zd_clinic_type(code,name,py_code,d_code,deleted_flag)
+ values(38,'24小时号','24XSH','24XSH','1')
 GO 
-
-;

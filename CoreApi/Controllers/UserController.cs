@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc; 
+﻿using Microsoft.AspNetCore.Mvc;
 using Data.Helpers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -48,13 +48,13 @@ namespace CoreApi.Controllers
         /// </summary>
         /// <param name="patient_id"></param>
         /// <returns></returns>
-        public ResponseResult<List<MzPatientSfz>> GetDataByPatientId(string patient_id)
+        public ResponseResult<List<MzPatientSfz>> GetDataBySfzId(string sfz_id)
         {
-            Log.Information($"GetDataByPatientId,{patient_id}");
+            Log.Information($"GetDataBySfzId,{sfz_id}");
             List<MzPatientSfz> list;
             try
             {
-                list = _mzPatientSfzRepository.GetDataByPatientId(patient_id);
+                list = _mzPatientSfzRepository.GetDataBySfzId(sfz_id);
             }
             catch (Exception ex)
             {
@@ -77,6 +77,21 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+        public ResponseResult<bool> UpdateUserBaseInfo(string pid, string name, string sex, string marry_code, string birthday, string tel, string relation_name, string relation_code,
+             string home_street, string opera)
+        {
+            Log.Information($"UpdateUserBaseInfo,{pid},{name},{sex},{marry_code},{birthday},{tel},{relation_name},{relation_code},{home_street},{opera}");
+            try
+            {
+                return _sfzInfoRepository.UpdateUserBaseInfo(pid, name, sex, marry_code, birthday, tel, relation_name, relation_code, home_street, opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
         public ResponseResult<bool> UpdateYbkInfo(string psn_no, string psn_cert_type, string certno, string psn_name, string gend, string naty, string brdy, int age)
         {
             Log.Information($"UpdateYbkInfo,{psn_no},{psn_cert_type},{certno},{psn_name},{gend},{naty},{brdy},{age}");
@@ -130,7 +145,7 @@ namespace CoreApi.Controllers
         {
             Log.Information($"GetYbkDetailInfo");
             try
-            { 
+            {
                 return _ybkInfoRepository.GetYbkDetailInfo(certno);
             }
             catch (Exception ex)
@@ -139,6 +154,6 @@ namespace CoreApi.Controllers
                 return ErrorResult<UserInfoResponseModel>(ex.Message);
             }
         }
-         
+
     }
 }

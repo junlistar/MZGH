@@ -11,13 +11,13 @@ namespace Data.Repository
     public class MzPatientSfzRepository : RepositoryBase<MzPatientSfz>, IMzPatientSfzRepository
     {
 
-        public List<MzPatientSfz> GetDataByPatientId(string patient_id)
+        public List<MzPatientSfz> GetDataBySfzId(string sfz_id)
         {
             string selectSql = GetSqlByTag(221078);
 
             var para = new DynamicParameters();
 
-            para.Add("@patient_id", patient_id);
+            para.Add("@sfz_id", sfz_id);
 
             return Select(selectSql, para);
 

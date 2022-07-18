@@ -43,18 +43,6 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.dgvlist = new Sunny.UI.UIDataGridView();
-            this.request_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doct_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weekstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daystr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totle_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.winnostr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.open_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.op_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.txtHaobie = new Sunny.UI.UITextBox();
             this.cbxWinNo = new Sunny.UI.UIComboBox();
@@ -77,6 +65,18 @@
             this.uiPagination1 = new Sunny.UI.UIPagination();
             this.lblTotalCount = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
+            this.request_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doct_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weekstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daystr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totle_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.winnostr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.open_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.op_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnltop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -330,79 +330,6 @@
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // request_sn
-            // 
-            this.request_sn.DataPropertyName = "request_sn";
-            this.request_sn.HeaderText = "request_sn";
-            this.request_sn.Name = "request_sn";
-            this.request_sn.Visible = false;
-            // 
-            // unit_name
-            // 
-            this.unit_name.DataPropertyName = "unit_name";
-            this.unit_name.HeaderText = "科室";
-            this.unit_name.Name = "unit_name";
-            // 
-            // group_name
-            // 
-            this.group_name.DataPropertyName = "group_name";
-            this.group_name.HeaderText = "专科";
-            this.group_name.Name = "group_name";
-            // 
-            // doct_name
-            // 
-            this.doct_name.DataPropertyName = "doct_name";
-            this.doct_name.HeaderText = "医生姓名";
-            this.doct_name.Name = "doct_name";
-            // 
-            // clinic_name
-            // 
-            this.clinic_name.DataPropertyName = "clinic_name";
-            this.clinic_name.HeaderText = "号别";
-            this.clinic_name.Name = "clinic_name";
-            // 
-            // weekstr
-            // 
-            this.weekstr.DataPropertyName = "weekstr";
-            this.weekstr.HeaderText = "周";
-            this.weekstr.Name = "weekstr";
-            // 
-            // daystr
-            // 
-            this.daystr.DataPropertyName = "daystr";
-            this.daystr.HeaderText = "天";
-            this.daystr.Name = "daystr";
-            // 
-            // apstr
-            // 
-            this.apstr.DataPropertyName = "apstr";
-            this.apstr.HeaderText = "上下午";
-            this.apstr.Name = "apstr";
-            // 
-            // totle_num
-            // 
-            this.totle_num.DataPropertyName = "totle_num";
-            this.totle_num.HeaderText = "总号数";
-            this.totle_num.Name = "totle_num";
-            // 
-            // winnostr
-            // 
-            this.winnostr.DataPropertyName = "winnostr";
-            this.winnostr.HeaderText = "窗口号";
-            this.winnostr.Name = "winnostr";
-            // 
-            // open_flag_str
-            // 
-            this.open_flag_str.DataPropertyName = "open_flag_str";
-            this.open_flag_str.HeaderText = "开放标志";
-            this.open_flag_str.Name = "open_flag_str";
-            // 
-            // op_date_str
-            // 
-            this.op_date_str.DataPropertyName = "op_date_str";
-            this.op_date_str.HeaderText = "操作时间";
-            this.op_date_str.Name = "op_date_str";
-            // 
             // uiGroupBox1
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -503,6 +430,7 @@
             this.cbxWeek.Size = new System.Drawing.Size(192, 29);
             this.cbxWeek.TabIndex = 5;
             this.cbxWeek.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxWeek.Visible = false;
             this.cbxWeek.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel1
@@ -622,6 +550,7 @@
             this.uiLabel7.TabIndex = 8;
             this.uiLabel7.Text = "周";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.Visible = false;
             this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel5
@@ -739,6 +668,80 @@
             this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
             this.uiToolTip1.OwnerDraw = true;
             // 
+            // request_sn
+            // 
+            this.request_sn.DataPropertyName = "request_sn";
+            this.request_sn.HeaderText = "request_sn";
+            this.request_sn.Name = "request_sn";
+            this.request_sn.Visible = false;
+            // 
+            // unit_name
+            // 
+            this.unit_name.DataPropertyName = "unit_name";
+            this.unit_name.HeaderText = "科室";
+            this.unit_name.Name = "unit_name";
+            // 
+            // group_name
+            // 
+            this.group_name.DataPropertyName = "group_name";
+            this.group_name.HeaderText = "专科";
+            this.group_name.Name = "group_name";
+            // 
+            // doct_name
+            // 
+            this.doct_name.DataPropertyName = "doct_name";
+            this.doct_name.HeaderText = "医生姓名";
+            this.doct_name.Name = "doct_name";
+            // 
+            // clinic_name
+            // 
+            this.clinic_name.DataPropertyName = "clinic_name";
+            this.clinic_name.HeaderText = "号别";
+            this.clinic_name.Name = "clinic_name";
+            // 
+            // weekstr
+            // 
+            this.weekstr.DataPropertyName = "weekstr";
+            this.weekstr.HeaderText = "周";
+            this.weekstr.Name = "weekstr";
+            this.weekstr.Visible = false;
+            // 
+            // daystr
+            // 
+            this.daystr.DataPropertyName = "daystr";
+            this.daystr.HeaderText = "天";
+            this.daystr.Name = "daystr";
+            // 
+            // apstr
+            // 
+            this.apstr.DataPropertyName = "apstr";
+            this.apstr.HeaderText = "上下午";
+            this.apstr.Name = "apstr";
+            // 
+            // totle_num
+            // 
+            this.totle_num.DataPropertyName = "totle_num";
+            this.totle_num.HeaderText = "总号数";
+            this.totle_num.Name = "totle_num";
+            // 
+            // winnostr
+            // 
+            this.winnostr.DataPropertyName = "winnostr";
+            this.winnostr.HeaderText = "诊室";
+            this.winnostr.Name = "winnostr";
+            // 
+            // open_flag_str
+            // 
+            this.open_flag_str.DataPropertyName = "open_flag_str";
+            this.open_flag_str.HeaderText = "开放标志";
+            this.open_flag_str.Name = "open_flag_str";
+            // 
+            // op_date_str
+            // 
+            this.op_date_str.DataPropertyName = "op_date_str";
+            this.op_date_str.HeaderText = "操作时间";
+            this.op_date_str.Name = "op_date_str";
+            // 
             // BaseRequest
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -792,6 +795,10 @@
         private Sunny.UI.UITextBox txtHaobie;
         private Sunny.UI.UISymbolButton btnDelete;
         private Sunny.UI.UISymbolButton btnAdd;
+        private Sunny.UI.UIPagination uiPagination1;
+        private Sunny.UI.UILabel lblTotalCount;
+        private Sunny.UI.UISymbolButton btnEdit;
+        private Sunny.UI.UIToolTip uiToolTip1;
         private System.Windows.Forms.DataGridViewTextBoxColumn request_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn group_name;
@@ -804,9 +811,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn winnostr;
         private System.Windows.Forms.DataGridViewTextBoxColumn open_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn op_date_str;
-        private Sunny.UI.UIPagination uiPagination1;
-        private Sunny.UI.UILabel lblTotalCount;
-        private Sunny.UI.UISymbolButton btnEdit;
-        private Sunny.UI.UIToolTip uiToolTip1;
     }
 }

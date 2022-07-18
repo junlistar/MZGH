@@ -141,6 +141,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
+         
         public ResponseResult<List<ChargeType>> GetChargeTypes()
         {
             Log.Information($"GetChargeTypes");

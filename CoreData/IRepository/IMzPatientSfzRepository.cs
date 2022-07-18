@@ -10,7 +10,7 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
 
-        List<MzPatientSfz> GetDataByPatientId(string patient_id);
+        List<MzPatientSfz> GetDataBySfzId(string sfz_id);
 
 
         #endregion

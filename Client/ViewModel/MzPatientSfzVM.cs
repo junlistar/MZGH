@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,29 @@ namespace Client.ViewModel
         public string patient_id { get; set; }
 
         public string sfz_id { get; set; }
+        public string relative_code { get; set; }
+        public string relative_str
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(relative_code))
+                {
+                    return "本人";
+                }
+                if (SessionHelper.relativeCodes!=null )
+                { 
+                    var _relativeCode = SessionHelper.relativeCodes.Where(p => p.code == relative_code).FirstOrDefault();
+                    if (_relativeCode!=null)
+                    {
+                        return _relativeCode.name;
+                    }
+                }
+                return relative_code;
+            }
+        }
+
+
+
         public string name { get; set; }
 
         public string sex { get; set; }
@@ -28,10 +52,10 @@ namespace Client.ViewModel
             {
                 switch (psn_cert_type)
                 {
-                    case "01":return "居民身份证（户口簿）"; 
+                    case "01": return "居民身份证（户口簿）";
                     case "90": return "社会保障卡";
 
-                    default:return "其他身份证件";
+                    default: return "其他身份证件";
                 }
             }
         }

@@ -34,7 +34,7 @@ namespace Client
         {
             InitializeComponent();
 
-            SessionHelper.MyHttpClient = new HttpClient();
+            SessionHelper.MyHttpClient = ClassLib.HttpClientFactory.GetHttpClient();
             SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
 
             MyMessager msg = new MyMessager();
@@ -236,7 +236,8 @@ namespace Client
                     case 1303:
                         obj = new BaseRequest(); break;
                     case 1304:
-                        obj = new CreateRequestRecord(); break;
+                        //obj = new CreateRequestRecord(); break;
+                        obj = new Schb(); break;
                     case 1305:
                         obj = new BaseWeiHu(); break;
                     case 1201:

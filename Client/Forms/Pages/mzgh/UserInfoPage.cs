@@ -24,6 +24,8 @@ namespace Client.Forms.Pages
 
         List<MzPatientSfzVM> sfz_list;
 
+
+
         public UserInfoPage()
         {
             InitializeComponent();
@@ -51,234 +53,38 @@ namespace Client.Forms.Pages
         UIDataGridView dgv_district = new UIDataGridView();
         UIDataGridView dgv_zhiye = new UIDataGridView();
         UIDataGridView dgv_shenfen = new UIDataGridView();
-        //private void txthomedistrict_TextChanged(object sender, EventArgs e)
-        //{
-        //    //查询科室信息 显示到girdview
-        //    var tb = sender as UITextBox;
-        //    //var pbl = tb.Parent as UIPanel;
-        //    //获取数据 
-
-        //    if (SessionHelper.districtCodes != null && SessionHelper.districtCodes.Count > 0)
-        //    {
-        //        var ipt = txthomedistrict.Text.Trim();
-
-        //        dgv_district.Parent = this;
-        //        dgv_district.Top = tb.Top + tb.Height;
-        //        dgv_district.Left = tb.Left;
-        //        dgv_district.Width = tb.Width;
-        //        dgv_district.Height = 200;
-        //        dgv_district.BringToFront();
-        //        dgv_district.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        //        dgv_district.RowHeadersVisible = false;
-        //        dgv_district.BackgroundColor = Color.White;
-        //        dgv_district.ReadOnly = true;
-
-
-        //        List<DistrictCodeVM> vm = SessionHelper.districtCodes;
-
-        //        if (!string.IsNullOrWhiteSpace(ipt))
-        //        {
-        //            vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
-        //        }
-        //        dgv_district.DataSource = vm;
-
-        //        dgv_district.Columns["code"].HeaderText = "编号";
-        //        dgv_district.Columns["name"].HeaderText = "名称";
-        //        dgv_district.Columns["py_code"].Visible = false;
-        //        dgv_district.Columns["d_code"].Visible = false;
-        //        dgv_district.Columns["zip_code"].Visible = false;
-        //        dgv_district.Columns["gb_code"].Visible = false;
-
-        //        dgv_district.AutoResizeColumns();
-
-        //        dgv_district.CellClick += dgv_district_CellContentClick;
-        //        dgv_district.Show();
-        //    }
-
-        //}
-        //private void dgv_district_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex == -1)
-        //    {
-        //        return;
-        //    }
-        //    var obj = sender as UIDataGridView;
-        //    var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
-        //    var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-        //    txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
-        //    txthomedistrict.Text = name;
-        //    //txthomestreet.Text = name;
-        //    txthomedistrict.TagString = unit_sn;
-        //    txthomedistrict.TextChanged += txthomedistrict_TextChanged;
-
-        //    dgv_district.Hide();
-        //}
-
-        //private void txthomedistrict_Leave(object sender, EventArgs e)
-        //{
-        //    if (!dgv_district.Focused)
-        //    {
-        //        dgv_district.Hide();
-        //    }
-        //}
-
-        //private void txthomedistrict_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Down)
-        //    {
-        //        this.dgv_district.Focus();
-        //    }
-        //    else if (e.KeyCode == Keys.Enter)
-        //    {
-        //        if (dgv_district.Rows.Count > 0)
-        //        {
-
-        //            var unit_sn = dgv_district.Rows[0].Cells["code"].Value.ToString();
-        //            var name = dgv_district.Rows[0].Cells["name"].Value.ToString();
-        //            txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
-        //            txthomedistrict.Text = name;
-        //            txthomedistrict.TagString = unit_sn;
-        //            txthomedistrict.TextChanged += txthomedistrict_TextChanged;
-
-        //            dgv_district.Hide();
-        //        }
-        //    }
-        //}
-
-        private void txtZhiye_TextChanged(object sender, EventArgs e)
-        {
-            //查询科室信息 显示到girdview
-            var tb = sender as UITextBox;
-            //var pbl = tb.Parent as UIPanel;
-            //获取数据 
-
-            if (SessionHelper.occupationCodes != null && SessionHelper.occupationCodes.Count > 0)
-            {
-                //var ipt = txtZhiye.Text.Trim();
-
-                //dgv_zhiye.Parent = this;
-                //dgv_zhiye.Top = tb.Top + tb.Height;
-                //dgv_zhiye.Left = tb.Left;
-                //dgv_zhiye.Width = tb.Width;
-                //dgv_zhiye.Height = 200;
-                //dgv_zhiye.BringToFront();
-                //dgv_zhiye.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                //dgv_zhiye.RowHeadersVisible = false;
-                //dgv_zhiye.BackgroundColor = Color.White;
-                //dgv_zhiye.ReadOnly = true;
-
-
-                //List<OccupationCodeVM> vm = SessionHelper.occupationCodes;
-
-                //if (!string.IsNullOrWhiteSpace(ipt))
-                //{
-                //    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
-                //}
-                //dgv_zhiye.DataSource = vm;
-
-                //dgv_zhiye.Columns["code"].HeaderText = "编号";
-                //dgv_zhiye.Columns["name"].HeaderText = "名称";
-                //dgv_zhiye.Columns["py_code"].Visible = false;
-                //dgv_zhiye.Columns["d_code"].Visible = false;
-                //dgv_zhiye.Columns["flag"].Visible = false;
-                //dgv_zhiye.Columns["group_code"].Visible = false;
-                //dgv_zhiye.Columns["tcmms_code"].Visible = false;
-
-                //dgv_zhiye.AutoResizeColumns();
-
-                //dgv_zhiye.CellClick += dgv_zhiye_CellContentClick;
-                //dgv_zhiye.Show();
-            }
-        }
-
-        private void dgv_zhiye_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1)
-            {
-                return;
-            }
-            var obj = sender as UIDataGridView;
-            var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
-            var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-            //txtZhiye.TextChanged -= txtZhiye_TextChanged;
-            //txtZhiye.Text = name;
-            //txtZhiye.TagString = unit_sn;
-            //txtZhiye.TextChanged += txtZhiye_TextChanged;
-
-            dgv_zhiye.Hide();
-        }
-
-        private void txtZhiye_Leave(object sender, EventArgs e)
-        {
-            if (!dgv_zhiye.Focused)
-            {
-                dgv_zhiye.Hide();
-            }
-        }
-
-        //private void Dgv_zhiye_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        if (dgv_zhiye.SelectedIndex != -1)
-        //        {
-
-        //            var ev = new DataGridViewCellEventArgs(0, dgv_zhiye.SelectedIndex);
-
-        //            dgv_zhiye_CellContentClick(sender, ev);
-        //        }
-        //    }
-        //}
-        //private void txtZhiye_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Down)
-        //    {
-        //        this.dgv_zhiye.Focus();
-        //    }
-        //    else if (e.KeyCode == Keys.Enter)
-        //    {
-        //        if (dgv_zhiye.Rows.Count > 0)
-        //        {
-
-        //            var unit_sn = dgv_zhiye.Rows[0].Cells["code"].Value.ToString();
-        //            var name = dgv_zhiye.Rows[0].Cells["name"].Value.ToString();
-        //            txtZhiye.TextChanged -= txtZhiye_TextChanged;
-        //            txtZhiye.Text = name;
-        //            txtZhiye.TagString = unit_sn;
-        //            txtZhiye.TextChanged += txtZhiye_TextChanged;
-
-        //            dgv_zhiye.Hide();
-        //        }
-        //    }
-
-        //}
-        //private void Dgv_district_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        if (dgv_district.SelectedIndex != -1)
-        //        {
-
-        //            var ev = new DataGridViewCellEventArgs(0, dgv_district.SelectedIndex);
-
-        //            dgv_district_CellContentClick(sender, ev);
-        //        }
-        //    }
-        //}
-
+          
 
         public void InitDic()
         {
 
             log.Info("初始化数据字典：InitDic");
+             
+
+            //获取用户  
+            var json = "";
+            var paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
+
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
+            }
+            SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
 
 
-
-            // dgv_district.KeyDown += Dgv_district_KeyDown;
-            // dgv_zhiye.KeyDown += Dgv_zhiye_KeyDown;
-
-
+            this.cbx_relation.DataSource = SessionHelper.relativeCodes;
+            cbx_relation.DisplayMember = "name";
+            cbx_relation.ValueMember = "code";
+            cbx_relation.Text = "本人";
         }
+
 
         private void cbxhm_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -289,11 +95,67 @@ namespace Client.Forms.Pages
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            //if (text == "新病人" || text == "病人ID" || text == "磁卡号")
-            //{
-            //    EditUser();
-            //}
+            try
+            {
 
+                //获取数据
+                var _pid = txt_patientId.Text;
+                var _name = txt_name.Text;
+                var _tel = txtTel.Text;
+
+                var sex = "1";
+                switch (cbxsex.Text)
+                {
+                    case "男": sex = "1";break;
+                    case "女": sex = "2";break;
+                    default:
+                        break;
+                }
+                var _sex = sex;
+
+                var marrycode = 1;
+                switch (this.cbxmarrycode.Text)
+                {
+                    case "已婚":
+                        marrycode = 1; break;
+                    case "未婚":
+                        marrycode = 2; break;
+                    case "丧偶":
+                        marrycode = 3; break;
+                    case "离婚":
+                        marrycode = 4; break;
+                    case "其他":
+                        marrycode = 5; break;
+                    default:
+                        break;
+                }
+                var _marry_code = marrycode;
+                var _birth = txt_birth.Value;
+                var _relation_name = txtrelationname.Text;
+                var _relation_code = cbx_relation.SelectedValue;
+                var _home_address = sfz_home_address.Text;
+                var _opera = SessionHelper.uservm.user_mi;
+
+                var paramurl = string.Format($"/api/User/UpdateUserBaseInfo?pid={_pid}&name={_name}&sex={_sex}&marry_code={_marry_code}&birthday={_birth}&tel={_tel}&relation_name={_relation_name}&relation_code={_relation_code}&home_street={_home_address}&opera={_opera}");
+                var json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("保存成功！");
+                    GetPatientRelatedSfzInfo(txt_sfz_no.Text);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
         }
 
         public void EditUser()
@@ -533,18 +395,8 @@ namespace Client.Forms.Pages
         }
         public void DeleteSocialNo(string sno)
         {
-            var json = "";
             var paramurl = string.Format($"/api/GuaHao/DeleteSocialNo?sno={sno}");
-            var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
+            HttpClientUtil.Get(paramurl);
         }
 
 
@@ -556,15 +408,32 @@ namespace Client.Forms.Pages
             // this.txtZhiye.TextChanged -= txtZhiye_TextChanged;
 
             //txtId.Text = item.patient_id.Substring(3, 7);
-            //txtbarcode.Text = item.p_bar_code;
+
+            txtCode.Text = item.p_bar_code;
+
+            txt_patientId.Text = item.patient_id;
+
             txt_sfz_no.Text = item.hic_no;
-            ybk_psn_no.Text = item.social_no;
+            //ybk_psn_no.Text = item.social_no;
 
             txt_name.Text = item.name;
 
             if (item.birthday.HasValue)
             {
                 this.txt_birth.Text = item.birthday.Value.ToShortDateString();
+            }
+            if (!string.IsNullOrEmpty(item.relation_code))
+            {
+                cbx_relation.SelectedValue = item.relation_code;
+                //var relativeCodeVM = SessionHelper.relativeCodes.Where(p => p.code == item.relation_code).FirstOrDefault();
+                // if (relativeCodeVM!=null)
+                // {
+                //     cbx_relation.SelectedValue = relativeCodeVM.code;
+                // }
+            }
+            else
+            {
+                cbx_relation.Text = "本人";
             }
 
             this.txtTel.Text = item.home_tel;
@@ -631,7 +500,7 @@ namespace Client.Forms.Pages
 
             //社保号码
             //addition_no1
-            ybk_psn_cert_type.Text = item.addition_no1;
+            //ybk_psn_cert_type.Text = item.addition_no1;
 
             //工作单位
             //employer_name
@@ -796,9 +665,9 @@ namespace Client.Forms.Pages
                         //SessionHelper.patientVM = userInfo;
 
 
-                        BindUserInfo(userInfo);
+                        //BindUserInfo(userInfo);
                         //查询patient_id关联的身份证信息
-                        GetPatientRelatedSfzInfo(userInfo.patient_id);
+                        GetPatientRelatedSfzInfo(userInfo.hic_no);
                     }
                     else
                     {
@@ -819,12 +688,12 @@ namespace Client.Forms.Pages
             }
         }
 
-        public void GetPatientRelatedSfzInfo(string patient_id)
+        public void GetPatientRelatedSfzInfo(string sfz_id)
         {
             //获取数据  
             Task<HttpResponseMessage> task = null;
             string json = "";
-            string paramurl = string.Format($"/api/user/GetDataByPatientId?patient_id={patient_id}");
+            string paramurl = string.Format($"/api/user/GetDataBySfzId?sfz_id={sfz_id}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -847,7 +716,8 @@ namespace Client.Forms.Pages
                     var _source = result.data.Select(p => new
                     {
                         patient_id = p.patient_id,
-                        sfz_id = p.sfz_id
+                        sfz_id = p.sfz_id,
+                        relative_code = p.relative_str
                     }).ToList();
                     dgv_patient_sfz.Init();
                     dgv_patient_sfz.DataSource = _source;
@@ -981,6 +851,9 @@ namespace Client.Forms.Pages
                 //查询数据库身份证信息
                 BindSfzInfo(patient_id);
 
+                //绑定基础信息数据
+                BindBaseInfo(patient_id);
+
                 //查询patient_id 关联挂号记录
                 GetRecordByPatientId(patient_id);
 
@@ -990,6 +863,49 @@ namespace Client.Forms.Pages
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
+        }
+        public void BindBaseInfo(string patient_id)
+        {//获取数据   
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/guahao/GetPatientByPatientId?pid={patient_id}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1)
+                {
+                    var _patient = result.data.FirstOrDefault();
+                    if (_patient != null)
+                    {
+                        BindUserInfo(_patient);
+                    }
+                }
+                else
+                {
+                    //MessageBox.Show("没有查到用户数据");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
         }
 
 
@@ -1001,7 +917,11 @@ namespace Client.Forms.Pages
                 sfz_card_no.Text = sfz_info.card_no;
                 sfz_name.Text = sfz_info.name;
                 sfz_sex.Text = sfz_info.sex;
-                sfz_birthday.Text = sfz_info.birthday;
+                DateTime _dt = DateTime.MinValue;
+                if (DateTime.TryParse(sfz_info.birthday, out _dt))
+                {
+                    sfz_birthday.Text = _dt.ToShortDateString();
+                }
                 sfz_folk.Text = sfz_info.folk;
                 sfz_address.Text = sfz_info.address;
                 sfz_home_address.Text = sfz_info.home_address;
@@ -1063,13 +983,13 @@ namespace Client.Forms.Pages
                     //MessageBox.Show("没有查到用户数据");
                 }
 
-            } 
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
-}
+        }
 
 
         public void GetRecordByPatientId(string patient_id)
@@ -1170,6 +1090,25 @@ namespace Client.Forms.Pages
         private void uiGroupBox5_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnNewUser_Click(object sender, EventArgs e)
+        {
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
+            UserInfoEdit ue = new UserInfoEdit("", null);
+            ue.FormClosed += Ue_FormClosed;
+            ue.ShowDialog();
+        }
+        private void Ue_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(SessionHelper.cardno))
+            {
+                txtCode.Text = SessionHelper.cardno;
+                SearchUser();
+            }
         }
     }
 }

@@ -323,7 +323,7 @@ namespace Client
                     }
                 }
                 BindUnit(requestDic);
-            } 
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -615,7 +615,7 @@ namespace Client
 
                     log.Error(result.message);
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -658,7 +658,7 @@ namespace Client
                         break;
                     }
                 }
-                 
+
             }
             if (isWrong)
             {
@@ -921,15 +921,15 @@ namespace Client
                 HttpContent httpContent = new StringContent(jsonStr);
 
                 SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent);
-           
-            } 
+
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
 
-}
+        }
 
 
 
@@ -1101,7 +1101,6 @@ namespace Client
 
         private void Ks_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //MessageBox.Show(request_key);
             if (requestDic != null && requestDic.Count > 0)
             {
                 if (!string.IsNullOrWhiteSpace(request_key))
@@ -1117,13 +1116,6 @@ namespace Client
                     uiBreadcrumb2.ItemIndex = 0;
                 }
             }
-
-        }
-
-        private void TxtKeySearch_TextChanged(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-
 
         }
 
@@ -1273,7 +1265,7 @@ namespace Client
 
                     lblstreet.Text = userInfo.home_street;
                     lblsfz.Text = userInfo.hic_no; ;
- 
+
                     if (YBHelper.currentYBInfo != null)
                     {
                         //保存用户的医保信息
@@ -1328,12 +1320,12 @@ namespace Client
                     }
                 }
 
-            } 
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
-            } 
+            }
 
         }
 
@@ -1395,46 +1387,46 @@ namespace Client
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
+
+            FilterGuahaoData();
+        }
+
+        public void FilterGuahaoData()
+        {
             var py_code = txtSearch.Text.Trim().ToUpper();
 
             if (string.IsNullOrWhiteSpace(py_code))
             {
-                lstunits.Hide();
+                BindUnit(requestDic);
+                return;
             }
-            else
+            if (py_code.Length < 2)
             {
-                lstunits.Show(); lstunits.BackColor = Color.Red; lstunits.BringToFront();
+                return;
             }
-            var list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
-
-            lstunits.Items.Clear();
-
-            foreach (var key in requestDic.Keys)
+            var _list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
+            var _source = new Dictionary<string, List<GHRequestVM>>();
+            foreach (var _item in _list)
             {
-                if (list.Where(p => p.name == key).Count() > 0)
+                if (requestDic.ContainsKey(_item.name))
                 {
-                    lstunits.Items.Add(key);
+                    _source.Add(_item.name, requestDic[_item.name]);
                 }
             }
 
+            BindUnit(_source); isBreadHandleSet = true;
+            uiBreadcrumb2.ItemIndex = 0;
         }
 
         private void txtSearch_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Down)
             {
-                this.lstunits.Focus();
-                if (lstunits.Items.Count > 0)
-                {
-                    lstunits.SelectedIndex = 0;
-                }
+                 
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if (lstunits.Items.Count > 0)
-                {
-                    request_key = lstunits.Items[0].ToString();
-                }
+                FilterGuahaoData();
             }
         }
 

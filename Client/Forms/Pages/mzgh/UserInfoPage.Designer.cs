@@ -116,7 +116,12 @@
             this.dgv_patient_sfz = new Sunny.UI.UIDataGridView();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.relative_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
+            this.txt_patientId = new Sunny.UI.UITextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.cbx_relation = new Sunny.UI.UIComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txt_sfz_no = new Sunny.UI.UITextBox();
             this.txt_birth = new Sunny.UI.UIDatePicker();
@@ -134,6 +139,7 @@
             this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.visit_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnNewUser = new Sunny.UI.UISymbolButton();
             this.sfz_name.SuspendLayout();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -205,11 +211,10 @@
             // 
             this.txtrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtrelationname.Location = new System.Drawing.Point(663, 76);
+            this.txtrelationname.Location = new System.Drawing.Point(678, 115);
             this.txtrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtrelationname.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtrelationname.Name = "txtrelationname";
-            this.txtrelationname.ReadOnly = true;
             this.txtrelationname.ShowText = false;
             this.txtrelationname.Size = new System.Drawing.Size(151, 29);
             this.txtrelationname.TabIndex = 17;
@@ -219,7 +224,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(588, 81);
+            this.label9.Location = new System.Drawing.Point(603, 120);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 21);
             this.label9.TabIndex = 16;
@@ -274,7 +279,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(333, 42);
+            this.label13.Location = new System.Drawing.Point(629, 42);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 21);
             this.label13.TabIndex = 20;
@@ -311,7 +316,6 @@
             this.txtTel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTel.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTel.Name = "txtTel";
-            this.txtTel.ReadOnly = true;
             this.txtTel.ShowText = false;
             this.txtTel.Size = new System.Drawing.Size(187, 29);
             this.txtTel.TabIndex = 31;
@@ -335,7 +339,6 @@
             this.sfz_home_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sfz_home_address.MinimumSize = new System.Drawing.Size(1, 16);
             this.sfz_home_address.Name = "sfz_home_address";
-            this.sfz_home_address.ReadOnly = true;
             this.sfz_home_address.ShowText = false;
             this.sfz_home_address.Size = new System.Drawing.Size(452, 29);
             this.sfz_home_address.TabIndex = 33;
@@ -362,13 +365,12 @@
             "丧偶",
             "离婚",
             "其他"});
-            this.cbxmarrycode.Location = new System.Drawing.Point(382, 37);
+            this.cbxmarrycode.Location = new System.Drawing.Point(678, 37);
             this.cbxmarrycode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxmarrycode.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxmarrycode.Name = "cbxmarrycode";
             this.cbxmarrycode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxmarrycode.ReadOnly = true;
-            this.cbxmarrycode.Size = new System.Drawing.Size(187, 29);
+            this.cbxmarrycode.Size = new System.Drawing.Size(151, 29);
             this.cbxmarrycode.TabIndex = 35;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -416,16 +418,15 @@
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(233, 21);
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(271, 2);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 35);
+            this.btnSave.Size = new System.Drawing.Size(100, 61);
             this.btnSave.Symbol = 61639;
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Visible = false;
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -433,7 +434,7 @@
             // 
             this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Location = new System.Drawing.Point(339, 21);
+            this.btnReset.Location = new System.Drawing.Point(487, 10);
             this.btnReset.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 35);
@@ -453,15 +454,15 @@
             this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(445, 21);
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(374, 2);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.Size = new System.Drawing.Size(107, 35);
+            this.btnExit.Size = new System.Drawing.Size(107, 61);
             this.btnExit.Style = Sunny.UI.UIStyle.Red;
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
@@ -954,6 +955,7 @@
             // 
             // uiGroupBox3
             // 
+            this.uiGroupBox3.Controls.Add(this.btnNewUser);
             this.uiGroupBox3.Controls.Add(this.btnYBK);
             this.uiGroupBox3.Controls.Add(this.btnIDCard);
             this.uiGroupBox3.Controls.Add(this.btnSFZ);
@@ -980,7 +982,7 @@
             this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(160, 117);
+            this.btnYBK.Location = new System.Drawing.Point(161, 92);
             this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBK.Name = "btnYBK";
             this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -1006,7 +1008,7 @@
             this.btnIDCard.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnIDCard.Location = new System.Drawing.Point(160, 62);
+            this.btnIDCard.Location = new System.Drawing.Point(161, 37);
             this.btnIDCard.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnIDCard.Name = "btnIDCard";
             this.btnIDCard.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -1032,7 +1034,7 @@
             this.btnSFZ.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSFZ.Location = new System.Drawing.Point(34, 117);
+            this.btnSFZ.Location = new System.Drawing.Point(35, 92);
             this.btnSFZ.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSFZ.Name = "btnSFZ";
             this.btnSFZ.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -1058,7 +1060,7 @@
             this.btnCika.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCika.Location = new System.Drawing.Point(34, 62);
+            this.btnCika.Location = new System.Drawing.Point(35, 37);
             this.btnCika.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCika.Name = "btnCika";
             this.btnCika.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -1120,7 +1122,8 @@
             this.dgv_patient_sfz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_patient_sfz.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patient_id,
-            this.sfz_id});
+            this.sfz_id,
+            this.relative_code});
             dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle33.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle33.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1170,8 +1173,18 @@
             this.sfz_id.HeaderText = "身份证ID";
             this.sfz_id.Name = "sfz_id";
             // 
+            // relative_code
+            // 
+            this.relative_code.DataPropertyName = "relative_code";
+            this.relative_code.HeaderText = "与患者关系";
+            this.relative_code.Name = "relative_code";
+            // 
             // uiGroupBox5
             // 
+            this.uiGroupBox5.Controls.Add(this.txt_patientId);
+            this.uiGroupBox5.Controls.Add(this.label22);
+            this.uiGroupBox5.Controls.Add(this.cbx_relation);
+            this.uiGroupBox5.Controls.Add(this.label20);
             this.uiGroupBox5.Controls.Add(this.label14);
             this.uiGroupBox5.Controls.Add(this.txt_sfz_no);
             this.uiGroupBox5.Controls.Add(this.txt_birth);
@@ -1203,6 +1216,55 @@
             this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox5.Click += new System.EventHandler(this.uiGroupBox5_Click);
             // 
+            // txt_patientId
+            // 
+            this.txt_patientId.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_patientId.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_patientId.Location = new System.Drawing.Point(117, 37);
+            this.txt_patientId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_patientId.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_patientId.Name = "txt_patientId";
+            this.txt_patientId.ReadOnly = true;
+            this.txt_patientId.ShowText = false;
+            this.txt_patientId.Size = new System.Drawing.Size(192, 29);
+            this.txt_patientId.TabIndex = 43;
+            this.txt_patientId.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_patientId.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(51, 42);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(59, 21);
+            this.label22.TabIndex = 42;
+            this.label22.Text = "病人ID";
+            // 
+            // cbx_relation
+            // 
+            this.cbx_relation.DataSource = null;
+            this.cbx_relation.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbx_relation.FillColor = System.Drawing.Color.White;
+            this.cbx_relation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx_relation.Location = new System.Drawing.Point(678, 154);
+            this.cbx_relation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbx_relation.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbx_relation.Name = "cbx_relation";
+            this.cbx_relation.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbx_relation.Size = new System.Drawing.Size(151, 29);
+            this.cbx_relation.TabIndex = 9;
+            this.cbx_relation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_relation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(587, 157);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(90, 21);
+            this.label20.TabIndex = 18;
+            this.label20.Text = "与患者关系";
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -1231,13 +1293,12 @@
             // 
             this.txt_birth.FillColor = System.Drawing.Color.White;
             this.txt_birth.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_birth.Location = new System.Drawing.Point(663, 37);
+            this.txt_birth.Location = new System.Drawing.Point(678, 76);
             this.txt_birth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_birth.MaxLength = 10;
             this.txt_birth.MinimumSize = new System.Drawing.Size(63, 0);
             this.txt_birth.Name = "txt_birth";
             this.txt_birth.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txt_birth.ReadOnly = true;
             this.txt_birth.ShowToday = true;
             this.txt_birth.Size = new System.Drawing.Size(151, 29);
             this.txt_birth.SymbolDropDown = 61555;
@@ -1251,7 +1312,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(614, 42);
+            this.label10.Location = new System.Drawing.Point(629, 81);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 21);
             this.label10.TabIndex = 38;
@@ -1263,12 +1324,14 @@
             this.cbxsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxsex.FillColor = System.Drawing.Color.White;
             this.cbxsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxsex.Items.AddRange(new object[] {
+            "男",
+            "女"});
             this.cbxsex.Location = new System.Drawing.Point(382, 117);
             this.cbxsex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxsex.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxsex.Name = "cbxsex";
             this.cbxsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxsex.ReadOnly = true;
             this.cbxsex.Size = new System.Drawing.Size(187, 29);
             this.cbxsex.TabIndex = 8;
             this.cbxsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1287,13 +1350,12 @@
             // 
             this.txt_name.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_name.Location = new System.Drawing.Point(117, 76);
+            this.txt_name.Location = new System.Drawing.Point(382, 37);
             this.txt_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_name.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_name.Name = "txt_name";
-            this.txt_name.ReadOnly = true;
             this.txt_name.ShowText = false;
-            this.txt_name.Size = new System.Drawing.Size(192, 29);
+            this.txt_name.Size = new System.Drawing.Size(187, 29);
             this.txt_name.TabIndex = 4;
             this.txt_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1301,7 +1363,7 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(72, 80);
+            this.label36.Location = new System.Drawing.Point(333, 42);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(42, 21);
             this.label36.TabIndex = 4;
@@ -1311,7 +1373,7 @@
             // 
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCode.Location = new System.Drawing.Point(117, 37);
+            this.txtCode.Location = new System.Drawing.Point(117, 76);
             this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtCode.Name = "txtCode";
@@ -1325,7 +1387,7 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(68, 40);
+            this.label37.Location = new System.Drawing.Point(68, 79);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(42, 21);
             this.label37.TabIndex = 2;
@@ -1440,6 +1502,32 @@
             this.visit_status.HeaderText = "状态";
             this.visit_status.Name = "visit_status";
             // 
+            // btnNewUser
+            // 
+            this.btnNewUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNewUser.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnNewUser.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNewUser.Location = new System.Drawing.Point(35, 144);
+            this.btnNewUser.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnNewUser.Name = "btnNewUser";
+            this.btnNewUser.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnNewUser.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnNewUser.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnNewUser.Size = new System.Drawing.Size(120, 39);
+            this.btnNewUser.Style = Sunny.UI.UIStyle.Orange;
+            this.btnNewUser.StyleCustomMode = true;
+            this.btnNewUser.Symbol = 62140;
+            this.btnNewUser.TabIndex = 35;
+            this.btnNewUser.Text = "新用户";
+            this.btnNewUser.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnNewUser.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
+            // 
             // UserInfoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1523,8 +1611,6 @@
         private Sunny.UI.UITextBox txtCode;
         private System.Windows.Forms.Label label37;
         private Sunny.UI.UIDataGridView dgv_patient_sfz;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sfz_id;
         private Sunny.UI.UITextBox sfz_address;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -1568,5 +1654,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cvlserv_flag;
         private System.Windows.Forms.DataGridViewTextBoxColumn insuplc_admdvs;
         private System.Windows.Forms.DataGridViewTextBoxColumn emp_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sfz_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn relative_code;
+        private Sunny.UI.UIComboBox cbx_relation;
+        private System.Windows.Forms.Label label20;
+        private Sunny.UI.UITextBox txt_patientId;
+        private System.Windows.Forms.Label label22;
+        private Sunny.UI.UISymbolButton btnNewUser;
     }
 }

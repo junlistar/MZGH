@@ -8,6 +8,8 @@ namespace Data.Entities
         public string patient_id { get; set; }
 
         public string sfz_id { get; set; }
+         
+        public string relative_code { get; set; }
 
         //身份证信息
         public string name { get; set; }

@@ -44,7 +44,9 @@ namespace Client.ClassLib
         public static List<RequestTypeVM> requestTypes;
         //用户
         public static List<UserDicVM> userDics;
-
+        //与患者关系
+        public static List<RelativeCodeVM> relativeCodes;
+        
 
         /// <summary>
         /// 身份证读卡数据

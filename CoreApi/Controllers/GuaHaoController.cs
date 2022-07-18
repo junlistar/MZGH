@@ -434,6 +434,21 @@ namespace CoreApi.Controllers
             return list;
         }
 
+        public ResponseResult<List<RelativeCode>> GetRelativeCodes()
+        {
+            Log.Information($"GetRelativeCodes");
+            var list = new List<RelativeCode>();
+            try
+            {
+                list = _userDicRepository.GetRelativeCodes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<RelativeCode>>(ex.Message);
+            }
+            return list;
+        }
         public ResponseResult<List<ChargeType>> GetChargeTypes()
         {
             Log.Information($"GetChargeTypes");

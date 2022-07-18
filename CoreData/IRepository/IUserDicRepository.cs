@@ -8,5 +8,7 @@ namespace Data.IRepository
     public interface IUserDicRepository : IRepositoryBase<UserDic> 
     {
         List<UserDic> GetUserDic();
+
+        List<RelativeCode> GetRelativeCodes();
     }
 }
