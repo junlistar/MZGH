@@ -20,7 +20,7 @@ namespace Client
     public partial class BaseWeiHu : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(BaseWeiHu));//typeof放当前类
-         
+
         List<BaseRequestVM> list = null;
 
         public List<UnitVM> units = null;
@@ -34,16 +34,14 @@ namespace Client
         }
         private void BaseRequest_Load(object sender, EventArgs e)
         { 
-
-            InitDic();
-
-            //InitData();
+            InitDic(); 
 
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
             uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
             uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
+
         }
 
         public void InitDic()
@@ -62,7 +60,7 @@ namespace Client
             txtDate.Value = DateTime.Now;
 
             //设置上午下午 
-            this.cbxSXW.Items.Clear(); 
+            this.cbxSXW.Items.Clear();
 
             var rh_list = new List<RequestHourVM>();
             foreach (var item in SessionHelper.requestHours.ToArray())
@@ -92,7 +90,7 @@ namespace Client
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
-        { 
+        {
             InitData();
         }
 
@@ -106,7 +104,7 @@ namespace Client
             string json = "";
 
             #region 参数处理
-             
+
             //var gh_date = txtRiqi.Text;
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
             var clinic_type = string.IsNullOrWhiteSpace(txtHaobie.Text) ? "%" : txtHaobie.TagString;
@@ -127,8 +125,8 @@ namespace Client
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
- 
-             
+
+
             if (cbxOpenFlag.Text == "开放")
             {
                 open_flag = "1";
@@ -139,7 +137,7 @@ namespace Client
             }
 
             #endregion
-             
+
             var begin = txtDate.Value.ToShortDateString();
 
             var para = $"?begin={begin}&end={begin}&unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&req_type={req_type}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
@@ -165,8 +163,8 @@ namespace Client
                 }
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-                if (result.status==1 && result.data!=null)
-                {  
+                if (result.status == 1 && result.data != null)
+                {
                     var ds = result.data.Select(p => new
                     {
                         record_sn = p.record_sn,
@@ -191,7 +189,7 @@ namespace Client
                     dgvlist.Init();
                     dgvlist.DataSource = ds;
                     dgvlist.AutoResizeColumns();
-
+                    lblTotalCount.Text = $"总计： {ds.Count} 条数据";
                     dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
                 else
@@ -199,6 +197,7 @@ namespace Client
                     UIMessageTip.ShowError("查询失败!");
                     log.Error(result.message);
                     BindNullData();
+                    lblTotalCount.Text = $"总计： 0 条数据";
                 }
 
             }
@@ -578,7 +577,7 @@ namespace Client
         public void Edit()
         {
             try
-            {  
+            {
                 if (dgvlist.Rows.Count > 0 && dgvlist.SelectedIndex >= 0)
                 {
                     var record_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["record_sn"].Value;
@@ -587,7 +586,7 @@ namespace Client
                     edit.ShowDialog();
                     InitData();
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -627,7 +626,7 @@ namespace Client
                     else
                     {
                         UIMessageTip.ShowError("查询失败!");
-                        log.Error(result.message); 
+                        log.Error(result.message);
                     }
 
                 }
@@ -822,6 +821,42 @@ namespace Client
             {
                 this.Focus();
             }
+        }
+
+        private void dgvlist_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                Edit();
+            }
+        }
+
+        private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            try
+            { 
+                if (e.RowIndex != -1)
+                {
+                    dgvlist.Rows[e.RowIndex].Cells["request_date"].Style.ForeColor = UIColor.Red;
+                    dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
+                    dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Purple;
+                    dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = UIColor.Green;
+                    dgvlist.Rows[e.RowIndex].Cells["group_name"].Style.ForeColor = UIColor.Orange;
+                    dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+                    dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+                    dgvlist.Rows[e.RowIndex].Cells["req_name"].Style.ForeColor = UIColor.Green;
+                    dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Red;
+                    dgvlist.Rows[e.RowIndex].Cells["begin_no"].Style.ForeColor = UIColor.Green; 
+                    dgvlist.Rows[e.RowIndex].Cells["current_no"].Style.ForeColor = UIColor.Blue; 
+                    dgvlist.Rows[e.RowIndex].Cells["toend_no"].Style.ForeColor = UIColor.Purple;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
         }
     }
 }

@@ -20,12 +20,15 @@ namespace Client
     public partial class BaseRequestEdit : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(BaseRequestEdit));//typeof放当前类
-        BaseRequest _baseRequest;
+        //BaseRequest _baseRequest;
+        string _current_sn = "";
+        int _temp_flag = 0;
 
-        public BaseRequestEdit(BaseRequest baseRequest)
+        public BaseRequestEdit(string current_sn,int temp_flag=0)
         {
             InitializeComponent();
-            _baseRequest = baseRequest;
+            _current_sn = current_sn;
+            _temp_flag = temp_flag;
         }
 
         private void BaseRequestEdit_Load(object sender, EventArgs e)
@@ -33,7 +36,7 @@ namespace Client
 
             InitUI();
 
-            if (!string.IsNullOrEmpty(_baseRequest.current_sn))
+            if (!string.IsNullOrEmpty(_current_sn))
             {
                 //查询数据
                 InitData();
@@ -48,7 +51,7 @@ namespace Client
 
                 var d = new
                 {
-                    request_sn = _baseRequest.current_sn,
+                    request_sn = _current_sn,
                 };
                 var cdata = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(cdata);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
@@ -113,16 +116,16 @@ namespace Client
                         cbxSXW.Text = req_hour.name;
                     }
 
-                    switch (data.week)
-                    {
-                        case 1: cbxWeek.Text = "第一周"; break;
-                        case 2: cbxWeek.Text = "第二周"; break;
-                        case 3: cbxWeek.Text = "第三周"; break;
-                        case 4: cbxWeek.Text = "第四周"; break;
-                        case 5: cbxWeek.Text = "第五周"; break;
-                        default:
-                            break;
-                    }
+                    //switch (data.week)
+                    //{
+                    //    case 1: cbxWeek.Text = "第一周"; break;
+                    //    case 2: cbxWeek.Text = "第二周"; break;
+                    //    case 3: cbxWeek.Text = "第三周"; break;
+                    //    case 4: cbxWeek.Text = "第四周"; break;
+                    //    case 5: cbxWeek.Text = "第五周"; break;
+                    //    default:
+                    //        break;
+                    //}
 
                     switch (data.day)
                     {
@@ -171,7 +174,7 @@ namespace Client
 
         public void InitUI()
         {
-            cbxHaobie.DataSource = _baseRequest.clinicTypes;
+            cbxHaobie.DataSource = SessionHelper.clinicTypes;
             cbxHaobie.ValueMember = "code";
             cbxHaobie.DisplayMember = "name";
 
@@ -191,6 +194,12 @@ namespace Client
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
+
+            if (_temp_flag == 0)
+            {
+                lbl_temp_flag.Visible = false;
+                txt_temp_flag.Visible = false;
+            }
 
         }
 
@@ -212,7 +221,7 @@ namespace Client
             var pbl = tb.Parent as UIPanel;
             //获取数据 
 
-            if (_baseRequest.units != null && _baseRequest.units.Count > 0)
+            if (SessionHelper.units != null && SessionHelper.units.Count > 0)
             {
                 var ipt = txtks.Text.Trim();
 
@@ -228,7 +237,7 @@ namespace Client
                 dgv.ReadOnly = true;
 
 
-                List<UnitVM> vm = _baseRequest.units;
+                List<UnitVM> vm = SessionHelper.units;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {
@@ -273,7 +282,7 @@ namespace Client
             var pbl = tb.Parent as UIPanel;
             //获取数据 
 
-            if (_baseRequest.units != null && _baseRequest.units.Count > 0)
+            if (SessionHelper.units != null && SessionHelper.units.Count > 0)
             {
                 var ipt = txtzk.Text.Trim();
 
@@ -289,7 +298,7 @@ namespace Client
                 dgvzk.ReadOnly = true;
 
 
-                List<UnitVM> vm = _baseRequest.units;
+                List<UnitVM> vm = SessionHelper.units;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {
@@ -332,7 +341,7 @@ namespace Client
             var pbl = tb.Parent as UIPanel;
             //获取数据 
 
-            if (_baseRequest.userDics != null && _baseRequest.userDics.Count > 0)
+            if (SessionHelper.userDics != null && SessionHelper.userDics.Count > 0)
             {
                 var ipt = txtDoct.Text.Trim();
 
@@ -348,7 +357,7 @@ namespace Client
                 dgvys.ReadOnly = true;
 
 
-                List<UserDicVM> vm = _baseRequest.userDics;
+                List<UserDicVM> vm = SessionHelper.userDics;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {
@@ -443,25 +452,26 @@ namespace Client
                 var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
 
                 var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
-                var week = "";
+                var week = "1";
                 var day = "";
                 int window_no = 0;
                 int open_flag = 1;
                 int total_num = 0;
+                int temp_flag = 0;
 
                 ampm = cbxSXW.SelectedValue.ToString();
 
 
-                switch (cbxWeek.Text)
-                {
-                    case "第一周": week = "1"; break;
-                    case "第二周": week = "2"; break;
-                    case "第三周": week = "3"; break;
-                    case "第四周": week = "4"; break;
-                    case "第五周": week = "5"; break;
-                    default:
-                        break;
-                }
+                //switch (cbxWeek.Text)
+                //{
+                //    case "第一周": week = "1"; break;
+                //    case "第二周": week = "2"; break;
+                //    case "第三周": week = "3"; break;
+                //    case "第四周": week = "4"; break;
+                //    case "第五周": week = "5"; break;
+                //    default:
+                //        break;
+                //}
 
                 switch (cbxDay.Text)
                 {
@@ -548,14 +558,14 @@ namespace Client
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
                 if (result.status == 1 && result.data.Count > 0)
                 {
-                    if (string.IsNullOrEmpty(_baseRequest.current_sn))
+                    if (string.IsNullOrEmpty(_current_sn))
                     {
                         UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
                         return;
                     }
                     else
                     {
-                        if (result.data[0].request_sn != _baseRequest.current_sn)
+                        if (result.data[0].request_sn != _current_sn)
                         {
                             UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
                             return;
@@ -571,7 +581,7 @@ namespace Client
                 }
                 var d = new
                 {
-                    request_sn = _baseRequest.current_sn,
+                    request_sn = _current_sn,
                     unit_sn = visit_dept,
                     group_sn = group_sn,
                     doctor_sn = doctor_code,
@@ -583,10 +593,11 @@ namespace Client
                     window_no = window_no,
                     open_flag = open_flag,
                     op_id = SessionHelper.uservm.user_mi,
+                    temp_flag= _temp_flag
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}");
+                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={d.temp_flag}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 

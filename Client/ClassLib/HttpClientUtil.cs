@@ -119,7 +119,7 @@ namespace Client.ClassLib
 
             _httpClient = new System.Net.Http.HttpClient(new HttpClientHandler());
 
-            _httpClient.Timeout = new TimeSpan(0, 0, 10);
+            _httpClient.Timeout = new TimeSpan(0, 0, 30);
 
             _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
 

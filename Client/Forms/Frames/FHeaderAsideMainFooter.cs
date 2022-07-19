@@ -84,6 +84,7 @@ namespace Client
                 pageIndex = 1300;
                 parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
                 Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+                Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
                 Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
                 Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
                 Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
@@ -153,6 +154,10 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
                     }
+                    if (function_list.Where(p => p.func_desc.Trim() == "临时号表维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
+                    }
                     if (function_list.Where(p => p.func_desc.Trim() == "生成号表").Count() > 0)
                     {
                         Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
@@ -169,6 +174,8 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
                     }
+
+                    
                 }
                 pageIndex = 1400;
                 if (function_list.Where(p => p.func_desc.Trim() == "用户报表").Count() > 0)
@@ -240,6 +247,8 @@ namespace Client
                         obj = new Schb(); break;
                     case 1305:
                         obj = new BaseWeiHu(); break;
+                    case 1306:
+                        obj = new TempRequest(); break;
                     case 1201:
                         obj = new GuahaoRijie(); break;
                     case 1202:

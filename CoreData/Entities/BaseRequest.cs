@@ -21,7 +21,12 @@ namespace Data.Entities
         public string open_flag { get; set; }
         public int window_no { get; set; }
         public string workroom { get; set; }
+        public string temp_flag { get; set; }
+        public int limit_appoint_percent { get; set; }
+
         
+
+
         public string segment { get; set; }
         public string req_type { get; set; }
         public int begin_no { get; set; }
@@ -39,5 +44,7 @@ namespace Data.Entities
 
         public DateTime request_date { get; set; }
         public string record_sn { get; set; }
+
+
     }
 }

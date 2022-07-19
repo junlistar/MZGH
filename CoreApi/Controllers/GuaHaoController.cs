@@ -386,7 +386,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<IEnumerable<GhSearch>>(ex.Message);
             }
             return list;
-        } 
+        }
 
         public ResponseResult<List<ClinicType>> GetClinicTypes()
         {
@@ -560,13 +560,13 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<List<BaseRequest>> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, string window_no, string open_flag)
+            string week, string day, string ampm, string window_no, string open_flag, int temp_flag = 0)
         {
-            Log.Information($"GetBaseRequests,{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{window_no},{open_flag}");
+            Log.Information($"GetBaseRequests,{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{window_no},{open_flag},{temp_flag}");
             var list = new List<BaseRequest>();
             try
             {
-                list = _baseRequestRepository.GetBaseRequests(unit_sn, group_sn, doctor_sn, clinic_type, week, day, ampm, window_no, open_flag);
+                list = _baseRequestRepository.GetBaseRequests(unit_sn, group_sn, doctor_sn, clinic_type, week, day, ampm, window_no, open_flag, temp_flag);
             }
             catch (Exception ex)
             {
@@ -577,13 +577,13 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id)
+           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag = 0)
         {
-            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{window_no},{open_flag},{op_id}");
+            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{window_no},{open_flag},{op_id},{temp_flag}");
             try
             {
                 return _baseRequestRepository.EditBaseRequest(request_sn, unit_sn, group_sn, doctor_sn, clinic_type,
-            week, day, ampm, totle_num, window_no, open_flag, op_id);
+            week, day, ampm, totle_num, window_no, open_flag, op_id, temp_flag);
             }
             catch (Exception ex)
             {
@@ -823,6 +823,22 @@ namespace CoreApi.Controllers
                 return ErrorResult<GhRequest>(ex.Message);
             }
         }
+        public ResponseResult<bool> Schb(string begin, string end, string op_id)
+        {
+
+            Log.Information($"Schb,{begin},{end},{op_id}");
+            try
+            {
+                return _repository.Schb(begin, end, op_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+
         public ResponseResult<ReportData> GetReportDataByCode(string code)
         {
 
@@ -1011,6 +1027,6 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-         
+
     }
 }

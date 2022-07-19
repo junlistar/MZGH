@@ -10,11 +10,11 @@ namespace Data.IRepository
         #region 扩展的dapper操作
 
         List<BaseRequest> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, string window_no, string open_flag);
+           string week, string day, string ampm, string window_no, string open_flag,int temp_flag);
 
 
         int EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id);
+           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag);
         int DeleteBaseRequest(string request_sn);
 
         List<BaseRequest> GetBaseRequestsBySN(string request_sn);

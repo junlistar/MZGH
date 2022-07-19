@@ -13,6 +13,8 @@ namespace Data.IRepository
 
         List<GhRequest> GetGhRecord(string record_sn);
 
+        bool Schb(string begin, string end, string op_id);
+
 
         int CreateRequestRecord(string begin, string end, string weeks, int day, string op_id);
 

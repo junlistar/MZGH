@@ -17,9 +17,9 @@ using Sunny.UI;
 
 namespace Client
 {
-    public partial class BaseRequest : UIPage
+    public partial class TempRequest : UIPage
     {
-        private static ILog log = LogManager.GetLogger(typeof(BaseRequest));//typeof放当前类
+        private static ILog log = LogManager.GetLogger(typeof(TempRequest));//typeof放当前类
 
         List<BaseRequestVM> list = new List<BaseRequestVM>();
 
@@ -30,7 +30,7 @@ namespace Client
         public string current_sn = "";
         string order_asc = "asc";
 
-        public BaseRequest()
+        public TempRequest()
         {
             InitializeComponent();
         }
@@ -171,7 +171,7 @@ namespace Client
             #endregion
 
 
-            var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
+            var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}&temp_flag=1";
 
             //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
             string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
@@ -662,7 +662,7 @@ namespace Client
 
         public void Add()
         {
-            BaseRequestEdit edit = new BaseRequestEdit("");
+            BaseRequestEdit edit = new BaseRequestEdit("", 1);
 
             edit.ShowDialog();
         }
@@ -765,7 +765,7 @@ namespace Client
 
                     current_sn = request_sn;
 
-                    BaseRequestEdit edit = new BaseRequestEdit(current_sn);
+                    BaseRequestEdit edit = new BaseRequestEdit(current_sn, 1);
                     edit.FormClosed += Edit_FormClosed;
                     edit.ShowDialog();
 
@@ -1028,7 +1028,7 @@ namespace Client
 
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
             if (e.RowIndex != -1)
             {
                 return;
@@ -1104,7 +1104,7 @@ namespace Client
                 }
                 //标题头
                 //dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(dgvlist.Columns[e.ColumnIndex].HeaderText, order_asc); 
-                dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(e.ColumnIndex, order_asc); 
+                dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(e.ColumnIndex, order_asc);
 
                 uiPagination1.PagerCount = 1;
                 var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
@@ -1128,18 +1128,18 @@ namespace Client
             }
         }
 
-        public string AddOrderSymbol(int col_index,string order)
-        { 
+        public string AddOrderSymbol(int col_index, string order)
+        {
             for (int i = 0; i < dgvlist.Columns.Count; i++)
             {
-                dgvlist.Columns[i].HeaderText =RemoveOrderSymbol(dgvlist.Columns[i].HeaderText);
+                dgvlist.Columns[i].HeaderText = RemoveOrderSymbol(dgvlist.Columns[i].HeaderText);
             }
 
             var text = dgvlist.Columns[col_index].HeaderText;
 
             if (order == "asc")
             {
-                text += "↑"; 
+                text += "↑";
             }
             else
             {

@@ -74,6 +74,7 @@
             this.cbxSXW = new Sunny.UI.UIComboBox();
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
+            this.lblTotalCount = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -251,7 +252,7 @@
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Red;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
@@ -280,9 +281,11 @@
             this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvlist.ShowGridLine = false;
             this.dgvlist.ShowRect = false;
-            this.dgvlist.Size = new System.Drawing.Size(1290, 392);
+            this.dgvlist.Size = new System.Drawing.Size(1290, 424);
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellDoubleClick);
+            this.dgvlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvlist_RowPostPaint);
             // 
             // record_sn
             // 
@@ -320,6 +323,7 @@
             this.group_name.DataPropertyName = "group_name";
             this.group_name.HeaderText = "专科";
             this.group_name.Name = "group_name";
+            this.group_name.Visible = false;
             // 
             // clinic_name
             // 
@@ -342,7 +346,7 @@
             // winnostr
             // 
             this.winnostr.DataPropertyName = "winnostr";
-            this.winnostr.HeaderText = "窗口号";
+            this.winnostr.HeaderText = "诊室";
             this.winnostr.Name = "winnostr";
             // 
             // begin_no
@@ -496,11 +500,11 @@
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(399, 108);
+            this.uiLabel6.Location = new System.Drawing.Point(413, 108);
             this.uiLabel6.Name = "uiLabel6";
-            this.uiLabel6.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel6.Size = new System.Drawing.Size(43, 23);
             this.uiLabel6.TabIndex = 24;
-            this.uiLabel6.Text = "窗口号";
+            this.uiLabel6.Text = "诊室";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel6.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -663,10 +667,23 @@
             this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
             this.uiToolTip1.OwnerDraw = true;
             // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalCount.Location = new System.Drawing.Point(12, 667);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(133, 33);
+            this.lblTotalCount.TabIndex = 7;
+            this.lblTotalCount.Text = "总计：";
+            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // BaseWeiHu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1314, 635);
+            this.ClientSize = new System.Drawing.Size(1314, 706);
+            this.Controls.Add(this.lblTotalCount);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.dgvlist);
             this.Controls.Add(this.pnlTitle);
@@ -713,6 +730,8 @@
         private Sunny.UI.UILabel uiLabel1;
         private Sunny.UI.UILabel uiLabel7;
         private Sunny.UI.UIComboBox cbxRequestType;
+        private Sunny.UI.UIToolTip uiToolTip1;
+        private Sunny.UI.UILabel lblTotalCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn record_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn request_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn open_flag_str;
@@ -726,6 +745,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn begin_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn current_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn toend_no;
-        private Sunny.UI.UIToolTip uiToolTip1;
     }
 }

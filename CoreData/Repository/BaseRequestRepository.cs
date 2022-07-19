@@ -12,7 +12,7 @@ namespace Data.Repository
     {
 
         public List<BaseRequest> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, string window_no, string open_flag)
+            string week, string day, string ampm, string window_no, string open_flag,int temp_flag)
         {
             string ghsql = GetSqlByTag(220053);
 
@@ -47,6 +47,7 @@ namespace Data.Repository
             para.Add("@ampm", string.IsNullOrWhiteSpace(ampm) ? "%" : ampm.Trim());
             para.Add("@window_no", string.IsNullOrWhiteSpace(window_no) ? "%" : window_no.Trim());
             para.Add("@open_flag", string.IsNullOrWhiteSpace(open_flag) ? "%" : open_flag.Trim());
+            para.Add("@temp_flag", temp_flag);
 
 
             return Select(ghsql, para);
@@ -55,7 +56,7 @@ namespace Data.Repository
         }
 
         public int EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id)
+            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id,int temp_flag = 0)
         {
 
             //修改
@@ -115,6 +116,7 @@ namespace Data.Repository
                 para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
                 para.Add("@window_no", window_no);
+                para.Add("@temp_flag", temp_flag);
 
 
                 Update(sql, para);
@@ -136,7 +138,7 @@ namespace Data.Repository
         }
 
         public int DeleteBaseRequest(string request_sn)
-        { 
+        {
             string segsql = GetSqlByTag(220057);
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
@@ -144,14 +146,63 @@ namespace Data.Repository
             return Update(segsql, para);
         }
         public List<BaseRequest> GetBaseRequestsBySN(string request_sn)
-        { 
-           // string segsql = @"select * from gh_base_request where request_sn=@request_sn";
+        {
+            // string segsql = @"select * from gh_base_request where request_sn=@request_sn";
 
             string segsql = GetSqlByTag(220061);
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
 
             return Select(segsql, para);
+        }
+        public List<BaseRequest> GetBaseRequestsByDate(string begin, string end)
+        {
+            string ghsql = GetSqlByTag(220058);
+
+            string weeks = "1";
+            string[] arr = weeks.Split(',');
+
+            int[] DayArray = new int[] { 7, 1, 2, 3, 4, 5, 6 };
+            if (arr.Length > 0)
+            {
+                DateTime dt1 = Convert.ToDateTime(begin);
+                DateTime dt2 = Convert.ToDateTime(end);
+
+                string append = " and (";
+
+                if (arr.Length == 1)
+                {
+                    int week = int.Parse(arr[0]);
+                    append += $" (((week*7)+day>={week * 7 + DayArray[Convert.ToInt32(dt1.DayOfWeek.ToString("d"))]}) AND ((week*7)+day<={week * 7 + DayArray[Convert.ToInt32(dt2.DayOfWeek.ToString("d"))]}))";
+                }
+                else
+                {
+                    for (int i = 0; i < arr.Length; i++)
+                    {
+                        int week = int.Parse(arr[i]);
+                        if (i == 0)
+                        {
+                            append += $" (((week*7)+day>={week * 7 + DayArray[Convert.ToInt32(dt1.DayOfWeek.ToString("d"))]}) AND ((week*7)+day<={(week + 1) * 7}))";
+
+                        }
+                        else if (i == arr.Length - 1)
+                        {
+                            append += $" or (((week*7)+day>={week * 7 + 1}) AND ((week*7)+day<={week * 7 + DayArray[Convert.ToInt32(dt2.DayOfWeek.ToString("d"))]}))";
+                        }
+                        else
+                        {
+                            append += $" or (((week*7)+day>={week * 7 + 1}) AND ((week*7)+day<={(week + 1) * 7}))";
+
+                        }
+                    }
+                }
+                append += $" ) ";
+                ghsql += append;
+            }
+
+            ghsql += $" order by week,day"; 
+
+            return Select(ghsql); 
         }
 
 
@@ -185,7 +236,7 @@ namespace Data.Repository
                         append += $" (((week*7)+day>={week * 7 + DayArray[Convert.ToInt32(dt1.DayOfWeek.ToString("d"))]}) AND ((week*7)+day<={week * 7 + DayArray[Convert.ToInt32(dt2.DayOfWeek.ToString("d"))]}))";
                     }
                     else
-                    {  
+                    {
                         for (int i = 0; i < arr.Length; i++)
                         {
                             int week = int.Parse(arr[i]);
@@ -236,7 +287,7 @@ namespace Data.Repository
              string ampm, string window_no, string open_flag)
         {
             string ghsql = GetSqlByTag(220060);
-             
+
 
             var para = new DynamicParameters();
             para.Add("@P1", begin);
@@ -246,7 +297,7 @@ namespace Data.Repository
             para.Add("@doctor_sn", string.IsNullOrWhiteSpace(doctor_sn) ? "%" : doctor_sn.Trim());
             para.Add("@clinic_type", string.IsNullOrWhiteSpace(clinic_type) ? "%" : clinic_type.Trim());
             para.Add("@req_type", string.IsNullOrWhiteSpace(req_type) ? "%" : req_type.Trim());
-              
+
             para.Add("@ampm", string.IsNullOrWhiteSpace(ampm) ? "%" : ampm.Trim());
             para.Add("@window_no", string.IsNullOrWhiteSpace(window_no) ? "%" : window_no.Trim());
             para.Add("@open_flag", string.IsNullOrWhiteSpace(open_flag) ? "%" : open_flag.Trim());
@@ -257,7 +308,7 @@ namespace Data.Repository
 
         }
 
-        public bool CreateRequestNoList(string begin, string end,int type)
+        public bool CreateRequestNoList(string begin, string end, int type)
         {
             string ghsql = GetSqlByTag(220063);
 
@@ -267,11 +318,11 @@ namespace Data.Repository
             para.Add("@eDate", end);
             //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
 
-           var dt =  base.ExecuteTable(ghsql, para, CommandType.Text);
-            if (dt!=null && dt.Rows.Count>0)
+            var dt = base.ExecuteTable(ghsql, para, CommandType.Text);
+            if (dt != null && dt.Rows.Count > 0)
             {
                 var code = dt.Rows[0][0].ToString();
-                if (code=="0")
+                if (code == "0")
                 {
                     return true;
                 }
@@ -280,20 +331,20 @@ namespace Data.Repository
                     throw new Exception(dt.Rows[0][1].ToString());
                 }
             }
-            return false; 
+            return false;
         }
 
-        public bool CheckGhRepeat(string patient_id,string record_sn)
+        public bool CheckGhRepeat(string patient_id, string record_sn)
         {
-//            string sql = @"select COUNT(*) from view_mz_visit_table a
-//inner join gh_request b on a.visit_date = b.request_date 
-//and a.visit_dept= b.unit_sn 
-//and a.clinic_type = b.clinic_type
-//and ISNULL(a.group_sn,'0') =ISNULL(b.group_sn,'0') 
-//and ISNULL(a.doctor_code,'0') LIKE ISNULL(b.doctor_sn,'0')
-//and a.ampm=b.ampm
-//where patient_id = @patient_id
-//and record_sn = @record_sn";
+            //            string sql = @"select COUNT(*) from view_mz_visit_table a
+            //inner join gh_request b on a.visit_date = b.request_date 
+            //and a.visit_dept= b.unit_sn 
+            //and a.clinic_type = b.clinic_type
+            //and ISNULL(a.group_sn,'0') =ISNULL(b.group_sn,'0') 
+            //and ISNULL(a.doctor_code,'0') LIKE ISNULL(b.doctor_sn,'0')
+            //and a.ampm=b.ampm
+            //where patient_id = @patient_id
+            //and record_sn = @record_sn";
 
             string sql = GetSqlByTag(220065);
 
@@ -301,7 +352,7 @@ namespace Data.Repository
             para.Add("@patient_id", patient_id);
             para.Add("@record_sn", record_sn);
             var count = ExcuteScalar(sql, para);
-            if (Convert.ToInt32(count) >0)
+            if (Convert.ToInt32(count) > 0)
             {
                 return true;
             }
