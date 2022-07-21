@@ -376,6 +376,7 @@
             this.dgvRequest.Size = new System.Drawing.Size(1363, 507);
             this.dgvRequest.TabIndex = 7;
             this.dgvRequest.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvRequest.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellClick);
             this.dgvRequest.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRequest_RowPostPaint);
             // 
             // request_date1

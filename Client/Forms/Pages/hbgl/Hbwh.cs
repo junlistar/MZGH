@@ -17,9 +17,9 @@ using Sunny.UI;
 
 namespace Client
 {
-    public partial class BaseWeiHu : UIPage
+    public partial class Hbwh : UIPage
     {
-        private static ILog log = LogManager.GetLogger(typeof(BaseWeiHu));//typeof放当前类
+        private static ILog log = LogManager.GetLogger(typeof(Hbwh));//typeof放当前类
 
         List<BaseRequestVM> list = null;
 
@@ -29,13 +29,26 @@ namespace Client
         public List<RequestTypeVM> requestTyeps = null;
 
         string order_asc = "asc";
-        public BaseWeiHu()
+
+        /// <summary>
+        /// 解决页面频繁刷新时界面闪烁问题
+        /// </summary>
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        }
+        public Hbwh()
         {
             InitializeComponent();
         }
         private void BaseRequest_Load(object sender, EventArgs e)
-        { 
-            InitDic(); 
+        {
+            InitDic();
 
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
@@ -43,6 +56,8 @@ namespace Client
             uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
+
+            dgvlist.CellDoubleClick += dgvlist_CellDoubleClick;
         }
 
         public void InitDic()
@@ -58,7 +73,9 @@ namespace Client
             cbxRequestType.DisplayMember = "name";
             cbxRequestType.ValueMember = "code";
 
-            txtDate.Value = DateTime.Now;
+            var _dt_now = DateTime.Now.ToShortDateString();
+            txtDate.Text = _dt_now;
+            txtDate2.Text = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToShortDateString();
 
             //设置上午下午 
             this.cbxSXW.Items.Clear();
@@ -101,10 +118,22 @@ namespace Client
         {
             log.Info("InitData");
 
+
             Task<HttpResponseMessage> task = null;
             string json = "";
 
             #region 参数处理
+            if (txtDate.Value > txtDate2.Value)
+            {
+                UIMessageTip.ShowError("开始日期不能大于结束日期!");
+                return;
+            }
+
+
+            LoadingHelper.ShowLoadingScreen();//显示
+
+            var begin = txtDate.Value.ToShortDateString();
+            var end = txtDate2.Value.ToShortDateString();
 
             //var gh_date = txtRiqi.Text;
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
@@ -121,12 +150,12 @@ namespace Client
             var day = "%";
             var window_no = "%";
             var open_flag = "%";
+            var temp_flag = "%";
 
             if (cbxSXW.Text != "全部")
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
-
 
             if (cbxOpenFlag.Text == "开放")
             {
@@ -137,13 +166,20 @@ namespace Client
                 open_flag = "0";
             }
 
+            switch (cbx_tempflag.Text)
+            {
+                case "全部": temp_flag = "%"; break;
+                case "临时号": temp_flag = "1"; break;
+                case "正常号": temp_flag = "0"; break;
+                default:
+                    break;
+            }
+
             #endregion
 
-            var begin = txtDate.Value.ToShortDateString();
+            var para = $"?begin={begin}&end={end}&unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&req_type={req_type}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}&temp_flag={temp_flag}";
 
-            var para = $"?begin={begin}&end={begin}&unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&req_type={req_type}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
-
-            string paramurl = string.Format($"/api/GuaHao/GetRequestsByParams" + para);
+            string paramurl = string.Format($"/api/GuaHao/GetRequestsByParamsV2" + para);
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -163,36 +199,122 @@ namespace Client
                     log.Error(response.ReasonPhrase);
                 }
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
                 if (result.status == 1 && result.data != null)
                 {
-                    list = result.data;
-                    var ds = result.data.Select(p => new
+                    //list = result.data;
+                    //var ds = result.data.Select(p => new
+                    //{
+                    //    record_sn = p.record_sn,
+                    //    request_date = p.request_date,
+                    //    open_flag_str = p.open_flag_str,
+                    //    apstr = p.apstr,
+                    //    unit_name = p.unit_name,
+                    //    unit_sn = p.unit_sn,
+                    //    clinic_name = p.clinic_name,
+                    //    req_name = p.req_name,
+                    //    group_name = p.group_name,
+                    //    doct_name = p.doct_name,
+                    //    //weekstr = p.weekstr,
+                    //    //daystr = p.daystr,
+                    //    winnostr = p.winnostr,
+                    //    begin_no = p.begin_no,
+                    //    current_no = p.current_no,
+                    //    end_no = p.end_no,
+
+                    //    //op_date_str = p.op_date_str
+                    //}).OrderBy(p => p.apstr).OrderBy(p => p.unit_name).OrderBy(p => p.group_name).OrderBy(p => p.clinic_name).OrderBy(p => p.doct_name).ToList();
+
+                    //lblTotalCount.Text = $"总计： {ds.Count} 条数据";
+                    //dgvlist.Init();
+                    //dgvlist.DataSource = ds;
+                    //dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+
+                    var jsontb = result.data;
+                    var dataTable = DataTableHelper.ToDataTable(jsontb);
+
+                    dataTable = ManaDT(dataTable);
+                    dgvlist.MergeColumnHeaderBackColor = UIColor.Blue;
+                    this.dgvlist.DataSource = dataTable;
+                    this.dgvlist.ColumnHeadersHeight = 40;
+                    this.dgvlist.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+                    lblTotalCount.Text = $"总计： {dataTable.Rows.Count} 条数据";
+
+                    if (dataTable.Rows.Count > 0)
                     {
-                        record_sn = p.record_sn,
-                        request_date = p.request_date,
-                        open_flag_str = p.open_flag_str,
-                        apstr = p.apstr,
-                        unit_name = p.unit_name,
-                        clinic_name = p.clinic_name,
-                        req_name = p.req_name,
-                        group_name = p.group_name,
-                        doct_name = p.doct_name,
-                        //weekstr = p.weekstr,
-                        //daystr = p.daystr,
-                        winnostr = p.winnostr,
-                        begin_no = p.begin_no,
-                        current_no = p.current_no,
-                        end_no = p.end_no,
 
-                        //op_date_str = p.op_date_str
-                    }).OrderBy(p => p.apstr).OrderBy(p => p.unit_name).OrderBy(p => p.group_name).OrderBy(p => p.clinic_name).OrderBy(p => p.doct_name).ToList();
+                        var _date = txtDate.Value;
+                        var _idx = 10;
+                        var _name_index = 0;
+                        while (_date <= txtDate2.Value && dgvlist.Columns.Count > 0)
+                        {
+                            var _day_str = DataTimeUtil.GetDayFromEnum(_date.DayOfWeek);
+                            dgvlist.AddSpanHeader(_idx, 3, _date.ToShortDateString() + " " + _day_str);
+                            _date = _date.AddDays(1);
+                            if (_name_index > 0)
+                            {
+                                //dgvlist.Columns["sn" + _name_index].Visible = false;
+                                dgvlist.Columns["bc" + _name_index].HeaderText = "班次";
+                                dgvlist.Columns["xe" + _name_index].HeaderText = "限额";
+                                dgvlist.Columns["xy" + _name_index].HeaderText = "限约";
 
-                    dgvlist.Init();
-                    dgvlist.DataSource = ds; 
-                    lblTotalCount.Text = $"总计： {ds.Count} 条数据";
-                    dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                     
+                                dgvlist.Columns["bc" + _name_index].Tag = _name_index;
+                                dgvlist.Columns["xe" + _name_index].Tag = _name_index;
+                                dgvlist.Columns["xy" + _name_index].Tag = _name_index;
+
+
+                                dgvlist.Columns["sn" + _name_index].Visible = false;
+                            }
+                            else
+                            {
+                                //dgvlist.Columns["sn"].Visible = false;
+                                dgvlist.Columns["bc"].HeaderText = "班次";
+                                dgvlist.Columns["xe"].HeaderText = "限额";
+                                dgvlist.Columns["xy"].HeaderText = "限约";
+
+
+                                dgvlist.Columns["bc"].Tag = _name_index;
+                                dgvlist.Columns["xe"].Tag = _name_index;
+                                dgvlist.Columns["xy"].Tag = _name_index;
+
+
+                                dgvlist.Columns["sn"].Visible = false;
+                            }
+
+                            _idx = _idx + 4;
+                            _name_index++;
+                        }
+                        dgvlist.Columns["unit_name"].HeaderText = "出诊专科";
+                        dgvlist.Columns["unit_sn"].HeaderText = "出诊编码";
+                        dgvlist.Columns["clinic_name"].HeaderText = "挂号类型";
+                        dgvlist.Columns["doct_name"].HeaderText = "出诊医生";
+
+
+
+                        //dgvlist.Columns["unit_sn"].Visible= false;
+                        dgvlist.Columns["group_sn"].Visible = false;
+                        dgvlist.Columns["group_name"].Visible = false;
+                        dgvlist.Columns["clinic_type"].Visible = false;
+                        dgvlist.Columns["doctor_sn"].Visible = false;
+                        dgvlist.Columns["ampm"].Visible = false;
+                        //dgvlist.Columns[11].HeaderText = "班次";
+                        //this.dgvlist.AddSpanHeader(9, 2, begin);
+
+
+                        this.dgvlist.MergeColumnNames.Add("unit_name");
+                        this.dgvlist.MergeColumnNames.Add("doct_name");
+                        this.dgvlist.MergeColumnNames.Add("clinic_name");
+                        this.dgvlist.MergeColumnNames.Add("unit_sn");
+
+
+                        dgvlist.AutoResizeColumns();
+
+                        SetTextColor();
+                    }
+
+                    return;
+
                 }
                 else
                 {
@@ -205,34 +327,102 @@ namespace Client
             }
             catch (Exception ex)
             {
-                UIMessageBox.ShowError(ex.Message);
+                MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
+            finally
+            {
 
+                LoadingHelper.CloseForm();//显示
+            }
+        }
 
+        public void SetTextColor()
+        {
 
+            foreach (DataGridViewRow row in dgvlist.Rows)
+            {
+                row.Cells["unit_name"].Style.ForeColor = UIColor.Red;
+                row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
+                row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+                row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+                row.Cells["unit_sn"].Style.ForeColor = UIColor.Green;
+
+                var _date = txtDate.Value;
+                var _name_index = 0;
+                while (_date <= txtDate2.Value)
+                {
+                    if (_name_index > 0)
+                    {
+                        row.Cells["bc" + _name_index].Style.ForeColor = UIColor.Red;
+                        row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
+                        row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
+                    }
+                    else
+                    {
+                        row.Cells["bc"].Style.ForeColor = UIColor.Red;
+                        row.Cells["xe"].Style.ForeColor = UIColor.Blue;
+                        row.Cells["xy"].Style.ForeColor = UIColor.Purple;
+                    }
+                    _name_index++;
+                    _date = _date.AddDays(1);
+                }
+            }
+        }
+        public DataTable ManaDT(DataTable dt)
+        {
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                var _date = txtDate.Value;
+                var _name_index = 0;
+                while (_date <= txtDate2.Value)
+                {
+                    if (_name_index > 0)
+                    {
+                        dt.Rows[i]["bc" + _name_index] = GetBanciText(dt.Rows[i]["bc" + _name_index].ToString());
+                    }
+                    else
+                    {
+                        dt.Rows[i]["bc"] = GetBanciText(dt.Rows[i]["bc"].ToString());
+                    }
+                    _name_index++;
+                    _date = _date.AddDays(1);
+                }
+            }
+            return dt;
+        }
+
+        public string GetBanciText(string ap)
+        {
+            var requestHour = SessionHelper.requestHours.Where(p => p.code == ap).FirstOrDefault();
+            if (requestHour != null)
+            {
+                return requestHour.name;
+            }
+            return "";
         }
 
         public void BindNullData()
         {
-            var tmp = new List<BaseRequestVM>();
-            var ds = tmp.Select(p => new
-            {
-                record_sn = p.record_sn,
-                request_date = p.request_date,
-                open_flag_str = p.open_flag_str,
-                apstr = p.apstr,
-                unit_name = p.unit_name,
-                clinic_name = p.clinic_name,
-                req_name = p.req_name,
-                group_name = p.group_name,
-                doct_name = p.doct_name,
-                winnostr = p.winnostr,
-                begin_no = p.begin_no,
-                current_no = p.current_no,
-                end_no = p.end_no,
-            }).ToList();
-            dgvlist.DataSource = ds;
+            dgvlist.DataSource = null;
+            //var tmp = new List<BaseRequestVM>();
+            //var ds = tmp.Select(p => new
+            //{
+            //    record_sn = p.record_sn,
+            //    request_date = p.request_date,
+            //    open_flag_str = p.open_flag_str,
+            //    apstr = p.apstr,
+            //    unit_name = p.unit_name,
+            //    clinic_name = p.clinic_name,
+            //    req_name = p.req_name,
+            //    group_name = p.group_name,
+            //    doct_name = p.doct_name,
+            //    winnostr = p.winnostr,
+            //    begin_no = p.begin_no,
+            //    current_no = p.current_no,
+            //    end_no = p.end_no,
+            //}).ToList();
+            //dgvlist.DataSource = ds;
         }
 
         UIDataGridView dgv = new UIDataGridView();
@@ -572,72 +762,108 @@ namespace Client
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Edit();
-
+            EditClick();
+        }
+        public void EditClick()
+        {
+            var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
+            var _colIndex = dgvlist.SelectedCells[0].ColumnIndex;
+            Edit(_rowIndex, _colIndex);
         }
 
-        public void Edit()
+
+        public void Edit(int _rowIndex, int _colIndex)
         {
             try
             {
-                if (dgvlist.Rows.Count > 0 && dgvlist.SelectedIndex >= 0)
+                if (dgvlist.SelectedCells.Count > 0)
                 {
-                    var record_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["record_sn"].Value;
+                    if (_rowIndex != -1 && _colIndex != -1)
+                    {
+                        var col_head_tag = dgvlist.Columns[_colIndex].Tag;
 
-                    RequestEdit edit = new RequestEdit(record_sn.ToString());
-                    edit.ShowDialog();
-                    InitData();
+                        if (col_head_tag != null)
+                        {
+                            var _record_sn = "0";
+                            if (col_head_tag.ToString() == "0")
+                            {
+                                _record_sn = dgvlist.Rows[_rowIndex].Cells["sn"].Value.ToString();
+                            }
+                            else
+                            {
+                                _record_sn = dgvlist.Rows[_rowIndex].Cells["sn" + col_head_tag].Value.ToString();
+                            }
+
+                            if (_record_sn != "0")
+                            {
+                                RequestEdit edit = new RequestEdit(_record_sn);
+                                if (edit.ShowDialog() == DialogResult.OK)
+                                {
+                                    InitData();
+                                }
+                            }
+                            else
+                            {
+                                UIMessageTip.ShowWarning("该日期条件下没有数据！");
+                            }
+                        }
+                        else
+                        {
+                            UIMessageTip.ShowWarning("请选择具体日期下面的数据操作");
+                        }
+                    }
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            var index = dgvlist.SelectedIndex;
+            //var index = dgvlist.SelectedIndex;
 
-            if (index >= 0)
-            {
+            //if (index >= 0)
+            //{
 
-                try
-                {
+            //    try
+            //    {
 
-                    var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
+            //        var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
 
 
-                    var d = new
-                    {
-                        request_sn = request_sn,
-                    };
-                    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                    var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
+            //        var d = new
+            //        {
+            //            request_sn = request_sn,
+            //        };
+            //        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+            //        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            //        var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
 
-                    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                    var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+            //        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+            //        var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                    if (result.status == 1)
-                    {
-                        UIMessageTip.ShowOk("操作成功!");
-                        return;
-                    }
-                    else
-                    {
-                        UIMessageTip.ShowError("查询失败!");
-                        log.Error(result.message);
-                    }
+            //        if (result.status == 1)
+            //        {
+            //            UIMessageTip.ShowOk("操作成功!");
+            //            return;
+            //        }
+            //        else
+            //        {
+            //            UIMessageTip.ShowError("查询失败!");
+            //            log.Error(result.message);
+            //        }
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    log.Error(ex.StackTrace);
-                }
-            }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //        log.Error(ex.StackTrace);
+            //    }
+            //}
         }
         private void txtks_KeyUp(object sender, KeyEventArgs e)
         {
@@ -809,7 +1035,7 @@ namespace Client
                     Reset();
                     break;
                 case Keys.F3:
-                    Edit();
+                    EditClick();
                     break;
                 case Keys.F4:
                     this.Close();//退出
@@ -827,39 +1053,13 @@ namespace Client
 
         private void dgvlist_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            if (e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                Edit();
+                Edit(e.RowIndex, e.ColumnIndex);
             }
         }
 
-        private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            try
-            { 
-                if (e.RowIndex != -1)
-                {
-                    dgvlist.Rows[e.RowIndex].Cells["request_date"].Style.ForeColor = UIColor.Red;
-                    dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
-                    dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Purple;
-                    dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = UIColor.Green;
-                    dgvlist.Rows[e.RowIndex].Cells["group_name"].Style.ForeColor = UIColor.Orange;
-                    dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
-                    dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Purple;
-                    dgvlist.Rows[e.RowIndex].Cells["req_name"].Style.ForeColor = UIColor.Green;
-                    dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Red;
-                    dgvlist.Rows[e.RowIndex].Cells["begin_no"].Style.ForeColor = UIColor.Green; 
-                    dgvlist.Rows[e.RowIndex].Cells["current_no"].Style.ForeColor = UIColor.Blue; 
-                    dgvlist.Rows[e.RowIndex].Cells["toend_no"].Style.ForeColor = UIColor.Purple;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-                log.Error(ex.StackTrace);
-            }
 
-        }
 
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -885,7 +1085,7 @@ namespace Client
                             break;
                         case "doct_name":
                             list = list.OrderBy(p => p.doct_name).ToList();
-                            break; 
+                            break;
                         case "clinic_name":
                             list = list.OrderBy(p => p.clinic_name).ToList();
                             break;
@@ -967,7 +1167,7 @@ namespace Client
                     clinic_name = p.clinic_name,
                     req_name = p.req_name,
                     group_name = p.group_name,
-                    doct_name = p.doct_name, 
+                    doct_name = p.doct_name,
                     winnostr = p.winnostr,
                     begin_no = p.begin_no,
                     current_no = p.current_no,
@@ -1017,6 +1217,85 @@ namespace Client
         public string RemoveOrderSymbol(string text)
         {
             return text.Replace("↑", "").Replace("↓", "");
+        }
+
+
+        private void btnWeek1_Click(object sender, EventArgs e)
+        {
+
+            var dt_from = DateTime.Now.ToShortDateString();
+            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToShortDateString();
+
+            txtDate.Text = dt_from;
+            txtDate2.Text = dt_to;
+
+            InitData();
+        }
+
+        private void btnWeek2_Click(object sender, EventArgs e)
+        {
+            var dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToShortDateString();
+            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToShortDateString();
+
+            txtDate.Text = dt_from;
+            txtDate2.Text = dt_to;
+
+            InitData();
+        }
+
+        private void dgvlist_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var text = dgvlist.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            if (text != null)
+            {
+                // UIMessageTip.Show(text.ToString());
+
+                var col_head_tag = dgvlist.Columns[e.ColumnIndex].Tag;
+
+                if (col_head_tag != null)
+                {
+                    var _record_sn = "0";
+                    if (col_head_tag.ToString() == "0")
+                    {
+                        _record_sn = dgvlist.Rows[e.RowIndex].Cells["sn"].Value.ToString();
+                    }
+                    else
+                    {
+                        _record_sn = dgvlist.Rows[e.RowIndex].Cells["sn" + col_head_tag].Value.ToString();
+                    }
+
+                    if (_record_sn != "0")
+                    {
+                        var _arr = text.ToString().Split("/");
+                        if (_arr.Length == 2)
+                        {
+                            int _num = 0;
+                            if (int.TryParse(_arr[1], out _num))
+                            {
+                                MessageBox.Show(_record_sn + "," + _num);
+                                //todo :更新挂号 总数
+
+
+                                return;
+                            }
+                        }
+                        MessageBox.Show("格式不正确！");
+
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowWarning("该日期条件下没有数据！");
+                    }
+                }
+                else
+                {
+                    UIMessageTip.ShowWarning("请选择具体日期下面的数据操作");
+                }
+            }
+            else
+            {
+                UIMessageTip.Show("end");
+            }
         }
     }
 }

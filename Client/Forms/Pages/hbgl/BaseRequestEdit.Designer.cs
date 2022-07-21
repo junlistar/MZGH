@@ -52,7 +52,7 @@
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.lbl_temp_flag = new Sunny.UI.UILabel();
-            this.txt_temp_flag = new Sunny.UI.UITextBox();
+            this.txt_limit = new Sunny.UI.UITextBox();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +60,7 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiGroupBox1.Controls.Add(this.txt_temp_flag);
+            this.uiGroupBox1.Controls.Add(this.txt_limit);
             this.uiGroupBox1.Controls.Add(this.lbl_temp_flag);
             this.uiGroupBox1.Controls.Add(this.txtTotalNum);
             this.uiGroupBox1.Controls.Add(this.uiLabel9);
@@ -117,7 +117,9 @@
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
             this.txtTotalNum.Style = Sunny.UI.UIStyle.Green;
             this.txtTotalNum.TabIndex = 44;
+            this.txtTotalNum.Text = "0";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txtTotalNum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel9
@@ -526,40 +528,40 @@
             // lbl_temp_flag
             // 
             this.lbl_temp_flag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_temp_flag.Location = new System.Drawing.Point(361, 237);
+            this.lbl_temp_flag.Location = new System.Drawing.Point(369, 234);
             this.lbl_temp_flag.Name = "lbl_temp_flag";
-            this.lbl_temp_flag.Size = new System.Drawing.Size(42, 23);
+            this.lbl_temp_flag.Size = new System.Drawing.Size(102, 23);
             this.lbl_temp_flag.Style = Sunny.UI.UIStyle.Green;
             this.lbl_temp_flag.TabIndex = 45;
-            this.lbl_temp_flag.Text = "类型";
+            this.lbl_temp_flag.Text = "限约比例(%)";
             this.lbl_temp_flag.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbl_temp_flag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // txt_temp_flag
+            // txt_limit
             // 
-            this.txt_temp_flag.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_temp_flag.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txt_temp_flag.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txt_temp_flag.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_temp_flag.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txt_temp_flag.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txt_temp_flag.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_temp_flag.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.txt_temp_flag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_temp_flag.Location = new System.Drawing.Point(412, 234);
-            this.txt_temp_flag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_temp_flag.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_temp_flag.Name = "txt_temp_flag";
-            this.txt_temp_flag.ReadOnly = true;
-            this.txt_temp_flag.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_temp_flag.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_temp_flag.ShowText = false;
-            this.txt_temp_flag.Size = new System.Drawing.Size(166, 29);
-            this.txt_temp_flag.Style = Sunny.UI.UIStyle.Green;
-            this.txt_temp_flag.TabIndex = 46;
-            this.txt_temp_flag.Text = "临时";
-            this.txt_temp_flag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_temp_flag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_limit.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_limit.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txt_limit.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txt_limit.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_limit.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txt_limit.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txt_limit.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_limit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.txt_limit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_limit.Location = new System.Drawing.Point(478, 234);
+            this.txt_limit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_limit.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_limit.Name = "txt_limit";
+            this.txt_limit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_limit.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_limit.ShowText = false;
+            this.txt_limit.Size = new System.Drawing.Size(100, 29);
+            this.txt_limit.Style = Sunny.UI.UIStyle.Green;
+            this.txt_limit.TabIndex = 45;
+            this.txt_limit.Text = "0";
+            this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleRight;
+            this.txt_limit.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.txt_limit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // BaseRequestEdit
             // 
@@ -611,7 +613,7 @@
         private Sunny.UI.UIComboBox cbxHaobie;
         private Sunny.UI.UITextBox txtTotalNum;
         private Sunny.UI.UILabel uiLabel9;
-        private Sunny.UI.UITextBox txt_temp_flag;
         private Sunny.UI.UILabel lbl_temp_flag;
+        private Sunny.UI.UITextBox txt_limit;
     }
 }

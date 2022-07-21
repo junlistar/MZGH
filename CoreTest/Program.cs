@@ -38,7 +38,10 @@ namespace CoreTest
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
-            //BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
+            BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
+            //2022-07-20,2022-07-20, %,  %,  %,  %,  01,%,  %,  % 
+            var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
+
             //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
             // ?begin=&end=&weeks=3&day=-1
 
@@ -79,8 +82,8 @@ namespace CoreTest
             //var aaa = rr.GetRequestTimes();
 
             //Schb,2022-07-18,2022-07-24,00000
-            GhRequestRepository ghRequestRepository = new GhRequestRepository();
-            ghRequestRepository.Schb("2022-07-25", "2022-07-31", "00000");
+            //GhRequestRepository ghRequestRepository = new GhRequestRepository();
+            //ghRequestRepository.Schb("2022-07-25", "2022-07-31", "00000");
 
             Console.WriteLine("Hello World!");
         }

@@ -24,7 +24,7 @@ namespace Client
         string _current_sn = "";
         int _temp_flag = 0;
 
-        public BaseRequestEdit(string current_sn,int temp_flag=0)
+        public BaseRequestEdit(string current_sn, int temp_flag = 0)
         {
             InitializeComponent();
             _current_sn = current_sn;
@@ -156,6 +156,8 @@ namespace Client
                             data.window_no.ToString(); break;
                     }
 
+                    txt_limit.Text = data.limit_appoint_percent.ToString();
+
                     txtks.TextChanged += txtks_TextChanged;
                     txtzk.TextChanged += txtzk_TextChanged;
                     txtDoct.TextChanged += txtDoct_TextChanged;
@@ -195,10 +197,9 @@ namespace Client
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
 
-            if (_temp_flag == 0)
+            if (_temp_flag == 1)
             {
-                lbl_temp_flag.Visible = false;
-                txt_temp_flag.Visible = false;
+                this.Text = "临时" + this.Text;
             }
 
         }
@@ -457,7 +458,7 @@ namespace Client
                 int window_no = 0;
                 int open_flag = 1;
                 int total_num = 0;
-                int temp_flag = 0;
+                int limit_appoint_percent = int.Parse(txt_limit.Text);
 
                 ampm = cbxSXW.SelectedValue.ToString();
 
@@ -556,25 +557,27 @@ namespace Client
                     json = read.Result;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-                if (result.status == 1 && result.data.Count > 0)
+                if (result.status == 1)
                 {
-                    if (string.IsNullOrEmpty(_current_sn))
+                    if (result.data.Count > 0)
                     {
-                        UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
-                        return;
-                    }
-                    else
-                    {
-                        if (result.data[0].request_sn != _current_sn)
+                        if (string.IsNullOrEmpty(_current_sn))
                         {
                             UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
                             return;
                         }
+                        else if (result.data[0].request_sn != _current_sn)
+                        {
+                            UIMessageTip.Show("验证失败 ，系统已存在相同的数据！");
+                            return;
+
+                        }
                     }
+
                 }
                 else
                 {
-                    UIMessageTip.Show("验证数据出错！");
+                    UIMessageTip.Show(result.message);
                     log.Error(result.message);
                     return;
 
@@ -593,11 +596,12 @@ namespace Client
                     window_no = window_no,
                     open_flag = open_flag,
                     op_id = SessionHelper.uservm.user_mi,
-                    temp_flag= _temp_flag
+                    temp_flag = _temp_flag,
+                    limit_appoint_percent = limit_appoint_percent
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={d.temp_flag}");
+                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={d.temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 

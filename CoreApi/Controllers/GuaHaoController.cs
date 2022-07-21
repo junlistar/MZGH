@@ -577,13 +577,13 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag = 0)
+           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
         {
-            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{window_no},{open_flag},{op_id},{temp_flag}");
+            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{window_no},{open_flag},{op_id},{temp_flag},{limit_appoint_percent}");
             try
             {
                 return _baseRequestRepository.EditBaseRequest(request_sn, unit_sn, group_sn, doctor_sn, clinic_type,
-            week, day, ampm, totle_num, window_no, open_flag, op_id, temp_flag);
+            week, day, ampm, totle_num, window_no, open_flag, op_id, temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {
@@ -637,12 +637,12 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
-         string ampm, int totle_num, string window_no, string open_flag, string op_id)
+         string ampm, int totle_num, string window_no, string open_flag, string op_id,string limit_appoint_percent)
         {
-            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id}");
+            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id},{limit_appoint_percent}");
             try
             {
-                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id);
+                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id, limit_appoint_percent);
             }
             catch (Exception ex)
             {
@@ -682,6 +682,22 @@ namespace CoreApi.Controllers
             }
         }
 
+        public ResponseResult<string> GetRequestsByParamsV2(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
+     string ampm, string window_no, string open_flag,string temp_flag)
+        {
+            Log.Information($"GetRequestsByParams,{begin},{end}, {unit_sn},  {group_sn},  {doctor_sn},  {clinic_type},  {req_type},{ampm},  {window_no},  {open_flag},{temp_flag}");
+            try
+            {
+                var dt = _baseRequestRepository.GetRequestsByParamsV2(begin, end, unit_sn, group_sn, doctor_sn, clinic_type, req_type, ampm, window_no, open_flag,temp_flag);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
+        }
 
         public ResponseResult<bool> CreateRequestNoList(string begin, string end, int type)
         {
@@ -830,6 +846,20 @@ namespace CoreApi.Controllers
             try
             {
                 return _repository.Schb(begin, end, op_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> SchbTemp(string request_sn, string op_id)
+        {
+
+            Log.Information($"SchbTemp,{request_sn},{op_id}");
+            try
+            {
+                return _repository.SchbTemp(request_sn, op_id);
             }
             catch (Exception ex)
             {

@@ -246,7 +246,8 @@ namespace Client
                         //obj = new CreateRequestRecord(); break;
                         obj = new Schb(); break;
                     case 1305:
-                        obj = new BaseWeiHu(); break;
+                        //obj = new BaseWeiHu(); break;
+                        obj = new Hbwh(); break;
                     case 1306:
                         obj = new TempRequest(); break;
                     case 1201:

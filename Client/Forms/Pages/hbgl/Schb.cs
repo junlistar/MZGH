@@ -26,7 +26,7 @@ namespace Client
         string localweeks = "";
         int localday = -1;
         int current_week = 1;
-
+        string order_asc = "asc";
         public Schb()
         {
             InitializeComponent();
@@ -101,7 +101,7 @@ namespace Client
 
                 if (result.status == 1)
                 {
-                    var list = result.data;
+                    list = result.data;
                     dgvRequest.Init();
                     dgvRequest.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     if (list != null)
@@ -311,6 +311,155 @@ namespace Client
                 log.Error(ex.Message);
                 log.Error(ex.StackTrace);
             }
+        }
+
+        private void dgvRequest_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex != -1)
+            {
+                return;
+            }
+            var _cIndex = e.ColumnIndex;
+            if (list != null && list.Count > 0)
+            {
+                if (order_asc == "asc")
+                {
+                    switch (dgvRequest.Columns[e.ColumnIndex].Name)
+                    {
+                        case "request_date1":
+                            list = list.OrderBy(p => p.request_date).ToList();
+                            break;
+                        case "ampm1":
+                            list = list.OrderBy(p => p.ampm).ToList();
+                            break;
+                        case "unit_name1":
+                            list = list.OrderBy(p => p.unit_name).ToList();
+                            break;
+                        case "doct_name1":
+                            list = list.OrderBy(p => p.doct_name).ToList();
+                            break;
+                        case "clinic_name1":
+                            list = list.OrderBy(p => p.clinic_name).ToList();
+                            break;
+                        case "begin_no1":
+                            list = list.OrderBy(p => p.begin_no).ToList();
+                            break;
+                        case "current_no1":
+                            list = list.OrderBy(p => p.current_no).ToList();
+                            break;
+                        case "end_no1":
+                            list = list.OrderBy(p => p.end_no).ToList();
+                            break;
+                        case "winnostr1":
+                            list = list.OrderBy(p => p.winnostr).ToList();
+                            break;
+                        case "open_flag1":
+                            list = list.OrderBy(p => p.open_flag).ToList();
+                            break;
+                        default:
+                            break;
+                    }
+                    order_asc = "desc";
+                }
+                else
+                {
+                    switch (dgvRequest.Columns[e.ColumnIndex].Name)
+                    {
+                        case "request_date1":
+                            list = list.OrderByDescending(p => p.request_date).ToList();
+                            break;
+                        case "ampm1":
+                            list = list.OrderByDescending(p => p.ampm).ToList();
+                            break;
+                        case "unit_name1":
+                            list = list.OrderByDescending(p => p.unit_name).ToList();
+                            break;
+                        case "doct_name1":
+                            list = list.OrderByDescending(p => p.doct_name).ToList();
+                            break;
+                        case "clinic_name1":
+                            list = list.OrderByDescending(p => p.clinic_name).ToList();
+                            break;
+                        case "begin_no1":
+                            list = list.OrderByDescending(p => p.begin_no).ToList();
+                            break;
+                        case "current_no1":
+                            list = list.OrderByDescending(p => p.current_no).ToList();
+                            break;
+                        case "end_no1":
+                            list = list.OrderByDescending(p => p.end_no).ToList();
+                            break;
+                        case "winnostr1":
+                            list = list.OrderByDescending(p => p.winnostr).ToList();
+                            break;
+                        case "open_flag1":
+                            list = list.OrderByDescending(p => p.open_flag).ToList();
+                            break;
+                        default:
+                            break;
+                    }
+                    order_asc = "asc";
+                }
+                //标题头 
+                dgvRequest.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(e.ColumnIndex, order_asc);
+                 
+                var ds = list.Select(p => new
+                {
+                    request_date_str = p.request_date_str,
+                    ampm = p.ampm,
+                    unit_name = p.unit_name,
+                    group_name = p.group_name,
+                    doct_name = p.doct_name,
+                    clinic_name = p.clinic_name,
+                    begin_no = p.begin_no,
+                    current_no = p.current_no,
+                    end_no = p.end_no,
+                    winnostr = p.winnostr,
+                    open_flag = p.open_flag,
+                }).ToList();
+
+                dgvRequest.DataSource = ds;
+                SetColumnWidth();
+            }
+        }
+        public void SetColumnWidth()
+        { 
+
+            dgvRequest.Columns["request_date1"].Width = 100;
+            dgvRequest.Columns["ampm1"].Width = 100;
+            dgvRequest.Columns["unit_name1"].Width = 100;
+            dgvRequest.Columns["doct_name1"].Width = 100;
+            dgvRequest.Columns["clinic_name1"].Width = 100;
+            dgvRequest.Columns["begin_no1"].Width = 100;
+            dgvRequest.Columns["current_no1"].Width = 100;
+            dgvRequest.Columns["end_no1"].Width = 100;
+            dgvRequest.Columns["winnostr1"].Width = 100;
+            dgvRequest.Columns["open_flag1"].Width = 100; 
+        }
+        public string AddOrderSymbol(int col_index, string order)
+        {
+            for (int i = 0; i < dgvRequest.Columns.Count; i++)
+            {
+                dgvRequest.Columns[i].HeaderText = RemoveOrderSymbol(dgvRequest.Columns[i].HeaderText);
+            }
+
+            var text = dgvRequest.Columns[col_index].HeaderText;
+
+            if (order == "asc")
+            {
+                text += "↑";
+            }
+            else
+            {
+                text += "↓";
+            }
+            return text;
+        }
+
+        public string RemoveOrderSymbol(string text)
+        {
+            return text.Replace("↑", "").Replace("↓", "");
         }
     }
 }

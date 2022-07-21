@@ -242,8 +242,8 @@ namespace Client
         {
 
             dgvlist.Columns["unit_name"].Width = 300;
-            dgvlist.Columns["doct_name"].Width = 300;
-            dgvlist.Columns["clinic_name"].Width = 300;
+            dgvlist.Columns["doct_name"].Width = 100;
+            dgvlist.Columns["clinic_name"].Width = 100;
             dgvlist.Columns["daystr"].Width = 100;
             dgvlist.Columns["apstr"].Width = 100;
             dgvlist.Columns["totle_num"].Width = 100;
@@ -1168,5 +1168,68 @@ namespace Client
 
             }
         }
+
+        private void btnSchb_Click(object sender, EventArgs e)
+        {
+            SaveData();
+        }
+
+        public void SaveData()
+        {
+            try
+            { 
+                var _index = dgvlist.SelectedIndex;
+                if (_index==-1)
+                {
+                    UIMessageTip.Show("请选择数据，在进行操作！");
+                    return;
+                }
+                var _recordsn = dgvlist.Rows[_index].Cells["request_sn"].Value.ToString();
+
+                var d = new
+                { 
+                    request_sn = _recordsn,
+                    op_id = SessionHelper.uservm.user_mi,
+                };
+
+                Task<HttpResponseMessage> task = null;
+                string json = ""; 
+                var paramurl = string.Format($"/api/GuaHao/SchbTemp?request_sn={d.request_sn}&op_id={d.op_id}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+
+                task.Wait();
+                var response = task.Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var read = response.Content.ReadAsStringAsync();
+                    read.Wait();
+                    json = read.Result;
+                }
+                else
+                {
+                    log.Error(response.ReasonPhrase);
+                }
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.ShowOk("操作成功!");
+                     
+                }
+                else
+                {
+                    UIMessageTip.ShowOk("操作失败!");
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }  
+        }
+
     }
 }

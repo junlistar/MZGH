@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    partial class BaseWeiHu
+    partial class Hbwh
     {
         /// <summary>
         /// Required designer variable.
@@ -32,31 +32,20 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hbwh));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.cbxRequestType = new Sunny.UI.UIComboBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
             this.btnAdd = new Sunny.UI.UISymbolButton();
             this.btnSearch = new Sunny.UI.UISymbolButton();
             this.btnReset = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
-            this.dgvlist = new Sunny.UI.UIDataGridView();
-            this.record_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.request_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.open_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.doct_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.req_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.winnostr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.begin_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.current_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toend_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
-            this.cbxRequestType = new Sunny.UI.UIComboBox();
-            this.uiLabel7 = new Sunny.UI.UILabel();
+            this.txtDate2 = new Sunny.UI.UIDatePicker();
+            this.uiLabel9 = new Sunny.UI.UILabel();
             this.txtDate = new Sunny.UI.UIDatePicker();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtHaobie = new Sunny.UI.UITextBox();
@@ -75,9 +64,14 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.lblTotalCount = new Sunny.UI.UILabel();
+            this.dgvlist = new Client.ClassLib.RowMergeView();
+            this.btnWeek2 = new Sunny.UI.UISymbolButton();
+            this.btnWeek1 = new Sunny.UI.UISymbolButton();
+            this.cbx_tempflag = new Sunny.UI.UIComboBox();
+            this.uiLabel11 = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlTitle
@@ -94,11 +88,42 @@
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1161, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1324, 66);
             this.pnlTitle.TabIndex = 2;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxRequestType
+            // 
+            this.cbxRequestType.DataSource = null;
+            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxRequestType.FillColor = System.Drawing.Color.White;
+            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxRequestType.Items.AddRange(new object[] {
+            "全部",
+            "开放",
+            "不开放"});
+            this.cbxRequestType.Location = new System.Drawing.Point(1053, 31);
+            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxRequestType.Name = "cbxRequestType";
+            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxRequestType.Size = new System.Drawing.Size(148, 29);
+            this.cbxRequestType.TabIndex = 5;
+            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(1002, 32);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel7.TabIndex = 28;
+            this.uiLabel7.Text = "号类";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnAdd
             // 
@@ -215,165 +240,18 @@
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // dgvlist
-            // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgvlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvlist.ColumnHeadersHeight = 32;
-            this.dgvlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.record_sn,
-            this.request_date,
-            this.open_flag_str,
-            this.apstr,
-            this.unit_name,
-            this.group_name,
-            this.clinic_name,
-            this.doct_name,
-            this.req_name,
-            this.winnostr,
-            this.begin_no,
-            this.current_no,
-            this.toend_no});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvlist.EnableHeadersVisualStyles = false;
-            this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.dgvlist.Location = new System.Drawing.Point(12, 240);
-            this.dgvlist.Name = "dgvlist";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvlist.RowHeight = 0;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvlist.RowTemplate.Height = 23;
-            this.dgvlist.SelectedIndex = -1;
-            this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvlist.ShowGridLine = false;
-            this.dgvlist.ShowRect = false;
-            this.dgvlist.Size = new System.Drawing.Size(1162, 424);
-            this.dgvlist.TabIndex = 3;
-            this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.dgvlist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellClick);
-            this.dgvlist.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellDoubleClick);
-            this.dgvlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvlist_RowPostPaint);
-            // 
-            // record_sn
-            // 
-            this.record_sn.DataPropertyName = "record_sn";
-            this.record_sn.HeaderText = "record_sn";
-            this.record_sn.Name = "record_sn";
-            this.record_sn.Visible = false;
-            // 
-            // request_date
-            // 
-            this.request_date.DataPropertyName = "request_date";
-            this.request_date.HeaderText = "日期";
-            this.request_date.Name = "request_date";
-            // 
-            // open_flag_str
-            // 
-            this.open_flag_str.DataPropertyName = "open_flag_str";
-            this.open_flag_str.HeaderText = "开放标志";
-            this.open_flag_str.Name = "open_flag_str";
-            // 
-            // apstr
-            // 
-            this.apstr.DataPropertyName = "apstr";
-            this.apstr.HeaderText = "上下午";
-            this.apstr.Name = "apstr";
-            // 
-            // unit_name
-            // 
-            this.unit_name.DataPropertyName = "unit_name";
-            this.unit_name.HeaderText = "科室";
-            this.unit_name.Name = "unit_name";
-            // 
-            // group_name
-            // 
-            this.group_name.DataPropertyName = "group_name";
-            this.group_name.HeaderText = "专科";
-            this.group_name.Name = "group_name";
-            this.group_name.Visible = false;
-            // 
-            // clinic_name
-            // 
-            this.clinic_name.DataPropertyName = "clinic_name";
-            this.clinic_name.HeaderText = "号别";
-            this.clinic_name.Name = "clinic_name";
-            // 
-            // doct_name
-            // 
-            this.doct_name.DataPropertyName = "doct_name";
-            this.doct_name.HeaderText = "医生";
-            this.doct_name.Name = "doct_name";
-            // 
-            // req_name
-            // 
-            this.req_name.DataPropertyName = "req_name";
-            this.req_name.HeaderText = "号类";
-            this.req_name.Name = "req_name";
-            // 
-            // winnostr
-            // 
-            this.winnostr.DataPropertyName = "winnostr";
-            this.winnostr.HeaderText = "诊室";
-            this.winnostr.Name = "winnostr";
-            // 
-            // begin_no
-            // 
-            this.begin_no.DataPropertyName = "begin_no";
-            this.begin_no.HeaderText = "起始号";
-            this.begin_no.Name = "begin_no";
-            // 
-            // current_no
-            // 
-            this.current_no.DataPropertyName = "current_no";
-            this.current_no.HeaderText = "当前号";
-            this.current_no.Name = "current_no";
-            // 
-            // toend_no
-            // 
-            this.toend_no.DataPropertyName = "end_no";
-            this.toend_no.HeaderText = "结束号";
-            this.toend_no.Name = "toend_no";
-            // 
             // uiGroupBox1
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.cbx_tempflag);
+            this.uiGroupBox1.Controls.Add(this.uiLabel11);
+            this.uiGroupBox1.Controls.Add(this.btnWeek2);
+            this.uiGroupBox1.Controls.Add(this.btnWeek1);
             this.uiGroupBox1.Controls.Add(this.cbxRequestType);
             this.uiGroupBox1.Controls.Add(this.uiLabel7);
+            this.uiGroupBox1.Controls.Add(this.txtDate2);
+            this.uiGroupBox1.Controls.Add(this.uiLabel9);
             this.uiGroupBox1.Controls.Add(this.txtDate);
             this.uiGroupBox1.Controls.Add(this.uiLabel1);
             this.uiGroupBox1.Controls.Add(this.txtHaobie);
@@ -396,66 +274,65 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1160, 151);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1323, 151);
             this.uiGroupBox1.TabIndex = 4;
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // cbxRequestType
+            // txtDate2
             // 
-            this.cbxRequestType.DataSource = null;
-            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxRequestType.FillColor = System.Drawing.Color.White;
-            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxRequestType.Items.AddRange(new object[] {
-            "全部",
-            "开放",
-            "不开放"});
-            this.cbxRequestType.Location = new System.Drawing.Point(761, 29);
-            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxRequestType.Name = "cbxRequestType";
-            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxRequestType.Size = new System.Drawing.Size(192, 29);
-            this.cbxRequestType.TabIndex = 5;
-            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtDate2.FillColor = System.Drawing.Color.White;
+            this.txtDate2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate2.Location = new System.Drawing.Point(94, 93);
+            this.txtDate2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate2.MaxLength = 10;
+            this.txtDate2.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate2.Name = "txtDate2";
+            this.txtDate2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate2.Size = new System.Drawing.Size(124, 29);
+            this.txtDate2.SymbolDropDown = 61555;
+            this.txtDate2.SymbolNormal = 61555;
+            this.txtDate2.TabIndex = 29;
+            this.txtDate2.Text = "1900-01-01";
+            this.txtDate2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate2.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.txtDate2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiLabel7
+            // uiLabel9
             // 
-            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(710, 36);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.Size = new System.Drawing.Size(44, 23);
-            this.uiLabel7.TabIndex = 28;
-            this.uiLabel7.Text = "号类";
-            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel9.Location = new System.Drawing.Point(69, 94);
+            this.uiLabel9.Name = "uiLabel9";
+            this.uiLabel9.Size = new System.Drawing.Size(32, 23);
+            this.uiLabel9.TabIndex = 28;
+            this.uiLabel9.Text = "至";
+            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel9.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtDate
             // 
             this.txtDate.FillColor = System.Drawing.Color.White;
             this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(112, 30);
+            this.txtDate.Location = new System.Drawing.Point(94, 50);
             this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDate.MaxLength = 10;
             this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
             this.txtDate.Name = "txtDate";
             this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.Size = new System.Drawing.Size(239, 29);
+            this.txtDate.Size = new System.Drawing.Size(124, 29);
             this.txtDate.SymbolDropDown = 61555;
             this.txtDate.SymbolNormal = 61555;
             this.txtDate.TabIndex = 27;
-            this.txtDate.Text = "2022-05-24";
+            this.txtDate.Text = "1900-01-01";
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(2022, 5, 24, 11, 43, 34, 412);
+            this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(61, 34);
+            this.uiLabel1.Location = new System.Drawing.Point(43, 52);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(44, 23);
             this.uiLabel1.TabIndex = 26;
@@ -467,12 +344,12 @@
             // 
             this.txtHaobie.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtHaobie.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtHaobie.Location = new System.Drawing.Point(467, 29);
+            this.txtHaobie.Location = new System.Drawing.Point(774, 30);
             this.txtHaobie.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtHaobie.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtHaobie.Name = "txtHaobie";
             this.txtHaobie.ShowText = false;
-            this.txtHaobie.Size = new System.Drawing.Size(200, 29);
+            this.txtHaobie.Size = new System.Drawing.Size(197, 29);
             this.txtHaobie.TabIndex = 25;
             this.txtHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -488,12 +365,12 @@
             this.cbxWinNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxWinNo.Items.AddRange(new object[] {
             "所有窗口"});
-            this.cbxWinNo.Location = new System.Drawing.Point(467, 108);
+            this.cbxWinNo.Location = new System.Drawing.Point(774, 108);
             this.cbxWinNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxWinNo.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxWinNo.Name = "cbxWinNo";
             this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxWinNo.Size = new System.Drawing.Size(200, 29);
+            this.cbxWinNo.Size = new System.Drawing.Size(197, 29);
             this.cbxWinNo.TabIndex = 23;
             this.cbxWinNo.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxWinNo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -501,7 +378,7 @@
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(413, 108);
+            this.uiLabel6.Location = new System.Drawing.Point(723, 108);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(43, 23);
             this.uiLabel6.TabIndex = 24;
@@ -513,12 +390,12 @@
             // 
             this.txtDoct.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDoct.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDoct.Location = new System.Drawing.Point(761, 70);
+            this.txtDoct.Location = new System.Drawing.Point(462, 108);
             this.txtDoct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDoct.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtDoct.Name = "txtDoct";
             this.txtDoct.ShowText = false;
-            this.txtDoct.Size = new System.Drawing.Size(192, 29);
+            this.txtDoct.Size = new System.Drawing.Size(213, 29);
             this.txtDoct.TabIndex = 20;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -530,12 +407,12 @@
             // 
             this.txtzk.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtzk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtzk.Location = new System.Drawing.Point(112, 108);
+            this.txtzk.Location = new System.Drawing.Point(462, 69);
             this.txtzk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtzk.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtzk.Name = "txtzk";
             this.txtzk.ShowText = false;
-            this.txtzk.Size = new System.Drawing.Size(239, 29);
+            this.txtzk.Size = new System.Drawing.Size(213, 29);
             this.txtzk.TabIndex = 15;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -547,12 +424,12 @@
             // 
             this.txtks.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtks.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtks.Location = new System.Drawing.Point(112, 70);
+            this.txtks.Location = new System.Drawing.Point(462, 31);
             this.txtks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtks.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtks.Name = "txtks";
             this.txtks.ShowText = false;
-            this.txtks.Size = new System.Drawing.Size(239, 29);
+            this.txtks.Size = new System.Drawing.Size(213, 29);
             this.txtks.TabIndex = 14;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -563,7 +440,7 @@
             // uiLabel10
             // 
             this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(710, 70);
+            this.uiLabel10.Location = new System.Drawing.Point(411, 108);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(93, 23);
             this.uiLabel10.TabIndex = 11;
@@ -574,7 +451,7 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(61, 112);
+            this.uiLabel8.Location = new System.Drawing.Point(411, 73);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(46, 23);
             this.uiLabel8.TabIndex = 9;
@@ -585,9 +462,9 @@
             // uiLabel5
             // 
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(414, 34);
+            this.uiLabel5.Location = new System.Drawing.Point(723, 36);
             this.uiLabel5.Name = "uiLabel5";
-            this.uiLabel5.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel5.Size = new System.Drawing.Size(46, 23);
             this.uiLabel5.TabIndex = 6;
             this.uiLabel5.Text = "号别";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -596,7 +473,7 @@
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(61, 75);
+            this.uiLabel4.Location = new System.Drawing.Point(411, 36);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(44, 23);
             this.uiLabel4.TabIndex = 5;
@@ -614,12 +491,12 @@
             "全部",
             "开放",
             "不开放"});
-            this.cbxOpenFlag.Location = new System.Drawing.Point(761, 111);
+            this.cbxOpenFlag.Location = new System.Drawing.Point(1053, 69);
             this.cbxOpenFlag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxOpenFlag.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxOpenFlag.Name = "cbxOpenFlag";
             this.cbxOpenFlag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxOpenFlag.Size = new System.Drawing.Size(192, 29);
+            this.cbxOpenFlag.Size = new System.Drawing.Size(148, 29);
             this.cbxOpenFlag.TabIndex = 4;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -627,7 +504,7 @@
             // uiLabel3
             // 
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(712, 111);
+            this.uiLabel3.Location = new System.Drawing.Point(1004, 69);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(42, 23);
             this.uiLabel3.TabIndex = 4;
@@ -641,12 +518,12 @@
             this.cbxSXW.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxSXW.FillColor = System.Drawing.Color.White;
             this.cbxSXW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxSXW.Location = new System.Drawing.Point(467, 67);
+            this.cbxSXW.Location = new System.Drawing.Point(774, 69);
             this.cbxSXW.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxSXW.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxSXW.Name = "cbxSXW";
             this.cbxSXW.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxSXW.Size = new System.Drawing.Size(200, 29);
+            this.cbxSXW.Size = new System.Drawing.Size(197, 29);
             this.cbxSXW.TabIndex = 3;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -654,11 +531,11 @@
             // uiLabel2
             // 
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(399, 67);
+            this.uiLabel2.Location = new System.Drawing.Point(723, 73);
             this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel2.Size = new System.Drawing.Size(49, 23);
             this.uiLabel2.TabIndex = 2;
-            this.uiLabel2.Text = "上下午";
+            this.uiLabel2.Text = "班次";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -672,24 +549,166 @@
             // 
             this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalCount.Location = new System.Drawing.Point(12, 667);
+            this.lblTotalCount.Location = new System.Drawing.Point(12, 677);
             this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(133, 33);
+            this.lblTotalCount.Size = new System.Drawing.Size(133, 23);
             this.lblTotalCount.TabIndex = 7;
             this.lblTotalCount.Text = "总计：";
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // BaseWeiHu
+            // dgvlist
+            // 
+            this.dgvlist.AllowUserToAddRows = false;
+            this.dgvlist.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgvlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvlist.EnableHeadersVisualStyles = false;
+            this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvlist.Location = new System.Drawing.Point(16, 241);
+            this.dgvlist.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
+            this.dgvlist.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("dgvlist.MergeColumnNames")));
+            this.dgvlist.Name = "dgvlist";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvlist.RowHeight = 0;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvlist.RowTemplate.Height = 23;
+            this.dgvlist.SelectedIndex = -1;
+            this.dgvlist.ShowGridLine = false;
+            this.dgvlist.ShowRect = false;
+            this.dgvlist.Size = new System.Drawing.Size(1320, 433);
+            this.dgvlist.TabIndex = 8;
+            this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellEndEdit);
+            // 
+            // btnWeek2
+            // 
+            this.btnWeek2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWeek2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek2.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek2.Location = new System.Drawing.Point(241, 93);
+            this.btnWeek2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnWeek2.Name = "btnWeek2";
+            this.btnWeek2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek2.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.Size = new System.Drawing.Size(102, 29);
+            this.btnWeek2.Style = Sunny.UI.UIStyle.Green;
+            this.btnWeek2.StyleCustomMode = true;
+            this.btnWeek2.Symbol = 125;
+            this.btnWeek2.TabIndex = 31;
+            this.btnWeek2.Text = "下周";
+            this.btnWeek2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnWeek2.Click += new System.EventHandler(this.btnWeek2_Click);
+            // 
+            // btnWeek1
+            // 
+            this.btnWeek1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWeek1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek1.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek1.Location = new System.Drawing.Point(241, 50);
+            this.btnWeek1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnWeek1.Name = "btnWeek1";
+            this.btnWeek1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.Size = new System.Drawing.Size(102, 29);
+            this.btnWeek1.Style = Sunny.UI.UIStyle.Green;
+            this.btnWeek1.StyleCustomMode = true;
+            this.btnWeek1.Symbol = 262068;
+            this.btnWeek1.TabIndex = 30;
+            this.btnWeek1.Text = "本周";
+            this.btnWeek1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnWeek1.Click += new System.EventHandler(this.btnWeek1_Click);
+            // 
+            // cbx_tempflag
+            // 
+            this.cbx_tempflag.DataSource = null;
+            this.cbx_tempflag.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbx_tempflag.FillColor = System.Drawing.Color.White;
+            this.cbx_tempflag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx_tempflag.Items.AddRange(new object[] {
+            "全部",
+            "临时号",
+            "正常号"});
+            this.cbx_tempflag.Location = new System.Drawing.Point(1053, 108);
+            this.cbx_tempflag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbx_tempflag.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbx_tempflag.Name = "cbx_tempflag";
+            this.cbx_tempflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbx_tempflag.Size = new System.Drawing.Size(148, 29);
+            this.cbx_tempflag.TabIndex = 5;
+            this.cbx_tempflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_tempflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel11
+            // 
+            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel11.Location = new System.Drawing.Point(1004, 108);
+            this.uiLabel11.Name = "uiLabel11";
+            this.uiLabel11.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel11.TabIndex = 6;
+            this.uiLabel11.Text = "临时";
+            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // Hbwh
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1186, 706);
+            this.ClientSize = new System.Drawing.Size(1349, 706);
+            this.Controls.Add(this.dgvlist);
             this.Controls.Add(this.lblTotalCount);
             this.Controls.Add(this.uiGroupBox1);
-            this.Controls.Add(this.dgvlist);
             this.Controls.Add(this.pnlTitle);
             this.KeyPreview = true;
-            this.Name = "BaseWeiHu";
+            this.Name = "Hbwh";
             this.PageIndex = 1305;
             this.StyleCustomMode = true;
             this.Text = "基础号表维护";
@@ -697,8 +716,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseWeiHu_KeyDown);
             this.MouseEnter += new System.EventHandler(this.BaseWeiHu_MouseEnter);
             this.pnlTitle.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).EndInit();
             this.uiGroupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -710,7 +729,6 @@
         private Sunny.UI.UISymbolButton btnReset;
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UILabel lblTitle;
-        private Sunny.UI.UIDataGridView dgvlist;
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UITextBox txtDoct;
         private Sunny.UI.UITextBox txtzk;
@@ -733,18 +751,12 @@
         private Sunny.UI.UIComboBox cbxRequestType;
         private Sunny.UI.UIToolTip uiToolTip1;
         private Sunny.UI.UILabel lblTotalCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn record_sn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn request_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn open_flag_str;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apstr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn group_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn clinic_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn doct_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn req_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn winnostr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn begin_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn current_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn toend_no;
+        private Sunny.UI.UIDatePicker txtDate2;
+        private Sunny.UI.UILabel uiLabel9;
+        private ClassLib.RowMergeView dgvlist;
+        private Sunny.UI.UISymbolButton btnWeek2;
+        private Sunny.UI.UISymbolButton btnWeek1;
+        private Sunny.UI.UIComboBox cbx_tempflag;
+        private Sunny.UI.UILabel uiLabel11;
     }
 }

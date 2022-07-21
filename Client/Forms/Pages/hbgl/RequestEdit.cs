@@ -134,12 +134,14 @@ namespace Client
                         txtTotalNum.Text = data.end_no.ToString();
                         //cbxSXW.SelectedValue = dat
                         txtDate.Value = data.request_date;
+                        txt_limit.Text = data.limit_appoint_percent;
 
                         if (SessionHelper.requestHours != null)
                         {
-                            var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
-                            cbxSXW.Text = req_hour.name;
-                        } 
+                            //var req_hour = SessionHelper.requestHours.Where(p => p.code == data.ampm).FirstOrDefault();
+                            //cbxSXW.Text = req_hour.name;
+                            cbxSXW.SelectedValue = data.ampm;
+                        }
                         switch (data.open_flag)
                         {
                             case 1:
@@ -157,11 +159,11 @@ namespace Client
                             case 0: cbxWinNo.Text = "所有窗口"; break;
                             default:
                                 data.window_no.ToString(); break;
-                        } 
+                        }
                         txtks.TextChanged += txtks_TextChanged;
                         txtzk.TextChanged += txtzk_TextChanged;
-                        txtDoct.TextChanged += txtDoct_TextChanged; 
-                    } 
+                        txtDoct.TextChanged += txtDoct_TextChanged;
+                    }
                 }
             }
             catch (Exception ex)
@@ -413,105 +415,124 @@ namespace Client
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "" : txtks.TagString;
-            var clinic_type = cbxHaobie.SelectedValue;
-            var request_type = cbxRequestType.SelectedValue;
-            var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
-            var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
-
-            var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
-
-            int window_no = 0;
-            int open_flag = 1;
-            int total_num = 0;
-
-            var request_date = txtDate.Text;
-
-            ampm = cbxSXW.SelectedValue.ToString();
-
-            //switch (cbxSXW.Text)
-            //{
-            //    case "上午": ampm = "a"; break;
-            //    case "中午": ampm = "m"; break;
-            //    case "下午": ampm = "p"; break;
-            //    case "夜间": ampm = "e"; break;
-            //    default:
-            //        break;
-            //} 
-
-            if (cbxOpenFlag.Text == "开放")
+            try
             {
-                open_flag = 1;
+
+                var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "" : txtks.TagString;
+                var clinic_type = cbxHaobie.SelectedValue;
+                var request_type = cbxRequestType.SelectedValue;
+                var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
+                var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
+
+                var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
+
+                int window_no = 0;
+                int open_flag = 1;
+                int total_num = 0;
+
+                var request_date = txtDate.Text;
+                int limit_appoint_percent = 0;
+                if (!string.IsNullOrWhiteSpace(txt_limit.Text))
+                {
+                    limit_appoint_percent = int.Parse(txt_limit.Text);
+                }
+
+                ampm = cbxSXW.SelectedValue.ToString();
+
+                //switch (cbxSXW.Text)
+                //{
+                //    case "上午": ampm = "a"; break;
+                //    case "中午": ampm = "m"; break;
+                //    case "下午": ampm = "p"; break;
+                //    case "夜间": ampm = "e"; break;
+                //    default:
+                //        break;
+                //} 
+
+                if (cbxOpenFlag.Text == "开放")
+                {
+                    open_flag = 1;
+                }
+                else if (cbxOpenFlag.Text == "不开放")
+                {
+                    open_flag = 0;
+                }
+                int result = 0;
+                if (int.TryParse(txtTotalNum.Text, out result))
+                {
+                    total_num = result;
+                }
+
+                if (string.IsNullOrWhiteSpace(visit_dept))
+                {
+                    UIMessageTip.ShowError("请选择科室！");
+                    txtks.Focus();
+                    return;
+                }
+                if (clinic_type == null || clinic_type.ToString() == "")
+                {
+                    UIMessageTip.ShowError("请选择号别！");
+                    cbxHaobie.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(ampm))
+                {
+                    UIMessageTip.ShowError("请选择上午下午！");
+                    cbxSXW.Focus();
+                    return;
+                }
+
+                if (total_num <= 0)
+                {
+                    UIMessageTip.ShowError("总号数不正确！");
+                    txtTotalNum.Focus();
+                    return;
+                }
+
+                //判断是否存在
+                Task<HttpResponseMessage> task = null;
+
+                var d = new
+                {
+                    record_sn = _record_sn,
+                    request_date = request_date,
+                    unit_sn = visit_dept,
+                    group_sn = group_sn,
+                    doctor_sn = doctor_code,
+                    clinic_type = clinic_type,
+                    request_type = request_type,
+                    ampm = ampm,
+                    totle_num = total_num,
+                    window_no = window_no,
+                    open_flag = open_flag,
+                    op_id = SessionHelper.uservm.user_mi,
+                    limit_appoint_percent = limit_appoint_percent
+                };
+                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&limit_appoint_percent={d.limit_appoint_percent}");
+
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+
+                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                if (responseJson.status ==1)
+                {
+                    UIMessageTip.ShowOk("操作成功!");
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(responseJson.message);
+                    log.Error(responseJson.message);
+                }  
             }
-            else if (cbxOpenFlag.Text == "不开放")
+            catch (Exception)
             {
-                open_flag = 0;
+
+                throw;
             }
-            int result = 0;
-            if (int.TryParse(txtTotalNum.Text, out result))
-            {
-                total_num = result;
-            }
-
-            if (string.IsNullOrWhiteSpace(visit_dept))
-            {
-                UIMessageTip.ShowError("请选择科室！");
-                txtks.Focus();
-                return;
-            }
-            if (clinic_type == null || clinic_type.ToString() == "")
-            {
-                UIMessageTip.ShowError("请选择号别！");
-                cbxHaobie.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(ampm))
-            {
-                UIMessageTip.ShowError("请选择上午下午！");
-                cbxSXW.Focus();
-                return;
-            }
-
-            if (total_num <= 0)
-            {
-                UIMessageTip.ShowError("总号数不正确！");
-                txtTotalNum.Focus();
-                return;
-            }
-
-            //判断是否存在
-            Task<HttpResponseMessage> task = null;
-
-            var d = new
-            {
-                record_sn = _record_sn,
-                request_date = request_date,
-                unit_sn = visit_dept,
-                group_sn = group_sn,
-                doctor_sn = doctor_code,
-                clinic_type = clinic_type,
-                request_type = request_type,
-                ampm = ampm,
-                totle_num = total_num,
-                window_no = window_no,
-                open_flag = open_flag,
-                op_id = SessionHelper.uservm.user_mi,
-            };
-            var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}");
-
-            string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-
-            var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res).data;
-
-            if (responseJson == 1 || responseJson == 2)
-            {
-                UIMessageTip.ShowOk("操作成功!");
-            }
-
-            this.Close();
-
 
         }
 

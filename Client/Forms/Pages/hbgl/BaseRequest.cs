@@ -242,8 +242,8 @@ namespace Client
         {
 
             dgvlist.Columns["unit_name"].Width = 300;
-            dgvlist.Columns["doct_name"].Width = 300;
-            dgvlist.Columns["clinic_name"].Width = 300;
+            dgvlist.Columns["doct_name"].Width = 100;
+            dgvlist.Columns["clinic_name"].Width = 100;
             dgvlist.Columns["daystr"].Width = 100;
             dgvlist.Columns["apstr"].Width = 100;
             dgvlist.Columns["totle_num"].Width = 100;

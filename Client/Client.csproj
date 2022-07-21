@@ -155,11 +155,23 @@
     <Compile Include="ClassLib\DataTableHelper.cs" />
     <Compile Include="ClassLib\LinqHelper.cs" />
     <Compile Include="ClassLib\LoadingHelper.cs" />
+    <Compile Include="ClassLib\RowMergeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ClassLib\RowMergeView.Designer.cs">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </Compile>
     <Compile Include="FastReport\Create.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FastReport\Create.Designer.cs">
       <DependentUpon>Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\cwgl\ShoufeiRijie.cs">
       <SubType>Form</SubType>
@@ -172,6 +184,12 @@
     </Compile>
     <Compile Include="Forms\Pages\cwgl\GuahaoRijie.Designer.cs">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\Hbwh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\Hbwh.Designer.cs">
+      <DependentUpon>Hbwh.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\hbgl\TempRequest.cs">
       <SubType>Form</SubType>
@@ -556,15 +574,24 @@
     <Compile Include="Forms\Pages\mzgh\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ClassLib\RowMergeView.resx">
+      <DependentUpon>RowMergeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FastReport\Create.resx">
       <DependentUpon>Create.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\cwgl\ShoufeiRijie.resx">
       <DependentUpon>ShoufeiRijie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\cwgl\GuahaoRijie.resx">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\hbgl\Hbwh.resx">
+      <DependentUpon>Hbwh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\TempRequest.resx">
       <DependentUpon>TempRequest.cs</DependentUpon>

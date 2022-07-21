@@ -15,5 +15,5 @@ from 	gh_base_request as b left join gh_zd_clinic_type as t on  b.clinic_type=t.
 	left join zd_unit_code as u2 on b.group_sn=u2.unit_sn 
 	left join a_employee_mi as a on b.doctor_sn=a.emp_sn 
         inner join gh_base_request_segment c on b.request_sn = c.request_sn 
-where  b.open_flag='1'
+where  b.open_flag='1' and isnull(b.temp_flag,'0') ='0'
  
