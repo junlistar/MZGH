@@ -32,18 +32,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hbwh));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
-            this.cbxRequestType = new Sunny.UI.UIComboBox();
-            this.uiLabel7 = new Sunny.UI.UILabel();
             this.btnAdd = new Sunny.UI.UISymbolButton();
             this.btnSearch = new Sunny.UI.UISymbolButton();
             this.btnReset = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
+            this.cbxRequestType = new Sunny.UI.UIComboBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.cbx_tempflag = new Sunny.UI.UIComboBox();
+            this.uiLabel11 = new Sunny.UI.UILabel();
+            this.btnWeek2 = new Sunny.UI.UISymbolButton();
+            this.btnWeek1 = new Sunny.UI.UISymbolButton();
             this.txtDate2 = new Sunny.UI.UIDatePicker();
             this.uiLabel9 = new Sunny.UI.UILabel();
             this.txtDate = new Sunny.UI.UIDatePicker();
@@ -65,10 +68,6 @@
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.lblTotalCount = new Sunny.UI.UILabel();
             this.dgvlist = new Client.ClassLib.RowMergeView();
-            this.btnWeek2 = new Sunny.UI.UISymbolButton();
-            this.btnWeek1 = new Sunny.UI.UISymbolButton();
-            this.cbx_tempflag = new Sunny.UI.UIComboBox();
-            this.uiLabel11 = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
@@ -93,37 +92,6 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxRequestType
-            // 
-            this.cbxRequestType.DataSource = null;
-            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxRequestType.FillColor = System.Drawing.Color.White;
-            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxRequestType.Items.AddRange(new object[] {
-            "全部",
-            "开放",
-            "不开放"});
-            this.cbxRequestType.Location = new System.Drawing.Point(1053, 31);
-            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxRequestType.Name = "cbxRequestType";
-            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxRequestType.Size = new System.Drawing.Size(148, 29);
-            this.cbxRequestType.TabIndex = 5;
-            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel7
-            // 
-            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(1002, 32);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.Size = new System.Drawing.Size(44, 23);
-            this.uiLabel7.TabIndex = 28;
-            this.uiLabel7.Text = "号类";
-            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnAdd
             // 
@@ -240,6 +208,37 @@
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbxRequestType
+            // 
+            this.cbxRequestType.DataSource = null;
+            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxRequestType.FillColor = System.Drawing.Color.White;
+            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxRequestType.Items.AddRange(new object[] {
+            "全部",
+            "开放",
+            "不开放"});
+            this.cbxRequestType.Location = new System.Drawing.Point(1053, 31);
+            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxRequestType.Name = "cbxRequestType";
+            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxRequestType.Size = new System.Drawing.Size(148, 29);
+            this.cbxRequestType.TabIndex = 5;
+            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(1002, 32);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel7.TabIndex = 28;
+            this.uiLabel7.Text = "号类";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // uiGroupBox1
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -279,6 +278,89 @@
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbx_tempflag
+            // 
+            this.cbx_tempflag.DataSource = null;
+            this.cbx_tempflag.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbx_tempflag.FillColor = System.Drawing.Color.White;
+            this.cbx_tempflag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx_tempflag.Items.AddRange(new object[] {
+            "全部",
+            "临时号",
+            "正常号"});
+            this.cbx_tempflag.Location = new System.Drawing.Point(1053, 108);
+            this.cbx_tempflag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbx_tempflag.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbx_tempflag.Name = "cbx_tempflag";
+            this.cbx_tempflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbx_tempflag.Size = new System.Drawing.Size(148, 29);
+            this.cbx_tempflag.TabIndex = 5;
+            this.cbx_tempflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_tempflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel11
+            // 
+            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel11.Location = new System.Drawing.Point(1004, 108);
+            this.uiLabel11.Name = "uiLabel11";
+            this.uiLabel11.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel11.TabIndex = 6;
+            this.uiLabel11.Text = "临时";
+            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnWeek2
+            // 
+            this.btnWeek2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWeek2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek2.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek2.Location = new System.Drawing.Point(241, 93);
+            this.btnWeek2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnWeek2.Name = "btnWeek2";
+            this.btnWeek2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek2.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek2.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek2.Size = new System.Drawing.Size(102, 29);
+            this.btnWeek2.Style = Sunny.UI.UIStyle.Green;
+            this.btnWeek2.StyleCustomMode = true;
+            this.btnWeek2.Symbol = 125;
+            this.btnWeek2.TabIndex = 31;
+            this.btnWeek2.Text = "下周";
+            this.btnWeek2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnWeek2.Click += new System.EventHandler(this.btnWeek2_Click);
+            // 
+            // btnWeek1
+            // 
+            this.btnWeek1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnWeek1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek1.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek1.Location = new System.Drawing.Point(241, 50);
+            this.btnWeek1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnWeek1.Name = "btnWeek1";
+            this.btnWeek1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnWeek1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnWeek1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnWeek1.Size = new System.Drawing.Size(102, 29);
+            this.btnWeek1.Style = Sunny.UI.UIStyle.Green;
+            this.btnWeek1.StyleCustomMode = true;
+            this.btnWeek1.Symbol = 262068;
+            this.btnWeek1.TabIndex = 30;
+            this.btnWeek1.Text = "本周";
+            this.btnWeek1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnWeek1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnWeek1.Click += new System.EventHandler(this.btnWeek1_Click);
             // 
             // txtDate2
             // 
@@ -590,7 +672,7 @@
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvlist.Location = new System.Drawing.Point(16, 241);
             this.dgvlist.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
-            this.dgvlist.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("dgvlist.MergeColumnNames")));
+            this.dgvlist.MergeColumnNames = null;
             this.dgvlist.Name = "dgvlist";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -614,90 +696,10 @@
             this.dgvlist.Size = new System.Drawing.Size(1320, 433);
             this.dgvlist.TabIndex = 8;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvlist_CellBeginEdit);
             this.dgvlist.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellEndEdit);
-            // 
-            // btnWeek2
-            // 
-            this.btnWeek2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnWeek2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek2.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnWeek2.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek2.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek2.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnWeek2.Location = new System.Drawing.Point(241, 93);
-            this.btnWeek2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnWeek2.Name = "btnWeek2";
-            this.btnWeek2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek2.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnWeek2.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek2.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek2.Size = new System.Drawing.Size(102, 29);
-            this.btnWeek2.Style = Sunny.UI.UIStyle.Green;
-            this.btnWeek2.StyleCustomMode = true;
-            this.btnWeek2.Symbol = 125;
-            this.btnWeek2.TabIndex = 31;
-            this.btnWeek2.Text = "下周";
-            this.btnWeek2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnWeek2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnWeek2.Click += new System.EventHandler(this.btnWeek2_Click);
-            // 
-            // btnWeek1
-            // 
-            this.btnWeek1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnWeek1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek1.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnWeek1.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek1.Font = new System.Drawing.Font("微软雅黑", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnWeek1.Location = new System.Drawing.Point(241, 50);
-            this.btnWeek1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnWeek1.Name = "btnWeek1";
-            this.btnWeek1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnWeek1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnWeek1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnWeek1.Size = new System.Drawing.Size(102, 29);
-            this.btnWeek1.Style = Sunny.UI.UIStyle.Green;
-            this.btnWeek1.StyleCustomMode = true;
-            this.btnWeek1.Symbol = 262068;
-            this.btnWeek1.TabIndex = 30;
-            this.btnWeek1.Text = "本周";
-            this.btnWeek1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnWeek1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnWeek1.Click += new System.EventHandler(this.btnWeek1_Click);
-            // 
-            // cbx_tempflag
-            // 
-            this.cbx_tempflag.DataSource = null;
-            this.cbx_tempflag.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbx_tempflag.FillColor = System.Drawing.Color.White;
-            this.cbx_tempflag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx_tempflag.Items.AddRange(new object[] {
-            "全部",
-            "临时号",
-            "正常号"});
-            this.cbx_tempflag.Location = new System.Drawing.Point(1053, 108);
-            this.cbx_tempflag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbx_tempflag.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbx_tempflag.Name = "cbx_tempflag";
-            this.cbx_tempflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbx_tempflag.Size = new System.Drawing.Size(148, 29);
-            this.cbx_tempflag.TabIndex = 5;
-            this.cbx_tempflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbx_tempflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel11
-            // 
-            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel11.Location = new System.Drawing.Point(1004, 108);
-            this.uiLabel11.Name = "uiLabel11";
-            this.uiLabel11.Size = new System.Drawing.Size(42, 23);
-            this.uiLabel11.TabIndex = 6;
-            this.uiLabel11.Text = "临时";
-            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvlist_ColumnHeaderMouseClick);
+            this.dgvlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvlist_RowPostPaint);
             // 
             // Hbwh
             // 

@@ -372,7 +372,7 @@
             this.btnNewUser.Size = new System.Drawing.Size(102, 39);
             this.btnNewUser.Style = Sunny.UI.UIStyle.Orange;
             this.btnNewUser.StyleCustomMode = true;
-            this.btnNewUser.Symbol = 62140;
+            this.btnNewUser.Symbol = 62004;
             this.btnNewUser.TabIndex = 17;
             this.btnNewUser.Text = "新用户";
             this.btnNewUser.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

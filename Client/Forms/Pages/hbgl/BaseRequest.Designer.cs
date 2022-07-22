@@ -72,6 +72,7 @@
             this.apstr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.totle_num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.winnostr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.limit_appoint_percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.open_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.op_date_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.request_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -288,6 +289,7 @@
             this.apstr,
             this.totle_num,
             this.winnostr,
+            this.limit_appoint_percent,
             this.open_flag_str,
             this.op_date_str,
             this.request_sn,
@@ -714,6 +716,12 @@
             this.winnostr.HeaderText = "诊室";
             this.winnostr.Name = "winnostr";
             // 
+            // limit_appoint_percent
+            // 
+            this.limit_appoint_percent.DataPropertyName = "limit_appoint_percent";
+            this.limit_appoint_percent.HeaderText = "限约比例";
+            this.limit_appoint_percent.Name = "limit_appoint_percent";
+            // 
             // open_flag_str
             // 
             this.open_flag_str.DataPropertyName = "open_flag_str";
@@ -812,6 +820,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn apstr;
         private System.Windows.Forms.DataGridViewTextBoxColumn totle_num;
         private System.Windows.Forms.DataGridViewTextBoxColumn winnostr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn limit_appoint_percent;
         private System.Windows.Forms.DataGridViewTextBoxColumn open_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn op_date_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn request_sn;

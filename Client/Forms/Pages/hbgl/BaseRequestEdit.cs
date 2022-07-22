@@ -149,13 +149,13 @@ namespace Client
                             cbxOpenFlag.Text = data.open_flag.ToString();
                             break;
                     }
-                    switch (data.window_no)
-                    {
-                        case 0: cbxWinNo.Text = "所有窗口"; break;
-                        default:
-                            data.window_no.ToString(); break;
-                    }
-
+                    //switch (data.window_no)
+                    //{
+                    //    case 0: cbxWinNo.Text = "所有窗口"; break;
+                    //    default:
+                    //        data.window_no.ToString(); break;
+                    //}
+                    txt_winno.Text = data.window_no.ToString();
                     txt_limit.Text = data.limit_appoint_percent.ToString();
 
                     txtks.TextChanged += txtks_TextChanged;
@@ -184,8 +184,9 @@ namespace Client
             cbxSXW.ValueMember = "code";
             cbxSXW.DisplayMember = "name";
 
-            cbxWinNo.Text = "所有窗口";
+            txt_winno.Text = "";
             cbxOpenFlag.Text = "开放";
+            txt_limit.Text = "1";
 
             dgv.CellClick += dgvks_CellContentClick;
             dgv.KeyDown += dgvks_KeyDown;
@@ -462,6 +463,12 @@ namespace Client
 
                 ampm = cbxSXW.SelectedValue.ToString();
 
+                var _winno = txt_winno.Text;
+                if (!int.TryParse(_winno, out window_no))
+                {
+                    UIMessageTip.Show("诊室数据有误，请输入数字");
+                    return;
+                }
 
                 //switch (cbxWeek.Text)
                 //{
@@ -519,12 +526,12 @@ namespace Client
                     cbxSXW.Focus();
                     return;
                 }
-                if (string.IsNullOrEmpty(week))
-                {
-                    UIMessageTip.ShowError("请选择周！");
-                    cbxWeek.Focus();
-                    return;
-                }
+                //if (string.IsNullOrEmpty(week))
+                //{
+                //    UIMessageTip.ShowError("请选择周！");
+                //    cbxWeek.Focus();
+                //    return;
+                //}
                 if (string.IsNullOrEmpty(day))
                 {
                     UIMessageTip.ShowError("请选择天！");

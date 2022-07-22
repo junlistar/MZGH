@@ -63,8 +63,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
             BindBottomData();
-
-            dgvlist.Init();
+             
         }
 
         public void InitDic()
@@ -213,7 +212,8 @@ namespace Client
                             winnostr = p.winnostr,
                             totle_num = p.totle_num,
                             open_flag_str = p.open_flag_str,
-                            op_date_str = p.op_date_str
+                            op_date_str = p.op_date_str,
+                            limit_appoint_percent = p.limit_appoint_percent
                         }).ToList();
                         dgvlist.DataSource = ds;
                         //dgvlist.AutoResizeColumns();

@@ -102,7 +102,7 @@ namespace Client
                 if (result.status == 1)
                 {
                     list = result.data;
-                    dgvRequest.Init();
+                    //dgvRequest.Init();
                     dgvRequest.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     if (list != null)
                     {
@@ -213,7 +213,7 @@ namespace Client
                 {
                     return;
                 }
-
+                LoadingHelper.ShowLoadingScreen();//显示
                 lblmsg.Show();
                 btnCreate.Enabled = false;
                 Application.DoEvents();
@@ -282,7 +282,7 @@ namespace Client
             {
                 btnCreate.Enabled = true;
                 lblmsg.Hide();
-
+                LoadingHelper.CloseForm();
             }
         }
 
@@ -460,6 +460,29 @@ namespace Client
         public string RemoveOrderSymbol(string text)
         {
             return text.Replace("↑", "").Replace("↓", "");
+        }
+
+        private void Schb_Initialize(object sender, EventArgs e)
+        {
+            var dt_from = DateTime.Now.ToString("MM-dd");
+            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToString("MM-dd");
+            btnWeek1.Text = "本周" + "\r\n" + dt_from + "至" + dt_to;
+
+            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToString("MM-dd");
+            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToString("MM-dd");
+            btnWeek2.Text = "下周" + "\r\n" + dt_from + "至" + dt_to;
+
+            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((3 - 1) * 7) + 1).ToString("MM-dd");
+            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((3 - 1) * 7) + 1).ToString("MM-dd");
+            btnWeek3.Text = "第三周" + "\r\n" + dt_from + "至" + dt_to;
+
+            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((4 - 1) * 7) + 1).ToString("MM-dd");
+            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((4 - 1) * 7) + 1).ToString("MM-dd");
+            btnWeek4.Text = "第四周" + "\r\n" + dt_from + "至" + dt_to;
+
+            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((5 - 1) * 7) + 1).ToString("MM-dd");
+            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((5 - 1) * 7) + 1).ToString("MM-dd");
+            btnWeek5.Text = "第五周" + "\r\n" + dt_from + "至" + dt_to;
         }
     }
 }

@@ -379,3 +379,101 @@ CREATE TABLE [dbo].[mz_patient_sfz](
  insert into gh_zd_clinic_type(code,name,py_code,d_code,deleted_flag)
  values(38,'24小时号','24XSH','24XSH','1')
 GO 
+
+
+ 
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,查询门诊挂号数据，合并表头,>
+-- ============================================= 
+ALTER PROCEDURE [dbo].[mzgh_SearchRequestData]
+
+	@dt1 DATETIME,
+	@dt2 DATETIME,
+	@unit_sn VARCHAR(20),
+	@group_sn VARCHAR(20),
+	@doctor_sn VARCHAR(20),
+	@clinic_type VARCHAR(20),
+	@req_type VARCHAR(20),
+	@ampm VARCHAR(20),
+	@window_no VARCHAR(20),
+	@open_flag VARCHAR(20),
+	@temp_flag VARCHAR(20)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+declare @dt DATETIME ,@sql_plus Nvarchar(max)
+
+SET @dt = @dt1 
+SET @sql_plus=''
+    
+set @sql_plus =' SELECT 
+	u1.name unit_name,b.unit_sn,
+       c.name clinic_name, 
+       a.name doct_name, b.clinic_type,b.doctor_sn,b.ampm'
+
+WHILE (@dt <= @dt2)
+BEGIN
+ set @sql_plus= @sql_plus+',
+ MAX(CASE request_date
+WHEN '''+ CONVERT(varchar(20),@dt,23) +''' THEN b.record_sn
+ELSE ''''
+END) [sn]
+,MAX(CASE request_date
+WHEN '''+ CONVERT(varchar(20),@dt,23) +''' THEN b.ampm
+ELSE ''''
+END) [bc]
+,MAX(CASE request_date
+WHEN '''+ CONVERT(varchar(20),@dt,23) +''' THEN CONVERT(varchar(20),b.current_no) +''/''+CONVERT(varchar(20),b.end_no) 
+ELSE ''''
+END) [xe]
+,MAX(CASE request_date
+WHEN '''+ CONVERT(varchar(20),@dt,23) +''' THEN CONVERT(varchar(20),b.limit_appoint_percent)
+ELSE ''''
+END) [xy]
+,MAX(CASE request_date
+WHEN '''+ CONVERT(varchar(20),@dt,23) +''' THEN b.open_flag
+ELSE ''0''
+END) [open_flag]'
+-- 在 ''日'' 单位上+1天
+    SET @dt = dateadd (DAY, 1, @dt)
+END
+set @sql_plus =@sql_plus + 'FROM  gh_request  b
+ left join a_employee_mi a on b.doctor_sn = a.emp_sn 
+     inner join zd_unit_code u1 on b.unit_sn = u1.unit_sn  
+     left join zd_unit_code u2 on b.group_sn = u2.unit_sn 
+     inner join gh_zd_clinic_type  c on b.clinic_type = c.code 
+     inner join gh_zd_request_type r on b.req_type = r.code  
+where b.request_date between '''+ CONVERT(varchar(20),@dt1,23)+''' and  '''+ CONVERT(varchar(20),@dt2,23)+'''
+and b.unit_sn like '''+@unit_sn+''' and
+      isnull(b.group_sn,'''') like '''+@group_sn+''' and
+      isnull(b.doctor_sn,'''') like '''+@doctor_sn+''' and
+      b.clinic_type like '''+@clinic_type+''' and
+      b.req_type like '''+@req_type+''' and 
+      b.ampm like '''+@ampm+''' and
+      isnull(cast(b.window_no as char),'''') like '''+@window_no+''' and
+      b.open_flag like '''+@open_flag+''' and 
+      isnull(b.temp_flag,''0'') like '''+@temp_flag+'''
+group by  b.unit_sn,b.clinic_type,b.doctor_sn,b.ampm,
+u1.name,a.name,c.name
+order by unit_sn,clinic_type,doctor_sn,ampm'
+
+print @sql_plus
+
+exec sp_executesql @sql_plus ,N'@dt1 DATETIME,@dt2 DATETIME,@unit_sn VARCHAR(20),
+	@group_sn VARCHAR(20),
+	@doctor_sn VARCHAR(20),
+	@clinic_type VARCHAR(20),
+	@req_type VARCHAR(20),
+	@ampm VARCHAR(20),
+	@window_no VARCHAR(20),
+	@open_flag VARCHAR(20),
+	@temp_flag VARCHAR(20)',@dt1 =@dt1,@dt2 =@dt2,@unit_sn=@unit_sn,@group_sn=@group_sn,@doctor_sn=@doctor_sn,@clinic_type=@clinic_type,
+@req_type=@req_type,@ampm=@ampm,@window_no=@window_no,@open_flag=@open_flag,@temp_flag=@temp_flag
+END
+
+

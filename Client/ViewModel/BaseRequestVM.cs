@@ -101,12 +101,13 @@ namespace Client.ViewModel
         {
             get
             {
-                switch (window_no)
-                {
-                    case 0: return "所有窗口";
-                    default:
-                        return window_no.ToString();
-                }
+                //switch (window_no)
+                //{
+                //    case 0: return "所有窗口";
+                //    default:
+                //        return window_no.ToString();
+                //}
+                return window_no.ToString();
             }
         }
 

@@ -4,7 +4,7 @@ using Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -12,7 +12,7 @@ namespace Data.Repository
     {
 
         public List<BaseRequest> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, string window_no, string open_flag,int temp_flag)
+            string week, string day, string ampm, string window_no, string open_flag, int temp_flag)
         {
             string ghsql = GetSqlByTag(220053);
 
@@ -54,19 +54,74 @@ namespace Data.Repository
 
 
         }
+        public bool IsExistBaseRecord(BaseRequest item)
+        {
+            string sql = "";
+            var para = new DynamicParameters();
+            //准备数据
+            if (string.IsNullOrWhiteSpace(item.doctor_sn))
+            {
+                //如果医生为空，则科室，专科，上下午，号类 唯一条件
+
+                sql = @"select* from gh_base_request where unit_sn = @unit_sn and ampm = @ampm and clinic_type = @clinic_type";
+            }
+            else
+            {
+                //医生不为空，则日期，上下午，医生 唯一条件
+                sql = @"select * from gh_base_request where ampm=@ampm and doctor_sn=@doctor_sn";
+            }
+            para.Add("@ampm", item.ampm);
+            para.Add("@unit_sn", item.unit_sn);
+            if (string.IsNullOrWhiteSpace(item.group_sn))
+            {
+                sql += " and group_sn is null";
+
+            }
+            else
+            {
+                sql += " and group_sn = @group_sn";
+
+                para.Add("@group_sn", item.group_sn);
+            }
+
+            para.Add("@doctor_sn", item.doctor_sn);
+            para.Add("@clinic_type", item.clinic_type);
+
+
+            var requestlist = Select(sql, para);
+
+            if (requestlist != null && requestlist.Count > 0)
+            {
+                if (string.IsNullOrEmpty(item.request_sn) || requestlist.Where(p => p.request_sn != item.request_sn).Count() > 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         public int EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id,int temp_flag,int limit_appoint_percent)
+            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
         {
+            //判断是否存在冲突号
+            BaseRequest baseRequest = new BaseRequest();
+            baseRequest.request_sn = request_sn;
+            baseRequest.unit_sn = unit_sn;
+            baseRequest.doctor_sn = doctor_sn;
+            baseRequest.clinic_type = clinic_type;
+            baseRequest.ampm = ampm;
+            baseRequest.group_sn = group_sn;
+
+            if (IsExistBaseRecord(baseRequest))
+            {
+                throw new Exception("存在相同记录号！");
+            }
 
             //修改
             if (!string.IsNullOrEmpty(request_sn))
-            {
-                //                string sql = @"update gh_base_request
-                //set [week]=@week,[day]=@day,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,
-                //clinic_type=@clinic_type,totle_num=@totle_num,op_id=@op_id,op_date=@op_date,open_flag=@open_flag,window_no=@window_no 
-                //where request_sn = @request_sn";
-
+            {  
                 string sql = GetSqlByTag(220062);
                 var para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
@@ -120,7 +175,7 @@ namespace Data.Repository
                 para.Add("@temp_flag", temp_flag);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
 
-                
+
                 Update(sql, para);
 
 
@@ -202,9 +257,9 @@ namespace Data.Repository
                 ghsql += append;
             }
 
-            ghsql += $" order by week,day"; 
+            ghsql += $" order by week,day";
 
-            return Select(ghsql); 
+            return Select(ghsql);
         }
 
 
@@ -312,59 +367,59 @@ namespace Data.Repository
         public DataTable GetRequestsByParamsV2(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
             string ampm, string window_no, string open_flag, string temp_flag)
         {
-            DateTime dt1 = DateTime.Parse(begin);
-            DateTime dt = dt1;
-            DateTime dt2 = DateTime.Parse(end);
-            string sel_columns = "";
-            while (dt <= dt2)
-            {
-                sel_columns += $@",MAX(CASE request_date
-WHEN '{dt.ToShortDateString()}' THEN b.record_sn
-ELSE ''
-END) [sn]
-,MAX(CASE request_date
-WHEN '{dt.ToShortDateString()}' THEN b.ampm
-ELSE ''
-END) [bc]
-,MAX(CASE request_date
-WHEN '{dt.ToShortDateString()}' THEN CONVERT(varchar(20),b.current_no) +'/'+CONVERT(varchar(20),b.end_no) 
-ELSE ''
-END) [xe]
-,MAX(CASE request_date
-WHEN '{dt.ToShortDateString()}' THEN CONVERT(varchar(20),b.limit_appoint_percent)
-ELSE ''
-END) [xy]";
-                dt = dt.AddDays(1);
-            } 
-            string ghsql = $@" SELECT 
-	u1.name unit_name,b.unit_sn,
-       u2.name group_name,
-       c.name clinic_name, 
-       a.name doct_name, b.group_sn,b.clinic_type,b.doctor_sn,b.ampm {sel_columns}
-from gh_request b left join a_employee_mi a on b.doctor_sn = a.emp_sn 
-     inner join zd_unit_code u1 on b.unit_sn = u1.unit_sn  
-     left join zd_unit_code u2 on b.group_sn = u2.unit_sn 
-     inner join gh_zd_clinic_type  c on b.clinic_type = c.code 
-     inner join gh_zd_request_type r on b.req_type = r.code  
-where b.request_date between @P1 and @P2
-and b.unit_sn like @unit_sn and
-      isnull(b.group_sn,'') like @group_sn and
-      isnull(b.doctor_sn,'') like @doctor_sn and
-      b.clinic_type like @clinic_type and
-      b.req_type like @req_type and 
-      b.ampm like @ampm and
-      isnull(cast(b.window_no as char),'') like @window_no and
-      b.open_flag like @open_flag and 
-      isnull(b.temp_flag,'0') like @temp_flag
-group by  b.unit_sn,b.group_sn ,b.clinic_type,b.doctor_sn,b.ampm,
-u1.name,u2.name,a.name,c.name
-order by unit_sn,group_sn,clinic_type,doctor_sn,ampm
-";
+            //            DateTime dt1 = DateTime.Parse(begin);
+            //            DateTime dt = dt1;
+            //            DateTime dt2 = DateTime.Parse(end);
+            //            string sel_columns = "";
+            //            while (dt <= dt2)
+            //            {
+            //                sel_columns += $@",MAX(CASE request_date
+            //WHEN '{dt.ToShortDateString()}' THEN b.record_sn
+            //ELSE ''
+            //END) [sn]
+            //,MAX(CASE request_date
+            //WHEN '{dt.ToShortDateString()}' THEN b.ampm
+            //ELSE ''
+            //END) [bc]
+            //,MAX(CASE request_date
+            //WHEN '{dt.ToShortDateString()}' THEN CONVERT(varchar(20),b.current_no) +'/'+CONVERT(varchar(20),b.end_no) 
+            //ELSE ''
+            //END) [xe]
+            //,MAX(CASE request_date
+            //WHEN '{dt.ToShortDateString()}' THEN CONVERT(varchar(20),b.limit_appoint_percent)
+            //ELSE ''
+            //END) [xy]";
+            //                dt = dt.AddDays(1);
+            //            } 
+            //            string ghsql = $@" SELECT 
+            //	u1.name unit_name,b.unit_sn,
+            //       u2.name group_name,
+            //       c.name clinic_name, 
+            //       a.name doct_name, b.group_sn,b.clinic_type,b.doctor_sn,b.ampm {sel_columns}
+            //from gh_request b left join a_employee_mi a on b.doctor_sn = a.emp_sn 
+            //     inner join zd_unit_code u1 on b.unit_sn = u1.unit_sn  
+            //     left join zd_unit_code u2 on b.group_sn = u2.unit_sn 
+            //     inner join gh_zd_clinic_type  c on b.clinic_type = c.code 
+            //     inner join gh_zd_request_type r on b.req_type = r.code  
+            //where b.request_date between @P1 and @P2
+            //and b.unit_sn like @unit_sn and
+            //      isnull(b.group_sn,'') like @group_sn and
+            //      isnull(b.doctor_sn,'') like @doctor_sn and
+            //      b.clinic_type like @clinic_type and
+            //      b.req_type like @req_type and 
+            //      b.ampm like @ampm and
+            //      isnull(cast(b.window_no as char),'') like @window_no and
+            //      b.open_flag like @open_flag and 
+            //      isnull(b.temp_flag,'0') like @temp_flag
+            //group by  b.unit_sn,b.group_sn ,b.clinic_type,b.doctor_sn,b.ampm,
+            //u1.name,u2.name,a.name,c.name
+            //order by unit_sn,group_sn,clinic_type,doctor_sn,ampm
+            //";
 
 
             var para = new DynamicParameters();
-            para.Add("@P1", begin);
-            para.Add("@P2", end);
+            para.Add("@dt1", begin);
+            para.Add("@dt2", end);
             para.Add("@unit_sn", string.IsNullOrWhiteSpace(unit_sn) ? "%" : unit_sn.Trim());
             para.Add("@group_sn", string.IsNullOrWhiteSpace(group_sn) ? "%" : group_sn.Trim());
             para.Add("@doctor_sn", string.IsNullOrWhiteSpace(doctor_sn) ? "%" : doctor_sn.Trim());
@@ -375,9 +430,10 @@ order by unit_sn,group_sn,clinic_type,doctor_sn,ampm
             para.Add("@window_no", string.IsNullOrWhiteSpace(window_no) ? "%" : window_no.Trim());
             para.Add("@open_flag", string.IsNullOrWhiteSpace(open_flag) ? "%" : open_flag.Trim());
             para.Add("@temp_flag", string.IsNullOrWhiteSpace(temp_flag) ? "%" : temp_flag.Trim());
-            
 
-            return ExecuteTable(ghsql, para, CommandType.Text);
+
+            //return ExecuteTable(ghsql, para, CommandType.Text);
+            return ExecuteTable("mzgh_SearchRequestData", para, CommandType.StoredProcedure);
 
 
         }

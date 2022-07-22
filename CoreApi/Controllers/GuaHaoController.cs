@@ -650,6 +650,19 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
+        public ResponseResult<int> EditRequestTotalNum(string record_sn, int total_num)
+        {
+            Log.Information($"EditRequestTotalNum,{record_sn},{total_num}");
+            try
+            {
+                return _repository.EditRequestTotalNum(record_sn, total_num);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+        } 
 
         public ResponseResult<List<BaseRequest>> GetRequestsByDate(string begin, string end)
         {
