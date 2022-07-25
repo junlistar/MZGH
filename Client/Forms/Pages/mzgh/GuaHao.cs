@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 using System.Reflection;
 using System.Threading;
 using Client.Forms.Wedgit;
+using Client.Forms.Pages.mzgh;
 
 namespace Client
 {
@@ -1198,6 +1199,12 @@ namespace Client
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
+            //如果点击的是身份证，择查询身份证信息
+            if (SessionHelper.CardReader != null)
+            {
+                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+            }
+
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
@@ -1216,6 +1223,23 @@ namespace Client
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
                     var userInfo = result.data[0];
+
+
+                    //如果身份证查询到多条记录
+                    //if (SessionHelper.CardReader != null && result.data.Count > 1)
+                    if (result.data.Count > 1)
+                    {
+                        //弹出选择提示
+                        SelectPatient selectPatient = new SelectPatient(result.data, this);
+                        if (selectPatient.ShowDialog() == DialogResult.OK)
+                        {
+                            userInfo = result.data.Where(p => p.patient_id == patient_id).FirstOrDefault();
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
                     PatientVM = userInfo;
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
@@ -1312,11 +1336,18 @@ namespace Client
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                     {
-                        //自动打开创建新用户窗口
-                        UserInfoEdit ue = new UserInfoEdit("", null);
-                        ue.FormClosed += Ue_FormClosed;
-                        ue.ShowDialog();
+                        ////自动打开创建新用户窗口
+                        //UserInfoEdit ue = new UserInfoEdit("", null);
+                        //ue.FormClosed += Ue_FormClosed;
+                        //ue.ShowDialog();
 
+                        //自动创建一条用户信息
+                        string _hicno = AutoAddUserInfo();
+
+                        YBHelper.currentYBInfo = null;
+                        SessionHelper.CardReader = null;
+                        this.txtCode.Text = _hicno;
+                        SearchUser();
                     }
                 }
 
@@ -1327,6 +1358,56 @@ namespace Client
                 log.Error(ex.StackTrace);
             }
 
+        }
+
+        public string AutoAddUserInfo()
+        {
+            var _hicno = "";
+            var _name = "";
+            var _sex = "";
+            var _birth = "";
+            var _home_street = "";
+
+            if (SessionHelper.CardReader != null)
+            {
+                _hicno = SessionHelper.CardReader.IDCard;
+                _name = SessionHelper.CardReader.Name;
+                _sex = SessionHelper.CardReader.Sex == "男" ? "1" : "2";
+                _birth = SessionHelper.CardReader.BirthDay;
+                _home_street = SessionHelper.CardReader.Address;
+
+            }
+            else if (YBHelper.currentYBInfo != null)
+            {
+                _hicno = YBHelper.currentYBInfo.output.baseinfo.certno;
+                _name = YBHelper.currentYBInfo.output.baseinfo.psn_name;
+                _sex = YBHelper.currentYBInfo.output.baseinfo.gend;
+                _birth = YBHelper.currentYBInfo.output.baseinfo.brdy;
+                _home_street = "";
+            }
+            var d = new
+            {
+                pid = "",
+                hicno = _hicno,
+                sno = _hicno,
+                barcode = _hicno,
+                name = _name,
+                sex = _sex,
+                birth = _birth,
+                tel = "",
+                home_district = "",
+                home_street = _home_street,
+                occupation_type = "",
+                response_type = "01",
+                charge_type = "01",
+                opera = SessionHelper.uservm.user_mi
+            };
+
+            var paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+
+            HttpClientUtil.Get(paramurl);
+
+            return _hicno;
         }
 
         private void btnMingtian_Click(object sender, EventArgs e)
@@ -1422,7 +1503,7 @@ namespace Client
         {
             if (e.KeyCode == Keys.Down)
             {
-                 
+
             }
             else if (e.KeyCode == Keys.Enter)
             {

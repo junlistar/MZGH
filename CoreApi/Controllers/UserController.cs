@@ -64,6 +64,23 @@ namespace CoreApi.Controllers
             return list;
         }
 
+        public ResponseResult<List<SfzInfo>> GetSfzInfoByPatientId(string pid)
+        {
+            Log.Information($"GetSfzInfoByPatientId,{pid}");
+            List<SfzInfo> list;
+            try
+            {
+                list = _sfzInfoRepository.GetSfzInfoByPatientId(pid);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<SfzInfo>>(ex.Message);
+            }
+            return list;
+        }
+         
+
         public ResponseResult<bool> UpdateSfzInfo(string name, string sex, string address, string folk, string birthday, string card_no)
         {
             Log.Information($"UpdateSfzInfo,{name},{sex},{address},{folk},{birthday},{card_no}");

@@ -68,21 +68,22 @@ namespace Data.Repository
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = @"select * from gh_base_request where ampm=@ampm and doctor_sn=@doctor_sn";
+                sql = @"select * from gh_base_request where week=@week ampm=@ampm and doctor_sn=@doctor_sn";
             }
+            para.Add("@week", item.week);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
-            if (string.IsNullOrWhiteSpace(item.group_sn))
-            {
-                sql += " and group_sn is null";
+            //if (string.IsNullOrWhiteSpace(item.group_sn))
+            //{
+            //    sql += " and group_sn is null";
 
-            }
-            else
-            {
-                sql += " and group_sn = @group_sn";
+            //}
+            //else
+            //{
+            //    sql += " and group_sn = @group_sn";
 
-                para.Add("@group_sn", item.group_sn);
-            }
+            //    para.Add("@group_sn", item.group_sn);
+            //}
 
             para.Add("@doctor_sn", item.doctor_sn);
             para.Add("@clinic_type", item.clinic_type);

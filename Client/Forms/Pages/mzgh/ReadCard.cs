@@ -17,13 +17,15 @@ namespace Client
     public partial class ReadCard : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(ReadCard));//typeof放当前类
-        public ReadCard(string cardName)
+        public ReadCard(string cardName, bool no_enter = false)
         {
             InitializeComponent();
             _cardName = cardName;
+            _no_enter = no_enter;
         }
 
         public string _cardName = ""; CardReader dto;
+        bool _no_enter = false;
 
         private void ReadCard_Load(object sender, EventArgs e)
         {
@@ -32,6 +34,11 @@ namespace Client
             lblmsg.ForeColor = Color.Red;
             timer1.Interval = 2000;
             timer1.Start();
+
+            if (_no_enter)
+            {
+                uiTabControl1.TabPages.RemoveAt(1); 
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -137,6 +144,11 @@ namespace Client
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            DoOk();
+        }
+
+        public void DoOk()
+        {
             var card_no = txt_sfz.Text.Trim();
 
             if (!string.IsNullOrWhiteSpace(card_no))
@@ -147,7 +159,7 @@ namespace Client
                     UIMessageTip.ShowError("身份证号码不正确!");
                     txt_sfz.Focus();
                     return;
-                } 
+                }
             }
             else
             {
@@ -157,6 +169,15 @@ namespace Client
 
             SessionHelper.cardno = card_no;
             this.Close();
+        }
+
+        private void uiTabControl1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DoOk();
+
+            }
         }
     }
 }

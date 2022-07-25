@@ -4,7 +4,7 @@ using Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -18,7 +18,7 @@ namespace Data.Repository
 
 
         public List<Patient> GetPatientByCard(string cardno)
-        { 
+        {
             string selectSql = GetSqlByTag(220002);
 
             var para = new DynamicParameters();
@@ -29,7 +29,7 @@ namespace Data.Repository
 
         }
         public List<Patient> GetPatientById(string pid)
-        { 
+        {
             string selectSql = GetSqlByTag(220003);
 
             var para = new DynamicParameters();
@@ -45,6 +45,15 @@ namespace Data.Repository
 
             var para = new DynamicParameters();
             para.Add("@barcode", barcode);
+
+            return Select(selectSql, para);
+        }
+        public List<Patient> GetPatientBySfzId(string sfzid)
+        {
+            string selectSql = @"select * from mz_patient_mi a where a.hic_no=@sfzid ";
+
+            var para = new DynamicParameters();
+            para.Add("@sfzid", sfzid);
 
             return Select(selectSql, para);
         }
@@ -86,82 +95,107 @@ namespace Data.Repository
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera)
         {
-
-            //查询是否存在
-            string issql = GetSqlByTag(220005);// "select * from mz_patient_mi where patient_id = @patient_id";
-            var para = new DynamicParameters();
-            if (pid.Length == 7)
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                pid = "000" + pid + "00";
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+
+                    //查询是否存在
+                    string issql = GetSqlByTag(220005);// "select * from mz_patient_mi where patient_id = @patient_id";
+                    var para = new DynamicParameters();
+                    if (pid.Length == 7)
+                    {
+                        pid = "000" + pid + "00";
+                    }
+                    para.Add("@patient_id", pid);
+                    var list = connection.Query<Patient>(issql, para,transaction);
+                    if (list != null && list.Count() > 0)
+                    {
+                        //修改
+
+                        //                string sql = @"update mz_patient_mi
+                        //set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
+                        //home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera 
+                        //where patient_id=@patient_id";
+
+                        string sql = GetSqlByTag(220008);
+                        para = new DynamicParameters();
+                        para.Add("@social_no", sno);
+                        para.Add("@hic_no", hicno);
+                        para.Add("@p_bar_code", barcode);
+                        para.Add("@name", name);
+                        para.Add("@sex", sex);
+                        para.Add("@birthday", birthday);
+                        para.Add("@tel", tel);
+                        para.Add("@home_district", home_district);
+                        para.Add("@home_street", home_street);
+                        para.Add("@occupation_type", occupation_type);
+                        para.Add("@response_type", response_type);
+                        para.Add("@charge_type", charge_type);
+                        para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
+                        para.Add("@update_opera", opera);
+                        para.Add("@patient_id", pid);
+
+                        return connection.Execute(sql, para,transaction);
+                    }
+                    else
+                    {
+                        //新增
+
+                        //                string sql = @"insert into mz_patient_mi(patient_id,social_no,hic_no,p_bar_code,name,sex,birthday,home_tel,
+                        //balance,max_times,max_ledger_sn,max_item_sn,max_receipt_sn,
+                        //home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date,enter_opera,update_opera) values
+                        //(@patient_id,@social_no,@hic_no,@p_bar_code,@name,@sex,@birthday,@home_tel,'0',0,0,0,0,
+                        //@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date,@enter_opera,@update_opera)";
+
+                        string sql = GetSqlByTag(220009);
+
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@social_no", sno);
+                        para.Add("@hic_no", hicno);
+                        para.Add("@p_bar_code", barcode);
+                        para.Add("@name", name);
+                        para.Add("@sex", int.Parse(sex));
+                        para.Add("@birthday", birthday);
+                        para.Add("@home_tel", tel);
+
+                        para.Add("@home_district", home_district);
+                        para.Add("@home_street", home_street);
+                        para.Add("@occupation_type", occupation_type);
+                        para.Add("@response_type", response_type);
+                        para.Add("@charge_type", charge_type);
+
+                        para.Add("@enter_date", DateTime.Now);
+                        para.Add("@update_date", DateTime.Now);
+
+                        para.Add("@enter_opera", opera);
+                        para.Add("@update_opera", opera);
+                         
+                        connection.Execute(sql, para, transaction);
+
+                        //写patientId和身份证id关联表
+                        sql = "insert into mz_patient_sfz(patient_id,sfz_id) value (@patient_id,@sfz_id)";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@hic_no", hicno);
+                        connection.Execute(sql, para, transaction);
+
+                    }
+                    transaction.Commit();
+
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+                 
             }
-            para.Add("@patient_id", pid);
-            var list = Select(issql, para);
-            if (list != null && list.Count > 0)
-            {
-                //修改
 
-                //                string sql = @"update mz_patient_mi
-                //set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
-                //home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera 
-                //where patient_id=@patient_id";
-
-                string sql = GetSqlByTag(220008);
-                para = new DynamicParameters();
-                para.Add("@social_no", sno);
-                para.Add("@hic_no", hicno);
-                para.Add("@p_bar_code", barcode);
-                para.Add("@name", name);
-                para.Add("@sex", sex);
-                para.Add("@birthday", birthday);
-                para.Add("@tel", tel);
-                para.Add("@home_district", home_district);
-                para.Add("@home_street", home_street);
-                para.Add("@occupation_type", occupation_type);
-                para.Add("@response_type", response_type);
-                para.Add("@charge_type", charge_type);
-                para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
-                para.Add("@update_opera", opera);
-                para.Add("@patient_id", pid);
-
-                return Update(sql, para);
-            }
-            else
-            {
-                //新增
-
-                //                string sql = @"insert into mz_patient_mi(patient_id,social_no,hic_no,p_bar_code,name,sex,birthday,home_tel,
-                //balance,max_times,max_ledger_sn,max_item_sn,max_receipt_sn,
-                //home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date,enter_opera,update_opera) values
-                //(@patient_id,@social_no,@hic_no,@p_bar_code,@name,@sex,@birthday,@home_tel,'0',0,0,0,0,
-                //@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date,@enter_opera,@update_opera)";
-
-                string sql = GetSqlByTag(220009);
-
-                para = new DynamicParameters();
-                para.Add("@patient_id", pid);
-                para.Add("@social_no", sno);
-                para.Add("@hic_no", hicno);
-                para.Add("@p_bar_code", barcode);
-                para.Add("@name", name);
-                para.Add("@sex", int.Parse(sex));
-                para.Add("@birthday", birthday);
-                para.Add("@home_tel", tel);
-
-                para.Add("@home_district", home_district);
-                para.Add("@home_street", home_street);
-                para.Add("@occupation_type", occupation_type);
-                para.Add("@response_type", response_type);
-                para.Add("@charge_type", charge_type);
-
-                para.Add("@enter_date", DateTime.Now);
-                para.Add("@update_date", DateTime.Now);
-
-                para.Add("@enter_opera", opera);
-                para.Add("@update_opera", opera);
-
-
-                return Update(sql, para);
-            }
         }
 
         public int EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
@@ -364,7 +398,7 @@ namespace Data.Repository
                             var recorditem = relist[0];
                             var patient = plist[0];
 
-                             //写入mz_visit_table 
+                            //写入mz_visit_table 
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@times", max_times);
@@ -411,7 +445,7 @@ namespace Data.Repository
                             audit_code = Convert.ToString(item.audit_code);
                             mz_bill_item = Convert.ToString(item.mz_bill_item);
                             mz_charge_group = Convert.ToString(item.mz_charge_group);
-                             
+
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@max_times", max_times);
@@ -462,10 +496,10 @@ namespace Data.Repository
 
                         }
                         //写入现金流表
-                       
+
                         //处理多重支付
                         var pay_method_arr = pay_string.Split(',');
-                        int item_no = 1; 
+                        int item_no = 1;
                         foreach (var pay_method in pay_method_arr)
                         {
                             var pay_detail = pay_method.Split('-');
@@ -544,11 +578,11 @@ namespace Data.Repository
                         para.Add("@start_no", start_no);
                         para.Add("@current_no", current_no);
                         para.Add("@end_no", end_no);
-                        para.Add("@step_length", step_length); 
+                        para.Add("@step_length", step_length);
 
                         result = Update(sql8, para);
 
-                        max_ledger_sn++; 
+                        max_ledger_sn++;
 
                         transaction.Commit();
                     }

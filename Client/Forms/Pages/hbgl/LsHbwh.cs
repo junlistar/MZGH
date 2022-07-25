@@ -17,7 +17,7 @@ using Sunny.UI;
 
 namespace Client
 {
-    public partial class Hbwh : UIPage
+    public partial class LsHbwh : UIPage
     {
         private static ILog log = LogManager.GetLogger(typeof(Hbwh));//typeof放当前类
 
@@ -42,7 +42,7 @@ namespace Client
                 return cp;
             }
         }
-        public Hbwh()
+        public LsHbwh()
         {
             InitializeComponent();
         }
@@ -53,7 +53,7 @@ namespace Client
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
             uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
-            uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F3]");
+            uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
              
 
@@ -150,7 +150,7 @@ namespace Client
             var day = "%";
             var window_no = "%";
             var open_flag = "%";
-            var temp_flag = "0";
+            var temp_flag = "1";
 
             if (cbxSXW.Text != "全部")
             {
@@ -791,10 +791,7 @@ namespace Client
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            EditClick();
-        }
+        
         public void EditClick()
         {
             var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
@@ -1434,6 +1431,25 @@ namespace Client
         private void dgvlist_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             SetTextColor();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            EditClick();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            RequestEdit edit = new RequestEdit("");
+            if (edit.ShowDialog() == DialogResult.OK)
+            {
+                InitData();
+            }
+        }
+
+        private void uiGroupBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -113,9 +113,69 @@ namespace Data.Repository
 
                         int[] DayArray = new int[] { 7, 1, 2, 3, 4, 5, 6 };
 
+                        //for (int i = 0; i < week_arr.Length; i++)
+                        //{
+                        //    //组装当日数据
+                        //    var weeklist = baselist.Where(p => p.week.ToString() == week_arr[i]).OrderBy(p => p.week).OrderBy(p => p.day).ToList();
+
+                        //    int _day = 1;
+                        //    if (i == 0)
+                        //    {
+                        //        _day = DayArray[Convert.ToInt32(request_date.DayOfWeek.ToString("d"))];
+                        //    }
+                        //    else
+                        //    {
+                        //        _day = weeklist[0].day;
+                        //    }
+
+
+                        //    do
+                        //    {
+                        //        var daylist = weeklist.Where(p => p.day == _day);
+
+                        //        foreach (var item in daylist)
+                        //        {
+                        //            item.request_date = request_date;
+                        //            if (IsExistRecord(item, connection, transaction))
+                        //            {
+                        //                continue;
+                        //            }
+                        //            para = new DynamicParameters();
+                        //            para.Add("@request_date", request_date);
+                        //            para.Add("@ampm", item.ampm);
+                        //            para.Add("@unit_sn", item.unit_sn);
+                        //            para.Add("@group_sn", item.group_sn);
+                        //            para.Add("@doctor_sn", item.doctor_sn);
+                        //            para.Add("@clinic_type", item.clinic_type);
+                        //            para.Add("@req_type", req_type);
+                        //            para.Add("@begin_no", 1);
+                        //            para.Add("@current_no", 1);
+                        //            para.Add("@end_no", item.totle_num);
+                        //            para.Add("@enter_opera", op_id);
+                        //            para.Add("@enter_date", enter_date);
+                        //            para.Add("@open_flag", item.open_flag);
+                        //            para.Add("@window_no", item.window_no);
+                        //            para.Add("@temp_flag", item.temp_flag);
+                        //            para.Add("@limit_appoint_percent", item.limit_appoint_percent);
+
+                        //            connection.Execute(insertsql, para, transaction);
+                        //        }
+                        //        _day++;
+                        //        request_date = request_date.AddDays(1);
+                        //        if (request_date > end_date)
+                        //        {
+                        //            break;
+                        //        }
+                        //    } while (_day < 8);
+
+                        //}
+                        ///////////////////////////////////////////
+
+                        var current_list = new List<GhRequest>();
+
+                        //组装当期数据
                         for (int i = 0; i < week_arr.Length; i++)
                         {
-                            //组装当日数据
                             var weeklist = baselist.Where(p => p.week.ToString() == week_arr[i]).OrderBy(p => p.week).OrderBy(p => p.day).ToList();
 
                             int _day = 1;
@@ -136,29 +196,27 @@ namespace Data.Repository
                                 foreach (var item in daylist)
                                 {
                                     item.request_date = request_date;
-                                    if (IsExistRecord(item, connection, transaction))
-                                    {
-                                        continue;
-                                    }
-                                    para = new DynamicParameters();
-                                    para.Add("@request_date", request_date);
-                                    para.Add("@ampm", item.ampm);
-                                    para.Add("@unit_sn", item.unit_sn);
-                                    para.Add("@group_sn", item.group_sn);
-                                    para.Add("@doctor_sn", item.doctor_sn);
-                                    para.Add("@clinic_type", item.clinic_type);
-                                    para.Add("@req_type", req_type);
-                                    para.Add("@begin_no", 1);
-                                    para.Add("@current_no", 1);
-                                    para.Add("@end_no", item.totle_num);
-                                    para.Add("@enter_opera", op_id);
-                                    para.Add("@enter_date", enter_date);
-                                    para.Add("@open_flag", item.open_flag);
-                                    para.Add("@window_no", item.window_no);
-                                    para.Add("@temp_flag", item.temp_flag);
-                                    para.Add("@limit_appoint_percent", item.limit_appoint_percent);
+                                    GhRequest ghRequest = new GhRequest();
+                                    ghRequest.ampm = item.ampm;
+                                    ghRequest.ap = item.ampm;
+                                    ghRequest.begin_no = item.begin_no;
+                                    ghRequest.clinic_type = item.clinic_type;
+                                    ghRequest.current_no = item.current_no;
+                                    ghRequest.doctor_sn = item.doctor_sn;
+                                    ghRequest.end_no = item.totle_num;
+                                    ghRequest.enter_date = enter_date;
+                                    ghRequest.enter_opera = op_id;
+                                    ghRequest.group_sn = item.group_sn;
+                                    ghRequest.limit_appoint_percent = item.limit_appoint_percent;
+                                    ghRequest.open_flag = item.open_flag;
+                                    ghRequest.request_date = item.request_date;
+                                    ghRequest.record_sn = item.record_sn;
+                                    ghRequest.req_type = item.req_type;
+                                    ghRequest.temp_flag = item.temp_flag;
+                                    ghRequest.unit_sn = item.unit_sn;
+                                    ghRequest.window_no = item.window_no.ToString(); 
 
-                                    connection.Execute(insertsql, para, transaction);
+                                    current_list.Add(ghRequest);
                                 }
                                 _day++;
                                 request_date = request_date.AddDays(1);
@@ -167,7 +225,57 @@ namespace Data.Repository
                                     break;
                                 }
                             } while (_day < 8);
+                        }
 
+                        //查询现有数据
+                        string sql = @"select * from gh_request where request_date between @begin and @end order by enter_date desc";
+                        para = new DynamicParameters();
+                        para.Add("@begin", begin);
+                        para.Add("@end", end);
+
+                        var list_request = connection.Query<GhRequest>(sql, para, transaction);
+
+                        //排除冲突（已经生成）数据
+                        foreach (var item in current_list.ToArray())
+                        {
+                            if (string.IsNullOrEmpty(item.doctor_sn))
+                            {
+                                if (list_request.Where(p=>p.request_date == item.request_date && p.unit_sn==item.unit_sn&& p.clinic_type==item.clinic_type&& p.ampm == item.ampm).Count()>0)
+                                {
+                                    current_list.Remove(item);
+                                }
+                            }
+                            else
+                            {
+                                if (list_request.Where(p => p.request_date == item.request_date && p.doctor_sn == item.doctor_sn && p.ampm == item.ampm).Count() > 0)
+                                {
+                                    current_list.Remove(item);
+                                }
+                            }
+                        }
+
+                        //写入数据
+                        foreach (var item in current_list)
+                        {
+                            para = new DynamicParameters();
+                            para.Add("@request_date", item.request_date);
+                            para.Add("@ampm", item.ampm);
+                            para.Add("@unit_sn", item.unit_sn);
+                            para.Add("@group_sn", item.group_sn);
+                            para.Add("@doctor_sn", item.doctor_sn);
+                            para.Add("@clinic_type", item.clinic_type);
+                            para.Add("@req_type", req_type);
+                            para.Add("@begin_no", 1);
+                            para.Add("@current_no", 1);
+                            para.Add("@end_no", item.end_no);
+                            para.Add("@enter_opera", op_id);
+                            para.Add("@enter_date", enter_date);
+                            para.Add("@open_flag", item.open_flag);
+                            para.Add("@window_no", item.window_no);
+                            para.Add("@temp_flag", item.temp_flag);
+                            para.Add("@limit_appoint_percent", item.limit_appoint_percent);
+
+                            connection.Execute(insertsql, para, transaction);
                         }
 
                         transaction.Commit();
@@ -441,7 +549,8 @@ namespace Data.Repository
                 //医生不为空，则日期，上下午，医生 唯一条件
                 sql = GetSqlByTag(220035);
             }
-            para.Add("@request_date", item.request_date);
+            para.Add("@request_date", item.request_date); 
+            para.Add("@week", item.week);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
             if (string.IsNullOrWhiteSpace(item.group_sn))
@@ -477,29 +586,23 @@ namespace Data.Repository
         }
 
         public int EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
-         string ampm, int totle_num, string window_no, string open_flag, string op_id, string limit_appoint_percent)
+         string ampm, int totle_num, string window_no, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
         {
-
+            BaseRequest baseRequest = new BaseRequest();
+            baseRequest.request_date = Convert.ToDateTime(request_date);
+            baseRequest.unit_sn = unit_sn;
+            baseRequest.group_sn = group_sn;
+            baseRequest.doctor_sn = doctor_sn;
+            baseRequest.clinic_type = clinic_type;
+            baseRequest.ampm = ampm;
+            baseRequest.record_sn = record_sn;
+            if (IsExistGhRecord(baseRequest))
+            {
+                throw new Exception("数据重复！");
+            }
             //修改
             if (!string.IsNullOrEmpty(record_sn))
             {
-                //                string sql = @"update gh_request set request_date=@request_date,ampm=@ampm,unit_sn=@unit_sn,group_sn=@group_sn,doctor_sn=@doctor_sn,clinic_type=@clinic_type,
-                //req_type=@req_type,end_no=@end_no, enter_opera=@enter_opera, enter_date=@enter_date, open_flag=@open_flag, window_no=@window_no
-                //where record_sn=@record_sn";
-                //item.request_date = request_date;
-
-                BaseRequest baseRequest = new BaseRequest();
-                baseRequest.request_date = Convert.ToDateTime(request_date);
-                baseRequest.unit_sn = unit_sn;
-                baseRequest.group_sn = group_sn;
-                baseRequest.doctor_sn = doctor_sn;
-                baseRequest.clinic_type = clinic_type;
-                baseRequest.ampm = ampm;
-                baseRequest.record_sn = record_sn;
-                if (IsExistGhRecord(baseRequest))
-                {
-                    throw new Exception("数据重复！");
-                }
 
                 string sql = GetSqlByTag(220037);
                 var para = new DynamicParameters();
@@ -523,9 +626,34 @@ namespace Data.Repository
 
                 return Update(sql, para);
             }
-            return 0;
+            else
+            {
+                //新增
+                string insertsql = GetSqlByTag(220036);
+                var para = new DynamicParameters();
 
+                var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                para = new DynamicParameters();
+                para.Add("@request_date", request_date);
+                para.Add("@ampm", ampm);
+                para.Add("@unit_sn", unit_sn);
+                para.Add("@group_sn", group_sn);
+                para.Add("@doctor_sn", doctor_sn);
+                para.Add("@clinic_type", clinic_type);
+                para.Add("@req_type", request_type);
+                para.Add("@begin_no", 1);
+                para.Add("@current_no", 1);
+                para.Add("@end_no", totle_num);
+                para.Add("@enter_opera", op_id);
+                para.Add("@enter_date", enter_date);
+                para.Add("@open_flag", open_flag);
+                para.Add("@window_no", window_no);
+                para.Add("@temp_flag", 1);
+                para.Add("@limit_appoint_percent", limit_appoint_percent);
 
+                return Update(insertsql, para);
+
+            }
         }
 
         public int EditRequestTotalNum(string record_sn, int total_num)
@@ -535,7 +663,7 @@ namespace Data.Repository
             para.Add("@record_sn", record_sn);
             para.Add("@total_num", total_num);
 
-            return Update(sql, para); 
+            return Update(sql, para);
 
         }
     }

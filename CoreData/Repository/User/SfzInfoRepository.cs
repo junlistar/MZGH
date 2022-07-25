@@ -11,6 +11,19 @@ namespace Data.Repository
     public class SfzInfoRepository : RepositoryBase<SfzInfo>, ISfzInfoRepository
     {
 
+
+        public List<SfzInfo> GetSfzInfoByPatientId(string pid)
+        {
+            string sql = @"select *
+    from mz_patient_sfz a
+   left
+    join mz_patient_sfz_info b on a.sfz_id = b.card_no
+   where a.patient_id = @pid";
+            var para = new DynamicParameters();
+            para.Add("@pid", pid);
+
+           return Select(sql, para);
+        }
         public bool UpdateSfzInfo(string name, string sex, string address, string home_address, string folk, string birthday, string card_no)
         {
             string selectSql = GetSqlByTag(221066);

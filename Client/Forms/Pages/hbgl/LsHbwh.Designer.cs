@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    partial class Hbwh
+    partial class LsHbwh
     {
         /// <summary>
         /// Required designer variable.
@@ -32,11 +32,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hbwh));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
             this.btnAdd = new Sunny.UI.UISymbolButton();
+            this.btnEdit = new Sunny.UI.UISymbolButton();
             this.btnSearch = new Sunny.UI.UISymbolButton();
             this.btnReset = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -77,6 +77,7 @@
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTitle.Controls.Add(this.btnAdd);
+            this.pnlTitle.Controls.Add(this.btnEdit);
             this.pnlTitle.Controls.Add(this.btnSearch);
             this.pnlTitle.Controls.Add(this.btnReset);
             this.pnlTitle.Controls.Add(this.btnExit);
@@ -95,28 +96,44 @@
             // btnAdd
             // 
             this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnAdd.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnAdd.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnAdd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnAdd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.Location = new System.Drawing.Point(463, 5);
+            this.btnAdd.Location = new System.Drawing.Point(463, 3);
             this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnAdd.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnAdd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnAdd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnAdd.Size = new System.Drawing.Size(100, 58);
-            this.btnAdd.Style = Sunny.UI.UIStyle.Orange;
+            this.btnAdd.Size = new System.Drawing.Size(100, 60);
             this.btnAdd.StyleCustomMode = true;
-            this.btnAdd.Symbol = 61508;
-            this.btnAdd.TabIndex = 12;
-            this.btnAdd.Text = "编辑";
+            this.btnAdd.Symbol = 61543;
+            this.btnAdd.TabIndex = 32;
+            this.btnAdd.Text = "新增";
             this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEdit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnEdit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnEdit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnEdit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnEdit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnEdit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEdit.Location = new System.Drawing.Point(569, 3);
+            this.btnEdit.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnEdit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnEdit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnEdit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnEdit.Size = new System.Drawing.Size(100, 60);
+            this.btnEdit.Style = Sunny.UI.UIStyle.Orange;
+            this.btnEdit.StyleCustomMode = true;
+            this.btnEdit.Symbol = 61508;
+            this.btnEdit.TabIndex = 12;
+            this.btnEdit.Text = "编辑";
+            this.btnEdit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEdit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnSearch
             // 
@@ -179,14 +196,14 @@
             this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(569, 5);
+            this.btnExit.Location = new System.Drawing.Point(675, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.Size = new System.Drawing.Size(107, 58);
+            this.btnExit.Size = new System.Drawing.Size(107, 60);
             this.btnExit.Style = Sunny.UI.UIStyle.Red;
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
@@ -203,7 +220,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(165, 51);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "使用号表维护";
+            this.lblTitle.Text = "临时号表维护";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -275,6 +292,7 @@
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
             // 
             // btnWeek2
             // 
@@ -607,6 +625,8 @@
             // 
             // dgvlist
             // 
+            this.dgvlist.AllowUserToAddRows = false;
+            this.dgvlist.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -634,9 +654,9 @@
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.dgvlist.Location = new System.Drawing.Point(13, 241);
+            this.dgvlist.Location = new System.Drawing.Point(16, 241);
             this.dgvlist.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
-            this.dgvlist.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("dgvlist.MergeColumnNames")));
+            this.dgvlist.MergeColumnNames = null;
             this.dgvlist.Name = "dgvlist";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -657,11 +677,15 @@
             this.dgvlist.SelectedIndex = -1;
             this.dgvlist.ShowGridLine = false;
             this.dgvlist.ShowRect = false;
-            this.dgvlist.Size = new System.Drawing.Size(1324, 433);
+            this.dgvlist.Size = new System.Drawing.Size(1320, 433);
             this.dgvlist.TabIndex = 8;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvlist_CellBeginEdit);
+            this.dgvlist.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellEndEdit);
+            this.dgvlist.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvlist_ColumnHeaderMouseClick);
+            this.dgvlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvlist_RowPostPaint);
             // 
-            // Hbwh
+            // LsHbwh
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1349, 706);
@@ -670,8 +694,8 @@
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.pnlTitle);
             this.KeyPreview = true;
-            this.Name = "Hbwh";
-            this.PageIndex = 1305;
+            this.Name = "LsHbwh";
+            this.PageIndex = 1306;
             this.StyleCustomMode = true;
             this.Text = "基础号表维护";
             this.Load += new System.EventHandler(this.BaseRequest_Load);
@@ -706,7 +730,7 @@
         private Sunny.UI.UIComboBox cbxWinNo;
         private Sunny.UI.UILabel uiLabel6;
         private Sunny.UI.UITextBox txtHaobie;
-        private Sunny.UI.UISymbolButton btnAdd;
+        private Sunny.UI.UISymbolButton btnEdit;
         private Sunny.UI.UIDatePicker txtDate;
         private Sunny.UI.UILabel uiLabel1;
         private Sunny.UI.UILabel uiLabel7;
@@ -715,8 +739,9 @@
         private Sunny.UI.UILabel lblTotalCount;
         private Sunny.UI.UIDatePicker txtDate2;
         private Sunny.UI.UILabel uiLabel9;
+        private ClassLib.RowMergeView dgvlist;
         private Sunny.UI.UISymbolButton btnWeek2;
         private Sunny.UI.UISymbolButton btnWeek1;
-        private ClassLib.RowMergeView dgvlist;
+        private Sunny.UI.UISymbolButton btnAdd;
     }
 }

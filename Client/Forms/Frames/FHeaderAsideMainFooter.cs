@@ -84,9 +84,9 @@ namespace Client
                 pageIndex = 1300;
                 parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
                 Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
-                Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
                 Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
                 Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
+                Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
                 Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
                 Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
 
@@ -154,10 +154,6 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
                     }
-                    if (function_list.Where(p => p.func_desc.Trim() == "临时号表维护").Count() > 0)
-                    {
-                        Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
-                    }
                     if (function_list.Where(p => p.func_desc.Trim() == "生成号表").Count() > 0)
                     {
                         Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
@@ -165,6 +161,10 @@ namespace Client
                     if (function_list.Where(p => p.func_desc.Trim() == "号表维护").Count() > 0)
                     {
                         Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "临时号表维护").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
                     }
                     if (function_list.Where(p => p.func_desc.Trim() == "时间段维护").Count() > 0)
                     {
@@ -197,8 +197,7 @@ namespace Client
                     }
                 }
 
-            }
-
+            } 
             //设置Header节点索引
 
             //Aside.CreateNode("业务", 1001);
@@ -249,7 +248,7 @@ namespace Client
                         //obj = new BaseWeiHu(); break;
                         obj = new Hbwh(); break;
                     case 1306:
-                        obj = new TempRequest(); break;
+                        obj = new LsHbwh(); break;
                     case 1201:
                         obj = new GuahaoRijie(); break;
                     case 1202:

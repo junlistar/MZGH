@@ -558,6 +558,21 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<Patient>> GetPatientBySfzId(string sfzid)
+        {
+            Log.Information($"GetPatientBySfzId");
+            var list = new List<Patient>();
+            try
+            {
+                list = _patientRepository.GetPatientBySfzId(sfzid);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Patient>>(ex.Message);
+            }
+            return list;
+        } 
 
         public ResponseResult<List<BaseRequest>> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
             string week, string day, string ampm, string window_no, string open_flag, int temp_flag = 0)
@@ -637,12 +652,12 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
-         string ampm, int totle_num, string window_no, string open_flag, string op_id,string limit_appoint_percent)
+         string ampm, int totle_num, string window_no, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
         {
-            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id},{limit_appoint_percent}");
+            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id},{ temp_flag},{limit_appoint_percent}");
             try
             {
-                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id, limit_appoint_percent);
+                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id,  temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {

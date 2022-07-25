@@ -20,6 +20,7 @@ namespace Client
     public partial class RequestEdit : UIForm
     {
         string _record_sn;
+        string _temp_flag = "1";
         private static ILog log = LogManager.GetLogger(typeof(RequestEdit));//typeof放当前类
         public RequestEdit(string record_sn)
         {
@@ -160,10 +161,16 @@ namespace Client
                             default:
                                 data.window_no.ToString(); break;
                         }
+                        _temp_flag = data.temp_flag;
+
                         txtks.TextChanged += txtks_TextChanged;
                         txtzk.TextChanged += txtzk_TextChanged;
                         txtDoct.TextChanged += txtDoct_TextChanged;
                     }
+                }
+                else
+                {
+                    txtDate.Value = DateTime.Now;
                 }
             }
             catch (Exception ex)
@@ -438,17 +445,7 @@ namespace Client
                 }
 
                 ampm = cbxSXW.SelectedValue.ToString();
-
-                //switch (cbxSXW.Text)
-                //{
-                //    case "上午": ampm = "a"; break;
-                //    case "中午": ampm = "m"; break;
-                //    case "下午": ampm = "p"; break;
-                //    case "夜间": ampm = "e"; break;
-                //    default:
-                //        break;
-                //} 
-
+ 
                 if (cbxOpenFlag.Text == "开放")
                 {
                     open_flag = 1;

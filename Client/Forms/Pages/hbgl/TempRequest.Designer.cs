@@ -35,6 +35,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnltop = new Sunny.UI.UIPanel();
+            this.btnSchb = new Sunny.UI.UISymbolButton();
             this.btnEdit = new Sunny.UI.UISymbolButton();
             this.btnDelete = new Sunny.UI.UISymbolButton();
             this.btnAdd = new Sunny.UI.UISymbolButton();
@@ -77,7 +78,6 @@
             this.uiPagination1 = new Sunny.UI.UIPagination();
             this.lblTotalCount = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
-            this.btnSchb = new Sunny.UI.UISymbolButton();
             this.pnltop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -105,6 +105,32 @@
             this.pnltop.Text = null;
             this.pnltop.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnltop.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnSchb
+            // 
+            this.btnSchb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSchb.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
+            this.btnSchb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
+            this.btnSchb.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
+            this.btnSchb.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btnSchb.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btnSchb.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSchb.Location = new System.Drawing.Point(463, 3);
+            this.btnSchb.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSchb.Name = "btnSchb";
+            this.btnSchb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
+            this.btnSchb.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
+            this.btnSchb.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btnSchb.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
+            this.btnSchb.Size = new System.Drawing.Size(100, 60);
+            this.btnSchb.Style = Sunny.UI.UIStyle.Purple;
+            this.btnSchb.StyleCustomMode = true;
+            this.btnSchb.Symbol = 61639;
+            this.btnSchb.TabIndex = 15;
+            this.btnSchb.Text = "生成";
+            this.btnSchb.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSchb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSchb.Click += new System.EventHandler(this.btnSchb_Click);
             // 
             // btnEdit
             // 
@@ -750,32 +776,6 @@
             this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
             this.uiToolTip1.OwnerDraw = true;
             // 
-            // btnSchb
-            // 
-            this.btnSchb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSchb.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
-            this.btnSchb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
-            this.btnSchb.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
-            this.btnSchb.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btnSchb.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btnSchb.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSchb.Location = new System.Drawing.Point(463, 3);
-            this.btnSchb.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSchb.Name = "btnSchb";
-            this.btnSchb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(102)))), ((int)(((byte)(58)))), ((int)(((byte)(183)))));
-            this.btnSchb.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(97)))), ((int)(((byte)(198)))));
-            this.btnSchb.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btnSchb.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(82)))), ((int)(((byte)(46)))), ((int)(((byte)(147)))));
-            this.btnSchb.Size = new System.Drawing.Size(100, 60);
-            this.btnSchb.Style = Sunny.UI.UIStyle.Purple;
-            this.btnSchb.StyleCustomMode = true;
-            this.btnSchb.Symbol = 61639;
-            this.btnSchb.TabIndex = 15;
-            this.btnSchb.Text = "生成";
-            this.btnSchb.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSchb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSchb.Click += new System.EventHandler(this.btnSchb_Click);
-            // 
             // TempRequest
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -787,7 +787,6 @@
             this.Controls.Add(this.pnltop);
             this.KeyPreview = true;
             this.Name = "TempRequest";
-            this.PageIndex = 1306;
             this.Text = "基础号表维护";
             this.Initialize += new System.EventHandler(this.BaseRequest_Initialize);
             this.Load += new System.EventHandler(this.BaseRequest_Load);

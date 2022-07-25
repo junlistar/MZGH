@@ -36,8 +36,8 @@
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txt_sfz = new Sunny.UI.UITextBox();
             this.btnOK = new Sunny.UI.UISymbolButton();
+            this.txt_sfz = new Sunny.UI.UITextBox();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -95,6 +95,7 @@
             this.uiTabControl1.TabIndex = 3;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiTabControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.uiTabControl1_KeyUp);
             // 
             // tabPage1
             // 
@@ -117,21 +118,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "输入号码";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // txt_sfz
-            // 
-            this.txt_sfz.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_sfz.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_sfz.Location = new System.Drawing.Point(266, 78);
-            this.txt_sfz.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_sfz.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_sfz.Name = "txt_sfz";
-            this.txt_sfz.ShowText = false;
-            this.txt_sfz.Size = new System.Drawing.Size(359, 45);
-            this.txt_sfz.TabIndex = 0;
-            this.txt_sfz.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_sfz.Watermark = "输入身份证号码";
-            this.txt_sfz.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnOK
             // 
@@ -157,6 +143,21 @@
             this.btnOK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // txt_sfz
+            // 
+            this.txt_sfz.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_sfz.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_sfz.Location = new System.Drawing.Point(266, 78);
+            this.txt_sfz.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_sfz.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_sfz.Name = "txt_sfz";
+            this.txt_sfz.ShowText = false;
+            this.txt_sfz.Size = new System.Drawing.Size(359, 45);
+            this.txt_sfz.TabIndex = 0;
+            this.txt_sfz.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sfz.Watermark = "输入身份证号码";
+            this.txt_sfz.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // ReadCard
             // 

@@ -88,12 +88,12 @@ namespace Client
 
                 //var cardType = cbxCardType.Text.ToString();
                 var cardId = txtCardId.Text.Trim();
-                var sfzId = txtsfz.Text.Trim();
-                var ybkId = txtybk.Text.Trim();
+                var sfzId = sfz_card_no.Text.Trim();
+                var ybkId = "";
                 var patientId = this.txtpatientid.Text;
                 var userName = this.txtUserName.Text;
-                var sex = this.rdoMale.Checked ? "1" : "2";
-                var birth = this.dtpBirth.Text;
+                var sex = sfz_sex.Text == "男" ? "1" : "2";
+                var birth = sfz_birthday.Text;
                 var tel = this.txtTel.Text.Trim();
 
 
@@ -127,7 +127,7 @@ namespace Client
                 if (string.IsNullOrWhiteSpace(sfzId))
                 {
                     UIMessageTip.ShowWarning("身份证号码不能为空!");
-                    txtsfz.Focus();
+                    sfz_card_no.Focus();
                     return;
                 }
 
@@ -142,10 +142,10 @@ namespace Client
 
                 //身份
                 //var response_type = this.txtShenfen.TagString;
-                var response_type = this.cbxShenfen.SelectedValue;
+                var response_type = "01";
 
                 //费别
-                var charge_type = this.cbxChargeType.SelectedValue;
+                var charge_type = "01";
 
 
                 //医保卡
@@ -161,7 +161,7 @@ namespace Client
                     if (!StringUtil.CheckIDCard(sfzId))
                     {
                         UIMessageTip.ShowError("身份证号码不正确!");
-                        txtsfz.Focus();
+                        sfz_card_no.Focus();
                         return;
                     }
                     hicno = sfzId;
@@ -212,8 +212,6 @@ namespace Client
                     }
                 }
 
-
-
                 json = "";
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -240,7 +238,7 @@ namespace Client
                             //if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
                             if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
                             {
-                                txtsfz.Focus();
+                                sfz_card_no.Focus();
                                 return;
                             }
                             else
@@ -257,7 +255,7 @@ namespace Client
                         {
                             if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
                             {
-                                txtsfz.Focus();
+                                sfz_card_no.Focus();
                                 return;
                             }
                             //清空相同身份证号信息
@@ -265,11 +263,7 @@ namespace Client
 
                         }
                     }
-
                 }
-
-
-
                 var d = new
                 {
                     pid = patientId,
@@ -294,7 +288,7 @@ namespace Client
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                if (responseJson.data == 1 || responseJson.data == 2)
+                if (responseJson.status==1)
                 {
                     barCode = cardId;
                     UIMessageTip.ShowOk("操作成功!");
@@ -345,52 +339,44 @@ namespace Client
                     GetNewPatientId();
 
                     this.txtUserName.Text = "新病人";
-                    this.rdoMale.Checked = true;
+                    //this.rdoMale.Checked = true;
 
                     //绑定身份证数据
                     if (SessionHelper.CardReader != null)
                     {
                         //this.cbxCardType.Text = "身份证";
-                        this.txtsfz.Text = SessionHelper.CardReader.IDCard;
+                        this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
                         this.txtUserName.Text = SessionHelper.CardReader.Name;
                         this.txthomestreet.Text = SessionHelper.CardReader.Address;
 
-
-                        if (SessionHelper.CardReader.Sex == "男")
-                        {
-                            this.rdoMale.Checked = true;
-                        }
-                        else
-                        {
-                            this.rdoFemale.Checked = true;
-                        }
+                        sfz_sex.Text = SessionHelper.CardReader.Sex;
 
                         if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
                         {
-                            this.dtpBirth.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
+                            this.sfz_birthday.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
                         }
 
                     }
                     else if (YBHelper.currentYBInfo != null)
                     {
                         //this.cbxCardType.Text = "身份证";
-                        this.txtybk.Text = YBHelper.currentYBInfo.output.baseinfo.certno;
-                        this.txtsfz.Text = YBHelper.currentYBInfo.output.baseinfo.certno;
+                        this.sfz_card_no.Text = YBHelper.currentYBInfo.output.baseinfo.certno;
+                        this.sfz_card_no.Text = YBHelper.currentYBInfo.output.baseinfo.certno;
                         this.txtUserName.Text = YBHelper.currentYBInfo.output.baseinfo.psn_name;
 
 
                         if (YBHelper.currentYBInfo.output.baseinfo.gend == "1")
                         {
-                            this.rdoMale.Checked = true;
+                            sfz_sex.Text = "男";
                         }
                         else
                         {
-                            this.rdoFemale.Checked = true;
+                            sfz_sex.Text = "女";
                         }
 
                         if (!string.IsNullOrWhiteSpace(YBHelper.currentYBInfo.output.baseinfo.brdy))
                         {
-                            this.dtpBirth.Value = Convert.ToDateTime(YBHelper.currentYBInfo.output.baseinfo.brdy);
+                            this.sfz_birthday.Value = Convert.ToDateTime(YBHelper.currentYBInfo.output.baseinfo.brdy);
                         }
 
                     }
@@ -415,19 +401,19 @@ namespace Client
         public void InitUI()
         {
 
-            this.cbxChargeType.DataSource = SessionHelper.chargeTypes;
+            //this.cbxChargeType.DataSource = SessionHelper.chargeTypes;
 
-            this.cbxChargeType.ValueMember = "code";
-            this.cbxChargeType.DisplayMember = "name";
-
-
-            this.cbxShenfen.DataSource = SessionHelper.responseTypes;
-
-            this.cbxShenfen.ValueMember = "code";
-            this.cbxShenfen.DisplayMember = "name";
+            //this.cbxChargeType.ValueMember = "code";
+            //this.cbxChargeType.DisplayMember = "name";
 
 
-            this.dtpBirth.Value = DateTime.Now;
+            //this.cbxShenfen.DataSource = SessionHelper.responseTypes;
+
+            //this.cbxShenfen.ValueMember = "code";
+            //this.cbxShenfen.DisplayMember = "name";
+
+
+            this.sfz_birthday.Value = DateTime.Now;
 
 
             //cbxDist.DataSource = SessionHelper.districtCodes;
@@ -499,33 +485,27 @@ namespace Client
                     //没有查到，新增病人信息
                     if (this._dto != null && _dto.Data != null)
                     {
-                        this.cbxCardType.Text = "身份证";
+                        //this.cbxCardType.Text = "身份证";
                         this.txtCardId.Text = _dto.Data.IDCard;
                         this.txtUserName.Text = _dto.Data.Name;
+                        this.sfz_name.Text = _dto.Data.Name;
                         this.txthomestreet.Text = _dto.Data.Address;
-
-
-                        if (_dto.Data.Sex == "男")
-                        {
-                            this.rdoMale.Checked = true;
-                        }
-                        else
-                        {
-                            this.rdoFemale.Checked = true;
-                        }
+                        sfz_folk.Text = _dto.Data.Folk;
+                        sfz_sex.Text = _dto.Data.Sex;
+                        sfz_card_no.Text = _dto.Data.IDCard;
 
                         if (!string.IsNullOrWhiteSpace(_dto.Data.BirthDay))
                         {
-                            this.dtpBirth.Value = Convert.ToDateTime(_dto.Data.BirthDay);
+                            this.sfz_birthday.Value = Convert.ToDateTime(_dto.Data.BirthDay);
                         }
                     }
                     else
                     {
 
-                        this.cbxCardType.Text = "身份证";
+                        //this.cbxCardType.Text = "身份证";
                         txtCardId.Text = code;
                         this.txtUserName.Text = "新病人";
-                        this.rdoMale.Checked = true;
+                        //this.rdoMale.Checked = true;
                     }
 
                 }
@@ -548,24 +528,27 @@ namespace Client
                 txtCardId.Text = userInfo.p_bar_code;
 
                 //0524字段调整：hic_no 是身份证号，social_no是医保号
-                txtsfz.Text = userInfo.hic_no;
-                txtybk.Text = userInfo.social_no;
+                sfz_card_no.Text = userInfo.hic_no;
+                //txtybk.Text = userInfo.social_no;
 
                 this.txtpatientid.Text = userInfo.patient_id;
                 this.txtUserName.Text = userInfo.name;
+                //this.sfz_name.Text = userInfo.name;
+                //this.sfz_address.Text = userInfo.home_street;
+                //this.sfz_sex.Text = userInfo.sex == "1"?"男":"女";
 
-                if (userInfo.sex == "1")
-                {
-                    this.rdoMale.Checked = true;
-                }
-                else
-                {
-                    this.rdoFemale.Checked = true;
-                }
-                if (userInfo.birthday.HasValue)
-                {
-                    this.dtpBirth.Text = userInfo.birthday.Value.ToShortDateString();
-                }
+                //if (userInfo.sex == "1")
+                //{
+                //    sfz_sex = "男";
+                //}
+                //else
+                //{
+                //    this.rdoFemale.Checked = true;
+                //}
+                //if (userInfo.birthday.HasValue)
+                //{
+                //    this.dtpBirth.Text = userInfo.birthday.Value.ToShortDateString();
+                //}
                 //this.txtAge.Text = userInfo["age"].ToString();
 
                 this.txtTel.Text = userInfo.home_tel;
@@ -619,22 +602,25 @@ namespace Client
                 }
 
                 //身份
-                if (!string.IsNullOrWhiteSpace(userInfo.response_type))
-                {
-                    this.txtShenfen.TagString = userInfo.response_type;
+                //if (!string.IsNullOrWhiteSpace(userInfo.response_type))
+                //{
+                //    this.txtShenfen.TagString = userInfo.response_type;
 
-                    var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
+                //    var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
 
-                    if (model != null)
-                    {
-                        this.txtShenfen.Text = model.name;
-                    }
-                }
+                //    if (model != null)
+                //    {
+                //        this.txtShenfen.Text = model.name;
+                //    }
+                //}
 
-                this.cbxShenfen.SelectedValue = userInfo.response_type;
+                //this.cbxShenfen.SelectedValue = userInfo.response_type;
 
                 //费别
-                this.cbxChargeType.SelectedValue = userInfo.charge_type;
+                //this.cbxChargeType.SelectedValue = userInfo.charge_type;
+
+                //查询身份证表信息
+                BindSfzInfo(userInfo.patient_id);
 
             }
             catch (Exception ex)
@@ -644,12 +630,50 @@ namespace Client
             }
         }
 
+        public void BindSfzInfo(string pid)
+        {
+            //List<SfzInfo>> GetSfzInfoByPatientId(string pid)
+            try
+            {
+
+                string paramurl = string.Format($"/api/GuaHao/GetSfzInfoByPatientId?pid={pid}");
+                string json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientSfzVM>>>(json);
+
+                if (result.status == 1)
+                {
+                    var sfz_info = result.data.FirstOrDefault();
+                    sfz_card_no.Text = sfz_info.card_no;
+                    sfz_name.Text = sfz_info.name;
+                    sfz_sex.Text = sfz_info.sex;
+                    DateTime _dt = DateTime.MinValue;
+                    if (DateTime.TryParse(sfz_info.birthday, out _dt))
+                    {
+                        sfz_birthday.Text = _dt.ToShortDateString();
+                    }
+                    sfz_folk.Text = sfz_info.folk;
+                    sfz_address.Text = sfz_info.address;
+                    sfz_address.Text = sfz_info.home_address;
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.StackTrace);
+
+            }
+        }
+
         private void BindEvent()
         {
 
             this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             this.txtZhiye.TextChanged += txtZhiye_TextChanged;
-            this.txtShenfen.TextChanged += txtShenfen_TextChanged;
+            //this.txtShenfen.TextChanged += txtShenfen_TextChanged;
 
         }
 
@@ -821,89 +845,89 @@ namespace Client
             }
         }
 
-        private void txtShenfen_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                //查询科室信息 显示到girdview
-                var tb = sender as UITextBox;
-                //var pbl = tb.Parent as UIPanel;
-                //获取数据 
+        //private void txtShenfen_TextChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        //查询科室信息 显示到girdview
+        //        var tb = sender as UITextBox;
+        //        //var pbl = tb.Parent as UIPanel;
+        //        //获取数据 
 
-                if (SessionHelper.responseTypes != null && SessionHelper.responseTypes.Count > 0)
-                {
-                    var ipt = txtShenfen.Text.Trim();
+        //        if (SessionHelper.responseTypes != null && SessionHelper.responseTypes.Count > 0)
+        //        {
+        //            var ipt = txtShenfen.Text.Trim();
 
-                    dgv_shenfen.Parent = this;
-                    dgv_shenfen.Top = tb.Top + tb.Height;
-                    dgv_shenfen.Left = tb.Left;
-                    dgv_shenfen.Width = tb.Width;
-                    dgv_shenfen.Height = 200;
-                    dgv_shenfen.BringToFront();
-                    dgv_shenfen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                    dgv_shenfen.RowHeadersVisible = false;
-                    dgv_shenfen.BackgroundColor = Color.White;
-                    dgv_shenfen.ReadOnly = true;
+        //            dgv_shenfen.Parent = this;
+        //            dgv_shenfen.Top = tb.Top + tb.Height;
+        //            dgv_shenfen.Left = tb.Left;
+        //            dgv_shenfen.Width = tb.Width;
+        //            dgv_shenfen.Height = 200;
+        //            dgv_shenfen.BringToFront();
+        //            dgv_shenfen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        //            dgv_shenfen.RowHeadersVisible = false;
+        //            dgv_shenfen.BackgroundColor = Color.White;
+        //            dgv_shenfen.ReadOnly = true;
 
 
-                    List<ResponceTypeVM> vm = SessionHelper.responseTypes;
+        //            List<ResponceTypeVM> vm = SessionHelper.responseTypes;
 
-                    if (!string.IsNullOrWhiteSpace(ipt))
-                    {
-                        vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
-                    }
-                    dgv_shenfen.DataSource = vm;
+        //            if (!string.IsNullOrWhiteSpace(ipt))
+        //            {
+        //                vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+        //            }
+        //            dgv_shenfen.DataSource = vm;
 
-                    dgv_shenfen.Columns["code"].HeaderText = "编号";
-                    dgv_shenfen.Columns["name"].HeaderText = "名称";
-                    dgv_shenfen.Columns["py_code"].Visible = false;
-                    dgv_shenfen.Columns["d_code"].Visible = false;
-                    dgv_shenfen.Columns["response_group"].Visible = false;
+        //            dgv_shenfen.Columns["code"].HeaderText = "编号";
+        //            dgv_shenfen.Columns["name"].HeaderText = "名称";
+        //            dgv_shenfen.Columns["py_code"].Visible = false;
+        //            dgv_shenfen.Columns["d_code"].Visible = false;
+        //            dgv_shenfen.Columns["response_group"].Visible = false;
 
-                    dgv_shenfen.AutoResizeColumns();
+        //            dgv_shenfen.AutoResizeColumns();
 
-                    dgv_shenfen.CellClick += dgv_shenfen_CellContentClick;
-                    dgv_shenfen.Show();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
-            }
-        }
+        //            dgv_shenfen.CellClick += dgv_shenfen_CellContentClick;
+        //            dgv_shenfen.Show();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        log.Error(ex.StackTrace);
+        //    }
+        //}
 
-        private void dgv_shenfen_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.RowIndex == -1)
-                {
-                    return;
-                }
-                var obj = sender as UIDataGridView;
-                var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
-                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                txtShenfen.TextChanged -= txtShenfen_TextChanged;
-                txtShenfen.Text = name;
-                txtShenfen.TagString = unit_sn;
-                txtShenfen.TextChanged += txtShenfen_TextChanged;
+        //private void dgv_shenfen_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.RowIndex == -1)
+        //        {
+        //            return;
+        //        }
+        //        var obj = sender as UIDataGridView;
+        //        var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
+        //        var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+        //        txtShenfen.TextChanged -= txtShenfen_TextChanged;
+        //        txtShenfen.Text = name;
+        //        txtShenfen.TagString = unit_sn;
+        //        txtShenfen.TextChanged += txtShenfen_TextChanged;
 
-                dgv_shenfen.Hide();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
-            }
-        }
-        private void txtShenfen_Leave(object sender, EventArgs e)
-        {
-            if (!dgv_shenfen.Focused)
-            {
-                dgv_shenfen.Hide();
-            }
-        }
+        //        dgv_shenfen.Hide();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        log.Error(ex.StackTrace);
+        //    }
+        //}
+        //private void txtShenfen_Leave(object sender, EventArgs e)
+        //{
+        //    if (!dgv_shenfen.Focused)
+        //    {
+        //        dgv_shenfen.Hide();
+        //    }
+        //}
 
         private void txthomedistrict_TextChanged_1(object sender, EventArgs e)
         {
@@ -912,22 +936,22 @@ namespace Client
 
         private void cbxCardType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (userInfo != null)
-            {
-                if (cbxCardType.Text == "身份证")
-                {
-                    txtCardId.Text = userInfo.social_no;
-                }
-                else if (cbxCardType.Text == "医保卡")
-                {
-                    txtCardId.Text = userInfo.hic_no;
-                }
-                else if (cbxCardType.Text == "磁卡")
-                {
-                    txtCardId.Text = userInfo.p_bar_code;
-                }
+            //if (userInfo != null)
+            //{
+            //    if (cbxCardType.Text == "身份证")
+            //    {
+            //        txtCardId.Text = userInfo.social_no;
+            //    }
+            //    else if (cbxCardType.Text == "医保卡")
+            //    {
+            //        txtCardId.Text = userInfo.hic_no;
+            //    }
+            //    else if (cbxCardType.Text == "磁卡")
+            //    {
+            //        txtCardId.Text = userInfo.p_bar_code;
+            //    }
 
-            }
+            //}
 
         }
 
@@ -935,35 +959,35 @@ namespace Client
         {
             try
             {
-                //如果是身份证，自动填充出生日期
-                if (cbxCardType.Text == "身份证")
-                {
+                ////如果是身份证，自动填充出生日期
+                //if (cbxCardType.Text == "身份证")
+                //{
 
-                    var cardId = txtCardId.Text.Trim();
-                    //验证卡号是否是身份证号
-                    if (StringUtil.CheckIDCard(cardId))
-                    {
-                        if (cardId.Length == 18)
-                        {
-                            string birth = cardId.Substring(6, 8).Insert(6, "-").Insert(4, "-");
-                            DateTime time = new DateTime();
-                            if (DateTime.TryParse(birth, out time))
-                            {
-                                this.dtpBirth.Value = time;
-                            }
-                        }
-                        else if (cardId.Length == 15)
-                        {
-                            string birth = cardId.Substring(6, 6).Insert(4, "-").Insert(2, "-");
-                            DateTime time = new DateTime();
-                            if (DateTime.TryParse(birth, out time))
-                            {
-                                this.dtpBirth.Value = time;
-                            }
-                        }
-                    }
+                //    var cardId = txtCardId.Text.Trim();
+                //    //验证卡号是否是身份证号
+                //    if (StringUtil.CheckIDCard(cardId))
+                //    {
+                //        if (cardId.Length == 18)
+                //        {
+                //            string birth = cardId.Substring(6, 8).Insert(6, "-").Insert(4, "-");
+                //            DateTime time = new DateTime();
+                //            if (DateTime.TryParse(birth, out time))
+                //            {
+                //                this.dtpBirth.Value = time;
+                //            }
+                //        }
+                //        else if (cardId.Length == 15)
+                //        {
+                //            string birth = cardId.Substring(6, 6).Insert(4, "-").Insert(2, "-");
+                //            DateTime time = new DateTime();
+                //            if (DateTime.TryParse(birth, out time))
+                //            {
+                //                this.dtpBirth.Value = time;
+                //            }
+                //        }
+                //    }
 
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -976,7 +1000,7 @@ namespace Client
         {
             try
             {
-                var cardId = txtsfz.Text.Trim();
+                var cardId = sfz_card_no.Text.Trim();
                 //验证卡号是否是身份证号
                 if (StringUtil.CheckIDCard(cardId))
                 {
@@ -986,7 +1010,7 @@ namespace Client
                         DateTime time = new DateTime();
                         if (DateTime.TryParse(birth, out time))
                         {
-                            this.dtpBirth.Value = time;
+                            //this.dtpBirth.Value = time;
                         }
                     }
                     else if (cardId.Length == 15)
@@ -995,7 +1019,7 @@ namespace Client
                         DateTime time = new DateTime();
                         if (DateTime.TryParse(birth, out time))
                         {
-                            this.dtpBirth.Value = time;
+                            //this.dtpBirth.Value = time;
                         }
                     }
                 }
@@ -1009,7 +1033,7 @@ namespace Client
 
         private void lklduka_Click(object sender, EventArgs e)
         {
-            ReadCard rc = new ReadCard("身份证");
+            ReadCard rc = new ReadCard("身份证", true);
             //关闭，刷新
             rc.FormClosed += Rc_FormClosed; ;
             rc.ShowDialog();
@@ -1019,23 +1043,15 @@ namespace Client
         {
             if (SessionHelper.CardReader != null)
             {
-                this.txtsfz.Text = SessionHelper.CardReader.IDCard;
+                this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
                 this.txtUserName.Text = SessionHelper.CardReader.Name;
                 this.txthomestreet.Text = SessionHelper.CardReader.Address;
 
-
-                if (SessionHelper.CardReader.Sex == "男")
-                {
-                    this.rdoMale.Checked = true;
-                }
-                else
-                {
-                    this.rdoFemale.Checked = true;
-                }
+                sfz_sex.Text = SessionHelper.CardReader.Sex;
 
                 if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
                 {
-                    this.dtpBirth.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
+                    sfz_birthday.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
                 }
             }
         }
@@ -1120,6 +1136,11 @@ namespace Client
             {
                 this.Close();
             }
+        }
+
+        private void uiLinkLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

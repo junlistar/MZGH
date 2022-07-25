@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txt_winno = new Sunny.UI.UITextBox();
             this.txt_limit = new Sunny.UI.UITextBox();
             this.lbl_temp_flag = new Sunny.UI.UILabel();
             this.txtTotalNum = new Sunny.UI.UITextBox();
@@ -50,7 +51,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.txt_winno = new Sunny.UI.UITextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -97,6 +97,30 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // txt_winno
+            // 
+            this.txt_winno.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_winno.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txt_winno.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txt_winno.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_winno.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txt_winno.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txt_winno.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_winno.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.txt_winno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_winno.Location = new System.Drawing.Point(410, 195);
+            this.txt_winno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_winno.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_winno.Name = "txt_winno";
+            this.txt_winno.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_winno.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txt_winno.ShowText = false;
+            this.txt_winno.Size = new System.Drawing.Size(168, 29);
+            this.txt_winno.Style = Sunny.UI.UIStyle.Green;
+            this.txt_winno.TabIndex = 46;
+            this.txt_winno.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_winno.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // txt_limit
             // 
             this.txt_limit.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -118,6 +142,7 @@
             this.txt_limit.Size = new System.Drawing.Size(168, 29);
             this.txt_limit.Style = Sunny.UI.UIStyle.Green;
             this.txt_limit.TabIndex = 45;
+            this.txt_limit.Text = "0";
             this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_limit.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txt_limit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -497,34 +522,10 @@
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txt_winno
-            // 
-            this.txt_winno.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_winno.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txt_winno.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txt_winno.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_winno.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txt_winno.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txt_winno.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_winno.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.txt_winno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_winno.Location = new System.Drawing.Point(410, 195);
-            this.txt_winno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_winno.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_winno.Name = "txt_winno";
-            this.txt_winno.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_winno.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txt_winno.ShowText = false;
-            this.txt_winno.Size = new System.Drawing.Size(168, 29);
-            this.txt_winno.Style = Sunny.UI.UIStyle.Green;
-            this.txt_winno.TabIndex = 46;
-            this.txt_winno.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_winno.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Teal;
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label1.Location = new System.Drawing.Point(23, 358);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(209, 21);
@@ -534,7 +535,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Teal;
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label2.Location = new System.Drawing.Point(34, 379);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(198, 21);
@@ -544,7 +545,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.Color.Teal;
+            this.label3.ForeColor = System.Drawing.Color.DodgerBlue;
             this.label3.Location = new System.Drawing.Point(34, 400);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 21);

@@ -185,6 +185,12 @@
     <Compile Include="Forms\Pages\cwgl\GuahaoRijie.Designer.cs">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\hbgl\LsHbwh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\LsHbwh.Designer.cs">
+      <DependentUpon>LsHbwh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\hbgl\Hbwh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +226,12 @@
     </Compile>
     <Compile Include="Forms\Pages\hbgl\RequestHour.Designer.cs">
       <DependentUpon>RequestHour.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\mzgh\SelectPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\mzgh\SelectPatient.Designer.cs">
+      <DependentUpon>SelectPatient.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\mzsf\CardPay.cs">
       <SubType>Form</SubType>
@@ -590,6 +602,9 @@
     <EmbeddedResource Include="Forms\Pages\cwgl\GuahaoRijie.resx">
       <DependentUpon>GuahaoRijie.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\hbgl\LsHbwh.resx">
+      <DependentUpon>LsHbwh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\Hbwh.resx">
       <DependentUpon>Hbwh.cs</DependentUpon>
     </EmbeddedResource>
@@ -604,6 +619,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\Schb.resx">
       <DependentUpon>Schb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\mzgh\SelectPatient.resx">
+      <DependentUpon>SelectPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\CardPay.resx">
       <DependentUpon>CardPay.cs</DependentUpon>

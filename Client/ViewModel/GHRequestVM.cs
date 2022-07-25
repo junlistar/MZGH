@@ -67,6 +67,7 @@ namespace Client.ViewModel
         public int open_flag { get; set; }
         public int window_no { get; set; }
         public string limit_appoint_percent { get; set; }
+        public string temp_flag { get; set; }
 
         public DateTime request_date { get; set; }
 

@@ -109,7 +109,7 @@ namespace Client
                         var ds = list.Select(p => new
                         {
                             request_date_str = p.request_date_str,
-                            ampm = p.ampm,
+                            ampm = p.apstr,
                             unit_name = p.unit_name,
                             group_name = p.group_name,
                             doct_name = p.doct_name,
@@ -198,15 +198,15 @@ namespace Client
                 DateTime dt_to = DateTime.Now;
                 if (current_week == 1)
                 {
-                    _message = "确认生成 本周 号表数据吗？";
+                    _message = $"确认生成 本周 \r\n{ GetWeekStr(current_week)} 的号表数据吗？";
                 }
                 else if (current_week == 2)
                 {
-                    _message = "确认生成 下周 号表数据吗？";
+                    _message = $"确认生成 下周 \r\n{ GetWeekStr(current_week)} 的号表数据吗？";
                 }
                 else
                 {
-                    _message = $"确认生成第 {current_week} 周号表数据吗？";
+                    _message = $"确认生成第 {current_week} 周 \r\n{ GetWeekStr(current_week)} 的号表数据吗？";
                 }
 
                 if (!UIMessageDialog.ShowAskDialog(this, _message))
@@ -407,7 +407,7 @@ namespace Client
                 var ds = list.Select(p => new
                 {
                     request_date_str = p.request_date_str,
-                    ampm = p.ampm,
+                    ampm = p.apstr,
                     unit_name = p.unit_name,
                     group_name = p.group_name,
                     doct_name = p.doct_name,
@@ -463,26 +463,23 @@ namespace Client
         }
 
         private void Schb_Initialize(object sender, EventArgs e)
+        { 
+            btnWeek1.Text = "本周" + "\r\n" + GetWeekStr(1);
+
+            btnWeek2.Text = "下周" + "\r\n" + GetWeekStr(2);
+
+            btnWeek3.Text = "第三周" + "\r\n" + GetWeekStr(3);
+
+            btnWeek4.Text = "第四周" + "\r\n" + GetWeekStr(4);
+             
+            btnWeek5.Text = "第五周" + "\r\n" + GetWeekStr(5);
+        }
+
+        public string GetWeekStr(int week)
         {
-            var dt_from = DateTime.Now.ToString("MM-dd");
-            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToString("MM-dd");
-            btnWeek1.Text = "本周" + "\r\n" + dt_from + "至" + dt_to;
-
-            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToString("MM-dd");
-            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToString("MM-dd");
-            btnWeek2.Text = "下周" + "\r\n" + dt_from + "至" + dt_to;
-
-            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((3 - 1) * 7) + 1).ToString("MM-dd");
-            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((3 - 1) * 7) + 1).ToString("MM-dd");
-            btnWeek3.Text = "第三周" + "\r\n" + dt_from + "至" + dt_to;
-
-            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((4 - 1) * 7) + 1).ToString("MM-dd");
-            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((4 - 1) * 7) + 1).ToString("MM-dd");
-            btnWeek4.Text = "第四周" + "\r\n" + dt_from + "至" + dt_to;
-
-            dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((5 - 1) * 7) + 1).ToString("MM-dd");
-            dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((5 - 1) * 7) + 1).ToString("MM-dd");
-            btnWeek5.Text = "第五周" + "\r\n" + dt_from + "至" + dt_to;
+            var dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((week - 1) * 7) + 1).ToString("MM-dd");
+            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((week - 1) * 7) + 1).ToString("MM-dd");
+            return dt_from + "至" + dt_to;
         }
     }
 }

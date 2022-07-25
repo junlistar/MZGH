@@ -59,7 +59,23 @@ namespace Client
             // 
             // Aside
             // 
+            this.Aside.BackColor = System.Drawing.Color.LightCoral;
+            this.Aside.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Aside.FillColor = System.Drawing.Color.LightCoral;
+            this.Aside.ForeColor = System.Drawing.Color.White;
+            this.Aside.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.Aside.Indent = 25;
+            this.Aside.LineColor = System.Drawing.Color.Red;
+            this.Aside.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.Aside.ScrollFillColor = System.Drawing.Color.White;
+            this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.Aside.SelectedColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.Aside.SelectedColorGradient = true;
+            this.Aside.SelectedForeColor = System.Drawing.Color.White;
+            this.Aside.SelectedHighColor = System.Drawing.Color.White;
             this.Aside.Size = new System.Drawing.Size(250, 575);
+            this.Aside.Style = Sunny.UI.UIStyle.Custom;
             this.Aside.MenuItemClick += new Sunny.UI.UINavMenu.OnMenuItemClick(this.Aside_MenuItemClick);
             // 
             // Header
@@ -147,6 +163,7 @@ namespace Client
             this.uiSignal1.Style = Sunny.UI.UIStyle.Custom;
             this.uiSignal1.TabIndex = 7;
             this.uiSignal1.Text = "uiSignal1";
+            this.uiSignal1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // timerSignal
             // 
@@ -165,6 +182,7 @@ namespace Client
             this.Name = "FHeaderAsideMainFooter";
             this.Text = "门诊挂号系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1024, 720);
             this.Load += new System.EventHandler(this.FHeaderAsideMainFooter_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FHeaderAsideMainFooter_KeyUp);
             this.Footer.ResumeLayout(false);
