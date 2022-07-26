@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<XTUserReport> GetXTUserReportsByGroupId(string subsys_id, string user_group)
         {
-            string ghsql = GetSqlByTag(221057);
+            string ghsql = GetSqlByTag("xt_userreport_getbygroupid");
             var para = new DynamicParameters();
 
             para.Add("@user_group", user_group);
@@ -23,7 +23,7 @@ namespace Data.Repository
         }
         public List<XTUserReport> GetXTUserReports(string subsys_id)
         { 
-            string ghsql = GetSqlByTag(221058);
+            string ghsql = GetSqlByTag("xt_report_getbysysid");
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -38,7 +38,7 @@ namespace Data.Repository
 
                 try
                 {
-                    string sql = GetSqlByTag(221059);
+                    string sql = GetSqlByTag("xt_report_getbyid");
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -51,7 +51,7 @@ namespace Data.Repository
                     }
 
 
-                    sql = GetSqlByTag(221060);
+                    sql = GetSqlByTag("xt_userreport_checkadd");
 
                     para = new DynamicParameters();
                     para.Add("@user_group", user_group);
@@ -64,7 +64,7 @@ namespace Data.Repository
                         throw new Exception("已经添加了该报表");
                     }
 
-                    sql = GetSqlByTag(221061);
+                    sql = GetSqlByTag("xt_userreport_add");
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@user_group", user_group);
@@ -95,7 +95,7 @@ namespace Data.Repository
 
                 try
                 {
-                    string sql = GetSqlByTag(221062);
+                    string sql = GetSqlByTag("xt_userreport_del");
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);

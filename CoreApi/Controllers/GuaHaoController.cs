@@ -235,21 +235,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
-        public ResponseResult<int> EditUserInfoPage(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-           string home_district, string home_street, string occupation_type, string response_type, string charge_type,
-           string relation_name, int marrycode, string addition_no1, string employer_name, string opera)
-        {
-            Log.Information($"EditUserInfoPage,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{relation_name},{marrycode},{addition_no1},{employer_name},{opera}");
-            try
-            {
-                return _patientRepository.EditUserInfoPage(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, relation_name, marrycode, addition_no1, employer_name, opera);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message);
-                return ErrorResult<int>(ex.Message);
-            }
-        }
+       
 
         public ResponseResult<bool> GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
         {
@@ -304,21 +290,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-        public ResponseResult<List<GhDeposit>> GetGhDepositByStatus(string pid, int times, int status, int cheque_type, int item_no)
-        {
-            Log.Information($"GetGhDepositByStatus,{pid},{times},{status},{cheque_type},{item_no}");
-            var list = new List<GhDeposit>();
-            try
-            {
-                list = _ghDepositRepository.GetGhDepositByStatus(pid, times, status, cheque_type, item_no);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex.Message);
-                return ErrorResult<List<GhDeposit>>(ex.Message);
-            }
-            return list;
-        }
+         
 
         public ResponseResult<int> Refund(string patient_id, int times, string opera, int manual = 0)
         {

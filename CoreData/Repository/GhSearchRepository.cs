@@ -16,7 +16,7 @@ namespace Data.Repository
             string group_sn = "%", string req_type = "%", string ampm = "%", string gh_opera = "%",
             string name = "%", string p_bar_code = "%")
         {
-            string sql = GetSqlByTag(220032);
+            string sql = GetSqlByTag("mzgh_mzvisit_getbyparams");
              
             var para = new DynamicParameters();
             para.Add("@gh_date", gh_date);
@@ -35,7 +35,7 @@ namespace Data.Repository
 
         public List<GhSearch> GetRecordByPatientId(string patient_id)
         {
-            string sql = GetSqlByTag(220066);
+            string sql = GetSqlByTag("mzgh_mzvisit_getbypid");
 
             var para = new DynamicParameters();
             para.Add("@patient_id", patient_id); 

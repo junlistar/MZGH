@@ -11,9 +11,7 @@ namespace Data.IRepository
 
 
         List<GhDeposit> GetGhDeposit(string request_date);
-
-        List<GhDeposit> GetGhDepositByStatus(string pid, int times, int status, int cheque_type,int item_no);
-        //int Refund(GhDeposit vm);
+         
 
         //int Refund(string patient_id, int ledger_sn, string cheque_type, string item_no, decimal charge, string opera, int manual = 0);
 

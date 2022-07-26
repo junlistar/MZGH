@@ -13,7 +13,7 @@ namespace Data.Repository.Mzsf
 
         public List<GhOpReceipt> GetCurrentReceiptNo(string operate)
         {
-            string ghsql = GetSqlByTag(221007);
+            string ghsql = GetSqlByTag("mzsf_mzopreceipt_get");
              
             var para = new DynamicParameters();
             para.Add("@operator", operate);

@@ -14,7 +14,7 @@ namespace Data.Repository
 
         public List<string> GetGhDailyReport(string opera, string report_date, string mz_dept_no)
         { 
-            string sql = GetSqlByTag(221027);
+            string sql = GetSqlByTag("mzsf_ghdaily_getreportdate");
 
             var para = new DynamicParameters();
 
@@ -93,7 +93,7 @@ namespace Data.Repository
                         //                        var mzReceiptCancelList = connection.Query<MzReceiptCancel>(sql4, para, transaction);
                         #endregion
 
-                        string sql5 = GetSqlByTag(221028);
+                        string sql5 = GetSqlByTag("mzsf_ghopreceipt_get");
                         para = new DynamicParameters();
                         para.Add("@P1", opera);
 
@@ -101,25 +101,25 @@ namespace Data.Repository
 
                         ////////////////////更新以上表的report_date 
                         string dtNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                        string upsql1 = GetSqlByTag(221029);
+                        string upsql1 = GetSqlByTag("mzsf_ghdeposit_update_reportdate");
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
                         connection.Execute(upsql1, para, transaction);
-                        string upsql2 = GetSqlByTag(221030);
+                        string upsql2 = GetSqlByTag("mzsf_ghreceipt_update_reportdata");
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
                         connection.Execute(upsql2, para, transaction); 
-                        string upsql3 = GetSqlByTag(221031);
+                        string upsql3 = GetSqlByTag("mzsf_ghdetailcharge_update reportdate");
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
                         para.Add("@P3", "1");
                         connection.Execute(upsql3, para, transaction);
-                        string upsql4 = GetSqlByTag(221032);
+                        string upsql4 = GetSqlByTag("mzsf_mzreceiptcacel_update_reportdate");
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);
                         para.Add("@P2", opera);
@@ -132,7 +132,7 @@ namespace Data.Repository
                             foreach (var item in ghOpReceiptCancelList)
                             {
                                 //更新report_flag 
-                                string upsql5 = GetSqlByTag(221033);
+                                string upsql5 = GetSqlByTag("mzsf_ghopreceipt_update_reportflag");
                                 para = new DynamicParameters();
                                 para.Add("@P1", "1");
                                 para.Add("@P2", item.@operator);
@@ -146,7 +146,7 @@ namespace Data.Repository
                                 connection.Execute(upsql5, para, transaction);
 
                                 //写入新数据
-                                upsql5 = GetSqlByTag(221034);
+                                upsql5 = GetSqlByTag("mzsf_ghopreceipt_add");
                                 para = new DynamicParameters();
                                 para.Add("@P1", item.@operator);
                                 para.Add("@P2", dtNow);
@@ -160,10 +160,10 @@ namespace Data.Repository
                             }
                         }
 
-                        string sql = GetSqlByTag(221035);
+                        string sql = GetSqlByTag("mzsf_hospital_get");
                         var hospital = connection.QueryFirstOrDefault<Hosipital>(sql, para, transaction);
 
-                        sql = GetSqlByTag(221036);
+                        sql = GetSqlByTag("mzsf_dailyreport_add");
                         para = new DynamicParameters();
                         para.Add("@P1", hospital.report_sn);
                         para.Add("@P2", dtNow);
@@ -172,7 +172,7 @@ namespace Data.Repository
                         para.Add("@P5", "1");
                         connection.Execute(sql, para, transaction);
 
-                        sql = GetSqlByTag(221037);
+                        sql = GetSqlByTag("mzsf_ghdeposit_getcharge");
                         para = new DynamicParameters();
                         para.Add("@report_date", dtNow);
                         para.Add("@price_opera", opera);
@@ -181,7 +181,7 @@ namespace Data.Repository
                         var out_amount = deposit_list.Where(p => p < 0).Sum();
 
                         /////???挂号费+诊疗费=01
-                        sql = GetSqlByTag(221038);
+                        sql = GetSqlByTag("mzsf_dailyreportdata_add");
                         para = new DynamicParameters();
                         para.Add("@P1", hospital.report_sn);
                         para.Add("@P2", "01");
@@ -214,7 +214,7 @@ namespace Data.Repository
 
                         foreach (var item in ghOpReceiptCancelList)
                         {
-                            sql = GetSqlByTag(221039);
+                            sql = GetSqlByTag("mzsf_dailyreportreceipt_add");
                             var end_no = (int.Parse(item.start_no) - 1).ToString();
                             end_no = end_no.PadLeft(item.start_no.Length - end_no.Length, '0');
 
@@ -228,7 +228,7 @@ namespace Data.Repository
                         }
 
 
-                        sql = GetSqlByTag(221040);
+                        sql = GetSqlByTag("mzsf_hospital_update_reportsn");
                         //para = new DynamicParameters();
                         //para.Add("@new_sn", hospital.report_sn + 1);
                         //para.Add("@no", hospital.no);

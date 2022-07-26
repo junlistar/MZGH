@@ -14,7 +14,7 @@ namespace Data.Repository
         public List<ChargeItem> GetChargeItemsByCode(string code)
         {
 
-            string ghsql = GetSqlByTag(220041);
+            string ghsql = GetSqlByTag("zd_chargeitem_getbycode");
             var para = new DynamicParameters();
 
             para.Add("@code", code);
@@ -24,7 +24,7 @@ namespace Data.Repository
         }
         public List<ChargeItem> GetChargeItemsByRecordSN(string record_sn)
         {
-            string chargesql = GetSqlByTag(220042);
+            string chargesql = GetSqlByTag("mzgh_chargeitem_getbyrequestsn");
 
             var para = new DynamicParameters();
 

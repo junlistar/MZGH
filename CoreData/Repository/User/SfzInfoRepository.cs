@@ -14,11 +14,7 @@ namespace Data.Repository
 
         public List<SfzInfo> GetSfzInfoByPatientId(string pid)
         {
-            string sql = @"select *
-    from mz_patient_sfz a
-   left
-    join mz_patient_sfz_info b on a.sfz_id = b.card_no
-   where a.patient_id = @pid";
+            string sql = GetSqlByTag("mzgh_mzpatientsfzinfo_getbypid");
             var para = new DynamicParameters();
             para.Add("@pid", pid);
 
@@ -26,7 +22,7 @@ namespace Data.Repository
         }
         public bool UpdateSfzInfo(string name, string sex, string address, string home_address, string folk, string birthday, string card_no)
         {
-            string selectSql = GetSqlByTag(221066);
+            string selectSql = GetSqlByTag("mzgh_mzpatientsfzinfo_get");
 
             var para = new DynamicParameters();
             para.Add("@card_no", card_no);
@@ -36,12 +32,12 @@ namespace Data.Repository
             if (Convert.ToInt32(_count) > 0)
             {
                 //编辑
-                selectSql = GetSqlByTag(221067);
+                selectSql = GetSqlByTag("mzgh_mzpatientsfzinfo_update");
             }
             else
             {
                 //新增
-                selectSql = GetSqlByTag(221068);
+                selectSql = GetSqlByTag("mzgh_mzpatientsfzinfo_add");
             }
             para.Add("@name", name);
             para.Add("@sex", sex);

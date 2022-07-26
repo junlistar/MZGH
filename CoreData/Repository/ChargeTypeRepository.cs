@@ -12,13 +12,9 @@ namespace Data.Repository
     {
    
         public List<ChargeType> GetChargeTypes()
-        {
-            
-            string ghsql = GetSqlByTag(220031);
-             
-            return  Select(ghsql);
-
-
+        { 
+            string ghsql = GetSqlByTag("zd_chargetype_get"); 
+            return  Select(ghsql);  
         }
          
     }

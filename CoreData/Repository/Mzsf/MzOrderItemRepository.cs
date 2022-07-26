@@ -17,7 +17,7 @@ namespace Data.Repository.Mzsf
             //西药
             if (order_type =="02")
             {
-                sql = GetSqlByTag(221024);
+                sql = GetSqlByTag("mzsf_yp_get_xy");
                 var para = new DynamicParameters();
                 
                 para.Add("@py_code", py_code + "%");
@@ -31,7 +31,7 @@ namespace Data.Repository.Mzsf
             else if (order_type == "04")
             {
                 //草药
-                sql = GetSqlByTag(221025);
+                sql = GetSqlByTag("mzsf_yp_get_cy");
                 var para = new DynamicParameters();
                 para.Add("@py_code", py_code + "%");
                 para.Add("@d_code", "%");
@@ -44,7 +44,7 @@ namespace Data.Repository.Mzsf
             else if (order_type == "01")
             {
                 //诊疗
-                sql = GetSqlByTag(221026);
+                sql = GetSqlByTag("mzsf_yp_get_zl");
                 var para = new DynamicParameters();
                 para.Add("@py_code", py_code + "%");
                 para.Add("@d_code", "%");

@@ -17,7 +17,7 @@ namespace Data.Repository
 
             //string ghsql = GetSqlByTag(220041);
 
-            string sql = GetSqlByTag(221041);
+            string sql = GetSqlByTag("mzsf_ghdaily_getsfreportdate");
 
             var para = new DynamicParameters();
 

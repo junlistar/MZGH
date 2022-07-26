@@ -36,7 +36,7 @@ namespace Data.Repository
 
         public List<GhRequest> GetGhRecord(string record_sn)
         {
-            string ghsql = GetSqlByTag(220033);
+            string ghsql = GetSqlByTag("mzgh_ghrequest_getbysn");
             var para = new DynamicParameters();
             para.Add("@record_sn", record_sn);
             return Select(ghsql, para);
@@ -51,12 +51,12 @@ namespace Data.Repository
             if (string.IsNullOrWhiteSpace(item.doctor_sn))
             {
                 //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
-                sql = GetSqlByTag(220034);
+                sql = GetSqlByTag("mzgh_ghrequest_getbyunit");
             }
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = GetSqlByTag(220035);
+                sql = GetSqlByTag("mzgh_ghrequest_getbydoct");
             }
             para.Add("@request_date", item.request_date);
             para.Add("@ampm", item.ampm);
@@ -101,7 +101,7 @@ namespace Data.Repository
                     {
                         var para = new DynamicParameters();
 
-                        string insertsql = GetSqlByTag(220036);
+                        string insertsql = GetSqlByTag("mzgh_ghrequest_add");
 
                         var request_date = Convert.ToDateTime(begin);
                         var end_date = Convert.ToDateTime(end);
@@ -311,7 +311,7 @@ namespace Data.Repository
                     {
                         var para = new DynamicParameters();
 
-                        string insertsql = GetSqlByTag(220036);
+                        string insertsql = GetSqlByTag("mzgh_ghrequest_add");
 
                         var request_date = DateTime.Now.ToShortDateString();
                         var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -373,12 +373,12 @@ namespace Data.Repository
             if (string.IsNullOrWhiteSpace(item.doctor_sn))
             {
                 //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
-                sql = GetSqlByTag(220034);
+                sql = GetSqlByTag("mzgh_ghrequest_getbyunit");
             }
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = GetSqlByTag(220035);
+                sql = GetSqlByTag("mzgh_ghrequest_getbydoct");
             }
             para.Add("@request_date", item.request_date);
             para.Add("@ampm", item.ampm);
@@ -430,7 +430,7 @@ namespace Data.Repository
             //  (request_date, ampm, unit_sn, group_sn, doctor_sn, clinic_type, req_type, begin_no, current_no, end_no, enter_opera, enter_date, open_flag, window_no)
             //values
             //  (@request_date, @ampm, @unit_sn, @group_sn, @doctor_sn, @clinic_type, @req_type, @begin_no, @current_no, @end_no, @enter_opera, @enter_date, @open_flag, @window_no)";
-            string insertsql = GetSqlByTag(220036);
+            string insertsql = GetSqlByTag("mzgh_ghrequest_add");
 
             //生成日期只有一天
             if (day > 0 && (begin == end))
@@ -542,12 +542,12 @@ namespace Data.Repository
             if (string.IsNullOrWhiteSpace(item.doctor_sn))
             {
                 //如果医生为空，则日期，科室，专科，上下午，号类 唯一条件
-                sql = GetSqlByTag(220034);
+                sql = GetSqlByTag("mzgh_ghrequest_getbyunit");
             }
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = GetSqlByTag(220035);
+                sql = GetSqlByTag("mzgh_ghrequest_getbydoct");
             }
             para.Add("@request_date", item.request_date); 
             para.Add("@week", item.week);
@@ -604,7 +604,7 @@ namespace Data.Repository
             if (!string.IsNullOrEmpty(record_sn))
             {
 
-                string sql = GetSqlByTag(220037);
+                string sql = GetSqlByTag("mzgh_ghrequest_update");
                 var para = new DynamicParameters();
                 para.Add("@record_sn", record_sn);
                 para.Add("@request_date", request_date);
@@ -629,7 +629,7 @@ namespace Data.Repository
             else
             {
                 //新增
-                string insertsql = GetSqlByTag(220036);
+                string insertsql = GetSqlByTag("mzgh_ghrequest_add");
                 var para = new DynamicParameters();
 
                 var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

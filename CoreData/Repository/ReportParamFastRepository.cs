@@ -13,7 +13,7 @@ namespace Data.Repository
     
         public List<ReportParam> GetReportParam(string code)
         { 
-            string sql = GetSqlByTag(221082);
+            string sql = GetSqlByTag("rt_reportparamsfastnet_getbycode");
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);

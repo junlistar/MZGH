@@ -29,475 +29,454 @@
     <None Update="Properties\launchSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220001.sql">
+    <None Update="SQLS\mzgh_mzpatientsfzinfo_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220002.sql">
+    <None Update="SQLS\mzgh_xtuser_login.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220003.sql">
+    <None Update="SQLS\mzgh_mzpatient_getbycardno.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220004.sql">
+    <None Update="SQLS\mzgh_mzpatient_getbybarcode.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220005.sql">
+    <None Update="SQLS\mzgh_mzpatient_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220006.sql">
+    <None Update="SQLS\mzgh_mzpatient_clearhicno.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220007.sql">
+    <None Update="SQLS\mzgh_mzpatient_updateybinfo.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220008.sql">
+    <None Update="SQLS\mzgh_mzpatient_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220009.sql">
+    <None Update="SQLS\mzgh_mzpatient_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220010.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbycurrentno.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220011.sql">
+    <None Update="SQLS\mzgh_ghrequest_updatecurrentno.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220012.sql">
+    <None Update="SQLS\mzgh_mzpatient_getmaxtimes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220013.sql">
+    <None Update="SQLS\mzgh_receipt_getmaxsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220014.sql">
+    <None Update="SQLS\mzgh_mzvisit_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220015.sql">
+    <None Update="SQLS\mzgh_ghdetailcharge_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220016.sql">
+    <None Update="SQLS\mzgh_ghdeposit_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220017.sql">
+    <None Update="SQLS\mzgh_ghreceiptcharge_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220018.sql">
+    <None Update="SQLS\mzgh_ghreceipt_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220019.sql">
+    <None Update="SQLS\mzgh_ghopreceipt_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220020.sql">
+    <None Update="SQLS\mzgh_ghconfig_getpatientsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220021.sql">
+    <None Update="SQLS\zd_unit_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220022.sql">
+    <None Update="SQLS\zd_employee_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220023.sql">
+    <None Update="SQLS\zd_responsetype_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220024.sql">
+    <None Update="SQLS\zd_occupation_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220025.sql">
+    <None Update="SQLS\zd_haoming_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220026.sql">
+    <None Update="SQLS\zd_district_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220027.sql">
+    <None Update="SQLS\zd_clinictype_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220028.sql">
+    <None Update="SQLS\zd_requesttype_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220029.sql">
+    <None Update="SQLS\zd_chargetype_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220030.sql">
+    <None Update="SQLS\mzgh_mzvisit_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220031.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbysn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220032.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbyunit.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220033.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbydoct.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220034.sql">
+    <None Update="SQLS\mzgh_ghrequest_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220035.sql">
+    <None Update="SQLS\mzgh_ghrequest_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220036.sql">
+    <None Update="SQLS\mzgh_mzvisit_getrefundlist.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220037.sql">
+    <None Update="SQLS\mzgh_ghopreceipt_getnew.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220038.sql">
+    <None Update="SQLS\mzgh_ghdoctorout_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220039.sql">
+    <None Update="SQLS\zd_chargeitem_getbycode.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220040.sql">
+    <None Update="SQLS\mzgh_chargeitem_getbyrequestsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220041.sql">
+    <None Update="SQLS\mzgh_ghdeposit_getbypatientid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220042.sql">
+    <None Update="SQLS\mzgh_ghdeposit_exist.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220043.sql">
+    <None Update="SQLS\mzgh_ghdeposit_addrefund.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220044.sql">
+    <None Update="SQLS\mzgh_ghdeposit_sumledger.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220045.sql">
+    <None Update="SQLS\mzgh_mzvisit_updateflag.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220046.sql">
+    <None Update="SQLS\mzgh_ghreceipt_addrefund.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220047.sql">
+    <None Update="SQLS\mzgh_ghreceiptcharge_addrefund.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220048.sql">
+    <None Update="SQLS\mzgh_ghdetailcharge_addrefund.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220049.sql">
+    <None Update="SQLS\mzgh_ghbaserequest_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220050.sql">
+    <None Update="SQLS\mzgh_ghconfig_getbaserequestsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220051.sql">
+    <None Update="SQLS\mzgh_ghbaserequest_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220052.sql">
+    <None Update="SQLS\mzgh_ghbaserequestsegment_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220053.sql">
+    <None Update="SQLS\mzgh_ghbasequest_delete.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220054.sql">
+    <None Update="SQLS\mzgh_ghbaserequest_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220055.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbydate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220056.sql">
+    <None Update="SQLS\mzgh_mzvisit_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220057.sql">
+    <None Update="SQLS\mzgh_mzvisit_checkrepeat.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220058.sql">
+    <None Update="SQLS\mzgh_requesthoure_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220059.sql">
+    <None Update="SQLS\mzgh_requestnolist.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220066.sql">
+    <None Update="SQLS\mzgh_ghbaserequest_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220065.sql">
+    <None Update="SQLS\mzgh_ghbaserequest_getbysn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220064.sql">
+    <None Update="SQLS\mzgh_ghrequest_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220063.sql">
+    <None Update="SQLS\zd_relative_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220062.sql">
+    <None Update="SQLS\mzgh_requesttime_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220061.sql">
+    <None Update="SQLS\mzgh_requesttime_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220060.sql">
+    <None Update="SQLS\mzgh_requesttime_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220075.sql">
+    <None Update="SQLS\mzgh_requesttime_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220074.sql">
+    <None Update="SQLS\mzgh_requesthour_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220073.sql">
+    <None Update="SQLS\mzgh_requesthoure_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220072.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220071.sql">
+    <None Update="SQLS\mzsf_mzdetailchargeitem_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220070.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_getbydate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220069.sql">
+    <None Update="SQLS\mzsf_maxledgersn_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220068.sql">
+    <None Update="SQLS\mzsf_receiptsn_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221001.sql">
+    <None Update="SQLS\mzsf_mzopreceipt_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221002.sql">
+    <None Update="SQLS\mzsf_mzopreceipt_updateno.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221003.sql">
+    <None Update="SQLS\mzsf_mzorderput_updatecount.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221004.sql">
+    <None Update="SQLS\mzsf_ypbase_updatestock.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221005.sql">
+    <None Update="SQLS\mzsf_mzpatient_updatetimes.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221006.sql">
+    <None Update="SQLS\mzsf_mzvisit_updatestatus.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221007.sql">
+    <None Update="SQLS\mzsf_mzvisit_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221008.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_update_zl.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221009.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_update_xy.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221010.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_getitems.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221011.sql">
+    <None Update="SQLS\mzsf_mzreceiptcharge_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221012.sql">
+    <None Update="SQLS\mzsf_mzreceipt_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221013.sql">
+    <None Update="SQLS\mzsf_mzdeposit_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221014.sql">
+    <None Update="SQLS\mzsf_mzdeposti_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221015.sql">
+    <None Update="SQLS\mzsf_mzreceipt_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221016.sql">
+    <None Update="SQLS\mzsf_mzdetailcharge_update_cy.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221017.sql">
+    <None Update="SQLS\zd_mzordertype_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221018.sql">
+    <None Update="SQLS\mzsf_yp_get_xy.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221019.sql">
+    <None Update="SQLS\mzsf_yp_get_cy.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221020.sql">
+    <None Update="SQLS\mzsf_ghopreceipt_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221021.sql">
+    <None Update="SQLS\mzsf_ghdeposit_update_reportdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221022.sql">
+    <None Update="SQLS\mzgh_requesthour_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221023.sql">
+    <None Update="SQLS\rt_reportparamsfastnet_getbycode.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221024.sql">
+    <None Update="SQLS\rt_reportdatafastnet_update_reportcom.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221025.sql">
+    <None Update="SQLS\rt_reportdatafastnet_getbycode.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221028.sql">
+    <None Update="SQLS\mzgh_mzpatientsfz_getbysfzid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221029.sql">
+    <None Update="SQLS\mzgh_mzpatientybkidetinfo_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\220067.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinsuinfo_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221082.sql">
+    <None Update="SQLS\mzgh_mzpatientybkidetinfo_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221081.sql">
+    <None Update="SQLS\mzgh_mzpatientybkidetinfo_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221080.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinsuinfo_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221079.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinsuinfo_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221078.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinfo_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221077.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinfo_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221076.sql">
+    <None Update="SQLS\mzgh_mzpatientybkinfo_checkadd.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221075.sql">
+    <None Update="SQLS\mzgh_mzpatientsfzinfo_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221074.sql">
+    <None Update="SQLS\mzgh_mzpatientsfzinfo_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221073.sql">
+    <None Update="SQLS\mzgh_mzpatientsfzinfo_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221072.sql">
+    <None Update="SQLS\xt_user_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221071.sql">
+    <None Update="SQLS\xt_user_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221070.sql">
+    <None Update="SQLS\xt_user_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221069.sql">
+    <None Update="SQLS\xt_userreport_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221068.sql">
+    <None Update="SQLS\xt_userreport_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221067.sql">
+    <None Update="SQLS\xt_userreport_checkadd.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221066.sql">
+    <None Update="SQLS\xt_report_getbyid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221065.sql">
+    <None Update="SQLS\xt_report_getbysysid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221064.sql">
+    <None Update="SQLS\xt_userreport_getbygroupid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221063.sql">
+    <None Update="SQLS\xt_func_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221062.sql">
+    <None Update="SQLS\xt_func_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221061.sql">
+    <None Update="SQLS\xt_func_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221060.sql">
+    <None Update="SQLS\xt_func_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221059.sql">
+    <None Update="SQLS\xt_func_getbydesc.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221058.sql">
+    <None Update="SQLS\xt_func_getbyname.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221057.sql">
+    <None Update="SQLS\xt_usergroup_delfunc.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221056.sql">
+    <None Update="SQLS\xt_usergroup_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221055.sql">
+    <None Update="SQLS\xt_usergroup_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221054.sql">
+    <None Update="SQLS\xt_func_getbysysid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221053.sql">
+    <None Update="SQLS\xt_func_getbygroup.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221052.sql">
+    <None Update="SQLS\xt_group_del.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221051.sql">
+    <None Update="SQLS\xt_groupt_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221050.sql">
+    <None Update="SQLS\xt_group_getmaxgroupid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221049.sql">
+    <None Update="SQLS\xt_group_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221048.sql">
+    <None Update="SQLS\mzsf_ghdaily_getsfreportdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221047.sql">
+    <None Update="SQLS\mzsf_hospital_update_reportsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221046.sql">
+    <None Update="SQLS\mzsf_dailyreportreceipt_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221045.sql">
+    <None Update="SQLS\mzsf_dailyreportdata_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221044.sql">
+    <None Update="SQLS\mzsf_ghdeposit_getcharge.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221043.sql">
+    <None Update="SQLS\mzsf_dailyreport_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221042.sql">
+    <None Update="SQLS\mzsf_hospital_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221041.sql">
+    <None Update="SQLS\mzsf_ghopreceipt_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221040.sql">
+    <None Update="SQLS\mzsf_ghopreceipt_update_reportflag.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221039.sql">
+    <None Update="SQLS\mzsf_mzreceiptcacel_update_reportdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221038.sql">
+    <None Update="SQLS\mzsf_ghdetailcharge_update reportdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221037.sql">
+    <None Update="SQLS\mzsf_ghreceipt_update_reportdata.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221036.sql">
+    <None Update="SQLS\mzsf_ghdaily_getreportdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SQLS\221035.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221034.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221033.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221032.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221031.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221030.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221027.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="SQLS\221026.sql">
+    <None Update="SQLS\mzsf_yp_get_zl.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="sql保存到数据库.sql">

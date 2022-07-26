@@ -11,7 +11,7 @@ namespace Data.Repository
 
         public List<RequestHour> GetRequestHours()
         {
-            string ghsql = GetSqlByTag(220064);
+            string ghsql = GetSqlByTag("mzgh_requesthoure_get");
 
             return Select(ghsql);
         }
@@ -23,12 +23,12 @@ namespace Data.Repository
             if (all.Where(p => p.code == code).Count() > 0)
             {
                 //存在：更新操作
-                sql = GetSqlByTag(220067);
+                sql = GetSqlByTag("mzgh_requesthour_update");
             }
             else
             {
                 //不存在：添加操作
-                sql = GetSqlByTag(220068);
+                sql = GetSqlByTag("mzgh_requesthoure_add");
 
             }
 
@@ -43,7 +43,7 @@ namespace Data.Repository
         }
         public bool DeleteRequestHour(string code)
         {
-            string sql = GetSqlByTag(220069);
+            string sql = GetSqlByTag("mzgh_requesthour_del");
 
             var param = new DynamicParameters();
             param.Add("@code", code); 

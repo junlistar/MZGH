@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<GhDoctorOut> GetGhDoctorOuts()
         {
-            string ghsql = GetSqlByTag(220040);
+            string ghsql = GetSqlByTag("mzgh_ghdoctorout_get");
              
             return  Select(ghsql);
 

@@ -13,7 +13,7 @@ namespace Data.Repository.Mzsf
         CprChargesRepository chargesRepository = new CprChargesRepository();
         public List<MzOrderReceipt> GetReceipts(string cash_opera, string begin_date, string end_date,string bar_code,string status)
         {
-            var sql = GetSqlByTag(221021);
+            var sql = GetSqlByTag("mzsf_mzreceipt_get");
              
             var para = new DynamicParameters();
 

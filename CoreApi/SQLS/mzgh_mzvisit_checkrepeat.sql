@@ -1,5 +1,5 @@
  
---220063挂号  生成分时段号源
+--220065挂号  检查重复
 select COUNT(*) from view_mz_visit_table a
 inner join gh_request b on a.visit_date = b.request_date 
 and a.visit_dept= b.unit_sn 

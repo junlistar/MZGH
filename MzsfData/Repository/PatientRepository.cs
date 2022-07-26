@@ -1,6 +1,6 @@
 ﻿using Dapper;
-using MzsfData.Entities;
-using MzsfData.IRepository;
+using CoreData.Entities;
+using CoreData.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,7 +18,7 @@ namespace MzsfData.Repository
         public List<Patient> GetPatientByCard(string cardno)
         {
              
-            string selectSql = GetSqlByTag(220002);
+            string selectSql = GetSqlByTag("mzgh_user_searchbycard");
 
             var para = new DynamicParameters();
             para.Add("@cardno", cardno);

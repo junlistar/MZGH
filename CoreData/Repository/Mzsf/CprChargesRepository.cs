@@ -14,7 +14,7 @@ namespace Data.Repository.Mzsf
         public List<CprCharges> GetCprCharges(string patient_id, int times, string charge_status)
         {
 
-            string ghsql = GetSqlByTag(221003);
+            string ghsql = GetSqlByTag("mzsf_mzdetailchargeitem_getbypid");
             var para = new DynamicParameters();
 
             para.Add("@patient_id", patient_id);

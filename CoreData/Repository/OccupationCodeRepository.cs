@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<OccupationCode> GetOccupationCodes()
         {
-            string ghsql = GetSqlByTag(220026);
+            string ghsql = GetSqlByTag("zd_occupation_get");
              
             return  Select(ghsql); 
         }

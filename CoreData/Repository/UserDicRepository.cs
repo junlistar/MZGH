@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<UserDic> GetUserDic()
         {
-            string sql = GetSqlByTag(220024);
+            string sql = GetSqlByTag("zd_employee_get");
 
             return Select(sql);
 
@@ -25,7 +25,7 @@ namespace Data.Repository
 
             try
             {
-                string sql = GetSqlByTag(220074);
+                string sql = GetSqlByTag("zd_relative_get");
 
                 return connection.Query<RelativeCode>(sql).ToList();
 

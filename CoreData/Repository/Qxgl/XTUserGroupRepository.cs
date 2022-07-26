@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<XTUserGroup> GetXTUserGroupsByGroupId(string subsys_id, string user_group)
         {
-            string ghsql = GetSqlByTag(221046);
+            string ghsql = GetSqlByTag("xt_func_getbygroup");
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -24,7 +24,7 @@ namespace Data.Repository
 
         public List<XTUserGroup> GetXTUserGroups(string subsys_id)
         {
-            string ghsql = GetSqlByTag(221047);
+            string ghsql = GetSqlByTag("xt_func_getbysysid");
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -43,7 +43,7 @@ namespace Data.Repository
                 {
                     var func_list = func_str.Split(",");
                     //先删除，后添加
-                    string sql = GetSqlByTag(221048);
+                    string sql = GetSqlByTag("xt_usergroup_del");
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -52,7 +52,7 @@ namespace Data.Repository
 
                     foreach (var func in func_list)
                     {
-                        sql = GetSqlByTag(221049);
+                        sql = GetSqlByTag("xt_usergroup_add");
 
                         para = new DynamicParameters();
 
@@ -92,7 +92,7 @@ namespace Data.Repository
                     foreach (var func in func_list)
                     {
                         //删除
-                        string sql = GetSqlByTag(221050);
+                        string sql = GetSqlByTag("xt_usergroup_delfunc");
 
                         var para = new DynamicParameters();
                         para.Add("@subsys_id", subsys_id);
@@ -125,7 +125,7 @@ namespace Data.Repository
                 try
                 {
                     //查询是否存在相同数据
-                    string sql = GetSqlByTag(221051);
+                    string sql = GetSqlByTag("xt_func_getbyname");
 
                     var para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -136,7 +136,7 @@ namespace Data.Repository
                         throw new Exception("存在相同功能编号！");
                     }
 
-                    sql = GetSqlByTag(221052);
+                    sql = GetSqlByTag("xt_func_getbydesc");
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_desc", func_desc);
@@ -145,7 +145,7 @@ namespace Data.Repository
                     {
                         throw new Exception("存在相同功能描述！");
                     } 
-                    sql = GetSqlByTag(221053);
+                    sql = GetSqlByTag("xt_func_add");
 
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -179,7 +179,7 @@ namespace Data.Repository
                 {
                     //查询是否存在相同数据  
                     var para = new DynamicParameters(); 
-                    string sql = GetSqlByTag(221054);
+                    string sql = GetSqlByTag("xt_func_getbyparams");
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
                     para.Add("@func_desc", func_desc);
@@ -189,7 +189,7 @@ namespace Data.Repository
                     {
                         throw new Exception("存在相同功能描述！");
                     }
-                    sql = GetSqlByTag(221055);
+                    sql = GetSqlByTag("xt_func_update");
 
                     para = new DynamicParameters();
                     para.Add("@subsys_id", subsys_id);
@@ -220,9 +220,8 @@ namespace Data.Repository
                 IDbTransaction transaction = connection.BeginTransaction();
 
                 try
-                {
-                    //查询是否存在相同数据
-                    string sql = GetSqlByTag(221056);
+                { 
+                    string sql = GetSqlByTag("xt_func_del");
 
                     var para = new DynamicParameters();
 

@@ -13,7 +13,7 @@ namespace Data.Repository.Mzsf
     
         public List<MzDeposit> GetMzDepositsByPatientId(string patient_id, int ledger_sn)
         { 
-            string ghsql = GetSqlByTag(221020);
+            string ghsql = GetSqlByTag("mzsf_mzdeposti_getbypid");
             var para = new DynamicParameters();
 
             para.Add("@patient_id", patient_id);

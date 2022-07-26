@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<XTGroup> GetXTGroupsBySysId(string subsys_id)
         {
-            string ghsql = GetSqlByTag(221042);
+            string ghsql = GetSqlByTag("xt_group_get");
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -24,7 +24,7 @@ namespace Data.Repository
 
         public int AddXTGroup(string group_name, string subsys_id)
         {
-            string sql = GetSqlByTag(221043);
+            string sql = GetSqlByTag("xt_group_getmaxgroupid");
             var para = new DynamicParameters();
 
             para.Add("@subsys_id", subsys_id);
@@ -32,7 +32,7 @@ namespace Data.Repository
 
             int user_group = Convert.ToInt32(ExcuteScalar(sql, para));
 
-            sql = GetSqlByTag(221044);
+            sql = GetSqlByTag("xt_groupt_add");
 
             para = new DynamicParameters();
 
@@ -46,7 +46,7 @@ namespace Data.Repository
 
         public int DeleteXTGroup(string user_group, string subsys_id)
         {
-            string sql = GetSqlByTag(221045);
+            string sql = GetSqlByTag("xt_group_del");
 
             var para = new DynamicParameters();
 

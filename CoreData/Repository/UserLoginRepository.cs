@@ -33,7 +33,7 @@ namespace Data.Repository
             //string sql = Convert.ToString(base.ExcuteScalar(login_sql, para));
 
 
-            string sql = GetSqlByTag(220001);
+            string sql = GetSqlByTag("mzgh_xtuser_login");
             if (string.IsNullOrEmpty(pwd) ){
                 pwd = "";
             } 

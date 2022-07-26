@@ -13,11 +13,8 @@ namespace Data.Repository
    
         public List<MzHaoming> GetMzHaomings()
         {
-            string ghsql = GetSqlByTag(220027);
-             
-            return  Select(ghsql);
-
-
+            string ghsql = GetSqlByTag("zd_haoming_get"); 
+            return  Select(ghsql); 
         } 
     }
 }

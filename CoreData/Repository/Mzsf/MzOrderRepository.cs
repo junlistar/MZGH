@@ -15,7 +15,7 @@ namespace Data.Repository.Mzsf
         public List<MzOrder> GetMzOrdersByPatientId(string patient_id, int times)
         {
 
-            string ghsql = GetSqlByTag(221002);
+            string ghsql = GetSqlByTag("mzsf_mzdetailcharge_getbypid");
             var para = new DynamicParameters();
 
             para.Add("@patient_id", patient_id);
@@ -375,7 +375,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 int max_item_sn = 0;
                 string order_no_param = "";
 
-                string mxa_ledger_sql = GetSqlByTag(221005);
+                string mxa_ledger_sql = GetSqlByTag("mzsf_maxledgersn_get");
 
                 para = new DynamicParameters();
                 para.Add("@patient_id", patient_id);
@@ -411,7 +411,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 //门诊机制发票号
                 int max_sn = 0;
 
-                string sql1 = GetSqlByTag(221006);
+                string sql1 = GetSqlByTag("mzsf_receiptsn_get");
 
                 //门诊发票号 根据当前用户获取  
                 MzOpReceiptRepository opreceiptResp = new MzOpReceiptRepository();
@@ -419,7 +419,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
 
                 //更新发票号
-                string sql3 = GetSqlByTag(221008);
+                string sql3 = GetSqlByTag("mzsf_mzopreceipt_updateno");
                 //p1:sql2 currentno,p2 opera,p3 date
 
 
@@ -428,35 +428,35 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 //p1 oder_code, p2 没用到
 
                 //更新信息
-                string sql5 = GetSqlByTag(221009);
+                string sql5 = GetSqlByTag("mzsf_mzorderput_updatecount");
                 //sql4 结果
 
                 //虚拟库存处理
-                string sql6 = GetSqlByTag(221010);
+                string sql6 = GetSqlByTag("mzsf_ypbase_updatestock");
 
                 //更新 mz_patient_mi
-                string sql7 = GetSqlByTag(221011);
+                string sql7 = GetSqlByTag("mzsf_mzpatient_updatetimes");
 
                 //更新 mz_visit_table
-                string sql8 = GetSqlByTag(221012);
+                string sql8 = GetSqlByTag("mzsf_mzvisit_updatestatus");
 
                 //获取就诊信息
-                string mz_sql = GetSqlByTag(221013);
+                string mz_sql = GetSqlByTag("mzsf_mzvisit_getbypid");
 
                 //9.更新detail_charge项目 
-                string sql_detail_charge_zl = GetSqlByTag(221014);
-                string sql_detail_charge_xy = GetSqlByTag(221015);
-                string sql_detail_charge_cy = GetSqlByTag(221022);
+                string sql_detail_charge_zl = GetSqlByTag("mzsf_mzdetailcharge_update_zl");
+                string sql_detail_charge_xy = GetSqlByTag("mzsf_mzdetailcharge_update_xy");
+                string sql_detail_charge_cy = GetSqlByTag("mzsf_mzdetailcharge_update_cy");
 
                 //10.查询 写入mz_receipt_charge
-                string sql10 = GetSqlByTag(221016);
-                string sql11 = GetSqlByTag(221017);
+                string sql10 = GetSqlByTag("mzsf_mzdetailcharge_getitems");
+                string sql11 = GetSqlByTag("mzsf_mzreceiptcharge_add");
 
                 //11.写入mz_receipt
-                string sql12 = GetSqlByTag(221018);
+                string sql12 = GetSqlByTag("mzsf_mzreceipt_add");
 
                 //12.写入 mz_deposit
-                string sql13 = GetSqlByTag(221019);
+                string sql13 = GetSqlByTag("mzsf_mzdeposit_add");
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
@@ -818,7 +818,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
 
                 //更新发票号
-                string sql3 = GetSqlByTag(221008);
+                string sql3 = GetSqlByTag("mzsf_mzopreceipt_updateno");
 
                 //整理退款项目
                 List<string> charge_code_list = new List<string>();
@@ -860,7 +860,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         var patient = connection.Query<Patient>(user_sql, para, transaction).FirstOrDefault();
                         int max_item_sn = patient.max_item_sn + 1;
 
-                        string mxa_ledger_sql = GetSqlByTag(221005);
+                        string mxa_ledger_sql = GetSqlByTag("mzsf_maxledgersn_get");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         int max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
@@ -877,7 +877,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         //门诊机制发票号
                         int max_sn = 0;
 
-                        string sql1 = GetSqlByTag(221006);
+                        string sql1 = GetSqlByTag("mzsf_receiptsn_get");
 
                         //1.获取机制号
                         max_sn = Convert.ToInt32(connection.ExecuteScalar(sql1, null, transaction));

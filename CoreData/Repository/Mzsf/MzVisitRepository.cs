@@ -14,7 +14,7 @@ namespace Data.Repository.Mzsf
         public List<MzVisit> GetMzVisitsByDate(string patient_id, string begin,string end)
         {
 
-            string ghsql = GetSqlByTag(221004);
+            string ghsql = GetSqlByTag("mzsf_mzdetailcharge_getbydate");
             var para = new DynamicParameters();
 
             para.Add("@patient_id", patient_id);

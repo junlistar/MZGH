@@ -77,7 +77,7 @@ namespace Data.Repository
         public ReportData GetReportDataByCode(string code)
         {
              
-            string sql = GetSqlByTag(221079);
+            string sql = GetSqlByTag("rt_reportdatafastnet_getbycode");
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);
@@ -103,7 +103,7 @@ namespace Data.Repository
 
         public List<ReportData> GetReportData(string code)
         { 
-            string sql = GetSqlByTag(221080);
+            string sql = GetSqlByTag("rt_reportdatafastnet_getbycode");
             var para = new DynamicParameters();
 
             para.Add("@report_code", code);
@@ -112,7 +112,7 @@ namespace Data.Repository
         }
         public int UpdateReportDataByCode(int code ,string report_com)
         { 
-            string sql = GetSqlByTag(221081);
+            string sql = GetSqlByTag("rt_reportdatafastnet_update_reportcom");
             var para = new DynamicParameters();
             byte[] ReportBytes = System.Text.Encoding.UTF8.GetBytes(report_com);
             para.Add("@report_com", ReportBytes);

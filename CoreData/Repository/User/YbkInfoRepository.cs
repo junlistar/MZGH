@@ -15,7 +15,7 @@ namespace Data.Repository
 
         public bool UpdateYbkInfo(string psn_no, string psn_cert_type, string certno, string psn_name, string gend, string naty, string brdy, int age)
         {
-            string selectSql = GetSqlByTag(221069);
+            string selectSql = GetSqlByTag("mzgh_mzpatientybkinfo_checkadd");
 
             var para = new DynamicParameters();
             para.Add("@certno", certno);
@@ -25,12 +25,12 @@ namespace Data.Repository
             if (Convert.ToInt32(_count) > 0)
             {
                 //编辑
-                selectSql = GetSqlByTag(221070);
+                selectSql = GetSqlByTag("mzgh_mzpatientybkinfo_update");
             }
             else
             {
                 //新增
-                selectSql = GetSqlByTag(221071);
+                selectSql = GetSqlByTag("mzgh_mzpatientybkinfo_add");
             }
             para.Add("@psn_no", psn_no);
             para.Add("@psn_cert_type", psn_cert_type);
@@ -65,14 +65,14 @@ namespace Data.Repository
                         if (yBResponse.output.insuinfo != null)
                         {
                             //删除旧数据，写入新数据
-                            sql = GetSqlByTag(221072);
+                            sql = GetSqlByTag("mzgh_mzpatientybkinfo_del");
 
                             para.Add("@certno", yBResponse.output.baseinfo.certno);
                             connection.Execute(sql, para, transaction);
 
                             foreach (var item in yBResponse.output.insuinfo)
                             {
-                                sql = GetSqlByTag(221073);
+                                sql = GetSqlByTag("mzgh_mzpatientybkinsuinfo_add");
                                 para = new DynamicParameters();
                                 para.Add("@certno", yBResponse.output.baseinfo.certno);
                                 para.Add("@balc", item.balc);
@@ -91,14 +91,14 @@ namespace Data.Repository
                         if (yBResponse.output.idetinfo != null)
                         {
                             //删除旧数据，写入新数据
-                            sql = GetSqlByTag(221074);
+                            sql = GetSqlByTag("mzgh_mzpatientybkidetinfo_del");
 
                             para.Add("@certno", yBResponse.output.baseinfo.certno);
                             connection.Execute(sql, para, transaction);
 
                             foreach (var item in yBResponse.output.idetinfo)
                             {
-                                sql = GetSqlByTag(221075);
+                                sql = GetSqlByTag("");
                                 para = new DynamicParameters();
                                 para.Add("@certno", yBResponse.output.baseinfo.certno);
                                 para.Add("@psn_idet_type", item.psn_idet_type);
@@ -143,13 +143,13 @@ namespace Data.Repository
 
                     try
                     {
-                        string sql = GetSqlByTag(221076);
+                        string sql = GetSqlByTag("mzgh_mzpatientybkinsuinfo_get");
                         var para = new DynamicParameters();
                         para.Add("@certno", certno);
 
                        var insu_list = connection.Query<InsuInfo>(sql, para, transaction);
 
-                        sql = GetSqlByTag(221077);
+                        sql = GetSqlByTag("mzgh_mzpatientybkidetinfo_get");
 
                         var idt_list= connection.Query<IdetInfo>(sql, para, transaction);
 

@@ -11,7 +11,7 @@ namespace Data.Repository.Mzsf
     { 
         public List<OrderType> GetOrderTypes()
         { 
-            string ghsql = GetSqlByTag(221023);
+            string ghsql = GetSqlByTag("zd_mzordertype_get");
              
             return Select(ghsql);
         } 

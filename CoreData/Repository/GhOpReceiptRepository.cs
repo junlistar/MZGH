@@ -14,7 +14,7 @@ namespace Data.Repository
         public List<GhOpReceipt> GetCurrentReceiptNo()
         {
             //string ghsql = "select top 1 * from gh_op_receipt order by happen_date desc ";
-            string ghsql = GetSqlByTag(220039);
+            string ghsql = GetSqlByTag("mzgh_ghopreceipt_getnew");
              
             return  Select(ghsql);
 

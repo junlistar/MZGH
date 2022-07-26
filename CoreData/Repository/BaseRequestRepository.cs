@@ -14,7 +14,7 @@ namespace Data.Repository
         public List<BaseRequest> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
             string week, string day, string ampm, string window_no, string open_flag, int temp_flag)
         {
-            string ghsql = GetSqlByTag(220053);
+            string ghsql = GetSqlByTag("mzgh_ghbaserequest_getbyparams");
 
             var para = new DynamicParameters();
 
@@ -123,7 +123,7 @@ namespace Data.Repository
             //修改
             if (!string.IsNullOrEmpty(request_sn))
             {  
-                string sql = GetSqlByTag(220062);
+                string sql = GetSqlByTag("mzgh_ghbaserequest_update");
                 var para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
                 para.Add("@week", week);
@@ -146,7 +146,7 @@ namespace Data.Repository
             else
             {
                 //新增
-                string snosql = GetSqlByTag(220054);
+                string snosql = GetSqlByTag("mzgh_ghconfig_getbaserequestsn");
 
                 var dtconfig = ExcuteScalar(snosql, null);
 
@@ -156,7 +156,7 @@ namespace Data.Repository
                 }
 
 
-                string sql = GetSqlByTag(220055);
+                string sql = GetSqlByTag("mzgh_ghbaserequest_add");
 
                 var para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
@@ -181,7 +181,7 @@ namespace Data.Repository
 
 
                 //挂号区间表
-                string segsql = GetSqlByTag(220056);
+                string segsql = GetSqlByTag("mzgh_ghbaserequestsegment_add");
                 para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
                 para.Add("@req_type", "01");
@@ -197,7 +197,7 @@ namespace Data.Repository
 
         public int DeleteBaseRequest(string request_sn)
         {
-            string segsql = GetSqlByTag(220057);
+            string segsql = GetSqlByTag("mzgh_ghbasequest_delete");
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
 
@@ -207,7 +207,7 @@ namespace Data.Repository
         {
             // string segsql = @"select * from gh_base_request where request_sn=@request_sn";
 
-            string segsql = GetSqlByTag(220061);
+            string segsql = GetSqlByTag("mzgh_ghbaserequest_getbysn");
             var para = new DynamicParameters();
             para.Add("@request_sn", request_sn);
 
@@ -215,7 +215,7 @@ namespace Data.Repository
         }
         public List<BaseRequest> GetBaseRequestsByDate(string begin, string end)
         {
-            string ghsql = GetSqlByTag(220058);
+            string ghsql = GetSqlByTag("mzgh_ghbaserequest_get");
 
             string weeks = "1";
             string[] arr = weeks.Split(',');
@@ -266,7 +266,7 @@ namespace Data.Repository
 
         public List<BaseRequest> GetBaseRequestsByWeekDay(string begin, string end, string weeks, int day)
         {
-            string ghsql = GetSqlByTag(220058);
+            string ghsql = GetSqlByTag("mzgh_ghbaserequest_get");
 
             if (day > 0)
             {
@@ -330,7 +330,7 @@ namespace Data.Repository
 
         public List<BaseRequest> GetRequestsByDate(string begin, string end)
         {
-            string ghsql = GetSqlByTag(220059);
+            string ghsql = GetSqlByTag("mzgh_ghrequest_getbydate");
 
             var para = new DynamicParameters();
             para.Add("@P1", begin);
@@ -344,7 +344,7 @@ namespace Data.Repository
         public List<BaseRequest> GetRequestsByParams(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
              string ampm, string window_no, string open_flag)
         {
-            string ghsql = GetSqlByTag(220060);
+            string ghsql = GetSqlByTag("mzgh_ghrequest_getbyparams");
 
 
             var para = new DynamicParameters();
@@ -441,7 +441,7 @@ namespace Data.Repository
 
         public bool CreateRequestNoList(string begin, string end, int type)
         {
-            string ghsql = GetSqlByTag(220063);
+            string ghsql = GetSqlByTag("mzgh_requestnolist");
 
             var para = new DynamicParameters();
             para.Add("@Op_type", type);
@@ -449,7 +449,7 @@ namespace Data.Repository
             para.Add("@eDate", end);
             //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
 
-            var dt = base.ExecuteTable(ghsql, para, CommandType.Text);
+            var dt = base.ExecuteTable(ghsql, para, CommandType.Text,"write");
             if (dt != null && dt.Rows.Count > 0)
             {
                 var code = dt.Rows[0][0].ToString();
@@ -466,18 +466,8 @@ namespace Data.Repository
         }
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
-        {
-            //            string sql = @"select COUNT(*) from view_mz_visit_table a
-            //inner join gh_request b on a.visit_date = b.request_date 
-            //and a.visit_dept= b.unit_sn 
-            //and a.clinic_type = b.clinic_type
-            //and ISNULL(a.group_sn,'0') =ISNULL(b.group_sn,'0') 
-            //and ISNULL(a.doctor_code,'0') LIKE ISNULL(b.doctor_sn,'0')
-            //and a.ampm=b.ampm
-            //where patient_id = @patient_id
-            //and record_sn = @record_sn";
-
-            string sql = GetSqlByTag(220065);
+        { 
+            string sql = GetSqlByTag("mzgh_mzvisit_checkrepeat");
 
             var para = new DynamicParameters();
             para.Add("@patient_id", patient_id);

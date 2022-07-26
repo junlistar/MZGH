@@ -13,7 +13,7 @@ namespace Data.Repository
 
         public List<MzPatientSfz> GetDataBySfzId(string sfz_id)
         {
-            string selectSql = GetSqlByTag(221078);
+            string selectSql = GetSqlByTag("mzgh_mzpatientsfz_getbysfzid");
 
             var para = new DynamicParameters();
 

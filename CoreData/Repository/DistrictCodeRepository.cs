@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<DistrictCode> GetDistrictCodes()
         {
-            string ghsql = GetSqlByTag(220028);
+            string ghsql = GetSqlByTag("zd_district_get");
              
             return  Select(ghsql);
 

@@ -13,7 +13,7 @@ namespace Data.Repository
    
         public List<Unit> GetUnits()
         {
-            string selectSql = GetSqlByTag(220023);
+            string selectSql = GetSqlByTag("zd_unit_get");
              
             return  Select(selectSql); 
 

@@ -13,14 +13,14 @@ namespace Data.Repository
    
         public List<ClinicType> GetClinicTypes()
         {
-            string ghsql = GetSqlByTag(220029);
+            string ghsql = GetSqlByTag("zd_clinictype_get");
 
             return  Select(ghsql); 
         }
 
         public List<ClinicType> GetRequestTypes()
         {
-            string ghsql = GetSqlByTag(220030);
+            string ghsql = GetSqlByTag("zd_requesttype_get");
 
             return Select(ghsql); 
         }

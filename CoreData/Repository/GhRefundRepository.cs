@@ -15,7 +15,7 @@ namespace Data.Repository
         public List<GhRefund> GetGhRefund(string datestr, string patient_id)
         {
 
-            string sql = GetSqlByTag(220038);
+            string sql = GetSqlByTag("mzgh_mzvisit_getrefundlist");
 
             var para = new DynamicParameters();
             para.Add("@request_date", datestr);
