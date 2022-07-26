@@ -758,16 +758,16 @@ namespace Client
             rc.ShowDialog();
 
 
-            var barcode = this.txtCode.Text.Trim();
-            lblMsg.Text = "";
-            if (string.IsNullOrEmpty(barcode))
-            {
-                this.txtCode.Focus();
-            }
-            else
-            {
-                SearchUser();
-            }
+            //var barcode = this.txtCode.Text.Trim();
+            //lblMsg.Text = "";
+            //if (string.IsNullOrEmpty(barcode))
+            //{
+            //    this.txtCode.Focus();
+            //}
+            //else
+            //{
+            //    SearchUser();
+            //}
 
             //ReadCard rc = new ReadCard("磁卡");
             ////关闭，刷新
@@ -795,8 +795,19 @@ namespace Client
 
             ReadCard rc = new ReadCard("身份证");
             //关闭，刷新
-            rc.FormClosed += Rc_FormClosed;
-            rc.ShowDialog();
+            //rc.FormClosed += Rc_FormClosed;
+            if (rc.ShowDialog() == DialogResult.OK)
+            {
+                DoSearch();
+            }
+        }
+        public void DoSearch()
+        {
+            if (!string.IsNullOrWhiteSpace(SessionHelper.cardno))
+            {
+                txtCode.Text = SessionHelper.cardno;
+                SearchUser();
+            }
         }
 
         private void btnYBK_Click(object sender, EventArgs e)
@@ -1200,7 +1211,7 @@ namespace Client
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             //如果点击的是身份证，择查询身份证信息
-            if (SessionHelper.CardReader != null)
+            if (SessionHelper.CardReader != null|| YBHelper.currentYBInfo != null)
             {
                 paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
             }
@@ -1249,8 +1260,12 @@ namespace Client
                     btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
                     //this.txtpatientid.Text = userInfo["patient_id"].ToString();
                     lblName.Text = userInfo.name.ToString();
+                    if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
+                    {
+                        userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
+                    }
                     lblAge.Text = userInfo.age.ToString() + "岁";
-                    lblhometel.Text = userInfo.home_tel.ToString();
+                    lblhometel.Text = userInfo.home_tel;
                     lblSex.Text = userInfo.sex == "1" ? "男" : "女";
                     lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";
                     if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
@@ -1343,9 +1358,7 @@ namespace Client
 
                         //自动创建一条用户信息
                         string _hicno = AutoAddUserInfo();
-
-                        YBHelper.currentYBInfo = null;
-                        SessionHelper.CardReader = null;
+                         
                         this.txtCode.Text = _hicno;
                         SearchUser();
                     }
@@ -1362,52 +1375,89 @@ namespace Client
 
         public string AutoAddUserInfo()
         {
-            var _hicno = "";
-            var _name = "";
-            var _sex = "";
-            var _birth = "";
-            var _home_street = "";
-
-            if (SessionHelper.CardReader != null)
+            try
             {
-                _hicno = SessionHelper.CardReader.IDCard;
-                _name = SessionHelper.CardReader.Name;
-                _sex = SessionHelper.CardReader.Sex == "男" ? "1" : "2";
-                _birth = SessionHelper.CardReader.BirthDay;
-                _home_street = SessionHelper.CardReader.Address;
+                var _pid = "";
+                var _hicno = "";
+                var _name = "";
+                var _sex = "";
+                var _birth = "";
+                var _home_street = "";
 
+                if (SessionHelper.CardReader != null)
+                {
+                    _hicno = SessionHelper.CardReader.IDCard;
+                    _name = SessionHelper.CardReader.Name;
+                    _sex = SessionHelper.CardReader.Sex == "男" ? "1" : "2";
+                    _birth = SessionHelper.CardReader.BirthDay;
+                    _home_street = SessionHelper.CardReader.Address;
+
+                }
+                else if (YBHelper.currentYBInfo != null)
+                {
+                    _hicno = YBHelper.currentYBInfo.output.baseinfo.certno;
+                    _name = YBHelper.currentYBInfo.output.baseinfo.psn_name;
+                    _sex = YBHelper.currentYBInfo.output.baseinfo.gend;
+                    _birth = YBHelper.currentYBInfo.output.baseinfo.brdy;
+                    _home_street = "";
+                }
+
+                var paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
+                var json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
+
+                if (result.status == 1)
+                {
+                    _pid = result.data;
+                }
+                else
+                {
+                    log.Error(result.message);
+                    return "";
+                }
+                //var json = HttpClientUtil.Get(paramurl);
+                var d = new
+                {
+                    pid = _pid,
+                    hicno = _hicno,
+                    sno = _hicno,
+                    barcode = _pid,
+                    name = _name,
+                    sex = _sex,
+                    birth = _birth,
+                    tel = "",
+                    home_district = "",
+                    home_street = _home_street,
+                    occupation_type = "",
+                    response_type = "01",
+                    charge_type = "01",
+                    opera = SessionHelper.uservm.user_mi
+                };
+                Task<HttpResponseMessage> task = null;
+
+                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                json = HttpClientUtil.Get(paramurl);
+                var res = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+                if (res.status == 1)
+                {
+                }
+                else
+                {
+                    log.Error(res.message);
+                    return "";
+                }
+                return _hicno;
             }
-            else if (YBHelper.currentYBInfo != null)
+            catch (Exception ex)
             {
-                _hicno = YBHelper.currentYBInfo.output.baseinfo.certno;
-                _name = YBHelper.currentYBInfo.output.baseinfo.psn_name;
-                _sex = YBHelper.currentYBInfo.output.baseinfo.gend;
-                _birth = YBHelper.currentYBInfo.output.baseinfo.brdy;
-                _home_street = "";
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
             }
-            var d = new
-            {
-                pid = "",
-                hicno = _hicno,
-                sno = _hicno,
-                barcode = _hicno,
-                name = _name,
-                sex = _sex,
-                birth = _birth,
-                tel = "",
-                home_district = "",
-                home_street = _home_street,
-                occupation_type = "",
-                response_type = "01",
-                charge_type = "01",
-                opera = SessionHelper.uservm.user_mi
-            };
 
-            var paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
-
-            HttpClientUtil.Get(paramurl);
-
-            return _hicno;
+            return "";
         }
 
         private void btnMingtian_Click(object sender, EventArgs e)

@@ -59,23 +59,27 @@ namespace Client
             // 
             // Aside
             // 
-            this.Aside.BackColor = System.Drawing.Color.LightCoral;
+            this.Aside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Aside.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Aside.FillColor = System.Drawing.Color.LightCoral;
+            this.Aside.ExpandSelectFirst = false;
+            this.Aside.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.Aside.ForeColor = System.Drawing.Color.White;
-            this.Aside.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
+            this.Aside.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.Aside.Indent = 25;
             this.Aside.LineColor = System.Drawing.Color.Red;
+            this.Aside.Margin = new System.Windows.Forms.Padding(10);
             this.Aside.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
             this.Aside.ScrollFillColor = System.Drawing.Color.White;
-            this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.Aside.SelectedColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.SelectedColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.Aside.SelectedColorGradient = true;
             this.Aside.SelectedForeColor = System.Drawing.Color.White;
             this.Aside.SelectedHighColor = System.Drawing.Color.White;
+            this.Aside.ShowSecondBackColor = true;
             this.Aside.Size = new System.Drawing.Size(250, 575);
             this.Aside.Style = Sunny.UI.UIStyle.Custom;
+            this.Aside.StyleCustomMode = true;
             this.Aside.MenuItemClick += new Sunny.UI.UINavMenu.OnMenuItemClick(this.Aside_MenuItemClick);
             // 
             // Header

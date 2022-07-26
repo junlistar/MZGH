@@ -95,7 +95,7 @@ namespace Data.Repository
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera)
         {
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -177,10 +177,10 @@ namespace Data.Repository
                         connection.Execute(sql, para, transaction);
 
                         //写patientId和身份证id关联表
-                        sql = "insert into mz_patient_sfz(patient_id,sfz_id) value (@patient_id,@sfz_id)";
+                        sql = "insert into mz_patient_sfz(patient_id,sfz_id) values (@patient_id,@sfz_id)";
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
-                        para.Add("@hic_no", hicno);
+                        para.Add("@sfz_id", hicno);
                         connection.Execute(sql, para, transaction);
 
                     }
@@ -331,7 +331,7 @@ namespace Data.Repository
                 //更新挂号发票记录表
                 string sql8 = GetSqlByTag(220021);
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

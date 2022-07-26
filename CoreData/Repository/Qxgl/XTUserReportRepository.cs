@@ -32,7 +32,7 @@ namespace Data.Repository
         public bool AddXtUserReports(string rep_id, string subsys_id, string user_group)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -89,7 +89,7 @@ namespace Data.Repository
         public bool DelXtUserReports(string rep_id, string subsys_id, string user_group)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 

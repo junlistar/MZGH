@@ -59,8 +59,8 @@ namespace Client
                     {
                         SaveCardData(dto.Data);
                     });
-                     
 
+                    this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
                 else if (!string.IsNullOrEmpty(dto.Msg))

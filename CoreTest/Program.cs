@@ -40,7 +40,7 @@ namespace CoreTest
 
             BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
             //2022-07-20,2022-07-20, %,  %,  %,  %,  01,%,  %,  % 
-            var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
+           // var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
 
             //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
             // ?begin=&end=&weeks=3&day=-1

@@ -197,7 +197,8 @@ namespace Client
                     }
                 }
 
-            } 
+            }
+            Aside.ShowSecondBackColor = true;
             //设置Header节点索引
 
             //Aside.CreateNode("业务", 1001);

@@ -54,7 +54,7 @@ namespace Data.Repository
                 DynamicParameters para = new DynamicParameters();
                 var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

@@ -38,7 +38,7 @@ namespace Data.Repository.Mzsf
                 DynamicParameters para = new DynamicParameters();
                 var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -458,7 +458,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 //12.写入 mz_deposit
                 string sql13 = GetSqlByTag(221019);
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -836,7 +836,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                 }
 
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
