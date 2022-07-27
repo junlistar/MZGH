@@ -404,7 +404,7 @@ namespace Client.Forms.Pages.qxgl
             {
                 var d = new
                 {
-                    subsys_id = "mz",
+                    subsys_id = "mz_new",
                     user_group = user_group
                 };
 
@@ -631,7 +631,7 @@ namespace Client.Forms.Pages.qxgl
                 var d = new
                 {
                     rep_id = rep_id,
-                    subsys_id = "mz",
+                    subsys_id = "mz_new",
                     user_group = user_group
                 };
 

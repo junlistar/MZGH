@@ -622,3 +622,4 @@ and ISNULL(a.doctor_code,''0'') LIKE ISNULL(b.doctor_sn,''0'')
 and a.ampm=b.ampm
 where patient_id = @patient_id
 and record_sn = @record_sn"','挂号-判断用户是否同一时段重复挂号');
+

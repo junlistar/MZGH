@@ -303,6 +303,16 @@ namespace Data.Repository
                             var recorditem = relist[0];
                             var patient = plist[0];
 
+                            if (!string.IsNullOrEmpty(patient.birthday))
+                            {
+                                DateTime _dtage = DateTime.Now;
+
+                                if( DateTime.TryParse(patient.birthday, out _dtage))
+                                {
+                                    patient.age = (DateTime.Now.Year - _dtage.Year).ToString();
+                                }
+                            }
+
                             //写入mz_visit_table 
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);

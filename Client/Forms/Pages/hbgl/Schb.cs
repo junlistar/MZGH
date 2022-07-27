@@ -478,6 +478,10 @@ namespace Client
         public string GetWeekStr(int week)
         {
             var dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((week - 1) * 7) + 1).ToString("MM-dd");
+            if (week==1)
+            {
+                dt_from = DateTime.Now.ToString("MM-dd");
+            }
             var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((week - 1) * 7) + 1).ToString("MM-dd");
             return dt_from + "至" + dt_to;
         }

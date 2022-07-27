@@ -341,6 +341,12 @@
     <Compile Include="Forms\Pages\qxgl\UserManage.Designer.cs">
       <DependentUpon>UserManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\yhbb\UserReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\UserReport.Designer.cs">
+      <DependentUpon>UserReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -677,6 +683,9 @@
     <EmbeddedResource Include="Forms\Pages\qxgl\UserManage.resx">
       <DependentUpon>UserManage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\yhbb\UserReport.resx">
+      <DependentUpon>UserReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\Print.resx">
       <DependentUpon>Print.cs</DependentUpon>
     </EmbeddedResource>
@@ -872,7 +881,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Pages\yhbb\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

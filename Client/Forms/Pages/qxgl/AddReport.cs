@@ -62,7 +62,7 @@ namespace Client.Forms.Pages.qxgl
                 var d = new
                 {
                     rep_id = tv_reports.SelectedNode.Name,
-                    subsys_id = "mz", 
+                    subsys_id = "mz_new", 
                     user_group = _group_id
                 };
 
@@ -109,7 +109,7 @@ namespace Client.Forms.Pages.qxgl
             {
                 var d = new
                 {
-                    subsys_id = "mz"
+                    subsys_id = "mz_new"
                 };
 
                 var param = $"subsys_id={d.subsys_id}";

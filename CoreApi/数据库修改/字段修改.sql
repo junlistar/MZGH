@@ -477,3 +477,10 @@ exec sp_executesql @sql_plus ,N'@dt1 DATETIME,@dt2 DATETIME,@unit_sn VARCHAR(20)
 END
 
 
+
+--增加报表
+
+	insert into rt_report_subsys(subsys_id,report_code,rep_id,rep_name,parent_id)
+	values('mz_new','220001',3001,'挂号收费明细表',null)
+	insert into rt_report_subsys(subsys_id,report_code,rep_id,rep_name,parent_id)
+	values('mz_new','220007',3002,'门诊收费明细表',null)

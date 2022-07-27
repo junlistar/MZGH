@@ -27,6 +27,8 @@ namespace Client
             Application.Run(new FHeaderAsideMainFooter());
             //Application.Run(new Form1());
 
+            //菜单管理
+
             log.Debug("关闭了程序");
         }
     }

@@ -55,6 +55,8 @@ namespace Client
 
         Color cur_color = Color.FromArgb(0, 150, 136);
 
+        Color requestHoureSelectedColor = Color.FromArgb(230, 80, 80);
+
         UIHeaderAsideMainFooterFrame parentForm;
 
         //科室搜索框
@@ -128,22 +130,22 @@ namespace Client
                     {
                         if (currentHour < hourslist[i].start_hour)
                         {
-                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                            btn1.FillColor = requestHoureSelectedColor;
                         }
                         else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
                         {
-                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                            btn1.FillColor = requestHoureSelectedColor;
                         }
                     }
                     else if (i > 0 && i < hourslist.Count)
                     {
                         if (currentHour < hourslist[i].start_hour && currentHour >= hourslist[i - 1].end_hour)
                         {
-                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                            btn1.FillColor = requestHoureSelectedColor;
                         }
                         else if (currentHour >= hourslist[i].start_hour && currentHour < hourslist[i].end_hour)
                         {
-                            btn1.FillColor = Color.FromArgb(230, 80, 80);
+                            btn1.FillColor = requestHoureSelectedColor;
                         }
                     }
 
@@ -572,7 +574,7 @@ namespace Client
                     fe.ShowDialog();
 
                     uiBreadcrumb2.ItemIndex = 0;
-
+                    GuaHao.PatientVM.max_times++; 
                     //打印发票
                     if (SessionHelper.do_gh_print)
                     {
@@ -648,7 +650,7 @@ namespace Client
                 foreach (var control in pnlHours.FlowLayoutPanel.Controls)
                 {
                     var cc = control as UIButton;
-                    if (cc.FillColor == cur_color)
+                    if (cc.FillColor == requestHoureSelectedColor)
                     {
                         var code = cc.TagString;
                         var requestHour = SessionHelper.requestHours.Where(p => p.code == code).FirstOrDefault();

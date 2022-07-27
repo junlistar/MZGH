@@ -191,10 +191,10 @@ namespace Client.Forms.Wedgit
                                 {
                                     sql = sql.Replace(":" + item.param_name, "'" + GuaHao.PatientVM.patient_id + "'");
                                 }
-                                //else if (item.param_name == "times")
-                                //{
-                                //    sql = sql.Replace(":" + item.param_name, "'" + item.param_defaultvalue + "'");
-                                //}
+                                else if (item.param_name == "times")
+                                {
+                                    sql = sql.Replace(":" + item.param_name, "'" + GuaHao.PatientVM.max_times + "'");
+                                }
 
                             }
                         }
@@ -209,7 +209,7 @@ namespace Client.Forms.Wedgit
                             var dt = DataTableHelper.ToDataTable(jsontb);
                             var dataset = new DataSet();
                             dataset.Tables.Add(dt);
-                            dataset.Tables[0].TableName = "ghinfo";
+                            dataset.Tables[0].TableName = "DataTable";
                             TargetReport.RegisterData(dataset);
                         }
                         #endregion

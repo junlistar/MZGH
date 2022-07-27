@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnSaveMenu = new Sunny.UI.UISymbolButton();
             this.btnReports = new Sunny.UI.UISymbolButton();
             this.btnFunctions = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -49,7 +50,6 @@
             this.cms_reports = new Sunny.UI.UIContextMenuStrip();
             this.uiTitlePanel5 = new Sunny.UI.UITitlePanel();
             this.tv_func_select = new Sunny.UI.UITreeView();
-            this.btnSaveMenu = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiTitlePanel1.SuspendLayout();
             this.uiTitlePanel2.SuspendLayout();
@@ -67,6 +67,7 @@
             this.pnlTitle.Controls.Add(this.btnFunctions);
             this.pnlTitle.Controls.Add(this.btnExit);
             this.pnlTitle.Controls.Add(this.lblTitle);
+            this.pnlTitle.Controls.Add(this.uiTitlePanel3);
             this.pnlTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlTitle.Location = new System.Drawing.Point(13, 14);
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -78,6 +79,32 @@
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnSaveMenu
+            // 
+            this.btnSaveMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSaveMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSaveMenu.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSaveMenu.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnSaveMenu.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSaveMenu.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSaveMenu.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSaveMenu.Location = new System.Drawing.Point(368, 3);
+            this.btnSaveMenu.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSaveMenu.Name = "btnSaveMenu";
+            this.btnSaveMenu.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.btnSaveMenu.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.btnSaveMenu.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSaveMenu.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.btnSaveMenu.Size = new System.Drawing.Size(138, 60);
+            this.btnSaveMenu.Style = Sunny.UI.UIStyle.Green;
+            this.btnSaveMenu.StyleCustomMode = true;
+            this.btnSaveMenu.Symbol = 61573;
+            this.btnSaveMenu.TabIndex = 12;
+            this.btnSaveMenu.Text = "保存菜单";
+            this.btnSaveMenu.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSaveMenu.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSaveMenu.Click += new System.EventHandler(this.btnSaveMenu_Click);
+            // 
             // btnReports
             // 
             this.btnReports.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -87,7 +114,7 @@
             this.btnReports.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnReports.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnReports.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReports.Location = new System.Drawing.Point(954, 3);
+            this.btnReports.Location = new System.Drawing.Point(869, 3);
             this.btnReports.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReports.Name = "btnReports";
             this.btnReports.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -113,7 +140,7 @@
             this.btnFunctions.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnFunctions.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnFunctions.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnFunctions.Location = new System.Drawing.Point(838, 3);
+            this.btnFunctions.Location = new System.Drawing.Point(753, 3);
             this.btnFunctions.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnFunctions.Name = "btnFunctions";
             this.btnFunctions.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
@@ -185,7 +212,7 @@
             this.tv_groups.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(184)))), ((int)(((byte)(0)))));
             this.tv_groups.ShowLines = true;
             this.tv_groups.ShowText = false;
-            this.tv_groups.Size = new System.Drawing.Size(287, 553);
+            this.tv_groups.Size = new System.Drawing.Size(328, 553);
             this.tv_groups.Style = Sunny.UI.UIStyle.LayuiOrange;
             this.tv_groups.StyleCustomMode = true;
             this.tv_groups.TabIndex = 17;
@@ -223,7 +250,7 @@
             this.uiTitlePanel1.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(184)))), ((int)(((byte)(0)))));
             this.uiTitlePanel1.ShowText = false;
-            this.uiTitlePanel1.Size = new System.Drawing.Size(295, 600);
+            this.uiTitlePanel1.Size = new System.Drawing.Size(336, 600);
             this.uiTitlePanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiTitlePanel1.StyleCustomMode = true;
             this.uiTitlePanel1.TabIndex = 19;
@@ -239,13 +266,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uiTitlePanel2.Controls.Add(this.tv_users);
             this.uiTitlePanel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel2.Location = new System.Drawing.Point(1016, 90);
+            this.uiTitlePanel2.Location = new System.Drawing.Point(747, 90);
             this.uiTitlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel2.Name = "uiTitlePanel2";
             this.uiTitlePanel2.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel2.ShowText = false;
-            this.uiTitlePanel2.Size = new System.Drawing.Size(341, 305);
+            this.uiTitlePanel2.Size = new System.Drawing.Size(610, 305);
             this.uiTitlePanel2.TabIndex = 20;
             this.uiTitlePanel2.Text = "用户";
             this.uiTitlePanel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -267,7 +294,7 @@
             this.tv_users.Name = "tv_users";
             this.tv_users.ShowLines = true;
             this.tv_users.ShowText = false;
-            this.tv_users.Size = new System.Drawing.Size(333, 260);
+            this.tv_users.Size = new System.Drawing.Size(602, 260);
             this.tv_users.TabIndex = 17;
             this.tv_users.Text = "uiTreeView1";
             this.tv_users.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -287,17 +314,18 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.uiTitlePanel3.Controls.Add(this.tv_functions);
             this.uiTitlePanel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel3.Location = new System.Drawing.Point(666, 90);
+            this.uiTitlePanel3.Location = new System.Drawing.Point(1066, 5);
             this.uiTitlePanel3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel3.Name = "uiTitlePanel3";
             this.uiTitlePanel3.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel3.ShowText = false;
-            this.uiTitlePanel3.Size = new System.Drawing.Size(342, 600);
+            this.uiTitlePanel3.Size = new System.Drawing.Size(342, 87);
             this.uiTitlePanel3.TabIndex = 21;
             this.uiTitlePanel3.Text = "菜单列表";
             this.uiTitlePanel3.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.uiTitlePanel3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiTitlePanel3.Visible = false;
             this.uiTitlePanel3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // tv_functions
@@ -315,7 +343,7 @@
             this.tv_functions.Name = "tv_functions";
             this.tv_functions.ShowLines = true;
             this.tv_functions.ShowText = false;
-            this.tv_functions.Size = new System.Drawing.Size(334, 554);
+            this.tv_functions.Size = new System.Drawing.Size(334, 41);
             this.tv_functions.TabIndex = 0;
             this.tv_functions.Text = "uiTreeView2";
             this.tv_functions.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -336,13 +364,13 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uiTitlePanel4.Controls.Add(this.tv_reports);
             this.uiTitlePanel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel4.Location = new System.Drawing.Point(1020, 405);
+            this.uiTitlePanel4.Location = new System.Drawing.Point(747, 405);
             this.uiTitlePanel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel4.Name = "uiTitlePanel4";
             this.uiTitlePanel4.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel4.ShowText = false;
-            this.uiTitlePanel4.Size = new System.Drawing.Size(337, 280);
+            this.uiTitlePanel4.Size = new System.Drawing.Size(610, 280);
             this.uiTitlePanel4.TabIndex = 22;
             this.uiTitlePanel4.Text = "报表";
             this.uiTitlePanel4.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -364,7 +392,7 @@
             this.tv_reports.Name = "tv_reports";
             this.tv_reports.ShowLines = true;
             this.tv_reports.ShowText = false;
-            this.tv_reports.Size = new System.Drawing.Size(329, 236);
+            this.tv_reports.Size = new System.Drawing.Size(602, 236);
             this.tv_reports.TabIndex = 0;
             this.tv_reports.Text = "uiTreeView3";
             this.tv_reports.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -384,13 +412,13 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.uiTitlePanel5.Controls.Add(this.tv_func_select);
             this.uiTitlePanel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTitlePanel5.Location = new System.Drawing.Point(316, 90);
+            this.uiTitlePanel5.Location = new System.Drawing.Point(357, 90);
             this.uiTitlePanel5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiTitlePanel5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiTitlePanel5.Name = "uiTitlePanel5";
             this.uiTitlePanel5.Padding = new System.Windows.Forms.Padding(0, 35, 0, 0);
             this.uiTitlePanel5.ShowText = false;
-            this.uiTitlePanel5.Size = new System.Drawing.Size(342, 600);
+            this.uiTitlePanel5.Size = new System.Drawing.Size(382, 600);
             this.uiTitlePanel5.TabIndex = 22;
             this.uiTitlePanel5.Text = "菜单选择";
             this.uiTitlePanel5.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -399,8 +427,9 @@
             // 
             // tv_func_select
             // 
-            this.tv_func_select.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.tv_func_select.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tv_func_select.CheckBoxes = true;
             this.tv_func_select.FillColor = System.Drawing.Color.White;
             this.tv_func_select.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -411,37 +440,11 @@
             this.tv_func_select.Name = "tv_func_select";
             this.tv_func_select.ShowLines = true;
             this.tv_func_select.ShowText = false;
-            this.tv_func_select.Size = new System.Drawing.Size(334, 554);
+            this.tv_func_select.Size = new System.Drawing.Size(374, 554);
             this.tv_func_select.TabIndex = 0;
             this.tv_func_select.Text = "uiTreeView2";
             this.tv_func_select.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.tv_func_select.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnSaveMenu
-            // 
-            this.btnSaveMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveMenu.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSaveMenu.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSaveMenu.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSaveMenu.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSaveMenu.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSaveMenu.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSaveMenu.Location = new System.Drawing.Point(368, 3);
-            this.btnSaveMenu.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSaveMenu.Name = "btnSaveMenu";
-            this.btnSaveMenu.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSaveMenu.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSaveMenu.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSaveMenu.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSaveMenu.Size = new System.Drawing.Size(138, 60);
-            this.btnSaveMenu.Style = Sunny.UI.UIStyle.Green;
-            this.btnSaveMenu.StyleCustomMode = true;
-            this.btnSaveMenu.Symbol = 61573;
-            this.btnSaveMenu.TabIndex = 12;
-            this.btnSaveMenu.Text = "保存菜单";
-            this.btnSaveMenu.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSaveMenu.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSaveMenu.Click += new System.EventHandler(this.btnSaveMenu_Click);
             // 
             // UserManage
             // 
@@ -449,7 +452,6 @@
             this.ClientSize = new System.Drawing.Size(1370, 697);
             this.Controls.Add(this.uiTitlePanel5);
             this.Controls.Add(this.uiTitlePanel4);
-            this.Controls.Add(this.uiTitlePanel3);
             this.Controls.Add(this.uiTitlePanel2);
             this.Controls.Add(this.uiTitlePanel1);
             this.Controls.Add(this.pnlTitle);
