@@ -825,6 +825,7 @@ namespace Client
                             if (_record_sn != "0")
                             {
                                 RequestEdit edit = new RequestEdit(_record_sn);
+                                edit._temp_flag = "1";
                                 if (edit.ShowDialog() == DialogResult.OK)
                                 {
                                     InitData();
@@ -1441,6 +1442,7 @@ namespace Client
         private void btnAdd_Click(object sender, EventArgs e)
         {
             RequestEdit edit = new RequestEdit("");
+            edit._temp_flag = "1";
             if (edit.ShowDialog() == DialogResult.OK)
             {
                 InitData();

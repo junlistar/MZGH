@@ -484,7 +484,7 @@ namespace Mzsf.Forms.Pages
             }
 
             var _charge_code_lookup = dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value.ToString();
-            var _charge_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
+            var _orig_price = Convert.ToDecimal(dgvOrderDetail.Rows[index].Cells["charge_price"].Value);
 
             var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
             var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
@@ -492,8 +492,9 @@ namespace Mzsf.Forms.Pages
 
             CprChargesVM vm = new CprChargesVM();
             vm.charge_code_lookup = _charge_code_lookup;
-            vm.charge_price = _charge_price;
+            vm.orig_price = _orig_price;
             vm.charge_amount = _charge_amount;
+            vm.charge_price = _orig_price * _charge_amount;
             vm.item_no = (index + 1);
             vm.order_no = _order_no;
 
@@ -503,7 +504,7 @@ namespace Mzsf.Forms.Pages
 
             if (item_list.Count == 0)
             {
-                page_total += _charge_price * _charge_amount;
+                page_total += _orig_price * _charge_amount;
                 page_items++;
                 item_amount += _charge_amount;
 
@@ -521,15 +522,16 @@ namespace Mzsf.Forms.Pages
                 foreach (DataGridViewRow row in dgvOrderDetail.Rows)
                 {
                     var charge_code_lookup = row.Cells["charge_code_lookup"].Value.ToString();
-                    var charge_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
+                    var orig_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
                     var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
                     var code = row.Cells["code"].Value.ToString();
                     var serial = row.Cells["serial"].Value.ToString();
 
                     var chargeVM = new CprChargesVM();
                     chargeVM.charge_code_lookup = charge_code_lookup;
-                    chargeVM.charge_price = charge_price;
+                    chargeVM.orig_price = orig_price;
                     chargeVM.charge_amount = charge_amount;
+                    chargeVM.charge_price = orig_price * charge_amount;
                     chargeVM.item_no = index++;
                     chargeVM.order_no = _order_no;
                     chargeVM.serial_no = serial;

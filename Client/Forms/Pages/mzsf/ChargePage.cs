@@ -47,7 +47,7 @@ namespace Mzsf.Forms.Pages
             this.pblSum.Hide();
             //this.pnlAddOrder.Hide();
 
-            ClearUserInfo();
+            //ClearUserInfo();
 
             var barcode = this.txtCode.Text.Trim();
 
@@ -175,7 +175,7 @@ namespace Mzsf.Forms.Pages
 
                     }
                     //查询处方
-                    GetOrders(patient_id, current_times); 
+                    GetOrders(patient_id, current_times);
                 }
                 else
                 {
@@ -526,18 +526,11 @@ namespace Mzsf.Forms.Pages
             btnYBK.FillColor = lvse;
 
             ReadCika rc = new ReadCika("磁卡");
-            rc.FormClosed += Rc_FormClosed1;
+            rc.FormClosed += Rc_FormClosed;
             rc.ShowDialog();
         }
 
-        private void Rc_FormClosed1(object sender, FormClosedEventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(SessionHelper.cardno))
-            {
-                txtCode.Text = SessionHelper.cardno;
-                SearchUser();
-            }
-        }
+      
 
         Color lvse = Color.FromArgb(110, 190, 40);
         Color hongse = Color.FromArgb(230, 80, 80);
@@ -551,7 +544,7 @@ namespace Mzsf.Forms.Pages
             btnYBK.FillColor = lvse;
 
             ReadCika rc = new ReadCika("ID号");
-            rc.FormClosed += Rc_FormClosed1;
+            rc.FormClosed += Rc_FormClosed;
             rc.ShowDialog();
         }
         private void btnSFZ_Click(object sender, EventArgs e)
@@ -572,6 +565,7 @@ namespace Mzsf.Forms.Pages
         {
             if (!string.IsNullOrWhiteSpace(SessionHelper.cardno))
             {
+                ClearUserInfo();
                 txtCode.Text = SessionHelper.cardno;
                 SearchUser();
             }
@@ -780,10 +774,25 @@ namespace Mzsf.Forms.Pages
                     //打印发票
                     if (SessionHelper.do_sf_print)
                     {
-                        SessionHelper.do_sf_print = false;
-                        //打印发票 
-                        Print ghprint = new Print(SessionHelper.mzsf_report_code);
-                        ghprint.Show();
+
+                        Task.Run(()=>{
+                            try
+                            {
+
+                                SessionHelper.do_sf_print = false;
+                                //打印发票 
+                                Print ghprint = new Print(SessionHelper.mzsf_report_code);
+                                ghprint.Show();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                log.Error(ex.Message);
+                                log.Error(ex.StackTrace);
+
+                            }
+                        });
+                       
                     }
                     //查询处方
                     SearchUser();

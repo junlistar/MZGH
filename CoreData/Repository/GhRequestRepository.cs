@@ -550,7 +550,6 @@ namespace Data.Repository
                 sql = GetSqlByTag("mzgh_ghrequest_getbydoct");
             }
             para.Add("@request_date", item.request_date); 
-            para.Add("@week", item.week);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
             if (string.IsNullOrWhiteSpace(item.group_sn))

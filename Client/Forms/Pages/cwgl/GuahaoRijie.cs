@@ -42,16 +42,16 @@ namespace Client.Forms.Pages.cwgl
 
             btn_jkmx.FillColor = sel_color;
 
-            _report_code = 220008;
+            _report_code = SessionHelper.ghrj_report_code;
 
             btnSave.Enabled = false;
-             
+
             //previewControl1.Hide();
 
             pnlReport.Text = "选择日期和结账状态，进行预览和结算操作";
 
         }
-         
+
         /// <summary>
         /// 查询
         /// </summary>
@@ -67,31 +67,21 @@ namespace Client.Forms.Pages.cwgl
                     opera = SessionHelper.uservm.user_mi,
                     report_date = txtDate.Text,
                     mz_dept_no = "1"
-                }; 
+                };
 
                 var param = $"opera={d.opera}&report_date={d.report_date}&mz_dept_no={d.mz_dept_no}";
 
-                var json = "";
                 var paramurl = string.Format($"/api/cwgl/GetGhDailyReport?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<string>>>(json);
                 cbxStatus.Items.Clear();
                 if (result.status == 1)
                 {
                     foreach (var item in result.data)
                     {
-                        if (item==null)
+                        if (item == null)
                         {
                             cbxStatus.Items.Add("未结");
                         }
@@ -100,9 +90,9 @@ namespace Client.Forms.Pages.cwgl
                             var dt_text = Convert.ToDateTime(item).ToString("yyyy-MM-dd HH:mm:ss");
                             cbxStatus.Items.Add(dt_text);
                         }
-                    } 
-                     cbxStatus.SelectedIndex = result.data.Count-1;
-                  
+                    }
+                    cbxStatus.SelectedIndex = result.data.Count - 1;
+
                 }
                 else
                 {
@@ -115,9 +105,9 @@ namespace Client.Forms.Pages.cwgl
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
-}
+        }
 
-         
+
 
         public string FormID { get; set; } = "PRDT"; //单据ID
         //private string RptNo, RptName; //报表编号、名称
@@ -235,7 +225,7 @@ namespace Client.Forms.Pages.cwgl
                         if (result.status == 1)
                         {
                             foreach (var item in result.data)
-                            { 
+                            {
                                 if (item.param_name == "report_date")
                                 {
                                     sql = sql.Replace(":" + item.param_name, "'1900-01-01 00:00:00'");
@@ -247,11 +237,11 @@ namespace Client.Forms.Pages.cwgl
                                 else if (item.param_name == "mz_dept_no")
                                 {
                                     sql = sql.Replace(":" + item.param_name, "'1'");
-                                } 
+                                }
                             }
                         }
                         var report_date = cbxStatus.SelectedText;
-                        if (report_date=="未结")
+                        if (report_date == "未结")
                         {
                             report_date = "1900-01-01 00:00:00";
                         }
@@ -322,7 +312,7 @@ namespace Client.Forms.Pages.cwgl
         private void uiSymbolButton5_Click(object sender, EventArgs e)
         {
 
-            
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -353,7 +343,7 @@ namespace Client.Forms.Pages.cwgl
                     json = read.Result;
                 }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-               
+
                 if (result.status == 1 && result.data)
                 {
                     UIMessageTip.ShowOk("保存成功");
@@ -386,7 +376,7 @@ namespace Client.Forms.Pages.cwgl
 
             LoadingHelper.ShowLoadingScreen();//显示
 
-            InitializeReport("PREVIEW"); 
+            InitializeReport("PREVIEW");
 
             LoadingHelper.CloseForm();//关闭
         }
@@ -400,7 +390,7 @@ namespace Client.Forms.Pages.cwgl
         {
             try
             {
-                if (TargetReport!=null)
+                if (TargetReport != null)
                 {
                     TargetReport.Print();
                 }

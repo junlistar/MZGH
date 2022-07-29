@@ -1,0 +1,2 @@
+nssm install MzghApiService
+nssm start MzghApiService

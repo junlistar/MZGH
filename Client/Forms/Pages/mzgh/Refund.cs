@@ -633,7 +633,7 @@ namespace Client
         }
         public void XianJinTuiHao()
         {
-            if (this.dgvDeposit.SelectedRows.Count == 0)
+            if (this.dgvDeposit.SelectedIndex< 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
                 return;
@@ -642,7 +642,7 @@ namespace Client
             try
             {
                 GhDepositVM vm = new GhDepositVM();
-                vm.sname = this.dgvDeposit.SelectedRows[0].Cells["visit_flag_name"].Value.ToString();
+                vm.sname = this.dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "已退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
@@ -655,14 +655,14 @@ namespace Client
                 }
 
                 vm.patient_id = lblhidid.Text;
-                vm.ledger_sn = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["ledger_sn"].Value);
+                vm.ledger_sn = Convert.ToInt32(dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["ledger_sn"].Value);
                 // vm.times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
 
                 vm.times = 0;
                 var sel_index = dgvDeposit.SelectedIndex;
                 while (vm.times == 0)
                 {
-                    var cel_value = this.dgvDeposit.Rows[sel_index].Cells["times"].Value.ToString();
+                    var cel_value = dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["times"].Value.ToString();
                     if (cel_value == null || cel_value.ToString() == "")
                     {
                         sel_index--;
@@ -728,7 +728,7 @@ namespace Client
 
             DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
 
-            if (dr.Cells["visit_flag_name"].Value != null && dr.Cells["visit_flag_name"].Value.ToString() == "取消分诊")
+            if (dr.Cells["visit_flag_name"].Value != null && dr.Cells["visit_flag_name"].Value.ToString() == "退号")
             {
                 // 设置单元格的背景色
                 //dr.DefaultCellStyle.BackColor = Color.Yellow;
@@ -820,13 +820,12 @@ namespace Client
                 //MessageBox.Show(dgvDeposit.SelectedIndex.ToString());
                 if (dgvDeposit.SelectedIndex != -1)
                 {
-                    var receipt_sn = this.dgvDeposit.SelectedRows[0].Cells["receipt_sn"].Value.ToString();
+                    var receipt_sn = dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["receipt_sn"].Value.ToString();
 
-                    var times = Convert.ToInt32(this.dgvDeposit.SelectedRows[0].Cells["times"].Value);
+                    var times = Convert.ToInt32(dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["times"].Value);
 
                     var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-                    var patient_id = lblhidid.Text;
-                    //RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
+                    var patient_id = lblhidid.Text; 
                     DetailPayList payList = new DetailPayList(userInfo, datestr, patient_id, times);
                     payList.ShowDialog();
                 }

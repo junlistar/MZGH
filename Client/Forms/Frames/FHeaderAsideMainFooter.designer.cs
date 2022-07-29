@@ -69,6 +69,9 @@ namespace Client
             this.Aside.LineColor = System.Drawing.Color.Red;
             this.Aside.Margin = new System.Windows.Forms.Padding(10);
             this.Aside.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.Aside.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.ScrollBarHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.ScrollBarPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.Aside.ScrollFillColor = System.Drawing.Color.White;
             this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
             this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));

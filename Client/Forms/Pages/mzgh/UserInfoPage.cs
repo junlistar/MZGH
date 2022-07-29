@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
+using Client.Forms.Pages.mzgh;
 using Client.Forms.Wedgit;
 using Client.ViewModel;
 using log4net;
@@ -179,6 +180,8 @@ namespace Client.Forms.Pages
 
             txt_patientId.Text = item.patient_id;
 
+            txtTel.Text = item.home_tel;
+
             txt_sfz_no.Text = item.hic_no;
             //ybk_psn_no.Text = item.social_no;
 
@@ -316,6 +319,10 @@ namespace Client.Forms.Pages
         private void btnCika_Click(object sender, EventArgs e)
         {
 
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
             //更改刷卡方式按钮样式
             btnCika.FillColor = hongse;
             btnIDCard.FillColor = lvse;
@@ -341,6 +348,10 @@ namespace Client.Forms.Pages
 
         private void btnIDCard_Click(object sender, EventArgs e)
         {
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
             //更改刷卡方式按钮样式
             btnCika.FillColor = lvse;
             btnIDCard.FillColor = hongse;
@@ -353,6 +364,11 @@ namespace Client.Forms.Pages
         }
         private void btnSFZ_Click(object sender, EventArgs e)
         {
+
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
             btnCika.FillColor = lvse;
             btnIDCard.FillColor = lvse;
             btnSFZ.FillColor = hongse;
@@ -403,6 +419,12 @@ namespace Client.Forms.Pages
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
 
+            //如果点击的是身份证或医保卡，择查询身份证信息
+            if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+            {
+                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+            }
+
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
@@ -418,31 +440,40 @@ namespace Client.Forms.Pages
                 }
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
-                if (result.status == 1)
+                if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                    if (result.data.Count > 0)
-                    {
                         var userInfo = result.data[0];
-                        if (string.IsNullOrEmpty(userInfo.name))
+                    if (result.data.Count > 1)
+                    {
+                        //弹出选择提示
+                        SelectPatient selectPatient = new SelectPatient(result.data);
+                        if (selectPatient.ShowDialog() == DialogResult.OK)
                         {
-                            lblmsg.Text = "没有查到用户数据";
+                            userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
+                        }
+                        else
+                        {
                             return;
                         }
-                        //SessionHelper.patientVM = userInfo;
-
-
-                        //BindUserInfo(userInfo);
-                        //查询patient_id关联的身份证信息
-                        GetPatientRelatedSfzInfo(userInfo.hic_no);
                     }
-                    else
-                    {
-                        MessageBox.Show("没有查到用户数据");
-                    }
+
+                    //BindUserInfo(userInfo);
+                    //查询patient_id关联的身份证信息
+                    GetPatientRelatedSfzInfo(userInfo.hic_no);
+                   
                 }
                 else
                 {
-                    MessageBox.Show("没有查到用户数据");
+                    //身份证
+                    if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+                    { 
+
+                        //自动创建一条用户信息
+                        string _hicno = AutoAddUserInfo();
+
+                        this.txtCode.Text = _hicno;
+                        SearchUser();
+                    }
                 }
 
             }
@@ -452,6 +483,92 @@ namespace Client.Forms.Pages
                 log.Debug("接口数据：" + json);
 
             }
+        }
+        public string AutoAddUserInfo()
+        {
+            try
+            {
+                var _pid = "";
+                var _hicno = "";
+                var _name = "";
+                var _sex = "";
+                var _birth = "";
+                var _home_street = "";
+
+                if (SessionHelper.CardReader != null)
+                {
+                    _hicno = SessionHelper.CardReader.IDCard;
+                    _name = SessionHelper.CardReader.Name;
+                    _sex = SessionHelper.CardReader.Sex == "男" ? "1" : "2";
+                    _birth = SessionHelper.CardReader.BirthDay;
+                    _home_street = SessionHelper.CardReader.Address;
+
+                }
+                else if (YBHelper.currentYBInfo != null)
+                {
+                    _hicno = YBHelper.currentYBInfo.output.baseinfo.certno;
+                    _name = YBHelper.currentYBInfo.output.baseinfo.psn_name;
+                    _sex = YBHelper.currentYBInfo.output.baseinfo.gend;
+                    _birth = YBHelper.currentYBInfo.output.baseinfo.brdy;
+                    _home_street = "";
+                }
+
+                var paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
+                var json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
+
+                if (result.status == 1)
+                {
+                    _pid = result.data;
+                }
+                else
+                {
+                    log.Error(result.message);
+                    return "";
+                }
+                //var json = HttpClientUtil.Get(paramurl);
+                var d = new
+                {
+                    pid = _pid,
+                    hicno = _hicno,
+                    sno = _hicno,
+                    barcode = _pid,
+                    name = _name,
+                    sex = _sex,
+                    birth = _birth,
+                    tel = "",
+                    home_district = "",
+                    home_street = _home_street,
+                    occupation_type = "",
+                    response_type = "01",
+                    charge_type = "01",
+                    opera = SessionHelper.uservm.user_mi
+                };
+                Task<HttpResponseMessage> task = null;
+
+                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                json = HttpClientUtil.Get(paramurl);
+                var res = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+                if (res.status == 1)
+                {
+                }
+                else
+                {
+                    log.Error(res.message);
+                    return "";
+                }
+                return _hicno;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
+            return "";
         }
 
         public void GetPatientRelatedSfzInfo(string sfz_id)
@@ -513,6 +630,8 @@ namespace Client.Forms.Pages
 
         private void btnYBK_Click(object sender, EventArgs e)
         {
+            //清空缓存
+            SessionHelper.CardReader = null;
             YBHelper.currentYBInfo = null;
 
             btnCika.FillColor = lvse;

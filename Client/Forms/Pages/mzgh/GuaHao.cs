@@ -643,6 +643,13 @@ namespace Client
             //判断当前是否可以挂号
             bool isWrong = false;
 
+            if (DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"))>Convert.ToDateTime(this.dtpGhrq.Text))
+            {
+                UIMessageTip.ShowError("所选日期不能小于今天!");
+                lblMsg.Text = "所选日期不能小于今天！";
+                return;
+            }
+
             //当前日期是今天
             if (DateTime.Now.ToString("yyyy-MM-dd") == this.dtpGhrq.Text)
             {
@@ -749,6 +756,10 @@ namespace Client
         private void btnCika_Click(object sender, EventArgs e)
         {
 
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
             //更改刷卡方式按钮样式
             btnCika.FillColor = hongse;
             btnIDCard.FillColor = lvse;
@@ -789,6 +800,10 @@ namespace Client
 
         private void btnSFZ_Click(object sender, EventArgs e)
         {
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
             //更改刷卡方式按钮样式
             btnCika.FillColor = lvse;
             btnIDCard.FillColor = lvse;
@@ -797,11 +812,12 @@ namespace Client
 
             ReadCard rc = new ReadCard("身份证");
             //关闭，刷新
-            //rc.FormClosed += Rc_FormClosed;
-            if (rc.ShowDialog() == DialogResult.OK)
-            {
-                DoSearch();
-            }
+            rc.FormClosed += Rc_FormClosed;
+            rc.ShowDialog();
+            //if (rc.ShowDialog() == DialogResult.OK)
+            //{
+            //    DoSearch();
+            //}
         }
         public void DoSearch()
         {
@@ -813,7 +829,9 @@ namespace Client
         }
 
         private void btnYBK_Click(object sender, EventArgs e)
-        {
+        { 
+            //清空缓存
+            SessionHelper.CardReader = null;
             YBHelper.currentYBInfo = null;
 
             //更改刷卡方式按钮样式
@@ -1212,7 +1230,7 @@ namespace Client
             string json = "";
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
-            //如果点击的是身份证，择查询身份证信息
+            //如果点击的是身份证或医保卡，择查询身份证信息
             if (SessionHelper.CardReader != null|| YBHelper.currentYBInfo != null)
             {
                 paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
@@ -1243,10 +1261,10 @@ namespace Client
                     if (result.data.Count > 1)
                     {
                         //弹出选择提示
-                        SelectPatient selectPatient = new SelectPatient(result.data, this);
+                        SelectPatient selectPatient = new SelectPatient(result.data);
                         if (selectPatient.ShowDialog() == DialogResult.OK)
                         {
-                            userInfo = result.data.Where(p => p.patient_id == patient_id).FirstOrDefault();
+                            userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
                         }
                         else
                         {
@@ -1581,6 +1599,11 @@ namespace Client
             btnIDCard.FillColor = hongse;
             btnSFZ.FillColor = lvse;
             btnYBK.FillColor = lvse;
+
+            //清空缓存
+            SessionHelper.CardReader = null;
+            YBHelper.currentYBInfo = null;
+
 
             ReadCika rc = new ReadCika("ID号");
             rc.FormClosed += Rc_FormClosed;

@@ -20,7 +20,7 @@ namespace Client
     public partial class RequestEdit : UIForm
     {
         string _record_sn;
-        string _temp_flag = "1";
+        public string _temp_flag = "0";
         private static ILog log = LogManager.GetLogger(typeof(RequestEdit));//typeof放当前类
         public RequestEdit(string record_sn)
         {
@@ -507,7 +507,7 @@ namespace Client
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&limit_appoint_percent={d.limit_appoint_percent}");
+                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 

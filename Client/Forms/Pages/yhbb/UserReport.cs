@@ -47,16 +47,9 @@ namespace Client.Forms.Pages.yhbb
                 var paramurl = string.Format($"/api/qxgl/GetXTUserReportsByGroupId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserReportVM>>>(json);
                 tv_reports.Nodes.Clear();
                 if (result.status == 1)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Client.ClassLib;
 using Client.ViewModel;
 using log4net;
 using Sunny.UI;
@@ -15,16 +16,14 @@ namespace Client.Forms.Pages.mzgh
 {
     public partial class SelectPatient : UIForm
     {
-        List<PatientVM> _list;
-        GuaHao _main;
+        List<PatientVM> _list; 
 
         private static ILog log = LogManager.GetLogger(typeof(SelectPatient));//typeof放当前类
 
-        public SelectPatient(List<PatientVM> list, GuaHao main)
+        public SelectPatient(List<PatientVM> list)
         {
             InitializeComponent();
             _list = list;
-            _main = main;
         }
 
         private void SelectPatient_Load(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace Client.Forms.Pages.mzgh
                 if (e.RowIndex != -1 && e.ColumnIndex != -1)
                 {
                     var pid = dgvUsers.Rows[e.RowIndex].Cells["patient_id"].Value.ToString();
-                    _main.patient_id = pid;
+                    SessionHelper.sel_patientid = pid;
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

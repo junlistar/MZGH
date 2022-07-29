@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LsHbwh));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
@@ -626,7 +627,6 @@
             // dgvlist
             // 
             this.dgvlist.AllowUserToAddRows = false;
-            this.dgvlist.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -656,7 +656,7 @@
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvlist.Location = new System.Drawing.Point(16, 241);
             this.dgvlist.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
-            this.dgvlist.MergeColumnNames = null;
+            this.dgvlist.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("dgvlist.MergeColumnNames")));
             this.dgvlist.Name = "dgvlist";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -680,10 +680,6 @@
             this.dgvlist.Size = new System.Drawing.Size(1320, 433);
             this.dgvlist.TabIndex = 8;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.dgvlist.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvlist_CellBeginEdit);
-            this.dgvlist.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellEndEdit);
-            this.dgvlist.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvlist_ColumnHeaderMouseClick);
-            this.dgvlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvlist_RowPostPaint);
             // 
             // LsHbwh
             // 
@@ -739,9 +735,9 @@
         private Sunny.UI.UILabel lblTotalCount;
         private Sunny.UI.UIDatePicker txtDate2;
         private Sunny.UI.UILabel uiLabel9;
-        private ClassLib.RowMergeView dgvlist;
         private Sunny.UI.UISymbolButton btnWeek2;
         private Sunny.UI.UISymbolButton btnWeek1;
         private Sunny.UI.UISymbolButton btnAdd;
+        private ClassLib.RowMergeView dgvlist;
     }
 }

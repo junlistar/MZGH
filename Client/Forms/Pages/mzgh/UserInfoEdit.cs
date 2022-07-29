@@ -636,7 +636,7 @@ namespace Client
             try
             {
 
-                string paramurl = string.Format($"/api/GuaHao/GetSfzInfoByPatientId?pid={pid}");
+                string paramurl = string.Format($"/api/user/GetSfzInfoByPatientId?pid={pid}");
                 string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientSfzVM>>>(json);
 
@@ -1044,6 +1044,9 @@ namespace Client
             if (SessionHelper.CardReader != null)
             {
                 this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
+                this.sfz_name.Text = SessionHelper.CardReader.IDCard;
+                this.sfz_folk.Text = SessionHelper.CardReader.Folk;
+                this.sfz_address.Text = SessionHelper.CardReader.Address;
                 this.txtUserName.Text = SessionHelper.CardReader.Name;
                 this.txthomestreet.Text = SessionHelper.CardReader.Address;
 

@@ -54,11 +54,11 @@ namespace Client
                     SessionHelper.CardReader = dto.Data;
 
                     log.Debug("读卡信息：" + dto.Data.IDCard + "," + dto.Data.Name + "," + dto.Data.Sex);
-
-                    Task.Run(() =>
-                    {
-                        SaveCardData(dto.Data);
-                    });
+                    SaveCardData(dto.Data);
+                    //Task.Run(() =>
+                    //{
+                    //    SaveCardData(dto.Data);
+                    //});
 
                     this.DialogResult = DialogResult.OK;
                     this.Close();
@@ -82,9 +82,7 @@ namespace Client
         public void SaveCardData(CardReader_Data data)
         {
             //获取数据  UpdateSfzInfo(string name, string sex, string address, string folk, string birthday, string card_no)
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-
+            
             var d = new
             {
                 name = data.Name,
@@ -100,8 +98,8 @@ namespace Client
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
+                //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                var json = HttpClientUtil.Get(paramurl);
                 //task.Wait();
                 //var response = task.Result;
                 //if (response.IsSuccessStatusCode)
@@ -123,7 +121,7 @@ namespace Client
             catch (Exception ex)
             {
                 log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
+                log.Debug("接口数据：" + ex.StackTrace);
 
             }
 
@@ -168,6 +166,7 @@ namespace Client
             }
 
             SessionHelper.cardno = card_no;
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 

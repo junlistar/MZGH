@@ -1,0 +1,2 @@
+nssm stop MzghApiService
+nssm remove MzghApiService

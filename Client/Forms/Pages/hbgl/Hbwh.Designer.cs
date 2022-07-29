@@ -607,6 +607,7 @@
             // 
             // dgvlist
             // 
+            this.dgvlist.AllowUserToAddRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -634,7 +635,7 @@
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.dgvlist.Location = new System.Drawing.Point(13, 241);
+            this.dgvlist.Location = new System.Drawing.Point(12, 240);
             this.dgvlist.MergeColumnHeaderBackColor = System.Drawing.SystemColors.Control;
             this.dgvlist.MergeColumnNames = ((System.Collections.Generic.List<string>)(resources.GetObject("dgvlist.MergeColumnNames")));
             this.dgvlist.Name = "dgvlist";
@@ -657,7 +658,7 @@
             this.dgvlist.SelectedIndex = -1;
             this.dgvlist.ShowGridLine = false;
             this.dgvlist.ShowRect = false;
-            this.dgvlist.Size = new System.Drawing.Size(1324, 433);
+            this.dgvlist.Size = new System.Drawing.Size(1324, 434);
             this.dgvlist.TabIndex = 8;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 

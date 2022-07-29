@@ -30,6 +30,7 @@ namespace Client
         static int LogOutSeconds = 0;
 
         List<XTUserGroupVM> function_list;
+        List<XTFunctionsVM> all_list;
 
         public FHeaderAsideMainFooter()
         {
@@ -47,10 +48,12 @@ namespace Client
             //报表编号获取（门诊挂号，门诊收费）
             SessionHelper.mzgh_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
             SessionHelper.mzsf_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
+            //挂号日结，收费日结
+            SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
+            SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
         }
 
-
-
+     
         public void MenuBind()
         {
             //设置关联
@@ -63,9 +66,9 @@ namespace Client
 
             TreeNode parent;
             int pageIndex;
-             
 
-            if (SessionHelper.uservm.user_mi== "00000")
+
+            if (SessionHelper.uservm.user_mi == "00000")
             {
                 pageIndex = 1000;
                 parent = Aside.CreateNode("挂号业务", 61734, 24, pageIndex);
@@ -98,12 +101,28 @@ namespace Client
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
+
+                //foreach (var item in all_list.ToArray())
+                //{
+                //    if (string.IsNullOrWhiteSpace(item.parent_func))
+                //    {
+                //        parent = Aside.CreateNode(item.func_desc.Trim(),1);
+                //        var items = all_list.Where(p => p.parent_func != null && p.parent_func.Trim() == item.func_name.Trim()).ToList();
+                //        if (items != null && items.Count > 0)
+                //        {
+                //            foreach (var subitem in items)
+                //            {
+                //                Aside.CreateChildNode(parent, subitem.func_desc.Trim(), 1);
+                //            } 
+                //        }
+                //    }
+                //} 
 
             }
             else
-            {  
+            {
 
                 pageIndex = 1000;
                 if (function_list.Where(p => p.func_desc.Trim() == "挂号业务").Count() > 0)
@@ -178,7 +197,7 @@ namespace Client
                         Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
                     }
 
-                    
+
                 }
                 pageIndex = 1400;
                 if (function_list.Where(p => p.func_desc.Trim() == "用户报表").Count() > 0)
@@ -204,8 +223,6 @@ namespace Client
                 }
 
             } 
-
-             
             //设置Header节点索引
 
             //Aside.CreateNode("业务", 1001);
@@ -252,6 +269,7 @@ namespace Client
                     case 1304:
                         //obj = new CreateRequestRecord(); break;
                         obj = new Schb(); break;
+                    //case "号表维护":
                     case 1305:
                         //obj = new BaseWeiHu(); break;
                         obj = new Hbwh(); break;
@@ -416,13 +434,20 @@ namespace Client
                     user_group = user_group
                 };
 
-                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-
+                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}"; 
                 var json = "";
                 var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsByGroupId?{param}");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 json = HttpClientUtil.Get(paramurl);
                 function_list = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserGroupVM>>>(json).data;
+                  
+                param = $"subsys_id={d.subsys_id}";
+                paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                all_list = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json).data;
+
             }
             catch (Exception ex)
             {
@@ -562,9 +587,9 @@ namespace Client
 
             //获取科室
             json = "";
-            paramurl = string.Format($"/api/GuaHao/GetUnits"); 
+            paramurl = string.Format($"/api/GuaHao/GetUnits");
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);  
+            json = HttpClientUtil.Get(paramurl);
             SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
 
             //获取号别
@@ -729,7 +754,7 @@ namespace Client
                 //if (m.Msg == 0x0202)
                 if (m.Msg == 513 || m.Msg == 516 || m.Msg == 519 || m.Msg == 520 || m.Msg == 522 || m.Msg == 256 || m.Msg == 257)
                 {
-                    iOperCount = 0;
+                    iOperCount = LogOutSeconds;
                 }
                 return false;
             }
@@ -737,13 +762,13 @@ namespace Client
 
         private void timerlogout_Tick(object sender, EventArgs e)
         {
-            iOperCount++;
+            iOperCount--;
             tlsInfo.Text = iOperCount.ToString();//屏幕长时间未操作，累计时间
 
-            int t = LogOutSeconds;//获取配置文件中的锁屏时间
-            if (iOperCount > t)
+
+            if (iOperCount == 0)
             {
-                iOperCount = 0;
+                iOperCount = LogOutSeconds;
                 timerlogout.Stop();
                 this.Hide();
                 Login login = new Login();//登录
