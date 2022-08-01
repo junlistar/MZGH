@@ -575,6 +575,8 @@ namespace Client
 
                     uiBreadcrumb2.ItemIndex = 0;
                     GuaHao.PatientVM.max_times++; 
+                   // var paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+
                     //打印发票
                     if (SessionHelper.do_gh_print)
                     {

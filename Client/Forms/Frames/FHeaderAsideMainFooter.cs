@@ -97,7 +97,7 @@ namespace Client
 
                 pageIndex = 1400;
                 parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
-                Aside.CreateChildNode(parent, "综合统计报表", 261463, 24, 1401);
+                Aside.CreateChildNode(parent, "综合统计报表", 61568, 24, 1401);
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
@@ -205,7 +205,7 @@ namespace Client
                     parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
                     if (function_list.Where(p => p.func_desc.Trim() == "综合统计报表").Count() > 0)
                     {
-                        Aside.CreateChildNode(parent, "综合统计报表", 261463, 24, 1401);
+                        Aside.CreateChildNode(parent, "综合统计报表", 61568, 24, 1401);
                     }
                 }
                 pageIndex = 1500;

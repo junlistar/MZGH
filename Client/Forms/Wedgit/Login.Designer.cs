@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.uiAvatar1 = new Sunny.UI.UIAvatar();
-            this.uiLine1 = new Sunny.UI.UILine();
-            this.txtName = new Sunny.UI.UITextBox();
-            this.txtPwd = new Sunny.UI.UITextBox();
-            this.btnLogin = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
+            this.btnLogin = new Sunny.UI.UISymbolButton();
+            this.txtPwd = new Sunny.UI.UITextBox();
+            this.txtName = new Sunny.UI.UITextBox();
+            this.uiLine1 = new Sunny.UI.UILine();
+            this.uiAvatar1 = new Sunny.UI.UIAvatar();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,43 +54,38 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(268, 256);
             this.uiPanel1.TabIndex = 1;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiAvatar1
+            // btnCancel
             // 
-            this.uiAvatar1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiAvatar1.Location = new System.Drawing.Point(101, 24);
-            this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiAvatar1.Name = "uiAvatar1";
-            this.uiAvatar1.Size = new System.Drawing.Size(60, 60);
-            this.uiAvatar1.TabIndex = 0;
-            this.uiAvatar1.Text = "uiAvatar1";
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(139, 204);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(84, 29);
+            this.btnCancel.Symbol = 61453;
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "取消";
+            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // uiLine1
+            // btnLogin
             // 
-            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLine1.Location = new System.Drawing.Point(30, 90);
-            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(202, 29);
-            this.uiLine1.TabIndex = 1;
-            this.uiLine1.Text = "用户登录";
-            // 
-            // txtName
-            // 
-            this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtName.Location = new System.Drawing.Point(40, 127);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtName.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtName.Name = "txtName";
-            this.txtName.ShowText = false;
-            this.txtName.Size = new System.Drawing.Size(183, 29);
-            this.txtName.Symbol = 61447;
-            this.txtName.TabIndex = 0;
-            this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtName.Watermark = "请输入账号";
-            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogin.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLogin.Location = new System.Drawing.Point(40, 204);
+            this.btnLogin.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(84, 29);
+            this.btnLogin.TabIndex = 5;
+            this.btnLogin.Text = "登录";
+            this.btnLogin.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLogin.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtPwd
             // 
@@ -106,46 +101,59 @@
             this.txtPwd.TabIndex = 4;
             this.txtPwd.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtPwd.Watermark = "请输入密码";
+            this.txtPwd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtPwd.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtPwd_KeyUp);
             // 
-            // btnLogin
+            // txtName
             // 
-            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogin.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLogin.Location = new System.Drawing.Point(40, 204);
-            this.btnLogin.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(84, 29);
-            this.btnLogin.TabIndex = 5;
-            this.btnLogin.Text = "登录";
-            this.btnLogin.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtName.Location = new System.Drawing.Point(40, 127);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtName.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtName.Name = "txtName";
+            this.txtName.ShowText = false;
+            this.txtName.Size = new System.Drawing.Size(183, 29);
+            this.txtName.Symbol = 61447;
+            this.txtName.TabIndex = 0;
+            this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtName.Watermark = "请输入账号";
+            this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
-            // btnCancel
+            // uiLine1
             // 
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(139, 204);
-            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(84, 29);
-            this.btnCancel.Symbol = 61453;
-            this.btnCancel.TabIndex = 6;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLine1.Location = new System.Drawing.Point(30, 90);
+            this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLine1.Name = "uiLine1";
+            this.uiLine1.Size = new System.Drawing.Size(202, 29);
+            this.uiLine1.TabIndex = 1;
+            this.uiLine1.Text = "用户登录";
+            this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiAvatar1
+            // 
+            this.uiAvatar1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiAvatar1.Location = new System.Drawing.Point(101, 24);
+            this.uiAvatar1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiAvatar1.Name = "uiAvatar1";
+            this.uiAvatar1.Size = new System.Drawing.Size(60, 60);
+            this.uiAvatar1.TabIndex = 0;
+            this.uiAvatar1.Text = "uiAvatar1";
+            this.uiAvatar1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.uiPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "门诊挂号";
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.Login_Load);
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

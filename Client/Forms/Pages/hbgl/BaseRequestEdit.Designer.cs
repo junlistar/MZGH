@@ -168,8 +168,10 @@
             this.txtTotalNum.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.txtTotalNum.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.txtTotalNum.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTotalNum.DoubleValue = 100D;
             this.txtTotalNum.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtTotalNum.IntValue = 100;
             this.txtTotalNum.Location = new System.Drawing.Point(163, 195);
             this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
@@ -180,7 +182,7 @@
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
             this.txtTotalNum.Style = Sunny.UI.UIStyle.Green;
             this.txtTotalNum.TabIndex = 44;
-            this.txtTotalNum.Text = "0";
+            this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txtTotalNum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

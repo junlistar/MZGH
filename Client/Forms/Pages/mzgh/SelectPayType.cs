@@ -824,7 +824,7 @@ namespace Client
                     this.Close();
                     return;
                     //打印单据  
-                     InitializeReport("PREVIEW");
+                 //    InitializeReport("PREVIEW");
                     //Print(pay_string);
                     //Task.Run(() =>
                     //{

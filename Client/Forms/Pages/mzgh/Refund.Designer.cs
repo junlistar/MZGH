@@ -619,7 +619,7 @@
             this.Controls.Add(this.dgvDeposit);
             this.KeyPreview = true;
             this.Name = "Refund";
-            this.Text = "退号";
+            this.Text = "退号（按ESC退出）";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1068, 645);
             this.Load += new System.EventHandler(this.Refund_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Refund_KeyDown);

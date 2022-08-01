@@ -288,7 +288,7 @@ namespace Client
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                if (responseJson.status==1)
+                if (responseJson.status == 1)
                 {
                     barCode = cardId;
                     UIMessageTip.ShowOk("操作成功!");
@@ -645,7 +645,18 @@ namespace Client
                     var sfz_info = result.data.FirstOrDefault();
                     sfz_card_no.Text = sfz_info.card_no;
                     sfz_name.Text = sfz_info.name;
-                    sfz_sex.Text = sfz_info.sex;
+                    if (sfz_info.sex == "1")
+                    {
+                        sfz_sex.Text = "男";
+                    }
+                    else if (sfz_info.sex == "2")
+                    {
+                        sfz_sex.Text = "女";
+                    }
+                    else
+                    {
+                        sfz_sex.Text = sfz_info.sex;
+                    }
                     DateTime _dt = DateTime.MinValue;
                     if (DateTime.TryParse(sfz_info.birthday, out _dt))
                     {
@@ -675,6 +686,14 @@ namespace Client
             this.txtZhiye.TextChanged += txtZhiye_TextChanged;
             //this.txtShenfen.TextChanged += txtShenfen_TextChanged;
 
+            txthomedistrict.KeyUp += txthomedistrict_KeyUp;
+            txtZhiye.KeyUp += txtZhiye_KeyUp;
+
+            txthomedistrict.Leave += txthomedistrict_Leave;
+            txtZhiye.Leave += txtZhiye_Leave;
+
+            dgv_district.Leave += dgv_district_Leave;
+            dgv_zhiye.Leave += dgv_zhiye_Leave;
         }
 
         UIDataGridView dgv_district = new UIDataGridView();
@@ -684,7 +703,7 @@ namespace Client
         {
             //查询科室信息 显示到girdview
             var tb = sender as UITextBox;
-            //var pbl = tb.Parent as UIPanel;
+            var pbl = tb.Parent as UIGroupBox;
             //获取数据 
 
             if (SessionHelper.districtCodes != null && SessionHelper.districtCodes.Count > 0)
@@ -692,8 +711,8 @@ namespace Client
                 var ipt = txthomedistrict.Text.Trim();
 
                 dgv_district.Parent = this;
-                dgv_district.Top = tb.Top + tb.Height;
-                dgv_district.Left = tb.Left;
+                dgv_district.Top = pbl.Top + tb.Top + tb.Height;
+                dgv_district.Left = pbl.Left + tb.Left;
                 dgv_district.Width = tb.Width;
                 dgv_district.Height = 200;
                 dgv_district.BringToFront();
@@ -757,14 +776,20 @@ namespace Client
                 dgv_district.Hide();
             }
         }
-
+        private void dgv_district_Leave(object sender, EventArgs e)
+        {
+            if (!txthomedistrict.Focused)
+            {
+                dgv_district.Hide();
+            }
+        }
         private void txtZhiye_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 //查询科室信息 显示到girdview
                 var tb = sender as UITextBox;
-                //var pbl = tb.Parent as UIPanel;
+                var pbl = tb.Parent as UIGroupBox;
                 //获取数据 
 
                 if (SessionHelper.occupationCodes != null && SessionHelper.occupationCodes.Count > 0)
@@ -772,8 +797,8 @@ namespace Client
                     var ipt = txtZhiye.Text.Trim();
 
                     dgv_zhiye.Parent = this;
-                    dgv_zhiye.Top = tb.Top + tb.Height;
-                    dgv_zhiye.Left = tb.Left;
+                    dgv_zhiye.Top = pbl.Top + tb.Top + tb.Height;
+                    dgv_zhiye.Left = pbl.Left + tb.Left;
                     dgv_zhiye.Width = tb.Width;
                     dgv_zhiye.Height = 150;
                     dgv_zhiye.BringToFront();
@@ -844,6 +869,15 @@ namespace Client
                 dgv_zhiye.Hide();
             }
         }
+        private void dgv_zhiye_Leave(object sender, EventArgs e)
+        {
+            if (!txtZhiye.Focused)
+            {
+                dgv_zhiye.Hide();
+            }
+        }
+
+
 
         //private void txtShenfen_TextChanged(object sender, EventArgs e)
         //{
@@ -929,10 +963,6 @@ namespace Client
         //    }
         //}
 
-        private void txthomedistrict_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void cbxCardType_SelectedIndexChanged(object sender, EventArgs e)
         {

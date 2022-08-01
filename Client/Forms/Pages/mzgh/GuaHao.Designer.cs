@@ -347,7 +347,7 @@
             this.btnIDCard.Size = new System.Drawing.Size(102, 38);
             this.btnIDCard.Style = Sunny.UI.UIStyle.Green;
             this.btnIDCard.StyleCustomMode = true;
-            this.btnIDCard.Symbol = 62140;
+            this.btnIDCard.Symbol = 62137;
             this.btnIDCard.TabIndex = 18;
             this.btnIDCard.Text = "I  D 卡";
             this.btnIDCard.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -440,7 +440,7 @@
             this.btnYBK.Size = new System.Drawing.Size(102, 39);
             this.btnYBK.Style = Sunny.UI.UIStyle.Green;
             this.btnYBK.StyleCustomMode = true;
-            this.btnYBK.Symbol = 62140;
+            this.btnYBK.Symbol = 62139;
             this.btnYBK.TabIndex = 16;
             this.btnYBK.Text = "医保卡";
             this.btnYBK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -492,7 +492,7 @@
             this.btnCika.Size = new System.Drawing.Size(102, 38);
             this.btnCika.Style = Sunny.UI.UIStyle.Green;
             this.btnCika.StyleCustomMode = true;
-            this.btnCika.Symbol = 62140;
+            this.btnCika.Symbol = 61639;
             this.btnCika.TabIndex = 14;
             this.btnCika.Text = "磁   卡";
             this.btnCika.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

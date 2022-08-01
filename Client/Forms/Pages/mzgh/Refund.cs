@@ -154,7 +154,7 @@ namespace Client
                 GhDepositVM vm = new GhDepositVM();
 
                 vm.sname = row.Cells["visit_flag_name"].Value.ToString();
-                if (vm.sname == "已退号")
+                if (vm.sname == "退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
                     return;
@@ -191,7 +191,8 @@ namespace Client
 
                 if (payList.ShowDialog() == DialogResult.OK)
                 {
-                    this.Close();
+                    Search();
+                   // this.Close();
                 };
 
                 return;
@@ -643,7 +644,7 @@ namespace Client
             {
                 GhDepositVM vm = new GhDepositVM();
                 vm.sname = this.dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["visit_flag_name"].Value.ToString();
-                if (vm.sname == "已退号")
+                if (vm.sname == "退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
                     return;

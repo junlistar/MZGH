@@ -36,7 +36,7 @@ namespace Client.Forms.Wedgit
 
         private void GhPrint_Load(object sender, EventArgs e)
         {
-            InitializeReport("PREVIEW");
+            InitializeReport("PRINT");
             this.Close();
         }
 

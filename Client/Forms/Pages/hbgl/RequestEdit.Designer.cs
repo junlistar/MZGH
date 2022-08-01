@@ -31,6 +31,8 @@
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.txt_limit = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
+            this.cbxRequestType = new Sunny.UI.UIComboBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
             this.txtDate = new Sunny.UI.UIDatePicker();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtTotalNum = new Sunny.UI.UITextBox();
@@ -49,8 +51,6 @@
             this.uiLabel3 = new Sunny.UI.UILabel();
             this.cbxSXW = new Sunny.UI.UIComboBox();
             this.uiLabel2 = new Sunny.UI.UILabel();
-            this.cbxRequestType = new Sunny.UI.UIComboBox();
-            this.uiLabel7 = new Sunny.UI.UILabel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -141,6 +141,42 @@
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbxRequestType
+            // 
+            this.cbxRequestType.DataSource = null;
+            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxRequestType.FillColor = System.Drawing.Color.White;
+            this.cbxRequestType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxRequestType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
+            this.cbxRequestType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.cbxRequestType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.cbxRequestType.Location = new System.Drawing.Point(542, 27);
+            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxRequestType.Name = "cbxRequestType";
+            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxRequestType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.cbxRequestType.Size = new System.Drawing.Size(163, 29);
+            this.cbxRequestType.Style = Sunny.UI.UIStyle.Red;
+            this.cbxRequestType.TabIndex = 45;
+            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRequestType.Visible = false;
+            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(491, 31);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.Size = new System.Drawing.Size(214, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Red;
+            this.uiLabel7.TabIndex = 46;
+            this.uiLabel7.Text = "号类";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.Visible = false;
+            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // txtDate
             // 
             this.txtDate.FillColor = System.Drawing.Color.White;
@@ -184,8 +220,10 @@
             this.txtTotalNum.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
             this.txtTotalNum.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtTotalNum.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTotalNum.DoubleValue = 100D;
             this.txtTotalNum.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.txtTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtTotalNum.IntValue = 100;
             this.txtTotalNum.Location = new System.Drawing.Point(174, 235);
             this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
@@ -196,7 +234,7 @@
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
             this.txtTotalNum.Style = Sunny.UI.UIStyle.Red;
             this.txtTotalNum.TabIndex = 44;
-            this.txtTotalNum.Text = "0";
+            this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txtTotalNum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -478,42 +516,6 @@
             this.uiLabel2.Text = "上下午";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxRequestType
-            // 
-            this.cbxRequestType.DataSource = null;
-            this.cbxRequestType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxRequestType.FillColor = System.Drawing.Color.White;
-            this.cbxRequestType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.cbxRequestType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxRequestType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.cbxRequestType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.cbxRequestType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.cbxRequestType.Location = new System.Drawing.Point(542, 27);
-            this.cbxRequestType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxRequestType.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxRequestType.Name = "cbxRequestType";
-            this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxRequestType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.cbxRequestType.Size = new System.Drawing.Size(163, 29);
-            this.cbxRequestType.Style = Sunny.UI.UIStyle.Red;
-            this.cbxRequestType.TabIndex = 45;
-            this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxRequestType.Visible = false;
-            this.cbxRequestType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel7
-            // 
-            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(491, 31);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.Size = new System.Drawing.Size(214, 23);
-            this.uiLabel7.Style = Sunny.UI.UIStyle.Red;
-            this.uiLabel7.TabIndex = 46;
-            this.uiLabel7.Text = "号类";
-            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel7.Visible = false;
-            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnSave
             // 

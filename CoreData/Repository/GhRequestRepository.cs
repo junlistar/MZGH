@@ -228,7 +228,7 @@ namespace Data.Repository
                         }
 
                         //查询现有数据
-                        string sql = @"select * from gh_request where request_date between @begin and @end order by enter_date desc";
+                        string sql = GetSqlByTag("mzgh_ghrequest_getbydate2");
                         para = new DynamicParameters();
                         para.Add("@begin", begin);
                         para.Add("@end", end);

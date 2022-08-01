@@ -1,0 +1,1 @@
+ update mz_patient_sfz set relative_code=@relative_code where patient_id=@patient_id

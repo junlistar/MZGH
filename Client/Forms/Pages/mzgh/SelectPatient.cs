@@ -57,5 +57,16 @@ namespace Client.Forms.Pages.mzgh
                 log.Error(ex.StackTrace);
             }
         }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            if (dgvUsers.SelectedIndex!=-1)
+            { 
+                var pid = dgvUsers.Rows[dgvUsers.SelectedIndex].Cells["patient_id"].Value.ToString();
+                SessionHelper.sel_patientid = pid;
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
     }
 }

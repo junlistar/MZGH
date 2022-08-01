@@ -39,17 +39,19 @@
             this.uiLabel9 = new Sunny.UI.UILabel();
             this.txthomestreet = new Sunny.UI.UITextBox();
             this.txtZhiye = new Sunny.UI.UITextBox();
-            this.btnSave = new Sunny.UI.UIButton();
-            this.btnCancel = new Sunny.UI.UIButton();
             this.txtpatientid = new Sunny.UI.UITextBox();
             this.lklduka = new Sunny.UI.UILinkLabel();
             this.uiLine1 = new Sunny.UI.UILine();
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txthomedistrict = new Sunny.UI.UITextBox();
+            this.uiLabel4 = new Sunny.UI.UILabel();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.sfz_folk = new Sunny.UI.UITextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.sfz_sex = new Sunny.UI.UITextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.sfz_address = new Sunny.UI.UITextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,15 +63,13 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.sfz_card_no = new Sunny.UI.UITextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.sfz_sex = new Sunny.UI.UITextBox();
-            this.uiLabel4 = new Sunny.UI.UILabel();
-            this.txthomedistrict = new Sunny.UI.UITextBox();
+            this.btnSave = new Sunny.UI.UISymbolButton();
+            this.btnCancel = new Sunny.UI.UISymbolButton();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.sfz_folk.SuspendLayout();
-            this.sfz_name.SuspendLayout();
             this.sfz_sex.SuspendLayout();
+            this.sfz_name.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiLabel1
@@ -270,50 +270,6 @@
             this.txtZhiye.TabIndex = 21;
             this.txtZhiye.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtZhiye.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtZhiye.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtZhiye_KeyUp);
-            this.txtZhiye.Leave += new System.EventHandler(this.txtZhiye_Leave);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(508, 610);
-            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(97, 35);
-            this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 24;
-            this.btnSave.Text = "保存";
-            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(623, 610);
-            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnCancel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.Size = new System.Drawing.Size(100, 35);
-            this.btnCancel.Style = Sunny.UI.UIStyle.Red;
-            this.btnCancel.StyleCustomMode = true;
-            this.btnCancel.TabIndex = 25;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // txtpatientid
             // 
@@ -448,6 +404,43 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // txthomedistrict
+            // 
+            this.txthomedistrict.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txthomedistrict.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txthomedistrict.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txthomedistrict.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txthomedistrict.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txthomedistrict.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txthomedistrict.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txthomedistrict.Location = new System.Drawing.Point(133, 129);
+            this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txthomedistrict.Name = "txthomedistrict";
+            this.txthomedistrict.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txthomedistrict.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txthomedistrict.ShowText = false;
+            this.txthomedistrict.Size = new System.Drawing.Size(200, 29);
+            this.txthomedistrict.Style = Sunny.UI.UIStyle.Green;
+            this.txthomedistrict.TabIndex = 40;
+            this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel4
+            // 
+            this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel4.Location = new System.Drawing.Point(26, 126);
+            this.uiLabel4.Name = "uiLabel4";
+            this.uiLabel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel4.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Green;
+            this.uiLabel4.TabIndex = 39;
+            this.uiLabel4.Text = "地区";
+            this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // uiGroupBox2
             // 
             this.uiGroupBox2.Controls.Add(this.sfz_folk);
@@ -512,6 +505,40 @@
             this.label5.Size = new System.Drawing.Size(17, 21);
             this.label5.TabIndex = 40;
             this.label5.Text = "*";
+            // 
+            // sfz_sex
+            // 
+            this.sfz_sex.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.sfz_sex.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.sfz_sex.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.sfz_sex.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.sfz_sex.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.sfz_sex.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.sfz_sex.Controls.Add(this.label3);
+            this.sfz_sex.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.sfz_sex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.sfz_sex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfz_sex.Location = new System.Drawing.Point(424, 76);
+            this.sfz_sex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfz_sex.MinimumSize = new System.Drawing.Size(1, 16);
+            this.sfz_sex.Name = "sfz_sex";
+            this.sfz_sex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.sfz_sex.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.sfz_sex.ShowText = false;
+            this.sfz_sex.Size = new System.Drawing.Size(205, 29);
+            this.sfz_sex.Style = Sunny.UI.UIStyle.Green;
+            this.sfz_sex.TabIndex = 58;
+            this.sfz_sex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_sex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(206, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 21);
+            this.label3.TabIndex = 40;
+            this.label3.Text = "*";
             // 
             // label2
             // 
@@ -672,94 +699,64 @@
             this.sfz_card_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_card_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // label3
+            // btnSave
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(206, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 21);
-            this.label3.TabIndex = 40;
-            this.label3.Text = "*";
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(462, 610);
+            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(114, 43);
+            this.btnSave.StyleCustomMode = true;
+            this.btnSave.TabIndex = 41;
+            this.btnSave.Text = "保存";
+            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // sfz_sex
+            // btnCancel
             // 
-            this.sfz_sex.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.sfz_sex.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.sfz_sex.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.sfz_sex.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.sfz_sex.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.sfz_sex.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.sfz_sex.Controls.Add(this.label3);
-            this.sfz_sex.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.sfz_sex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.sfz_sex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sfz_sex.Location = new System.Drawing.Point(424, 76);
-            this.sfz_sex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.sfz_sex.MinimumSize = new System.Drawing.Size(1, 16);
-            this.sfz_sex.Name = "sfz_sex";
-            this.sfz_sex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.sfz_sex.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.sfz_sex.ShowText = false;
-            this.sfz_sex.Size = new System.Drawing.Size(205, 29);
-            this.sfz_sex.Style = Sunny.UI.UIStyle.Green;
-            this.sfz_sex.TabIndex = 58;
-            this.sfz_sex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.sfz_sex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel4
-            // 
-            this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(26, 126);
-            this.uiLabel4.Name = "uiLabel4";
-            this.uiLabel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uiLabel4.Size = new System.Drawing.Size(100, 23);
-            this.uiLabel4.Style = Sunny.UI.UIStyle.Green;
-            this.uiLabel4.TabIndex = 39;
-            this.uiLabel4.Text = "地区";
-            this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txthomedistrict
-            // 
-            this.txthomedistrict.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txthomedistrict.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txthomedistrict.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txthomedistrict.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txthomedistrict.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txthomedistrict.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txthomedistrict.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomedistrict.Location = new System.Drawing.Point(133, 129);
-            this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txthomedistrict.Name = "txthomedistrict";
-            this.txthomedistrict.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txthomedistrict.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txthomedistrict.ShowText = false;
-            this.txthomedistrict.Size = new System.Drawing.Size(200, 29);
-            this.txthomedistrict.Style = Sunny.UI.UIStyle.Green;
-            this.txthomedistrict.TabIndex = 40;
-            this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnCancel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnCancel.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(598, 610);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnCancel.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.btnCancel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancel.Size = new System.Drawing.Size(114, 43);
+            this.btnCancel.Style = Sunny.UI.UIStyle.Red;
+            this.btnCancel.StyleCustomMode = true;
+            this.btnCancel.Symbol = 61453;
+            this.btnCancel.TabIndex = 42;
+            this.btnCancel.Text = "取消";
+            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // UserInfoEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(797, 673);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.uiLine1);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserInfoEdit";
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.Style = Sunny.UI.UIStyle.Green;
-            this.Text = "编辑用户信息";
+            this.Text = "编辑用户信息（按ESC退出）";
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 876, 536);
             this.Load += new System.EventHandler(this.UserInfoEdit_Load);
@@ -769,10 +766,10 @@
             this.uiGroupBox2.PerformLayout();
             this.sfz_folk.ResumeLayout(false);
             this.sfz_folk.PerformLayout();
-            this.sfz_name.ResumeLayout(false);
-            this.sfz_name.PerformLayout();
             this.sfz_sex.ResumeLayout(false);
             this.sfz_sex.PerformLayout();
+            this.sfz_name.ResumeLayout(false);
+            this.sfz_name.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -790,8 +787,6 @@
         private Sunny.UI.UILabel uiLabel9;
         private Sunny.UI.UITextBox txthomestreet;
         private Sunny.UI.UITextBox txtZhiye;
-        private Sunny.UI.UIButton btnSave;
-        private Sunny.UI.UIButton btnCancel;
         private Sunny.UI.UITextBox txtpatientid;
         private Sunny.UI.UILinkLabel lklduka;
         private Sunny.UI.UILine uiLine1;
@@ -816,5 +811,7 @@
         private System.Windows.Forms.Label label3;
         private Sunny.UI.UITextBox txthomedistrict;
         private Sunny.UI.UILabel uiLabel4;
+        private Sunny.UI.UISymbolButton btnSave;
+        private Sunny.UI.UISymbolButton btnCancel;
     }
 }

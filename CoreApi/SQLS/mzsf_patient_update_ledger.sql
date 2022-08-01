@@ -1,0 +1,1 @@
+﻿ update mz_patient_mi set max_ledger_sn = @max_ledger_sn, max_item_sn = @max_item_sn where patient_id = @patient_id

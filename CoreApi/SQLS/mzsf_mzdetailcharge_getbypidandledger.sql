@@ -1,0 +1,1 @@
+﻿SELECT* FROM mz_detail_charge WHERE patient_id = @patient_id AND ledger_sn =@ledger_sn

@@ -62,13 +62,8 @@ namespace Data.Repository
                     IDbTransaction transaction = connection.BeginTransaction();
 
                     try
-                    {
-
-
-                        string sql = @" update mz_patient_mi 
- set name=@name,home_tel=@home_tel,sex=@sex,marry_code=@marry_code,birthday=@birthday,
- relation_name=@relation_name,relation_code=@relation_code,home_street=@home_street,update_opera=@update_opera,update_date=getdate()
- where patient_id=@patient_id";
+                    { 
+                        string sql = GetSqlByTag("mzgh_mzpatient_update_relation");
 
                         var para = new DynamicParameters();
                         para.Add("@patient_id", pid);
@@ -84,7 +79,7 @@ namespace Data.Repository
 
                         connection.Execute(sql, para, transaction);
 
-                        sql = @" update mz_patient_sfz set relative_code=@relative_code where patient_id=@patient_id";
+                        sql =GetSqlByTag("mzgh_mzpatientsfz_update_relation");
                         para = new DynamicParameters();
                         para.Add("@relative_code", relation_code);
                         para.Add("@patient_id", pid);

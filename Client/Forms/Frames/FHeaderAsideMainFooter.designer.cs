@@ -31,6 +31,7 @@ namespace Client
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FHeaderAsideMainFooter));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslblName = new System.Windows.Forms.ToolStripStatusLabel();
@@ -185,6 +186,7 @@ namespace Client
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 720);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FHeaderAsideMainFooter";
             this.Text = "门诊挂号系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

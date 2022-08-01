@@ -250,6 +250,7 @@ namespace Client
                         if (responseJson.status == 1)
                         {
                             UIMessageTip.ShowOk("退号成功!");
+                            this.DialogResult = DialogResult.OK;
                             System.Threading.Thread.Sleep(1000);
                             this.Close();
                         }
@@ -273,6 +274,12 @@ namespace Client
             }
         }
 
-         
+        private void RefundPayList_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

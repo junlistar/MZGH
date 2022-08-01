@@ -49,7 +49,7 @@ namespace Data.Repository.Mzsf
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
                         var visit_info = connection.QueryFirstOrDefault<MzVisit>("mzcpr_GetVisitInfo", para, transaction, null, CommandType.StoredProcedure);
-                         
+
                         string insert_sql = "";
 
                         //处方数
@@ -85,130 +85,27 @@ namespace Data.Repository.Mzsf
                                 if (order_type == "01")
                                 {
                                     //诊疗
-                                    order_item_sql = @"SELECT code,  
-        case when  serial ='**' then  name  else  name end name,
-        specification,
-        orig_price, 
-        manufactory,
-        serial, 
-        dosage, 
-        bill_item_code, 
-        audit_code, 
-        exec_unit, 
-        charge_group, 
-        self_flag, 
-        separate_flag, 
-        suprice_flag, 
-        drug_flag, 
-        mz_confirm_flag, 
-        amount1, 
-        amount2, 
-        amount3, 
-        amount4, 
-        amount5, 
-        item_flag ,
-        group_no,
-        group_name
-  FROM view_mz_huajia_zhenliao
- WHERE    
-        code =@code AND  
-       code <> '000085'
-ORDER BY len(py_code) ,d_code, name,amount1";
+                                    order_item_sql = GetSqlByTag("mzsf_huajia_zhenliao");
 
 
                                 }
                                 else if (order_type == "02")
                                 {
                                     //西药
-                                    order_item_sql = @"SELECT code,  
-        name=case when  serial ='**' then  name
-  else  
-name +'('+specification+')' +' '+isnull(abname,'') 
-end,
-        py_code,
-        d_code,
-        cast(orig_price as decimal(38,6)) orig_price,
-        stock_amount,
-        specification, 
-        manufactory,
-        serial, 
-        dosage, 
-        bill_item_code, 
-        audit_code, 
-        exec_unit , 
-        charge_group, 
-        self_flag,
-        separate_flag, 
-        suprice_flag , 
-        drug_flag,
-        mz_confirm_flag, 
-        amount1,
-        amount2,
-        amount3,
-        amount4,
-        amount5,
-        item_flag ,
-        group_no,
-        group_name 
-    FROM view_mz_huajia_xiyao
-   WHERE code=@code AND  serial=@serial and
-         (bill_item_code like '001' OR
-          bill_item_code like '003') AND
-          group_no  like '000003'
-ORDER BY d_code,py_code, name,serial DESC";
+                                    order_item_sql = GetSqlByTag("mzsf_huajia_xiyao");
 
 
                                 }
                                 else if (order_type == "04")
                                 {
                                     //草药
-                                    order_item_sql = @"SELECT code,  
-        name=case when  serial ='**' then  name  else  name end,
-        py_code,
-        d_code,
-        specification,
-        cast(orig_price as decimal(38,6)) orig_price, 
-        stock_amount ,     
-        manufactory ,
-        serial,
-        dosage,
-        bill_item_code, 
-        audit_code,
-        exec_unit,
-        charge_group, 
-        self_flag,
-        separate_flag, 
-        suprice_flag, 
-        drug_flag, 
-        mz_confirm_flag, 
-        amount1, 
-        amount2, 
-        amount3, 
-        amount4, 
-        amount5, 
-        item_flag ,
-        group_no ,
-        group_name 
-    FROM view_mz_huajia_caoyao
-   WHERE code=@code  AND  
-         (bill_item_code like '002' OR                    
-bill_item_code <> 'aa') AND
-         (group_no  like '000004' OR group_no = '%') 
-ORDER BY len(name)";
+                                    order_item_sql = GetSqlByTag("mzsf_huajia_caoyao");
                                 }
 
                                 //类型不同，写入字段不一样
                                 if (order_type == "01")
                                 {
-                                    insert_sql = @"INSERT INTO mz_detail_charge 
-( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no, 
-charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
-happen_date, enter_date, enter_opera, windows_no, dosage, persist_days, dosage_unit, fit_type, poision_flag, 
-charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn) 
-Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @charge_code, @serial_no, @group_no, 
-@charge_status, @bill_code, @audit_code, @exec_sn, @charge_amount, @orig_price, @charge_group, @caoyao_fu, @back_amount,
-@happen_date, @enter_date, @enter_opera, @windows_no, @dosage, @persist_days, @dosage_unit, @fit_type, @poision_flag, 
-@charge_no, @mz_dept_no, @apply_unit, @doctor_code, @name, @parent_no, @order_properties, @skin_test_flag, @change_drug_code, @order_sn) ";
+                                    insert_sql = GetSqlByTag("mzsf_mzdetailcharge_add_zhenliao");
 
                                     para = new DynamicParameters();
                                     para.Add("@code", charge_code);
@@ -261,15 +158,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                                 }
                                 else
                                 {
-                                    insert_sql = @"INSERT INTO mz_detail_charge 
-( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no,
-charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
-happen_date, enter_date, enter_opera, windows_no, confirm_flag, supply_code, dosage, persist_days, dosage_unit, comment, fit_type, self_flag,
-separate_flag, supprice_flag, poision_flag, charge_no, mz_dept_no, apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, change_drug_code, order_sn) 
-Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @charge_code, @serial_no, @group_no, 
-@charge_status, @bill_code, @audit_code, @exec_sn, @charge_amount, @orig_price, @charge_group, @caoyao_fu, @back_amount,
-@happen_date, @enter_date, @enter_opera, @windows_no, @confirm_flag, @supply_code, null, @persist_days, null, @comment, @fit_type, @self_flag,
-@separate_flag, @supprice_flag, @poision_flag, @charge_no, @mz_dept_no, @apply_unit, @doctor_code, @name, @parent_no, @order_properties, @skin_test_flag, @change_drug_code, @order_sn) ";
+                                    insert_sql = GetSqlByTag("mzsf_mzdetailcharge_add_xiyao");
 
                                     para = new DynamicParameters();
                                     para.Add("@code", charge_code);
@@ -405,7 +294,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                     chargeList = chargeList.Where(p => order_no_arr.Contains(p.order_no)).ToList();
 
                     // order_no_param = string.Join(""','", order_no_arr);
-                     
+
                 }
 
                 //门诊机制发票号
@@ -653,16 +542,16 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
-                        para.Add("@ledger_sn", max_ledger_sn); 
-                         //para.Add("@order_no_str", order_no_param);
+                        para.Add("@ledger_sn", max_ledger_sn);
+                        //para.Add("@order_no_str", order_no_param);
 
-                         var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
+                        var chargeItemList = connection.Query<DetailChargeItem>(sql10, para, transaction);
 
                         if (!string.IsNullOrWhiteSpace(order_no_str))
                         {
                             var order_no_arr = order_no_str.Split("-");
                             chargeItemList = chargeItemList.Where(p => order_no_arr.Contains(p.order_no)).ToList();
-                        } 
+                        }
 
                         //根据收费项目类型分组写入
                         var bill_list = (from c in chargeItemList
@@ -749,12 +638,12 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                     }
 
                     return max_ledger_sn;
-                } 
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
-            } 
+            }
         }
 
 
@@ -762,41 +651,42 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
         {
             try
             {
-                var para = new DynamicParameters();
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                {
+                    IDbTransaction transaction = connection.BeginTransaction();
 
-                para.Add("@opera", opera);
-                para.Add("@pid", pid);
-                para.Add("@ledger_sn", ledger_sn);
-                para.Add("@receipt_sn", receipt_sn);
-                para.Add("@receipt_no", receipt_no);
-                para.Add("@cheque_cash", cheque_cash);
-                para.Add("@isall", isall);
-                ExecQuerySP("mzsf_BackFee2", para);
+                    try
+                    {
+                        var para = new DynamicParameters();
 
-                string sql = @"INSERT INTO mz_receipt_cancel
-         ( operator,   
-           happen_date,   
-           report_date,   
-           receipt_sn,
-           receipt_no,   
-           subsys_id,
-           mz_dept_no )  
-  VALUES ( @operator,
-            cast( convert(char(19),getdate(),121) as datetime) ,   
-           null,
-           @receipt_sn,
-           @receipt_no,   
-           @subsys_id,
-           @mz_dept_no)";
-                para = new DynamicParameters();
-                para.Add("@operator", opera);
-                para.Add("@receipt_sn", receipt_sn);
-                para.Add("@receipt_no", receipt_no);
-                para.Add("@subsys_id", "mz");
-                para.Add("@mz_dept_no", "1");
+                        para.Add("@opera", opera);
+                        para.Add("@pid", pid);
+                        para.Add("@ledger_sn", ledger_sn);
+                        para.Add("@receipt_sn", receipt_sn);
+                        para.Add("@receipt_no", receipt_no);
+                        para.Add("@cheque_cash", cheque_cash);
+                        para.Add("@isall", isall);
+                        connection.Execute("mzsf_BackFee2", para, transaction, null, CommandType.StoredProcedure);
 
-                Update(sql, para);
-                return true;
+                        string sql = GetSqlByTag("mzsf_mzreceiptcancel_add");
+                        para = new DynamicParameters();
+                        para.Add("@operator", opera);
+                        para.Add("@receipt_sn", receipt_sn);
+                        para.Add("@receipt_no", receipt_no);
+                        para.Add("@subsys_id", "mz");
+                        para.Add("@mz_dept_no", "1");
+                        connection.Execute(sql, para, transaction);
+                        
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+
+                    return true;
+                }
             }
             catch (Exception ex)
             {
@@ -829,7 +719,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                     var refund_item = item.Split("-");
                     var order_type = refund_item[0];
                     var charge_code = refund_item[1];
-                    var price =Convert.ToDecimal(refund_item[2]);
+                    var price = Convert.ToDecimal(refund_item[2]);
 
                     refund_charge += price;
                     charge_code_list.Add(charge_code);
@@ -853,8 +743,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para.Add("@isall", '0');
                         connection.Execute("mzsf_BackFee2", para, transaction, null, CommandType.StoredProcedure);
 
-
-                        string user_sql = @"select * from mz_patient_mi where patient_id=@patient_id";
+                        string user_sql = GetSqlByTag("mzgh_mzpatient_getbypid");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         var patient = connection.Query<Patient>(user_sql, para, transaction).FirstOrDefault();
@@ -865,7 +754,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         para.Add("@patient_id", pid);
                         int max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
 
-                        string update_user_sql = @"update mz_patient_mi set max_ledger_sn = @max_ledger_sn, max_item_sn = @max_item_sn where patient_id = @patient_id";
+                        string update_user_sql = GetSqlByTag("mzsf_patient_update_ledger");
                         para = new DynamicParameters();
                         para.Add("@max_ledger_sn", max_ledger_sn);
                         para.Add("@max_item_sn", max_item_sn);
@@ -915,21 +804,21 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
 
                         //1.mz_detail_charge
 
-                        string sql_1 = @"SELECT* FROM mz_detail_charge WHERE patient_id = @patient_id AND ledger_sn =@ledger_sn";
+                        string sql_1 = GetSqlByTag("mzsf_mzdetailcharge_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@ledger_sn", ledger_sn);
                         var detail_charge_list = connection.Query<CprCharges>(sql_1, para, transaction).ToList();
 
                         //2.mz_deposit
-                        string sql_2 = @"SELECT* FROM mz_deposit WHERE patient_id = @patient_id AND ledger_sn = @ledger_sn";
+                        string sql_2 = GetSqlByTag("mzsf_mzdeposit_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@ledger_sn", ledger_sn);
                         var deposit_list = connection.Query<MzDeposit>(sql_2, para, transaction).ToList();
 
                         //3.mz_receipt
-                        string sql_3 = @"SELECT* FROM mz_receipt WHERE patient_id = @patient_id  AND ledger_sn =@ledger_sn AND receipt_sn = @receipt_sn";
+                        string sql_3 = GetSqlByTag("mzsf_mzreceipt_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@ledger_sn", ledger_sn);
@@ -937,7 +826,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         var receipt_list = connection.Query<MzReceipt>(sql_3, para, transaction).ToList();
 
                         //4.mz_receipt_charge
-                        string sql_4 = @"SELECT* FROM mz_receipt_charge WHERE patient_id = @patient_id  AND ledger_sn =@ledger_sn AND receipt_sn = @receipt_sn";
+                        string sql_4 = GetSqlByTag("mzsf_mzreceiptcharge_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@ledger_sn", ledger_sn);
@@ -950,16 +839,7 @@ Values ( @charge_price, @patient_id, @times, @order_type, @order_no, @item_no, @
                         //todo： 排除掉未勾选的项目进行写入操作
 
                         //写入没有退款的数据 leder_sn +1
-                        string insert_1 = @"INSERT INTO mz_detail_charge ( patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, 
-serial_no, group_no, charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_price, charge_group, caoyao_fu, back_amount,
-happen_date, price_data, price_opera, enter_date, enter_opera, windows_no, confirm_date, dosage, 
-persist_days, fit_type, infant_flag, self_flag, poision_flag, ope_flag, emergency_flag, charge_no, mz_dept_no, 
-apply_unit, doctor_code, name, parent_no, order_properties, skin_test_flag, sum_total, change_drug_code, response_type, charge_type, order_sn) 
-Values (@patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @charge_code, 
-@serial_no, @group_no, @charge_status, @bill_code, @audit_code, @exec_sn, @charge_amount, @orig_price, @charge_price, @charge_group, @caoyao_fu, @back_amount,
-@happen_date, @price_data, @price_opera, @enter_date, @enter_opera, @windows_no, @confirm_date,@dosage, 
-@persist_days, @fit_type, @infant_flag, @self_flag, @poision_flag, @ope_flag, @emergency_flag, @charge_no, @mz_dept_no, 
-@apply_unit, @doctor_code, @name, @parent_no, @order_properties, @skin_test_flag, @sum_total, @change_drug_code, @response_type, @charge_type, @order_sn) ";
+                        string insert_1 = GetSqlByTag("mzsf_mzdetailcharge_add");
 
                         foreach (var item in detail_charge_list)
                         {
@@ -1013,10 +893,10 @@ Values (@patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @char
                             para.Add("@persist_days", item.persist_days);
                             para.Add("@dosage_unit", item.dosage_unit);
                             para.Add("@comment", item.comment);
-                            para.Add("@fit_type", item.fit_type); 
+                            para.Add("@fit_type", item.fit_type);
                             para.Add("@ope_flag", item.ope_flag);
                             para.Add("@emergency_flag", item.emergency_flag);
-                            para.Add("@infant_flag", item.infant_flag); 
+                            para.Add("@infant_flag", item.infant_flag);
                             para.Add("@self_flag", item.self_flag);
                             para.Add("@separate_flag", item.seperate_flag);
                             para.Add("@supprice_flag", item.supprice_flag);
@@ -1042,14 +922,12 @@ Values (@patient_id, @times, @order_type, @order_no, @item_no, @ledger_sn, @char
 
                         }
 
-                        string insert_2 = @"INSERT INTO mz_deposit 
-( patient_id, item_no, ledger_sn, cheque_type, cheque_no, charge, depo_status, windows_no, dcount_date, dcount_id, mz_dept_no)
-Values ( @patient_id, @item_no, @ledger_sn, @cheque_type, @cheque_no, @charge, @depo_status, @windows_no, @dcount_date, @dcount_id, @mz_dept_no) ";
+                        string insert_2 = GetSqlByTag("mzsf_mzdeposit_add2");
                         foreach (var item in deposit_list)
                         {
 
                             item.ledger_sn = max_ledger_sn;
-                            item.dcount_date =Convert.ToDateTime(dt_now);
+                            item.dcount_date = Convert.ToDateTime(dt_now);
                             var charge = deposit_list.Sum(p => p.charge) - refund_charge;
 
                             para = new DynamicParameters();
@@ -1065,18 +943,14 @@ Values ( @patient_id, @item_no, @ledger_sn, @cheque_type, @cheque_no, @charge, @
                             para.Add("@dcount_id", item.dcount_id);
                             para.Add("@mz_dept_no", item.mz_dept_no);
                             para.Add("@out_trade_no", "");
-                             
+
                             connection.Execute(insert_2, para, transaction);
 
                             break;//模拟一次现金缴费
 
-                        }
+                        } 
 
-
-                        string insert_3 = @"INSERT INTO mz_receipt ( patient_id, ledger_sn, receipt_sn, pay_unit, charge_total,
-charge_status, cash_date, cash_opera, windows_no, receipt_no, mz_dept_no, contract_code, backfee_date)  
-Values ( @patient_id, @ledger_sn, @receipt_sn, @pay_unit, @charge_total,
-@charge_status, @cash_date, @cash_opera, @windows_no, @receipt_no, @mz_dept_no, @contract_code, null) ";
+                        string insert_3 = GetSqlByTag("mzsf_mzreceipt_add2");
 
                         foreach (var item in receipt_list)
                         {
@@ -1090,7 +964,7 @@ Values ( @patient_id, @ledger_sn, @receipt_sn, @pay_unit, @charge_total,
                             para = new DynamicParameters();
                             para.Add("@patient_id", item.patient_id);
                             para.Add("@ledger_sn", item.ledger_sn);
-                            para.Add("@receipt_sn",max_sn);
+                            para.Add("@receipt_sn", max_sn);
                             para.Add("@pay_unit", item.pay_unit);
                             para.Add("@charge_total", item.charge_total);
                             para.Add("@charge_status", item.charge_status);
@@ -1100,22 +974,25 @@ Values ( @patient_id, @ledger_sn, @receipt_sn, @pay_unit, @charge_total,
                             para.Add("@receipt_no", item.receipt_no);
                             para.Add("@mz_dept_no", item.mz_dept_no);
                             para.Add("@contract_code", item.contract_code);
-                           // para.Add("@backfee_date", item.backfee_date);
+                            // para.Add("@backfee_date", item.backfee_date);
 
                             connection.Execute(insert_3, para, transaction);
                         }
 
-                        string sel_detail_charge = @"
-select patient_id,times,order_type,bill_code,exec_sn,sum(charge_amount* charge_price) charge from 
- mz_detail_charge 
- WHERE patient_id = @patient_id
- AND       ledger_sn =@ledger_sn
- and charge_amount>0
- group by patient_id,times,exec_sn,order_type,bill_code";
+                        //                        string sel_detail_charge = @"
+                        //select patient_id,times,order_type,bill_code,exec_sn,sum(charge_amount* charge_price) charge from 
+                        // mz_detail_charge 
+                        // WHERE patient_id = @patient_id
+                        // AND       ledger_sn =@ledger_sn
+                        // and charge_amount>0
+                        // group by patient_id,times,exec_sn,order_type,bill_code";
+
+                        string sel_detail_charge = GetSqlByTag("mzsf_mzdetailcharge_getbypidledgeramount");
+                                               
                         //查询结果，有几条 写入几条
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
-                        para.Add("@ledger_sn", max_ledger_sn); 
+                        para.Add("@ledger_sn", max_ledger_sn);
 
 
                         var chargeItemList = connection.Query<DetailChargeItem>(sel_detail_charge, para, transaction);
@@ -1130,10 +1007,8 @@ select patient_id,times,order_type,bill_code,exec_sn,sum(charge_amount* charge_p
                                              charge = s.Sum(m => m.charge)
                                          }).ToList();
 
-                        string insert_4 = @"insert into mz_receipt_charge
-  (patient_id, ledger_sn, receipt_sn, bill_code, charge, pay_unit)
-values
-  (@patient_id, @ledger_sn, @receipt_sn, @bill_code, @charge, @pay_unit) ";
+                        string insert_4 = GetSqlByTag("mzsf_mzreceiptcharge_add");
+                         
                         foreach (var item in bill_list)
                         {
                             //写入
@@ -1147,24 +1022,9 @@ values
 
                             connection.Execute(insert_4, para, transaction);
                         }
-
-
+ 
                         //写入退费记录
-                        string sql = @"INSERT INTO mz_receipt_cancel
-         ( operator,   
-           happen_date,   
-           report_date,   
-           receipt_sn,
-           receipt_no,   
-           subsys_id,
-           mz_dept_no )  
-  VALUES ( @operator,
-            cast( convert(char(19),getdate(),121) as datetime) ,   
-           null,
-           @receipt_sn,
-           @receipt_no,   
-           @subsys_id,
-           @mz_dept_no)";
+                        string sql = GetSqlByTag("mzsf_mzreceiptcancel_add");
                         para = new DynamicParameters();
                         para.Add("@operator", opera);
                         para.Add("@receipt_sn", receipt_sn);
@@ -1172,7 +1032,7 @@ values
                         para.Add("@subsys_id", "mz");
                         para.Add("@mz_dept_no", "1");
 
-                        connection.Execute(sql, para, transaction); 
+                        connection.Execute(sql, para, transaction);
 
                         transaction.Commit();
                     }

@@ -34,9 +34,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUsers = new Sunny.UI.UIDataGridView();
-            this.btnOK = new Sunny.UI.UISymbolButton();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnOK = new Sunny.UI.UISymbolButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,6 +105,18 @@
             this.dgvUsers.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellDoubleClick);
             // 
+            // patient_id
+            // 
+            this.patient_id.DataPropertyName = "patient_id";
+            this.patient_id.HeaderText = "ID号";
+            this.patient_id.Name = "patient_id";
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "姓名";
+            this.name.Name = "name";
+            // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -119,18 +131,7 @@
             this.btnOK.Text = "确认";
             this.btnOK.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // patient_id
-            // 
-            this.patient_id.DataPropertyName = "patient_id";
-            this.patient_id.HeaderText = "ID号";
-            this.patient_id.Name = "patient_id";
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "姓名";
-            this.name.Name = "name";
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // SelectPatient
             // 
