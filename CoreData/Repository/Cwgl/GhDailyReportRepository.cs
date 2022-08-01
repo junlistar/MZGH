@@ -145,19 +145,21 @@ namespace Data.Repository
                                 para.Add("@P9", item.report_flag);
                                 connection.Execute(upsql5, para, transaction);
 
-                                //写入新数据
-                                upsql5 = GetSqlByTag("mzsf_ghopreceipt_add");
-                                para = new DynamicParameters();
-                                para.Add("@P1", item.@operator);
-                                para.Add("@P2", dtNow);
-                                para.Add("@P3", item.current_no);
-                                para.Add("@P4", item.current_no);
-                                para.Add("@P5", item.end_no);
-                                para.Add("@P6", item.step_length);
-                                para.Add("@P7", item.deleted_flag);
-                                para.Add("@P8", item.report_flag);
-                                connection.Execute(upsql5, para, transaction);
                             }
+
+                            //写入新数据
+                            var _item = ghOpReceiptCancelList.OrderByDescending(p=>p.happen_date).FirstOrDefault();
+                            string add5 = GetSqlByTag("mzsf_ghopreceipt_add");
+                            para = new DynamicParameters();
+                            para.Add("@P1", _item.@operator);
+                            para.Add("@P2", dtNow);
+                            para.Add("@P3", _item.current_no);
+                            para.Add("@P4", _item.current_no);
+                            para.Add("@P5", _item.end_no);
+                            para.Add("@P6", _item.step_length);
+                            para.Add("@P7", _item.deleted_flag);
+                            para.Add("@P8", 0);
+                            connection.Execute(add5, para, transaction);
                         }
 
                         string sql = GetSqlByTag("mzsf_hospital_get");
