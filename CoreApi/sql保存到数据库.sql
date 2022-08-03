@@ -623,3 +623,17 @@ and a.ampm=b.ampm
 where patient_id = @patient_id
 and record_sn = @record_sn"','挂号-判断用户是否同一时段重复挂号');
 
+--电子发票表
+create table fp_data(
+patient_id varchar(12) not null,
+ledger_sn int not null,
+billBatchCode varchar(50) null,
+billNo varchar(20) null,
+random varchar(20) null,
+createTime varchar(20) null,
+billQRCode text null,
+pictureUrl varchar(100) null,
+pictureNetUrl varchar(100) null,
+subsys_id varchar(12) null ,
+primary key(patient_id,ledger_sn)
+)

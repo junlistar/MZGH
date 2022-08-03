@@ -19,6 +19,10 @@ namespace Data.IRepository
 
         List<GhDeposit> GetGhRefundPayList(string request_date, string patient_id, int times);
 
+        List<GhDeposit> GetThirdPayList(string bengin, string end);
+         
+        List<GhDeposit> GetYbPayList(string bengin, string end);
+        
         #endregion
     }
 }

@@ -605,7 +605,7 @@ namespace Data.Repository.Mzsf
                             var cheque_type = pay_detail[0];
                             var charge = decimal.Parse(pay_detail[1]);
                             var out_trade_no = pay_detail[2];//订单编号
-                            var cheque_no = current_no;
+                            //var cheque_no = current_no;
                             para = new DynamicParameters();
 
 
@@ -614,14 +614,15 @@ namespace Data.Repository.Mzsf
                             para.Add("@item_no", item_no);
                             para.Add("@ledger_sn", max_ledger_sn);
                             para.Add("@cheque_type", cheque_type);
-                            para.Add("@cheque_no", cheque_no);
+                            para.Add("@cheque_no", out_trade_no);
                             para.Add("@charge", charge);
                             para.Add("@depo_status", "3");
                             para.Add("@windows_no", drugwin.window_no);
                             para.Add("@dcount_date", op_date);
                             para.Add("@dcount_id", opera);
                             para.Add("@mz_dept_no", "1");
-                            para.Add("@out_trade_no", out_trade_no);
+                            //para.Add("@out_trade_no", out_trade_no);
+                            para.Add("@out_trade_no", "");
 
                             connection.Execute(sql13, para, transaction);
 

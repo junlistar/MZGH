@@ -1057,6 +1057,32 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+        public ResponseResult<List<GhDeposit>> GetThirdPayList(string bengin, string end)
+        {
+            Log.Information($"GetThirdPayList,{bengin},{end}");
+            try
+            {
+                return _ghDepositRepository.GetThirdPayList(bengin, end);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GhDeposit>>(ex.Message);
+            }
+        }
+        public ResponseResult<List<GhDeposit>> GetYbPayList(string bengin, string end)
+        {
+            Log.Information($"GetYbPayList,{bengin},{end}");
+            try
+            {
+                return _ghDepositRepository.GetYbPayList(bengin, end);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GhDeposit>>(ex.Message);
+            }
+        } 
 
     }
 }

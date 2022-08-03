@@ -187,5 +187,30 @@ namespace Data.Repository
             return Select(sql, para);
         }
 
+
+        public List<GhDeposit> GetThirdPayList(string bengin, string end)
+        {
+
+            string sql = GetSqlByTag("mzgh_ghdeposit_getthridpaylist");
+
+            var para = new DynamicParameters();
+            para.Add("@bengin_date", bengin);
+            para.Add("@end_date", end); 
+
+
+            return Select(sql, para);
+        }
+        public List<GhDeposit> GetYbPayList(string bengin, string end)
+        {
+
+            string sql = GetSqlByTag("mzgh_ghdeposit_getybpaylist");
+
+            var para = new DynamicParameters();
+            para.Add("@bengin_date", bengin);
+            para.Add("@end_date", end);
+
+
+            return Select(sql, para);
+        }
     }
 }

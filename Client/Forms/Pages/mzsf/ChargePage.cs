@@ -361,31 +361,59 @@ namespace Mzsf.Forms.Pages
                     {
                         SessionHelper.mzOrders = result.data;
                         SessionHelper.cprCharges = detail_result.data;
-                        if (detail_result.data.Count > 0)
+                        if (result.data.Count > 0)
                         {
                             int pageIndex = 0;
-                            for (int i = 0; i < result.data.Count; i++)
+                            foreach (var orderVM in SessionHelper.mzOrders)
                             {
-                                if (detail_result.data.Where(p => p.order_no == result.data[i].order_no).Count() > 0)
+                                OrderItemPage page;
+                                if (detail_result.data != null && detail_result.data.Where(p => p.order_no == orderVM.order_no).Count() == 0)
                                 {
-                                    var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
-                                    page.TagString = result.data[i].order_no.ToString();
-                                    page.setData = UpdateBottomPrice;
-
-                                    uiTabControl1.AddPage(page);
-                                    //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
-                                    uiTabControl1.TabPages[pageIndex].Text = result.data[i].title;
-                                    pageIndex++;
+                                    page = new OrderItemPage(orderVM.order_no, orderVM.order_type, true);
                                 }
+                                else
+                                {
+                                    page = new OrderItemPage(orderVM.order_no, orderVM.order_type);
+                                }
+                                page.TagString = orderVM.order_no.ToString();
+                                page.setData = UpdateBottomPrice;
+
+                                uiTabControl1.AddPage(page);
+                                uiTabControl1.TabPages[pageIndex].Text = orderVM.title;
+                                //uiTabControl1.TabPages[pageIndex].showclo
+                                pageIndex++;
                             }
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
-                            pblSum.Show(); //this.pnlAddOrder.Show();
-                            uiTabControl1.ShowCloseButton = true;
+                            pblSum.Show();
+                            uiTabControl1.ShowActiveCloseButton = true;
 
-                            //锁定处方
-                            LockOrder(SessionHelper.uservm.user_mi, patient_id, times, "2");
-                            is_order_lock = true;
+
+                            return;
+
+                            //int pageIndex = 0;
+                            //for (int i = 0; i < result.data.Count; i++)
+                            //{
+                            //    if (detail_result.data.Where(p => p.order_no == result.data[i].order_no).Count() > 0)
+                            //    {
+                            //        var page = new OrderItemPage(result.data[i].order_no, result.data[i].order_type);
+                            //        page.TagString = result.data[i].order_no.ToString();
+                            //        page.setData = UpdateBottomPrice;
+
+                            //        uiTabControl1.AddPage(page);
+                            //        //uiTabControl1.AddPage(new OrderItemPage(result.data[i].order_no, result.data[i].order_type));
+                            //        uiTabControl1.TabPages[pageIndex].Text = result.data[i].title;
+                            //        pageIndex++;
+                            //    }
+                            //}
+                            //uiTabControl1.Show();
+                            //BindBottomChargeInfo(0);
+                            //pblSum.Show(); //this.pnlAddOrder.Show();
+                            //uiTabControl1.ShowCloseButton = true;
+
+                            ////锁定处方
+                            //LockOrder(SessionHelper.uservm.user_mi, patient_id, times, "2");
+                            //is_order_lock = true;
                         }
                         else
                         {
@@ -530,7 +558,7 @@ namespace Mzsf.Forms.Pages
             rc.ShowDialog();
         }
 
-      
+
 
         Color lvse = Color.FromArgb(110, 190, 40);
         Color hongse = Color.FromArgb(230, 80, 80);
@@ -737,17 +765,19 @@ namespace Mzsf.Forms.Pages
 
         public void BindBottomChargeInfo(int tabindex)
         {
-            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
-.Select(g => g.First()).Select(p => p.order_no)
-.ToList();
+            //            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+            //.Select(g => g.First()).Select(p => p.order_no)
+            //.ToList();
 
-            if (tabindex >= order_list.Count)
-            {
-                return;
-            }
-            var order_no = order_list[tabindex];
+            //            if (tabindex >= order_list.Count)
+            //            {
+            //                return;
+            //            }
+            //            var order_no = order_list[tabindex];
 
-            var order = SessionHelper.cprCharges.Where(p => p.order_no == order_no);
+            var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
+
+            var order = SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no);
 
             lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
             lblOrderItemCount.Text = order.Count().ToString();
@@ -775,7 +805,8 @@ namespace Mzsf.Forms.Pages
                     if (SessionHelper.do_sf_print)
                     {
 
-                        Task.Run(()=>{
+                        Task.Run(() =>
+                        {
                             try
                             {
 
@@ -792,7 +823,7 @@ namespace Mzsf.Forms.Pages
 
                             }
                         });
-                       
+
                     }
                     //查询处方
                     SearchUser();
@@ -829,11 +860,20 @@ namespace Mzsf.Forms.Pages
             {
                 SessionHelper.cprCharges = new List<CprChargesVM>();
             }
-
-            int max_order_no = 0;
-            if (SessionHelper.cprCharges.Count > 0)
+            if (SessionHelper.mzOrders == null)
             {
-                max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
+                SessionHelper.mzOrders = new List<MzOrderVM>();
+            }
+            int max_order_no = 0;
+
+            //if (SessionHelper.cprCharges.Count > 0)
+            if (SessionHelper.mzOrders != null && SessionHelper.mzOrders.Count > 0)
+            {
+                //max_order_no = SessionHelper.cprCharges.Max(p => p.order_no);
+                max_order_no = SessionHelper.mzOrders.Max(p => p.order_no);
+
+
+
             }
             //else
             //{
@@ -858,6 +898,11 @@ namespace Mzsf.Forms.Pages
             uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + (max_order_no + 1) + "：" + cbxOrderType.Text;
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
             uiTabControl1.ShowCloseButton = true;
+
+            var _order = new MzOrderVM();
+            _order.order_no = max_order_no + 1;
+            _order.order_type = cbxOrderType.SelectedValue.ToString();
+            SessionHelper.mzOrders.Add(_order);
         }
 
         public bool CreateVisitRecord()
@@ -1019,23 +1064,58 @@ namespace Mzsf.Forms.Pages
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
         {
-            var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
-.Select(g => g.First()).Select(p => p.order_no)
-.ToList();
-            if (index >= order_list.Count)
+            var _order = SessionHelper.mzOrders.Where(p => p.order_no == index+1).FirstOrDefault();
+            if (_order != null)
             {
-                return true;
-            }
-            var order_no = order_list[index];
-
-            foreach (var item in SessionHelper.cprCharges.ToArray())
-            {
-                if (item.order_no == order_no)
+                if (!string.IsNullOrEmpty(_order.group_no) && SessionHelper.cprCharges != null && SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no).Count() == 0)
                 {
-                    SessionHelper.cprCharges.Remove(item);
+                    UIMessageTip.ShowError("医生处方不能删除！");
+                    return false;
+                }
+                else
+                { 
+                    var _order_no = _order.order_no;
+                    SessionHelper.mzOrders.Remove(_order);
+                    foreach (var item in SessionHelper.cprCharges.ToArray())
+                    {
+                        if (item.order_no == _order_no)
+                        {
+                            SessionHelper.cprCharges.Remove(item);
+                        }
+                    }
                 }
             }
 
+
+            // var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+            //.Select(g => g.First()).Select(p => p.order_no)
+            //.ToList();
+            //            if (index >= order_list.Count)
+            //            {
+            //                var order_no = order_list[index];
+
+            //                foreach (var item in SessionHelper.cprCharges.ToArray())
+            //                {
+            //                    if (item.order_no == order_no)
+            //                    {
+            //                        SessionHelper.cprCharges.Remove(item);
+            //                    }
+            //                }
+            //            }
+
+            //            if (index >= order_list.Count)
+            //            {
+            //                var order_no = order_list[index];
+
+            //                foreach (var item in SessionHelper.mzOrders.ToArray())
+            //                {
+            //                    if (item.order_no == order_no)
+            //                    {
+            //                        SessionHelper.mzOrders.Remove(item);
+            //                    }
+            //                }
+
+            //            }
 
             return true;
         }

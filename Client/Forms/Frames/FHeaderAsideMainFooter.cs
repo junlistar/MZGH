@@ -19,6 +19,7 @@ using Client.Forms.Pages.cwgl;
 using Client.Forms.Pages.qxgl;
 using System.Linq;
 using Client.Forms.Pages.yhbb;
+using Client.Forms.Pages.zfgl;
 
 namespace Client
 {
@@ -101,8 +102,15 @@ namespace Client
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
+
+                pageIndex = 1600;
+                parent = Aside.CreateNode("支付管理", 361573, 24, pageIndex);
+                Aside.CreateChildNode(parent, "医保支付", 361875, 24, 1601);
+                Aside.CreateChildNode(parent, "窗口支付", 361875, 24, 1602);
+                Aside.CreateChildNode(parent, "自助支付", 361875, 24, 1603);
+
 
                 //foreach (var item in all_list.ToArray())
                 //{
@@ -221,7 +229,23 @@ namespace Client
                         Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                     }
                 }
-
+                pageIndex = 1600;
+                if (function_list.Where(p => p.func_desc.Trim() == "支付管理").Count() > 0)
+                {
+                    parent = Aside.CreateNode("支付管理", 361573, 24, pageIndex);
+                    if (function_list.Where(p => p.func_desc.Trim() == "医保支付").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "医保支付", 361875, 24, 1601);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "窗口支付").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "窗口支付", 361875, 24, 1602);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "自助支付").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "自助支付", 361875, 24, 1603);
+                    }
+                }
             } 
             //设置Header节点索引
 
@@ -285,6 +309,12 @@ namespace Client
                         obj = new FunctionList(); break;
                     case 1502:
                         obj = new UserManage(); break;
+                    case 1601:
+                        obj = new YBPay();break;
+                    case 1602:
+                        obj = new WindowPay(); break;
+                    case 1603:
+                        obj = new SelfPay(); break;
                     default:
                         break;
                 }

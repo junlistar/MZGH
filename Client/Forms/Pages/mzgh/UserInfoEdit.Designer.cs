@@ -309,6 +309,7 @@
             this.lklduka.TabIndex = 35;
             this.lklduka.TabStop = true;
             this.lklduka.Text = "读卡";
+            this.lklduka.Visible = false;
             this.lklduka.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.lklduka.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.lklduka.Click += new System.EventHandler(this.lklduka_Click);

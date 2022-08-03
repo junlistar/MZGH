@@ -35,7 +35,7 @@
             this.btnHoutian = new Sunny.UI.UIButton();
             this.btnMingtian = new Sunny.UI.UIButton();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
-            this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
+            this.btnRePrint = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
             this.btnTuihao = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
@@ -92,7 +92,7 @@
             this.pnlTitle.Controls.Add(this.btnHoutian);
             this.pnlTitle.Controls.Add(this.btnMingtian);
             this.pnlTitle.Controls.Add(this.uiSymbolButton1);
-            this.pnlTitle.Controls.Add(this.uiSymbolButton3);
+            this.pnlTitle.Controls.Add(this.btnRePrint);
             this.pnlTitle.Controls.Add(this.uiSymbolButton2);
             this.pnlTitle.Controls.Add(this.btnTuihao);
             this.pnlTitle.Controls.Add(this.lblTitle);
@@ -229,20 +229,31 @@
             this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
             // 
-            // uiSymbolButton3
+            // btnRePrint
             // 
-            this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton3.Location = new System.Drawing.Point(769, 16);
-            this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton3.Name = "uiSymbolButton3";
-            this.uiSymbolButton3.Size = new System.Drawing.Size(101, 35);
-            this.uiSymbolButton3.Symbol = 61487;
-            this.uiSymbolButton3.TabIndex = 9;
-            this.uiSymbolButton3.Text = "重打";
-            this.uiSymbolButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton3.Visible = false;
-            this.uiSymbolButton3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnRePrint.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRePrint.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnRePrint.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnRePrint.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnRePrint.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnRePrint.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnRePrint.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRePrint.Location = new System.Drawing.Point(600, 3);
+            this.btnRePrint.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnRePrint.Name = "btnRePrint";
+            this.btnRePrint.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnRePrint.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnRePrint.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnRePrint.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnRePrint.Size = new System.Drawing.Size(105, 60);
+            this.btnRePrint.Style = Sunny.UI.UIStyle.Colorful;
+            this.btnRePrint.StyleCustomMode = true;
+            this.btnRePrint.Symbol = 61487;
+            this.btnRePrint.TabIndex = 9;
+            this.btnRePrint.Text = "补打";
+            this.btnRePrint.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRePrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnRePrint.Click += new System.EventHandler(this.btnRePrint_Click);
             // 
             // uiSymbolButton2
             // 
@@ -940,7 +951,7 @@
         private Sunny.UI.UILabel uiLabel13;
         private Sunny.UI.UILabel lblbirth;
         private Sunny.UI.UILabel uiLabel16;
-        private Sunny.UI.UISymbolButton uiSymbolButton3;
+        private Sunny.UI.UISymbolButton btnRePrint;
         private Sunny.UI.UIButton btnHoutian;
         private Sunny.UI.UIButton btnMingtian;
         private Sunny.UI.UISymbolButton uiSymbolButton4;

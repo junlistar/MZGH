@@ -44,6 +44,12 @@
     <None Update="Properties\launchSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_ghdeposit_getybpaylist.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzgh_ghdeposit_getthridpaylist.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_ghrequest_getbydate2.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

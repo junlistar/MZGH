@@ -20,6 +20,7 @@ namespace Mzsf.Forms.Pages
         public static int testno = 0;
         int _order_no = 0;
         string _order_type;
+        bool _is_charge;
         public static string str = "";
 
         private static ILog log = LogManager.GetLogger(typeof(ChargePage));//typeof放当前类
@@ -29,25 +30,42 @@ namespace Mzsf.Forms.Pages
 
         Dictionary<string, int> kucun_dic = new Dictionary<string, int>();
 
-        public OrderItemPage(int order_no, string order_type)
+        public OrderItemPage(int order_no, string order_type,bool is_charge=false)
         {
             InitializeComponent();
             _order_no = order_no;
             _order_type = order_type;
+            _is_charge = is_charge;
         }
 
         private void OrderItemPage_Load(object sender, EventArgs e)
         {
-            if (SessionHelper.cprCharges.Count(p => p.order_no == _order_no) > 0)
+            if (_is_charge)
             {
                 btnAddItem.Visible = false;
                 btnDeleteItem.Visible = false;
+                dgvOrderDetail.Visible = false;
+                uiPanel1.Visible = false;
+
+                lblNodata.Text = "已收费处方"; 
+                lblNodata.Show();
+            }
+            else
+            { 
+                lblNodata.Hide();
+
+                if (SessionHelper.cprCharges.Count(p => p.order_no == _order_no) > 0)
+                {
+                    btnAddItem.Visible = false;
+                    btnDeleteItem.Visible = false;
+                }
+
+                InitUI();
+                GetData();
+
+                txtName.Focus();
             }
 
-            InitUI();
-            GetData();
-
-            txtName.Focus();
         }
 
 
@@ -303,7 +321,7 @@ namespace Mzsf.Forms.Pages
         UIDataGridView dgv = new UIDataGridView();
         private void txtName_TextChanged(object sender, EventArgs e)
         {
-            if (txtName.Text.Trim().Length < 2)
+            if (txtName.Text.Length < 2)
             {
                 return;
             }

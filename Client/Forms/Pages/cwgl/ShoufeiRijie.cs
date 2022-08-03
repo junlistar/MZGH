@@ -312,7 +312,8 @@ namespace Client.Forms.Pages.cwgl
                             }
                             else
                             {
-                                MessageBox.Show("该报表无数据");
+                                pnlReport.Text = "该报表无数据";
+                                UIMessageTip.Show("该报表无数据");
                             }
 
                         }

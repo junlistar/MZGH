@@ -232,16 +232,9 @@ namespace Client
                     {
                         var pid = result.data[i].patient_id;
                         if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
-                        {
-                            //UIMessageTip.ShowError("系统中已存在此身份证号!");
-
+                        { 
                             //if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
-                            if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
-                            {
-                                sfz_card_no.Focus();
-                                return;
-                            }
-                            else
+                            if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
                             {
                                 //调取最后一次记录Id 
                                 SessionHelper.cardno = result.data[0].p_bar_code;
@@ -642,29 +635,36 @@ namespace Client
 
                 if (result.status == 1)
                 {
-                    var sfz_info = result.data.FirstOrDefault();
-                    sfz_card_no.Text = sfz_info.card_no;
-                    sfz_name.Text = sfz_info.name;
-                    if (sfz_info.sex == "1")
+                    if (result.data != null && result.data.Count > 0)
                     {
-                        sfz_sex.Text = "男";
-                    }
-                    else if (sfz_info.sex == "2")
-                    {
-                        sfz_sex.Text = "女";
+                        var sfz_info = result.data.FirstOrDefault();
+                        sfz_card_no.Text = sfz_info.card_no;
+                        sfz_name.Text = sfz_info.name;
+                        if (sfz_info.sex == "1")
+                        {
+                            sfz_sex.Text = "男";
+                        }
+                        else if (sfz_info.sex == "2")
+                        {
+                            sfz_sex.Text = "女";
+                        }
+                        else
+                        {
+                            sfz_sex.Text = sfz_info.sex;
+                        }
+                        DateTime _dt = DateTime.MinValue;
+                        if (DateTime.TryParse(sfz_info.birthday, out _dt))
+                        {
+                            sfz_birthday.Text = _dt.ToShortDateString();
+                        }
+                        sfz_folk.Text = sfz_info.folk;
+                        sfz_address.Text = sfz_info.address;
+                        sfz_address.Text = sfz_info.home_address;
                     }
                     else
                     {
-                        sfz_sex.Text = sfz_info.sex;
+                        UIMessageTip.ShowError("没有获取到用户身份证信息");
                     }
-                    DateTime _dt = DateTime.MinValue;
-                    if (DateTime.TryParse(sfz_info.birthday, out _dt))
-                    {
-                        sfz_birthday.Text = _dt.ToShortDateString();
-                    }
-                    sfz_folk.Text = sfz_info.folk;
-                    sfz_address.Text = sfz_info.address;
-                    sfz_address.Text = sfz_info.home_address;
                 }
                 else
                 {

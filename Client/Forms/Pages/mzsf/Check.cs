@@ -362,88 +362,87 @@ namespace Mzsf.Forms.Pages
                 }
                 //todo:医保支付
 
-                ////机制号
-                //var sn_no = GetReceiptMaxNo();
-                //max_sn = int.Parse(sn_no);
+                //机制号
+                var sn_no = GetReceiptMaxNo();
+                var max_sn = int.Parse(sn_no);
 
-                ////门诊挂号
-                //YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
-                //ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
+                //门诊挂号
+                YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
+                ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
 
-                //ghRequest.msgid = YBHelper.msgid;
-                //ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                //ghRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
-                //ghRequest.recer_sys_code = YBHelper.recer_sys_code;
-                //ghRequest.dev_no = "";
-                //ghRequest.dev_safe_info = "";
-                //ghRequest.cainfo = "";
-                //ghRequest.signtype = "";
-                //ghRequest.infver = YBHelper.infver;
-                //ghRequest.opter_type = YBHelper.opter_type;
-                //ghRequest.opter = SessionHelper.uservm.user_mi;
-                //ghRequest.opter_name = SessionHelper.uservm.name;
-                //ghRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                //ghRequest.fixmedins_code = YBHelper.fixmedins_code;
-                //ghRequest.fixmedins_name = YBHelper.fixmedins_name;
-                //ghRequest.sign_no = YBHelper.msgid;
+                ghRequest.msgid = YBHelper.msgid;
+                ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                ghRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
+                ghRequest.recer_sys_code = YBHelper.recer_sys_code;
+                ghRequest.dev_no = "";
+                ghRequest.dev_safe_info = "";
+                ghRequest.cainfo = "";
+                ghRequest.signtype = "";
+                ghRequest.infver = YBHelper.infver;
+                ghRequest.opter_type = YBHelper.opter_type;
+                ghRequest.opter = SessionHelper.uservm.user_mi;
+                ghRequest.opter_name = SessionHelper.uservm.name;
+                ghRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                ghRequest.fixmedins_code = YBHelper.fixmedins_code;
+                ghRequest.fixmedins_name = YBHelper.fixmedins_name;
+                ghRequest.sign_no = YBHelper.msgid;
 
-                //ghRequest.input = new RepModel<GHRequestModel>();
-                //ghRequest.input.data = new GHRequestModel();
+                ghRequest.input = new RepModel<GHRequestModel>();
+                ghRequest.input.data = new GHRequestModel();
 
-                //ghRequest.input.data.psn_no = SessionHelper.patientVM.yb_psn_no.Trim();
-                //ghRequest.input.data.insutype = SessionHelper.patientVM.yb_insutype.Trim();
+                ghRequest.input.data.psn_no = SessionHelper.patientVM.yb_psn_no.Trim();
+                ghRequest.input.data.insutype = SessionHelper.patientVM.yb_insutype.Trim();
 
-                //ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                ////ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
-                ////ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
-                //ghRequest.input.data.mdtrt_cert_type = "02";//身份证
-                //ghRequest.input.data.mdtrt_cert_no = SessionHelper.patientVM.hic_no;
+                ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
+                //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
+                ghRequest.input.data.mdtrt_cert_type = "02";//身份证
+                ghRequest.input.data.mdtrt_cert_no = SessionHelper.patientVM.hic_no;
 
-                //ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
-                //ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
-                //ghRequest.input.data.dr_name = vm.doctor_name;
-                //ghRequest.input.data.dept_code = vm.unit_name;
-                //ghRequest.input.data.dept_name = vm.unit_name;
-                //ghRequest.input.data.caty = vm.clinic_name;
+                ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
+                ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
+                ghRequest.input.data.dr_name = "1";
+                ghRequest.input.data.dept_code = "1";
+                ghRequest.input.data.dept_name = "1";
+                ghRequest.input.data.caty = "1";
 
-                //json = WebApiHelper.SerializeObject(ghRequest);
+                json = WebApiHelper.SerializeObject(ghRequest);
 
-                //BusinessID = "2201";
-                //Dataxml = json;
-                //Outputxml = "";
-                //parm = new object[] { BusinessID, json, Outputxml };
+                BusinessID = "2201";
+                Dataxml = json;
+                Outputxml = "";
+                parm = new object[] { BusinessID, json, Outputxml };
 
-                //var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                //log.Debug(parm[2]);
+                log.Debug(parm[2]);
 
-                //var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+                var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
 
-                //if (!string.IsNullOrEmpty(resp.err_msg))
-                //{
-                //    MessageBox.Show(resp.err_msg);
-                //    log.Error(resp.err_msg);
-                //}
-                //else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
-                //{
-                //    //MessageBox.Show(resp.output.data.mdtrt_id);
+                if (!string.IsNullOrEmpty(resp.err_msg))
+                {
+                    MessageBox.Show(resp.err_msg);
+                    log.Error(resp.err_msg);
+                }
+                else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
+                {
+                    //MessageBox.Show(resp.output.data.mdtrt_id);
 
-                //    //保存医保支付信息，用于退款
-                //    YBHelper.currentYBPay = resp;
-                //    //就诊ID 医保返回唯一流水
-                //    string mdtrt_id = resp.output.data.mdtrt_id;
-                //    //人员编号
-                //    string psn_no = resp.output.data.psn_no;
-                //    //住院/门诊号
-                //    string ipt_otp_no = resp.output.data.ipt_otp_no;
+                    //保存医保支付信息，用于退款
+                    YBHelper.currentYBPay = resp;
+                    //就诊ID 医保返回唯一流水
+                    string mdtrt_id = resp.output.data.mdtrt_id;
+                    //人员编号
+                    string psn_no = resp.output.data.psn_no;
+                    //住院/门诊号
+                    string ipt_otp_no = resp.output.data.ipt_otp_no;
 
 
-                //    return true; 
-                //}
+                    return true;
+                }
 
-                //MessageBox.Show("支付失败！");
-
-                return true;
+                MessageBox.Show("支付失败！");
+                 
             }
             catch (Exception ex)
             {
@@ -514,7 +513,7 @@ namespace Mzsf.Forms.Pages
             try
             {
 
-                string paramurl = string.Format($"/api/mzsf/GetNewReceiptMaxSN");
+                string paramurl = string.Format($"/api/guahao/GetNewReceiptMaxSN");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 

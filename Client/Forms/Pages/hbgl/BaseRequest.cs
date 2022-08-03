@@ -591,18 +591,19 @@ namespace Client
             var tmp = new List<BaseRequestVM>();
             var ds = tmp.Select(p => new
             {
-                request_sn,
-                unit_name,
-                group_name,
-                doct_name,
-                clinic_name,
-                weekstr,
-                daystr,
-                apstr,
-                winnostr,
-                totle_num,
-                open_flag_str,
-                op_date_str
+                request_sn = p.request_sn,
+                unit_name = p.unit_name,
+                group_name = p.group_name,
+                doct_name = p.doct_name,
+                clinic_name = p.clinic_name,
+                weekstr = p.weekstr,
+                daystr = p.daystr,
+                apstr = p.apstr,
+                winnostr = p.winnostr,
+                totle_num = p.totle_num,
+                open_flag_str = p.open_flag_str,
+                op_date_str = p.op_date_str,
+                limit_appoint_percent = p.limit_appoint_percent
             }).ToList();
             dgvlist.DataSource = ds;
         }

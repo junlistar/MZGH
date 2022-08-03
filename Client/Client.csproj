@@ -354,6 +354,36 @@
     <Compile Include="Forms\Pages\yhbb\UserReport.Designer.cs">
       <DependentUpon>UserReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\zfgl\SelfPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\zfgl\SelfPay.Designer.cs">
+      <DependentUpon>SelfPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\zfgl\WindowPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\zfgl\WindowPay.Designer.cs">
+      <DependentUpon>WindowPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\zfgl\YBPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\zfgl\YBPay.Designer.cs">
+      <DependentUpon>YBPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\EditPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\EditPwd.Designer.cs">
+      <DependentUpon>EditPwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\ForgetPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\ForgetPwd.Designer.cs">
+      <DependentUpon>ForgetPwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\Print.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -577,6 +607,7 @@
     <Compile Include="ViewModel\BaseRequestVM.cs" />
     <Compile Include="ViewModel\RequestTimeVM.cs" />
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
+    <Compile Include="ViewModel\DepositVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
@@ -692,6 +723,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\yhbb\UserReport.resx">
       <DependentUpon>UserReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\zfgl\SelfPay.resx">
+      <DependentUpon>SelfPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\zfgl\WindowPay.resx">
+      <DependentUpon>WindowPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\zfgl\YBPay.resx">
+      <DependentUpon>YBPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\EditPwd.resx">
+      <DependentUpon>EditPwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\Print.resx">
       <DependentUpon>Print.cs</DependentUpon>

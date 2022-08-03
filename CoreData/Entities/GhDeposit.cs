@@ -5,7 +5,8 @@ namespace Data.Entities
     public class GhDeposit : BaseModel
     { 
         public string patient_id { get; set; }
-         
+        public string patient_name { get; set; }
+
         public int item_no { get; set; }
         public int ledger_sn { get; set; }
         public int times { get; set; }

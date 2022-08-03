@@ -1611,5 +1611,12 @@ namespace Client
             rc.FormClosed += Rc_FormClosed;
             rc.ShowDialog();
         }
+
+        private void btnRePrint_Click(object sender, EventArgs e)
+        {
+            //补打电子发票
+
+
+        }
     }
 }

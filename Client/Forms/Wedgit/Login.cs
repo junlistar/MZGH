@@ -12,7 +12,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using ThoughtWorks.QRCode.Codec;
 
 namespace Client.Forms.Wedgit
 {
@@ -20,6 +20,8 @@ namespace Client.Forms.Wedgit
     {
         private static ILog log = LogManager.GetLogger(typeof(Login));//typeof放当前类
         public bool IsLogin = false;
+        Color iconColor = Color.FromArgb(48, 48, 48);
+
 
         public Login()
         {
@@ -117,8 +119,122 @@ namespace Client.Forms.Wedgit
         }
 
         private void Login_Load(object sender, EventArgs e)
-        {
+        { 
+
             txtName.Focus();
+        }
+
+        private void uiSymbolLabel1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void uiSymbolLabel1_MouseEnter(object sender, EventArgs e)
+        { 
+            uiSymbolLabel1.SymbolColor = Color.Red;
+        }
+
+        private void uiSymbolLabel1_MouseLeave(object sender, EventArgs e)
+        {
+            uiSymbolLabel1.SymbolColor = iconColor;
+        }
+
+        private void uiSymbolLabel2_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void uiSymbolLabel2_MouseEnter(object sender, EventArgs e)
+        {
+
+            uiSymbolLabel2.SymbolColor = Color.Red;
+        }
+
+        private void uiSymbolLabel2_MouseLeave(object sender, EventArgs e)
+        {
+            uiSymbolLabel2.SymbolColor = iconColor;
+        }
+
+        private void uiSymbolLabel3_MouseEnter(object sender, EventArgs e)
+        {
+            uiSymbolLabel3.SymbolColor = Color.Red;
+        }
+
+        private void uiSymbolLabel3_MouseLeave(object sender, EventArgs e)
+        {
+            uiSymbolLabel3.SymbolColor = iconColor;
+        }
+        private Point mouseLocation;//表示鼠标对于窗口左上角的坐标的负数
+        private bool isDragging;//标识鼠标是否按下
+        private void Login_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                mouseLocation = new Point(-e.X, -e.Y);
+                //表示鼠标当前位置相对于窗口左上角的坐标，
+                //并取负数,这里的e是参数，
+                //可以获取鼠标位置
+                isDragging = true;//标识鼠标已经按下
+            } 
+        }
+
+        private void Login_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                Point newMouseLocation = MousePosition;
+                //获取鼠标当前位置
+                newMouseLocation.Offset(mouseLocation.X, mouseLocation.Y);
+                //用鼠标当前位置加上鼠标相较于窗体左上角的
+                //坐标的负数，也就获取到了新的窗体左上角位置
+                Location = newMouseLocation;//设置新的窗体左上角位置
+            } 
+        }
+
+        private void Login_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (isDragging)
+            {
+                isDragging = false;//鼠标已抬起，标识为false
+            }
+
+        }
+
+        private void btnScanLogin_Click(object sender, EventArgs e)
+        {
+            if (btnScanLogin.Text=="扫码登录")
+            {
+                //扫码登录  获取手机号登录
+
+                string _url = "12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+
+
+                //初始化二维码生成工具
+                QRCodeEncoder qrCodeEncoder = new QRCodeEncoder();
+                qrCodeEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
+                qrCodeEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
+                qrCodeEncoder.QRCodeVersion = 0;
+                qrCodeEncoder.QRCodeScale = 4;
+
+                //将字符串生成二维码图片
+                Bitmap img = qrCodeEncoder.Encode(_url, Encoding.Default);
+                imgQRCode.Image = img;
+                imgQRCode.Show();
+                imgQRCode.BringToFront();
+                btnScanLogin.Text = "账号登录";
+            }
+            else
+            {
+                imgQRCode.Hide();
+                btnScanLogin.Text = "扫码登录";
+            }
+            
+
+        }
+
+        private void btnEditPwd_Click(object sender, EventArgs e)
+        {
+            EditPwd editPwd = new EditPwd();
+            editPwd.ShowDialog();
         }
     }
 }
