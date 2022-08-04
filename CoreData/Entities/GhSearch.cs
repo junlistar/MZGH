@@ -34,7 +34,7 @@ namespace Data.Entities
         public string receipt_no { get; set; }
         public string p_bar_code { get; set; }
 
-
+        public int ledger_sn { get; set; }
 
     }
 }

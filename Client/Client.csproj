@@ -605,6 +605,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\ElectBillModel.cs" />
     <Compile Include="ViewModel\RequestTimeVM.cs" />
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\DepositVM.cs" />

@@ -40,6 +40,7 @@ namespace CoreApi.Controllers
         private readonly IMzDepositRepository _mzDepositRepository;
         private readonly IOrderTypeRepository _orderTypeRepository;
         private readonly IMzOrderItemRepository _mzOrderItemRepository;
+        private readonly IFpDataRepository _fpDataRepository;
 
 
 
@@ -48,7 +49,8 @@ namespace CoreApi.Controllers
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IChargeItemRepository chargeItemRepository,
             IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository,
             IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository,
-            IMzDepositRepository mzDepositRepository, IOrderTypeRepository orderTypeRepository, IMzOrderItemRepository mzOrderItemRepository)
+            IMzDepositRepository mzDepositRepository, IOrderTypeRepository orderTypeRepository, IMzOrderItemRepository mzOrderItemRepository,
+            IFpDataRepository fpDataRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository;
@@ -67,6 +69,7 @@ namespace CoreApi.Controllers
             _mzDepositRepository = mzDepositRepository;
             _orderTypeRepository = orderTypeRepository;
             _mzOrderItemRepository = mzOrderItemRepository;
+            _fpDataRepository = fpDataRepository;
         }
 
 
@@ -141,7 +144,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-         
+
         public ResponseResult<List<ChargeType>> GetChargeTypes()
         {
             Log.Information($"GetChargeTypes");
@@ -248,7 +251,7 @@ namespace CoreApi.Controllers
             var list = new List<MzVisit>();
             try
             {
-                list = _mzVisitRepository.CreateVisitRecord(haoming_code,  patient_id,  times,  expertflag,  unit_sn,  doctor_sn);
+                list = _mzVisitRepository.CreateVisitRecord(haoming_code, patient_id, times, expertflag, unit_sn, doctor_sn);
             }
             catch (Exception ex)
             {
@@ -334,7 +337,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
-        public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date, string bar_code,string status)
+        public ResponseResult<List<MzOrderReceipt>> GetReceipts(string cash_opera, string begin_date, string end_date, string bar_code, string status)
         {
             Log.Information($"GetReceipts,{cash_opera},{begin_date},{end_date},{bar_code},{status}");
             try
@@ -402,7 +405,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        }  
+        }
 
         public ResponseResult<bool> CallCprCharges(string user_mi, string patient_id, int times, string status)
         {
@@ -445,5 +448,31 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<MzOrderItem>>(ex.Message);
             }
         }
+        public ResponseResult<bool> AddFpData(string patient_id, int ledger_sn, string billBatchCode, string billNo, string random, string createTime, string billQRCode, string pictureUrl, string pictureNetUrl, string subsys_id)
+        {
+            Log.Information($"AddFpData,{patient_id},{ledger_sn},{billBatchCode},{billNo},{random},{createTime},{billQRCode},{pictureUrl},{pictureNetUrl},{subsys_id}");
+            try
+            {
+                return _fpDataRepository.AddFpData(patient_id, ledger_sn, billBatchCode, billNo, random, createTime, billQRCode, pictureUrl, pictureNetUrl, subsys_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
+        {
+            Log.Information($"GetFpDatasByParams,{patient_id},{ledger_sn},{subsys_id}");
+            try
+            {
+                return _fpDataRepository.GetFpDatasByParams(patient_id, ledger_sn, subsys_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<FpData>>(ex.Message);
+            }
+        } 
     }
 }

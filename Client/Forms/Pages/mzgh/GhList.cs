@@ -16,6 +16,7 @@ using Client.FastReportLib;
 using Client.ViewModel;
 using FastReport;
 using log4net;
+using Newtonsoft.Json;
 using Sunny.UI;
 
 namespace Client
@@ -1268,6 +1269,60 @@ namespace Client
                 //dr.DefaultCellStyle.ForeColor = Color.Green;
 
             }
+        }
+
+        private void btnRePrint_Click(object sender, EventArgs e)
+        {
+            //补打电子发票
+
+            //查询电子发票记录表
+
+
+            string ip = "127.0.0.1";
+            string port = "13526";
+            string dllName = "NontaxIndustry";
+            string func = "CallNontaxIndustry";
+
+            string noise = Guid.NewGuid().ToString();
+
+            string appid = "JZSZXYY0561116";
+            string key = "08d7323b667db6b93bcb1be7d7";
+            string version = "1.0";
+
+            string method = "printElectBill";
+
+            var _data = new
+            {
+                billBatchCode = "42060120",
+                billNo = "0008214465",
+                random = "a87b2c",
+            };
+
+            var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
+            var stringSignTemp = stringA + $"&key={key}&version={version}";
+
+            var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
+
+            var _params = new
+            {
+                appid = appid,
+                data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
+                noise = noise,
+                version = version,
+                sign = _sign
+            };
+
+            var _payload = new
+            {
+                method = method,
+                @params = _params
+            };
+            string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
+
+
+            string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
+
+            var result = HttpClientUtil.Get(url);
         }
     }
 }

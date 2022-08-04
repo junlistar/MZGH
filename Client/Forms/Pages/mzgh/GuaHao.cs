@@ -22,6 +22,7 @@ using System.Reflection;
 using System.Threading;
 using Client.Forms.Wedgit;
 using Client.Forms.Pages.mzgh;
+using Newtonsoft.Json;
 
 namespace Client
 {
@@ -556,9 +557,6 @@ namespace Client
         /// <param name="e"></param>
         private void btnClinic_Click(object sender, EventArgs e)
         {
-            //todo:判断是否挂了相同的号
-
-
             var btn = sender as UIButton;
             foreach (var item in clinicList)
             {
@@ -574,8 +572,8 @@ namespace Client
                     fe.ShowDialog();
 
                     uiBreadcrumb2.ItemIndex = 0;
-                    GuaHao.PatientVM.max_times++; 
-                   // var paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+                    GuaHao.PatientVM.max_times++;
+                    // var paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
 
                     //打印发票
                     if (SessionHelper.do_gh_print)
@@ -584,10 +582,13 @@ namespace Client
                         GhPrint ghprint = new GhPrint();
                         ghprint.Show();
                     }
+                     
                 }
             }
 
         }
+
+      
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
         {
@@ -645,7 +646,7 @@ namespace Client
             //判断当前是否可以挂号
             bool isWrong = false;
 
-            if (DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd"))>Convert.ToDateTime(this.dtpGhrq.Text))
+            if (DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) > Convert.ToDateTime(this.dtpGhrq.Text))
             {
                 UIMessageTip.ShowError("所选日期不能小于今天!");
                 lblMsg.Text = "所选日期不能小于今天！";
@@ -831,7 +832,7 @@ namespace Client
         }
 
         private void btnYBK_Click(object sender, EventArgs e)
-        { 
+        {
             //清空缓存
             SessionHelper.CardReader = null;
             YBHelper.currentYBInfo = null;
@@ -1233,7 +1234,7 @@ namespace Client
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             //如果点击的是身份证或医保卡，择查询身份证信息
-            if (SessionHelper.CardReader != null|| YBHelper.currentYBInfo != null)
+            if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
             {
                 paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
             }
@@ -1380,7 +1381,7 @@ namespace Client
 
                         //自动创建一条用户信息
                         string _hicno = AutoAddUserInfo();
-                         
+
                         this.txtCode.Text = _hicno;
                         SearchUser();
                     }
@@ -1612,11 +1613,14 @@ namespace Client
             rc.ShowDialog();
         }
 
+
+
+
         private void btnRePrint_Click(object sender, EventArgs e)
         {
-            //补打电子发票
-
+            
 
         }
+
     }
 }

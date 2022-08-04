@@ -206,7 +206,7 @@ namespace Data.Repository
         /// <param name="pay_string"></param>
         /// <param name="opera"></param>
         /// <returns></returns>
-        public bool GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
+        public int GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
         {
             try
             {
@@ -497,18 +497,17 @@ namespace Data.Repository
                         para.Add("@step_length", step_length);
 
                         result = Update(sql8, para);
-
-                        max_ledger_sn++;
-
+                          
                         transaction.Commit();
+
+                        return max_ledger_sn;
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
                         throw ex;
                     }
-
-                    return true;
+                     
                 }
 
             }

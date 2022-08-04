@@ -82,6 +82,7 @@ namespace Client.ViewModel
     public class ChargeItemVM
     {
         public decimal charge_price { get; set; }
+        public string charge_code { get; set; } 
 
         public decimal effective_price { get; set; }
 

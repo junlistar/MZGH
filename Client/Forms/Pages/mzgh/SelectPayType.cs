@@ -32,6 +32,7 @@ using MyMzghLib;
 using FastReport.Design;
 using System.IO;
 using Client.Forms.Wedgit;
+using Newtonsoft.Json;
 
 namespace Client
 {
@@ -813,37 +814,23 @@ namespace Client
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
 
-                if (result.status == 1 && result.data)
+                if (result.status == 1)
                 {
                     log.Info("挂号成功");
                     UIMessageTip.ShowOk("挂号成功!", 1500);
                     SessionHelper.do_gh_print = true;
+
+
+                    var new_ledger_sn = result.data;
+                    //写入电子发票信息
+                    CreateElecBill(new_ledger_sn);
+
+
                     this.Close();
                     return;
-                    //打印单据  
-                 //    InitializeReport("PREVIEW");
-                    //Print(pay_string);
-                    //Task.Run(() =>
-                    //{
-
-                    //    //InitializeReport("DESIGN");
-                    //    InitializeReport("PREVIEW");
-                    //    //InitializeReport("PRINT");
-                    //});
-                     
-                    //var report = CreateReportAndLoadFrx(pay_string);
-
-                    //PreviewFrom pf = new PreviewFrom(report);
-
-
-                    //DialogResult res = pf.ShowDialog();
-                    //if (res == DialogResult.Cancel)
-                    //{
-                    //    report.Dispose();
-                    //    this.Close();
-                    //}
+                   
                 }
                 else
                 {
@@ -852,16 +839,197 @@ namespace Client
                     //挂号失败，退款处理
                     Refund();
 
-                }
-
-
+                } 
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
-
+                UIMessageBox.ShowError(ex.ToString());
+                log.Error(ex.ToString()); 
             }
         }
+
+        public void CreateElecBill(int new_ledger_sn)
+        {
+            string ip = "127.0.0.1";
+            string port = "13526";
+            string dllName = "NontaxIndustry";
+            string func = "CallNontaxIndustry";
+
+            string noise = Guid.NewGuid().ToString();
+
+            string appid = "JZSZXYY0561116";
+            string key = "08d7323b667db6b93bcb1be7d7";
+            string version = "1.0";
+
+            string method = "invEBillRegistration";//医疗挂号电子票据开具接口
+
+            string placeCode = "001";//开票点编码
+
+            string busNo = DateTime.Now.Ticks.ToString(); //业务流水号
+            string totalAmt = vm.je;
+
+            List<ElectBillChargeItem> chargeItemlist = new List<ElectBillChargeItem>();
+            List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
+            List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
+            for (int i = 0; i < chargeItems.Count; i++) 
+            {
+                ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
+                electBillCharge.sortNo = i;
+                if (chargeItems[i].mz_bill_item=="026")
+                {
+                    electBillCharge.chargeCode = "90611";//对应挂号费
+                }
+                else if (chargeItems[i].mz_bill_item == "018")
+                {
+                    electBillCharge.chargeCode = "90601";//对应诊查费
+                }
+                else
+                {
+
+                }
+                electBillCharge.chargeName = chargeItems[i].name;
+                electBillCharge.number = 1;
+                electBillCharge.std = chargeItems[i].effective_price.ToString();
+                electBillCharge.amt = chargeItems[i].effective_price.ToString();
+                electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
+                electBillCharge.remark = "";
+
+                chargeItemlist.Add(electBillCharge); 
+            }
+
+            //var _chargeDetail = new
+            //{
+            //    sortNo = "序号",
+            //    chargeCode = "收费项目代码",
+            //    chargeName = "收费项目名称",
+            //    number = 0,//数量
+            //    std = 0,//收费标准
+            //    amt = 0,//金额
+            //    selfAmt = "0",
+            //    remark = "备注"
+            //};
+            //var _listDetail = new
+            //{
+            //    name = "",//药品名称
+            //    std = "",//单价
+            //    number = "",//数量
+            //    amt = "",//金额
+            //    selfAmt = "", //自费金额
+            //};
+
+            PayChannelDetail payChannelDetail = new PayChannelDetail();
+            payChannelDetail.payChannelCode = "02";
+            payChannelDetail.payChannelValue = totalAmt;
+            payChannelDetails.Add(payChannelDetail);
+
+            var _data = new
+            {
+                busNo = busNo,             //业务流水号
+                busType = "06",         //业务标识
+                payer = GuaHao.PatientVM.name.Trim(),               //患者姓名
+                busDateTime = DateTime.Now.ToString("yyyyMMddHHmmss000"),//业务发生时间
+                placeCode = placeCode,//开票点编码
+                payee = SessionHelper.uservm.user_mi,//收费员
+                author = SessionHelper.uservm.user_mi,//票据编制人
+                checker = SessionHelper.uservm.user_mi,//票据复核人
+                totalAmt = totalAmt,//开票总金额
+                payerType = "1",//交款人类型 1 个人2单位
+                cardType = "3101",//卡类型
+                cardNo = GuaHao.PatientVM.patient_id,//卡号
+                age = GuaHao.PatientVM.age,
+                sex = GuaHao.PatientVM.sex == "1" ? "男" : "女",
+                accountPay = "0",//个人账户支付
+                fundPay = "0",//医保统筹基金支付
+                otherfundPay = "0",//其它医保支付
+                ownPay = "0",//自费金额
+                selfConceitedAmt = "0",//个人自负
+                selfPayAmt = "0",//个人自付
+                selfCashPay = totalAmt,//个人现金支付
+                reimbursementAmt = "0",//医保报销总金额
+                payChannelDetail = payChannelDetails,//交费渠道列表
+                isArrears = "1",//是否可流通
+                chargeDetail = chargeItemlist,
+                listDetail = electBillListDetails,
+            };
+            log.Debug("_data:" + _data);
+            var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
+
+            log.Debug("stringA:" + stringA);
+            var stringSignTemp = stringA + $"&key={key}&version={version}";
+
+            log.Debug("stringSignTemp:" + stringSignTemp);
+
+            var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
+
+            var _params = new
+            {
+                appid = appid,
+                data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
+                noise = noise,
+                version = version,
+                sign = _sign
+            };
+
+            var _payload = new
+            {
+                method = method,
+                @params = _params
+            };
+            string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
+            string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
+
+            log.Debug(url);
+            var json = HttpClientUtil.Get(url);
+
+            var result = WebApiHelper.DeserializeObject<ElectBillCommonResponse>(json);
+
+            if (result.data !=null)
+            {
+                var addbill_resp = StringUtil.Base64Decode(result.data);
+
+                var _resp = WebApiHelper.DeserializeObject<ElectBillAddResponse>(addbill_resp);
+                var _fpdata = StringUtil.Base64Decode(_resp.message);
+                if (_resp.result== "S0000")
+                {
+                    //成功
+                    var _entity = WebApiHelper.DeserializeObject<FpData>(_fpdata);
+                    //写入电子发票数据到数据库
+                    var d = new
+                    {
+                        patientId = patientId,
+                        ledger_sn = new_ledger_sn,
+                        billBatchCode = _entity.billBatchCode,
+                        billNo = _entity.billNo,
+                        random = _entity.random,
+                        createTime = _entity.createTime,
+                        billQRCode = _entity.billQRCode,
+                        pictureUrl = _entity.pictureUrl,
+                        pictureNetUrl = _entity.pictureNetUrl,
+                        subsys_id = "mz",
+                    };
+
+                    string paramurl = string.Format($"/api/mzsf/AddFpData?patient_id={d.patientId}&ledger_sn={d.ledger_sn}&billBatchCode={d.billBatchCode}&billNo={d.billNo}&random={d.random}&createTime={d.createTime}&billQRCode={d.billQRCode}&pictureUrl={d.pictureUrl}&pictureNetUrl={d.pictureNetUrl}&subsys_id={d.subsys_id}");
+                    var _addresult = HttpClientUtil.Get(paramurl);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(_fpdata);
+                }
+                
+
+                log.Error(_fpdata);
+              
+
+            }
+            else
+            {
+                UIMessageTip.ShowError("电子发票数据生成失败！");
+                log.Error(json);
+            }
+
+
+        }
+
 
         public string FormID { get; set; } = "PRDT"; //单据ID
         //private string RptNo, RptName; //报表编号、名称

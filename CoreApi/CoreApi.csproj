@@ -122,6 +122,9 @@
     <None Update="SQLS\mzgh_ghconfig_getpatientsn.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzsf_fpdata_add.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzsf_mzdetailcharge_getbypidledgeramount.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -165,6 +168,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\mzsf_mzdetailcharge_add_xiyao.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzsf_fpdata_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\zd_unit_get.sql">

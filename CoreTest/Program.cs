@@ -1,6 +1,9 @@
 ﻿using Data.Repository;
 using MzsfData.Repository;
+using Newtonsoft.Json;
 using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace CoreTest
 {
@@ -40,7 +43,7 @@ namespace CoreTest
 
             BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
             //2022-07-20,2022-07-20, %,  %,  %,  %,  01,%,  %,  % 
-           // var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
+            // var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
 
             //baseRequestRepository.GetBaseRequestsByWeekDay("2022-05-30 00:00:00", "2022-05-30 23:59:59", "1", -1);
             // ?begin=&end=&weeks=3&day=-1
@@ -85,7 +88,90 @@ namespace CoreTest
             //GhRequestRepository ghRequestRepository = new GhRequestRepository();
             //ghRequestRepository.Schb("2022-07-25", "2022-07-31", "00000");
 
+
+            btnRePrint_Click();
+
             Console.WriteLine("Hello World!");
+        }
+
+
+        public static void btnRePrint_Click()
+        {
+            //补打电子发票
+            string ip = "127.0.0.1";
+            string port = "13526";
+            string dllName = "NontaxIndustry";
+            string func = "CallNontaxIndustry";
+
+            string noise = Guid.NewGuid().ToString();
+
+            string appid = "JZSZXYY0561116";
+            string key = "08d7323b667db6b93bcb1be7d7";
+            string version = "1.0";
+
+            string method = "printElectBill";
+
+            var _data = new
+            {
+                billBatchCode = "42060120",
+                billNo = "0008214465",
+                random = "a87b2c",
+            };
+
+            var stringA = $"appid={appid}&data={Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
+            var stringSignTemp = stringA + $"&key={key}&version={version}";
+
+            var _sign = GenerateMD5(stringSignTemp).ToUpper();
+
+            var _params = new
+            {
+                appid = appid,
+                data = Base64Encode(JsonConvert.SerializeObject(_data)),
+                noise = noise,
+                version = version,
+                sign = _sign
+            };
+
+            var _payload = new
+            {
+                method = method,
+                @params = _params
+            };
+            string payload = Base64Encode(JsonConvert.SerializeObject(_payload));
+
+
+            string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
+
+        }
+        /// <summary>
+        /// MD5字符串加密
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns>加密后字符串</returns>
+        public static string GenerateMD5(string txt)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(txt);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
+        }
+        public static string Base64Encode(string str)
+        {
+            var _strBytes = System.Text.Encoding.UTF8.GetBytes(str);
+            return System.Convert.ToBase64String(_strBytes);
+        }
+        public static string Base64Decode(string base64EncodeData)
+        {
+            var _base64EncodeBytes = System.Convert.FromBase64String(base64EncodeData);
+            return System.Text.Encoding.UTF8.GetString(_base64EncodeBytes);
         }
     }
 }

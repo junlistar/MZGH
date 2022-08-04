@@ -23,7 +23,7 @@ select
         case a.flag when 'a' then 'Î´×ªÒÆ' else 'ÒÑ×ªÒÆ' end flag,
         sum(i.charge_total) charge_fee,
         i.receipt_sn,
-        i.receipt_no,
+        i.receipt_no,i.ledger_sn,
         p.p_bar_code 
 from    view_mz_visit_table a left join  zd_unit_code b on a.visit_dept = b.unit_sn
         left join  zd_unit_code b1 on a.group_sn = b1.unit_sn 
@@ -66,7 +66,7 @@ group by
         a.ampm,
         a.flag,
         i.receipt_sn,
-        i.receipt_no,
+        i.receipt_no,ledger_sn,
         p.p_bar_code        
 order by
         a.gh_date,

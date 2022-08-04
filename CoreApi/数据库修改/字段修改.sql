@@ -484,3 +484,18 @@ END
 	values('mz_new','220001',3001,'挂号收费明细表',null)
 	insert into rt_report_subsys(subsys_id,report_code,rep_id,rep_name,parent_id)
 	values('mz_new','220007',3002,'门诊收费明细表',null)
+
+--创建电子发票记录表
+create table fp_data(
+patient_id varchar(12) not null,
+ledger_sn int not null,
+billBatchCode varchar(50) null,
+billNo varchar(20) null,
+random varchar(20) null,
+createTime varchar(20) null,
+billQRCode text null,
+pictureUrl varchar(100) null,
+pictureNetUrl varchar(100) null,
+subsys_id varchar(12) null ,
+primary key(patient_id,ledger_sn)
+)

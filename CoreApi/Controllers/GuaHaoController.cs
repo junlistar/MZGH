@@ -237,7 +237,7 @@ namespace CoreApi.Controllers
         }
        
 
-        public ResponseResult<bool> GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
+        public ResponseResult<int> GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
         {
             Log.Information($"GuaHao,{patient_id},{record_sn},{pay_string},{opera}");
             try
@@ -247,7 +247,7 @@ namespace CoreApi.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<bool>(ex.Message);
+                return ErrorResult<int>(ex.Message);
             }
 
         }

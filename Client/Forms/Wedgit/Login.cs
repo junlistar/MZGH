@@ -70,18 +70,27 @@ namespace Client.Forms.Wedgit
                     UIMessageTip.ShowWarning(" 访问登录接口失败!");
                     return;
                 }
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
-
-                if (listApi.data != null && listApi.data.Count > 0)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
+                if (result.status == 1)
                 {
-                    SessionHelper.uservm = listApi.data[0];
-                    IsLogin = true;
-                    this.Close();
+
+                    if (result.data != null && result.data.Count > 0)
+                    {
+                        SessionHelper.uservm = result.data[0];
+                        IsLogin = true;
+                        this.Close();
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowWarning(" 登录名或密码有误!");
+                        return;
+                    }
                 }
                 else
                 {
-                    UIMessageTip.ShowWarning(" 登录名或密码有误!");
-                    return;
+
+                    UIMessageTip.ShowWarning(result.message);
+                    log.Error(result.message);
                 }
 
             }
@@ -113,13 +122,13 @@ namespace Client.Forms.Wedgit
         private void txtPwd_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            { 
+            {
                 btnLogin_Click(sender, e);
             }
         }
 
         private void Login_Load(object sender, EventArgs e)
-        { 
+        {
 
             txtName.Focus();
         }
@@ -130,7 +139,7 @@ namespace Client.Forms.Wedgit
         }
 
         private void uiSymbolLabel1_MouseEnter(object sender, EventArgs e)
-        { 
+        {
             uiSymbolLabel1.SymbolColor = Color.Red;
         }
 
@@ -174,7 +183,7 @@ namespace Client.Forms.Wedgit
                 //并取负数,这里的e是参数，
                 //可以获取鼠标位置
                 isDragging = true;//标识鼠标已经按下
-            } 
+            }
         }
 
         private void Login_MouseMove(object sender, MouseEventArgs e)
@@ -187,7 +196,7 @@ namespace Client.Forms.Wedgit
                 //用鼠标当前位置加上鼠标相较于窗体左上角的
                 //坐标的负数，也就获取到了新的窗体左上角位置
                 Location = newMouseLocation;//设置新的窗体左上角位置
-            } 
+            }
         }
 
         private void Login_MouseUp(object sender, MouseEventArgs e)
@@ -201,7 +210,7 @@ namespace Client.Forms.Wedgit
 
         private void btnScanLogin_Click(object sender, EventArgs e)
         {
-            if (btnScanLogin.Text=="扫码登录")
+            if (btnScanLogin.Text == "扫码登录")
             {
                 //扫码登录  获取手机号登录
 
@@ -227,7 +236,7 @@ namespace Client.Forms.Wedgit
                 imgQRCode.Hide();
                 btnScanLogin.Text = "扫码登录";
             }
-            
+
 
         }
 

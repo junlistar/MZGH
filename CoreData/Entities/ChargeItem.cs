@@ -5,6 +5,7 @@ namespace Data.Entities
     public class ChargeItem : BaseModel
     { 
         public decimal charge_price { get; set; }
+        public string charge_code { get; set; }
 
         public decimal effective_price { get; set; }
 

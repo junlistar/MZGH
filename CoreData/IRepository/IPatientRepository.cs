@@ -21,9 +21,9 @@ namespace Data.IRepository
 
         int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera);
- 
 
-        bool GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "");
+
+        int GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "");
 
         string GetNewPatientId();
 
