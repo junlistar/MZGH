@@ -1057,30 +1057,30 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-        public ResponseResult<List<GhDeposit>> GetThirdPayList(string bengin, string end)
+        public ResponseResult<List<MzThridPayView>> GetThirdPayList(string bengin, string end, string his_status,string patient_id)
         {
-            Log.Information($"GetThirdPayList,{bengin},{end}");
+            Log.Information($"GetThirdPayList,{bengin},{end},{ his_status},{patient_id}");
             try
             {
-                return _ghDepositRepository.GetThirdPayList(bengin, end);
+                return _ghDepositRepository.GetThirdPayList(bengin, end, his_status, patient_id);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<List<GhDeposit>>(ex.Message);
+                return ErrorResult<List<MzThridPayView>>(ex.Message);
             }
         }
-        public ResponseResult<List<GhDeposit>> GetYbPayList(string bengin, string end)
+        public ResponseResult<List<MzThridPayView>> GetYbPayList(string bengin, string end, string his_status, string patient_id)
         {
-            Log.Information($"GetYbPayList,{bengin},{end}");
+            Log.Information($"GetYbPayList,{bengin},{end},{ his_status},{patient_id}");
             try
             {
-                return _ghDepositRepository.GetYbPayList(bengin, end);
+                return _ghDepositRepository.GetYbPayList(bengin, end, his_status, patient_id);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return ErrorResult<List<GhDeposit>>(ex.Message);
+                return ErrorResult<List<MzThridPayView>>(ex.Message);
             }
         } 
 

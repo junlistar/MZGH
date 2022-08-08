@@ -571,10 +571,7 @@ namespace Client
                     SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
                     fe.ShowDialog();
 
-                    uiBreadcrumb2.ItemIndex = 0;
-                    GuaHao.PatientVM.max_times++;
-                    // var paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
-
+                    uiBreadcrumb2.ItemIndex = 0;  
                     //打印发票
                     if (SessionHelper.do_gh_print)
                     {

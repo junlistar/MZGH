@@ -19,9 +19,9 @@ namespace Data.IRepository
 
         List<GhDeposit> GetGhRefundPayList(string request_date, string patient_id, int times);
 
-        List<GhDeposit> GetThirdPayList(string bengin, string end);
+        List<MzThridPayView> GetThirdPayList(string bengin, string end, string his_status, string patient_id);
          
-        List<GhDeposit> GetYbPayList(string bengin, string end);
+        List<MzThridPayView> GetYbPayList(string bengin, string end, string his_status, string patient_id);
         
         #endregion
     }

@@ -217,6 +217,7 @@ namespace Client
                         req_name = p.req_name,
                         response_name = p.response_name,
                         times = p.times,
+                        ledger_sn = p.ledger_sn,
                         unit_name = p.unit_name,
                         visit_flag = p.visit_flag,
                         visit_status = p.visit_status,
@@ -274,6 +275,7 @@ namespace Client
                 req_name = p.req_name,
                 response_name = p.response_name,
                 times = p.times,
+                ledger_sn = p.ledger_sn,
                 unit_name = p.unit_name,
                 visit_flag = p.visit_flag,
                 visit_status = p.visit_status,
@@ -1275,27 +1277,63 @@ namespace Client
         {
             //补打电子发票
 
-            //查询电子发票记录表
+            //获取选择参数
+            var _patientId = dgvlist.Rows[dgvlist.SelectedIndex].Cells["patient_id"].Value;
+            if (_patientId==null)
+            {
+                UIMessageTip.Show("没有数据！");
+                return;
+            }
+            var _ledger_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["ledger_sn"].Value;
+            var _subsys_id = "mz";
 
+            //查询电子发票记录表  <List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
+            string paramurl = string.Format($"/api/mzsf/GetFpDatasByParams?patient_id={_patientId.ToString()}&ledger_sn={_ledger_sn.ToString()}&subsys_id={_subsys_id}");
 
-            string ip = "127.0.0.1";
-            string port = "13526";
-            string dllName = "NontaxIndustry";
-            string func = "CallNontaxIndustry";
+            var json = HttpClientUtil.Get(paramurl);
+             
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<FpData>>>(json);
+
+            if (result.status != 1)
+            {
+                UIMessageTip.Show(result.message);
+
+                log.Error(result.message);
+
+                return;
+
+            }
+            if (result.data==null || result.data.Count==0)
+            {
+                UIMessageTip.Show("没有电子发票数据！");
+
+                log.Error("没有电子发票数据！");
+
+                return;
+            }
+
+            string _billBatchCode = result.data[0].billBatchCode;
+            string _billNo = result.data[0].billNo;
+            string _random = result.data[0].random;
+
+            string ip = ConfigurationManager.AppSettings["ip"];
+            string port = ConfigurationManager.AppSettings["port"];
+            string dllName = ConfigurationManager.AppSettings["dllName"];
+            string func = ConfigurationManager.AppSettings["func"];
 
             string noise = Guid.NewGuid().ToString();
 
-            string appid = "JZSZXYY0561116";
-            string key = "08d7323b667db6b93bcb1be7d7";
-            string version = "1.0";
+            string appid = ConfigurationManager.AppSettings["appid"];
+            string key = ConfigurationManager.AppSettings["key"];
+            string version = ConfigurationManager.AppSettings["version"];
 
             string method = "printElectBill";
 
             var _data = new
             {
-                billBatchCode = "42060120",
-                billNo = "0008214465",
-                random = "a87b2c",
+                billBatchCode = _billBatchCode,
+                billNo = _billNo,
+                random = _random,
             };
 
             var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
@@ -1322,7 +1360,7 @@ namespace Client
 
             string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
 
-            var result = HttpClientUtil.Get(url);
+            var printstr = HttpClientUtil.Get(url);
         }
     }
 }

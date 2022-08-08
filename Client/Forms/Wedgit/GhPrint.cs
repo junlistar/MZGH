@@ -29,6 +29,8 @@ namespace Client.Forms.Wedgit
     public partial class GhPrint : Form
     {
         private static ILog log = LogManager.GetLogger(typeof(GhPrint));//typeof放当前类
+
+        PatientVM patientVM ;
         public GhPrint()
         {
             InitializeComponent();
@@ -36,8 +38,21 @@ namespace Client.Forms.Wedgit
 
         private void GhPrint_Load(object sender, EventArgs e)
         {
+            GetPatientInfo();
             InitializeReport("PRINT");
             this.Close();
+        }
+
+        public void GetPatientInfo()
+        {
+            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={GuaHao.PatientVM.patient_id}");
+
+            log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            string responseJson = HttpClientUtil.Get(paramurl);
+
+            var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(responseJson);
+
+            patientVM = result.data[0];
         }
 
         public string FormID { get; set; } = "PRDT"; //单据ID

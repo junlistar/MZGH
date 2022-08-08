@@ -22,12 +22,12 @@ namespace Client
             try
             {
 
-                //设置应用程序处理异常方式：ThreadException处理
-                Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-                //UI线程的未处理异常捕获
-                Application.ThreadException += Application_ThreadException;
-                //非UI线程的未处理异常捕获
-                AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+                ////设置应用程序处理异常方式：ThreadException处理
+                //Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+                ////UI线程的未处理异常捕获
+                //Application.ThreadException += Application_ThreadException;
+                ////非UI线程的未处理异常捕获
+                //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 
                 //这段代码要在程序运行的入口进行配置

@@ -65,6 +65,12 @@
     <None Update="SQLS\mzgh_ghdeposit_getpaylist.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzsf_mzthirdpay_refund.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzsf_mzthirdpay_add.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_xtuser_login.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

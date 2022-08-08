@@ -41,6 +41,7 @@ namespace CoreApi.Controllers
         private readonly IOrderTypeRepository _orderTypeRepository;
         private readonly IMzOrderItemRepository _mzOrderItemRepository;
         private readonly IFpDataRepository _fpDataRepository;
+        private readonly IMzThridPayRepository _mzThirdPayRepository;
 
 
 
@@ -50,7 +51,7 @@ namespace CoreApi.Controllers
             IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository,
             IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository,
             IMzDepositRepository mzDepositRepository, IOrderTypeRepository orderTypeRepository, IMzOrderItemRepository mzOrderItemRepository,
-            IFpDataRepository fpDataRepository)
+            IFpDataRepository fpDataRepository, IMzThridPayRepository mzThirdPayRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository;
@@ -70,6 +71,7 @@ namespace CoreApi.Controllers
             _orderTypeRepository = orderTypeRepository;
             _mzOrderItemRepository = mzOrderItemRepository;
             _fpDataRepository = fpDataRepository;
+            _mzThirdPayRepository = mzThirdPayRepository;
         }
 
 
@@ -473,6 +475,34 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<FpData>>(ex.Message);
             }
+        }
+        public ResponseResult<int> AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, string charge, string price_date, string opera)
+        {
+            Log.Information($"AddMzThridPay,{patient_id},{cheque_type},{cheque_no},{mdtrt_id},{ipt_otp_no},{psn_no},{yb_insuplc_admdvs},{charge},{price_date},{opera}");
+            try
+            {
+                return _mzThirdPayRepository.AddMzThridPay(patient_id, cheque_type, cheque_no, mdtrt_id, ipt_otp_no, psn_no, yb_insuplc_admdvs, charge,price_date, opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+        }
+
+        public ResponseResult<int> RefundMzThridPay(string patient_id, string cheque_type, string cheque_no, string charge, string price_date)
+        {
+            Log.Information($"RefundMzThridPay,{patient_id},{cheque_type},{cheque_no},{charge},{price_date}");
+            try
+            {
+                return _mzThirdPayRepository.RefundMzThridPay(patient_id, cheque_type, cheque_no, charge, price_date);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
         } 
+
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -14,14 +15,14 @@ namespace Data.Repository
 
         public List<GhDeposit> GetGhDeposit(string patient_id)
         {
-            string selectSql =GetSqlByTag("mzgh_ghdeposit_getbypatientid");
+            string selectSql = GetSqlByTag("mzgh_ghdeposit_getbypatientid");
 
             var para = new DynamicParameters();
             para.Add("@patient_id", patient_id);
 
             return Select(selectSql, para);
         }
-    
+
 
         /// <summary>
         /// 退号
@@ -36,11 +37,11 @@ namespace Data.Repository
 
             //判断挂号数据是否存在
             //string seldeposit = @"select * from gh_deposit where patient_id=@patient_id and times =@times and depo_status=@depo_status";
-            string seldeposit =GetSqlByTag("mzgh_ghdeposit_exist");
+            string seldeposit = GetSqlByTag("mzgh_ghdeposit_exist");
             para.Add("@patient_id", patient_id);
-            para.Add("@times", times); 
+            para.Add("@times", times);
             para.Add("@depo_status", 4);
-             
+
             var depolist = Select(seldeposit, para);
 
             if (depolist == null || depolist.Count == 0)
@@ -65,7 +66,7 @@ namespace Data.Repository
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
-                IDbTransaction transaction = connection.BeginTransaction(); 
+                IDbTransaction transaction = connection.BeginTransaction();
 
                 try
                 {
@@ -82,7 +83,7 @@ namespace Data.Repository
                             //@report_date,
 
                             string sql = GetSqlByTag("mzgh_ghdeposit_addrefund");
-                           para = new DynamicParameters();
+                            para = new DynamicParameters();
 
                             para.Add("@patient_id", item.patient_id);
                             para.Add("@item_no", item.item_no);
@@ -99,7 +100,7 @@ namespace Data.Repository
                             //para.Add("@print_flag", item.print_flag);
 
                             connection.Execute(sql, para, transaction);
-                        } 
+                        }
                         //如果有组合付款没有退完 择不更新主表
                         //string selectSql = @"select sum(ledger_sn) from gh_deposit where patient_id=@patient_id and times=@times";
                         string selectSql = GetSqlByTag("mzgh_ghdeposit_sumledger");
@@ -118,9 +119,9 @@ namespace Data.Repository
                             connection.Execute(updatesql, para, transaction);
 
                             //gh_receipt 写入反向记录
-//                            string s1 = @"insert into gh_receipt(patient_id,times,ledger_sn,receipt_sn,pay_unit,charge_total,settle_opera,settle_date,price_opera,price_date,report_date,receipt_no,charge_status,mz_dept_no,op_receipt_sn)  
-//select patient_id,times,-ledger_sn,receipt_sn,pay_unit,-charge_total,@settle_opera,settle_date,@price_opera,price_date,report_date,receipt_no,7,mz_dept_no,op_receipt_sn
-//from gh_receipt  where patient_id =@patient_id and ledger_sn=@ledger_sn";
+                            //                            string s1 = @"insert into gh_receipt(patient_id,times,ledger_sn,receipt_sn,pay_unit,charge_total,settle_opera,settle_date,price_opera,price_date,report_date,receipt_no,charge_status,mz_dept_no,op_receipt_sn)  
+                            //select patient_id,times,-ledger_sn,receipt_sn,pay_unit,-charge_total,@settle_opera,settle_date,@price_opera,price_date,report_date,receipt_no,7,mz_dept_no,op_receipt_sn
+                            //from gh_receipt  where patient_id =@patient_id and ledger_sn=@ledger_sn";
                             string s1 = GetSqlByTag("mzgh_ghreceipt_addrefund");
                             para = new DynamicParameters();
 
@@ -131,10 +132,10 @@ namespace Data.Repository
                             connection.Execute(s1, para, transaction);
 
                             //gh_receipt_charge 写入反向记录
-//                            string s2 = @"insert into gh_receipt_charge (patient_id,times,ledger_sn,receipt_sn,bill_code,charge,pay_unit)
-//select patient_id,times,-ledger_sn,receipt_sn,bill_code,-charge,pay_unit
-//from gh_receipt_charge
-//where patient_id =@patient_id and ledger_sn=@ledger_sn";
+                            //                            string s2 = @"insert into gh_receipt_charge (patient_id,times,ledger_sn,receipt_sn,bill_code,charge,pay_unit)
+                            //select patient_id,times,-ledger_sn,receipt_sn,bill_code,-charge,pay_unit
+                            //from gh_receipt_charge
+                            //where patient_id =@patient_id and ledger_sn=@ledger_sn";
                             string s2 = GetSqlByTag("mzgh_ghreceiptcharge_addrefund");
                             para = new DynamicParameters();
 
@@ -143,12 +144,12 @@ namespace Data.Repository
                             connection.Execute(s2, para, transaction);
 
                             // gh_detail_charge写入反向记录
-//                            string s3 = @"insert into gh_detail_charge (patient_id,times,item_no,ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,charge_amount,
-//charge_group,enter_opera,enter_date,enter_win_no,confirm_opera,confirm_date,confirm_win_no,charge_status,trans_flag,fit_type,report_date,mz_dept_no)
-//select patient_id,times,item_no,-ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,-charge_amount,
-//charge_group,@enter_opera,enter_date,enter_win_no,@confirm_opera,confirm_date,confirm_win_no,7,trans_flag,fit_type,report_date,mz_dept_no
-//from gh_detail_charge
-//where patient_id =@patient_id and ledger_sn=@ledger_sn";
+                            //                            string s3 = @"insert into gh_detail_charge (patient_id,times,item_no,ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,charge_amount,
+                            //charge_group,enter_opera,enter_date,enter_win_no,confirm_opera,confirm_date,confirm_win_no,charge_status,trans_flag,fit_type,report_date,mz_dept_no)
+                            //select patient_id,times,item_no,-ledger_sn,happen_date,charge_code,audit_code,bill_code,exec_sn,apply_sn,org_price,charge_price,-charge_amount,
+                            //charge_group,@enter_opera,enter_date,enter_win_no,@confirm_opera,confirm_date,confirm_win_no,7,trans_flag,fit_type,report_date,mz_dept_no
+                            //from gh_detail_charge
+                            //where patient_id =@patient_id and ledger_sn=@ledger_sn";
 
                             string s3 = GetSqlByTag("mzgh_ghdetailcharge_addrefund");
 
@@ -188,29 +189,35 @@ namespace Data.Repository
         }
 
 
-        public List<GhDeposit> GetThirdPayList(string bengin, string end)
+        public List<MzThridPayView> GetThirdPayList(string bengin, string end, string his_status, string patient_id)
         {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = GetSqlByTag("mzgh_ghdeposit_getthridpaylist");
 
-            string sql = GetSqlByTag("mzgh_ghdeposit_getthridpaylist");
+                var para = new DynamicParameters();
+                para.Add("@bengin_date", bengin);
+                para.Add("@end_date", end);
+                para.Add("@his_status", his_status);
+                para.Add("@patient_id", patient_id);
 
-            var para = new DynamicParameters();
-            para.Add("@bengin_date", bengin);
-            para.Add("@end_date", end); 
-
-
-            return Select(sql, para);
+                return conn.Query<MzThridPayView>(sql, para).ToList();
+            }
         }
-        public List<GhDeposit> GetYbPayList(string bengin, string end)
+        public List<MzThridPayView> GetYbPayList(string bengin, string end, string his_status, string patient_id)
         {
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = GetSqlByTag("mzgh_ghdeposit_getybpaylist");
 
-            string sql = GetSqlByTag("mzgh_ghdeposit_getybpaylist");
+                var para = new DynamicParameters();
+                para.Add("@bengin_date", bengin);
+                para.Add("@end_date", end);
+                para.Add("@his_status", his_status);
+                para.Add("@patient_id", patient_id);
+                return conn.Query<MzThridPayView>(sql, para).ToList();
 
-            var para = new DynamicParameters();
-            para.Add("@bengin_date", bengin);
-            para.Add("@end_date", end);
-
-
-            return Select(sql, para);
+            }
         }
     }
 }

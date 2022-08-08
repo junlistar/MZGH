@@ -1,0 +1,2 @@
+﻿ insert into mz_thirdpay(patient_id,cheque_type,cheque_no,charge,mdtrt_id,ipt_otp_no,psn_no,yb_insuplc_admdvs,price_date,opera)
+ values(@patient_id,@cheque_type,@cheque_no,@charge,@mdtrt_id,@ipt_otp_no,@psn_no,@yb_insuplc_admdvs,@price_date,@opera)

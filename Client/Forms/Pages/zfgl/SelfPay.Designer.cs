@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
-            this.btnRefundDetail = new Sunny.UI.UISymbolButton();
             this.btnHuajia = new Sunny.UI.UISymbolButton();
             this.btnSearch = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
@@ -50,16 +49,20 @@
             this.txtBeginDate = new Sunny.UI.UIDatePicker();
             this.dgv_paylist = new Sunny.UI.UIDataGridView();
             this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.his_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refund_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cheque_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.price_opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.depo_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mz_dept_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cheque_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mdtrt_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ipt_otp_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.psn_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.yb_insuplc_admdvs = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_paylist)).BeginInit();
@@ -69,7 +72,6 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTitle.Controls.Add(this.btnRefundDetail);
             this.pnlTitle.Controls.Add(this.btnHuajia);
             this.pnlTitle.Controls.Add(this.btnSearch);
             this.pnlTitle.Controls.Add(this.uiSymbolButton1);
@@ -85,31 +87,6 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnRefundDetail
-            // 
-            this.btnRefundDetail.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefundDetail.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnRefundDetail.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnRefundDetail.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnRefundDetail.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnRefundDetail.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnRefundDetail.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRefundDetail.Location = new System.Drawing.Point(534, 3);
-            this.btnRefundDetail.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnRefundDetail.Name = "btnRefundDetail";
-            this.btnRefundDetail.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.btnRefundDetail.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.btnRefundDetail.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnRefundDetail.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnRefundDetail.Size = new System.Drawing.Size(102, 60);
-            this.btnRefundDetail.Style = Sunny.UI.UIStyle.Orange;
-            this.btnRefundDetail.StyleCustomMode = true;
-            this.btnRefundDetail.Symbol = 61641;
-            this.btnRefundDetail.TabIndex = 13;
-            this.btnRefundDetail.Text = "退费详情";
-            this.btnRefundDetail.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnRefundDetail.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnHuajia
             // 
@@ -135,6 +112,7 @@
             this.btnHuajia.Text = "退费";
             this.btnHuajia.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnHuajia.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnHuajia.Click += new System.EventHandler(this.btnHuajia_Click);
             // 
             // btnSearch
             // 
@@ -179,27 +157,28 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(642, 3);
+            this.btnExit.Location = new System.Drawing.Point(534, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
-            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
+            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
+            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnExit.Size = new System.Drawing.Size(107, 60);
-            this.btnExit.Style = Sunny.UI.UIStyle.Red;
+            this.btnExit.Style = Sunny.UI.UIStyle.Orange;
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblTitle
             // 
@@ -336,69 +315,74 @@
             // 
             this.dgv_paylist.AllowUserToAddRows = false;
             this.dgv_paylist.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgv_paylist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_paylist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_paylist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_paylist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_paylist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_paylist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_paylist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_paylist.ColumnHeadersHeight = 32;
             this.dgv_paylist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_paylist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patient_name,
+            this.his_no,
+            this.refund_date,
             this.patient_id,
-            this.ledger_sn,
             this.price_date,
             this.charge,
             this.cheque_no,
-            this.price_opera,
+            this.opera,
             this.cheque_name,
-            this.depo_status,
-            this.mz_dept_no,
-            this.cheque_type});
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_paylist.DefaultCellStyle = dataGridViewCellStyle13;
+            this.status,
+            this.cheque_type,
+            this.mdtrt_id,
+            this.ipt_otp_no,
+            this.psn_no,
+            this.yb_insuplc_admdvs});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_paylist.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_paylist.EnableHeadersVisualStyles = false;
             this.dgv_paylist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_paylist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgv_paylist.Location = new System.Drawing.Point(3, 204);
             this.dgv_paylist.Name = "dgv_paylist";
             this.dgv_paylist.ReadOnly = true;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_paylist.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_paylist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_paylist.RowHeight = 0;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_paylist.RowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_paylist.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_paylist.RowTemplate.Height = 23;
             this.dgv_paylist.SelectedIndex = -1;
+            this.dgv_paylist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_paylist.ShowGridLine = false;
             this.dgv_paylist.ShowRect = false;
-            this.dgv_paylist.Size = new System.Drawing.Size(1210, 506);
+            this.dgv_paylist.Size = new System.Drawing.Size(1210, 515);
             this.dgv_paylist.TabIndex = 8;
             this.dgv_paylist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -409,19 +393,28 @@
             this.patient_name.Name = "patient_name";
             this.patient_name.ReadOnly = true;
             // 
+            // his_no
+            // 
+            this.his_no.DataPropertyName = "his_no";
+            this.his_no.HeaderText = "his_no";
+            this.his_no.Name = "his_no";
+            this.his_no.ReadOnly = true;
+            this.his_no.Visible = false;
+            // 
+            // refund_date
+            // 
+            this.refund_date.DataPropertyName = "refund_date";
+            this.refund_date.HeaderText = "refund_date";
+            this.refund_date.Name = "refund_date";
+            this.refund_date.ReadOnly = true;
+            this.refund_date.Visible = false;
+            // 
             // patient_id
             // 
             this.patient_id.DataPropertyName = "patient_id";
             this.patient_id.HeaderText = "病人ID";
             this.patient_id.Name = "patient_id";
             this.patient_id.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "账页";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
             // 
             // price_date
             // 
@@ -444,12 +437,12 @@
             this.cheque_no.Name = "cheque_no";
             this.cheque_no.ReadOnly = true;
             // 
-            // price_opera
+            // opera
             // 
-            this.price_opera.DataPropertyName = "price_opera";
-            this.price_opera.HeaderText = "收费员";
-            this.price_opera.Name = "price_opera";
-            this.price_opera.ReadOnly = true;
+            this.opera.DataPropertyName = "opera";
+            this.opera.HeaderText = "收费员";
+            this.opera.Name = "opera";
+            this.opera.ReadOnly = true;
             // 
             // cheque_name
             // 
@@ -458,20 +451,12 @@
             this.cheque_name.Name = "cheque_name";
             this.cheque_name.ReadOnly = true;
             // 
-            // depo_status
+            // status
             // 
-            this.depo_status.DataPropertyName = "depo_status";
-            this.depo_status.HeaderText = "状态";
-            this.depo_status.Name = "depo_status";
-            this.depo_status.ReadOnly = true;
-            // 
-            // mz_dept_no
-            // 
-            this.mz_dept_no.DataPropertyName = "mz_dept_no";
-            this.mz_dept_no.HeaderText = "mz_dept_no";
-            this.mz_dept_no.Name = "mz_dept_no";
-            this.mz_dept_no.ReadOnly = true;
-            this.mz_dept_no.Visible = false;
+            this.status.DataPropertyName = "status";
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            this.status.ReadOnly = true;
             // 
             // cheque_type
             // 
@@ -480,6 +465,38 @@
             this.cheque_type.Name = "cheque_type";
             this.cheque_type.ReadOnly = true;
             this.cheque_type.Visible = false;
+            // 
+            // mdtrt_id
+            // 
+            this.mdtrt_id.DataPropertyName = "mdtrt_id";
+            this.mdtrt_id.HeaderText = "mdtrt_id";
+            this.mdtrt_id.Name = "mdtrt_id";
+            this.mdtrt_id.ReadOnly = true;
+            this.mdtrt_id.Visible = false;
+            // 
+            // ipt_otp_no
+            // 
+            this.ipt_otp_no.DataPropertyName = "ipt_otp_no";
+            this.ipt_otp_no.HeaderText = "ipt_otp_no";
+            this.ipt_otp_no.Name = "ipt_otp_no";
+            this.ipt_otp_no.ReadOnly = true;
+            this.ipt_otp_no.Visible = false;
+            // 
+            // psn_no
+            // 
+            this.psn_no.DataPropertyName = "psn_no";
+            this.psn_no.HeaderText = "psn_no";
+            this.psn_no.Name = "psn_no";
+            this.psn_no.ReadOnly = true;
+            this.psn_no.Visible = false;
+            // 
+            // yb_insuplc_admdvs
+            // 
+            this.yb_insuplc_admdvs.DataPropertyName = "yb_insuplc_admdvs";
+            this.yb_insuplc_admdvs.HeaderText = "yb_insuplc_admdvs";
+            this.yb_insuplc_admdvs.Name = "yb_insuplc_admdvs";
+            this.yb_insuplc_admdvs.ReadOnly = true;
+            this.yb_insuplc_admdvs.Visible = false;
             // 
             // SelfPay
             // 
@@ -503,7 +520,6 @@
         #endregion
 
         private Sunny.UI.UIPanel pnlTitle;
-        private Sunny.UI.UISymbolButton btnRefundDetail;
         private Sunny.UI.UISymbolButton btnHuajia;
         private Sunny.UI.UISymbolButton btnSearch;
         private Sunny.UI.UISymbolButton uiSymbolButton1;
@@ -519,15 +535,19 @@
         private Sunny.UI.UIDatePicker txtBeginDate;
         private Sunny.UI.UIDataGridView dgv_paylist;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn his_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn refund_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn price_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge;
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn price_opera;
+        private System.Windows.Forms.DataGridViewTextBoxColumn opera;
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn depo_status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mz_dept_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
         private System.Windows.Forms.DataGridViewTextBoxColumn cheque_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mdtrt_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ipt_otp_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn psn_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn yb_insuplc_admdvs;
     }
 }
