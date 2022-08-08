@@ -8,11 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
+using Client.ClassLib;
+using Client.ViewModel;
+using log4net; 
 
 namespace Client.Forms.Pages.zfgl
 {
     public partial class SelfPay : UIPage
     {
+        private static ILog log = LogManager.GetLogger(typeof(SelfPay));
         public SelfPay()
         {
             InitializeComponent();
@@ -20,7 +24,7 @@ namespace Client.Forms.Pages.zfgl
 
         private void SelfPay_Initialize(object sender, EventArgs e)
         {
-
+            txtBarcode.Focus();
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
         }

@@ -95,12 +95,12 @@ namespace CoreApi.Controllers
             }
         }
         public ResponseResult<bool> UpdateUserBaseInfo(string pid, string name, string sex, string marry_code, string birthday, string tel, string relation_name, string relation_code,
-             string home_street, string opera)
+             string home_street, string district, string responseType, string chargeType, string opera)
         {
-            Log.Information($"UpdateUserBaseInfo,{pid},{name},{sex},{marry_code},{birthday},{tel},{relation_name},{relation_code},{home_street},{opera}");
+            Log.Information($"UpdateUserBaseInfo,{pid},{name},{sex},{marry_code},{birthday},{tel},{relation_name},{relation_code},{home_street},{district},{responseType},{chargeType},{opera}");
             try
             {
-                return _sfzInfoRepository.UpdateUserBaseInfo(pid, name, sex, marry_code, birthday, tel, relation_name, relation_code, home_street, opera);
+                return _sfzInfoRepository.UpdateUserBaseInfo(pid, name, sex, marry_code, birthday, tel, relation_name, relation_code, home_street, district, responseType, chargeType, opera);
             }
             catch (Exception ex)
             {

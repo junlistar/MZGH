@@ -144,5 +144,10 @@ namespace Client.Forms.Pages.zfgl
         {
             this.Close();
         }
+
+        private void pnlTitle_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

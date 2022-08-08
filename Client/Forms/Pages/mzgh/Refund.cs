@@ -49,7 +49,7 @@ namespace Client
             log.Info("LoadData");
             Task<HttpResponseMessage> task = null;
             string json = "";
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={_barcode}");
+            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={_barcode}");
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
             try

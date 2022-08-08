@@ -142,10 +142,10 @@ namespace Client
 
                 //身份
                 //var response_type = this.txtShenfen.TagString;
-                var response_type = "01";
+                var response_type =cbxShenfen.SelectedValue;
 
                 //费别
-                var charge_type = "01";
+                var charge_type = cbxChargeType.SelectedValue; ;
 
 
                 //医保卡
@@ -240,6 +240,10 @@ namespace Client
                                 SessionHelper.cardno = result.data[0].p_bar_code;
                                 this.Close();
                                 return;
+                            }
+                            else
+                            {
+                                break;
                             }
                             ////清空相同身份证号信息
                             //DeleteSocialNo(sno);
@@ -394,16 +398,16 @@ namespace Client
         public void InitUI()
         {
 
-            //this.cbxChargeType.DataSource = SessionHelper.chargeTypes;
+            this.cbxChargeType.DataSource = SessionHelper.chargeTypes;
 
-            //this.cbxChargeType.ValueMember = "code";
-            //this.cbxChargeType.DisplayMember = "name";
+            this.cbxChargeType.ValueMember = "code";
+            this.cbxChargeType.DisplayMember = "name";
 
 
-            //this.cbxShenfen.DataSource = SessionHelper.responseTypes;
+            this.cbxShenfen.DataSource = SessionHelper.responseTypes;
 
-            //this.cbxShenfen.ValueMember = "code";
-            //this.cbxShenfen.DisplayMember = "name";
+            this.cbxShenfen.ValueMember = "code";
+            this.cbxShenfen.DisplayMember = "name";
 
 
             this.sfz_birthday.Value = DateTime.Now;
@@ -453,7 +457,7 @@ namespace Client
                 //根据patientId查找已存在的病人
                 Task<HttpResponseMessage> task = null;
                 string json = "";
-                string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={code}");
+                string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={code}"); 
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -607,10 +611,10 @@ namespace Client
                 //    }
                 //}
 
-                //this.cbxShenfen.SelectedValue = userInfo.response_type;
+                this.cbxShenfen.SelectedValue = userInfo.response_type;
 
                 //费别
-                //this.cbxChargeType.SelectedValue = userInfo.charge_type;
+                this.cbxChargeType.SelectedValue = userInfo.charge_type;
 
                 //查询身份证表信息
                 BindSfzInfo(userInfo.patient_id);

@@ -848,7 +848,7 @@ namespace Client
                     UIMessageTip.ShowOk("挂号成功!", 1500);
                     SessionHelper.do_gh_print = true;
 
-
+                    SessionHelper.sf_print_user_ledger = result.data;
                     var new_ledger_sn = result.data;
                     //写入电子发票信息
                     CreateElecBill(new_ledger_sn);

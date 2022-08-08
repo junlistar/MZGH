@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sfz_name = new Sunny.UI.UITextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -62,7 +62,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.ybk_psn_cert_type = new Sunny.UI.UITextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtTel = new Sunny.UI.UITextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.sfz_home_address = new Sunny.UI.UITextBox();
             this.label19 = new System.Windows.Forms.Label();
@@ -119,6 +118,19 @@
             this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relative_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
+            this.txtAge = new Sunny.UI.UITextBox();
+            this.cbxChargeTypes = new Sunny.UI.UIComboBox();
+            this.cbxResponseType = new Sunny.UI.UIComboBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.txtCode = new Sunny.UI.UITextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.cbxsex = new Sunny.UI.UIComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txthomedistrict = new Sunny.UI.UITextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.txt_patientId = new Sunny.UI.UITextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.cbx_relation = new Sunny.UI.UIComboBox();
@@ -127,12 +139,10 @@
             this.txt_sfz_no = new Sunny.UI.UITextBox();
             this.txt_birth = new Sunny.UI.UIDatePicker();
             this.label10 = new System.Windows.Forms.Label();
-            this.cbxsex = new Sunny.UI.UIComboBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.txt_name = new Sunny.UI.UITextBox();
             this.label36 = new System.Windows.Forms.Label();
-            this.txtCode = new Sunny.UI.UITextBox();
-            this.label37 = new System.Windows.Forms.Label();
+            this.txthometel = new Sunny.UI.UITextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.uiGroupBox6 = new Sunny.UI.UIGroupBox();
             this.dgv_ghlist = new Sunny.UI.UIDataGridView();
             this.gh_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -211,7 +221,7 @@
             // 
             this.txtrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtrelationname.Location = new System.Drawing.Point(678, 115);
+            this.txtrelationname.Location = new System.Drawing.Point(662, 144);
             this.txtrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtrelationname.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtrelationname.Name = "txtrelationname";
@@ -224,7 +234,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(603, 120);
+            this.label9.Location = new System.Drawing.Point(587, 149);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 21);
             this.label9.TabIndex = 16;
@@ -279,7 +289,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(629, 42);
+            this.label13.Location = new System.Drawing.Point(613, 34);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 21);
             this.label13.TabIndex = 20;
@@ -308,24 +318,10 @@
             this.label17.TabIndex = 28;
             this.label17.Text = "证件类型";
             // 
-            // txtTel
-            // 
-            this.txtTel.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtTel.Location = new System.Drawing.Point(382, 76);
-            this.txtTel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtTel.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtTel.Name = "txtTel";
-            this.txtTel.ShowText = false;
-            this.txtTel.Size = new System.Drawing.Size(187, 29);
-            this.txtTel.TabIndex = 31;
-            this.txtTel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtTel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(333, 81);
+            this.label18.Location = new System.Drawing.Point(317, 73);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(42, 21);
             this.label18.TabIndex = 30;
@@ -335,12 +331,12 @@
             // 
             this.sfz_home_address.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.sfz_home_address.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sfz_home_address.Location = new System.Drawing.Point(117, 154);
+            this.sfz_home_address.Location = new System.Drawing.Point(101, 181);
             this.sfz_home_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sfz_home_address.MinimumSize = new System.Drawing.Size(1, 16);
             this.sfz_home_address.Name = "sfz_home_address";
             this.sfz_home_address.ShowText = false;
-            this.sfz_home_address.Size = new System.Drawing.Size(452, 29);
+            this.sfz_home_address.Size = new System.Drawing.Size(421, 29);
             this.sfz_home_address.TabIndex = 33;
             this.sfz_home_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_home_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -348,7 +344,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(40, 160);
+            this.label19.Location = new System.Drawing.Point(24, 187);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 21);
             this.label19.TabIndex = 32;
@@ -365,7 +361,7 @@
             "丧偶",
             "离婚",
             "其他"});
-            this.cbxmarrycode.Location = new System.Drawing.Point(678, 37);
+            this.cbxmarrycode.Location = new System.Drawing.Point(662, 29);
             this.cbxmarrycode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxmarrycode.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxmarrycode.Name = "cbxmarrycode";
@@ -405,11 +401,11 @@
             this.pnlTitle.Controls.Add(this.lblTitle);
             this.pnlTitle.Controls.Add(this.lblmsg);
             this.pnlTitle.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pnlTitle.Location = new System.Drawing.Point(13, 14);
+            this.pnlTitle.Location = new System.Drawing.Point(3, 4);
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1218, 66);
+            this.pnlTitle.Size = new System.Drawing.Size(1235, 45);
             this.pnlTitle.TabIndex = 38;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -422,7 +418,7 @@
             this.btnSave.Location = new System.Drawing.Point(271, 2);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(100, 61);
+            this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.Symbol = 61639;
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
@@ -434,7 +430,7 @@
             // 
             this.btnReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnReset.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReset.Location = new System.Drawing.Point(487, 10);
+            this.btnReset.Location = new System.Drawing.Point(716, 5);
             this.btnReset.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 35);
@@ -449,21 +445,21 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.Location = new System.Drawing.Point(374, 2);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
-            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnExit.Size = new System.Drawing.Size(107, 61);
-            this.btnExit.Style = Sunny.UI.UIStyle.Red;
+            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
+            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
+            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
+            this.btnExit.Size = new System.Drawing.Size(100, 40);
+            this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
@@ -477,7 +473,7 @@
             this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(45, 5);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(182, 51);
+            this.lblTitle.Size = new System.Drawing.Size(182, 37);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "患者基本信息";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -486,7 +482,7 @@
             // lblmsg
             // 
             this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.Location = new System.Drawing.Point(603, 22);
+            this.lblmsg.Location = new System.Drawing.Point(611, 10);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(517, 23);
             this.lblmsg.TabIndex = 44;
@@ -509,7 +505,7 @@
             this.uiGroupBox1.Controls.Add(this.label11);
             this.uiGroupBox1.Controls.Add(this.sfz_card_no);
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(15, 302);
+            this.uiGroupBox1.Location = new System.Drawing.Point(3, 285);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
@@ -636,12 +632,12 @@
             this.uiGroupBox2.Controls.Add(this.label17);
             this.uiGroupBox2.Controls.Add(this.ybk_psn_cert_type);
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox2.Location = new System.Drawing.Point(669, 302);
+            this.uiGroupBox2.Location = new System.Drawing.Point(659, 285);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(562, 554);
+            this.uiGroupBox2.Size = new System.Drawing.Size(579, 570);
             this.uiGroupBox2.TabIndex = 46;
             this.uiGroupBox2.Text = "医保卡基本信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -649,20 +645,20 @@
             // 
             // dgv_sfxx
             // 
-            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgv_sfxx.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_sfxx.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
             this.dgv_sfxx.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_sfxx.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_sfxx.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle42.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle42.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle42.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_sfxx.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_sfxx.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dgv_sfxx.ColumnHeadersHeight = 32;
             this.dgv_sfxx.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_sfxx.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -671,39 +667,39 @@
             this.memo,
             this.begntime,
             this.endtime});
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle43.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle43.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_sfxx.DefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_sfxx.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgv_sfxx.EnableHeadersVisualStyles = false;
             this.dgv_sfxx.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_sfxx.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgv_sfxx.Location = new System.Drawing.Point(12, 444);
             this.dgv_sfxx.Name = "dgv_sfxx";
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle44.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle44.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_sfxx.RowHeadersDefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_sfxx.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dgv_sfxx.RowHeight = 0;
-            dataGridViewCellStyle45.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle45.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_sfxx.RowsDefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_sfxx.RowsDefaultCellStyle = dataGridViewCellStyle25;
             this.dgv_sfxx.RowTemplate.Height = 23;
             this.dgv_sfxx.SelectedIndex = -1;
             this.dgv_sfxx.ShowGridLine = false;
             this.dgv_sfxx.ShowRect = false;
-            this.dgv_sfxx.Size = new System.Drawing.Size(536, 96);
+            this.dgv_sfxx.Size = new System.Drawing.Size(553, 96);
             this.dgv_sfxx.TabIndex = 35;
             this.dgv_sfxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -740,20 +736,20 @@
             // 
             // dgv_cbxx
             // 
-            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgv_cbxx.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_cbxx.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle26;
             this.dgv_cbxx.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_cbxx.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_cbxx.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle47.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle47.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_cbxx.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_cbxx.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dgv_cbxx.ColumnHeadersHeight = 32;
             this.dgv_cbxx.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_cbxx.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -766,39 +762,39 @@
             this.cvlserv_flag,
             this.insuplc_admdvs,
             this.emp_name});
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle48.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle48.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_cbxx.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_cbxx.DefaultCellStyle = dataGridViewCellStyle28;
             this.dgv_cbxx.EnableHeadersVisualStyles = false;
             this.dgv_cbxx.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_cbxx.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgv_cbxx.Location = new System.Drawing.Point(12, 278);
             this.dgv_cbxx.Name = "dgv_cbxx";
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_cbxx.RowHeadersDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle29.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle29.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_cbxx.RowHeadersDefaultCellStyle = dataGridViewCellStyle29;
             this.dgv_cbxx.RowHeight = 0;
-            dataGridViewCellStyle50.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_cbxx.RowsDefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle30.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_cbxx.RowsDefaultCellStyle = dataGridViewCellStyle30;
             this.dgv_cbxx.RowTemplate.Height = 23;
             this.dgv_cbxx.SelectedIndex = -1;
             this.dgv_cbxx.ShowGridLine = false;
             this.dgv_cbxx.ShowRect = false;
-            this.dgv_cbxx.Size = new System.Drawing.Size(536, 119);
+            this.dgv_cbxx.Size = new System.Drawing.Size(553, 119);
             this.dgv_cbxx.TabIndex = 34;
             this.dgv_cbxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -962,12 +958,12 @@
             this.uiGroupBox3.Controls.Add(this.btnCika);
             this.uiGroupBox3.Controls.Add(this.label26);
             this.uiGroupBox3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox3.Location = new System.Drawing.Point(13, 90);
+            this.uiGroupBox3.Location = new System.Drawing.Point(3, 54);
             this.uiGroupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox3.Name = "uiGroupBox3";
             this.uiGroupBox3.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox3.Size = new System.Drawing.Size(321, 202);
+            this.uiGroupBox3.Size = new System.Drawing.Size(286, 221);
             this.uiGroupBox3.TabIndex = 47;
             this.uiGroupBox3.Text = "刷卡查询";
             this.uiGroupBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -989,7 +985,7 @@
             this.btnNewUser.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
             this.btnNewUser.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnNewUser.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.btnNewUser.Size = new System.Drawing.Size(120, 39);
+            this.btnNewUser.Size = new System.Drawing.Size(100, 39);
             this.btnNewUser.Style = Sunny.UI.UIStyle.Orange;
             this.btnNewUser.StyleCustomMode = true;
             this.btnNewUser.Symbol = 62004;
@@ -1008,14 +1004,14 @@
             this.btnYBK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBK.Location = new System.Drawing.Point(161, 92);
+            this.btnYBK.Location = new System.Drawing.Point(161, 96);
             this.btnYBK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBK.Name = "btnYBK";
             this.btnYBK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.btnYBK.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btnYBK.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnYBK.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnYBK.Size = new System.Drawing.Size(120, 37);
+            this.btnYBK.Size = new System.Drawing.Size(100, 37);
             this.btnYBK.Style = Sunny.UI.UIStyle.Green;
             this.btnYBK.StyleCustomMode = true;
             this.btnYBK.Symbol = 62139;
@@ -1041,7 +1037,7 @@
             this.btnIDCard.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btnIDCard.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnIDCard.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnIDCard.Size = new System.Drawing.Size(120, 38);
+            this.btnIDCard.Size = new System.Drawing.Size(100, 38);
             this.btnIDCard.Style = Sunny.UI.UIStyle.Green;
             this.btnIDCard.StyleCustomMode = true;
             this.btnIDCard.Symbol = 62137;
@@ -1067,7 +1063,7 @@
             this.btnSFZ.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btnSFZ.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSFZ.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSFZ.Size = new System.Drawing.Size(120, 37);
+            this.btnSFZ.Size = new System.Drawing.Size(100, 37);
             this.btnSFZ.Style = Sunny.UI.UIStyle.Green;
             this.btnSFZ.StyleCustomMode = true;
             this.btnSFZ.Symbol = 62140;
@@ -1093,7 +1089,7 @@
             this.btnCika.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.btnCika.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnCika.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnCika.Size = new System.Drawing.Size(120, 38);
+            this.btnCika.Size = new System.Drawing.Size(100, 38);
             this.btnCika.Style = Sunny.UI.UIStyle.Green;
             this.btnCika.StyleCustomMode = true;
             this.btnCika.Symbol = 61639;
@@ -1116,7 +1112,7 @@
             // 
             this.uiGroupBox4.Controls.Add(this.dgv_patient_sfz);
             this.uiGroupBox4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox4.Location = new System.Drawing.Point(15, 515);
+            this.uiGroupBox4.Location = new System.Drawing.Point(3, 498);
             this.uiGroupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox4.Name = "uiGroupBox4";
@@ -1129,55 +1125,55 @@
             // 
             // dgv_patient_sfz
             // 
-            dataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgv_patient_sfz.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_patient_sfz.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle31;
             this.dgv_patient_sfz.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_patient_sfz.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_patient_sfz.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_patient_sfz.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_patient_sfz.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle32;
             this.dgv_patient_sfz.ColumnHeadersHeight = 32;
             this.dgv_patient_sfz.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_patient_sfz.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.patient_id,
             this.sfz_id,
             this.relative_code});
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle53.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_patient_sfz.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_patient_sfz.DefaultCellStyle = dataGridViewCellStyle33;
             this.dgv_patient_sfz.EnableHeadersVisualStyles = false;
             this.dgv_patient_sfz.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_patient_sfz.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgv_patient_sfz.Location = new System.Drawing.Point(14, 36);
             this.dgv_patient_sfz.Name = "dgv_patient_sfz";
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_patient_sfz.RowHeadersDefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_patient_sfz.RowHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dgv_patient_sfz.RowHeight = 0;
-            dataGridViewCellStyle55.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle55.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle55.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_patient_sfz.RowsDefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle35.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_patient_sfz.RowsDefaultCellStyle = dataGridViewCellStyle35;
             this.dgv_patient_sfz.RowTemplate.Height = 23;
             this.dgv_patient_sfz.SelectedIndex = -1;
             this.dgv_patient_sfz.ShowGridLine = false;
@@ -1207,6 +1203,19 @@
             // 
             // uiGroupBox5
             // 
+            this.uiGroupBox5.Controls.Add(this.txtAge);
+            this.uiGroupBox5.Controls.Add(this.cbxChargeTypes);
+            this.uiGroupBox5.Controls.Add(this.cbxResponseType);
+            this.uiGroupBox5.Controls.Add(this.label28);
+            this.uiGroupBox5.Controls.Add(this.label29);
+            this.uiGroupBox5.Controls.Add(this.txtCode);
+            this.uiGroupBox5.Controls.Add(this.label37);
+            this.uiGroupBox5.Controls.Add(this.label25);
+            this.uiGroupBox5.Controls.Add(this.cbxsex);
+            this.uiGroupBox5.Controls.Add(this.label6);
+            this.uiGroupBox5.Controls.Add(this.label27);
+            this.uiGroupBox5.Controls.Add(this.txthomedistrict);
+            this.uiGroupBox5.Controls.Add(this.label24);
             this.uiGroupBox5.Controls.Add(this.txt_patientId);
             this.uiGroupBox5.Controls.Add(this.label22);
             this.uiGroupBox5.Controls.Add(this.cbx_relation);
@@ -1215,38 +1224,192 @@
             this.uiGroupBox5.Controls.Add(this.txt_sfz_no);
             this.uiGroupBox5.Controls.Add(this.txt_birth);
             this.uiGroupBox5.Controls.Add(this.label10);
-            this.uiGroupBox5.Controls.Add(this.cbxsex);
-            this.uiGroupBox5.Controls.Add(this.label6);
             this.uiGroupBox5.Controls.Add(this.txt_name);
             this.uiGroupBox5.Controls.Add(this.cbxmarrycode);
             this.uiGroupBox5.Controls.Add(this.txtrelationname);
             this.uiGroupBox5.Controls.Add(this.label36);
             this.uiGroupBox5.Controls.Add(this.label9);
             this.uiGroupBox5.Controls.Add(this.sfz_home_address);
-            this.uiGroupBox5.Controls.Add(this.txtCode);
             this.uiGroupBox5.Controls.Add(this.label19);
-            this.uiGroupBox5.Controls.Add(this.label37);
             this.uiGroupBox5.Controls.Add(this.label13);
-            this.uiGroupBox5.Controls.Add(this.txtTel);
+            this.uiGroupBox5.Controls.Add(this.txthometel);
+            this.uiGroupBox5.Controls.Add(this.label23);
             this.uiGroupBox5.Controls.Add(this.label18);
             this.uiGroupBox5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox5.Location = new System.Drawing.Point(352, 90);
+            this.uiGroupBox5.Location = new System.Drawing.Point(297, 59);
             this.uiGroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox5.Name = "uiGroupBox5";
             this.uiGroupBox5.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox5.Size = new System.Drawing.Size(879, 202);
+            this.uiGroupBox5.Size = new System.Drawing.Size(941, 221);
             this.uiGroupBox5.TabIndex = 49;
             this.uiGroupBox5.Text = "患者信息";
             this.uiGroupBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox5.Click += new System.EventHandler(this.uiGroupBox5_Click);
             // 
+            // txtAge
+            // 
+            this.txtAge.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtAge.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtAge.Location = new System.Drawing.Point(750, 107);
+            this.txtAge.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtAge.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtAge.Name = "txtAge";
+            this.txtAge.ShowText = false;
+            this.txtAge.Size = new System.Drawing.Size(61, 29);
+            this.txtAge.TabIndex = 50;
+            this.txtAge.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtAge.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxChargeTypes
+            // 
+            this.cbxChargeTypes.DataSource = null;
+            this.cbxChargeTypes.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxChargeTypes.FillColor = System.Drawing.Color.White;
+            this.cbxChargeTypes.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxChargeTypes.Location = new System.Drawing.Point(366, 146);
+            this.cbxChargeTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxChargeTypes.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxChargeTypes.Name = "cbxChargeTypes";
+            this.cbxChargeTypes.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxChargeTypes.Size = new System.Drawing.Size(156, 29);
+            this.cbxChargeTypes.TabIndex = 10;
+            this.cbxChargeTypes.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxChargeTypes.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxResponseType
+            // 
+            this.cbxResponseType.DataSource = null;
+            this.cbxResponseType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxResponseType.FillColor = System.Drawing.Color.White;
+            this.cbxResponseType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxResponseType.Location = new System.Drawing.Point(366, 107);
+            this.cbxResponseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxResponseType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxResponseType.Name = "cbxResponseType";
+            this.cbxResponseType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxResponseType.Size = new System.Drawing.Size(156, 29);
+            this.cbxResponseType.TabIndex = 10;
+            this.cbxResponseType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxResponseType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(317, 149);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(42, 21);
+            this.label28.TabIndex = 48;
+            this.label28.Text = "费别";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(317, 149);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(42, 21);
+            this.label29.TabIndex = 49;
+            this.label29.Text = "电话";
+            // 
+            // txtCode
+            // 
+            this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCode.Location = new System.Drawing.Point(101, 29);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.ShowText = false;
+            this.txtCode.Size = new System.Drawing.Size(192, 29);
+            this.txtCode.TabIndex = 3;
+            this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtCode.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtCode_KeyUp);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(52, 32);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(42, 21);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "卡号";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(317, 112);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(42, 21);
+            this.label25.TabIndex = 44;
+            this.label25.Text = "身份";
+            // 
+            // cbxsex
+            // 
+            this.cbxsex.DataSource = null;
+            this.cbxsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxsex.FillColor = System.Drawing.Color.White;
+            this.cbxsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxsex.Items.AddRange(new object[] {
+            "男",
+            "女"});
+            this.cbxsex.Location = new System.Drawing.Point(662, 107);
+            this.cbxsex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxsex.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxsex.Name = "cbxsex";
+            this.cbxsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxsex.Size = new System.Drawing.Size(68, 29);
+            this.cbxsex.TabIndex = 8;
+            this.cbxsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(613, 112);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(42, 21);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "性别";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(317, 112);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(42, 21);
+            this.label27.TabIndex = 45;
+            this.label27.Text = "电话";
+            // 
+            // txthomedistrict
+            // 
+            this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txthomedistrict.Location = new System.Drawing.Point(101, 146);
+            this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txthomedistrict.Name = "txthomedistrict";
+            this.txthomedistrict.ShowText = false;
+            this.txthomedistrict.Size = new System.Drawing.Size(192, 29);
+            this.txthomedistrict.TabIndex = 35;
+            this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(52, 149);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(42, 21);
+            this.label24.TabIndex = 34;
+            this.label24.Text = "地区";
+            // 
             // txt_patientId
             // 
             this.txt_patientId.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_patientId.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_patientId.Location = new System.Drawing.Point(117, 37);
+            this.txt_patientId.Location = new System.Drawing.Point(101, 68);
             this.txt_patientId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_patientId.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_patientId.Name = "txt_patientId";
@@ -1256,11 +1419,12 @@
             this.txt_patientId.TabIndex = 43;
             this.txt_patientId.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_patientId.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_patientId.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txt_patientId_KeyUp);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(51, 42);
+            this.label22.Location = new System.Drawing.Point(35, 73);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(59, 21);
             this.label22.TabIndex = 42;
@@ -1272,7 +1436,7 @@
             this.cbx_relation.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbx_relation.FillColor = System.Drawing.Color.White;
             this.cbx_relation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx_relation.Location = new System.Drawing.Point(678, 154);
+            this.cbx_relation.Location = new System.Drawing.Point(662, 181);
             this.cbx_relation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbx_relation.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbx_relation.Name = "cbx_relation";
@@ -1285,7 +1449,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(587, 157);
+            this.label20.Location = new System.Drawing.Point(571, 184);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(90, 21);
             this.label20.TabIndex = 18;
@@ -1294,17 +1458,17 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(19, 118);
+            this.label14.Location = new System.Drawing.Point(36, 107);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(90, 21);
+            this.label14.Size = new System.Drawing.Size(58, 21);
             this.label14.TabIndex = 40;
-            this.label14.Text = "身份证号码";
+            this.label14.Text = "身份证";
             // 
             // txt_sfz_no
             // 
             this.txt_sfz_no.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_sfz_no.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_sfz_no.Location = new System.Drawing.Point(117, 115);
+            this.txt_sfz_no.Location = new System.Drawing.Point(101, 107);
             this.txt_sfz_no.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_sfz_no.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_sfz_no.Name = "txt_sfz_no";
@@ -1319,14 +1483,14 @@
             // 
             this.txt_birth.FillColor = System.Drawing.Color.White;
             this.txt_birth.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_birth.Location = new System.Drawing.Point(678, 76);
+            this.txt_birth.Location = new System.Drawing.Point(662, 71);
             this.txt_birth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_birth.MaxLength = 10;
             this.txt_birth.MinimumSize = new System.Drawing.Size(63, 0);
             this.txt_birth.Name = "txt_birth";
             this.txt_birth.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.txt_birth.ShowToday = true;
-            this.txt_birth.Size = new System.Drawing.Size(151, 29);
+            this.txt_birth.Size = new System.Drawing.Size(149, 29);
             this.txt_birth.SymbolDropDown = 61555;
             this.txt_birth.SymbolNormal = 61555;
             this.txt_birth.TabIndex = 39;
@@ -1338,50 +1502,22 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(629, 81);
+            this.label10.Location = new System.Drawing.Point(611, 76);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(42, 21);
             this.label10.TabIndex = 38;
             this.label10.Text = "生日";
             // 
-            // cbxsex
-            // 
-            this.cbxsex.DataSource = null;
-            this.cbxsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxsex.FillColor = System.Drawing.Color.White;
-            this.cbxsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxsex.Items.AddRange(new object[] {
-            "男",
-            "女"});
-            this.cbxsex.Location = new System.Drawing.Point(382, 117);
-            this.cbxsex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxsex.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxsex.Name = "cbxsex";
-            this.cbxsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxsex.Size = new System.Drawing.Size(187, 29);
-            this.cbxsex.TabIndex = 8;
-            this.cbxsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(333, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 21);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "性别";
-            // 
             // txt_name
             // 
             this.txt_name.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_name.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_name.Location = new System.Drawing.Point(382, 37);
+            this.txt_name.Location = new System.Drawing.Point(366, 29);
             this.txt_name.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_name.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_name.Name = "txt_name";
             this.txt_name.ShowText = false;
-            this.txt_name.Size = new System.Drawing.Size(187, 29);
+            this.txt_name.Size = new System.Drawing.Size(156, 29);
             this.txt_name.TabIndex = 4;
             this.txt_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1389,35 +1525,34 @@
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(333, 42);
+            this.label36.Location = new System.Drawing.Point(317, 34);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(42, 21);
             this.label36.TabIndex = 4;
             this.label36.Text = "姓名";
             // 
-            // txtCode
+            // txthometel
             // 
-            this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtCode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtCode.Location = new System.Drawing.Point(117, 76);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtCode.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.ReadOnly = true;
-            this.txtCode.ShowText = false;
-            this.txtCode.Size = new System.Drawing.Size(192, 29);
-            this.txtCode.TabIndex = 3;
-            this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txthometel.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txthometel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txthometel.Location = new System.Drawing.Point(366, 68);
+            this.txthometel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txthometel.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txthometel.Name = "txthometel";
+            this.txthometel.ShowText = false;
+            this.txthometel.Size = new System.Drawing.Size(156, 29);
+            this.txthometel.TabIndex = 31;
+            this.txthometel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txthometel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // label37
+            // label23
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(68, 79);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(42, 21);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "卡号";
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(317, 73);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(42, 21);
+            this.label23.TabIndex = 30;
+            this.label23.Text = "电话";
             // 
             // uiGroupBox6
             // 
@@ -1425,12 +1560,12 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.uiGroupBox6.Controls.Add(this.dgv_ghlist);
             this.uiGroupBox6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox6.Location = new System.Drawing.Point(13, 691);
+            this.uiGroupBox6.Location = new System.Drawing.Point(1, 674);
             this.uiGroupBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox6.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox6.Name = "uiGroupBox6";
             this.uiGroupBox6.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox6.Size = new System.Drawing.Size(648, 165);
+            this.uiGroupBox6.Size = new System.Drawing.Size(650, 181);
             this.uiGroupBox6.TabIndex = 48;
             this.uiGroupBox6.Text = "ID号挂号记录";
             this.uiGroupBox6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1438,21 +1573,21 @@
             // 
             // dgv_ghlist
             // 
-            dataGridViewCellStyle56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgv_ghlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle36.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgv_ghlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle36;
             this.dgv_ghlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_ghlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_ghlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle57.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle57.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_ghlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle57;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle37.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle37.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle37.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle37.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_ghlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle37;
             this.dgv_ghlist.ColumnHeadersHeight = 32;
             this.dgv_ghlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_ghlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -1461,39 +1596,39 @@
             this.doctor_name,
             this.ampm,
             this.visit_status});
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle58.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle58.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle58.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_ghlist.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle38.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle38.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle38.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle38.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle38.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ghlist.DefaultCellStyle = dataGridViewCellStyle38;
             this.dgv_ghlist.EnableHeadersVisualStyles = false;
             this.dgv_ghlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_ghlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgv_ghlist.Location = new System.Drawing.Point(14, 36);
             this.dgv_ghlist.Name = "dgv_ghlist";
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle59.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle59.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle59.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle59.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_ghlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle39.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle39.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle39.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle39.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_ghlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle39;
             this.dgv_ghlist.RowHeight = 0;
-            dataGridViewCellStyle60.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle60.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle60.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle60.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_ghlist.RowsDefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle40.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle40.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle40.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle40.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_ghlist.RowsDefaultCellStyle = dataGridViewCellStyle40;
             this.dgv_ghlist.RowTemplate.Height = 23;
             this.dgv_ghlist.SelectedIndex = -1;
             this.dgv_ghlist.ShowGridLine = false;
             this.dgv_ghlist.ShowRect = false;
-            this.dgv_ghlist.Size = new System.Drawing.Size(619, 115);
+            this.dgv_ghlist.Size = new System.Drawing.Size(621, 131);
             this.dgv_ghlist.TabIndex = 0;
             this.dgv_ghlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgv_ghlist.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_ghlist_RowPostPaint);
@@ -1583,7 +1718,6 @@
         private System.Windows.Forms.Label label13;
         private Sunny.UI.UITextBox ybk_psn_cert_type;
         private System.Windows.Forms.Label label17;
-        private Sunny.UI.UITextBox txtTel;
         private System.Windows.Forms.Label label18;
         private Sunny.UI.UITextBox sfz_home_address;
         private System.Windows.Forms.Label label19;
@@ -1662,5 +1796,16 @@
         private Sunny.UI.UITextBox txt_patientId;
         private System.Windows.Forms.Label label22;
         private Sunny.UI.UISymbolButton btnNewUser;
+        private Sunny.UI.UITextBox txthomedistrict;
+        private System.Windows.Forms.Label label24;
+        private Sunny.UI.UITextBox txthometel;
+        private System.Windows.Forms.Label label23;
+        private Sunny.UI.UIComboBox cbxChargeTypes;
+        private Sunny.UI.UIComboBox cbxResponseType;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label27;
+        private Sunny.UI.UITextBox txtAge;
     }
 }

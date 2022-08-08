@@ -56,7 +56,7 @@ namespace Client
 
         Color cur_color = Color.FromArgb(0, 150, 136);
 
-        Color requestHoureSelectedColor = Color.FromArgb(230, 80, 80);
+        Color requestHoureSelectedColor = Color.FromArgb(80, 160, 255);
 
         UIHeaderAsideMainFooterFrame parentForm;
 
@@ -91,6 +91,16 @@ namespace Client
             uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text + "[F2]");
             uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text + "[F3]");
             uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text + "[F4]");
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(500);
+
+                this.Invoke(new Action(() =>
+                {
+                    txtCode.Focus();
+                }));
+            });
 
         }
 
@@ -181,7 +191,7 @@ namespace Client
                     cc.FillColor = Color.FromArgb(110, 190, 40);
                 }
                 var btn = sender as UIButton;
-                btn.FillColor = Color.FromArgb(230, 80, 80); ;
+                btn.FillColor = requestHoureSelectedColor;
                 LoadRequestInfo();
             }
             catch (Exception ex)
@@ -200,8 +210,9 @@ namespace Client
                 txtCode.Focus();
                 return;
             }
-            var code = this.txtCode.Text.Trim();
-            UserInfoEdit ue = new UserInfoEdit(code, dto);
+            //var code = this.txtCode.Text.Trim();
+            var pid =lblPatientid.Text.Trim();
+            UserInfoEdit ue = new UserInfoEdit(pid, dto);
             //关闭，刷新
             ue.FormClosed += Ue_FormClosed1;
 
@@ -224,7 +235,7 @@ namespace Client
 
         private void Ue_FormClosed1(object sender, FormClosedEventArgs e)
         {
-            SearchUser();
+            ReloadUserInfo();
         }
 
         private void btnAM_Click(object sender, EventArgs e)
@@ -268,7 +279,7 @@ namespace Client
                 foreach (var control in pnlHours.FlowLayoutPanel.Controls)
                 {
                     var cc = control as UIButton;
-                    if (cc.FillColor == Color.FromArgb(230, 80, 80))
+                    if (cc.FillColor == requestHoureSelectedColor)
                     {
                         ampm = cc.TagString;
                         break;
@@ -575,6 +586,7 @@ namespace Client
                     //打印发票
                     if (SessionHelper.do_gh_print)
                     {
+                        GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
                         SessionHelper.do_gh_print = false;
                         GhPrint ghprint = new GhPrint();
                         ghprint.Show();
@@ -642,7 +654,7 @@ namespace Client
         {
             //判断当前是否可以挂号
             bool isWrong = false;
-
+            lblMsg.Text = "";
             if (DateTime.Parse(DateTime.Now.ToString("yyyy-MM-dd")) > Convert.ToDateTime(this.dtpGhrq.Text))
             {
                 UIMessageTip.ShowError("所选日期不能小于今天!");
@@ -675,7 +687,7 @@ namespace Client
                 UIMessageTip.ShowError("请选择正确的时间段进行挂号操作!");
                 lblMsg.Text = "请选择正确的时间段进行挂号操作！";
                 return;
-            }
+            }  
 
             if (string.IsNullOrEmpty(txtCode.Text))
             {
@@ -991,7 +1003,7 @@ namespace Client
             }
             else
             {
-                Refund rf = new Refund(txtCode.Text.Trim());
+                Refund rf = new Refund(lblPatientid.Text.Trim());
                 rf.ShowDialog();
             }
         }
@@ -1277,53 +1289,7 @@ namespace Client
                         return;
                     }
 
-                    btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
-                    //this.txtpatientid.Text = userInfo["patient_id"].ToString();
-                    lblName.Text = userInfo.name.ToString();
-                    if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
-                    {
-                        userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
-                    }
-                    lblAge.Text = userInfo.age.ToString() + "岁";
-                    lblhometel.Text = userInfo.home_tel;
-                    lblSex.Text = userInfo.sex == "1" ? "男" : "女";
-                    lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";
-                    if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
-                    {
-                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
-                    }
-                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
-                    {
-                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
-                    }
-                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
-                    {
-                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
-                    }
-                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
-                    {
-                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
-                    }
-                    else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
-                    {
-                        lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
-                    }
-                    else
-                    {
-                        lblmarry.Text = userInfo.marry_code;
-                    }
-                    if (!string.IsNullOrEmpty(userInfo.home_district))
-                    {
-                        var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
-
-                        if (model != null)
-                        {
-                            lbldistrict.Text = model.name;
-                        }
-                    }
-
-                    lblstreet.Text = userInfo.home_street;
-                    lblsfz.Text = userInfo.hic_no; ;
+                    BindUserInfo(userInfo);
 
                     if (YBHelper.currentYBInfo != null)
                     {
@@ -1393,6 +1359,101 @@ namespace Client
 
         }
 
+
+        public void ReloadUserInfo()
+        {
+            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={lblPatientid}");
+
+            var json = HttpClientUtil.Get(paramurl); 
+
+            var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+            if (result.status == 1 && result.data != null && result.data.Count > 0)
+            {
+                BindUserInfo(result.data[0]);
+            }
+        }
+        public void BindUserInfo(PatientVM userInfo)
+        {
+            btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
+                                                                     //this.txtpatientid.Text = userInfo["patient_id"].ToString();
+            lblName.Text = userInfo.name.ToString();
+            lblPatientid.Text = userInfo.patient_id;
+            txtCode.Text = userInfo.p_bar_code;
+            if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
+            {
+                userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
+            }
+            lblAge.Text = userInfo.age.ToString() + "岁";
+            lblhometel.Text = userInfo.home_tel;
+            lblSex.Text = userInfo.sex == "1" ? "男" : "女";
+            lblbirth.Text = userInfo.birthday.HasValue ? userInfo.birthday.Value.ToShortDateString() : "";
+            if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
+            }
+            else
+            {
+                lblmarry.Text = userInfo.marry_code;
+            }
+            if (!string.IsNullOrEmpty(userInfo.home_district))
+            {
+                var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
+
+                if (model != null)
+                {
+                    lbldistrict.Text = model.name;
+                }
+            }
+
+            lblstreet.Text = userInfo.home_street;
+            lblsfz.Text = userInfo.hic_no; ;
+
+
+            if (!string.IsNullOrEmpty(userInfo.response_type))
+            {
+                var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
+
+                if (model != null)
+                {
+                    lblshenfen.Text = model.name;
+                }
+            }
+            if (!string.IsNullOrEmpty(userInfo.charge_type))
+            {
+                var model = SessionHelper.chargeTypes.Where(p => p.code == userInfo.charge_type).FirstOrDefault();
+
+                if (model != null)
+                {
+                    lblfeibie.Text = model.name;
+                }
+            }
+            lblrelationname.Text = userInfo.relation_name;
+            if (!string.IsNullOrEmpty(userInfo.relation_code))
+            {
+                var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
+
+                if (model != null)
+                {
+                    lblrelation.Text = model.name;
+                }
+            }
+        }
         public string AutoAddUserInfo()
         {
             try
@@ -1615,7 +1676,14 @@ namespace Client
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
-            
+            //GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1; 
+            if (PatientVM!=null)
+            {
+
+                GhPrint ghprint = new GhPrint();
+                ghprint.Show();
+            }
+
 
         }
 

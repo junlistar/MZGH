@@ -65,6 +65,10 @@
             this.sfz_card_no = new Sunny.UI.UITextBox();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
+            this.uiLabel5 = new Sunny.UI.UILabel();
+            this.cbxChargeType = new Sunny.UI.UIComboBox();
+            this.uiLabel7 = new Sunny.UI.UILabel();
+            this.cbxShenfen = new Sunny.UI.UIComboBox();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.sfz_folk.SuspendLayout();
@@ -200,7 +204,7 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(26, 168);
+            this.uiLabel8.Location = new System.Drawing.Point(26, 216);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel8.Size = new System.Drawing.Size(100, 23);
@@ -213,7 +217,7 @@
             // uiLabel9
             // 
             this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(66, 209);
+            this.uiLabel9.Location = new System.Drawing.Point(66, 257);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel9.Size = new System.Drawing.Size(60, 23);
@@ -234,7 +238,7 @@
             this.txthomestreet.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomestreet.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txthomestreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomestreet.Location = new System.Drawing.Point(133, 168);
+            this.txthomestreet.Location = new System.Drawing.Point(133, 216);
             this.txthomestreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomestreet.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthomestreet.Name = "txthomestreet";
@@ -258,7 +262,7 @@
             this.txtZhiye.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtZhiye.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtZhiye.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtZhiye.Location = new System.Drawing.Point(133, 207);
+            this.txtZhiye.Location = new System.Drawing.Point(133, 255);
             this.txtZhiye.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtZhiye.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtZhiye.Name = "txtZhiye";
@@ -321,10 +325,10 @@
             this.uiLine1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.uiLine1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLine1.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.uiLine1.Location = new System.Drawing.Point(3, 575);
+            this.uiLine1.Location = new System.Drawing.Point(3, 576);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(791, 29);
+            this.uiLine1.Size = new System.Drawing.Size(776, 29);
             this.uiLine1.Style = Sunny.UI.UIStyle.Green;
             this.uiLine1.TabIndex = 36;
             this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -340,7 +344,6 @@
             this.uiLabel14.TabIndex = 37;
             this.uiLabel14.Text = "婚姻状况";
             this.uiLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel14.Visible = false;
             this.uiLabel14.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cbxmarrycode
@@ -368,13 +371,16 @@
             this.cbxmarrycode.Style = Sunny.UI.UIStyle.Green;
             this.cbxmarrycode.TabIndex = 38;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxmarrycode.Visible = false;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiGroupBox1
             // 
+            this.uiGroupBox1.Controls.Add(this.cbxShenfen);
+            this.uiGroupBox1.Controls.Add(this.uiLabel5);
             this.uiGroupBox1.Controls.Add(this.txthomedistrict);
+            this.uiGroupBox1.Controls.Add(this.cbxChargeType);
             this.uiGroupBox1.Controls.Add(this.uiLabel4);
+            this.uiGroupBox1.Controls.Add(this.uiLabel7);
             this.uiGroupBox1.Controls.Add(this.uiLabel1);
             this.uiGroupBox1.Controls.Add(this.cbxmarrycode);
             this.uiGroupBox1.Controls.Add(this.uiLabel2);
@@ -398,7 +404,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.uiGroupBox1.Size = new System.Drawing.Size(709, 263);
+            this.uiGroupBox1.Size = new System.Drawing.Size(709, 320);
             this.uiGroupBox1.Style = Sunny.UI.UIStyle.Green;
             this.uiGroupBox1.TabIndex = 39;
             this.uiGroupBox1.Text = "基本信息";
@@ -460,13 +466,13 @@
             this.uiGroupBox2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.uiGroupBox2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox2.Location = new System.Drawing.Point(38, 337);
+            this.uiGroupBox2.Location = new System.Drawing.Point(38, 383);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.uiGroupBox2.Size = new System.Drawing.Size(709, 212);
+            this.uiGroupBox2.Size = new System.Drawing.Size(709, 197);
             this.uiGroupBox2.Style = Sunny.UI.UIStyle.Green;
             this.uiGroupBox2.TabIndex = 40;
             this.uiGroupBox2.Text = "身份证信息";
@@ -741,10 +747,90 @@
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // uiLabel5
+            // 
+            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel5.Location = new System.Drawing.Point(26, 165);
+            this.uiLabel5.Name = "uiLabel5";
+            this.uiLabel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel5.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Green;
+            this.uiLabel5.TabIndex = 43;
+            this.uiLabel5.Text = "身份";
+            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxChargeType
+            // 
+            this.cbxChargeType.DataSource = null;
+            this.cbxChargeType.FillColor = System.Drawing.Color.White;
+            this.cbxChargeType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxChargeType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxChargeType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxChargeType.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxChargeType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxChargeType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxChargeType.Location = new System.Drawing.Point(447, 168);
+            this.cbxChargeType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxChargeType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxChargeType.Name = "cbxChargeType";
+            this.cbxChargeType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxChargeType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxChargeType.Size = new System.Drawing.Size(179, 29);
+            this.cbxChargeType.Style = Sunny.UI.UIStyle.Green;
+            this.cbxChargeType.TabIndex = 42;
+            this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(340, 168);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel7.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Green;
+            this.uiLabel7.TabIndex = 41;
+            this.uiLabel7.Text = "费别";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxShenfen
+            // 
+            this.cbxShenfen.DataSource = null;
+            this.cbxShenfen.FillColor = System.Drawing.Color.White;
+            this.cbxShenfen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxShenfen.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxShenfen.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxShenfen.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxShenfen.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxShenfen.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxShenfen.Location = new System.Drawing.Point(133, 168);
+            this.cbxShenfen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxShenfen.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxShenfen.Name = "cbxShenfen";
+            this.cbxShenfen.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxShenfen.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxShenfen.Size = new System.Drawing.Size(200, 29);
+            this.cbxShenfen.Style = Sunny.UI.UIStyle.Green;
+            this.cbxShenfen.TabIndex = 43;
+            this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // UserInfoEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(797, 673);
+            this.ClientSize = new System.Drawing.Size(782, 674);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -814,5 +900,9 @@
         private Sunny.UI.UILabel uiLabel4;
         private Sunny.UI.UISymbolButton btnSave;
         private Sunny.UI.UISymbolButton btnCancel;
+        private Sunny.UI.UILabel uiLabel5;
+        private Sunny.UI.UIComboBox cbxChargeType;
+        private Sunny.UI.UILabel uiLabel7;
+        private Sunny.UI.UIComboBox cbxShenfen;
     }
 }

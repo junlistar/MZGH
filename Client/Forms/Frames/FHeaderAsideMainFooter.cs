@@ -102,14 +102,14 @@ namespace Client
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
 
                 pageIndex = 1600;
-                parent = Aside.CreateNode("支付管理", 361573, 24, pageIndex);
-                Aside.CreateChildNode(parent, "医保支付", 361875, 24, 1601);
-                Aside.CreateChildNode(parent, "窗口支付", 361875, 24, 1602);
-                Aside.CreateChildNode(parent, "自助支付", 361875, 24, 1603);
+                parent = Aside.CreateNode("支付管理", 61852, 24, pageIndex);
+                Aside.CreateChildNode(parent, "医保支付", 62139, 24, 1601);
+                Aside.CreateChildNode(parent, "窗口支付", 361705, 24, 1602);
+                Aside.CreateChildNode(parent, "自助支付", 362716, 24, 1603);
 
 
                 //foreach (var item in all_list.ToArray())
@@ -648,6 +648,13 @@ namespace Client
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             json = HttpClientUtil.Get(paramurl);
             SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+
+            //获取用户   
+            paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            json = HttpClientUtil.Get(paramurl);
+
+            SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
         }
 
 

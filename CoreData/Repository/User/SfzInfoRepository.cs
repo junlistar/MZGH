@@ -53,7 +53,7 @@ namespace Data.Repository
         }
 
         public bool UpdateUserBaseInfo(string pid, string name, string sex, string marry_code, string birthday, string tel, string relation_name, string relation_code,
-             string home_street, string opera)
+             string home_street,string district, string responseType, string chargeType, string opera)
         {
             try
             {
@@ -75,6 +75,9 @@ namespace Data.Repository
                         para.Add("@relation_name", relation_name);
                         para.Add("@relation_code", relation_code);
                         para.Add("@home_street", home_street);
+                        para.Add("@district", district);
+                        para.Add("@responseType", responseType);
+                        para.Add("@chargeType", chargeType);
                         para.Add("@update_opera", opera);
 
                         connection.Execute(sql, para, transaction);

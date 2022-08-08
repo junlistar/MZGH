@@ -16,6 +16,7 @@ using Client.Forms.Wedgit;
 using Client.ViewModel;
 using Sunny.UI;
 using Client;
+using Client.Forms.Pages.mzgh;
 
 namespace Mzsf.Forms.Pages
 {
@@ -60,6 +61,11 @@ namespace Mzsf.Forms.Pages
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
+            //如果点击的是身份证或医保卡，择查询身份证信息
+            if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+            {
+                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+            }
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -81,6 +87,20 @@ namespace Mzsf.Forms.Pages
                     if (result.data.Count > 0)
                     {
                         var userInfo = result.data[0];
+                        //如果身份证查询到多条记录 
+                        if (result.data.Count > 1)
+                        {
+                            //弹出选择提示
+                            SelectPatient selectPatient = new SelectPatient(result.data);
+                            if (selectPatient.ShowDialog() == DialogResult.OK)
+                            {
+                                userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
                         if (string.IsNullOrEmpty(userInfo.name))
                         {
                             lblNodata.Text = "没有查到用户数据";
@@ -242,8 +262,9 @@ namespace Mzsf.Forms.Pages
 
         public void BindUserInfo(PatientVM userInfo)
         {
-
+            txtCode.Text = userInfo.p_bar_code;
             txtCode.TagString = userInfo.patient_id;
+            lblPatientid.Text = userInfo.patient_id;
             txtName.Text = userInfo.name.ToString();
             txtAge.Text = userInfo.age.ToString() + "岁";
             txtTel.Text = userInfo.home_tel.ToString();
@@ -255,6 +276,31 @@ namespace Mzsf.Forms.Pages
             {
                 txtSex.Text = "女";
             }
+            if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
+            }
+            else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
+            {
+                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
+            }
+            else
+            {
+                lblmarry.Text = userInfo.marry_code;
+            }
+            lblstreet.Text = userInfo.home_street;
             txtHicno.Text = userInfo.hic_no;
 
             lblTimes.Text = "来访号：" + userInfo.max_times;
@@ -288,14 +334,24 @@ namespace Mzsf.Forms.Pages
                     cbxChargeTypes.Text = model.name;
                 }
             }
+            lblrelationname.Text = userInfo.relation_name;
+            if (!string.IsNullOrEmpty(userInfo.relation_code))
+            {
+                var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
+
+                if (model != null)
+                {
+                    lblrelation.Text = model.name;
+                }
+            }
         }
 
         private void txtCode_KeyUp(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    SearchUser();
-            //}
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchUser();
+            }
         }
         /// <summary>
         /// 获取病人处方存储过程
@@ -449,13 +505,13 @@ namespace Mzsf.Forms.Pages
 
             InitUI();
 
-            cbxResponseType.DataSource = SessionHelper.responseTypes;
-            cbxResponseType.ValueMember = "code";
-            cbxResponseType.DisplayMember = "name";
+            //cbxResponseType.DataSource = SessionHelper.responseTypes;
+            //cbxResponseType.ValueMember = "code";
+            //cbxResponseType.DisplayMember = "name";
 
-            cbxChargeTypes.DataSource = SessionHelper.chargeTypes;
-            cbxChargeTypes.ValueMember = "code";
-            cbxChargeTypes.DisplayMember = "name";
+            //cbxChargeTypes.DataSource = SessionHelper.chargeTypes;
+            //cbxChargeTypes.ValueMember = "code";
+            //cbxChargeTypes.DisplayMember = "name";
 
             BindOrderTypes();
         }

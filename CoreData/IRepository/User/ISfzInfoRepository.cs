@@ -13,7 +13,7 @@ namespace Data.IRepository
         bool UpdateSfzInfo(string name, string sex, string address, string home_address, string folk, string birthday, string card_no);
 
         bool UpdateUserBaseInfo(string pid, string name, string sex, string marry_code, string birthday, string tel, string relation_name, string relation_code,
-             string home_street, string opera);
+             string home_street, string district, string responseType, string chargeType, string opera);
 
         #endregion
     }

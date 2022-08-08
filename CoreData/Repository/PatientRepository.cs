@@ -39,7 +39,7 @@ namespace Data.Repository
         }
         public List<Patient> GetPatientByBarcode(string barcode)
         { 
-            string selectSql = GetSqlByTag("mzgh_mzpatient_getbybarcode.sql");
+            string selectSql = GetSqlByTag("mzgh_mzpatient_getbybarcode");
 
             var para = new DynamicParameters();
             para.Add("@barcode", barcode);
@@ -136,7 +136,7 @@ namespace Data.Repository
                         para.Add("@update_opera", opera);
                         para.Add("@patient_id", pid);
 
-                        return connection.Execute(sql, para,transaction);
+                        connection.Execute(sql, para,transaction);
                     }
                     else
                     {
