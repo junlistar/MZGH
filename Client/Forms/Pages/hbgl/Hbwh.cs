@@ -350,7 +350,7 @@ namespace Client
 
             foreach (DataGridViewRow row in dgvlist.Rows)
             {
-                row.Cells["unit_name"].Style.ForeColor = UIColor.Red;
+                row.Cells["unit_name"].Style.ForeColor = Color.Green;
                 //row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
                 row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
                 row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
@@ -362,13 +362,30 @@ namespace Client
                 {
                     if (_name_index > 0)
                     {
-                        row.Cells["bc" + _name_index].Style.ForeColor = UIColor.Red;
+                        if (row.Cells["bc" + _name_index].Value != null && row.Cells["bc" + _name_index].Value.ToString().IndexOf("(停)") != -1)
+                        {
+                            row.Cells["bc" + _name_index].Style.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            row.Cells["bc" + _name_index].Style.ForeColor = Color.Green;
+                        }
+                         
                         row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
                         row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
                     }
                     else
                     {
-                        row.Cells["bc"].Style.ForeColor = UIColor.Red;
+                        if (row.Cells["bc"].Value!=null && row.Cells["bc"].Value.ToString().IndexOf("(停)")!=-1)
+                        {
+                            row.Cells["bc"].Style.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            row.Cells["bc"].Style.ForeColor = Color.Green;
+                        }
+
+                        
                         row.Cells["xe"].Style.ForeColor = UIColor.Blue;
                         row.Cells["xy"].Style.ForeColor = UIColor.Purple;
                     }

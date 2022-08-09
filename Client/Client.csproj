@@ -240,6 +240,12 @@
     <Compile Include="Forms\Pages\mzgh\SelectPatient.Designer.cs">
       <DependentUpon>SelectPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\mzgh\RelationInfoEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\mzgh\RelationInfoEdit.Designer.cs">
+      <DependentUpon>RelationInfoEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\mzsf\CardPay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -605,11 +611,13 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\MzPatientRelationVM.cs" />
     <Compile Include="ViewModel\MzThirdPayVM.cs" />
     <Compile Include="ViewModel\ElectBillModel.cs" />
     <Compile Include="ViewModel\RequestTimeVM.cs" />
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\DepositVM.cs" />
+    <Compile Include="ViewModel\SfzInfoVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
@@ -668,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzgh\SelectPatient.resx">
       <DependentUpon>SelectPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\mzgh\RelationInfoEdit.resx">
+      <DependentUpon>RelationInfoEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\CardPay.resx">
       <DependentUpon>CardPay.cs</DependentUpon>

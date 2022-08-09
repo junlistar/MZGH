@@ -57,6 +57,7 @@ namespace Client.Forms.Pages.zfgl
                     var ds = result.data;
                     dgv_paylist.DataSource = ds;
                     dgv_paylist.AutoResizeColumns();
+                    dgv_paylist.AutoGenerateColumns = false;
                 }
                 else
                 {

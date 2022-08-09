@@ -91,5 +91,10 @@ namespace Client.Forms.Pages.zfgl
                 log.Error(ex.Message);
             }
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -118,6 +118,7 @@
             this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relative_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
+            this.btnEditRelation = new Sunny.UI.UISymbolButton();
             this.txtAge = new Sunny.UI.UITextBox();
             this.cbxChargeTypes = new Sunny.UI.UIComboBox();
             this.cbxResponseType = new Sunny.UI.UIComboBox();
@@ -336,7 +337,7 @@
             this.sfz_home_address.MinimumSize = new System.Drawing.Size(1, 16);
             this.sfz_home_address.Name = "sfz_home_address";
             this.sfz_home_address.ShowText = false;
-            this.sfz_home_address.Size = new System.Drawing.Size(421, 29);
+            this.sfz_home_address.Size = new System.Drawing.Size(443, 29);
             this.sfz_home_address.TabIndex = 33;
             this.sfz_home_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_home_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -344,7 +345,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(24, 187);
+            this.label19.Location = new System.Drawing.Point(20, 184);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(74, 21);
             this.label19.TabIndex = 32;
@@ -1203,6 +1204,7 @@
             // 
             // uiGroupBox5
             // 
+            this.uiGroupBox5.Controls.Add(this.btnEditRelation);
             this.uiGroupBox5.Controls.Add(this.txtAge);
             this.uiGroupBox5.Controls.Add(this.cbxChargeTypes);
             this.uiGroupBox5.Controls.Add(this.cbxResponseType);
@@ -1236,7 +1238,7 @@
             this.uiGroupBox5.Controls.Add(this.label23);
             this.uiGroupBox5.Controls.Add(this.label18);
             this.uiGroupBox5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox5.Location = new System.Drawing.Point(297, 59);
+            this.uiGroupBox5.Location = new System.Drawing.Point(297, 54);
             this.uiGroupBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox5.Name = "uiGroupBox5";
@@ -1247,6 +1249,20 @@
             this.uiGroupBox5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox5.Click += new System.EventHandler(this.uiGroupBox5_Click);
+            // 
+            // btnEditRelation
+            // 
+            this.btnEditRelation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEditRelation.Location = new System.Drawing.Point(820, 146);
+            this.btnEditRelation.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnEditRelation.Name = "btnEditRelation";
+            this.btnEditRelation.Size = new System.Drawing.Size(25, 24);
+            this.btnEditRelation.Symbol = 61508;
+            this.btnEditRelation.TabIndex = 52;
+            this.btnEditRelation.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEditRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEditRelation.Click += new System.EventHandler(this.btnEditRelation_Click);
             // 
             // txtAge
             // 
@@ -1273,7 +1289,7 @@
             this.cbxChargeTypes.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxChargeTypes.Name = "cbxChargeTypes";
             this.cbxChargeTypes.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxChargeTypes.Size = new System.Drawing.Size(156, 29);
+            this.cbxChargeTypes.Size = new System.Drawing.Size(178, 29);
             this.cbxChargeTypes.TabIndex = 10;
             this.cbxChargeTypes.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxChargeTypes.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1289,7 +1305,7 @@
             this.cbxResponseType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxResponseType.Name = "cbxResponseType";
             this.cbxResponseType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxResponseType.Size = new System.Drawing.Size(156, 29);
+            this.cbxResponseType.Size = new System.Drawing.Size(177, 29);
             this.cbxResponseType.TabIndex = 10;
             this.cbxResponseType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxResponseType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1517,7 +1533,7 @@
             this.txt_name.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_name.Name = "txt_name";
             this.txt_name.ShowText = false;
-            this.txt_name.Size = new System.Drawing.Size(156, 29);
+            this.txt_name.Size = new System.Drawing.Size(177, 29);
             this.txt_name.TabIndex = 4;
             this.txt_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1540,7 +1556,7 @@
             this.txthometel.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthometel.Name = "txthometel";
             this.txthometel.ShowText = false;
-            this.txthometel.Size = new System.Drawing.Size(156, 29);
+            this.txthometel.Size = new System.Drawing.Size(177, 29);
             this.txthometel.TabIndex = 31;
             this.txthometel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthometel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1807,5 +1823,6 @@
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label27;
         private Sunny.UI.UITextBox txtAge;
+        private Sunny.UI.UISymbolButton btnEditRelation;
     }
 }

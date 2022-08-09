@@ -203,7 +203,7 @@ namespace Client
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(this.txtCode.Text) || btnEditUser1.TagString == "")
+            if (string.IsNullOrEmpty(this.lblPatientid.Text) || btnEditUser1.TagString == "")
             {
                 UIMessageTip.ShowError("请刷卡!");
                 lblMsg.Text = "请刷卡！";
@@ -211,7 +211,7 @@ namespace Client
                 return;
             }
             //var code = this.txtCode.Text.Trim();
-            var pid =lblPatientid.Text.Trim();
+            var pid = lblPatientid.Text.Trim();
             UserInfoEdit ue = new UserInfoEdit(pid, dto);
             //关闭，刷新
             ue.FormClosed += Ue_FormClosed1;
@@ -582,7 +582,7 @@ namespace Client
                     SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
                     fe.ShowDialog();
 
-                    uiBreadcrumb2.ItemIndex = 0;  
+                    uiBreadcrumb2.ItemIndex = 0;
                     //打印发票
                     if (SessionHelper.do_gh_print)
                     {
@@ -591,13 +591,13 @@ namespace Client
                         GhPrint ghprint = new GhPrint();
                         ghprint.Show();
                     }
-                     
+
                 }
             }
 
         }
 
-      
+
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
         {
@@ -687,7 +687,7 @@ namespace Client
                 UIMessageTip.ShowError("请选择正确的时间段进行挂号操作!");
                 lblMsg.Text = "请选择正确的时间段进行挂号操作！";
                 return;
-            }  
+            }
 
             if (string.IsNullOrEmpty(txtCode.Text))
             {
@@ -741,7 +741,7 @@ namespace Client
 
         private void txtCode_TextChanged(object sender, EventArgs e)
         {
-            InitUserInfo();
+            //InitUserInfo();
 
         }
 
@@ -1210,6 +1210,7 @@ namespace Client
         public void InitUserInfo()
         {
             lblMsg.Text = "";
+            lblPatientid.Text = "";
             btnEditUser1.TagString = ""; //btnEditUser1.Hide();
             lblName.Text = "";
             lblAge.Text = "";
@@ -1221,6 +1222,10 @@ namespace Client
             lblbirth.Text = "";
             lblmarry.Text = "";
 
+            lblrelation.Text = "";
+            lblrelationname.Text = "";
+            lblshenfen.Text = "";
+            lblfeibie.Text = "";
         }
 
         public void SearchUser()
@@ -1362,9 +1367,9 @@ namespace Client
 
         public void ReloadUserInfo()
         {
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={lblPatientid}");
+            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={lblPatientid.Text}");
 
-            var json = HttpClientUtil.Get(paramurl); 
+            var json = HttpClientUtil.Get(paramurl);
 
             var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
             if (result.status == 1 && result.data != null && result.data.Count > 0)
@@ -1382,6 +1387,10 @@ namespace Client
             if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
             {
                 userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
+            }
+            else
+            {
+                userInfo.age = "0";
             }
             lblAge.Text = userInfo.age.ToString() + "岁";
             lblhometel.Text = userInfo.home_tel;
@@ -1452,6 +1461,10 @@ namespace Client
                 {
                     lblrelation.Text = model.name;
                 }
+            }
+            else
+            {
+                lblrelation.Text = "";
             }
         }
         public string AutoAddUserInfo()
@@ -1677,15 +1690,34 @@ namespace Client
         private void btnRePrint_Click(object sender, EventArgs e)
         {
             //GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1; 
-            if (PatientVM!=null)
+            if (PatientVM != null && PatientVM.max_times != 0)
             {
-
                 GhPrint ghprint = new GhPrint();
                 ghprint.Show();
             }
+            UIMessageTip.Show("没有数据");
 
 
         }
 
+        private void btnEditRelation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                if (PatientVM != null && !string.IsNullOrEmpty(PatientVM.patient_id))
+                {
+                    RelationInfoEdit relationInfoEdit = new RelationInfoEdit(PatientVM.patient_id, PatientVM.relation_code, PatientVM.relation_name);
+                    if (relationInfoEdit.ShowDialog() == DialogResult.OK)
+                    {
+                        ReloadUserInfo();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
     }
 }

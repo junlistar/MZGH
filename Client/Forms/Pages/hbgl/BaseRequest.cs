@@ -219,7 +219,7 @@ namespace Client
                         //dgvlist.AutoResizeColumns();
                         dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                         SetColumnWidth();
-
+                        SetGridTextColor();
                     }
                 }
                 else
@@ -740,7 +740,7 @@ namespace Client
                 dgvlist.AutoResizeColumns();
                 dgvlist.DataSource = ds;
                 SetColumnWidth();
-
+                SetGridTextColor();
             }
             catch (Exception ex)
             {
@@ -1125,7 +1125,8 @@ namespace Client
                 }).ToList();
 
                 dgvlist.DataSource = ds;
-                SetColumnWidth();
+                SetColumnWidth(); 
+                SetGridTextColor();
             }
         }
 
@@ -1156,17 +1157,31 @@ namespace Client
 
         private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (e.RowIndex != -1)
-            {
-                dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = UIColor.Red;
-                dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Blue;
-                dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
-                dgvlist.Rows[e.RowIndex].Cells["daystr"].Style.ForeColor = UIColor.Green;
-                dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Orange;
-                dgvlist.Rows[e.RowIndex].Cells["totle_num"].Style.ForeColor = UIColor.Blue;
-                dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Purple;
-                dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = UIColor.Red;
+            //if (e.RowIndex != -1)
+            //{
+            //    dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = Color.Green;
+            //    dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Blue;
+            //    dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
+            //    dgvlist.Rows[e.RowIndex].Cells["daystr"].Style.ForeColor = UIColor.Green;
+            //    dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Orange;
+            //    dgvlist.Rows[e.RowIndex].Cells["totle_num"].Style.ForeColor = UIColor.Blue;
+            //    dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Purple;
+            //    dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = Color.Orange;
 
+            //}
+        }
+
+        public void SetGridTextColor()
+        {
+            foreach (DataGridViewRow row in dgvlist.Rows) {
+                row.Cells["unit_name"].Style.ForeColor = Color.Green;
+                row.Cells["doct_name"].Style.ForeColor = UIColor.Blue;
+                row.Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
+                row.Cells["daystr"].Style.ForeColor = UIColor.Green;
+                row.Cells["apstr"].Style.ForeColor = UIColor.Orange;
+                row.Cells["totle_num"].Style.ForeColor = UIColor.Blue;
+                row.Cells["winnostr"].Style.ForeColor = UIColor.Purple;
+                row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
             }
         }
     }

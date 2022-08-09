@@ -34,8 +34,8 @@ namespace Client
             InitializeComponent();
         }
         private void BaseRequest_Load(object sender, EventArgs e)
-        { 
-            InitDic(); 
+        {
+            InitDic();
 
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
@@ -189,10 +189,10 @@ namespace Client
                     }).OrderBy(p => p.apstr).OrderBy(p => p.unit_name).OrderBy(p => p.group_name).OrderBy(p => p.clinic_name).OrderBy(p => p.doct_name).ToList();
 
                     dgvlist.Init();
-                    dgvlist.DataSource = ds; 
+                    dgvlist.DataSource = ds; SetGridTextColor();
                     lblTotalCount.Text = $"总计： {ds.Count} 条数据";
                     dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                     
+
                 }
                 else
                 {
@@ -835,32 +835,50 @@ namespace Client
 
         private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            try
-            { 
-                if (e.RowIndex != -1)
-                {
-                    dgvlist.Rows[e.RowIndex].Cells["request_date"].Style.ForeColor = UIColor.Red;
-                    dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
-                    dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Purple;
-                    dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = UIColor.Green;
-                    dgvlist.Rows[e.RowIndex].Cells["group_name"].Style.ForeColor = UIColor.Orange;
-                    dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
-                    dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Purple;
-                    dgvlist.Rows[e.RowIndex].Cells["req_name"].Style.ForeColor = UIColor.Green;
-                    dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Red;
-                    dgvlist.Rows[e.RowIndex].Cells["begin_no"].Style.ForeColor = UIColor.Green; 
-                    dgvlist.Rows[e.RowIndex].Cells["current_no"].Style.ForeColor = UIColor.Blue; 
-                    dgvlist.Rows[e.RowIndex].Cells["toend_no"].Style.ForeColor = UIColor.Purple;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-                log.Error(ex.StackTrace);
-            }
+            //try
+            //{ 
+            //    if (e.RowIndex != -1)
+            //    {
+            //       row.Cells["request_date"].Style.ForeColor = Color.Green; ;
+            //        dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
+            //        dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Purple;
+            //        dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = UIColor.Green;
+            //        dgvlist.Rows[e.RowIndex].Cells["group_name"].Style.ForeColor = UIColor.Orange;
+            //        dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+            //        dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+            //        dgvlist.Rows[e.RowIndex].Cells["req_name"].Style.ForeColor = UIColor.Green;
+            //        dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = Color.Green;
+            //        dgvlist.Rows[e.RowIndex].Cells["begin_no"].Style.ForeColor = UIColor.Green; 
+            //        dgvlist.Rows[e.RowIndex].Cells["current_no"].Style.ForeColor = UIColor.Blue; 
+            //        dgvlist.Rows[e.RowIndex].Cells["toend_no"].Style.ForeColor = UIColor.Purple;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error(ex.Message);
+            //    log.Error(ex.StackTrace);
+            //}
 
         }
+        public void SetGridTextColor()
+        {
 
+            foreach (DataGridViewRow row in dgvlist.Rows)
+            {
+                row.Cells["request_date"].Style.ForeColor = Color.Green; ;
+                row.Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
+                row.Cells["apstr"].Style.ForeColor = UIColor.Purple;
+                row.Cells["unit_name"].Style.ForeColor = UIColor.Green;
+                row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
+                row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+                row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+                row.Cells["req_name"].Style.ForeColor = UIColor.Green;
+                row.Cells["winnostr"].Style.ForeColor = Color.Green;
+                row.Cells["begin_no"].Style.ForeColor = UIColor.Green;
+                row.Cells["current_no"].Style.ForeColor = UIColor.Blue;
+                row.Cells["toend_no"].Style.ForeColor = UIColor.Purple;
+            }
+        }
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1)
@@ -885,7 +903,7 @@ namespace Client
                             break;
                         case "doct_name":
                             list = list.OrderBy(p => p.doct_name).ToList();
-                            break; 
+                            break;
                         case "clinic_name":
                             list = list.OrderBy(p => p.clinic_name).ToList();
                             break;
@@ -967,7 +985,7 @@ namespace Client
                     clinic_name = p.clinic_name,
                     req_name = p.req_name,
                     group_name = p.group_name,
-                    doct_name = p.doct_name, 
+                    doct_name = p.doct_name,
                     winnostr = p.winnostr,
                     begin_no = p.begin_no,
                     current_no = p.current_no,
@@ -975,7 +993,7 @@ namespace Client
                 }).ToList();
 
                 dgvlist.DataSource = ds;
-                SetColumnWidth();
+                SetColumnWidth(); SetGridTextColor();
             }
 
         }

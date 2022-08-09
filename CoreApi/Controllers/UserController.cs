@@ -29,12 +29,15 @@ namespace CoreApi.Controllers
         private readonly IMzPatientSfzRepository _mzPatientSfzRepository;
         private readonly ISfzInfoRepository _sfzInfoRepository;
         private readonly IYbkInfoRepository _ybkInfoRepository;
+        private readonly IMzPatientRelationRepository _mzPatientRelationRepository;
 
-        public UserController(IMzPatientSfzRepository mzPatientSfzRepository, ISfzInfoRepository sfzInfoRepository, IYbkInfoRepository ybkInfoRepository)
+        public UserController(IMzPatientSfzRepository mzPatientSfzRepository, ISfzInfoRepository sfzInfoRepository, IYbkInfoRepository ybkInfoRepository,
+            IMzPatientRelationRepository mzPatientRelationRepository)
         {
             _mzPatientSfzRepository = mzPatientSfzRepository;
             _sfzInfoRepository = sfzInfoRepository;
             _ybkInfoRepository = ybkInfoRepository;
+            _mzPatientRelationRepository = mzPatientRelationRepository;
         }
 
         [HttpGet]
@@ -171,6 +174,36 @@ namespace CoreApi.Controllers
                 return ErrorResult<UserInfoResponseModel>(ex.Message);
             }
         }
+
+        public ResponseResult<List<MzPatientRelation>> GetMzPatientRelationByPatientId(string pid)
+        {
+            Log.Information($"GetMzPatientRelationByPatientId,{pid}");
+            List<MzPatientRelation> list;
+            try
+            {
+                list = _mzPatientRelationRepository.GetMzPatientRelationByPatientId(pid);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzPatientRelation>>(ex.Message);
+            }
+            return list;
+        }
+
+        public ResponseResult<bool> UpdateMzPatientRelation(string patient_id, string relation_code, string sfz_id, string username, string sex, string tel, string opera, string birth, string address)
+        {
+            Log.Information($"UpdateMzPatientRelation,{patient_id},{relation_code},{sfz_id},{username},{sex},{tel},{opera},{birth},{address}");
+            try
+            {
+                return _mzPatientRelationRepository.UpdateMzPatientRelation(patient_id,  relation_code,  sfz_id,  username,  sex,  tel,  opera,  birth,  address);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        } 
 
     }
 }

@@ -473,7 +473,7 @@ namespace Mzsf.Forms.Pages
             }
             return false;
         }
-         
+
 
         public string GetReceiptMaxNo()
         {
@@ -566,7 +566,7 @@ namespace Mzsf.Forms.Pages
                     //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
                     //log.Info("微信退款返回字符串：" + wx_response);
 
-
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
                     UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
                     //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
                     break;
@@ -575,17 +575,20 @@ namespace Mzsf.Forms.Pages
 
                     if (YBRefund())
                     {
+                        UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
 
                     }
 
                     //UIMessageTip.ShowOk("处理医保退款,金额：" + item.pay_je); Thread.Sleep(1000);
                     break;
                 case (int)PayMethodEnum.Yinlian:
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
                     UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
                     //UIMessageTip.ShowOk("处理银联退款,金额：" + item.pay_je); Thread.Sleep(1000);
                     break;
                 case (int)PayMethodEnum.Zhifubao:
 
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
                     //var cof = AliConfig.GetConfig();
                     //Factory.SetOptions(cof);
 
@@ -674,6 +677,38 @@ namespace Mzsf.Forms.Pages
             }
             return true;
         }
+
+
+        public void UpdateThirdPayStatus(string patient_id, string cheque_type,string cheque_no,string charge)
+        {
+            try
+            {
+                string paramurl = string.Format($"/api/mzsf/RefundMzThridPay?patient_id={patient_id}&cheque_type={cheque_type}&cheque_no={cheque_no}&charge={charge}&price_date=");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                var json = HttpClientUtil.Get(paramurl);
+
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("退费成功");
+                }
+                else
+                {
+                    UIMessageTip.Show(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            }
+
+        }
+
         private void Check_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -838,7 +873,7 @@ namespace Mzsf.Forms.Pages
             var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
    .Select(g => g.First())
    .ToList();
-             
+
 
             for (int i = 0; i < order_list.Count; i++)
             {
@@ -863,7 +898,7 @@ namespace Mzsf.Forms.Pages
                 }
                 electBillCharge.chargeName = order_list[i].order_type;
                 electBillCharge.number = 1;
-                electBillCharge.std =Math.Round(order_list[i].charge_price,2).ToString();
+                electBillCharge.std = Math.Round(order_list[i].charge_price, 2).ToString();
                 electBillCharge.amt = Math.Round(order_list[i].charge_price, 2).ToString();
                 electBillCharge.selfAmt = Math.Round(order_list[i].charge_price, 2).ToString();
                 electBillCharge.remark = "";
@@ -960,9 +995,9 @@ namespace Mzsf.Forms.Pages
                 payee = SessionHelper.uservm.user_mi,//收费员
                 author = SessionHelper.uservm.user_mi,//票据编制人
                 checker = SessionHelper.uservm.user_mi,//票据复核人
-                totalAmt = Math.Round(totalAmt,2),//开票总金额
+                totalAmt = Math.Round(totalAmt, 2),//开票总金额
                 remark = _remark,
-                patientNo= SessionHelper.patientVM.patient_id+new_ledger_sn,
+                patientNo = SessionHelper.patientVM.patient_id + new_ledger_sn,
                 patientId = SessionHelper.patientVM.patient_id,
                 payerType = "1",//交款人类型 1 个人2单位
                 cardType = "3101",//卡类型

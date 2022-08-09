@@ -265,8 +265,16 @@ namespace Mzsf.Forms.Pages
             txtCode.Text = userInfo.p_bar_code;
             txtCode.TagString = userInfo.patient_id;
             lblPatientid.Text = userInfo.patient_id;
-            txtName.Text = userInfo.name.ToString();
-            txtAge.Text = userInfo.age.ToString() + "岁";
+            txtName.Text = userInfo.name.ToString(); 
+            if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
+            {
+                userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
+            }
+            else
+            {
+                userInfo.age = "0";
+            }
+            txtAge.Text = userInfo.age.ToString() + "岁"; 
             txtTel.Text = userInfo.home_tel.ToString();
             if (userInfo.sex == "1")
             {
@@ -1261,6 +1269,52 @@ namespace Mzsf.Forms.Pages
             //打印发票 
             Print ghprint = new Print(SessionHelper.mzsf_report_code);
             ghprint.Show();
+        }
+
+        private void btnEditRelation_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(lblPatientid.Text))
+            {
+                RelationInfoEdit relationInfoEdit = new RelationInfoEdit(lblPatientid.Text, "", lblrelationname.Text);
+                if (relationInfoEdit.ShowDialog() == DialogResult.OK)
+                {
+                    BindBaseInfo(lblPatientid.Text);
+                }
+            }
+
+        }
+
+        public void BindBaseInfo(string patient_id)
+        {//获取数据   
+            Task<HttpResponseMessage> task = null;
+            string json = "";
+            string paramurl = string.Format($"/api/guahao/GetPatientByPatientId?pid={patient_id}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                json = HttpClientUtil.Get(paramurl); 
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1)
+                {
+                    var _patient = result.data.FirstOrDefault();
+                    if (_patient != null)
+                    {
+                        BindUserInfo(_patient);
+                    }
+                }
+                else
+                {
+                    //MessageBox.Show("没有查到用户数据");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
         }
     }
 }

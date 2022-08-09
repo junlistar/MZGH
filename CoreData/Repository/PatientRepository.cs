@@ -91,7 +91,7 @@ namespace Data.Repository
 
 
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-             string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera)
+             string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code, string opera)
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
@@ -132,6 +132,7 @@ namespace Data.Repository
                         para.Add("@occupation_type", occupation_type);
                         para.Add("@response_type", response_type);
                         para.Add("@charge_type", charge_type);
+                        para.Add("@marry_code", marry_code);
                         para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
                         para.Add("@update_opera", opera);
                         para.Add("@patient_id", pid);
@@ -165,6 +166,7 @@ namespace Data.Repository
                         para.Add("@occupation_type", occupation_type);
                         para.Add("@response_type", response_type);
                         para.Add("@charge_type", charge_type);
+                        para.Add("@marry_code", marry_code);
 
                         para.Add("@enter_date", DateTime.Now);
                         para.Add("@update_date", DateTime.Now);

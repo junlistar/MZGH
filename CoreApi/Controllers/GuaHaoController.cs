@@ -164,7 +164,7 @@ namespace CoreApi.Controllers
             }
             return list;
         }
-
+        [HttpGet]
         public ResponseResult<IEnumerable<GhRequest>> GetGhRequest(string request_date, string ampm, string unit_sn = "%", string clinic_type = "%", string doctor_sn = "%", string group_sn = "%", string req_type = "01", string win_no = "%")
         {
             Log.Information($"GetGhRequest,{request_date},{ampm}");
@@ -222,12 +222,12 @@ namespace CoreApi.Controllers
         /// <param name="tel"></param>
         /// <returns></returns>
         public ResponseResult<int> EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-            string home_district, string home_street, string occupation_type, string response_type, string charge_type, string opera)
+            string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code,string opera)
         {
-            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{opera}");
+            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{marry_code},{opera}");
             try
             {
-                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, opera);
+                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, marry_code, opera);
             }
             catch (Exception ex)
             {

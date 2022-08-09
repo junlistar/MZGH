@@ -20,8 +20,9 @@ namespace Client.ViewModel
         public string ipt_otp_no { get; set; }
         public string psn_no { get; set; }
         public DateTime price_date { get; set; }
-        public string refund_date { get; set; }
+        public DateTime? refund_date { get; set; }
         public string opera { get; set; }
+        public string opera_name { get; set; }
         public decimal charge { get; set; }
         public string his_no { get; set; }
 
@@ -29,7 +30,7 @@ namespace Client.ViewModel
         {
             get
             {
-                if (!string.IsNullOrEmpty(refund_date))
+                if (refund_date.HasValue)
                 {
                     return "已退费";
                 }

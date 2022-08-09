@@ -24,9 +24,7 @@ namespace Client.Forms.Pages
         private static ILog log = LogManager.GetLogger(typeof(UserInfoPage));//typeof放当前类
 
         List<MzPatientSfzVM> sfz_list;
-
-
-
+         
         public UserInfoPage()
         {
             InitializeComponent();
@@ -347,6 +345,10 @@ namespace Client.Forms.Pages
             {
                 item.age = (DateTime.Now.Year - item.birthday.Value.Year).ToString();
             }
+            else
+            {
+                item.age = "0";
+            }
             txtAge.Text = item.age.ToString() + "岁";
 
             txthometel.Text = item.home_tel;
@@ -358,19 +360,7 @@ namespace Client.Forms.Pages
             {
                 this.txt_birth.Text = item.birthday.Value.ToShortDateString();
             }
-            if (!string.IsNullOrEmpty(item.relation_code))
-            {
-                cbx_relation.SelectedValue = item.relation_code;
-                //var relativeCodeVM = SessionHelper.relativeCodes.Where(p => p.code == item.relation_code).FirstOrDefault();
-                // if (relativeCodeVM!=null)
-                // {
-                //     cbx_relation.SelectedValue = relativeCodeVM.code;
-                // }
-            }
-            else
-            {
-                cbx_relation.Text = "本人";
-            }
+           
 
 
             if (!string.IsNullOrEmpty(item.home_district))
@@ -407,16 +397,14 @@ namespace Client.Forms.Pages
             cbxResponseType.SelectedValue = item.response_type;
             cbxChargeTypes.SelectedValue = item.charge_type;
             txtrelationname.Text = item.relation_name;
-            //if (!string.IsNullOrEmpty(item.relation_code))
-            //{
-            //    var model = SessionHelper.relativeCodes.Where(p => p.code == item.relation_code).FirstOrDefault();
-
-            //    if (model != null)
-            //    {
-            //        cbx_relation.Text = model.name;
-            //    }
-            //}
-            cbx_relation.SelectedValue = item.relation_code;
+            if (!string.IsNullOrEmpty(item.relation_code))
+            {
+                cbx_relation.SelectedValue = item.relation_code;
+            }
+            else
+            {
+                cbx_relation.Text = "本人";
+            }
 
             this.cbxsex.Text = item.sex == "1" ? "男" : "女";
 
@@ -439,9 +427,6 @@ namespace Client.Forms.Pages
             }
             this.cbxmarrycode.Text = marrycode;
 
-            //家长姓名
-            //relation_name
-            txtrelationname.Text = item.relation_name;
 
             //社保号码
             //addition_no1
@@ -1183,6 +1168,19 @@ namespace Client.Forms.Pages
             {
                 SearchUser();
             }
+        }
+
+        private void btnEditRelation_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txt_patientId.Text))
+            {
+                RelationInfoEdit relationInfoEdit = new RelationInfoEdit(txt_patientId.Text, "", txtrelationname.Text);
+                if (relationInfoEdit.ShowDialog() == DialogResult.OK)
+                {
+                    BindBaseInfo(txt_patientId.Text);
+                }
+            }
+            
         }
     }
 }

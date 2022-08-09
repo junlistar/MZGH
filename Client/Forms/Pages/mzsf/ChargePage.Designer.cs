@@ -37,6 +37,20 @@
             this.lblTitle = new Sunny.UI.UILabel();
             this.lblNodata = new System.Windows.Forms.Label();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.cbxChargeTypes = new Sunny.UI.UITextBox();
+            this.cbxResponseType = new Sunny.UI.UITextBox();
+            this.lblmarry = new Sunny.UI.UITextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lblrelation = new Sunny.UI.UITextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.lblrelationname = new Sunny.UI.UITextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblPatientid = new Sunny.UI.UITextBox();
+            this.txtName = new Sunny.UI.UITextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.lblstreet = new Sunny.UI.UITextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtdistrict = new Sunny.UI.UITextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,8 +68,6 @@
             this.txtSex = new Sunny.UI.UITextBox();
             this.txtAge = new Sunny.UI.UITextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtName = new Sunny.UI.UITextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtCode = new Sunny.UI.UITextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblMsg = new System.Windows.Forms.Label();
@@ -77,18 +89,7 @@
             this.lblOrderCharge = new System.Windows.Forms.Label();
             this.lblOrderTotalCharge = new System.Windows.Forms.Label();
             this.pnlAddOrder = new Sunny.UI.UIPanel();
-            this.lblstreet = new Sunny.UI.UITextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.lblPatientid = new Sunny.UI.UITextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.lblrelationname = new Sunny.UI.UITextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.lblrelation = new Sunny.UI.UITextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.lblmarry = new Sunny.UI.UITextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cbxResponseType = new Sunny.UI.UITextBox();
-            this.cbxChargeTypes = new Sunny.UI.UITextBox();
+            this.btnEditRelation = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
@@ -112,7 +113,7 @@
             this.pnlTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
-            this.pnlTitle.Size = new System.Drawing.Size(1249, 45);
+            this.pnlTitle.Size = new System.Drawing.Size(1279, 45);
             this.pnlTitle.TabIndex = 2;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -262,6 +263,9 @@
             // 
             // uiGroupBox1
             // 
+            this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.btnEditRelation);
             this.uiGroupBox1.Controls.Add(this.cbxChargeTypes);
             this.uiGroupBox1.Controls.Add(this.cbxResponseType);
             this.uiGroupBox1.Controls.Add(this.lblmarry);
@@ -301,11 +305,185 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(960, 197);
+            this.uiGroupBox1.Size = new System.Drawing.Size(990, 197);
             this.uiGroupBox1.TabIndex = 3;
             this.uiGroupBox1.Text = "患者信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxChargeTypes
+            // 
+            this.cbxChargeTypes.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cbxChargeTypes.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxChargeTypes.Location = new System.Drawing.Point(513, 108);
+            this.cbxChargeTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxChargeTypes.MinimumSize = new System.Drawing.Size(1, 16);
+            this.cbxChargeTypes.Name = "cbxChargeTypes";
+            this.cbxChargeTypes.ReadOnly = true;
+            this.cbxChargeTypes.ShowText = false;
+            this.cbxChargeTypes.Size = new System.Drawing.Size(170, 29);
+            this.cbxChargeTypes.TabIndex = 26;
+            this.cbxChargeTypes.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxChargeTypes.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxResponseType
+            // 
+            this.cbxResponseType.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.cbxResponseType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxResponseType.Location = new System.Drawing.Point(290, 108);
+            this.cbxResponseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxResponseType.MinimumSize = new System.Drawing.Size(1, 16);
+            this.cbxResponseType.Name = "cbxResponseType";
+            this.cbxResponseType.ReadOnly = true;
+            this.cbxResponseType.ShowText = false;
+            this.cbxResponseType.Size = new System.Drawing.Size(150, 29);
+            this.cbxResponseType.TabIndex = 25;
+            this.cbxResponseType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxResponseType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // lblmarry
+            // 
+            this.lblmarry.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblmarry.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblmarry.Location = new System.Drawing.Point(786, 26);
+            this.lblmarry.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblmarry.MinimumSize = new System.Drawing.Size(1, 16);
+            this.lblmarry.Name = "lblmarry";
+            this.lblmarry.ReadOnly = true;
+            this.lblmarry.ShowText = false;
+            this.lblmarry.Size = new System.Drawing.Size(149, 29);
+            this.lblmarry.TabIndex = 7;
+            this.lblmarry.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblmarry.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(737, 30);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(42, 21);
+            this.label20.TabIndex = 8;
+            this.label20.Text = "婚姻";
+            // 
+            // lblrelation
+            // 
+            this.lblrelation.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblrelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblrelation.Location = new System.Drawing.Point(786, 108);
+            this.lblrelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblrelation.MinimumSize = new System.Drawing.Size(1, 16);
+            this.lblrelation.Name = "lblrelation";
+            this.lblrelation.ReadOnly = true;
+            this.lblrelation.ShowText = false;
+            this.lblrelation.Size = new System.Drawing.Size(149, 29);
+            this.lblrelation.TabIndex = 5;
+            this.lblrelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblrelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(689, 112);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(90, 21);
+            this.label19.TabIndex = 6;
+            this.label19.Text = "与患者关系";
+            // 
+            // lblrelationname
+            // 
+            this.lblrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblrelationname.Location = new System.Drawing.Point(786, 69);
+            this.lblrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblrelationname.MinimumSize = new System.Drawing.Size(1, 16);
+            this.lblrelationname.Name = "lblrelationname";
+            this.lblrelationname.ReadOnly = true;
+            this.lblrelationname.ShowText = false;
+            this.lblrelationname.Size = new System.Drawing.Size(149, 29);
+            this.lblrelationname.TabIndex = 5;
+            this.lblrelationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblrelationname.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(721, 73);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(58, 21);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "监护人";
+            // 
+            // lblPatientid
+            // 
+            this.lblPatientid.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblPatientid.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblPatientid.Location = new System.Drawing.Point(290, 30);
+            this.lblPatientid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblPatientid.MinimumSize = new System.Drawing.Size(1, 16);
+            this.lblPatientid.Name = "lblPatientid";
+            this.lblPatientid.ReadOnly = true;
+            this.lblPatientid.ShowText = false;
+            this.lblPatientid.Size = new System.Drawing.Size(150, 29);
+            this.lblPatientid.TabIndex = 5;
+            this.lblPatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txtName
+            // 
+            this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtName.Location = new System.Drawing.Point(68, 69);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtName.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
+            this.txtName.ShowText = false;
+            this.txtName.Size = new System.Drawing.Size(170, 29);
+            this.txtName.TabIndex = 4;
+            this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(23, 73);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 21);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "姓名";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(245, 34);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 21);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "ID号";
+            // 
+            // lblstreet
+            // 
+            this.lblstreet.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.lblstreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblstreet.Location = new System.Drawing.Point(68, 152);
+            this.lblstreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblstreet.MinimumSize = new System.Drawing.Size(1, 16);
+            this.lblstreet.Name = "lblstreet";
+            this.lblstreet.ReadOnly = true;
+            this.lblstreet.ShowText = false;
+            this.lblstreet.Size = new System.Drawing.Size(170, 29);
+            this.lblstreet.TabIndex = 23;
+            this.lblstreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblstreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(23, 156);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 21);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "住址";
             // 
             // label14
             // 
@@ -502,30 +680,6 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "年龄";
             // 
-            // txtName
-            // 
-            this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtName.Location = new System.Drawing.Point(68, 69);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtName.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtName.Name = "txtName";
-            this.txtName.ReadOnly = true;
-            this.txtName.ShowText = false;
-            this.txtName.Size = new System.Drawing.Size(170, 29);
-            this.txtName.TabIndex = 4;
-            this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 73);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 21);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "姓名";
-            // 
             // txtCode
             // 
             this.txtCode.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -571,7 +725,7 @@
             this.uiTabControl1.MainPage = "";
             this.uiTabControl1.Name = "uiTabControl1";
             this.uiTabControl1.SelectedIndex = 0;
-            this.uiTabControl1.Size = new System.Drawing.Size(1250, 306);
+            this.uiTabControl1.Size = new System.Drawing.Size(1280, 313);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.TabIndex = 4;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -711,7 +865,7 @@
             this.uiLine1.Location = new System.Drawing.Point(5, 257);
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
-            this.uiLine1.Size = new System.Drawing.Size(1250, 10);
+            this.uiLine1.Size = new System.Drawing.Size(1280, 10);
             this.uiLine1.TabIndex = 15;
             this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -765,7 +919,7 @@
             this.pblSum.Controls.Add(this.lblOrderCharge);
             this.pblSum.Controls.Add(this.lblOrderTotalCharge);
             this.pblSum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pblSum.Location = new System.Drawing.Point(12, 633);
+            this.pblSum.Location = new System.Drawing.Point(12, 640);
             this.pblSum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pblSum.MinimumSize = new System.Drawing.Size(1, 1);
             this.pblSum.Name = "pblSum";
@@ -834,6 +988,8 @@
             // 
             // pnlAddOrder
             // 
+            this.pnlAddOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlAddOrder.Controls.Add(this.btnAddOrder);
             this.pnlAddOrder.Controls.Add(this.label5);
             this.pnlAddOrder.Controls.Add(this.cbxOrderType);
@@ -842,166 +998,30 @@
             this.pnlAddOrder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlAddOrder.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlAddOrder.Name = "pnlAddOrder";
-            this.pnlAddOrder.Size = new System.Drawing.Size(1249, 41);
+            this.pnlAddOrder.Size = new System.Drawing.Size(1279, 41);
             this.pnlAddOrder.TabIndex = 31;
             this.pnlAddOrder.Text = null;
             this.pnlAddOrder.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // lblstreet
+            // btnEditRelation
             // 
-            this.lblstreet.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblstreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblstreet.Location = new System.Drawing.Point(68, 152);
-            this.lblstreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblstreet.MinimumSize = new System.Drawing.Size(1, 16);
-            this.lblstreet.Name = "lblstreet";
-            this.lblstreet.ReadOnly = true;
-            this.lblstreet.ShowText = false;
-            this.lblstreet.Size = new System.Drawing.Size(170, 29);
-            this.lblstreet.TabIndex = 23;
-            this.lblstreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblstreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(23, 156);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 21);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "住址";
-            // 
-            // lblPatientid
-            // 
-            this.lblPatientid.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblPatientid.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblPatientid.Location = new System.Drawing.Point(290, 30);
-            this.lblPatientid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblPatientid.MinimumSize = new System.Drawing.Size(1, 16);
-            this.lblPatientid.Name = "lblPatientid";
-            this.lblPatientid.ReadOnly = true;
-            this.lblPatientid.ShowText = false;
-            this.lblPatientid.Size = new System.Drawing.Size(150, 29);
-            this.lblPatientid.TabIndex = 5;
-            this.lblPatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblPatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(245, 34);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 21);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "ID号";
-            // 
-            // lblrelationname
-            // 
-            this.lblrelationname.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblrelationname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblrelationname.Location = new System.Drawing.Point(786, 69);
-            this.lblrelationname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblrelationname.MinimumSize = new System.Drawing.Size(1, 16);
-            this.lblrelationname.Name = "lblrelationname";
-            this.lblrelationname.ReadOnly = true;
-            this.lblrelationname.ShowText = false;
-            this.lblrelationname.Size = new System.Drawing.Size(149, 29);
-            this.lblrelationname.TabIndex = 5;
-            this.lblrelationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblrelationname.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(721, 73);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(58, 21);
-            this.label18.TabIndex = 6;
-            this.label18.Text = "监护人";
-            // 
-            // lblrelation
-            // 
-            this.lblrelation.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblrelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblrelation.Location = new System.Drawing.Point(786, 108);
-            this.lblrelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblrelation.MinimumSize = new System.Drawing.Size(1, 16);
-            this.lblrelation.Name = "lblrelation";
-            this.lblrelation.ReadOnly = true;
-            this.lblrelation.ShowText = false;
-            this.lblrelation.Size = new System.Drawing.Size(149, 29);
-            this.lblrelation.TabIndex = 5;
-            this.lblrelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblrelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(689, 112);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(90, 21);
-            this.label19.TabIndex = 6;
-            this.label19.Text = "与患者关系";
-            // 
-            // lblmarry
-            // 
-            this.lblmarry.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.lblmarry.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmarry.Location = new System.Drawing.Point(786, 26);
-            this.lblmarry.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.lblmarry.MinimumSize = new System.Drawing.Size(1, 16);
-            this.lblmarry.Name = "lblmarry";
-            this.lblmarry.ReadOnly = true;
-            this.lblmarry.ShowText = false;
-            this.lblmarry.Size = new System.Drawing.Size(149, 29);
-            this.lblmarry.TabIndex = 7;
-            this.lblmarry.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblmarry.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(737, 30);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(42, 21);
-            this.label20.TabIndex = 8;
-            this.label20.Text = "婚姻";
-            // 
-            // cbxResponseType
-            // 
-            this.cbxResponseType.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cbxResponseType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxResponseType.Location = new System.Drawing.Point(290, 108);
-            this.cbxResponseType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxResponseType.MinimumSize = new System.Drawing.Size(1, 16);
-            this.cbxResponseType.Name = "cbxResponseType";
-            this.cbxResponseType.ReadOnly = true;
-            this.cbxResponseType.ShowText = false;
-            this.cbxResponseType.Size = new System.Drawing.Size(150, 29);
-            this.cbxResponseType.TabIndex = 25;
-            this.cbxResponseType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxResponseType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxChargeTypes
-            // 
-            this.cbxChargeTypes.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.cbxChargeTypes.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxChargeTypes.Location = new System.Drawing.Point(513, 108);
-            this.cbxChargeTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxChargeTypes.MinimumSize = new System.Drawing.Size(1, 16);
-            this.cbxChargeTypes.Name = "cbxChargeTypes";
-            this.cbxChargeTypes.ReadOnly = true;
-            this.cbxChargeTypes.ShowText = false;
-            this.cbxChargeTypes.Size = new System.Drawing.Size(170, 29);
-            this.cbxChargeTypes.TabIndex = 26;
-            this.cbxChargeTypes.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxChargeTypes.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEditRelation.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEditRelation.Location = new System.Drawing.Point(942, 72);
+            this.btnEditRelation.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnEditRelation.Name = "btnEditRelation";
+            this.btnEditRelation.Size = new System.Drawing.Size(25, 24);
+            this.btnEditRelation.Symbol = 61508;
+            this.btnEditRelation.TabIndex = 53;
+            this.btnEditRelation.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEditRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnEditRelation.Click += new System.EventHandler(this.btnEditRelation_Click);
             // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1259, 686);
+            this.ClientSize = new System.Drawing.Size(1289, 693);
             this.Controls.Add(this.pnlAddOrder);
             this.Controls.Add(this.pblSum);
             this.Controls.Add(this.uiLine1);
@@ -1091,5 +1111,6 @@
         private System.Windows.Forms.Label label18;
         private Sunny.UI.UITextBox cbxChargeTypes;
         private Sunny.UI.UITextBox cbxResponseType;
+        private Sunny.UI.UISymbolButton btnEditRelation;
     }
 }

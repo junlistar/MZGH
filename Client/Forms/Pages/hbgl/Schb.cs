@@ -71,7 +71,7 @@ namespace Client
             btnWeek4.Style = UIStyle.Green;
             btnWeek5.Style = UIStyle.Green;
 
-            obj.Style = UIStyle.Red;
+            obj.Style =UIStyle.Orange;
         }
 
         private void btnWeek1_Click(object sender, EventArgs e)
@@ -122,6 +122,7 @@ namespace Client
                         }).ToList();
                         dgvRequest.DataSource = ds;
                         dgvRequest.AutoResizeColumns();
+                        SetGridTextColor();
 
                         lblTotalCount.Text = $"总计：{ds.Count} 条";
                     }
@@ -286,31 +287,51 @@ namespace Client
             }
         }
 
+        public void SetGridTextColor()
+        {
+
+            foreach (DataGridViewRow row in dgvRequest.Rows)
+            {
+                row.Cells["request_date1"].Style.ForeColor = Color.Green;
+                row.Cells["ampm1"].Style.ForeColor = UIColor.Blue;
+                row.Cells["unit_name1"].Style.ForeColor = UIColor.Purple;
+                row.Cells["group_name1"].Style.ForeColor = UIColor.Green;
+                row.Cells["doct_name1"].Style.ForeColor = UIColor.Orange;
+                row.Cells["clinic_name1"].Style.ForeColor = UIColor.Blue;
+                row.Cells["begin_no1"].Style.ForeColor = UIColor.Purple;
+                row.Cells["current_no1"].Style.ForeColor = UIColor.Green;
+                row.Cells["end_no1"].Style.ForeColor = Color.Green;
+                row.Cells["winnostr1"].Style.ForeColor = UIColor.Green;
+                row.Cells["open_flag1"].Style.ForeColor = UIColor.Orange;
+            }
+        }
+             
+
         private void dgvRequest_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            try
-            {
-                if (e.RowIndex != -1)
-                {
-                    dgvRequest.Rows[e.RowIndex].Cells["request_date1"].Style.ForeColor = UIColor.Red;
-                    dgvRequest.Rows[e.RowIndex].Cells["ampm1"].Style.ForeColor = UIColor.Blue;
-                    dgvRequest.Rows[e.RowIndex].Cells["unit_name1"].Style.ForeColor = UIColor.Purple;
-                    dgvRequest.Rows[e.RowIndex].Cells["group_name1"].Style.ForeColor = UIColor.Green;
-                    dgvRequest.Rows[e.RowIndex].Cells["doct_name1"].Style.ForeColor = UIColor.Orange;
-                    dgvRequest.Rows[e.RowIndex].Cells["clinic_name1"].Style.ForeColor = UIColor.Blue;
-                    dgvRequest.Rows[e.RowIndex].Cells["begin_no1"].Style.ForeColor = UIColor.Purple;
-                    dgvRequest.Rows[e.RowIndex].Cells["current_no1"].Style.ForeColor = UIColor.Green;
-                    dgvRequest.Rows[e.RowIndex].Cells["end_no1"].Style.ForeColor = UIColor.Red;
-                    dgvRequest.Rows[e.RowIndex].Cells["winnostr1"].Style.ForeColor = UIColor.Green;
-                    dgvRequest.Rows[e.RowIndex].Cells["open_flag1"].Style.ForeColor = UIColor.Orange;
+            //try
+            //{
+            //    if (e.RowIndex != -1)
+            //    {
+            //        dgvRequest.Rows[e.RowIndex].Cells["request_date1"].Style.ForeColor = Color.Green;
+            //        dgvRequest.Rows[e.RowIndex].Cells["ampm1"].Style.ForeColor = UIColor.Blue;
+            //        dgvRequest.Rows[e.RowIndex].Cells["unit_name1"].Style.ForeColor = UIColor.Purple;
+            //        dgvRequest.Rows[e.RowIndex].Cells["group_name1"].Style.ForeColor = UIColor.Green;
+            //        dgvRequest.Rows[e.RowIndex].Cells["doct_name1"].Style.ForeColor = UIColor.Orange;
+            //        dgvRequest.Rows[e.RowIndex].Cells["clinic_name1"].Style.ForeColor = UIColor.Blue;
+            //        dgvRequest.Rows[e.RowIndex].Cells["begin_no1"].Style.ForeColor = UIColor.Purple;
+            //        dgvRequest.Rows[e.RowIndex].Cells["current_no1"].Style.ForeColor = UIColor.Green;
+            //        dgvRequest.Rows[e.RowIndex].Cells["end_no1"].Style.ForeColor = Color.Green;
+            //        dgvRequest.Rows[e.RowIndex].Cells["winnostr1"].Style.ForeColor = UIColor.Green;
+            //        dgvRequest.Rows[e.RowIndex].Cells["open_flag1"].Style.ForeColor = UIColor.Orange;
 
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-                log.Error(ex.StackTrace);
-            }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error(ex.Message);
+            //    log.Error(ex.StackTrace);
+            //}
         }
 
         private void dgvRequest_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -421,6 +442,7 @@ namespace Client
 
                 dgvRequest.DataSource = ds;
                 SetColumnWidth();
+                SetGridTextColor();
             }
         }
         public void SetColumnWidth()
