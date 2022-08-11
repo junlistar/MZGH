@@ -38,7 +38,7 @@ namespace Data.Repository
             return Select(selectSql, para);
         }
         public List<Patient> GetPatientByBarcode(string barcode)
-        { 
+        {
             string selectSql = GetSqlByTag("mzgh_mzpatient_getbybarcode");
 
             var para = new DynamicParameters();
@@ -101,14 +101,14 @@ namespace Data.Repository
                 {
 
                     //查询是否存在
-                    string issql = GetSqlByTag("mzgh_mzpatient_getbypid"); 
+                    string issql = GetSqlByTag("mzgh_mzpatient_getbypid");
                     var para = new DynamicParameters();
                     if (pid.Length == 7)
                     {
                         pid = "000" + pid + "00";
                     }
                     para.Add("@patient_id", pid);
-                    var list = connection.Query<Patient>(issql, para,transaction);
+                    var list = connection.Query<Patient>(issql, para, transaction);
                     if (list != null && list.Count() > 0)
                     {
                         //修改
@@ -137,7 +137,7 @@ namespace Data.Repository
                         para.Add("@update_opera", opera);
                         para.Add("@patient_id", pid);
 
-                        connection.Execute(sql, para,transaction);
+                        connection.Execute(sql, para, transaction);
                     }
                     else
                     {
@@ -173,7 +173,7 @@ namespace Data.Repository
 
                         para.Add("@enter_opera", opera);
                         para.Add("@update_opera", opera);
-                         
+
                         connection.Execute(sql, para, transaction);
 
                         //写patientId和身份证id关联表
@@ -193,12 +193,12 @@ namespace Data.Repository
                     transaction.Rollback();
                     throw ex;
                 }
-                 
+
             }
 
         }
 
-     
+
 
         /// <summary>
         /// 加上事务处理
@@ -309,7 +309,7 @@ namespace Data.Repository
                             {
                                 DateTime _dtage = DateTime.Now;
 
-                                if( DateTime.TryParse(patient.birthday, out _dtage))
+                                if (DateTime.TryParse(patient.birthday, out _dtage))
                                 {
                                     patient.age = (DateTime.Now.Year - _dtage.Year).ToString();
                                 }
@@ -429,7 +429,7 @@ namespace Data.Repository
                             para.Add("@patient_id", patient_id);
                             para.Add("@item_no", item_no);
                             para.Add("@ledger_sn", max_ledger_sn);
-                            para.Add("@times", max_times); 
+                            para.Add("@times", max_times);
                             para.Add("@cheque_no", out_trade_no);
                             //para.Add("@cheque_no", cheque_no);
                             para.Add("@charge", charge);
@@ -449,10 +449,23 @@ namespace Data.Repository
 
                         decimal to_price = 0;
 
-                        //挂号费，诊查费等分批写入  
+                        //挂号费，诊查费等分批写入   
+
+                        Dictionary<string, decimal> billitem_dic = new Dictionary<string, decimal>();
                         foreach (var item in chargeItems)
                         {
-                            to_price += item.effective_price;
+                            if (billitem_dic.Keys.Contains(item.mz_bill_item))
+                            {
+                                billitem_dic[item.mz_bill_item] += item.effective_price;
+                            }
+                            else
+                            {
+                                billitem_dic.Add(item.mz_bill_item, item.effective_price);
+                            }
+                        }
+                        foreach (var key in billitem_dic.Keys)
+                        {
+                            to_price += billitem_dic[key];
 
                             para = new DynamicParameters();
 
@@ -460,12 +473,28 @@ namespace Data.Repository
                             para.Add("@times", max_times);
                             para.Add("@ledger_sn", max_ledger_sn);
                             para.Add("@receipt_sn", max_sn);
-                            para.Add("@bill_code", item.mz_bill_item);
-                            para.Add("@charge", item.effective_price);
+                            para.Add("@bill_code", key);
+                            para.Add("@charge", billitem_dic[key]);
                             para.Add("@pay_unit", "01");
 
                             result = connection.Execute(sql6, para, transaction);
                         }
+                        //foreach (var item in chargeItems)
+                        //{
+                        //    to_price += item.effective_price;
+
+                        //    para = new DynamicParameters();
+
+                        //    para.Add("@patient_id", patient_id);
+                        //    para.Add("@times", max_times);
+                        //    para.Add("@ledger_sn", max_ledger_sn);
+                        //    para.Add("@receipt_sn", max_sn);
+                        //    para.Add("@bill_code", item.mz_bill_item);
+                        //    para.Add("@charge", item.effective_price);
+                        //    para.Add("@pay_unit", "01");
+
+                        //    result = connection.Execute(sql6, para, transaction);
+                        //}
                         //写入挂号发票表
                         para = new DynamicParameters();
 
@@ -499,7 +528,7 @@ namespace Data.Repository
                         para.Add("@step_length", step_length);
 
                         result = Update(sql8, para);
-                          
+
                         transaction.Commit();
 
                         return max_ledger_sn;
@@ -509,7 +538,7 @@ namespace Data.Repository
                         transaction.Rollback();
                         throw ex;
                     }
-                     
+
                 }
 
             }

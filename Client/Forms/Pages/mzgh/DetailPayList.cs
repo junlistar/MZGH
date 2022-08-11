@@ -70,6 +70,7 @@ namespace Client
             {
                 paylist = result.data;
                 this.dgvpaylist.DataSource = result.data;
+                dgvpaylist.AutoGenerateColumns = false;
                 this.dgvpaylist.AutoResizeColumns();
             }
             else

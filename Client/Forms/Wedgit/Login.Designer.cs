@@ -47,12 +47,12 @@
             this.uiSymbolLabel3 = new Sunny.UI.UISymbolLabel();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).BeginInit();
+            this.uiTextBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // uiPanel1
             // 
-            this.uiPanel1.Controls.Add(this.imgQRCode);
             this.uiPanel1.Controls.Add(this.btnLostPwd);
             this.uiPanel1.Controls.Add(this.btnEditPwd);
             this.uiPanel1.Controls.Add(this.btnScanLogin);
@@ -80,7 +80,7 @@
             // 
             // imgQRCode
             // 
-            this.imgQRCode.Location = new System.Drawing.Point(36, 89);
+            this.imgQRCode.Location = new System.Drawing.Point(-7, -17);
             this.imgQRCode.Name = "imgQRCode";
             this.imgQRCode.Size = new System.Drawing.Size(248, 223);
             this.imgQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -93,7 +93,6 @@
             this.btnLostPwd.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.btnLostPwd.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnLostPwd.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.btnLostPwd.LinkColor = System.Drawing.Color.Gray;
             this.btnLostPwd.Location = new System.Drawing.Point(221, 321);
             this.btnLostPwd.Name = "btnLostPwd";
             this.btnLostPwd.Size = new System.Drawing.Size(67, 23);
@@ -109,7 +108,6 @@
             this.btnEditPwd.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.btnEditPwd.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEditPwd.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.btnEditPwd.LinkColor = System.Drawing.Color.Gray;
             this.btnEditPwd.Location = new System.Drawing.Point(134, 321);
             this.btnEditPwd.Name = "btnEditPwd";
             this.btnEditPwd.Size = new System.Drawing.Size(67, 23);
@@ -126,7 +124,6 @@
             this.btnScanLogin.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.btnScanLogin.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnScanLogin.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.btnScanLogin.LinkColor = System.Drawing.Color.Gray;
             this.btnScanLogin.Location = new System.Drawing.Point(47, 321);
             this.btnScanLogin.Name = "btnScanLogin";
             this.btnScanLogin.Size = new System.Drawing.Size(67, 23);
@@ -167,6 +164,7 @@
             // uiTextBox1
             // 
             this.uiTextBox1.ButtonSymbol = 61703;
+            this.uiTextBox1.Controls.Add(this.imgQRCode);
             this.uiTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.uiTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTextBox1.Location = new System.Drawing.Point(47, 112);
@@ -178,7 +176,7 @@
             this.uiTextBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiTextBox1.StyleCustomMode = true;
             this.uiTextBox1.Symbol = 62104;
-            this.uiTextBox1.TabIndex = 3;
+            this.uiTextBox1.TabIndex = 10;
             this.uiTextBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiTextBox1.Watermark = "";
             this.uiTextBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -329,6 +327,7 @@
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).EndInit();
+            this.uiTextBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

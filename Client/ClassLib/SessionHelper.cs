@@ -75,6 +75,11 @@ namespace Client.ClassLib
         public static List<MzOrderVM> mzOrders;
         //门诊处方详情
         public static List<CprChargesVM> cprCharges;
-
+         
+        public static string pay_xianjin;
+        public static string pay_weixin;
+        public static string pay_zhifubao;
+        public static string pay_yinlian;
+        public static string pay_yibao;
     }
 }

@@ -75,17 +75,17 @@ namespace Data.Repository
                         para.Add("@relation_name", relation_name);
                         para.Add("@relation_code", relation_code);
                         para.Add("@home_street", home_street);
-                        para.Add("@district", district);
-                        para.Add("@responseType", responseType);
-                        para.Add("@chargeType", chargeType);
+                        para.Add("@home_district", district);
+                        para.Add("@response_type", responseType);
+                        para.Add("@charge_type", chargeType);
                         para.Add("@update_opera", opera);
 
                         connection.Execute(sql, para, transaction);
 
-                        sql =GetSqlByTag("mzgh_mzpatientsfz_update_relation");
-                        para = new DynamicParameters();
-                        para.Add("@relative_code", relation_code);
-                        para.Add("@patient_id", pid);
+                        //sql =GetSqlByTag("mzgh_mzpatientsfz_update_relation");
+                        //para = new DynamicParameters();
+                        //para.Add("@relative_code", relation_code);
+                        //para.Add("@patient_id", pid);  废弃
 
                         connection.Execute(sql, para, transaction);
                         transaction.Commit();

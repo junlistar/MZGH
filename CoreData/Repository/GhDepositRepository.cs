@@ -90,7 +90,7 @@ namespace Data.Repository
                             para.Add("@ledger_sn", -item.ledger_sn);
                             para.Add("@times", item.times);
                             para.Add("@charge", -item.charge);
-                            para.Add("@cheque_type", manual == 1 ? 1 : item.cheque_type);//手工退号，默认现金
+                            para.Add("@cheque_type", manual == 1 ? "1" : item.cheque_type);//手工退号，默认现金
                             para.Add("@cheque_no", item.cheque_no);
                             para.Add("@depo_status", depo_refund_status);
                             para.Add("@price_opera", opera);

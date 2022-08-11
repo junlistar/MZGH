@@ -117,6 +117,7 @@ namespace Mzsf.Forms.Pages
 
             dgvRefund.DataSource = list;
             dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvRefund.AutoGenerateColumns = false;
             dgvRefund.AutoResizeColumns();
 
             lblTotalCount.ForeColor = Color.Red;

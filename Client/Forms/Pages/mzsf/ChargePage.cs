@@ -37,6 +37,16 @@ namespace Mzsf.Forms.Pages
         public ChargePage()
         {
             InitializeComponent();
+
+            Task.Run(async () =>
+            {
+                await Task.Delay(500);
+
+                this.Invoke(new Action(() =>
+                {
+                    txtCode.Focus();
+                }));
+            });
         }
 
         public void SearchUser()
@@ -265,7 +275,7 @@ namespace Mzsf.Forms.Pages
             txtCode.Text = userInfo.p_bar_code;
             txtCode.TagString = userInfo.patient_id;
             lblPatientid.Text = userInfo.patient_id;
-            txtName.Text = userInfo.name.ToString(); 
+            txtName.Text = userInfo.name.ToString();
             if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
             {
                 userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
@@ -274,7 +284,7 @@ namespace Mzsf.Forms.Pages
             {
                 userInfo.age = "0";
             }
-            txtAge.Text = userInfo.age.ToString() + "岁"; 
+            txtAge.Text = userInfo.age.ToString() + "岁";
             txtTel.Text = userInfo.home_tel.ToString();
             if (userInfo.sex == "1")
             {
@@ -838,14 +848,24 @@ namespace Mzsf.Forms.Pages
             //                return;
             //            }
             //            var order_no = order_list[tabindex];
+            try
+            {
+                var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
+                if (_order != null)
+                {
 
-            var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
+                    var order = SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no);
 
-            var order = SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no);
-
-            lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
-            lblOrderItemCount.Text = order.Count().ToString();
-            lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
+                    lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
+                    lblOrderItemCount.Text = order.Count().ToString();
+                    lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            }
         }
 
         private void btnHuajia_Click(object sender, EventArgs e)
@@ -917,6 +937,7 @@ namespace Mzsf.Forms.Pages
             if (current_patient_id == "")
             {
                 UIMessageTip.ShowWarning("患者请刷卡！");
+                txtCode.Focus();
                 return;
             }
 
@@ -1128,7 +1149,7 @@ namespace Mzsf.Forms.Pages
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
         {
-            var _order = SessionHelper.mzOrders.Where(p => p.order_no == index+1).FirstOrDefault();
+            var _order = SessionHelper.mzOrders.Where(p => p.order_no == index + 1).FirstOrDefault();
             if (_order != null)
             {
                 if (!string.IsNullOrEmpty(_order.group_no) && SessionHelper.cprCharges != null && SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no).Count() == 0)
@@ -1137,7 +1158,7 @@ namespace Mzsf.Forms.Pages
                     return false;
                 }
                 else
-                { 
+                {
                     var _order_no = _order.order_no;
                     SessionHelper.mzOrders.Remove(_order);
                     foreach (var item in SessionHelper.cprCharges.ToArray())
@@ -1293,7 +1314,7 @@ namespace Mzsf.Forms.Pages
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                json = HttpClientUtil.Get(paramurl); 
+                json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1)
                 {

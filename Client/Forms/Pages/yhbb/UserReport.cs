@@ -42,9 +42,15 @@ namespace Client.Forms.Pages.yhbb
                 };
 
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-
+                 
                 var json = "";
                 var paramurl = string.Format($"/api/qxgl/GetXTUserReportsByGroupId?{param}");
+
+                if (SessionHelper.uservm.user_mi == "00000")
+                { 
+                    param = $"subsys_id={d.subsys_id}"; 
+                    paramurl = string.Format($"/api/qxgl/GetXTUserReports?{param}");
+                }
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 

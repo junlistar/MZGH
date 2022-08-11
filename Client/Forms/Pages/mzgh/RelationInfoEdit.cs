@@ -56,8 +56,23 @@ namespace Client
             var _tel = txt_tel.Text;
             var _opera = SessionHelper.uservm.user_mi;
             var _birth = txt_birthday.Value;
-            var _addr = txt_address.Text; 
+            var _addr = txt_address.Text;
 
+            if (_code==null || string.IsNullOrEmpty(_code.ToString()))
+            {
+                UIMessageTip.Show("请选择关系！");
+                return;
+            }
+            if (string.IsNullOrEmpty(_name))
+            {
+                UIMessageTip.Show("请输入姓名！");
+                return;
+            }
+            if (string.IsNullOrEmpty(_sfz_id))
+            {
+                UIMessageTip.Show("请输入身份证！");
+                return;
+            }
             string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");
              
             var json = HttpClientUtil.Get(paramurl);

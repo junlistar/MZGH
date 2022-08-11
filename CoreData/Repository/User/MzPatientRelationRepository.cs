@@ -64,13 +64,13 @@ namespace Data.Repository
 
                     Update(selectSql, para);
 
-                    //更新mz_patient_sfz 关联信息
-                    selectSql = "update mz_patient_sfz set relative_code= @relative_code where patient_id=@patient_id";
-                    para = new DynamicParameters();
-                    para.Add("@patient_id", patient_id);
-                    para.Add("@relative_code", relation_code); 
+                    ////更新mz_patient_sfz 关联信息 废弃
+                    //selectSql = "update mz_patient_sfz set relative_code= @relative_code where patient_id=@patient_id";
+                    //para = new DynamicParameters();
+                    //para.Add("@patient_id", patient_id);
+                    //para.Add("@relative_code", relation_code); 
 
-                    Update(selectSql, para);
+                    //Update(selectSql, para);
 
                     transaction.Commit();
                     return true;
@@ -106,17 +106,17 @@ namespace Data.Repository
                         para.Add("@relation_name", relation_name);
                         para.Add("@relation_code", relation_code);
                         para.Add("@home_street", home_street);
-                        para.Add("@district", district);
-                        para.Add("@responseType", responseType);
-                        para.Add("@chargeType", chargeType);
+                        para.Add("@home_district", district);
+                        para.Add("@response_type", responseType);
+                        para.Add("@charge_type", chargeType);
                         para.Add("@update_opera", opera);
 
                         connection.Execute(sql, para, transaction);
 
-                        sql = GetSqlByTag("mzgh_mzpatientsfz_update_relation");
-                        para = new DynamicParameters();
-                        para.Add("@relative_code", relation_code);
-                        para.Add("@patient_id", pid);
+                        //sql = GetSqlByTag("mzgh_mzpatientsfz_update_relation");
+                        //para = new DynamicParameters();
+                        //para.Add("@relative_code", relation_code);
+                        //para.Add("@patient_id", pid); 废弃
 
                         connection.Execute(sql, para, transaction);
                         transaction.Commit();

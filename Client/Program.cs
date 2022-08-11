@@ -19,8 +19,8 @@ namespace Client
         [STAThread]
         static void Main()
         {
-            try
-            {
+            //try
+            //{
 
                 ////设置应用程序处理异常方式：ThreadException处理
                 //Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
@@ -45,12 +45,12 @@ namespace Client
                 log.Debug("关闭了程序");
 
                  
-            }
-            catch (Exception ex)
-            {
-                string str = ExceptionToString(ex, "主线程");
-                MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            } 
+            //}
+            //catch (Exception ex)
+            //{
+            //    string str = ExceptionToString(ex, "主线程");
+            //    MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //} 
            
         }
         /// <summary>

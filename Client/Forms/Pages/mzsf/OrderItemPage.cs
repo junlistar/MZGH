@@ -117,6 +117,9 @@ namespace Mzsf.Forms.Pages
 
         private void Dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+
             if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
             {
                 if (BindItemData(e.RowIndex))
@@ -128,6 +131,12 @@ namespace Mzsf.Forms.Pages
 
                 }
 
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -506,7 +515,12 @@ namespace Mzsf.Forms.Pages
 
             var _charge_amount = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["charge_amount"].Value);
             var _code = dgvOrderDetail.Rows[index].Cells["code"].Value.ToString();
-            var _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString();
+            var _serial = "";
+            if (dgvOrderDetail.Rows[index].Cells["serial"].Value != null)
+            {
+                _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString();
+            }
+            
 
             CprChargesVM vm = new CprChargesVM();
             vm.charge_code_lookup = _charge_code_lookup;
@@ -543,7 +557,11 @@ namespace Mzsf.Forms.Pages
                     var orig_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
                     var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
                     var code = row.Cells["code"].Value.ToString();
-                    var serial = row.Cells["serial"].Value.ToString();
+                    var serial ="";
+                    if (row.Cells["serial"].Value!=null)
+                    {
+                        serial = row.Cells["serial"].Value.ToString();
+                    } 
 
                     var chargeVM = new CprChargesVM();
                     chargeVM.charge_code_lookup = charge_code_lookup;

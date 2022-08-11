@@ -106,6 +106,7 @@ namespace Client
             cbxJiahao.Items.Add("加号");
             cbxJiahao.Items.Add("正常");
             cbxJiahao.Text = "全部";
+
         }
 
         public void InitDic()
@@ -224,13 +225,17 @@ namespace Client
                     }).ToList();
                     //dgvlist.Init();
                     dgvlist.DataSource = source;
+                    dgvlist.AutoGenerateColumns = false;
                     dgvlist.AutoResizeColumns();
                     dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
                     zje = list.Sum(p => p.charge_fee);
                     zrc = list.Count();
-                    ghrc = list.Count(p => p.visit_flag != "9");
-                    thrc = list.Count(p => p.visit_flag == "9");
+                    ghrc = list.Count(p => p.ledger_sn > 0);
+                    thrc = list.Count(p => p.ledger_sn < 0);
+
+                    SetBackground();
+
                 }
                 else
                 {
@@ -282,6 +287,19 @@ namespace Client
             }).ToList();
             //dgvlist.Init();
             dgvlist.DataSource = source;
+        }
+        public void SetBackground()
+        {
+            foreach (DataGridViewRow dr in dgvlist.Rows)
+            {
+                if (dr.Cells["ledger_sn"].Value != null && Convert.ToInt32(dr.Cells["ledger_sn"].Value) < 0)
+                {
+                    // 设置单元格的背景色
+                    //dr.DefaultCellStyle.BackColor = Color.Yellow;
+                    // 设置单元格的前景色
+                    dr.DefaultCellStyle.ForeColor = Color.Red;
+                }
+            }
         }
 
         UIDataGridView dgv = new UIDataGridView();
@@ -1257,110 +1275,105 @@ namespace Client
 
         private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            DataGridViewRow dr = (sender as UIDataGridView).Rows[e.RowIndex];
-
-            if (dr.Cells["visit_flag"].Value != null && dr.Cells["visit_flag"].Value.ToString() == "9")
-            {
-                // 设置单元格的背景色
-                //dr.DefaultCellStyle.BackColor = Color.Yellow;
-                // 设置单元格的前景色
-                dr.DefaultCellStyle.ForeColor = Color.Red;
-            }
-            else
-            {
-                //dr.DefaultCellStyle.ForeColor = Color.Green;
-
-            }
+            
         }
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
             //补打电子发票
-
-            //获取选择参数
-            var _patientId = dgvlist.Rows[dgvlist.SelectedIndex].Cells["patient_id"].Value;
-            if (_patientId==null)
+            try
             {
-                UIMessageTip.Show("没有数据！");
-                return;
-            }
-            var _ledger_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["ledger_sn"].Value;
-            var _subsys_id = "mz";
 
-            //查询电子发票记录表  <List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
-            string paramurl = string.Format($"/api/mzsf/GetFpDatasByParams?patient_id={_patientId.ToString()}&ledger_sn={_ledger_sn.ToString()}&subsys_id={_subsys_id}");
+                //获取选择参数
+                var _patientId = dgvlist.Rows[dgvlist.SelectedIndex].Cells["patient_id"].Value;
+                if (_patientId == null)
+                {
+                    UIMessageTip.Show("没有数据！");
+                    return;
+                }
+                var _ledger_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["ledger_sn"].Value;
+                var _subsys_id = "mz";
 
-            var json = HttpClientUtil.Get(paramurl);
-             
+                //查询电子发票记录表  <List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
+                string paramurl = string.Format($"/api/mzsf/GetFpDatasByParams?patient_id={_patientId.ToString()}&ledger_sn={_ledger_sn.ToString()}&subsys_id={_subsys_id}");
+
+                var json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<FpData>>>(json);
 
-            if (result.status != 1)
-            {
-                UIMessageTip.Show(result.message);
+                if (result.status != 1)
+                {
+                    UIMessageTip.Show(result.message);
 
-                log.Error(result.message);
+                    log.Error(result.message);
 
-                return;
+                    return;
 
+                }
+                if (result.data == null || result.data.Count == 0)
+                {
+                    UIMessageTip.Show("没有电子发票数据！");
+
+                    log.Error("没有电子发票数据！");
+
+                    return;
+                }
+
+                string _billBatchCode = result.data[0].billBatchCode;
+                string _billNo = result.data[0].billNo;
+                string _random = result.data[0].random;
+
+                string ip = ConfigurationManager.AppSettings["ip"];
+                string port = ConfigurationManager.AppSettings["port"];
+                string dllName = ConfigurationManager.AppSettings["dllName"];
+                string func = ConfigurationManager.AppSettings["func"];
+
+                string noise = Guid.NewGuid().ToString();
+
+                string appid = ConfigurationManager.AppSettings["appid"];
+                string key = ConfigurationManager.AppSettings["key"];
+                string version = ConfigurationManager.AppSettings["version"];
+
+                string method = "printElectBill";
+
+                var _data = new
+                {
+                    billBatchCode = _billBatchCode,
+                    billNo = _billNo,
+                    random = _random,
+                };
+
+                var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
+                var stringSignTemp = stringA + $"&key={key}&version={version}";
+
+                var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
+
+                var _params = new
+                {
+                    appid = appid,
+                    data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
+                    noise = noise,
+                    version = version,
+                    sign = _sign
+                };
+
+                var _payload = new
+                {
+                    method = method,
+                    @params = _params
+                };
+                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
+
+
+                string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
+
+                var printstr = HttpClientUtil.Get(url);
             }
-            if (result.data==null || result.data.Count==0)
+            catch (Exception ex)
             {
-                UIMessageTip.Show("没有电子发票数据！");
-
-                log.Error("没有电子发票数据！");
-
-                return;
+                log.Error("打印电子发票失败！");
+                log.Error(ex.Message);
             }
-
-            string _billBatchCode = result.data[0].billBatchCode;
-            string _billNo = result.data[0].billNo;
-            string _random = result.data[0].random;
-
-            string ip = ConfigurationManager.AppSettings["ip"];
-            string port = ConfigurationManager.AppSettings["port"];
-            string dllName = ConfigurationManager.AppSettings["dllName"];
-            string func = ConfigurationManager.AppSettings["func"];
-
-            string noise = Guid.NewGuid().ToString();
-
-            string appid = ConfigurationManager.AppSettings["appid"];
-            string key = ConfigurationManager.AppSettings["key"];
-            string version = ConfigurationManager.AppSettings["version"];
-
-            string method = "printElectBill";
-
-            var _data = new
-            {
-                billBatchCode = _billBatchCode,
-                billNo = _billNo,
-                random = _random,
-            };
-
-            var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
-            var stringSignTemp = stringA + $"&key={key}&version={version}";
-
-            var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
-
-            var _params = new
-            {
-                appid = appid,
-                data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
-                noise = noise,
-                version = version,
-                sign = _sign
-            };
-
-            var _payload = new
-            {
-                method = method,
-                @params = _params
-            };
-            string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
-
-
-            string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
-
-            var printstr = HttpClientUtil.Get(url);
         }
     }
 }

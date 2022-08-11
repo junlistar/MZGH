@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,23 +14,23 @@ namespace Client.ClassLib
         /// <summary>
         /// 微信支付
         /// </summary>
-        WeiXin = 12,
+        WeiXin ,
         /// <summary>
         /// 支付宝
         /// </summary>
-        Zhifubao = 11,
+        Zhifubao ,
         /// <summary>
         /// 银联
         /// </summary>
-        Yinlian = 14,
+        Yinlian,
         /// <summary>
         /// 医保卡
         /// </summary>
-        Yibao = 6,
+        Yibao,
         /// <summary>
         /// 现金
         /// </summary>
-        Xianjin = 1,
+        Xianjin
     }
     public class PayMethod
     {  
@@ -53,24 +54,52 @@ namespace Client.ClassLib
             return "其他";
 
         }
-        public static string GetPayStringByEnumValue(int payMethod)
+        public static string GetChequeTypeByEnum(PayMethodEnum payMethod)
         {
             switch (payMethod)
             {
-                case (int)PayMethodEnum.WeiXin:
-                    return "微信";
-                case (int)PayMethodEnum.Zhifubao:
-                    return "支付宝";
-                case (int)PayMethodEnum.Yinlian:
-                    return "银联";
-                case (int)PayMethodEnum.Yibao:
-                    return "医保卡";
-                case (int)PayMethodEnum.Xianjin:
-                    return "现金";
+                case PayMethodEnum.WeiXin:
+                    return SessionHelper.pay_weixin;
+                case PayMethodEnum.Zhifubao:
+                    return SessionHelper.pay_zhifubao;
+                case PayMethodEnum.Yinlian:
+                    return SessionHelper.pay_yinlian;
+                case PayMethodEnum.Yibao:
+                    return SessionHelper.pay_yibao;
+                case PayMethodEnum.Xianjin:
+                    return SessionHelper.pay_xianjin;
                 default:
                     break;
             }
             return "其他";
+
+        }
+        public static string GetPayStringByEnumValue(string payMethod)
+        {
+            if (payMethod== SessionHelper.pay_weixin)
+            {
+                return "微信";
+            }
+            else if (payMethod == SessionHelper.pay_zhifubao)
+            {
+                return "支付宝";
+            }
+            else if (payMethod == SessionHelper.pay_yinlian)
+            {
+                return "银联";
+            }
+            else if (payMethod == SessionHelper.pay_yibao)
+            {
+                return "医保卡";
+            }
+            else if (payMethod == SessionHelper.pay_xianjin)
+            {
+                return "现金";
+            }
+            else
+            {
+                return payMethod;
+            }
 
         }
     }

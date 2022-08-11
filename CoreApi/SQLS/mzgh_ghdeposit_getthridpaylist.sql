@@ -3,7 +3,7 @@
 	left join zd_cheque_type c on a.cheque_type= c.code
 	left join (
 	 select cheque_type,cheque_no from view_gh_deposit
-   where price_date between @bengin_date and @end_date and cheque_type<>1
+   where price_date between @bengin_date and @end_date and cheque_type<>'1'
    union all 
     select cheque_type,cheque_no from view_mz_deposit
   where dcount_date between @bengin_date and @end_date) d

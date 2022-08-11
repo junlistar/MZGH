@@ -72,6 +72,7 @@ namespace Client
                 {
                     paylist = result.data;
                     this.dgvpaylist.DataSource = result.data;
+                    dgvpaylist.AutoGenerateColumns = false;
                     this.dgvpaylist.AutoResizeColumns();
                     dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
@@ -133,7 +134,7 @@ namespace Client
                             {
                                 log.Info("有外部订单号：" + item.cheque_no);
 
-                                if (item.cheque_type == (int)PayMethodEnum.WeiXin)
+                                if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.WeiXin))
                                 {
                                     log.Info("微信退款：");
                                     //微信退款
@@ -146,7 +147,7 @@ namespace Client
                                     //log.Info("微信退款返回字符串：" + wx_response);
 
                                 }
-                                else if (item.cheque_type == (int)PayMethodEnum.Zhifubao)
+                                else if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.Zhifubao))
                                 {
                                     log.Info("支付宝退款：");
                                     //支付宝退款
@@ -167,7 +168,7 @@ namespace Client
                                     //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
                                     //}
                                 }
-                                else if (item.cheque_type == (int)PayMethodEnum.Yibao)
+                                else if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.Yibao))
                                 {
                                     log.Info("医保退款：");
                                     //门诊挂号撤销

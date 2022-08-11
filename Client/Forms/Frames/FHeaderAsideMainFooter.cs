@@ -52,6 +52,12 @@ namespace Client
             //挂号日结，收费日结
             SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
+
+            SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
+            SessionHelper.pay_weixin = ConfigurationManager.AppSettings.Get("pay_weixin");
+            SessionHelper.pay_zhifubao = ConfigurationManager.AppSettings.Get("pay_zhifubao"); 
+            SessionHelper.pay_yinlian =ConfigurationManager.AppSettings.Get("pay_yinlian");
+            SessionHelper.pay_yibao = ConfigurationManager.AppSettings.Get("pay_yibao");
         }
 
      

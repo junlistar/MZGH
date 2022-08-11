@@ -11,7 +11,7 @@ namespace Data.Entities
         public int ledger_sn { get; set; }
         public int times { get; set; }
         public decimal charge { get; set; }
-        public int cheque_type { get; set; }
+        public string cheque_type { get; set; }
         public string cheque_no { get; set; }
         public string depo_status { get; set; }
         public string price_opera { get; set; }

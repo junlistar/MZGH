@@ -5,8 +5,8 @@ using MyMzghLib;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -242,21 +242,21 @@ namespace FastReportClient
                 {
                     int _code = int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
                     string sql = $@"insert into rt_report_data_fast_net (report_code,short_name,long_name,report_sql,report_com,report_flag,datasetn)
-values(?, ?, ?, ?,?, 1, 0)";
-                    var para = new System.Data.OleDb.OleDbParameter[5];
-                    para[0] = new System.Data.OleDb.OleDbParameter("p1", _code);
-                    para[1] = new System.Data.OleDb.OleDbParameter("p2", "test");
-                    para[2] = new System.Data.OleDb.OleDbParameter("p3", "test");
-                    para[3] = new System.Data.OleDb.OleDbParameter("p4", txtsql.Text);
-                    para[4] = new System.Data.OleDb.OleDbParameter("p5", stream.ToArray());
+values(@p1, @p2,@p3,@p4,@p5, 1, 0)";
+                    var para = new SqlParameter[5];
+                    para[0] = new SqlParameter("@p1", _code);
+                    para[1] = new SqlParameter("@p2", "test");
+                    para[2] = new SqlParameter("@p3", "test");
+                    para[3] = new SqlParameter("@p4", txtsql.Text);
+                    para[4] = new SqlParameter("@p5", stream.ToArray());
                     var result = DbHelper.ExecuteNonQuery(sql, para);
                 }
                 else
                 {
 
-                    string sql = $"update rt_report_data_fast_net set report_com=? where report_code = {code}";
-                    var para = new System.Data.OleDb.OleDbParameter[1];
-                    para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
+                    string sql = $"update rt_report_data_fast_net set report_com=@p1 where report_code = {code}";
+                    var para = new SqlParameter[1];
+                    para[0] = new SqlParameter("@p1", stream.ToArray());
                     var result = DbHelper.ExecuteNonQuery(sql, para);
 
                 }
@@ -299,11 +299,11 @@ values(?, ?, ?, ?,?, 1, 0)";
 
                 //保存sql和参数
                 string sqltext = txtsql.Text.Trim();
-                string sql1 = $"update rt_report_data_fast_net set report_sql=? where report_code=?";
+                string sql1 = $"update rt_report_data_fast_net set report_sql=@p1 where report_code=@p2";
 
-                var para = new System.Data.OleDb.OleDbParameter[2];
-                para[0] = new System.Data.OleDb.OleDbParameter("p1", sqltext);
-                para[1] = new System.Data.OleDb.OleDbParameter("p2", int.Parse(code));
+                var para = new System.Data.SqlClient.SqlParameter[2];
+                para[0] = new System.Data.SqlClient.SqlParameter("@p1", sqltext);
+                para[1] = new System.Data.SqlClient.SqlParameter("@p2", int.Parse(code));
                 var result = DbHelper.ExecuteNonQuery(sql1, para);
 
 
@@ -399,13 +399,13 @@ values(?, ?, ?, ?,?, 1, 0)";
                         var dt_param = DbHelper.ExecuteDataTable(param_sql);
                         if (dt_param != null && dt_param.Rows.Count > 0)
                         {
-                            // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
+                            // var param = new SqlParameter[dt_param.Rows.Count];
 
                             for (int i = 0; i < dt_param.Rows.Count; i++)
                             {
                                 sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(), "'" + dt_param.Rows[i]["param_defaultvalue"].ToString() + "'");
                             }
-                            //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
+                            //param[0] = new SqlParameter("p1", GuaHao.PatientVM.patient_id);
                             //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                         }
                         var ds = DbHelper.GetDataSet(sql, "DataTable");
@@ -431,13 +431,13 @@ values(?, ?, ?, ?,?, 1, 0)";
                     var dt_param = DbHelper.ExecuteDataTable(param_sql);
                     if (dt_param != null && dt_param.Rows.Count > 0)
                     {
-                        // var param = new System.Data.OleDb.OleDbParameter[dt_param.Rows.Count];
+                        // var param = new SqlParameter[dt_param.Rows.Count];
 
                         for (int i = 0; i < dt_param.Rows.Count; i++)
                         {
                             sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(), "'" + dt_param.Rows[i]["param_defaultvalue"].ToString() + "'");
                         }
-                        //param[0] = new System.Data.OleDb.OleDbParameter("p1", GuaHao.PatientVM.patient_id);
+                        //param[0] = new SqlParameter("p1", GuaHao.PatientVM.patient_id);
                         //var ds = DbHelper.GetDataSet(sql, "ghinfo", param);
                     }
                     var ds = DbHelper.GetDataSet(sql, "DataTable");

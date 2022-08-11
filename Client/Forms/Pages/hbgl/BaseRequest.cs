@@ -216,9 +216,10 @@ namespace Client
                             limit_appoint_percent = p.limit_appoint_percent
                         }).ToList();
                         dgvlist.DataSource = ds;
-                        //dgvlist.AutoResizeColumns();
+                        dgvlist.AutoGenerateColumns = false;
+                        dgvlist.AutoResizeColumns();
                         dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                        SetColumnWidth();
+                        //SetColumnWidth();
                         SetGridTextColor();
                     }
                 }
@@ -738,8 +739,8 @@ namespace Client
                     op_date_str = p.op_date_str
                 }).ToList();
                 dgvlist.AutoResizeColumns();
-                dgvlist.DataSource = ds;
-                SetColumnWidth();
+                dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
+                //SetColumnWidth();
                 SetGridTextColor();
             }
             catch (Exception ex)
@@ -1124,8 +1125,8 @@ namespace Client
                     op_date_str = p.op_date_str
                 }).ToList();
 
-                dgvlist.DataSource = ds;
-                SetColumnWidth(); 
+                dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
+                //SetColumnWidth(); 
                 SetGridTextColor();
             }
         }

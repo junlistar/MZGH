@@ -9,6 +9,16 @@ if not exists(select * from syscolumns where id=object_id('mz_patient_mi') and n
 ALTER TABLE mz_patient_mi ADD yb_insuplc_admdvs  varchar(10) default (null)
 end
 
+if not exists(select * from syscolumns where id=object_id('mz_patient_mi_b') and name='yb_psn_no') begin
+ALTER TABLE mz_patient_mi ADD yb_psn_no  varchar(30) default (null)
+end
+if not exists(select * from syscolumns where id=object_id('mz_patient_mi_b') and name='yb_insutype') begin
+ALTER TABLE mz_patient_mi ADD yb_insutype  varchar(10) default (null)
+end
+if not exists(select * from syscolumns where id=object_id('mz_patient_mi_b') and name='yb_insuplc_admdvs') begin
+ALTER TABLE mz_patient_mi ADD yb_insuplc_admdvs  varchar(10) default (null)
+end
+
 
 
 --fastreport报表 新建表
@@ -499,3 +509,183 @@ pictureNetUrl varchar(100) null,
 subsys_id varchar(12) null ,
 primary key(patient_id,ledger_sn)
 )
+
+ CREATE TABLE [dbo].[mz_patient_sfz_info](
+	[name] [varchar](50) NULL,
+	[sex] [varchar](10) NULL,
+	[address] [varchar](200) NULL,
+	[home_address] [varchar](200) NULL,
+	[folk] [varchar](50) NULL,
+	[birthday] [varchar](20) NULL,
+	[card_no] [varchar](20) NULL,
+	[img_path] [varchar](100) NULL,
+	[gender] [nvarchar](10) NULL,
+	[agency] [nvarchar](50) NULL,
+	[expireStart] [datetime] NULL,
+	[expireEnd] [datetime] NULL
+) ON [PRIMARY]
+
+GO
+
+CREATE TABLE [dbo].[mz_patient_relation](
+	[patient_id] [varchar](50) NULL,
+	[relation_code] [varchar](50) NULL,
+	[sfz_id] [varchar](50) NULL,
+	[username] [varchar](50) NULL,
+	[birth] [datetime] NULL,
+	[sex] [smallint] NULL,
+	[tel] [varchar](50) NULL,
+	[opera] [varchar](50) NULL,
+	[update_date] [datetime] NULL,
+	[address] [varchar](50) NULL
+) ON [PRIMARY]
+
+GO
+
+if not exists(select * from syscolumns where id=object_id('gh_base_request') and name='limit_appoint_percent') begin
+ALTER TABLE gh_base_request ADD limit_appoint_percent  varchar(10) default (null)
+end 
+
+if not exists(select * from syscolumns where id=object_id('gh_base_request') and name='temp_flag') begin
+ALTER TABLE gh_base_request ADD temp_flag  varchar(10) default (null)
+end 
+
+
+if not exists(select * from syscolumns where id=object_id('gh_request') and name='limit_appoint_percent') begin
+ALTER TABLE gh_request ADD limit_appoint_percent  varchar(10) default (null)
+end 
+if not exists(select * from syscolumns where id=object_id('gh_request') and name='temp_flag') begin
+ALTER TABLE gh_request ADD temp_flag  varchar(10) default (null)
+end 
+ 
+
+ CREATE TABLE [dbo].[mz_thirdpay](
+	[patient_id] [varchar](50) NULL,
+	[cheque_type] [smallint] NULL,
+	[cheque_no] [varchar](50) NULL,
+	[charge] [decimal](18, 2) NULL,
+	[mdtrt_id] [varchar](50) NULL,
+	[ipt_otp_no] [varchar](50) NULL,
+	[psn_no] [varchar](50) NULL,
+	[yb_insuplc_admdvs] [varchar](50) NULL,
+	[price_date] [datetime] NULL,
+	[refund_date] [datetime] NULL,
+	[opera] [varchar](50) NULL
+) ON [PRIMARY]
+
+
+
+
+if not exists(select * from syscolumns where id=object_id('xt_user_group') and name='sys_type') begin
+ALTER TABLE xt_user_group ADD sys_type  varchar(10) default (null)
+end
+if not exists(select * from syscolumns where id=object_id('xt_group') and name='sys_type') begin
+ALTER TABLE xt_group ADD sys_type  varchar(10) default (null)
+end
+if not exists(select * from syscolumns where id=object_id('xt_func') and name='sys_type') begin
+ALTER TABLE xt_func ADD sys_type  varchar(10) default (null)
+end
+if not exists(select * from syscolumns where id=object_id('xt_func') and name='parent_func') begin
+ALTER TABLE xt_func ADD parent_func  varchar(20) default (null)
+end
+
+insert into xt_func
+select 
+'mz', 'new_caiwuguanli', '财务管理', '1', '2.0', NULL
+union all
+select
+'mz', 'new_chuangkouzhifu', '窗口支付', '1', '2.0', 'new_zhifuguanli'
+union all
+select
+'mz', 'new_fenshiduanweihu', '分时段维护', '1', '2.0', 'new_haobiaoguanli' 
+union all
+select
+'mz', 'new_ghyw', '挂号业务', '1', '2.0',NULL
+union all
+select
+'mz', 'new_guahao', '挂号', '1', '2.0', 'new_ghyw' 
+union all
+select
+'mz', 'new_guahaochaxun', '挂号查询', '1', '2.0', 'new_ghyw' 
+union all
+select
+'mz', 'new_guahaorijie', '挂号日结', '1', '2.0', 'new_caiwuguanli' 
+union all
+select
+'mz', 'new_haobiaoguanli', '号表管理', '1', '2.0', NULL
+ union all
+select
+'mz', 'new_haobiaoweihu', '号表维护', '1', '2.0', 'new_haobiaoguanli' 
+ union all
+select
+'mz', 'new_huajiashoufei', '划价收费', '1', '2.0', 'new_shoufeiyewu' 
+ union all
+select
+'mz', 'new_huanzhejibenxinxi', '患者基本信息', '1', '2.0', 'new_ghyw' 
+ union all
+select
+'mz', 'new_jchbwh', '基础号表维护', '1', '2.0', 'new_haobiaoguanli' 
+ union all
+select
+'mz', 'new_lshaobiaoweihu', '临时号表维护', '1', '2.0', 'new_haobiaoguanli'  union all
+select
+'mz', 'new_quanxianguanli', '权限管理', '1', '2.0', NULL  union all
+select
+'mz', 'new_shengchenghaobiao', '生成号表', '1', '2.0', 'new_haobiaoguanli'  union all
+select
+'mz', 'new_shijianduanweihu', '时间段维护', '1', '2.0', 'new_haobiaoguanli'  union all
+select
+'mz', 'new_shoufeirijie', '收费日结', '1', '2.0', 'new_caiwuguanli'  union all
+select
+'mz', 'new_shoufeiyewu', '收费业务', '1', '2.0', NULL  union all
+select
+'mz', 'new_tuifei', '退费', '1', '2.0', 'new_shoufeiyewu'  union all
+select
+'mz', 'new_yibaozhifu', '医保支付', '1', '2.0', 'new_zhifuguanli'  union all
+select
+'mz', 'new_yonghubaobiao', '用户报表', '1', '2.0', NULL  union all
+select
+'mz', 'new_yonghuquanxian', '用户权限', '1', '2.0', 'new_quanxianguanli'  union all
+select
+'mz', 'new_zhifuguanli', '支付管理', '1', '2.0', NULL union all
+select
+'mz', 'new_zhtjbb', '综合统计报表', '1', '2.0', 'new_yonghubaobiao' union all
+select
+'mz', 'new_zizhuzhifu', '自助支付', '1', '2.0', 'new_zhifuguanli'  
+
+--insert into mz_patient_sfz(patient_id,sfz_id)
+--select patient_id,hic_no
+--from mz_patient_mi
+
+
+CREATE TABLE [dbo].[mz_patient_ybk_idetinfo](
+	[certno] [varchar](50) NULL,
+	[psn_idet_type] [varchar](10) NULL,
+	[psn_type_lv] [varchar](10) NULL,
+	[memo] [varchar](500) NULL,
+	[begntime] [datetime] NULL,
+	[endtime] [datetime] NULL
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[mz_patient_ybk_info](
+	[psn_no] [varchar](50) NULL,
+	[psn_cert_type] [varchar](10) NULL,
+	[certno] [varchar](200) NULL,
+	[psn_name] [varchar](200) NULL,
+	[gend] [varchar](50) NULL,
+	[naty] [varchar](20) NULL,
+	[brdy] [datetime] NULL,
+	[age] [int] NULL
+) ON [PRIMARY]
+CREATE TABLE [dbo].[mz_patient_ybk_insuinfo](
+	[certno] [varchar](50) NULL,
+	[balc] [decimal](18, 2) NULL,
+	[insutype] [varchar](50) NULL,
+	[psn_type] [varchar](50) NULL,
+	[psn_insu_stas] [varchar](50) NULL,
+	[psn_insu_date] [datetime] NULL,
+	[paus_insu_date] [datetime] NULL,
+	[cvlserv_flag] [varchar](50) NULL,
+	[insuplc_admdvs] [varchar](50) NULL,
+	[emp_name] [varchar](200) NULL
+) ON [PRIMARY]

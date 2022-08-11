@@ -13,12 +13,16 @@ namespace Client.ViewModel
 
         public string times { get; set; }
 
-        public DateTime gh_date { get; set; }
+        public DateTime? gh_date { get; set; }
         public string gh_time
         {
             get
             {
-                return gh_date.ToString("HH:mm:ss");
+                if (gh_date.HasValue)
+                {
+                    return gh_date.Value.ToString("HH:mm:ss");
+                }
+                return "";
             }
         }
         public string patient_name { get; set; }
@@ -58,7 +62,7 @@ namespace Client.ViewModel
         public int ledger_sn { get; set; }
         public int times { get; set; }
         public decimal charge { get; set; }
-        public int cheque_type { get; set; }
+        public string cheque_type { get; set; }
         public string cheque_name { get; set; }
         public string cheque_no { get; set; }
         public string receipt_sn { get; set; }

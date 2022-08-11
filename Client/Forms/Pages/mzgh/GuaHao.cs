@@ -1618,29 +1618,41 @@ namespace Client
 
         public void FilterGuahaoData()
         {
-            var py_code = txtSearch.Text.Trim().ToUpper();
+            try
+            {
 
-            if (string.IsNullOrWhiteSpace(py_code))
-            {
-                BindUnit(requestDic);
-                return;
-            }
-            if (py_code.Length < 2)
-            {
-                return;
-            }
-            var _list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
-            var _source = new Dictionary<string, List<GHRequestVM>>();
-            foreach (var _item in _list)
-            {
-                if (requestDic.ContainsKey(_item.name))
+                var py_code = txtSearch.Text.Trim().ToUpper();
+
+                if (string.IsNullOrWhiteSpace(py_code))
                 {
-                    _source.Add(_item.name, requestDic[_item.name]);
+                    BindUnit(requestDic);
+                    return;
                 }
-            }
+                if (py_code.Length < 2)
+                {
+                    return;
+                }
+                var _list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
+                var _source = new Dictionary<string, List<GHRequestVM>>();
+                foreach (var _item in _list)
+                {
+                    if (requestDic.ContainsKey(_item.name))
+                    {
+                        if (!_source.ContainsKey(_item.name))
+                        {
+                            _source.Add(_item.name, requestDic[_item.name]);
+                        }
+                        
+                    }
+                }
 
-            BindUnit(_source); isBreadHandleSet = true;
-            uiBreadcrumb2.ItemIndex = 0;
+                BindUnit(_source); isBreadHandleSet = true;
+                uiBreadcrumb2.ItemIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
 
         private void txtSearch_KeyUp(object sender, KeyEventArgs e)

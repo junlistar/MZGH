@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -58,11 +58,11 @@ namespace FastReportClient
                 var lname = txtlname.Text;
 
                 string sql = @"insert into rt_report_data_fast_net(report_code,short_name,long_name,report_flag,datasetn)
-values(?,?,?,1,0)";
-                var para = new System.Data.OleDb.OleDbParameter[3];
-                para[0] = new System.Data.OleDb.OleDbParameter("p1", code);
-                para[1] = new System.Data.OleDb.OleDbParameter("p2", sname);
-                para[2] = new System.Data.OleDb.OleDbParameter("p3", lname);
+values(@p1,@p2,@p3,1,0)";
+                var para = new SqlParameter[3];
+                para[0] = new SqlParameter("@p1", code);
+                para[1] = new SqlParameter("@p2", sname);
+                para[2] = new SqlParameter("@p3", lname);
                 var result = DbHelper.ExecuteNonQuery(sql, para);
                 if (result>0)
                 {

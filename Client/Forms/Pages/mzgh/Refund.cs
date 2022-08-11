@@ -525,6 +525,7 @@ namespace Client
 
                     //dgvDeposit.Init();
                     this.dgvDeposit.DataSource = viewlist;
+                    dgvDeposit.AutoGenerateColumns = false;
                     this.dgvDeposit.AutoResizeColumns();
                     dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }

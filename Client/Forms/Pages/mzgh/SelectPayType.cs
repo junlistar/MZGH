@@ -14,7 +14,7 @@ using System.Configuration;
 using Client.ClassLib;
 using System.Net.Http.Headers;
 using System.Web;
-using WxPayAPI; 
+using WxPayAPI;
 using System.Threading;
 using log4net;
 using Client.Pay.AliPayAPI;
@@ -85,76 +85,68 @@ namespace Client
         {
 
             log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
-            switch (item.pay_type)
+            if (item.pay_type == SessionHelper.pay_xianjin)
             {
-                case (int)PayMethodEnum.Xianjin:
-                    UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
-                    //UIMessageTip.ShowOk("处理现金退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-                case (int)PayMethodEnum.WeiXin:
+                UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
+            }
+            else if (item.pay_type == SessionHelper.pay_weixin)
+            {
+                //var transaction_id = "";
+                //var out_trade_no = "";
+                //var total_fee = "";
+                //var redfund_fee = "";
 
-                    //var transaction_id = "";
-                    //var out_trade_no = "";
-                    //var total_fee = "";
-                    //var redfund_fee = "";
-
-                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                    //log.Info("微信退款返回字符串：" + wx_response);
+                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                //log.Info("微信退款返回字符串：" + wx_response);
 
 
-                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                    UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
-                    //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-                case (int)PayMethodEnum.Yibao:
-                    UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
+                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
+                //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
+            }
+            else if (item.pay_type == SessionHelper.pay_yibao)
+            {
+                UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
 
-                    if (YBRefund())
-                    {
-
-                        UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                    }
-
-                    //UIMessageTip.ShowOk("处理医保退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-                case (int)PayMethodEnum.Yinlian:
-                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                    UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
-                    //UIMessageTip.ShowOk("处理银联退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-                case (int)PayMethodEnum.Zhifubao:
+                if (YBRefund())
+                {
 
                     UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-
-                    //var cof = AliConfig.GetConfig();
-                    //Factory.SetOptions(cof);
-
-                    ////全部退款
-                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
-                    ////部分退款
-                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
-
-                    //if (ResponseChecker.Success(response))
-                    //{
-                    //    log.Info("支付宝退款调用成功");
-                    //}
-                    //else
-                    //{
-                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                    //}
-
-                    UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
-                    //UIMessageTip.ShowOk("处理支付宝退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-                default:
-
-                    UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
-                    //UIMessageTip.ShowOk("处理其他退款,金额：" + item.pay_je); Thread.Sleep(1000);
-                    break;
-
-
+                }
 
             }
+            else if (item.pay_type == SessionHelper.pay_yinlian)
+            {
+                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
+            }
+            else if (item.pay_type == SessionHelper.pay_zhifubao)
+            {
+                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+
+                //var cof = AliConfig.GetConfig();
+                //Factory.SetOptions(cof);
+
+                ////全部退款
+                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
+                ////部分退款
+                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                //if (ResponseChecker.Success(response))
+                //{
+                //    log.Info("支付宝退款调用成功");
+                //}
+                //else
+                //{
+                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                //}
+
+                UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
+            }
+            else
+            {
+                UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
+            } 
         }
 
         public bool YBRefund()
@@ -240,7 +232,7 @@ namespace Client
             }
         }
 
-        public void AddMzThridPay(int payMethod, string out_trade_no, string mdtrt_id, string ipt_otp_no, string psn_no,string yb_insuplc_admdvs, decimal charge)
+        public void AddMzThridPay(string payMethod, string out_trade_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, decimal charge)
         {
             var _pid = patientId;
             var _cheque_type = payMethod;
@@ -314,27 +306,27 @@ namespace Client
             {
 
 
-                WxPay wxPay = new WxPay(((int)payMethod).ToString(), left_je.ToString(), out_trade_no);
+                WxPay wxPay = new WxPay(PayMethod.GetChequeTypeByEnum(payMethod), left_je.ToString(), out_trade_no);
                 wxPay.ShowDialog();
                 if (wxPay.DialogResult == DialogResult.OK)
                 {
-                    log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, out_trade_no));
-                    
+                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, out_trade_no));
+
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
                     //总金额-支付金额
                     lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
                     lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
-                     
+
                     //保存到数据库
-                    AddMzThridPay((int)payMethod, out_trade_no, "", "", "","", (decimal)left_je);
-                     
+                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), out_trade_no, "", "", "", "", (decimal)left_je);
+
                 }
                 else
                 {
-                    log.Info("取消支付：" + (int)PayMethodEnum.Zhifubao + ",金额：" + left_je);
+                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
 
                 }
 
@@ -345,9 +337,9 @@ namespace Client
                 card.ShowDialog();
                 if (card.DialogResult == DialogResult.OK)
                 {
-                    log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, out_trade_no));
+                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, out_trade_no));
 
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -356,11 +348,11 @@ namespace Client
                     lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                     //保存到数据库
-                    AddMzThridPay((int)payMethod, out_trade_no, "", "", "","",(decimal)left_je);
+                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), out_trade_no, "", "", "", "", (decimal)left_je);
                 }
                 else
                 {
-                    log.Info("取消支付：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
 
 
                 }
@@ -370,27 +362,27 @@ namespace Client
                 //刷医保卡，再挂号 
                 if (YiBaoPay())
                 {
-                    log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
+                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
 
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
                     //总金额-支付金额
                     lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
                     lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
-                     
+
                     //保存到数据库
-                    AddMzThridPay((int)payMethod, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
+                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
                 }
                 else
                 {
-                    log.Info("支付失败：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("支付失败：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
                 }
             }
             else if (payMethod == PayMethodEnum.Xianjin)
             {
-                JKZL xjzf = new JKZL(((int)payMethod).ToString(), left_je.ToString());
+                JKZL xjzf = new JKZL(PayMethod.GetChequeTypeByEnum(payMethod), left_je.ToString());
                 if (chkcomb.Checked)
                 {
                     xjzf.lbl1.Text = "本次支付:";
@@ -401,7 +393,7 @@ namespace Client
                 {
                     log.Info("完成支付：" + (int)payMethod + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel((int)payMethod, (decimal)left_je));
+                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je));
 
                     this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -411,13 +403,13 @@ namespace Client
                 }
                 else
                 {
-                    log.Info("取消支付：" + (int)payMethod + ",金额：" + left_je);
+                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
 
                 }
             }
             else
             {
-                log.Info("其他支付：" + (int)payMethod + ",金额：" + left_je);
+                log.Info("其他支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
                 //其他支付
                 UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
             }
@@ -626,7 +618,7 @@ namespace Client
                     string psn_no = resp.output.data.psn_no;
                     //住院/门诊号
                     string ipt_otp_no = resp.output.data.ipt_otp_no;
-                     
+
 
                     return true;
 
@@ -749,7 +741,7 @@ namespace Client
             this.lbltop.ForeColor = Color.Red;
             CountDown();
 
-            ShowMessage(); 
+            ShowMessage();
         }
         public void GetEffectivePriceByRecordSN()
         {
@@ -854,13 +846,25 @@ namespace Client
 
                     SessionHelper.sf_print_user_ledger = result.data;
                     var new_ledger_sn = result.data;
-                    //写入电子发票信息
-                    CreateElecBill(new_ledger_sn);
 
 
+                    if (decimal.Parse(vm.je) == 0)
+                    {
+                        //支付金额为0，不写电子发票
+                        log.Debug("支付金额为0，不写电子发票");
+                    }
+                    else
+                    {
+                        Task.Run(() =>
+                        {
+                        //写入电子发票信息
+                        CreateElecBill(new_ledger_sn);
+
+                        });
+                    }
                     this.Close();
                     return;
-                   
+
                 }
                 else
                 {
@@ -869,17 +873,17 @@ namespace Client
                     //挂号失败，退款处理
                     Refund();
 
-                } 
+                }
             }
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.ToString());
-                log.Error(ex.ToString()); 
+                log.Error(ex.ToString());
             }
         }
 
         public void CreateElecBill(int new_ledger_sn)
-        { 
+        {
             string ip = ConfigurationManager.AppSettings["ip"];
             string port = ConfigurationManager.AppSettings["port"];
             string dllName = ConfigurationManager.AppSettings["dllName"];
@@ -902,11 +906,13 @@ namespace Client
             List<ElectBillChargeItem> chargeItemlist = new List<ElectBillChargeItem>();
             List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
             List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
-            for (int i = 0; i < chargeItems.Count; i++) 
+
+
+            for (int i = 0; i < chargeItems.Count; i++)
             {
                 ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
                 electBillCharge.sortNo = i;
-                if (chargeItems[i].mz_bill_item=="026")
+                if (chargeItems[i].mz_bill_item == "026")
                 {
                     electBillCharge.chargeCode = "90611";//对应挂号费
                 }
@@ -916,16 +922,16 @@ namespace Client
                 }
                 else
                 {
-
+                    electBillCharge.chargeCode = "90611";//对应挂号费
                 }
-                electBillCharge.chargeName = chargeItems[i].name;
+                electBillCharge.chargeName = chargeItems[i].name.Trim();
                 electBillCharge.number = 1;
                 electBillCharge.std = chargeItems[i].effective_price.ToString();
                 electBillCharge.amt = chargeItems[i].effective_price.ToString();
                 electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
                 electBillCharge.remark = "";
 
-                chargeItemlist.Add(electBillCharge); 
+                chargeItemlist.Add(electBillCharge);
             }
 
             //var _chargeDetail = new
@@ -951,27 +957,27 @@ namespace Client
             for (int i = 0; i < paylist.Count; i++)
             {
                 PayChannelDetail payChannelDetail = new PayChannelDetail();
-                if (paylist[i].pay_type == 1)
+                if (paylist[i].pay_type == SessionHelper.pay_xianjin)
                 {//现金
                     payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
                 }
-                else if (paylist[i].pay_type == 6)
+                else if (paylist[i].pay_type == SessionHelper.pay_yibao)
                 {//医保
                     payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
                 }
-                else if (paylist[i].pay_type == 11)
+                else if (paylist[i].pay_type == SessionHelper.pay_zhifubao)
                 {//支付宝
                     payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
                 }
-                else if (paylist[i].pay_type == 12)
+                else if (paylist[i].pay_type == SessionHelper.pay_weixin)
                 {//微信
                     payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
                 }
-                else if (paylist[i].pay_type == 14)
+                else if (paylist[i].pay_type == SessionHelper.pay_yinlian)
                 {//银联
                     payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
                 }
-                 
+
                 _remark += paylist[i].pay_je.ToString();
                 payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();
                 payChannelDetails.Add(payChannelDetail);
@@ -1009,7 +1015,7 @@ namespace Client
                 isArrears = "1",//是否可流通
                 chargeDetail = chargeItemlist,
                 listDetail = electBillListDetails,
-                remark= _remark
+                remark = _remark
             };
             log.Debug("_data:" + _data);
             var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
@@ -1035,7 +1041,7 @@ namespace Client
                 method = method,
                 @params = _params
             };
-            string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
+            string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
             string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
 
             log.Debug(url);
@@ -1043,13 +1049,13 @@ namespace Client
 
             var result = WebApiHelper.DeserializeObject<ElectBillCommonResponse>(json);
 
-            if (result.data !=null)
+            if (result.data != null)
             {
                 var addbill_resp = StringUtil.Base64Decode(result.data);
 
                 var _resp = WebApiHelper.DeserializeObject<ElectBillAddResponse>(addbill_resp);
                 var _fpdata = StringUtil.Base64Decode(_resp.message);
-                if (_resp.result== "S0000")
+                if (_resp.result == "S0000")
                 {
                     //成功
                     var _entity = WebApiHelper.DeserializeObject<FpData>(_fpdata);
@@ -1075,10 +1081,10 @@ namespace Client
                 {
                     UIMessageTip.ShowError(_fpdata);
                 }
-                
+
 
                 log.Error(_fpdata);
-              
+
 
             }
             else
@@ -1092,9 +1098,9 @@ namespace Client
 
 
         public string FormID { get; set; } = "PRDT"; //单据ID
-        //private string RptNo, RptName; //报表编号、名称
-        //private DataTable RptTable; //数据表
-        //private DataRow RptRow; //数据行(报表数据源)
+                                                     //private string RptNo, RptName; //报表编号、名称
+                                                     //private DataTable RptTable; //数据表
+                                                     //private DataRow RptRow; //数据行(报表数据源)
         private bool isSaveAs = false; //另存为
 
         ReportDataVM rdvm;
@@ -1123,7 +1129,7 @@ namespace Client
                 log.Info(response.ReasonPhrase);
             }
 
-            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json); 
+            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
 
             if (resp.status == 1)
             {
@@ -1183,7 +1189,7 @@ namespace Client
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                 var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
 
-                if (result.status == 1 )
+                if (result.status == 1)
                 {
                     log.Info("保存报表成功");
                 }
@@ -1250,7 +1256,7 @@ namespace Client
                                 //{
                                 //    sql = sql.Replace(":" + item.param_name, "'" + item.param_defaultvalue + "'");
                                 //}
-                                
+
                             }
                         }
                         paramurl = string.Format($"/api/GuaHao/GetReportDataBySql?sql={sql}&tb_name={"ghinfo"}");
@@ -1298,10 +1304,7 @@ namespace Client
         /// </summary>
         /// <returns></returns>
         public Report CreateReportAndLoadFrx(string pay_string)
-        {
-
-
-
+        { 
             Report report = new Report();
 
             report.Load(Application.StartupPath + @"\FastReport\file\gh_pay.frx");//这里是模板的路径 
@@ -1321,7 +1324,7 @@ namespace Client
                 var charge = decimal.Parse(pay_detail[1]);
                 var out_trade_no = pay_detail[2];//订单编号
 
-                result += "支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge + "元" + "\r\n";
+                result += "支付方式：" + PayMethod.GetPayStringByEnumValue(cheque_type) + "，金额： " + charge + "元" + "\r\n";
             }
             report.SetParameterValue("paystr", result);
 
@@ -1349,7 +1352,7 @@ namespace Client
 
             //纸张设置默认
             PaperSize pageSize = new PaperSize("First custom size", (int)(58 * 100 / 25.4), height);//58mm   转绘图宽度
-            //PaperSize pageSize = new PaperSize("First custom size", 300,400);//58mm   转绘图宽度
+                                                                                                    //PaperSize pageSize = new PaperSize("First custom size", 300,400);//58mm   转绘图宽度
             pd.DefaultPageSettings.PaperSize = pageSize;
             //打印事件设置            
             if (type == 1)
@@ -1489,7 +1492,7 @@ namespace Client
 
                 //打印支付内容
                 font = new Font("Arial", 6, System.Drawing.FontStyle.Regular);
-                string payitem = "支付方式：" + PayMethod.GetPayStringByEnumValue(int.Parse(cheque_type)) + "，金额： " + charge + "元";
+                string payitem = "支付方式：" + PayMethod.GetPayStringByEnumValue(cheque_type) + "，金额： " + charge + "元";
                 size = e.Graphics.MeasureString(payitem, font);
                 heightStep = Convert.ToInt32(size.Height * 1.3);
                 e.Graphics.DrawString(payitem, font, System.Drawing.Brushes.Black, 10, yLocation);
@@ -1753,7 +1756,7 @@ namespace Client
             {
                 UIMessageTip.ShowWarning("存在支付记录！");
                 chkcomb.Checked = true;
-            } 
+            }
         }
 
 
@@ -1823,16 +1826,16 @@ namespace Client
         private void btnTuikuan_Click(object sender, EventArgs e)
         {
             var index = uiListBox1.SelectedIndex;
-            if (index==-1)
+            if (index == -1)
             {
-                MessageBox.Show("请选择付款项目进行退款操作！");return;
+                MessageBox.Show("请选择付款项目进行退款操作！"); return;
             }
-            if (MessageBox.Show(uiListBox1.SelectedItem.ToString(),"是否确认退款？",MessageBoxButtons.OKCancel) == DialogResult.OK)
+            if (MessageBox.Show(uiListBox1.SelectedItem.ToString(), "是否确认退款？", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 //退款
                 RefundType(paylist[index]);
 
-                uiListBox1.Items.Remove(uiListBox1.SelectedItem); 
+                uiListBox1.Items.Remove(uiListBox1.SelectedItem);
                 //总金额-支付金额
                 lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) - paylist[index].pay_je).ToString();
                 lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
@@ -1847,7 +1850,7 @@ namespace Client
                 //        uiListBox2.Items.Add("支付方式：" + item.pay_type + "，金额： " + item.pay_je);
                 //    }
                 //}
-            } 
+            }
         }
 
         public void UpdateThirdPayStatus(string patient_id, string cheque_type, string cheque_no, string charge)

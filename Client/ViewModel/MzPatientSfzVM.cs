@@ -12,24 +12,24 @@ namespace Client.ViewModel
         public string patient_id { get; set; }
 
         public string sfz_id { get; set; }
-        public string relative_code { get; set; }
+        public string relation_code { get; set; }
         public string relative_str
         {
             get
             {
-                if (string.IsNullOrEmpty(relative_code))
+                if (string.IsNullOrEmpty(relation_code))
                 {
                     return "本人";
                 }
                 if (SessionHelper.relativeCodes!=null )
                 { 
-                    var _relativeCode = SessionHelper.relativeCodes.Where(p => p.code == relative_code).FirstOrDefault();
+                    var _relativeCode = SessionHelper.relativeCodes.Where(p => p.code == relation_code).FirstOrDefault();
                     if (_relativeCode!=null)
                     {
                         return _relativeCode.name;
                     }
                 }
-                return relative_code;
+                return relation_code;
             }
         }
 

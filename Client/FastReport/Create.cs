@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -59,9 +60,9 @@ namespace Client.FastReportLib
                 //保存 
                 TargetReport.Save(stream);
 
-                string sql = @"update rt_report_data_fast set report_com=? where report_code = 5555";
-                var para = new System.Data.OleDb.OleDbParameter[1] ;
-                para[0] = new System.Data.OleDb.OleDbParameter("p1", stream.ToArray());
+                string sql = @"update rt_report_data_fast set report_com=@p1 where report_code = 5555";
+                var para = new SqlParameter[1] ;
+                para[0] = new SqlParameter("@p1", stream.ToArray());
                 var result = DbHelper.ExecuteNonQuery(sql, para);
 
                
