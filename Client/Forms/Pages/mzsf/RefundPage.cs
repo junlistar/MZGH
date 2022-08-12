@@ -113,6 +113,7 @@ namespace Mzsf.Forms.Pages
                 charge_status = p.charge_status,
                 cheque_type_name = p.cheque_type_name,
                 cash_name = p.cash_name,
+                //tableflag = p.tableflag,
             }).ToList();
 
             dgvRefund.DataSource = list;
@@ -209,6 +210,7 @@ namespace Mzsf.Forms.Pages
                 refundConfirm.ledger_sn = dat.ledger_sn;
                 refundConfirm.receipt_no = dat.receipt_no;
                 refundConfirm.receipt_sn = dat.receipt_sn;
+                refundConfirm.table_flag = dat.tableflag;
 
                 //关闭 刷新
                 refundConfirm.FormClosed += RefundConfirm_FormClosed;

@@ -1,0 +1,1 @@
+﻿ update xt_func set func_desc=@func_desc,parent_func=@parent_func,action_flag=@action_flag where subsys_id =@subsys_id and func_name = @func_name  and sys_type='2.0'

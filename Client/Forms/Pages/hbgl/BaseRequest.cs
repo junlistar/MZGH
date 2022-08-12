@@ -1174,15 +1174,20 @@ namespace Client
 
         public void SetGridTextColor()
         {
-            foreach (DataGridViewRow row in dgvlist.Rows) {
-                row.Cells["unit_name"].Style.ForeColor = Color.Green;
-                row.Cells["doct_name"].Style.ForeColor = UIColor.Blue;
-                row.Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
-                row.Cells["daystr"].Style.ForeColor = UIColor.Green;
-                row.Cells["apstr"].Style.ForeColor = UIColor.Orange;
-                row.Cells["totle_num"].Style.ForeColor = UIColor.Blue;
-                row.Cells["winnostr"].Style.ForeColor = UIColor.Purple;
-                row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
+            foreach (DataGridViewRow row in dgvlist.Rows)
+            {
+                //row.Cells["unit_name"].Style.ForeColor = Color.Green;
+                //row.Cells["doct_name"].Style.ForeColor = UIColor.Blue;
+                //row.Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["daystr"].Style.ForeColor = UIColor.Green;
+                //row.Cells["apstr"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["totle_num"].Style.ForeColor = UIColor.Blue;
+                //row.Cells["winnostr"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
+                if (row.Cells["open_flag_str"].Value!=null && row.Cells["open_flag_str"].Value.ToString() =="不开放")
+                {
+                    row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
+                }
             }
         }
     }

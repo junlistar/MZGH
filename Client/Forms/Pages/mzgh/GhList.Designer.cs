@@ -72,8 +72,6 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtRiqi = new Sunny.UI.UIDatePicker();
             this.dgvlist = new Sunny.UI.UIDataGridView();
-            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
-            this.lblTotalCount = new Sunny.UI.UILabel();
             this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,6 +98,8 @@
             this.gh_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
+            this.lblTotalCount = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvks)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -135,7 +135,6 @@
             this.btnRePrint.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRePrint.Name = "btnRePrint";
             this.btnRePrint.Size = new System.Drawing.Size(100, 40);
-            this.btnRePrint.Style = Sunny.UI.UIStyle.DarkBlue;
             this.btnRePrint.StyleCustomMode = true;
             this.btnRePrint.Symbol = 61487;
             this.btnRePrint.TabIndex = 13;
@@ -201,21 +200,11 @@
             // btnSearch
             // 
             this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSearch.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSearch.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSearch.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSearch.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSearch.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSearch.Location = new System.Drawing.Point(216, 3);
             this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnSearch.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnSearch.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnSearch.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSearch.Size = new System.Drawing.Size(100, 40);
-            this.btnSearch.Style = Sunny.UI.UIStyle.Green;
             this.btnSearch.StyleCustomMode = true;
             this.btnSearch.Symbol = 61442;
             this.btnSearch.TabIndex = 11;
@@ -227,21 +216,11 @@
             // uiSymbolButton1
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.uiSymbolButton1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.uiSymbolButton1.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.uiSymbolButton1.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.uiSymbolButton1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Location = new System.Drawing.Point(322, 3);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
-            this.uiSymbolButton1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.uiSymbolButton1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(175)))), ((int)(((byte)(83)))));
-            this.uiSymbolButton1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
-            this.uiSymbolButton1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton1.Style = Sunny.UI.UIStyle.Orange;
             this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
@@ -253,21 +232,11 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnExit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnExit.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.Location = new System.Drawing.Point(534, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
-            this.btnExit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(190)))), ((int)(((byte)(172)))));
-            this.btnExit.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(203)))), ((int)(((byte)(189)))));
-            this.btnExit.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
-            this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
@@ -744,24 +713,6 @@
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiToolTip1
-            // 
-            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
-            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.uiToolTip1.OwnerDraw = true;
-            // 
-            // lblTotalCount
-            // 
-            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
-            this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
-            this.lblTotalCount.TabIndex = 7;
-            this.lblTotalCount.Text = "总计：";
-            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // patient_name
             // 
             this.patient_name.DataPropertyName = "patient_name";
@@ -952,6 +903,24 @@
             this.ampm.Name = "ampm";
             this.ampm.ReadOnly = true;
             this.ampm.Visible = false;
+            // 
+            // uiToolTip1
+            // 
+            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.uiToolTip1.OwnerDraw = true;
+            // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
+            this.lblTotalCount.TabIndex = 7;
+            this.lblTotalCount.Text = "总计：";
+            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // GhList
             // 

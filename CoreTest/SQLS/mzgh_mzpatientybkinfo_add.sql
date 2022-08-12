@@ -1,0 +1,1 @@
+﻿ insert into mz_patient_ybk_info(psn_no,psn_cert_type,certno,psn_name,gend,naty,brdy,age) values(@psn_no,@psn_cert_type,@certno,@psn_name,@gend,@naty,@brdy,@age)

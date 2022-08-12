@@ -94,7 +94,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.uiGroupBox1.Size = new System.Drawing.Size(732, 336);
+            this.uiGroupBox1.Size = new System.Drawing.Size(644, 336);
             this.uiGroupBox1.Style = Sunny.UI.UIStyle.Red;
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.Text = "编辑";
@@ -118,6 +118,7 @@
             this.txt_limit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_limit.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_limit.Name = "txt_limit";
+            this.txt_limit.ReadOnly = true;
             this.txt_limit.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txt_limit.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txt_limit.ShowText = false;
@@ -188,6 +189,7 @@
             this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
             this.txtDate.Name = "txtDate";
             this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.ReadOnly = true;
             this.txtDate.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtDate.Size = new System.Drawing.Size(166, 29);
             this.txtDate.Style = Sunny.UI.UIStyle.Red;
@@ -228,6 +230,7 @@
             this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTotalNum.Name = "txtTotalNum";
+            this.txtTotalNum.ReadOnly = true;
             this.txtTotalNum.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtTotalNum.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtTotalNum.ShowText = false;
@@ -269,6 +272,7 @@
             this.cbxHaobie.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxHaobie.Name = "cbxHaobie";
             this.cbxHaobie.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxHaobie.ReadOnly = true;
             this.cbxHaobie.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cbxHaobie.Size = new System.Drawing.Size(163, 29);
             this.cbxHaobie.Style = Sunny.UI.UIStyle.Red;
@@ -293,6 +297,7 @@
             this.cbxWinNo.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxWinNo.Name = "cbxWinNo";
             this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxWinNo.ReadOnly = true;
             this.cbxWinNo.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cbxWinNo.Size = new System.Drawing.Size(166, 29);
             this.cbxWinNo.Style = Sunny.UI.UIStyle.Red;
@@ -327,6 +332,7 @@
             this.txtDoct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDoct.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtDoct.Name = "txtDoct";
+            this.txtDoct.ReadOnly = true;
             this.txtDoct.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtDoct.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtDoct.ShowText = false;
@@ -354,6 +360,7 @@
             this.txtzk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtzk.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtzk.Name = "txtzk";
+            this.txtzk.ReadOnly = true;
             this.txtzk.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtzk.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtzk.ShowText = false;
@@ -381,6 +388,7 @@
             this.txtks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtks.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtks.Name = "txtks";
+            this.txtks.ReadOnly = true;
             this.txtks.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtks.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.txtks.ShowText = false;
@@ -498,6 +506,7 @@
             this.cbxSXW.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxSXW.Name = "cbxSXW";
             this.cbxSXW.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxSXW.ReadOnly = true;
             this.cbxSXW.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.cbxSXW.Size = new System.Drawing.Size(166, 29);
             this.cbxSXW.Style = Sunny.UI.UIStyle.Red;
@@ -521,10 +530,10 @@
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(404, 396);
+            this.btnSave.Location = new System.Drawing.Point(425, 402);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(113, 45);
+            this.btnSave.Size = new System.Drawing.Size(93, 36);
             this.btnSave.StyleCustomMode = true;
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "保存";
@@ -535,21 +544,11 @@
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnCancel.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(539, 396);
+            this.btnCancel.Location = new System.Drawing.Point(533, 402);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnCancel.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
-            this.btnCancel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancel.Size = new System.Drawing.Size(119, 45);
-            this.btnCancel.Style = Sunny.UI.UIStyle.Red;
+            this.btnCancel.Size = new System.Drawing.Size(99, 36);
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 13;
@@ -591,8 +590,7 @@
             // RequestEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(747, 465);
-            this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(115)))), ((int)(((byte)(115)))));
+            this.ClientSize = new System.Drawing.Size(659, 461);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -603,11 +601,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RequestEdit";
-            this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.Style = Sunny.UI.UIStyle.Red;
             this.StyleCustomMode = true;
             this.Text = "基础号表编辑(按ESC退出)";
-            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 747, 465);
             this.Load += new System.EventHandler(this.BaseRequestEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RequestEdit_KeyDown);

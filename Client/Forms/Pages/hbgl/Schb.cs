@@ -292,17 +292,22 @@ namespace Client
 
             foreach (DataGridViewRow row in dgvRequest.Rows)
             {
-                row.Cells["request_date1"].Style.ForeColor = Color.Green;
-                row.Cells["ampm1"].Style.ForeColor = UIColor.Blue;
-                row.Cells["unit_name1"].Style.ForeColor = UIColor.Purple;
-                row.Cells["group_name1"].Style.ForeColor = UIColor.Green;
-                row.Cells["doct_name1"].Style.ForeColor = UIColor.Orange;
-                row.Cells["clinic_name1"].Style.ForeColor = UIColor.Blue;
-                row.Cells["begin_no1"].Style.ForeColor = UIColor.Purple;
-                row.Cells["current_no1"].Style.ForeColor = UIColor.Green;
-                row.Cells["end_no1"].Style.ForeColor = Color.Green;
-                row.Cells["winnostr1"].Style.ForeColor = UIColor.Green;
-                row.Cells["open_flag1"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["request_date1"].Style.ForeColor = Color.Green;
+                //row.Cells["ampm1"].Style.ForeColor = UIColor.Blue;
+                //row.Cells["unit_name1"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["group_name1"].Style.ForeColor = UIColor.Green;
+                //row.Cells["doct_name1"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["clinic_name1"].Style.ForeColor = UIColor.Blue;
+                //row.Cells["begin_no1"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["current_no1"].Style.ForeColor = UIColor.Green;
+                //row.Cells["end_no1"].Style.ForeColor = Color.Green;
+                //row.Cells["winnostr1"].Style.ForeColor = UIColor.Green;
+                //row.Cells["open_flag1"].Style.ForeColor = UIColor.Orange;
+
+                if (row.Cells["open_flag1"].Value != null && row.Cells["open_flag1"].Value.ToString() == "不开放")
+                {
+                    row.Cells["open_flag1"].Style.ForeColor = Color.Orange;
+                }
             }
         }
              

@@ -8,7 +8,7 @@ namespace Data.Entities.Mzsf
         public string patient_id { get; set; }
         public int item_no { get; set; }
         public int ledger_sn { get; set; }
-        public int cheque_type { get; set; }
+        public string cheque_type { get; set; }
         public string cheque_no { get; set; }
         public decimal charge { get; set; }
         public int depo_status { get; set; }

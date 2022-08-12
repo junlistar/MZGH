@@ -1,0 +1,1 @@
+﻿ update rt_report_data_fast_net set report_com=@report_com where report_code =@report_code

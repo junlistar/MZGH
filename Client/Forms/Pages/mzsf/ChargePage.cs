@@ -368,6 +368,7 @@ namespace Mzsf.Forms.Pages
         {
             if (e.KeyCode == Keys.Enter)
             {
+                InitUI();
                 SearchUser();
             }
         }
@@ -564,7 +565,7 @@ namespace Mzsf.Forms.Pages
                     cbxOrderType.ValueMember = "code";
                     cbxOrderType.DisplayMember = "name";
 
-                    cbxOrderType.SelectedValue = "02";
+                    cbxOrderType.SelectedValue = "01";
                 }
                 else
                 {
@@ -594,7 +595,6 @@ namespace Mzsf.Forms.Pages
             //txtCode.Text = "";
             ClearUserInfo();
 
-            cbxOrderType.Text = "西药";
         }
         public void ClearUserInfo()
         {
@@ -615,8 +615,23 @@ namespace Mzsf.Forms.Pages
             SessionHelper.patientVM = null;
             SessionHelper.mzOrders = null;
             SessionHelper.cprCharges = null;
+            ClearTab();
         }
 
+        public void ClearTab()
+        {
+            #region tabcontrol 重置
+
+            var pageCount = uiTabControl1.TabPages.Count;
+
+            for (int i = 0; i < pageCount; i++)
+            {
+                uiTabControl1.TabPages.RemoveAt(uiTabControl1.TabPages.Count - 1);
+            }
+
+            #endregion
+
+        }
 
         private void btnCika_Click(object sender, EventArgs e)
         {

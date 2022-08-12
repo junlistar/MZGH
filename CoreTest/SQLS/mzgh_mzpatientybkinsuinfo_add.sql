@@ -1,0 +1,2 @@
+﻿ insert into mz_patient_ybk_insuinfo( certno, balc, insutype, psn_type, psn_insu_stas, psn_insu_date, paus_insu_date, cvlserv_flag, insuplc_admdvs, emp_name)
+values(@certno, @balc, @insutype, @psn_type, @psn_insu_stas, @psn_insu_date, @paus_insu_date, @cvlserv_flag, @insuplc_admdvs, @emp_name)

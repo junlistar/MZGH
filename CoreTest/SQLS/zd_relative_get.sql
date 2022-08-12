@@ -1,0 +1,1 @@
+﻿SELECT * FROM zd_relative_code

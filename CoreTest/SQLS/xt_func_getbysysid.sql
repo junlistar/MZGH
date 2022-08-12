@@ -1,0 +1,1 @@
+﻿ select * from xt_func where subsys_id = @subsys_id and sys_type='2.0'

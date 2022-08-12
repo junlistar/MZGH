@@ -19,9 +19,17 @@ namespace Data.Repository.Mzsf
             para.Add("@operator", operate);
             para.Add("@receipt_type", 1);
 
-            return  Select(ghsql,para); 
+            var list = Select(ghsql, para);
 
-        }
- 
+            if (list==null || list.Count==0)
+            {
+                para = new DynamicParameters();
+                para.Add("@operator", '%');
+                para.Add("@receipt_type", 1);
+
+                return Select(ghsql, para);
+            } 
+            return list;  
+        } 
     }
 }

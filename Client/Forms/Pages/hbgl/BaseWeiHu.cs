@@ -863,21 +863,21 @@ namespace Client
         public void SetGridTextColor()
         {
 
-            foreach (DataGridViewRow row in dgvlist.Rows)
-            {
-                row.Cells["request_date"].Style.ForeColor = Color.Green; ;
-                row.Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
-                row.Cells["apstr"].Style.ForeColor = UIColor.Purple;
-                row.Cells["unit_name"].Style.ForeColor = UIColor.Green;
-                row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
-                row.Cells["req_name"].Style.ForeColor = UIColor.Green;
-                row.Cells["winnostr"].Style.ForeColor = Color.Green;
-                row.Cells["begin_no"].Style.ForeColor = UIColor.Green;
-                row.Cells["current_no"].Style.ForeColor = UIColor.Blue;
-                row.Cells["toend_no"].Style.ForeColor = UIColor.Purple;
-            }
+            //foreach (DataGridViewRow row in dgvlist.Rows)
+            //{
+            //    row.Cells["request_date"].Style.ForeColor = Color.Green; ;
+            //    row.Cells["open_flag_str"].Style.ForeColor = UIColor.Blue;
+            //    row.Cells["apstr"].Style.ForeColor = UIColor.Purple;
+            //    row.Cells["unit_name"].Style.ForeColor = UIColor.Green;
+            //    row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
+            //    row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+            //    row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+            //    row.Cells["req_name"].Style.ForeColor = UIColor.Green;
+            //    row.Cells["winnostr"].Style.ForeColor = Color.Green;
+            //    row.Cells["begin_no"].Style.ForeColor = UIColor.Green;
+            //    row.Cells["current_no"].Style.ForeColor = UIColor.Blue;
+            //    row.Cells["toend_no"].Style.ForeColor = UIColor.Purple;
+            //}
         }
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {

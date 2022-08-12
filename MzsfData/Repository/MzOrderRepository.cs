@@ -68,7 +68,8 @@ namespace MzsfData.Repository
                                 string order_type = obj[0];
                                 string order_no = obj[1];
                                 string charge_code = obj[2];
-                                string charge_amount = obj[3];
+                                string serial_no = obj[3];
+                                string charge_amount = obj[4];
 
                                 //其他数据根据charge_code查询获取
 

@@ -29,14 +29,12 @@ namespace Mzsf.Forms.Pages
 
 
         private void WxPay_Load(object sender, EventArgs e)
-        {
-
-
+        {  
             string payQRCordUrl = "http://localhosthttp://localhosthttp://localhosthttp://localhosthttp://localhosthttp://localhosthttp://localhost";
 
             lblJe.Text = _jine;
-
-            if (int.Parse(_key) == (int)PayMethodEnum.Zhifubao)
+             
+            if (_key == PayMethod.GetChequeTypeByEnum(PayMethodEnum.Zhifubao))
             {
                 lblInfo.Text = "打开支付宝扫码支付";
                 this.Text = "支付宝支付";
@@ -59,7 +57,7 @@ namespace Mzsf.Forms.Pages
                     UIMessageBox.ShowError(ex.ToString());
                 }
             }
-            else if (int.Parse(_key) == (int)PayMethodEnum.WeiXin)
+            else if (_key == PayMethod.GetChequeTypeByEnum(PayMethodEnum.WeiXin))
             {
                 lblInfo.Text = "打开微信扫码支付";
                 this.Text = "微信支付";

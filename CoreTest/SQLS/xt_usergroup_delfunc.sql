@@ -1,0 +1,1 @@
+﻿ delete from xt_user_group where subsys_id=@subsys_id and user_group=@user_group and func_name=@func_name and sys_type='2.0'

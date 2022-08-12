@@ -28,7 +28,7 @@ SELECT
 				                          WHERE ma1.patient_id = @patient_id AND ma1.times = @times AND
 				                                ma1.order_no = a.order_no AND ma1.order_type = a.order_type)
 		   	 FROM mz_detail_charge a
-	        WHERE a.patient_id = @patient_id AND a.times = @times) ma
+	        WHERE a.patient_id = @patient_id AND a.times = @times and  DATEDIFF(day,a.happen_date,getdate())<2) ma
 	       LEFT JOIN mz_zd_order_type b ON ma.order_type = b.code
 	       LEFT JOIN mz_order_properties c ON ma.order_properties = c.code  
 	 ORDER BY ma.order_no 

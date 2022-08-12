@@ -55,7 +55,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
             uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
-             
+
 
             dgvlist.CellDoubleClick += dgvlist_CellDoubleClick;
         }
@@ -257,7 +257,7 @@ namespace Client
                                 //dgvlist.Columns["sn" + _name_index].Visible = false;
                                 dgvlist.Columns["bc" + _name_index].HeaderText = "班次";
                                 dgvlist.Columns["xe" + _name_index].HeaderText = "限额";
-                                dgvlist.Columns["xy" + _name_index].HeaderText = "限约"; 
+                                dgvlist.Columns["xy" + _name_index].HeaderText = "限约";
 
                                 dgvlist.Columns["bc" + _name_index].Tag = _name_index;
                                 dgvlist.Columns["xe" + _name_index].Tag = _name_index;
@@ -350,11 +350,11 @@ namespace Client
 
             foreach (DataGridViewRow row in dgvlist.Rows)
             {
-                row.Cells["unit_name"].Style.ForeColor = Color.Green;
-                //row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
-                row.Cells["unit_sn"].Style.ForeColor = UIColor.Green;
+                //row.Cells["unit_name"].Style.ForeColor = Color.Green;
+                ////row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["unit_sn"].Style.ForeColor = UIColor.Green;
 
                 var _date = txtDate.Value;
                 var _name_index = 0;
@@ -368,10 +368,10 @@ namespace Client
                         }
                         else
                         {
-                            row.Cells["bc" + _name_index].Style.ForeColor = Color.Green;
-                        } 
-                        row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
-                        row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
+                            // row.Cells["bc" + _name_index].Style.ForeColor = Color.Green;
+                        }
+                        //row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
+                        //row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
                     }
                     else
                     {
@@ -381,10 +381,10 @@ namespace Client
                         }
                         else
                         {
-                            row.Cells["bc"].Style.ForeColor = Color.Green;
-                        } 
-                        row.Cells["xe"].Style.ForeColor = UIColor.Blue;
-                        row.Cells["xy"].Style.ForeColor = UIColor.Purple;
+                            //row.Cells["bc"].Style.ForeColor = Color.Green;
+                        }
+                        //row.Cells["xe"].Style.ForeColor = UIColor.Blue;
+                        //row.Cells["xy"].Style.ForeColor = UIColor.Purple;
                     }
                     _name_index++;
                     _date = _date.AddDays(1);
@@ -403,15 +403,15 @@ namespace Client
                     {
                         dt.Rows[i]["bc" + _name_index] = GetBanciText(dt.Rows[i]["bc" + _name_index].ToString());
 
-                        var _opent_flag = dt.Rows[i]["open_flag" + _name_index]; 
-                        if (_opent_flag != null  && _opent_flag.ToString()!="1")
+                        var _opent_flag = dt.Rows[i]["open_flag" + _name_index];
+                        if (_opent_flag != null && _opent_flag.ToString() != "1")
                         {
                             var _bc = dt.Rows[i]["bc" + _name_index];
-                            if (_bc!=null && !string.IsNullOrWhiteSpace(_bc.ToString()))
+                            if (_bc != null && !string.IsNullOrWhiteSpace(_bc.ToString()))
                             {
                                 dt.Rows[i]["bc" + _name_index] = _bc.ToString() + "(停)";
                             }
-                            
+
                         }
                     }
                     else
@@ -421,8 +421,8 @@ namespace Client
 
                         //处理 不开放的号，增加（停）标识
                         var _opent_flag = dt.Rows[i]["open_flag"];
-                        if (_opent_flag != null && dt.Rows[i]["bc"] != null && _opent_flag.ToString() != "1" )
-                        { 
+                        if (_opent_flag != null && dt.Rows[i]["bc"] != null && _opent_flag.ToString() != "1")
+                        {
                             var _bc = dt.Rows[i]["bc"];
                             if (_bc != null && !string.IsNullOrWhiteSpace(_bc.ToString()))
                             {
@@ -805,7 +805,7 @@ namespace Client
             }
         }
 
-        
+
         public void EditClick()
         {
             var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
@@ -1221,7 +1221,7 @@ namespace Client
 
                     dgvlist.DataSource = ds;
                     SetColumnWidth();
-                } 
+                }
             }
             catch (Exception ex)
             {

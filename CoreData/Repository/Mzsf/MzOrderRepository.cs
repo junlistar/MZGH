@@ -49,7 +49,20 @@ namespace Data.Repository.Mzsf
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
                         var visit_info = connection.QueryFirstOrDefault<MzVisit>("mzcpr_GetVisitInfo", para, transaction, null, CommandType.StoredProcedure);
-
+                        if (visit_info==null)
+                        {
+                            visit_info = new MzVisit();
+                            string emp_sql = " select * from a_employee_mi where emp_sn=@emp_sn"; 
+                            para = new DynamicParameters();
+                            para.Add("@emp_sn", opera);
+                            var operaModel  = connection.QueryFirstOrDefault<Employee>(emp_sql, para, transaction);
+                            if (operaModel!=null)
+                            {
+                                visit_info.visit_dept = operaModel.dept_sn;
+                                visit_info.doctor_code = operaModel.code;
+                                visit_info.name = operaModel.name; 
+                            }
+                        }
                         string insert_sql = "";
 
                         //处方数
@@ -108,7 +121,8 @@ namespace Data.Repository.Mzsf
                                     insert_sql = GetSqlByTag("mzsf_mzdetailcharge_add_zhenliao");
 
                                     para = new DynamicParameters();
-                                    para.Add("@code", charge_code);
+                                    para.Add("@code", charge_code);//AND  ISNULL(serial,'') =@serial
+                                    para.Add("@serial", serial);//AND  ISNULL(serial,'') =@serial
                                     var order_item = connection.QueryFirstOrDefault<MzOrderItem>(order_item_sql, para, transaction);
 
                                     para = new DynamicParameters();
@@ -666,7 +680,8 @@ namespace Data.Repository.Mzsf
                         para.Add("@receipt_sn", receipt_sn);
                         para.Add("@receipt_no", receipt_no);
                         para.Add("@cheque_cash", cheque_cash);
-                        para.Add("@isall", isall);
+                        //para.Add("@isall", isall);
+                        para.Add("@back_all", isall);
                         connection.Execute("mzsf_BackFee2", para, transaction, null, CommandType.StoredProcedure);
 
                         string sql = GetSqlByTag("mzsf_mzreceiptcancel_add");

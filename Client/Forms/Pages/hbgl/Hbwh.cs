@@ -350,11 +350,11 @@ namespace Client
 
             foreach (DataGridViewRow row in dgvlist.Rows)
             {
-                row.Cells["unit_name"].Style.ForeColor = Color.Green;
-                //row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
-                row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
-                row.Cells["unit_sn"].Style.ForeColor = UIColor.Green;
+                //row.Cells["unit_name"].Style.ForeColor = Color.Green;
+                ////row.Cells["group_name"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["clinic_name"].Style.ForeColor = UIColor.Orange;
+                //row.Cells["doct_name"].Style.ForeColor = UIColor.Purple;
+                //row.Cells["unit_sn"].Style.ForeColor = UIColor.Green;
 
                 var _date = txtDate.Value;
                 var _name_index = 0;
@@ -368,11 +368,11 @@ namespace Client
                         }
                         else
                         {
-                            row.Cells["bc" + _name_index].Style.ForeColor = Color.Green;
+                            //row.Cells["bc" + _name_index].Style.ForeColor = Color.Green;
                         }
                          
-                        row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
-                        row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
+                        //row.Cells["xe" + _name_index].Style.ForeColor = UIColor.Blue;
+                        //row.Cells["xy" + _name_index].Style.ForeColor = UIColor.Purple;
                     }
                     else
                     {
@@ -382,12 +382,12 @@ namespace Client
                         }
                         else
                         {
-                            row.Cells["bc"].Style.ForeColor = Color.Green;
+                            //row.Cells["bc"].Style.ForeColor = Color.Green;
                         }
 
                         
-                        row.Cells["xe"].Style.ForeColor = UIColor.Blue;
-                        row.Cells["xy"].Style.ForeColor = UIColor.Purple;
+                        //row.Cells["xe"].Style.ForeColor = UIColor.Blue;
+                        //row.Cells["xy"].Style.ForeColor = UIColor.Purple;
                     }
                     _name_index++;
                     _date = _date.AddDays(1);

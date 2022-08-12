@@ -808,7 +808,6 @@ namespace Mzsf.Forms.Pages
 
                 if (result.status == 1)
                 {
-                    paylist.Clear();
                     log.Info("缴费成功");
                     UIMessageTip.ShowOk("缴费成功!", 1500);
                     SessionHelper.do_sf_print = true;
@@ -817,6 +816,7 @@ namespace Mzsf.Forms.Pages
 
                     CreateElecBill(result.data);
 
+                    paylist.Clear();
                     this.Close();
                     return;
                 }

@@ -1,0 +1,1 @@
+﻿ select * from fp_data where patient_id=@patient_id and ledger_sn=@ledger_sn and subsys_id=@subsys_id

@@ -48,8 +48,15 @@ namespace Client.Forms.Wedgit
                 {
                     int times = Convert.ToInt32(dgvOrders.Rows[e.RowIndex].Cells["times"].Value);
                     ChargePage.current_times = times;
-                    ChargePage.current_doct_name = dgvOrders.Rows[e.RowIndex].Cells["doct_name"].Value.ToString();
-                    ChargePage.current_unit_name = dgvOrders.Rows[e.RowIndex].Cells["unit_name"].Value.ToString(); ;
+                    if (dgvOrders.Rows[e.RowIndex].Cells["doct_name"].Value!=null)
+                    {
+                        ChargePage.current_doct_name = dgvOrders.Rows[e.RowIndex].Cells["doct_name"].Value.ToString();
+                    }
+                    if (dgvOrders.Rows[e.RowIndex].Cells["unit_name"].Value!=null)
+                    {
+                        ChargePage.current_unit_name = dgvOrders.Rows[e.RowIndex].Cells["unit_name"].Value.ToString(); ;
+                    }
+                     
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

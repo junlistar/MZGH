@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Data
 {
     public class RepositoryBase<T> : IRepositoryBase<T>
-    { 
+    {
 
         public string GetSqlByTag(int tag)
         {
@@ -37,9 +37,25 @@ namespace Data
         {
             if (!CacheHelper.Exsits(tag))
             {
-                string str = File.ReadAllText(Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
-                CacheHelper.Add(tag.ToString(), str);
-                return str;
+                try
+                {
+                    string str = File.ReadAllText(Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
+                    CacheHelper.Add(tag.ToString(), str);
+                    return str;
+                }
+                catch (ArgumentException ex)
+                {
+                    string str = File.ReadAllText(Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("UTF-8"));
+                    CacheHelper.Add(tag.ToString(), str);
+                    return str;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+                //string str = File.ReadAllText(Environment.CurrentDirectory + $"/sqls/{tag}.sql", System.Text.Encoding.GetEncoding("GB2312"));
+
             }
             else
             {
@@ -122,14 +138,14 @@ namespace Data
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
                 return conn.Query<T>(SPName, param, null, true, null, CommandType.StoredProcedure).ToList();
-                 
+
             }
         }
         public int ExecuteSP(string SPName, DynamicParameters param, string db_model = "")
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
-                return conn.Execute(SPName, param, null, null, CommandType.StoredProcedure); 
+                return conn.Execute(SPName, param, null, null, CommandType.StoredProcedure);
             }
         }
 
@@ -139,7 +155,7 @@ namespace Data
             {
                 return conn.Execute(insertSql, entity);
             }
-        } 
+        }
 
         public List<T> Select(string selectSql, string db_model = "")
         {
@@ -148,7 +164,7 @@ namespace Data
                 return conn.Query<T>(selectSql).ToList();
             }
         }
-        public List<T> Select(string selectSql, DynamicParameters param ,string db_model = "")
+        public List<T> Select(string selectSql, DynamicParameters param, string db_model = "")
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -164,7 +180,7 @@ namespace Data
         }
 
 
-        public object ExcuteScalar(string selectSql, DynamicParameters param,string db_model="")
+        public object ExcuteScalar(string selectSql, DynamicParameters param, string db_model = "")
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {

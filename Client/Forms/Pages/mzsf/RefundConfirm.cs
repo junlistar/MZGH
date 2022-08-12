@@ -28,6 +28,7 @@ namespace Mzsf.Forms.Pages
         public int ledger_sn = 0;
         public string receipt_sn = "";
         public string receipt_no = "";
+        public string table_flag = "";
 
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -151,6 +152,7 @@ namespace Mzsf.Forms.Pages
             refundApart.ledger_sn = ledger_sn;
             refundApart.receipt_no = receipt_no;
             refundApart.receipt_sn = receipt_sn;
+            refundApart.tbl_flag = table_flag;
             refundApart.ShowDialog();
             this.Close();
         }

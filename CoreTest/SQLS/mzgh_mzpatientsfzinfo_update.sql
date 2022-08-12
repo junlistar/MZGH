@@ -1,0 +1,1 @@
+﻿ update mz_patient_sfz_info set name=@name,sex=@sex,address=@address,home_address=@home_address,folk=@folk,birthday=@birthday where card_no=@card_no

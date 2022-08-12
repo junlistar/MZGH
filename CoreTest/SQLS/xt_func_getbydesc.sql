@@ -1,0 +1,1 @@
+﻿ select count(*) from xt_func where subsys_id =@subsys_id and func_desc = @func_desc and sys_type='2.0'

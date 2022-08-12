@@ -1,5 +1,5 @@
 ﻿using Data.Repository;
-using MzsfData.Repository;
+using Data.Repository.Mzsf;
 using Newtonsoft.Json;
 using System;
 using System.Security.Cryptography;
@@ -89,7 +89,15 @@ namespace CoreTest
             //ghRequestRepository.Schb("2022-07-25", "2022-07-31", "00000");
 
 
-            btnRePrint_Click();
+            //btnRePrint_Click();
+
+            //000174985600&times=20&order_string=01-2-700261-**-1&opera=00000
+            //SaveOrder,000200724300,11,01-1-700527--2,00000 ||  ||end   SaveOrder?patient_id=000174985600&times=21&order_string=01-1-700666-**-1&opera=00000
+            MzOrderRepository mzOrderRepository = new MzOrderRepository();
+            //var rr = mzOrderRepository.SaveOrder("000200724300", 11, "01-2-700261-**-1", "00000");
+
+            ///api/mzsf/pay?patient_id=000189394100&times=20&pay_string=c-23-202208121512124997,3-44-202208121512158243,1-49-&order_no_str=1&opera=00000
+             var aaa  = mzOrderRepository.Pay("000189394100", 20, "c-23-202208121512124997,3-44-202208121512158243,1-49-", "1", "00000");
 
             Console.WriteLine("Hello World!");
         }

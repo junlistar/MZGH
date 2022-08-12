@@ -1,0 +1,1 @@
+﻿ delete from mz_patient_ybk_insuinfo where certno=@certno
