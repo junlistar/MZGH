@@ -689,7 +689,7 @@ namespace Client
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtCode.Text))
+            if (string.IsNullOrEmpty(lblBarcode.Text))
             {
                 UIMessageTip.ShowError("请刷卡!");
                 lblMsg.Text = "请刷卡！";
@@ -1210,6 +1210,7 @@ namespace Client
         public void InitUserInfo()
         {
             lblMsg.Text = "";
+            lblBarcode.Text = "";
             lblPatientid.Text = "";
             btnEditUser1.TagString = ""; //btnEditUser1.Hide();
             lblName.Text = "";
@@ -1383,7 +1384,8 @@ namespace Client
                                                                      //this.txtpatientid.Text = userInfo["patient_id"].ToString();
             lblName.Text = userInfo.name.ToString();
             lblPatientid.Text = userInfo.patient_id;
-            txtCode.Text = userInfo.p_bar_code;
+            txtCode.Text = "";//查询清空
+            lblBarcode.Text = userInfo.p_bar_code;
             if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
             {
                 userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();

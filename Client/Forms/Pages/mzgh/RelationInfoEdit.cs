@@ -60,17 +60,17 @@ namespace Client
 
             if (_code==null || string.IsNullOrEmpty(_code.ToString()))
             {
-                UIMessageTip.Show("请选择关系！");
+                UIMessageTip.Show("请选择关系！"); cbxRelationCode.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(_name))
             {
-                UIMessageTip.Show("请输入姓名！");
+                UIMessageTip.Show("请输入姓名！"); txt_relationname.Focus();
                 return;
             }
             if (string.IsNullOrEmpty(_sfz_id))
             {
-                UIMessageTip.Show("请输入身份证！");
+                UIMessageTip.Show("请输入身份证！"); txt_sfzid.Focus();
                 return;
             }
             string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");

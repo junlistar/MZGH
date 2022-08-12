@@ -45,8 +45,12 @@
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.cbxShenfen = new Sunny.UI.UIComboBox();
+            this.uiLabel5 = new Sunny.UI.UILabel();
             this.txthomedistrict = new Sunny.UI.UITextBox();
+            this.cbxChargeType = new Sunny.UI.UIComboBox();
             this.uiLabel4 = new Sunny.UI.UILabel();
+            this.uiLabel7 = new Sunny.UI.UILabel();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.sfz_folk = new Sunny.UI.UITextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -65,10 +69,10 @@
             this.sfz_card_no = new Sunny.UI.UITextBox();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.uiLabel5 = new Sunny.UI.UILabel();
-            this.cbxChargeType = new Sunny.UI.UIComboBox();
-            this.uiLabel7 = new Sunny.UI.UILabel();
-            this.cbxShenfen = new Sunny.UI.UIComboBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtRelationName = new Sunny.UI.UITextBox();
+            this.cbxRelation = new Sunny.UI.UIComboBox();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.sfz_folk.SuspendLayout();
@@ -105,7 +109,7 @@
             // uiLabel3
             // 
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(26, 84);
+            this.uiLabel3.Location = new System.Drawing.Point(26, 79);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel3.Size = new System.Drawing.Size(100, 23);
@@ -118,7 +122,7 @@
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(340, 84);
+            this.uiLabel6.Location = new System.Drawing.Point(340, 79);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel6.Size = new System.Drawing.Size(100, 23);
@@ -164,7 +168,7 @@
             this.txtUserName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUserName.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtUserName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtUserName.Location = new System.Drawing.Point(133, 84);
+            this.txtUserName.Location = new System.Drawing.Point(133, 79);
             this.txtUserName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUserName.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtUserName.Name = "txtUserName";
@@ -188,7 +192,7 @@
             this.txtTel.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtTel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtTel.Location = new System.Drawing.Point(447, 84);
+            this.txtTel.Location = new System.Drawing.Point(447, 79);
             this.txtTel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTel.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTel.Name = "txtTel";
@@ -204,10 +208,10 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(26, 216);
+            this.uiLabel8.Location = new System.Drawing.Point(55, 240);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uiLabel8.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel8.Size = new System.Drawing.Size(71, 23);
             this.uiLabel8.Style = Sunny.UI.UIStyle.Green;
             this.uiLabel8.TabIndex = 17;
             this.uiLabel8.Text = "街道";
@@ -217,7 +221,7 @@
             // uiLabel9
             // 
             this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(66, 257);
+            this.uiLabel9.Location = new System.Drawing.Point(66, 279);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel9.Size = new System.Drawing.Size(60, 23);
@@ -238,7 +242,7 @@
             this.txthomestreet.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomestreet.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txthomestreet.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomestreet.Location = new System.Drawing.Point(133, 216);
+            this.txthomestreet.Location = new System.Drawing.Point(133, 240);
             this.txthomestreet.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomestreet.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthomestreet.Name = "txthomestreet";
@@ -262,7 +266,7 @@
             this.txtZhiye.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtZhiye.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtZhiye.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtZhiye.Location = new System.Drawing.Point(133, 255);
+            this.txtZhiye.Location = new System.Drawing.Point(133, 277);
             this.txtZhiye.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtZhiye.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtZhiye.Name = "txtZhiye";
@@ -336,7 +340,7 @@
             // uiLabel14
             // 
             this.uiLabel14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel14.Location = new System.Drawing.Point(340, 129);
+            this.uiLabel14.Location = new System.Drawing.Point(340, 119);
             this.uiLabel14.Name = "uiLabel14";
             this.uiLabel14.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel14.Size = new System.Drawing.Size(100, 23);
@@ -361,7 +365,7 @@
             "其他"});
             this.cbxmarrycode.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxmarrycode.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxmarrycode.Location = new System.Drawing.Point(447, 129);
+            this.cbxmarrycode.Location = new System.Drawing.Point(447, 119);
             this.cbxmarrycode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxmarrycode.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxmarrycode.Name = "cbxmarrycode";
@@ -375,6 +379,10 @@
             // 
             // uiGroupBox1
             // 
+            this.uiGroupBox1.Controls.Add(this.cbxRelation);
+            this.uiGroupBox1.Controls.Add(this.txtRelationName);
+            this.uiGroupBox1.Controls.Add(this.label20);
+            this.uiGroupBox1.Controls.Add(this.label9);
             this.uiGroupBox1.Controls.Add(this.cbxShenfen);
             this.uiGroupBox1.Controls.Add(this.uiLabel5);
             this.uiGroupBox1.Controls.Add(this.txthomedistrict);
@@ -410,6 +418,47 @@
             this.uiGroupBox1.Text = "基本信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
+            // 
+            // cbxShenfen
+            // 
+            this.cbxShenfen.DataSource = null;
+            this.cbxShenfen.FillColor = System.Drawing.Color.White;
+            this.cbxShenfen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxShenfen.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxShenfen.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxShenfen.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxShenfen.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxShenfen.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxShenfen.Location = new System.Drawing.Point(133, 161);
+            this.cbxShenfen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxShenfen.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxShenfen.Name = "cbxShenfen";
+            this.cbxShenfen.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxShenfen.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxShenfen.Size = new System.Drawing.Size(200, 29);
+            this.cbxShenfen.Style = Sunny.UI.UIStyle.Green;
+            this.cbxShenfen.TabIndex = 43;
+            this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel5
+            // 
+            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel5.Location = new System.Drawing.Point(77, 161);
+            this.uiLabel5.Name = "uiLabel5";
+            this.uiLabel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel5.Size = new System.Drawing.Size(49, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Green;
+            this.uiLabel5.TabIndex = 43;
+            this.uiLabel5.Text = "身份";
+            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txthomedistrict
             // 
@@ -422,7 +471,7 @@
             this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomedistrict.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txthomedistrict.Location = new System.Drawing.Point(133, 129);
+            this.txthomedistrict.Location = new System.Drawing.Point(133, 119);
             this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
             this.txthomedistrict.Name = "txthomedistrict";
@@ -435,10 +484,37 @@
             this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbxChargeType
+            // 
+            this.cbxChargeType.DataSource = null;
+            this.cbxChargeType.FillColor = System.Drawing.Color.White;
+            this.cbxChargeType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxChargeType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxChargeType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxChargeType.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxChargeType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxChargeType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxChargeType.Location = new System.Drawing.Point(133, 200);
+            this.cbxChargeType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxChargeType.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxChargeType.Name = "cbxChargeType";
+            this.cbxChargeType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxChargeType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxChargeType.Size = new System.Drawing.Size(200, 29);
+            this.cbxChargeType.Style = Sunny.UI.UIStyle.Green;
+            this.cbxChargeType.TabIndex = 42;
+            this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(26, 126);
+            this.uiLabel4.Location = new System.Drawing.Point(26, 116);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel4.Size = new System.Drawing.Size(100, 23);
@@ -447,6 +523,19 @@
             this.uiLabel4.Text = "地区";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel7
+            // 
+            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel7.Location = new System.Drawing.Point(26, 200);
+            this.uiLabel7.Name = "uiLabel7";
+            this.uiLabel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uiLabel7.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Green;
+            this.uiLabel7.TabIndex = 41;
+            this.uiLabel7.Text = "费别";
+            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiGroupBox2
             // 
@@ -747,85 +836,74 @@
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // uiLabel5
+            // label20
             // 
-            this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(26, 165);
-            this.uiLabel5.Name = "uiLabel5";
-            this.uiLabel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uiLabel5.Size = new System.Drawing.Size(100, 23);
-            this.uiLabel5.Style = Sunny.UI.UIStyle.Green;
-            this.uiLabel5.TabIndex = 43;
-            this.uiLabel5.Text = "身份";
-            this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(360, 203);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(90, 21);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "与患者关系";
             // 
-            // cbxChargeType
+            // label9
             // 
-            this.cbxChargeType.DataSource = null;
-            this.cbxChargeType.FillColor = System.Drawing.Color.White;
-            this.cbxChargeType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxChargeType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxChargeType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
-            this.cbxChargeType.Items.AddRange(new object[] {
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(381, 163);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(58, 21);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "监护人";
+            // 
+            // txtRelationName
+            // 
+            this.txtRelationName.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txtRelationName.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txtRelationName.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txtRelationName.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txtRelationName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtRelationName.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.txtRelationName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRelationName.Location = new System.Drawing.Point(446, 161);
+            this.txtRelationName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtRelationName.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtRelationName.Name = "txtRelationName";
+            this.txtRelationName.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ShowText = false;
+            this.txtRelationName.Size = new System.Drawing.Size(180, 29);
+            this.txtRelationName.Style = Sunny.UI.UIStyle.Green;
+            this.txtRelationName.TabIndex = 16;
+            this.txtRelationName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtRelationName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // cbxRelation
+            // 
+            this.cbxRelation.DataSource = null;
+            this.cbxRelation.FillColor = System.Drawing.Color.White;
+            this.cbxRelation.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxRelation.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxRelation.Items.AddRange(new object[] {
             "已婚",
             "未婚",
             "丧偶",
             "离婚",
             "其他"});
-            this.cbxChargeType.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxChargeType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxChargeType.Location = new System.Drawing.Point(447, 168);
-            this.cbxChargeType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxChargeType.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxChargeType.Name = "cbxChargeType";
-            this.cbxChargeType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxChargeType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxChargeType.Size = new System.Drawing.Size(179, 29);
-            this.cbxChargeType.Style = Sunny.UI.UIStyle.Green;
-            this.cbxChargeType.TabIndex = 42;
-            this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel7
-            // 
-            this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(340, 168);
-            this.uiLabel7.Name = "uiLabel7";
-            this.uiLabel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uiLabel7.Size = new System.Drawing.Size(100, 23);
-            this.uiLabel7.Style = Sunny.UI.UIStyle.Green;
-            this.uiLabel7.TabIndex = 41;
-            this.uiLabel7.Text = "费别";
-            this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel7.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxShenfen
-            // 
-            this.cbxShenfen.DataSource = null;
-            this.cbxShenfen.FillColor = System.Drawing.Color.White;
-            this.cbxShenfen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxShenfen.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxShenfen.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
-            this.cbxShenfen.Items.AddRange(new object[] {
-            "已婚",
-            "未婚",
-            "丧偶",
-            "离婚",
-            "其他"});
-            this.cbxShenfen.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxShenfen.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxShenfen.Location = new System.Drawing.Point(133, 168);
-            this.cbxShenfen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxShenfen.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxShenfen.Name = "cbxShenfen";
-            this.cbxShenfen.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxShenfen.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxShenfen.Size = new System.Drawing.Size(200, 29);
-            this.cbxShenfen.Style = Sunny.UI.UIStyle.Green;
-            this.cbxShenfen.TabIndex = 43;
-            this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.cbxRelation.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxRelation.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxRelation.Location = new System.Drawing.Point(446, 200);
+            this.cbxRelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxRelation.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxRelation.Name = "cbxRelation";
+            this.cbxRelation.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxRelation.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxRelation.Size = new System.Drawing.Size(179, 29);
+            this.cbxRelation.Style = Sunny.UI.UIStyle.Green;
+            this.cbxRelation.TabIndex = 39;
+            this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // UserInfoEdit
             // 
@@ -849,6 +927,7 @@
             this.Load += new System.EventHandler(this.UserInfoEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserInfoEdit_KeyDown);
             this.uiGroupBox1.ResumeLayout(false);
+            this.uiGroupBox1.PerformLayout();
             this.uiGroupBox2.ResumeLayout(false);
             this.uiGroupBox2.PerformLayout();
             this.sfz_folk.ResumeLayout(false);
@@ -904,5 +983,9 @@
         private Sunny.UI.UIComboBox cbxChargeType;
         private Sunny.UI.UILabel uiLabel7;
         private Sunny.UI.UIComboBox cbxShenfen;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label9;
+        private Sunny.UI.UITextBox txtRelationName;
+        private Sunny.UI.UIComboBox cbxRelation;
     }
 }

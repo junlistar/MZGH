@@ -62,6 +62,9 @@
     <None Update="SQLS\mzgh_mzpatientsfzinfo_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_mzpatientrelation_updatecode.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_mzpatientsfz_update_relation.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -72,6 +75,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\mzgh_ghdeposit_getpaylist.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzgh_mzpatientsfz_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\mzsf_mzthirdpay_refund.sql">

@@ -540,6 +540,7 @@ namespace Mzsf.Forms.Pages
             {
                 RefundType(item);
             }
+            paylist = new List<GHPayModel>();
 
             log.Info("结束取消支付,退款处理");
 
@@ -1121,9 +1122,8 @@ namespace Mzsf.Forms.Pages
         }
 
         private void Check_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-            if (paylist!=null && paylist.Count > 0)
+        { 
+            if (paylist != null && paylist.Count > 0)
             {
                 Refund();
             }

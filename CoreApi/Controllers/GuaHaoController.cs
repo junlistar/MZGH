@@ -222,12 +222,12 @@ namespace CoreApi.Controllers
         /// <param name="tel"></param>
         /// <returns></returns>
         public ResponseResult<int> EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-            string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code,string opera)
+            string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code, string relation_code, string relation_name, string opera)
         {
-            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{marry_code},{opera}");
+            Log.Information($"EditUserInfo,{pid},{sno},{hicno},{barcode},{name},{sex},{birthday},{tel},{home_district},{home_street},{occupation_type},{response_type},{charge_type},{marry_code},{relation_code},{relation_name},{opera}");
             try
             {
-                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, marry_code, opera);
+                return _patientRepository.EditUserInfo(pid, sno, hicno, barcode, name, sex, birthday, tel, home_district, home_street, occupation_type, response_type, charge_type, marry_code, relation_code, relation_name, opera);
             }
             catch (Exception ex)
             {

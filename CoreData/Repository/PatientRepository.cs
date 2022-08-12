@@ -91,7 +91,7 @@ namespace Data.Repository
 
 
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
-             string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code, string opera)
+             string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code, string relation_code, string relation_name, string opera)
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
             {
@@ -111,12 +111,7 @@ namespace Data.Repository
                     var list = connection.Query<Patient>(issql, para, transaction);
                     if (list != null && list.Count() > 0)
                     {
-                        //修改
-
-                        //                string sql = @"update mz_patient_mi
-                        //set social_no=@social_no,hic_no=@hic_no,p_bar_code=@p_bar_code,name=@name,sex=@sex,birthday=@birthday,home_tel=@tel,
-                        //home_district=@home_district,home_street=@home_street,occupation_type=@occupation_type,response_type=@response_type,charge_type=@charge_type,update_date=@update_date,update_opera=@update_opera 
-                        //where patient_id=@patient_id";
+                        //修改 
 
                         string sql = GetSqlByTag("mzgh_mzpatient_update");
                         para = new DynamicParameters();
@@ -132,6 +127,8 @@ namespace Data.Repository
                         para.Add("@occupation_type", occupation_type);
                         para.Add("@response_type", response_type);
                         para.Add("@charge_type", charge_type);
+                        para.Add("@relation_code", relation_code);
+                        para.Add("@relation_name", relation_name);
                         para.Add("@marry_code", marry_code);
                         para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
                         para.Add("@update_opera", opera);
@@ -142,12 +139,6 @@ namespace Data.Repository
                     else
                     {
                         //新增
-
-                        //                string sql = @"insert into mz_patient_mi(patient_id,social_no,hic_no,p_bar_code,name,sex,birthday,home_tel,
-                        //balance,max_times,max_ledger_sn,max_item_sn,max_receipt_sn,
-                        //home_district,home_street,occupation_type,response_type,charge_type,enter_date,update_date,enter_opera,update_opera) values
-                        //(@patient_id,@social_no,@hic_no,@p_bar_code,@name,@sex,@birthday,@home_tel,'0',0,0,0,0,
-                        //@home_district,@home_street,@occupation_type,@response_type,@charge_type,@enter_date,@update_date,@enter_opera,@update_opera)";
 
                         string sql = GetSqlByTag("mzgh_mzpatient_add");
 
@@ -167,6 +158,8 @@ namespace Data.Repository
                         para.Add("@response_type", response_type);
                         para.Add("@charge_type", charge_type);
                         para.Add("@marry_code", marry_code);
+                        para.Add("@relation_code", relation_code);
+                        para.Add("@relation_name", relation_name);
 
                         para.Add("@enter_date", DateTime.Now);
                         para.Add("@update_date", DateTime.Now);
@@ -177,13 +170,31 @@ namespace Data.Repository
                         connection.Execute(sql, para, transaction);
 
                         //写patientId和身份证id关联表
-                        sql = "insert into mz_patient_sfz(patient_id,sfz_id) values (@patient_id,@sfz_id)";
+                        sql = GetSqlByTag("mzgh_mzpatientsfz_add");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@sfz_id", hicno);
                         connection.Execute(sql, para, transaction);
 
                     }
+
+                    //更新监护人信息
+                    string relationsql =GetSqlByTag("mzgh_mzpatientrelation_getbypid");
+                    para = new DynamicParameters();
+                    para.Add("@patient_id", pid);
+                    var relationEntity = connection.QueryFirstOrDefault<MzPatientRelation>(relationsql, para, transaction);
+                    if (relationEntity != null)
+                    {
+                        relationsql = GetSqlByTag("mzgh_mzpatientrelation_updatecode");
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", pid);
+                        para.Add("@relation_code", relation_code); 
+                        para.Add("@relation_name", relation_name);
+                        para.Add("@opera", opera); 
+                        para.Add("@update_date", DateTime.Now);
+                        connection.Execute(relationsql, para, transaction);
+                    }
+
                     transaction.Commit();
 
                     return 1;
@@ -192,14 +203,10 @@ namespace Data.Repository
                 {
                     transaction.Rollback();
                     throw ex;
-                }
-
-            }
-
+                } 
+            } 
         }
-
-
-
+         
         /// <summary>
         /// 加上事务处理
         /// </summary>
