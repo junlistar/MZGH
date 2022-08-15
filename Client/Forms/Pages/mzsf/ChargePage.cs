@@ -272,8 +272,9 @@ namespace Mzsf.Forms.Pages
 
         public void BindUserInfo(PatientVM userInfo)
         {
-            txtCode.Text = userInfo.p_bar_code;
+            txtCode.Text ="";
             txtCode.TagString = userInfo.patient_id;
+            txtBarcode.Text = userInfo.p_bar_code;
             lblPatientid.Text = userInfo.patient_id;
             txtName.Text = userInfo.name.ToString();
             if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
@@ -560,7 +561,7 @@ namespace Mzsf.Forms.Pages
                 if (result.status == 1)
                 {
                     var orderTypes = result.data;
-
+                    orderTypes = orderTypes.Where(p => p.name.Contains("诊疗")).ToList();
                     cbxOrderType.DataSource = orderTypes;
                     cbxOrderType.ValueMember = "code";
                     cbxOrderType.DisplayMember = "name";
@@ -865,7 +866,8 @@ namespace Mzsf.Forms.Pages
             //            var order_no = order_list[tabindex];
             try
             {
-                var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
+                //var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
+                var _order = SessionHelper.mzOrders.OrderBy(p=>p.order_no).ToList()[tabindex];
                 if (_order != null)
                 {
 

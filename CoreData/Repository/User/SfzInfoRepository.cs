@@ -82,12 +82,12 @@ namespace Data.Repository
 
                         connection.Execute(sql, para, transaction);
 
-                        //sql =GetSqlByTag("mzgh_mzpatientsfz_update_relation");
+                        //sql = GetSqlByTag("mzgh_mzpatientsfz_update_relation");
                         //para = new DynamicParameters();
                         //para.Add("@relative_code", relation_code);
-                        //para.Add("@patient_id", pid);  废弃
+                        //para.Add("@patient_id", pid); 
 
-                        connection.Execute(sql, para, transaction);
+                        //connection.Execute(sql, para, transaction);
                         transaction.Commit();
                         return true;
                     }

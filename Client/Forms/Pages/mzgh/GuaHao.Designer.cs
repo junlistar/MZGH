@@ -43,6 +43,8 @@
             this.btnIDCard = new Sunny.UI.UISymbolButton();
             this.btnNewUser = new Sunny.UI.UISymbolButton();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.lblBarcode = new Sunny.UI.UILabel();
+            this.uiLabel2 = new Sunny.UI.UILabel();
             this.btnEditRelation = new Sunny.UI.UISymbolButton();
             this.lblPatientid = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
@@ -88,8 +90,6 @@
             this.gbxUnits = new Sunny.UI.UIFlowLayoutPanel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.txtSearch = new Sunny.UI.UITextBox();
-            this.uiLabel2 = new Sunny.UI.UILabel();
-            this.lblBarcode = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -413,6 +413,28 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // lblBarcode
+            // 
+            this.lblBarcode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblBarcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblBarcode.Location = new System.Drawing.Point(90, 67);
+            this.lblBarcode.Name = "lblBarcode";
+            this.lblBarcode.Size = new System.Drawing.Size(181, 23);
+            this.lblBarcode.TabIndex = 52;
+            this.lblBarcode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBarcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel2
+            // 
+            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel2.Location = new System.Drawing.Point(37, 35);
+            this.uiLabel2.Name = "uiLabel2";
+            this.uiLabel2.Size = new System.Drawing.Size(47, 23);
+            this.uiLabel2.TabIndex = 15;
+            this.uiLabel2.Text = "查询:";
+            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // btnEditRelation
             // 
             this.btnEditRelation.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -716,7 +738,7 @@
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(20, 70);
+            this.uiLabel4.Location = new System.Drawing.Point(20, 67);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(64, 23);
             this.uiLabel4.TabIndex = 13;
@@ -988,28 +1010,6 @@
             this.txtSearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyUp);
-            // 
-            // uiLabel2
-            // 
-            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(37, 35);
-            this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(47, 23);
-            this.uiLabel2.TabIndex = 15;
-            this.uiLabel2.Text = "查询:";
-            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // lblBarcode
-            // 
-            this.lblBarcode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBarcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblBarcode.Location = new System.Drawing.Point(90, 67);
-            this.lblBarcode.Name = "lblBarcode";
-            this.lblBarcode.Size = new System.Drawing.Size(181, 23);
-            this.lblBarcode.TabIndex = 52;
-            this.lblBarcode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblBarcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // GuaHao
             // 

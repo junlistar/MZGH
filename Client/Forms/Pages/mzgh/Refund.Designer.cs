@@ -341,11 +341,11 @@
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(36, 41);
+            this.uiLabel4.Location = new System.Drawing.Point(14, 41);
             this.uiLabel4.Name = "uiLabel4";
-            this.uiLabel4.Size = new System.Drawing.Size(54, 23);
+            this.uiLabel4.Size = new System.Drawing.Size(76, 23);
             this.uiLabel4.TabIndex = 9;
-            this.uiLabel4.Text = "日期";
+            this.uiLabel4.Text = "挂号日期";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -373,7 +373,7 @@
             // uiLabel5
             // 
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(36, 80);
+            this.uiLabel5.Location = new System.Drawing.Point(45, 79);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(45, 23);
             this.uiLabel5.TabIndex = 11;
@@ -578,6 +578,8 @@
             this.Controls.Add(this.pnlTitle);
             this.Controls.Add(this.dgvDeposit);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Refund";
             this.Text = "退号（按ESC退出）";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1068, 645);

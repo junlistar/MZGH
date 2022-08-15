@@ -689,3 +689,30 @@ CREATE TABLE [dbo].[mz_patient_ybk_insuinfo](
 	[insuplc_admdvs] [varchar](50) NULL,
 	[emp_name] [varchar](200) NULL
 ) ON [PRIMARY]
+
+
+CREATE TABLE [dbo].[page_cheque_compare](
+	[his_code] [varchar](50) NULL,
+	[his_name] [varchar](50) NULL,
+	[page_code] [varchar](50) NULL,
+	[page_name] [varchar](50) NULL,
+	[is_show] [bit] NULL
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[page_cheque_compare] ADD  CONSTRAINT [DF_page_cheque_compare_is_show]  DEFAULT ((1)) FOR [is_show]
+GO
+insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
+values('1','现金','5','现金',1)
+insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
+values('3','银联','3','银联',1)
+insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
+values('6','医保','4','现金',1)
+insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
+values('c','微信(支付宝)','1','微信',1)
+insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
+values('c','微信(支付宝)','2','支付宝',1)

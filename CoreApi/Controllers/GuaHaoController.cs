@@ -44,13 +44,14 @@ namespace CoreApi.Controllers
         private readonly IReportParamFastRepository _reportParamFastRepository;
         private readonly IRequestHourRepository _requestHourRepository;
         private readonly IRequestTimeRepository _requestTimeRepository;
+        private readonly ICommonRepository _commonRepository;
 
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
             IUserLoginRepository userLoginRepository, IGhDepositRepository ghDepositRepository, IGhRefundRepository ghRefundRepository, IClinicTypeRepository clinicTypeRepository,
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
             IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository, IRequestHourRepository requestHourRepository,
-            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository)
+            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository, ICommonRepository commonRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -73,6 +74,7 @@ namespace CoreApi.Controllers
             _requestHourRepository = requestHourRepository;
             _reportParamFastRepository = reportParamFastRepository;
             _requestTimeRepository = requestTimeRepository;
+            _commonRepository = commonRepository;
 
         }
 
@@ -498,6 +500,22 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<PageChequeCompare>> GetPageChequeCompares()
+        {
+            Log.Information($"GetPageChequeCompares");
+            var list = new List<PageChequeCompare>();
+            try
+            {
+                list = _commonRepository.GetPageChequeCompares();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<PageChequeCompare>>(ex.Message);
+            }
+            return list;
+        }
+        
 
         public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {

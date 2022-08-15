@@ -48,7 +48,9 @@ namespace Client.ClassLib
         public static List<UserDicVM> userDics;
         //与患者关系
         public static List<RelativeCodeVM> relativeCodes;
-        
+        //支付类型比较
+        public static List<PageChequeCompareVM> pageChequeCompares;
+
 
         /// <summary>
         /// 身份证读卡数据

@@ -49,9 +49,80 @@ namespace Mzsf.Forms.Pages
             lblfpzje.Text = total_charge.ToString();
             lblfpje.Text = total_charge.ToString();
 
+            BindChequelist();
 
             //绑定发票数据
             BindChargeData();
+        }
+        public void BindChequelist()
+        {
+
+            gbxChequelist.Clear();
+            int btnWidth = 120;
+            int btnHeight = 60;
+            var _ds = SessionHelper.pageChequeCompares.OrderBy(p => p.page_code).ToList();
+
+            for (int i = 0; i < _ds.Count; i++)
+            {
+                UISymbolButton btn1 = new UISymbolButton();
+
+                btn1.Style = Sunny.UI.UIStyle.Blue;
+                btn1.StyleCustomMode = true;
+                btn1.Width = btnWidth;
+                btn1.Height = btnHeight;
+                btn1.Text = _ds[i].page_name;
+                btn1.TagString = _ds[i].his_code;
+
+                if (_ds[i].page_name.Contains("微信"))
+                {
+                    btn1.Symbol = 161911;
+                }
+                else if (_ds[i].page_name.Contains("支付宝"))
+                {
+                    btn1.Symbol = 163042;
+                }
+                else if (_ds[i].page_name.Contains("银联"))
+                {
+                    btn1.Symbol = 161940;
+                }
+                else if (_ds[i].page_name.Contains("医保"))
+                {
+                    btn1.Symbol = 62147;
+                }
+                else if (_ds[i].page_name.Contains("现金"))
+                {
+                    btn1.Symbol = 361783;
+                }
+                btn1.Font = new Font("微软雅黑", 16, FontStyle.Regular);
+                btn1.Click += ChequeCompare_Click; ;
+                gbxChequelist.Add(btn1);
+            }
+        }
+        private void ChequeCompare_Click(object sender, EventArgs e)
+        {
+            var btn = sender as UISymbolButton;
+
+            if (btn.Text.Contains("微信"))
+            {
+                OpenPayWindow(PayMethodEnum.WeiXin, btn.TagString);
+            }
+            else if (btn.Text.Contains("支付宝"))
+            {
+                OpenPayWindow(PayMethodEnum.Zhifubao, btn.TagString);
+            }
+            else if (btn.Text.Contains("银联"))
+            {
+                OpenPayWindow(PayMethodEnum.Yinlian, btn.TagString);
+            }
+            else if (btn.Text.Contains("医保"))
+            {
+                OpenPayWindow(PayMethodEnum.Yibao, btn.TagString);
+            }
+            else if (btn.Text.Contains("现金"))
+            {
+                OpenPayWindow(PayMethodEnum.Xianjin, btn.TagString);
+            }
+
         }
 
         private void BindChargeData()
@@ -98,7 +169,7 @@ namespace Mzsf.Forms.Pages
             string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
             HttpClientUtil.Get(paramurl);
         }
-        public void OpenPayWindow(PayMethodEnum payMethod)
+        public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type="")
         {
 
             var left_je = Convert.ToDouble(lblsyje.Text);
@@ -156,40 +227,40 @@ namespace Mzsf.Forms.Pages
             {
 
 
-                WxPay wxPay = new WxPay(PayMethod.GetChequeTypeByEnum(payMethod), left_je.ToString(), out_trade_no);
+                WxPay wxPay = new WxPay(his_cheque_type, left_je.ToString(), out_trade_no);
                 wxPay.ShowDialog();
                 if (wxPay.DialogResult == DialogResult.OK)
                 {
-                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, out_trade_no));
+                    paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, out_trade_no));
 
                     //保存到数据库
-                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), out_trade_no, "", "", "", "", (decimal)left_je);
+                    AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
                 }
                 else
                 {
-                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
                     return;
                 }
 
             }
             else if (payMethod == PayMethodEnum.Yinlian)
             {
-                CardPay card = new CardPay(PayMethod.GetChequeTypeByEnum(payMethod), left_je.ToString());
+                CardPay card = new CardPay(his_cheque_type, left_je.ToString());
                 card.ShowDialog();
                 if (card.DialogResult == DialogResult.OK)
                 {
-                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, out_trade_no));
+                    paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, out_trade_no));
 
                     //保存到数据库
-                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), out_trade_no, "", "", "", "", (decimal)left_je);
+                    AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
                 }
                 else
                 {
-                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
                     return;
 
                 }
@@ -199,23 +270,23 @@ namespace Mzsf.Forms.Pages
                 //刷医保卡，再挂号 
                 if (YiBaoPay())
                 {
-                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
+                    paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
 
                     //保存到数据库
-                    AddMzThridPay(PayMethod.GetChequeTypeByEnum(payMethod), YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
+                    AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
 
                 }
                 else
                 {
-                    log.Info("支付失败：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("支付失败：" + his_cheque_type + ",金额：" + left_je);
                     return;
                 }
             }
             else if (payMethod == PayMethodEnum.Xianjin)
             {
-                JKZL xjzf = new JKZL((PayMethod.GetChequeTypeByEnum(payMethod)).ToString(), left_je.ToString());
+                JKZL xjzf = new JKZL((his_cheque_type).ToString(), left_je.ToString());
                 if (chkcomb.Checked)
                 {
                     xjzf.lbl1.Text = "本次支付:";
@@ -224,20 +295,20 @@ namespace Mzsf.Forms.Pages
                 xjzf.ShowDialog();
                 if (xjzf.DialogResult == DialogResult.OK)
                 {
-                    log.Info("完成支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                     //保存支付数据，用于退款
-                    paylist.Add(new GHPayModel(PayMethod.GetChequeTypeByEnum(payMethod), (decimal)left_je));
+                    paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je));
 
                 }
                 else
                 {
-                    log.Info("取消支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                    log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
                     return;
                 }
             }
             else
             {
-                log.Info("其他支付：" + PayMethod.GetChequeTypeByEnum(payMethod) + ",金额：" + left_je);
+                log.Info("其他支付：" + his_cheque_type + ",金额：" + left_je);
                 //其他支付
                 UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
             }
@@ -949,26 +1020,53 @@ namespace Mzsf.Forms.Pages
             for (int i = 0; i < paylist.Count; i++)
             {
                 PayChannelDetail payChannelDetail = new PayChannelDetail();
-                if (paylist[i].pay_type == SessionHelper.pay_xianjin)
-                {//现金
+                //if (paylist[i].pay_type == SessionHelper.pay_xianjin)
+                //{//现金
+                //    payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
+                //}
+                //else if (paylist[i].pay_type == SessionHelper.pay_yibao)
+                //{//医保
+                //    payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
+                //}
+                //else if (paylist[i].pay_type == SessionHelper.pay_zhifubao)
+                //{//支付宝
+                //    payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
+                //}
+                //else if (paylist[i].pay_type == SessionHelper.pay_weixin)
+                //{//微信
+                //    payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
+                //}
+                //else if (paylist[i].pay_type == SessionHelper.pay_yinlian)
+                //{//银联
+                //    payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
+                //}
+                var _payType = SessionHelper.pageChequeCompares.Where(p => p.his_code == paylist[i].pay_type).FirstOrDefault();
+                if (_payType != null && _payType.page_code == "1")
+                {
+                    //微信
+                    payChannelDetail.payChannelCode = "05"; _remark += ",微信-";
+                }
+                else if (_payType != null && _payType.page_code == "2")
+                {
+                    //支付宝
+                    payChannelDetail.payChannelCode = "05"; _remark += ",支付宝-";
+                }
+                else if (_payType != null && _payType.page_code == "3")
+                {
+                    //银联
+                    payChannelDetail.payChannelCode = "08"; _remark += ",银联-";
+                }
+                else if (_payType != null && _payType.page_code == "4")
+                {
+                    //医保
+                    payChannelDetail.payChannelCode = "11"; _remark += ",医保-";
+                }
+                else if (_payType != null && _payType.page_code == "5")
+                {
+                    //现金
                     payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
                 }
-                else if (paylist[i].pay_type == SessionHelper.pay_yibao)
-                {//医保
-                    payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
-                }
-                else if (paylist[i].pay_type == SessionHelper.pay_zhifubao)
-                {//支付宝
-                    payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
-                }
-                else if (paylist[i].pay_type == SessionHelper.pay_weixin)
-                {//微信
-                    payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
-                }
-                else if (paylist[i].pay_type == SessionHelper.pay_yinlian)
-                {//银联
-                    payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
-                }
+
 
                 _remark += paylist[i].pay_je.ToString();
                 payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();

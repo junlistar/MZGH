@@ -64,12 +64,11 @@ namespace Data.Repository
 
                     Update(selectSql, para);
 
-                    ////更新mz_patient_sfz 关联信息 废弃
+                    ////更新mz_patient_sfz 关联信息  
                     //selectSql = "update mz_patient_sfz set relative_code= @relative_code where patient_id=@patient_id";
                     //para = new DynamicParameters();
                     //para.Add("@patient_id", patient_id);
-                    //para.Add("@relative_code", relation_code); 
-
+                    //para.Add("@relative_code", relation_code);
                     //Update(selectSql, para);
 
                     transaction.Commit();

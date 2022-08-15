@@ -53,11 +53,6 @@ namespace Client
             SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
 
-            SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
-            SessionHelper.pay_weixin = ConfigurationManager.AppSettings.Get("pay_weixin");
-            SessionHelper.pay_zhifubao = ConfigurationManager.AppSettings.Get("pay_zhifubao"); 
-            SessionHelper.pay_yinlian =ConfigurationManager.AppSettings.Get("pay_yinlian");
-            SessionHelper.pay_yibao = ConfigurationManager.AppSettings.Get("pay_yibao");
         }
 
      
@@ -661,6 +656,25 @@ namespace Client
             json = HttpClientUtil.Get(paramurl);
 
             SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
+
+            //支付类型比较 
+            paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            json = HttpClientUtil.Get(paramurl);
+
+            SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
+
+            //SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
+            //SessionHelper.pay_weixin = ConfigurationManager.AppSettings.Get("pay_weixin");
+            //SessionHelper.pay_zhifubao = ConfigurationManager.AppSettings.Get("pay_zhifubao");
+            //SessionHelper.pay_yinlian = ConfigurationManager.AppSettings.Get("pay_yinlian");
+            //SessionHelper.pay_yibao = ConfigurationManager.AppSettings.Get("pay_yibao");
+
+            //SessionHelper.pay_xianjin = SessionHelper.pageChequeCompares.Where(p=>p.page_code=="1").FirstOrDefault().his_code;
+            //SessionHelper.pay_weixin = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
+            //SessionHelper.pay_zhifubao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
+            //SessionHelper.pay_yinlian = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
+            //SessionHelper.pay_yibao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
         }
 
 

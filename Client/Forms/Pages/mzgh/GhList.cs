@@ -1362,12 +1362,15 @@ namespace Client
                     method = method,
                     @params = _params
                 };
-                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
-
-
+                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
                 string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
 
-                var printstr = HttpClientUtil.Get(url);
+                Task.Run(() =>
+                {
+                      HttpClientUtil.Get(url);
+                });
+
+               
             }
             catch (Exception ex)
             {

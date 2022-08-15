@@ -463,6 +463,22 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+        
+        public ResponseResult<FPRegistration> GetFPRegistrationData(string patient_id, int ledger_sn, int admiss_times)
+        {
+            Log.Information($"AddFpData,{patient_id},{ledger_sn},{admiss_times}");
+            try
+            {
+                return _fpDataRepository.GetFPRegistrationData(patient_id, ledger_sn, admiss_times);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<FPRegistration>(ex.Message);
+            }
+        }
+
+
         public ResponseResult<List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
         {
             Log.Information($"GetFpDatasByParams,{patient_id},{ledger_sn},{subsys_id}");

@@ -24,7 +24,7 @@ namespace Client.Forms.Pages
         private static ILog log = LogManager.GetLogger(typeof(UserInfoPage));//typeof放当前类
 
         List<MzPatientSfzVM> sfz_list;
-         
+
         public UserInfoPage()
         {
             InitializeComponent();
@@ -265,8 +265,8 @@ namespace Client.Forms.Pages
                 var sex = "1";
                 switch (cbxsex.Text)
                 {
-                    case "男": sex = "1";break;
-                    case "女": sex = "2";break;
+                    case "男": sex = "1"; break;
+                    case "女": sex = "2"; break;
                     default:
                         break;
                 }
@@ -317,7 +317,7 @@ namespace Client.Forms.Pages
             }
         }
 
-     
+
         public void DeleteSocialNo(string sno)
         {
             var paramurl = string.Format($"/api/GuaHao/DeleteSocialNo?sno={sno}");
@@ -334,7 +334,9 @@ namespace Client.Forms.Pages
 
             //txtId.Text = item.patient_id.Substring(3, 7);
 
-            txtCode.Text = item.p_bar_code;
+            txtCode.Text = "";
+
+            txt_barcode.Text = item.p_bar_code;
 
             txt_patientId.Text = item.patient_id;
 
@@ -360,7 +362,7 @@ namespace Client.Forms.Pages
             {
                 this.txt_birth.Text = item.birthday.Value.ToShortDateString();
             }
-           
+
 
 
             if (!string.IsNullOrEmpty(item.home_district))
@@ -393,7 +395,7 @@ namespace Client.Forms.Pages
             //this.cbxShenfen.SelectedValue = item.response_type;
 
             //费别
-            
+
             cbxResponseType.SelectedValue = item.response_type;
             cbxChargeTypes.SelectedValue = item.charge_type;
             txtrelationname.Text = item.relation_name;
@@ -439,7 +441,7 @@ namespace Client.Forms.Pages
             //合同单位contract_code
 
 
-             this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
+            this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             //  this.txtZhiye.TextChanged += txtZhiye_TextChanged;
         }
 
@@ -552,13 +554,47 @@ namespace Client.Forms.Pages
         }
         public void ClearUserInfo()
         {
-            //txtAge.Text = "";
-            //txtSex.Text = "";
-            //txtTel.Text = ""; 
-            //txtdistrict.Text = "";
-            //cbxResponseType.Text = "";
-            //cbxChargeTypes.Text = ""; 
+            this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
 
+            txt_barcode.Text = "";
+            txt_patientId.Text = "";
+            txt_sfz_no.Text = "";
+            txtAge.Text = "";
+            txthometel.Text = "";
+            txthomedistrict.Text = "";
+            txt_name.Text = "";
+            this.txt_birth.Text = "";
+            txthomedistrict.Text = "";
+
+            //地区
+            this.sfz_home_address.Text = "";
+
+            //费别
+
+            cbxResponseType.Text = "";
+            cbxChargeTypes.Text = "";
+            txtrelationname.Text = "";
+            cbx_relation.Text = "";
+
+            this.cbxsex.Text = "";
+
+            //婚姻 
+            this.cbxmarrycode.Text = "";
+
+            this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
+
+            sfz_card_no.Text = "";
+            sfz_name.Text = "";
+            sfz_sex.Text = "";
+            sfz_birthday.Text = "";
+            sfz_folk.Text = "";
+            sfz_address.Text = "";
+            sfz_home_address.Text = "";
+
+            ybk_psn_no.Text = "";
+            ybk_psn_cert_type.Text = "";
+            ybk_psn_name.Text = "";
+            ybk_certno.Text = "";
         }
         public void SearchUser()
         {
@@ -603,7 +639,7 @@ namespace Client.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                        var userInfo = result.data[0];
+                    var userInfo = result.data[0];
                     if (result.data.Count > 1)
                     {
                         //弹出选择提示
@@ -611,6 +647,7 @@ namespace Client.Forms.Pages
                         if (selectPatient.ShowDialog() == DialogResult.OK)
                         {
                             userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
+                            BindUserInfo(userInfo);
                         }
                         else
                         {
@@ -621,19 +658,24 @@ namespace Client.Forms.Pages
                     //BindUserInfo(userInfo);
                     //查询patient_id关联的身份证信息
                     GetPatientRelatedSfzInfo(userInfo.hic_no);
-                   
+
                 }
                 else
                 {
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
-                    { 
+                    {
 
                         //自动创建一条用户信息
                         string _hicno = AutoAddUserInfo();
 
                         this.txtCode.Text = _hicno;
                         SearchUser();
+                    }
+                    else
+                    {
+                        lblmsg.Text = "没有查询到数据！";
+                        lblmsg.Show();
                     }
                 }
 
@@ -1180,7 +1222,7 @@ namespace Client.Forms.Pages
                     BindBaseInfo(txt_patientId.Text);
                 }
             }
-            
+
         }
     }
 }

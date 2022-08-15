@@ -57,6 +57,7 @@
             this.lbltop = new Sunny.UI.UILabel();
             this.btnTuikuan = new Sunny.UI.UIButton();
             this.uiListBox2 = new Sunny.UI.UIListBox();
+            this.gbxChequelist = new Sunny.UI.UIFlowLayoutPanel();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,10 +115,10 @@
             // 
             // btnBack
             // 
-            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBack.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBack.Location = new System.Drawing.Point(626, 415);
+            this.btnBack.Location = new System.Drawing.Point(620, 375);
             this.btnBack.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 35);
@@ -129,10 +130,10 @@
             // 
             // btnSubmitCombi
             // 
-            this.btnSubmitCombi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSubmitCombi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSubmitCombi.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubmitCombi.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSubmitCombi.Location = new System.Drawing.Point(414, 415);
+            this.btnSubmitCombi.Location = new System.Drawing.Point(408, 375);
             this.btnSubmitCombi.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSubmitCombi.Name = "btnSubmitCombi";
             this.btnSubmitCombi.Size = new System.Drawing.Size(100, 35);
@@ -146,7 +147,7 @@
             // 
             this.lblTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTotal.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotal.Location = new System.Drawing.Point(45, 250);
+            this.lblTotal.Location = new System.Drawing.Point(45, 210);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(122, 23);
             this.lblTotal.TabIndex = 20;
@@ -208,7 +209,7 @@
             this.uiGroupBox1.Controls.Add(this.uiLabel3);
             this.uiGroupBox1.Controls.Add(this.uiLabel4);
             this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(38, 69);
+            this.uiGroupBox1.Location = new System.Drawing.Point(778, 413);
             this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
@@ -278,7 +279,7 @@
             // 
             this.uiLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(45, 293);
+            this.uiLabel1.Location = new System.Drawing.Point(45, 253);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(122, 23);
             this.uiLabel1.TabIndex = 32;
@@ -290,7 +291,7 @@
             // 
             this.uiLabel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(45, 338);
+            this.uiLabel6.Location = new System.Drawing.Point(45, 298);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(122, 23);
             this.uiLabel6.TabIndex = 33;
@@ -300,9 +301,10 @@
             // 
             // uiListBox1
             // 
+            this.uiListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.uiListBox1.FillColor = System.Drawing.Color.White;
             this.uiListBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiListBox1.Location = new System.Drawing.Point(318, 250);
+            this.uiListBox1.Location = new System.Drawing.Point(318, 209);
             this.uiListBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiListBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiListBox1.Name = "uiListBox1";
@@ -317,7 +319,7 @@
             // 
             this.lblzje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblzje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblzje.Location = new System.Drawing.Point(191, 250);
+            this.lblzje.Location = new System.Drawing.Point(191, 210);
             this.lblzje.Name = "lblzje";
             this.lblzje.Size = new System.Drawing.Size(120, 23);
             this.lblzje.TabIndex = 35;
@@ -329,7 +331,7 @@
             // 
             this.lblyfje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblyfje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblyfje.Location = new System.Drawing.Point(191, 293);
+            this.lblyfje.Location = new System.Drawing.Point(191, 253);
             this.lblyfje.Name = "lblyfje";
             this.lblyfje.Size = new System.Drawing.Size(120, 23);
             this.lblyfje.TabIndex = 36;
@@ -341,7 +343,7 @@
             // 
             this.lblsyje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblsyje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblsyje.Location = new System.Drawing.Point(191, 338);
+            this.lblsyje.Location = new System.Drawing.Point(191, 298);
             this.lblsyje.Name = "lblsyje";
             this.lblsyje.Size = new System.Drawing.Size(120, 23);
             this.lblsyje.TabIndex = 37;
@@ -353,7 +355,7 @@
             // 
             this.uiLabel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(317, 219);
+            this.uiLabel7.Location = new System.Drawing.Point(317, 179);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(122, 23);
             this.uiLabel7.TabIndex = 38;
@@ -363,8 +365,9 @@
             // 
             // lblmsg
             // 
+            this.lblmsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.Location = new System.Drawing.Point(45, 406);
+            this.lblmsg.Location = new System.Drawing.Point(45, 365);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(210, 47);
             this.lblmsg.TabIndex = 39;
@@ -379,10 +382,11 @@
             // 
             // chkcomb
             // 
+            this.chkcomb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkcomb.Checked = true;
             this.chkcomb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkcomb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chkcomb.Location = new System.Drawing.Point(314, 418);
+            this.chkcomb.Location = new System.Drawing.Point(314, 377);
             this.chkcomb.MinimumSize = new System.Drawing.Size(1, 1);
             this.chkcomb.Name = "chkcomb";
             this.chkcomb.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -397,7 +401,7 @@
             // lbltop
             // 
             this.lbltop.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbltop.Location = new System.Drawing.Point(98, 39);
+            this.lbltop.Location = new System.Drawing.Point(86, 47);
             this.lbltop.Name = "lbltop";
             this.lbltop.Size = new System.Drawing.Size(594, 38);
             this.lbltop.TabIndex = 41;
@@ -407,10 +411,10 @@
             // 
             // btnTuikuan
             // 
-            this.btnTuikuan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTuikuan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTuikuan.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuikuan.Location = new System.Drawing.Point(520, 415);
+            this.btnTuikuan.Location = new System.Drawing.Point(514, 375);
             this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuikuan.Name = "btnTuikuan";
             this.btnTuikuan.Size = new System.Drawing.Size(100, 35);
@@ -435,10 +439,26 @@
             this.uiListBox2.Text = "uiListBox2";
             this.uiListBox2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // gbxChequelist
+            // 
+            this.gbxChequelist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gbxChequelist.Location = new System.Drawing.Point(4, 90);
+            this.gbxChequelist.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbxChequelist.MinimumSize = new System.Drawing.Size(1, 1);
+            this.gbxChequelist.Name = "gbxChequelist";
+            this.gbxChequelist.Padding = new System.Windows.Forms.Padding(2);
+            this.gbxChequelist.ShowText = false;
+            this.gbxChequelist.Size = new System.Drawing.Size(743, 73);
+            this.gbxChequelist.TabIndex = 44;
+            this.gbxChequelist.Text = "uiFlowLayoutPanel1";
+            this.gbxChequelist.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.gbxChequelist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // SelectPayType
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(763, 465);
+            this.ClientSize = new System.Drawing.Size(755, 425);
+            this.Controls.Add(this.gbxChequelist);
             this.Controls.Add(this.uiListBox2);
             this.Controls.Add(this.btnTuikuan);
             this.Controls.Add(this.lbltop);
@@ -497,5 +517,6 @@
         private Sunny.UI.UILabel lbltop;
         private Sunny.UI.UIButton btnTuikuan;
         private Sunny.UI.UIListBox uiListBox2;
+        private Sunny.UI.UIFlowLayoutPanel gbxChequelist;
     }
 }

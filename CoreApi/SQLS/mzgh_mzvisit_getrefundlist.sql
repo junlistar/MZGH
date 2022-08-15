@@ -47,7 +47,7 @@ FROM  view_mz_visit_table v
       left join gh_zd_request_type r on v.req_type = r.code
       left join gh_receipt f on f.patient_id = v.patient_id AND f.times = v.times 
 WHERE 
-      DATEDIFF(dd, v.visit_date, @request_date) = 0 AND 
+      DATEDIFF(dd, v.gh_date, @request_date) = 0 AND 
       v.patient_id LIKE @patient_id
    
 order by v.gh_date desc 
