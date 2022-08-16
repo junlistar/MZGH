@@ -117,6 +117,9 @@
             this.sfz_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.relative_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
+            this.lblmsg = new System.Windows.Forms.Label();
+            this.txt_barcode = new Sunny.UI.UITextBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.btnEditRelation = new Sunny.UI.UISymbolButton();
             this.txtAge = new Sunny.UI.UITextBox();
             this.cbxChargeTypes = new Sunny.UI.UIComboBox();
@@ -150,9 +153,6 @@
             this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.visit_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txt_barcode = new Sunny.UI.UITextBox();
-            this.label30 = new System.Windows.Forms.Label();
-            this.lblmsg = new System.Windows.Forms.Label();
             this.sfz_name.SuspendLayout();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -1234,6 +1234,42 @@
             this.uiGroupBox5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox5.Click += new System.EventHandler(this.uiGroupBox5_Click);
             // 
+            // lblmsg
+            // 
+            this.lblmsg.AutoSize = true;
+            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.lblmsg.ForeColor = System.Drawing.Color.Red;
+            this.lblmsg.Location = new System.Drawing.Point(300, 28);
+            this.lblmsg.Name = "lblmsg";
+            this.lblmsg.Size = new System.Drawing.Size(145, 25);
+            this.lblmsg.TabIndex = 53;
+            this.lblmsg.Text = "没有查询到数据";
+            this.lblmsg.Visible = false;
+            // 
+            // txt_barcode
+            // 
+            this.txt_barcode.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_barcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_barcode.Location = new System.Drawing.Point(101, 65);
+            this.txt_barcode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_barcode.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_barcode.Name = "txt_barcode";
+            this.txt_barcode.ReadOnly = true;
+            this.txt_barcode.ShowText = false;
+            this.txt_barcode.Size = new System.Drawing.Size(192, 29);
+            this.txt_barcode.TabIndex = 5;
+            this.txt_barcode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_barcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(52, 68);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(42, 21);
+            this.label30.TabIndex = 4;
+            this.label30.Text = "卡号";
+            // 
             // btnEditRelation
             // 
             this.btnEditRelation.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1663,42 +1699,6 @@
             this.visit_status.HeaderText = "状态";
             this.visit_status.Name = "visit_status";
             // 
-            // txt_barcode
-            // 
-            this.txt_barcode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_barcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_barcode.Location = new System.Drawing.Point(101, 65);
-            this.txt_barcode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_barcode.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_barcode.Name = "txt_barcode";
-            this.txt_barcode.ReadOnly = true;
-            this.txt_barcode.ShowText = false;
-            this.txt_barcode.Size = new System.Drawing.Size(192, 29);
-            this.txt_barcode.TabIndex = 5;
-            this.txt_barcode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_barcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(52, 68);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(42, 21);
-            this.label30.TabIndex = 4;
-            this.label30.Text = "卡号";
-            // 
-            // lblmsg
-            // 
-            this.lblmsg.AutoSize = true;
-            this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.lblmsg.ForeColor = System.Drawing.Color.Red;
-            this.lblmsg.Location = new System.Drawing.Point(300, 28);
-            this.lblmsg.Name = "lblmsg";
-            this.lblmsg.Size = new System.Drawing.Size(145, 25);
-            this.lblmsg.TabIndex = 53;
-            this.lblmsg.Text = "没有查询到数据";
-            this.lblmsg.Visible = false;
-            // 
             // UserInfoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1712,7 +1712,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "UserInfoPage";
             this.PageIndex = 1003;
-            this.Text = "UserInfoPage";
+            this.Text = "患者基本信息";
             this.Initialize += new System.EventHandler(this.UserInfoPage_Initialize);
             this.Load += new System.EventHandler(this.UserInfoPage_Load);
             this.sfz_name.ResumeLayout(false);

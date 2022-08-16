@@ -391,17 +391,14 @@ namespace Client.Forms.Pages
             //    }
             //}
 
-            //身份
-            //this.cbxShenfen.SelectedValue = item.response_type;
-
-            //费别
-
+            //身份  
+            //费别 
             cbxResponseType.SelectedValue = item.response_type;
             cbxChargeTypes.SelectedValue = item.charge_type;
             txtrelationname.Text = item.relation_name;
             if (!string.IsNullOrEmpty(item.relation_code))
             {
-                cbx_relation.SelectedValue = item.relation_code;
+                cbx_relation.SelectedValue = item.relation_code; 
             }
             else
             {
@@ -428,18 +425,7 @@ namespace Client.Forms.Pages
                     break;
             }
             this.cbxmarrycode.Text = marrycode;
-
-
-            //社保号码
-            //addition_no1
-            //ybk_psn_cert_type.Text = item.addition_no1;
-
-            //工作单位
-            //employer_name
-            //txtemployer_name.Text = item.employer_name;
-
-            //合同单位contract_code
-
+             
 
             this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
             //  this.txtZhiye.TextChanged += txtZhiye_TextChanged;
@@ -574,7 +560,7 @@ namespace Client.Forms.Pages
             cbxResponseType.Text = "";
             cbxChargeTypes.Text = "";
             txtrelationname.Text = "";
-            cbx_relation.Text = "";
+            //cbx_relation.Text = "";
 
             this.cbxsex.Text = "";
 
@@ -595,6 +581,9 @@ namespace Client.Forms.Pages
             ybk_psn_cert_type.Text = "";
             ybk_psn_name.Text = "";
             ybk_certno.Text = "";
+
+            dgv_patient_sfz.DataSource = null;
+            dgv_ghlist.DataSource = null;
         }
         public void SearchUser()
         {

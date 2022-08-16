@@ -105,7 +105,7 @@ namespace CoreData.Helpers
         }
         public static List<T> ToModels<T>(this DataTable data) where T : new()
         {
-            if (data != null && data.Rows.Count > 0 && data.Rows.Count < 2)
+            if (data != null && data.Rows.Count > 0 )
                 return data.GetList<T>(null, true);
             return new List<T>();
         }

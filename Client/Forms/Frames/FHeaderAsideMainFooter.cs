@@ -60,6 +60,8 @@ namespace Client
         {
             //设置关联
             Aside.TabControl = MainTabControl;
+            Aside.TabControl.ShowCloseButton = true;
+            Aside.TabControl.TabVisible = true; 
 
             //增加页面到Main
             //AddPage(new FTitlePage1(), 1001);
@@ -261,11 +263,17 @@ namespace Client
             //Aside.CreateNode("Page3", ++pageIndex);
 
             //显示默认界面
-            // Aside.SelectFirst();
+             Aside.SelectFirst();
         }
+ 
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
         {
+            if (node.Nodes!=null && node.Nodes.Count>0)
+            {
+                return;
+            }
+
             Footer.Text = "PageIndex: " + pageIndex;
 
             UIPage page = new UIPage();
@@ -310,7 +318,7 @@ namespace Client
                         obj = new FunctionList(); break;
                     case 1502:
                         obj = new UserManage(); break;
-                    case 1601:
+                    case 1601: 
                         obj = new YBPay();break;
                     case 1602:
                         obj = new WindowPay(); break;
@@ -319,7 +327,10 @@ namespace Client
                     default:
                         break;
                 }
-                page = AddPage(obj);
+                 
+                obj.TagString = pageIndex.ToString();
+                obj.FormClosing += Obj_FormClosing; ;
+                page = AddPage(obj, pageIndex);
             }
             SelectPage(pageIndex);
 
@@ -336,6 +347,13 @@ namespace Client
             });
 
         }
+
+        private void Obj_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //RemovePage(int.Parse((sender as UIPage).TagString));//
+            Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
+        }
+         
 
         BackgroundWorker _demoBGWorker = new BackgroundWorker();
 

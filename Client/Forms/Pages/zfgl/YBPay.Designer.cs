@@ -525,7 +525,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "YBPay";
             this.PageIndex = 1601;
-            this.Text = "YBPay";
+            this.Text = "医保支付";
             this.Initialize += new System.EventHandler(this.YBPay_Initialize);
             this.pnlTitle.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);

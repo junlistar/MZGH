@@ -932,8 +932,8 @@ namespace Client
                     {
                         Task.Run(() =>
                         {
-                        //写入电子发票信息
-                        CreateElecBill(new_ledger_sn);
+                            //写入电子发票信息
+                            CreateElecBill(new_ledger_sn);
 
                         });
                     }
@@ -983,162 +983,162 @@ namespace Client
             List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
 
 
-            for (int i = 0; i < chargeItems.Count; i++)
-            {
-                ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
-                electBillCharge.sortNo = i;
-                if (chargeItems[i].mz_bill_item == "026")
-                {
-                    electBillCharge.chargeCode = "90611";//对应挂号费
-                }
-                else if (chargeItems[i].mz_bill_item == "018")
-                {
-                    electBillCharge.chargeCode = "90601";//对应诊查费
-                }
-                else
-                {
-                    electBillCharge.chargeCode = "90611";//对应挂号费
-                }
-                electBillCharge.chargeName = chargeItems[i].name.Trim();
-                electBillCharge.number = 1;
-                electBillCharge.std = chargeItems[i].effective_price.ToString();
-                electBillCharge.amt = chargeItems[i].effective_price.ToString();
-                electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
-                electBillCharge.remark = "";
-
-                chargeItemlist.Add(electBillCharge);
-            }
-
-            //var _chargeDetail = new
+            //for (int i = 0; i < chargeItems.Count; i++)
             //{
-            //    sortNo = "序号",
-            //    chargeCode = "收费项目代码",
-            //    chargeName = "收费项目名称",
-            //    number = 0,//数量
-            //    std = 0,//收费标准
-            //    amt = 0,//金额
-            //    selfAmt = "0",
-            //    remark = "备注"
-            //};
-            //var _listDetail = new
-            //{
-            //    name = "",//药品名称
-            //    std = "",//单价
-            //    number = "",//数量
-            //    amt = "",//金额
-            //    selfAmt = "", //自费金额
-            //};
-            string _remark = "";
-            for (int i = 0; i < paylist.Count; i++)
-            {
-                PayChannelDetail payChannelDetail = new PayChannelDetail();
-                var _payType = SessionHelper.pageChequeCompares.Where(p => p.his_code == paylist[i].pay_type).FirstOrDefault();
-                if (_payType!=null&& _payType.page_code=="1")
-                {
-                    //微信
-                    payChannelDetail.payChannelCode = "05"; _remark += ",微信-";
-                }
-                else if (_payType != null && _payType.page_code == "2")
-                {
-                    //支付宝
-                    payChannelDetail.payChannelCode = "05"; _remark += ",支付宝-";
-                }
-                else if (_payType != null && _payType.page_code == "3")
-                {
-                    //银联
-                    payChannelDetail.payChannelCode = "08"; _remark += ",银联-";
-                }
-                else if (_payType != null && _payType.page_code == "4")
-                {
-                    //医保
-                    payChannelDetail.payChannelCode = "11"; _remark += ",医保-";
-                }
-                else if (_payType != null && _payType.page_code == "5")
-                {
-                    //现金
-                    payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
-                } 
+            //    ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
+            //    electBillCharge.sortNo = i;
+            //    if (chargeItems[i].mz_bill_item == "026")
+            //    {
+            //        electBillCharge.chargeCode = "90611";//对应挂号费
+            //    }
+            //    else if (chargeItems[i].mz_bill_item == "018")
+            //    {
+            //        electBillCharge.chargeCode = "90601";//对应诊查费
+            //    }
+            //    else
+            //    {
+            //        electBillCharge.chargeCode = "90611";//对应挂号费
+            //    }
+            //    electBillCharge.chargeName = chargeItems[i].name.Trim();
+            //    electBillCharge.number = 1;
+            //    electBillCharge.std = chargeItems[i].effective_price.ToString();
+            //    electBillCharge.amt = chargeItems[i].effective_price.ToString();
+            //    electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
+            //    electBillCharge.remark = "";
 
-                _remark += paylist[i].pay_je.ToString();
-                payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();
-                payChannelDetails.Add(payChannelDetail);
-            }
-            if (!string.IsNullOrWhiteSpace(_remark))
-            {
-                _remark = _remark.Substring(1);
-            }
+            //    chargeItemlist.Add(electBillCharge);
+            //}
+
+            ////var _chargeDetail = new
+            ////{
+            ////    sortNo = "序号",
+            ////    chargeCode = "收费项目代码",
+            ////    chargeName = "收费项目名称",
+            ////    number = 0,//数量
+            ////    std = 0,//收费标准
+            ////    amt = 0,//金额
+            ////    selfAmt = "0",
+            ////    remark = "备注"
+            ////};
+            ////var _listDetail = new
+            ////{
+            ////    name = "",//药品名称
+            ////    std = "",//单价
+            ////    number = "",//数量
+            ////    amt = "",//金额
+            ////    selfAmt = "", //自费金额
+            ////};
+            //string _remark = "";
+            //for (int i = 0; i < paylist.Count; i++)
+            //{
+            //    PayChannelDetail payChannelDetail = new PayChannelDetail();
+            //    var _payType = SessionHelper.pageChequeCompares.Where(p => p.his_code == paylist[i].pay_type).FirstOrDefault();
+            //    if (_payType!=null&& _payType.page_code=="1")
+            //    {
+            //        //微信
+            //        payChannelDetail.payChannelCode = "05"; _remark += ",微信-";
+            //    }
+            //    else if (_payType != null && _payType.page_code == "2")
+            //    {
+            //        //支付宝
+            //        payChannelDetail.payChannelCode = "05"; _remark += ",支付宝-";
+            //    }
+            //    else if (_payType != null && _payType.page_code == "3")
+            //    {
+            //        //银联
+            //        payChannelDetail.payChannelCode = "08"; _remark += ",银联-";
+            //    }
+            //    else if (_payType != null && _payType.page_code == "4")
+            //    {
+            //        //医保
+            //        payChannelDetail.payChannelCode = "11"; _remark += ",医保-";
+            //    }
+            //    else if (_payType != null && _payType.page_code == "5")
+            //    {
+            //        //现金
+            //        payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
+            //    } 
+
+            //    _remark += paylist[i].pay_je.ToString();
+            //    payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();
+            //    payChannelDetails.Add(payChannelDetail);
+            //}
+            //if (!string.IsNullOrWhiteSpace(_remark))
+            //{
+            //    _remark = _remark.Substring(1);
+            //}
 
             //获取数据 ResponseResult<FPRegistration> GetFPRegistrationData(string patient_id, int ledger_sn, int admiss_times)
 
             //List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
-            //string getDataUrl = string.Format($"/api/mzsf/GetFPRegistrationData?patient_id={patientId}&ledger_sn={new_ledger_sn}&admiss_times={1}");
-            //var json = HttpClientUtil.Get(getDataUrl); 
-            //var result = WebApiHelper.DeserializeObject<ResponseResult<FPRegistrationVM>>(json);
-            //if (result.status != 1)
-            //{
-            //    log.Error(result.message);
-            //    throw new Exception(result.message); 
-            //}
-            //var _data = new
-            //{
-            //    busNo = result.data.MainData.busNo,             //业务流水号
-            //    busType = result.data.MainData.busType,         //业务标识
-            //    payer = result.data.MainData.payer,               //患者姓名
-            //    busDateTime = result.data.MainData.busDateTime,//业务发生时间
-            //    placeCode = result.data.MainData.placeCode,//开票点编码
-            //    payee = result.data.MainData.payee,//收费员
-            //    author = result.data.MainData.author,//票据编制人
-            //    checker = result.data.MainData.checker,//票据复核人
-            //    totalAmt = result.data.MainData.totalAmt,//开票总金额
-            //    payerType = result.data.MainData.payerType,//交款人类型 1 个人2单位
-            //    cardType = result.data.MainData.cardType,//卡类型
-            //    cardNo = result.data.MainData.cardNo,//卡号
-            //    age = result.data.MainData.age,
-            //    sex = result.data.MainData.sex,
-            //    accountPay = result.data.MainData.accountPay,//个人账户支付
-            //    fundPay = result.data.MainData.fundPay,//医保统筹基金支付
-            //    otherfundPay = result.data.MainData.otherfundPay,//其它医保支付
-            //    ownPay = result.data.MainData.ownPay,//自费金额
-            //    selfConceitedAmt = result.data.MainData.selfConceitedAmt,//个人自负
-            //    selfPayAmt = result.data.MainData.selfPayAmt,//个人自付
-            //    selfCashPay = result.data.MainData.selfCashPay,//个人现金支付
-            //    reimbursementAmt = result.data.MainData.reimbursementAmt,//医保报销总金额
-            //    payChannelDetail = result.data.PayChannelDetails,//交费渠道列表
-            //    isArrears = result.data.MainData.isArrears,//是否可流通
-            //    chargeDetail = result.data.ChargeDetails,
-            //    listDetail = electBillListDetails,
-            //    remark = result.data.MainData.remark
-            //};
+            string getDataUrl = string.Format($"/api/mzsf/GetFPRegistrationData?patient_id={patientId}&ledger_sn={new_ledger_sn}&admiss_times={1}");
+            var json = HttpClientUtil.Get(getDataUrl);
+            var result = WebApiHelper.DeserializeObject<ResponseResult<FPRegistrationVM>>(json);
+            if (result.status != 1)
+            {
+                log.Error(result.message);
+                throw new Exception(result.message);
+            }
             var _data = new
             {
-                busNo = busNo,             //业务流水号
-                busType = "06",         //业务标识
-                payer = GuaHao.PatientVM.name.Trim(),               //患者姓名
-                busDateTime = DateTime.Now.ToString("yyyyMMddHHmmss000"),//业务发生时间
-                placeCode = placeCode,//开票点编码
-                payee = SessionHelper.uservm.user_mi,//收费员
-                author = SessionHelper.uservm.user_mi,//票据编制人
-                checker = SessionHelper.uservm.user_mi,//票据复核人
-                totalAmt = totalAmt,//开票总金额
-                payerType = "1",//交款人类型 1 个人2单位
-                cardType = "3101",//卡类型
-                cardNo = GuaHao.PatientVM.patient_id,//卡号
-                age = GuaHao.PatientVM.age,
-                sex = GuaHao.PatientVM.sex == "1" ? "男" : "女",
-                accountPay = "0",//个人账户支付
-                fundPay = "0",//医保统筹基金支付
-                otherfundPay = "0",//其它医保支付
-                ownPay = "0",//自费金额
-                selfConceitedAmt = "0",//个人自负
-                selfPayAmt = "0",//个人自付
-                selfCashPay = totalAmt,//个人现金支付
-                reimbursementAmt = "0",//医保报销总金额
-                payChannelDetail = payChannelDetails,//交费渠道列表
-                isArrears = "1",//是否可流通
-                chargeDetail = chargeItemlist,
+                busNo = result.data.MainData.busNo,             //业务流水号
+                busType = result.data.MainData.busType,         //业务标识
+                payer = result.data.MainData.payer,               //患者姓名
+                busDateTime = result.data.MainData.busDateTime,//业务发生时间
+                placeCode = result.data.MainData.placeCode,//开票点编码
+                payee = result.data.MainData.payee,//收费员
+                author = result.data.MainData.author,//票据编制人
+                checker = result.data.MainData.checker,//票据复核人
+                totalAmt = StringUtil.RoundCharge(result.data.MainData.totalAmt),//开票总金额
+                payerType = result.data.MainData.payerType,//交款人类型 1 个人2单位
+                cardType = result.data.MainData.cardType,//卡类型
+                cardNo = result.data.MainData.cardNo,//卡号
+                age = result.data.MainData.age,
+                sex = result.data.MainData.sex,
+                accountPay = StringUtil.RoundCharge(result.data.MainData.accountPay),//个人账户支付
+                fundPay = StringUtil.RoundCharge(result.data.MainData.fundPay),//医保统筹基金支付
+                otherfundPay = StringUtil.RoundCharge(result.data.MainData.otherfundPay),//其它医保支付
+                ownPay = StringUtil.RoundCharge(result.data.MainData.ownPay),//自费金额
+                selfConceitedAmt = StringUtil.RoundCharge(result.data.MainData.selfConceitedAmt),//个人自负
+                selfPayAmt = StringUtil.RoundCharge(result.data.MainData.selfPayAmt),//个人自付
+                selfCashPay = StringUtil.RoundCharge(result.data.MainData.selfCashPay),//个人现金支付
+                reimbursementAmt = StringUtil.RoundCharge(result.data.MainData.reimbursementAmt),//医保报销总金额
+                payChannelDetail = result.data.PayChannelDetails,//交费渠道列表
+                isArrears = result.data.MainData.isArrears,//是否可流通
+                chargeDetail = result.data.ChargeDetails,
                 listDetail = electBillListDetails,
-                remark = _remark
+                remark = result.data.MainData.remark
             };
+            //var _data = new
+            //{
+            //    busNo = busNo,             //业务流水号
+            //    busType = "06",         //业务标识
+            //    payer = GuaHao.PatientVM.name.Trim(),               //患者姓名
+            //    busDateTime = DateTime.Now.ToString("yyyyMMddHHmmss000"),//业务发生时间
+            //    placeCode = placeCode,//开票点编码
+            //    payee = SessionHelper.uservm.user_mi,//收费员
+            //    author = SessionHelper.uservm.user_mi,//票据编制人
+            //    checker = SessionHelper.uservm.user_mi,//票据复核人
+            //    totalAmt = totalAmt,//开票总金额
+            //    payerType = "1",//交款人类型 1 个人2单位
+            //    cardType = "3101",//卡类型
+            //    cardNo = GuaHao.PatientVM.patient_id,//卡号
+            //    age = GuaHao.PatientVM.age,
+            //    sex = GuaHao.PatientVM.sex == "1" ? "男" : "女",
+            //    accountPay = "0",//个人账户支付
+            //    fundPay = "0",//医保统筹基金支付
+            //    otherfundPay = "0",//其它医保支付
+            //    ownPay = "0",//自费金额
+            //    selfConceitedAmt = "0",//个人自负
+            //    selfPayAmt = "0",//个人自付
+            //    selfCashPay = totalAmt,//个人现金支付
+            //    reimbursementAmt = "0",//医保报销总金额
+            //    payChannelDetail = payChannelDetails,//交费渠道列表
+            //    isArrears = "1",//是否可流通
+            //    chargeDetail = chargeItemlist,
+            //    listDetail = electBillListDetails,
+            //    remark = _remark
+            //};
             log.Debug("_data:" + _data);
              var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
 
@@ -1167,7 +1167,7 @@ namespace Client
             string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
 
             log.Debug(url);
-            var json = HttpClientUtil.Get(url);
+            json = HttpClientUtil.Get(url);
 
             var response = WebApiHelper.DeserializeObject<ElectBillCommonResponse>(json);
 

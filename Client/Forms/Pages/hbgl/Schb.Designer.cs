@@ -351,6 +351,7 @@
             this.dgvRequest.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRequest.RowTemplate.Height = 23;
             this.dgvRequest.SelectedIndex = -1;
+            this.dgvRequest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRequest.ShowGridLine = true;
             this.dgvRequest.ShowRect = false;
             this.dgvRequest.Size = new System.Drawing.Size(1384, 524);
@@ -456,7 +457,7 @@
             this.Name = "Schb";
             this.PageIndex = 1304;
             this.StyleCustomMode = true;
-            this.Text = "CreateRequestRecord";
+            this.Text = "生成号表";
             this.Initialize += new System.EventHandler(this.Schb_Initialize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateRequestRecord_KeyDown);
             this.MouseEnter += new System.EventHandler(this.CreateRequestRecord_MouseEnter);

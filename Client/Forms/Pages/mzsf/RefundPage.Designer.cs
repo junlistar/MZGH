@@ -399,6 +399,7 @@
             this.dgvRefund.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRefund.RowTemplate.Height = 23;
             this.dgvRefund.SelectedIndex = -1;
+            this.dgvRefund.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRefund.ShowGridLine = false;
             this.dgvRefund.ShowRect = false;
             this.dgvRefund.Size = new System.Drawing.Size(870, 485);
@@ -708,7 +709,7 @@
             this.KeyPreview = true;
             this.Name = "RefundPage";
             this.PageIndex = 1102;
-            this.Text = "RefundPage";
+            this.Text = "退费";
             this.Load += new System.EventHandler(this.RefundPage_Load);
             this.pnlTitle.ResumeLayout(false);
             this.pnlTitle.PerformLayout();

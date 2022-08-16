@@ -438,7 +438,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "RequestTime";
             this.PageIndex = 1302;
-            this.Text = "RequestHour";
+            this.Text = "分时段维护";
             this.Load += new System.EventHandler(this.RequestHour_Load);
             this.pnlTitle.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequestTime)).EndInit();

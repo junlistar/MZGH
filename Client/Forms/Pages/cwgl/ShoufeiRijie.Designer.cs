@@ -71,7 +71,7 @@
             // 
             this.btnPrint.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPrint.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnPrint.Location = new System.Drawing.Point(445, 3);
+            this.btnPrint.Location = new System.Drawing.Point(426, 3);
             this.btnPrint.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Radius = 1;
@@ -94,7 +94,7 @@
             this.btnSave.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnSave.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(330, 3);
+            this.btnSave.Location = new System.Drawing.Point(320, 2);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Radius = 1;
@@ -148,7 +148,7 @@
             this.btnExit.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(570, 3);
+            this.btnExit.Location = new System.Drawing.Point(532, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Radius = 1;
@@ -309,7 +309,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "ShoufeiRijie";
             this.PageIndex = 1202;
-            this.Text = "GuahaoRijie";
+            this.Text = "收费日结";
             this.Load += new System.EventHandler(this.GuahaoRijie_Load);
             this.pnlTitle.ResumeLayout(false);
             this.uiPanel1.ResumeLayout(false);

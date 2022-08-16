@@ -40,6 +40,7 @@
             this.uiLabel1.TabIndex = 0;
             this.uiLabel1.Text = "欢迎使用挂号系统！";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // DefaultPage
             // 
@@ -48,7 +49,7 @@
             this.Controls.Add(this.uiLabel1);
             this.Name = "DefaultPage";
             this.PageIndex = 1000;
-            this.Text = "DefaultPage";
+            this.Text = "欢迎";
             this.ResumeLayout(false);
 
         }

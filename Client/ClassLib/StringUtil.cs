@@ -137,5 +137,25 @@ namespace Client.ClassLib
             var _base64EncodeBytes = System.Convert.FromBase64String(base64EncodeData);
             return System.Text.Encoding.UTF8.GetString(_base64EncodeBytes);
         }
+
+        public static string RoundCharge(string charge , int round = 2)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(charge))
+                {
+                    return charge;
+                }
+
+                decimal _charge = decimal.Parse(charge);
+                return Math.Round(_charge, 2).ToString();
+            }
+            catch (Exception ex)
+            {
+                return charge;
+            }
+         
+        }
+             
     }
 }

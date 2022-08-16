@@ -923,8 +923,7 @@ namespace Client
         public void SaveCardData(UserInfoResponseModel model)
         {
             Task<HttpResponseMessage> task = null;
-            string json = "";
-
+            
             var d = new
             {
                 psn_no = model.baseinfo.psn_no,
@@ -946,8 +945,8 @@ namespace Client
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
+                log.Error("请求接口数据出错：" + ex.Message);
+                log.Error("接口数据：" + ex.StackTrace);
 
             }
 
@@ -1336,9 +1335,11 @@ namespace Client
                 else
                 {
 
-                    lblMsg.Text = "没有查询到数据";
-
                     InitUserInfo();
+
+                    lblMsg.Text = "没有查询到数据";
+                    lblMsg.Show();
+
 
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
@@ -1376,10 +1377,13 @@ namespace Client
             if (result.status == 1 && result.data != null && result.data.Count > 0)
             {
                 BindUserInfo(result.data[0]);
+
             }
         }
         public void BindUserInfo(PatientVM userInfo)
         {
+            PatientVM = userInfo;
+
             btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
                                                                      //this.txtpatientid.Text = userInfo["patient_id"].ToString();
             lblName.Text = userInfo.name.ToString();
@@ -1644,7 +1648,7 @@ namespace Client
                         {
                             _source.Add(_item.name, requestDic[_item.name]);
                         }
-                        
+
                     }
                 }
 

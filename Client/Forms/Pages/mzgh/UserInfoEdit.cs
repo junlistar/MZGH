@@ -651,7 +651,11 @@ namespace Client
                 this.cbxChargeType.SelectedValue = userInfo.charge_type;
 
                 txtRelationName.Text = userInfo.relation_name;
-                cbxRelation.SelectedValue = userInfo.relation_code;
+
+                if (userInfo.relation_code!=null)
+                {
+                    cbxRelation.SelectedValue = userInfo.relation_code;
+                } 
 
                 //查询身份证表信息
                 BindSfzInfo(userInfo.patient_id);

@@ -41,7 +41,7 @@ namespace CoreTest
 
             //CreateRequestRecord,2022-05-24,2022-05-24,1,1,00040
 
-            BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
+            //BaseRequestRepository baseRequestRepository = new BaseRequestRepository();
             //2022-07-20,2022-07-20, %,  %,  %,  %,  01,%,  %,  % 
             // var dt = baseRequestRepository.GetRequestsByParamsV2("2022-07-20", "2022-07-20", "%", "%", "%", "%", "01", "%", "%", "%");
 
@@ -93,14 +93,14 @@ namespace CoreTest
 
             //000174985600&times=20&order_string=01-2-700261-**-1&opera=00000
             ////SaveOrder,000174985600,22,01-2-700261--1,00000
-            MzOrderRepository mzOrderRepository = new MzOrderRepository();
-            var rr = mzOrderRepository.SaveOrder("000174985600", 22, "01-2-700261--1", "00000");
+            // MzOrderRepository mzOrderRepository = new MzOrderRepository();
+            //var rr = mzOrderRepository.SaveOrder("000174985600", 22, "01-2-700261--1", "00000");
 
             /////api/mzsf/pay?patient_id=000189394100&times=20&pay_string=c-23-202208121512124997,3-44-202208121512158243,1-49-&order_no_str=1&opera=00000
             // var aaa  = mzOrderRepository.Pay("000189394100", 20, "c-23-202208121512124997,3-44-202208121512158243,1-49-", "1", "00000");
-
-           // FpDataRepository fpDataRepository = new FpDataRepository();
-           // var aa =fpDataRepository.GetFPRegistrationData("000200724300", 17, 1);
+            ///api/mzsf/GetFPRegistrationData?patient_id=000174985600&ledger_sn=40&admiss_times=1
+            FpDataRepository fpDataRepository = new FpDataRepository();
+            var aa =fpDataRepository.GetFPRegistrationData("000174985600", 40, 1);
 
             Console.WriteLine("Hello World!");
         }

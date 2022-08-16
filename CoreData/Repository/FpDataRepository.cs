@@ -5,6 +5,7 @@ using Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace Data.Repository
@@ -17,7 +18,7 @@ namespace Data.Repository
             {
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
                 {
-                    IDbTransaction transaction = connection.BeginTransaction();
+                   // IDbTransaction transaction = connection.BeginTransaction();
 
                     try
                     {
@@ -28,50 +29,81 @@ namespace Data.Repository
                         para.Add("@ledger_sn", ledger_sn);
                         para.Add("@admiss_times", admiss_times);
 
+                        string adpsql = $"exec fp_invEBillRegistration '{patient_id}',{ledger_sn},{admiss_times}";
+
                         FPRegistration fPRegistration = new FPRegistration();
+                        IDbCommand dbCommand = connection.CreateCommand();
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(adpsql, connection as SqlConnection); ;
+                        DataSet ds = new DataSet();//创建DataSet实例
+                        sqlDataAdapter.Fill(ds);
 
-
-
-                        var reader = connection.ExecuteReader(sql, para, transaction, null, CommandType.StoredProcedure);
-                        int count = 0;
-                        while (reader.Read())
+                        if (ds!=null && ds.Tables.Count>0)
                         {
-                            DataTable table = new DataTable();
-                            //DataSet ds = DataTableHelper.GetDataSet(reader);
-                            table.Load(reader);
-                            if (count == 0)
-                            {
-                                fPRegistration.MainData = DataTableHelper.ToSingleModel<MainData>(table);
-                            }
-                            else if (count == 1)
-                            {
-                                fPRegistration.PayChannelDetails = DataTableHelper.ToModels<PayChannelDetail>(table);
-                            }
-                            else
-                            {
-                                fPRegistration.ChargeDetails = DataTableHelper.ToModels<ChargeDetail>(table);
-
-                            }
-                        }
-
-                        transaction.Commit();
+                            fPRegistration.MainData = DataTableHelper.ToSingleModel<MainData>(ds.Tables[0]);
+                            fPRegistration.PayChannelDetails = DataTableHelper.ToModels<PayChannelDetail>(ds.Tables[1]);
+                            fPRegistration.ChargeDetails = DataTableHelper.ToModels<ChargeDetail>(ds.Tables[2]);
+                        } 
 
                         return fPRegistration;
                     }
                     catch (Exception ex)
                     {
-                        transaction.Rollback();
+                       // transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+            catch (Exception)
+            { 
+                throw;
+            }
+        }
+        public FPRegistration GetFPInvoiceEBillOutpatient(string patient_id, int ledger_sn, int admiss_times)
+        {
+            try
+            {
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                {
+                    // IDbTransaction transaction = connection.BeginTransaction();
+
+                    try
+                    {
+                        string sql = "fp_invoiceEBillOutpatient";
+
+                        var para = new DynamicParameters();
+                        para.Add("@patient_id", patient_id);
+                        para.Add("@ledger_sn", ledger_sn);
+                        para.Add("@admiss_times", admiss_times);
+
+                        string adpsql = $"exec fp_invoiceEBillOutpatient '{patient_id}',{ledger_sn},{admiss_times}";
+
+                        FPRegistration fPRegistration = new FPRegistration();
+                        IDbCommand dbCommand = connection.CreateCommand();
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(adpsql, connection as SqlConnection); ;
+                        DataSet ds = new DataSet();//创建DataSet实例
+                        sqlDataAdapter.Fill(ds);
+
+                        if (ds != null && ds.Tables.Count > 0)
+                        {
+                            fPRegistration.MainData = DataTableHelper.ToSingleModel<MainData>(ds.Tables[0]);
+                            fPRegistration.PayChannelDetails = DataTableHelper.ToModels<PayChannelDetail>(ds.Tables[1]);
+                            fPRegistration.ChargeDetails = DataTableHelper.ToModels<ChargeDetail>(ds.Tables[2]);
+                        }
+
+                        return fPRegistration;
+                    }
+                    catch (Exception ex)
+                    {
+                        // transaction.Rollback();
                         throw;
                     }
                 }
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
-
 
         public List<FpData> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
         {

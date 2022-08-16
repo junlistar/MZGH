@@ -95,17 +95,15 @@ namespace Mzsf.Forms.Pages
         }
 
         private void BindDgvDate()
-        {
-            dgvRefund.Init();
-
+        { 
             var list = ds.Select(p => new
             {
                 patient_id = p.patient_id,
-                patient_name = p.patient_name,
+                patient_name = p.patient_name.Trim(),
                 p_bar_code = p.p_bar_code,
                 receipt_no = p.receipt_no,
                 receipt_sn = p.receipt_sn,
-                cash_opera = p.cash_opera,
+               // cash_opera = p.cash_opera,
                 cash_date = p.cash_date,
                 times = p.times,
                 ledger_sn = p.ledger_sn,

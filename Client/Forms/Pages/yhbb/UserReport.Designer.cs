@@ -310,7 +310,7 @@
             this.Controls.Add(this.lblpnltile);
             this.Name = "UserReport";
             this.PageIndex = 1401;
-            this.Text = "UserReport";
+            this.Text = "综合统计报表";
             this.Initialize += new System.EventHandler(this.UserReport_Initialize);
             this.lblpnltile.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);

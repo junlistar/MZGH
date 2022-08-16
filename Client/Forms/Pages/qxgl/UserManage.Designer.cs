@@ -437,7 +437,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "UserManage";
             this.PageIndex = 1502;
-            this.Text = "UserManage";
+            this.Text = "用户管理";
             this.Initialize += new System.EventHandler(this.UserManage_Initialize);
             this.pnlTitle.ResumeLayout(false);
             this.uiTitlePanel3.ResumeLayout(false);

@@ -927,7 +927,7 @@ namespace Mzsf.Forms.Pages
 
                     }
                     //查询处方
-                    SearchUser();
+                    ReloadPageData();
                 }
             }
         }
@@ -993,6 +993,12 @@ namespace Mzsf.Forms.Pages
             //}
             this.uiTabControl1.Show();
             this.pblSum.Show();
+             
+            var _order = new MzOrderVM();
+            _order.order_no = max_order_no + 1;
+            _order.order_type = cbxOrderType.SelectedValue.ToString();
+            SessionHelper.mzOrders.Add(_order);
+
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
             page.setData = UpdateBottomPrice;
@@ -1001,10 +1007,6 @@ namespace Mzsf.Forms.Pages
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
             uiTabControl1.ShowCloseButton = true;
 
-            var _order = new MzOrderVM();
-            _order.order_no = max_order_no + 1;
-            _order.order_type = cbxOrderType.SelectedValue.ToString();
-            SessionHelper.mzOrders.Add(_order);
         }
 
         public bool CreateVisitRecord()
@@ -1354,5 +1356,11 @@ namespace Mzsf.Forms.Pages
             }
 
         }
+
+        public void ReloadPageData()
+        {
+            BindOrders(lblPatientid.Text);
+        }
+             
     }
 }

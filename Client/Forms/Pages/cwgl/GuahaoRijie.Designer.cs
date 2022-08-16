@@ -382,7 +382,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "GuahaoRijie";
             this.PageIndex = 1201;
-            this.Text = "GuahaoRijie";
+            this.Text = "挂号日结";
             this.Load += new System.EventHandler(this.GuahaoRijie_Load);
             this.pnlTitle.ResumeLayout(false);
             this.uiPanel1.ResumeLayout(false);

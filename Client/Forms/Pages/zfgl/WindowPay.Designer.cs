@@ -525,7 +525,7 @@
             this.Controls.Add(this.pnlTitle);
             this.Name = "WindowPay";
             this.PageIndex = 1602;
-            this.Text = "WindowPay";
+            this.Text = "窗口支付";
             this.Initialize += new System.EventHandler(this.WindowPay_Initialize);
             this.pnlTitle.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);

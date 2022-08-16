@@ -477,7 +477,20 @@ namespace CoreApi.Controllers
                 return ErrorResult<FPRegistration>(ex.Message);
             }
         }
-
+        public ResponseResult<FPRegistration> GetFPInvoiceEBillOutpatient(string patient_id, int ledger_sn, int admiss_times)
+        {
+            Log.Information($"GetFPInvoiceEBillOutpatient,{patient_id},{ledger_sn},{admiss_times}");
+            try
+            {
+                return _fpDataRepository.GetFPInvoiceEBillOutpatient(patient_id, ledger_sn, admiss_times);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<FPRegistration>(ex.Message);
+            }
+        }
+        
 
         public ResponseResult<List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
         {

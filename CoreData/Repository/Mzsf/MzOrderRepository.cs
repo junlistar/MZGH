@@ -387,8 +387,10 @@ namespace Data.Repository.Mzsf
                         var deleted_flag = "0";
                         var report_flag = "0";
                         var receipt_type = "0";
+                        var _opera = "";
                         if (dtreceipt != null && dtreceipt.Count > 0)
                         {
+                            _opera=  dtreceipt[0].@operator.ToString();
                             current_no = dtreceipt[0].current_no.ToString();
                             start_no = dtreceipt[0].start_no.ToString();
                             end_no = dtreceipt[0].end_no.ToString();
@@ -402,7 +404,7 @@ namespace Data.Repository.Mzsf
                         //3.更新发票号
                         para = new DynamicParameters();
                         para.Add("@current_no", int.Parse(current_no) + step_length);
-                        para.Add("@operator", opera);
+                        para.Add("@operator", _opera);
                         para.Add("@happen_date", happen_date);
                         connection.Execute(sql3, para, transaction);
 

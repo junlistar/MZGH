@@ -998,6 +998,7 @@
             // 
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSearch.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.txtSearch.Location = new System.Drawing.Point(387, 322);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSearch.MinimumSize = new System.Drawing.Size(1, 16);
@@ -1025,7 +1026,7 @@
             this.KeyPreview = true;
             this.Name = "GuaHao";
             this.PageIndex = 1001;
-            this.Text = "门诊挂号子系统";
+            this.Text = "挂号";
             this.Initialize += new System.EventHandler(this.GuaHao_Initialize);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GuaHao_FormClosing);
             this.Load += new System.EventHandler(this.GuaHao_Load);

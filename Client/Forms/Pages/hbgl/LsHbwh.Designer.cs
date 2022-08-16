@@ -652,7 +652,7 @@
             this.Name = "LsHbwh";
             this.PageIndex = 1306;
             this.StyleCustomMode = true;
-            this.Text = "基础号表维护";
+            this.Text = "临时号表维护";
             this.Load += new System.EventHandler(this.BaseRequest_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseWeiHu_KeyDown);
             this.MouseEnter += new System.EventHandler(this.BaseWeiHu_MouseEnter);
