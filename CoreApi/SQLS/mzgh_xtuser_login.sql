@@ -11,3 +11,4 @@
                   ( ( xt_user.subsys_id = 'mz' ) AND  
                   ( xt_user.user_name = @uname )  And
                     xt_user.pass_word =@pwd ) 
+                     

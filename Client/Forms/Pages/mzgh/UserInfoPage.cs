@@ -200,25 +200,7 @@ namespace Client.Forms.Pages
         {
 
             log.Info("初始化数据字典：InitDic");
-
-
-            ////获取用户  
-            //var json = "";
-            //var paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
-
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            //task.Wait();
-            //var response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
-
+             
 
             cbxResponseType.DataSource = SessionHelper.responseTypes;
             cbxResponseType.ValueMember = "code";
@@ -377,20 +359,7 @@ namespace Client.Forms.Pages
 
             //地区
             this.sfz_home_address.Text = item.home_street;
-
-            ////职业
-            //if (!string.IsNullOrWhiteSpace(item.occupation_type))
-            //{
-            //    this.txtZhiye.TagString = item.occupation_type;
-
-            //    var model = SessionHelper.occupationCodes.Where(p => p.code == item.occupation_type).FirstOrDefault();
-
-            //    if (model != null)
-            //    {
-            //        this.txtZhiye.Text = model.name;
-            //    }
-            //}
-
+  
             //身份  
             //费别 
             cbxResponseType.SelectedValue = item.response_type;
@@ -436,23 +405,15 @@ namespace Client.Forms.Pages
             //this.txthomedistrict.TextChanged -= txthomedistrict_TextChanged;
             // this.txtZhiye.TextChanged -= txtZhiye_TextChanged;
 
-            //cbxhm.Text = "";
-            //txtId.Text = "";
-            //txtbarcode.Text = "";
-            //txtname.Text = "";
-            //cbxShenfen.SelectedValue = "";
-            //cbxFeibie.SelectedValue = "";
+   
             cbxsex.Text = "";
             sfz_birthday.Text = "";
             txtrelationname.Text = "";
             txthometel.Text = "";
             sfz_card_no.Text = "";
             ybk_psn_no.Text = "";
-            cbxmarrycode.Text = "";
-            //txtemployer_name.Text = "";
-            // txtZhiye.Text = "";
-            ybk_psn_cert_type.Text = "";
-            // txthomedistrict.Text = "";
+            cbxmarrycode.Text = ""; 
+            ybk_psn_cert_type.Text = ""; 
             sfz_home_address.Text = "";
 
             //this.txthomedistrict.TextChanged += txthomedistrict_TextChanged;
@@ -600,9 +561,7 @@ namespace Client.Forms.Pages
                 return;
             }
 
-            //获取数据  
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+            //获取数据   
             string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
 
             //如果点击的是身份证或医保卡，择查询身份证信息
@@ -614,16 +573,7 @@ namespace Client.Forms.Pages
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
@@ -671,9 +621,7 @@ namespace Client.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                log.Debug("请求接口数据出错：" + ex.Message); 
             }
         }
         public string AutoAddUserInfo()
@@ -765,24 +713,14 @@ namespace Client.Forms.Pages
 
         public void GetPatientRelatedSfzInfo(string sfz_id)
         {
-            //获取数据  
-            Task<HttpResponseMessage> task = null;
+            //获取数据   
             string json = "";
             string paramurl = string.Format($"/api/user/GetDataBySfzId?sfz_id={sfz_id}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientSfzVM>>>(json);
                 if (result.status == 1)
@@ -813,8 +751,7 @@ namespace Client.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
+                log.Debug("请求接口数据出错：" + ex.Message); 
 
             }
         }
@@ -942,26 +879,15 @@ namespace Client.Forms.Pages
             }
         }
         public void BindBaseInfo(string patient_id)
-        {//获取数据   
-            Task<HttpResponseMessage> task = null;
+        {//获取数据    
             string json = "";
             string paramurl = string.Format($"/api/guahao/GetPatientByPatientId?pid={patient_id}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-
-
+                json = HttpClientUtil.Get(paramurl);
+                 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1)
                 {
@@ -1019,25 +945,14 @@ namespace Client.Forms.Pages
 
         public void GetYbkDetailInfo(string certno)
         {
-            //获取数据   
-            Task<HttpResponseMessage> task = null;
+            //获取数据    
             string json = "";
             string paramurl = string.Format($"/api/user/GetYbkDetailInfo?certno={certno}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<UserInfoResponseModel>>(json);
                 if (result.status == 1)
@@ -1071,26 +986,15 @@ namespace Client.Forms.Pages
 
         public void GetRecordByPatientId(string patient_id)
         {
-            //获取数据  
-            Task<HttpResponseMessage> task = null;
+            //获取数据   
             string json = "";
             string paramurl = string.Format($"/api/guahao/GetRecordByPatientId?patient_id={patient_id}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-
-
+                json = HttpClientUtil.Get(paramurl);
+                 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhSearchVM>>>(json);
                 if (result.status == 1)
                 {
@@ -1103,7 +1007,7 @@ namespace Client.Forms.Pages
                         ampm = p.ampm,
                         visit_status = p.visit_status
                     }).ToList();
-                    //dgv_ghlist.Init();
+                    dgv_ghlist.Init();
                     dgv_ghlist.DataSource = _source;
                     dgv_ghlist.AutoResizeColumns();
                     dgv_ghlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;

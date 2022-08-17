@@ -546,23 +546,11 @@ namespace Client
                 }
 
                 //判断是否存在
-                Task<HttpResponseMessage> task = null;
-                var json = "";
-
-
+                var json = ""; 
                 var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no=&open_flag=";
 
                 string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
                 if (result.status == 1)
                 {

@@ -34,25 +34,13 @@ namespace Client
         }
 
         private void GetNewPatientId()
-        {
-            string json = ""; string paramurl = "";
+        { 
 
             try
             {
-                //根据patientId查找已存在的病人
-                Task<HttpResponseMessage> task = null;
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                //根据patientId查找已存在的病人 
+                var paramurl = string.Format($"/api/GuaHao/GetNewPatientId");
+                var json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
                 if (result.status == 1)
                 {
@@ -192,25 +180,10 @@ namespace Client
                     sno = ybkId;
                 }
                 barcode = cardId;
-
-
-                string json = ""; string paramurl = "";
-
-
-                //根据patientId查找已存在的病人
-                Task<HttpResponseMessage> task = null;
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                  
+                //根据patientId查找已存在的病人 
+                var paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
+                var json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
                 if (result.status == 1 && result.data.Count > 0)
@@ -232,19 +205,9 @@ namespace Client
                         }
                     }
                 }
-
-                json = "";
+                 
                 paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
                 result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
                 if (result.status == 1 && result.data.Count > 0)
@@ -488,20 +451,9 @@ namespace Client
         {
             try
             {
-                //根据patientId查找已存在的病人
-                Task<HttpResponseMessage> task = null;
-                string json = "";
+                //根据patientId查找已存在的病人 
                 string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={code}");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
                 var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
 
 
@@ -655,7 +607,11 @@ namespace Client
                 if (userInfo.relation_code!=null)
                 {
                     cbxRelation.SelectedValue = userInfo.relation_code;
-                } 
+                }
+                else
+                {
+                    cbxRelation.Text = "";
+                }
 
                 //查询身份证表信息
                 BindSfzInfo(userInfo.patient_id);

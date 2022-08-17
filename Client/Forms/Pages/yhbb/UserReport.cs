@@ -230,24 +230,7 @@ namespace Client.Forms.Pages.yhbb
         ReportDataVM rdvm;
         //初始化报表
         private void InitializeReport(string RptMode)
-        {
-            //var json = "";
-            //var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
-
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-            //task.Wait();
-            //var response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            //else
-            //{
-            //    log.Info(response.ReasonPhrase);
-            //}
+        {  
             var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
             var json = HttpClientUtil.Get(paramurl);
             var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);

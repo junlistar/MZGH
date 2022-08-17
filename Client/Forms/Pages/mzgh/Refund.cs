@@ -46,29 +46,14 @@ namespace Client
 
         public void LoadData()
         {
-            log.Info("LoadData");
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+            log.Info("LoadData"); 
             string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={_barcode}");
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
             try
-            {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            { 
+                var json = HttpClientUtil.Get(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(response.ReasonPhrase);
-                    return;
-                }
                 var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
                 if (listApi != null && listApi.Count > 0)
                 {
@@ -82,27 +67,13 @@ namespace Client
 
                     log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-                    json = "";
-                    task.Wait();
-                    response = task.Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var read = response.Content.ReadAsStringAsync();
-                        read.Wait();
-                        json = read.Result;
-                    }
-                    else
-                    {
-                        log.Info(response.ReasonPhrase);
-                    }
+                    json = HttpClientUtil.Get(paramurl);
+
                     var depositList = WebApiHelper.DeserializeObject<ResponseResult<List<GhDepositVM>>>(json).data;
                     if (depositList == null)
                     {
                         return;
-                    }
-
-
+                    } 
                     var showlist = depositList.Where(p => p.depo_status == "4").ToList();
                     var refundlist = depositList.Where(p => p.depo_status == "7").ToList();
                     foreach (var item in showlist)
@@ -414,28 +385,14 @@ namespace Client
             {
                 return;
             }
-
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+             
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(response.ReasonPhrase);
-                }
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
@@ -475,28 +432,14 @@ namespace Client
 
             //查询列表
             var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-            var patient_id = lblhidid.Text;
-            Task<HttpResponseMessage> task = null; var json = "";
+            var patient_id = lblhidid.Text; 
             var paramurl = string.Format($"/api/GuaHao/GetGhRefund?datestr={datestr}&patient_id={patient_id}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {
+            { 
+                var json = HttpClientUtil.Get(paramurl);
 
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(response.ReasonPhrase);
-                }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
 
                 if (result.status == 1 && result.data != null && result.data.Count > 0)

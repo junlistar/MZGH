@@ -41,21 +41,10 @@ namespace Client.Forms.Pages.hbgl
         {
             try
             {
-                //获取挂号时间段
-                var json = "";
-                var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
-
+                //获取挂号时间段 
+                var paramurl = string.Format($"/api/GuaHao/GetRequestHours"); 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
             }
             catch (Exception ex)
@@ -112,22 +101,11 @@ namespace Client.Forms.Pages.hbgl
                 {
                     UIMessageTip.ShowWarning("开始小时数必须小于等于结束小时数！");
                     return;
-                }
-                Task<HttpResponseMessage> task;
-                string json = "";
+                } 
                 string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)
@@ -165,24 +143,13 @@ namespace Client.Forms.Pages.hbgl
             {
                 return;
             }
-
-            Task<HttpResponseMessage> task;
-            string json = "";
+             
             string paramurl = string.Format($"/api/GuaHao/DeleteRequestHour?code={d.code}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (result.status == 1)

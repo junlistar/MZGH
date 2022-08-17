@@ -37,7 +37,11 @@ namespace Client.Forms.Pages.mzgh
             dgvUsers.Init();
             dgvUsers.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
-
+        /// <summary>
+        /// 双击选择患者，并关闭弹窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -60,8 +64,21 @@ namespace Client.Forms.Pages.mzgh
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (dgvUsers.SelectedIndex!=-1)
-            { 
+            SelectRowAndClose();
+        }
+
+        private void dgvUsers_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode== Keys.Enter)
+            {
+                SelectRowAndClose(); 
+            }
+        }
+
+        public void SelectRowAndClose()
+        { 
+            if (dgvUsers.SelectedIndex != -1)
+            {
                 var pid = dgvUsers.Rows[dgvUsers.SelectedIndex].Cells["patient_id"].Value.ToString();
                 SessionHelper.sel_patientid = pid;
                 this.DialogResult = DialogResult.OK;

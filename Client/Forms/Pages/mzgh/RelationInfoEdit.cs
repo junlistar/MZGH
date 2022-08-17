@@ -129,19 +129,10 @@ namespace Client
             try
             {
                 //根据patientId查找已存在的病人
-                Task<HttpResponseMessage> task = null;
-                string json = "";
                 string paramurl = string.Format($"/api/user/GetMzPatientRelationByPatientId?pid={code}");
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientRelationVM>>>(json);
 
                 if (result.status == 1 && result.data.Count > 0)

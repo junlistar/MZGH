@@ -30,13 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.imgQRCode = new System.Windows.Forms.PictureBox();
             this.btnLostPwd = new Sunny.UI.UILinkLabel();
             this.btnEditPwd = new Sunny.UI.UILinkLabel();
             this.btnScanLogin = new Sunny.UI.UILinkLabel();
             this.lblTitle2 = new Sunny.UI.UILabel();
             this.lblTitle1 = new Sunny.UI.UILabel();
-            this.uiTextBox1 = new Sunny.UI.UITextBox();
+            this.txtSign = new Sunny.UI.UITextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnLogin = new Sunny.UI.UISymbolButton();
             this.txtPwd = new Sunny.UI.UITextBox();
@@ -45,10 +44,10 @@
             this.uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             this.uiSymbolLabel2 = new Sunny.UI.UISymbolLabel();
             this.uiSymbolLabel3 = new Sunny.UI.UISymbolLabel();
+            this.imgQRCode = new System.Windows.Forms.PictureBox();
             this.uiPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).BeginInit();
-            this.uiTextBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).BeginInit();
             this.SuspendLayout();
             // 
             // uiPanel1
@@ -56,9 +55,10 @@
             this.uiPanel1.Controls.Add(this.btnLostPwd);
             this.uiPanel1.Controls.Add(this.btnEditPwd);
             this.uiPanel1.Controls.Add(this.btnScanLogin);
+            this.uiPanel1.Controls.Add(this.imgQRCode);
             this.uiPanel1.Controls.Add(this.lblTitle2);
             this.uiPanel1.Controls.Add(this.lblTitle1);
-            this.uiPanel1.Controls.Add(this.uiTextBox1);
+            this.uiPanel1.Controls.Add(this.txtSign);
             this.uiPanel1.Controls.Add(this.label4);
             this.uiPanel1.Controls.Add(this.btnLogin);
             this.uiPanel1.Controls.Add(this.txtPwd);
@@ -77,16 +77,6 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // imgQRCode
-            // 
-            this.imgQRCode.Location = new System.Drawing.Point(-7, -17);
-            this.imgQRCode.Name = "imgQRCode";
-            this.imgQRCode.Size = new System.Drawing.Size(248, 223);
-            this.imgQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgQRCode.TabIndex = 14;
-            this.imgQRCode.TabStop = false;
-            this.imgQRCode.Visible = false;
             // 
             // btnLostPwd
             // 
@@ -161,25 +151,24 @@
             this.lblTitle1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblTitle1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiTextBox1
+            // txtSign
             // 
-            this.uiTextBox1.ButtonSymbol = 61703;
-            this.uiTextBox1.Controls.Add(this.imgQRCode);
-            this.uiTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTextBox1.Location = new System.Drawing.Point(47, 112);
-            this.uiTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox1.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox1.Name = "uiTextBox1";
-            this.uiTextBox1.ShowText = false;
-            this.uiTextBox1.Size = new System.Drawing.Size(237, 39);
-            this.uiTextBox1.Style = Sunny.UI.UIStyle.Custom;
-            this.uiTextBox1.StyleCustomMode = true;
-            this.uiTextBox1.Symbol = 62104;
-            this.uiTextBox1.TabIndex = 10;
-            this.uiTextBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox1.Watermark = "";
-            this.uiTextBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtSign.ButtonSymbol = 61703;
+            this.txtSign.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtSign.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtSign.Location = new System.Drawing.Point(47, 112);
+            this.txtSign.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSign.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtSign.Name = "txtSign";
+            this.txtSign.ShowText = false;
+            this.txtSign.Size = new System.Drawing.Size(237, 39);
+            this.txtSign.Style = Sunny.UI.UIStyle.Custom;
+            this.txtSign.StyleCustomMode = true;
+            this.txtSign.Symbol = 62104;
+            this.txtSign.TabIndex = 10;
+            this.txtSign.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtSign.Watermark = "";
+            this.txtSign.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label4
             // 
@@ -303,6 +292,18 @@
             this.uiSymbolLabel3.MouseEnter += new System.EventHandler(this.uiSymbolLabel3_MouseEnter);
             this.uiSymbolLabel3.MouseLeave += new System.EventHandler(this.uiSymbolLabel3_MouseLeave);
             // 
+            // imgQRCode
+            // 
+            this.imgQRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.imgQRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgQRCode.Location = new System.Drawing.Point(40, 89);
+            this.imgQRCode.Name = "imgQRCode";
+            this.imgQRCode.Size = new System.Drawing.Size(248, 223);
+            this.imgQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgQRCode.TabIndex = 14;
+            this.imgQRCode.TabStop = false;
+            this.imgQRCode.Visible = false;
+            // 
             // Login
             // 
             this.AllowShowTitle = false;
@@ -326,9 +327,8 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).EndInit();
-            this.uiTextBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -338,7 +338,7 @@
         private Sunny.UI.UITextBox txtName;
         private Sunny.UI.UISymbolButton btnLogin;
         private Sunny.UI.UITextBox txtPwd;
-        private Sunny.UI.UITextBox uiTextBox1;
+        private Sunny.UI.UITextBox txtSign;
         private Sunny.UI.UILabel lblTitle2;
         private Sunny.UI.UILabel lblTitle1;
         private System.Windows.Forms.Label label4;

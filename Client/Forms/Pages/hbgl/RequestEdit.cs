@@ -70,20 +70,9 @@ namespace Client
             try
             {
                 if (!string.IsNullOrEmpty(_record_sn))
-                {
-                    Task<HttpResponseMessage> task = null;
-                    string json = "";
+                {  
                     string paramurl = string.Format($"/api/GuaHao/GetGhRecord?record_sn={_record_sn}");
-                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                    task.Wait();
-                    var response = task.Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var read = response.Content.ReadAsStringAsync();
-                        read.Wait();
-                        json = read.Result;
-                    }
+                    string json = HttpClientUtil.Get(paramurl);
                     var result = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json);
                     if (result.status == 1 && result.data != null)
                     {

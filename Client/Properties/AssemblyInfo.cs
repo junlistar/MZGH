@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("China")]
-[assembly: AssemblyProduct("Client")]
+[assembly: AssemblyProduct("GuX.His")]
 [assembly: AssemblyCopyright("Copyright © China 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

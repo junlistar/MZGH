@@ -44,27 +44,13 @@ namespace Client
             LoadData();
         }
         public void LoadData()
-        {
-            Task<HttpResponseMessage> task = null; var json = "";
+        { 
             var paramurl = string.Format($"/api/GuaHao/GetGhRefundPayList?request_date={_datestr}&patient_id={_patient_id}&times={_times}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+             
+            var json = HttpClientUtil.Get(paramurl);
 
-
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            else
-            {
-                log.Info(response.ReasonPhrase);
-            }
             var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundPayVM>>>(json);
             if (result.status==1)
             {

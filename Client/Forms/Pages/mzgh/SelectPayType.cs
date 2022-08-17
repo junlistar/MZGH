@@ -146,7 +146,7 @@ namespace Client
             else
             {
                 UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
-            } 
+            }
         }
 
         public bool YBRefund()
@@ -249,7 +249,7 @@ namespace Client
         }
 
 
-        public void OpenPayWindow(PayMethodEnum payMethod,string his_cheque_type)
+        public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type)
         {
 
             var left_je = Convert.ToDouble(lblsyje.Text);
@@ -304,7 +304,7 @@ namespace Client
 
             if (payMethod == PayMethodEnum.WeiXin || payMethod == PayMethodEnum.Zhifubao)
             {
-                 
+
                 WxPay wxPay = new WxPay(his_cheque_type, left_je.ToString(), out_trade_no);
                 wxPay.ShowDialog();
                 if (wxPay.DialogResult == DialogResult.OK)
@@ -690,16 +690,7 @@ namespace Client
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-                var json = "";
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
 
@@ -789,7 +780,7 @@ namespace Client
                 gbxChequelist.Add(btn1);
             }
         }
-             
+
 
         private void ChequeCompare_Click(object sender, EventArgs e)
         {
@@ -797,7 +788,7 @@ namespace Client
 
             if (btn.Text.Contains("微信"))
             {
-                OpenPayWindow(PayMethodEnum.WeiXin,btn.TagString);
+                OpenPayWindow(PayMethodEnum.WeiXin, btn.TagString);
             }
             else if (btn.Text.Contains("支付宝"))
             {
@@ -815,36 +806,27 @@ namespace Client
             {
                 OpenPayWindow(PayMethodEnum.Xianjin, btn.TagString);
             }
-           
+
         }
 
         public void GetEffectivePriceByRecordSN()
         {
             var record_sn = vm.record_sn;
 
-            Task<HttpResponseMessage> task = null;
-            string json = "";
             string paramurl = string.Format($"/api/GuaHao/GetChargeItemsByRecordSN?record_sn={record_sn}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                var json = HttpClientUtil.Get(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
+                var dat = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeItemVM>>>(json).data;
+                if (dat != null)
                 {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                    var dat = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeItemVM>>>(json).data;
-                    if (dat != null)
-                    {
-                        vm.je = dat.Sum(p => p.effective_price).ToString();
-                        chargeItems = dat;
-                    }
+                    vm.je = dat.Sum(p => p.effective_price).ToString();
+                    chargeItems = dat;
                 }
+
             }
             catch (Exception ex)
             {
@@ -1140,7 +1122,7 @@ namespace Client
             //    remark = _remark
             //};
             log.Debug("_data:" + _data);
-             var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
+            var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
 
             log.Debug("stringA:" + stringA);
             var stringSignTemp = stringA + $"&key={key}&version={version}";
@@ -1231,25 +1213,12 @@ namespace Client
         {
             //string sql = "select * from rt_report_data_fast_net where report_code = 220001";
             //DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
-
-
-            Task<HttpResponseMessage> task = null; var json = "";
+             
             var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.mzgh_report_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-            task.Wait();
-            var response = task.Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var read = response.Content.ReadAsStringAsync();
-                read.Wait();
-                json = read.Result;
-            }
-            else
-            {
-                log.Info(response.ReasonPhrase);
-            }
+
+            var json = HttpClientUtil.Get(paramurl);
 
             var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
 
@@ -1426,7 +1395,7 @@ namespace Client
         /// </summary>
         /// <returns></returns>
         public Report CreateReportAndLoadFrx(string pay_string)
-        { 
+        {
             Report report = new Report();
 
             report.Load(Application.StartupPath + @"\FastReport\file\gh_pay.frx");//这里是模板的路径 
@@ -1823,7 +1792,7 @@ namespace Client
 
         private void btnyl_Click(object sender, EventArgs e)
         {
-           // OpenPayWindow(PayMethodEnum.Yinlian);
+            // OpenPayWindow(PayMethodEnum.Yinlian);
         }
 
         private void btnybk_Click(object sender, EventArgs e)
@@ -1834,7 +1803,7 @@ namespace Client
                 return;
             }
 
-           // OpenPayWindow(PayMethodEnum.Yibao);
+            // OpenPayWindow(PayMethodEnum.Yibao);
         }
 
         private void btnxj_Click(object sender, EventArgs e)

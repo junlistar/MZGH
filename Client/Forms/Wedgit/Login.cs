@@ -229,11 +229,20 @@ namespace Client.Forms.Wedgit
                 imgQRCode.Image = img;
                 imgQRCode.Show();
                 imgQRCode.BringToFront();
+                txtSign.Hide();
+                txtName.Hide();
+                txtPwd.Hide();
+                btnLogin.Hide();
+
                 btnScanLogin.Text = "账号登录";
             }
             else
             {
                 imgQRCode.Hide();
+                txtSign.Show();
+                txtName.Show();
+                txtPwd.Show();
+                btnLogin.Show();
                 btnScanLogin.Text = "扫码登录";
             }
 

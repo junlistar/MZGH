@@ -45,6 +45,10 @@
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.cbxRelation = new Sunny.UI.UIComboBox();
+            this.txtRelationName = new Sunny.UI.UITextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.cbxShenfen = new Sunny.UI.UIComboBox();
             this.uiLabel5 = new Sunny.UI.UILabel();
             this.txthomedistrict = new Sunny.UI.UITextBox();
@@ -69,10 +73,6 @@
             this.sfz_card_no = new Sunny.UI.UITextBox();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtRelationName = new Sunny.UI.UITextBox();
-            this.cbxRelation = new Sunny.UI.UIComboBox();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.sfz_folk.SuspendLayout();
@@ -128,7 +128,7 @@
             this.uiLabel6.Size = new System.Drawing.Size(100, 23);
             this.uiLabel6.Style = Sunny.UI.UIStyle.Green;
             this.uiLabel6.TabIndex = 5;
-            this.uiLabel6.Text = "联系电话";
+            this.uiLabel6.Text = "手机号码";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel6.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -419,6 +419,75 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
+            // 
+            // cbxRelation
+            // 
+            this.cbxRelation.DataSource = null;
+            this.cbxRelation.FillColor = System.Drawing.Color.White;
+            this.cbxRelation.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxRelation.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxRelation.Items.AddRange(new object[] {
+            "已婚",
+            "未婚",
+            "丧偶",
+            "离婚",
+            "其他"});
+            this.cbxRelation.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxRelation.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxRelation.Location = new System.Drawing.Point(446, 200);
+            this.cbxRelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxRelation.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxRelation.Name = "cbxRelation";
+            this.cbxRelation.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxRelation.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxRelation.Size = new System.Drawing.Size(179, 29);
+            this.cbxRelation.Style = Sunny.UI.UIStyle.Green;
+            this.cbxRelation.TabIndex = 39;
+            this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txtRelationName
+            // 
+            this.txtRelationName.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txtRelationName.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txtRelationName.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
+            this.txtRelationName.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
+            this.txtRelationName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtRelationName.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.txtRelationName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtRelationName.Location = new System.Drawing.Point(446, 161);
+            this.txtRelationName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtRelationName.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtRelationName.Name = "txtRelationName";
+            this.txtRelationName.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.txtRelationName.ShowText = false;
+            this.txtRelationName.Size = new System.Drawing.Size(180, 29);
+            this.txtRelationName.Style = Sunny.UI.UIStyle.Green;
+            this.txtRelationName.TabIndex = 16;
+            this.txtRelationName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtRelationName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(360, 203);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(90, 21);
+            this.label20.TabIndex = 53;
+            this.label20.Text = "与患者关系";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(381, 163);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(58, 21);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "监护人";
             // 
             // cbxShenfen
             // 
@@ -825,75 +894,6 @@
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(360, 203);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(90, 21);
-            this.label20.TabIndex = 53;
-            this.label20.Text = "与患者关系";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(381, 163);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 21);
-            this.label9.TabIndex = 52;
-            this.label9.Text = "监护人";
-            // 
-            // txtRelationName
-            // 
-            this.txtRelationName.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txtRelationName.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txtRelationName.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txtRelationName.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txtRelationName.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.txtRelationName.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.txtRelationName.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtRelationName.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.txtRelationName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtRelationName.Location = new System.Drawing.Point(446, 161);
-            this.txtRelationName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtRelationName.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtRelationName.Name = "txtRelationName";
-            this.txtRelationName.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txtRelationName.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.txtRelationName.ShowText = false;
-            this.txtRelationName.Size = new System.Drawing.Size(180, 29);
-            this.txtRelationName.Style = Sunny.UI.UIStyle.Green;
-            this.txtRelationName.TabIndex = 16;
-            this.txtRelationName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtRelationName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbxRelation
-            // 
-            this.cbxRelation.DataSource = null;
-            this.cbxRelation.FillColor = System.Drawing.Color.White;
-            this.cbxRelation.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxRelation.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
-            this.cbxRelation.Items.AddRange(new object[] {
-            "已婚",
-            "未婚",
-            "丧偶",
-            "离婚",
-            "其他"});
-            this.cbxRelation.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxRelation.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxRelation.Location = new System.Drawing.Point(446, 200);
-            this.cbxRelation.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxRelation.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxRelation.Name = "cbxRelation";
-            this.cbxRelation.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxRelation.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxRelation.Size = new System.Drawing.Size(179, 29);
-            this.cbxRelation.Style = Sunny.UI.UIStyle.Green;
-            this.cbxRelation.TabIndex = 39;
-            this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // UserInfoEdit
             // 

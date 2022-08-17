@@ -117,9 +117,7 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
-
-
-            Task<HttpResponseMessage> task = null;
+             
             string json = "";
 
             #region 参数处理
@@ -184,20 +182,7 @@ namespace Client
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Error(response.ReasonPhrase);
-                }
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
                 if (result.status == 1 && result.data != null)
@@ -452,25 +437,7 @@ namespace Client
 
         public void BindNullData()
         {
-            dgvlist.DataSource = null;
-            //var tmp = new List<BaseRequestVM>();
-            //var ds = tmp.Select(p => new
-            //{
-            //    record_sn = p.record_sn,
-            //    request_date = p.request_date,
-            //    open_flag_str = p.open_flag_str,
-            //    apstr = p.apstr,
-            //    unit_name = p.unit_name,
-            //    clinic_name = p.clinic_name,
-            //    req_name = p.req_name,
-            //    group_name = p.group_name,
-            //    doct_name = p.doct_name,
-            //    winnostr = p.winnostr,
-            //    begin_no = p.begin_no,
-            //    current_no = p.current_no,
-            //    end_no = p.end_no,
-            //}).ToList();
-            //dgvlist.DataSource = ds;
+            dgvlist.DataSource = null; 
         }
 
         UIDataGridView dgv = new UIDataGridView();

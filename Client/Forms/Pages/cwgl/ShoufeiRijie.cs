@@ -70,21 +70,11 @@ namespace Client.Forms.Pages.cwgl
                 };
 
                 var param = $"opera={d.opera}&report_date={d.report_date}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/cwgl/GetMzsfReport?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<string>>>(json);
                 cbxStatus.Items.Clear();
                 if (result.status == 1)
@@ -131,24 +121,11 @@ namespace Client.Forms.Pages.cwgl
         private void InitializeReport(string RptMode)
         {
             try
-            {
-                Task<HttpResponseMessage> task = null; var json = "";
+            { 
                 var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(response.ReasonPhrase);
-                }
+                string json = HttpClientUtil.Get(paramurl);
 
                 var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
 

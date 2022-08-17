@@ -178,7 +178,7 @@ namespace Client.ClassLib
 
         //获取周一
         public static DateTime getMonday(DateTime now)
-        { 
+        {
             DateTime temp = new DateTime(now.Year, now.Month, now.Day);
             int count = now.DayOfWeek - DayOfWeek.Monday;
             if (count == -1) count = 6;
@@ -187,7 +187,7 @@ namespace Client.ClassLib
         }
         //获取周天
         public static DateTime getSunday(DateTime now)
-        { 
+        {
             DateTime temp = new DateTime(now.Year, now.Month, now.Day);
             int count = now.DayOfWeek - DayOfWeek.Sunday;
             if (count != 0) count = 7 - count;
@@ -233,7 +233,7 @@ namespace Client.ClassLib
         {
             string res = "";
             switch (dof)
-            { 
+            {
                 case DayOfWeek.Sunday:
                     res = "星期日";
                     break;
@@ -274,11 +274,11 @@ namespace Client.ClassLib
                 case "星期六": return 6;
                 case "星期日": return 7;
                 default:
-                    return 0; 
+                    return 0;
             }
         }
         public static int GetIntByWeekStr(string cnstr)
-        { 
+        {
             switch (cnstr)
             {
                 case "第一周": return 1;

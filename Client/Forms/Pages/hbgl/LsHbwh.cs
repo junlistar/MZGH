@@ -117,9 +117,7 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
-
-
-            Task<HttpResponseMessage> task = null;
+             
             string json = "";
 
             #region 参数处理
@@ -184,20 +182,7 @@ namespace Client
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Error(response.ReasonPhrase);
-                }
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<string>>(json);
                 if (result.status == 1 && result.data != null)

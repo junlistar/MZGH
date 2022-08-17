@@ -3,7 +3,7 @@ using Data.Entities;
 using Data.IRepository;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
+using Serilog;
 
 namespace Data.Repository
 {
@@ -34,13 +34,30 @@ namespace Data.Repository
 
 
             string sql = GetSqlByTag("mzgh_xtuser_login");
-            if (string.IsNullOrEmpty(pwd) ){
+            if (string.IsNullOrEmpty(pwd)) {
                 pwd = "";
-            } 
+            }
             para.Add("@uname", uname);
             para.Add("@pwd", pwd);
 
+            Log.Debug($"准备执行登录查询mzgh_xtuser_login,uname={uname},pwd={pwd}");
+            
             return Select(sql, para);
+
+        }
+
+        public int UpdateUserPassWord(string uname, string pwd)
+        {
+            string sql = GetSqlByTag("mzgh_xtuser_updatepwd");
+            var para = new DynamicParameters();  
+            if (string.IsNullOrEmpty(pwd))
+            {
+                pwd = "";
+            }
+            para.Add("@uname", uname);
+            para.Add("@pwd", pwd);
+
+            return Update(sql, para);
 
         }
 

@@ -99,6 +99,7 @@
             this.dgvUsers.TabIndex = 0;
             this.dgvUsers.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvUsers.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellDoubleClick);
+            this.dgvUsers.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvUsers_KeyUp);
             // 
             // patient_id
             // 

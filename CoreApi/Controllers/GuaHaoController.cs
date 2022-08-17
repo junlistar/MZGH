@@ -269,6 +269,20 @@ namespace CoreApi.Controllers
             return list;
 
         }
+        public ResponseResult<int> UpdateUserPassWord(string uname, string pwd)
+        {
+            Log.Information($"UpdateUserPassWord,{uname},{pwd}"); 
+            try
+            {
+                return _userLoginRepository.UpdateUserPassWord(uname, pwd);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            } 
+
+        } 
 
         /// <summary>
         /// 获取挂号记录

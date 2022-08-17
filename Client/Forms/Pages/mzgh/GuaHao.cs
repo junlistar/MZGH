@@ -34,7 +34,7 @@ namespace Client
             InitializeComponent();
         }
         /// <summary>
-        /// 解决页面频繁刷新时界面闪烁问题
+        /// 解决页面频繁刷新时界面闪烁问题(自定义控件拖动花屏)
         /// </summary>
         protected override CreateParams CreateParams
         {
@@ -56,6 +56,7 @@ namespace Client
 
         Color cur_color = Color.FromArgb(0, 150, 136);
 
+        //时间段 选中颜色
         Color requestHoureSelectedColor = Color.FromArgb(80, 160, 255);
 
         UIHeaderAsideMainFooterFrame parentForm;
@@ -65,11 +66,7 @@ namespace Client
 
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
-
-        private void uiLabel2_Click(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         public void GuaHao_Load(object sender, EventArgs e)
         {
@@ -87,8 +84,7 @@ namespace Client
             this.dtpGhrq.ValueChanged += dtpGhrq_ValueChanged;
 
             //设置按钮提示文字信息
-            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]");
-            uiToolTip1.SetToolTip(uiSymbolButton4, uiSymbolButton4.Text + "[F2]");
+            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]"); 
             uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text + "[F3]");
             uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text + "[F4]");
 
@@ -163,11 +159,7 @@ namespace Client
                     btn1.Click += Btn1_Click;
                     pnlHours.Add(btn1);
                 }
-                pnlHours.RectColor = Color.Transparent;
-
-                ////初始化明天，后天按钮
-                //btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
-                //btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
+                pnlHours.RectColor = Color.Transparent; 
 
                 this.dtpGhrq.Value = DateTime.Now;
 
@@ -285,11 +277,7 @@ namespace Client
                         break;
                     }
                 }
-
-
-                Task<HttpResponseMessage> task = null;
-                string json = "";
-
+                 
                 var d = new
                 {
                     request_date = dh_data,
@@ -304,17 +292,8 @@ namespace Client
                 string paramurl = string.Format($"/api/GuaHao/GetGhRequest?request_date={d.request_date}&ampm={d.ampm}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                 
+                var json = HttpClientUtil.Get(paramurl);
 
                 var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<GHRequestVM>>>(json);
                 if (listApi.data == null)
@@ -600,24 +579,13 @@ namespace Client
 
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
-        {
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+        { 
             string paramurl = string.Format($"/api/GuaHao/CheckGhRepeat?patient_id={patient_id}&record_sn={record_sn}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+            { 
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
 
@@ -780,25 +748,7 @@ namespace Client
 
             ReadCika rc = new ReadCika("磁卡");
             rc.FormClosed += Rc_FormClosed;
-            rc.ShowDialog();
-
-
-            //var barcode = this.txtCode.Text.Trim();
-            //lblMsg.Text = "";
-            //if (string.IsNullOrEmpty(barcode))
-            //{
-            //    this.txtCode.Focus();
-            //}
-            //else
-            //{
-            //    SearchUser();
-            //}
-
-            //ReadCard rc = new ReadCard("磁卡");
-            ////关闭，刷新
-            //rc.FormClosed += Rc_FormClosed;
-            //rc.ShowDialog();
-
+            rc.ShowDialog(); 
         }
 
         private void Rc_FormClosed(object sender, FormClosedEventArgs e)
@@ -1107,18 +1057,7 @@ namespace Client
         }
 
         private void GuaHao_KeyUp(object sender, KeyEventArgs e)
-        {
-            //if (txtCode.Focused)
-            //{
-            //    return;
-            //}
-            //else
-            //{
-            //    if (e.KeyCode != Keys.F1 && e.KeyCode != Keys.F2 && e.KeyCode != Keys.F3 && e.KeyCode != Keys.F4 && e.KeyCode != Keys.F5)
-            //    {
-            //        ShowSearchWindow();
-            //    }
-            //}
+        { 
         }
 
         public void ShowSearchWindow()
@@ -1198,7 +1137,8 @@ namespace Client
         private void txtCode_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
+            { 
+
                 //清空缓存
                 SessionHelper.CardReader = null;
                 YBHelper.currentYBInfo = null;
@@ -1230,21 +1170,18 @@ namespace Client
 
         public void SearchUser()
         {
-
             var barcode = this.txtCode.Text.Trim();
             lblMsg.Text = "";
             if (string.IsNullOrEmpty(barcode))
             {
-                InitUIText();
                 return;
             }
+            InitUIText();
 
 
             List<PatientVM> listApi = new List<PatientVM>();
             //获取数据 
-
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+             
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             //如果点击的是身份证或医保卡，择查询身份证信息
@@ -1256,16 +1193,8 @@ namespace Client
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
@@ -1558,26 +1487,7 @@ namespace Client
             }
 
             return "";
-        }
-
-        private void btnMingtian_Click(object sender, EventArgs e)
-        {
-            btnHoutian.FillColor = Color.FromArgb(110, 190, 40);
-            btnMingtian.FillColor = Color.FromArgb(230, 80, 80);
-            dtpGhrq.Value = DateTime.Now.AddDays(1);
-        }
-
-        private void btnHoutian_Click(object sender, EventArgs e)
-        {
-            btnMingtian.FillColor = Color.FromArgb(110, 190, 40);
-            btnHoutian.FillColor = Color.FromArgb(230, 80, 80);
-            dtpGhrq.Value = DateTime.Now.AddDays(2);
-        }
-
-        private void uiSymbolButton4_Click(object sender, EventArgs e)
-        {
-            ShowSearchWindow();//搜索
-        }
+        } 
 
         private void GuaHao_Initialize(object sender, EventArgs e)
         {
@@ -1609,11 +1519,7 @@ namespace Client
             }
             isBreadHandleSet = false;
         }
-
-
-        private void uiGroupBox2_MouseEnter(object sender, EventArgs e)
-        {
-        }
+         
 
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -1721,8 +1627,7 @@ namespace Client
         private void btnEditRelation_Click(object sender, EventArgs e)
         {
             try
-            {
-
+            { 
                 if (PatientVM != null && !string.IsNullOrEmpty(PatientVM.patient_id))
                 {
                     RelationInfoEdit relationInfoEdit = new RelationInfoEdit(PatientVM.patient_id, PatientVM.relation_code, PatientVM.relation_name);

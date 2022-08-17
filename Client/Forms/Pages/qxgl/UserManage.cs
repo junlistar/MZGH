@@ -232,21 +232,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"subsys_id={d.subsys_id}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/GetXTGroupsBySysId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTGroupVM>>>(json);
                 tv_groups.Nodes.Clear();
                 if (result.status == 1)
@@ -300,21 +290,13 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-
-                var json = "";
+                  
                 var paramurl = string.Format($"/api/qxgl/GetXTUsersBySysId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserVM>>>(json);
                 tv_users.Nodes.Clear();
                 if (result.status == 1)
@@ -357,21 +339,13 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsByGroupId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserGroupVM>>>(json);
                 tv_functions.Nodes.Clear();
                 if (result.status == 1)
@@ -409,21 +383,13 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/GetXTUserReportsByGroupId?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserReportVM>>>(json);
                 tv_reports.Nodes.Clear();
                 if (result.status == 1)
@@ -496,21 +462,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"user_group={d.user_group}&subsys_id={d.subsys_id}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/DeleteXTGroup?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
 
                 if (result.status == 1)
@@ -543,21 +499,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"user_name={d.user_name}&user_group={d.user_group}&subsys_id={d.subsys_id}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/DeleteXtUser?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
 
                 if (result.status == 1)
@@ -636,21 +582,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"rep_id={d.rep_id}&subsys_id={d.subsys_id}&user_group={d.user_group}";
-
-                var json = "";
+ 
                 var paramurl = string.Format($"/api/qxgl/DelXtUserReports?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
 
                 if (result.status == 1)
@@ -699,21 +635,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"subsys_id={d.subsys_id}";
-
-                var json = "";
+                  
                 var paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json);
 
                 if (result.status == 1)
@@ -749,6 +675,11 @@ namespace Client.Forms.Pages.qxgl
             }
         }
 
+        /// <summary>
+        /// 加载子项目
+        /// </summary>
+        /// <param name="treeNodeCollection"></param>
+        /// <param name="data"></param>
         public void LoadSubFuncItems(TreeNodeCollection treeNodeCollection, List<XTFunctionsVM> data)
         {
 
@@ -766,10 +697,16 @@ namespace Client.Forms.Pages.qxgl
             }
         }
 
+        /// <summary>
+        /// 保存菜单权限
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveMenu_Click(object sender, EventArgs e)
         {
             var func_str = "";
 
+            //获取选中的菜单项
             GetChildNode(tv_func_select.Nodes, ref func_str);
 
 
@@ -789,21 +726,11 @@ namespace Client.Forms.Pages.qxgl
                 };
 
                 var param = $"func_str={d.func_str}&subsys_id={d.subsys_id}&user_group={d.user_group}";
-
-                var json = "";
+                 
                 var paramurl = string.Format($"/api/qxgl/AddXtUserGroups?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                string json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                  
                 if (result.status == 1)
@@ -822,6 +749,12 @@ namespace Client.Forms.Pages.qxgl
                 log.Error(ex.Message);
             }
         }
+        /// <summary>
+        /// 获取树形菜单子项
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name="func_str"></param>
+        /// <returns></returns>
         public string GetChildNode(TreeNodeCollection nodes, ref string func_str)
         {
             var node_str = "";
@@ -847,7 +780,11 @@ namespace Client.Forms.Pages.qxgl
             func_str += node_str;
             return node_str;
         }
-
+        /// <summary>
+        /// 设置树形菜单选中
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
         public bool SetCheckBox(TreeNodeCollection nodes)
         {
             bool _re = false;

@@ -105,8 +105,7 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
-
-            Task<HttpResponseMessage> task = null;
+             
             string json = "";
 
             #region 参数处理
@@ -172,26 +171,13 @@ namespace Client
 
             var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
 
-            //string paramurl = string.Format($"/api/GuaHao/GhSearchList?gh_date={gh_date}&visit_dept={visit_dept}&clinic_type={clinic_type}&doctor_code={doctor_code}&group_sn={group_sn}&req_type={req_type}&ampm={ampm}&gh_opera={gh_opera}&name={name}&p_bar_code={p_bar_code}");
-            string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
+             string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                json = HttpClientUtil.Get(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Error(response.ReasonPhrase);
-                }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
                 if (result.status == 1 && result.data.Count > 0)
                 {
