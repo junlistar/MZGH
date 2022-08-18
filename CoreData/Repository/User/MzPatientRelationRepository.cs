@@ -24,7 +24,7 @@ namespace Data.Repository
 
         public bool UpdateMzPatientRelation(string patient_id, string relation_code, string sfz_id, string username, string sex, string tel, string opera, string birth, string address)
         {
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction(); try
                 {
@@ -87,7 +87,7 @@ namespace Data.Repository
         {
             try
             {
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

@@ -64,7 +64,7 @@ namespace Data.Repository
                 throw new Exception("操作失败，该数据已经退号了！");
             }
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 

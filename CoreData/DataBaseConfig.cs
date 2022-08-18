@@ -17,10 +17,10 @@ namespace Data
         private static string DefaultRedisString = "localhost, abortConnect=false";
         private static ConnectionMultiplexer redis;
 
-        public static IDbConnection GetSqlConnection(string db_model = "")
+        public static IDbConnection GetSqlConnection(DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             string sqlConnectionString = "";
-            if (string.IsNullOrEmpty(db_model))
+            if (db_model == DBConnectionEnum.Read)
             {
                 sqlConnectionString = DefaultSqlConnectionString;
             }
@@ -67,5 +67,12 @@ namespace Data
         }
 
         #endregion
+
+        
+    }
+    public enum DBConnectionEnum
+    {
+        Read = 0,
+        Write = 1
     }
 }

@@ -672,13 +672,13 @@ namespace Client
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(PatientVM.hic_no))
-            {
-                UIMessageTip.ShowError("用户身份证信息为空，请编辑保存!");
-                lblMsg.Text = "未获到取用户身份证信息，请编辑保存！";
-                txtCode.Focus();
-                return;
-            }
+            //if (string.IsNullOrWhiteSpace(PatientVM.hic_no))
+            //{
+            //    UIMessageTip.ShowError("用户身份证信息为空，请编辑保存!");
+            //    lblMsg.Text = "未获到取用户身份证信息，请编辑保存！";
+            //    txtCode.Focus();
+            //    return;
+            //}
 
             SessionHelper.patientVM = PatientVM;
 
@@ -1540,10 +1540,10 @@ namespace Client
                     BindUnit(requestDic);
                     return;
                 }
-                if (py_code.Length < 2)
-                {
-                    return;
-                }
+                //if (py_code.Length < 2)  //todo:做系统配置，同医院信息，版本号
+                //{
+                //    return;
+                //}
                 var _list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
                 var _source = new Dictionary<string, List<GHRequestVM>>();
                 foreach (var _item in _list)

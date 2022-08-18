@@ -114,9 +114,9 @@ namespace Client.ViewModel
         public string employer_tel { get; set; }
         public string allergic_diag { get; set; }
         public string marry_code { get; set; }
-        public string max_ledger_sn { get; set; }
+        public int max_ledger_sn { get; set; }
         public string max_receipt_sn { get; set; }
-        public string max_item_sn { get; set; }
+        public int max_item_sn { get; set; }
         public string enter_opera { get; set; }
         public string enter_date { get; set; }
         public string update_opera { get; set; }
@@ -125,6 +125,13 @@ namespace Client.ViewModel
         public string yb_psn_no { get; set; }
         public string yb_insuplc_admdvs { get; set; }
         public string yb_insutype { get; set; }
+
+        //监护人信息
+        public string relation_sfzid { get; set; }
+        public string relation_sex { get; set; } 
+        public string relation_birth { get; set; }
+        public string relation_addr { get; set; } 
+
 
     }
 

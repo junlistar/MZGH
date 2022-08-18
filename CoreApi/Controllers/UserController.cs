@@ -30,14 +30,16 @@ namespace CoreApi.Controllers
         private readonly ISfzInfoRepository _sfzInfoRepository;
         private readonly IYbkInfoRepository _ybkInfoRepository;
         private readonly IMzPatientRelationRepository _mzPatientRelationRepository;
+        private readonly IPatientRepository _patientRepository;
 
         public UserController(IMzPatientSfzRepository mzPatientSfzRepository, ISfzInfoRepository sfzInfoRepository, IYbkInfoRepository ybkInfoRepository,
-            IMzPatientRelationRepository mzPatientRelationRepository)
+            IMzPatientRelationRepository mzPatientRelationRepository, IPatientRepository patientRepository)
         {
             _mzPatientSfzRepository = mzPatientSfzRepository;
             _sfzInfoRepository = sfzInfoRepository;
             _ybkInfoRepository = ybkInfoRepository;
             _mzPatientRelationRepository = mzPatientRelationRepository;
+            _patientRepository = patientRepository;
         }
 
         [HttpGet]
@@ -102,8 +104,26 @@ namespace CoreApi.Controllers
         {
             Log.Information($"UpdateUserBaseInfo,{pid},{name},{sex},{marry_code},{birthday},{tel},{relation_name},{relation_code},{home_street},{district},{responseType},{chargeType},{opera}");
             try
-            {
+            { 
                 return _sfzInfoRepository.UpdateUserBaseInfo(pid, name, sex, marry_code, birthday, tel, relation_name, relation_code, home_street, district, responseType, chargeType, opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> UpdateUserBaseInfoByJson()
+        {
+            Log.Information($"UpdateUserBaseInfoByJson");
+            try
+            {
+                //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _sfzInfoRepository.UpdateUserBaseInfo(strData);
             }
             catch (Exception ex)
             {
@@ -203,7 +223,28 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        } 
+        }
 
+        /// <summary>
+        /// 修改用户信息
+        /// </summary> 
+        /// <returns></returns>
+        public ResponseResult<bool> EditUserInfoByJson()
+        {
+            Log.Information($"EditUserInfo,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _patientRepository.EditUserInfo(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+       
     }
 }

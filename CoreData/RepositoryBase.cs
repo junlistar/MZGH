@@ -62,7 +62,7 @@ namespace Data
                 return CacheHelper.Get<string>(tag.ToString());
             }
         }
-        public DataTable ExecuteTable(string sql, string db_model = "")
+        public DataTable ExecuteTable(string sql, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -75,7 +75,7 @@ namespace Data
         // sql语句
         public DataSet ExecuteDataSet(string sql, string tbname, object param, CommandType commandType, string db_model = "")
         {
-            using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
+            using (IDbConnection conn = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 //DataTable table = new DataTable();
                 var reader = conn.ExecuteReader(sql, param, null, null, commandType);
@@ -89,7 +89,7 @@ namespace Data
 
         //执行存储过程，返回DT
 
-        public DataTable ExecuteTable(string sql, object param, CommandType commandType, string db_model = "")
+        public DataTable ExecuteTable(string sql, object param, CommandType commandType, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -104,7 +104,7 @@ namespace Data
 
 
 
-        public int Delete(Guid Id, string deleteSql, string db_model = "")
+        public int Delete(Guid Id, string deleteSql, DBConnectionEnum db_model =  DBConnectionEnum.Write)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -112,7 +112,7 @@ namespace Data
             }
         }
 
-        public T Detail(Guid Id, string detailSql, string db_model = "")
+        public T Detail(Guid Id, string detailSql, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -126,14 +126,14 @@ namespace Data
         /// </summary>
         /// <param name="SPName"></param>
         /// <returns></returns>
-        public List<T> ExecQuerySP(string SPName, string db_model = "")
+        public List<T> ExecQuerySP(string SPName, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
                 return conn.Query<T>(SPName, null, null, true, null, CommandType.StoredProcedure).ToList();
             }
         }
-        public List<T> ExecQuerySP(string SPName, DynamicParameters param, string db_model = "")
+        public List<T> ExecQuerySP(string SPName, DynamicParameters param, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -141,7 +141,7 @@ namespace Data
 
             }
         }
-        public int ExecuteSP(string SPName, DynamicParameters param, string db_model = "")
+        public int ExecuteSP(string SPName, DynamicParameters param, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -149,7 +149,7 @@ namespace Data
             }
         }
 
-        public int Insert(T entity, string insertSql, string db_model = "")
+        public int Insert(T entity, string insertSql, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -157,21 +157,21 @@ namespace Data
             }
         }
 
-        public List<T> Select(string selectSql, string db_model = "")
+        public List<T> Select(string selectSql, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
                 return conn.Query<T>(selectSql).ToList();
             }
         }
-        public List<T> Select(string selectSql, DynamicParameters param, string db_model = "")
+        public List<T> Select(string selectSql, DynamicParameters param, DBConnectionEnum db_model =  DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
                 return conn.Query<T>(selectSql, param).ToList();
             }
         }
-        public List<string> SelectStringList(string selectSql, DynamicParameters param, string db_model = "")
+        public List<string> SelectStringList(string selectSql, DynamicParameters param, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -180,7 +180,7 @@ namespace Data
         }
 
 
-        public object ExcuteScalar(string selectSql, DynamicParameters param, string db_model = "")
+        public object ExcuteScalar(string selectSql, DynamicParameters param, DBConnectionEnum db_model = DBConnectionEnum.Read)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -188,7 +188,7 @@ namespace Data
             }
         }
 
-        public int Update(string updateSql, DynamicParameters param, string db_model = "write")
+        public int Update(string updateSql, DynamicParameters param, DBConnectionEnum db_model = DBConnectionEnum.Write)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {
@@ -196,7 +196,7 @@ namespace Data
             }
         }
 
-        public int Update(T entity, string updateSql, string db_model = "write")
+        public int Update(T entity, string updateSql, DBConnectionEnum db_model = DBConnectionEnum.Write)
         {
             using (IDbConnection conn = DataBaseConfig.GetSqlConnection(db_model))
             {

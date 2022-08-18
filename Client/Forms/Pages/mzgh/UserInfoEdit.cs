@@ -34,7 +34,7 @@ namespace Client
         }
 
         private void GetNewPatientId()
-        { 
+        {
 
             try
             {
@@ -78,9 +78,10 @@ namespace Client
                 var cardId = txtCardId.Text.Trim();
                 var sfzId = sfz_card_no.Text.Trim();
                 var ybkId = "";
+                var shebaohao = txtshebaohao.Text.Trim();
                 var patientId = this.txtpatientid.Text;
                 var userName = this.txtUserName.Text;
-                var sex = sfz_sex.Text == "男" ? "1" : "2";
+                var sex = cbxSex.Text == "男" ? "1" : "2";
                 var birth = sfz_birthday.Text;
                 var tel = this.txtTel.Text.Trim();
 
@@ -112,18 +113,18 @@ namespace Client
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(sfzId))
-                {
-                    UIMessageTip.ShowWarning("身份证号码不能为空!");
-                    sfz_card_no.Focus();
-                    return;
-                }
+                //if (string.IsNullOrWhiteSpace(sfzId))
+                //{
+                //    UIMessageTip.ShowWarning("身份证号码不能为空!");
+                //    sfz_card_no.Focus();
+                //    return;
+                //}
 
                 var marrycode = cbxmarrycode.Text;
                 switch (marrycode)
                 {
                     case "已婚":
-                        marrycode = "1";break;
+                        marrycode = "1"; break;
                     case "未婚":
                         marrycode = "2"; break;
                     case "丧偶":
@@ -135,7 +136,7 @@ namespace Client
                     default:
                         marrycode = "5";
                         break;
-                } 
+                }
 
                 //地区
                 var district = this.txthomedistrict.TagString;
@@ -143,18 +144,28 @@ namespace Client
                 //街道
                 var street = this.txthomestreet.Text;
 
+                //工作单位
+                var employername = txtemployername.Text;
+
                 //职业
                 var zhiye = this.txtZhiye.TagString;
 
                 //身份
-                //var response_type = this.txtShenfen.TagString;
                 var response_type = cbxShenfen.SelectedValue;
 
                 //费别
                 var charge_type = cbxChargeType.SelectedValue;
-                 
+
+                //监护人信息部分
                 var relation_name = txtRelationName.Text;
                 var relation_code = cbxRelation.SelectedValue;
+
+                //var _sfz_id = txt_rel_sfzid.Text;
+                //var _sex = cbx_relsex.Text == "男" ? 1 : 2;
+                //var _tel = txt_rel_tel.Text;
+                var _opera = SessionHelper.uservm.user_mi;
+                //var _birth = txt_rel_birth.Value;
+                //var _addr = txt_rel_address.Text;
 
 
                 //医保卡
@@ -180,7 +191,7 @@ namespace Client
                     sno = ybkId;
                 }
                 barcode = cardId;
-                  
+
                 //根据patientId查找已存在的病人 
                 var paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
                 var json = HttpClientUtil.Get(paramurl);
@@ -205,77 +216,131 @@ namespace Client
                         }
                     }
                 }
-                 
-                paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
-                json = HttpClientUtil.Get(paramurl);
-                result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
-
-                if (result.status == 1 && result.data.Count > 0)
+                if (!string.IsNullOrEmpty(hicno))
                 {
-                    for (int i = 0; i < result.data.Count; i++)
+
+                    paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
+                    json = HttpClientUtil.Get(paramurl);
+                    result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+
+                    if (result.status == 1 && result.data.Count > 0)
                     {
-                        var pid = result.data[i].patient_id;
-                        if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
+                        for (int i = 0; i < result.data.Count; i++)
                         {
-                            //if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
-                            if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
-                            {
-                                //调取最后一次记录Id 
-                                SessionHelper.cardno = result.data[0].p_bar_code;
-                                this.Close();
-                                return;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                            ////清空相同身份证号信息
-                            //DeleteSocialNo(sno);
-                        }
-                        else if (pid != patientId)
-                        {
-                            if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
-                            {
-                                sfz_card_no.Focus();
-                                //清空相同身份证号信息
-                                // DeleteSocialNo(sno);
-                                return;
-                            }
-                            else
-                            {
-                                break;
-                            }
+                            var pid = result.data[i].patient_id;
 
-
+                            //新用户
+                            if (string.IsNullOrEmpty(patientId) || patientId.Length == 7)
+                            {
+                                //if (!UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                                if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
+                                {
+                                    //调取最后一次记录Id 
+                                    SessionHelper.cardno = result.data[0].p_bar_code;
+                                    this.Close();
+                                    return;
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                                ////清空相同身份证号信息
+                                //DeleteSocialNo(sno);
+                            }
+                            else if (pid != patientId)//编辑
+                            {
+                                if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否调取患者最后一次就诊记录？"))
+                                {
+                                    //默认身份证唯一，取现有数据
+                                    SessionHelper.cardno = result.data[0].p_bar_code;
+                                    this.Close();
+                                    return;
+                                }
+                                else
+                                {
+                                    return;
+                                }
+                                //if (UIMessageBox.ShowAsk("系统中已存在此身份证号,是否覆盖？"))
+                                //{
+                                //    sfz_card_no.Focus();
+                                //    //清空相同身份证号信息
+                                //    // DeleteSocialNo(sno);
+                                //    return;
+                                //}
+                                //else
+                                //{
+                                //    break;
+                                //} 
+                            }
                         }
                     }
                 }
-                var d = new
-                {
-                    pid = patientId,
-                    hicno = hicno,
-                    sno = sno,
-                    barcode = barcode,
-                    name = userName,
-                    sex = sex,
-                    birth = birth,
-                    tel = tel,
-                    home_district = district,
-                    home_street = street,
-                    occupation_type = zhiye,
-                    response_type = response_type,
-                    charge_type = charge_type,
-                    marry_code = marrycode,
-                    relation_code = relation_code,
-                    relation_name=relation_name,
-                    opera = SessionHelper.uservm.user_mi
-                };
-                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&marry_code={d.marry_code}&relation_code={d.relation_code}&relation_name={d.relation_name}&opera={d.opera}");
 
-                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+                var _patientVM = new PatientVM();
+                _patientVM.patient_id = patientId;
+                _patientVM.hic_no = hicno;
+                _patientVM.social_no = sno;
+                _patientVM.addition_no1 = shebaohao;
+                _patientVM.p_bar_code = barcode;
+                _patientVM.name = userName;
+                _patientVM.sex = sex;
+                _patientVM.birthday =Convert.ToDateTime(birth);
+                _patientVM.home_tel = tel;
+                _patientVM.marry_code = marrycode;
+                _patientVM.relation_name = relation_name;
+                if (relation_code != null)
+                {
+                    _patientVM.relation_code = relation_code.ToString();
+                }
+                _patientVM.home_district = district;
+                _patientVM.home_street = street;
+                _patientVM.response_type = response_type.ToString();
+                _patientVM.charge_type = charge_type.ToString();
+                _patientVM.occupation_type = zhiye;
+                _patientVM.employer_name = employername;
+
+                _patientVM.update_opera = _opera;
+
+                _patientVM.relation_addr = txt_rel_address.Text;
+                _patientVM.relation_birth = txt_rel_birth.Text;
+                _patientVM.relation_sfzid = txt_rel_sfzid.Text;
+                _patientVM.relation_tel = txt_rel_tel.Text;
+                _patientVM.relation_sex = cbx_relsex.Text == "男" ? "1" : "2";
+
+                string jsonStr = WebApiHelper.SerializeObject(_patientVM);
+
+                HttpContent httpContent = new StringContent(jsonStr, Encoding.GetEncoding("UTF-8"));
+
+                paramurl = string.Format($"/api/User/EditUserInfoByJson");
+                json = HttpClientUtil.PostJSON(paramurl, _patientVM);
+                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                //var d = new
+                //{
+                //    pid = patientId,
+                //    hicno = hicno,
+                //    sno = sno,
+                //    barcode = barcode,
+                //    name = userName,
+                //    sex = sex,
+                //    birth = birth,
+                //    tel = tel,
+                //    home_district = district,
+                //    home_street = street,
+                //    occupation_type = zhiye,
+                //    response_type = response_type,
+                //    charge_type = charge_type,
+                //    marry_code = marrycode,
+                //    relation_code = relation_code,
+                //    relation_name = relation_name,
+                //    opera = SessionHelper.uservm.user_mi
+                //};
+                //var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&marry_code={d.marry_code}&relation_code={d.relation_code}&relation_name={d.relation_name}&opera={d.opera}");
+
+                //string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                //var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
                 if (responseJson.status == 1)
                 {
@@ -338,7 +403,7 @@ namespace Client
                         this.txtUserName.Text = SessionHelper.CardReader.Name;
                         this.txthomestreet.Text = SessionHelper.CardReader.Address;
 
-                        sfz_sex.Text = SessionHelper.CardReader.Sex;
+                        cbxSex.Text = SessionHelper.CardReader.Sex;
 
                         if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
                         {
@@ -356,11 +421,11 @@ namespace Client
 
                         if (YBHelper.currentYBInfo.output.baseinfo.gend == "1")
                         {
-                            sfz_sex.Text = "男";
+                            cbxSex.Text = "男";
                         }
                         else
                         {
-                            sfz_sex.Text = "女";
+                            cbxSex.Text = "女";
                         }
 
                         if (!string.IsNullOrWhiteSpace(YBHelper.currentYBInfo.output.baseinfo.brdy))
@@ -471,10 +536,10 @@ namespace Client
                         //this.cbxCardType.Text = "身份证";
                         this.txtCardId.Text = _dto.Data.IDCard;
                         this.txtUserName.Text = _dto.Data.Name;
-                        this.sfz_name.Text = _dto.Data.Name;
+                        this.sfz_card_no.Text = _dto.Data.Name;
                         this.txthomestreet.Text = _dto.Data.Address;
-                        sfz_folk.Text = _dto.Data.Folk;
-                        sfz_sex.Text = _dto.Data.Sex;
+                        //sfz_folk.Text = _dto.Data.Folk;
+                        cbxSex.Text = _dto.Data.Sex;
                         sfz_card_no.Text = _dto.Data.IDCard;
 
                         if (!string.IsNullOrWhiteSpace(_dto.Data.BirthDay))
@@ -510,30 +575,19 @@ namespace Client
             {
                 txtCardId.Text = userInfo.p_bar_code;
 
-                //0524字段调整：hic_no 是身份证号，social_no是医保号
-                sfz_card_no.Text = userInfo.hic_no;
-                //txtybk.Text = userInfo.social_no;
-
                 this.txtpatientid.Text = userInfo.patient_id;
                 this.txtUserName.Text = userInfo.name;
-                //this.sfz_name.Text = userInfo.name;
-                //this.sfz_address.Text = userInfo.home_street;
-                //this.sfz_sex.Text = userInfo.sex == "1"?"男":"女";
+                this.sfz_card_no.Text = userInfo.hic_no;
+                this.txthomestreet.Text = userInfo.home_street;
+                cbxSex.Text = userInfo.sex == "1" ? "男" : "女";
 
-                //if (userInfo.sex == "1")
-                //{
-                //    sfz_sex = "男";
-                //}
-                //else
-                //{
-                //    this.rdoFemale.Checked = true;
-                //}
+                txtshebaohao.Text = userInfo.addition_no1;
+                txtemployername.Text = userInfo.employer_name;
+
                 if (userInfo.birthday.HasValue)
                 {
                     this.sfz_birthday.Text = userInfo.birthday.Value.ToShortDateString();
                 }
-                //this.txtAge.Text = userInfo["age"].ToString();
-
                 this.txtTel.Text = userInfo.home_tel;
 
                 //婚姻
@@ -584,19 +638,7 @@ namespace Client
                     }
                 }
 
-                //身份
-                //if (!string.IsNullOrWhiteSpace(userInfo.response_type))
-                //{
-                //    this.txtShenfen.TagString = userInfo.response_type;
-
-                //    var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
-
-                //    if (model != null)
-                //    {
-                //        this.txtShenfen.Text = model.name;
-                //    }
-                //}
-
+                //身份 
                 this.cbxShenfen.SelectedValue = userInfo.response_type;
 
                 //费别
@@ -604,7 +646,7 @@ namespace Client
 
                 txtRelationName.Text = userInfo.relation_name;
 
-                if (userInfo.relation_code!=null)
+                if (userInfo.relation_code != null)
                 {
                     cbxRelation.SelectedValue = userInfo.relation_code;
                 }
@@ -613,8 +655,11 @@ namespace Client
                     cbxRelation.Text = "";
                 }
 
+                //查询监护人信息
+                BindRelationInfo(userInfo.patient_id);
+
                 //查询身份证表信息
-                BindSfzInfo(userInfo.patient_id);
+                //BindSfzInfo(userInfo.patient_id);
 
             }
             catch (Exception ex)
@@ -624,65 +669,43 @@ namespace Client
             }
         }
 
-        public void BindSfzInfo(string pid)
+        public void BindRelationInfo(string pid)
         {
-            //List<SfzInfo>> GetSfzInfoByPatientId(string pid)
             try
             {
+                //根据patientId查找已存在的病人
+                string paramurl = string.Format($"/api/user/GetMzPatientRelationByPatientId?pid={pid}");
 
-                string paramurl = string.Format($"/api/user/GetSfzInfoByPatientId?pid={pid}");
-                string json = HttpClientUtil.Get(paramurl);
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<SfzInfoVM>>>(json);
+                var json = HttpClientUtil.Get(paramurl);
 
-                if (result.status == 1)
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientRelationVM>>>(json);
+
+                if (result.status == 1 && result.data.Count > 0)
                 {
-                    if (result.data != null && result.data.Count > 0)
+                    var relationInfo = result.data[0];
+                    if (relationInfo.relation_code!=null)
                     {
-                        var sfz_info = result.data.FirstOrDefault();
-                        if (string.IsNullOrEmpty(sfz_info.card_no))
-                        {
-                            return;
-                        }
-                        sfz_card_no.Text = sfz_info.card_no;
-                        sfz_name.Text = sfz_info.name;
-                        if (sfz_info.sex == "1")
-                        {
-                            sfz_sex.Text = "男";
-                        }
-                        else if (sfz_info.sex == "2")
-                        {
-                            sfz_sex.Text = "女";
-                        }
-                        else
-                        {
-                            sfz_sex.Text = sfz_info.sex;
-                        }
-                        DateTime _dt = DateTime.MinValue;
-                        if (DateTime.TryParse(sfz_info.birthday, out _dt))
-                        {
-                            sfz_birthday.Text = _dt.ToShortDateString();
-                        }
-                        sfz_folk.Text = sfz_info.folk;
-                        sfz_address.Text = sfz_info.address;
-                        sfz_address.Text = sfz_info.home_address;
+                        cbxRelation.SelectedValue = relationInfo.relation_code; 
                     }
-                    else
+                    txtRelationName.Text = relationInfo.username;
+                    txt_rel_sfzid.Text = relationInfo.sfz_id;
+                    txt_rel_tel.Text = relationInfo.tel;
+                    if (relationInfo.birth.HasValue)
                     {
-                        UIMessageTip.ShowError("没有获取到用户身份证信息");
+                        txt_rel_birth.Value = relationInfo.birth.Value;
                     }
+                    txt_rel_address.Text = relationInfo.address;
+                    cbx_relsex.Text = relationInfo.sex == "1" ? "男" : "女";
                 }
-                else
-                {
-                    UIMessageTip.ShowError(result.message);
-                }
+
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError(ex.Message);
+                MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
-
             }
         }
+
 
         private void BindEvent()
         {
@@ -1066,45 +1089,34 @@ namespace Client
             }
         }
 
-        private void lklduka_Click(object sender, EventArgs e)
-        {
-            ReadCard rc = new ReadCard("身份证", true);
-            //关闭，刷新
-            rc.FormClosed += Rc_FormClosed; ;
-            rc.ShowDialog();
-        }
+        //private void lklduka_Click(object sender, EventArgs e)
+        //{
+        //    ReadCard rc = new ReadCard("身份证", true);
+        //    //关闭，刷新
+        //    rc.FormClosed += Rc_FormClosed; ;
+        //    rc.ShowDialog();
+        //}
 
-        private void Rc_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (SessionHelper.CardReader != null)
-            {
-                this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
-                this.sfz_name.Text = SessionHelper.CardReader.IDCard;
-                this.sfz_folk.Text = SessionHelper.CardReader.Folk;
-                this.sfz_address.Text = SessionHelper.CardReader.Address;
-                this.txtUserName.Text = SessionHelper.CardReader.Name;
-                this.txthomestreet.Text = SessionHelper.CardReader.Address;
+        //private void Rc_FormClosed(object sender, FormClosedEventArgs e)
+        //{
+        //    if (SessionHelper.CardReader != null)
+        //    {
+        //        this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
+        //        this.sfz_name.Text = SessionHelper.CardReader.IDCard;
+        //        this.sfz_folk.Text = SessionHelper.CardReader.Folk;
+        //        this.sfz_address.Text = SessionHelper.CardReader.Address;
+        //        this.txtUserName.Text = SessionHelper.CardReader.Name;
+        //        this.txthomestreet.Text = SessionHelper.CardReader.Address;
 
-                sfz_sex.Text = SessionHelper.CardReader.Sex;
+        //        sfz_sex.Text = SessionHelper.CardReader.Sex;
 
-                if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
-                {
-                    sfz_birthday.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
-                }
-            }
-        }
+        //        if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
+        //        {
+        //            sfz_birthday.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
+        //        }
+        //    }
+        //}
 
-        private void cbxDist_TextChanged(object sender, EventArgs e)
-        {
-            //cbxDist.DataSource = SessionHelper.units.Where(p => p.py_code.StartsWith(cbxDist.Text)).ToList();
-            //cbxDist.ValueMember = "code";
-            //cbxDist.DisplayMember = "name";
-        }
-
-        private void cbxDist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void txthomedistrict_KeyUp(object sender, KeyEventArgs e)
         {

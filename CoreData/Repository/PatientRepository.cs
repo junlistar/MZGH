@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Data.Entities;
 using Data.IRepository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -93,7 +94,7 @@ namespace Data.Repository
         public int EditUserInfo(string pid, string sno, string hicno, string barcode, string name, string sex, string birthday, string tel,
              string home_district, string home_street, string occupation_type, string response_type, string charge_type, string marry_code, string relation_code, string relation_name, string opera)
         {
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -179,7 +180,7 @@ namespace Data.Repository
                     }
 
                     //更新监护人信息
-                    string relationsql =GetSqlByTag("mzgh_mzpatientrelation_getbypid");
+                    string relationsql = GetSqlByTag("mzgh_mzpatientrelation_getbypid");
                     para = new DynamicParameters();
                     para.Add("@patient_id", pid);
                     var relationEntity = connection.QueryFirstOrDefault<MzPatientRelation>(relationsql, para, transaction);
@@ -188,9 +189,9 @@ namespace Data.Repository
                         relationsql = GetSqlByTag("mzgh_mzpatientrelation_updatecode");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
-                        para.Add("@relation_code", relation_code); 
+                        para.Add("@relation_code", relation_code);
                         para.Add("@relation_name", relation_name);
-                        para.Add("@opera", opera); 
+                        para.Add("@opera", opera);
                         para.Add("@update_date", DateTime.Now);
                         connection.Execute(relationsql, para, transaction);
                     }
@@ -203,10 +204,124 @@ namespace Data.Repository
                 {
                     transaction.Rollback();
                     throw ex;
-                } 
-            } 
+                }
+            }
         }
-         
+
+        public bool EditUserInfo(string jsonStr)
+        {
+            Patient patient = JsonConvert.DeserializeObject<Patient>(jsonStr);
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
+            {
+                IDbTransaction transaction = connection.BeginTransaction();
+
+                try
+                {
+                    //查询是否存在
+                    string issql = GetSqlByTag("mzgh_mzpatient_getbypid");
+                    var para = new DynamicParameters();
+                    if (patient.patient_id.Length == 7)
+                    {
+                        patient.patient_id = "000" + patient.patient_id + "00";
+                    }
+                    para.Add("@patient_id", patient.patient_id);
+                    var list = connection.Query<Patient>(issql, para, transaction);
+
+                    para = new DynamicParameters();
+                    para.Add("@patient_id", patient.patient_id);
+                    para.Add("@social_no", patient.social_no);
+                    para.Add("@hic_no", patient.hic_no);
+                    para.Add("@p_bar_code", patient.p_bar_code);
+                    para.Add("@name", patient.name);
+                    para.Add("@sex", patient.sex);
+                    para.Add("@birthday", patient.birthday);
+                    para.Add("@home_tel", patient.home_tel);
+
+                    para.Add("@home_district", patient.home_district);
+                    para.Add("@home_street", patient.home_street);
+                    para.Add("@occupation_type", patient.occupation_type);
+                    para.Add("@response_type", patient.response_type);
+                    para.Add("@charge_type", patient.charge_type);
+                    para.Add("@relation_code", patient.relation_code);
+                    para.Add("@relation_name", patient.relation_name);
+                    para.Add("@marry_code", patient.marry_code);
+                    para.Add("@addition_no1", patient.addition_no1);
+                    para.Add("@employer_name", patient.employer_name);
+                     
+                    para.Add("@enter_date", DateTime.Now);
+                    para.Add("@update_date", DateTime.Now);
+
+                    para.Add("@enter_opera", patient.update_opera);
+                    para.Add("@update_opera", patient.update_opera);
+
+                    if (list != null && list.Count() > 0)
+                    {
+                        //修改  
+                        string sql = GetSqlByTag("mzgh_mzpatient_update");
+
+                        connection.Execute(sql, para, transaction);
+                    }
+                    else
+                    {
+                        //新增
+
+                        string sql = GetSqlByTag("mzgh_mzpatient_add");
+
+                        connection.Execute(sql, para, transaction);
+
+                        ////写patientId和身份证id关联表
+                        //sql = GetSqlByTag("mzgh_mzpatientsfz_add");
+                        //para = new DynamicParameters();
+                        //para.Add("@patient_id", pid);
+                        //para.Add("@sfz_id", hicno);
+                        //connection.Execute(sql, para, transaction);
+
+                    }
+
+                    //更新监护人信息
+                    if (!string.IsNullOrEmpty(patient.relation_code) && !string.IsNullOrEmpty(patient.relation_name))
+                    { 
+                        string relationsql = GetSqlByTag("mzgh_mzpatientrelation_getbypid");
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", patient.patient_id);
+                        var relationEntity = connection.QueryFirstOrDefault<MzPatientRelation>(relationsql, para, transaction);
+                        if (relationEntity != null)
+                        {
+                            //编辑
+                            relationsql = GetSqlByTag("mzgh_mzpatientrelation_update");
+                        }
+                        else
+                        {
+                            //新增
+                            relationsql = GetSqlByTag("mzgh_mzpatientrelation_add");
+                        }
+                        para.Add("@patient_id", patient.patient_id);
+                        para.Add("@relation_code", patient.relation_code);
+                        para.Add("@sfz_id", patient.relation_sfzid);
+                        para.Add("@username", patient.relation_name);
+                        para.Add("@sex", patient.relation_sex);
+                        para.Add("@tel", patient.relation_tel);
+                        para.Add("@opera", patient.update_opera);
+                        para.Add("@birth", patient.relation_birth);
+                        para.Add("@address", patient.relation_addr);
+                        para.Add("@update_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                        connection.Execute(relationsql, para, transaction); 
+                    }
+                    transaction.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
+            }
+        }
+
+
         /// <summary>
         /// 加上事务处理
         /// </summary>
@@ -245,7 +360,7 @@ namespace Data.Repository
                 //更新挂号发票记录表
                 string sql8 = GetSqlByTag("mzgh_ghopreceipt_update");
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

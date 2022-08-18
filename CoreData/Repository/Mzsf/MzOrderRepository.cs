@@ -38,7 +38,7 @@ namespace Data.Repository.Mzsf
                 DynamicParameters para = new DynamicParameters();
                 var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -361,7 +361,7 @@ namespace Data.Repository.Mzsf
                 //12.写入 mz_deposit
                 string sql13 = GetSqlByTag("mzsf_mzdeposit_add");
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -668,7 +668,7 @@ namespace Data.Repository.Mzsf
         {
             try
             {
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -744,7 +744,7 @@ namespace Data.Repository.Mzsf
                 }
 
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

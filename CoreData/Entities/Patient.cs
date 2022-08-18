@@ -54,5 +54,12 @@ namespace Data.Entities
         public string yb_psn_no { get; set; }
         public string yb_insuplc_admdvs { get; set; }
         public string yb_insutype { get; set; }
+
+
+        //监护人信息
+        public string relation_sfzid { get; set; }
+        public string relation_sex { get; set; }
+        public string relation_birth { get; set; }
+        public string relation_addr { get; set; }
     }
 }

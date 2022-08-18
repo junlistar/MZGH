@@ -59,6 +59,9 @@
     <None Update="SQLS\mzgh_mzpatientrelation_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_mzpatientrelation_updatecode - 复制.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_mzpatientsfzinfo_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

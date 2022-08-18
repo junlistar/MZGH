@@ -117,7 +117,7 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
-             
+
             string json = "";
 
             #region 参数处理
@@ -793,9 +793,14 @@ namespace Client
 
         public void EditClick()
         {
-            var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
-            var _colIndex = dgvlist.SelectedCells[0].ColumnIndex;
-            Edit(_rowIndex, _colIndex);
+            if (dgvlist.Rows.Count>0)
+            {
+                var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
+                var _colIndex = dgvlist.SelectedCells[0].ColumnIndex;
+
+                Edit(_rowIndex, _colIndex);
+            } 
+              
         }
 
 

@@ -449,7 +449,7 @@ namespace Data.Repository
             para.Add("@eDate", end);
             //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
 
-            var dt = base.ExecuteTable(ghsql, para, CommandType.Text,"write");
+            var dt = base.ExecuteTable(ghsql, para, CommandType.Text, DBConnectionEnum.Write);
             if (dt != null && dt.Rows.Count > 0)
             {
                 var code = dt.Rows[0][0].ToString();

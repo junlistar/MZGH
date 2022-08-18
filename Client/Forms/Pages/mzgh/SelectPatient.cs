@@ -67,13 +67,7 @@ namespace Client.Forms.Pages.mzgh
             SelectRowAndClose();
         }
 
-        private void dgvUsers_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode== Keys.Enter)
-            {
-                SelectRowAndClose(); 
-            }
-        }
+       
 
         public void SelectRowAndClose()
         { 
@@ -83,6 +77,14 @@ namespace Client.Forms.Pages.mzgh
                 SessionHelper.sel_patientid = pid;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+        }
+
+        private void dgvUsers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SelectRowAndClose();
             }
         }
     }

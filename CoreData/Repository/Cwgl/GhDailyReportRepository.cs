@@ -35,7 +35,7 @@ namespace Data.Repository
             {
                 DynamicParameters para;
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

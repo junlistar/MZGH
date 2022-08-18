@@ -318,7 +318,7 @@
             this.ckall.BackColor = System.Drawing.Color.Transparent;
             this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(15, 162);
+            this.ckall.Location = new System.Drawing.Point(8, 162);
             this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
             this.ckall.Name = "ckall";
             this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);

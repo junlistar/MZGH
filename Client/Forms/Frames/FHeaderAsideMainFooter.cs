@@ -61,8 +61,8 @@ namespace Client
             //设置关联
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
-            Aside.TabControl.TabVisible = true; 
-
+            Aside.TabControl.TabVisible = true;
+             
             //增加页面到Main
             //AddPage(new FTitlePage1(), 1001);
             //AddPage(new FTitlePage2(), 1002);

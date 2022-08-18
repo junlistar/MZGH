@@ -63,6 +63,20 @@ namespace Client
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
+             
+            if (!string.IsNullOrEmpty(_record_sn))
+            {
+                //如果是编辑状态，值允许编辑开放状态
+                txtks.ReadOnly = true;
+                txtzk.ReadOnly = true;
+                txtDoct.ReadOnly = true;
+                txtDate.ReadOnly = true;
+                cbxHaobie.ReadOnly = true;
+                txtTotalNum.ReadOnly = true;
+                txt_limit.ReadOnly = true;
+                cbxSXW.ReadOnly = true;
+                cbxWinNo.ReadOnly = true;
+            }
         }
 
         public void InitDate()

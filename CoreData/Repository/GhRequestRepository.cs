@@ -93,7 +93,7 @@ namespace Data.Repository
             try
             {
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
@@ -303,7 +303,7 @@ namespace Data.Repository
             try
             {
 
-                using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 

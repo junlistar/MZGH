@@ -35,7 +35,7 @@ namespace Data.Repository
         public bool AddXtUserGroups(string func_str, string subsys_id, string user_group)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -80,7 +80,7 @@ namespace Data.Repository
         public bool DeleteXtUserGroups(string func_str, string subsys_id, string user_group)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -118,7 +118,7 @@ namespace Data.Repository
         public bool AddFuncton(string subsys_id, string func_name, string func_desc,string parent_func, string action_flag)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -171,7 +171,7 @@ namespace Data.Repository
 
         public bool UpdateFuncton(string subsys_id, string func_name, string func_desc, string parent_func, string action_flag)
         {
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 
@@ -215,7 +215,7 @@ namespace Data.Repository
         public bool DelFuncton(string subsys_id, string func_name, string func_desc, string action_flag)
         {
 
-            using (IDbConnection connection = DataBaseConfig.GetSqlConnection("write"))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
                 IDbTransaction transaction = connection.BeginTransaction();
 

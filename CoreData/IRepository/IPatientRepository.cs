@@ -32,6 +32,8 @@ namespace Data.IRepository
         /// </summary>
         /// <returns></returns>
         string GetNewReceiptMaxSN();
+         
+        bool EditUserInfo(string jsonStr);
 
 
         #endregion
