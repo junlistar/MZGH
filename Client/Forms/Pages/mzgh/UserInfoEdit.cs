@@ -392,8 +392,9 @@ namespace Client
                     //创建新的id
                     GetNewPatientId();
 
-                    this.txtUserName.Text = "新病人";
-                    //this.rdoMale.Checked = true;
+                    this.txtUserName.Text = "新患者";
+                    cbxSex.Text = "男";cbxmarrycode.Text = "未婚";
+                    cbxRelation.Text = "本人"; cbx_relsex.Text = "男";
 
                     //绑定身份证数据
                     if (SessionHelper.CardReader != null)
@@ -605,6 +606,7 @@ namespace Client
                     case "5":
                         marrycode = "其他"; break;
                     default:
+                        marrycode = "未婚";
                         break;
                 }
                 this.cbxmarrycode.Text = marrycode;
@@ -696,6 +698,10 @@ namespace Client
                     }
                     txt_rel_address.Text = relationInfo.address;
                     cbx_relsex.Text = relationInfo.sex == "1" ? "男" : "女";
+                }
+                else
+                {
+                    cbxRelation.Text = "本人"; cbx_relsex.Text = "男";
                 }
 
             }

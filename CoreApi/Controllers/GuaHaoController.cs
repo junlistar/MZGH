@@ -237,7 +237,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<int>(ex.Message);
             }
         }
-       
+
 
         public ResponseResult<int> GuaHao(string patient_id, string record_sn, string pay_string, int max_sn = 0, string opera = "")
         {
@@ -271,7 +271,7 @@ namespace CoreApi.Controllers
         }
         public ResponseResult<int> UpdateUserPassWord(string uname, string pwd)
         {
-            Log.Information($"UpdateUserPassWord,{uname},{pwd}"); 
+            Log.Information($"UpdateUserPassWord,{uname},{pwd}");
             try
             {
                 return _userLoginRepository.UpdateUserPassWord(uname, pwd);
@@ -280,9 +280,9 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
-            } 
+            }
 
-        } 
+        }
 
         /// <summary>
         /// 获取挂号记录
@@ -306,7 +306,7 @@ namespace CoreApi.Controllers
             return list;
         }
 
-         
+
 
         public ResponseResult<int> Refund(string patient_id, int times, string opera, int manual = 0)
         {
@@ -529,7 +529,19 @@ namespace CoreApi.Controllers
             }
             return list;
         }
-        
+        public ResponseResult<MzClientConfig> GetMzClientConfig()
+        {
+            Log.Information($"GetMzClientConfig");
+            try
+            {
+                return _commonRepository.GetMzClientConfig();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<MzClientConfig>(ex.Message);
+            } 
+        } 
 
         public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {
@@ -576,7 +588,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<Patient>>(ex.Message);
             }
             return list;
-        } 
+        }
 
         public ResponseResult<List<BaseRequest>> GetBaseRequests(string unit_sn, string group_sn, string doctor_sn, string clinic_type,
             string week, string day, string ampm, string window_no, string open_flag, int temp_flag = 0)
@@ -661,7 +673,7 @@ namespace CoreApi.Controllers
             Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id},{ temp_flag},{limit_appoint_percent}");
             try
             {
-                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id,  temp_flag, limit_appoint_percent);
+                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id, temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {
@@ -681,7 +693,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
             }
-        } 
+        }
 
         public ResponseResult<List<BaseRequest>> GetRequestsByDate(string begin, string end)
         {
@@ -715,12 +727,12 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<string> GetRequestsByParamsV2(string begin, string end, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string req_type,
-     string ampm, string window_no, string open_flag,string temp_flag)
+     string ampm, string window_no, string open_flag, string temp_flag)
         {
             Log.Information($"GetRequestsByParams,{begin},{end}, {unit_sn},  {group_sn},  {doctor_sn},  {clinic_type},  {req_type},{ampm},  {window_no},  {open_flag},{temp_flag}");
             try
             {
-                var dt = _baseRequestRepository.GetRequestsByParamsV2(begin, end, unit_sn, group_sn, doctor_sn, clinic_type, req_type, ampm, window_no, open_flag,temp_flag);
+                var dt = _baseRequestRepository.GetRequestsByParamsV2(begin, end, unit_sn, group_sn, doctor_sn, clinic_type, req_type, ampm, window_no, open_flag, temp_flag);
 
                 return JsonConvert.SerializeObject(dt, new DataTableConverter());
             }
@@ -1089,7 +1101,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-        public ResponseResult<List<MzThridPayView>> GetThirdPayList(string bengin, string end, string his_status,string patient_id)
+        public ResponseResult<List<MzThridPayView>> GetThirdPayList(string bengin, string end, string his_status, string patient_id)
         {
             Log.Information($"GetThirdPayList,{bengin},{end},{ his_status},{patient_id}");
             try
@@ -1114,7 +1126,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<MzThridPayView>>(ex.Message);
             }
-        } 
+        }
 
     }
 }

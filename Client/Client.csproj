@@ -611,6 +611,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\MzClientConfigVM.cs" />
     <Compile Include="ViewModel\MzPatientRelationVM.cs" />
     <Compile Include="ViewModel\MzThirdPayVM.cs" />
     <Compile Include="ViewModel\ElectBillModel.cs" />

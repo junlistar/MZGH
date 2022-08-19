@@ -200,6 +200,9 @@
     <None Update="SQLS\mzsf_fpdata_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\zd_mzclientconfig_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\zd_pagechequecompare_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

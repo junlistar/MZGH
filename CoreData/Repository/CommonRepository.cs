@@ -4,7 +4,7 @@ using Data.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -20,6 +20,16 @@ namespace Data.Repository
 
                 return connection.Query<PageChequeCompare>(sql).AsList();
 
+            }
+        }
+
+        public MzClientConfig GetMzClientConfig()
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            { 
+                string sql = GetSqlByTag("zd_mzclientconfig_get");
+
+                return connection.Query<MzClientConfig>(sql).FirstOrDefault();
             }
         }
     }

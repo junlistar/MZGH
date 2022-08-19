@@ -278,6 +278,7 @@ namespace Client.Forms.Pages.cwgl
                                 //TargetReport.Design();
                                 if (report_date == "1900-01-01 00:00:00")
                                 {
+                                    //禁用结算按钮
                                     btnSave.Enabled = true;
                                 }
 
@@ -291,6 +292,8 @@ namespace Client.Forms.Pages.cwgl
                             {
                                 pnlReport.Text = "该报表无数据";
                                 UIMessageTip.Show("该报表无数据");
+                                //禁用结算按钮
+                                btnSave.Enabled = false;
                             }
 
                         }

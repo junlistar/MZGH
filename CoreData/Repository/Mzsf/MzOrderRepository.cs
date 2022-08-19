@@ -272,6 +272,7 @@ namespace Data.Repository.Mzsf
 
             try
             {
+                Serilog.Log.Debug("门诊支付开始：");
                 DynamicParameters para = new DynamicParameters();
 
                 int max_ledger_sn = 0;
@@ -287,6 +288,8 @@ namespace Data.Repository.Mzsf
 
                 var op_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
+
+                Serilog.Log.Debug($"查询处方信息patient_id：{patient_id},times:{times}");
                 var orderlist = GetMzOrdersByPatientId(patient_id, times);
 
                 if (orderlist == null || orderlist.Count == 0)
@@ -294,6 +297,7 @@ namespace Data.Repository.Mzsf
                     throw new Exception("未查询到处方信息");
                 }
 
+                Serilog.Log.Debug("查询未缴费处方：");
                 var chargeList = chargesRepository.GetCprCharges(patient_id, times, "1");
 
                 if (chargeList == null || chargeList.Count == 0)
@@ -319,6 +323,8 @@ namespace Data.Repository.Mzsf
                 //门诊发票号 根据当前用户获取  
                 MzOpReceiptRepository opreceiptResp = new MzOpReceiptRepository();
                 //p1: usermi,p2:1
+
+                Serilog.Log.Debug("查询门诊发票号：");
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
 
                 //更新发票号
@@ -363,6 +369,7 @@ namespace Data.Repository.Mzsf
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
+                    Serilog.Log.Debug("开始事务：");
                     IDbTransaction transaction = connection.BeginTransaction();
 
                     try
@@ -370,12 +377,15 @@ namespace Data.Repository.Mzsf
                         para = new DynamicParameters();
 
                         //获取就诊信息 
+                        Serilog.Log.Debug("查询就诊信息 ：");
+
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
 
                         var mz_visit = connection.QueryFirstOrDefault<MzVisit>(mz_sql, para, transaction);
 
                         //1.获取机制号
+                        Serilog.Log.Debug("查询机制号 ：");
                         max_sn = Convert.ToInt32(connection.ExecuteScalar(sql1, null, transaction));
 
                         //2.获取发票号 
@@ -388,9 +398,10 @@ namespace Data.Repository.Mzsf
                         var report_flag = "0";
                         var receipt_type = "0";
                         var _opera = "";
+                        Serilog.Log.Debug("读取发票信息");
                         if (dtreceipt != null && dtreceipt.Count > 0)
                         {
-                            _opera=  dtreceipt[0].@operator.ToString();
+                            _opera =  dtreceipt[0].@operator.ToString();
                             current_no = dtreceipt[0].current_no.ToString();
                             start_no = dtreceipt[0].start_no.ToString();
                             end_no = dtreceipt[0].end_no.ToString();
@@ -400,10 +411,18 @@ namespace Data.Repository.Mzsf
                             deleted_flag = dtreceipt[0].deleted_flag;
                             report_flag = dtreceipt[0].report_flag;
                             receipt_type = dtreceipt[0].receipt_type;
+
+                            Serilog.Log.Debug("current_no:" + current_no);
                         }
+
+                        Serilog.Log.Debug("更新发票号");
+                        Serilog.Log.Debug("current_no:" + (int.Parse(current_no) + step_length));
+                        Serilog.Log.Debug("operator:" + _opera);
+                        Serilog.Log.Debug("happen_date:" + happen_date);
+                        Serilog.Log.Debug("sql3:" + sql3);
                         //3.更新发票号
                         para = new DynamicParameters();
-                        para.Add("@current_no", int.Parse(current_no) + step_length);
+                        para.Add("@current_no", (int.Parse(current_no) + step_length).ToString().PadLeft(10, '0'));
                         para.Add("@operator", _opera);
                         para.Add("@happen_date", happen_date);
                         connection.Execute(sql3, para, transaction);
@@ -414,6 +433,7 @@ namespace Data.Repository.Mzsf
                         var xiyao_detail_list = chargeList.Where(p => p.order_type == order_code).ToList();
 
                         //4. 查询药房信息 (西药)
+                        Serilog.Log.Debug("查询药房信息 ：");
                         para = new DynamicParameters();
                         para.Add("@order_code", order_code);
                         para.Add("@team_no", "1");
@@ -440,6 +460,7 @@ namespace Data.Repository.Mzsf
                             foreach (var item in xiyao_detail_list)
                             {
                                 //6.虚拟库存处理（西药药方细目）
+                                Serilog.Log.Debug("虚拟库存处理 （西药药方细目）：");
                                 para = new DynamicParameters();
                                 para.Add("@P1", item.charge_amount);
                                 para.Add("@P2", item.caoyao_fu);
@@ -452,6 +473,7 @@ namespace Data.Repository.Mzsf
 
 
                         //7.更新 mz_patient_mi 
+                        Serilog.Log.Debug("更新 mz_patient_mi ,max_ledger_sn,max_item_sn");
                         para = new DynamicParameters();
                         para.Add("@max_ledger_sn", max_ledger_sn); //??
                         para.Add("@max_item_sn", 1);    //??
@@ -459,6 +481,7 @@ namespace Data.Repository.Mzsf
                         connection.Execute(sql7, para, transaction);
 
                         //8.更新 mz_visit_table 
+                        Serilog.Log.Debug("更新 mz_visit_table ,charge_status,charge_times,times");
                         para = new DynamicParameters();
                         para.Add("@charge_status", 4);
                         para.Add("@charge_times", 1);  //??
@@ -468,6 +491,7 @@ namespace Data.Repository.Mzsf
 
 
                         //9.更新detail_charge项目
+                        Serilog.Log.Debug("更新 detail_charge项目 ");
                         foreach (var item in chargeList)
                         {
                             if (item.order_type == "01")//诊疗
@@ -554,6 +578,7 @@ namespace Data.Repository.Mzsf
                         }
 
                         //10.写入mz_receipt_charge  
+                        Serilog.Log.Debug("写入mz_receipt_charge ");
                         //查询结果，有几条 写入几条
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
@@ -594,6 +619,7 @@ namespace Data.Repository.Mzsf
                         }
 
                         //11.写入mz_receipt 
+                        Serilog.Log.Debug("写入mz_receipt ");
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@ledger_sn", max_ledger_sn);
@@ -610,8 +636,8 @@ namespace Data.Repository.Mzsf
 
                         connection.Execute(sql12, para, transaction);
 
-                        //12.写入 mz_deposit 
-
+                        //12.写入 mz_deposit  
+                        Serilog.Log.Debug("写入 mz_deposit ");
                         //处理多重支付
                         var pay_method_arr = pay_string.Split(',');
                         int item_no = 1;
@@ -623,8 +649,7 @@ namespace Data.Repository.Mzsf
                             var out_trade_no = pay_detail[2];//订单编号
                             //var cheque_no = current_no;
                             para = new DynamicParameters();
-
-
+                             
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@item_no", item_no);
@@ -646,11 +671,14 @@ namespace Data.Repository.Mzsf
                             item_no++;
                         }
 
+                        Serilog.Log.Debug("提交事务 ");
                         transaction.Commit();
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
+                        Serilog.Log.Debug("回滚事务 ");
+                        Serilog.Log.Error(ex.Message);
                         throw ex;
                     }
 
@@ -717,12 +745,14 @@ namespace Data.Repository.Mzsf
         {
             try
             {
+                Serilog.Log.Debug("门诊退费，部分退费业务开始： ");
                 DynamicParameters para = new DynamicParameters();
                 var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
                 //门诊发票号 根据当前用户获取  
                 MzOpReceiptRepository opreceiptResp = new MzOpReceiptRepository();
                 //p1: usermi,p2:1
+                Serilog.Log.Debug("门诊发票号 根据当前用户获取   ");
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
 
                 //更新发票号
@@ -748,6 +778,7 @@ namespace Data.Repository.Mzsf
                 {
                     IDbTransaction transaction = connection.BeginTransaction();
 
+                    Serilog.Log.Debug("开始事务 ");
                     try
                     {
                         para = new DynamicParameters();
@@ -758,38 +789,47 @@ namespace Data.Repository.Mzsf
                         para.Add("@receipt_sn", receipt_sn);
                         para.Add("@receipt_no", receipt_no);
                         para.Add("@cheque_cash", cheque_cash);
-                        para.Add("@isall", '0');
+                        //para.Add("@isall", '0');
+                        //para.Add("@back_all", '0');
+
+                        Serilog.Log.Debug("执行存储过程：mzsf_BackFee2");
                         connection.Execute("mzsf_BackFee2", para, transaction, null, CommandType.StoredProcedure);
 
+
+                        Serilog.Log.Debug($"查询用户:{pid}");
                         string user_sql = GetSqlByTag("mzgh_mzpatient_getbypid");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         var patient = connection.Query<Patient>(user_sql, para, transaction).FirstOrDefault();
                         int max_item_sn = patient.max_item_sn + 1;
-
+                         
+                        Serilog.Log.Debug($"max_item_sn:{max_item_sn}");
                         string mxa_ledger_sql = GetSqlByTag("mzsf_maxledgersn_get");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         int max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
 
+                        Serilog.Log.Debug($"max_ledger_sn:{max_ledger_sn}");
+
+                        Serilog.Log.Debug($"更新缴费次数 mzsf_patient_update_ledger");
                         string update_user_sql = GetSqlByTag("mzsf_patient_update_ledger");
                         para = new DynamicParameters();
                         para.Add("@max_ledger_sn", max_ledger_sn);
                         para.Add("@max_item_sn", max_item_sn);
                         para.Add("@patient_id", pid);
                         connection.Execute(update_user_sql, para, transaction);
-
-
-
+                          
                         //门诊机制发票号
                         int max_sn = 0;
 
                         string sql1 = GetSqlByTag("mzsf_receiptsn_get");
 
                         //1.获取机制号
+                        Serilog.Log.Debug($"获取机制号");
                         max_sn = Convert.ToInt32(connection.ExecuteScalar(sql1, null, transaction));
 
                         //2.获取发票号 
+                        Serilog.Log.Debug($"获取发票号");
                         var current_no = "";
                         var start_no = "";
                         var end_no = "";
@@ -811,8 +851,9 @@ namespace Data.Repository.Mzsf
                             receipt_type = dtreceipt[0].receipt_type;
                         }
                         //3.更新发票号
-                        para = new DynamicParameters();
-                        para.Add("@current_no", int.Parse(current_no) + step_length);
+                        Serilog.Log.Debug($"更新发票号");
+                        para = new DynamicParameters(); 
+                        para.Add("@current_no", (int.Parse(current_no) + step_length).ToString().PadLeft(10, '0'));
                         para.Add("@operator", opera);
                         para.Add("@happen_date", happen_date);
                         connection.Execute(sql3, para, transaction);
@@ -822,6 +863,7 @@ namespace Data.Repository.Mzsf
 
                         //1.mz_detail_charge
 
+                        Serilog.Log.Debug($"查询当前处方的数据,patient_id:{pid},ledger_sn:{ledger_sn}");
                         string sql_1 = GetSqlByTag("mzsf_mzdetailcharge_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
@@ -829,13 +871,15 @@ namespace Data.Repository.Mzsf
                         var detail_charge_list = connection.Query<CprCharges>(sql_1, para, transaction).ToList();
 
                         //2.mz_deposit
+                        Serilog.Log.Debug($"查询当前现金流数据,patient_id:{pid},ledger_sn:{ledger_sn}");
                         string sql_2 = GetSqlByTag("mzsf_mzdeposit_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
                         para.Add("@ledger_sn", ledger_sn);
                         var deposit_list = connection.Query<MzDeposit>(sql_2, para, transaction).ToList();
 
-                        //3.mz_receipt
+                        //3.mz_receipt 
+                        Serilog.Log.Debug($"查询当前发票数据,patient_id:{pid},ledger_sn:{ledger_sn},receipt_sn:{receipt_sn}");
                         string sql_3 = GetSqlByTag("mzsf_mzreceipt_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
@@ -844,6 +888,7 @@ namespace Data.Repository.Mzsf
                         var receipt_list = connection.Query<MzReceipt>(sql_3, para, transaction).ToList();
 
                         //4.mz_receipt_charge
+                        Serilog.Log.Debug($"查询当前发票明细数据,patient_id:{pid},ledger_sn:{ledger_sn},receipt_sn:{receipt_sn}");
                         string sql_4 = GetSqlByTag("mzsf_mzreceiptcharge_getbypidandledger");
                         para = new DynamicParameters();
                         para.Add("@patient_id", pid);
@@ -859,6 +904,7 @@ namespace Data.Repository.Mzsf
                         //写入没有退款的数据 leder_sn +1
                         string insert_1 = GetSqlByTag("mzsf_mzdetailcharge_add");
 
+                        Serilog.Log.Debug($"写入没有退款的项目数据");
                         foreach (var item in detail_charge_list)
                         {
                             if (charge_code_list.Contains(item.charge_code))
@@ -874,7 +920,8 @@ namespace Data.Repository.Mzsf
                             item.price_date = dt_now;
 
 
-                            //写入 
+                            //写入  
+                            Serilog.Log.Debug($"写入mzdetailcharge");
                             para = new DynamicParameters();
 
                             para.Add("@charge_price", item.charge_price);
@@ -940,6 +987,7 @@ namespace Data.Repository.Mzsf
 
                         }
 
+                        Serilog.Log.Debug($"写入mzdeposit");
                         string insert_2 = GetSqlByTag("mzsf_mzdeposit_add2");
                         foreach (var item in deposit_list)
                         {
@@ -952,7 +1000,7 @@ namespace Data.Repository.Mzsf
                             para.Add("@patient_id", item.patient_id);
                             para.Add("@item_no", item.item_no);
                             para.Add("@ledger_sn", item.ledger_sn);
-                            para.Add("@cheque_type", 1); ///这里的支付类型 是否是默认现金 ，金额
+                            para.Add("@cheque_type", 1); ///这里的支付类型 默认现金
                             para.Add("@cheque_no", item.cheque_no);
                             para.Add("@charge", charge);
                             para.Add("@depo_status", item.depo_status);
@@ -970,6 +1018,7 @@ namespace Data.Repository.Mzsf
 
                         string insert_3 = GetSqlByTag("mzsf_mzreceipt_add2");
 
+                        Serilog.Log.Debug($"写入mzreceipt");
                         foreach (var item in receipt_list)
                         {
                             item.ledger_sn = max_ledger_sn;
@@ -1026,7 +1075,8 @@ namespace Data.Repository.Mzsf
                                          }).ToList();
 
                         string insert_4 = GetSqlByTag("mzsf_mzreceiptcharge_add");
-                         
+
+                        Serilog.Log.Debug($"写入mzreceiptcharge");
                         foreach (var item in bill_list)
                         {
                             //写入
@@ -1040,8 +1090,9 @@ namespace Data.Repository.Mzsf
 
                             connection.Execute(insert_4, para, transaction);
                         }
- 
+
                         //写入退费记录
+                        Serilog.Log.Debug($"写入退费记录mzreceiptcancel");
                         string sql = GetSqlByTag("mzsf_mzreceiptcancel_add");
                         para = new DynamicParameters();
                         para.Add("@operator", opera);
@@ -1052,11 +1103,14 @@ namespace Data.Repository.Mzsf
 
                         connection.Execute(sql, para, transaction);
 
+                        Serilog.Log.Debug($"提交事务");
                         transaction.Commit();
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
+                        Serilog.Log.Debug($"回滚事务");
+                        Serilog.Log.Error($"{ex.Message}");
                         throw ex;
                     }
 
@@ -1064,7 +1118,7 @@ namespace Data.Repository.Mzsf
                 }
             }
             catch (Exception ex)
-            {
+            { 
                 throw ex;
             }
 

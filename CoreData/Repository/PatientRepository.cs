@@ -334,8 +334,12 @@ namespace Data.Repository
         {
             try
             {
+                Serilog.Log.Debug("挂号开始：");
 
+                Serilog.Log.Debug($"根据挂号record_sn:{record_sn},获取收费信息");
                 var chargeItems = chargeItemResp.GetChargeItemsByRecordSN(record_sn);
+
+                Serilog.Log.Debug($"获取发票信息");
                 var dtreceipt = opreceiptResp.GetCurrentReceiptNo();
 
                 //查询当前号是否超过数量
@@ -362,16 +366,19 @@ namespace Data.Repository
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
+                    Serilog.Log.Debug($"打开数据库连接");
                     IDbTransaction transaction = connection.BeginTransaction();
-
+                    Serilog.Log.Debug($"开启事务");
                     try
                     {
                         //查询挂号信息
+                        Serilog.Log.Debug($"查询挂号信息record_sn:{record_sn}");
                         var relist = ghResp.GetGhRecord(record_sn);
                         int result = 0;
 
                         //查询当前号是否超过数量
                         //string exsitsql = "select * from gh_request where record_sn = @record_sn and current_no<= end_no";
+                        Serilog.Log.Debug($"查询当前号是否超过数量");
                         DynamicParameters para = new DynamicParameters();
                         para.Add("@record_sn", record_sn);
                         var obj = connection.QueryFirstOrDefault<GhRequest>(exsitsql, para, transaction);
@@ -382,6 +389,7 @@ namespace Data.Repository
                         var visit_date = obj.request_date;
 
                         //更新挂号表 当前号haole
+                        Serilog.Log.Debug($"更新挂号表,已挂号数量current_no");
                         //string sql1 = "UPDATE gh_request SET current_no =current_no+1 WHERE record_sn = @record_sn";
                         para = new DynamicParameters();
                         para.Add("@record_sn", record_sn);
@@ -391,7 +399,8 @@ namespace Data.Repository
                         //更新门诊用户信息 max_times
                         //string sql2 = "update mz_patient_mi set max_times = max_times+1,max_ledger_sn =max_ledger_sn+1 where  patient_id=@patient_id " +
                         //    "select max_ledger_sn,max_times from mz_patient_mi where  patient_id=@patient_id";
-
+                         
+                        Serilog.Log.Debug($"更新并获取门诊用户信息 max_times+1,max_ledger_sn+1");
                         para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
 
@@ -413,15 +422,15 @@ namespace Data.Repository
                         //   FROM mz_order_generator
                         //   WHERE(mz_order_generator.define = 'gh_receipt_sn') ";
 
+                        Serilog.Log.Debug($"更新并获取挂号机制号 mz_order_generator,max_sn");
                         if (max_sn == 0)
                         {
                             max_sn = Convert.ToInt32(connection.ExecuteScalar(sql3, null, transaction));
                         }
-
-
-
+                         
                         if (relist.Count > 0)
                         {
+                            Serilog.Log.Debug($"获取病人信息{patient_id}");
                             var plist = GetPatientById(patient_id);
 
                             var recorditem = relist[0];
@@ -438,6 +447,7 @@ namespace Data.Repository
                             }
 
                             //写入mz_visit_table 
+                            Serilog.Log.Debug($"写入mz_visit_table");
                             para = new DynamicParameters();
                             para.Add("@patient_id", patient_id);
                             para.Add("@times", max_times);
@@ -477,6 +487,7 @@ namespace Data.Repository
                         var mz_charge_group = "";
                         int itemno = 0;
                         //写入挂号收费明细表
+                        Serilog.Log.Debug($"写入挂号收费明细表");
                         foreach (var item in chargeItems)
                         {
                             charge_price = Convert.ToDecimal(item.charge_price);
@@ -521,6 +532,7 @@ namespace Data.Repository
                         var deleted_flag = "0";
                         var report_flag = "0";
                         var receipt_type = "0";
+                        Serilog.Log.Debug($"查询发票表数据");
                         if (dtreceipt != null && dtreceipt.Count > 0)
                         {
                             current_no = dtreceipt[0].current_no.ToString();
@@ -536,6 +548,7 @@ namespace Data.Repository
                         }
                         //写入现金流表
 
+                        Serilog.Log.Debug($"写入现金流表");
                         //处理多重支付
                         var pay_method_arr = pay_string.Split(',');
                         int item_no = 1;
@@ -567,8 +580,8 @@ namespace Data.Repository
                             item_no++;
                         }
 
-                        //写入挂号发票明细表 
-
+                        //写入挂号发票明细表  
+                        Serilog.Log.Debug($"写入挂号发票明细表");
                         decimal to_price = 0;
 
                         //挂号费，诊查费等分批写入   
@@ -618,6 +631,7 @@ namespace Data.Repository
                         //    result = connection.Execute(sql6, para, transaction);
                         //}
                         //写入挂号发票表
+                        Serilog.Log.Debug($"写入挂号发票表");
                         para = new DynamicParameters();
 
                         para.Add("@patient_id", patient_id);
@@ -637,8 +651,8 @@ namespace Data.Repository
                         result = connection.Execute(sql5, para, transaction);
 
                         int new_no = Convert.ToInt32(current_no) + step_length;
-                        ////更新挂号发票记录表
-
+                        //更新挂号发票记录表 
+                        Serilog.Log.Debug($"更新挂号发票记录表");
                         para = new DynamicParameters();
 
                         para.Add("@new_no", new_no.ToString().PadLeft(10, '0'));
@@ -653,22 +667,22 @@ namespace Data.Repository
 
                         transaction.Commit();
 
+                        Serilog.Log.Debug($"提交事务");
                         return max_ledger_sn;
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
+                        Serilog.Log.Debug($"回滚事务"); 
+                        Serilog.Log.Error(ex.Message);
                         throw ex;
-                    }
-
-                }
-
+                    } 
+                } 
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-
+            } 
         }
 
         public string GetNewPatientId()
@@ -689,8 +703,7 @@ namespace Data.Repository
             catch (Exception ex)
             {
                 throw ex;
-            }
-
+            } 
         }
 
         /// <summary>

@@ -55,14 +55,14 @@ namespace Client
 
         }
 
-     
+
         public void MenuBind()
         {
             //设置关联
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
-            Aside.TabControl.TabVisible = true;
-             
+            //Aside.TabControl.TabVisible = true; 
+
             //增加页面到Main
             //AddPage(new FTitlePage1(), 1001);
             //AddPage(new FTitlePage2(), 1002);
@@ -249,7 +249,7 @@ namespace Client
                         Aside.CreateChildNode(parent, "自助支付", 361875, 24, 1603);
                     }
                 }
-            } 
+            }
             //设置Header节点索引
 
             //Aside.CreateNode("业务", 1001);
@@ -263,13 +263,13 @@ namespace Client
             //Aside.CreateNode("Page3", ++pageIndex);
 
             //显示默认界面
-             Aside.SelectFirst();
+            Aside.SelectFirst();
         }
- 
+
 
         private void Aside_MenuItemClick(System.Windows.Forms.TreeNode node, NavMenuItem item, int pageIndex)
         {
-            if (node.Nodes!=null && node.Nodes.Count>0)
+            if (node.Nodes != null && node.Nodes.Count > 0)
             {
                 return;
             }
@@ -318,8 +318,8 @@ namespace Client
                         obj = new FunctionList(); break;
                     case 1502:
                         obj = new UserManage(); break;
-                    case 1601: 
-                        obj = new YBPay();break;
+                    case 1601:
+                        obj = new YBPay(); break;
                     case 1602:
                         obj = new WindowPay(); break;
                     case 1603:
@@ -327,7 +327,7 @@ namespace Client
                     default:
                         break;
                 }
-                 
+
                 obj.TagString = pageIndex.ToString();
                 obj.FormClosing += Obj_FormClosing; ;
                 page = AddPage(obj, pageIndex);
@@ -353,7 +353,7 @@ namespace Client
             //RemovePage(int.Parse((sender as UIPage).TagString));//
             Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
         }
-         
+
 
         BackgroundWorker _demoBGWorker = new BackgroundWorker();
 
@@ -394,83 +394,74 @@ namespace Client
         }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
-            this.MinimumSize = new Size(this.Width, this.Height);
-
-            AddPage(new Client.Forms.Pages.DefaultPage());
-            // SelectPage(1000);
-            Header.Hide();
-
-            this.Hide();
-
-            tlsInfo.Text = "";
-
-            log.Debug((new System.Diagnostics.StackTrace().GetFrame(0).GetMethod()).Name);
-
-            //UILoginForm frm = new UILoginForm();
-            //frm.ShowInTaskbar = true;
-            //frm.Text = "荆州中心医院";
-            //frm.Title = "门诊挂号";
-            //frm.SubText = "荆州中心医院 v0.1";
-            //frm.OnLogin += Frm_OnLogin;
-            //frm.ButtonCancelClick += btnCancel_Click;
-            //frm.LoginImage = UILoginForm.UILoginImage.Login2;
-            //frm.ShowDialog();
-            //if (frm.IsLogin)
-            //{
-            //frm.Dispose();
-            //}
-            //else
-            //{
-            //    
-            //}
-            //return;
-
-            Login frm = new Login();
-            frm.ShowDialog();
-            if (frm.IsLogin)
+            try
             {
-                UIMessageTip.ShowOk("登录成功");
-                this.WindowState = FormWindowState.Maximized;
-                this.Show();
 
-                //statusstrip信息
-                tsslblName.Text = SessionHelper.uservm.name;
+                this.MinimumSize = new Size(this.Width, this.Height);
 
-                tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
-                timer1.Interval = 1000;
-                timer1.Start();
+                //显示默认页面
+                AddPage(new Client.Forms.Pages.DefaultPage());
 
-                timerlogout.Interval = 1000;
-                timerlogout.Start();
+                //隐藏框架头部
+                Header.Hide();
 
-                //加载字典数据
+                this.Hide();
 
-                InitDic();
+                tlsInfo.Text = "";
 
-                //获取菜单权限 
-                GetUserFunctions(SessionHelper.uservm.user_group);
+                Login frm = new Login();
+                frm.ShowDialog();
+                if (frm.IsLogin)
+                {
+                    UIMessageTip.ShowOk("登录成功");
+                    this.WindowState = FormWindowState.Maximized;
+                    this.Show();
 
+                    //statusstrip信息
+                    tsslblName.Text = SessionHelper.uservm.name;
 
-                //绑定菜单
-                MenuBind();
+                    tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
+                    timer1.Interval = 1000;
+                    timer1.Start();
 
-                SessionHelper.clientHeight = this.Height;
-                SessionHelper.clientWidth = this.Width;
+                    timerlogout.Interval = 1000;
+                    timerlogout.Start();
 
-                this.FormClosing += FHeaderAsideMainFooter_FormClosing;
+                    //加载字典数据 
+                    InitDic();
 
-                //ping
-                //_demoBGWorker.DoWork += BGWorker_DoWork;
-                //_demoBGWorker.RunWorkerAsync();
-                //_demoBGWorker.WorkerReportsProgress = true;
-                //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+                    //获取菜单权限 
+                    GetUserFunctions(SessionHelper.uservm.user_group);
 
-                //timerSignal.Interval = 1000 * 5;//10s
-                //timerSignal.Start();
+                    //绑定名称，版本号
+                    this.Text = SessionHelper.client_name + " " + SessionHelper.client_version;
+
+                    //绑定菜单
+                    MenuBind();
+
+                    SessionHelper.clientHeight = this.Height;
+                    SessionHelper.clientWidth = this.Width;
+
+                    this.FormClosing += FHeaderAsideMainFooter_FormClosing;
+
+                    //ping
+                    //_demoBGWorker.DoWork += BGWorker_DoWork;
+                    //_demoBGWorker.RunWorkerAsync();
+                    //_demoBGWorker.WorkerReportsProgress = true;
+                    //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+
+                    //timerSignal.Interval = 1000 * 5;//10s
+                    //timerSignal.Start();
+                }
+                else
+                {
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.Close();
+                log.Error(ex.Message);
+                UIMessageTip.Show(ex.Message);
             }
         }
         public void GetUserFunctions(string user_group)
@@ -483,13 +474,13 @@ namespace Client
                     user_group = user_group
                 };
 
-                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}"; 
+                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
                 var json = "";
                 var paramurl = string.Format($"/api/qxgl/GetXTUserGroupsByGroupId?{param}");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 json = HttpClientUtil.Get(paramurl);
                 function_list = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserGroupVM>>>(json).data;
-                  
+
                 param = $"subsys_id={d.subsys_id}";
                 paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
 
@@ -500,7 +491,7 @@ namespace Client
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                UIMessageTip.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
 
@@ -591,96 +582,123 @@ namespace Client
 
         public void InitDic()
         {
-            log.Info("初始化数据字典：InitDic");
+            try
+            {
 
-            //获取用户费别信息 
-            string json = "";
-            string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
+                log.Info("初始化数据字典：InitDic");
 
-            //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                //获取用户费别信息 
+                string json;
+                string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
 
-            //task.Wait();
-            //var response = task.Result;
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    var read = response.Content.ReadAsStringAsync();
-            //    read.Wait();
-            //    json = read.Result;
-            //}
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
+                //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
-            //获取地区信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetDistrictCodes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
+                //task.Wait();
+                //var response = task.Result;
+                //if (response.IsSuccessStatusCode)
+                //{
+                //    var read = response.Content.ReadAsStringAsync();
+                //    read.Wait();
+                //    json = read.Result;
+                //}
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
 
-
-            //获取职业信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetOccupationCodes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
-
-            //获取身份信息
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetResponceTypes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
+                //获取地区信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetDistrictCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
 
 
-            //获取科室
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetUnits");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
+                //获取职业信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetOccupationCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
 
-            //获取号别
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetClinicTypes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+                //获取身份信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetResponceTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
 
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetRequestTypes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
 
-            //获取用户
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetUserDic");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
+                //获取科室
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetUnits");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
 
-            //获取挂号时间段
-            json = "";
-            paramurl = string.Format($"/api/GuaHao/GetRequestHours");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
-            SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+                //获取号别
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetClinicTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
 
-            //获取用户   
-            paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetRequestTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
 
-            SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
+                //获取用户
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetUserDic");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
 
-            //支付类型比较 
-            paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            json = HttpClientUtil.Get(paramurl);
+                //获取挂号时间段
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetRequestHours");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
 
-            SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
+                //获取用户   
+                paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
+
+                //支付类型比较 
+                paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
+
+                //客户端配置 
+                paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                MzClientConfigVM mzClientConfig = WebApiHelper.DeserializeObject<ResponseResult<MzClientConfigVM>>(json).data;
+                if (mzClientConfig != null)
+                {
+                    //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
+                    SessionHelper.client_name = mzClientConfig.client_name;// ConfigurationManager.AppSettings.Get("client_name");
+                    SessionHelper.client_version = mzClientConfig.client_version; //ConfigurationManager.AppSettings.Get("client_version");
+                    SessionHelper.client_ghsearchkey_length = mzClientConfig.client_ghsearchkey_length; //int.Parse(ConfigurationManager.AppSettings.Get("client_ghsearchkey_length"));
+                }
+                else
+                {
+                    UIMessageTip.Show("没有获取到数据库客户端配置数据");
+                    log.Error("没有获取到数据库客户端配置数据");
+                } 
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
 
             //SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
             //SessionHelper.pay_weixin = ConfigurationManager.AppSettings.Get("pay_weixin");
@@ -793,12 +811,7 @@ namespace Client
 
 
         private void timerSignal_Tick(object sender, EventArgs e)
-        {
-            //Task t2 = Task.Run(() =>
-            //{
-            //    LoadSingnal();
-            //});
-
+        {  
             Action action = () =>
             {
                 LoadSingnal();
@@ -810,23 +823,8 @@ namespace Client
         internal class MyMessager : IMessageFilter
         {
             public bool PreFilterMessage(ref Message m)
-            {
-                //这个函数可以做很多事情，只要是windows消息都会经过，例如注册全局快捷键，修改窗体大小边框，等等
-                //也可以调API做对应的事情
-                //if (m.Msg == WM_KEYDOWN || m.Msg == 513 || m.Msg == 515 || m.Msg == 516 || m.Msg == 522
-                //    //|| m.Msg == (int)WindowsMessages.WM_MOUSEMOVE
-                //    //|| m.Msg == (int)WindowsMessages.WM_LBUTTONDOWN
-                //    //|| m.Msg == (int)WindowsMessages.WM_RBUTTONDOWN
-                //    || m.Msg == WM_KEYUP
-                //    || m.Msg == WM_RBUTTONDOWN
-                //    )
-                //if ( m.Msg == 513 || m.Msg == 515 || m.Msg == 516 || m.Msg == 522)
-                //{
-                //    iOperCount = 0;
-                //}
-
-                //如果检测到有鼠标或则键盘的消息，则使计数为0
-                //if (m.Msg == 0x0202)
+            {  
+                //如果检测到有鼠标或则键盘的消息，则使计数为0 
                 if (m.Msg == 513 || m.Msg == 516 || m.Msg == 519 || m.Msg == 520 || m.Msg == 522 || m.Msg == 256 || m.Msg == 257)
                 {
                     iOperCount = LogOutSeconds;

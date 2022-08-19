@@ -177,12 +177,10 @@ namespace Mzsf.Forms.Pages
                 lblRecriptSn.Text = dat.receipt_sn;
                 lblDateTime.Text = dat.cash_date.ToString("yyyy-MM-dd HH:mm:ss");
                 lblPayType.Text = dat.cheque_type_name.Replace(") ", ")\r\n"); ;
-                lblCharge.Text = dat.charge_total.ToString();
-
-
+                lblCharge.Text = dat.charge_total.ToString()+"元";
+                 
                 //处方详情数据
-                //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag);
-
+                //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag); 
             }
         }
 

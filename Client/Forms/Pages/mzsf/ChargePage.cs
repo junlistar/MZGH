@@ -276,7 +276,7 @@ namespace Mzsf.Forms.Pages
             txtCode.TagString = userInfo.patient_id;
             txtBarcode.Text = userInfo.p_bar_code;
             lblPatientid.Text = userInfo.patient_id;
-            txtName.Text = userInfo.name.ToString();
+            txtName.Text = userInfo.name;
             if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
             {
                 userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
@@ -286,7 +286,7 @@ namespace Mzsf.Forms.Pages
                 userInfo.age = "0";
             }
             txtAge.Text = userInfo.age.ToString() + "岁";
-            txtTel.Text = userInfo.home_tel.ToString();
+            txtTel.Text = userInfo.home_tel;
             if (userInfo.sex == "1")
             {
                 txtSex.Text = "男";

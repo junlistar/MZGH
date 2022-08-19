@@ -1540,10 +1540,10 @@ namespace Client
                     BindUnit(requestDic);
                     return;
                 }
-                //if (py_code.Length < 2)  //todo:做系统配置，同医院信息，版本号
-                //{
-                //    return;
-                //}
+                if (py_code.Length < SessionHelper.client_ghsearchkey_length)  
+                {
+                    return;
+                }
                 var _list = SessionHelper.units.Where(p => p.py_code.StartsWith(py_code)).ToList();
                 var _source = new Dictionary<string, List<GHRequestVM>>();
                 foreach (var _item in _list)

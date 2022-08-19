@@ -10,7 +10,9 @@ namespace Data.IRepository
         #region 扩展的dapper操作
          
         List<PageChequeCompare> GetPageChequeCompares();
-         
+
+        MzClientConfig GetMzClientConfig();
+
         #endregion
     }
 }

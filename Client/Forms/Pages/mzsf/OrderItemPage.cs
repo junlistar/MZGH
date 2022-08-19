@@ -30,7 +30,7 @@ namespace Mzsf.Forms.Pages
 
         Dictionary<string, int> kucun_dic = new Dictionary<string, int>();
 
-        public OrderItemPage(int order_no, string order_type,bool is_charge=false)
+        public OrderItemPage(int order_no, string order_type, bool is_charge = false)
         {
             InitializeComponent();
             _order_no = order_no;
@@ -47,11 +47,11 @@ namespace Mzsf.Forms.Pages
                 dgvOrderDetail.Visible = false;
                 uiPanel1.Visible = false;
 
-                lblNodata.Text = "已收费处方"; 
+                lblNodata.Text = "已收费处方";
                 lblNodata.Show();
             }
             else
-            { 
+            {
                 lblNodata.Hide();
 
                 if (SessionHelper.cprCharges.Count(p => p.order_no == _order_no) > 0)
@@ -120,16 +120,16 @@ namespace Mzsf.Forms.Pages
             try
             {
 
-            if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
-            {
-                if (BindItemData(e.RowIndex))
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
                 {
-                    //更新金额（当前金额和总金额）
-                    CalcPrice();
+                    if (BindItemData(e.RowIndex))
+                    {
+                        //更新金额（当前金额和总金额）
+                        CalcPrice();
 
-                    txtAmount.Focus();
+                        txtAmount.Focus();
 
-                }
+                    }
 
                 }
             }
@@ -182,17 +182,23 @@ namespace Mzsf.Forms.Pages
 
 
                 txtName.TextChanged -= txtName_TextChanged;
-
-                txtName.Text = dgv.Rows[sel_index].Cells["name"].Value.ToString();
+                if (dgv.Rows[sel_index].Cells["name"].Value != null)
+                {
+                    txtName.Text = dgv.Rows[sel_index].Cells["name"].Value.ToString();
+                }
                 var exec_unit = "";
                 if (dgv.Rows[sel_index].Cells["exec_unit"].Value != null)
                 {
-
-                    txtUnit.Text = dgv.Rows[sel_index].Cells["exec_unit_str"].Value.ToString();
                     exec_unit = dgv.Rows[sel_index].Cells["exec_unit"].Value.ToString();
                 }
-
-                txtCharge.Text = dgv.Rows[sel_index].Cells["price"].Value.ToString();
+                if (dgv.Rows[sel_index].Cells["exec_unit_str"].Value != null)
+                {
+                    txtUnit.Text = dgv.Rows[sel_index].Cells["exec_unit_str"].Value.ToString();
+                }
+                if (dgv.Rows[sel_index].Cells["price"].Value != null)
+                {
+                    txtCharge.Text = dgv.Rows[sel_index].Cells["price"].Value.ToString();
+                }
                 txtAmount.Text = "1";
                 var _serial = "";
                 if (dgv.Rows[sel_index].Cells["serial"].Value != null)
@@ -276,45 +282,63 @@ namespace Mzsf.Forms.Pages
 
         public void BindSelectedRowData(int rowIndex)
         {
-            var row = dgvOrderDetail.Rows[rowIndex];
-
-            txtName.TextChanged -= txtName_TextChanged;
-
-            if (row.Cells["charge_code_lookup"].Value != null)
+            try
             {
-                if (row.Cells["charge_code_lookup_str"].Value != null)
-                {
-                    txtName.Text = row.Cells["charge_code_lookup_str"].Value.ToString();
-                }
-                if (row.Cells["exec_SN_lookup"].Value != null)
-                {
 
-                    txtUnit.Text = row.Cells["exec_SN_lookup"].Value.ToString();
+                var row = dgvOrderDetail.Rows[rowIndex];
+
+                txtName.TextChanged -= txtName_TextChanged;
+
+                if (row.Cells["charge_code_lookup"].Value != null)
+                {
+                    if (row.Cells["charge_code_lookup_str"].Value != null)
+                    {
+                        txtName.Text = row.Cells["charge_code_lookup_str"].Value.ToString();
+                    }
+                    if (row.Cells["exec_SN_lookup"].Value != null)
+                    {
+
+                        txtUnit.Text = row.Cells["exec_SN_lookup"].Value.ToString();
+                    }
+                    txtCharge.Text = row.Cells["charge_price"].Value.ToString();
+                    txtAmount.Text = row.Cells["charge_amount"].Value.ToString();
                 }
-                txtCharge.Text = row.Cells["charge_price"].Value.ToString();
-                txtAmount.Text = row.Cells["charge_amount"].Value.ToString();
+                else
+                {
+                    txtName.Text = "";
+                    txtUnit.Text = "";
+                    txtCharge.Text = "";
+                    txtAmount.Text = "";
+                }
+
+                txtName.TextChanged += txtName_TextChanged;
             }
-            else
+            catch (Exception ex)
             {
-                txtName.Text = "";
-                txtUnit.Text = "";
-                txtCharge.Text = "";
-                txtAmount.Text = "";
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
-
-            txtName.TextChanged += txtName_TextChanged;
         }
 
         private void dgvOrderDetail_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (e.RowIndex > -1)
+            try
             {
-                var pno = Convert.ToString(this.dgvOrderDetail.Rows[e.RowIndex].Cells["parent_no"].Value);
-                if (pno != "0")
-                {
-                    dgvOrderDetail.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                }
 
+                if (e.RowIndex > -1)
+                {
+                    var pno = Convert.ToString(this.dgvOrderDetail.Rows[e.RowIndex].Cells["parent_no"].Value);
+                    if (pno != "0")
+                    {
+                        dgvOrderDetail.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -520,7 +544,7 @@ namespace Mzsf.Forms.Pages
             {
                 _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString();
             }
-            
+
 
             CprChargesVM vm = new CprChargesVM();
             vm.charge_code_lookup = _charge_code_lookup;
@@ -557,11 +581,11 @@ namespace Mzsf.Forms.Pages
                     var orig_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
                     var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
                     var code = row.Cells["code"].Value.ToString();
-                    var serial ="";
-                    if (row.Cells["serial"].Value!=null)
+                    var serial = "";
+                    if (row.Cells["serial"].Value != null)
                     {
                         serial = row.Cells["serial"].Value.ToString();
-                    } 
+                    }
 
                     var chargeVM = new CprChargesVM();
                     chargeVM.charge_code_lookup = charge_code_lookup;

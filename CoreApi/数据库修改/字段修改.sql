@@ -716,3 +716,12 @@ insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
 values('c','微信(支付宝)','1','微信',1)
 insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
 values('c','微信(支付宝)','2','支付宝',1)
+
+CREATE TABLE [dbo].[mz_client_config](
+	[client_name] [varchar](50) NULL,
+	[client_version] [varchar](50) NULL,
+	[client_ghsearchkey_length] [smallint] NULL
+) ON [PRIMARY]
+
+insert into mz_client_config(client_name,client_version,client_ghsearchkey_length)
+values('荆州市中医医院','v1.0','1')
