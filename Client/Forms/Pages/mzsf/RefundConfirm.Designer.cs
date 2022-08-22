@@ -49,11 +49,11 @@
             this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
+            this.btnExit = new Sunny.UI.UISymbolButton();
+            this.btnTuikuan = new Sunny.UI.UISymbolButton();
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
-            this.btnTuikuan = new Sunny.UI.UISymbolButton();
-            this.btnExit = new Sunny.UI.UISymbolButton();
             this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -237,6 +237,35 @@
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnExit
+            // 
+            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(289, 2);
+            this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(103, 40);
+            this.btnExit.Symbol = 61579;
+            this.btnExit.TabIndex = 13;
+            this.btnExit.Text = "退出";
+            this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnTuikuan
+            // 
+            this.btnTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTuikuan.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnTuikuan.Location = new System.Drawing.Point(183, 3);
+            this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnTuikuan.Name = "btnTuikuan";
+            this.btnTuikuan.Size = new System.Drawing.Size(100, 39);
+            this.btnTuikuan.TabIndex = 12;
+            this.btnTuikuan.Text = "退款";
+            this.btnTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnTuikuan.Click += new System.EventHandler(this.btnTuikuan_Click);
+            // 
             // btnBufenTuikuan
             // 
             this.btnBufenTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -333,35 +362,6 @@
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
             // 
-            // btnTuikuan
-            // 
-            this.btnTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTuikuan.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuikuan.Location = new System.Drawing.Point(183, 3);
-            this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnTuikuan.Name = "btnTuikuan";
-            this.btnTuikuan.Size = new System.Drawing.Size(100, 39);
-            this.btnTuikuan.TabIndex = 12;
-            this.btnTuikuan.Text = "退款";
-            this.btnTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuikuan.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnTuikuan.Click += new System.EventHandler(this.btnTuikuan_Click);
-            // 
-            // btnExit
-            // 
-            this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(289, 2);
-            this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(103, 40);
-            this.btnExit.Symbol = 61579;
-            this.btnExit.TabIndex = 13;
-            this.btnExit.Text = "退出";
-            this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // ckall
             // 
             this.ckall.BackColor = System.Drawing.Color.Transparent;
@@ -381,7 +381,7 @@
             // 
             this.chkback.HeaderText = "";
             this.chkback.Name = "chkback";
-            this.chkback.TrueValue = "1";
+            this.chkback.TrueValue = "True";
             this.chkback.Width = 88;
             // 
             // charge_amount

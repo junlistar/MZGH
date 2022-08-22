@@ -398,6 +398,11 @@ namespace Mzsf.Forms.Pages
             {
 
                 int rowInde = e.RowIndex;
+                int colIndex = e.ColumnIndex;
+                //if (colIndex==0)
+                //{
+                //    return;
+                //}
 
                 if (dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value != null)
                 {

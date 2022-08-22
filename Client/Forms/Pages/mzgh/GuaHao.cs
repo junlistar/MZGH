@@ -66,7 +66,7 @@ namespace Client
 
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
- 
+
 
         public void GuaHao_Load(object sender, EventArgs e)
         {
@@ -84,7 +84,7 @@ namespace Client
             this.dtpGhrq.ValueChanged += dtpGhrq_ValueChanged;
 
             //设置按钮提示文字信息
-            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]"); 
+            uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]");
             uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text + "[F3]");
             uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text + "[F4]");
 
@@ -159,7 +159,7 @@ namespace Client
                     btn1.Click += Btn1_Click;
                     pnlHours.Add(btn1);
                 }
-                pnlHours.RectColor = Color.Transparent; 
+                pnlHours.RectColor = Color.Transparent;
 
                 this.dtpGhrq.Value = DateTime.Now;
 
@@ -277,7 +277,7 @@ namespace Client
                         break;
                     }
                 }
-                 
+
                 var d = new
                 {
                     request_date = dh_data,
@@ -292,7 +292,7 @@ namespace Client
                 string paramurl = string.Format($"/api/GuaHao/GetGhRequest?request_date={d.request_date}&ampm={d.ampm}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                 
+
                 var json = HttpClientUtil.Get(paramurl);
 
                 var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<GHRequestVM>>>(json);
@@ -579,12 +579,12 @@ namespace Client
 
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
-        { 
+        {
             string paramurl = string.Format($"/api/GuaHao/CheckGhRepeat?patient_id={patient_id}&record_sn={record_sn}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            { 
+            {
                 var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
@@ -748,7 +748,7 @@ namespace Client
 
             ReadCika rc = new ReadCika("磁卡");
             rc.FormClosed += Rc_FormClosed;
-            rc.ShowDialog(); 
+            rc.ShowDialog();
         }
 
         private void Rc_FormClosed(object sender, FormClosedEventArgs e)
@@ -873,7 +873,7 @@ namespace Client
         public void SaveCardData(UserInfoResponseModel model)
         {
             Task<HttpResponseMessage> task = null;
-            
+
             var d = new
             {
                 psn_no = model.baseinfo.psn_no,
@@ -1057,7 +1057,7 @@ namespace Client
         }
 
         private void GuaHao_KeyUp(object sender, KeyEventArgs e)
-        { 
+        {
         }
 
         public void ShowSearchWindow()
@@ -1137,7 +1137,7 @@ namespace Client
         private void txtCode_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            { 
+            {
 
                 //清空缓存
                 SessionHelper.CardReader = null;
@@ -1181,7 +1181,7 @@ namespace Client
 
             List<PatientVM> listApi = new List<PatientVM>();
             //获取数据 
-             
+
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             //如果点击的是身份证或医保卡，择查询身份证信息
@@ -1487,7 +1487,7 @@ namespace Client
             }
 
             return "";
-        } 
+        }
 
         private void GuaHao_Initialize(object sender, EventArgs e)
         {
@@ -1519,7 +1519,7 @@ namespace Client
             }
             isBreadHandleSet = false;
         }
-         
+
 
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -1540,7 +1540,7 @@ namespace Client
                     BindUnit(requestDic);
                     return;
                 }
-                if (py_code.Length < SessionHelper.client_ghsearchkey_length)  
+                if (py_code.Length < SessionHelper.client_ghsearchkey_length)
                 {
                     return;
                 }
@@ -1613,21 +1613,30 @@ namespace Client
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
-            //GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1; 
-            if (PatientVM != null && PatientVM.max_times != 0)
-            {
-                GhPrint ghprint = new GhPrint();
-                ghprint.Show();
+            try
+            { 
+                //GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1; 
+                if (PatientVM != null && PatientVM.max_times != 0)
+                {
+                    GhPrint ghprint = new GhPrint();
+                    ghprint.Show();
+                }
+                else
+                {
+                    UIMessageTip.Show("没有数据");
+                } 
             }
-            UIMessageTip.Show("没有数据");
-
-
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            } 
         }
 
         private void btnEditRelation_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 if (PatientVM != null && !string.IsNullOrEmpty(PatientVM.patient_id))
                 {
                     RelationInfoEdit relationInfoEdit = new RelationInfoEdit(PatientVM.patient_id, PatientVM.relation_code, PatientVM.relation_name);
@@ -1639,6 +1648,7 @@ namespace Client
             }
             catch (Exception ex)
             {
+                UIMessageTip.Show(ex.Message);
                 log.Error(ex.Message);
             }
         }

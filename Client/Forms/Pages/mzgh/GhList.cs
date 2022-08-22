@@ -1277,14 +1277,15 @@ namespace Client
                 };
                 string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
                 string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
-
-                Task.Run(() =>
-                {
-                      HttpClientUtil.Get(url);
-                }); 
+                var reslt = HttpClientUtil.Get(url);
+                //Task.Run(() =>
+                //{
+                //      HttpClientUtil.Get(url);
+                //}); 
             }
             catch (Exception ex)
             {
+                UIMessageTip.Show(ex.Message);
                 log.Error("打印电子发票失败！");
                 log.Error(ex.Message);
             }

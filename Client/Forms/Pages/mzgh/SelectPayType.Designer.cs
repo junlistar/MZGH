@@ -319,9 +319,12 @@
             // 
             this.lblzje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblzje.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblzje.ForeColor = System.Drawing.Color.Red;
             this.lblzje.Location = new System.Drawing.Point(191, 210);
             this.lblzje.Name = "lblzje";
             this.lblzje.Size = new System.Drawing.Size(120, 23);
+            this.lblzje.Style = Sunny.UI.UIStyle.Custom;
+            this.lblzje.StyleCustomMode = true;
             this.lblzje.TabIndex = 35;
             this.lblzje.Text = "0.00";
             this.lblzje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -334,6 +337,7 @@
             this.lblyfje.Location = new System.Drawing.Point(191, 253);
             this.lblyfje.Name = "lblyfje";
             this.lblyfje.Size = new System.Drawing.Size(120, 23);
+            this.lblyfje.StyleCustomMode = true;
             this.lblyfje.TabIndex = 36;
             this.lblyfje.Text = "0.00";
             this.lblyfje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

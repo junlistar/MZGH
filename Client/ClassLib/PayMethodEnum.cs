@@ -14,23 +14,23 @@ namespace Client.ClassLib
         /// <summary>
         /// 微信支付
         /// </summary>
-        WeiXin ,
+        WeiXin =1,
         /// <summary>
         /// 支付宝
         /// </summary>
-        Zhifubao ,
+        Zhifubao =2,
         /// <summary>
         /// 银联
         /// </summary>
-        Yinlian,
+        Yinlian=3,
         /// <summary>
         /// 医保卡
         /// </summary>
-        Yibao,
+        Yibao=4,
         /// <summary>
         /// 现金
         /// </summary>
-        Xianjin
+        Xianjin=5
     }
     public class PayMethod
     {  

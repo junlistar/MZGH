@@ -83,70 +83,76 @@ namespace Client
 
         public void RefundType(GHPayModel item)
         {
+            var chequeCompare = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.pay_type).FirstOrDefault();
 
-            log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
-            if (item.pay_type == SessionHelper.pay_xianjin)
-            {
-                UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
-            }
-            else if (item.pay_type == SessionHelper.pay_weixin)
-            {
-                //var transaction_id = "";
-                //var out_trade_no = "";
-                //var total_fee = "";
-                //var redfund_fee = "";
+            if (chequeCompare != null)
+            { 
+                log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
 
-                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                //log.Info("微信退款返回字符串：" + wx_response);
+                UIMessageBox.ShowInfo($"处理{chequeCompare.his_name}退款,金额：" + item.pay_je);
 
-
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
-                //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
-            }
-            else if (item.pay_type == SessionHelper.pay_yibao)
-            {
-                UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
-
-                if (YBRefund())
+                if (chequeCompare.page_code == ((int)PayMethodEnum.Xianjin).ToString())
                 {
+                    //UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
+                }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.WeiXin).ToString())
+                {
+                    //var transaction_id = "";
+                    //var out_trade_no = "";
+                    //var total_fee = "";
+                    //var redfund_fee = "";
+
+                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                    //log.Info("微信退款返回字符串：" + wx_response);
+
 
                     UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    // UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
                 }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Yibao).ToString())
+                {
+                   // UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
 
-            }
-            else if (item.pay_type == SessionHelper.pay_yinlian)
-            {
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
-            }
-            else if (item.pay_type == SessionHelper.pay_zhifubao)
-            {
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    if (YBRefund())
+                    {
 
-                //var cof = AliConfig.GetConfig();
-                //Factory.SetOptions(cof);
+                        UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    }
+                }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Yinlian).ToString())
+                {
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    //  UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
+                }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Zhifubao).ToString())
+                {
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
 
-                ////全部退款
-                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
-                ////部分退款
-                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+                    //var cof = AliConfig.GetConfig();
+                    //Factory.SetOptions(cof);
 
-                //if (ResponseChecker.Success(response))
-                //{
-                //    log.Info("支付宝退款调用成功");
-                //}
-                //else
-                //{
-                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                //}
+                    ////全部退款
+                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
+                    ////部分退款
+                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
 
-                UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
-            }
-            else
-            {
-                UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
-            }
+                    //if (ResponseChecker.Success(response))
+                    //{
+                    //    log.Info("支付宝退款调用成功");
+                    //}
+                    //else
+                    //{
+                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                    //}
+
+                    //UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
+                }
+                else
+                {
+                    //UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
+                }
+            } 
         }
 
         public bool YBRefund()
@@ -1213,7 +1219,7 @@ namespace Client
         {
             //string sql = "select * from rt_report_data_fast_net where report_code = 220001";
             //DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
-             
+
             var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.mzgh_report_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);

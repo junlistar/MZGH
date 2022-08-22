@@ -41,6 +41,10 @@ namespace Mzsf.Forms.Pages
             dgvfk.Init();
             total_charge = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2);
 
+            lblzje.Text = "0.00";
+            lblyfje.Text = "0.00";
+            lblsyje.Text = "0.00";
+
             lblZongji.Text = total_charge.ToString();
             lblzje.Text = total_charge.ToString();
             lblsyje.Text = total_charge.ToString();
@@ -169,7 +173,7 @@ namespace Mzsf.Forms.Pages
             string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
             HttpClientUtil.Get(paramurl);
         }
-        public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type="")
+        public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type = "")
         {
 
             var left_je = Convert.ToDouble(lblsyje.Text);
@@ -619,68 +623,77 @@ namespace Mzsf.Forms.Pages
 
         public void RefundType(GHPayModel item)
         {
-            log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
-            if (item.pay_type == SessionHelper.pay_xianjin)
+            var chequeCompare = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.pay_type).FirstOrDefault();
+
+            if (chequeCompare != null)
             {
-                UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
-            }
-            else if (item.pay_type == SessionHelper.pay_weixin)
-            {
-                //var transaction_id = "";
-                //var out_trade_no = "";
-                //var total_fee = "";
-                //var redfund_fee = "";
+                log.Info("处理退款:" + item.pay_type + ",金额：" + item.pay_je);
 
-                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                //log.Info("微信退款返回字符串：" + wx_response);
+                UIMessageBox.ShowInfo($"处理{chequeCompare.his_name}退款,金额：" + item.pay_je);
 
 
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
-                //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
-            }
-            else if (item.pay_type == SessionHelper.pay_yibao)
-            {
-                UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
-
-                if (YBRefund())
+                if (chequeCompare.page_code == ((int)PayMethodEnum.Xianjin).ToString())
                 {
+                    //UIMessageBox.ShowInfo("处理现金退款,金额：" + item.pay_je);
+                }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.WeiXin).ToString())
+                {
+                    //var transaction_id = "";
+                    //var out_trade_no = "";
+                    //var total_fee = "";
+                    //var redfund_fee = "";
+
+                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                    //log.Info("微信退款返回字符串：" + wx_response);
+
 
                     UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    // UIMessageBox.ShowInfo("处理微信退款,金额：" + item.pay_je);
+                    //UIMessageTip.ShowOk("处理微信退款,金额：" + item.pay_je); Thread.Sleep(1000);
                 }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Yibao).ToString())
+                {
+                    //UIMessageBox.ShowInfo("处理医保退款,金额：" + item.pay_je);
 
-            }
-            else if (item.pay_type == SessionHelper.pay_yinlian)
-            {
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
-                UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
-            }
-            else if (item.pay_type == SessionHelper.pay_zhifubao)
-            {
-                UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    if (YBRefund())
+                    {
 
-                //var cof = AliConfig.GetConfig();
-                //Factory.SetOptions(cof);
+                        UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    }
 
-                ////全部退款
-                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
-                ////部分退款
-                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+                } 
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Yinlian).ToString())
+                {
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
+                    //UIMessageBox.ShowInfo("处理银联退款,金额：" + item.pay_je);
+                }
+                else if (chequeCompare.page_code == ((int)PayMethodEnum.Zhifubao).ToString())
+                {
+                    UpdateThirdPayStatus(SessionHelper.patientVM.patient_id, item.pay_type.ToString(), item.out_trade_no, item.pay_je.ToString());
 
-                //if (ResponseChecker.Success(response))
-                //{
-                //    log.Info("支付宝退款调用成功");
-                //}
-                //else
-                //{
-                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                //}
+                    //var cof = AliConfig.GetConfig();
+                    //Factory.SetOptions(cof);
 
-                UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
-            }
-            else
-            {
-                UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
+                    ////全部退款
+                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund("外部订单号", "1.0");
+                    ////部分退款
+                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                    //if (ResponseChecker.Success(response))
+                    //{
+                    //    log.Info("支付宝退款调用成功");
+                    //}
+                    //else
+                    //{
+                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                    //}
+
+                    //UIMessageBox.ShowInfo("处理支付宝退款,金额：" + item.pay_je);
+                }
+                else
+                {
+                   // UIMessageBox.ShowInfo("处理其他退款,金额：" + item.pay_je);
+                }
             }
         }
         public bool YBRefund()
@@ -852,7 +865,7 @@ namespace Mzsf.Forms.Pages
             {
                 //处理金额为0的情况
                 pay_string = PayMethod.GetChequeTypeByEnum(PayMethodEnum.Xianjin) + "-0-";
-            } 
+            }
             try
             {
 
@@ -881,7 +894,7 @@ namespace Mzsf.Forms.Pages
                     SessionHelper.do_sf_print = true;
                     SessionHelper.sf_print_user_ledger = result.data;
                     this.DialogResult = DialogResult.OK;
-                    
+
 
                     if (total_charge == 0)
                     {
@@ -893,7 +906,7 @@ namespace Mzsf.Forms.Pages
                         Task.Run(() =>
                         {
                             //写入电子发票信息
-                            CreateElecBill(result.data); 
+                            CreateElecBill(result.data);
                         });
                     }
                     paylist.Clear();
@@ -943,148 +956,148 @@ namespace Mzsf.Forms.Pages
             List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
 
 
-   //         //搜集数据 处方
-   //         var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
-   //.Select(g => g.First())
-   //.ToList();
+            //         //搜集数据 处方
+            //         var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
+            //.Select(g => g.First())
+            //.ToList();
 
 
-   //         for (int i = 0; i < order_list.Count; i++)
-   //         {
-   //             ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
-   //             electBillCharge.sortNo = i;
-   //             if (order_list[i].order_type == "01")
-   //             {
-   //                 //诊疗
-   //                 electBillCharge.chargeCode = "90609";
-   //             }
-   //             else if (order_list[i].order_type == "02")
-   //             {
-   //                 //西药
-   //                 electBillCharge.chargeCode = "90607";
+            //         for (int i = 0; i < order_list.Count; i++)
+            //         {
+            //             ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
+            //             electBillCharge.sortNo = i;
+            //             if (order_list[i].order_type == "01")
+            //             {
+            //                 //诊疗
+            //                 electBillCharge.chargeCode = "90609";
+            //             }
+            //             else if (order_list[i].order_type == "02")
+            //             {
+            //                 //西药
+            //                 electBillCharge.chargeCode = "90607";
 
-   //             }
-   //             else if (order_list[i].order_type == "04")
-   //             {
-   //                 //草药
-   //                 electBillCharge.chargeCode = "90613";
+            //             }
+            //             else if (order_list[i].order_type == "04")
+            //             {
+            //                 //草药
+            //                 electBillCharge.chargeCode = "90613";
 
-   //             }
-   //             electBillCharge.chargeName = order_list[i].order_type;
-   //             electBillCharge.number = 1;
-   //             electBillCharge.std = Math.Round(order_list[i].charge_price, 2).ToString();
-   //             electBillCharge.amt = Math.Round(order_list[i].charge_price, 2).ToString();
-   //             electBillCharge.selfAmt = Math.Round(order_list[i].charge_price, 2).ToString();
-   //             electBillCharge.remark = "";
-   //             chargeItemlist.Add(electBillCharge);
-   //         }
+            //             }
+            //             electBillCharge.chargeName = order_list[i].order_type;
+            //             electBillCharge.number = 1;
+            //             electBillCharge.std = Math.Round(order_list[i].charge_price, 2).ToString();
+            //             electBillCharge.amt = Math.Round(order_list[i].charge_price, 2).ToString();
+            //             electBillCharge.selfAmt = Math.Round(order_list[i].charge_price, 2).ToString();
+            //             electBillCharge.remark = "";
+            //             chargeItemlist.Add(electBillCharge);
+            //         }
 
-   //         //for (int i = 0; i < chargeItems.Count; i++)
-   //         //{
-   //         //    ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
-   //         //    electBillCharge.sortNo = i;
-   //         //    if (chargeItems[i].mz_bill_item == "026")
-   //         //    {
-   //         //        electBillCharge.chargeCode = "90611";//对应挂号费
-   //         //    }
-   //         //    else if (chargeItems[i].mz_bill_item == "018")
-   //         //    {
-   //         //        electBillCharge.chargeCode = "90601";//对应诊查费
-   //         //    }
-   //         //    else
-   //         //    {
+            //         //for (int i = 0; i < chargeItems.Count; i++)
+            //         //{
+            //         //    ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
+            //         //    electBillCharge.sortNo = i;
+            //         //    if (chargeItems[i].mz_bill_item == "026")
+            //         //    {
+            //         //        electBillCharge.chargeCode = "90611";//对应挂号费
+            //         //    }
+            //         //    else if (chargeItems[i].mz_bill_item == "018")
+            //         //    {
+            //         //        electBillCharge.chargeCode = "90601";//对应诊查费
+            //         //    }
+            //         //    else
+            //         //    {
 
-   //         //    }
-   //         //    electBillCharge.chargeName = chargeItems[i].name;
-   //         //    electBillCharge.number = 1;
-   //         //    electBillCharge.std = chargeItems[i].effective_price.ToString();
-   //         //    electBillCharge.amt = chargeItems[i].effective_price.ToString();
-   //         //    electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
-   //         //    electBillCharge.remark = "";
+            //         //    }
+            //         //    electBillCharge.chargeName = chargeItems[i].name;
+            //         //    electBillCharge.number = 1;
+            //         //    electBillCharge.std = chargeItems[i].effective_price.ToString();
+            //         //    electBillCharge.amt = chargeItems[i].effective_price.ToString();
+            //         //    electBillCharge.selfAmt = chargeItems[i].effective_price.ToString();
+            //         //    electBillCharge.remark = "";
 
-   //         //    chargeItemlist.Add(electBillCharge);
-   //         //}
+            //         //    chargeItemlist.Add(electBillCharge);
+            //         //}
 
-   //         //var _chargeDetail = new
-   //         //{
-   //         //    sortNo = "序号",
-   //         //    chargeCode = "收费项目代码",
-   //         //    chargeName = "收费项目名称",
-   //         //    number = 0,//数量
-   //         //    std = 0,//收费标准
-   //         //    amt = 0,//金额
-   //         //    selfAmt = "0",
-   //         //    remark = "备注"
-   //         //};
-   //         //var _listDetail = new
-   //         //{
-   //         //    name = "",//药品名称
-   //         //    std = "",//单价
-   //         //    number = "",//数量
-   //         //    amt = "",//金额
-   //         //    selfAmt = "", //自费金额
-   //         //};
+            //         //var _chargeDetail = new
+            //         //{
+            //         //    sortNo = "序号",
+            //         //    chargeCode = "收费项目代码",
+            //         //    chargeName = "收费项目名称",
+            //         //    number = 0,//数量
+            //         //    std = 0,//收费标准
+            //         //    amt = 0,//金额
+            //         //    selfAmt = "0",
+            //         //    remark = "备注"
+            //         //};
+            //         //var _listDetail = new
+            //         //{
+            //         //    name = "",//药品名称
+            //         //    std = "",//单价
+            //         //    number = "",//数量
+            //         //    amt = "",//金额
+            //         //    selfAmt = "", //自费金额
+            //         //};
 
-   //         string _remark = "";
-   //         for (int i = 0; i < paylist.Count; i++)
-   //         {
-   //             PayChannelDetail payChannelDetail = new PayChannelDetail();
-   //             //if (paylist[i].pay_type == SessionHelper.pay_xianjin)
-   //             //{//现金
-   //             //    payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
-   //             //}
-   //             //else if (paylist[i].pay_type == SessionHelper.pay_yibao)
-   //             //{//医保
-   //             //    payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
-   //             //}
-   //             //else if (paylist[i].pay_type == SessionHelper.pay_zhifubao)
-   //             //{//支付宝
-   //             //    payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
-   //             //}
-   //             //else if (paylist[i].pay_type == SessionHelper.pay_weixin)
-   //             //{//微信
-   //             //    payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
-   //             //}
-   //             //else if (paylist[i].pay_type == SessionHelper.pay_yinlian)
-   //             //{//银联
-   //             //    payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
-   //             //}
-   //             var _payType = SessionHelper.pageChequeCompares.Where(p => p.his_code == paylist[i].pay_type).FirstOrDefault();
-   //             if (_payType != null && _payType.page_code == "1")
-   //             {
-   //                 //微信
-   //                 payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
-   //             }
-   //             else if (_payType != null && _payType.page_code == "2")
-   //             {
-   //                 //支付宝
-   //                 payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
-   //             }
-   //             else if (_payType != null && _payType.page_code == "3")
-   //             {
-   //                 //银联
-   //                 payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
-   //             }
-   //             else if (_payType != null && _payType.page_code == "4")
-   //             {
-   //                 //医保
-   //                 payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
-   //             }
-   //             else if (_payType != null && _payType.page_code == "5")
-   //             {
-   //                 //现金
-   //                 payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
-   //             }
+            //         string _remark = "";
+            //         for (int i = 0; i < paylist.Count; i++)
+            //         {
+            //             PayChannelDetail payChannelDetail = new PayChannelDetail();
+            //             //if (paylist[i].pay_type == SessionHelper.pay_xianjin)
+            //             //{//现金
+            //             //    payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
+            //             //}
+            //             //else if (paylist[i].pay_type == SessionHelper.pay_yibao)
+            //             //{//医保
+            //             //    payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
+            //             //}
+            //             //else if (paylist[i].pay_type == SessionHelper.pay_zhifubao)
+            //             //{//支付宝
+            //             //    payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
+            //             //}
+            //             //else if (paylist[i].pay_type == SessionHelper.pay_weixin)
+            //             //{//微信
+            //             //    payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
+            //             //}
+            //             //else if (paylist[i].pay_type == SessionHelper.pay_yinlian)
+            //             //{//银联
+            //             //    payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
+            //             //}
+            //             var _payType = SessionHelper.pageChequeCompares.Where(p => p.his_code == paylist[i].pay_type).FirstOrDefault();
+            //             if (_payType != null && _payType.page_code == "1")
+            //             {
+            //                 //微信
+            //                 payChannelDetail.payChannelCode = "01"; _remark += ",微信-";
+            //             }
+            //             else if (_payType != null && _payType.page_code == "2")
+            //             {
+            //                 //支付宝
+            //                 payChannelDetail.payChannelCode = "01"; _remark += ",支付宝-";
+            //             }
+            //             else if (_payType != null && _payType.page_code == "3")
+            //             {
+            //                 //银联
+            //                 payChannelDetail.payChannelCode = "01"; _remark += ",银联-";
+            //             }
+            //             else if (_payType != null && _payType.page_code == "4")
+            //             {
+            //                 //医保
+            //                 payChannelDetail.payChannelCode = "07"; _remark += ",医保-";
+            //             }
+            //             else if (_payType != null && _payType.page_code == "5")
+            //             {
+            //                 //现金
+            //                 payChannelDetail.payChannelCode = "02"; _remark += ",现金-";
+            //             }
 
 
-   //             _remark += paylist[i].pay_je.ToString();
-   //             payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();
-   //             payChannelDetails.Add(payChannelDetail);
-   //         }
-   //         if (!string.IsNullOrWhiteSpace(_remark))
-   //         {
-   //             _remark = _remark.Substring(1);
-   //         }
+            //             _remark += paylist[i].pay_je.ToString();
+            //             payChannelDetail.payChannelValue = paylist[i].pay_je.ToString();
+            //             payChannelDetails.Add(payChannelDetail);
+            //         }
+            //         if (!string.IsNullOrWhiteSpace(_remark))
+            //         {
+            //             _remark = _remark.Substring(1);
+            //         }
 
             string getDataUrl = string.Format($"/api/mzsf/GetFPInvoiceEBillOutpatient?patient_id={SessionHelper.patientVM.patient_id}&ledger_sn={new_ledger_sn}&admiss_times={1}");
             var json = HttpClientUtil.Get(getDataUrl);
@@ -1269,7 +1282,7 @@ namespace Mzsf.Forms.Pages
         }
 
         private void Check_FormClosing(object sender, FormClosingEventArgs e)
-        { 
+        {
             if (paylist != null && paylist.Count > 0)
             {
                 Refund();
