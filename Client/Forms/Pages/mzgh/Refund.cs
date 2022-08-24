@@ -98,10 +98,8 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.InnerException.ToString());
-
-            }
-
+                log.Error(ex.StackTrace); 
+            } 
 
         }
 
@@ -362,7 +360,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.Message);
+                log.Error(ex.StackTrace);
             }
 
         }
@@ -423,8 +421,9 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.InnerException.ToString());
+                log.Error(ex.StackTrace);
             }
+        
         }
 
         public void BindGridView()
@@ -483,7 +482,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.InnerException.ToString());
+                log.Error(ex.StackTrace);
             }
         }
 

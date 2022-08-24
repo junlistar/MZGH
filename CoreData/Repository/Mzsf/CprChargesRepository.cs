@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository.Mzsf
 {
@@ -51,6 +52,19 @@ namespace Data.Repository.Mzsf
             para.Add("@status", status);
             ExecQuerySP("mzsf_CallCprCharges", para);
             return true;
+        }
+
+        public int GetRefundNewRecordLedgerSn(int ledger_sn)
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = GetSqlByTag("mzsf_mzdetailcharge_getparentledgersn");
+              
+                var para = new DynamicParameters();
+                para.Add("@parent_ledger_sn", ledger_sn);
+
+                return connection.Query<int>(sql,para).FirstOrDefault();
+            } 
         }
     }
 }

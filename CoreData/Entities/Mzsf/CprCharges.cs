@@ -58,7 +58,10 @@ namespace Data.Entities.Mzsf
         public decimal sum_total { get; set; }
         public string response_type { get; set; }
         public string charge_type { get; set; }
+        public int parent_ledger_sn { get; set; }
+
         
+
 
         public string parent_no { get; set; }
         public string order_properties { get; set; }

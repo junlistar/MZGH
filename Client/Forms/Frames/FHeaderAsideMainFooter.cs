@@ -20,6 +20,7 @@ using Client.Forms.Pages.qxgl;
 using System.Linq;
 using Client.Forms.Pages.yhbb;
 using Client.Forms.Pages.zfgl;
+using Client.Forms.Pages.xt;
 
 namespace Client
 {
@@ -105,8 +106,9 @@ namespace Client
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
-                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
+                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
 
                 pageIndex = 1600;
                 parent = Aside.CreateNode("支付管理", 61852, 24, pageIndex);
@@ -231,7 +233,11 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                     }
-                }
+                    if (function_list.Where(p => p.func_desc.Trim() == "客户端配置").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
+                    }
+                } 
                 pageIndex = 1600;
                 if (function_list.Where(p => p.func_desc.Trim() == "支付管理").Count() > 0)
                 {
@@ -318,6 +324,8 @@ namespace Client
                         obj = new FunctionList(); break;
                     case 1502:
                         obj = new UserManage(); break;
+                    case 1503:
+                        obj = new MzClientConfig(); break;
                     case 1601:
                         obj = new YBPay(); break;
                     case 1602:
@@ -434,7 +442,7 @@ namespace Client
                     GetUserFunctions(SessionHelper.uservm.user_group);
 
                     //绑定名称，版本号
-                    this.Text = SessionHelper.client_name + " " + SessionHelper.client_version;
+                    this.Text = SessionHelper.MzClientConfigVM.client_name + " " + SessionHelper.MzClientConfigVM.client_version;
 
                     //绑定菜单
                     MenuBind();
@@ -684,9 +692,7 @@ namespace Client
                 if (mzClientConfig != null)
                 {
                     //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
-                    SessionHelper.client_name = mzClientConfig.client_name;// ConfigurationManager.AppSettings.Get("client_name");
-                    SessionHelper.client_version = mzClientConfig.client_version; //ConfigurationManager.AppSettings.Get("client_version");
-                    SessionHelper.client_ghsearchkey_length = mzClientConfig.client_ghsearchkey_length; //int.Parse(ConfigurationManager.AppSettings.Get("client_ghsearchkey_length"));
+                    SessionHelper.MzClientConfigVM = mzClientConfig;
                 }
                 else
                 {

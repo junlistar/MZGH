@@ -15,6 +15,8 @@ namespace Data.IRepository.Mzsf
 
         bool CallCprCharges(string user_mi, string patient_id, int times, string status);
 
+        int GetRefundNewRecordLedgerSn(int ledger_sn);
+
         #endregion
     }
 }

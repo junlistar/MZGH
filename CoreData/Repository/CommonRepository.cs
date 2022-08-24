@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Data.Entities;
 using Data.IRepository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,10 +27,27 @@ namespace Data.Repository
         public MzClientConfig GetMzClientConfig()
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
-            { 
+            {
                 string sql = GetSqlByTag("zd_mzclientconfig_get");
 
                 return connection.Query<MzClientConfig>(sql).FirstOrDefault();
+            }
+        }
+
+        public bool UpdateMzClientConfig(string jsonStr)
+        {
+            MzClientConfig clientConfig = JsonConvert.DeserializeObject<MzClientConfig>(jsonStr);
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = GetSqlByTag("zd_mzclientconfig_update");
+               
+                var para = new DynamicParameters();
+                para.Add("@client_name", clientConfig.client_name);
+                para.Add("@client_version", clientConfig.client_version);
+                para.Add("@client_ghsearchkey_length", clientConfig.client_ghsearchkey_length);
+                para.Add("@sys_type", clientConfig.sys_type);
+
+                return connection.Execute(sql, para) > 0;
             }
         }
     }

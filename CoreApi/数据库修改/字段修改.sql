@@ -718,10 +718,17 @@ insert into page_cheque_compare(his_code,his_name,page_code,page_name,is_show)
 values('c','微信(支付宝)','2','支付宝',1)
 
 CREATE TABLE [dbo].[mz_client_config](
+	[sys_type] [varchar](50) NULL,
 	[client_name] [varchar](50) NULL,
 	[client_version] [varchar](50) NULL,
-	[client_ghsearchkey_length] [smallint] NULL
+	[client_ghsearchkey_length] [smallint] NULL,
+	[update_time] [datetime] NULL
 ) ON [PRIMARY]
+insert into mz_client_config(sys_type,client_name,client_version,client_ghsearchkey_length,update_time)
+values('mz','荆州市中医医院','v1.0','1',GETDATE())
 
-insert into mz_client_config(client_name,client_version,client_ghsearchkey_length)
-values('荆州市中医医院','v1.0','1')
+
+alter TABLE mz_detail_charge
+add parent_ledger_sn smallint  default (0);
+alter TABLE mz_detail_charge_b
+add parent_ledger_sn smallint  default (0);

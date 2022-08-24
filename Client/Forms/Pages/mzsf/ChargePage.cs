@@ -51,35 +51,36 @@ namespace Mzsf.Forms.Pages
 
         public void SearchUser()
         {
-            lblMsg.Text = "";
-            txtCode.Focus();
-
-            this.uiTabControl1.Hide();
-            this.pblSum.Hide();
-            //this.pnlAddOrder.Hide();
-
-            //ClearUserInfo();
-
-            var barcode = this.txtCode.Text.Trim();
-
-            if (string.IsNullOrEmpty(barcode))
-            {
-                return;
-            }
-
-            //获取数据  
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
-            //如果点击的是身份证或医保卡，择查询身份证信息
-            if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
-            {
-                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
-            }
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
+                lblMsg.Text = "";
+                txtCode.Focus();
+
+                this.uiTabControl1.Hide();
+                this.pblSum.Hide();
+                //this.pnlAddOrder.Hide();
+
+                //ClearUserInfo();
+
+                var barcode = this.txtCode.Text.Trim();
+
+                if (string.IsNullOrEmpty(barcode))
+                {
+                    return;
+                }
+
+                //获取数据  
+                Task<HttpResponseMessage> task = null;
+                string json = "";
+                string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
+                //如果点击的是身份证或医保卡，择查询身份证信息
+                if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+                {
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+                }
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -147,9 +148,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -159,18 +159,19 @@ namespace Mzsf.Forms.Pages
         /// <param name="patient_id"></param>
         private void BindOrders(string patient_id)
         {
-            //查询近两日就诊处方记录，如果有多条，要今天选择 
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-
-            string begin = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
-            string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
-
-            string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
+                //查询近两日就诊处方记录，如果有多条，要今天选择 
+                Task<HttpResponseMessage> task = null;
+                string json = "";
+
+                string begin = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd 00:00:00");
+                string end = DateTime.Now.ToString("yyyy-MM-dd 23:59:59");
+
+                string paramurl = string.Format($"/api/mzsf/GetMzVisitsByDate?patient_id={patient_id}&begin={begin}&end={end}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -216,11 +217,9 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
-
         }
 
         /// <summary>
@@ -272,96 +271,106 @@ namespace Mzsf.Forms.Pages
 
         public void BindUserInfo(PatientVM userInfo)
         {
-            txtCode.Text ="";
-            txtCode.TagString = userInfo.patient_id;
-            txtBarcode.Text = userInfo.p_bar_code;
-            lblPatientid.Text = userInfo.patient_id;
-            txtName.Text = userInfo.name;
-            if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
+            try
             {
-                userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
-            }
-            else
-            {
-                userInfo.age = "0";
-            }
-            txtAge.Text = userInfo.age.ToString() + "岁";
-            txtTel.Text = userInfo.home_tel;
-            if (userInfo.sex == "1")
-            {
-                txtSex.Text = "男";
-            }
-            else if (userInfo.sex == "2")
-            {
-                txtSex.Text = "女";
-            }
-            if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
-            {
-                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
-            }
-            else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
-            {
-                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
-            }
-            else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
-            {
-                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
-            }
-            else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
-            {
-                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
-            }
-            else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
-            {
-                lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
-            }
-            else
-            {
-                lblmarry.Text = userInfo.marry_code;
-            }
-            lblstreet.Text = userInfo.home_street;
-            txtHicno.Text = userInfo.hic_no;
 
-            lblTimes.Text = "来访号：" + userInfo.max_times;
-            lblTimes.Tag = userInfo.max_times;
 
-            if (!string.IsNullOrEmpty(userInfo.home_district))
-            {
-                var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
-
-                if (model != null)
+                txtCode.Text = "";
+                txtCode.TagString = userInfo.patient_id;
+                txtBarcode.Text = userInfo.p_bar_code;
+                lblPatientid.Text = userInfo.patient_id;
+                txtName.Text = userInfo.name;
+                if (string.IsNullOrEmpty(userInfo.age) && userInfo.birthday.HasValue)
                 {
-                    txtdistrict.Text = model.name;
+                    userInfo.age = (DateTime.Now.Year - userInfo.birthday.Value.Year).ToString();
+                }
+                else
+                {
+                    userInfo.age = "0";
+                }
+                txtAge.Text = userInfo.age.ToString() + "岁";
+                txtTel.Text = userInfo.home_tel;
+                if (userInfo.sex == "1")
+                {
+                    txtSex.Text = "男";
+                }
+                else if (userInfo.sex == "2")
+                {
+                    txtSex.Text = "女";
+                }
+                if (userInfo.marry_code == ((int)MarryCodeEnum.Yihun).ToString())
+                {
+                    lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Yihun);
+                }
+                else if (userInfo.marry_code == ((int)MarryCodeEnum.Lihun).ToString())
+                {
+                    lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Lihun);
+                }
+                else if (userInfo.marry_code == ((int)MarryCodeEnum.Qita).ToString())
+                {
+                    lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Qita);
+                }
+                else if (userInfo.marry_code == ((int)MarryCodeEnum.Sangou).ToString())
+                {
+                    lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Sangou);
+                }
+                else if (userInfo.marry_code == ((int)MarryCodeEnum.Weinhun).ToString())
+                {
+                    lblmarry.Text = EnumExtension.GetDescription(MarryCodeEnum.Weinhun);
+                }
+                else
+                {
+                    lblmarry.Text = userInfo.marry_code;
+                }
+                lblstreet.Text = userInfo.home_street;
+                txtHicno.Text = userInfo.hic_no;
+
+                lblTimes.Text = "来访号：" + userInfo.max_times;
+                lblTimes.Tag = userInfo.max_times;
+
+                if (!string.IsNullOrEmpty(userInfo.home_district))
+                {
+                    var model = SessionHelper.districtCodes.Where(p => p.code == userInfo.home_district).FirstOrDefault();
+
+                    if (model != null)
+                    {
+                        txtdistrict.Text = model.name;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(userInfo.response_type))
+                {
+                    var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
+
+                    if (model != null)
+                    {
+                        cbxResponseType.Text = model.name;
+                    }
+                }
+                if (!string.IsNullOrEmpty(userInfo.charge_type))
+                {
+                    var model = SessionHelper.chargeTypes.Where(p => p.code == userInfo.charge_type).FirstOrDefault();
+
+                    if (model != null)
+                    {
+                        cbxChargeTypes.Text = model.name;
+                    }
+                }
+                lblrelationname.Text = userInfo.relation_name;
+                if (!string.IsNullOrEmpty(userInfo.relation_code))
+                {
+                    var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
+
+                    if (model != null)
+                    {
+                        lblrelation.Text = model.name;
+                    }
                 }
             }
-
-            if (!string.IsNullOrEmpty(userInfo.response_type))
+            catch (Exception ex)
             {
-                var model = SessionHelper.responseTypes.Where(p => p.code == userInfo.response_type).FirstOrDefault();
-
-                if (model != null)
-                {
-                    cbxResponseType.Text = model.name;
-                }
-            }
-            if (!string.IsNullOrEmpty(userInfo.charge_type))
-            {
-                var model = SessionHelper.chargeTypes.Where(p => p.code == userInfo.charge_type).FirstOrDefault();
-
-                if (model != null)
-                {
-                    cbxChargeTypes.Text = model.name;
-                }
-            }
-            lblrelationname.Text = userInfo.relation_name;
-            if (!string.IsNullOrEmpty(userInfo.relation_code))
-            {
-                var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
-
-                if (model != null)
-                {
-                    lblrelation.Text = model.name;
-                }
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -377,15 +386,15 @@ namespace Mzsf.Forms.Pages
         /// 获取病人处方存储过程
         /// </summary>
         public void GetOrders(string patient_id, int times)
-        {
+        { try
+            {
             lblNodata.Text = "没有查询到数据";
             Task<HttpResponseMessage> task = null;
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetMzOrdersByPatientId?patient_id={patient_id}&times={times}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
-            {
+           
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -735,7 +744,7 @@ namespace Mzsf.Forms.Pages
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
 
-                var result = InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                 log.Debug(parm[2]);
 
@@ -756,68 +765,12 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error("请求接口数据出错：" + ex.Message);
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
-        [DllImport("ole32.dll")]
-        static extern int CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid pclsid);
-
-        public static object InvokeMethod(string comName, string methodName, ref object[] args)
-        {
-
-            object ret = null;
-            COMInfo com = GetCOMInfo(comName);
-            try
-            {
-                //用参数的索引属性来指出哪些参数是一个返回的参数
-                //对于那些是[in]或ByRef的参数可以不用指定
-                ParameterModifier[] ParamMods = new ParameterModifier[1];
-                ParamMods[0] = new ParameterModifier(3); // 初始化为接口参数的个数
-                ParamMods[0][2] = true; // 设置第三个参数为返回参数
-
-
-                ret = com.COMType.InvokeMember(methodName, BindingFlags.Default | BindingFlags.InvokeMethod, null, com.Instance, args, ParamMods,
-                                                         null,
-                                                         null);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return ret;
-        }
-
-
-        public static COMInfo GetCOMInfo(string comName)
-        {
-            COMInfo comInfo;
-            Type type;
-            object instance = null;
-            instance = CreateInstance(comName, out type);
-            comInfo = new COMInfo(type, instance);
-            return comInfo;
-        }
-
-
-        private static object CreateInstance(string progName, out Type type)
-        {
-            object instance = null;
-            type = null;
-            try
-            {
-                Guid clsid;
-                int result = CLSIDFromProgID(progName, out clsid);
-                type = Type.GetTypeFromCLSID(clsid, true);
-                instance = Activator.CreateInstance(type);
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return instance;
-        }
-
+        
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             txtCode.Text = "";
@@ -867,7 +820,7 @@ namespace Mzsf.Forms.Pages
             try
             {
                 //var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
-                var _order = SessionHelper.mzOrders.OrderBy(p=>p.order_no).ToList()[tabindex];
+                var _order = SessionHelper.mzOrders.OrderBy(p => p.order_no).ToList()[tabindex];
                 if (_order != null)
                 {
 
@@ -993,7 +946,7 @@ namespace Mzsf.Forms.Pages
             //}
             this.uiTabControl1.Show();
             this.pblSum.Show();
-             
+
             var _order = new MzOrderVM();
             _order.order_no = max_order_no + 1;
             _order.order_type = cbxOrderType.SelectedValue.ToString();
@@ -1053,9 +1006,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
             return true;
         }
@@ -1158,10 +1110,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError(ex.Message);
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
 
         }
@@ -1225,7 +1175,7 @@ namespace Mzsf.Forms.Pages
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
-        {
+        { 
             if (current_patient_id == "")
             {
                 return;
@@ -1361,6 +1311,6 @@ namespace Mzsf.Forms.Pages
         {
             BindOrders(lblPatientid.Text);
         }
-             
+
     }
 }

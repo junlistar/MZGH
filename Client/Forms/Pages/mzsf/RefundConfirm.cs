@@ -55,43 +55,51 @@ namespace Mzsf.Forms.Pages
         /// <param name="e"></param>
         private void btnTuikuan_Click(object sender, EventArgs e)
         {
-
-            CalcTotalPrice();
-
-            var je = Math.Round(decimal.Parse(lblTuikuan.Text), 2);
-
-            if (je == 0)
+            try
             {
-                MessageBox.Show("请选择需要退款的处方细目！");
-                return;
-            }
 
-            string msg = "退款金额(￥)：" + je + "，是否确定？";
+                CalcTotalPrice();
 
-            if (UIMessageDialog.ShowAskDialog(this, msg))
-            {
-                //提交部分退款
-                if (refund_item_str != "")
+                var je = Math.Round(decimal.Parse(lblTuikuan.Text), 2);
+
+                if (je == 0)
                 {
-                    refund_item_str = refund_item_str.Substring(1);
-                }
-                else
-                {
-                    MessageBox.Show("没有选择退款项目");
+                    MessageBox.Show("请选择需要退款的处方细目！");
                     return;
                 }
 
-                if (lblZongji.Text == lblTuikuan.Text)
-                {
-                    log.Debug("全部退款");
-                    RefundAll();
-                }
-                else
-                {
-                    log.Debug("部分退款");
-                    RefundPart(refund_item_str);
-                }
+                string msg = "退款金额(￥)：" + je + "，是否确定？";
 
+                if (UIMessageDialog.ShowAskDialog(this, msg))
+                {
+                    //提交部分退款
+                    if (refund_item_str != "")
+                    {
+                        refund_item_str = refund_item_str.Substring(1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("没有选择退款项目");
+                        return;
+                    }
+
+                    if (lblZongji.Text == lblTuikuan.Text)
+                    {
+                        log.Debug("全部退款");
+                        RefundAll();
+                    }
+                    else
+                    {
+                        log.Debug("部分退款");
+                        RefundPart(refund_item_str);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -141,8 +149,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -189,7 +197,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -242,8 +251,7 @@ namespace Mzsf.Forms.Pages
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Debug("请求接口数据出错：" + ex.Message);
-
+                log.Error(ex.Message);
             }
         }
 
@@ -320,9 +328,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
         private void ckall_CheckedChanged(object sender, EventArgs e)

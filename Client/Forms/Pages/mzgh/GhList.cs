@@ -1277,11 +1277,11 @@ namespace Client
                 };
                 string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
                 string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
-                var reslt = HttpClientUtil.Get(url);
-                //Task.Run(() =>
-                //{
-                //      HttpClientUtil.Get(url);
-                //}); 
+                //var reslt = HttpClientUtil.Get(url);
+                Task.Run(() =>
+                {
+                    HttpClientUtil.Get(url);
+                });
             }
             catch (Exception ex)
             {

@@ -15,6 +15,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Converters;
+using System.IO;
+using System.Text;
 
 namespace CoreApi.Controllers
 {
@@ -1125,6 +1127,22 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<MzThridPayView>>(ex.Message);
+            }
+        } 
+        public ResponseResult<bool> UpdateMzClientConfig()
+        {
+            Log.Information($"EditUserInfo,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _commonRepository.UpdateMzClientConfig(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
             }
         }
 

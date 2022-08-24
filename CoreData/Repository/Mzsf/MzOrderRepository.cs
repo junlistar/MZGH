@@ -904,20 +904,25 @@ namespace Data.Repository.Mzsf
                         //写入没有退款的数据 leder_sn +1
                         string insert_1 = GetSqlByTag("mzsf_mzdetailcharge_add");
 
-                        Serilog.Log.Debug($"写入没有退款的项目数据");
+                        Serilog.Log.Debug($"写入没有退款的项目数据，detail_charge_list：{detail_charge_list.Count}条");
                         foreach (var item in detail_charge_list)
                         {
+                            Serilog.Log.Debug($"判断charge_code :{item.charge_code}");
                             if (charge_code_list.Contains(item.charge_code))
                             {
+                                Serilog.Log.Debug($"退款，不写入");
                                 //选择退款的，不写入
                                 continue;
                             }
+
+                            Serilog.Log.Debug($"不退款，添加一条新数据");
 
                             item.ledger_sn = max_ledger_sn;
                             item.confirm_date = dt_now;
                             item.enter_date = dt_now;
                             item.happen_date = dt_now;
                             item.price_date = dt_now;
+                            item.parent_ledger_sn = ledger_sn;
 
 
                             //写入  
@@ -970,7 +975,8 @@ namespace Data.Repository.Mzsf
                             para.Add("@response_type", item.response_type);
                             para.Add("@charge_type", item.charge_type);
 
-
+                            para.Add("@parent_ledger_sn", item.parent_ledger_sn);//退号记录对应的父级记录
+                             
                             para.Add("@charge_no", item.charge_no);  //todo 查询charge_no
                             para.Add("@mz_dept_no", item.mz_dept_no);
                             para.Add("@apply_unit", item.apply_unit);

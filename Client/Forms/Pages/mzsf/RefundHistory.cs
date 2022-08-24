@@ -65,22 +65,26 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<CprChargesVM>>>(json);
                 if (result.status == 1)
                 {
-                    //查询部分退款，重新生成的数据，做比较得到退款的数据项目
-                    paramurl = string.Format($"/api/mzsf/GetDrugDetails?p_id={p_id}&ledger_sn={-ledger_sn + 1}&tbl_flag={tbl_flag}");
-                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-                    task.Wait();
-                    response = task.Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var read = response.Content.ReadAsStringAsync();
-                        read.Wait();
-                        json = read.Result;
-                    }
-                    var new_result = WebApiHelper.DeserializeObject<ResponseResult<List<CprChargesVM>>>(json);
+                    List<CprChargesVM> new_data = new List<CprChargesVM>();
 
+                    //查询出对应的部分退费生成的新纪录的ledger_sn GetRefundNewRecordLedgerSn(int ledger_sn)
+                    paramurl = string.Format($"/api/mzsf/GetRefundNewRecordLedgerSn?ledger_sn={Math.Abs(ledger_sn)}");
+                    json = HttpClientUtil.Get(paramurl);
+                    var ledger_result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
+
+                    if (ledger_result.status == 1 && ledger_result.data > 0)
+                    {
+                        var next_ledger_sn = ledger_result.data;
+
+                        //查询部分退款，重新生成的数据，做比较得到退款的数据项目
+                        paramurl = string.Format($"/api/mzsf/GetDrugDetails?p_id={p_id}&ledger_sn={next_ledger_sn}&tbl_flag={tbl_flag}");
+                        json = HttpClientUtil.Get(paramurl);
+                        var new_result = WebApiHelper.DeserializeObject<ResponseResult<List<CprChargesVM>>>(json);
+                        new_data = new_result.data;
+                    }
                     foreach (var item in result.data)
                     {
-                        if (new_result.data.Where(p => p.charge_code == item.charge_code).Count() > 0)
+                        if (new_data.Where(p => p.charge_code == item.charge_code).Count() > 0)
                         {
                             item.is_delete = false;
                         }
@@ -92,7 +96,7 @@ namespace Mzsf.Forms.Pages
                     }
 
                     var list = result.data.Select(p => new
-                    { 
+                    {
                         back = p.back,
                         charge_amount = p.charge_amount,
                         charge_name = p.charge_name,
@@ -106,6 +110,7 @@ namespace Mzsf.Forms.Pages
                         is_delete = p.is_delete,
 
                     }).ToList();
+
                     //dgvCpr.Init();
                     dgvCpr.DataSource = list;
                     dgvCpr.CellBorderStyle = DataGridViewCellBorderStyle.Single;
@@ -126,9 +131,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -167,9 +171,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -201,15 +204,24 @@ namespace Mzsf.Forms.Pages
 
         private void dgvCpr_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (e.RowIndex!=-1)
+            try
             {
-                var is_delete = Convert.ToBoolean(dgvCpr.Rows[e.RowIndex].Cells["is_delete"].Value);
-                if (is_delete)
+
+                if (e.RowIndex != -1)
                 {
-                    dgvCpr.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                    //dgvCpr.Rows[e.RowIndex].Cells["charge_name"].Style.Font = new Font("微软雅黑",12, FontStyle.Strikeout);
-                    dgvCpr.Rows[e.RowIndex].DefaultCellStyle.Font = new Font("微软雅黑",12, FontStyle.Strikeout);
+                    var is_delete = Convert.ToBoolean(dgvCpr.Rows[e.RowIndex].Cells["is_delete"].Value);
+                    if (is_delete)
+                    {
+                        dgvCpr.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                        //dgvCpr.Rows[e.RowIndex].Cells["charge_name"].Style.Font = new Font("微软雅黑",12, FontStyle.Strikeout);
+                        dgvCpr.Rows[e.RowIndex].DefaultCellStyle.Font = new Font("微软雅黑", 12, FontStyle.Strikeout);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 

@@ -20,9 +20,7 @@ namespace Client.ClassLib
         public static int gh_pay_countdown = 120;//second
 
         //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
-        public static string client_name;
-        public static string client_version;
-        public static int client_ghsearchkey_length = 1;
+        public static MzClientConfigVM MzClientConfigVM; 
 
         public static string cardno = "";
 

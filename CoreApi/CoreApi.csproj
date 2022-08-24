@@ -86,6 +86,9 @@
     <None Update="SQLS\mzgh_xtuser_updatepwd.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzsf_mzdetailcharge_getparentledgersn.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzsf_mzthirdpay_refund.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -198,6 +201,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\mzsf_fpdata_getbyparams.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\zd_mzclientconfig_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\zd_mzclientconfig_get.sql">

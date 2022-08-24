@@ -121,9 +121,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -153,21 +152,29 @@ namespace Mzsf.Forms.Pages
 
         public void CalcTotalPrice()
         {
-            refund_item_str = "";
-            decimal t_price = 0;//总计金额
-            for (int i = 0; i < dgvCpr.Rows.Count; i++)
-            {
-                if (Convert.ToBoolean(dgvCpr.Rows[i].Cells[0].Value))
+            try
+            { 
+                refund_item_str = "";
+                decimal t_price = 0;//总计金额
+                for (int i = 0; i < dgvCpr.Rows.Count; i++)
                 {
-                    var charge = Convert.ToDecimal(dgvCpr.Rows[i].Cells["sum_total"].Value);
-                    t_price += charge;
+                    if (Convert.ToBoolean(dgvCpr.Rows[i].Cells[0].Value))
+                    {
+                        var charge = Convert.ToDecimal(dgvCpr.Rows[i].Cells["sum_total"].Value);
+                        t_price += charge;
 
-                    var order_type = dgvCpr.Rows[i].Cells["order_type"].Value;
-                    var charge_code = dgvCpr.Rows[i].Cells["charge_code"].Value;
-                    refund_item_str += "," + order_type + "-" + charge_code + "-" + charge;
+                        var order_type = dgvCpr.Rows[i].Cells["order_type"].Value;
+                        var charge_code = dgvCpr.Rows[i].Cells["charge_code"].Value;
+                        refund_item_str += "," + order_type + "-" + charge_code + "-" + charge;
+                    }
                 }
+                lblTuikuan.Text = t_price.ToString();
             }
-            lblTuikuan.Text = t_price.ToString();
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            }
         }
 
 
@@ -189,44 +196,52 @@ namespace Mzsf.Forms.Pages
 
         private void btnXianjintui_Click(object sender, EventArgs e)
         {
-            CalcTotalPrice();
-
-            var je = Math.Round(decimal.Parse(lblTuikuan.Text), 2);
-
-            if (je == 0)
+            try
             {
-                MessageBox.Show("请选择需要退款的处方细目！");
-                return;
-            }
 
-            string msg = "退款金额(￥)：" + je + "，是否确定？";
+                CalcTotalPrice();
 
-            if (UIMessageDialog.ShowAskDialog(this, msg))
-            {
-                //提交部分退款
-                if (refund_item_str != "")
+                var je = Math.Round(decimal.Parse(lblTuikuan.Text), 2);
+
+                if (je == 0)
                 {
-                    refund_item_str = refund_item_str.Substring(1); 
-                }
-                else
-                {
-                    MessageBox.Show("没有选择退款项目");
+                    MessageBox.Show("请选择需要退款的处方细目！");
                     return;
                 }
 
-                if (lblZongji.Text == lblTuikuan.Text)
-                {
-                    log.Debug("全部退款"); 
-                    RefundAll();
-                }
-                else
-                {
-                    log.Debug("部分退款");
-                    RefundPart(refund_item_str); 
-                }
+                string msg = "退款金额(￥)：" + je + "，是否确定？";
 
+                if (UIMessageDialog.ShowAskDialog(this, msg))
+                {
+                    //提交部分退款
+                    if (refund_item_str != "")
+                    {
+                        refund_item_str = refund_item_str.Substring(1);
+                    }
+                    else
+                    {
+                        MessageBox.Show("没有选择退款项目");
+                        return;
+                    }
+
+                    if (lblZongji.Text == lblTuikuan.Text)
+                    {
+                        log.Debug("全部退款");
+                        RefundAll();
+                    }
+                    else
+                    {
+                        log.Debug("部分退款");
+                        RefundPart(refund_item_str);
+                    }
+
+                }
             }
-
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            }
         }
 
         public void RefundAll()
@@ -272,8 +287,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
@@ -319,8 +334,8 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Error(ex.ToString());
-
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 

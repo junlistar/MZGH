@@ -453,9 +453,10 @@
             this.txt_rel_address.Location = new System.Drawing.Point(147, 300);
             this.txt_rel_address.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_rel_address.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_rel_address.Multiline = true;
             this.txt_rel_address.Name = "txt_rel_address";
             this.txt_rel_address.ShowText = false;
-            this.txt_rel_address.Size = new System.Drawing.Size(348, 29);
+            this.txt_rel_address.Size = new System.Drawing.Size(348, 52);
             this.txt_rel_address.TabIndex = 77;
             this.txt_rel_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

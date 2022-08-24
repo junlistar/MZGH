@@ -309,6 +309,20 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<int> GetRefundNewRecordLedgerSn(int ledger_sn)
+        {
+            Log.Information($"GetRefundNewRecordLedgerSn,{ledger_sn}");
+             
+            try
+            {
+                return _cprChargesRepository.GetRefundNewRecordLedgerSn(ledger_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            } 
+        }
 
         public ResponseResult<List<Unit>> GetUnits()
         {

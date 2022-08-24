@@ -13,6 +13,8 @@ namespace Data.IRepository
 
         MzClientConfig GetMzClientConfig();
 
+        bool UpdateMzClientConfig(string jsonStr);
+
         #endregion
     }
 }

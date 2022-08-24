@@ -84,14 +84,9 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
-
-            }
-            finally
-            {
-
-            }
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
+            } 
         }
 
         private void BindDgvDate()
@@ -228,13 +223,21 @@ namespace Mzsf.Forms.Pages
 
         private void dgvRefund_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                var charge_total = Convert.ToDecimal(dgvRefund.Rows[e.RowIndex].Cells["charge_total"].Value);
-                if (charge_total < 0)
+            try
+            { 
+                if (e.RowIndex >= 0)
                 {
-                    dgvRefund.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    var charge_total = Convert.ToDecimal(dgvRefund.Rows[e.RowIndex].Cells["charge_total"].Value);
+                    if (charge_total < 0)
+                    {
+                        dgvRefund.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 

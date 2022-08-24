@@ -47,42 +47,56 @@ namespace Client
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // UpdateMzPatientRelation(string patient_id, string relation_code, string sfz_id, string username, string sex, string tel, string opera, string birth, string address)
-            var _pid = txt_patientid.Text;
-            var _code = cbxRelationCode.SelectedValue;
-            var _sfz_id = txt_sfzid.Text;
-            var _name = txt_relationname.Text;
-            var _sex = cbxSex.Text == "男" ? 1 : 2;
-            var _tel = txt_tel.Text;
-            var _opera = SessionHelper.uservm.user_mi;
-            var _birth = txt_birthday.Value;
-            var _addr = txt_address.Text;
+            try
+            {
 
-            if (_code==null || string.IsNullOrEmpty(_code.ToString()))
-            {
-                UIMessageTip.Show("请选择关系！"); cbxRelationCode.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(_name))
-            {
-                UIMessageTip.Show("请输入姓名！"); txt_relationname.Focus();
-                return;
-            }
-            if (string.IsNullOrEmpty(_sfz_id))
-            {
-                UIMessageTip.Show("请输入身份证！"); txt_sfzid.Focus();
-                return;
-            }
-            string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");
-             
-            var json = HttpClientUtil.Get(paramurl);
+                // UpdateMzPatientRelation(string patient_id, string relation_code, string sfz_id, string username, string sex, string tel, string opera, string birth, string address)
+                var _pid = txt_patientid.Text;
+                var _code = cbxRelationCode.SelectedValue;
+                var _sfz_id = txt_sfzid.Text;
+                var _name = txt_relationname.Text;
+                var _sex = cbxSex.Text == "男" ? 1 : 2;
+                var _tel = txt_tel.Text;
+                var _opera = SessionHelper.uservm.user_mi;
+                var _birth = txt_birthday.Value;
+                var _addr = txt_address.Text;
 
-            var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-            if (result.status ==1)
+                if (_code == null || string.IsNullOrEmpty(_code.ToString()))
+                {
+                    UIMessageTip.Show("请选择关系！"); cbxRelationCode.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(_name))
+                {
+                    UIMessageTip.Show("请输入姓名！"); txt_relationname.Focus();
+                    return;
+                }
+                if (string.IsNullOrEmpty(_sfz_id))
+                {
+                    UIMessageTip.Show("请输入身份证！"); txt_sfzid.Focus();
+                    return;
+                }
+                string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");
+
+                var json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("保存成功！");
+                    DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
             {
-                UIMessageTip.Show("保存成功！");
-                DialogResult = DialogResult.OK;
-                this.Close();
+                UIMessageBox.ShowError(ex.Message);
+                log.Error(ex.StackTrace);
             }
         }
 
@@ -91,7 +105,7 @@ namespace Client
         {
             try
             {
-                InitUI(); 
+                InitUI();
             }
             catch (Exception ex)
             {
@@ -115,8 +129,8 @@ namespace Client
 
 
             txt_patientid.Text = _patientId;
-            cbxRelationCode.SelectedValue = _relationCode??"";
-            txt_relationname.Text = _relationName??"";
+            cbxRelationCode.SelectedValue = _relationCode ?? "";
+            txt_relationname.Text = _relationName ?? "";
 
             LoadUserInfo(_patientId);
 
@@ -155,14 +169,14 @@ namespace Client
         private void BindUserInfo(MzPatientRelationVM userInfo)
         {
             try
-            { 
+            {
                 cbxRelationCode.SelectedValue = userInfo.relation_code;
                 txt_relationname.Text = userInfo.username;
                 txt_sfzid.Text = userInfo.sfz_id;
                 txt_tel.Text = userInfo.tel;
                 if (userInfo.birth.HasValue)
                 {
-                    txt_birthday.Value = userInfo.birth.Value; 
+                    txt_birthday.Value = userInfo.birth.Value;
                 }
                 txt_address.Text = userInfo.address;
                 cbxSex.Text = userInfo.sex == "1" ? "男" : "女";
