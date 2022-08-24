@@ -69,7 +69,7 @@ namespace Client
         {
             return System.Text.RegularExpressions.Regex.IsMatch(str_telephone, @"^(\d{3,4}-)?\d{6,8}$");
         }
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
@@ -194,7 +194,7 @@ namespace Client
 
                 //根据patientId查找已存在的病人 
                 var paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
-                var json = HttpClientUtil.Get(paramurl);
+                var json = await HttpClientUtil.GetAsync(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
                 if (result.status == 1 && result.data.Count > 0)
@@ -220,7 +220,7 @@ namespace Client
                 {
 
                     paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
-                    json = HttpClientUtil.Get(paramurl);
+                    json =await HttpClientUtil.GetAsync(paramurl);
                     result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
                     if (result.status == 1 && result.data.Count > 0)
@@ -312,7 +312,8 @@ namespace Client
                 HttpContent httpContent = new StringContent(jsonStr, Encoding.GetEncoding("UTF-8"));
 
                 paramurl = string.Format($"/api/User/EditUserInfoByJson");
-                json = HttpClientUtil.PostJSON(paramurl, _patientVM);
+                //json = HttpClientUtil.PostJSON(paramurl, _patientVM);
+                json = await HttpClientUtil.PostJSONAsync(paramurl, _patientVM);
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
 
                 //var d = new
@@ -646,16 +647,16 @@ namespace Client
                 //费别
                 this.cbxChargeType.SelectedValue = userInfo.charge_type;
 
-                txtRelationName.Text = userInfo.relation_name;
+                //txtRelationName.Text = userInfo.relation_name;
 
-                if (userInfo.relation_code != null)
-                {
-                    cbxRelation.SelectedValue = userInfo.relation_code;
-                }
-                else
-                {
-                    cbxRelation.Text = "";
-                }
+                //if (userInfo.relation_code != null)
+                //{
+                //    cbxRelation.SelectedValue = userInfo.relation_code;
+                //}
+                //else
+                //{
+                //    cbxRelation.Text = "";
+                //}
 
                 //查询监护人信息
                 BindRelationInfo(userInfo.patient_id);

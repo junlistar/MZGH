@@ -35,73 +35,18 @@ namespace Client
             _barcode = barcode;
         }
 
-        private void Refund_Load(object sender, EventArgs e)
+        private async void Refund_Load(object sender, EventArgs e)
         {
             this.dtprq.Value = DateTime.Now;
             this.txtCode.Text = _barcode;
 
-            Search();
+            LoadingHelper.ShowLoadingScreen();//显示
+            await Search();
+
+            LoadingHelper.CloseForm();//显示
             //LoadData();
         }
-
-        public void LoadData()
-        {
-            log.Info("LoadData"); 
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={_barcode}");
-            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
-            try
-            { 
-                var json = HttpClientUtil.Get(paramurl);
-
-                var listApi = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json).data;
-                if (listApi != null && listApi.Count > 0)
-                {
-                    userInfo = listApi[0];
-                    lblName.Text = listApi[0].name;
-                    lblAge.Text = listApi[0].age;
-                    lblSex.Text = listApi[0].sex == "1" ? "男" : "女";
-
-                    //获取挂号流水记录 选取进行退号操作
-                    paramurl = string.Format($"/api/GuaHao/GetGhDeposit?patient_id={listApi[0].patient_id}");
-
-                    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
-                    json = HttpClientUtil.Get(paramurl);
-
-                    var depositList = WebApiHelper.DeserializeObject<ResponseResult<List<GhDepositVM>>>(json).data;
-                    if (depositList == null)
-                    {
-                        return;
-                    } 
-                    var showlist = depositList.Where(p => p.depo_status == "4").ToList();
-                    var refundlist = depositList.Where(p => p.depo_status == "7").ToList();
-                    foreach (var item in showlist)
-                    {
-                        int count = refundlist.Where(p => p.item_no == item.item_no
-                        && p.ledger_sn == -item.ledger_sn
-                        && p.times == item.times
-                        && p.charge == -item.charge
-                        && p.cheque_type == item.cheque_type).Count();
-
-                        if (count > 0)
-                        {
-                            item.sname = "已退号";
-                        }
-                    }
-                    dgvDeposit.Init();
-                    dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                    this.dgvDeposit.DataSource = showlist;
-                    this.dgvDeposit.AutoResizeColumns();
-                }
-            }
-            catch (Exception ex)
-            {
-                UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.StackTrace); 
-            } 
-
-        }
+         
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
@@ -375,7 +320,7 @@ namespace Client
             //Search();
         }
 
-        public void Search()
+        public async Task Search()
         {
 
             string barcode = this.txtCode.Text.Trim();
@@ -390,7 +335,7 @@ namespace Client
             try
             {
 
-                var json = HttpClientUtil.Get(paramurl);
+                var json =await HttpClientUtil.GetAsync(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 

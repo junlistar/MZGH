@@ -219,7 +219,7 @@ namespace Client
             ue.FormClosed += Ue_FormClosed1;
 
             //先停止读卡器
-            log.Debug("打开编辑界面，关闭读卡器");
+            //log.Debug("打开编辑界面，关闭读卡器");
             //timer1.Stop();
 
 
@@ -433,7 +433,7 @@ namespace Client
                     }
                     btn1.Click += btnks_Click;
                     gbxUnits.Add(btn1);
-                } 
+                }
                 #endregion
             }
             catch (Exception ex)
@@ -1196,25 +1196,44 @@ namespace Client
 
         public void SearchUser()
         {
-            var barcode = this.txtCode.Text.Trim();
+            var input_str = this.txtCode.Text.Trim();
             lblMsg.Text = "";
-            if (string.IsNullOrEmpty(barcode))
+            if (string.IsNullOrEmpty(input_str))
             {
                 return;
             }
             InitUIText();
 
-
             List<PatientVM> listApi = new List<PatientVM>();
-            //获取数据 
+            //获取数据  
+            //string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={input_str}");
 
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
+            var barcode_url = string.Format($"/api/GuaHao/GetPatientByBarcode?barcode={input_str}");
+            string paramurl = barcode_url;
+
+            #region 根据数据长度判断查询
 
             //如果点击的是身份证或医保卡，择查询身份证信息
             if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
             {
-                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
             }
+            else if (input_str.Length == 11)
+            {
+                //如果长度为12，则查询patient_id 
+                paramurl = string.Format($"/api/GuaHao/GetPatientByTel?tel={input_str}");
+            }
+            else if (input_str.Length == 12)
+            {
+                //如果长度为12，则查询patient_id 
+                paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={input_str}");
+            }
+            else if (input_str.Length == 15 || input_str.Length == 18)
+            {
+                //如果长度为15或18，则查询身份证对应的hic_no
+                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
+            }
+            #endregion
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -1223,26 +1242,37 @@ namespace Client
                 var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1 && result.data.Count == 0)
+                {
+                    //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
+                    if (paramurl!=barcode_url)
+                    {
+                        json = HttpClientUtil.Get(paramurl);
+                        result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                    }
+                } 
+
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                    var userInfo = result.data[0];
+                    //默认取最大的patient_id数据
+                    var userInfo = result.data.OrderByDescending(p=>p.patient_id).FirstOrDefault();
 
+                    #region 如果身份证查询到多条记录 (废弃，默认取最大的那条记录)
+                    //if (result.data.Count > 1)
+                    //{
+                    //    //弹出选择提示
+                    //    SelectPatient selectPatient = new SelectPatient(result.data);
+                    //    if (selectPatient.ShowDialog() == DialogResult.OK)
+                    //    {
+                    //        userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
+                    //    }
+                    //    else
+                    //    {
+                    //        return;
+                    //    }
+                    //}
+                    #endregion
 
-                    //如果身份证查询到多条记录
-                    //if (SessionHelper.CardReader != null && result.data.Count > 1)
-                    if (result.data.Count > 1)
-                    {
-                        //弹出选择提示
-                        SelectPatient selectPatient = new SelectPatient(result.data);
-                        if (selectPatient.ShowDialog() == DialogResult.OK)
-                        {
-                            userInfo = result.data.Where(p => p.patient_id == SessionHelper.sel_patientid).FirstOrDefault();
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
                     PatientVM = userInfo;
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
@@ -1283,8 +1313,7 @@ namespace Client
                         else
                         {
                             log.Error(responseJson.message);
-                        }
-
+                        } 
                     }
                 }
                 else
@@ -1294,8 +1323,7 @@ namespace Client
 
                     lblMsg.Text = "没有查询到数据";
                     lblMsg.Show();
-
-
+                     
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                     {
@@ -1310,31 +1338,27 @@ namespace Client
                         this.txtCode.Text = _hicno;
                         SearchUser();
                     }
-                }
-
+                } 
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.StackTrace);
-            }
+            } 
+        } 
 
-        }
-
-
-        public void ReloadUserInfo()
+        public async void ReloadUserInfo()
         {
             try
             {
                 string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={lblPatientid.Text}");
 
-                var json = HttpClientUtil.Get(paramurl);
+                var json = await HttpClientUtil.GetAsync(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                    BindUserInfo(result.data[0]);
-
+                    BindUserInfo(result.data[0]); 
                 }
             }
             catch (Exception ex)
@@ -1346,8 +1370,7 @@ namespace Client
         public void BindUserInfo(PatientVM userInfo)
         {
             try
-            {
-
+            { 
                 PatientVM = userInfo;
 
                 btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
@@ -1424,26 +1447,66 @@ namespace Client
                         lblfeibie.Text = model.name;
                     }
                 }
-                lblrelationname.Text = userInfo.relation_name;
-                if (!string.IsNullOrEmpty(userInfo.relation_code))
-                {
-                    var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
+                //lblrelationname.Text = userInfo.relation_name;
+                //if (!string.IsNullOrEmpty(userInfo.relation_code))
+                //{
+                //    var model = SessionHelper.relativeCodes.Where(p => p.code == userInfo.relation_code).FirstOrDefault();
 
-                    if (model != null)
-                    {
-                        lblrelation.Text = model.name;
-                    }
-                }
-                else
-                {
-                    lblrelation.Text = "";
-                }
+                //    if (model != null)
+                //    {
+                //        lblrelation.Text = model.name;
+                //    }
+                //}
+                //else
+                //{
+                //    lblrelation.Text = "";
+                //}
+                BindRelationInfo(userInfo.patient_id);
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
+        }
+
+        public void BindRelationInfo(string code)
+        {
+            try
+            {
+                //根据patientId查找已存在的病人
+                string paramurl = string.Format($"/api/user/GetMzPatientRelationByPatientId?pid={code}");
+
+                var json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzPatientRelationVM>>>(json);
+
+                if (result.status == 1 && result.data.Count > 0)
+                {
+                    var rel_info = result.data[0];
+                    lblrelationname.Text = rel_info.username;
+                    if (!string.IsNullOrEmpty(rel_info.relation_code))
+                    {
+                        var model = SessionHelper.relativeCodes.Where(p => p.code == rel_info.relation_code).FirstOrDefault();
+
+                        if (model != null)
+                        {
+                            lblrelation.Text = model.name;
+                        }
+                    }
+                    else
+                    {
+                        lblrelation.Text = "";
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+
         }
         public string AutoAddUserInfo()
         {

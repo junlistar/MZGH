@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Client.ClassLib
 {
-    public class HttpClientUtil
-
-    {
-         
-        public static string Get(string url)
-
+    public class HttpClientUtil 
+    { 
+        public static string Get(string url) 
         {
 
             var http = HttpClientFactory.GetHttpClient();
@@ -21,6 +18,17 @@ namespace Client.ClassLib
 
             return response1.Content.ReadAsStringAsync().Result;
 
+        }
+        public static async Task<string> GetAsync(string url)
+        {
+            return await Task.Run(() =>
+            {
+                var http = HttpClientFactory.GetHttpClient();
+
+                var response1 = http.GetAsync(url).Result;
+
+                return response1.Content.ReadAsStringAsync().Result;
+            });
         }
 
         /// <summary>
@@ -37,8 +45,7 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static string PostForm(string url, string data)
-
+        public static string PostForm(string url, string data) 
         {
 
             var http = HttpClientFactory.GetHttpClient();
@@ -50,7 +57,27 @@ namespace Client.ClassLib
             return response.Content.ReadAsStringAsync().Result;
 
         }
+        public static async Task<string> PostJSONAsync(string url, object data)
+        {
+            //调用实例
+            //var body = new
+            //{
+            //    userNameOrEmailAddress = "admin",
+            //    password = "123qwe"
+            //};
+            //string token = await HttpClientHelper.PostJSONAsync("https://localhost:44302/api/TokenAuth/Authenticate", body);
 
+            return await Task.Run(() =>
+            {
+                var http = HttpClientFactory.GetHttpClient();
+
+                var content = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json");
+
+                var response = http.PostAsync(url, content).Result;
+
+                return response.Content.ReadAsStringAsync().Result;
+            });
+        }
 
 
 
@@ -69,8 +96,7 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static string PostJSON(string url, object data)
-
+        public static string PostJSON(string url, object data) 
         {
             //调用实例
             //var body = new
@@ -88,13 +114,9 @@ namespace Client.ClassLib
 
             return response.Content.ReadAsStringAsync().Result;
 
-        }
-
-
-
+        }  
     }
-    public class HttpClientFactory
-
+    public class HttpClientFactory 
     {
 
         private static HttpClient _httpClient = null;
@@ -113,18 +135,14 @@ namespace Client.ClassLib
 
         /// </summary>
 
-        static HttpClientFactory()
-
+        static HttpClientFactory() 
         {
 
             _httpClient = new System.Net.Http.HttpClient(new HttpClientHandler());
 
             _httpClient.Timeout = new TimeSpan(0, 0, 30);
 
-            _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
-
-            
-
+            _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive"); 
         }
 
 
@@ -137,13 +155,12 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static HttpClient GetHttpClient()
-
+        public static HttpClient GetHttpClient() 
         {
 
             return _httpClient;
 
-        } 
+        }
 
     }
 }

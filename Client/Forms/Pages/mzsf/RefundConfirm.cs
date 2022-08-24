@@ -340,7 +340,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null)
+                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[i].Cells["confirm_flag"].Value) == 1)
                         {
                             continue;
                         }
@@ -353,7 +353,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null)
+                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[i].Cells["confirm_flag"].Value) == 1)
                         {
                             continue;
                         }
@@ -406,14 +406,14 @@ namespace Mzsf.Forms.Pages
 
                 int rowInde = e.RowIndex;
                 int colIndex = e.ColumnIndex;
-                //if (colIndex==0)
-                //{
-                //    return;
-                //}
-
-                if (dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value != null)
+                if (colIndex < 0 || rowInde <0)
                 {
-                    UIMessageTip.Show("该项目不能退费");
+                    return;
+                }
+
+                if (dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value) == 1)
+                {
+                    UIMessageTip.Show("该项目已确认，不能退费");
                     return;
                 }
 
@@ -443,9 +443,13 @@ namespace Mzsf.Forms.Pages
                 {
                     foreach (DataGridViewRow row in dgvCpr.Rows)
                     {
-                        if (row.Cells["confirm_flag"].Value == null)
+                        if (row.Cells["confirm_flag"].Value == null || Convert.ToInt32(row.Cells["confirm_flag"].Value) != 1)
                         {
                             row.Cells[0].Value = "True";
+                        }
+                        else
+                        { 
+                            row.Cells[0].ReadOnly = true;
                         }
                     }
                     CalcTotalPrice();
@@ -458,5 +462,12 @@ namespace Mzsf.Forms.Pages
             }
         }
 
+        private void RefundConfirm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

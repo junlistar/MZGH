@@ -14,6 +14,8 @@ namespace Data.IRepository
         List<Patient> GetPatientByBarcode(string barcode);
         List<Patient> GetPatientByPatientId(string pid);
 
+        List<Patient> GetPatientByTel(string tel);
+
         List<Patient> GetPatientBySfzId(string sfzid);
         int DeleteSocialNo(string sno);
 

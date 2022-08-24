@@ -152,6 +152,8 @@ namespace Data.Repository.Mzsf
                                     para.Add("@enter_date", dt_now);
                                     para.Add("@enter_opera", opera);
                                     para.Add("@windows_no", drugwin.window_no);
+                                    para.Add("@confirm_flag", '0');
+                                    para.Add("@trans_flag", '0');
                                     para.Add("@dosage", order_item.dosage);
                                     para.Add("@persist_days", 1);
                                     para.Add("@dosage_unit", "");

@@ -25,9 +25,7 @@ namespace Data.Repository
             var para = new DynamicParameters();
             para.Add("@cardno", cardno);
 
-            return Select(selectSql, para);
-
-
+            return Select(selectSql, para); 
         }
         public List<Patient> GetPatientById(string pid)
         {
@@ -49,7 +47,7 @@ namespace Data.Repository
         }
         public List<Patient> GetPatientBySfzId(string sfzid)
         {
-            string selectSql = @"select * from mz_patient_mi a where a.hic_no=@sfzid ";
+            string selectSql = GetSqlByTag("mzgh_mzpatient_getbysfzid");
 
             var para = new DynamicParameters();
             para.Add("@sfzid", sfzid);
@@ -66,6 +64,15 @@ namespace Data.Repository
             }
             var para = new DynamicParameters();
             para.Add("@patient_id", pid);
+
+            return Select(selectSql, para);
+        }
+        public List<Patient> GetPatientByTel(string tel)
+        {
+            string selectSql = GetSqlByTag("mzgh_mzpatient_getbytel");
+             
+            var para = new DynamicParameters();
+            para.Add("@home_tel", tel);
 
             return Select(selectSql, para);
         }

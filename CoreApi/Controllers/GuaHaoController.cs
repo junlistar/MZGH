@@ -563,7 +563,7 @@ namespace CoreApi.Controllers
 
         public ResponseResult<List<Patient>> GetPatientByPatientId(string pid)
         {
-            Log.Information($"GetPatientByPatientId");
+            Log.Information($"GetPatientByPatientId,{pid}");
             var list = new List<Patient>();
             try
             {
@@ -576,9 +576,25 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<Patient>> GetPatientByTel(string tel)
+        {
+            Log.Information($"GetPatientByTel,{tel}");
+            var list = new List<Patient>();
+            try
+            {
+                list = _patientRepository.GetPatientByTel(tel);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Patient>>(ex.Message);
+            }
+            return list;
+        }
+       
         public ResponseResult<List<Patient>> GetPatientBySfzId(string sfzid)
         {
-            Log.Information($"GetPatientBySfzId");
+            Log.Information($"GetPatientBySfzId,{sfzid}");
             var list = new List<Patient>();
             try
             {

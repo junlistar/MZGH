@@ -621,7 +621,7 @@ namespace Client
                 ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.hic_no;
 
                 ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
-                ghRequest.input.data.atddr_no = "D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
+                ghRequest.input.data.atddr_no = vm.yb_ys_code; //"D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
                 ghRequest.input.data.dr_name = vm.doctor_name;
                 ghRequest.input.data.dept_code = vm.unit_name;
                 ghRequest.input.data.dept_name = vm.unit_name;

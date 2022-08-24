@@ -74,6 +74,12 @@
     <None Update="SQLS\mzgh_mzpatientrelation_getbypid.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_mzpatient_getbysfzid.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzgh_mzpatient_getbytel.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_mzpatient_update_relation.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -600,9 +606,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\mzsf_yp_get_zl.sql">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="sql保存到数据库.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="uninstall.bat">

@@ -44,6 +44,7 @@
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.cbxSex = new Sunny.UI.UIComboBox();
             this.txtshebaohao = new Sunny.UI.UITextBox();
             this.uiLabel12 = new Sunny.UI.UILabel();
             this.txtemployername = new Sunny.UI.UITextBox();
@@ -76,7 +77,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.cbxSex = new Sunny.UI.UIComboBox();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -215,7 +215,7 @@
             this.uiLabel8.Size = new System.Drawing.Size(87, 23);
             this.uiLabel8.Style = Sunny.UI.UIStyle.Green;
             this.uiLabel8.TabIndex = 17;
-            this.uiLabel8.Text = "街道地址";
+            this.uiLabel8.Text = "现住址";
             this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel8.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -408,6 +408,31 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
+            // 
+            // cbxSex
+            // 
+            this.cbxSex.DataSource = null;
+            this.cbxSex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cbxSex.FillColor = System.Drawing.Color.White;
+            this.cbxSex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxSex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxSex.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
+            this.cbxSex.Items.AddRange(new object[] {
+            "男",
+            "女"});
+            this.cbxSex.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxSex.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
+            this.cbxSex.Location = new System.Drawing.Point(447, 118);
+            this.cbxSex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxSex.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxSex.Name = "cbxSex";
+            this.cbxSex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxSex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.cbxSex.Size = new System.Drawing.Size(179, 29);
+            this.cbxSex.Style = Sunny.UI.UIStyle.Green;
+            this.cbxSex.TabIndex = 90;
+            this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtshebaohao
             // 
@@ -979,31 +1004,6 @@
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // cbxSex
-            // 
-            this.cbxSex.DataSource = null;
-            this.cbxSex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxSex.FillColor = System.Drawing.Color.White;
-            this.cbxSex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxSex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxSex.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(242)))), ((int)(((byte)(212)))));
-            this.cbxSex.Items.AddRange(new object[] {
-            "男",
-            "女"});
-            this.cbxSex.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxSex.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxSex.Location = new System.Drawing.Point(447, 118);
-            this.cbxSex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxSex.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxSex.Name = "cbxSex";
-            this.cbxSex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxSex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.cbxSex.Size = new System.Drawing.Size(179, 29);
-            this.cbxSex.Style = Sunny.UI.UIStyle.Green;
-            this.cbxSex.TabIndex = 90;
-            this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // UserInfoEdit
             // 

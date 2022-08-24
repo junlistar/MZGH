@@ -129,8 +129,8 @@ namespace Client
 
 
             txt_patientid.Text = _patientId;
-            cbxRelationCode.SelectedValue = _relationCode ?? "";
-            txt_relationname.Text = _relationName ?? "";
+            //cbxRelationCode.SelectedValue = _relationCode ?? "";
+            //txt_relationname.Text = _relationName ?? "";
 
             LoadUserInfo(_patientId);
 

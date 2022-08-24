@@ -37,6 +37,8 @@ namespace Client.ViewModel
         public string clinic_name { get; set; }
         public string je { get; set; }
         public string doctor_name { get; set; }
+        public string yb_ys_code { get; set; }
+        
         public string group_name { get; set; }
         public string req_name { get; set; }
         public string ap { get; set; }
