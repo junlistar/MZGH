@@ -1,4 +1,4 @@
-
+--查询医保支付记录信息
     select b.name patient_name,c.name cheque_name,a.*,d.cheque_no his_no,e.[name] opera_name from mz_thirdpay a 
 	left join mz_patient_mi b on  a.patient_id = b.patient_id
 	left join zd_cheque_type c on a.cheque_type= c.code

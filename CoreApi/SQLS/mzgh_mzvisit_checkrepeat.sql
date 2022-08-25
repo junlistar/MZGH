@@ -1,5 +1,5 @@
  
---220065π“∫≈  ºÏ≤È÷ÿ∏¥
+--220065π“∫≈  ºÏ≤È÷ÿ∏¥π“∫≈–≈œ¢
 select COUNT(*) from view_mz_visit_table a
 inner join gh_request b on a.visit_date = b.request_date 
 and a.visit_dept= b.unit_sn 

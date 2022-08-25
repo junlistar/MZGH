@@ -1,3 +1,4 @@
+ --修改用户信息
  update mz_patient_mi 
  set name=@name,home_tel=@home_tel,sex=@sex,marry_code=@marry_code,birthday=@birthday,
  --relation_name=@relation_name,relation_code=@relation_code,

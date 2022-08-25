@@ -81,6 +81,12 @@ namespace Client.ClassLib
         //门诊处方详情
         public static List<CprChargesVM> cprCharges;
 
+        public static List<MzChargePatternVM> MzChargePatterns;
+        public static List<MzChargePatternDetailVM> MzChargePatternDetails;
+
+        //模板处方 
+        public static List<CprChargesVM> mbChargeList;
+
         public static string pay_xianjin;
         public static string pay_weixin;
         public static string pay_zhifubao;

@@ -1,4 +1,5 @@
-﻿ update gh_detail_charge  set
+﻿ ----日结，更新gh_detail_charge表的report_date
+ update gh_detail_charge  set
                                          report_date = @P1
                                         where
                                          confirm_opera = @P2 and

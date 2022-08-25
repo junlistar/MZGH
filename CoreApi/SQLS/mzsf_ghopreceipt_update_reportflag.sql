@@ -1,4 +1,5 @@
-﻿ update gh_op_receipt  set
+﻿ --日结 更新发票号表的report_flag
+ update gh_op_receipt  set
                                          report_flag = @P1
                                         where
                                          operator = @P2 and

@@ -1,3 +1,4 @@
+ --根据patient_id和日期查询用户的挂号流水信息
  SELECT
       DISTINCT
 	 

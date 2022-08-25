@@ -1,4 +1,5 @@
-﻿ SELECT code,  
+﻿--门诊收费划价，查询诊疗信息
+ SELECT code,  
         case when  serial ='**' then  name  else  name end name,
         specification,
         orig_price, 

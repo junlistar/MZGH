@@ -1,4 +1,4 @@
-﻿
+﻿--查询指定的门诊收费项目
 select patient_id,times,order_type,bill_code,exec_sn,sum(charge_amount* charge_price) charge from 
  mz_detail_charge 
  WHERE patient_id = @patient_id

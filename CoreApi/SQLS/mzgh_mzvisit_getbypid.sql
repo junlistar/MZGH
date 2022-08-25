@@ -1,3 +1,4 @@
+ --查询指定patient_id的挂号信息
  select 
         a.patient_id,
         a.times,

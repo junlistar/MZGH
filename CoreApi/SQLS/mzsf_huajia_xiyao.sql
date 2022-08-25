@@ -1,4 +1,5 @@
-﻿SELECT code,  
+﻿--门诊收费划价，查询西信息
+SELECT code,  
         name=case when  serial ='**' then  name
   else  
 name +'('+specification+')' +' '+isnull(abname,'') 

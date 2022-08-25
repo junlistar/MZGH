@@ -1,4 +1,5 @@
-﻿INSERT INTO mz_detail_charge 
+﻿--添加门诊收费项目明细
+INSERT INTO mz_detail_charge 
 ( charge_price, patient_id, times, order_type, order_no, item_no, ledger_sn, charge_code, serial_no, group_no,
 charge_status, bill_code, audit_code, exec_sn, charge_amount, orig_price, charge_group, caoyao_fu, back_amount,
 happen_date, enter_date, enter_opera, windows_no, confirm_flag, supply_code, dosage, persist_days, dosage_unit, comment, fit_type, self_flag,

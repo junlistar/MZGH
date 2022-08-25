@@ -42,16 +42,15 @@ namespace CoreApi.Controllers
         private readonly IMzOrderItemRepository _mzOrderItemRepository;
         private readonly IFpDataRepository _fpDataRepository;
         private readonly IMzThridPayRepository _mzThirdPayRepository;
-
-
-
+        private readonly IMzChargePatternRepository _mzChargePatternRepository;
+         
         public MzsfController(IUserLoginRepository userLoginRepository, IClinicTypeRepository clinicTypeRepository,
              IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IChargeItemRepository chargeItemRepository,
             IPatientRepository patientRepository, IMzOrderRepository mzOrderRepository, ICprChargesRepository cprChargesRepository,
             IUnitRepository unitRepository, IMzVisitRepository mzVisitRepository, IMzOrderReceiptRepository mzOrderReceiptRepository,
             IMzDepositRepository mzDepositRepository, IOrderTypeRepository orderTypeRepository, IMzOrderItemRepository mzOrderItemRepository,
-            IFpDataRepository fpDataRepository, IMzThridPayRepository mzThirdPayRepository)
+            IFpDataRepository fpDataRepository, IMzThridPayRepository mzThirdPayRepository, IMzChargePatternRepository mzChargePatternRepository)
         {
             _userLoginRepository = userLoginRepository;
             _clinicTypeRepository = clinicTypeRepository;
@@ -72,9 +71,8 @@ namespace CoreApi.Controllers
             _mzOrderItemRepository = mzOrderItemRepository;
             _fpDataRepository = fpDataRepository;
             _mzThirdPayRepository = mzThirdPayRepository;
-        }
-
-
+            _mzChargePatternRepository = mzChargePatternRepository;
+        } 
 
         [HttpGet]
         public string GetTest()
@@ -545,7 +543,41 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<int>(ex.Message);
             }
-        } 
+        }
 
+         /// <summary>
+         /// 获取处方诊疗模板
+         /// </summary>
+         /// <returns></returns>
+        public ResponseResult<List<MzChargePattern>> GetMzChargePatterns()
+        {
+            Log.Information($"GetMzChargePatterns,");
+            try
+            {
+                return _mzChargePatternRepository.GetMzChargePatterns();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzChargePattern>>(ex.Message);
+            }
+        }
+        /// <summary>
+        /// 获取处方诊疗模板详情项目
+        /// </summary>
+        /// <returns></returns>
+        public ResponseResult<List<MzChargePatternDetail>> GetMzPatternDetails()
+        {
+            Log.Information($"GetMzChargePatterns,");
+            try
+            {
+                return _mzChargePatternRepository.GetMzPatternDetails();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzChargePatternDetail>>(ex.Message);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿ INSERT INTO mz_receipt_cancel
+﻿ --添加门诊退费记录
+ INSERT INTO mz_receipt_cancel
          ( operator,   
            happen_date,   
            report_date,   

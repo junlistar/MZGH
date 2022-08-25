@@ -1,3 +1,3 @@
  
---220063挂号  生成分时段号源
+--220063挂号  获取挂号时段
 select * from  gh_zd_request_hour order by start_hour

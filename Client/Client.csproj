@@ -162,6 +162,7 @@
     <Compile Include="ClassLib\DataTableHelper.cs" />
     <Compile Include="ClassLib\LinqHelper.cs" />
     <Compile Include="ClassLib\LoadingHelper.cs" />
+    <Compile Include="ClassLib\PrintUtil.cs" />
     <Compile Include="ClassLib\RowMergeView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -281,6 +282,12 @@
     </Compile>
     <Compile Include="Forms\Pages\mzsf\OrderItemPage.Designer.cs">
       <DependentUpon>OrderItemPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\mzsf\OrderTemplateSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\mzsf\OrderTemplateSelect.Designer.cs">
+      <DependentUpon>OrderTemplateSelect.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Pages\mzsf\RefundApart.cs">
       <SubType>Form</SubType>
@@ -617,6 +624,8 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\MzChargePatternVM.cs" />
+    <Compile Include="ViewModel\MzChargePatternDetailVM.cs" />
     <Compile Include="ViewModel\MzClientConfigVM.cs" />
     <Compile Include="ViewModel\MzPatientRelationVM.cs" />
     <Compile Include="ViewModel\MzThirdPayVM.cs" />
@@ -704,6 +713,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\OrderItemPage.resx">
       <DependentUpon>OrderItemPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\mzsf\OrderTemplateSelect.resx">
+      <DependentUpon>OrderTemplateSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\RefundApart.resx">
       <DependentUpon>RefundApart.cs</DependentUpon>

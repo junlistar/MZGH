@@ -1,5 +1,5 @@
  
---220058挂号  查询基础号表 
+--220058  查询基础号表 
 select b.*,
 	w.name window_name,	
         t.name clinic_name, 

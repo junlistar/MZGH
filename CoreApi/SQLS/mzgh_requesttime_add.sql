@@ -1,2 +1,3 @@
-﻿ insert into gh_zd_request_time(Section_number,Section_number_comment,start_time,end_time,ampm)
+﻿ --添加挂号分时 
+ insert into gh_zd_request_time(Section_number,Section_number_comment,start_time,end_time,ampm)
 values(@Section_number,@Section_number_comment,@start_time,@end_time,@ampm)

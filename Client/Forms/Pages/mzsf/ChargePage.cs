@@ -386,15 +386,16 @@ namespace Mzsf.Forms.Pages
         /// 获取病人处方存储过程
         /// </summary>
         public void GetOrders(string patient_id, int times)
-        { try
+        {
+            try
             {
-            lblNodata.Text = "没有查询到数据";
-            Task<HttpResponseMessage> task = null;
-            string json = "";
-            string paramurl = string.Format($"/api/mzsf/GetMzOrdersByPatientId?patient_id={patient_id}&times={times}");
+                lblNodata.Text = "没有查询到数据";
+                Task<HttpResponseMessage> task = null;
+                string json = "";
+                string paramurl = string.Format($"/api/mzsf/GetMzOrdersByPatientId?patient_id={patient_id}&times={times}");
 
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-           
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
                 task = SessionHelper.MyHttpClient.GetAsync(paramurl);
 
                 task.Wait();
@@ -543,28 +544,64 @@ namespace Mzsf.Forms.Pages
             //cbxChargeTypes.DisplayMember = "name";
 
             BindOrderTypes();
+
+            InicOrderTemplate();
+        }
+        /// <summary>
+        /// 初始化诊疗模板信息
+        /// </summary>
+        public void InicOrderTemplate()
+        { 
+            //查询 处方类型列表 
+            try
+            {
+                string json = "";
+                string paramurl = string.Format($"/api/mzsf/GetMzChargePatterns");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternVM>>>(json);
+                if (result.status == 1)
+                {
+                    SessionHelper.MzChargePatterns = result.data;
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+                paramurl = string.Format($"/api/mzsf/GetMzPatternDetails");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var detail_result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternDetailVM>>>(json);
+                if (detail_result.status == 1)
+                {
+                    SessionHelper.MzChargePatternDetails = detail_result.data;
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Debug("请求接口数据出错：" + ex.Message); 
+            }
         }
 
         public void BindOrderTypes()
         {
-            //查询 处方类型列表
-            Task<HttpResponseMessage> task;
+            //查询 处方类型列表 
             string json = "";
             string paramurl = string.Format($"/api/mzsf/GetOrderTypes");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
                 if (result.status == 1)
@@ -770,7 +807,7 @@ namespace Mzsf.Forms.Pages
             }
         }
 
-        
+
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             txtCode.Text = "";
@@ -1175,7 +1212,7 @@ namespace Mzsf.Forms.Pages
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
-        { 
+        {
             if (current_patient_id == "")
             {
                 return;

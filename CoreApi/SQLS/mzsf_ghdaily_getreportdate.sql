@@ -1,4 +1,5 @@
-﻿ select distinct
+﻿ --查询挂号日结记录
+ select distinct
        report_date 
 from view_GhDailyReport_op
 where (price_opera like @price_opera) and

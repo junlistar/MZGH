@@ -30,8 +30,19 @@ namespace Client.Forms.Pages.xt
 
         private void MzClientConfig_Initialize(object sender, EventArgs e)
         {
+            InitPrinters();
+
             LoadInfo();
         }
+
+        private void InitPrinters()
+        {
+            cbxDefaultPrint.DataSource = PrintUtil.GetLocalPrinters();
+            //获取本地默认打印机
+            cbxDefaultPrint.Text = PrintUtil.DefaultPrinter();
+            cbxDefaultPrint.SelectedIndexChanged += cbxDefaultPrint_SelectedIndexChanged;
+        }
+
         public void LoadInfo()
         {
             if (SessionHelper.MzClientConfigVM != null)
@@ -46,6 +57,7 @@ namespace Client.Forms.Pages.xt
             {
                 UIMessageTip.Show("没有获取到配置数据信息");
             }
+
         } 
         private void btnSaveData_Click(object sender, EventArgs e)
         {
@@ -117,6 +129,11 @@ namespace Client.Forms.Pages.xt
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cbxDefaultPrint_SelectedIndexChanged(object sender, EventArgs e)
+        { 
+            PrintUtil.SetDefaultPrinter(cbxDefaultPrint.Text);
         }
     }
 }

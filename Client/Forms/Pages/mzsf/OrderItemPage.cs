@@ -12,6 +12,7 @@ using log4net;
 using Client.ClassLib;
 using Client.ViewModel;
 using Sunny.UI;
+using Client.Forms.Pages.mzsf;
 
 namespace Mzsf.Forms.Pages
 {
@@ -144,91 +145,104 @@ namespace Mzsf.Forms.Pages
         {
             try
             {
-                var kucun = dgv.Rows[sel_index].Cells["amount"].Value.ToString();
-                if (kucun == "0" && _order_type != "01")
-                {
-                    MessageBox.Show("库存不足"); return false;
-                }
-
                 string code = "";
                 if (dgv.Rows[sel_index].Cells["code"].Value != null)
                 {
                     code = dgv.Rows[sel_index].Cells["code"].Value.ToString();
                 }
-                //判断是否已添加相同药品
-                for (int i = 0; i < dgvOrderDetail.Rows.Count; i++)
+
+                if (dgv.Rows[sel_index].Cells["specification"] != null && dgv.Rows[sel_index].Cells["specification"].Value.ToString() == "模版")
                 {
-                    var _code = dgvOrderDetail.Rows[i].Cells["code"].Value;
-                    if (_code != null && _code.ToString() == code)
+                    //弹出模板项目选择框
+                    OrderTemplateSelect orderTemplateSelect = new OrderTemplateSelect();
+                    orderTemplateSelect._code = code;
+                    orderTemplateSelect.setData = BindMbData;
+                    orderTemplateSelect.ShowDialog();
+                    return true;
+                }
+                else
+                { 
+                    var kucun = dgv.Rows[sel_index].Cells["amount"].Value.ToString();
+                    if (kucun == "0" && _order_type != "01")
                     {
-                        MessageBox.Show("已经添加了相同细目");
+                        MessageBox.Show("库存不足"); return false;
+                    }
+
+                    //判断是否已添加相同药品
+                    for (int i = 0; i < dgvOrderDetail.Rows.Count; i++)
+                    {
+                        var _code = dgvOrderDetail.Rows[i].Cells["code"].Value;
+                        if (_code != null && _code.ToString() == code)
+                        {
+                            MessageBox.Show("已经添加了相同细目");
+                            return false;
+                        }
+                    }
+                    if (kucun != "")
+                    {
+                        if (kucun_dic.Keys.Contains(code))
+                        {
+                            kucun_dic[code] = int.Parse(kucun);
+                        }
+                        else
+                        {
+                            kucun_dic.Add(code, int.Parse(kucun));
+                        }
+                    }
+
+
+                    dgv.Hide();
+
+
+                    txtName.TextChanged -= txtName_TextChanged;
+                    if (dgv.Rows[sel_index].Cells["name"].Value != null)
+                    {
+                        txtName.Text = dgv.Rows[sel_index].Cells["name"].Value.ToString();
+                    }
+                    var exec_unit = "";
+                    if (dgv.Rows[sel_index].Cells["exec_unit"].Value != null)
+                    {
+                        exec_unit = dgv.Rows[sel_index].Cells["exec_unit"].Value.ToString();
+                    }
+                    if (dgv.Rows[sel_index].Cells["exec_unit_str"].Value != null)
+                    {
+                        txtUnit.Text = dgv.Rows[sel_index].Cells["exec_unit_str"].Value.ToString();
+                    }
+                    if (dgv.Rows[sel_index].Cells["price"].Value != null)
+                    {
+                        txtCharge.Text = dgv.Rows[sel_index].Cells["price"].Value.ToString();
+                    }
+                    txtAmount.Text = "1";
+                    var _serial = "";
+                    if (dgv.Rows[sel_index].Cells["serial"].Value != null)
+                    {
+                        _serial = dgv.Rows[sel_index].Cells["serial"].Value.ToString();
+                    }
+                    if (dgvOrderDetail.SelectedIndex == -1)
+                    {
                         return false;
                     }
+
+                    int index = dgvOrderDetail.SelectedIndex;
+
+
+                    dgvOrderDetail.Rows[index].Cells["item_no"].Value = dgvOrderDetail.Rows.Count;
+                    dgvOrderDetail.Rows[index].Cells["charge_code_lookup_str"].Value = txtName.Text;
+                    dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value = exec_unit;
+                    dgvOrderDetail.Rows[index].Cells["exec_SN_lookup"].Value = txtUnit.Text;
+                    dgvOrderDetail.Rows[index].Cells["charge_price"].Value = txtCharge.Text;
+                    dgvOrderDetail.Rows[index].Cells["charge_amount"].Value = txtAmount.Text;
+                    dgvOrderDetail.Rows[index].Cells["serial"].Value = _serial;
+
+                    dgvOrderDetail.Rows[index].Cells["code"].Value = code;
+
+                    txtName.TextChanged += txtName_TextChanged;
+
+                    dgvOrderDetail.AutoResizeColumns();
+
+                    return true;
+
                 }
-                if (kucun != "")
-                {
-                    if (kucun_dic.Keys.Contains(code))
-                    {
-                        kucun_dic[code] = int.Parse(kucun);
-                    }
-                    else
-                    {
-                        kucun_dic.Add(code, int.Parse(kucun));
-                    }
-                }
-
-
-                dgv.Hide();
-
-
-                txtName.TextChanged -= txtName_TextChanged;
-                if (dgv.Rows[sel_index].Cells["name"].Value != null)
-                {
-                    txtName.Text = dgv.Rows[sel_index].Cells["name"].Value.ToString();
-                }
-                var exec_unit = "";
-                if (dgv.Rows[sel_index].Cells["exec_unit"].Value != null)
-                {
-                    exec_unit = dgv.Rows[sel_index].Cells["exec_unit"].Value.ToString();
-                }
-                if (dgv.Rows[sel_index].Cells["exec_unit_str"].Value != null)
-                {
-                    txtUnit.Text = dgv.Rows[sel_index].Cells["exec_unit_str"].Value.ToString();
-                }
-                if (dgv.Rows[sel_index].Cells["price"].Value != null)
-                {
-                    txtCharge.Text = dgv.Rows[sel_index].Cells["price"].Value.ToString();
-                }
-                txtAmount.Text = "1";
-                var _serial = "";
-                if (dgv.Rows[sel_index].Cells["serial"].Value != null)
-                {
-                    _serial = dgv.Rows[sel_index].Cells["serial"].Value.ToString();
-                }
-                if (dgvOrderDetail.SelectedIndex == -1)
-                {
-                    return false;
-                }
-
-                int index = dgvOrderDetail.SelectedIndex;
-
-
-                dgvOrderDetail.Rows[index].Cells["item_no"].Value = dgvOrderDetail.Rows.Count;
-                dgvOrderDetail.Rows[index].Cells["charge_code_lookup_str"].Value = txtName.Text;
-                dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value = exec_unit;
-                dgvOrderDetail.Rows[index].Cells["exec_SN_lookup"].Value = txtUnit.Text;
-                dgvOrderDetail.Rows[index].Cells["charge_price"].Value = txtCharge.Text;
-                dgvOrderDetail.Rows[index].Cells["charge_amount"].Value = txtAmount.Text;
-                dgvOrderDetail.Rows[index].Cells["serial"].Value = _serial;
-
-                dgvOrderDetail.Rows[index].Cells["code"].Value = code;
-
-                txtName.TextChanged += txtName_TextChanged;
-
-                dgvOrderDetail.AutoResizeColumns();
-
-                return true;
-
             }
             catch (Exception ex)
             {
@@ -236,6 +250,52 @@ namespace Mzsf.Forms.Pages
                 return false;
             }
         }
+
+        public void BindMbData()
+        {
+            if (SessionHelper.mbChargeList!=null)
+            {
+                dgv.Hide();
+                txtName.TextChanged -= txtName_TextChanged;
+
+                int index = dgvOrderDetail.SelectedIndex;
+                //if (dgvOrderDetail.Rows.Count>0)
+                //{
+                //     index = dgvOrderDetail.Rows.Count;
+                //}
+
+                for (int i = 0; i < SessionHelper.mbChargeList.Count; i++)
+                {
+
+                    var _item = SessionHelper.mbChargeList[i];
+                    //chargeVM.charge_code_lookup = _charge_name;
+                    //chargeVM.orig_price = _price;
+                    //chargeVM.charge_amount = _quantity;
+                    //chargeVM.serial_no = _serial;
+                    //chargeVM.charge_code = _code;
+                    if (index>=dgvOrderDetail.Rows.Count)
+                    { 
+                        AddNewRow();
+                    }
+
+                    dgvOrderDetail.Rows[index].Cells["item_no"].Value = dgvOrderDetail.Rows.Count;
+                    dgvOrderDetail.Rows[index].Cells["charge_code_lookup_str"].Value = _item.charge_code_lookup;
+                    dgvOrderDetail.Rows[index].Cells["charge_code_lookup"].Value = _item.charge_code_lookup;
+                    dgvOrderDetail.Rows[index].Cells["exec_SN_lookup"].Value = _item.exec_sn;
+                    dgvOrderDetail.Rows[index].Cells["charge_price"].Value = _item.orig_price;
+                    dgvOrderDetail.Rows[index].Cells["charge_amount"].Value = _item.charge_amount;
+                    dgvOrderDetail.Rows[index].Cells["serial"].Value = _item.serial_no;
+                    dgvOrderDetail.Rows[index].Cells["code"].Value = _item.charge_code;
+
+                    dgvOrderDetail.Rows[index].Cells["total_price"].Value = _item.charge_amount * _item.orig_price;
+                    
+
+                    index = index + 1;
+                }
+                txtName.TextChanged += txtName_TextChanged;
+            }
+        }
+
 
 
         public void GetData()
@@ -558,17 +618,17 @@ namespace Mzsf.Forms.Pages
             vm.order_type = _order_type;
             vm.serial_no = _serial;
 
-            if (item_list.Count == 0)
-            {
-                page_total += _orig_price * _charge_amount;
-                page_items++;
-                item_amount += _charge_amount;
+            //if (item_list.Count == 0)
+            //{
+            //    page_total += _orig_price * _charge_amount;
+            //    page_items++;
+            //    item_amount += _charge_amount;
 
-                SessionHelper.cprCharges.Add(vm);
+            //    SessionHelper.cprCharges.Add(vm);
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 foreach (var aa in item_list.ToArray())
                 {
                     SessionHelper.cprCharges.Remove(aa);
@@ -604,7 +664,7 @@ namespace Mzsf.Forms.Pages
                 }
 
 
-            }
+            //}
             setData();
         }
 
@@ -615,7 +675,11 @@ namespace Mzsf.Forms.Pages
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
+            AddNewRow(); 
+        }
 
+        public void AddNewRow()
+        {
             try
             {
                 if (dgvOrderDetail.Rows.Count == 0 || dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
@@ -625,17 +689,14 @@ namespace Mzsf.Forms.Pages
                     this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
                     BindSelectedRowData(new_index);
                     txtName.Focus();
-                }
-
-
+                }  
             }
             catch (Exception ex)
             {
                 log.Error(ex.Message);
             }
-
-
         }
+
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
             try

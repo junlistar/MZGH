@@ -1,5 +1,4 @@
- 
---220042挂号 根据挂号信息获取收费项目
+ --挂号 根据挂号信息获取收费项目
 select b.*,c.name,c.charge_price,c.charge_price,c.effective_price,c.audit_code,c.mz_bill_item,mz_charge_group from gh_zd_clinic_type a 
 left join gh_zd_clinic_charge b on a.code = b.code
 left join zd_charge_item c on b.charge_code = c.code

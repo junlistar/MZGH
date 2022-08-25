@@ -338,8 +338,8 @@ namespace Client.ClassLib
         /// <returns></returns>
         public static T DeserializeObject<T>(string json)
         {
-            JavaScriptSerializer Serializer = new JavaScriptSerializer();
-            T objs = default(T);
+            JavaScriptSerializer Serializer = new JavaScriptSerializer(); Serializer.MaxJsonLength = int.MaxValue;
+             T objs = default(T);
             try
             {
                 objs = Serializer.Deserialize<T>(json);

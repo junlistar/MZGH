@@ -44,6 +44,8 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbxDefaultPrint = new Sunny.UI.UIComboBox();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -146,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(186, 219);
+            this.label5.Location = new System.Drawing.Point(185, 286);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 7;
@@ -155,7 +157,7 @@
             // txt_updatetime
             // 
             this.txt_updatetime.AutoSize = true;
-            this.txt_updatetime.Location = new System.Drawing.Point(271, 219);
+            this.txt_updatetime.Location = new System.Drawing.Point(270, 286);
             this.txt_updatetime.Name = "txt_updatetime";
             this.txt_updatetime.Size = new System.Drawing.Size(0, 21);
             this.txt_updatetime.TabIndex = 8;
@@ -164,7 +166,7 @@
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(267, 273);
+            this.btnSave.Location = new System.Drawing.Point(266, 340);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 35);
@@ -240,6 +242,8 @@
             this.uiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiPanel1.Controls.Add(this.cbxDefaultPrint);
+            this.uiPanel1.Controls.Add(this.label6);
             this.uiPanel1.Controls.Add(this.txt_systype);
             this.uiPanel1.Controls.Add(this.label1);
             this.uiPanel1.Controls.Add(this.btnSave);
@@ -258,8 +262,33 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(1019, 630);
             this.uiPanel1.TabIndex = 18;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(138, 217);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 21);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "默认打印机配置";
+            // 
+            // cbxDefaultPrint
+            // 
+            this.cbxDefaultPrint.DataSource = null;
+            this.cbxDefaultPrint.FillColor = System.Drawing.Color.White;
+            this.cbxDefaultPrint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxDefaultPrint.Location = new System.Drawing.Point(267, 214);
+            this.cbxDefaultPrint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxDefaultPrint.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxDefaultPrint.Name = "cbxDefaultPrint";
+            this.cbxDefaultPrint.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxDefaultPrint.Size = new System.Drawing.Size(352, 29);
+            this.cbxDefaultPrint.TabIndex = 11;
+            this.cbxDefaultPrint.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxDefaultPrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // MzClientConfig
             // 
@@ -295,5 +324,7 @@
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UILabel lblTitle;
         private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIComboBox cbxDefaultPrint;
+        private System.Windows.Forms.Label label6;
     }
 }

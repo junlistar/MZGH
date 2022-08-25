@@ -1,4 +1,5 @@
-﻿update gh_deposit  set
+﻿--日结，更新gh_deposit表的report_date
+update gh_deposit  set
 report_date = @P1
 where
 price_opera = @P2
