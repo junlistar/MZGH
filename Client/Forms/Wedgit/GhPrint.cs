@@ -242,6 +242,10 @@ namespace Client.Forms.Wedgit
                 }
                 else if (RptMode == "PRINT")
                 {
+                    if (!string.IsNullOrWhiteSpace(SessionHelper.gh_printer))
+                    {
+                        TargetReport.PrintSettings.Printer = SessionHelper.gh_printer; 
+                    }
                     TargetReport.Print();
                 }
 
@@ -249,9 +253,7 @@ namespace Client.Forms.Wedgit
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-            }
-
-
+            } 
         }
     }
 }

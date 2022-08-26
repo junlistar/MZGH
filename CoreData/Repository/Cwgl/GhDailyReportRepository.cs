@@ -10,8 +10,7 @@ using System.Linq;
 namespace Data.Repository
 {
     public class GhDailyReportRepository : RepositoryBase<ChargeItem>, IGhDailyReportRepository
-    {
-
+    { 
         public List<string> GetGhDailyReport(string opera, string report_date, string mz_dept_no)
         { 
             string sql = GetSqlByTag("mzsf_ghdaily_getreportdate");

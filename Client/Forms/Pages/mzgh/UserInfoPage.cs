@@ -814,32 +814,64 @@ namespace Client.Forms.Pages
                 lblmsg.Text = "";
                 txtCode.Focus();
 
-                var barcode = this.txtCode.Text.Trim();
+                var input_str = this.txtCode.Text.Trim();
 
-                if (string.IsNullOrEmpty(barcode))
+                if (string.IsNullOrEmpty(input_str))
                 {
                     return;
                 }
 
                 ClearUserInfo();
 
-                //获取数据   
-                string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
+                //获取数据    
+                var barcode_url = string.Format($"/api/GuaHao/GetPatientByBarcode?barcode={input_str}");
+
+                string paramurl = barcode_url;
+                #region 根据数据长度判断查询
 
                 //如果点击的是身份证或医保卡，择查询身份证信息
                 if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                 {
-                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
                 }
+                else if (input_str.Length == 11)
+                {
+                    //如果长度为12，则查询patient_id 
+                    paramurl = string.Format($"/api/GuaHao/GetPatientByTel?tel={input_str}");
+                }
+                else if (input_str.Length == 12)
+                {
+                    //如果长度为12，则查询patient_id 
+                    paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={input_str}");
+                }
+                else if (input_str.Length == 15 || input_str.Length == 18)
+                {
+                    //如果长度为15或18，则查询身份证对应的hic_no
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
+                }
+                #endregion
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
                 var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
-                if (result.status == 1 && result.data != null && result.data.Count > 0)
+                if (result.status == 1 && result.data.Count == 0)
                 {
-                    var userInfo = result.data[0];
+                    //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
+                    if (paramurl != barcode_url)
+                    {
+                        json = HttpClientUtil.Get(paramurl);
+                        result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                    }
+                }
+
+                if (result.status == 1 && result.data != null && result.data.Count > 0)
+                { 
+                    //默认取最大的patient_id数据
+                    var userInfo = result.data.OrderByDescending(p => p.patient_id).FirstOrDefault();
+
+                    #region 如果身份证查询到多条记录 (废弃，默认取最大的那条记录)
                     if (result.data.Count > 1)
                     {
                         //弹出选择提示
@@ -854,6 +886,8 @@ namespace Client.Forms.Pages
                             return;
                         }
                     }
+                    #endregion
+
                     //绑定用户基本信息
                     BindUserInfo(userInfo);
 

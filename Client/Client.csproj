@@ -367,6 +367,18 @@
     <Compile Include="Forms\Pages\xt\MzClientConfig.Designer.cs">
       <DependentUpon>MzClientConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\yhbb\GhrjReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\GhrjReport.Designer.cs">
+      <DependentUpon>GhrjReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\SfrjReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\SfrjReport.Designer.cs">
+      <DependentUpon>SfrjReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\yhbb\UserReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -755,6 +767,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\xt\MzClientConfig.resx">
       <DependentUpon>MzClientConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\yhbb\GhrjReport.resx">
+      <DependentUpon>GhrjReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\yhbb\SfrjReport.resx">
+      <DependentUpon>SfrjReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\yhbb\UserReport.resx">
       <DependentUpon>UserReport.cs</DependentUpon>

@@ -153,14 +153,17 @@ namespace Client
                 {
                     BindUserInfo(result.data[0]);
                 }
-
+                else
+                {
+                    cbxSex.Text = "";
+                    cbxRelationCode.Text = "";
+                } 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
-            }
-
+            } 
         }
         /// <summary>
         /// 绑定数据
@@ -187,8 +190,6 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
-        }
-
-
+        } 
     }
 }

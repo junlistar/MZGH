@@ -62,9 +62,9 @@ namespace Mzsf.Forms.Pages
 
                 //ClearUserInfo();
 
-                var barcode = this.txtCode.Text.Trim();
+                var input_str = this.txtCode.Text.Trim();
 
-                if (string.IsNullOrEmpty(barcode))
+                if (string.IsNullOrEmpty(input_str))
                 {
                     return;
                 }
@@ -72,33 +72,57 @@ namespace Mzsf.Forms.Pages
                 //获取数据  
                 Task<HttpResponseMessage> task = null;
                 string json = "";
-                string paramurl = string.Format($"/api/mzsf/GetPatientByCard?cardno={barcode}");
+                //获取数据    
+                var barcode_url = string.Format($"/api/GuaHao/GetPatientByBarcode?barcode={input_str}");
+
+                string paramurl = barcode_url;
+                #region 根据数据长度判断查询
+
                 //如果点击的是身份证或医保卡，择查询身份证信息
                 if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                 {
-                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={barcode}");
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
                 }
+                else if (input_str.Length == 11)
+                {
+                    //如果长度为12，则查询patient_id 
+                    paramurl = string.Format($"/api/GuaHao/GetPatientByTel?tel={input_str}");
+                }
+                else if (input_str.Length == 12)
+                {
+                    //如果长度为12，则查询patient_id 
+                    paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={input_str}");
+                }
+                else if (input_str.Length == 15 || input_str.Length == 18)
+                {
+                    //如果长度为15或18，则查询身份证对应的hic_no
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
+                }
+                #endregion
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
+                json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                if (result.status == 1 && result.data.Count == 0)
+                {
+                    //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
+                    if (paramurl != barcode_url)
+                    {
+                        json = HttpClientUtil.Get(paramurl);
+                        result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+                    }
+                }
+
                 if (result.status == 1)
                 {
                     if (result.data.Count > 0)
                     {
-                        var userInfo = result.data[0];
-                        //如果身份证查询到多条记录 
+                        //默认取最大的patient_id数据
+                        var userInfo = result.data.OrderByDescending(p => p.patient_id).FirstOrDefault();
+
+                        #region 如果身份证查询到多条记录 (废弃，默认取最大的那条记录)
                         if (result.data.Count > 1)
                         {
                             //弹出选择提示
@@ -112,6 +136,8 @@ namespace Mzsf.Forms.Pages
                                 return;
                             }
                         }
+                        #endregion
+
                         if (string.IsNullOrEmpty(userInfo.name))
                         {
                             lblNodata.Text = "没有查到用户数据";
@@ -119,24 +145,21 @@ namespace Mzsf.Forms.Pages
                             return;
                         }
                         SessionHelper.patientVM = userInfo;
-
-
+                         
                         //当前最大记录次数
                         current_times = userInfo.max_times;
                         current_patient_id = userInfo.patient_id;
 
                         BindUserInfo(userInfo);
 
-                        BindOrders(userInfo.patient_id);
-
+                        BindOrders(userInfo.patient_id); 
                     }
                     else
                     {
                         MessageBox.Show("没有查到用户数据");
                         lblNodata.Text = "没有查到用户数据";
                         lblNodata.Show();
-                    }
-
+                    } 
                 }
                 else
                 {
@@ -551,7 +574,7 @@ namespace Mzsf.Forms.Pages
         /// 初始化诊疗模板信息
         /// </summary>
         public void InicOrderTemplate()
-        { 
+        {
             //查询 处方类型列表 
             try
             {
@@ -588,7 +611,7 @@ namespace Mzsf.Forms.Pages
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Debug("请求接口数据出错：" + ex.Message); 
+                log.Debug("请求接口数据出错：" + ex.Message);
             }
         }
 
@@ -821,10 +844,6 @@ namespace Mzsf.Forms.Pages
             this.Close();
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            SearchUser();
-        }
 
         private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -894,16 +913,15 @@ namespace Mzsf.Forms.Pages
                 {
                     //打印发票
                     if (SessionHelper.do_sf_print)
-                    {
-
+                    { 
                         Task.Run(() =>
                         {
                             try
-                            {
-
+                            { 
                                 SessionHelper.do_sf_print = false;
                                 //打印发票 
                                 Print ghprint = new Print(SessionHelper.mzsf_report_code);
+                                ghprint._printer = SessionHelper.sf_printer;
                                 ghprint.Show();
 
                             }
@@ -922,12 +940,6 @@ namespace Mzsf.Forms.Pages
             }
         }
 
-        private void Check_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-            //查询处方
-            SearchUser();
-        }
 
         private void uiGroupBox2_Click(object sender, EventArgs e)
         {

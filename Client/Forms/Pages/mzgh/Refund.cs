@@ -46,7 +46,7 @@ namespace Client
             LoadingHelper.CloseForm();//显示
             //LoadData();
         }
-         
+
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
@@ -66,7 +66,11 @@ namespace Client
             try
             {
                 GhDepositVM vm = new GhDepositVM();
-
+                if (row.Cells["visit_flag_name"].Value == null)
+                {
+                    UIMessageTip.ShowWarning("此记录不能进行退号操作!");
+                    return;
+                }
                 vm.sname = row.Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "退号")
                 {
@@ -78,17 +82,23 @@ namespace Client
                     UIMessageTip.ShowWarning("此记录已经就诊!");
                     return;
                 }
+                else if (vm.sname == "接诊")
+                {
+                    UIMessageTip.ShowWarning("此记录已经接诊!");
+                    return;
+                }
                 else if (vm.sname == "取消分诊")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
                     return;
                 }
 
-                if (dtprq.Value.Date < DateTime.Now.Date)
-                {
-                    UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
-                    return;
-                }
+                //可以退以前的号
+                //if (dtprq.Value.Date < DateTime.Now.Date)
+                //{
+                //    UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
+                //    return;
+                //}
 
                 vm.patient_id = lblhidid.Text;
 
@@ -106,7 +116,7 @@ namespace Client
                 if (payList.ShowDialog() == DialogResult.OK)
                 {
                     Search();
-                   // this.Close();
+                    // this.Close();
                 };
 
                 return;
@@ -328,14 +338,14 @@ namespace Client
             {
                 return;
             }
-             
+
             string paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={barcode}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
 
-                var json =await HttpClientUtil.GetAsync(paramurl);
+                var json = await HttpClientUtil.GetAsync(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
@@ -368,7 +378,7 @@ namespace Client
                 UIMessageBox.ShowError(ex.Message);
                 log.Error(ex.StackTrace);
             }
-        
+
         }
 
         public void BindGridView()
@@ -376,12 +386,12 @@ namespace Client
 
             //查询列表
             var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-            var patient_id = lblhidid.Text; 
+            var patient_id = lblhidid.Text;
             var paramurl = string.Format($"/api/GuaHao/GetGhRefund?datestr={datestr}&patient_id={patient_id}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            { 
+            {
                 var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
@@ -522,7 +532,7 @@ namespace Client
         }
         public void XianJinTuiHao()
         {
-            if (this.dgvDeposit.SelectedIndex< 0)
+            if (this.dgvDeposit.SelectedIndex < 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
                 return;
@@ -714,7 +724,7 @@ namespace Client
                     var times = Convert.ToInt32(dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["times"].Value);
 
                     var datestr = dtprq.Value.ToString("yyyy-MM-dd");
-                    var patient_id = lblhidid.Text; 
+                    var patient_id = lblhidid.Text;
                     DetailPayList payList = new DetailPayList(userInfo, datestr, patient_id, times);
                     payList.ShowDialog();
                 }

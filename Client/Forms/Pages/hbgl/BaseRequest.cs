@@ -63,7 +63,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
             BindBottomData();
-             
+
         }
 
         public void InitDic()
@@ -105,7 +105,7 @@ namespace Client
         public void InitData()
         {
             log.Info("InitData");
-             
+
             string json = "";
 
             #region 参数处理
@@ -171,7 +171,7 @@ namespace Client
 
             var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no={window_no}&open_flag={open_flag}";
 
-             string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
+            string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
@@ -653,11 +653,13 @@ namespace Client
             BaseRequestEdit edit = new BaseRequestEdit("");
 
             edit.ShowDialog();
+
+            InitData();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Delete();
+            Delete(); InitData();
         }
 
         public void Delete()
@@ -738,7 +740,7 @@ namespace Client
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Edit();
+            Edit(); InitData();
         }
 
         public void Edit()
@@ -1016,119 +1018,128 @@ namespace Client
 
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-            if (e.RowIndex != -1)
+            try
             {
-                return;
+
+
+                if (e.RowIndex != -1 || e.ColumnIndex == -1)
+                {
+                    return;
+                }
+                var _cIndex = e.ColumnIndex;
+                if (list != null && list.Count > 0)
+                {
+                    if (order_asc == "asc")
+                    {
+                        switch (dgvlist.Columns[e.ColumnIndex].Name)
+                        {
+                            case "unit_name":
+                                list = list.OrderBy(p => p.unit_name).ToList();
+                                break;
+                            case "doct_name":
+                                list = list.OrderBy(p => p.doct_name).ToList();
+                                break;
+                            case "clinic_name":
+                                list = list.OrderBy(p => p.clinic_name).ToList();
+                                break;
+                            case "daystr":
+                                list = list.OrderBy(p => p.day).ToList();
+                                break;
+                            case "apstr":
+                                list = list.OrderBy(p => p.ampm).ToList();
+                                break;
+                            case "totle_num":
+                                list = list.OrderBy(p => p.totle_num).ToList();
+                                break;
+                            case "open_flag_str":
+                                list = list.OrderBy(p => p.open_flag).ToList();
+                                break;
+                            case "winnostr":
+                                list = list.OrderBy(p => p.window_no).ToList();
+                                break;
+                            default:
+                                break;
+                        }
+                        order_asc = "desc";
+                    }
+                    else
+                    {
+                        switch (dgvlist.Columns[e.ColumnIndex].Name)
+                        {
+                            case "unit_name":
+                                list = list.OrderByDescending(p => p.unit_name).ToList();
+                                break;
+                            case "doct_name":
+                                list = list.OrderByDescending(p => p.doct_name).ToList();
+                                break;
+                            case "clinic_name":
+                                list = list.OrderByDescending(p => p.clinic_name).ToList();
+                                break;
+                            case "daystr":
+                                list = list.OrderByDescending(p => p.day).ToList();
+                                break;
+                            case "apstr":
+                                list = list.OrderByDescending(p => p.ampm).ToList();
+                                break;
+                            case "totle_num":
+                                list = list.OrderByDescending(p => p.totle_num).ToList();
+                                break;
+                            case "open_flag_str":
+                                list = list.OrderByDescending(p => p.open_flag).ToList();
+                                break;
+                            case "winnostr":
+                                list = list.OrderByDescending(p => p.window_no).ToList();
+                                break;
+                            default:
+                                break;
+                        }
+                        order_asc = "asc";
+                    }
+                    //标题头
+                    //dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(dgvlist.Columns[e.ColumnIndex].HeaderText, order_asc); 
+                    dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(e.ColumnIndex, order_asc);
+
+                    uiPagination1.PagerCount = 1;
+                    var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
+                    {
+                        request_sn = p.request_sn,
+                        unit_name = p.unit_name,
+                        group_name = p.group_name,
+                        doct_name = p.doct_name,
+                        clinic_name = p.clinic_name,
+                        weekstr = p.weekstr,
+                        daystr = p.daystr,
+                        apstr = p.apstr,
+                        winnostr = p.winnostr,
+                        totle_num = p.totle_num,
+                        open_flag_str = p.open_flag_str,
+                        op_date_str = p.op_date_str
+                    }).ToList();
+
+                    dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
+                    //SetColumnWidth(); 
+                    SetGridTextColor();
+                }
             }
-            var _cIndex = e.ColumnIndex;
-            if (list != null && list.Count > 0)
+            catch (Exception ex)
             {
-                if (order_asc == "asc")
-                {
-                    switch (dgvlist.Columns[e.ColumnIndex].Name)
-                    {
-                        case "unit_name":
-                            list = list.OrderBy(p => p.unit_name).ToList();
-                            break;
-                        case "doct_name":
-                            list = list.OrderBy(p => p.doct_name).ToList();
-                            break;
-                        case "clinic_name":
-                            list = list.OrderBy(p => p.clinic_name).ToList();
-                            break;
-                        case "daystr":
-                            list = list.OrderBy(p => p.day).ToList();
-                            break;
-                        case "apstr":
-                            list = list.OrderBy(p => p.ampm).ToList();
-                            break;
-                        case "totle_num":
-                            list = list.OrderBy(p => p.totle_num).ToList();
-                            break;
-                        case "open_flag_str":
-                            list = list.OrderBy(p => p.open_flag).ToList();
-                            break;
-                        case "winnostr":
-                            list = list.OrderBy(p => p.window_no).ToList();
-                            break;
-                        default:
-                            break;
-                    }
-                    order_asc = "desc";
-                }
-                else
-                {
-                    switch (dgvlist.Columns[e.ColumnIndex].Name)
-                    {
-                        case "unit_name":
-                            list = list.OrderByDescending(p => p.unit_name).ToList();
-                            break;
-                        case "doct_name":
-                            list = list.OrderByDescending(p => p.doct_name).ToList();
-                            break;
-                        case "clinic_name":
-                            list = list.OrderByDescending(p => p.clinic_name).ToList();
-                            break;
-                        case "daystr":
-                            list = list.OrderByDescending(p => p.day).ToList();
-                            break;
-                        case "apstr":
-                            list = list.OrderByDescending(p => p.ampm).ToList();
-                            break;
-                        case "totle_num":
-                            list = list.OrderByDescending(p => p.totle_num).ToList();
-                            break;
-                        case "open_flag_str":
-                            list = list.OrderByDescending(p => p.open_flag).ToList();
-                            break;
-                        case "winnostr":
-                            list = list.OrderByDescending(p => p.window_no).ToList();
-                            break;
-                        default:
-                            break;
-                    }
-                    order_asc = "asc";
-                }
-                //标题头
-                //dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(dgvlist.Columns[e.ColumnIndex].HeaderText, order_asc); 
-                dgvlist.Columns[e.ColumnIndex].HeaderText = AddOrderSymbol(e.ColumnIndex, order_asc); 
-
-                uiPagination1.PagerCount = 1;
-                var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
-                {
-                    request_sn = p.request_sn,
-                    unit_name = p.unit_name,
-                    group_name = p.group_name,
-                    doct_name = p.doct_name,
-                    clinic_name = p.clinic_name,
-                    weekstr = p.weekstr,
-                    daystr = p.daystr,
-                    apstr = p.apstr,
-                    winnostr = p.winnostr,
-                    totle_num = p.totle_num,
-                    open_flag_str = p.open_flag_str,
-                    op_date_str = p.op_date_str
-                }).ToList();
-
-                dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
-                //SetColumnWidth(); 
-                SetGridTextColor();
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
         }
 
-        public string AddOrderSymbol(int col_index,string order)
-        { 
+        public string AddOrderSymbol(int col_index, string order)
+        {
             for (int i = 0; i < dgvlist.Columns.Count; i++)
             {
-                dgvlist.Columns[i].HeaderText =RemoveOrderSymbol(dgvlist.Columns[i].HeaderText);
+                dgvlist.Columns[i].HeaderText = RemoveOrderSymbol(dgvlist.Columns[i].HeaderText);
             }
 
             var text = dgvlist.Columns[col_index].HeaderText;
 
             if (order == "asc")
             {
-                text += "↑"; 
+                text += "↑";
             }
             else
             {
@@ -1170,7 +1181,7 @@ namespace Client
                 //row.Cells["totle_num"].Style.ForeColor = UIColor.Blue;
                 //row.Cells["winnostr"].Style.ForeColor = UIColor.Purple;
                 //row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
-                if (row.Cells["open_flag_str"].Value!=null && row.Cells["open_flag_str"].Value.ToString() =="不开放")
+                if (row.Cells["open_flag_str"].Value != null && row.Cells["open_flag_str"].Value.ToString() == "不开放")
                 {
                     row.Cells["open_flag_str"].Style.ForeColor = Color.Orange;
                 }

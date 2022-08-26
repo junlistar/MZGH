@@ -341,21 +341,13 @@ namespace Mzsf.Forms.Pages
                 //发票tab，数据更新
                 BindReceiptData();
 
-
-                if (chkcomb.Checked)
+                //单个支付，支付完成，自动提交
+                var sy_je = Convert.ToDouble(lblsyje.Text);
+                if (sy_je == 0)
                 {
-                    //ShowMessage();
+                    TiJiaoZhifu();
                 }
-                else
-                {
-
-                    ////单个支付，支付完成，自动提交
-                    //var sy_je = Convert.ToDouble(lblsyje.Text);
-                    //if (sy_je == 0)
-                    //{
-                    //    TiJiaoZhifu();
-                    //}
-                }
+                
             }
             catch (Exception ex)
             {

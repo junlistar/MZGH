@@ -1,55 +1,184 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using System.IO;
+using System.Drawing;
 using System.Linq;
-using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Sunny.UI;
+using log4net;
 using Client.ClassLib;
-using Client.ViewModel;
+using Client.ViewModel; 
 using FastReport;
 using FastReport.Utils;
-using MyMzghLib;
-using FastReport.Design;
-using log4net;
-using Sunny.UI;
-using System.Drawing;
+using System.Net.Http;
+using System.IO;
 
-namespace Client.Forms.Pages.cwgl
+namespace Client.Forms.Pages.yhbb
 {
-    public partial class ShoufeiRijie : UIPage
+    public partial class SfrjReport : UIPage
     {
-        private static ILog log = LogManager.GetLogger(typeof(GuahaoRijie));//typeof放当前类
-
-        public Color sel_color = Color.FromArgb(230, 80, 80);
-        public string _searchKey = "hzrb";
-        public int _report_code;
-
-        public ShoufeiRijie()
+        private static ILog log = LogManager.GetLogger(typeof(SfrjReport));//typeof放当前类
+        public SfrjReport()
         {
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        public int _report_code;
+        string report_date;
+        string opera;
+
+        UIDataGridView dgvghy = new UIDataGridView();
+
+        private void txtGhUser_KeyUp(object sender, KeyEventArgs e)
         {
-            this.Close();
+            try
+            {
+                if (e.KeyCode == Keys.Down)
+                {
+                    this.dgvghy.Focus();
+                }
+                else if (e.KeyCode == Keys.Enter)
+                {
+                    if (dgvghy.Rows.Count > 0)
+                    {
+
+                        var unit_sn = dgvghy.Rows[0].Cells["code"].Value.ToString();
+                        var name = dgvghy.Rows[0].Cells["name"].Value.ToString();
+
+                        txtGhUser.TextChanged -= txtGhUser_TextChanged;
+                        txtGhUser.Text = name;
+                        txtGhUser.TagString = unit_sn;
+                        txtGhUser.TextChanged += txtGhUser_TextChanged;
+
+                        dgvghy.Hide();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+        }
+        private void Dgvghy_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (dgvghy.SelectedIndex != -1)
+                {
+
+                    var ev = new DataGridViewCellEventArgs(0, dgvghy.SelectedIndex);
+
+                    dgvghy_CellContentClick(sender, ev);
+                }
+            }
+        }
+        private void txtGhUser_Leave(object sender, EventArgs e)
+        {
+            if (!dgvghy.Focused)
+            {
+                dgvghy.Hide();
+            }
         }
 
-        private void GuahaoRijie_Load(object sender, EventArgs e)
+        private void txtGhUser_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtGhUser.Text == "")
+                {
+                    return;
+                }
+
+                // 查询信息 显示到girdview
+                var tb = sender as UITextBox;
+                var pbl = tb.Parent as UIPanel;
+                //获取数据 
+
+                if (SessionHelper.userDics != null && SessionHelper.userDics.Count > 0)
+                {
+                    var ipt = txtGhUser.Text.Trim();
+
+                    dgvghy.Parent = this;
+                    dgvghy.Top = pbl.Top + tb.Top + tb.Height;
+                    dgvghy.Left = pbl.Left + tb.Left;
+                    dgvghy.Width = tb.Width;
+                    dgvghy.Height = 200;
+                    dgvghy.BringToFront();
+                    dgvghy.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvghy.RowHeadersVisible = false;
+                    dgvghy.BackgroundColor = Color.White;
+                    dgvghy.ReadOnly = true;
+
+
+                    List<UserDicVM> vm = SessionHelper.userDics;
+
+                    if (!string.IsNullOrWhiteSpace(ipt))
+                    {
+                        vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    }
+                    dgvghy.DataSource = vm;
+
+                    dgvghy.Columns["code"].HeaderText = "编号";
+                    dgvghy.Columns["name"].HeaderText = "名称";
+                    dgvghy.Columns["py_code"].Visible = false;
+                    dgvghy.Columns["d_code"].Visible = false;
+                    dgvghy.Columns["emp_sn"].Visible = false;
+                    dgvghy.AutoResizeColumns();
+
+                    dgvghy.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+        }
+        private void dgvghy_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                var obj = sender as UIDataGridView;
+                var unit_sn = obj.Rows[e.RowIndex].Cells["code"].Value.ToString();
+                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtGhUser.TextChanged -= txtGhUser_TextChanged;
+                txtGhUser.Text = name;
+                txtGhUser.TagString = unit_sn;
+                txtGhUser.TextChanged += txtGhUser_TextChanged;
+
+                dgvghy.Hide();
+
+                GetMzsfReport();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.StackTrace);
+            }
+        }
+
+        private void SfrjReport_Load(object sender, EventArgs e)
         {
             txtDate.Value = DateTime.Now;
-
-            btn_hzrb.FillColor = sel_color;
-
             _report_code = SessionHelper.sfrj_report_code;
 
-            btnSave.Enabled = false;
+            dgvghy.CellClick += dgvghy_CellContentClick;
+            dgvghy.KeyDown += Dgvghy_KeyDown;
 
-            //previewControl1.Hide();
+            txtDate.ValueChanged += TxtDate_ValueChanged;
+        }
 
-            pnlReport.Text = "选择日期时间，进行预览和结算操作";
-
+        private void TxtDate_ValueChanged(object sender, DateTime value)
+        {
+            GetMzsfReport();
         }
 
         /// <summary>
@@ -59,18 +188,23 @@ namespace Client.Forms.Pages.cwgl
         {
             try
             {
+                var opera = txtGhUser.TagString;
 
+                if (string.IsNullOrEmpty(opera))
+                {
+                    return;
+                }
                 //查询当日扎帐记录  GetMzsfReport(string opera, string report_date)
                 //ResponseResult<List<string>> GetGhDailyReport(string opera, string report_date, string mz_dept_no)
                 var d = new
                 {
-                    opera = SessionHelper.uservm.user_mi,
+                    opera = opera,
                     report_date = txtDate.Value.ToShortDateString(),
                     mz_dept_no = "1"
                 };
 
                 var param = $"opera={d.opera}&report_date={d.report_date}";
-                 
+
                 var paramurl = string.Format($"/api/cwgl/GetMzsfReport?{param}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -108,100 +242,69 @@ namespace Client.Forms.Pages.cwgl
             }
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            report_date = cbxStatus.SelectedText;
+            if (report_date == "未结")
+            {
+                UIMessageTip.Show("没有结算日期"); return;
+            }
+            if (txtGhUser.Text == "")
+            {
+                UIMessageTip.Show("请选择操作员"); return;
+            }
+            opera = txtGhUser.TagString;
+
+            previewControl1.Hide();
+            previewControl1.Clear();
+
+            LoadingHelper.ShowLoadingScreen();//显示
+
+            InitializeReport("PREVIEW");
+
+            LoadingHelper.CloseForm();//关闭
+        }
 
 
-        public string FormID { get; set; } = "PRDT"; //单据ID
-        //private string RptNo, RptName; //报表编号、名称
-        //private DataTable RptTable; //数据表
-        //private DataRow RptRow; //数据行(报表数据源)
-        private bool isSaveAs = false; //另存为
 
         ReportDataVM rdvm;
         //初始化报表
         private void InitializeReport(string RptMode)
         {
-            try
-            { 
-                var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
+            Task<HttpResponseMessage> task = null; var json = "";
+            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
 
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                string json = HttpClientUtil.Get(paramurl);
-
-                var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
-
-                if (resp.status == 1)
-                {
-                    rdvm = resp.data;
-                }
-                else
-                {
-                    MessageBox.Show(resp.message);
-                    log.Error(resp.message);
-                    return;
-                }
-                RegisterDesignerEvents();
-                DesignReport(RptMode);
-            }
-            catch (Exception ex)
+            log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            task.Wait();
+            var response = task.Result;
+            if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                var read = response.Content.ReadAsStringAsync();
+                read.Wait();
+                json = read.Result;
             }
-        }
-        //菜单事件注册
-        private void RegisterDesignerEvents()
-        {
-            Config.DesignerSettings.CustomSaveDialog += new OpenSaveDialogEventHandler(DesignerSettings_CustomSaveDialog);
-            Config.DesignerSettings.CustomSaveReport += new OpenSaveReportEventHandler(DesignerSettings_CustomSaveReport);
-        }
-        //保存菜单：对话框
-        private void DesignerSettings_CustomSaveDialog(object sender, OpenSaveDialogEventArgs e)
-        {
-            isSaveAs = true;
-        }
-        //保存菜单：委托函数
-        private void DesignerSettings_CustomSaveReport(object sender, OpenSaveReportEventArgs e)
-        {
-            try
+            else
             {
-                //SaveReport(e.Report);
-                using (MemoryStream stream = new MemoryStream())
-                {
-                    //解决多次保存问题
-                    Config.DesignerSettings.CustomSaveDialog -= new OpenSaveDialogEventHandler(DesignerSettings_CustomSaveDialog);
-                    Config.DesignerSettings.CustomSaveReport -= new OpenSaveReportEventHandler(DesignerSettings_CustomSaveReport);
-
-                    //保存 
-                    TargetReport.Save(stream);
-
-                    #region 接口方式
-
-                    var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
-
-                    string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={_report_code}&report_com={report_data}");
-
-                    log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                    string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
-                    var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(responseJson);
-
-                    if (result.status == 1)
-                    {
-                        log.Info("保存报表成功");
-                    }
-                    else
-                    {
-                        log.Error(result.message);
-                    }
-                    #endregion
-
-                }
+                log.Info(response.ReasonPhrase);
             }
-            catch (Exception ex)
+
+            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
+
+            if (resp.status == 1)
             {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                rdvm = resp.data;
             }
+            else
+            {
+                MessageBox.Show(resp.message);
+                log.Error(resp.message);
+                return;
+            }
+            DesignReport(RptMode);
         }
+
+
         Report TargetReport;
         private void DesignReport(string RptMode)
         {
@@ -274,13 +377,7 @@ namespace Client.Forms.Pages.cwgl
                                 var dataset2 = dataset.Copy();
                                 dataset2.Tables[0].TableName = "DataTable2";
                                 TargetReport.RegisterData(dataset2);
-
-                                //TargetReport.Design();
-                                if (report_date == "1900-01-01 00:00:00")
-                                {
-                                    //禁用结算按钮
-                                    btnSave.Enabled = true;
-                                }
+                                 
 
                                 previewControl1.Show();
                                 TargetReport.Preview = previewControl1;
@@ -291,9 +388,7 @@ namespace Client.Forms.Pages.cwgl
                             else
                             {
                                 pnlReport.Text = "该报表无数据";
-                                UIMessageTip.Show("该报表无数据");
-                                //禁用结算按钮
-                                btnSave.Enabled = false;
+                                UIMessageTip.Show("该报表无数据"); 
                             }
 
                         }
@@ -328,74 +423,6 @@ namespace Client.Forms.Pages.cwgl
             }
         }
 
-        private void uiSymbolButton5_Click(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var d = new
-                {
-                    opera = SessionHelper.uservm.user_mi,
-                    cash_date = txtDate.Text,
-                };
-                var param = $"opera={d.opera}&cash_date={d.cash_date}";
-
-                var json = "";
-                var paramurl = string.Format($"/api/cwgl/SaveMzsfDaily?{param}");
-
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                var task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-
-                if (result.status == 1 && result.data)
-                {
-                    UIMessageTip.ShowOk("保存成功");
-
-                    //查询日结记录
-                    GetMzsfReport();
-                    previewControl1.Hide();
-                    previewControl1.Clear();
-                    InitializeReport("PREVIEW");
-                }
-                else
-                {
-                    UIMessageTip.ShowError(result.message);
-                    log.Error(result.message);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            previewControl1.Hide();
-            previewControl1.Clear();
-
-            LoadingHelper.ShowLoadingScreen();//显示
-
-            InitializeReport("PREVIEW");
-
-            LoadingHelper.CloseForm();//关闭
-        }
- 
         private void btnPrint_Click(object sender, EventArgs e)
         {
             try
@@ -414,19 +441,6 @@ namespace Client.Forms.Pages.cwgl
             {
                 log.Error(ex.Message);
             }
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
-        {
-            txtDate.Value = DateTime.Now;
-            previewControl1.Clear();
-        }
-
-        private void txtDate_TextChanged(object sender, EventArgs e)
-        {
-            btnSave.Enabled = false;
-            //查询日结记录
-            GetMzsfReport();
         }
     }
 }

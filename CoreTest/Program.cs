@@ -2,6 +2,7 @@
 using Data.Repository.Mzsf;
 using Newtonsoft.Json;
 using System;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -61,7 +62,7 @@ namespace CoreTest
             //CreateRequestRecord,,2022-05-30,1,1,00040
             // rsp.CreateRequestRecord("2022-05-30", "2022-05-30", "1", 1, "00040");
 
-            MzOrderRepository mzOrderRepository = new MzOrderRepository();
+            //MzOrderRepository mzOrderRepository = new MzOrderRepository();
             //http://localhost:5010//api/mzsf/pay?patient_id=000296903300&times=307&pay_string=11-86-202206161056566431&opera=00000
             //patient_id=000296903300&times=317&pay_string=12-292.8-202206201617482429&opera=00000
             //var re = mzOrderRepository.Pay("000296903300", 320, "12-156.34-202206231105297670", "00000");
@@ -69,7 +70,7 @@ namespace CoreTest
             //SaveOrder,000296903300,320,02-003528-1,02-003647-1,00000 
             ///api/mzsf/SaveOrder?patient_id=000266966600&times=23&order_string=01-2-702398-**-1,01-2-702398-**-1,01-2-702398-**-2&opera=00000
 
-            var re = mzOrderRepository.SaveOrder("000266966600", 23, "01-2-702398-**-1,01-2-702398-**-1,01-2-702398-**-2", "00000");
+            // var re = mzOrderRepository.SaveOrder("000266966600", 23, "01-2-702398-**-1,01-2-702398-**-1,01-2-702398-**-2", "00000");
 
 
             ///api/mzsf/BackFeePart?opera=00000&pid=000296995400&ledger_sn=6&receipt_sn=2581058&receipt_no=1012067632&cheque_cash=;14;11;12&refund_item_str=01-201252-1
@@ -100,9 +101,29 @@ namespace CoreTest
             /////api/mzsf/pay?patient_id=000189394100&times=20&pay_string=c-23-202208121512124997,3-44-202208121512158243,1-49-&order_no_str=1&opera=00000
             // var aaa  = mzOrderRepository.Pay("000189394100", 20, "c-23-202208121512124997,3-44-202208121512158243,1-49-", "1", "00000");
             ///api/mzsf/GetFPRegistrationData?patient_id=000174985600&ledger_sn=40&admiss_times=1
-            FpDataRepository fpDataRepository = new FpDataRepository();
-            var aa =fpDataRepository.GetFPRegistrationData("000174985600", 40, 1);
+            try
+            {
 
+                FpDataRepository fpDataRepository = new FpDataRepository();
+                var aa = fpDataRepository.GetFPRegistrationData("000174985600", 40, 1);
+
+            }
+            catch (SqlException ex)
+            {
+
+                if (ex.Message.Contains("Timeout"))
+                {
+                    throw new Exception("连接数据库超时！");
+                }
+                else if(ex.Message.Contains("not found"))
+                {
+                    throw new Exception("无法连接到数据库！");
+                }
+            }
+            catch (Exception ex)
+            { 
+                throw ex;
+            }
             Console.WriteLine("Hello World!");
         }
 

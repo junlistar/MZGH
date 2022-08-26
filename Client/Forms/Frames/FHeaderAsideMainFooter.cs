@@ -21,6 +21,7 @@ using System.Linq;
 using Client.Forms.Pages.yhbb;
 using Client.Forms.Pages.zfgl;
 using Client.Forms.Pages.xt;
+using System.IO;
 
 namespace Client
 {
@@ -62,7 +63,7 @@ namespace Client
             //设置关联
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
-            //Aside.TabControl.TabVisible = true; 
+            Aside.TabControl.TabVisible = true; 
 
             //增加页面到Main
             //AddPage(new FTitlePage1(), 1001);
@@ -103,11 +104,13 @@ namespace Client
                 pageIndex = 1400;
                 parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
                 Aside.CreateChildNode(parent, "综合统计报表", 61568, 24, 1401);
+                Aside.CreateChildNode(parent, "挂号员日结报表", 61568, 24, 1402);
+                Aside.CreateChildNode(parent, "收费员日结报表", 61568, 24, 1403);
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
-               // Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                // Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
 
                 pageIndex = 1600;
@@ -212,6 +215,9 @@ namespace Client
 
 
                 }
+
+                 
+
                 pageIndex = 1400;
                 if (function_list.Where(p => p.func_desc.Trim() == "用户报表").Count() > 0)
                 {
@@ -219,6 +225,14 @@ namespace Client
                     if (function_list.Where(p => p.func_desc.Trim() == "综合统计报表").Count() > 0)
                     {
                         Aside.CreateChildNode(parent, "综合统计报表", 61568, 24, 1401);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "挂号员日结报表").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "挂号员日结报表", 61568, 24, 1402);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "收费员日结报表").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "收费员日结报表", 61568, 24, 1403);
                     }
                 }
                 pageIndex = 1500;
@@ -237,7 +251,7 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
                     }
-                } 
+                }
                 pageIndex = 1600;
                 if (function_list.Where(p => p.func_desc.Trim() == "支付管理").Count() > 0)
                 {
@@ -320,6 +334,10 @@ namespace Client
                         obj = new ShoufeiRijie(); break;
                     case 1401:
                         obj = new UserReport(); break;
+                    case 1402:
+                        obj = new GhrjReport(); break;
+                    case 1403:
+                        obj = new SfrjReport(); break;
                     case 1501:
                         obj = new FunctionList(); break;
                     case 1502:
@@ -341,8 +359,7 @@ namespace Client
                 page = AddPage(obj, pageIndex);
             }
             SelectPage(pageIndex);
-
-
+             
             //设置激活 用户键盘事件
             Task.Run(async () =>
             {
@@ -437,6 +454,9 @@ namespace Client
 
                     //加载字典数据 
                     InitDic();
+
+                    //读取打印机配置
+                    InitPrinter();
 
                     //获取菜单权限 
                     GetUserFunctions(SessionHelper.uservm.user_group);
@@ -698,7 +718,7 @@ namespace Client
                 {
                     UIMessageTip.Show("没有获取到数据库客户端配置数据");
                     log.Error("没有获取到数据库客户端配置数据");
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -717,6 +737,82 @@ namespace Client
             //SessionHelper.pay_zhifubao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
             //SessionHelper.pay_yinlian = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
             //SessionHelper.pay_yibao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
+        }
+
+
+        public void InitPrinter()
+        {
+            try
+            {
+                //判断文件是否存在
+                if (!File.Exists(Application.StartupPath + "\\config.ini"))
+                {
+                    //File.Create(Application.StartupPath + "\\AlarmSet.txt");//创建该文件
+
+                    FileStream fs1 = new FileStream(Application.StartupPath + "\\config.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
+
+                    StreamWriter sw = new StreamWriter(fs1);
+                    sw.WriteLine("[printer]");//开始写入值
+                    sw.WriteLine("ghxp=");
+                    sw.WriteLine("sfxp=");
+                    sw.WriteLine("jsbb=");
+                    sw.WriteLine("default=");
+
+                    sw.Close();
+                    fs1.Close();
+                }
+                //读取配置
+                //读取文件值并显示到窗体
+                FileStream fs = new FileStream(Application.StartupPath + "\\config.ini", FileMode.Open, FileAccess.ReadWrite);
+                StreamReader sr = new StreamReader(fs);
+                string line = sr.ReadLine();
+                int curLine = 0;
+                while (line != null)
+                {
+
+                    if (line.StartsWith("ghxp="))
+                    {
+                        var _ghxp = line.Substring(line.LastIndexOf("=") + 1);//截取=号后边的值
+                        if (!string.IsNullOrWhiteSpace(_ghxp))
+                        {
+                            SessionHelper.gh_printer = _ghxp;
+                        }
+                    }
+                    else if (line.StartsWith("sfxp="))
+                    {
+                        var _sfxp = line.Substring(line.LastIndexOf("=") + 1);
+                        if (!string.IsNullOrWhiteSpace(_sfxp))
+                        {
+                            SessionHelper.sf_printer = _sfxp;
+                        }
+                    }
+                    else if (line.StartsWith("jsbb="))
+                    {
+                        var _jsbb = line.Substring(line.LastIndexOf("=") + 1);
+                        if (!string.IsNullOrWhiteSpace(_jsbb))
+                        {
+                            SessionHelper.jsbb_printer = _jsbb;
+                        }
+                    }
+                    else if (line.StartsWith("default="))
+                    {
+                        var _def = line.Substring(line.LastIndexOf("=") + 1);
+                        if (!string.IsNullOrWhiteSpace(_def))
+                        {
+                            SessionHelper.default_printer = _def;
+                        }
+                    }
+
+                    line = sr.ReadLine();
+                }
+                sr.Close();
+                fs.Close(); 
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                UIMessageTip.Show("打印配置文件读取失败");
+            }
         }
 
 
@@ -817,7 +913,7 @@ namespace Client
 
 
         private void timerSignal_Tick(object sender, EventArgs e)
-        {  
+        {
             Action action = () =>
             {
                 LoadSingnal();
@@ -829,7 +925,7 @@ namespace Client
         internal class MyMessager : IMessageFilter
         {
             public bool PreFilterMessage(ref Message m)
-            {  
+            {
                 //如果检测到有鼠标或则键盘的消息，则使计数为0 
                 if (m.Msg == 513 || m.Msg == 516 || m.Msg == 519 || m.Msg == 520 || m.Msg == 522 || m.Msg == 256 || m.Msg == 257)
                 {

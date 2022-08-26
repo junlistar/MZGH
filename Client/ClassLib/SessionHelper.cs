@@ -67,12 +67,17 @@ namespace Client.ClassLib
         public static int ghrj_report_code;
         public static int sfrj_report_code;
 
-
-
+         
         //标志 挂号操作是否需要打印
         public static bool do_gh_print = false;
         public static bool do_sf_print = false;
         public static int sf_print_user_ledger = 0;
+
+        //默认打印机配置
+        public static string gh_printer;
+        public static string sf_printer;
+        public static string jsbb_printer;
+        public static string default_printer;
 
 
 

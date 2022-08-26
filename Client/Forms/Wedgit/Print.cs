@@ -31,6 +31,7 @@ namespace Client.Forms.Wedgit
         private static ILog log = LogManager.GetLogger(typeof(Print));//typeof放当前类
 
         public int _report_code;
+        public string _printer;
 
         public Print(int report_code)
         {
@@ -220,6 +221,10 @@ namespace Client.Forms.Wedgit
                 }
                 else if (RptMode == "PRINT")
                 {
+                    if (!string.IsNullOrEmpty(_printer))
+                    {
+                        TargetReport.PrintSettings.Printer = _printer;
+                    }
                     TargetReport.Print();
                 }
 

@@ -746,12 +746,12 @@ namespace Mzsf.Forms.Pages
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if (dgv.Rows.Count > 0)
-                {
-                    BindItemData(0);
+                //if (dgv.Rows.Count > 0)
+                //{
+                //    BindItemData(0);
 
-                    dgv.Hide();
-                }
+                //    dgv.Hide();
+                //}
             }
         }
 

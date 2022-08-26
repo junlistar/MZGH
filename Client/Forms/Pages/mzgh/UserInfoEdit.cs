@@ -395,7 +395,10 @@ namespace Client
 
                     this.txtUserName.Text = "新患者";
                     cbxSex.Text = "男";cbxmarrycode.Text = "未婚";
-                    cbxRelation.Text = "本人"; cbx_relsex.Text = "男";
+
+                    cbxRelation.Text = "";
+                    cbx_relsex.Text = "";
+                    txt_rel_birth.Text = "";
 
                     //绑定身份证数据
                     if (SessionHelper.CardReader != null)
@@ -702,7 +705,9 @@ namespace Client
                 }
                 else
                 {
-                    cbxRelation.Text = "本人"; cbx_relsex.Text = "男";
+                    cbxRelation.Text = ""; 
+                    cbx_relsex.Text = "";
+                    txt_rel_birth.Text = "";
                 }
 
             }

@@ -38,8 +38,6 @@ namespace Client.Forms.Wedgit
             var username = txtName.Text.Trim();
             var password = txtPwd.Text.Trim();
 
-
-
             if (string.IsNullOrWhiteSpace(username))
             {
                 UIMessageTip.ShowWarning("请输入登录名!"); txtName.Focus();
@@ -88,7 +86,6 @@ namespace Client.Forms.Wedgit
                 }
                 else
                 {
-
                     UIMessageTip.ShowWarning(result.message);
                     log.Error(result.message);
                 }
@@ -96,18 +93,9 @@ namespace Client.Forms.Wedgit
             }
             catch (Exception ex)
             {
-                if (ex.InnerException != null && ex.InnerException.InnerException != null)
-                {
-                    log.Error(ex.InnerException.InnerException.Message.ToString());
-                    UIMessageTip.ShowError(ex.InnerException.InnerException.Message);
-                }
-                else
-                {
-                    log.Error(ex.InnerException.ToString());
-                    UIMessageTip.ShowError(ex.InnerException.Message);
-                }
 
-                return;
+                log.Error(ex.StackTrace);
+                UIMessageTip.ShowError(ex.Message); 
             }
         }
 

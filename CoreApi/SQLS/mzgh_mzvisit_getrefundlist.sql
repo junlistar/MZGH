@@ -36,6 +36,7 @@ SELECT
       v.visit_flag,						
       visit_flag_name = CASE ISNULL(v.visit_flag, '0') WHEN '1' THEN 'π“∫≈'
                                                   WHEN '2' THEN '∑÷’Ô'
+                                                  WHEN '3' THEN 'Ω”’Ô'
                                                   WHEN '4' THEN '“—æÕ’Ô'
                                                   WHEN '9' THEN 'ÕÀ∫≈'
                    END    

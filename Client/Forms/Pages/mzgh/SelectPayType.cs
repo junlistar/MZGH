@@ -449,26 +449,15 @@ namespace Client
                     //其他支付
                     UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
                 }
-
-
+                 
                 ShowMessage();
 
-                if (chkcomb.Checked)
+                //支付完成，自动提交
+                var sy_je = Convert.ToDouble(lblsyje.Text);
+                if (sy_je == 0)
                 {
-
-                    //ShowMessage();
-                }
-                else
-                {
-
-                    ////单个支付，支付完成，自动提交
-                    //var sy_je = Convert.ToDouble(lblsyje.Text);
-                    //if (sy_je == 0)
-                    //{
-                    //    TiJiaoZhifu();
-                    //}
-
-                }
+                    TiJiaoZhifu();
+                } 
             }
             catch (Exception ex)
             {

@@ -44,8 +44,14 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.label6 = new System.Windows.Forms.Label();
             this.cbxDefaultPrint = new Sunny.UI.UIComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.ghprint = new Sunny.UI.UIComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.sfprint = new Sunny.UI.UIComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.jsbbprint = new Sunny.UI.UIComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -148,7 +154,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(185, 286);
+            this.label5.Location = new System.Drawing.Point(185, 439);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 7;
@@ -157,7 +163,7 @@
             // txt_updatetime
             // 
             this.txt_updatetime.AutoSize = true;
-            this.txt_updatetime.Location = new System.Drawing.Point(270, 286);
+            this.txt_updatetime.Location = new System.Drawing.Point(270, 439);
             this.txt_updatetime.Name = "txt_updatetime";
             this.txt_updatetime.Size = new System.Drawing.Size(0, 21);
             this.txt_updatetime.TabIndex = 8;
@@ -166,7 +172,7 @@
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(266, 340);
+            this.btnSave.Location = new System.Drawing.Point(267, 493);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 35);
@@ -242,6 +248,12 @@
             this.uiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiPanel1.Controls.Add(this.jsbbprint);
+            this.uiPanel1.Controls.Add(this.label9);
+            this.uiPanel1.Controls.Add(this.sfprint);
+            this.uiPanel1.Controls.Add(this.label8);
+            this.uiPanel1.Controls.Add(this.ghprint);
+            this.uiPanel1.Controls.Add(this.label7);
             this.uiPanel1.Controls.Add(this.cbxDefaultPrint);
             this.uiPanel1.Controls.Add(this.label6);
             this.uiPanel1.Controls.Add(this.txt_systype);
@@ -266,15 +278,6 @@
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(138, 217);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(122, 21);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "默认打印机配置";
-            // 
             // cbxDefaultPrint
             // 
             this.cbxDefaultPrint.DataSource = null;
@@ -289,6 +292,87 @@
             this.cbxDefaultPrint.TabIndex = 11;
             this.cbxDefaultPrint.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxDefaultPrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(138, 217);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 21);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "默认打印机配置";
+            // 
+            // ghprint
+            // 
+            this.ghprint.DataSource = null;
+            this.ghprint.FillColor = System.Drawing.Color.White;
+            this.ghprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ghprint.Location = new System.Drawing.Point(267, 253);
+            this.ghprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ghprint.MinimumSize = new System.Drawing.Size(63, 0);
+            this.ghprint.Name = "ghprint";
+            this.ghprint.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.ghprint.Size = new System.Drawing.Size(352, 29);
+            this.ghprint.TabIndex = 13;
+            this.ghprint.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ghprint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(138, 256);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(122, 21);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "挂号小票打印机";
+            // 
+            // sfprint
+            // 
+            this.sfprint.DataSource = null;
+            this.sfprint.FillColor = System.Drawing.Color.White;
+            this.sfprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.sfprint.Location = new System.Drawing.Point(267, 292);
+            this.sfprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.sfprint.MinimumSize = new System.Drawing.Size(63, 0);
+            this.sfprint.Name = "sfprint";
+            this.sfprint.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.sfprint.Size = new System.Drawing.Size(352, 29);
+            this.sfprint.TabIndex = 15;
+            this.sfprint.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfprint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(138, 295);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 21);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "收费小票打印机";
+            // 
+            // jsbbprint
+            // 
+            this.jsbbprint.DataSource = null;
+            this.jsbbprint.FillColor = System.Drawing.Color.White;
+            this.jsbbprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.jsbbprint.Location = new System.Drawing.Point(267, 331);
+            this.jsbbprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.jsbbprint.MinimumSize = new System.Drawing.Size(63, 0);
+            this.jsbbprint.Name = "jsbbprint";
+            this.jsbbprint.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.jsbbprint.Size = new System.Drawing.Size(352, 29);
+            this.jsbbprint.TabIndex = 13;
+            this.jsbbprint.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.jsbbprint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(138, 334);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(122, 21);
+            this.label9.TabIndex = 12;
+            this.label9.Text = "结算报表打印机";
             // 
             // MzClientConfig
             // 
@@ -326,5 +410,11 @@
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UIComboBox cbxDefaultPrint;
         private System.Windows.Forms.Label label6;
+        private Sunny.UI.UIComboBox jsbbprint;
+        private System.Windows.Forms.Label label9;
+        private Sunny.UI.UIComboBox sfprint;
+        private System.Windows.Forms.Label label8;
+        private Sunny.UI.UIComboBox ghprint;
+        private System.Windows.Forms.Label label7;
     }
 }

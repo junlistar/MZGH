@@ -188,7 +188,14 @@ namespace Client.ViewModel
                 if (SessionHelper.requestHours != null)
                 {
                     var req_hour = SessionHelper.requestHours.Where(p => p.code == ampm).FirstOrDefault();
-                    return req_hour.name;
+                    if (req_hour!=null)
+                    {
+                        return req_hour.name;
+                    }
+                    else
+                    {
+                        return ampm;
+                    } 
                 }
                 else
                 {

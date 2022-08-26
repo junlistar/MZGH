@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Converters;
 using System.IO;
 using System.Text;
+using System.Data.SqlClient;
 
 namespace CoreApi.Controllers
 {
@@ -263,11 +264,24 @@ namespace CoreApi.Controllers
             {
                 list = _userLoginRepository.GetLoginUser(uname, pwd);
             }
+            catch (SqlException ex)
+            {
+                string errormsg = ex.Message;
+                if (ex.Message.Contains("Timeout"))
+                {
+                    errormsg = "连接数据库超时！";
+                }
+                else if (ex.Message.Contains("not found"))
+                {
+                    errormsg = "无法连接到数据库！"; 
+                }
+                Log.Error(errormsg);
+            }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return ErrorResult<IEnumerable<LoginUsers>>(ex.Message);
-            }
+            } 
             return list;
 
         }

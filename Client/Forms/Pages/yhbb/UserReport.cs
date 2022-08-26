@@ -129,7 +129,7 @@ namespace Client.Forms.Pages.yhbb
 
                 _report_code = tv_reports.SelectedNode.ImageKey;
 
-                SetDefaultParams();
+                //SetDefaultParams();
             }
             catch (Exception)
             {

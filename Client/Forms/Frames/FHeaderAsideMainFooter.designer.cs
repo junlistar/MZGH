@@ -60,23 +60,23 @@ namespace Client
             // 
             // Aside
             // 
-            this.Aside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(204)))));
+            this.Aside.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.Aside.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Aside.ExpandSelectFirst = false;
-            this.Aside.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(204)))));
+            this.Aside.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.Aside.ForeColor = System.Drawing.Color.White;
-            this.Aside.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.HoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
             this.Aside.Indent = 25;
             this.Aside.LineColor = System.Drawing.Color.Red;
             this.Aside.Margin = new System.Windows.Forms.Padding(10);
             this.Aside.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
-            this.Aside.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.Aside.ScrollBarHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.Aside.ScrollBarPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
+            this.Aside.ScrollBarHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
+            this.Aside.ScrollBarPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
             this.Aside.ScrollFillColor = System.Drawing.Color.White;
-            this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(115)))), ((int)(((byte)(179)))), ((int)(((byte)(255)))));
-            this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            this.Aside.SelectedColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.Aside.SecondBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
+            this.Aside.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
+            this.Aside.SelectedColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(146)))), ((int)(((byte)(151)))));
             this.Aside.SelectedForeColor = System.Drawing.Color.White;
             this.Aside.SelectedHighColor = System.Drawing.Color.White;
             this.Aside.ShowSecondBackColor = true;
@@ -188,7 +188,11 @@ namespace Client
             this.ClientSize = new System.Drawing.Size(1024, 720);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FHeaderAsideMainFooter";
+            this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(77)))), ((int)(((byte)(132)))));
+            this.ShowTitleIcon = true;
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "门诊挂号系统";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(77)))), ((int)(((byte)(132)))));
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1024, 720);
             this.Load += new System.EventHandler(this.FHeaderAsideMainFooter_Load);
