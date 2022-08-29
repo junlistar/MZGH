@@ -385,6 +385,18 @@
     <Compile Include="Forms\Pages\yhbb\UserReport.Designer.cs">
       <DependentUpon>UserReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\yhbb\WebReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\WebReport.Designer.cs">
+      <DependentUpon>WebReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\WebReportEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\yhbb\WebReportEdit.Designer.cs">
+      <DependentUpon>WebReportEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\zfgl\SelfPay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -642,6 +654,7 @@
     <Compile Include="ViewModel\MzPatientRelationVM.cs" />
     <Compile Include="ViewModel\MzThirdPayVM.cs" />
     <Compile Include="ViewModel\ElectBillModel.cs" />
+    <Compile Include="ViewModel\MzWebReportVM.cs" />
     <Compile Include="ViewModel\RequestTimeVM.cs" />
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\DepositVM.cs" />
@@ -776,6 +789,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\yhbb\UserReport.resx">
       <DependentUpon>UserReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\yhbb\WebReport.resx">
+      <DependentUpon>WebReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\yhbb\WebReportEdit.resx">
+      <DependentUpon>WebReportEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\zfgl\SelfPay.resx">
       <DependentUpon>SelfPay.cs</DependentUpon>

@@ -706,6 +706,11 @@ namespace Mzsf.Forms.Pages
                     //dgv.Rows.Remove(dgv.SelectedRows[0]);
                     dgvOrderDetail.Rows.RemoveAt(dgvOrderDetail.SelectedIndex);
 
+                    if (dgvOrderDetail.Rows.Count==0)
+                    {
+                        AddNewRow();
+                    }
+
                     var row = dgvOrderDetail.Rows[dgvOrderDetail.SelectedIndex];
 
                     var obj = row.Cells["code"].Value;

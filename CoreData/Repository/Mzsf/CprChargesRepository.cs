@@ -39,7 +39,7 @@ namespace Data.Repository.Mzsf
             para.Add("@p_id", p_id);
             para.Add("@ledger_sn", ledger_sn);
             para.Add("@tbl_flag", tbl_flag);
-            return ExecQuerySP("mzsf_GetDrugDetails", para); 
+            return ExecQuerySP("mzsf_GetDrugDetails_20220829", para); 
         }
          
         public bool CallCprCharges(string user_mi,string patient_id, int times, string status)

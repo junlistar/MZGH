@@ -95,6 +95,7 @@
             this.uiTabControl1.TabIndex = 3;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiTabControl1.SelectedIndexChanged += new System.EventHandler(this.uiTabControl1_SelectedIndexChanged);
             this.uiTabControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.uiTabControl1_KeyUp);
             // 
             // tabPage1

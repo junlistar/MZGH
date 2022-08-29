@@ -64,6 +64,10 @@ namespace Client
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
             Aside.TabControl.TabVisible = true; 
+            //Aside.TabControl.TabBackColor = Color.FromArgb(60, 95, 145);
+            Aside.TabControl.TabSelectedColor = Color.FromArgb(6, 146, 151);
+            Aside.TabControl.TabSelectedForeColor = Color.White;
+
 
             //增加页面到Main
             //AddPage(new FTitlePage1(), 1001);
@@ -106,6 +110,7 @@ namespace Client
                 Aside.CreateChildNode(parent, "综合统计报表", 61568, 24, 1401);
                 Aside.CreateChildNode(parent, "挂号员日结报表", 61568, 24, 1402);
                 Aside.CreateChildNode(parent, "收费员日结报表", 61568, 24, 1403);
+                Aside.CreateChildNode(parent, "WEB报表查询", 61568, 24, 1404);
 
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
@@ -234,6 +239,11 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "收费员日结报表", 61568, 24, 1403);
                     }
+                    if (function_list.Where(p => p.func_desc.Trim() == "WEB报表查询").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "WEB报表查询", 61568, 24, 1404);
+                    }
+                    
                 }
                 pageIndex = 1500;
                 if (function_list.Where(p => p.func_desc.Trim() == "权限管理").Count() > 0)
@@ -338,6 +348,8 @@ namespace Client
                         obj = new GhrjReport(); break;
                     case 1403:
                         obj = new SfrjReport(); break;
+                    case 1404:
+                        obj = new WebReport(); break;
                     case 1501:
                         obj = new FunctionList(); break;
                     case 1502:

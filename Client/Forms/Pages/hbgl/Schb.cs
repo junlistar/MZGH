@@ -500,6 +500,14 @@ namespace Client
             btnWeek4.Text = "第四周" + "\r\n" + GetWeekStr(4);
              
             btnWeek5.Text = "第五周" + "\r\n" + GetWeekStr(5);
+
+            //默认查询
+            SetButtonColor(btnWeek1);
+            current_week = 1;
+            var dt_from = DateTime.Now;
+            var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1);
+            GetRequestData(dt_from, dt_to);
+
         }
 
         public string GetWeekStr(int week)

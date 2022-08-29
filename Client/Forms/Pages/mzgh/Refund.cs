@@ -56,7 +56,6 @@ namespace Client
         public void TuiHao()
         {
             var row_index = dgvDeposit.SelectedIndex;
-            var row = dgvDeposit.Rows[row_index];
 
             if (row_index < 0)
             {
@@ -65,6 +64,7 @@ namespace Client
             }
             try
             {
+                var row = dgvDeposit.Rows[row_index];
                 GhDepositVM vm = new GhDepositVM();
                 if (row.Cells["visit_flag_name"].Value == null)
                 {

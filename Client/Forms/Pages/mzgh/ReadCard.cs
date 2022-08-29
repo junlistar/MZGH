@@ -37,7 +37,11 @@ namespace Client
 
             if (_no_enter)
             {
-                uiTabControl1.TabPages.RemoveAt(1); 
+                uiTabControl1.TabPages.RemoveAt(1);
+            }
+            else
+            {
+                txt_sfz.Focus();
             }
         }
 
@@ -177,6 +181,11 @@ namespace Client
                 DoOk();
 
             }
+        }
+
+        private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txt_sfz.Focus();
         }
     }
 }

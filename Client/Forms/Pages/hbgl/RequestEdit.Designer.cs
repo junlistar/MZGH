@@ -109,7 +109,7 @@
             this.txt_limit.Name = "txt_limit";
             this.txt_limit.ShowText = false;
             this.txt_limit.Size = new System.Drawing.Size(163, 29);
-            this.txt_limit.TabIndex = 46;
+            this.txt_limit.TabIndex = 9;
             this.txt_limit.Text = "1";
             this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_limit.Type = Sunny.UI.UITextBox.UIEditType.Integer;
@@ -168,7 +168,7 @@
             this.txtDate.Size = new System.Drawing.Size(166, 29);
             this.txtDate.SymbolDropDown = 61555;
             this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 48;
+            this.txtDate.TabIndex = 4;
             this.txtDate.Text = "2022-05-24";
             this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDate.Value = new System.DateTime(2022, 5, 24, 16, 53, 39, 51);
@@ -197,7 +197,7 @@
             this.txtTotalNum.Name = "txtTotalNum";
             this.txtTotalNum.ShowText = false;
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
-            this.txtTotalNum.TabIndex = 44;
+            this.txtTotalNum.TabIndex = 7;
             this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
@@ -229,7 +229,7 @@
             this.cbxHaobie.Name = "cbxHaobie";
             this.cbxHaobie.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxHaobie.Size = new System.Drawing.Size(163, 29);
-            this.cbxHaobie.TabIndex = 28;
+            this.cbxHaobie.TabIndex = 5;
             this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -247,7 +247,7 @@
             this.cbxWinNo.Name = "cbxWinNo";
             this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxWinNo.Size = new System.Drawing.Size(166, 29);
-            this.cbxWinNo.TabIndex = 41;
+            this.cbxWinNo.TabIndex = 8;
             this.cbxWinNo.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxWinNo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -272,7 +272,7 @@
             this.txtDoct.Name = "txtDoct";
             this.txtDoct.ShowText = false;
             this.txtDoct.Size = new System.Drawing.Size(163, 29);
-            this.txtDoct.TabIndex = 39;
+            this.txtDoct.TabIndex = 3;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtDoct.TextChanged += new System.EventHandler(this.txtDoct_TextChanged);
@@ -289,7 +289,7 @@
             this.txtzk.Name = "txtzk";
             this.txtzk.ShowText = false;
             this.txtzk.Size = new System.Drawing.Size(415, 29);
-            this.txtzk.TabIndex = 38;
+            this.txtzk.TabIndex = 2;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtzk.TextChanged += new System.EventHandler(this.txtzk_TextChanged);
@@ -306,7 +306,7 @@
             this.txtks.Name = "txtks";
             this.txtks.ShowText = false;
             this.txtks.Size = new System.Drawing.Size(415, 29);
-            this.txtks.TabIndex = 37;
+            this.txtks.TabIndex = 1;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtks.TextChanged += new System.EventHandler(this.txtks_TextChanged);
@@ -372,7 +372,7 @@
             this.cbxOpenFlag.Name = "cbxOpenFlag";
             this.cbxOpenFlag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxOpenFlag.Size = new System.Drawing.Size(166, 29);
-            this.cbxOpenFlag.TabIndex = 29;
+            this.cbxOpenFlag.TabIndex = 10;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -404,7 +404,7 @@
             this.cbxSXW.Name = "cbxSXW";
             this.cbxSXW.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxSXW.Size = new System.Drawing.Size(166, 29);
-            this.cbxSXW.TabIndex = 27;
+            this.cbxSXW.TabIndex = 6;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -428,7 +428,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(93, 36);
             this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 12;
+            this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -444,7 +444,7 @@
             this.btnCancel.Size = new System.Drawing.Size(99, 36);
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61453;
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

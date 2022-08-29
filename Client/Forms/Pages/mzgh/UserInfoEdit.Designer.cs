@@ -153,7 +153,7 @@
             this.txtCardId.ShowText = false;
             this.txtCardId.Size = new System.Drawing.Size(179, 29);
             this.txtCardId.Style = Sunny.UI.UIStyle.Green;
-            this.txtCardId.TabIndex = 14;
+            this.txtCardId.TabIndex = 2;
             this.txtCardId.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCardId.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtCardId.Leave += new System.EventHandler(this.txtCardId_Leave);
@@ -178,7 +178,7 @@
             this.txtUserName.ShowText = false;
             this.txtUserName.Size = new System.Drawing.Size(200, 29);
             this.txtUserName.Style = Sunny.UI.UIStyle.Green;
-            this.txtUserName.TabIndex = 14;
+            this.txtUserName.TabIndex = 3;
             this.txtUserName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtUserName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -202,7 +202,7 @@
             this.txtTel.ShowText = false;
             this.txtTel.Size = new System.Drawing.Size(179, 29);
             this.txtTel.Style = Sunny.UI.UIStyle.Green;
-            this.txtTel.TabIndex = 15;
+            this.txtTel.TabIndex = 4;
             this.txtTel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -252,7 +252,7 @@
             this.txthomestreet.ShowText = false;
             this.txthomestreet.Size = new System.Drawing.Size(493, 29);
             this.txthomestreet.Style = Sunny.UI.UIStyle.Green;
-            this.txthomestreet.TabIndex = 17;
+            this.txthomestreet.TabIndex = 15;
             this.txthomestreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthomestreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -276,7 +276,7 @@
             this.txtZhiye.ShowText = false;
             this.txtZhiye.Size = new System.Drawing.Size(493, 29);
             this.txtZhiye.Style = Sunny.UI.UIStyle.Green;
-            this.txtZhiye.TabIndex = 21;
+            this.txtZhiye.TabIndex = 14;
             this.txtZhiye.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtZhiye.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -301,7 +301,7 @@
             this.txtpatientid.ShowText = false;
             this.txtpatientid.Size = new System.Drawing.Size(200, 29);
             this.txtpatientid.Style = Sunny.UI.UIStyle.Green;
-            this.txtpatientid.TabIndex = 15;
+            this.txtpatientid.TabIndex = 1;
             this.txtpatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtpatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -356,7 +356,7 @@
             this.cbxmarrycode.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxmarrycode.Size = new System.Drawing.Size(179, 29);
             this.cbxmarrycode.Style = Sunny.UI.UIStyle.Green;
-            this.cbxmarrycode.TabIndex = 38;
+            this.cbxmarrycode.TabIndex = 8;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -430,7 +430,7 @@
             this.cbxSex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxSex.Size = new System.Drawing.Size(179, 29);
             this.cbxSex.Style = Sunny.UI.UIStyle.Green;
-            this.cbxSex.TabIndex = 90;
+            this.cbxSex.TabIndex = 6;
             this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -454,7 +454,7 @@
             this.txtshebaohao.ShowText = false;
             this.txtshebaohao.Size = new System.Drawing.Size(201, 29);
             this.txtshebaohao.Style = Sunny.UI.UIStyle.Green;
-            this.txtshebaohao.TabIndex = 67;
+            this.txtshebaohao.TabIndex = 11;
             this.txtshebaohao.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtshebaohao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -491,7 +491,7 @@
             this.txtemployername.ShowText = false;
             this.txtemployername.Size = new System.Drawing.Size(493, 29);
             this.txtemployername.Style = Sunny.UI.UIStyle.Green;
-            this.txtemployername.TabIndex = 64;
+            this.txtemployername.TabIndex = 13;
             this.txtemployername.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtemployername.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -528,7 +528,7 @@
             this.cbxShenfen.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxShenfen.Size = new System.Drawing.Size(179, 29);
             this.cbxShenfen.Style = Sunny.UI.UIStyle.Green;
-            this.cbxShenfen.TabIndex = 43;
+            this.cbxShenfen.TabIndex = 10;
             this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -565,7 +565,7 @@
             this.txthomedistrict.ShowText = false;
             this.txthomedistrict.Size = new System.Drawing.Size(200, 29);
             this.txthomedistrict.Style = Sunny.UI.UIStyle.Green;
-            this.txthomedistrict.TabIndex = 40;
+            this.txthomedistrict.TabIndex = 9;
             this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -593,7 +593,7 @@
             this.cbxChargeType.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxChargeType.Size = new System.Drawing.Size(179, 29);
             this.cbxChargeType.Style = Sunny.UI.UIStyle.Green;
-            this.cbxChargeType.TabIndex = 42;
+            this.cbxChargeType.TabIndex = 12;
             this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -614,7 +614,7 @@
             this.sfz_birthday.Style = Sunny.UI.UIStyle.Green;
             this.sfz_birthday.SymbolDropDown = 61555;
             this.sfz_birthday.SymbolNormal = 61555;
-            this.sfz_birthday.TabIndex = 57;
+            this.sfz_birthday.TabIndex = 7;
             this.sfz_birthday.Text = "1900-01-01";
             this.sfz_birthday.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_birthday.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
@@ -684,7 +684,7 @@
             this.sfz_card_no.ShowText = false;
             this.sfz_card_no.Size = new System.Drawing.Size(200, 29);
             this.sfz_card_no.Style = Sunny.UI.UIStyle.Green;
-            this.sfz_card_no.TabIndex = 56;
+            this.sfz_card_no.TabIndex = 5;
             this.sfz_card_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_card_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -721,7 +721,7 @@
             this.cbxRelation.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxRelation.Size = new System.Drawing.Size(200, 29);
             this.cbxRelation.Style = Sunny.UI.UIStyle.Green;
-            this.cbxRelation.TabIndex = 39;
+            this.cbxRelation.TabIndex = 18;
             this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -820,7 +820,7 @@
             this.cbx_relsex.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbx_relsex.Size = new System.Drawing.Size(181, 29);
             this.cbx_relsex.Style = Sunny.UI.UIStyle.Green;
-            this.cbx_relsex.TabIndex = 89;
+            this.cbx_relsex.TabIndex = 19;
             this.cbx_relsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbx_relsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -857,7 +857,7 @@
             this.txt_rel_address.ShowText = false;
             this.txt_rel_address.Size = new System.Drawing.Size(493, 29);
             this.txt_rel_address.Style = Sunny.UI.UIStyle.Green;
-            this.txt_rel_address.TabIndex = 87;
+            this.txt_rel_address.TabIndex = 22;
             this.txt_rel_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -890,7 +890,7 @@
             this.txt_rel_tel.ShowText = false;
             this.txt_rel_tel.Size = new System.Drawing.Size(181, 29);
             this.txt_rel_tel.Style = Sunny.UI.UIStyle.Green;
-            this.txt_rel_tel.TabIndex = 81;
+            this.txt_rel_tel.TabIndex = 17;
             this.txt_rel_tel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_tel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -924,7 +924,7 @@
             this.txt_rel_birth.Style = Sunny.UI.UIStyle.Green;
             this.txt_rel_birth.SymbolDropDown = 61555;
             this.txt_rel_birth.SymbolNormal = 61555;
-            this.txt_rel_birth.TabIndex = 85;
+            this.txt_rel_birth.TabIndex = 21;
             this.txt_rel_birth.Text = "1990-01-01";
             this.txt_rel_birth.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_birth.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
@@ -950,7 +950,7 @@
             this.txt_rel_sfzid.ShowText = false;
             this.txt_rel_sfzid.Size = new System.Drawing.Size(200, 29);
             this.txt_rel_sfzid.Style = Sunny.UI.UIStyle.Green;
-            this.txt_rel_sfzid.TabIndex = 84;
+            this.txt_rel_sfzid.TabIndex = 20;
             this.txt_rel_sfzid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_sfzid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -982,7 +982,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(99, 36);
             this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 41;
+            this.btnSave.TabIndex = 23;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

@@ -24,16 +24,62 @@ namespace Client.Forms.Pages.zfgl
 
         private void SelfPay_Initialize(object sender, EventArgs e)
         {
-            txtBarcode.Focus();
-            txtBeginDate.Value = DateTime.Now;
-            txtEndDate.Value = DateTime.Now;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+        public void Search()
+        {
+            return;
 
+            var cash_opera = SessionHelper.uservm.user_mi;
+            var begin_date = txtBeginDate.Value.ToString("yyyy-MM-dd 00:00:00");
+            var end_date = txtEndDate.Value.ToString("yyyy-MM-dd 23:59:59");
+            var his_status = "%";
+            var pid = "%";
+            if (!string.IsNullOrWhiteSpace(txt_pid.Text))
+            {
+                pid = txt_pid.Text;
+            }
+
+            if (cbxRefundStatus.Text != "全部")
+            {
+                his_status = "-1";
+            }
+
+            //获取数据   
+            string paramurl = string.Format($"/api/guahao/GetSelfPayList?bengin={begin_date}&end={end_date}&his_status={his_status}&patient_id={pid}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                var json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzThridPayViewVM>>>(json);
+                if (result.status == 1)
+                {
+                    var ds = result.data;
+                    dgv_paylist.DataSource = ds;
+                    dgv_paylist.AutoResizeColumns();
+                    dgv_paylist.AutoGenerateColumns = false;
+                }
+                else
+                {
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                log.Error("请求接口数据出错：" + ex.Message);
+                log.Error(ex.StackTrace);
+            }
+            finally
+            {
+
+            }
+        }
         private void btnHuajia_Click(object sender, EventArgs e)
         {
             try
@@ -94,7 +140,20 @@ namespace Client.Forms.Pages.zfgl
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            Search();
+        }
+        public void ResetSearch()
+        {
+            txtBeginDate.Value = DateTime.Now;
+            txtEndDate.Value = DateTime.Now;
 
+            cbxRefundStatus.Text = "全部";
+            txt_pid.Text = "";
+        }
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            ResetSearch();
+            Search();
         }
     }
 }

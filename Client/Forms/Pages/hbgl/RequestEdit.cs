@@ -36,6 +36,7 @@ namespace Client
 
             InitDate();
 
+            txtks.Focus();
         }
         public void InitUI()
         {
@@ -425,6 +426,11 @@ namespace Client
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            SaveData();
+        }
+
+        public void SaveData()
+        {
             try
             {
 
@@ -448,7 +454,7 @@ namespace Client
                 }
 
                 ampm = cbxSXW.SelectedValue.ToString();
- 
+
                 if (cbxOpenFlag.Text == "开放")
                 {
                     open_flag = 1;
@@ -516,7 +522,7 @@ namespace Client
 
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                if (responseJson.status ==1)
+                if (responseJson.status == 1)
                 {
                     UIMessageTip.ShowOk("操作成功!");
                     this.DialogResult = DialogResult.OK;
@@ -526,14 +532,13 @@ namespace Client
                 {
                     UIMessageTip.ShowError(responseJson.message);
                     log.Error(responseJson.message);
-                }  
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -664,6 +669,10 @@ namespace Client
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                SaveData();
             }
         }
     }

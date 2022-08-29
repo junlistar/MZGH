@@ -39,7 +39,7 @@ namespace Client
 
             InitDic();
 
-            //InitData();
+            InitData();
 
             dgv.CellClick += dgvks_CellContentClick;
             dgv.KeyDown += dgvks_KeyDown;
@@ -98,10 +98,7 @@ namespace Client
         private void btnSearch_Click(object sender, EventArgs e)
         {
             InitData();
-        }
-
-
-
+        } 
         public void InitData()
         {
             log.Info("InitData");
@@ -240,7 +237,7 @@ namespace Client
 
         public void BindBottomData()
         {
-            lblTotalCount.Text = "总计：" + list.Count.ToString() + "条";
+            lblTotalCount.Text = "总计：" + list.Count.ToString() + "条, 每页 " + 50 + "条";
             //设置分页控件总数
             uiPagination1.TotalCount = list.Count;
             //设置分页控件每页数量

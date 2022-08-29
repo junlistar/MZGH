@@ -145,21 +145,21 @@ namespace Mzsf.Forms.Pages
                             return;
                         }
                         SessionHelper.patientVM = userInfo;
-                         
+
                         //当前最大记录次数
-                        current_times = userInfo.max_times;
+                        current_times = userInfo.max_times + 1;
                         current_patient_id = userInfo.patient_id;
 
                         BindUserInfo(userInfo);
 
-                        BindOrders(userInfo.patient_id); 
+                        BindOrders(userInfo.patient_id);
                     }
                     else
                     {
                         MessageBox.Show("没有查到用户数据");
                         lblNodata.Text = "没有查到用户数据";
                         lblNodata.Show();
-                    } 
+                    }
                 }
                 else
                 {
@@ -437,8 +437,12 @@ namespace Mzsf.Forms.Pages
                     {
                         lblNodata.Text = "没有处方数据";
                         lblNodata.Show();
+
                         return;
                     }
+
+                    //当前最大记录次数
+                    current_times = times;
 
                     #region tabcontrol 重置
 
@@ -668,6 +672,13 @@ namespace Mzsf.Forms.Pages
         }
         public void ClearUserInfo()
         {
+            txtBarcode.Text = "";
+            lblPatientid.Text = "";
+            lblmarry.Text = "";
+            lblrelationname.Text = "";
+            lblrelation.Text = "";
+            lblstreet.Text = "";
+
             txtName.Text = "";
             txtHicno.Text = "";
             txtAge.Text = "";
@@ -913,11 +924,11 @@ namespace Mzsf.Forms.Pages
                 {
                     //打印发票
                     if (SessionHelper.do_sf_print)
-                    { 
+                    {
                         Task.Run(() =>
                         {
                             try
-                            { 
+                            {
                                 SessionHelper.do_sf_print = false;
                                 //打印发票 
                                 Print ghprint = new Print(SessionHelper.mzsf_report_code);
@@ -1167,12 +1178,13 @@ namespace Mzsf.Forms.Pages
 
         private bool uiTabControl1_BeforeRemoveTabPage(object sender, int index)
         {
-            var _order = SessionHelper.mzOrders.Where(p => p.order_no == index + 1).FirstOrDefault();
+            //var _order = SessionHelper.mzOrders.Where(p => p.order_no == index + 1).FirstOrDefault();
+            var _order = SessionHelper.mzOrders[index];
             if (_order != null)
             {
                 if (!string.IsNullOrEmpty(_order.group_no) && SessionHelper.cprCharges != null && SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no).Count() == 0)
                 {
-                    UIMessageTip.ShowError("医生处方不能删除！");
+                    UIMessageTip.ShowError("该处方不能删除！");
                     return false;
                 }
                 else
@@ -1184,9 +1196,17 @@ namespace Mzsf.Forms.Pages
                         if (item.order_no == _order_no)
                         {
                             SessionHelper.cprCharges.Remove(item);
+
                         }
                     }
+
                 }
+            } 
+            if (SessionHelper.mzOrders.Count==0)
+            {
+                lblOrderCharge.Text = "0";
+                lblOrderItemCount.Text = "0";
+                lblOrderTotalCharge.Text = "0"; 
             }
 
 

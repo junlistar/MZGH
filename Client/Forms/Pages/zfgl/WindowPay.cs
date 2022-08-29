@@ -76,13 +76,18 @@ namespace Client.Forms.Pages.zfgl
             }
         }
 
-        private void WindowPay_Initialize(object sender, EventArgs e)
+        public void ResetSearch()
         {
-
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
 
             cbxRefundStatus.Text = "全部";
+            txt_pid.Text = "";
+        }
+
+        private void WindowPay_Initialize(object sender, EventArgs e)
+        {
+            ResetSearch(); 
         }
 
         private void pnlTitle_Click(object sender, EventArgs e)
@@ -151,6 +156,12 @@ namespace Client.Forms.Pages.zfgl
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            ResetSearch();
+            Search();
         }
     }
 }

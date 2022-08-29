@@ -52,22 +52,8 @@ namespace Client.Forms.Wedgit
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+                json = HttpClientUtil.Get(paramurl);
 
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(" 访问登录接口失败!" + json);
-                    UIMessageTip.ShowWarning(" 访问登录接口失败!");
-                    return;
-                }
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
                 if (result.status == 1)
                 {

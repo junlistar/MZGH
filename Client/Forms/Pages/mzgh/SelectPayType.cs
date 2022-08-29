@@ -1957,10 +1957,15 @@ namespace Client
 
         private void btnTuikuan_Click(object sender, EventArgs e)
         {
+            if (uiListBox1.SelectedIndex == -1)
+            {
+                uiListBox1.SelectedIndex = 0;
+            }
+
             var index = uiListBox1.SelectedIndex;
             if (index == -1)
             {
-                MessageBox.Show("请选择付款项目进行退款操作！"); return;
+                //   MessageBox.Show("请选择付款项目进行退款操作！"); return;
             }
             if (MessageBox.Show(uiListBox1.SelectedItem.ToString(), "是否确认退款？", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {

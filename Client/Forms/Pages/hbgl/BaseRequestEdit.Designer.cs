@@ -108,7 +108,7 @@
             this.txt_winno.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_winno.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txt_winno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_winno.Location = new System.Drawing.Point(410, 195);
+            this.txt_winno.Location = new System.Drawing.Point(380, 195);
             this.txt_winno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_winno.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_winno.Name = "txt_winno";
@@ -117,7 +117,7 @@
             this.txt_winno.ShowText = false;
             this.txt_winno.Size = new System.Drawing.Size(168, 29);
             this.txt_winno.Style = Sunny.UI.UIStyle.Green;
-            this.txt_winno.TabIndex = 46;
+            this.txt_winno.TabIndex = 8;
             this.txt_winno.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_winno.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -132,7 +132,7 @@
             this.txt_limit.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_limit.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txt_limit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_limit.Location = new System.Drawing.Point(410, 234);
+            this.txt_limit.Location = new System.Drawing.Point(380, 234);
             this.txt_limit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_limit.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_limit.Name = "txt_limit";
@@ -141,7 +141,7 @@
             this.txt_limit.ShowText = false;
             this.txt_limit.Size = new System.Drawing.Size(168, 29);
             this.txt_limit.Style = Sunny.UI.UIStyle.Green;
-            this.txt_limit.TabIndex = 45;
+            this.txt_limit.TabIndex = 10;
             this.txt_limit.Text = "0";
             this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_limit.Type = Sunny.UI.UITextBox.UIEditType.Integer;
@@ -150,7 +150,7 @@
             // lbl_temp_flag
             // 
             this.lbl_temp_flag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_temp_flag.Location = new System.Drawing.Point(333, 235);
+            this.lbl_temp_flag.Location = new System.Drawing.Point(303, 235);
             this.lbl_temp_flag.Name = "lbl_temp_flag";
             this.lbl_temp_flag.Size = new System.Drawing.Size(74, 23);
             this.lbl_temp_flag.Style = Sunny.UI.UIStyle.Green;
@@ -172,7 +172,7 @@
             this.txtTotalNum.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtTotalNum.IntValue = 100;
-            this.txtTotalNum.Location = new System.Drawing.Point(163, 195);
+            this.txtTotalNum.Location = new System.Drawing.Point(133, 195);
             this.txtTotalNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTotalNum.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtTotalNum.Name = "txtTotalNum";
@@ -181,7 +181,7 @@
             this.txtTotalNum.ShowText = false;
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
             this.txtTotalNum.Style = Sunny.UI.UIStyle.Green;
-            this.txtTotalNum.TabIndex = 44;
+            this.txtTotalNum.TabIndex = 7;
             this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
@@ -190,7 +190,7 @@
             // uiLabel9
             // 
             this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(95, 195);
+            this.uiLabel9.Location = new System.Drawing.Point(65, 195);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.Size = new System.Drawing.Size(63, 23);
             this.uiLabel9.Style = Sunny.UI.UIStyle.Green;
@@ -212,7 +212,7 @@
             "下午"});
             this.cbxHaobie.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxHaobie.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxHaobie.Location = new System.Drawing.Point(412, 115);
+            this.cbxHaobie.Location = new System.Drawing.Point(382, 115);
             this.cbxHaobie.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxHaobie.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxHaobie.Name = "cbxHaobie";
@@ -220,14 +220,14 @@
             this.cbxHaobie.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxHaobie.Size = new System.Drawing.Size(166, 29);
             this.cbxHaobie.Style = Sunny.UI.UIStyle.Green;
-            this.cbxHaobie.TabIndex = 28;
+            this.cbxHaobie.TabIndex = 4;
             this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(361, 195);
+            this.uiLabel6.Location = new System.Drawing.Point(331, 195);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(42, 23);
             this.uiLabel6.Style = Sunny.UI.UIStyle.Green;
@@ -239,7 +239,7 @@
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(126, 158);
+            this.uiLabel1.Location = new System.Drawing.Point(96, 158);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(26, 23);
             this.uiLabel1.Style = Sunny.UI.UIStyle.Green;
@@ -259,7 +259,7 @@
             this.txtDoct.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtDoct.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtDoct.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDoct.Location = new System.Drawing.Point(163, 116);
+            this.txtDoct.Location = new System.Drawing.Point(133, 116);
             this.txtDoct.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDoct.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtDoct.Name = "txtDoct";
@@ -268,7 +268,7 @@
             this.txtDoct.ShowText = false;
             this.txtDoct.Size = new System.Drawing.Size(163, 29);
             this.txtDoct.Style = Sunny.UI.UIStyle.Green;
-            this.txtDoct.TabIndex = 39;
+            this.txtDoct.TabIndex = 3;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtDoct.TextChanged += new System.EventHandler(this.txtDoct_TextChanged);
@@ -286,7 +286,7 @@
             this.txtzk.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtzk.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtzk.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtzk.Location = new System.Drawing.Point(163, 75);
+            this.txtzk.Location = new System.Drawing.Point(133, 75);
             this.txtzk.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtzk.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtzk.Name = "txtzk";
@@ -295,7 +295,7 @@
             this.txtzk.ShowText = false;
             this.txtzk.Size = new System.Drawing.Size(415, 29);
             this.txtzk.Style = Sunny.UI.UIStyle.Green;
-            this.txtzk.TabIndex = 38;
+            this.txtzk.TabIndex = 2;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtzk.TextChanged += new System.EventHandler(this.txtzk_TextChanged);
@@ -313,7 +313,7 @@
             this.txtks.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtks.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.txtks.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtks.Location = new System.Drawing.Point(163, 37);
+            this.txtks.Location = new System.Drawing.Point(133, 37);
             this.txtks.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtks.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtks.Name = "txtks";
@@ -322,7 +322,7 @@
             this.txtks.ShowText = false;
             this.txtks.Size = new System.Drawing.Size(415, 29);
             this.txtks.Style = Sunny.UI.UIStyle.Green;
-            this.txtks.TabIndex = 37;
+            this.txtks.TabIndex = 1;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtks.TextChanged += new System.EventHandler(this.txtks_TextChanged);
@@ -347,7 +347,7 @@
             "星期日"});
             this.cbxDay.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxDay.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxDay.Location = new System.Drawing.Point(163, 155);
+            this.cbxDay.Location = new System.Drawing.Point(133, 155);
             this.cbxDay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxDay.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxDay.Name = "cbxDay";
@@ -355,14 +355,14 @@
             this.cbxDay.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxDay.Size = new System.Drawing.Size(163, 29);
             this.cbxDay.Style = Sunny.UI.UIStyle.Green;
-            this.cbxDay.TabIndex = 30;
+            this.cbxDay.TabIndex = 5;
             this.cbxDay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxDay.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel10
             // 
             this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(112, 116);
+            this.uiLabel10.Location = new System.Drawing.Point(82, 116);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(93, 23);
             this.uiLabel10.Style = Sunny.UI.UIStyle.Green;
@@ -374,7 +374,7 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(112, 79);
+            this.uiLabel8.Location = new System.Drawing.Point(82, 79);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(46, 23);
             this.uiLabel8.Style = Sunny.UI.UIStyle.Green;
@@ -386,7 +386,7 @@
             // uiLabel5
             // 
             this.uiLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel5.Location = new System.Drawing.Point(361, 120);
+            this.uiLabel5.Location = new System.Drawing.Point(331, 120);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(46, 23);
             this.uiLabel5.Style = Sunny.UI.UIStyle.Green;
@@ -398,7 +398,7 @@
             // uiLabel4
             // 
             this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(112, 42);
+            this.uiLabel4.Location = new System.Drawing.Point(82, 42);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(44, 23);
             this.uiLabel4.Style = Sunny.UI.UIStyle.Green;
@@ -420,7 +420,7 @@
             "不开放"});
             this.cbxOpenFlag.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxOpenFlag.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxOpenFlag.Location = new System.Drawing.Point(160, 234);
+            this.cbxOpenFlag.Location = new System.Drawing.Point(130, 234);
             this.cbxOpenFlag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxOpenFlag.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxOpenFlag.Name = "cbxOpenFlag";
@@ -428,14 +428,14 @@
             this.cbxOpenFlag.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxOpenFlag.Size = new System.Drawing.Size(166, 29);
             this.cbxOpenFlag.Style = Sunny.UI.UIStyle.Green;
-            this.cbxOpenFlag.TabIndex = 29;
+            this.cbxOpenFlag.TabIndex = 9;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel3
             // 
             this.uiLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel3.Location = new System.Drawing.Point(111, 234);
+            this.uiLabel3.Location = new System.Drawing.Point(81, 234);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(42, 23);
             this.uiLabel3.Style = Sunny.UI.UIStyle.Green;
@@ -459,7 +459,7 @@
             "夜间"});
             this.cbxSXW.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxSXW.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
-            this.cbxSXW.Location = new System.Drawing.Point(412, 154);
+            this.cbxSXW.Location = new System.Drawing.Point(382, 154);
             this.cbxSXW.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxSXW.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxSXW.Name = "cbxSXW";
@@ -467,14 +467,14 @@
             this.cbxSXW.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
             this.cbxSXW.Size = new System.Drawing.Size(166, 29);
             this.cbxSXW.Style = Sunny.UI.UIStyle.Green;
-            this.cbxSXW.TabIndex = 27;
+            this.cbxSXW.TabIndex = 6;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel2
             // 
             this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(346, 157);
+            this.uiLabel2.Location = new System.Drawing.Point(316, 157);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(61, 23);
             this.uiLabel2.Style = Sunny.UI.UIStyle.Green;
@@ -492,7 +492,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 32);
             this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 12;
+            this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -508,7 +508,7 @@
             this.btnCancel.Size = new System.Drawing.Size(93, 33);
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61453;
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

@@ -275,7 +275,8 @@ namespace CoreApi.Controllers
                 {
                     errormsg = "无法连接到数据库！"; 
                 }
-                Log.Error(errormsg);
+                Log.Error(errormsg); 
+                return ErrorResult<IEnumerable<LoginUsers>>(errormsg);
             }
             catch (Exception ex)
             {

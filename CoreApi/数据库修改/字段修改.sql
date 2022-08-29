@@ -732,3 +732,15 @@ alter TABLE mz_detail_charge
 add parent_ledger_sn smallint  default (0);
 alter TABLE mz_detail_charge_b
 add parent_ledger_sn smallint  default (0);
+
+--web报表
+CREATE TABLE [dbo].[mz_webreport](
+	[code] [varchar](50) NULL,
+	[name] [varchar](50) NULL,
+	[url] [varchar](2000) NULL,
+	[open_flag] [bit] NULL,
+	[create_opera] [varchar](50) NULL,
+	[create_time] [datetime] NULL,
+	[update_time] [datetime] NULL,
+	[update_opera] [varchar](50) NULL
+) ON [PRIMARY]

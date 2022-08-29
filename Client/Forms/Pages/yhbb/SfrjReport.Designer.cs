@@ -36,12 +36,12 @@
             this.uiPanel1 = new Sunny.UI.UIPanel();
             this.txtGhUser = new Sunny.UI.UITextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtDate = new Sunny.UI.UIDatetimePicker();
             this.cbxStatus = new Sunny.UI.UIComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlReport = new Sunny.UI.UIPanel();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
+            this.txtDate = new Sunny.UI.UIDatePicker();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.pnlReport.SuspendLayout();
@@ -136,6 +136,7 @@
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblTitle
             // 
@@ -152,9 +153,9 @@
             // 
             this.uiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiPanel1.Controls.Add(this.txtDate);
             this.uiPanel1.Controls.Add(this.txtGhUser);
             this.uiPanel1.Controls.Add(this.label3);
-            this.uiPanel1.Controls.Add(this.txtDate);
             this.uiPanel1.Controls.Add(this.cbxStatus);
             this.uiPanel1.Controls.Add(this.label2);
             this.uiPanel1.Controls.Add(this.label1);
@@ -195,26 +196,6 @@
             this.label3.Size = new System.Drawing.Size(58, 21);
             this.label3.TabIndex = 27;
             this.label3.Text = "收费员";
-            // 
-            // txtDate
-            // 
-            this.txtDate.DateFormat = "yyyy-MM-dd";
-            this.txtDate.FillColor = System.Drawing.Color.White;
-            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(104, 17);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtDate.MaxLength = 10;
-            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.ShowToday = true;
-            this.txtDate.Size = new System.Drawing.Size(150, 29);
-            this.txtDate.SymbolDropDown = 61555;
-            this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 26;
-            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cbxStatus
             // 
@@ -284,6 +265,26 @@
             this.previewControl1.ToolbarVisible = false;
             this.previewControl1.Visible = false;
             // 
+            // txtDate
+            // 
+            this.txtDate.FillColor = System.Drawing.Color.White;
+            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate.Location = new System.Drawing.Point(104, 17);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate.MaxLength = 10;
+            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.ShowToday = true;
+            this.txtDate.Size = new System.Drawing.Size(150, 29);
+            this.txtDate.SymbolDropDown = 61555;
+            this.txtDate.SymbolNormal = 61555;
+            this.txtDate.TabIndex = 29;
+            this.txtDate.Text = "2022-08-26";
+            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate.Value = new System.DateTime(2022, 8, 26, 15, 26, 32, 892);
+            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // SfrjReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -313,11 +314,11 @@
         private Sunny.UI.UIPanel uiPanel1;
         private Sunny.UI.UITextBox txtGhUser;
         private System.Windows.Forms.Label label3;
-        private Sunny.UI.UIDatetimePicker txtDate;
         private Sunny.UI.UIComboBox cbxStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UIPanel pnlReport;
         private FastReport.Preview.PreviewControl previewControl1;
+        private Sunny.UI.UIDatePicker txtDate;
     }
 }

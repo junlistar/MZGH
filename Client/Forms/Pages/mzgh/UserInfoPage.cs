@@ -360,16 +360,21 @@ namespace Client.Forms.Pages
             this.cbx_relation.DataSource = SessionHelper.relativeCodes;
             cbx_relation.DisplayMember = "name";
             cbx_relation.ValueMember = "code";
-            cbx_relation.Text = "本人";
+            //cbx_relation.Text = "本人";
 
 
             this.cbx_rel_relation.DataSource = SessionHelper.relativeCodes;
             cbx_rel_relation.DisplayMember = "name";
             cbx_rel_relation.ValueMember = "code";
-            cbx_rel_relation.Text = "本人";
+            //cbx_rel_relation.Text = "本人";
         }
 
         private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveData();
+        }
+
+        public void SaveData()
         {
 
             try
@@ -789,7 +794,7 @@ namespace Client.Forms.Pages
             //cbxResponseType.Text = "";
             //cbxChargeTypes.Text = "";
             txtrelationname.Text = "";
-            cbx_relation.Text = "本人";
+            cbx_relation.Text = "";
 
             this.cbxsex.Text = "";
 
@@ -1288,6 +1293,14 @@ namespace Client.Forms.Pages
         private void txthomedistrict_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void UserInfoPage_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && !txtCode.Focused)
+            {
+                SaveData();
+            }
         }
     }
 }

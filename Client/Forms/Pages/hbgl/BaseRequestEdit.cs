@@ -42,6 +42,7 @@ namespace Client
                 InitData();
             }
 
+            txtks.Focus();
         }
 
         public void InitData()
@@ -446,6 +447,12 @@ namespace Client
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            SaveData();
+
+        }
+
+        public void SaveData()
+        {
             try
             {
                 var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "" : txtks.TagString;
@@ -463,12 +470,6 @@ namespace Client
 
                 ampm = cbxSXW.SelectedValue.ToString();
 
-                var _winno = txt_winno.Text;
-                if (!int.TryParse(_winno, out window_no))
-                {
-                    UIMessageTip.Show("诊室数据有误，请输入数字");
-                    return;
-                }
 
                 //switch (cbxWeek.Text)
                 //{
@@ -545,8 +546,15 @@ namespace Client
                     return;
                 }
 
+                var _winno = txt_winno.Text;
+                if (!int.TryParse(_winno, out window_no))
+                {
+                    UIMessageTip.Show("诊室数据有误，请输入数字");
+                    return;
+                }
+
                 //判断是否存在
-                var json = ""; 
+                var json = "";
                 var para = $"?unit_sn={visit_dept}&group_sn={group_sn}&doctor_sn={doctor_code}&clinic_type={clinic_type}&week={week}&day={day}&ampm={ampm}&window_no=&open_flag=";
 
                 string paramurl = string.Format($"/api/GuaHao/GetBaseRequests" + para);
@@ -620,7 +628,6 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.StackTrace);
             }
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -751,6 +758,10 @@ namespace Client
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                SaveData();
             }
         }
     }

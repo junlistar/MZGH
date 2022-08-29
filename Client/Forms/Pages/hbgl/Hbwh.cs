@@ -105,6 +105,8 @@ namespace Client
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
+
+            InitData();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

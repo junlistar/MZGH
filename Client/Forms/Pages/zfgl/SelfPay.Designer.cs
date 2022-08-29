@@ -44,7 +44,7 @@
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.cbxRefundStatus = new Sunny.UI.UIComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtBarcode = new Sunny.UI.UITextBox();
+            this.txt_pid = new Sunny.UI.UITextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEndDate = new Sunny.UI.UIDatePicker();
@@ -157,6 +157,7 @@
             this.uiSymbolButton1.Text = "重新";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
             // 
             // btnExit
             // 
@@ -199,7 +200,7 @@
             // 
             this.uiGroupBox1.Controls.Add(this.cbxRefundStatus);
             this.uiGroupBox1.Controls.Add(this.label4);
-            this.uiGroupBox1.Controls.Add(this.txtBarcode);
+            this.uiGroupBox1.Controls.Add(this.txt_pid);
             this.uiGroupBox1.Controls.Add(this.label2);
             this.uiGroupBox1.Controls.Add(this.label1);
             this.uiGroupBox1.Controls.Add(this.txtEndDate);
@@ -245,28 +246,28 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "收费状态：";
             // 
-            // txtBarcode
+            // txt_pid
             // 
-            this.txtBarcode.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBarcode.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtBarcode.Location = new System.Drawing.Point(421, 29);
-            this.txtBarcode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtBarcode.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.ShowText = false;
-            this.txtBarcode.Size = new System.Drawing.Size(150, 29);
-            this.txtBarcode.TabIndex = 4;
-            this.txtBarcode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtBarcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_pid.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_pid.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_pid.Location = new System.Drawing.Point(421, 29);
+            this.txt_pid.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_pid.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_pid.Name = "txt_pid";
+            this.txt_pid.ShowText = false;
+            this.txt_pid.Size = new System.Drawing.Size(150, 29);
+            this.txt_pid.TabIndex = 4;
+            this.txt_pid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_pid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(340, 32);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 21);
+            this.label2.Size = new System.Drawing.Size(75, 21);
             this.label2.TabIndex = 3;
-            this.label2.Text = "磁卡号：";
+            this.label2.Text = "患者ID：";
             // 
             // label1
             // 
@@ -546,7 +547,7 @@
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UIComboBox cbxRefundStatus;
         private System.Windows.Forms.Label label4;
-        private Sunny.UI.UITextBox txtBarcode;
+        private Sunny.UI.UITextBox txt_pid;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UIDatePicker txtEndDate;

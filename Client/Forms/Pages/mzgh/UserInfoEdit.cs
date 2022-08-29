@@ -71,9 +71,13 @@ namespace Client
         }
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            try
-            {
+             SaveData();
+        }
 
+        public async void SaveData()
+        {
+            try
+            { 
                 //var cardType = cbxCardType.Text.ToString();
                 var cardId = txtCardId.Text.Trim();
                 var sfzId = sfz_card_no.Text.Trim();
@@ -220,7 +224,7 @@ namespace Client
                 {
 
                     paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
-                    json =await HttpClientUtil.GetAsync(paramurl);
+                    json = await HttpClientUtil.GetAsync(paramurl);
                     result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
                     if (result.status == 1 && result.data.Count > 0)
@@ -284,7 +288,7 @@ namespace Client
                 _patientVM.p_bar_code = barcode;
                 _patientVM.name = userName;
                 _patientVM.sex = sex;
-                _patientVM.birthday =Convert.ToDateTime(birth);
+                _patientVM.birthday = Convert.ToDateTime(birth);
                 _patientVM.home_tel = tel;
                 _patientVM.marry_code = marrycode;
                 _patientVM.relation_name = relation_name;
@@ -363,6 +367,7 @@ namespace Client
                 log.Error(ex.StackTrace);
             }
         }
+
         public void DeleteSocialNo(string sno)
         {
             var json = "";
@@ -383,6 +388,7 @@ namespace Client
         {
             try
             {
+                txtUserName.Focus();
 
                 SessionHelper.cardno = "";
 
@@ -1197,6 +1203,10 @@ namespace Client
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                SaveData();
             }
         }
 
