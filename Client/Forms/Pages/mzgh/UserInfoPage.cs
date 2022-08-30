@@ -115,7 +115,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -185,7 +185,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -254,7 +254,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -279,7 +279,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -324,7 +324,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -495,7 +495,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -541,7 +541,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -665,7 +665,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -952,7 +952,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -979,7 +979,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1067,7 +1067,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
             return "";
@@ -1145,7 +1145,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1181,7 +1181,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -1228,7 +1228,7 @@ namespace Client.Forms.Pages
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

@@ -59,8 +59,8 @@ namespace Client.Forms.Pages.yhbb
         {
             LoadInfo();
 
-            uiComboDataGridView1.DataGridView.DataSource = SessionHelper.userDics;
-            uiComboDataGridView1.FilterColumnName = "py_code";
+            //uiComboDataGridView1.DataGridView.DataSource = SessionHelper.userDics;
+            //uiComboDataGridView1.FilterColumnName = "py_code";
             
         }
 

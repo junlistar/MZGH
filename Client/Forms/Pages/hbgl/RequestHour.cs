@@ -50,7 +50,7 @@ namespace Client.Forms.Pages.hbgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -122,7 +122,7 @@ namespace Client.Forms.Pages.hbgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -166,7 +166,7 @@ namespace Client.Forms.Pages.hbgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

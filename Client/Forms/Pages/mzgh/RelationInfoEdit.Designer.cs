@@ -99,7 +99,7 @@
             this.txt_tel.Name = "txt_tel";
             this.txt_tel.ShowText = false;
             this.txt_tel.Size = new System.Drawing.Size(179, 29);
-            this.txt_tel.TabIndex = 15;
+            this.txt_tel.TabIndex = 4;
             this.txt_tel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_tel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -141,7 +141,7 @@
             this.cbxRelationCode.Name = "cbxRelationCode";
             this.cbxRelationCode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxRelationCode.Size = new System.Drawing.Size(200, 29);
-            this.cbxRelationCode.TabIndex = 38;
+            this.cbxRelationCode.TabIndex = 1;
             this.cbxRelationCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxRelationCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -189,7 +189,7 @@
             this.cbxSex.Name = "cbxSex";
             this.cbxSex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxSex.Size = new System.Drawing.Size(179, 29);
-            this.cbxSex.TabIndex = 63;
+            this.cbxSex.TabIndex = 2;
             this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -215,7 +215,7 @@
             this.txt_address.Name = "txt_address";
             this.txt_address.ShowText = false;
             this.txt_address.Size = new System.Drawing.Size(491, 29);
-            this.txt_address.TabIndex = 61;
+            this.txt_address.TabIndex = 7;
             this.txt_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -248,7 +248,7 @@
             this.txt_relationname.Name = "txt_relationname";
             this.txt_relationname.ShowText = false;
             this.txt_relationname.Size = new System.Drawing.Size(200, 29);
-            this.txt_relationname.TabIndex = 52;
+            this.txt_relationname.TabIndex = 3;
             this.txt_relationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_relationname.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -275,7 +275,7 @@
             this.txt_birthday.Size = new System.Drawing.Size(177, 29);
             this.txt_birthday.SymbolDropDown = 61555;
             this.txt_birthday.SymbolNormal = 61555;
-            this.txt_birthday.TabIndex = 57;
+            this.txt_birthday.TabIndex = 6;
             this.txt_birthday.Text = "1990-01-01";
             this.txt_birthday.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_birthday.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
@@ -291,7 +291,7 @@
             this.txt_sfzid.Name = "txt_sfzid";
             this.txt_sfzid.ShowText = false;
             this.txt_sfzid.Size = new System.Drawing.Size(200, 29);
-            this.txt_sfzid.TabIndex = 56;
+            this.txt_sfzid.TabIndex = 5;
             this.txt_sfzid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_sfzid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -323,7 +323,7 @@
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 35);
             this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 41;
+            this.btnSave.TabIndex = 8;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

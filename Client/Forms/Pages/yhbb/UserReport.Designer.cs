@@ -137,9 +137,7 @@
             // txt_tims
             // 
             this.txt_tims.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_tims.DoubleValue = 1D;
             this.txt_tims.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_tims.IntValue = 1;
             this.txt_tims.Location = new System.Drawing.Point(346, 41);
             this.txt_tims.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_tims.MinimumSize = new System.Drawing.Size(1, 16);
@@ -147,7 +145,6 @@
             this.txt_tims.ShowText = false;
             this.txt_tims.Size = new System.Drawing.Size(150, 29);
             this.txt_tims.TabIndex = 2;
-            this.txt_tims.Text = "1";
             this.txt_tims.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_tims.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txt_tims.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

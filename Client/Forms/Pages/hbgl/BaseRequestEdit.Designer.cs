@@ -202,7 +202,6 @@
             // cbxHaobie
             // 
             this.cbxHaobie.DataSource = null;
-            this.cbxHaobie.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxHaobie.FillColor = System.Drawing.Color.White;
             this.cbxHaobie.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxHaobie.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -332,7 +331,6 @@
             // cbxDay
             // 
             this.cbxDay.DataSource = null;
-            this.cbxDay.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxDay.FillColor = System.Drawing.Color.White;
             this.cbxDay.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxDay.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -447,7 +445,6 @@
             // cbxSXW
             // 
             this.cbxSXW.DataSource = null;
-            this.cbxSXW.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxSXW.FillColor = System.Drawing.Color.White;
             this.cbxSXW.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxSXW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

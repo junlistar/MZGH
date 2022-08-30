@@ -14,6 +14,7 @@ using Client.ClassLib;
 using System.Net.Http.Headers;
 using Client.ViewModel;
 using log4net;
+using System.Runtime.InteropServices;
 
 namespace Client
 {
@@ -56,7 +57,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -364,7 +365,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -388,7 +389,6 @@ namespace Client
         {
             try
             {
-                txtUserName.Focus();
 
                 SessionHelper.cardno = "";
 
@@ -451,16 +451,32 @@ namespace Client
                     LoadUserInfo(barCode);
                 }
                 BindEvent();
-
+                 
+                txtUserName.Focus(); this.ActiveControl = this.txtUserName;
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Winapi)]
+        internal static extern IntPtr GetFocus();
 
+        private Control GetFocusedControl()
+        {
+            Control focusedControl = null;
+            // To get hold of the focused control:
+            IntPtr focusedHandle = GetFocus();
+            if (focusedHandle != IntPtr.Zero)
+                // Note that if the focused Control is not a .Net control, then this will return null.
+                focusedControl = Control.FromHandle(focusedHandle);
+
+            MessageBox.Show(focusedControl.Name);
+            return focusedControl;
+        }
 
 
         public void InitUI()
@@ -572,7 +588,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -677,7 +693,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -720,7 +736,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -811,7 +827,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -879,7 +895,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -904,7 +920,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -973,7 +989,7 @@ namespace Client
         //    catch (Exception ex)
         //    {
         //        MessageBox.Show(ex.Message);
-        //        log.Error(ex.StackTrace);
+        //        log.Error(ex.ToString());
         //    }
         //}
 
@@ -998,7 +1014,7 @@ namespace Client
         //    catch (Exception ex)
         //    {
         //        MessageBox.Show(ex.Message);
-        //        log.Error(ex.StackTrace);
+        //        log.Error(ex.ToString());
         //    }
         //}
         //private void txtShenfen_Leave(object sender, EventArgs e)
@@ -1068,7 +1084,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1103,7 +1119,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1163,7 +1179,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1194,7 +1210,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1218,6 +1234,14 @@ namespace Client
         private void uiGroupBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbxmarrycode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode== Keys.Enter)
+            {
+               // e.Handled = true;
+            }
         }
     }
 }

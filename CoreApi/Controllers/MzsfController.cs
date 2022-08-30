@@ -478,7 +478,7 @@ namespace CoreApi.Controllers
         
         public ResponseResult<FPRegistration> GetFPRegistrationData(string patient_id, int ledger_sn, int admiss_times)
         {
-            Log.Information($"AddFpData,{patient_id},{ledger_sn},{admiss_times}");
+            Log.Information($"GetFPRegistrationData,{patient_id},{ledger_sn},{admiss_times}");
             try
             {
                 return _fpDataRepository.GetFPRegistrationData(patient_id, ledger_sn, admiss_times);

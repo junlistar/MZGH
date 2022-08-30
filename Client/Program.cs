@@ -64,7 +64,7 @@ namespace Client
                 str.Append($"【对象名称】：{ex.Source}{Environment.NewLine}");
                 str.Append($"【异常类型】：{ex.GetType().Name}{Environment.NewLine}");
                 str.Append($"【详细信息】：{ex.Message}{Environment.NewLine}");
-                str.Append($"【堆栈调用】：{ex.StackTrace}");
+                str.Append($"【堆栈调用】：{ex.ToString()}");
             }
             else
             {

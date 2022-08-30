@@ -394,7 +394,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -444,7 +444,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void dgvys_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -468,7 +468,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -517,7 +517,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -542,7 +542,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -710,7 +710,7 @@ namespace Client
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
-                        log.Error(ex.StackTrace);
+                        log.Error(ex.ToString());
                     }
                 }
             }
@@ -774,7 +774,7 @@ namespace Client
                 catch (Exception ex)
                 {
                     UIMessageTip.ShowError(ex.ToString());
-                    log.Error(ex.StackTrace);
+                    log.Error(ex.ToString());
                 }
             }
         }
@@ -812,7 +812,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -859,7 +859,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -908,7 +908,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -954,7 +954,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void Dgvys_KeyDown(object sender, KeyEventArgs e)
@@ -1227,7 +1227,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }  
         }
 

@@ -42,13 +42,13 @@ namespace Client.Forms.Pages.yhbb
                 };
 
                 var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
-                 
+
                 var json = "";
                 var paramurl = string.Format($"/api/qxgl/GetXTUserReportsByGroupId?{param}");
 
                 if (SessionHelper.uservm.user_mi == "00000")
-                { 
-                    param = $"subsys_id={d.subsys_id}"; 
+                {
+                    param = $"subsys_id={d.subsys_id}";
                     paramurl = string.Format($"/api/qxgl/GetXTUserReports?{param}");
                 }
 
@@ -64,7 +64,7 @@ namespace Client.Forms.Pages.yhbb
                     {
                         if (item.parent_id == null || result.data.Where(p => p.rep_id == item.parent_id).Count() == 0)
                         {
-                            tv_reports.Nodes.Add(item.rep_id, item.rep_name,item.report_code);
+                            tv_reports.Nodes.Add(item.rep_id, item.rep_name, item.report_code);
 
                         }
                     }
@@ -125,11 +125,11 @@ namespace Client.Forms.Pages.yhbb
                 lblTitle.Text = $"{tv_reports.SelectedNode.Text}";
                 lblpnltile.Text = $"报表编号：{tv_reports.SelectedNode.ImageKey}";
 
-                uiPanel1.Text= $"{tv_reports.SelectedNode.Text}";
+                uiPanel1.Text = $"{tv_reports.SelectedNode.Text}";
 
                 _report_code = tv_reports.SelectedNode.ImageKey;
 
-                //SetDefaultParams();
+                SetDefaultParams();
             }
             catch (Exception)
             {
@@ -147,44 +147,44 @@ namespace Client.Forms.Pages.yhbb
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<ReportParamVM>>>(responseJson);
                 reportParamVMs = result.data;
-                switch (_report_code)
-                {
-                    case "220001":
-                        lbl_times.Text = "挂号次数";
-                        foreach (var item in reportParamVMs)
-                        {
-                            if (item.param_name == "patient_id")
-                            {
-                                txt_patientid.Text = item.param_defaultvalue;
-                            }
-                            else if (item.param_name == "times")
-                            {
-                                txt_tims.Text = item.param_defaultvalue;
-                            }
-                        }
-                        break;
-                    case "220007":
-                        lbl_times.Text = "缴费次数";
-                        foreach (var item in result.data)
-                        {
-                            if (item.param_name == "patient_id")
-                            {
-                                txt_patientid.Text = item.param_defaultvalue;
-                            }
-                            else if (item.param_name == "ledger_sn")
-                            {
-                                txt_tims.Text = item.param_defaultvalue;
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                //switch (_report_code)
+                //{
+                //    case "220001":
+                //        lbl_times.Text = "挂号次数";
+                //        foreach (var item in reportParamVMs)
+                //        {
+                //            if (item.param_name == "patient_id")
+                //            {
+                //                txt_patientid.Text = item.param_defaultvalue;
+                //            }
+                //            else if (item.param_name == "times")
+                //            {
+                //                txt_tims.Text = item.param_defaultvalue;
+                //            }
+                //        }
+                //        break;
+                //    case "220007":
+                //        lbl_times.Text = "缴费次数";
+                //        foreach (var item in result.data)
+                //        {
+                //            if (item.param_name == "patient_id")
+                //            {
+                //                txt_patientid.Text = item.param_defaultvalue;
+                //            }
+                //            else if (item.param_name == "ledger_sn")
+                //            {
+                //                txt_tims.Text = item.param_defaultvalue;
+                //            }
+                //        }
+                //        break;
+                //    default:
+                //        break;
+                //}
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -230,23 +230,31 @@ namespace Client.Forms.Pages.yhbb
         ReportDataVM rdvm;
         //初始化报表
         private void InitializeReport(string RptMode)
-        {  
-            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
-            var json = HttpClientUtil.Get(paramurl);
-            var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
+        {
+            try
+            { 
+                var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={_report_code}");
+                var json = HttpClientUtil.Get(paramurl);
+                var resp = WebApiHelper.DeserializeObject<ResponseResult<ReportDataVM>>(json);
 
-            if (resp.status == 1)
-            {
-                rdvm = resp.data;
+                if (resp.status == 1)
+                {
+                    rdvm = resp.data;
+                }
+                else
+                {
+                    MessageBox.Show(resp.message);
+                    log.Error(resp.message);
+                    return;
+                }
+                RegisterDesignerEvents();
+                DesignReport(RptMode);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(resp.message);
-                log.Error(resp.message);
-                return;
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.Message);
             }
-            RegisterDesignerEvents();
-            DesignReport(RptMode);
         }
         //菜单事件注册
         private void RegisterDesignerEvents()
@@ -417,7 +425,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

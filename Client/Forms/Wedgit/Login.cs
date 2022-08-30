@@ -79,9 +79,23 @@ namespace Client.Forms.Wedgit
             }
             catch (Exception ex)
             {
-
-                log.Error(ex.StackTrace);
-                UIMessageTip.ShowError(ex.Message); 
+                if (ex.InnerException!=null)
+                {
+                    log.Error(ex.ToString());
+                    if (ex.InnerException.InnerException!=null)
+                    { 
+                        UIMessageTip.ShowError(ex.InnerException.InnerException.Message);
+                    }
+                    else
+                    { 
+                        UIMessageTip.ShowError(ex.InnerException.Message);
+                    }
+                }
+                else
+                { 
+                    log.Error(ex.ToString());
+                    UIMessageTip.ShowError(ex.Message);
+                }
             }
         }
 

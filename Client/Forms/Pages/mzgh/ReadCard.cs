@@ -125,7 +125,7 @@ namespace Client
             catch (Exception ex)
             {
                 log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + ex.StackTrace);
+                log.Debug("接口数据：" + ex.ToString());
 
             }
 

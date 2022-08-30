@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Client.ClassLib
 {
-    public class HttpClientUtil 
-    { 
-        public static string Get(string url) 
+    public class HttpClientUtil
+    {
+        public static string Get(string url)
         {
-
             var http = HttpClientFactory.GetHttpClient();
 
             var response1 = http.GetAsync(url).Result;
@@ -45,7 +44,7 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static string PostForm(string url, string data) 
+        public static string PostForm(string url, string data)
         {
 
             var http = HttpClientFactory.GetHttpClient();
@@ -96,7 +95,7 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static string PostJSON(string url, object data) 
+        public static string PostJSON(string url, object data)
         {
             //调用实例
             //var body = new
@@ -114,9 +113,9 @@ namespace Client.ClassLib
 
             return response.Content.ReadAsStringAsync().Result;
 
-        }  
+        }
     }
-    public class HttpClientFactory 
+    public class HttpClientFactory
     {
 
         private static HttpClient _httpClient = null;
@@ -135,14 +134,14 @@ namespace Client.ClassLib
 
         /// </summary>
 
-        static HttpClientFactory() 
+        static HttpClientFactory()
         {
 
             _httpClient = new System.Net.Http.HttpClient(new HttpClientHandler());
 
-            _httpClient.Timeout = new TimeSpan(0, 0, 30);
+            _httpClient.Timeout = new TimeSpan(0, 0, 40);
 
-            _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive"); 
+            _httpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
         }
 
 
@@ -155,7 +154,7 @@ namespace Client.ClassLib
 
         /// <returns></returns>
 
-        public static HttpClient GetHttpClient() 
+        public static HttpClient GetHttpClient()
         {
 
             return _httpClient;

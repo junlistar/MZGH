@@ -315,7 +315,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -376,7 +376,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -437,7 +437,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -532,7 +532,9 @@ namespace Client
         }
         public void XianJinTuiHao()
         {
-            if (this.dgvDeposit.SelectedIndex < 0)
+            var row_index = dgvDeposit.SelectedIndex;
+
+            if (row_index < 0)
             {
                 UIMessageTip.ShowWarning("没有记录!");
                 return;
@@ -540,16 +542,32 @@ namespace Client
 
             try
             {
+                var row = dgvDeposit.Rows[row_index];
                 GhDepositVM vm = new GhDepositVM();
-                vm.sname = this.dgvDeposit.Rows[dgvDeposit.SelectedIndex].Cells["visit_flag_name"].Value.ToString();
+                if (row.Cells["visit_flag_name"].Value == null)
+                {
+                    UIMessageTip.ShowWarning("此记录不能进行退号操作!");
+                    return;
+                }
+                vm.sname = row.Cells["visit_flag_name"].Value.ToString();
                 if (vm.sname == "退号")
                 {
                     UIMessageTip.ShowWarning("此记录已经退号!");
                     return;
                 }
-                if (dtprq.Value.Date < DateTime.Now.Date)
+                else if (vm.sname == "已就诊")
                 {
-                    UIMessageTip.ShowWarning("此记录已过期，不能进行退号操作!");
+                    UIMessageTip.ShowWarning("此记录已经就诊!");
+                    return;
+                }
+                else if (vm.sname == "接诊")
+                {
+                    UIMessageTip.ShowWarning("此记录已经接诊!");
+                    return;
+                }
+                else if (vm.sname == "取消分诊")
+                {
+                    UIMessageTip.ShowWarning("此记录已经退号!");
                     return;
                 }
 
@@ -619,7 +637,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void dgvDeposit_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -732,7 +750,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

@@ -73,7 +73,7 @@ namespace Client.Forms.Pages.zfgl
             catch (Exception ex)
             {
                 log.Error("请求接口数据出错：" + ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
             finally
             {

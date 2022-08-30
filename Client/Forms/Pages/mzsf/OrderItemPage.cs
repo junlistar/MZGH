@@ -704,12 +704,7 @@ namespace Mzsf.Forms.Pages
                 if (dgvOrderDetail.SelectedRows.Count > 0)
                 {
                     //dgv.Rows.Remove(dgv.SelectedRows[0]);
-                    dgvOrderDetail.Rows.RemoveAt(dgvOrderDetail.SelectedIndex);
-
-                    if (dgvOrderDetail.Rows.Count==0)
-                    {
-                        AddNewRow();
-                    }
+                    
 
                     var row = dgvOrderDetail.Rows[dgvOrderDetail.SelectedIndex];
 
@@ -733,6 +728,32 @@ namespace Mzsf.Forms.Pages
                             setData();
                             break;
                         }
+                    }
+
+                    dgvOrderDetail.Rows.RemoveAt(dgvOrderDetail.SelectedIndex);
+
+                    if (dgvOrderDetail.Rows.Count == 0)
+                    {
+                        AddNewRow();
+                    }
+                    else
+                    {
+                        //更新显示序号
+                        int _index = 1;
+                        foreach (DataGridViewRow item in dgvOrderDetail.Rows)
+                        {
+                            var _code = item.Cells["code"].Value;
+                            if (_code == null)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                item.Cells["item_no"].Value = _index++;
+                            }
+                        }
+                        dgvOrderDetail.SelectedIndex = 0;
+                        BindSelectedRowData(0);
                     }
 
                 }

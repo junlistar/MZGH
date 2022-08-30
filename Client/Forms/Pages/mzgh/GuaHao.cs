@@ -105,7 +105,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -179,7 +179,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -199,7 +199,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -331,7 +331,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -439,7 +439,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -586,8 +586,13 @@ namespace Client
                         {
                             GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
                             SessionHelper.do_gh_print = false;
-                            GhPrint ghprint = new GhPrint();
-                            ghprint.Show();
+
+                            Task.Run(() =>
+                            {
+                                GhPrint ghprint = new GhPrint();
+                                ghprint.Show();
+                            });
+
                         }
 
                     }
@@ -596,7 +601,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -626,7 +631,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
             return false;
         }
@@ -729,7 +734,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -897,7 +902,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -928,7 +933,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -950,7 +955,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -1122,7 +1127,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -1245,17 +1250,17 @@ namespace Client
                 if (result.status == 1 && result.data.Count == 0)
                 {
                     //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
-                    if (paramurl!=barcode_url)
+                    if (paramurl != barcode_url)
                     {
                         json = HttpClientUtil.Get(paramurl);
                         result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                     }
-                } 
+                }
 
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
                     //默认取最大的patient_id数据
-                    var userInfo = result.data.OrderByDescending(p=>p.patient_id).FirstOrDefault();
+                    var userInfo = result.data.OrderByDescending(p => p.patient_id).FirstOrDefault();
 
                     #region 如果身份证查询到多条记录 (废弃，默认取最大的那条记录)
                     //if (result.data.Count > 1)
@@ -1313,7 +1318,7 @@ namespace Client
                         else
                         {
                             log.Error(responseJson.message);
-                        } 
+                        }
                     }
                 }
                 else
@@ -1323,7 +1328,7 @@ namespace Client
 
                     lblMsg.Text = "没有查询到数据";
                     lblMsg.Show();
-                     
+
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                     {
@@ -1338,14 +1343,14 @@ namespace Client
                         this.txtCode.Text = _hicno;
                         SearchUser();
                     }
-                } 
+                }
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
-            } 
-        } 
+                log.Error(ex.ToString());
+            }
+        }
 
         public async void ReloadUserInfo()
         {
@@ -1358,19 +1363,19 @@ namespace Client
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
                 {
-                    BindUserInfo(result.data[0]); 
+                    BindUserInfo(result.data[0]);
                 }
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         public void BindUserInfo(PatientVM userInfo)
         {
             try
-            { 
+            {
                 PatientVM = userInfo;
 
                 btnEditUser1.TagString = userInfo.patient_id.ToString(); //btnEditUser1.Show();
@@ -1466,7 +1471,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -1504,7 +1509,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -1589,7 +1594,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
             return "";
@@ -1670,7 +1675,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

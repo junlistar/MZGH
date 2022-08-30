@@ -217,7 +217,6 @@
             // cbxHaobie
             // 
             this.cbxHaobie.DataSource = null;
-            this.cbxHaobie.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxHaobie.FillColor = System.Drawing.Color.White;
             this.cbxHaobie.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxHaobie.Items.AddRange(new object[] {
@@ -236,7 +235,6 @@
             // cbxWinNo
             // 
             this.cbxWinNo.DataSource = null;
-            this.cbxWinNo.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxWinNo.FillColor = System.Drawing.Color.White;
             this.cbxWinNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxWinNo.Items.AddRange(new object[] {
@@ -360,7 +358,6 @@
             // cbxOpenFlag
             // 
             this.cbxOpenFlag.DataSource = null;
-            this.cbxOpenFlag.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxOpenFlag.FillColor = System.Drawing.Color.White;
             this.cbxOpenFlag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxOpenFlag.Items.AddRange(new object[] {
@@ -390,7 +387,6 @@
             // cbxSXW
             // 
             this.cbxSXW.DataSource = null;
-            this.cbxSXW.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxSXW.FillColor = System.Drawing.Color.White;
             this.cbxSXW.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxSXW.Items.AddRange(new object[] {

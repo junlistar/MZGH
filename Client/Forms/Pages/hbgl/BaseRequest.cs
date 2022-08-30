@@ -378,7 +378,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -428,7 +428,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void dgvys_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -452,7 +452,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -501,7 +501,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -526,7 +526,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -697,7 +697,7 @@ namespace Client
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
-                        log.Error(ex.StackTrace);
+                        log.Error(ex.ToString());
                     }
                 }
             }
@@ -761,7 +761,7 @@ namespace Client
                 catch (Exception ex)
                 {
                     UIMessageTip.ShowError(ex.ToString());
-                    log.Error(ex.StackTrace);
+                    log.Error(ex.ToString());
                 }
             }
         }
@@ -799,7 +799,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -846,7 +846,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -895,7 +895,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -941,7 +941,7 @@ namespace Client
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void Dgvys_KeyDown(object sender, KeyEventArgs e)
@@ -1009,16 +1009,14 @@ namespace Client
 
         private void dgvlist_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            MessageBox.Show("e.RowIndex" + e.RowIndex.ToString());
-            MessageBox.Show("e.ColumnIndex" + e.ColumnIndex.ToString());
+            //MessageBox.Show("e.RowIndex" + e.RowIndex.ToString());
+            //MessageBox.Show("e.ColumnIndex" + e.ColumnIndex.ToString());
         }
 
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
-            {
-
-
+            { 
                 if (e.RowIndex != -1 || e.ColumnIndex == -1)
                 {
                     return;

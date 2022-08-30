@@ -104,7 +104,7 @@ namespace Client.Forms.Pages.cwgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -145,7 +145,7 @@ namespace Client.Forms.Pages.cwgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         //菜单事件注册
@@ -199,7 +199,7 @@ namespace Client.Forms.Pages.cwgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         Report TargetReport;
@@ -324,7 +324,7 @@ namespace Client.Forms.Pages.cwgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -380,7 +380,7 @@ namespace Client.Forms.Pages.cwgl
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

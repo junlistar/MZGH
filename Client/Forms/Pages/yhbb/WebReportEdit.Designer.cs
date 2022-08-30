@@ -37,7 +37,6 @@
             this.btnCancel = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.label4 = new System.Windows.Forms.Label();
-            this.uiComboDataGridView1 = new Sunny.UI.UIComboDataGridView();
             this.chk_openflag = new Sunny.UI.UICheckBox();
             this.SuspendLayout();
             // 
@@ -151,22 +150,6 @@
             this.label4.TabIndex = 16;
             this.label4.Text = "是否启用";
             // 
-            // uiComboDataGridView1
-            // 
-            this.uiComboDataGridView1.FillColor = System.Drawing.Color.White;
-            this.uiComboDataGridView1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiComboDataGridView1.Location = new System.Drawing.Point(154, 236);
-            this.uiComboDataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiComboDataGridView1.MinimumSize = new System.Drawing.Size(63, 0);
-            this.uiComboDataGridView1.Name = "uiComboDataGridView1";
-            this.uiComboDataGridView1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.uiComboDataGridView1.ShowFilter = true;
-            this.uiComboDataGridView1.Size = new System.Drawing.Size(150, 29);
-            this.uiComboDataGridView1.TabIndex = 18;
-            this.uiComboDataGridView1.Text = "uiComboDataGridView1";
-            this.uiComboDataGridView1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiComboDataGridView1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // chk_openflag
             // 
             this.chk_openflag.Checked = true;
@@ -185,7 +168,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(653, 296);
             this.Controls.Add(this.chk_openflag);
-            this.Controls.Add(this.uiComboDataGridView1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -219,7 +201,6 @@
         private Sunny.UI.UISymbolButton btnCancel;
         private Sunny.UI.UISymbolButton btnSave;
         private System.Windows.Forms.Label label4;
-        private Sunny.UI.UIComboDataGridView uiComboDataGridView1;
         private Sunny.UI.UICheckBox chk_openflag;
     }
 }

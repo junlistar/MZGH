@@ -60,7 +60,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void Dgvghy_KeyDown(object sender, KeyEventArgs e)
@@ -135,7 +135,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
         private void dgvghy_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -161,7 +161,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -238,7 +238,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -419,7 +419,7 @@ namespace Client.Forms.Pages.yhbb
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

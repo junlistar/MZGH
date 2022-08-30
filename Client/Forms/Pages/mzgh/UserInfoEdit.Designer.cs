@@ -301,7 +301,7 @@
             this.txtpatientid.ShowText = false;
             this.txtpatientid.Size = new System.Drawing.Size(200, 29);
             this.txtpatientid.Style = Sunny.UI.UIStyle.Green;
-            this.txtpatientid.TabIndex = 1;
+            this.txtpatientid.TabIndex = 1111;
             this.txtpatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtpatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -359,6 +359,7 @@
             this.cbxmarrycode.TabIndex = 8;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.cbxmarrycode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxmarrycode_KeyDown);
             // 
             // uiGroupBox1
             // 
@@ -412,7 +413,6 @@
             // cbxSex
             // 
             this.cbxSex.DataSource = null;
-            this.cbxSex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxSex.FillColor = System.Drawing.Color.White;
             this.cbxSex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxSex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -507,7 +507,6 @@
             // cbxShenfen
             // 
             this.cbxShenfen.DataSource = null;
-            this.cbxShenfen.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxShenfen.FillColor = System.Drawing.Color.White;
             this.cbxShenfen.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxShenfen.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -700,7 +699,6 @@
             // cbxRelation
             // 
             this.cbxRelation.DataSource = null;
-            this.cbxRelation.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxRelation.FillColor = System.Drawing.Color.White;
             this.cbxRelation.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxRelation.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

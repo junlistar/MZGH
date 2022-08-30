@@ -161,7 +161,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -229,7 +229,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
             return false;
         }
@@ -278,7 +278,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -462,7 +462,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -706,7 +706,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
             return false;
         }
@@ -814,7 +814,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -868,7 +868,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
@@ -965,16 +965,14 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 
         public void CreateElecBill(int new_ledger_sn)
         {
             try
-            {
-
-
+            { 
 
                 string ip = ConfigurationManager.AppSettings["ip"];
                 string port = ConfigurationManager.AppSettings["port"];
@@ -1089,7 +1087,9 @@ namespace Client
 
                 //List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
                 string getDataUrl = string.Format($"/api/mzsf/GetFPRegistrationData?patient_id={patientId}&ledger_sn={new_ledger_sn}&admiss_times={1}");
+                log.Debug("getDataUrl：" + getDataUrl);
                 var json = HttpClientUtil.Get(getDataUrl);
+                log.Debug("获取数据："+json);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<FPRegistrationVM>>(json);
                 if (result.status != 1)
                 {
@@ -1156,13 +1156,13 @@ namespace Client
                 //    listDetail = electBillListDetails,
                 //    remark = _remark
                 //};
-                log.Debug("_data:" + _data);
+               // log.Debug("_data:" + _data);
                 var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
 
-                log.Debug("stringA:" + stringA);
+                //log.Debug("stringA:" + stringA);
                 var stringSignTemp = stringA + $"&key={key}&version={version}";
 
-                log.Debug("stringSignTemp:" + stringSignTemp);
+                //log.Debug("stringSignTemp:" + stringSignTemp);
 
                 var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
 
@@ -1222,7 +1222,7 @@ namespace Client
                     }
 
 
-                    log.Error(_fpdata);
+                    //log.Error(_fpdata);
 
 
                 }
@@ -1236,7 +1236,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }

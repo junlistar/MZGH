@@ -56,8 +56,10 @@ namespace Client.Forms.Pages.zfgl
                 {
                    var ds = result.data;
                     dgv_paylist.DataSource = ds;
-                    dgv_paylist.AutoResizeColumns();
-                    dgv_paylist.AutoGenerateColumns = false;
+                    if (ds!=null && ds.Count>0)
+                    {
+                        dgv_paylist.AutoResizeColumns();
+                    }
                 }
                 else
                 {
@@ -68,7 +70,7 @@ namespace Client.Forms.Pages.zfgl
             catch (Exception ex)
             {
                 log.Error("请求接口数据出错：" + ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
             finally
             {
@@ -81,6 +83,7 @@ namespace Client.Forms.Pages.zfgl
             txtBeginDate.Value = DateTime.Now;
             txtEndDate.Value = DateTime.Now;
             cbxRefundStatus.Text = "全部";
+            dgv_paylist.AutoGenerateColumns = false;
         }
 
         private void btnUpdateStatus_Click(object sender, EventArgs e)

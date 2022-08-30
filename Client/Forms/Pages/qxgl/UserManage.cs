@@ -618,7 +618,7 @@ namespace Client.Forms.Pages.qxgl
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }

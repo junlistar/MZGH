@@ -58,7 +58,7 @@ namespace Client.Forms.Pages.mzgh
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
         }
 

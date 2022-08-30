@@ -532,7 +532,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
         }
@@ -735,7 +735,7 @@ namespace Client
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
-                log.Error(ex.StackTrace);
+                log.Error(ex.ToString());
             }
 
             //SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
@@ -910,8 +910,10 @@ namespace Client
 
         private void FHeaderAsideMainFooter_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-
+            //if (MessageBox.Show("确定退出程序吗？","确认退出", MessageBoxButtons.OKCancel) != DialogResult.OK) 
+            //{
+            //    e.Cancel = true;
+            //}
             if (!UIMessageBox.ShowAsk("确定退出程序吗?"))
             {
                 e.Cancel = true;
