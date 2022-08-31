@@ -44,6 +44,9 @@
     <None Update="Properties\launchSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_mzpatientybkinfo_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mz_webreport_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

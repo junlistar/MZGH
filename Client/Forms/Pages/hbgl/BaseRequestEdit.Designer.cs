@@ -408,7 +408,6 @@
             // cbxOpenFlag
             // 
             this.cbxOpenFlag.DataSource = null;
-            this.cbxOpenFlag.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxOpenFlag.FillColor = System.Drawing.Color.White;
             this.cbxOpenFlag.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxOpenFlag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

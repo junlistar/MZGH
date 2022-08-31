@@ -159,12 +159,13 @@ namespace Client
                         }
 
 
-                        switch (data.window_no)
-                        {
-                            case 0: cbxWinNo.Text = "所有窗口"; break;
-                            default:
-                                data.window_no.ToString(); break;
-                        }
+                        //switch (data.window_no)
+                        //{
+                        //    case 0: cbxWinNo.Text = "所有窗口"; break;
+                        //    default:
+                        //        data.window_no.ToString(); break;
+                        //}
+                        txt_workroom.Text = data.window_no.ToString();
                         _temp_flag = data.temp_flag;
 
                         txtks.TextChanged += txtks_TextChanged;
@@ -446,6 +447,11 @@ namespace Client
                 int open_flag = 1;
                 int total_num = 0;
 
+                if (!string.IsNullOrEmpty(txt_workroom.Text))
+                {
+                    window_no = int.Parse(txt_workroom.Text);
+                }
+
                 var request_date = txtDate.Text;
                 int limit_appoint_percent = 0;
                 if (!string.IsNullOrWhiteSpace(txt_limit.Text))
@@ -660,6 +666,8 @@ namespace Client
                     var ev = new DataGridViewCellEventArgs(0, dgvys.SelectedIndex);
 
                     dgvys_CellContentClick(sender, ev);
+
+                    e.Handled = true;
                 }
             }
         }
@@ -672,6 +680,16 @@ namespace Client
             }
             else if (e.KeyCode == Keys.Enter)
             {
+
+                if (dgv.Focused || dgvzk.Focused || dgvys.Focused ||txtks.Focused || txtzk.Focused||txtDoct.Focused)
+                {
+                    return;
+                }
+
+                //if (txtks.Focused || txtzk.Focused || txtDoct.Focused)
+                //{
+
+                //}
                 SaveData();
             }
         }

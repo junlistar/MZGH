@@ -23,4 +23,4 @@ from gh_request b left join a_employee_mi a on b.doctor_sn = a.emp_sn
      left join zd_unit_code u2 on b.group_sn = u2.unit_sn 
      inner join gh_zd_clinic_type  c on b.clinic_type = c.code 
      inner join gh_zd_request_type r on b.req_type = r.code  
-where b.request_date between @P1 and @P2 
+where b.request_date between @P1 and @P2  and b.delete_flag is null

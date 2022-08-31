@@ -188,7 +188,7 @@ namespace Client.Forms.Wedgit
                         }
                         paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
 
-                        log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                        //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
                         if (ds_result.status == 1)

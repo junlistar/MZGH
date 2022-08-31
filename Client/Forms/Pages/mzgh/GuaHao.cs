@@ -1219,11 +1219,12 @@ namespace Client
             #region 根据数据长度判断查询
 
             //如果点击的是身份证或医保卡，择查询身份证信息
-            if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
-            {
-                paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
-            }
-            else if (input_str.Length == 11)
+            //if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+            //{
+            //    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
+            //}
+            //else 
+            if (input_str.Length == 11)
             {
                 //如果长度为12，则查询patient_id 
                 paramurl = string.Format($"/api/GuaHao/GetPatientByTel?tel={input_str}");
@@ -1252,7 +1253,7 @@ namespace Client
                     //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
                     if (paramurl != barcode_url)
                     {
-                        json = HttpClientUtil.Get(paramurl);
+                        json = HttpClientUtil.Get(barcode_url);
                         result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                     }
                 }
@@ -1332,16 +1333,16 @@ namespace Client
                     //身份证
                     if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
                     {
-                        ////自动打开创建新用户窗口
-                        //UserInfoEdit ue = new UserInfoEdit("", null);
-                        //ue.FormClosed += Ue_FormClosed;
-                        //ue.ShowDialog();
+                        //自动打开创建新用户窗口
+                        UserInfoEdit ue = new UserInfoEdit("", null);
+                        ue.FormClosed += Ue_FormClosed;
+                        ue.ShowDialog();
 
-                        //自动创建一条用户信息
-                        string _hicno = AutoAddUserInfo();
+                        ////自动创建一条用户信息
+                        //string _hicno = AutoAddUserInfo();
 
-                        this.txtCode.Text = _hicno;
-                        SearchUser();
+                        //this.txtCode.Text = _hicno;
+                        //SearchUser();
                     }
                 }
             }
@@ -1573,6 +1574,38 @@ namespace Client
                     charge_type = "01",
                     opera = SessionHelper.uservm.user_mi
                 };
+
+
+                //var _patientVM = new PatientVM();
+                //_patientVM.patient_id = _pid;
+                //_patientVM.hic_no = _hicno;
+                //_patientVM.social_no = _hicno;
+                //_patientVM.addition_no1 = "";
+                //_patientVM.p_bar_code = _pid;
+                //_patientVM.name = _name;
+                //_patientVM.sex = _sex;
+                //_patientVM.birthday = Convert.ToDateTime(_birth);
+                //_patientVM.home_tel = tel;
+                //_patientVM.marry_code = marrycode;
+                //_patientVM.relation_name = relation_name;
+                //if (relation_code != null)
+                //{
+                //    _patientVM.relation_code = relation_code.ToString();
+                //}
+                //_patientVM.home_district = district;
+                //_patientVM.home_street = street;
+                //_patientVM.response_type = response_type.ToString();
+                //_patientVM.charge_type = charge_type.ToString();
+                //_patientVM.occupation_type = zhiye;
+                //_patientVM.employer_name = employername;
+
+                //_patientVM.update_opera = _opera;
+
+                //_patientVM.relation_addr = txt_rel_address.Text;
+                //_patientVM.relation_birth = txt_rel_birth.Text;
+                //_patientVM.relation_sfzid = txt_rel_sfzid.Text;
+                //_patientVM.relation_tel = txt_rel_tel.Text;
+                //_patientVM.relation_sex = cbx_relsex.Text == "男" ? "1" : "2";
                 Task<HttpResponseMessage> task = null;
 
                 paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&opera={d.opera}");

@@ -795,14 +795,14 @@ namespace Client
 
         public void EditClick()
         {
-            if (dgvlist.Rows.Count>0)
+            if (dgvlist.Rows.Count > 0)
             {
                 var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
                 var _colIndex = dgvlist.SelectedCells[0].ColumnIndex;
 
                 Edit(_rowIndex, _colIndex);
-            } 
-              
+            }
+
         }
 
 
@@ -1457,6 +1457,51 @@ namespace Client
 
         private void uiGroupBox1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+            var index = dgvlist.SelectedIndex;
+
+            if (index == -1)
+            {
+                UIMessageTip.Show("没有选择数据行");
+                return;
+            }
+
+            try
+            { 
+                var record_sn = dgvlist.Rows[index].Cells["sn"].Value.ToString();
+ 
+                var d = new
+                {
+                    record_sn = record_sn,
+                };
+                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var paramurl = string.Format($"/api/GuaHao/DeleteGHRequest?record_sn={d.record_sn}");
+
+                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.ShowOk("操作成功!");
+                    return;
+                }
+                else
+                {
+                    UIMessageTip.ShowError("查询失败!");
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
 
         }
     }

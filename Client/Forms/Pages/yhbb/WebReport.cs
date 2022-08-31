@@ -7,8 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
 using Client.ClassLib;
 using Client.ViewModel;
+using Gecko;
 using Sunny.UI;
 
 namespace Client.Forms.Pages.yhbb
@@ -58,7 +61,21 @@ namespace Client.Forms.Pages.yhbb
 
                 url = _obj.SelectedNode.Tag.ToString();
 
-                webBrowser1.Url = new Uri(url); 
+                var geckoWebBrowser = new GeckoWebBrowser { Dock = DockStyle.Fill };
+
+                pnl_browser.Controls.Add(geckoWebBrowser);
+                geckoWebBrowser.Navigate(url);
+
+
+                //WebBrowser = new ChromiumWebBrowser(url);
+                ////{
+                ////    // 填充整个父控件
+                ////    Dock = DockStyle.Fill
+                ////};
+                //WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
+                //// 添加到窗口的控件列表中
+                //pnl_browser.Controls.Clear();
+                //this.pnl_browser.Controls.Add(WebBrowser);
             }
             catch (Exception ex)
             {
@@ -81,10 +98,43 @@ namespace Client.Forms.Pages.yhbb
             webReportEdit.ShowDialog();
             LoadReportList();
         }
-
-        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        ChromiumWebBrowser WebBrowser;
+        private void WebReport_Load(object sender, EventArgs e)
         {
+            var settings = new CefSettings()
+            {
+                UserAgent = "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Mobile Safari/537.36",
+            };
 
+            //Perform dependency check to make sure all relevant resources are in our output directory.
+            //Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
+
+            // cefsharp提供的浏览器控件，一般用它充满窗口就搞定了
+            //WebBrowser = new ChromiumWebBrowser("http://www.163.com")
+            //{
+            //    // 填充整个父控件
+            //    Dock = DockStyle.Fill
+            //};
+           // WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
+
+        }
+        private void FrameEndFunc(object sender, FrameLoadEndEventArgs e)
+        {
+            //MessageBox.Show(WebBrowser.GetSourceAsync().Result);
+            //this.BeginInvoke(new Action(() =>
+            //{
+            //    String html = WebBrowser.GetSourceAsync().Result;
+            //    richTextBox1.Text = html;
+            //}));
+        }
+
+        private void WebReport_ForeColorChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void WebReport_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Cef.Shutdown();
         }
     }
 }

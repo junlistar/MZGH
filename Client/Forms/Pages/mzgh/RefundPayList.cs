@@ -56,11 +56,12 @@ namespace Client
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundPayVM>>>(json);
                 if (result.status == 1)
                 {
+                    dgvpaylist.Init();
                     paylist = result.data;
                     this.dgvpaylist.DataSource = result.data;
-                    dgvpaylist.AutoGenerateColumns = false;
-                    this.dgvpaylist.AutoResizeColumns();
-                    dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    //dgvpaylist.AutoGenerateColumns = false;
+                    dgvpaylist.AutoResizeColumns();
+                   // dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
                 else
                 {

@@ -35,11 +35,9 @@
             this.lblTitle = new Sunny.UI.UILabel();
             this.lblpnltile = new Sunny.UI.UITitlePanel();
             this.tv_reports = new Sunny.UI.UITreeView();
-            this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.pnl_browser = new Sunny.UI.UIPanel();
             this.pnlTitle.SuspendLayout();
             this.lblpnltile.SuspendLayout();
-            this.uiPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitle
@@ -189,46 +187,39 @@
             this.tv_reports.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.tv_reports.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_reports_AfterSelect);
             // 
-            // uiPanel1
+            // pnl_browser
             // 
-            this.uiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnl_browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiPanel1.Controls.Add(this.webBrowser1);
-            this.uiPanel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiPanel1.Location = new System.Drawing.Point(295, 59);
-            this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(972, 629);
-            this.uiPanel1.TabIndex = 29;
-            this.uiPanel1.Text = "uiPanel1";
-            this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(972, 629);
-            this.webBrowser1.TabIndex = 0;
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowser1_DocumentCompleted);
+            this.pnl_browser.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.pnl_browser.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pnl_browser.Location = new System.Drawing.Point(295, 59);
+            this.pnl_browser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnl_browser.MinimumSize = new System.Drawing.Size(1, 1);
+            this.pnl_browser.Name = "pnl_browser";
+            this.pnl_browser.Size = new System.Drawing.Size(972, 629);
+            this.pnl_browser.Style = Sunny.UI.UIStyle.Custom;
+            this.pnl_browser.TabIndex = 29;
+            this.pnl_browser.Text = "uiPanel1";
+            this.pnl_browser.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pnl_browser.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // WebReport
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1272, 692);
-            this.Controls.Add(this.uiPanel1);
+            this.Controls.Add(this.pnl_browser);
             this.Controls.Add(this.lblpnltile);
             this.Controls.Add(this.pnlTitle);
             this.Name = "WebReport";
             this.Text = "用户报表管理";
             this.Initialize += new System.EventHandler(this.WebReport_Initialize);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WebReport_FormClosed);
+            this.Load += new System.EventHandler(this.WebReport_Load);
+            this.ForeColorChanged += new System.EventHandler(this.WebReport_ForeColorChanged);
             this.pnlTitle.ResumeLayout(false);
             this.lblpnltile.ResumeLayout(false);
-            this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -242,7 +233,6 @@
         private Sunny.UI.UILabel lblTitle;
         private Sunny.UI.UITitlePanel lblpnltile;
         private Sunny.UI.UITreeView tv_reports;
-        private Sunny.UI.UIPanel uiPanel1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private Sunny.UI.UIPanel pnl_browser;
     }
 }

@@ -671,6 +671,21 @@ namespace CoreApi.Controllers
             }
         }
 
+        public ResponseResult<int> DeleteGHRequest(string record_sn)
+        {
+
+            Log.Information($"DeleteGHRequest,{record_sn}");
+            try
+            {
+                return _repository.DeleteRequest(record_sn);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<int>(ex.Message);
+            }
+        }
+
         public ResponseResult<BaseRequest> GetBaseRequestsBySN(string request_sn)
         {
             Log.Information($"GetBaseRequestsBySN,{request_sn}");
@@ -1162,7 +1177,7 @@ namespace CoreApi.Controllers
         } 
         public ResponseResult<bool> UpdateMzClientConfig()
         {
-            Log.Information($"EditUserInfo,");
+            Log.Information($"UpdateMzClientConfig,");
             try
             {   //获取RequestBody流
                 StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));

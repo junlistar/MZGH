@@ -24,6 +24,8 @@ namespace Data.IRepository
           string ampm, int totle_num, string window_no, string open_flag, string op_id, string temp_flag, string limit_appoint_percent);
 
         int EditRequestTotalNum(string record_sn, int total_num);
+
+        int DeleteRequest(string record_sn);
         #endregion
     }
 }

@@ -571,7 +571,6 @@
             // cbxChargeType
             // 
             this.cbxChargeType.DataSource = null;
-            this.cbxChargeType.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbxChargeType.FillColor = System.Drawing.Color.White;
             this.cbxChargeType.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbxChargeType.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -800,7 +799,6 @@
             // cbx_relsex
             // 
             this.cbx_relsex.DataSource = null;
-            this.cbx_relsex.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.cbx_relsex.FillColor = System.Drawing.Color.White;
             this.cbx_relsex.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(251)))), ((int)(((byte)(241)))));
             this.cbx_relsex.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

@@ -977,6 +977,7 @@ namespace Mzsf.Forms.Pages
                 string key = ConfigurationManager.AppSettings["key"];
                 string version = ConfigurationManager.AppSettings["version"];
 
+                string weburl = ConfigurationManager.AppSettings["weburl"];
 
                 string method = "invoiceEBillOutpatient";//医疗挂号电子票据开具接口
 
@@ -989,6 +990,14 @@ namespace Mzsf.Forms.Pages
                 List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
                 List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
 
+                var init_result = ElecBillHelper.InitCreateElecBillCom(appid, key, weburl, version, ip, port, dllName, func);
+
+                if (!init_result)
+                {
+                    UIMessageTip.Show("初始化电子发票失败");
+                    log.Error("初始化电子发票失败");
+                    return;
+                }
 
                 //         //搜集数据 处方
                 //         var order_list = SessionHelper.cprCharges.GroupBy(p => new { p.order_no })
@@ -1205,13 +1214,13 @@ namespace Mzsf.Forms.Pages
                 //    chargeDetail = chargeItemlist,
                 //    listDetail = electBillListDetails,
                 //};
-                log.Debug("_data:" + _data);
+                //log.Debug("_data:" + _data);
                 var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
 
-                log.Debug("stringA:" + stringA);
+                //log.Debug("stringA:" + stringA);
                 var stringSignTemp = stringA + $"&key={key}&version={version}";
 
-                log.Debug("stringSignTemp:" + stringSignTemp);
+                //log.Debug("stringSignTemp:" + stringSignTemp);
 
                 var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
 
@@ -1269,11 +1278,6 @@ namespace Mzsf.Forms.Pages
                     {
                         UIMessageTip.ShowError(_fpdata);
                     }
-
-
-                    log.Error(_fpdata);
-
-
                 }
                 else
                 {

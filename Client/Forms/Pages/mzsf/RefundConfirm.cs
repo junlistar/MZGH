@@ -403,30 +403,52 @@ namespace Mzsf.Forms.Pages
         {
             try
             {
-
-                int rowInde = e.RowIndex;
                 int colIndex = e.ColumnIndex;
-                if (colIndex < 0 || rowInde <0)
+                int rowIndex = e.RowIndex;
+                if (colIndex == 0 && rowIndex!=-1)
                 {
-                    return;
-                }
+                   // MessageBox.Show(this.dgvCpr.Rows[e.RowIndex].Cells[0].EditedFormattedValue.ToString());
 
-                if (dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value) == 1)
-                {
-                    UIMessageTip.Show("该项目已确认，不能退费");
-                    return;
-                }
+                    (dgvCpr.Rows[rowIndex].Cells[0] as DataGridViewCheckBoxCell).ReadOnly = true;
+                    //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
+                        if (dgvCpr.Rows[rowIndex].Cells[0].Value != null && Convert.ToBoolean(dgvCpr.Rows[rowIndex].Cells[0].Value))
+                        {
+                            //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "0";
+                            dgvCpr.Rows[rowIndex].Cells[0].Value = false;
+                        }
+                        else
+                        {
+                            //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "1";
+                            dgvCpr.Rows[rowIndex].Cells[0].Value = true;
+                        }
+                   (dgvCpr.Rows[rowIndex].Cells[0] as DataGridViewCheckBoxCell).ReadOnly = false;
 
-                if ((Convert.ToBoolean(dgvCpr.Rows[rowInde].Cells[0].Value) == true))
-                {
-                    dgvCpr.Rows[rowInde].Cells[0].Value = "False";
+                    CalcTotalPrice();
                 }
-                else
-                {
-                    dgvCpr.Rows[rowInde].Cells[0].Value = "True";
-                }
+                return;
+                //int rowInde = e.RowIndex;
+                //int colIndex = e.ColumnIndex;
+                //if (colIndex < 0 || rowInde < 0)
+                //{
+                //    return;
+                //}
 
-                CalcTotalPrice();
+                //if (dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowInde].Cells["confirm_flag"].Value) == 1)
+                //{
+                //    UIMessageTip.Show("该项目已确认，不能退费");
+                //    return;
+                //}
+
+                //if ((Convert.ToBoolean(dgvCpr.Rows[rowInde].Cells[0].Value) == true))
+                //{
+                //    dgvCpr.Rows[rowInde].Cells[0].Value = "False";
+                //}
+                //else
+                //{
+                //    dgvCpr.Rows[rowInde].Cells[0].Value = "True";
+                //}
+
+                //CalcTotalPrice();
             }
             catch (Exception ex)
             {
@@ -448,7 +470,7 @@ namespace Mzsf.Forms.Pages
                             row.Cells[0].Value = "True";
                         }
                         else
-                        { 
+                        {
                             row.Cells[0].ReadOnly = true;
                         }
                     }

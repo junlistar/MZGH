@@ -467,7 +467,8 @@ and b.unit_sn like '''+@unit_sn+''' and
       b.ampm like '''+@ampm+''' and
       isnull(cast(b.window_no as char),'''') like '''+@window_no+''' and
       b.open_flag like '''+@open_flag+''' and 
-      isnull(b.temp_flag,''0'') like '''+@temp_flag+'''
+      isnull(b.temp_flag,''0'') like '''+@temp_flag+''' and 
+	  b.delete_flag is null
 group by  b.unit_sn,b.clinic_type,b.doctor_sn,b.ampm,
 u1.name,a.name,c.name
 order by unit_sn,clinic_type,doctor_sn,ampm'
@@ -744,3 +745,8 @@ CREATE TABLE [dbo].[mz_webreport](
 	[update_time] [datetime] NULL,
 	[update_opera] [varchar](50) NULL
 ) ON [PRIMARY]
+
+--增加删除标记
+if not exists(select * from syscolumns where id=object_id('gh_request') and name='delete_flag') begin
+ALTER TABLE gh_request ADD delete_flag  bit default (null)
+end

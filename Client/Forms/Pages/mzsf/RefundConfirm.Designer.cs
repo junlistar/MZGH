@@ -54,6 +54,7 @@
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
+            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,7 +67,6 @@
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ckall = new Sunny.UI.UICheckBox();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -338,6 +338,7 @@
             this.dgvCpr.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvCpr.Location = new System.Drawing.Point(4, 297);
             this.dgvCpr.Name = "dgvCpr";
+            this.dgvCpr.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -362,82 +363,6 @@
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
             // 
-            // chkback
-            // 
-            this.chkback.HeaderText = "";
-            this.chkback.Name = "chkback";
-            this.chkback.TrueValue = "True";
-            this.chkback.Width = 88;
-            // 
-            // charge_amount
-            // 
-            this.charge_amount.DataPropertyName = "charge_amount";
-            this.charge_amount.HeaderText = "数量";
-            this.charge_amount.Name = "charge_amount";
-            // 
-            // charge_name
-            // 
-            this.charge_name.DataPropertyName = "charge_name";
-            this.charge_name.HeaderText = "项目名称";
-            this.charge_name.Name = "charge_name";
-            // 
-            // cf_amount
-            // 
-            this.cf_amount.DataPropertyName = "cf_amount";
-            this.cf_amount.HeaderText = "处方数量";
-            this.cf_amount.Name = "cf_amount";
-            // 
-            // caoyao_fu
-            // 
-            this.caoyao_fu.DataPropertyName = "caoyao_fu";
-            this.caoyao_fu.HeaderText = "付数";
-            this.caoyao_fu.Name = "caoyao_fu";
-            // 
-            // orig_price
-            // 
-            this.orig_price.DataPropertyName = "orig_price";
-            this.orig_price.HeaderText = "价格(标准)";
-            this.orig_price.Name = "orig_price";
-            // 
-            // charge_price
-            // 
-            this.charge_price.DataPropertyName = "charge_price";
-            this.charge_price.HeaderText = "价格(实收)";
-            this.charge_price.Name = "charge_price";
-            // 
-            // sum_total
-            // 
-            this.sum_total.DataPropertyName = "sum_total";
-            this.sum_total.HeaderText = "合计";
-            this.sum_total.Name = "sum_total";
-            // 
-            // back
-            // 
-            this.back.DataPropertyName = "back";
-            this.back.HeaderText = "退药数量";
-            this.back.Name = "back";
-            // 
-            // charge_code
-            // 
-            this.charge_code.DataPropertyName = "charge_code";
-            this.charge_code.HeaderText = "charge_code";
-            this.charge_code.Name = "charge_code";
-            this.charge_code.Visible = false;
-            // 
-            // order_type
-            // 
-            this.order_type.DataPropertyName = "order_type";
-            this.order_type.HeaderText = "order_type";
-            this.order_type.Name = "order_type";
-            this.order_type.Visible = false;
-            // 
-            // confirm_flag
-            // 
-            this.confirm_flag.DataPropertyName = "confirm_flag";
-            this.confirm_flag.HeaderText = "confirm_flag";
-            this.confirm_flag.Name = "confirm_flag";
-            this.confirm_flag.Visible = false;
-            // 
             // ckall
             // 
             this.ckall.BackColor = System.Drawing.Color.Transparent;
@@ -452,6 +377,94 @@
             this.ckall.Text = "全选";
             this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
+            // 
+            // chkback
+            // 
+            this.chkback.HeaderText = "";
+            this.chkback.Name = "chkback";
+            this.chkback.ReadOnly = true;
+            this.chkback.TrueValue = "True";
+            this.chkback.Width = 88;
+            // 
+            // charge_amount
+            // 
+            this.charge_amount.DataPropertyName = "charge_amount";
+            this.charge_amount.HeaderText = "数量";
+            this.charge_amount.Name = "charge_amount";
+            this.charge_amount.ReadOnly = true;
+            // 
+            // charge_name
+            // 
+            this.charge_name.DataPropertyName = "charge_name";
+            this.charge_name.HeaderText = "项目名称";
+            this.charge_name.Name = "charge_name";
+            this.charge_name.ReadOnly = true;
+            // 
+            // cf_amount
+            // 
+            this.cf_amount.DataPropertyName = "cf_amount";
+            this.cf_amount.HeaderText = "处方数量";
+            this.cf_amount.Name = "cf_amount";
+            this.cf_amount.ReadOnly = true;
+            // 
+            // caoyao_fu
+            // 
+            this.caoyao_fu.DataPropertyName = "caoyao_fu";
+            this.caoyao_fu.HeaderText = "付数";
+            this.caoyao_fu.Name = "caoyao_fu";
+            this.caoyao_fu.ReadOnly = true;
+            // 
+            // orig_price
+            // 
+            this.orig_price.DataPropertyName = "orig_price";
+            this.orig_price.HeaderText = "价格(标准)";
+            this.orig_price.Name = "orig_price";
+            this.orig_price.ReadOnly = true;
+            // 
+            // charge_price
+            // 
+            this.charge_price.DataPropertyName = "charge_price";
+            this.charge_price.HeaderText = "价格(实收)";
+            this.charge_price.Name = "charge_price";
+            this.charge_price.ReadOnly = true;
+            // 
+            // sum_total
+            // 
+            this.sum_total.DataPropertyName = "sum_total";
+            this.sum_total.HeaderText = "合计";
+            this.sum_total.Name = "sum_total";
+            this.sum_total.ReadOnly = true;
+            // 
+            // back
+            // 
+            this.back.DataPropertyName = "back";
+            this.back.HeaderText = "退药数量";
+            this.back.Name = "back";
+            this.back.ReadOnly = true;
+            // 
+            // charge_code
+            // 
+            this.charge_code.DataPropertyName = "charge_code";
+            this.charge_code.HeaderText = "charge_code";
+            this.charge_code.Name = "charge_code";
+            this.charge_code.ReadOnly = true;
+            this.charge_code.Visible = false;
+            // 
+            // order_type
+            // 
+            this.order_type.DataPropertyName = "order_type";
+            this.order_type.HeaderText = "order_type";
+            this.order_type.Name = "order_type";
+            this.order_type.ReadOnly = true;
+            this.order_type.Visible = false;
+            // 
+            // confirm_flag
+            // 
+            this.confirm_flag.DataPropertyName = "confirm_flag";
+            this.confirm_flag.HeaderText = "confirm_flag";
+            this.confirm_flag.Name = "confirm_flag";
+            this.confirm_flag.ReadOnly = true;
+            this.confirm_flag.Visible = false;
             // 
             // RefundConfirm
             // 

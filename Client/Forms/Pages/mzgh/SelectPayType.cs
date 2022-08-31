@@ -449,7 +449,7 @@ namespace Client
                     //其他支付
                     UIMessageTip.ShowOk("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + ",金额：" + left_je);
                 }
-                 
+
                 ShowMessage();
 
                 //支付完成，自动提交
@@ -457,7 +457,7 @@ namespace Client
                 if (sy_je == 0)
                 {
                     TiJiaoZhifu();
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -972,7 +972,7 @@ namespace Client
         public void CreateElecBill(int new_ledger_sn)
         {
             try
-            { 
+            {
 
                 string ip = ConfigurationManager.AppSettings["ip"];
                 string port = ConfigurationManager.AppSettings["port"];
@@ -984,6 +984,8 @@ namespace Client
                 string appid = ConfigurationManager.AppSettings["appid"];
                 string key = ConfigurationManager.AppSettings["key"];
                 string version = ConfigurationManager.AppSettings["version"];
+
+                string weburl = ConfigurationManager.AppSettings["weburl"];
 
 
                 string method = "invEBillRegistration";//医疗挂号电子票据开具接口
@@ -997,7 +999,14 @@ namespace Client
                 List<ElectBillListDetail> electBillListDetails = new List<ElectBillListDetail>();
                 List<PayChannelDetail> payChannelDetails = new List<PayChannelDetail>();
 
+                var init_result = ElecBillHelper.InitCreateElecBillCom(appid, key, weburl, version, ip, port, dllName, func);
 
+                if (!init_result)
+                {
+                    UIMessageTip.Show("初始化电子发票失败");
+                    log.Error("初始化电子发票失败");
+                    return;
+                }
                 //for (int i = 0; i < chargeItems.Count; i++)
                 //{
                 //    ElectBillChargeItem electBillCharge = new ElectBillChargeItem();
@@ -1089,7 +1098,7 @@ namespace Client
                 string getDataUrl = string.Format($"/api/mzsf/GetFPRegistrationData?patient_id={patientId}&ledger_sn={new_ledger_sn}&admiss_times={1}");
                 log.Debug("getDataUrl：" + getDataUrl);
                 var json = HttpClientUtil.Get(getDataUrl);
-                log.Debug("获取数据："+json);
+                log.Debug("获取数据：" + json);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<FPRegistrationVM>>(json);
                 if (result.status != 1)
                 {
@@ -1156,7 +1165,7 @@ namespace Client
                 //    listDetail = electBillListDetails,
                 //    remark = _remark
                 //};
-               // log.Debug("_data:" + _data);
+                // log.Debug("_data:" + _data);
                 var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
 
                 //log.Debug("stringA:" + stringA);
@@ -1241,6 +1250,7 @@ namespace Client
 
         }
 
+      
 
         public string FormID { get; set; } = "PRDT"; //单据ID
                                                      //private string RptNo, RptName; //报表编号、名称
@@ -1393,7 +1403,7 @@ namespace Client
                         }
                         paramurl = string.Format($"/api/GuaHao/GetReportDataBySql?sql={sql}&tb_name={"ghinfo"}");
 
-                        log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                        //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
                         if (ds_result.status == 1)

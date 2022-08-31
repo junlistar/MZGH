@@ -665,5 +665,14 @@ namespace Data.Repository
             return Update(sql, para);
 
         }
+
+        public int DeleteRequest(string record_sn)
+        {
+            string sql = "update gh_request set delete_flag=1 where record_sn=@record_sn";
+            var para = new DynamicParameters();
+            para.Add("@record_sn", record_sn); 
+
+            return Update(sql, para); 
+        }
     }
 }

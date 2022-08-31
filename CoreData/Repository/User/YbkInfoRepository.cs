@@ -65,7 +65,7 @@ namespace Data.Repository
                         if (yBResponse.output.insuinfo != null)
                         {
                             //删除旧数据，写入新数据
-                            sql = GetSqlByTag("mzgh_mzpatientybkinfo_del");
+                            sql = GetSqlByTag("mzgh_mzpatientybkinsuinfo_del");
 
                             para.Add("@certno", yBResponse.output.baseinfo.certno);
                             connection.Execute(sql, para, transaction);
@@ -143,17 +143,20 @@ namespace Data.Repository
 
                     try
                     {
-                        string sql = GetSqlByTag("mzgh_mzpatientybkinsuinfo_get");
+                        string sql = GetSqlByTag("mzgh_mzpatientybkinfo_get");
                         var para = new DynamicParameters();
                         para.Add("@certno", certno);
+                        var info_list = connection.Query<BaseInfo>(sql, para, transaction);
 
-                       var insu_list = connection.Query<InsuInfo>(sql, para, transaction);
+                        sql = GetSqlByTag("mzgh_mzpatientybkinsuinfo_get");
+                         
+                        var insu_list = connection.Query<InsuInfo>(sql, para, transaction);
 
                         sql = GetSqlByTag("mzgh_mzpatientybkidetinfo_get");
 
                         var idt_list= connection.Query<IdetInfo>(sql, para, transaction);
 
-                       
+                        responseModel.baseinfo = info_list.FirstOrDefault();
                         responseModel.insuinfo = insu_list.ToList();
                         responseModel.idetinfo = idt_list.ToList();
 

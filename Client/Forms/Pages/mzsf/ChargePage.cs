@@ -79,11 +79,12 @@ namespace Mzsf.Forms.Pages
                 #region 根据数据长度判断查询
 
                 //如果点击的是身份证或医保卡，择查询身份证信息
-                if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
-                {
-                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
-                }
-                else if (input_str.Length == 11)
+                //if (SessionHelper.CardReader != null || YBHelper.currentYBInfo != null)
+                //{
+                //    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={input_str}");
+                //}
+                //else 
+                if (input_str.Length == 11)
                 {
                     //如果长度为12，则查询patient_id 
                     paramurl = string.Format($"/api/GuaHao/GetPatientByTel?tel={input_str}");
@@ -110,7 +111,7 @@ namespace Mzsf.Forms.Pages
                     //如果没有查到数据 并且不是根据barcode查询，则再用barcode查询一次，避免数据遗漏
                     if (paramurl != barcode_url)
                     {
-                        json = HttpClientUtil.Get(paramurl);
+                        json = HttpClientUtil.Get(barcode_url);
                         result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                     }
                 }

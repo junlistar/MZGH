@@ -56,6 +56,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txt_workroom = new Sunny.UI.UITextBox();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.txt_workroom);
             this.uiGroupBox1.Controls.Add(this.txt_limit);
             this.uiGroupBox1.Controls.Add(this.uiLabel11);
             this.uiGroupBox1.Controls.Add(this.cbxRequestType);
@@ -239,14 +241,16 @@
             this.cbxWinNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxWinNo.Items.AddRange(new object[] {
             "所有窗口"});
-            this.cbxWinNo.Location = new System.Drawing.Point(396, 224);
+            this.cbxWinNo.Location = new System.Drawing.Point(584, 65);
             this.cbxWinNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxWinNo.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxWinNo.Name = "cbxWinNo";
             this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxWinNo.ReadOnly = true;
             this.cbxWinNo.Size = new System.Drawing.Size(166, 29);
             this.cbxWinNo.TabIndex = 8;
             this.cbxWinNo.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxWinNo.Visible = false;
             this.cbxWinNo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel6
@@ -476,6 +480,22 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "*限约比例：针对网上支付号";
             // 
+            // txt_workroom
+            // 
+            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_workroom.Location = new System.Drawing.Point(396, 224);
+            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_workroom.Name = "txt_workroom";
+            this.txt_workroom.ShowText = false;
+            this.txt_workroom.Size = new System.Drawing.Size(166, 29);
+            this.txt_workroom.TabIndex = 48;
+            this.txt_workroom.Text = "0";
+            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_workroom.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // RequestEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -531,5 +551,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private Sunny.UI.UITextBox txt_workroom;
     }
 }
