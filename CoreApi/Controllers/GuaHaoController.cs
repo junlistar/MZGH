@@ -546,6 +546,22 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+
+        public ResponseResult<List<Ybhzzd>> GetYbhzzdList()
+        {
+            Log.Information($"GetYbhzzdList");
+            var list = new List<Ybhzzd>();
+            try
+            {
+                list = _commonRepository.GetYbhzzdList();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Ybhzzd>>(ex.Message);
+            }
+            return list;
+        }
         public ResponseResult<MzClientConfig> GetMzClientConfig()
         {
             Log.Information($"GetMzClientConfig");
@@ -1191,6 +1207,21 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-
+        public ResponseResult<bool> AddYbLog()
+        {
+            Log.Information($"AddYbLog,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _commonRepository.AddYbLog(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
     }
 }

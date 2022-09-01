@@ -22,6 +22,10 @@ namespace Client.ClassLib
     public class RepModel<T>
     {
         public T data { get; set; }
+        public T feedetail { get; set; }
+
+        public Mdtrtinfo mdtrtinfo { get; set; }
+        public List<Diseinfo> diseinfo { get; set; }
     }
 
     public class YBRequest<T>
@@ -197,9 +201,9 @@ namespace Client.ClassLib
         /// <summary>
         /// 明细项目费用总额
         /// </summary>
-        public string det_item_fee_sumamt { get; set; }
-        public string cnt { get; set; }//数量
-        public string pric { get; set; }//单价
+        public decimal det_item_fee_sumamt { get; set; }
+        public decimal cnt { get; set; }//数量
+        public decimal pric { get; set; }//单价
         /// <summary>
         /// 单次剂量描述
         /// </summary>
@@ -280,11 +284,172 @@ namespace Client.ClassLib
         /// <summary>
         /// 字段扩展
         /// </summary>
-        public string exp_content { get; set; } 
-
-
+        public string exp_content { get; set; }
 
     }
 
-    #endregion 
+    public class feedetailresult { 
+    
+
+        public string feedetl_sn { get; set; }
+        public string det_item_fee_sumamt { get; set; }
+        public string cnt { get; set; }
+        public string pric { get; set; }
+        public string pric_uplmt_amt { get; set; }
+        public string selfpay_prop { get; set; }
+        public string fulamt_ownpay_amt { get; set; }
+        public string overlmt_amt { get; set; }
+        public string preselfpay_amt { get; set; }
+        public string inscp_scp_amt { get; set; }
+        public string chrgitm_lv { get; set; }
+        public string med_chrgitm_type { get; set; }
+        public string bas_medn_flag { get; set; }
+        public string hi_nego_drug_flag { get; set; }
+        public string chld_medc_flag { get; set; }
+        public string list_sp_item_flag { get; set; }
+        public string lmt_used_flag { get; set; }
+        public string drt_reim_flag { get; set; }
+        public string memo { get; set; }  
+    }
+
+
+    #endregion
+
+
+    #region 门诊就诊信息上传请求模型
+    /// <summary>
+    /// 就诊信息
+    /// </summary>
+    public class Mdtrtinfo
+    {
+        public string psn_no { get; set; }
+        public string mdtrt_id { get; set; }
+        public string med_type { get; set; }
+        public string begntime { get; set; }
+        public string main_cond_d { get; set; }
+        public string scr { get; set; }
+        public string dise_codg { get; set; }
+        public string dise_name { get; set; }
+        public string birctrl_type { get; set; }
+        public string birctrl_matn_date { get; set; }
+
+    }
+    /// <summary>
+    /// -诊断信息
+    /// </summary>
+    public class Diseinfo
+    { 
+        public string diag_type { get; set; }
+        public string diag_srt_no { get; set; }
+        public string diag_code { get; set; }
+        public string diag_name { get; set; }
+        public string diag_dept { get; set; }
+        public string dise_dor_no { get; set; }
+        public string dise_dor_name { get; set; }
+        public string diag_time { get; set; }
+        public string vali_flag { get; set; }  
+    }
+
+
+    public class JzxxModel
+    {
+        public Mdtrtinfo mdtrtinfo;
+        public Diseinfo diseinfo;
+    }
+
+    #endregion
+
+
+    #region 门诊结算请求模型
+
+    public class MZJS2207A {
+        public string psn_no { get; set; }
+        public string mdtrt_cert_type { get; set; }
+        public string mdtrt_cert_no { get; set; }
+        public int med_type { get; set; }
+        public decimal medfee_sumamt { get; set; }
+        public string psn_setlway { get; set; }
+        public string mdtrt_id { get; set; }
+        public string chrg_bchno { get; set; }
+        public string insutype { get; set; }
+        public string acct_used_flag { get; set; }
+        public string invono { get; set; }
+        public string fulamt_ownpay_amt { get; set; }
+        public string overlmt_selfpay { get; set; }
+        public string preselfpay_amt { get; set; }
+        public string inscp_scp_amt { get; set; } 
+    }
+
+    public class MZJSCX
+    {
+        public string setl_id { get; set; }
+        public string mdtrt_id { get; set; }
+        public string psn_no { get; set; }
+    }
+    #endregion
+
+    public class MzjsResponse
+    {
+        public Setlinfo setlinfo { get; set; }
+        public List<Setldetail> setldetail { get; set; }
+    }
+
+    public class Setlinfo
+    {
+        public string setl_id { get; set; }
+        public string mdtrt_id { get; set; }
+        public string psn_no { get; set; }
+        public string psn_name { get; set; }
+        public string psn_cert_type { get; set; }
+        public string certno { get; set; }
+        public string gend { get; set; }
+        public string naty { get; set; }
+        public string brdy { get; set; }
+        public string age { get; set; }
+        public string insutype { get; set; }
+        public string psn_type { get; set; }
+        public string cvlserv_flag { get; set; }
+        public string setl_time { get; set; }
+        public string mdtrt_cert_type { get; set; }
+        public string med_type { get; set; }
+        public string medfee_sumamt { get; set; }
+        public string fulamt_ownpay_amt { get; set; }
+        public string overlmt_selfpay { get; set; }
+        public string preselfpay_amt { get; set; }
+        public string inscp_scp_amt { get; set; }
+        public string act_pay_dedc { get; set; }
+        public string hifp_pay { get; set; }
+        public string pool_prop_selfpay { get; set; }
+        public string cvlserv_pay { get; set; }
+        public string hifes_pay { get; set; }
+        public string hifmi_pay { get; set; }
+        public string hifob_pay { get; set; }
+        public string hifdm_pay { get; set; }
+        public string maf_pay { get; set; }
+        public string oth_pay { get; set; }
+        public string fund_pay_sumamt { get; set; }
+        public string psn_part_amt { get; set; }
+        public string acct_pay { get; set; }
+        public string psn_cash_pay { get; set; }
+        public string hosp_part_amt { get; set; }
+        public string balc { get; set; }
+        public string acct_mulaid_pay { get; set; }
+        public string medins_setl_id { get; set; }
+        public string clr_optins { get; set; }
+        public string clr_way { get; set; }
+        public string clr_type { get; set; }
+        public string exp_content { get; set; }
+        
+    }
+
+    public class Setldetail
+    {
+        public string fund_pay_type { get; set; }
+        public string inscp_scp_amt { get; set; }
+        public string crt_payb_lmt_amt { get; set; }
+        public string fund_payamt { get; set; }
+        public string fund_pay_type_name { get; set; }
+        public string setl_proc_info { get; set; }
+     
+    }
 }

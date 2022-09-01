@@ -34,7 +34,8 @@ namespace Client.Forms.Wedgit
                 times = p.times,
                 visit_date = p.visit_date,
                 doct_name = p.doct_name,
-                unit_name=  p.unit_name
+                doct_code = p.doctor_code,
+                unit_name =  p.unit_name
             }).OrderBy(o=>o.times).ToList();
             dgvOrders.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvOrders.AutoResizeColumns();
@@ -56,7 +57,11 @@ namespace Client.Forms.Wedgit
                     {
                         ChargePage.current_unit_name = dgvOrders.Rows[e.RowIndex].Cells["unit_name"].Value.ToString(); ;
                     }
-                     
+                    if (dgvOrders.Rows[e.RowIndex].Cells["doct_code"].Value != null)
+                    {
+                        ChargePage.current_doct_sn = dgvOrders.Rows[e.RowIndex].Cells["doct_code"].Value.ToString(); ;
+                    }
+
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }

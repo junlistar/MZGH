@@ -13,8 +13,11 @@ namespace Data.IRepository
 
         MzClientConfig GetMzClientConfig();
 
-        bool UpdateMzClientConfig(string jsonStr);
+        List<Ybhzzd> GetYbhzzdList();
 
+        bool UpdateMzClientConfig(string jsonStr);
+         
+        bool  AddYbLog(string jsonStr);
         #endregion
     }
 }

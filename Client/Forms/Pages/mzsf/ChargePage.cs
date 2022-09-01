@@ -28,6 +28,7 @@ namespace Mzsf.Forms.Pages
         public static int current_times = 0;
         public static string current_unit_name = "";
         public static string current_doct_name = "";
+        public static string current_doct_sn = "";
         public static string current_patient_id = "";
 
         bool is_order_lock = false;
@@ -215,7 +216,7 @@ namespace Mzsf.Forms.Pages
                         //绑定科室 医生信息
                         txtUnit.Text = result.data[0].unit_name;
                         txtDoct.Text = result.data[0].doct_name;
-
+                        current_doct_sn = result.data[0].doctor_code;
                         if (result.data.Count > 1)
                         {
                             SelectOrder selectOrder = new SelectOrder(result.data);
@@ -223,7 +224,7 @@ namespace Mzsf.Forms.Pages
                             {
                                 //绑定科室 医生信息
                                 txtUnit.Text = current_unit_name;
-                                txtDoct.Text = current_doct_name;
+                                txtDoct.Text = current_doct_name; 
                                 lblTimes.Text = "来访号：" + current_times;
                             }
                         }
@@ -919,6 +920,8 @@ namespace Mzsf.Forms.Pages
             {
                 Check check = new Check();
                 check.times = current_times;
+                check.doct_code = current_doct_sn;
+
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
                 if (dresult == DialogResult.OK)

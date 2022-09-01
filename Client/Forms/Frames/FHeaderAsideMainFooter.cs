@@ -716,6 +716,13 @@ namespace Client
 
                 SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
 
+                //医保目录类型比较 
+                paramurl = string.Format($"/api/GuaHao/GetYbhzzdList");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                SessionHelper.ybhzCompare = WebApiHelper.DeserializeObject<ResponseResult<List<YbhzzdVM>>>(json).data;
+
                 //客户端配置 
                 paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);

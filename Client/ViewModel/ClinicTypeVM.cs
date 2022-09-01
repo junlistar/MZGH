@@ -110,5 +110,13 @@ namespace Client.ViewModel
         public string page_code { get; set; }
         public string page_name { get; set; }
 
-    } 
+    }
+
+    public class YbhzzdVM
+    {
+        public string charge_code { get; set; }
+        public string searial { get; set; }
+        public string ybhz_code { get; set; }
+        public string old_code { get; set; }
+    }
 }

@@ -618,6 +618,12 @@
     <Compile Include="Forms\Wedgit\SelectOrder.Designer.cs">
       <DependentUpon>SelectOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\YBJSPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\YBJSPreview.Designer.cs">
+      <DependentUpon>YBJSPreview.cs</DependentUpon>
+    </Compile>
     <Compile Include="Pay\AliPayAPI\AliConfig.cs" />
     <Compile Include="Pay\WxPayAPI\business\DownloadBill.cs" />
     <Compile Include="Pay\WxPayAPI\business\JsApiPay.cs" />
@@ -705,6 +711,7 @@
     <Compile Include="Forms\Pages\mzgh\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\YbLog.cs" />
     <EmbeddedResource Include="ClassLib\RowMergeView.resx">
       <DependentUpon>RowMergeView.cs</DependentUpon>
     </EmbeddedResource>
@@ -912,6 +919,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\SelectOrder.resx">
       <DependentUpon>SelectOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\YBJSPreview.resx">
+      <DependentUpon>YBJSPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

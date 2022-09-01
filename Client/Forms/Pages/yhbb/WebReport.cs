@@ -61,26 +61,25 @@ namespace Client.Forms.Pages.yhbb
 
                 url = _obj.SelectedNode.Tag.ToString();
 
-                var geckoWebBrowser = new GeckoWebBrowser { Dock = DockStyle.Fill };
-
-                pnl_browser.Controls.Add(geckoWebBrowser);
-                geckoWebBrowser.Navigate(url);
-
-
-                //WebBrowser = new ChromiumWebBrowser(url);
-                ////{
-                ////    // 填充整个父控件
-                ////    Dock = DockStyle.Fill
-                ////};
-                //WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
-                //// 添加到窗口的控件列表中
+                //var geckoWebBrowser = new GeckoWebBrowser { Dock = DockStyle.Fill };
                 //pnl_browser.Controls.Clear();
-                //this.pnl_browser.Controls.Add(WebBrowser);
+                //pnl_browser.Controls.Add(geckoWebBrowser);
+                //geckoWebBrowser.Navigate(url);
+
+
+                WebBrowser = new ChromiumWebBrowser(url);
+                //{
+                //    // 填充整个父控件
+                //    Dock = DockStyle.Fill
+                //};
+                WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
+                // 添加到窗口的控件列表中
+                pnl_browser.Controls.Clear();
+                pnl_browser.Controls.Add(WebBrowser);
             }
             catch (Exception ex)
             {
-                UIMessageBox.Show($"打开WEB地址失败：{url}");
-              
+                UIMessageBox.Show($"打开WEB地址失败：{url}"); 
             }
         }
 
