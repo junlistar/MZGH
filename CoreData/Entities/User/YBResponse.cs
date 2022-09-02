@@ -67,6 +67,8 @@ namespace Data.Entities
     /// </summary>
     public class UserInfoResponseModel
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public BaseInfo baseinfo { get; set; }
         public List<InsuInfo> insuinfo { get; set; }
         public List<IdetInfo> idetinfo { get; set; }
@@ -130,7 +132,9 @@ namespace Data.Entities
     }
 
     public class GHResponseModel
-    { 
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string mdtrt_id { get; set; }
         public string psn_no { get; set; }
         public string ipt_otp_no { get; set; }
@@ -140,10 +144,87 @@ namespace Data.Entities
     #endregion
 
 
+    #region 门诊就诊信息上传请求模型
+    /// <summary>
+    /// 就诊信息
+    /// </summary>
+    public class Mdtrtinfo
+    {
+        public string psn_no { get; set; }
+        public string mdtrt_id { get; set; }
+        public string med_type { get; set; }
+        public string begntime { get; set; }
+        public string main_cond_d { get; set; }
+        public string scr { get; set; }
+        public string dise_codg { get; set; }
+        public string dise_name { get; set; }
+        public string birctrl_type { get; set; }
+        public string birctrl_matn_date { get; set; }
+
+    }
+    /// <summary>
+    /// -诊断信息
+    /// </summary>
+    public class Diseinfo
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
+        public string diag_type { get; set; }
+        public string diag_srt_no { get; set; }
+        public string diag_code { get; set; }
+        public string diag_name { get; set; }
+        public string diag_dept { get; set; }
+        public string dise_dor_no { get; set; }
+        public string dise_dor_name { get; set; }
+        public string diag_time { get; set; }
+        public string vali_flag { get; set; }
+    }
+
+
+    public class JzxxModel
+    {
+        public Mdtrtinfo mdtrtinfo;
+        public Diseinfo diseinfo;
+    }
+
+    #endregion
+
+
+    #region 门诊结算请求模型
+
+    public class MZJS2207A
+    {
+        public string psn_no { get; set; }
+        public string mdtrt_cert_type { get; set; }
+        public string mdtrt_cert_no { get; set; }
+        public int med_type { get; set; }
+        public decimal medfee_sumamt { get; set; }
+        public string psn_setlway { get; set; }
+        public string mdtrt_id { get; set; }
+        public string chrg_bchno { get; set; }
+        public string insutype { get; set; }
+        public string acct_used_flag { get; set; }
+        public string invono { get; set; }
+        public string fulamt_ownpay_amt { get; set; }
+        public string overlmt_selfpay { get; set; }
+        public string preselfpay_amt { get; set; }
+        public string inscp_scp_amt { get; set; }
+    }
+
+    public class MZJSCX
+    {
+        public string setl_id { get; set; }
+        public string mdtrt_id { get; set; }
+        public string psn_no { get; set; }
+    }
+    #endregion
+
+
+
     #region 门诊挂号取消退款数据模型
 
     public class GHRefundRequestModel
-    {  
+    { 
         public string mdtrt_id { get; set; }
         public string psn_no { get; set; }
         public string ipt_otp_no { get; set; } 

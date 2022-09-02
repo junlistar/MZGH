@@ -71,6 +71,8 @@ namespace Client.ClassLib
     /// </summary>
     public class UserInfoResponseModel
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public BaseInfo baseinfo { get; set; }
         public List<InsuInfo> insuinfo { get; set; }
         public List<IdetInfo> idetinfo { get; set; }
@@ -133,7 +135,9 @@ namespace Client.ClassLib
     }
 
     public class GHResponseModel
-    { 
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string mdtrt_id { get; set; }
         public string psn_no { get; set; }
         public string ipt_otp_no { get; set; }
@@ -338,7 +342,9 @@ namespace Client.ClassLib
     /// -诊断信息
     /// </summary>
     public class Diseinfo
-    { 
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string diag_type { get; set; }
         public string diag_srt_no { get; set; }
         public string diag_code { get; set; }

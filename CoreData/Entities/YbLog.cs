@@ -15,4 +15,5 @@ namespace Data.Entities
         public string ver { get; set; }
         public string opera { get; set; } 
     }
+     
 }
