@@ -192,16 +192,13 @@
             this.pnl_browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnl_browser.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.pnl_browser.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnl_browser.Location = new System.Drawing.Point(295, 59);
             this.pnl_browser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnl_browser.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnl_browser.Name = "pnl_browser";
             this.pnl_browser.Size = new System.Drawing.Size(972, 629);
-            this.pnl_browser.Style = Sunny.UI.UIStyle.Custom;
             this.pnl_browser.TabIndex = 29;
-            this.pnl_browser.Text = "uiPanel1";
             this.pnl_browser.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnl_browser.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -213,7 +210,7 @@
             this.Controls.Add(this.lblpnltile);
             this.Controls.Add(this.pnlTitle);
             this.Name = "WebReport";
-            this.Text = "用户报表管理";
+            this.Text = "WEB报表管理";
             this.Initialize += new System.EventHandler(this.WebReport_Initialize);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WebReport_FormClosed);
             this.Load += new System.EventHandler(this.WebReport_Load);

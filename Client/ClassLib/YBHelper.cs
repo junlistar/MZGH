@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using log4net;
 
 namespace Client.ClassLib
 { 
@@ -14,14 +15,16 @@ namespace Client.ClassLib
         人员信息 =1101,
         门诊挂号 =2201,
         门诊挂号撤销 =2202,
+        就诊信息 =2203,
         门诊明细上传 = 2204,
         预结算= 2206,
         结算= 2207
     }
-
     //医保配置
     public class YBHelper
     {
+         
+        private static ILog log = LogManager.GetLogger(typeof(YBHelper));//typeof放当前类
 
         public static YBResponse<UserInfoResponseModel> currentYBInfo;
         public static YBResponse<RepModel<GHResponseModel>> currentYBPay;
@@ -68,5 +71,39 @@ namespace Client.ClassLib
         /// 交易签到流水号 421000G0000000244038
         /// </summary>
         public static string sign_no = "421000G0000000244038";
+
+
+        public static void AddYBLog(string info_code, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)
+        {
+            try
+            {
+                var _yblog = new YbLog();
+                _yblog.admiss_times = 4;
+                _yblog.data = data;
+                _yblog.oper_code = info_code;
+                _yblog.patient_id = patient_id;
+                _yblog.msgid = msgid;
+                _yblog.ver = ver;
+                _yblog.flag = flag;
+                _yblog.opera = opera;
+                _yblog.oper_date = Convert.ToDateTime(oper_date);
+
+
+                var paramurl = string.Format($"/api/guahao/AddYbLog");
+                var json = HttpClientUtil.PostJSON(paramurl, _yblog);
+                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (responseJson.status == 1)
+                {
+                    log.Debug("医保操作：" + info_code);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+         
+
     }
 }

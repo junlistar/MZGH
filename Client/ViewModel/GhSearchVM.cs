@@ -70,6 +70,8 @@ namespace Client.ViewModel
         public string price_opera { get; set; }
         public DateTime price_date { get; set; }
 
+        public string out_trade_no { get; set; }
+
 
     }
 }

@@ -12,7 +12,7 @@ namespace Data.IRepository
 
         List<MzThridPay> GetMzThridPays();
 
-        int AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, string charge, string price_date, string opera);
+        int AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id,string setl_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, string charge, string price_date, string opera);
 
         int RefundMzThridPay(string patient_id, string cheque_type, string cheque_no, string charge, string price_date);
         #endregion

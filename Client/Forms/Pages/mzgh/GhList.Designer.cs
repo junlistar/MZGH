@@ -72,6 +72,8 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtRiqi = new Sunny.UI.UIDatePicker();
             this.dgvlist = new Sunny.UI.UIDataGridView();
+            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
+            this.lblTotalCount = new Sunny.UI.UILabel();
             this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,13 +84,13 @@
             this.clinic_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.doctor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_sequence = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_order = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_sequence_f = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.opera_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_fee = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.visit_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.visit_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.group_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,8 +100,6 @@
             this.gh_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
-            this.lblTotalCount = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvks)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -658,13 +658,13 @@
             this.clinic_name,
             this.doctor_name,
             this.gh_sequence,
+            this.ledger_sn,
+            this.times,
             this.gh_order,
             this.gh_sequence_f,
             this.flag,
             this.opera_name,
             this.charge_fee,
-            this.times,
-            this.ledger_sn,
             this.visit_flag,
             this.visit_status,
             this.group_name,
@@ -712,6 +712,24 @@
             this.dgvlist.StyleCustomMode = true;
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiToolTip1
+            // 
+            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.uiToolTip1.OwnerDraw = true;
+            // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
+            this.lblTotalCount.TabIndex = 7;
+            this.lblTotalCount.Text = "总计：";
+            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // patient_name
             // 
@@ -783,6 +801,21 @@
             this.gh_sequence.HeaderText = "就诊号";
             this.gh_sequence.Name = "gh_sequence";
             this.gh_sequence.ReadOnly = true;
+            this.gh_sequence.Visible = false;
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            this.ledger_sn.HeaderText = "结账次数";
+            this.ledger_sn.Name = "ledger_sn";
+            this.ledger_sn.ReadOnly = true;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "就诊次数";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
             // 
             // gh_order
             // 
@@ -821,21 +854,6 @@
             this.charge_fee.HeaderText = "金额(元)";
             this.charge_fee.Name = "charge_fee";
             this.charge_fee.ReadOnly = true;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "次数";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "ledger_sn";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            this.ledger_sn.Visible = false;
             // 
             // visit_flag
             // 
@@ -903,24 +921,6 @@
             this.ampm.Name = "ampm";
             this.ampm.ReadOnly = true;
             this.ampm.Visible = false;
-            // 
-            // uiToolTip1
-            // 
-            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
-            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.uiToolTip1.OwnerDraw = true;
-            // 
-            // lblTotalCount
-            // 
-            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
-            this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
-            this.lblTotalCount.TabIndex = 7;
-            this.lblTotalCount.Text = "总计：";
-            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // GhList
             // 
@@ -993,13 +993,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clinic_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn doctor_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn gh_sequence;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn times;
         private System.Windows.Forms.DataGridViewTextBoxColumn gh_order;
         private System.Windows.Forms.DataGridViewTextBoxColumn gh_sequence_f;
         private System.Windows.Forms.DataGridViewTextBoxColumn flag;
         private System.Windows.Forms.DataGridViewTextBoxColumn opera_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_fee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn times;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn visit_flag;
         private System.Windows.Forms.DataGridViewTextBoxColumn visit_status;
         private System.Windows.Forms.DataGridViewTextBoxColumn group_name;

@@ -32,6 +32,10 @@ namespace Mzsf.Forms.Pages
 
         string refund_item_str = "";
 
+        List<MzDepositVM> deposit_list;
+        PatientVM _patient;
+
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -42,11 +46,31 @@ namespace Mzsf.Forms.Pages
         {
             lblZongji.Text = total_charge.ToString();
             lblTuikuan.Text = total_charge.ToString();
+            GetPatientInfo();
             //绑定支付信息
             BindDepositList(patient_id, ledger_sn);
             //绑定付款项目信息
             BindDrugDetails(patient_id, ledger_sn, table_flag);
+
         }
+        public void GetPatientInfo()
+        {
+            try
+            { 
+                string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={patient_id}");
+
+                var json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
+
+                _patient = result.data[0];
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+            }
+        }
+
 
         /// <summary>
         /// 退款处理
@@ -111,41 +135,195 @@ namespace Mzsf.Forms.Pages
             try
             {
                 //各种支付退款处理
-
-                //提交数据库
-                var d = new
+                if (deposit_list != null)
                 {
-                    pid = patient_id,
-                    ledger_sn = ledger_sn,
-                    receipt_sn = receipt_sn,
-                    receipt_no = receipt_no,
-                    cheque_cash = ";14;11;12",
-                    isall = "1",
-                    opera = SessionHelper.uservm.user_mi
-                };
-                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                string paramurl = string.Format($"/api/mzsf/BackFee?opera={d.opera}&pid={d.pid}&ledger_sn={d.ledger_sn}&receipt_sn={d.receipt_sn}&receipt_no={d.receipt_no}&cheque_cash={d.cheque_cash}&isall={d.isall}");
+                    //退款操作
+                    foreach (var item in deposit_list)
+                    {
+                        if (!string.IsNullOrWhiteSpace(item.cheque_no))
+                        {
+                            log.Info("有外部订单号：" + item.cheque_no);
 
-                log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                            var page_model = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.cheque_type).FirstOrDefault();
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+                            if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
+                            {
+                                log.Info("微信退款：");
+                                //微信退款
+                                //var transaction_id = "";
+                                //var out_trade_no = vm.cheque_no;
+                                //var total_fee = vm.charge.ToString();
+                                //var redfund_fee = vm.charge.ToString();
 
-                if (result.status == 1 && result.data)
-                {
-                    log.Info("退款成功");
-                    UIMessageTip.ShowOk("退款成功!", 1500);
-                    this.Close();
-                    return;
+                                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                                //log.Info("微信退款返回字符串：" + wx_response);
+
+                            }
+                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
+                            {
+                                log.Info("支付宝退款：");
+                                //支付宝退款
+                                //var cof = AliConfig.GetConfig();
+                                //Factory.SetOptions(cof);
+
+                                ////全部退款
+                                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(vm.cheque_no, vm.charge.ToString());
+                                ////部分退款
+                                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                                //if (ResponseChecker.Success(response))
+                                //{
+                                //    log.Info("支付宝退款调用成功");
+                                //}
+                                //else
+                                //{
+                                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                                //}
+                            }
+                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
+                            {
+                                log.Info("医保退款：");
+                                //门诊挂号撤销
+
+                                ////查询用户医保信息
+                                //var insuplc_admdvs = _userInfo.yb_insuplc_admdvs.Trim();
+                                //var mdtrt_id = item.cheque_no;
+                                //var ipt_otp_no = receipt_sn;
+                                //var psn_no = _userInfo.yb_psn_no;
+
+                                //YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
+                                //ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
+
+                                //ghRefund.msgid = YBHelper.msgid;
+                                //ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                                //ghRefund.insuplc_admdvs = insuplc_admdvs;
+                                //ghRefund.recer_sys_code = YBHelper.recer_sys_code;
+                                //ghRefund.dev_no = "";
+                                //ghRefund.dev_safe_info = "";
+                                //ghRefund.cainfo = "";
+                                //ghRefund.signtype = "";
+                                //ghRefund.infver = YBHelper.infver;
+                                //ghRefund.opter_type = YBHelper.opter_type;
+                                //ghRefund.opter = SessionHelper.uservm.user_mi;
+                                //ghRefund.opter_name = SessionHelper.uservm.name;
+                                //ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                //ghRefund.fixmedins_code = YBHelper.fixmedins_code;
+                                //ghRefund.fixmedins_name = YBHelper.fixmedins_name;
+                                //ghRefund.sign_no = YBHelper.msgid;
+
+                                //ghRefund.input = new RepModel<GHRefundRequestModel>();
+                                //ghRefund.input.data = new GHRefundRequestModel();
+                                //ghRefund.input.data.mdtrt_id = mdtrt_id;
+                                //ghRefund.input.data.psn_no = psn_no;
+                                //ghRefund.input.data.ipt_otp_no = item.receipt_sn;// ipt_otp_no;
+
+
+                                //json = WebApiHelper.SerializeObject(ghRefund);
+
+                                //var BusinessID = "2202";
+                                //var Dataxml = json;
+                                //var Outputxml = "";
+                                //var parm = new object[] { BusinessID, json, Outputxml };
+
+                                //ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                                //log.Debug(parm[2]);
+
+                                //var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                                //if (!string.IsNullOrEmpty(refund_resp.err_msg))
+                                //{
+                                //    MessageBox.Show(refund_resp.err_msg);
+                                //    log.Error(refund_resp.err_msg);
+                                //    return;
+                                //}
+
+
+                                //门诊结算撤销
+                                var jscxRequest = new YBRequest<MZJSCX>();
+                                jscxRequest.infno = "2208";
+
+                                jscxRequest.msgid = YBHelper.msgid;
+                                jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+                                jscxRequest.insuplc_admdvs = _patient.yb_insuplc_admdvs.Trim();
+                                jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
+                                jscxRequest.dev_no = "";
+                                jscxRequest.dev_safe_info = "";
+                                jscxRequest.cainfo = "";
+                                jscxRequest.signtype = "";
+                                jscxRequest.infver = YBHelper.infver;
+                                jscxRequest.opter_type = YBHelper.opter_type;
+                                jscxRequest.opter = SessionHelper.uservm.user_mi;
+                                jscxRequest.opter_name = SessionHelper.uservm.name;
+                                jscxRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                jscxRequest.fixmedins_code = YBHelper.fixmedins_code;
+                                jscxRequest.fixmedins_name = YBHelper.fixmedins_name;
+                                jscxRequest.sign_no = YBHelper.msgid;
+                                jscxRequest.input = new RepModel<MZJSCX>();
+
+                                MZJSCX _mzjscx = new MZJSCX();
+                                _mzjscx.psn_no = item.psn_no;
+                                _mzjscx.setl_id = item.setl_id;//结算返回值 
+                                _mzjscx.mdtrt_id = item.mdtrt_id;
+
+                                jscxRequest.input.data = _mzjscx;
+
+                                var json = WebApiHelper.SerializeObject(jscxRequest);
+                                var BusinessID = "2208";
+                                var Dataxml = json;
+                                var Outputxml = "";
+                                var parm = new object[] { BusinessID, json, Outputxml };
+
+
+                                YBHelper.AddYBLog(BusinessID, json, _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+                                //提交
+                                ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                                log.Debug("结算撤销返回：" + parm[2]);
+                                YBHelper.AddYBLog(BusinessID, parm[2].ToString(), _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+
+                                var _jscxresp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                            }
+                        }
+                    }
+
+
+                    //提交数据库
+                    var d = new
+                    {
+                        pid = patient_id,
+                        ledger_sn = ledger_sn,
+                        receipt_sn = receipt_sn,
+                        receipt_no = receipt_no,
+                        cheque_cash = ";14;11;12",
+                        isall = "1",
+                        opera = SessionHelper.uservm.user_mi
+                    };
+                    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    string paramurl = string.Format($"/api/mzsf/BackFee?opera={d.opera}&pid={d.pid}&ledger_sn={d.ledger_sn}&receipt_sn={d.receipt_sn}&receipt_no={d.receipt_no}&cheque_cash={d.cheque_cash}&isall={d.isall}");
+
+                    log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                    string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(responseJson);
+
+                    if (result.status == 1 && result.data)
+                    {
+                        log.Info("退款成功");
+                        UIMessageTip.ShowOk("退款成功!", 1500);
+                        this.Close();
+                        return;
+                    }
+                    else
+                    {
+                        log.Error(result.message);
+                        UIMessageBox.ShowError(result.message);
+                    }
+
+
                 }
-                else
-                {
-                    log.Error(result.message);
-                    UIMessageBox.ShowError(result.message);
-                }
-
-
             }
             catch (Exception ex)
             {
@@ -226,6 +404,7 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzDepositVM>>>(json);
                 if (result.status == 1)
                 {
+                    deposit_list = result.data;
                     if (result.data.Count > 0)
                     {
                         var dat = result.data.Select(p => new
@@ -405,22 +584,22 @@ namespace Mzsf.Forms.Pages
             {
                 int colIndex = e.ColumnIndex;
                 int rowIndex = e.RowIndex;
-                if (colIndex == 0 && rowIndex!=-1)
+                if (colIndex == 0 && rowIndex != -1)
                 {
-                   // MessageBox.Show(this.dgvCpr.Rows[e.RowIndex].Cells[0].EditedFormattedValue.ToString());
+                    // MessageBox.Show(this.dgvCpr.Rows[e.RowIndex].Cells[0].EditedFormattedValue.ToString());
 
                     (dgvCpr.Rows[rowIndex].Cells[0] as DataGridViewCheckBoxCell).ReadOnly = true;
                     //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
-                        if (dgvCpr.Rows[rowIndex].Cells[0].Value != null && Convert.ToBoolean(dgvCpr.Rows[rowIndex].Cells[0].Value))
-                        {
-                            //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "0";
-                            dgvCpr.Rows[rowIndex].Cells[0].Value = false;
-                        }
-                        else
-                        {
-                            //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "1";
-                            dgvCpr.Rows[rowIndex].Cells[0].Value = true;
-                        }
+                    if (dgvCpr.Rows[rowIndex].Cells[0].Value != null && Convert.ToBoolean(dgvCpr.Rows[rowIndex].Cells[0].Value))
+                    {
+                        //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "0";
+                        dgvCpr.Rows[rowIndex].Cells[0].Value = false;
+                    }
+                    else
+                    {
+                        //dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value = "1";
+                        dgvCpr.Rows[rowIndex].Cells[0].Value = true;
+                    }
                    (dgvCpr.Rows[rowIndex].Cells[0] as DataGridViewCheckBoxCell).ReadOnly = false;
 
                     CalcTotalPrice();

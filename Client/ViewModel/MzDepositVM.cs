@@ -28,6 +28,10 @@ namespace Client.ViewModel
         public string deposit_no { get; set; }
         public string cheque_name { get; set; }
         public string cheque_flag { get; set; }
+        public string mz_dept_no { get; set; }
+        public string mdtrt_id { get; set; }
+        public string psn_no { get; set; }
+        public string setl_id { get; set; }
 
     }
 }

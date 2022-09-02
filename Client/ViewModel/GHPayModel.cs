@@ -9,16 +9,18 @@ namespace Client.ViewModel
 {
     public class GHPayModel
     {
-        public GHPayModel(string type, decimal je,string trade_no="")
+        public GHPayModel(string type, decimal je,string trade_no="", string setlid = "")
         { 
             pay_type = type;
             pay_je = je;
             out_trade_no = trade_no;
+            setl_id = setlid;
         }
         public string pay_type { get; set; }
         public decimal pay_je { get; set; }
 
         public string out_trade_no { get; set; }
+        public string setl_id { get; set; }
         public string type_name
         {
             get

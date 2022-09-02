@@ -70,13 +70,23 @@ namespace Client.Forms.Pages.hbgl
 
         private void dgvRequestHour_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
             {
-                txt_section.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number"].Value.ToString();
-                txtComment.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number_comment"].Value.ToString();
-                txt_start_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["start_time"].Value.ToString();
-                txt_end_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["end_time"].Value.ToString();
-                cbx_ampm.SelectedValue = dgvRequestTime.Rows[e.RowIndex].Cells["ampm"].Value.ToString();
+
+                if (e.RowIndex != -1)
+                {
+                    txt_section.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number"].Value.ToString();
+                    txtComment.Text = dgvRequestTime.Rows[e.RowIndex].Cells["Section_number_comment"].Value.ToString();
+                    txt_start_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["start_time"].Value.ToString();
+                    txt_end_time.Text = dgvRequestTime.Rows[e.RowIndex].Cells["end_time"].Value.ToString();
+
+                    cbx_ampm.SelectedValue = dgvRequestTime.Rows[e.RowIndex].Cells["ampm"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.ToString());
             }
         }
 
@@ -91,20 +101,24 @@ namespace Client.Forms.Pages.hbgl
                 ampm = cbx_ampm.SelectedValue,
 
             };
+
+            if (d.ampm != null && d.ampm.ToString() != "")
+            {
+                UIMessageTip.ShowError("请将数据填写完整！");
+                return;
+            }
             if (string.IsNullOrWhiteSpace(d.section) || string.IsNullOrWhiteSpace(d.section_name))
             {
                 UIMessageTip.ShowError("请将数据填写完整！");
                 return;
             }
 
-
             try
             {
-
                 // EditRequestTime(string section, string section_name, string start_time, string end_time,string ampm)
                 string time1 = d.start_time;
                 string time2 = d.end_time;
-                 
+
                 string paramurl = string.Format($"/api/GuaHao/EditRequestTime?section={d.section}&section_name={d.section_name}&start_time={d.start_time}&end_time={d.end_time}&ampm={d.ampm}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -147,7 +161,7 @@ namespace Client.Forms.Pages.hbgl
             {
                 return;
             }
-             
+
             string paramurl = string.Format($"/api/GuaHao/DeleteRequestTime?section={d.section}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);

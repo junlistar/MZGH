@@ -1280,6 +1280,8 @@ namespace Client
                     #endregion
 
                     PatientVM = userInfo;
+                    SessionHelper.patientVM = userInfo;
+
                     if (string.IsNullOrEmpty(userInfo.name))
                     {
                         return;

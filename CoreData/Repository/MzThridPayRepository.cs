@@ -18,7 +18,7 @@ namespace Data.Repository
             return  Select(selectSql); 
 
         }
-        public int AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs,string charge,string price_date, string opera)
+        public int AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string setl_id,string ipt_otp_no, string psn_no, string yb_insuplc_admdvs,string charge,string price_date, string opera)
         {
             string insert_sql = GetSqlByTag("mzsf_mzthirdpay_add");
              
@@ -27,6 +27,7 @@ namespace Data.Repository
             para.Add("@cheque_type", cheque_type);
             para.Add("@cheque_no", cheque_no);
             para.Add("@mdtrt_id", mdtrt_id);
+            para.Add("@setl_id", setl_id);
             para.Add("@ipt_otp_no", ipt_otp_no);
             para.Add("@psn_no", psn_no);
             para.Add("@yb_insuplc_admdvs", yb_insuplc_admdvs);

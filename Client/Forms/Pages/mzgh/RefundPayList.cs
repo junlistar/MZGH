@@ -107,7 +107,9 @@ namespace Client
                             {
                                 log.Info("有外部订单号：" + item.cheque_no);
 
-                                if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.WeiXin))
+                                var page_model = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.cheque_type).FirstOrDefault();
+
+                                if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
                                 {
                                     log.Info("微信退款：");
                                     //微信退款
@@ -120,7 +122,7 @@ namespace Client
                                     //log.Info("微信退款返回字符串：" + wx_response);
 
                                 }
-                                else if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.Zhifubao))
+                                else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
                                 {
                                     log.Info("支付宝退款：");
                                     //支付宝退款
@@ -141,63 +143,110 @@ namespace Client
                                     //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
                                     //}
                                 }
-                                else if (item.cheque_type == PayMethod.GetChequeTypeByEnum(PayMethodEnum.Yibao))
+                                else if (int.Parse(page_model.page_code)== (int)PayMethodEnum.Yibao)
                                 {
                                     log.Info("医保退款：");
                                     //门诊挂号撤销
 
-                                    //查询用户医保信息
-                                    var insuplc_admdvs = _userInfo.yb_insuplc_admdvs.Trim();
-                                    var mdtrt_id = item.cheque_no;
-                                    var ipt_otp_no = receipt_sn;
-                                    var psn_no = _userInfo.yb_psn_no;
+                                    ////查询用户医保信息
+                                    //var insuplc_admdvs = _userInfo.yb_insuplc_admdvs.Trim();
+                                    //var mdtrt_id = item.cheque_no;
+                                    //var ipt_otp_no = receipt_sn;
+                                    //var psn_no = _userInfo.yb_psn_no;
 
-                                    YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
-                                    ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
+                                    //YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
+                                    //ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
 
-                                    ghRefund.msgid = YBHelper.msgid;
-                                    ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                                    ghRefund.insuplc_admdvs = insuplc_admdvs;
-                                    ghRefund.recer_sys_code = YBHelper.recer_sys_code;
-                                    ghRefund.dev_no = "";
-                                    ghRefund.dev_safe_info = "";
-                                    ghRefund.cainfo = "";
-                                    ghRefund.signtype = "";
-                                    ghRefund.infver = YBHelper.infver;
-                                    ghRefund.opter_type = YBHelper.opter_type;
-                                    ghRefund.opter = SessionHelper.uservm.user_mi;
-                                    ghRefund.opter_name = SessionHelper.uservm.name;
-                                    ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                                    ghRefund.fixmedins_code = YBHelper.fixmedins_code;
-                                    ghRefund.fixmedins_name = YBHelper.fixmedins_name;
-                                    ghRefund.sign_no = YBHelper.msgid;
+                                    //ghRefund.msgid = YBHelper.msgid;
+                                    //ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                                    //ghRefund.insuplc_admdvs = insuplc_admdvs;
+                                    //ghRefund.recer_sys_code = YBHelper.recer_sys_code;
+                                    //ghRefund.dev_no = "";
+                                    //ghRefund.dev_safe_info = "";
+                                    //ghRefund.cainfo = "";
+                                    //ghRefund.signtype = "";
+                                    //ghRefund.infver = YBHelper.infver;
+                                    //ghRefund.opter_type = YBHelper.opter_type;
+                                    //ghRefund.opter = SessionHelper.uservm.user_mi;
+                                    //ghRefund.opter_name = SessionHelper.uservm.name;
+                                    //ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    //ghRefund.fixmedins_code = YBHelper.fixmedins_code;
+                                    //ghRefund.fixmedins_name = YBHelper.fixmedins_name;
+                                    //ghRefund.sign_no = YBHelper.msgid;
 
-                                    ghRefund.input = new RepModel<GHRefundRequestModel>();
-                                    ghRefund.input.data = new GHRefundRequestModel();
-                                    ghRefund.input.data.mdtrt_id = mdtrt_id;
-                                    ghRefund.input.data.psn_no = psn_no;
-                                    ghRefund.input.data.ipt_otp_no = item.receipt_sn;// ipt_otp_no;
+                                    //ghRefund.input = new RepModel<GHRefundRequestModel>();
+                                    //ghRefund.input.data = new GHRefundRequestModel();
+                                    //ghRefund.input.data.mdtrt_id = mdtrt_id;
+                                    //ghRefund.input.data.psn_no = psn_no;
+                                    //ghRefund.input.data.ipt_otp_no = item.receipt_sn;// ipt_otp_no;
 
 
-                                    json = WebApiHelper.SerializeObject(ghRefund);
+                                    //json = WebApiHelper.SerializeObject(ghRefund);
 
-                                    var BusinessID = "2202";
+                                    //var BusinessID = "2202";
+                                    //var Dataxml = json;
+                                    //var Outputxml = "";
+                                    //var parm = new object[] { BusinessID, json, Outputxml };
+
+                                    //ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                                    //log.Debug(parm[2]);
+
+                                    //var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
+                                    //if (!string.IsNullOrEmpty(refund_resp.err_msg))
+                                    //{
+                                    //    MessageBox.Show(refund_resp.err_msg);
+                                    //    log.Error(refund_resp.err_msg);
+                                    //    return;
+                                    //}
+
+
+                                    //门诊结算撤销
+                                    var jscxRequest = new YBRequest<MZJSCX>();
+                                    jscxRequest.infno = "2208";
+
+                                    jscxRequest.msgid = YBHelper.msgid;
+                                    jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+                                    jscxRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
+                                    jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
+                                    jscxRequest.dev_no = "";
+                                    jscxRequest.dev_safe_info = "";
+                                    jscxRequest.cainfo = "";
+                                    jscxRequest.signtype = "";
+                                    jscxRequest.infver = YBHelper.infver;
+                                    jscxRequest.opter_type = YBHelper.opter_type;
+                                    jscxRequest.opter = SessionHelper.uservm.user_mi;
+                                    jscxRequest.opter_name = SessionHelper.uservm.name;
+                                    jscxRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                                    jscxRequest.fixmedins_code = YBHelper.fixmedins_code;
+                                    jscxRequest.fixmedins_name = YBHelper.fixmedins_name;
+                                    jscxRequest.sign_no = YBHelper.msgid;
+                                    jscxRequest.input = new RepModel<MZJSCX>();
+
+                                    MZJSCX _mzjscx = new MZJSCX();
+                                    _mzjscx.psn_no = SessionHelper.patientVM.yb_psn_no;
+                                    _mzjscx.setl_id = item.out_trade_no;//结算返回值 
+                                    _mzjscx.mdtrt_id =item.cheque_no;
+
+                                    jscxRequest.input.data = _mzjscx;
+
+                                    json = WebApiHelper.SerializeObject(jscxRequest);
+                                    var BusinessID = "2208";
                                     var Dataxml = json;
                                     var Outputxml = "";
                                     var parm = new object[] { BusinessID, json, Outputxml };
 
-                                    ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                                    log.Debug(parm[2]);
+                                    YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+                                    //提交
+                                     ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                                    var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+                                    log.Debug("结算撤销返回：" + parm[2]);
+                                    YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
 
-                                    if (!string.IsNullOrEmpty(refund_resp.err_msg))
-                                    {
-                                        MessageBox.Show(refund_resp.err_msg);
-                                        log.Error(refund_resp.err_msg);
-                                        return;
-                                    }
+                                    var _jscxresp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
+
                                 }
                             }
                         }
@@ -248,6 +297,7 @@ namespace Client
             }
         }
 
+      
         private void RefundPayList_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

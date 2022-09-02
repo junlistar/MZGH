@@ -750,3 +750,8 @@ CREATE TABLE [dbo].[mz_webreport](
 if not exists(select * from syscolumns where id=object_id('gh_request') and name='delete_flag') begin
 ALTER TABLE gh_request ADD delete_flag  bit default (null)
 end
+
+--增加医保结算id
+if not exists(select * from syscolumns where id=object_id('mz_thirdpay') and name='setl_id') begin
+ALTER TABLE mz_thirdpay ADD setl_id  varchar(50) default (null)
+end

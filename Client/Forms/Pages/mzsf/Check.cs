@@ -28,6 +28,8 @@ namespace Mzsf.Forms.Pages
         List<GHPayModel> paylist = new List<GHPayModel>();
         //List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
 
+        MzjsResponse mzjsResponse;
+
         decimal total_charge = 0;
         public int times = 0;
         public string doct_code = "";
@@ -171,7 +173,7 @@ namespace Mzsf.Forms.Pages
                 log.Error(ex.Message);
             }
         }
-        public void AddMzThridPay(string payMethod, string out_trade_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, decimal charge)
+        public void AddMzThridPay(string payMethod, string out_trade_no, string mdtrt_id,string setl_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, decimal charge)
         {
             try
             { 
@@ -179,13 +181,14 @@ namespace Mzsf.Forms.Pages
                 var _cheque_type = payMethod;
                 var _cheque_no = out_trade_no;
                 var _mdtrt_id = mdtrt_id;
+                var _setl_id = setl_id;
                 var _ipt_otp_no = ipt_otp_no;
                 var _psn_no = psn_no;
                 var _yb_insuplc_admdvs = yb_insuplc_admdvs;
                 var _price_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 var _charge = charge;
                 var _opera = SessionHelper.uservm.user_mi;
-                string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
+                string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&setl_id={setl_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
                 HttpClientUtil.Get(paramurl);
             }
             catch (Exception ex)
@@ -263,7 +266,7 @@ namespace Mzsf.Forms.Pages
                         paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, out_trade_no));
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", "", (decimal)left_je);
                     }
                     else
                     {
@@ -283,13 +286,12 @@ namespace Mzsf.Forms.Pages
                         paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, out_trade_no));
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", "", (decimal)left_je);
                     }
                     else
                     {
                         log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
-                        return;
-
+                        return; 
                     }
                 }
                 else if (payMethod == PayMethodEnum.Yibao)
@@ -299,10 +301,10 @@ namespace Mzsf.Forms.Pages
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id));
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
 
                     }
                     else
@@ -627,6 +629,9 @@ namespace Mzsf.Forms.Pages
                     {
                         MessageBox.Show(_jzxxresp.err_msg);
                         log.Error(_jzxxresp.err_msg);
+
+                        //门诊挂号撤销
+
                         return false;
                     }
 
@@ -833,11 +838,13 @@ namespace Mzsf.Forms.Pages
                         log.Error(_jsresp.err_msg);
                     }
                     else if (_jsresp.output != null)
-                    {
-                        var setl_id = _jsresp.output.setlinfo.setl_id;
+                    { 
+                        mzjsResponse = _jsresp.output;
 
-                           //门诊结算撤销
-                           var jscxRequest = new YBRequest<MZJSCX>();
+                        var setl_id = _jsresp.output.setlinfo.setl_id;
+                          
+                        //门诊结算撤销
+                        var jscxRequest = new YBRequest<MZJSCX>();
                         jscxRequest.infno = "2208";
 
                         jscxRequest.msgid = YBHelper.msgid;
@@ -1262,7 +1269,7 @@ namespace Mzsf.Forms.Pages
             string pay_string = "";
             foreach (var item in paylist)
             {
-                pay_string += "," + item.pay_type + "-" + item.pay_je + "-" + item.out_trade_no;
+                pay_string += "," + item.pay_type + "-" + item.pay_je + "-" + item.out_trade_no + "-" + item.setl_id;
             }
 
             if (pay_string.Length > 0)
@@ -1272,7 +1279,7 @@ namespace Mzsf.Forms.Pages
             else
             {
                 //处理金额为0的情况
-                pay_string = PayMethod.GetChequeTypeByEnum(PayMethodEnum.Xianjin) + "-0-";
+                pay_string = PayMethod.GetChequeTypeByEnum(PayMethodEnum.Xianjin) + "-0--";
             }
             try
             {

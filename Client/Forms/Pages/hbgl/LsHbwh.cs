@@ -857,49 +857,6 @@ namespace Client
         }
 
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            //var index = dgvlist.SelectedIndex;
-
-            //if (index >= 0)
-            //{
-
-            //    try
-            //    {
-
-            //        var request_sn = dgvlist.Rows[index].Cells["request_sn"].Value.ToString();
-
-
-            //        var d = new
-            //        {
-            //            request_sn = request_sn,
-            //        };
-            //        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-            //        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            //        var paramurl = string.Format($"/api/GuaHao/DeleteBaseRequest?request_sn={d.request_sn}");
-
-            //        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-            //        var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
-            //        if (result.status == 1)
-            //        {
-            //            UIMessageTip.ShowOk("操作成功!");
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            UIMessageTip.ShowError("查询失败!");
-            //            log.Error(result.message);
-            //        }
-
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //        log.Error(ex.ToString());
-            //    }
-            //}
-        }
         private void txtks_KeyUp(object sender, KeyEventArgs e)
         {
             //MessageBox.Show(e.KeyCode.ToString());
@@ -1462,18 +1419,72 @@ namespace Client
 
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
-            var index = dgvlist.SelectedIndex;
 
-            if (index == -1)
+            if (dgvlist.Rows.Count > 0)
             {
-                UIMessageTip.Show("没有选择数据行");
-                return;
+                var _rowIndex = dgvlist.SelectedCells[0].RowIndex;
+                var _colIndex = dgvlist.SelectedCells[0].ColumnIndex;
+                
+                Delete(_rowIndex, _colIndex);
             }
+            else
+            {
+                UIMessageTip.ShowWarning("该日期条件下没有数据！");
+            }
+        }
 
+        public void Delete(int _rowIndex, int _colIndex)
+        {
+            try
+            {
+                if (dgvlist.SelectedCells.Count > 0)
+                {
+                    if (_rowIndex != -1 && _colIndex != -1)
+                    {
+                        var col_head_tag = dgvlist.Columns[_colIndex].Tag;
+
+                        if (col_head_tag != null)
+                        {
+                            var _record_sn = "0";
+                            if (col_head_tag.ToString() == "0")
+                            {
+                                _record_sn = dgvlist.Rows[_rowIndex].Cells["sn"].Value.ToString();
+                            }
+                            else
+                            {
+                                _record_sn = dgvlist.Rows[_rowIndex].Cells["sn" + col_head_tag].Value.ToString();
+                            }
+
+                            if (_record_sn != "0")
+                            {
+                                if (DeleteRecord(_record_sn))
+                                {
+                                    InitData();
+                                }
+                            }
+                            else
+                            {
+                                UIMessageTip.ShowWarning("该日期条件下没有数据！");
+                            }
+                        }
+                        else
+                        {
+                            UIMessageTip.ShowWarning("请选择具体日期下面的数据操作");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
+
+        public bool DeleteRecord(string record_sn)
+        {
             try
             { 
-                var record_sn = dgvlist.Rows[index].Cells["sn"].Value.ToString();
- 
                 var d = new
                 {
                     record_sn = record_sn,
@@ -1488,7 +1499,7 @@ namespace Client
                 if (result.status == 1)
                 {
                     UIMessageTip.ShowOk("操作成功!");
-                    return;
+                    return true ;
                 }
                 else
                 {
@@ -1502,7 +1513,7 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
-
+            return false;
         }
     }
 }

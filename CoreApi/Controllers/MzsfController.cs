@@ -517,12 +517,12 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<FpData>>(ex.Message);
             }
         }
-        public ResponseResult<int> AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, string charge, string price_date, string opera)
+        public ResponseResult<int> AddMzThridPay(string patient_id, string cheque_type, string cheque_no, string mdtrt_id, string setl_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, string charge, string price_date, string opera)
         {
-            Log.Information($"AddMzThridPay,{patient_id},{cheque_type},{cheque_no},{mdtrt_id},{ipt_otp_no},{psn_no},{yb_insuplc_admdvs},{charge},{price_date},{opera}");
+            Log.Information($"AddMzThridPay,{patient_id},{cheque_type},{cheque_no},{mdtrt_id},{setl_id},{ipt_otp_no},{psn_no},{yb_insuplc_admdvs},{charge},{price_date},{opera}");
             try
             {
-                return _mzThirdPayRepository.AddMzThridPay(patient_id, cheque_type, cheque_no, mdtrt_id, ipt_otp_no, psn_no, yb_insuplc_admdvs, charge,price_date, opera);
+                return _mzThirdPayRepository.AddMzThridPay(patient_id, cheque_type, cheque_no, mdtrt_id, setl_id, ipt_otp_no, psn_no, yb_insuplc_admdvs, charge,price_date, opera);
             }
             catch (Exception ex)
             {

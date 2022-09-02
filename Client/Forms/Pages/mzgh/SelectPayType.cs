@@ -47,6 +47,7 @@ namespace Client
         List<GHPayModel> paylist = new List<GHPayModel>();
         List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
 
+        MzjsResponse mzjsResponse;
         public SelectPayType(GHRequestVM _vm, string _patientId)
         {
             InitializeComponent(); vm = _vm; patientId = _patientId;
@@ -257,30 +258,7 @@ namespace Client
                 timer1.Stop(); lblmsg.Visible = false;
             }
         }
-
-        public void AddMzThridPay(string payMethod, string out_trade_no, string mdtrt_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, decimal charge)
-        {
-            try
-            {
-                var _pid = patientId;
-                var _cheque_type = payMethod;
-                var _cheque_no = out_trade_no;
-                var _mdtrt_id = mdtrt_id;
-                var _ipt_otp_no = ipt_otp_no;
-                var _psn_no = psn_no;
-                var _yb_insuplc_admdvs = yb_insuplc_admdvs;
-                var _price_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                var _charge = charge;
-                var _opera = SessionHelper.uservm.user_mi;
-                string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
-                HttpClientUtil.Get(paramurl);
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.Show(ex.Message);
-                log.Error(ex.ToString());
-            }
-        }
+         
 
 
         public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type)
@@ -357,7 +335,7 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", "", (decimal)left_je);
 
                     }
                     else
@@ -384,13 +362,11 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, out_trade_no, "", "", "", "", "", (decimal)left_je);
                     }
                     else
                     {
-                        log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
-
-
+                        log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je); 
                     }
                 }
                 else if (payMethod == PayMethodEnum.Yibao)
@@ -400,7 +376,7 @@ namespace Client
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id));
 
                         this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -409,7 +385,7 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id ,YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
                     }
                     else
                     {
@@ -509,7 +485,7 @@ namespace Client
                     json = WebApiHelper.SerializeObject(request);
 
                     //调用 com名称  方法  参数
-                    BusinessID = "1101";
+                    BusinessID = ((int)InfoNoEnum.人员信息).ToString();
                     Dataxml = json;
                     Outputxml = "";
                     parm = new object[] { BusinessID, json, Outputxml };
@@ -702,11 +678,11 @@ namespace Client
                     Outputxml = "";
                     parm = new object[] { BusinessID, json, Outputxml };
 
-                    AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                    AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     log.Debug("就诊系信息返回：" + parm[2]);
 
@@ -745,25 +721,25 @@ namespace Client
                     foreach (var item in chargeItems)
                     {
                         feedetail _detail = new feedetail();
-                        _detail.feedetl_sn = GuaHao.PatientVM.patient_id + "_" + GuaHao.PatientVM.max_ledger_sn+ "_"+ _index++;
+                        _detail.feedetl_sn = GuaHao.PatientVM.patient_id + "_" + GuaHao.PatientVM.max_ledger_sn + "_" + _index++;
                         _detail.mdtrt_id = mdtrt_id;
                         _detail.psn_no = psn_no;
                         _detail.chrg_bchno = ipt_otp_no;
                         _detail.rx_circ_flag = "0";
                         _detail.fee_ocur_time = _dt;
                         var ybbill = SessionHelper.ybhzCompare.Where(p => p.charge_code == item.charge_code).FirstOrDefault();
-                        if (ybbill!=null)
+                        if (ybbill != null)
                         {
                             _detail.med_list_codg = ybbill.ybhz_code;
                         }
                         else
                         {
                             MessageBox.Show("没有找到关联医保目录");
-                        } 
+                        }
                         _detail.medins_list_codg = item.charge_code;
                         _detail.det_item_fee_sumamt = item.charge_price;
                         _detail.cnt = 1;
-                        _detail.pric =item.charge_price;
+                        _detail.pric = item.charge_price;
                         _detail.bilg_dept_codg = vm.unit_sn;
                         _detail.bilg_dept_name = vm.unit_name;
                         _detail.bilg_dr_codg = vm.yb_ys_code;
@@ -773,17 +749,17 @@ namespace Client
                         feedetails.Add(_detail);
                     }
                     mzmxRequest.input.feedetail = feedetails;
-                   json = WebApiHelper.SerializeObject(mzmxRequest);
-                    BusinessID = "2204";
+                    json = WebApiHelper.SerializeObject(mzmxRequest);
+                    BusinessID = ((int)InfoNoEnum.门诊明细上传).ToString();
                     Dataxml = json;
                     Outputxml = "";
                     parm = new object[] { BusinessID, json, Outputxml };
 
-                    AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                    AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     log.Debug("明细提交返回：" + parm[2]);
 
@@ -831,11 +807,11 @@ namespace Client
                     Outputxml = "";
                     parm = new object[] { BusinessID, json, Outputxml };
 
-                    AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                    AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     log.Debug("预结算返回：" + parm[2]);
 
@@ -900,11 +876,11 @@ namespace Client
                     parm = new object[] { BusinessID, json, Outputxml };
 
                     //提交门诊挂号结算信息
-                    AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                    AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                    YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                     log.Debug("结算返回：" + parm[2].ToString());
 
@@ -917,6 +893,9 @@ namespace Client
                     }
                     else if (_jsresp.output != null)
                     {
+                        mzjsResponse = _jsresp.output;
+                        //return true;
+
                         var setl_id = _jsresp.output.setlinfo.setl_id;
 
                         //门诊结算撤销
@@ -955,11 +934,11 @@ namespace Client
                         parm = new object[] { BusinessID, json, Outputxml };
 
 
-                        AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                        YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 0, SessionHelper.uservm.user_mi, ghRequest.inf_time);
                         //提交
                         result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                        AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
+                        YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, ghRequest.sign_no, ghRequest.infver, 1, SessionHelper.uservm.user_mi, ghRequest.inf_time);
 
                         log.Debug("结算撤销返回：" + parm[2]);
 
@@ -974,7 +953,6 @@ namespace Client
                         {
                             return true;
                         }
-
                     }
 
                     return false;
@@ -1218,7 +1196,7 @@ namespace Client
             string pay_string = "";
             foreach (var item in paylist)
             {
-                pay_string += "," + item.pay_type + "-" + item.pay_je + "-" + item.out_trade_no;
+                pay_string += "," + item.pay_type + "-" + item.pay_je + "-" + item.out_trade_no + "-" + item.setl_id;
             }
 
             if (pay_string.Length > 0)
@@ -1228,7 +1206,7 @@ namespace Client
             else
             {
                 //处理金额为0的情况
-                pay_string = (int)PayMethodEnum.Xianjin + "-0-";
+                pay_string = (int)PayMethodEnum.Xianjin + "-0--";
             }
             //MessageBox.Show(pay_string);
 
@@ -2358,39 +2336,30 @@ namespace Client
 
         }
 
-        #region 医保信息上传
-        public void AddYBLog(string info_code, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)
+        public void AddMzThridPay(string payMethod, string out_trade_no, string mdtrt_id, string setl_id, string ipt_otp_no, string psn_no, string yb_insuplc_admdvs, decimal charge)
         {
             try
             {
-                var _yblog = new YbLog();
-                _yblog.admiss_times = 4;
-                _yblog.data = data;
-                _yblog.oper_code = info_code;
-                _yblog.patient_id = patient_id;
-                _yblog.msgid = msgid;
-                _yblog.ver = ver;
-                _yblog.flag = flag;
-                _yblog.opera = opera;
-                _yblog.oper_date = Convert.ToDateTime(oper_date);
-
-
-                var paramurl = string.Format($"/api/guahao/AddYbLog");
-                var json = HttpClientUtil.PostJSON(paramurl, _yblog);
-                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-
-                if (responseJson.status == 1)
-                {
-                    log.Debug("医保操作：" + info_code);
-                }
+                var _pid = SessionHelper.patientVM.patient_id;
+                var _cheque_type = payMethod;
+                var _cheque_no = out_trade_no;
+                var _mdtrt_id = mdtrt_id;
+                var _setl_id = setl_id;
+                var _ipt_otp_no = ipt_otp_no;
+                var _psn_no = psn_no;
+                var _yb_insuplc_admdvs = yb_insuplc_admdvs;
+                var _price_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var _charge = charge;
+                var _opera = SessionHelper.uservm.user_mi;
+                string paramurl = string.Format($"/api/mzsf/AddMzThridPay?patient_id={_pid}&cheque_type={_cheque_type}&cheque_no={_cheque_no}&mdtrt_id={_mdtrt_id}&setl_id={setl_id}&ipt_otp_no={_ipt_otp_no}&psn_no={_psn_no}&yb_insuplc_admdvs={_yb_insuplc_admdvs}&charge={_charge}&price_date={_price_date}&opera={_opera}");
+                HttpClientUtil.Get(paramurl);
             }
             catch (Exception ex)
             {
+                UIMessageTip.Show(ex.Message);
                 log.Error(ex.Message);
             }
         }
-
-        #endregion
 
 
     }
