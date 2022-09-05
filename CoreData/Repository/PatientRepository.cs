@@ -106,8 +106,7 @@ namespace Data.Repository
                 IDbTransaction transaction = connection.BeginTransaction();
 
                 try
-                {
-
+                { 
                     //查询是否存在
                     string issql = GetSqlByTag("mzgh_mzpatient_getbypid");
                     var para = new DynamicParameters();

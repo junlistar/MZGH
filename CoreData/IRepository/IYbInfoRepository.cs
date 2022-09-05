@@ -11,6 +11,22 @@ namespace Data.IRepository
 
         bool AddYB1101(string jsonStr);
 
+        bool AddYB2201(string jsonStr);
+
+        bool AddYB2203(string jsonStr);
+
+        bool AddYB2204(string jsonStr);
+
+        bool AddYB2207(string jsonStr);
+
+        List<Insutype> GetInsutypes();
+
+        List<MdtrtCertType> GetMdtrtCertTypes();
+
+        List<MedType> GetMedTypes();
+
+        UserInfoResponseModel GetYjsUserInfo(string patient_id, int admiss_times);
+
         #endregion
     }
 }

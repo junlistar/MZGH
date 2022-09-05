@@ -723,6 +723,20 @@ namespace Client
 
                 SessionHelper.ybhzCompare = WebApiHelper.DeserializeObject<ResponseResult<List<YbhzzdVM>>>(json).data;
 
+                //医保字典 
+                paramurl = string.Format($"/api/YbInfo/GetInsutypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl); 
+                SessionHelper.insutypes = WebApiHelper.DeserializeObject<ResponseResult<List<InsutypeVM>>>(json).data;
+                paramurl = string.Format($"/api/YbInfo/GetMdtrtCertTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MdtrtCertTypeVM>>>(json).data;
+                paramurl = string.Format($"/api/YbInfo/GetMedTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.medTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MedTypeVM>>>(json).data;
+
                 //客户端配置 
                 paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);

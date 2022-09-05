@@ -27,10 +27,12 @@ namespace CoreApi.Controllers
     public class YbInfoController : ApiControllerBase
     {
         private readonly IMzWebReportRepository _mzWebReportRepository;  
+        private readonly IYbInfoRepository _ybInfoRepository;
 
-        public YbInfoController(IMzWebReportRepository mzWebReportRepository )
+        public YbInfoController(IMzWebReportRepository mzWebReportRepository, IYbInfoRepository ybInfoRepository)
         {
-            _mzWebReportRepository = mzWebReportRepository; 
+            _mzWebReportRepository = mzWebReportRepository;
+            _ybInfoRepository = ybInfoRepository;
         }
 
         [HttpGet]
@@ -48,13 +50,133 @@ namespace CoreApi.Controllers
                 StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
                 string strData = sr.ReadToEndAsync().Result;
                 Log.Information($"============== {strData}");
-                return _mzWebReportRepository.EditMzWebReports(strData);
+                return _ybInfoRepository.AddYB1101(strData);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        } 
+        }
+
+        public ResponseResult<bool> AddYB2201()
+        {
+            Log.Information($"AddYB2201,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ybInfoRepository.AddYB2201(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> AddYB2203()
+        {
+            Log.Information($"AddYB2203,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ybInfoRepository.AddYB2203(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> AddYB2204()
+        {
+            Log.Information($"AddYB2204,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ybInfoRepository.AddYB2204(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> AddYB2207()
+        {
+            Log.Information($"AddYB2207,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ybInfoRepository.AddYB2207(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+         
+        public ResponseResult<List<Insutype>> GetInsutypes()
+        {
+            Log.Information($"GetInsutypes,");
+            try
+            {    
+                return _ybInfoRepository.GetInsutypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<Insutype>>(ex.Message);
+            }
+        }
+        public ResponseResult<List<MdtrtCertType>> GetMdtrtCertTypes()
+        {
+            Log.Information($"GetMdtrtCertTypes,");
+            try
+            {
+                return _ybInfoRepository.GetMdtrtCertTypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MdtrtCertType>>(ex.Message);
+            }
+        }
+        public ResponseResult<List<MedType>> GetMedTypes()
+        {
+            Log.Information($"GetMedTypes,");
+            try
+            {
+                return _ybInfoRepository.GetMedTypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MedType>>(ex.Message);
+            }
+        }
+        public ResponseResult<UserInfoResponseModel> GetYjsUserInfo(string patient_id, int admiss_times)
+        {
+            Log.Information($"GetYbkDetailInfo");
+            try
+            {
+                return _ybInfoRepository.GetYjsUserInfo(patient_id, admiss_times);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<UserInfoResponseModel>(ex.Message);
+            }
+        }
     }
 }

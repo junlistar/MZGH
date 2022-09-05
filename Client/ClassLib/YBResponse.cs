@@ -14,7 +14,7 @@ namespace Client.ClassLib
         public string err_msg { get; set; }
         public string warn_msg { get; set; }
         public string signtype { get; set; }
-        public string cainfo { get; set; } 
+        public string cainfo { get; set; }
         public string detail_msg { get; set; }
         public T output { get; set; }
     }
@@ -26,6 +26,11 @@ namespace Client.ClassLib
 
         public Mdtrtinfo mdtrtinfo { get; set; }
         public List<Diseinfo> diseinfo { get; set; }
+
+    }
+    public class Repsonse2204<T>
+    {
+        public T result { get; set; }
     }
 
     public class YBRequest<T>
@@ -77,7 +82,7 @@ namespace Client.ClassLib
         public List<InsuInfo> insuinfo { get; set; }
         public List<IdetInfo> idetinfo { get; set; }
 
-        
+
     }
     public class BaseInfo
     {
@@ -93,7 +98,7 @@ namespace Client.ClassLib
 
     }
     public class InsuInfo
-    { 
+    {
         public decimal balc { get; set; }
         public string insutype { get; set; }
         public string psn_insu_stas { get; set; }
@@ -119,7 +124,7 @@ namespace Client.ClassLib
     #region 门诊挂号数据模型
 
     public class GHRequestModel
-    { 
+    {
 
         public string psn_no { get; set; }
         public string insutype { get; set; }
@@ -131,7 +136,7 @@ namespace Client.ClassLib
         public string dr_name { get; set; }
         public string dept_code { get; set; }
         public string dept_name { get; set; }
-        public string caty { get; set; } 
+        public string caty { get; set; }
     }
 
     public class GHResponseModel
@@ -150,10 +155,10 @@ namespace Client.ClassLib
     #region 门诊挂号取消退款数据模型
 
     public class GHRefundRequestModel
-    {  
+    {
         public string mdtrt_id { get; set; }
         public string psn_no { get; set; }
-        public string ipt_otp_no { get; set; } 
+        public string ipt_otp_no { get; set; }
     }
 
     #endregion
@@ -211,7 +216,7 @@ namespace Client.ClassLib
         /// <summary>
         /// 单次剂量描述
         /// </summary>
-        public string sin_dos_dscr { get; set;}
+        public string sin_dos_dscr { get; set; }
         /// <summary>
         /// 使用频次描述
         /// </summary>
@@ -292,8 +297,9 @@ namespace Client.ClassLib
 
     }
 
-    public class feedetailresult { 
-    
+    public class feedetailresult
+    {
+
 
         public string feedetl_sn { get; set; }
         public string det_item_fee_sumamt { get; set; }
@@ -313,7 +319,7 @@ namespace Client.ClassLib
         public string list_sp_item_flag { get; set; }
         public string lmt_used_flag { get; set; }
         public string drt_reim_flag { get; set; }
-        public string memo { get; set; }  
+        public string memo { get; set; }
     }
 
 
@@ -353,7 +359,7 @@ namespace Client.ClassLib
         public string dise_dor_no { get; set; }
         public string dise_dor_name { get; set; }
         public string diag_time { get; set; }
-        public string vali_flag { get; set; }  
+        public string vali_flag { get; set; }
     }
 
 
@@ -368,7 +374,8 @@ namespace Client.ClassLib
 
     #region 门诊结算请求模型
 
-    public class MZJS2207A {
+    public class MZJS2207A
+    {
         public string psn_no { get; set; }
         public string mdtrt_cert_type { get; set; }
         public string mdtrt_cert_no { get; set; }
@@ -383,7 +390,7 @@ namespace Client.ClassLib
         public string fulamt_ownpay_amt { get; set; }
         public string overlmt_selfpay { get; set; }
         public string preselfpay_amt { get; set; }
-        public string inscp_scp_amt { get; set; } 
+        public string inscp_scp_amt { get; set; }
     }
 
     public class MZJSCX
@@ -396,6 +403,9 @@ namespace Client.ClassLib
 
     public class MzjsResponse
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
+
         public Setlinfo setlinfo { get; set; }
         public List<Setldetail> setldetail { get; set; }
     }
@@ -445,7 +455,7 @@ namespace Client.ClassLib
         public string clr_way { get; set; }
         public string clr_type { get; set; }
         public string exp_content { get; set; }
-        
+
     }
 
     public class Setldetail
@@ -456,6 +466,114 @@ namespace Client.ClassLib
         public string fund_payamt { get; set; }
         public string fund_pay_type_name { get; set; }
         public string setl_proc_info { get; set; }
-     
+
     }
+
+    #region 就诊信息返回
+
+    public class JzxxResponse
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
+        public string feedetl_sn { get; set; }
+        public string det_item_fee_sumamt { get; set; }
+        public string cnt { get; set; }
+        public string pric { get; set; }
+        public string pric_uplmt_amt { get; set; }
+        public string selfpay_prop { get; set; }
+        public string fulamt_ownpay_amt { get; set; }
+        public string overlmt_amt { get; set; }
+        public string preselfpay_amt { get; set; }
+        public string inscp_scp_amt { get; set; }
+        public string chrgitm_lv { get; set; }
+        public string med_chrgitm_type { get; set; }
+        public string bas_medn_flag { get; set; }
+        public string hi_nego_drug_flag { get; set; }
+        public string chld_medc_flag { get; set; }
+        public string list_sp_item_flag { get; set; }
+        public string lmt_used_flag { get; set; }
+        public string drt_reim_flag { get; set; }
+        public string memo { get; set; }
+        public string mdtrt_id { get; set; }
+
+    }
+
+
+
+
+    #endregion
+
+
+
+    public class JzxxUploadModel
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
+        public Mdtrtinfo mdtrtinfo { get; set; }
+        public List<Diseinfo> diseinfo { get; set; }
+    }
+
+    public class JzmxUploadModel
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; } 
+        public List<JzxxResponse> diseinfo { get; set; }
+    }
+     
+
+
+    #region 预结算返回模型
+
+    public class YJS_Response
+    {
+
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
+        public string mdtrt_id { get; set; }
+        public string setl_id { get; set; }
+        public string psn_no { get; set; }
+        public string psn_name { get; set; }
+        public string @psn_cert_type { get; set; }
+        public string @certno { get; set; }
+        public string @gend { get; set; }
+        public string @naty { get; set; }
+        public string @brdy { get; set; }
+        public string @age { get; set; }
+        public string @insutype { get; set; }
+        public string @psn_type { get; set; }
+        public string @cvlserv_flag { get; set; }
+        public string @setl_time { get; set; }
+        public string @mdtrt_cert_type { get; set; }
+        public string @med_type { get; set; }
+        public string @medfee_sumamt { get; set; }
+        public string @fulamt_ownpay_amt { get; set; }
+        public string @overlmt_selfpay { get; set; }
+        public string @preselfpay_amt { get; set; }
+        public string @inscp_scp_amt { get; set; }
+        public string @act_pay_dedc { get; set; }
+        public string @hifp_pay { get; set; }
+        public string @pool_prop_selfpay { get; set; }
+        public string @cvlserv_pay { get; set; }
+        public string @hifes_pay { get; set; }
+        public string @hifmi_pay { get; set; }
+        public string @hifob_pay { get; set; }
+        public string @maf_pay { get; set; }
+        public string @oth_pay { get; set; }
+        public string @fund_pay_sumamt { get; set; }
+        public string @psn_part_amt { get; set; }
+        public string @acct_pay { get; set; }
+        public string @psn_cash_pay { get; set; }
+        public string @hosp_part_amt { get; set; }
+        public string @balc { get; set; }
+        public string @acct_mulaid_pay { get; set; }
+        public string @medins_setl_id { get; set; }
+        public string @clr_optins { get; set; }
+        public string @clr_way { get; set; }
+        public string @clr_type { get; set; }
+
+    }
+
+
+    #endregion
+
 }

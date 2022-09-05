@@ -55,6 +55,10 @@ namespace Client.ClassLib
         public static List<PageChequeCompareVM> pageChequeCompares;
         //医保目录字典
         public static List<YbhzzdVM> ybhzCompare;
+        //医保字典
+        public static List<InsutypeVM> insutypes;
+        public static List<MdtrtCertTypeVM> mdtrtCertTypes;
+        public static List<MedTypeVM> medTypes;
 
 
         /// <summary>

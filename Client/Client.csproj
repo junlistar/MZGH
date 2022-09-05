@@ -705,6 +705,7 @@
     <Compile Include="Forms\Pages\mzgh\WxPay.Designer.cs">
       <DependentUpon>WxPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\YbInfo.cs" />
     <Compile Include="ViewModel\YbLog.cs" />
     <EmbeddedResource Include="ClassLib\RowMergeView.resx">
       <DependentUpon>RowMergeView.cs</DependentUpon>

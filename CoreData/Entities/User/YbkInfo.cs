@@ -16,4 +16,31 @@ namespace Data.Entities
         public int age { get; set; } 
 
     }
+
+    /// <summary>
+    /// 险种类型
+    /// </summary>
+    public class Insutype
+    {
+        public string  code { get; set; }
+        public string  name { get; set; }
+    }
+    /// <summary>
+    /// 就诊凭证类型
+    /// </summary>
+    public class MdtrtCertType
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
+    /// <summary>
+    /// 医疗类别
+    /// </summary>
+    public class MedType
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
+     
+    
 }

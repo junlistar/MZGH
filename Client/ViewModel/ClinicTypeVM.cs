@@ -33,6 +33,7 @@ namespace Client.ViewModel
 
         public string dept_sn { get; set; }
         public string dept_name { get; set; }
+        public string yb_ys_code { get; set; }
     }
 
     public class ChargeTypeVM
