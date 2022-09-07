@@ -251,8 +251,6 @@ namespace Client
                             }
                         }
 
-
-
                         var aa = new
                         {
                             patient_id = _patient_id,

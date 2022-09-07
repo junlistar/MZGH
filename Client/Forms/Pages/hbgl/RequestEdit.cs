@@ -22,6 +22,9 @@ namespace Client
         string _record_sn;
         public string _temp_flag = "0";
         private static ILog log = LogManager.GetLogger(typeof(RequestEdit));//typeof放当前类
+
+        List<UserDicVM> docList;
+
         public RequestEdit(string record_sn)
         {
             InitializeComponent();
@@ -31,6 +34,8 @@ namespace Client
 
         private void BaseRequestEdit_Load(object sender, EventArgs e)
         {
+
+            docList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
 
             InitUI();
 
@@ -324,7 +329,7 @@ namespace Client
             var pbl = tb.Parent as UIPanel;
             //获取数据 
 
-            if (SessionHelper.userDics != null && SessionHelper.userDics.Count > 0)
+            if (docList != null && docList.Count > 0)
             {
                 var ipt = txtDoct.Text.Trim();
 
@@ -340,7 +345,7 @@ namespace Client
                 dgvys.ReadOnly = true;
 
 
-                List<UserDicVM> vm = SessionHelper.userDics;
+                List<UserDicVM> vm = docList;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {

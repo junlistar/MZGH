@@ -29,6 +29,8 @@ namespace Client.ClassLib
         public static YBResponse<UserInfoResponseModel> currentYBInfo;
         public static YBResponse<RepModel<GHResponseModel>> currentYBPay;
 
+        public static MzjsResponse mzjsResponse;
+
 
         /// <summary>
         /// 发送方报文 ID

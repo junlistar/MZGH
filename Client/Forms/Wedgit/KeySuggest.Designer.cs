@@ -44,6 +44,7 @@
             this.txtKeySearch.Size = new System.Drawing.Size(305, 29);
             this.txtKeySearch.TabIndex = 3;
             this.txtKeySearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtKeySearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtKeySearch.TextChanged += new System.EventHandler(this.txtKeySearch_TextChanged);
             this.txtKeySearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyUp);
             // 
@@ -60,6 +61,7 @@
             this.lstunits.Size = new System.Drawing.Size(305, 180);
             this.lstunits.TabIndex = 4;
             this.lstunits.Text = "uiListBox1";
+            this.lstunits.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.lstunits.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstunits_KeyUp);
             this.lstunits.ItemClick += new System.EventHandler(this.lstunits_ItemClick);
             // 
@@ -73,7 +75,10 @@
             this.MinimizeBox = false;
             this.Name = "KeySuggest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "筛选科室";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 340, 280);
             this.Load += new System.EventHandler(this.KeySuggest_Load);
             this.ResumeLayout(false);
 

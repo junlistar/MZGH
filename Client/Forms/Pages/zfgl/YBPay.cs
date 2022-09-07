@@ -123,7 +123,8 @@ namespace Client.Forms.Pages.zfgl
                     var result = WebApiHelper.DeserializeObject<ResponseResult<int>>(json);
                     if (result.status == 1)
                     {
-                        UIMessageTip.Show("退费成功");
+                        UIMessageTip.Show("退费成功"); 
+                        Search();
                     }
                     else
                     {

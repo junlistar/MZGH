@@ -26,10 +26,12 @@ namespace Mzsf.Forms.Pages
 
         Color cur_color = Color.FromArgb(80, 160, 255);
         public static int current_times = 0;
+        public static string current_unit_sn = "";
         public static string current_unit_name = "";
         public static string current_doct_name = "";
         public static string current_doct_sn = "";
         public static string current_patient_id = "";
+        public static string current_icd_code = "";
 
         bool is_order_lock = false;
         int current_tab_index = 0;
@@ -214,9 +216,11 @@ namespace Mzsf.Forms.Pages
                     if (result.data.Count > 0)
                     {
                         //绑定科室 医生信息
+                        current_unit_sn = result.data[0].visit_dept;
                         txtUnit.Text = result.data[0].unit_name;
                         txtDoct.Text = result.data[0].doct_name;
                         current_doct_sn = result.data[0].doctor_code;
+                        current_icd_code = result.data[0].icd_code;
                         if (result.data.Count > 1)
                         {
                             SelectOrder selectOrder = new SelectOrder(result.data);
@@ -921,7 +925,9 @@ namespace Mzsf.Forms.Pages
                 Check check = new Check();
                 check.times = current_times;
                 check.doct_code = current_doct_sn;
-
+                check.unit_code = current_unit_sn;
+                check.icd_code = current_icd_code;
+                 
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
                 if (dresult == DialogResult.OK)

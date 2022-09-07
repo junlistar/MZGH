@@ -81,6 +81,7 @@
             this.lblPatientId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotalCount = new Sunny.UI.UILabel();
+            this.btnYBTuifei = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.btnYBTuifei);
             this.pnlTitle.Controls.Add(this.btnRefundDetail);
             this.pnlTitle.Controls.Add(this.btnHuajia);
             this.pnlTitle.Controls.Add(this.btnSearch);
@@ -178,7 +180,7 @@
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(640, 3);
+            this.btnExit.Location = new System.Drawing.Point(746, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
@@ -206,7 +208,7 @@
             this.lblNodata.AutoSize = true;
             this.lblNodata.Font = new System.Drawing.Font("微软雅黑", 18F);
             this.lblNodata.ForeColor = System.Drawing.Color.Red;
-            this.lblNodata.Location = new System.Drawing.Point(763, 7);
+            this.lblNodata.Location = new System.Drawing.Point(918, 7);
             this.lblNodata.Name = "lblNodata";
             this.lblNodata.Size = new System.Drawing.Size(182, 31);
             this.lblNodata.TabIndex = 6;
@@ -697,6 +699,22 @@
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // btnYBTuifei
+            // 
+            this.btnYBTuifei.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnYBTuifei.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnYBTuifei.Location = new System.Drawing.Point(640, 3);
+            this.btnYBTuifei.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnYBTuifei.Name = "btnYBTuifei";
+            this.btnYBTuifei.Size = new System.Drawing.Size(100, 40);
+            this.btnYBTuifei.StyleCustomMode = true;
+            this.btnYBTuifei.Symbol = 62164;
+            this.btnYBTuifei.TabIndex = 14;
+            this.btnYBTuifei.Text = "医保退费";
+            this.btnYBTuifei.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnYBTuifei.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnYBTuifei.Click += new System.EventHandler(this.btnYBTuifei_Click);
+            // 
             // RefundPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -772,5 +790,6 @@
         private Sunny.UI.UIComboBox cbxRefundStatus;
         private System.Windows.Forms.Label label4;
         private Sunny.UI.UILabel lblTotalCount;
+        private Sunny.UI.UISymbolButton btnYBTuifei;
     }
 }

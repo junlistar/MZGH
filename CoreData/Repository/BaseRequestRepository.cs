@@ -63,7 +63,7 @@ namespace Data.Repository
             {
                 //如果医生为空，则科室，专科，上下午，号类 唯一条件
 
-                sql = @"select* from gh_base_request where unit_sn = @unit_sn and ampm = @ampm and clinic_type = @clinic_type";
+                sql = @"select* from gh_base_request where unit_sn = @unit_sn and week=@week and day=@day and ampm = @ampm and clinic_type = @clinic_type";
             }
             else
             {
@@ -71,6 +71,7 @@ namespace Data.Repository
                 sql = @"select * from gh_base_request where week=@week and ampm=@ampm and doctor_sn=@doctor_sn";
             }
             para.Add("@week", item.week);
+            para.Add("@day", item.day);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
             //if (string.IsNullOrWhiteSpace(item.group_sn))

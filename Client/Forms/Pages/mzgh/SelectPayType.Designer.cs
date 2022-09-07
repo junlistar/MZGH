@@ -482,8 +482,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectPayType";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "选择支付方式";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 763, 465);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectPayType_FormClosed);
             this.Load += new System.EventHandler(this.SelectPayType_Load);

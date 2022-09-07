@@ -33,6 +33,8 @@ namespace Mzsf.Forms.Pages
         decimal total_charge = 0;
         public int times = 0;
         public string doct_code = "";
+        public string unit_code = "";
+        public string icd_code = "";
 
         public Check()
         {
@@ -301,10 +303,10 @@ namespace Mzsf.Forms.Pages
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id));
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
 
                     }
                     else
@@ -382,15 +384,18 @@ namespace Mzsf.Forms.Pages
         {
             try
             {
+                string admiss_times = (SessionHelper.patientVM.max_times + 1).ToString();
+                string patient_id = SessionHelper.patientVM.patient_id;
+
                 string json = "";
                 string BusinessID = "1101";
                 string Dataxml = json;
                 string Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
 
-                if (string.IsNullOrEmpty(SessionHelper.patientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(SessionHelper.patientVM.hic_no)
-                   || string.IsNullOrEmpty(SessionHelper.patientVM.yb_insutype) || string.IsNullOrEmpty(SessionHelper.patientVM.yb_psn_no))
-                {
+                //if (string.IsNullOrEmpty(SessionHelper.patientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(SessionHelper.patientVM.hic_no)
+                //   || string.IsNullOrEmpty(SessionHelper.patientVM.yb_insutype) || string.IsNullOrEmpty(SessionHelper.patientVM.yb_psn_no))
+                //{
                     YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
                     request.infno = ((int)InfoNoEnum.人员信息).ToString();
                     request.msgid = YBHelper.msgid;
@@ -436,7 +441,13 @@ namespace Mzsf.Forms.Pages
                         return false;
                     }
                     else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                    {
+                    { 
+                        //记录医保日志
+                        var paramurl = string.Format($"/api/YbInfo/AddYB1101");
+                        yBResponse.output.patient_id = patient_id;
+                        yBResponse.output.admiss_times = admiss_times;
+                        HttpClientUtil.PostJSON(paramurl, yBResponse.output);
+
                         SessionHelper.cardno = yBResponse.output.baseinfo.certno;
 
                         if (yBResponse.output.baseinfo.certno != SessionHelper.patientVM.hic_no)
@@ -464,7 +475,7 @@ namespace Mzsf.Forms.Pages
                         };
                         var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                         httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        var paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
+                        paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
 
                         string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
                         var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
@@ -480,8 +491,7 @@ namespace Mzsf.Forms.Pages
                         }
                     }
 
-                }
-                //todo:医保支付
+                //}
 
                 //机制号
                 var sn_no = GetReceiptMaxNo();
@@ -550,6 +560,11 @@ namespace Mzsf.Forms.Pages
                 }
                 else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
                 {
+                    //记录医保日志
+                    var paramurl = string.Format($"/api/YbInfo/AddYB2201");
+                    resp.output.data.patient_id = patient_id;
+                    resp.output.data.admiss_times = admiss_times;
+                    HttpClientUtil.PostJSON(paramurl, resp.output.data);
                     //MessageBox.Show(resp.output.data.mdtrt_id);
 
                     //保存医保支付信息，用于退款
@@ -562,6 +577,39 @@ namespace Mzsf.Forms.Pages
                     string ipt_otp_no = resp.output.data.ipt_otp_no;
 
                     var _dt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                    //清空诊断信息
+                    SessionHelper.diseinfoList = null;
+
+                    //弹出预结算信息
+                    YBJSPreview yBJSPreview = new YBJSPreview();
+                    yBJSPreview.admiss_times = int.Parse(admiss_times);
+                    yBJSPreview.patient_id = patient_id;
+                    yBJSPreview.mdtrt_id = mdtrt_id;
+                    yBJSPreview.psn_no = psn_no;
+                    yBJSPreview.ipt_otp_no = ipt_otp_no;
+
+                    if (!string.IsNullOrEmpty(doct_code))
+                    {
+                        GHRequestVM _vm = new GHRequestVM();
+                        _vm.doctor_sn = doct_code;
+                        _vm.unit_sn = unit_code;
+                        _vm.icd_code = icd_code;
+                        yBJSPreview.ghRequest = _vm;
+                    }
+                    
+                    //yBJSPreview.chargeItems = chargeItems;
+                    yBJSPreview.left_je = left_je;
+
+                    //绑定医师信息
+                    yBJSPreview.doctList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
+                    yBJSPreview.unitList = SessionHelper.units;
+
+                    if (yBJSPreview.ShowDialog() != DialogResult.OK)
+                    {
+                        return false;
+                    }
+                    return true;
 
                     //提交门诊就诊信息 
                     var jzxxRequest = new YBRequest<object>();
@@ -771,13 +819,13 @@ namespace Mzsf.Forms.Pages
                         return false;
                     }
 
-                    //弹出预结算信息
-                    YBJSPreview yBJSPreview = new YBJSPreview();
-                    yBJSPreview.mzjsResponse = _yjsresp.output;
-                    if (yBJSPreview.ShowDialog() != DialogResult.OK)
-                    {
-                        return false;
-                    }
+                    ////弹出预结算信息
+                    //YBJSPreview yBJSPreview = new YBJSPreview();
+                    //yBJSPreview.mzjsResponse = _yjsresp.output;
+                    //if (yBJSPreview.ShowDialog() != DialogResult.OK)
+                    //{
+                    //    return false;
+                    //}
 
                     //门诊结算
                     var jsRequest = new YBRequest<MZJS2207A>();

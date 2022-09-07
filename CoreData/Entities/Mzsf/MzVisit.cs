@@ -13,6 +13,7 @@ namespace Data.Entities.Mzsf
         public string unit_name { get; set; } 
         public string doct_name { get; set; }
         public string name { get; set; }
+        public string icd_code { get; set; }
     }
 
     public class VisitInfo : BaseModel
@@ -26,6 +27,7 @@ namespace Data.Entities.Mzsf
 
         public string unit_name { get; set; }
         public string doct_name { get; set; }
+        public string icd_code { get; set; }
 
     }
 }

@@ -886,7 +886,8 @@ namespace Client
                     UIMessageTip.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                {
+                { 
+
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;

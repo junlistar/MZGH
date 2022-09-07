@@ -181,7 +181,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "WebReportEdit";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "Web报表编辑";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.WebReportEdit_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.WebReportEdit_KeyUp);

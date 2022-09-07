@@ -30,10 +30,12 @@
         {
             this.uiBreadcrumb1 = new Sunny.UI.UIBreadcrumb();
             this.pnl1 = new Sunny.UI.UIPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
             this.txtPwd = new Sunny.UI.UITextBox();
             this.txtName = new Sunny.UI.UITextBox();
             this.pnl2 = new Sunny.UI.UIPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.btn2left = new Sunny.UI.UISymbolButton();
             this.btn2right = new Sunny.UI.UISymbolButton();
             this.txtpwd2 = new Sunny.UI.UITextBox();
@@ -41,8 +43,6 @@
             this.pnl3 = new Sunny.UI.UIPanel();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.btnok = new Sunny.UI.UISymbolButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.pnl1.SuspendLayout();
             this.pnl2.SuspendLayout();
             this.pnl3.SuspendLayout();
@@ -79,8 +79,20 @@
             this.pnl1.Name = "pnl1";
             this.pnl1.Size = new System.Drawing.Size(400, 206);
             this.pnl1.TabIndex = 1;
+            this.pnl1.Text = null;
             this.pnl1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.Location = new System.Drawing.Point(110, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(183, 25);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "请输入账号和原密码";
             // 
             // uiSymbolButton1
             // 
@@ -144,8 +156,20 @@
             this.pnl2.Name = "pnl2";
             this.pnl2.Size = new System.Drawing.Size(400, 206);
             this.pnl2.TabIndex = 8;
+            this.pnl2.Text = null;
             this.pnl2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnl2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label2.Location = new System.Drawing.Point(135, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(126, 25);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "请输入新密码";
             // 
             // btn2left
             // 
@@ -252,28 +276,6 @@
             this.btnok.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnok.Click += new System.EventHandler(this.btnok_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label1.Location = new System.Drawing.Point(110, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 25);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "请输入账号和原密码";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.label2.Location = new System.Drawing.Point(135, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 25);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "请输入新密码";
-            // 
             // EditPwd
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -286,7 +288,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EditPwd";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "修改密码(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.EditPwd_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditPwd_KeyUp);

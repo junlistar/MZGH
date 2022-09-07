@@ -138,8 +138,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectPatient";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "选择病人";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.SelectPatient_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();

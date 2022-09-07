@@ -11,6 +11,8 @@ namespace Data.Entities
         public string py_code { get; set; }
         public string d_code { get; set; }
         public string unit_sn { get; set; }
-         
+
+        public string yb_ks_code { get; set; }
+        public string yb_ks_name { get; set; }
     }
 }

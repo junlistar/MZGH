@@ -25,6 +25,10 @@ namespace Data.IRepository
 
         List<MedType> GetMedTypes();
 
+        List<DiagType> GetDiagTypes();
+
+        List<IcdCode> GetIcdCodes();
+
         UserInfoResponseModel GetYjsUserInfo(string patient_id, int admiss_times);
 
         #endregion

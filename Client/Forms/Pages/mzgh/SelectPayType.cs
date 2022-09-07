@@ -46,8 +46,7 @@ namespace Client
         Dictionary<int, double> dicPay = new Dictionary<int, double>();
         List<GHPayModel> paylist = new List<GHPayModel>();
         List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
-
-        MzjsResponse mzjsResponse;
+         
         public SelectPayType(GHRequestVM _vm, string _patientId)
         {
             InitializeComponent(); vm = _vm; patientId = _patientId;
@@ -376,7 +375,7 @@ namespace Client
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.mzjsResponse.setlinfo.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id));
 
                         this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -385,7 +384,7 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, mzjsResponse.setlinfo.setl_id ,YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id ,YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
                     }
                     else
                     {
@@ -459,9 +458,9 @@ namespace Client
 
                 //var res = DataPost("http://10.87.82.212:8080", json);
 
-                if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
-                   || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
-                {
+                //if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
+                //   || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
+                //{
                     YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
                     request.infno = ((int)InfoNoEnum.人员信息).ToString();
                     request.msgid = YBHelper.msgid;
@@ -557,7 +556,7 @@ namespace Client
                         }
                     }
 
-                }
+                //}
                 //机制号
                 var sn_no = GetReceiptMaxNo();
                 max_sn = int.Parse(sn_no);
@@ -596,7 +595,7 @@ namespace Client
                 ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.hic_no;
 
                 ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
-                ghRequest.input.data.atddr_no = vm.yb_ys_code; //"D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
+                ghRequest.input.data.atddr_no = vm.yb_ys_code =="" ? "D421003007628" : vm.yb_ys_code; //"D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
                 ghRequest.input.data.dr_name = vm.doctor_name;
                 ghRequest.input.data.dept_code = vm.unit_sn;
                 ghRequest.input.data.dept_name = vm.unit_name;
@@ -646,6 +645,13 @@ namespace Client
                     yBJSPreview.psn_no = psn_no;
                     yBJSPreview.ipt_otp_no = ipt_otp_no;
                     yBJSPreview.ghRequest = vm;
+                    yBJSPreview.chargeItems = chargeItems;
+                    yBJSPreview.left_je = left_je;
+
+                    //绑定医师信息
+                    yBJSPreview.doctList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
+                    yBJSPreview.unitList = SessionHelper.units;
+
                     if (yBJSPreview.ShowDialog() != DialogResult.OK)
                     {
                         return false;
@@ -1230,23 +1236,26 @@ namespace Client
                     else
                     {
                         UIMessageTip.ShowError(_fpdata);
-                    }
-
-
-                    //log.Error(_fpdata);
-
-
+                    } 
                 }
                 else
                 {
-                    UIMessageTip.ShowError("电子发票数据生成失败！");
+                    UIMessageBox.Show("生成电子发票失败,参考日志信息");
                     log.Error(json);
                 }
 
             }
             catch (Exception ex)
             {
-                UIMessageTip.Show(ex.Message);
+                string ermsg = ex.ToString();
+                if (ermsg.IndexOf("无法连接")>-1)
+                {
+                    UIMessageBox.Show("生成电子发票失败,无法连接到服务器");
+                }
+                else
+                {
+                    UIMessageBox.Show("生成电子发票失败,参考日志信息");
+                } 
                 log.Error(ex.ToString());
             }
 

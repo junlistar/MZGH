@@ -12,6 +12,7 @@ using log4net;
 using Client.ClassLib;
 using Client.ViewModel;
 using Sunny.UI;
+using Client.Forms.Wedgit;
 
 namespace Mzsf.Forms.Pages
 {
@@ -108,11 +109,14 @@ namespace Mzsf.Forms.Pages
                 cash_name = p.cash_name,
                 //tableflag = p.tableflag,
             }).ToList();
-
-            dgvRefund.DataSource = list;
-            dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgvRefund.AutoGenerateColumns = false;
-            dgvRefund.AutoResizeColumns();
+            if (list.Count>0)
+            {
+                dgvRefund.DataSource = list;
+                dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                dgvRefund.AutoGenerateColumns = false;
+                dgvRefund.AutoResizeColumns();
+            }
+            
 
             lblTotalCount.ForeColor = Color.Red;
 
@@ -333,6 +337,12 @@ namespace Mzsf.Forms.Pages
         private void pnlTitle_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnYBTuifei_Click(object sender, EventArgs e)
+        {
+            YBtuifei yb = new YBtuifei();
+            yb.Show();
         }
     }
 }

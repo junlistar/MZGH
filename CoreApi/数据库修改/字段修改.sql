@@ -755,3 +755,60 @@ end
 if not exists(select * from syscolumns where id=object_id('mz_thirdpay') and name='setl_id') begin
 ALTER TABLE mz_thirdpay ADD setl_id  varchar(50) default (null)
 end
+
+
+
+ CREATE TABLE [dbo].[yb_zd_insutype](
+	[code] [varchar](50) NULL,
+	[name] [varchar](200) NULL
+) ON [PRIMARY]
+
+CREATE TABLE [dbo].[yb_zd_mdtrtcerttype](
+	[code] [varchar](50) NULL,
+	[name] [varchar](200) NULL
+) ON [PRIMARY]
+CREATE TABLE [dbo].[yb_zd_medtype](
+	[code] [varchar](50) NULL,
+	[name] [varchar](200) NULL
+) ON [PRIMARY]
+
+insert into [yb_zd_insutype] values('310','职工基本医疗保险');
+insert into [yb_zd_insutype] values('320','公务员医疗补助');
+insert into [yb_zd_insutype] values('330','大额医疗费用补助');
+insert into [yb_zd_insutype] values('340','离休人员医疗保障');
+insert into [yb_zd_insutype] values('390','城乡居民基本医疗保险');
+insert into [yb_zd_insutype] values('392','城乡居民大病医疗保险');
+insert into [yb_zd_insutype] values('510','生育保险'); 
+
+insert into [yb_zd_mdtrtcerttype] values('01','医保电子凭证'); 
+insert into [yb_zd_mdtrtcerttype] values('02','居民身份证'); 
+insert into [yb_zd_mdtrtcerttype] values('03','社会保障卡'); 
+
+
+insert into [yb_zd_medtype] values('11','普通门诊'); 
+insert into [yb_zd_medtype] values('12','门诊挂号'); 
+insert into [yb_zd_medtype] values('13','急诊'); 
+insert into [yb_zd_medtype] values('14','门诊慢特病'); 
+insert into [yb_zd_medtype] values('21','普通住院'); 
+insert into [yb_zd_medtype] values('22','外伤住院'); 
+insert into [yb_zd_medtype] values('23','转外诊治住院'); 
+insert into [yb_zd_medtype] values('24','急诊转住院'); 
+insert into [yb_zd_medtype] values('41','定点药店购药'); 
+insert into [yb_zd_medtype] values('51','生育门诊'); 
+insert into [yb_zd_medtype] values('52','生育住院'); 
+insert into [yb_zd_medtype] values('53','计划生育手术费'); 
+insert into [yb_zd_medtype] values('91','其他门诊'); 
+insert into [yb_zd_medtype] values('92','其他住院'); 
+insert into [yb_zd_medtype] values('93','其他购药'); 
+insert into [yb_zd_medtype] values('99','地方扩展医疗类别'); 
+
+CREATE TABLE [dbo].[yb_zd_diagtype](
+	[code] [varchar](50) NULL,
+	[name] [varchar](200) NULL
+) ON [PRIMARY]
+
+ 
+  insert into yb_zd_diagtype(code,name) values('1','西医主要诊断')
+  insert into yb_zd_diagtype(code,name) values('2','西医其他诊断')
+  insert into yb_zd_diagtype(code,name) values('3','中医主病诊断')
+  insert into yb_zd_diagtype(code,name) values('4','中医主证诊断')

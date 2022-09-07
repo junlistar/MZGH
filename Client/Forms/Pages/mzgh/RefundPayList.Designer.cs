@@ -34,10 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvpaylist = new Sunny.UI.UIDataGridView();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiLabel2 = new Sunny.UI.UILabel();
-            this.btnCancel = new Sunny.UI.UISymbolButton();
-            this.btnSave = new Sunny.UI.UISymbolButton();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.item_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +46,10 @@
             this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price_opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.price_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiLabel1 = new Sunny.UI.UILabel();
+            this.uiLabel2 = new Sunny.UI.UILabel();
+            this.btnCancel = new Sunny.UI.UISymbolButton();
+            this.btnSave = new Sunny.UI.UISymbolButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvpaylist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,62 +124,6 @@
             this.dgvpaylist.Size = new System.Drawing.Size(732, 262);
             this.dgvpaylist.TabIndex = 0;
             this.dgvpaylist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(3, 88);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(94, 23);
-            this.uiLabel1.TabIndex = 3;
-            this.uiLabel1.Text = "支付信息";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel2
-            // 
-            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(172, 52);
-            this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(403, 32);
-            this.uiLabel2.TabIndex = 4;
-            this.uiLabel2.Text = "是否确认退款？";
-            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(631, 394);
-            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Radius = 1;
-            this.btnCancel.Size = new System.Drawing.Size(104, 34);
-            this.btnCancel.StyleCustomMode = true;
-            this.btnCancel.Symbol = 61453;
-            this.btnCancel.TabIndex = 44;
-            this.btnCancel.Text = "取消";
-            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnCancel.Click += new System.EventHandler(this.btnCacel_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(512, 394);
-            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 34);
-            this.btnSave.StyleCustomMode = true;
-            this.btnSave.TabIndex = 43;
-            this.btnSave.Text = "确定";
-            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnSave.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // patient_id
             // 
@@ -273,6 +217,62 @@
             this.price_date.Name = "price_date";
             this.price_date.ReadOnly = true;
             // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Location = new System.Drawing.Point(3, 88);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(94, 23);
+            this.uiLabel1.TabIndex = 3;
+            this.uiLabel1.Text = "支付信息";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel2
+            // 
+            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel2.Location = new System.Drawing.Point(172, 52);
+            this.uiLabel2.Name = "uiLabel2";
+            this.uiLabel2.Size = new System.Drawing.Size(403, 32);
+            this.uiLabel2.TabIndex = 4;
+            this.uiLabel2.Text = "是否确认退款？";
+            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(631, 394);
+            this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Radius = 1;
+            this.btnCancel.Size = new System.Drawing.Size(104, 34);
+            this.btnCancel.StyleCustomMode = true;
+            this.btnCancel.Symbol = 61453;
+            this.btnCancel.TabIndex = 44;
+            this.btnCancel.Text = "取消";
+            this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnCancel.Click += new System.EventHandler(this.btnCacel_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(512, 394);
+            this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(101, 34);
+            this.btnSave.StyleCustomMode = true;
+            this.btnSave.TabIndex = 43;
+            this.btnSave.Text = "确定";
+            this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnSave.Click += new System.EventHandler(this.btnOk_Click);
+            // 
             // RefundPayList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -286,8 +286,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RefundPayList";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "确认退款（按ESC退出）";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.RefundPayList_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RefundPayList_KeyUp);

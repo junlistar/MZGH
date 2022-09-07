@@ -375,7 +375,7 @@ namespace Client
             //设置激活 用户键盘事件
             Task.Run(async () =>
             {
-                await Task.Delay(500);
+                await Task.Delay(100);
 
                 this.Invoke(new Action(() =>
                 {
@@ -736,6 +736,14 @@ namespace Client
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 json = HttpClientUtil.Get(paramurl);
                 SessionHelper.medTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MedTypeVM>>>(json).data;
+                paramurl = string.Format($"/api/YbInfo/GetDiagTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.diagTypes = WebApiHelper.DeserializeObject<ResponseResult<List<DiagTypeVM>>>(json).data;
+                paramurl = string.Format($"/api/YbInfo/GetIcdCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.icdCodes = WebApiHelper.DeserializeObject<ResponseResult<List<IcdCodeVM>>>(json).data;
 
                 //客户端配置 
                 paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
@@ -847,7 +855,7 @@ namespace Client
                 UIMessageTip.Show("打印配置文件读取失败");
             }
         }
-
+        
 
         private bool Frm_OnLogin(string userName, string password)
         {

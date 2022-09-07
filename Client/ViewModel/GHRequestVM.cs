@@ -34,6 +34,7 @@ namespace Client.ViewModel
         public string record_sn { get; set; }
         public int current_no { get; set; }
         public string unit_sn { get; set; }
+        public string icd_code { get; set; }
         public string unit_name { get; set; }
         public string clinic_name { get; set; }
         public string je { get; set; }

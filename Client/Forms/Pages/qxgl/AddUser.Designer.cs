@@ -120,11 +120,11 @@
             // uiSymbolButton1
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Location = new System.Drawing.Point(294, 313);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
-            this.uiSymbolButton1.Size = new System.Drawing.Size(133, 46);
+            this.uiSymbolButton1.Size = new System.Drawing.Size(92, 36);
             this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.TabIndex = 7;
             this.uiSymbolButton1.Text = "保存";
@@ -135,11 +135,11 @@
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(433, 313);
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(402, 313);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(137, 46);
+            this.btnCancel.Size = new System.Drawing.Size(96, 36);
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61534;
             this.btnCancel.TabIndex = 8;
@@ -175,8 +175,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddUser";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "添加用户(按Enter保存，ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.AddUser_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddGroup_KeyUp);

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txt_workroom = new Sunny.UI.UITextBox();
             this.txt_limit = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
             this.cbxRequestType = new Sunny.UI.UIComboBox();
@@ -56,7 +57,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txt_workroom = new Sunny.UI.UITextBox();
             this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,6 +98,22 @@
             this.uiGroupBox1.Text = "编辑";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txt_workroom
+            // 
+            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_workroom.Location = new System.Drawing.Point(396, 224);
+            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_workroom.Name = "txt_workroom";
+            this.txt_workroom.ShowText = false;
+            this.txt_workroom.Size = new System.Drawing.Size(166, 29);
+            this.txt_workroom.TabIndex = 48;
+            this.txt_workroom.Text = "0";
+            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_workroom.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_limit
             // 
@@ -422,7 +438,7 @@
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.Location = new System.Drawing.Point(425, 402);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
@@ -437,7 +453,7 @@
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Location = new System.Drawing.Point(533, 402);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
@@ -480,22 +496,6 @@
             this.label1.TabIndex = 50;
             this.label1.Text = "*限约比例：针对网上支付号";
             // 
-            // txt_workroom
-            // 
-            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_workroom.Location = new System.Drawing.Point(396, 224);
-            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_workroom.Name = "txt_workroom";
-            this.txt_workroom.ShowText = false;
-            this.txt_workroom.Size = new System.Drawing.Size(166, 29);
-            this.txt_workroom.TabIndex = 48;
-            this.txt_workroom.Text = "0";
-            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_workroom.Type = Sunny.UI.UITextBox.UIEditType.Integer;
-            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // RequestEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -510,8 +510,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RequestEdit";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "基础号表编辑(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 747, 465);
             this.Load += new System.EventHandler(this.BaseRequestEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RequestEdit_KeyDown);

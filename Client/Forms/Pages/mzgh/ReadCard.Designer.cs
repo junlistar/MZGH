@@ -115,7 +115,7 @@
             this.tabPage2.Controls.Add(this.txt_sfz);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(902, 277);
+            this.tabPage2.Size = new System.Drawing.Size(200, 60);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "输入号码";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -170,7 +170,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadCard";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "读卡(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 783, 295);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ReadCard_FormClosed);
             this.Load += new System.EventHandler(this.ReadCard_Load);

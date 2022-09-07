@@ -74,11 +74,11 @@
             // btnCancel
             // 
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(438, 203);
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Location = new System.Drawing.Point(421, 203);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(137, 46);
+            this.btnCancel.Size = new System.Drawing.Size(94, 36);
             this.btnCancel.StyleCustomMode = true;
             this.btnCancel.Symbol = 61534;
             this.btnCancel.TabIndex = 12;
@@ -90,11 +90,11 @@
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(299, 203);
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Location = new System.Drawing.Point(316, 203);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(133, 46);
+            this.btnSave.Size = new System.Drawing.Size(90, 36);
             this.btnSave.StyleCustomMode = true;
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
@@ -105,7 +105,7 @@
             // AddGroup
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(589, 263);
+            this.ClientSize = new System.Drawing.Size(584, 261);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.uiLine1);
@@ -115,8 +115,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AddGroup";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "添加用户组(按Enter保存，ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddGroup_KeyUp);
             this.ResumeLayout(false);

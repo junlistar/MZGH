@@ -24,6 +24,10 @@ namespace Client.Forms.Pages.zfgl
 
         private void SelfPay_Initialize(object sender, EventArgs e)
         {
+            txtBeginDate.Value = DateTime.Now;
+            txtEndDate.Value = DateTime.Now;
+            cbxRefundStatus.Text = "全部";
+            dgv_paylist.AutoGenerateColumns = false;
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -118,6 +122,7 @@ namespace Client.Forms.Pages.zfgl
                     if (result.status == 1)
                     {
                         UIMessageTip.Show("退费成功");
+                        Search();
                     }
                     else
                     {

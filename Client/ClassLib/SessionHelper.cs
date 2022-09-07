@@ -59,6 +59,8 @@ namespace Client.ClassLib
         public static List<InsutypeVM> insutypes;
         public static List<MdtrtCertTypeVM> mdtrtCertTypes;
         public static List<MedTypeVM> medTypes;
+        public static List<DiagTypeVM> diagTypes;
+        public static List<IcdCodeVM> icdCodes;
 
 
         /// <summary>
@@ -97,6 +99,9 @@ namespace Client.ClassLib
 
         //模板处方 
         public static List<CprChargesVM> mbChargeList;
+
+        //就诊信息
+        public static List<Diseinfo> diseinfoList = new List<Diseinfo>();
 
         public static string pay_xianjin;
         public static string pay_weixin;

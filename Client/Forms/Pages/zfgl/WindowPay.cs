@@ -136,6 +136,7 @@ namespace Client.Forms.Pages.zfgl
                     if (result.status == 1)
                     {
                         UIMessageTip.Show("退费成功");
+                        Search();
                     }
                     else
                     {

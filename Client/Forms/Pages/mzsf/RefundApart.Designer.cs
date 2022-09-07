@@ -339,7 +339,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RefundApart";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "部分退款";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 753, 465);
             this.Load += new System.EventHandler(this.RefundConfirm_Load);
             this.uiPanel1.ResumeLayout(false);

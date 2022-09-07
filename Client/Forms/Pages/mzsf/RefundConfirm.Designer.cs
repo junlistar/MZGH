@@ -67,6 +67,9 @@
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confirm_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confirm_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confirm_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -86,7 +89,8 @@
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(934, 63);
+            this.uiPanel1.Size = new System.Drawing.Size(1132, 63);
+            this.uiPanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel1.TabIndex = 5;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -189,7 +193,8 @@
             this.dgvDeposit.SelectedIndex = -1;
             this.dgvDeposit.ShowGridLine = false;
             this.dgvDeposit.ShowRect = false;
-            this.dgvDeposit.Size = new System.Drawing.Size(934, 125);
+            this.dgvDeposit.Size = new System.Drawing.Size(1132, 125);
+            this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -231,7 +236,8 @@
             this.uiPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel2.Name = "uiPanel2";
-            this.uiPanel2.Size = new System.Drawing.Size(934, 45);
+            this.uiPanel2.Size = new System.Drawing.Size(1132, 45);
+            this.uiPanel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel2.TabIndex = 7;
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -245,6 +251,7 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(103, 40);
+            this.btnExit.Style = Sunny.UI.UIStyle.Custom;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 13;
             this.btnExit.Text = "退出";
@@ -260,6 +267,7 @@
             this.btnTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuikuan.Name = "btnTuikuan";
             this.btnTuikuan.Size = new System.Drawing.Size(100, 39);
+            this.btnTuikuan.Style = Sunny.UI.UIStyle.Custom;
             this.btnTuikuan.TabIndex = 12;
             this.btnTuikuan.Text = "退款";
             this.btnTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -274,6 +282,7 @@
             this.btnBufenTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnBufenTuikuan.Name = "btnBufenTuikuan";
             this.btnBufenTuikuan.Size = new System.Drawing.Size(100, 40);
+            this.btnBufenTuikuan.Style = Sunny.UI.UIStyle.Custom;
             this.btnBufenTuikuan.TabIndex = 10;
             this.btnBufenTuikuan.Text = "部分退款";
             this.btnBufenTuikuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -324,7 +333,10 @@
             this.back,
             this.charge_code,
             this.order_type,
-            this.confirm_flag});
+            this.confirm_flag,
+            this.confirm_flag_str,
+            this.confirm_name,
+            this.confirm_date});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -358,7 +370,8 @@
             this.dgvCpr.SelectedIndex = -1;
             this.dgvCpr.ShowGridLine = false;
             this.dgvCpr.ShowRect = false;
-            this.dgvCpr.Size = new System.Drawing.Size(934, 325);
+            this.dgvCpr.Size = new System.Drawing.Size(1132, 325);
+            this.dgvCpr.Style = Sunny.UI.UIStyle.Custom;
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
@@ -373,6 +386,7 @@
             this.ckall.Name = "ckall";
             this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
             this.ckall.TabIndex = 14;
             this.ckall.Text = "全选";
             this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -441,6 +455,7 @@
             this.back.HeaderText = "退药数量";
             this.back.Name = "back";
             this.back.ReadOnly = true;
+            this.back.Visible = false;
             // 
             // charge_code
             // 
@@ -466,10 +481,33 @@
             this.confirm_flag.ReadOnly = true;
             this.confirm_flag.Visible = false;
             // 
+            // confirm_flag_str
+            // 
+            this.confirm_flag_str.DataPropertyName = "confirm_flag_str";
+            this.confirm_flag_str.HeaderText = "确认状态";
+            this.confirm_flag_str.Name = "confirm_flag_str";
+            this.confirm_flag_str.ReadOnly = true;
+            // 
+            // confirm_name
+            // 
+            this.confirm_name.DataPropertyName = "confirm_name";
+            this.confirm_name.HeaderText = "确认人";
+            this.confirm_name.Name = "confirm_name";
+            this.confirm_name.ReadOnly = true;
+            this.confirm_name.Visible = false;
+            // 
+            // confirm_date
+            // 
+            this.confirm_date.DataPropertyName = "confirm_date";
+            this.confirm_date.HeaderText = "确认日期";
+            this.confirm_date.Name = "confirm_date";
+            this.confirm_date.ReadOnly = true;
+            this.confirm_date.Visible = false;
+            // 
             // RefundConfirm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(942, 625);
+            this.ClientSize = new System.Drawing.Size(1140, 625);
             this.Controls.Add(this.ckall);
             this.Controls.Add(this.dgvCpr);
             this.Controls.Add(this.uiPanel2);
@@ -479,7 +517,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RefundConfirm";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "退款(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 753, 465);
             this.Load += new System.EventHandler(this.RefundConfirm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RefundConfirm_KeyUp);
@@ -523,5 +563,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn order_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag_str;
+        private System.Windows.Forms.DataGridViewTextBoxColumn confirm_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn confirm_date;
     }
 }

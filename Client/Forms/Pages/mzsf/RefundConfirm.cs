@@ -472,7 +472,10 @@ namespace Mzsf.Forms.Pages
                         sum_total = p.sum_total,
                         charge_code = p.charge_code,
                         order_type = p.order_type,
-                        confirm_flag = p.confirm_flag
+                        confirm_flag = p.confirm_flag,
+                        confirm_flag_str = p.confirm_flag_str,
+                        confirm_name = p.confirm_name,
+                        confirm_date = p.confirm_date
                     }).ToList();
                     dgvCpr.Init();
                     dgvCpr.DataSource = list;
@@ -519,7 +522,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[i].Cells["confirm_flag"].Value) == 1)
+                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "")
                         {
                             continue;
                         }
@@ -532,7 +535,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[i].Cells["confirm_flag"].Value) == 1)
+                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "")
                         {
                             continue;
                         }
@@ -587,6 +590,13 @@ namespace Mzsf.Forms.Pages
                 if (colIndex == 0 && rowIndex != -1)
                 {
                     // MessageBox.Show(this.dgvCpr.Rows[e.RowIndex].Cells[0].EditedFormattedValue.ToString());
+                    //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
+
+                    if (dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "")
+                    {
+                        UIMessageTip.Show("该项目已确认，不能退费");
+                        return;
+                    }
 
                     (dgvCpr.Rows[rowIndex].Cells[0] as DataGridViewCheckBoxCell).ReadOnly = true;
                     //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
@@ -644,7 +654,9 @@ namespace Mzsf.Forms.Pages
                 {
                     foreach (DataGridViewRow row in dgvCpr.Rows)
                     {
-                        if (row.Cells["confirm_flag"].Value == null || Convert.ToInt32(row.Cells["confirm_flag"].Value) != 1)
+                        //if (row.Cells["confirm_flag"].Value == null || Convert.ToInt32(row.Cells["confirm_flag"].Value) != 1)
+
+                        if (row.Cells["confirm_flag_str"].Value== null ||row.Cells["confirm_flag_str"].Value.ToString() == "")
                         {
                             row.Cells[0].Value = "True";
                         }

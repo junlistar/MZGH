@@ -34,6 +34,7 @@ namespace Data.Entities.Mzsf
         public string windows_no { get; set; }
         public string confirm_date { get; set; }
         public string confirm_opera { get; set; }
+        public string confirm_name { get; set; }
         public string confirm_win { get; set; }
         public string confirm_flag { get; set; }
         public string trans_flag { get; set; }

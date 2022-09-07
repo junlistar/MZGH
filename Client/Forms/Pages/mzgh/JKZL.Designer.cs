@@ -51,6 +51,7 @@
             this.lbl1.TabIndex = 0;
             this.lbl1.Text = "应交金额:";
             this.lbl1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel2
             // 
@@ -62,6 +63,7 @@
             this.uiLabel2.TabIndex = 1;
             this.uiLabel2.Text = "实收金额:";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel3
             // 
@@ -73,6 +75,7 @@
             this.uiLabel3.TabIndex = 2;
             this.uiLabel3.Text = "找零金额:";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtyjzje
             // 
@@ -97,6 +100,7 @@
             this.txtyjzje.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtyjzje.TabIndex = 10;
             this.txtyjzje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtyjzje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtjkje
             // 
@@ -120,6 +124,7 @@
             this.txtjkje.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtjkje.TabIndex = 3;
             this.txtjkje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtjkje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtjkje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtjkje_KeyPress);
             // 
             // txtzlje
@@ -145,6 +150,7 @@
             this.txtzlje.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.txtzlje.TabIndex = 5;
             this.txtzlje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtzlje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnSave
             // 
@@ -168,6 +174,7 @@
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "确定";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
@@ -192,6 +199,7 @@
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // uiLabel1
@@ -204,6 +212,7 @@
             this.uiLabel1.TabIndex = 11;
             this.uiLabel1.Text = "元";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel4
             // 
@@ -215,6 +224,7 @@
             this.uiLabel4.TabIndex = 12;
             this.uiLabel4.Text = "元";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel5
             // 
@@ -226,6 +236,7 @@
             this.uiLabel5.TabIndex = 13;
             this.uiLabel5.Text = "元";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // JKZL
             // 
@@ -247,9 +258,10 @@
             this.MinimizeBox = false;
             this.Name = "JKZL";
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "交款找零";
-            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
+            this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 528, 320);
             this.Load += new System.EventHandler(this.JKZL_Load);
             this.ResumeLayout(false);
 

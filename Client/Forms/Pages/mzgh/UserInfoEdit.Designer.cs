@@ -44,6 +44,7 @@
             this.uiLabel14 = new Sunny.UI.UILabel();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.cbxSex = new Sunny.UI.UIComboBox();
             this.txtshebaohao = new Sunny.UI.UITextBox();
             this.uiLabel12 = new Sunny.UI.UILabel();
@@ -287,6 +288,7 @@
             // 
             // uiGroupBox1
             // 
+            this.uiGroupBox1.Controls.Add(this.label3);
             this.uiGroupBox1.Controls.Add(this.cbxSex);
             this.uiGroupBox1.Controls.Add(this.txtshebaohao);
             this.uiGroupBox1.Controls.Add(this.uiLabel12);
@@ -329,6 +331,16 @@
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiGroupBox1.Click += new System.EventHandler(this.uiGroupBox1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(631, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 21);
+            this.label3.TabIndex = 1112;
+            this.label3.Text = "*";
             // 
             // cbxSex
             // 
@@ -766,7 +778,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.Location = new System.Drawing.Point(516, 715);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
@@ -782,7 +794,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnCancel.Location = new System.Drawing.Point(630, 715);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
@@ -808,7 +820,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserInfoEdit";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "编辑患者信息（按ESC退出）";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 876, 536);
             this.Load += new System.EventHandler(this.UserInfoEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserInfoEdit_KeyDown);
@@ -871,5 +885,6 @@
         private Sunny.UI.UITextBox txtshebaohao;
         private Sunny.UI.UILabel uiLabel12;
         private Sunny.UI.UIComboBox cbxSex;
+        private System.Windows.Forms.Label label3;
     }
 }

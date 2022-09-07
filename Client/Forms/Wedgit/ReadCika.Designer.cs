@@ -73,21 +73,11 @@
             // btnOK
             // 
             this.btnOK.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnOK.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnOK.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnOK.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnOK.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnOK.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnOK.Location = new System.Drawing.Point(186, 154);
             this.btnOK.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnOK.Name = "btnOK";
-            this.btnOK.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
-            this.btnOK.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(203)))), ((int)(((byte)(83)))));
-            this.btnOK.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
-            this.btnOK.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnOK.Size = new System.Drawing.Size(340, 59);
-            this.btnOK.Style = Sunny.UI.UIStyle.Green;
             this.btnOK.StyleCustomMode = true;
             this.btnOK.TabIndex = 4;
             this.btnOK.Text = "确 定";
@@ -107,7 +97,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReadCika";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "读磁卡(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 690, 203);
             this.Load += new System.EventHandler(this.ReadCika_Load);
             this.ResumeLayout(false);

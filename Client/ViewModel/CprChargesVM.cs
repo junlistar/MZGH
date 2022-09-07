@@ -14,9 +14,9 @@ namespace Client.ViewModel
         {
             get
             {
-                if (parent_no!="0")
+                if (parent_no != "0")
                 {
-                   // return "　　" + charge_code_lookup;
+                    // return "　　" + charge_code_lookup;
                     return "　└  " + charge_code_lookup;
                 }
                 else
@@ -55,6 +55,7 @@ namespace Client.ViewModel
         public string windows_no { get; set; }
         public string confirm_date { get; set; }
         public string confirm_opera { get; set; }
+        public string confirm_name { get; set; }
         public string confirm_win { get; set; }
         public string confirm_flag { get; set; }
         public string trans_flag { get; set; }
@@ -108,7 +109,19 @@ namespace Client.ViewModel
         //是否是退款标记
         public bool is_delete
         {
-            get;set;
+            get; set;
+        }
+
+        public string confirm_flag_str
+        {
+            get
+            {
+                if (confirm_flag == "1" && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
+                {
+                    return confirm_name + "(" + confirm_date + ")";
+                }
+                return "";
+            }
         }
     }
 

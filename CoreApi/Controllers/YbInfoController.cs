@@ -165,6 +165,33 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<MedType>>(ex.Message);
             }
         }
+        public ResponseResult<List<DiagType>> GetDiagTypes()
+        {
+            Log.Information($"GetDiagTypes,");
+            try
+            {
+                return _ybInfoRepository.GetDiagTypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<DiagType>>(ex.Message);
+            }
+        }
+        public ResponseResult<List<IcdCode>> GetIcdCodes()
+        {
+            Log.Information($"GetIcdCodes,");
+            try
+            {
+                return _ybInfoRepository.GetIcdCodes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<IcdCode>>(ex.Message);
+            }
+        }
+         
         public ResponseResult<UserInfoResponseModel> GetYjsUserInfo(string patient_id, int admiss_times)
         {
             Log.Information($"GetYbkDetailInfo");

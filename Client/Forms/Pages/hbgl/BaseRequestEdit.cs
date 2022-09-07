@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
@@ -23,6 +23,8 @@ namespace Client
         //BaseRequest _baseRequest;
         string _current_sn = "";
         int _temp_flag = 0;
+
+        public List<UserDicVM> docList;
 
         public BaseRequestEdit(string current_sn, int temp_flag = 0)
         {
@@ -41,6 +43,7 @@ namespace Client
                 //查询数据
                 InitData();
             }
+            docList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
 
             txtks.Focus();
         }
@@ -344,7 +347,7 @@ namespace Client
             var pbl = tb.Parent as UIPanel;
             //获取数据 
 
-            if (SessionHelper.userDics != null && SessionHelper.userDics.Count > 0)
+            if (docList != null && docList.Count > 0)
             {
                 var ipt = txtDoct.Text.Trim();
 
@@ -360,7 +363,7 @@ namespace Client
                 dgvys.ReadOnly = true;
 
 
-                List<UserDicVM> vm = SessionHelper.userDics;
+                List<UserDicVM> vm = docList;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {

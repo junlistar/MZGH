@@ -38,6 +38,7 @@
             this.visit_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.doct_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.doct_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +64,8 @@
             this.times,
             this.visit_date,
             this.unit_name,
-            this.doct_name});
+            this.doct_name,
+            this.doct_code});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -85,6 +87,7 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvOrders.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvOrders.RowHeight = 0;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -93,7 +96,10 @@
             this.dgvOrders.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvOrders.RowTemplate.Height = 23;
             this.dgvOrders.SelectedIndex = -1;
+            this.dgvOrders.ShowGridLine = false;
+            this.dgvOrders.ShowRect = false;
             this.dgvOrders.Size = new System.Drawing.Size(629, 206);
+            this.dgvOrders.Style = Sunny.UI.UIStyle.Custom;
             this.dgvOrders.TabIndex = 0;
             this.dgvOrders.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvOrders.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellDoubleClick);
@@ -122,6 +128,13 @@
             this.doct_name.HeaderText = "医生";
             this.doct_name.Name = "doct_name";
             // 
+            // doct_code
+            // 
+            this.doct_code.DataPropertyName = "doct_code";
+            this.doct_code.HeaderText = "doct_code";
+            this.doct_code.Name = "doct_code";
+            this.doct_code.Visible = false;
+            // 
             // SelectOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -131,7 +144,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SelectOrder";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "选择处方记录(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.SelectOrder_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelectOrder_KeyUp);
@@ -147,5 +162,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn visit_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn doct_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn doct_code;
     }
 }

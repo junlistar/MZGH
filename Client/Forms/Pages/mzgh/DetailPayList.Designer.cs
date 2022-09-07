@@ -230,9 +230,13 @@
             this.Controls.Add(this.btnCacel);
             this.Controls.Add(this.dgvpaylist);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "DetailPayList";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.StyleCustomMode = true;
             this.Text = "支付详情";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 367);
             this.Load += new System.EventHandler(this.RefundPayList_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DetailPayList_KeyDown);

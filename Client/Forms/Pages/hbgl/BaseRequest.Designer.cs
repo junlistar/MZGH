@@ -540,6 +540,7 @@
             this.cbxDay.FillColor = System.Drawing.Color.White;
             this.cbxDay.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbxDay.Items.AddRange(new object[] {
+            "全部",
             "星期一",
             "星期二",
             "星期三",

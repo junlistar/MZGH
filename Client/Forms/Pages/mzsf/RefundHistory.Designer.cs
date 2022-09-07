@@ -263,7 +263,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RefundHistory";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "退款记录(按ESC退出)";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 753, 465);
             this.Load += new System.EventHandler(this.RefundConfirm_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RefundHistory_KeyUp);

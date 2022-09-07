@@ -37,7 +37,7 @@ values(@patient_id,@admiss_times,@psn_no,@psn_cert_type,@certno,@psn_name,@gend,
                     para.Add("@psn_name", baseinfo.psn_name);
                     para.Add("@gend", baseinfo.gend);
                     para.Add("@naty", baseinfo.naty);
-                    para.Add("@brty", baseinfo.brdy);
+                    para.Add("@brdy", baseinfo.brdy);
                     para.Add("@age", baseinfo.age);
 
                     connection.Execute(del_sql, para, transaction);
@@ -450,6 +450,28 @@ values (@patient_id,
                 return connection.Query<MedType>(sql).ToList();
             }
         }
+
+        public List<DiagType> GetDiagTypes()
+        {
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = "select * from yb_zd_diagtype";
+
+                return connection.Query<DiagType>(sql).ToList();
+            }
+        }
+        public List<IcdCode> GetIcdCodes()
+        {
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = "select code,name,py_code,d_code,yb_code,yb_name from zd_icd_code";
+
+                return connection.Query<IcdCode>(sql).ToList();
+            }
+        }
+         
 
         public UserInfoResponseModel GetYjsUserInfo(string patient_id,int admiss_times)
         {

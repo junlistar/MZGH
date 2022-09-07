@@ -433,6 +433,12 @@
     <Compile Include="Forms\Pages\zfgl\YBPay.Designer.cs">
       <DependentUpon>YBPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\AddZhenduan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\AddZhenduan.Designer.cs">
+      <DependentUpon>AddZhenduan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\EditPwd.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -617,6 +623,12 @@
     </Compile>
     <Compile Include="Forms\Wedgit\YBJSPreview.Designer.cs">
       <DependentUpon>YBJSPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\YBtuifei.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\YBtuifei.Designer.cs">
+      <DependentUpon>YBtuifei.cs</DependentUpon>
     </Compile>
     <Compile Include="Pay\AliPayAPI\AliConfig.cs" />
     <Compile Include="Pay\WxPayAPI\business\DownloadBill.cs" />
@@ -831,6 +843,9 @@
     <EmbeddedResource Include="Forms\Pages\zfgl\YBPay.resx">
       <DependentUpon>YBPay.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\AddZhenduan.resx">
+      <DependentUpon>AddZhenduan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\EditPwd.resx">
       <DependentUpon>EditPwd.cs</DependentUpon>
     </EmbeddedResource>
@@ -917,6 +932,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\YBJSPreview.resx">
       <DependentUpon>YBJSPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\YBtuifei.resx">
+      <DependentUpon>YBtuifei.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

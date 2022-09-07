@@ -32,4 +32,22 @@ namespace Client.ViewModel
         public string name { get; set; }
     }
 
+    //诊断类别
+    public class DiagTypeVM
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
+
+    public class IcdCodeVM
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+        public string py_code { get; set; }
+        public string d_code { get; set; }
+        public string yb_code { get; set; }
+        public string yb_name { get; set; }
+    }
+
+
 }

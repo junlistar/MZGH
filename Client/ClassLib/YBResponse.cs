@@ -352,6 +352,7 @@ namespace Client.ClassLib
         public string patient_id { get; set; }
         public string admiss_times { get; set; }
         public string diag_type { get; set; }
+        public string diag_type_name { get; set; }
         public string diag_srt_no { get; set; }
         public string diag_code { get; set; }
         public string diag_name { get; set; }
