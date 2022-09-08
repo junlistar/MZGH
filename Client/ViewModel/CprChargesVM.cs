@@ -116,11 +116,23 @@ namespace Client.ViewModel
         {
             get
             {
-                if (confirm_flag == "1" && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
+                if (hasBackYp &&confirm_flag == "1" && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
                 {
                     return confirm_name + "(" + confirm_date + ")";
                 }
                 return "";
+            }
+        }
+
+        public bool hasBackYp
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(back) && back != charge_amount.ToString())
+                {
+                    return true;
+                }
+                return false;
             }
         }
     }

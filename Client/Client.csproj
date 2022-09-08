@@ -295,6 +295,12 @@
     <Compile Include="Forms\Pages\mzsf\JKZL.Designer.cs">
       <DependentUpon>JKZL.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\mzsf\MzDepositRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\mzsf\MzDepositRecord.Designer.cs">
+      <DependentUpon>MzDepositRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\mzsf\OrderItemPage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -773,6 +779,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\JKZL.resx">
       <DependentUpon>JKZL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\mzsf\MzDepositRecord.resx">
+      <DependentUpon>MzDepositRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\OrderItemPage.resx">
       <DependentUpon>OrderItemPage.cs</DependentUpon>

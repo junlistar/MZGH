@@ -591,8 +591,10 @@ namespace Mzsf.Forms.Pages
                 {
                     // MessageBox.Show(this.dgvCpr.Rows[e.RowIndex].Cells[0].EditedFormattedValue.ToString());
                     //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
+                    //var _back = dgvCpr.Rows[rowIndex].Cells["back"].Value.ToString();
+                    //var _charge_amount = dgvCpr.Rows[rowIndex].Cells["charge_amount"].Value.ToString();
 
-                    if (dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "")
+                    if ( dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "")
                     {
                         UIMessageTip.Show("该项目已确认，不能退费");
                         return;
@@ -655,7 +657,7 @@ namespace Mzsf.Forms.Pages
                     foreach (DataGridViewRow row in dgvCpr.Rows)
                     {
                         //if (row.Cells["confirm_flag"].Value == null || Convert.ToInt32(row.Cells["confirm_flag"].Value) != 1)
-
+                         
                         if (row.Cells["confirm_flag_str"].Value== null ||row.Cells["confirm_flag_str"].Value.ToString() == "")
                         {
                             row.Cells[0].Value = "True";

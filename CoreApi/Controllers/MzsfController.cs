@@ -377,8 +377,23 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<MzDeposit>>(ex.Message);
             }
-
         }
+
+        public ResponseResult<List<MzOrderReceipt>> GetDepositReceipts(string patient_id)
+        {
+            Log.Information($"GetDepositReceipts,{patient_id}");
+            try
+            {
+                return _mzDepositRepository.GetDepositReceipts(patient_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<MzOrderReceipt>>(ex.Message);
+            }
+        }
+
+
 
         public ResponseResult<bool> BackFee(string opera, string pid, int ledger_sn, string receipt_sn, string receipt_no, string cheque_cash, string isall = "1")
         {

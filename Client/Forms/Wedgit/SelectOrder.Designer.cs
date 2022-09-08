@@ -39,6 +39,7 @@
             this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.doct_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.doct_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.icd_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +66,8 @@
             this.visit_date,
             this.unit_name,
             this.doct_name,
-            this.doct_code});
+            this.doct_code,
+            this.icd_code});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -135,6 +137,13 @@
             this.doct_code.Name = "doct_code";
             this.doct_code.Visible = false;
             // 
+            // icd_code
+            // 
+            this.icd_code.DataPropertyName = "icd_code";
+            this.icd_code.HeaderText = "icd_code";
+            this.icd_code.Name = "icd_code";
+            this.icd_code.Visible = false;
+            // 
             // SelectOrder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -163,5 +172,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn doct_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn doct_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn icd_code;
     }
 }

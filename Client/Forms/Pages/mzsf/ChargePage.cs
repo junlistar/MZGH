@@ -41,15 +41,15 @@ namespace Mzsf.Forms.Pages
         {
             InitializeComponent();
 
-            Task.Run(async () =>
-            {
-                await Task.Delay(500);
+            //Task.Run(async () =>
+            //{
+            //    await Task.Delay(500);
 
-                this.Invoke(new Action(() =>
-                {
-                    txtCode.Focus();
-                }));
-            });
+            //    this.Invoke(new Action(() =>
+            //    {
+            //        txtCode.Focus();
+            //    }));
+            //});
         }
 
         public void SearchUser()
@@ -221,6 +221,7 @@ namespace Mzsf.Forms.Pages
                         txtDoct.Text = result.data[0].doct_name;
                         current_doct_sn = result.data[0].doctor_code;
                         current_icd_code = result.data[0].icd_code;
+                        current_times = result.data[0].times;
                         if (result.data.Count > 1)
                         {
                             SelectOrder selectOrder = new SelectOrder(result.data);
@@ -231,8 +232,7 @@ namespace Mzsf.Forms.Pages
                                 txtDoct.Text = current_doct_name; 
                                 lblTimes.Text = "来访号：" + current_times;
                             }
-                        }
-
+                        } 
                     }
                     //查询处方
                     GetOrders(patient_id, current_times);
@@ -578,7 +578,8 @@ namespace Mzsf.Forms.Pages
 
             BindOrderTypes();
 
-            InicOrderTemplate();
+            //转移到首次加载
+            //InicOrderTemplate();
         }
         /// <summary>
         /// 初始化诊疗模板信息
@@ -627,38 +628,50 @@ namespace Mzsf.Forms.Pages
 
         public void BindOrderTypes()
         {
-            //查询 处方类型列表 
-            string json = "";
-            string paramurl = string.Format($"/api/mzsf/GetOrderTypes");
 
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
+            if (SessionHelper.mzOrderTypes!=null )
             {
-                json = HttpClientUtil.Get(paramurl);
+                var orderTypes = SessionHelper.mzOrderTypes;
+                orderTypes = orderTypes.Where(p => p.name.Contains("诊疗")).ToList();
+                cbxOrderType.DataSource = orderTypes;
+                cbxOrderType.ValueMember = "code";
+                cbxOrderType.DisplayMember = "name";
 
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
-                if (result.status == 1)
-                {
-                    var orderTypes = result.data;
-                    orderTypes = orderTypes.Where(p => p.name.Contains("诊疗")).ToList();
-                    cbxOrderType.DataSource = orderTypes;
-                    cbxOrderType.ValueMember = "code";
-                    cbxOrderType.DisplayMember = "name";
-
-                    cbxOrderType.SelectedValue = "01";
-                }
-                else
-                {
-                    log.Error(result.message);
-                }
-
+                cbxOrderType.SelectedValue = "01";
             }
-            catch (Exception ex)
-            {
-                log.Debug("请求接口数据出错：" + ex.Message);
-                log.Debug("接口数据：" + json);
+            return;
+            ////查询 处方类型列表 
+            //string json = "";
+            //string paramurl = string.Format($"/api/mzsf/GetOrderTypes");
 
-            }
+            //log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            //try
+            //{
+            //    json = HttpClientUtil.Get(paramurl);
+
+            //    var result = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json);
+            //    if (result.status == 1)
+            //    {
+            //        var orderTypes = result.data;
+            //        orderTypes = orderTypes.Where(p => p.name.Contains("诊疗")).ToList();
+            //        cbxOrderType.DataSource = orderTypes;
+            //        cbxOrderType.ValueMember = "code";
+            //        cbxOrderType.DisplayMember = "name";
+
+            //        cbxOrderType.SelectedValue = "01";
+            //    }
+            //    else
+            //    {
+            //        log.Error(result.message);
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Debug("请求接口数据出错：" + ex.Message);
+            //    log.Debug("接口数据：" + json);
+
+            //}
         }
 
         private void InitUI()
@@ -943,6 +956,8 @@ namespace Mzsf.Forms.Pages
                                 //打印发票 
                                 Print ghprint = new Print(SessionHelper.mzsf_report_code);
                                 ghprint._printer = SessionHelper.sf_printer;
+                                ghprint._patient_id = SessionHelper.patientVM.patient_id;
+                                ghprint._ledger_sn = SessionHelper.sf_print_user_ledger.ToString();
                                 ghprint.Show();
 
                             }
@@ -1391,5 +1406,30 @@ namespace Mzsf.Forms.Pages
             BindOrders(lblPatientid.Text);
         }
 
+        private void btnxp_Click(object sender, EventArgs e)
+        {
+            ShowPrintSelectWindow();
+        }
+
+        private void btnfp_Click(object sender, EventArgs e)
+        {
+            ShowPrintSelectWindow();
+        }
+
+        public void ShowPrintSelectWindow()
+        {
+            var _pid = lblPatientid.Text;
+            if (string.IsNullOrEmpty(lblPatientid.Text))
+            {
+                UIMessageTip.Show("没有患者信息，请先查询");
+                return;
+            }
+
+            Client.Forms.Pages.mzsf.MzDepositRecord mzDepositRecord = new Client.Forms.Pages.mzsf.MzDepositRecord();
+            mzDepositRecord.patient_id = lblPatientid.Text;
+
+            mzDepositRecord.ShowDialog();
+        }
+         
     }
 }

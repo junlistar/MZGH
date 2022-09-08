@@ -55,15 +55,26 @@ namespace Client
             SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
 
+            //this.BackColor = Color.Pink;
+            //this.Aside.BackColor = Color.Red;
+            MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
 
+        private bool MainTabControl_BeforeRemoveTabPage(object sender, int index)
+        {
+            //if (index==0)
+            //{
+            //    return false;
+            //}
+            return true;
+        }
 
         public void MenuBind()
         {
             //设置关联
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
-            Aside.TabControl.TabVisible = true; 
+            Aside.TabControl.TabVisible = true;
             //Aside.TabControl.TabBackColor = Color.FromArgb(60, 95, 145);
             Aside.TabControl.TabSelectedColor = Color.FromArgb(6, 146, 151);
             Aside.TabControl.TabSelectedForeColor = Color.White;
@@ -221,7 +232,7 @@ namespace Client
 
                 }
 
-                 
+
 
                 pageIndex = 1400;
                 if (function_list.Where(p => p.func_desc.Trim() == "用户报表").Count() > 0)
@@ -243,7 +254,7 @@ namespace Client
                     {
                         Aside.CreateChildNode(parent, "WEB报表查询", 61568, 24, 1404);
                     }
-                    
+
                 }
                 pageIndex = 1500;
                 if (function_list.Where(p => p.func_desc.Trim() == "权限管理").Count() > 0)
@@ -371,7 +382,7 @@ namespace Client
                 page = AddPage(obj, pageIndex);
             }
             SelectPage(pageIndex);
-             
+
             //设置激活 用户键盘事件
             Task.Run(async () =>
             {
@@ -387,8 +398,20 @@ namespace Client
 
         private void Obj_FormClosing(object sender, FormClosingEventArgs e)
         {
+            TabPage _tabpage = null;
+            foreach (TabPage page in MainTabControl.TabPages)
+            {
+                var _sendpage = sender as UIPage;
+                if (page.Text == _sendpage.Text)
+                {
+                    _tabpage = page;
+                    break;
+                }
+            }
+
+            MainTabControl.TabPages.Remove(_tabpage);
             //RemovePage(int.Parse((sender as UIPage).TagString));//
-            Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
+            //Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
         }
 
 
@@ -437,7 +460,7 @@ namespace Client
                 this.MinimumSize = new Size(this.Width, this.Height);
 
                 //显示默认页面
-                AddPage(new Client.Forms.Pages.DefaultPage());
+                AddPage(new Client.Forms.Pages.DefaultPage(), 9999);
 
                 //隐藏框架头部
                 Header.Hide();
@@ -709,6 +732,33 @@ namespace Client
 
                 SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
 
+                //处方模板
+                paramurl = string.Format($"/api/mzsf/GetMzChargePatterns");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternVM>>>(json);
+                if (result.status == 1)
+                {
+                    SessionHelper.MzChargePatterns = result.data;
+                }
+                //处方模板详细
+                paramurl = string.Format($"/api/mzsf/GetMzPatternDetails");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var detail_result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternDetailVM>>>(json);
+                if (detail_result.status == 1)
+                {
+                    SessionHelper.MzChargePatternDetails = detail_result.data;
+                }
+                //处方类型
+                paramurl = string.Format($"/api/mzsf/GetOrderTypes"); 
+                json = HttpClientUtil.Get(paramurl); 
+                SessionHelper.mzOrderTypes = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json).data;
+
                 //支付类型比较 
                 paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -726,7 +776,7 @@ namespace Client
                 //医保字典 
                 paramurl = string.Format($"/api/YbInfo/GetInsutypes");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl); 
+                json = HttpClientUtil.Get(paramurl);
                 SessionHelper.insutypes = WebApiHelper.DeserializeObject<ResponseResult<List<InsutypeVM>>>(json).data;
                 paramurl = string.Format($"/api/YbInfo/GetMdtrtCertTypes");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -744,6 +794,10 @@ namespace Client
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 json = HttpClientUtil.Get(paramurl);
                 SessionHelper.icdCodes = WebApiHelper.DeserializeObject<ResponseResult<List<IcdCodeVM>>>(json).data;
+                paramurl = string.Format($"/api/YbInfo/GetBirctrlTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.birctrlTypes = WebApiHelper.DeserializeObject<ResponseResult<List<BirctrlTypeVM>>>(json).data;
 
                 //客户端配置 
                 paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
@@ -847,7 +901,7 @@ namespace Client
                     line = sr.ReadLine();
                 }
                 sr.Close();
-                fs.Close(); 
+                fs.Close();
             }
             catch (Exception ex)
             {
@@ -855,7 +909,7 @@ namespace Client
                 UIMessageTip.Show("打印配置文件读取失败");
             }
         }
-        
+
 
         private bool Frm_OnLogin(string userName, string password)
         {

@@ -29,6 +29,8 @@ namespace Data.IRepository
 
         List<IcdCode> GetIcdCodes();
 
+        List<BirctrlType> GetBirctrlTypes();
+
         UserInfoResponseModel GetYjsUserInfo(string patient_id, int admiss_times);
 
         #endregion

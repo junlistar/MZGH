@@ -35,7 +35,8 @@ namespace Client.Forms.Wedgit
                 visit_date = p.visit_date,
                 doct_name = p.doct_name,
                 doct_code = p.doctor_code,
-                unit_name =  p.unit_name
+                unit_name =  p.unit_name,
+                icd_code =  p.icd_code
             }).OrderBy(o=>o.times).ToList();
             dgvOrders.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvOrders.AutoResizeColumns();
@@ -60,6 +61,10 @@ namespace Client.Forms.Wedgit
                     if (dgvOrders.Rows[e.RowIndex].Cells["doct_code"].Value != null)
                     {
                         ChargePage.current_doct_sn = dgvOrders.Rows[e.RowIndex].Cells["doct_code"].Value.ToString(); ;
+                    }
+                    if (dgvOrders.Rows[e.RowIndex].Cells["icd_code"].Value != null)
+                    {
+                        ChargePage.current_icd_code = dgvOrders.Rows[e.RowIndex].Cells["icd_code"].Value.ToString(); ;
                     }
 
                     this.DialogResult = DialogResult.OK;

@@ -370,6 +370,7 @@ namespace Client
                 }
                 else if (payMethod == PayMethodEnum.Yibao)
                 {
+
                     //刷医保卡，再挂号 
                     if (YiBaoPay(Convert.ToDecimal(left_je)))
                     {
@@ -844,7 +845,12 @@ namespace Client
                 OpenPayWindow(PayMethodEnum.Yinlian, btn.TagString);
             }
             else if (btn.Text.Contains("医保"))
-            {
+            { 
+                if (string.IsNullOrEmpty(vm.yb_ys_code))
+                {
+                    UIMessageBox.ShowError("医生医保编号为空，不能进行医保支付");
+                    return;
+                }
                 OpenPayWindow(PayMethodEnum.Yibao, btn.TagString);
             }
             else if (btn.Text.Contains("现金"))
@@ -1240,7 +1246,7 @@ namespace Client
                 }
                 else
                 {
-                    UIMessageBox.Show("生成电子发票失败,参考日志信息");
+                    UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
                     log.Error(json);
                 }
 
@@ -1250,11 +1256,11 @@ namespace Client
                 string ermsg = ex.ToString();
                 if (ermsg.IndexOf("无法连接")>-1)
                 {
-                    UIMessageBox.Show("生成电子发票失败,无法连接到服务器");
+                    UIMessageBox.ShowError("生成电子发票失败，请检查财政票据客户端是否运行中");
                 }
                 else
                 {
-                    UIMessageBox.Show("生成电子发票失败,参考日志信息");
+                    UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
                 } 
                 log.Error(ex.ToString());
             }

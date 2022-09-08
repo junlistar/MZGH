@@ -49,6 +49,13 @@ namespace Data.Entities
         public string name { get; set; }
     }
 
+    //计划生育手术类别
+    public class BirctrlType
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
+
     public class IcdCode
     { 
         public string code { get; set; }

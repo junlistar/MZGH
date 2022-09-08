@@ -33,6 +33,9 @@ namespace Client.Forms.Wedgit
         public int _report_code;
         public string _printer;
 
+        public string _patient_id;
+        public string _ledger_sn;
+
         public Print(int report_code)
         {
             InitializeComponent();
@@ -164,11 +167,11 @@ namespace Client.Forms.Wedgit
                             {
                                 if (item.param_name == "patient_id")
                                 {
-                                    sql = sql.Replace(":" + item.param_name, "'"+ SessionHelper.patientVM.patient_id + "'");
+                                    sql = sql.Replace(":" + item.param_name, "'"+  _patient_id+ "'");
                                 }
                                 else if (item.param_name == "ledger_sn")
                                 {
-                                    sql = sql.Replace(":" + item.param_name,  SessionHelper.sf_print_user_ledger.ToString());
+                                    sql = sql.Replace(":" + item.param_name, _ledger_sn);
                                 }
 
                                 //if (item.param_name == "report_date")

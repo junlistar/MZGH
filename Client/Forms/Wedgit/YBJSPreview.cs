@@ -72,6 +72,17 @@ namespace Client.Forms.Wedgit
                 med_type.ValueMember = "code";
                 med_type.DisplayMember = "name";
             }
+            if (SessionHelper.birctrlTypes != null)
+            {
+                var _birctrlTypes = SessionHelper.birctrlTypes;
+                var _birItem = new BirctrlTypeVM();
+                _birItem.code = "";
+                _birItem.name = ""; 
+                _birctrlTypes.Insert(0, _birItem);
+                birctrl_type.DataSource = _birctrlTypes;
+                birctrl_type.ValueMember = "code";
+                birctrl_type.DisplayMember = "name";
+            }
             var setway = new List<ComboxItem>();
             setway.Add(new ComboxItem("按项目结算", "01"));
             setway.Add(new ComboxItem("按定额结算", "02"));
@@ -136,8 +147,8 @@ namespace Client.Forms.Wedgit
                 {
                     var _doct = doctList.Where(p => p.code == ghRequest.doctor_sn).FirstOrDefault();
 
-                    if (_doct!=null)
-                    { 
+                    if (_doct != null)
+                    {
                         txtDoct.TagString = _doct.yb_ys_code;
                         txtDoct.Text = _doct.name;
                     }
@@ -429,6 +440,19 @@ namespace Client.Forms.Wedgit
             jzxxRequest.input.mdtrtinfo.psn_no = psn_no;
             jzxxRequest.input.mdtrtinfo.med_type = med_type.SelectedValue.ToString(); //"11";
             jzxxRequest.input.mdtrtinfo.begntime = _dt;
+            //门诊慢病处理
+            //病种编码
+            if (birctrl_type.Text!="")
+            { 
+                jzxxRequest.input.mdtrtinfo.birctrl_type = birctrl_type.SelectedValue.ToString();
+                jzxxRequest.input.mdtrtinfo.birctrl_matn_date = birctrl_type.SelectedText;
+            }
+
+            if (cbx_mzmb.Text!="")
+            {
+                jzxxRequest.input.mdtrtinfo.dise_codg = cbx_mzmb.SelectedValue.ToString();
+                jzxxRequest.input.mdtrtinfo.dise_name = cbx_mzmb.SelectedText;
+            }
 
 
             //Diseinfo diseinfo = new Diseinfo();
@@ -830,6 +854,9 @@ namespace Client.Forms.Wedgit
                 txtDoct.TextChanged += txtDoct_TextChanged;
 
                 dgvys.Hide();
+
+                //更新诊断医生信息
+                LoadIcdData();
             }
             catch (Exception ex)
             {
@@ -1040,6 +1067,88 @@ namespace Client.Forms.Wedgit
                 }).ToList();
                 dgvjzxx.DataSource = _dat;
             }
+        }
+        /// <summary>
+        /// 获取慢病
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnLoadMb_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                //【5301】人员慢特病备案查询
+                var jsRequest = new YBRequest<Request5301>();
+                jsRequest.infno = "5301";
+
+                jsRequest.msgid = YBHelper.msgid;
+                jsRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+                jsRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
+                jsRequest.recer_sys_code = YBHelper.recer_sys_code;
+                jsRequest.dev_no = "";
+                jsRequest.dev_safe_info = "";
+                jsRequest.cainfo = "";
+                jsRequest.signtype = "";
+                jsRequest.infver = YBHelper.infver;
+                jsRequest.opter_type = YBHelper.opter_type;
+                jsRequest.opter = SessionHelper.uservm.user_mi;
+                jsRequest.opter_name = SessionHelper.uservm.name;
+                jsRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                jsRequest.fixmedins_code = YBHelper.fixmedins_code;
+                jsRequest.fixmedins_name = YBHelper.fixmedins_name;
+                jsRequest.sign_no = YBHelper.msgid;
+                jsRequest.input = new RepModel<Request5301>();
+
+                jsRequest.input.data = new Request5301();
+                jsRequest.input.data.psn_no = psn_no;
+
+                var json = WebApiHelper.SerializeObject(jsRequest);
+                var BusinessID = "5301";
+                var Dataxml = json;
+                var Outputxml = "";
+                var parm = new object[] { BusinessID, json, Outputxml };
+
+                //提交门诊挂号结算信息
+                YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 0, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+
+                var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 1, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+
+                log.Debug("结算返回：" + parm[2].ToString());
+
+                var _jsresp = WebApiHelper.DeserializeObject<YBResponse<Response5301>>(parm[2].ToString());
+
+                //绑定下拉框
+                if (_jsresp.output.feedetail!=null)
+                {
+                    var _mblist = _jsresp.output.feedetail;
+                    var _mbItem = new Response5301Feedetail();
+                    _mbItem.opsp_dise_code = "";
+                    _mbItem.opsp_dise_name = "";
+                    _mblist.Insert(0, _mbItem);
+
+                    cbx_mzmb.DataSource = _mblist;
+                    cbx_mzmb.DisplayMember = "opsp_dise_code";
+                    cbx_mzmb.ValueMember = "opsp_dise_name";
+                }
+                else
+                {
+                    UIMessageBox.Show("没有查询到慢病数据");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
+
+        private void lnkSetEmptyDate_Click(object sender, EventArgs e)
+        {
+            birctrl_matn_date.Text = "";
         }
     }
 }

@@ -910,7 +910,7 @@ namespace Data.Repository.Mzsf
                         foreach (var item in detail_charge_list)
                         {
                             Serilog.Log.Debug($"判断charge_code :{item.charge_code}");
-                            if (charge_code_list.Contains(item.charge_code))
+                            if (charge_code_list.Contains(item.charge_code)) //还要判断数量
                             {
                                 Serilog.Log.Debug($"退款，不写入");
                                 //选择退款的，不写入

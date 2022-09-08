@@ -38,7 +38,12 @@ namespace Client.ViewModel
         public string code { get; set; }
         public string name { get; set; }
     }
-
+    //计划生育手术类别
+    public class BirctrlTypeVM
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
     public class IcdCodeVM
     {
         public string code { get; set; }

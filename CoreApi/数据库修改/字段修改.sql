@@ -806,9 +806,27 @@ CREATE TABLE [dbo].[yb_zd_diagtype](
 	[code] [varchar](50) NULL,
 	[name] [varchar](200) NULL
 ) ON [PRIMARY]
-
  
   insert into yb_zd_diagtype(code,name) values('1','西医主要诊断')
   insert into yb_zd_diagtype(code,name) values('2','西医其他诊断')
   insert into yb_zd_diagtype(code,name) values('3','中医主病诊断')
   insert into yb_zd_diagtype(code,name) values('4','中医主证诊断')
+
+
+CREATE TABLE [dbo].[yb_zd_birctrltype](
+	[code] [varchar](50) NULL,
+	[name] [varchar](200) NULL
+) ON [PRIMARY]
+GO
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('1','放置宫内节育器')
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('2','取出宫内节育器')
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('3','流产术')
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('4','引产术')
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('5','绝育手术')
+insert into [yb_zd_birctrltype] ([code],[name])
+values ('6','绝育复通手术')

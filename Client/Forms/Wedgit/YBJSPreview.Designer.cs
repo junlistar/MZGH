@@ -75,7 +75,7 @@
             this.dise_dor_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dise_dor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vali_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uiButton1 = new Sunny.UI.UIButton();
+            this.btnLoadMb = new Sunny.UI.UIButton();
             this.birctrl_matn_date = new Sunny.UI.UIDatePicker();
             this.caty_name = new Sunny.UI.UITextBox();
             this.caty_code = new Sunny.UI.UITextBox();
@@ -83,7 +83,6 @@
             this.mdtrt_cert_no = new Sunny.UI.UITextBox();
             this.psn_setlway = new Sunny.UI.UIComboBox();
             this.med_type = new Sunny.UI.UIComboBox();
-            this.txt_mzmb = new Sunny.UI.UITextBox();
             this.txtfph = new Sunny.UI.UITextBox();
             this.birctrl_type = new Sunny.UI.UIComboBox();
             this.mdtrt_cert_type = new Sunny.UI.UIComboBox();
@@ -135,6 +134,8 @@
             this.label23 = new System.Windows.Forms.Label();
             this.btnYJS = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
+            this.cbx_mzmb = new Sunny.UI.UIComboBox();
+            this.lnkSetEmptyDate = new Sunny.UI.UILinkLabel();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cbxx)).BeginInit();
             this.uiGroupBox2.SuspendLayout();
@@ -477,12 +478,14 @@
             // 
             // uiGroupBox2
             // 
+            this.uiGroupBox2.Controls.Add(this.lnkSetEmptyDate);
+            this.uiGroupBox2.Controls.Add(this.cbx_mzmb);
             this.uiGroupBox2.Controls.Add(this.btnDelZd);
             this.uiGroupBox2.Controls.Add(this.btnAddzd);
             this.uiGroupBox2.Controls.Add(this.txtDoct);
             this.uiGroupBox2.Controls.Add(this.chkuse_flag);
             this.uiGroupBox2.Controls.Add(this.dgvjzxx);
-            this.uiGroupBox2.Controls.Add(this.uiButton1);
+            this.uiGroupBox2.Controls.Add(this.btnLoadMb);
             this.uiGroupBox2.Controls.Add(this.birctrl_matn_date);
             this.uiGroupBox2.Controls.Add(this.caty_name);
             this.uiGroupBox2.Controls.Add(this.caty_code);
@@ -490,7 +493,6 @@
             this.uiGroupBox2.Controls.Add(this.mdtrt_cert_no);
             this.uiGroupBox2.Controls.Add(this.psn_setlway);
             this.uiGroupBox2.Controls.Add(this.med_type);
-            this.uiGroupBox2.Controls.Add(this.txt_mzmb);
             this.uiGroupBox2.Controls.Add(this.txtfph);
             this.uiGroupBox2.Controls.Add(this.birctrl_type);
             this.uiGroupBox2.Controls.Add(this.mdtrt_cert_type);
@@ -532,7 +534,7 @@
             this.btnDelZd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnDelZd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnDelZd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDelZd.Location = new System.Drawing.Point(804, 253);
+            this.btnDelZd.Location = new System.Drawing.Point(814, 159);
             this.btnDelZd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnDelZd.Name = "btnDelZd";
             this.btnDelZd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -544,6 +546,7 @@
             this.btnDelZd.TabIndex = 43;
             this.btnDelZd.Text = "删除";
             this.btnDelZd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDelZd.Visible = false;
             this.btnDelZd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnDelZd.Click += new System.EventHandler(this.btnDelZd_Click);
             // 
@@ -556,7 +559,7 @@
             this.btnAddzd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnAddzd.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnAddzd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddzd.Location = new System.Drawing.Point(804, 198);
+            this.btnAddzd.Location = new System.Drawing.Point(756, 159);
             this.btnAddzd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAddzd.Name = "btnAddzd";
             this.btnAddzd.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
@@ -568,6 +571,7 @@
             this.btnAddzd.TabIndex = 42;
             this.btnAddzd.Text = "添加";
             this.btnAddzd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAddzd.Visible = false;
             this.btnAddzd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnAddzd.Click += new System.EventHandler(this.btnAddzd_Click);
             // 
@@ -675,7 +679,7 @@
             this.dgvjzxx.SelectedIndex = -1;
             this.dgvjzxx.ShowGridLine = false;
             this.dgvjzxx.ShowRect = false;
-            this.dgvjzxx.Size = new System.Drawing.Size(795, 81);
+            this.dgvjzxx.Size = new System.Drawing.Size(863, 81);
             this.dgvjzxx.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             this.dgvjzxx.Style = Sunny.UI.UIStyle.LayuiGreen;
             this.dgvjzxx.TabIndex = 39;
@@ -723,29 +727,29 @@
             this.vali_flag.HeaderText = "有效标志";
             this.vali_flag.Name = "vali_flag";
             // 
-            // uiButton1
+            // btnLoadMb
             // 
-            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiButton1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiButton1.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiButton1.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiButton1.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Location = new System.Drawing.Point(660, 159);
-            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.uiButton1.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.uiButton1.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiButton1.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.uiButton1.Size = new System.Drawing.Size(75, 25);
-            this.uiButton1.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.uiButton1.TabIndex = 32;
-            this.uiButton1.Text = "获取慢病";
-            this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Visible = false;
-            this.uiButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnLoadMb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLoadMb.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.btnLoadMb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.btnLoadMb.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.btnLoadMb.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btnLoadMb.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btnLoadMb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLoadMb.Location = new System.Drawing.Point(660, 159);
+            this.btnLoadMb.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnLoadMb.Name = "btnLoadMb";
+            this.btnLoadMb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.btnLoadMb.RectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
+            this.btnLoadMb.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btnLoadMb.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
+            this.btnLoadMb.Size = new System.Drawing.Size(75, 25);
+            this.btnLoadMb.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnLoadMb.TabIndex = 32;
+            this.btnLoadMb.Text = "获取慢病";
+            this.btnLoadMb.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnLoadMb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnLoadMb.Click += new System.EventHandler(this.btnLoadMb_Click);
             // 
             // birctrl_matn_date
             // 
@@ -909,30 +913,6 @@
             this.med_type.TabIndex = 26;
             this.med_type.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.med_type.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txt_mzmb
-            // 
-            this.txt_mzmb.ButtonFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txt_mzmb.ButtonFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txt_mzmb.ButtonFillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txt_mzmb.ButtonRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txt_mzmb.ButtonRectHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(171)))), ((int)(((byte)(160)))));
-            this.txt_mzmb.ButtonRectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
-            this.txt_mzmb.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_mzmb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.txt_mzmb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_mzmb.Location = new System.Drawing.Point(450, 157);
-            this.txt_mzmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_mzmb.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_mzmb.Name = "txt_mzmb";
-            this.txt_mzmb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txt_mzmb.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.txt_mzmb.ShowText = false;
-            this.txt_mzmb.Size = new System.Drawing.Size(203, 29);
-            this.txt_mzmb.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.txt_mzmb.TabIndex = 27;
-            this.txt_mzmb.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_mzmb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtfph
             // 
@@ -1772,6 +1752,44 @@
             this.uiSymbolButton4.Visible = false;
             this.uiSymbolButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cbx_mzmb
+            // 
+            this.cbx_mzmb.DataSource = null;
+            this.cbx_mzmb.FillColor = System.Drawing.Color.White;
+            this.cbx_mzmb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbx_mzmb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx_mzmb.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
+            this.cbx_mzmb.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbx_mzmb.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbx_mzmb.Location = new System.Drawing.Point(440, 157);
+            this.cbx_mzmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbx_mzmb.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbx_mzmb.Name = "cbx_mzmb";
+            this.cbx_mzmb.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbx_mzmb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbx_mzmb.Size = new System.Drawing.Size(213, 29);
+            this.cbx_mzmb.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.cbx_mzmb.TabIndex = 27;
+            this.cbx_mzmb.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_mzmb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // lnkSetEmptyDate
+            // 
+            this.lnkSetEmptyDate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.lnkSetEmptyDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lnkSetEmptyDate.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.lnkSetEmptyDate.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.lnkSetEmptyDate.Location = new System.Drawing.Point(737, 126);
+            this.lnkSetEmptyDate.Name = "lnkSetEmptyDate";
+            this.lnkSetEmptyDate.Size = new System.Drawing.Size(50, 23);
+            this.lnkSetEmptyDate.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.lnkSetEmptyDate.TabIndex = 44;
+            this.lnkSetEmptyDate.TabStop = true;
+            this.lnkSetEmptyDate.Text = "置空";
+            this.lnkSetEmptyDate.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lnkSetEmptyDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lnkSetEmptyDate.Click += new System.EventHandler(this.lnkSetEmptyDate_Click);
+            // 
             // YBJSPreview
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1833,7 +1851,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private Sunny.UI.UIDataGridView dgvjzxx;
-        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIButton btnLoadMb;
         private Sunny.UI.UIDatePicker birctrl_matn_date;
         private Sunny.UI.UITextBox caty_name;
         private Sunny.UI.UITextBox caty_code;
@@ -1841,7 +1859,6 @@
         private Sunny.UI.UITextBox mdtrt_cert_no;
         private Sunny.UI.UIComboBox psn_setlway;
         private Sunny.UI.UIComboBox med_type;
-        private Sunny.UI.UITextBox txt_mzmb;
         private Sunny.UI.UITextBox txtfph;
         private Sunny.UI.UIComboBox birctrl_type;
         private Sunny.UI.UIComboBox mdtrt_cert_type;
@@ -1903,5 +1920,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dise_dor_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn dise_dor_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn vali_flag;
+        private Sunny.UI.UIComboBox cbx_mzmb;
+        private Sunny.UI.UILinkLabel lnkSetEmptyDate;
     }
 }

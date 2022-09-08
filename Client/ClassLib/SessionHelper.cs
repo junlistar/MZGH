@@ -61,6 +61,9 @@ namespace Client.ClassLib
         public static List<MedTypeVM> medTypes;
         public static List<DiagTypeVM> diagTypes;
         public static List<IcdCodeVM> icdCodes;
+        public static List<BirctrlTypeVM> birctrlTypes;
+
+        
 
 
         /// <summary>
@@ -87,7 +90,8 @@ namespace Client.ClassLib
         public static string jsbb_printer;
         public static string default_printer;
 
-
+        //门诊处方类型列表
+        public static List<OrderTypeVM> mzOrderTypes;
 
         //门诊处方
         public static List<MzOrderVM> mzOrders;

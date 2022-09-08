@@ -28,6 +28,23 @@ namespace Client.ClassLib
         public List<Diseinfo> diseinfo { get; set; }
 
     }
+
+    public class Request5301 {
+        public string psn_no { get; set; }
+    }
+
+    public class Response5301
+    {
+        public List<Response5301Feedetail> feedetail { get; set; }
+    }
+
+    public class Response5301Feedetail {
+        public string opsp_dise_code { get; set; }
+        public string opsp_dise_name { get; set; }
+        public string begndate { get; set; }
+        public string enddate { get; set; } 
+
+    }
     public class Repsonse2204<T>
     {
         public T result { get; set; }

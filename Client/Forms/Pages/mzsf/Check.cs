@@ -1712,15 +1712,24 @@ namespace Mzsf.Forms.Pages
                 }
                 else
                 {
-                    UIMessageTip.ShowError("电子发票数据生成失败！");
+                    UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
                     log.Error(json);
                 }
+
             }
             catch (Exception ex)
             {
-                UIMessageTip.Show(ex.Message);
-                log.Error(ex.Message);
-            } 
+                string ermsg = ex.ToString();
+                if (ermsg.IndexOf("无法连接") > -1)
+                {
+                    UIMessageBox.ShowError("生成电子发票失败，请检查财政票据客户端是否运行中");
+                }
+                else
+                {
+                    UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
+                }
+                log.Error(ex.ToString());
+            }
         } 
 
         private void btnTuikuan_Click(object sender, EventArgs e)

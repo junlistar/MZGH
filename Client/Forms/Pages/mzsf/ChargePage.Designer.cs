@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnxp = new Sunny.UI.UISymbolButton();
+            this.uiLabel1 = new Sunny.UI.UILabel();
+            this.btnfp = new Sunny.UI.UISymbolButton();
             this.uiButton1 = new Sunny.UI.UIButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnHuajia = new Sunny.UI.UISymbolButton();
@@ -92,9 +95,6 @@
             this.lblOrderCharge = new System.Windows.Forms.Label();
             this.lblOrderTotalCharge = new System.Windows.Forms.Label();
             this.pnlAddOrder = new Sunny.UI.UIPanel();
-            this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
@@ -106,9 +106,9 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlTitle.Controls.Add(this.uiSymbolButton3);
+            this.pnlTitle.Controls.Add(this.btnxp);
             this.pnlTitle.Controls.Add(this.uiLabel1);
-            this.pnlTitle.Controls.Add(this.uiSymbolButton2);
+            this.pnlTitle.Controls.Add(this.btnfp);
             this.pnlTitle.Controls.Add(this.uiButton1);
             this.pnlTitle.Controls.Add(this.btnSave);
             this.pnlTitle.Controls.Add(this.btnHuajia);
@@ -125,6 +125,49 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnxp
+            // 
+            this.btnxp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnxp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnxp.Location = new System.Drawing.Point(820, 2);
+            this.btnxp.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnxp.Name = "btnxp";
+            this.btnxp.Size = new System.Drawing.Size(100, 40);
+            this.btnxp.StyleCustomMode = true;
+            this.btnxp.Symbol = 61579;
+            this.btnxp.TabIndex = 17;
+            this.btnxp.Text = "小票打印";
+            this.btnxp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnxp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnxp.Click += new System.EventHandler(this.btnxp_Click);
+            // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uiLabel1.Location = new System.Drawing.Point(588, 5);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(120, 35);
+            this.uiLabel1.TabIndex = 16;
+            this.uiLabel1.Text = "票据打印";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnfp
+            // 
+            this.btnfp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnfp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnfp.Location = new System.Drawing.Point(714, 2);
+            this.btnfp.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnfp.Name = "btnfp";
+            this.btnfp.Size = new System.Drawing.Size(100, 40);
+            this.btnfp.StyleCustomMode = true;
+            this.btnfp.Symbol = 61579;
+            this.btnfp.TabIndex = 15;
+            this.btnfp.Text = "发票打印";
+            this.btnfp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnfp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnfp.Click += new System.EventHandler(this.btnfp_Click);
             // 
             // uiButton1
             // 
@@ -1022,47 +1065,6 @@
             this.pnlAddOrder.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiSymbolButton2
-            // 
-            this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton2.Location = new System.Drawing.Point(714, 2);
-            this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton2.Name = "uiSymbolButton2";
-            this.uiSymbolButton2.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton2.StyleCustomMode = true;
-            this.uiSymbolButton2.Symbol = 61579;
-            this.uiSymbolButton2.TabIndex = 15;
-            this.uiSymbolButton2.Text = "发票打印";
-            this.uiSymbolButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uiLabel1.Location = new System.Drawing.Point(588, 5);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(120, 35);
-            this.uiLabel1.TabIndex = 16;
-            this.uiLabel1.Text = "票据打印";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiSymbolButton3
-            // 
-            this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton3.Location = new System.Drawing.Point(820, 2);
-            this.uiSymbolButton3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSymbolButton3.Name = "uiSymbolButton3";
-            this.uiSymbolButton3.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton3.StyleCustomMode = true;
-            this.uiSymbolButton3.Symbol = 61579;
-            this.uiSymbolButton3.TabIndex = 17;
-            this.uiSymbolButton3.Text = "小票打印";
-            this.uiSymbolButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1159,7 +1161,7 @@
         private Sunny.UI.UITextBox txtBarcode;
         private System.Windows.Forms.Label label21;
         private Sunny.UI.UILabel uiLabel1;
-        private Sunny.UI.UISymbolButton uiSymbolButton2;
-        private Sunny.UI.UISymbolButton uiSymbolButton3;
+        private Sunny.UI.UISymbolButton btnfp;
+        private Sunny.UI.UISymbolButton btnxp;
     }
 }

@@ -1288,6 +1288,8 @@ namespace Client
                         return;
                     }
 
+                    txtSearch.Focus();
+
                     BindUserInfo(userInfo);
 
                     if (YBHelper.currentYBInfo != null)

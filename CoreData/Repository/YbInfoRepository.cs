@@ -471,7 +471,17 @@ values (@patient_id,
                 return connection.Query<IcdCode>(sql).ToList();
             }
         }
-         
+        public List<BirctrlType> GetBirctrlTypes()
+        {
+
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = "select * from yb_zd_birctrltype"; 
+
+                return connection.Query<BirctrlType>(sql).ToList();
+            }
+        }
+
 
         public UserInfoResponseModel GetYjsUserInfo(string patient_id,int admiss_times)
         {

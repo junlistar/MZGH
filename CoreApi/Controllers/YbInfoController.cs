@@ -191,7 +191,19 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<IcdCode>>(ex.Message);
             }
         }
-         
+        public ResponseResult<List<BirctrlType>> GetBirctrlTypes()
+        {
+            Log.Information($"GetBirctrlTypes,");
+            try
+            {
+                return _ybInfoRepository.GetBirctrlTypes();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<BirctrlType>>(ex.Message);
+            }
+        }
         public ResponseResult<UserInfoResponseModel> GetYjsUserInfo(string patient_id, int admiss_times)
         {
             Log.Information($"GetYbkDetailInfo");

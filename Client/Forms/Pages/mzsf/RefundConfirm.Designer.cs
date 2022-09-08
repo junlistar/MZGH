@@ -455,7 +455,6 @@
             this.back.HeaderText = "退药数量";
             this.back.Name = "back";
             this.back.ReadOnly = true;
-            this.back.Visible = false;
             // 
             // charge_code
             // 
