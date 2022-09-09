@@ -41,15 +41,15 @@ namespace Mzsf.Forms.Pages
         {
             InitializeComponent();
 
-            //Task.Run(async () =>
-            //{
-            //    await Task.Delay(500);
+            Task.Run(async () =>
+            {
+                await Task.Delay(500);
 
-            //    this.Invoke(new Action(() =>
-            //    {
-            //        txtCode.Focus();
-            //    }));
-            //});
+                this.Invoke(new Action(() =>
+                {
+                    txtCode.Focus();
+                }));
+            });
         }
 
         public void SearchUser()
@@ -845,12 +845,17 @@ namespace Mzsf.Forms.Pages
                     MessageBox.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                {
+                { 
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
                     txtCode.Text = SessionHelper.cardno;
                     SearchUser();
+
+                    Task.Run(() =>
+                    {
+                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(parm[2].ToString());
+                    });
                 }
             }
             catch (Exception ex)
@@ -863,12 +868,15 @@ namespace Mzsf.Forms.Pages
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+        public void Reset()
+        {
             txtCode.Text = "";
             txtCode.Focus();
 
             InitUI();
         }
-
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -1114,6 +1122,7 @@ namespace Mzsf.Forms.Pages
 
             if (SessionHelper.cprCharges == null)
             {
+                UIMessageTip.ShowWarning("没有数据");
                 return;
             }
 
@@ -1430,6 +1439,35 @@ namespace Mzsf.Forms.Pages
 
             mzDepositRecord.ShowDialog();
         }
-         
+
+        private void btnHuajia_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+        }
+
+        private void ChargePage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                Reset();
+            }
+            if (e.KeyCode == Keys.F2)
+            {
+                SaveOrder();
+                Huajia();
+            }
+            if (e.KeyCode == Keys.F3)
+            {
+                ShowPrintSelectWindow();
+            }
+            if (e.KeyCode == Keys.F4)
+            {
+                ShowPrintSelectWindow();
+            }
+            if (e.KeyCode == Keys.F12)
+            {
+                this.Close();
+            }
+        }
     }
 }

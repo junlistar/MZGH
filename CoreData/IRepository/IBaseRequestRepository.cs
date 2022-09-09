@@ -15,7 +15,7 @@ namespace Data.IRepository
 
 
         int EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag,int limit_appoint_percent);
+           string week, string day, string ampm, int totle_num, string woork_room, string open_flag, string op_id, int temp_flag,int limit_appoint_percent);
          
         int DeleteBaseRequest(string request_sn);
 

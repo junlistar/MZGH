@@ -7,8 +7,6 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Client.ClassLib;
 using Client.ViewModel;
@@ -159,7 +157,7 @@ namespace Client
                     //    default:
                     //        data.window_no.ToString(); break;
                     //}
-                    txt_winno.Text = data.window_no.ToString();
+                    txt_wookroom.Text = data.workroom;
                     txt_limit.Text = data.limit_appoint_percent.ToString();
 
                     txtks.TextChanged += txtks_TextChanged;
@@ -188,7 +186,7 @@ namespace Client
             cbxSXW.ValueMember = "code";
             cbxSXW.DisplayMember = "name";
 
-            txt_winno.Text = "";
+            txt_wookroom.Text = "";
             cbxOpenFlag.Text = "开放";
             txt_limit.Text = "1";
 
@@ -463,15 +461,14 @@ namespace Client
                 var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
                 var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
 
-                var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
+                var ampm = cbxSXW.SelectedValue; //cbxSXW.Text == "上午" ? "a" : "p";
                 var week = "1";
                 var day = "";
                 int window_no = 0;
                 int open_flag = 1;
                 int total_num = 0;
                 int limit_appoint_percent = int.Parse(txt_limit.Text);
-
-                ampm = cbxSXW.SelectedValue.ToString();
+                 
 
 
                 //switch (cbxWeek.Text)
@@ -506,6 +503,12 @@ namespace Client
                 {
                     open_flag = 0;
                 }
+                else
+                {
+                    UIMessageTip.ShowError("请选择开放状态！");
+                    cbxOpenFlag.Focus();
+                    return;
+                }
                 int num = 0;
                 if (int.TryParse(txtTotalNum.Text, out num))
                 {
@@ -524,7 +527,7 @@ namespace Client
                     cbxHaobie.Focus();
                     return;
                 }
-                if (string.IsNullOrEmpty(ampm))
+                if (ampm == null || ampm.ToString() == "")
                 {
                     UIMessageTip.ShowError("请选择上午下午！");
                     cbxSXW.Focus();
@@ -549,12 +552,17 @@ namespace Client
                     return;
                 }
 
-                var _winno = txt_winno.Text;
-                if (!int.TryParse(_winno, out window_no))
+                var _wookroom = txt_wookroom.Text;
+                if (_wookroom=="")
                 {
-                    UIMessageTip.Show("诊室数据有误，请输入数字");
-                    return;
+                    UIMessageTip.Show("诊室数据为空！");
+                     return;
                 }
+                //if (!int.TryParse(_winno, out window_no))
+                //{
+                //    UIMessageTip.Show("诊室数据有误，请输入数字");
+                //    return;
+                //}
 
                 //判断是否存在
                 var json = "";
@@ -599,7 +607,7 @@ namespace Client
                     day = day,
                     ampm = ampm,
                     totle_num = total_num,
-                    window_no = window_no,
+                    woork_room = _wookroom,
                     open_flag = open_flag,
                     op_id = SessionHelper.uservm.user_mi,
                     temp_flag = _temp_flag,
@@ -607,7 +615,7 @@ namespace Client
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={d.temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
+                paramurl = string.Format($"/api/GuaHao/EditBaseRequest?request_sn={d.request_sn}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&week={d.week}&day={d.day}&ampm={d.ampm}&totle_num={d.totle_num}&woork_room={d.woork_room}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={d.temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 

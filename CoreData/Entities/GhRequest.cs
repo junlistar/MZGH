@@ -33,6 +33,7 @@ namespace Data.Entities
         public string enter_date { get; set; }
         public string open_flag { get; set; }
         public string window_no { get; set; }
+        public string workroom { get; set; }
         public string temp_flag { get; set; }
         public int limit_appoint_percent { get; set; }
 

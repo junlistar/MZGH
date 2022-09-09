@@ -34,6 +34,10 @@ namespace Client
 
         private void BaseRequestEdit_Load(object sender, EventArgs e)
         {
+            if (_temp_flag=="1")
+            {
+                this.Text = "临时号表编辑(按ESC退出)";
+            }
 
             docList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
 
@@ -69,7 +73,7 @@ namespace Client
 
             dgvys.CellClick += dgvys_CellContentClick;
             dgvys.KeyDown += Dgvys_KeyDown;
-             
+
             if (!string.IsNullOrEmpty(_record_sn))
             {
                 //如果是编辑状态，值允许编辑开放状态
@@ -90,7 +94,7 @@ namespace Client
             try
             {
                 if (!string.IsNullOrEmpty(_record_sn))
-                {  
+                {
                     string paramurl = string.Format($"/api/GuaHao/GetGhRecord?record_sn={_record_sn}");
                     string json = HttpClientUtil.Get(paramurl);
                     var result = WebApiHelper.DeserializeObject<ResponseResult<GHRequestEditVM>>(json);
@@ -170,7 +174,7 @@ namespace Client
                         //    default:
                         //        data.window_no.ToString(); break;
                         //}
-                        txt_workroom.Text = data.window_no.ToString();
+                        txt_workroom.Text = data.workroom;
                         _temp_flag = data.temp_flag;
 
                         txtks.TextChanged += txtks_TextChanged;
@@ -446,16 +450,18 @@ namespace Client
                 var doctor_code = string.IsNullOrWhiteSpace(txtDoct.Text) ? "" : txtDoct.TagString;
                 var group_sn = string.IsNullOrWhiteSpace(txtzk.Text) ? "" : txtzk.TagString;
 
-                var ampm = ""; //cbxSXW.Text == "上午" ? "a" : "p";
+                var ampm = cbxSXW.SelectedValue; //cbxSXW.Text == "上午" ? "a" : "p";
 
-                int window_no = 0;
+                string workroom = txt_workroom.Text;
                 int open_flag = 1;
                 int total_num = 0;
 
-                if (!string.IsNullOrEmpty(txt_workroom.Text))
+                if (string.IsNullOrEmpty(workroom))
                 {
-                    window_no = int.Parse(txt_workroom.Text);
-                }
+                    UIMessageTip.ShowError("请输入诊室！");
+                    txt_workroom.Focus();
+                    return;
+                } 
 
                 var request_date = txtDate.Text;
                 int limit_appoint_percent = 0;
@@ -464,16 +470,7 @@ namespace Client
                     limit_appoint_percent = int.Parse(txt_limit.Text);
                 }
 
-                ampm = cbxSXW.SelectedValue.ToString();
 
-                if (cbxOpenFlag.Text == "开放")
-                {
-                    open_flag = 1;
-                }
-                else if (cbxOpenFlag.Text == "不开放")
-                {
-                    open_flag = 0;
-                }
                 int result = 0;
                 if (int.TryParse(txtTotalNum.Text, out result))
                 {
@@ -492,7 +489,7 @@ namespace Client
                     cbxHaobie.Focus();
                     return;
                 }
-                if (string.IsNullOrEmpty(ampm))
+                if (ampm == null || ampm.ToString() == "")
                 {
                     UIMessageTip.ShowError("请选择上午下午！");
                     cbxSXW.Focus();
@@ -505,6 +502,20 @@ namespace Client
                     txtTotalNum.Focus();
                     return;
                 }
+                if (cbxOpenFlag.Text== "开放")
+                {
+                    open_flag = 1;
+                }
+                else if (cbxOpenFlag.Text == "不开放")
+                {
+                    open_flag = 0;
+                }
+                else
+                {
+                    UIMessageTip.ShowError("请选择开放状态！");
+                    cbxOpenFlag.Focus();
+                    return;
+                } 
 
                 //判断是否存在
                 Task<HttpResponseMessage> task = null;
@@ -520,14 +531,14 @@ namespace Client
                     request_type = request_type,
                     ampm = ampm,
                     totle_num = total_num,
-                    window_no = window_no,
+                    workroom = workroom,
                     open_flag = open_flag,
                     op_id = SessionHelper.uservm.user_mi,
                     limit_appoint_percent = limit_appoint_percent
                 };
                 var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&window_no={d.window_no}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
+                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&workroom={d.workroom}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
 
                 string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
 
@@ -686,7 +697,7 @@ namespace Client
             else if (e.KeyCode == Keys.Enter)
             {
 
-                if (dgv.Focused || dgvzk.Focused || dgvys.Focused ||txtks.Focused || txtzk.Focused||txtDoct.Focused)
+                if (dgv.Focused || dgvzk.Focused || dgvys.Focused || txtks.Focused || txtzk.Focused || txtDoct.Focused)
                 {
                     return;
                 }

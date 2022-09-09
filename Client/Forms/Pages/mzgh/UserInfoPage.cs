@@ -32,7 +32,8 @@ namespace Client.Forms.Pages
 
         private void UserInfoPage_Initialize(object sender, EventArgs e)
         {
-
+            dgv_cbxx.Init(); dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgv_sfxx.Init(); dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void UserInfoPage_Load(object sender, EventArgs e)
@@ -1136,6 +1137,10 @@ namespace Client.Forms.Pages
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
                 {
+                    Task.Run(() =>
+                    {
+                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(parm[2].ToString());
+                    });
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
@@ -1216,13 +1221,13 @@ namespace Client.Forms.Pages
                     if (result.data != null && result.data.insuinfo != null)
                     {
                         dgv_cbxx.DataSource = result.data.insuinfo;
-                        dgv_cbxx.AutoResizeColumns();
+                  
                         dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
                     if (result.data != null && result.data.idetinfo != null)
                     {
                         dgv_sfxx.DataSource = result.data.idetinfo;
-                        dgv_sfxx.AutoResizeColumns();
+                       
                         dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
                 }

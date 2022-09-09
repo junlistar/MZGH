@@ -90,6 +90,7 @@ namespace Client
                 var birth = sfz_birthday.Text;
                 var tel = this.txtTel.Text.Trim();
 
+                
 
                 //验证卡号 
                 if (string.IsNullOrWhiteSpace(cardId))
@@ -117,13 +118,32 @@ namespace Client
                     txtTel.Focus();
                     return;
                 }
-
+                if (cbxSex.SelectedValue ==null)
+                {
+                    UIMessageTip.ShowError("请选择性别!");
+                    cbxSex.Focus();
+                    return;
+                }
                 //if (string.IsNullOrWhiteSpace(sfzId))
                 //{
                 //    UIMessageTip.ShowWarning("身份证号码不能为空!");
                 //    sfz_card_no.Focus();
                 //    return;
                 //}
+
+                if (cbxShenfen.SelectedValue==null)
+                {
+                    UIMessageTip.ShowWarning("请选择身份类型!");
+                    cbxShenfen.Focus();
+                    return;
+                }
+
+                if (cbxChargeType.SelectedValue == null)
+                {
+                    UIMessageTip.ShowWarning("请选择费别!");
+                    cbxChargeType.Focus();
+                    return;
+                }
 
                 var marrycode = cbxmarrycode.Text;
                 switch (marrycode)

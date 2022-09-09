@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.txt_workroom = new Sunny.UI.UITextBox();
             this.txt_limit = new Sunny.UI.UITextBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
@@ -64,6 +71,13 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.label10);
+            this.uiGroupBox1.Controls.Add(this.label9);
+            this.uiGroupBox1.Controls.Add(this.label8);
+            this.uiGroupBox1.Controls.Add(this.label7);
+            this.uiGroupBox1.Controls.Add(this.label6);
+            this.uiGroupBox1.Controls.Add(this.label5);
+            this.uiGroupBox1.Controls.Add(this.label4);
             this.uiGroupBox1.Controls.Add(this.txt_workroom);
             this.uiGroupBox1.Controls.Add(this.txt_limit);
             this.uiGroupBox1.Controls.Add(this.uiLabel11);
@@ -94,10 +108,81 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.Size = new System.Drawing.Size(644, 336);
+            this.uiGroupBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox1.TabIndex = 0;
             this.uiGroupBox1.Text = "编辑";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(569, 232);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 21);
+            this.label10.TabIndex = 1120;
+            this.label10.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(317, 232);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 21);
+            this.label9.TabIndex = 1119;
+            this.label9.Text = "*";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(569, 265);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 21);
+            this.label8.TabIndex = 1118;
+            this.label8.Text = "*";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.Red;
+            this.label7.Location = new System.Drawing.Point(317, 190);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 21);
+            this.label7.TabIndex = 1117;
+            this.label7.Text = "*";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(569, 153);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 21);
+            this.label6.TabIndex = 1116;
+            this.label6.Text = "*";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(569, 191);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 21);
+            this.label5.TabIndex = 1115;
+            this.label5.Text = "*";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(569, 74);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 21);
+            this.label4.TabIndex = 1114;
+            this.label4.Text = "*";
             // 
             // txt_workroom
             // 
@@ -109,10 +194,9 @@
             this.txt_workroom.Name = "txt_workroom";
             this.txt_workroom.ShowText = false;
             this.txt_workroom.Size = new System.Drawing.Size(166, 29);
+            this.txt_workroom.Style = Sunny.UI.UIStyle.Custom;
             this.txt_workroom.TabIndex = 48;
-            this.txt_workroom.Text = "0";
             this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_workroom.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_limit
@@ -127,6 +211,7 @@
             this.txt_limit.Name = "txt_limit";
             this.txt_limit.ShowText = false;
             this.txt_limit.Size = new System.Drawing.Size(163, 29);
+            this.txt_limit.Style = Sunny.UI.UIStyle.Custom;
             this.txt_limit.TabIndex = 9;
             this.txt_limit.Text = "1";
             this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -139,6 +224,7 @@
             this.uiLabel11.Location = new System.Drawing.Point(94, 263);
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel11.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel11.TabIndex = 45;
             this.uiLabel11.Text = "限约";
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,6 +242,7 @@
             this.cbxRequestType.Name = "cbxRequestType";
             this.cbxRequestType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxRequestType.Size = new System.Drawing.Size(163, 29);
+            this.cbxRequestType.Style = Sunny.UI.UIStyle.Custom;
             this.cbxRequestType.TabIndex = 45;
             this.cbxRequestType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxRequestType.Visible = false;
@@ -167,6 +254,7 @@
             this.uiLabel7.Location = new System.Drawing.Point(491, 31);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(214, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel7.TabIndex = 46;
             this.uiLabel7.Text = "号类";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -184,6 +272,7 @@
             this.txtDate.Name = "txtDate";
             this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.txtDate.Size = new System.Drawing.Size(166, 29);
+            this.txtDate.Style = Sunny.UI.UIStyle.Custom;
             this.txtDate.SymbolDropDown = 61555;
             this.txtDate.SymbolNormal = 61555;
             this.txtDate.TabIndex = 4;
@@ -198,6 +287,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(344, 145);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 47;
             this.uiLabel1.Text = "日期";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -215,6 +305,7 @@
             this.txtTotalNum.Name = "txtTotalNum";
             this.txtTotalNum.ShowText = false;
             this.txtTotalNum.Size = new System.Drawing.Size(163, 29);
+            this.txtTotalNum.Style = Sunny.UI.UIStyle.Custom;
             this.txtTotalNum.TabIndex = 7;
             this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -227,6 +318,7 @@
             this.uiLabel9.Location = new System.Drawing.Point(79, 224);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel9.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel9.TabIndex = 43;
             this.uiLabel9.Text = "总号数";
             this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -246,6 +338,7 @@
             this.cbxHaobie.Name = "cbxHaobie";
             this.cbxHaobie.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxHaobie.Size = new System.Drawing.Size(163, 29);
+            this.cbxHaobie.Style = Sunny.UI.UIStyle.Custom;
             this.cbxHaobie.TabIndex = 5;
             this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -264,6 +357,7 @@
             this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxWinNo.ReadOnly = true;
             this.cbxWinNo.Size = new System.Drawing.Size(166, 29);
+            this.cbxWinNo.Style = Sunny.UI.UIStyle.Custom;
             this.cbxWinNo.TabIndex = 8;
             this.cbxWinNo.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxWinNo.Visible = false;
@@ -275,6 +369,7 @@
             this.uiLabel6.Location = new System.Drawing.Point(343, 224);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(43, 23);
+            this.uiLabel6.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel6.TabIndex = 42;
             this.uiLabel6.Text = "诊室";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -290,6 +385,7 @@
             this.txtDoct.Name = "txtDoct";
             this.txtDoct.ShowText = false;
             this.txtDoct.Size = new System.Drawing.Size(163, 29);
+            this.txtDoct.Style = Sunny.UI.UIStyle.Custom;
             this.txtDoct.TabIndex = 3;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -307,6 +403,7 @@
             this.txtzk.Name = "txtzk";
             this.txtzk.ShowText = false;
             this.txtzk.Size = new System.Drawing.Size(415, 29);
+            this.txtzk.Style = Sunny.UI.UIStyle.Custom;
             this.txtzk.TabIndex = 2;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -324,6 +421,7 @@
             this.txtks.Name = "txtks";
             this.txtks.ShowText = false;
             this.txtks.Size = new System.Drawing.Size(415, 29);
+            this.txtks.Style = Sunny.UI.UIStyle.Custom;
             this.txtks.TabIndex = 1;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -337,6 +435,7 @@
             this.uiLabel10.Location = new System.Drawing.Point(96, 145);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(93, 23);
+            this.uiLabel10.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel10.TabIndex = 36;
             this.uiLabel10.Text = "医生";
             this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -348,6 +447,7 @@
             this.uiLabel8.Location = new System.Drawing.Point(96, 108);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel8.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel8.TabIndex = 35;
             this.uiLabel8.Text = "专科";
             this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -359,6 +459,7 @@
             this.uiLabel5.Location = new System.Drawing.Point(96, 189);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel5.TabIndex = 33;
             this.uiLabel5.Text = "号别";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -370,6 +471,7 @@
             this.uiLabel4.Location = new System.Drawing.Point(96, 71);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 32;
             this.uiLabel4.Text = "科室";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -389,6 +491,7 @@
             this.cbxOpenFlag.Name = "cbxOpenFlag";
             this.cbxOpenFlag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxOpenFlag.Size = new System.Drawing.Size(166, 29);
+            this.cbxOpenFlag.Style = Sunny.UI.UIStyle.Custom;
             this.cbxOpenFlag.TabIndex = 10;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -399,6 +502,7 @@
             this.uiLabel3.Location = new System.Drawing.Point(344, 263);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 28;
             this.uiLabel3.Text = "开放";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -420,6 +524,7 @@
             this.cbxSXW.Name = "cbxSXW";
             this.cbxSXW.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxSXW.Size = new System.Drawing.Size(166, 29);
+            this.cbxSXW.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSXW.TabIndex = 6;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -430,6 +535,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(328, 183);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 26;
             this.uiLabel2.Text = "上下午";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -518,6 +624,7 @@
             this.Load += new System.EventHandler(this.BaseRequestEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RequestEdit_KeyDown);
             this.uiGroupBox1.ResumeLayout(false);
+            this.uiGroupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -554,5 +661,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Sunny.UI.UITextBox txt_workroom;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }

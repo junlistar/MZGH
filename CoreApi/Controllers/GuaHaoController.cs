@@ -657,13 +657,13 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
+           string week, string day, string ampm, int totle_num, string workroom, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
         {
-            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{window_no},{open_flag},{op_id},{temp_flag},{limit_appoint_percent}");
+            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{workroom},{open_flag},{op_id},{temp_flag},{limit_appoint_percent}");
             try
             {
                 return _baseRequestRepository.EditBaseRequest(request_sn, unit_sn, group_sn, doctor_sn, clinic_type,
-            week, day, ampm, totle_num, window_no, open_flag, op_id, temp_flag, limit_appoint_percent);
+            week, day, ampm, totle_num, workroom, open_flag, op_id, temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {
@@ -732,12 +732,12 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
-         string ampm, int totle_num, string window_no, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
+         string ampm, int totle_num, string workroom, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
         {
-            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{window_no},{open_flag},{op_id},{ temp_flag},{limit_appoint_percent}");
+            Log.Information($"EditRequest,{record_sn},{request_date},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{request_type},{ampm},{totle_num},{workroom},{open_flag},{op_id},{ temp_flag},{limit_appoint_percent}");
             try
             {
-                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, window_no, open_flag, op_id, temp_flag, limit_appoint_percent);
+                return _repository.EditRequest(record_sn, request_date, unit_sn, group_sn, doctor_sn, clinic_type, request_type, ampm, totle_num, workroom, open_flag, op_id, temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {

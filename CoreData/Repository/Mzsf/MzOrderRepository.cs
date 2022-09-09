@@ -52,7 +52,7 @@ namespace Data.Repository.Mzsf
                         if (visit_info==null)
                         {
                             visit_info = new MzVisit();
-                            string emp_sql = " select * from a_employee_mi where emp_sn=@emp_sn"; 
+                            string emp_sql = GetSqlByTag("mz_employee_getbysn"); 
                             para = new DynamicParameters();
                             para.Add("@emp_sn", opera);
                             var operaModel  = connection.QueryFirstOrDefault<Employee>(emp_sql, para, transaction);

@@ -28,34 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uiLabel1 = new Sunny.UI.UILabel();
             this.SuspendLayout();
-            // 
-            // uiLabel1
-            // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(119, 116);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(461, 76);
-            this.uiLabel1.TabIndex = 0;
-            this.uiLabel1.Text = "欢迎使用挂号系统！";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // DefaultPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.uiLabel1);
             this.Name = "DefaultPage";
             this.PageIndex = 1000;
             this.Text = "欢迎";
+            this.Initialize += new System.EventHandler(this.DefaultPage_Initialize);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Sunny.UI.UILabel uiLabel1;
     }
 }

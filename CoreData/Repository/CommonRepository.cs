@@ -28,7 +28,7 @@ namespace Data.Repository
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {  
-                string sql = "select charge_code,serial,ybhz_code,old_code from ybhz_zd_ypitem_dy";
+                string sql = GetSqlByTag("zd_ybhz_zd_ypitem_dy");
 
                 return connection.Query<Ybhzzd>(sql).AsList();
 

@@ -830,3 +830,8 @@ insert into [yb_zd_birctrltype] ([code],[name])
 values ('5','绝育手术')
 insert into [yb_zd_birctrltype] ([code],[name])
 values ('6','绝育复通手术')
+
+--增加诊室字段
+if not exists(select * from syscolumns where id=object_id('gh_request') and name='workroom') begin
+ALTER TABLE gh_request ADD workroom  varchar(100) default (null)
+end

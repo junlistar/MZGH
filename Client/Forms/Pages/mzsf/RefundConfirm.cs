@@ -26,6 +26,7 @@ namespace Mzsf.Forms.Pages
         public decimal total_charge = 0;
         public string patient_id = "";
         public int ledger_sn = 0;
+        public int times = 0;
         public string receipt_sn = "";
         public string receipt_no = "";
         public string table_flag = "";
@@ -275,12 +276,12 @@ namespace Mzsf.Forms.Pages
                                 var parm = new object[] { BusinessID, json, Outputxml };
 
 
-                                YBHelper.AddYBLog(BusinessID, json, _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+                                YBHelper.AddYBLog(BusinessID, times, json, _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
                                 //提交
                                 ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                                 log.Debug("结算撤销返回：" + parm[2]);
-                                YBHelper.AddYBLog(BusinessID, parm[2].ToString(), _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+                                YBHelper.AddYBLog(BusinessID, times, parm[2].ToString(), _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
 
                                 var _jscxresp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
 

@@ -18,7 +18,7 @@ namespace Data.Repository
             {
                 //IDbTransaction transaction = connection.BeginTransaction();
 
-                string sql = "SELECT * FROM mz_charge_pattern";//GetSqlByTag("zd_pagechequecompare_get");
+                string sql = GetSqlByTag("mz_charge_pattern_get"); 
 
                 return connection.Query<MzChargePattern>(sql).AsList();
 
@@ -29,7 +29,7 @@ namespace Data.Repository
         {
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "mzsf_PatternDetail";//GetSqlByTag("zd_mzclientconfig_get");
+                string sql = "mzsf_PatternDetail";
                  
                 return connection.Query<MzChargePatternDetail>(sql,null,null,true,null, CommandType.StoredProcedure).AsList();
             }

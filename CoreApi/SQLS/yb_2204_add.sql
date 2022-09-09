@@ -1,0 +1,3 @@
+--添加医保2204信息 
+insert into ybNew_2204_result(patient_id, admiss_times, feedetl_sn, det_item_fee_sumamt, cnt, pric, pric_uplmt_amt, selfpay_prop, fulamt_ownpay_amt, overlmt_amt, preselfpay_amt, inscp_scp_amt, chrgitm_lv, med_chrgitm_type, bas_medn_flag, hi_nego_drug_flag, chld_medc_flag, list_sp_item_flag, lmt_used_flag, drt_reim_flag, memo, mdtrt_id)
+values(@patient_id, @admiss_times, @feedetl_sn, @det_item_fee_sumamt, @cnt, @pric, @pric_uplmt_amt, @selfpay_prop, @fulamt_ownpay_amt, @overlmt_amt, @preselfpay_amt, @inscp_scp_amt, @chrgitm_lv, @med_chrgitm_type, @bas_medn_flag, @hi_nego_drug_flag, @chld_medc_flag, @list_sp_item_flag, @lmt_used_flag, @drt_reim_flag, @memo, @mdtrt_id)

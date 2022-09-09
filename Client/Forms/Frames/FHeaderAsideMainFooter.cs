@@ -55,17 +55,16 @@ namespace Client
             SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
 
-            //this.BackColor = Color.Pink;
-            //this.Aside.BackColor = Color.Red;
+            MainTabControl.TabBackColor = Color.FromArgb(60, 95, 145); 
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
 
         private bool MainTabControl_BeforeRemoveTabPage(object sender, int index)
         {
-            //if (index==0)
-            //{
-            //    return false;
-            //}
+            if (index == 0)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -415,43 +414,6 @@ namespace Client
         }
 
 
-        BackgroundWorker _demoBGWorker = new BackgroundWorker();
-
-
-        private void BGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            //修改进度条的显示。
-            var percent = e.ProgressPercentage;
-
-            //如果有更多的信息需要传递，可以使用 e.UserState 传递一个自定义的类型。
-            //这是一个 object 类型的对象，您可以通过它传递任何类型。
-            //我们仅把当前 sum 的值通过 e.UserState 传回，并通过显示在窗口上。
-            ResponseResult<bool> result = e.UserState as ResponseResult<bool>;
-
-            if (result.status == 1 && result.data)
-            {
-                //uiSignal1.Level = 5;
-                uiSignal1.OnColor = Color.FromArgb(80, 160, 255);
-                tlsInfo.Text = "";
-            }
-            else if (result.status == 2)
-            {
-                uiSignal1.OnColor = Color.Red;
-                tlsInfo.Text = result.message;
-            }
-            else
-            {
-                //uiSignal1.Level = 0;
-                uiSignal1.OnColor = Color.Red;
-                tlsInfo.Text = "数据库服务器连接失败！";
-            }
-
-            toolTip1.AutoPopDelay = 5000; toolTip1.InitialDelay = 500; toolTip1.ReshowDelay = 500;
-            toolTip1.ShowAlways = true;
-            toolTip1.SetToolTip(uiSignal1, "ping:" + result.message);  //设置提示信息为自定义
-
-
-        }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
             try
@@ -474,47 +436,52 @@ namespace Client
                 if (frm.IsLogin)
                 {
                     UIMessageTip.ShowOk("登录成功");
-                    this.WindowState = FormWindowState.Maximized;
-                    this.Show();
 
-                    //statusstrip信息
-                    tsslblName.Text = SessionHelper.uservm.name;
+                    ProcessingForm processingForm = new ProcessingForm();
+                    if (processingForm.ShowDialog() == DialogResult.OK)
+                    { 
+                        this.WindowState = FormWindowState.Maximized;
+                        this.Show();
 
-                    tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
-                    timer1.Interval = 1000;
-                    timer1.Start();
+                        //statusstrip信息
+                        tsslblName.Text = SessionHelper.uservm.name;
 
-                    timerlogout.Interval = 1000;
-                    timerlogout.Start();
+                        tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
+                        timer1.Interval = 1000;
+                        timer1.Start();
 
-                    //加载字典数据 
-                    InitDic();
+                        timerlogout.Interval = 1000;
+                        timerlogout.Start();
 
-                    //读取打印机配置
-                    InitPrinter();
+                        //加载字典数据 
+                        //InitDic();
 
-                    //获取菜单权限 
-                    GetUserFunctions(SessionHelper.uservm.user_group);
+                        //读取打印机配置
+                        InitPrinter();
 
-                    //绑定名称，版本号
-                    this.Text = SessionHelper.MzClientConfigVM.client_name + " " + SessionHelper.MzClientConfigVM.client_version;
+                        //获取菜单权限 
+                        GetUserFunctions(SessionHelper.uservm.user_group);
 
-                    //绑定菜单
-                    MenuBind();
+                        //绑定名称，版本号
+                        this.Text = SessionHelper.MzClientConfigVM.client_name + " " + SessionHelper.MzClientConfigVM.client_version;
 
-                    SessionHelper.clientHeight = this.Height;
-                    SessionHelper.clientWidth = this.Width;
+                        //绑定菜单
+                        MenuBind();
 
-                    this.FormClosing += FHeaderAsideMainFooter_FormClosing;
+                        SessionHelper.clientHeight = this.Height;
+                        SessionHelper.clientWidth = this.Width;
 
-                    //ping
-                    //_demoBGWorker.DoWork += BGWorker_DoWork;
-                    //_demoBGWorker.RunWorkerAsync();
-                    //_demoBGWorker.WorkerReportsProgress = true;
-                    //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+                        this.FormClosing += FHeaderAsideMainFooter_FormClosing;
 
-                    //timerSignal.Interval = 1000 * 5;//10s
-                    //timerSignal.Start();
+                        ////ping
+                        //_demoBGWorker.DoWork += BGWorker_DoWork;
+                        //_demoBGWorker.RunWorkerAsync();
+                        //_demoBGWorker.WorkerReportsProgress = true;
+                        //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
+
+                        //timerSignal.Interval = 1000 * 5;//10s
+                        //timerSignal.Start();
+                    };
                 }
                 else
                 {
@@ -564,59 +531,7 @@ namespace Client
 
         ToolTip toolTip1 = new ToolTip();
 
-        public void BGWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (1 == 1)
-            {
-                BackgroundWorker bgWorker = sender as BackgroundWorker;
-                //UIMessageTip.Show("BGWorker_DoWork");
-                try
-                {
-                    //获取用户费别信息
-                    Task<HttpResponseMessage> task = null;
-                    string json = "";
-                    string paramurl = string.Format($"/api/GuaHao/TestDBConnection");
 
-                    log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                    task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                    task.Wait();
-                    var response = task.Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var read = response.Content.ReadAsStringAsync();
-                        read.Wait();
-                        json = read.Result;
-                    }
-                    var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-
-                    bgWorker.ReportProgress(1, result);
-
-                    Thread.Sleep(5000);
-                }
-                catch (Exception ex)
-                {
-                    ResponseResult<bool> result = new ResponseResult<bool>();
-                    if (ex.InnerException != null && ex.InnerException.InnerException != null)
-                    {
-                        log.Error(ex.InnerException.InnerException.Message.ToString());
-
-                        result.message = ex.InnerException.InnerException.Message.ToString();
-
-                    }
-                    else
-                    {
-                        log.Error(ex.InnerException.ToString());
-                        result.message = ex.InnerException.InnerException.Message.ToString();
-
-                    }
-                    result.status = 2;
-
-                    bgWorker.ReportProgress(2, result);
-
-                }
-            }
-        }
 
         public void LoadSingnal()
         {
@@ -643,196 +558,6 @@ namespace Client
             toolTip1.SetToolTip(uiSignal1, "ping:" + result.message);  //设置提示信息为自定义
         }
 
-        public void InitDic()
-        {
-            try
-            {
-
-                log.Info("初始化数据字典：InitDic");
-
-                //获取用户费别信息 
-                string json;
-                string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
-
-                //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                //task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                //task.Wait();
-                //var response = task.Result;
-                //if (response.IsSuccessStatusCode)
-                //{
-                //    var read = response.Content.ReadAsStringAsync();
-                //    read.Wait();
-                //    json = read.Result;
-                //}
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
-
-                //获取地区信息
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetDistrictCodes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
-
-
-                //获取职业信息
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetOccupationCodes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
-
-                //获取身份信息
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetResponceTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
-
-
-                //获取科室
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetUnits");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
-
-                //获取号别
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetClinicTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
-
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetRequestTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
-
-                //获取用户
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetUserDic");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
-
-                //获取挂号时间段
-                json = "";
-                paramurl = string.Format($"/api/GuaHao/GetRequestHours");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
-
-                //获取用户   
-                paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-
-                SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
-
-                //处方模板
-                paramurl = string.Format($"/api/mzsf/GetMzChargePatterns");
-
-                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternVM>>>(json);
-                if (result.status == 1)
-                {
-                    SessionHelper.MzChargePatterns = result.data;
-                }
-                //处方模板详细
-                paramurl = string.Format($"/api/mzsf/GetMzPatternDetails");
-
-                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-
-                var detail_result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternDetailVM>>>(json);
-                if (detail_result.status == 1)
-                {
-                    SessionHelper.MzChargePatternDetails = detail_result.data;
-                }
-                //处方类型
-                paramurl = string.Format($"/api/mzsf/GetOrderTypes"); 
-                json = HttpClientUtil.Get(paramurl); 
-                SessionHelper.mzOrderTypes = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json).data;
-
-                //支付类型比较 
-                paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-
-                SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
-
-                //医保目录类型比较 
-                paramurl = string.Format($"/api/GuaHao/GetYbhzzdList");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-
-                SessionHelper.ybhzCompare = WebApiHelper.DeserializeObject<ResponseResult<List<YbhzzdVM>>>(json).data;
-
-                //医保字典 
-                paramurl = string.Format($"/api/YbInfo/GetInsutypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.insutypes = WebApiHelper.DeserializeObject<ResponseResult<List<InsutypeVM>>>(json).data;
-                paramurl = string.Format($"/api/YbInfo/GetMdtrtCertTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MdtrtCertTypeVM>>>(json).data;
-                paramurl = string.Format($"/api/YbInfo/GetMedTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.medTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MedTypeVM>>>(json).data;
-                paramurl = string.Format($"/api/YbInfo/GetDiagTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.diagTypes = WebApiHelper.DeserializeObject<ResponseResult<List<DiagTypeVM>>>(json).data;
-                paramurl = string.Format($"/api/YbInfo/GetIcdCodes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.icdCodes = WebApiHelper.DeserializeObject<ResponseResult<List<IcdCodeVM>>>(json).data;
-                paramurl = string.Format($"/api/YbInfo/GetBirctrlTypes");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                SessionHelper.birctrlTypes = WebApiHelper.DeserializeObject<ResponseResult<List<BirctrlTypeVM>>>(json).data;
-
-                //客户端配置 
-                paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                json = HttpClientUtil.Get(paramurl);
-                MzClientConfigVM mzClientConfig = WebApiHelper.DeserializeObject<ResponseResult<MzClientConfigVM>>(json).data;
-                if (mzClientConfig != null)
-                {
-                    //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
-                    SessionHelper.MzClientConfigVM = mzClientConfig;
-                }
-                else
-                {
-                    UIMessageTip.Show("没有获取到数据库客户端配置数据");
-                    log.Error("没有获取到数据库客户端配置数据");
-                }
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.Show(ex.Message);
-                log.Error(ex.ToString());
-            }
-
-            //SessionHelper.pay_xianjin = ConfigurationManager.AppSettings.Get("pay_xianjin");
-            //SessionHelper.pay_weixin = ConfigurationManager.AppSettings.Get("pay_weixin");
-            //SessionHelper.pay_zhifubao = ConfigurationManager.AppSettings.Get("pay_zhifubao");
-            //SessionHelper.pay_yinlian = ConfigurationManager.AppSettings.Get("pay_yinlian");
-            //SessionHelper.pay_yibao = ConfigurationManager.AppSettings.Get("pay_yibao");
-
-            //SessionHelper.pay_xianjin = SessionHelper.pageChequeCompares.Where(p=>p.page_code=="1").FirstOrDefault().his_code;
-            //SessionHelper.pay_weixin = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
-            //SessionHelper.pay_zhifubao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
-            //SessionHelper.pay_yinlian = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
-            //SessionHelper.pay_yibao = SessionHelper.pageChequeCompares.Where(p => p.page_code == "1").FirstOrDefault().his_code;
-        }
 
 
         public void InitPrinter()

@@ -295,11 +295,11 @@ namespace Client.Forms.Wedgit
                 var parm = new object[] { BusinessID, json, Outputxml };
 
                 //提交门诊挂号结算信息
-                YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 0, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+                YBHelper.AddYBLog(BusinessID, admiss_times,json, SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 0, SessionHelper.uservm.user_mi, jsRequest.inf_time);
 
                 var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 1, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+                YBHelper.AddYBLog(BusinessID, admiss_times,parm[2].ToString(), SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 1, SessionHelper.uservm.user_mi, jsRequest.inf_time);
 
                 log.Debug("结算返回：" + parm[2].ToString());
 
@@ -486,11 +486,11 @@ namespace Client.Forms.Wedgit
             var Outputxml = "";
             var parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times,json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-            YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             log.Debug("就诊系信息返回：" + parm[2]);
 
@@ -613,11 +613,11 @@ namespace Client.Forms.Wedgit
             Outputxml = "";
             parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-            YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             log.Debug("明细提交返回：" + parm[2]);
 
@@ -682,11 +682,11 @@ namespace Client.Forms.Wedgit
             Outputxml = "";
             parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, json, SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-            YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), SessionHelper.patientVM.patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, SessionHelper.uservm.user_mi, jzxxRequest.inf_time);
 
             log.Debug("预结算返回：" + parm[2]);
 
@@ -1110,11 +1110,11 @@ namespace Client.Forms.Wedgit
                 var parm = new object[] { BusinessID, json, Outputxml };
 
                 //提交门诊挂号结算信息
-                YBHelper.AddYBLog(BusinessID, json, SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 0, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+                YBHelper.AddYBLog(BusinessID, admiss_times, json, SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 0, SessionHelper.uservm.user_mi, jsRequest.inf_time);
 
                 var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                YBHelper.AddYBLog(BusinessID, parm[2].ToString(), SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 1, SessionHelper.uservm.user_mi, jsRequest.inf_time);
+                YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), SessionHelper.patientVM.patient_id, jsRequest.sign_no, jsRequest.infver, 1, SessionHelper.uservm.user_mi, jsRequest.inf_time);
 
                 log.Debug("结算返回：" + parm[2].ToString());
 

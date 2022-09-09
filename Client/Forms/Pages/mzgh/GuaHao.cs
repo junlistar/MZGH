@@ -205,6 +205,10 @@ namespace Client
 
         private void btnEditUser_Click(object sender, EventArgs e)
         {
+            EditUserInfo();
+        }
+        public void EditUserInfo()
+        {
             if (string.IsNullOrEmpty(this.lblPatientid.Text) || btnEditUser1.TagString == "")
             {
                 UIMessageTip.ShowError("请刷卡!");
@@ -896,7 +900,7 @@ namespace Client
 
                     Task.Run(() =>
                     {
-                        SaveCardData(yBResponse.output); SaveCardDataAll(parm[2].ToString());
+                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(parm[2].ToString());
                     });
                 }
             }
@@ -908,59 +912,7 @@ namespace Client
 
         }
 
-        public void SaveCardData(UserInfoResponseModel model)
-        {
-            Task<HttpResponseMessage> task = null;
-
-            var d = new
-            {
-                psn_no = model.baseinfo.psn_no,
-                psn_cert_type = model.baseinfo.psn_cert_type,
-                certno = model.baseinfo.certno,
-                psn_name = model.baseinfo.psn_name,
-                gend = model.baseinfo.gend,
-                naty = model.baseinfo.naty,
-                brdy = model.baseinfo.brdy,
-                age = model.baseinfo.age,
-            };
-
-            string paramurl = string.Format($"/api/user/UpdateYbkInfo?psn_no={d.psn_no}&psn_cert_type={d.psn_cert_type}&certno={d.certno}&psn_name={d.psn_name}&gend={d.gend}&naty={d.naty}&brdy={d.brdy}&age={d.age}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
-            {
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.Show(ex.Message);
-                log.Error(ex.ToString());
-            }
-
-        }
-
-        public void SaveCardDataAll(string jsonStr)
-        {
-
-            //更新医保其他信息  
-            string paramurl = string.Format($"/api/user/UpdateYbkInfoAll");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            try
-            {
-                HttpContent httpContent = new StringContent(jsonStr);
-
-                SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent);
-
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.Show(ex.Message);
-                log.Error(ex.ToString());
-            }
-
-        }
-
+    
 
         private void btnTuihao_Click(object sender, EventArgs e)
         {
@@ -1000,6 +952,7 @@ namespace Client
             txtCode.Text = "";
             txtCode.TextChanged += txtCode_TextChanged;
             InitUIText();
+            txtCode.Focus();
         }
 
 
@@ -1141,15 +1094,18 @@ namespace Client
 
                 case Keys.F1:
                     Reset();//重新
-                    break;
-
+                    break; 
                 case Keys.F2:
-                    ShowSearchWindow();//搜索
-                    break;
-                case Keys.F3:
+                    // ShowSearchWindow();//搜索
                     Refund();//退号
                     break;
+                case Keys.F3:
+                    EditUserInfo();
+                    break;
                 case Keys.F4:
+                    XiaopiaoDayin();//小票打印
+                    break;
+                case Keys.F12:
                     this.Close();//退出
                     break;
             }
@@ -1763,6 +1719,14 @@ namespace Client
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
+            //补打小票
+            XiaopiaoDayin();
+        }
+        /// <summary>
+        /// 小票打印
+        /// </summary>
+        public void XiaopiaoDayin()
+        {
             try
             {
                 //GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1; 
@@ -1782,7 +1746,6 @@ namespace Client
                 log.Error(ex.Message);
             }
         }
-
         private void btnEditRelation_Click(object sender, EventArgs e)
         {
             try
@@ -1801,6 +1764,11 @@ namespace Client
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.Message);
             }
+        }
+
+        private void pnlSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

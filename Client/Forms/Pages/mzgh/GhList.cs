@@ -1165,9 +1165,9 @@ namespace Client
                     Reset();//重新
                     break;
                 case Keys.F3:
-
+                    PrintElecBill();
                     break;
-                case Keys.F4:
+                case Keys.F12:
                     this.Close();//退出
                     break;
             }
@@ -1193,9 +1193,19 @@ namespace Client
         /// <param name="e"></param>
         private void btnRePrint_Click(object sender, EventArgs e)
         {
+            PrintElecBill();
+        }
+
+        public void PrintElecBill()
+        {
             //补打电子发票
             try
             {
+                if (dgvlist.SelectedIndex==-1)
+                {
+                    UIMessageTip.ShowError("没有数据");
+                    return;
+                }
 
                 //获取选择参数
                 var _patientId = dgvlist.Rows[dgvlist.SelectedIndex].Cells["patient_id"].Value;
@@ -1275,7 +1285,7 @@ namespace Client
                     method = method,
                     @params = _params
                 };
-                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload)); 
+                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
                 string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
                 //var reslt = HttpClientUtil.Get(url);
                 Task.Run(() =>

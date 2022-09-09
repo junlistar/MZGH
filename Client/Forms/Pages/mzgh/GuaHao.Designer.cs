@@ -118,7 +118,7 @@
             // btnEditUser1
             // 
             this.btnEditUser1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditUser1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnEditUser1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEditUser1.Location = new System.Drawing.Point(381, 2);
             this.btnEditUser1.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnEditUser1.Name = "btnEditUser1";
@@ -126,7 +126,7 @@
             this.btnEditUser1.StyleCustomMode = true;
             this.btnEditUser1.Symbol = 61508;
             this.btnEditUser1.TabIndex = 12;
-            this.btnEditUser1.Text = "编辑";
+            this.btnEditUser1.Text = "编辑(F3)";
             this.btnEditUser1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnEditUser1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnEditUser1.Click += new System.EventHandler(this.btnEditUser_Click);
@@ -134,7 +134,7 @@
             // uiSymbolButton1
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Location = new System.Drawing.Point(171, 2);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
@@ -142,7 +142,7 @@
             this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
-            this.uiSymbolButton1.Text = "重新";
+            this.uiSymbolButton1.Text = "重新(F1)";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
@@ -150,7 +150,7 @@
             // btnRePrint
             // 
             this.btnRePrint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRePrint.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnRePrint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRePrint.Location = new System.Drawing.Point(487, 2);
             this.btnRePrint.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRePrint.Name = "btnRePrint";
@@ -158,7 +158,7 @@
             this.btnRePrint.StyleCustomMode = true;
             this.btnRePrint.Symbol = 61487;
             this.btnRePrint.TabIndex = 9;
-            this.btnRePrint.Text = "补打";
+            this.btnRePrint.Text = "补打(F4)";
             this.btnRePrint.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnRePrint.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnRePrint.Click += new System.EventHandler(this.btnRePrint_Click);
@@ -166,7 +166,7 @@
             // uiSymbolButton2
             // 
             this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton2.Location = new System.Drawing.Point(593, 2);
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
@@ -174,7 +174,7 @@
             this.uiSymbolButton2.StyleCustomMode = true;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
-            this.uiSymbolButton2.Text = "退出";
+            this.uiSymbolButton2.Text = "退出(F12)";
             this.uiSymbolButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton2.Click += new System.EventHandler(this.uiSymbolButton2_Click);
@@ -182,7 +182,7 @@
             // btnTuihao
             // 
             this.btnTuihao.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTuihao.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnTuihao.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTuihao.Location = new System.Drawing.Point(275, 2);
             this.btnTuihao.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuihao.Name = "btnTuihao";
@@ -190,7 +190,7 @@
             this.btnTuihao.StyleCustomMode = true;
             this.btnTuihao.Symbol = 62005;
             this.btnTuihao.TabIndex = 7;
-            this.btnTuihao.Text = "退号";
+            this.btnTuihao.Text = "退号(F2)";
             this.btnTuihao.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnTuihao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnTuihao.Click += new System.EventHandler(this.btnTuihao_Click);
@@ -227,6 +227,7 @@
             this.pnlSearch.Text = null;
             this.pnlSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlSearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.pnlSearch.Click += new System.EventHandler(this.pnlSearch_Click);
             // 
             // btnIDCard
             // 

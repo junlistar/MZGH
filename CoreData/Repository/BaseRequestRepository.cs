@@ -105,7 +105,7 @@ namespace Data.Repository
 
 
         public int EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-            string week, string day, string ampm, int totle_num, string window_no, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
+            string week, string day, string ampm, int totle_num, string workroom, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
         {
             //判断是否存在冲突号
             BaseRequest baseRequest = new BaseRequest();
@@ -139,7 +139,7 @@ namespace Data.Repository
                 para.Add("@op_id", op_id);
                 para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
-                para.Add("@window_no", window_no);
+                para.Add("@workroom", workroom);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
 
                 return Update(sql, para);
@@ -173,7 +173,7 @@ namespace Data.Repository
                 para.Add("@op_id", op_id);
                 para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
-                para.Add("@window_no", window_no);
+                para.Add("@workroom", workroom);
                 para.Add("@temp_flag", temp_flag);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
 

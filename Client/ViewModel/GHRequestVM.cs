@@ -71,6 +71,7 @@ namespace Client.ViewModel
         public int end_no { get; set; }
         public int open_flag { get; set; }
         public int window_no { get; set; }
+        public string workroom { get; set; }
         public string limit_appoint_percent { get; set; }
         public string temp_flag { get; set; }
 

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
+using Sunny.UI;
 
 namespace Client.ClassLib
 { 
@@ -75,12 +76,12 @@ namespace Client.ClassLib
         public static string sign_no = "421000G0000000244038";
 
 
-        public static void AddYBLog(string info_code, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)
+        public static void AddYBLog(string info_code,int admiss_times, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)
         {
             try
             {
                 var _yblog = new YbLog();
-                _yblog.admiss_times = 4;
+                _yblog.admiss_times = admiss_times;
                 _yblog.data = data;
                 _yblog.oper_code = info_code;
                 _yblog.patient_id = patient_id;
@@ -105,7 +106,59 @@ namespace Client.ClassLib
                 log.Error(ex.Message);
             }
         }
-         
+
+        public static void SaveCardData(UserInfoResponseModel model)
+        {
+            Task<HttpResponseMessage> task = null;
+
+            var d = new
+            {
+                psn_no = model.baseinfo.psn_no,
+                psn_cert_type = model.baseinfo.psn_cert_type,
+                certno = model.baseinfo.certno,
+                psn_name = model.baseinfo.psn_name,
+                gend = model.baseinfo.gend,
+                naty = model.baseinfo.naty,
+                brdy = model.baseinfo.brdy,
+                age = model.baseinfo.age,
+            };
+
+            string paramurl = string.Format($"/api/user/UpdateYbkInfo?psn_no={d.psn_no}&psn_cert_type={d.psn_cert_type}&certno={d.certno}&psn_name={d.psn_name}&gend={d.gend}&naty={d.naty}&brdy={d.brdy}&age={d.age}");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+
+        }
+
+        public static void SaveCardDataAll(string jsonStr)
+        {
+
+            //更新医保其他信息  
+            string paramurl = string.Format($"/api/user/UpdateYbkInfoAll");
+
+            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+            try
+            {
+                HttpContent httpContent = new StringContent(jsonStr);
+
+                SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent);
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+
+        }
 
     }
 }

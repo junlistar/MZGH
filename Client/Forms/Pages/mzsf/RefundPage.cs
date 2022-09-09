@@ -87,11 +87,11 @@ namespace Mzsf.Forms.Pages
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.Message);
-            } 
+            }
         }
 
         private void BindDgvDate()
-        { 
+        {
             var list = ds.Select(p => new
             {
                 patient_id = p.patient_id,
@@ -99,7 +99,7 @@ namespace Mzsf.Forms.Pages
                 p_bar_code = p.p_bar_code,
                 receipt_no = p.receipt_no,
                 receipt_sn = p.receipt_sn,
-               // cash_opera = p.cash_opera,
+                // cash_opera = p.cash_opera,
                 cash_date = p.cash_date,
                 times = p.times,
                 ledger_sn = p.ledger_sn,
@@ -109,14 +109,14 @@ namespace Mzsf.Forms.Pages
                 cash_name = p.cash_name,
                 //tableflag = p.tableflag,
             }).ToList();
-            if (list.Count>0)
+            if (list.Count > 0)
             {
                 dgvRefund.DataSource = list;
                 dgvRefund.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 dgvRefund.AutoGenerateColumns = false;
                 dgvRefund.AutoResizeColumns();
             }
-            
+
 
             lblTotalCount.ForeColor = Color.Red;
 
@@ -176,8 +176,8 @@ namespace Mzsf.Forms.Pages
                 lblRecriptSn.Text = dat.receipt_sn;
                 lblDateTime.Text = dat.cash_date.ToString("yyyy-MM-dd HH:mm:ss");
                 lblPayType.Text = dat.cheque_type_name.Replace(") ", ")\r\n"); ;
-                lblCharge.Text = dat.charge_total.ToString()+"元";
-                 
+                lblCharge.Text = dat.charge_total.ToString() + "元";
+
                 //处方详情数据
                 //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag); 
             }
@@ -186,9 +186,19 @@ namespace Mzsf.Forms.Pages
 
         private void btnHuajia_Click(object sender, EventArgs e)
         {
-            var index = dgvRefund.SelectedIndex;
-            if (index != -1)
+            Tuifei();
+        }
+
+        public void Tuifei()
+        {
+            try
             {
+                var index = dgvRefund.SelectedIndex;
+                if (index == -1)
+                {
+                    UIMessageTip.ShowWarning("没有数据");
+                    return;
+                }
                 var dat = ds[index];
 
                 if (!string.IsNullOrEmpty(dat.backfee_date) || dat.charge_total < 0)
@@ -203,6 +213,7 @@ namespace Mzsf.Forms.Pages
                 refundConfirm.total_charge = Math.Round(dat.charge_total, 2);
                 refundConfirm.patient_id = dat.patient_id;
                 refundConfirm.ledger_sn = dat.ledger_sn;
+                refundConfirm.times = dat.times;
                 refundConfirm.receipt_no = dat.receipt_no;
                 refundConfirm.receipt_sn = dat.receipt_sn;
                 refundConfirm.table_flag = dat.tableflag;
@@ -211,6 +222,12 @@ namespace Mzsf.Forms.Pages
                 refundConfirm.FormClosed += RefundConfirm_FormClosed;
 
                 refundConfirm.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
             }
         }
 
@@ -228,7 +245,7 @@ namespace Mzsf.Forms.Pages
         private void dgvRefund_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             try
-            { 
+            {
                 if (e.RowIndex >= 0)
                 {
                     var charge_total = Convert.ToDecimal(dgvRefund.Rows[e.RowIndex].Cells["charge_total"].Value);
@@ -343,6 +360,27 @@ namespace Mzsf.Forms.Pages
         {
             YBtuifei yb = new YBtuifei();
             yb.Show();
+        }
+
+        private void RefundPage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                ClearDataBind();
+                Search();
+            }
+            else if (e.KeyCode == Keys.F2)
+            {
+                InitUI();
+            }
+            else if (e.KeyCode == Keys.F3)
+            {
+                Tuifei();
+            }
+            else if (e.KeyCode == Keys.F12)
+            {
+                this.Close();
+            }
         }
     }
 }

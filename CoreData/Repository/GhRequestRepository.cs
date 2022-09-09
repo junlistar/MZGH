@@ -215,6 +215,7 @@ namespace Data.Repository
                                     ghRequest.temp_flag = item.temp_flag;
                                     ghRequest.unit_sn = item.unit_sn;
                                     ghRequest.window_no = item.window_no.ToString(); 
+                                    ghRequest.workroom = item.workroom;
 
                                     current_list.Add(ghRequest);
                                 }
@@ -272,6 +273,7 @@ namespace Data.Repository
                             para.Add("@enter_date", enter_date);
                             para.Add("@open_flag", item.open_flag);
                             para.Add("@window_no", item.window_no);
+                            para.Add("@workroom", item.workroom);
                             para.Add("@temp_flag", item.temp_flag);
                             para.Add("@limit_appoint_percent", item.limit_appoint_percent);
 
@@ -585,7 +587,7 @@ namespace Data.Repository
         }
 
         public int EditRequest(string record_sn, string request_date, string unit_sn, string group_sn, string doctor_sn, string clinic_type, string request_type,
-         string ampm, int totle_num, string window_no, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
+         string ampm, int totle_num, string workroom, string open_flag, string op_id, string temp_flag, string limit_appoint_percent)
         {
             BaseRequest baseRequest = new BaseRequest();
             baseRequest.request_date = Convert.ToDateTime(request_date);
@@ -620,7 +622,8 @@ namespace Data.Repository
                 para.Add("@enter_opera", op_id);
                 para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
-                para.Add("@window_no", window_no);
+                //para.Add("@window_no", window_no);
+                para.Add("@workroom", workroom);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
 
                 return Update(sql, para);
@@ -646,7 +649,8 @@ namespace Data.Repository
                 para.Add("@enter_opera", op_id);
                 para.Add("@enter_date", enter_date);
                 para.Add("@open_flag", open_flag);
-                para.Add("@window_no", window_no);
+                para.Add("@window_no", 0);
+                para.Add("@workroom", workroom);
                 para.Add("@temp_flag", 1);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
 

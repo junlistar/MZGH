@@ -25,9 +25,8 @@ namespace Data.Repository
                     var baseinfo = _dat.baseinfo;
                     var idetinfo = _dat.idetinfo;
                     var insuinfo = _dat.insuinfo;
-                    string del_sql = "delete from ybNew_1101_baseinfo where patient_id=@patient_id and admiss_times=@admiss_times";
-                    string sql = @"insert into ybNew_1101_baseinfo(patient_id,admiss_times,psn_no,psn_cert_type,certno,psn_name,gend,naty,brdy,age,flag,mzzy,insuplc_admdvs)
-values(@patient_id,@admiss_times,@psn_no,@psn_cert_type,@certno,@psn_name,@gend,@naty,@brdy,@age,null,null,null)";
+                    string del_sql = GetSqlByTag("yb_baseinfo_del");
+                    string sql = GetSqlByTag("yb_baseinfo_add");
                     var para = new DynamicParameters();
                     para.Add("@patient_id", _dat.patient_id);
                     para.Add("@admiss_times", _dat.admiss_times);
@@ -46,9 +45,8 @@ values(@patient_id,@admiss_times,@psn_no,@psn_cert_type,@certno,@psn_name,@gend,
                     if (idetinfo != null)
                     {
                         //添加idetinfo
-                        del_sql = "delete from ybNew_1101_idetinfo where patient_id=@patient_id and admiss_times=@admiss_times";
-                        sql = @"insert into ybNew_1101_idetinfo(patient_id,admiss_times,psn_idet_type,psn_type_lv,memo,begntime,endtime)
-values(@patient_id,@admiss_times,@psn_idet_type,@psn_type_lv,@memo,@begntime,@endtime)";
+                        del_sql = GetSqlByTag("yb_idetinfo_del");
+                        sql = GetSqlByTag("yb_idetinfo_add");
                         foreach (var item in idetinfo)
                         {
                             para = new DynamicParameters();
@@ -67,9 +65,8 @@ values(@patient_id,@admiss_times,@psn_idet_type,@psn_type_lv,@memo,@begntime,@en
                     if (insuinfo != null)
                     {
                         //添加insuinfo
-                        del_sql = "delete from ybNew_1101_insuinfo where patient_id=@patient_id and admiss_times=@admiss_times";
-                        sql = @"insert into ybNew_1101_insuinfo(patient_id,admiss_times,balc,insutype,psn_type,psn_insu_stas,psn_insu_date,paus_insu_date,cvlserv_flag,insuplc_admdvs,emp_name)
-values(@patient_id,@admiss_times,@balc,@insutype,@psn_type,@psn_insu_stas,@psn_insu_date,@paus_insu_date,@cvlserv_flag,@insuplc_admdvs,@emp_name)";
+                        del_sql = GetSqlByTag("yb_insuinfo_del");
+                        sql = GetSqlByTag("yb_insuinfo_add");
                         foreach (var item in insuinfo)
                         {
                             para = new DynamicParameters();
@@ -110,9 +107,8 @@ values(@patient_id,@admiss_times,@balc,@insutype,@psn_type,@psn_insu_stas,@psn_i
                 try
                 {
                     //添加 
-                    string del_sql = "delete from ybNew_2201_data where patient_id=@patient_id and admiss_times=@admiss_times";
-                    string sql = @"insert into ybNew_2201_data(patient_id,admiss_times,mdtrt_id,psn_no,ipt_otp_no)
-values(@patient_id,@admiss_times,@mdtrt_id,@psn_no,@ipt_otp_no)";
+                    string del_sql = GetSqlByTag("yb_2201_del");
+                    string sql = GetSqlByTag("yb_2201_add");
                     var para = new DynamicParameters();
                     para.Add("@patient_id", _dat.patient_id);
                     para.Add("@admiss_times", _dat.admiss_times);
@@ -146,9 +142,8 @@ values(@patient_id,@admiss_times,@mdtrt_id,@psn_no,@ipt_otp_no)";
                 try
                 {
                     //添加 
-                    string del_sql = "delete from ybNew_2203_diseinfo where patient_id=@patient_id and admiss_times=@admiss_times";
-                    string sql = @"insert into ybNew_2203_diseinfo(patient_id,admiss_times,mdtrt_id,diag_type,diag_srt_no,diag_code,diag_name,diag_dept,dise_dor_no,dise_dor_name,diag_time,vali_flag)
-values(@patient_id,@admiss_times,@mdtrt_id,@diag_type,@diag_srt_no,@diag_code,@diag_name,@diag_dept,@dise_dor_no,@dise_dor_name,@diag_time,@vali_flag)";
+                    string del_sql = GetSqlByTag("yb_2203_diseinfo_del");
+                    string sql = GetSqlByTag("yb_2203_diseinfo_add");
 
                     if (_dat != null && _dat.diseinfo != null)
                     {
@@ -202,10 +197,8 @@ values(@patient_id,@admiss_times,@mdtrt_id,@diag_type,@diag_srt_no,@diag_code,@d
                 try
                 {
                     //添加 
-                    string del_sql = "delete from ybNew_2204_result where patient_id=@patient_id and admiss_times=@admiss_times";
-                    string sql = @"insert into ybNew_2204_result(patient_id, admiss_times, feedetl_sn, det_item_fee_sumamt, cnt, pric, pric_uplmt_amt, selfpay_prop, fulamt_ownpay_amt, overlmt_amt, preselfpay_amt, inscp_scp_amt, chrgitm_lv, med_chrgitm_type, bas_medn_flag, hi_nego_drug_flag, chld_medc_flag, list_sp_item_flag, lmt_used_flag, drt_reim_flag, memo, mdtrt_id)
-values(@patient_id, @admiss_times, @feedetl_sn, @det_item_fee_sumamt, @cnt, @pric, @pric_uplmt_amt, @selfpay_prop, @fulamt_ownpay_amt, @overlmt_amt, @preselfpay_amt, @inscp_scp_amt, @chrgitm_lv, @med_chrgitm_type, @bas_medn_flag, @hi_nego_drug_flag, @chld_medc_flag, @list_sp_item_flag, @lmt_used_flag, @drt_reim_flag, @memo, @mdtrt_id)
-";
+                    string del_sql = GetSqlByTag("yb_2204_del");
+                    string sql = GetSqlByTag("yb_2204_add");
                     if (_mod != null && _mod.diseinfo != null)
                     {
                         var para = new DynamicParameters();
@@ -265,94 +258,8 @@ values(@patient_id, @admiss_times, @feedetl_sn, @det_item_fee_sumamt, @cnt, @pri
                 try
                 {
                     //添加 
-                    string del_sql = "delete from ybNew_2204_result where patient_id=@patient_id and admiss_times=@admiss_times";
-                    string sql = @"insert into ybNew_2207_result([patient_id],
-	[admiss_times],
-	[mdtrt_id],
-	[setl_id] ,
-	[psn_no] ,
-	[psn_name] ,
-	[psn_cert_type],
-	[certno],
-	[gend],
-	[naty] ,
-	[brdy],
-	[age] ,
-	[insutype] ,
-	[psn_type] ,
-	[cvlserv_flag] ,
-	[setl_time] ,
-	[mdtrt_cert_type],
-	[med_type] ,
-	[medfee_sumamt],
-	[fulamt_ownpay_amt] ,
-	[overlmt_selfpay] ,
-	[preselfpay_amt] ,
-	[inscp_scp_amt] ,
-	[act_pay_dedc] ,
-	[hifp_pay] ,
-	[pool_prop_selfpay],
-	[cvlserv_pay] ,
-	[hifes_pay] ,
-	[hifmi_pay] ,
-	[hifob_pay],
-	[maf_pay] ,
-	[oth_pay] ,
-	[fund_pay_sumamt],
-	[psn_part_amt] ,
-	[acct_pay] ,
-	[psn_cash_pay] ,
-	[hosp_part_amt] ,
-	[balc],
-	[acct_mulaid_pay],
-	[medins_setl_id] ,
-	[clr_optins] ,
-	[clr_way] ,
-	[clr_type] )
-values (@patient_id,
-	@admiss_times,
-	@mdtrt_id,
-	@setl_id ,
-	@psn_no,
-	@psn_name ,
-	@psn_cert_type,
-	@certno,
-	@gend,
-	@naty ,
-	@brdy,
-	@age ,
-	@insutype ,
-	@psn_type ,
-	@cvlserv_flag ,
-	@setl_time ,
-	@mdtrt_cert_type,
-	@med_type ,
-	@medfee_sumamt,
-	@fulamt_ownpay_amt ,
-	@overlmt_selfpay ,
-	@preselfpay_amt,
-	@inscp_scp_amt,
-	@act_pay_dedc,
-	@hifp_pay,
-	@pool_prop_selfpay,
-	@cvlserv_pay ,
-	@hifes_pay ,
-	@hifmi_pay ,
-	@hifob_pay,
-	@maf_pay ,
-	@oth_pay ,
-	@fund_pay_sumamt,
-	@psn_part_amt ,
-	@acct_pay ,
-	@psn_cash_pay ,
-	@hosp_part_amt ,
-	@balc,
-	@acct_mulaid_pay,
-	@medins_setl_id ,
-	@clr_optins ,
-	@clr_way ,
-	@clr_type )
-";
+                    string del_sql = GetSqlByTag("yb_2207_del");
+                    string sql = GetSqlByTag("yb_2207_add");
                     var para = new DynamicParameters();
                     para.Add("@patient_id", _mod.patient_id);
                     para.Add("@admiss_times", _mod.admiss_times);
@@ -425,7 +332,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select * from yb_zd_insutype";
+                string sql = GetSqlByTag("yb_zd_insutype");
 
                 return connection.Query<Insutype>(sql).ToList();
             }
@@ -435,7 +342,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select * from yb_zd_mdtrtcerttype";
+                string sql = GetSqlByTag("yb_zd_mdtrtcerttype");
 
                 return connection.Query<MdtrtCertType>(sql).ToList();
             }
@@ -445,7 +352,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select * from yb_zd_medtype";
+                string sql = GetSqlByTag("yb_zd_medtype");
 
                 return connection.Query<MedType>(sql).ToList();
             }
@@ -456,7 +363,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select * from yb_zd_diagtype";
+                string sql =GetSqlByTag("yb_zd_diagtype");
 
                 return connection.Query<DiagType>(sql).ToList();
             }
@@ -466,7 +373,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select code,name,py_code,d_code,yb_code,yb_name from zd_icd_code";
+                string sql = GetSqlByTag("zd_icd_code_get");
 
                 return connection.Query<IcdCode>(sql).ToList();
             }
@@ -476,7 +383,7 @@ values (@patient_id,
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = "select * from yb_zd_birctrltype"; 
+                string sql = GetSqlByTag("yb_zd_birctrltype"); 
 
                 return connection.Query<BirctrlType>(sql).ToList();
             }
@@ -495,16 +402,16 @@ values (@patient_id,
 
                     try
                     {
-                        string sql = "select * from ybNew_1101_baseinfo where patient_id = @patient_id and admiss_times =@admiss_times";
+                        string sql = GetSqlByTag("yb_baseinfo_get");
                         var para = new DynamicParameters();
                         para.Add("@patient_id", patient_id);
                         para.Add("@admiss_times", admiss_times);
                         var info_list = connection.Query<BaseInfo>(sql, para, transaction);
 
-                        sql = "select * from ybNew_1101_insuinfo where patient_id = @patient_id and admiss_times =@admiss_times";
+                        sql = GetSqlByTag("yb_insuinfo_get");
                         var insu_list = connection.Query<InsuInfo>(sql, para, transaction);
 
-                        sql = "select * from ybNew_1101_idetinfo where patient_id = @patient_id and admiss_times =@admiss_times";
+                        sql = GetSqlByTag("yb_idetinfo_get");
                         var idt_list = connection.Query<IdetInfo>(sql, para, transaction);
 
                         responseModel.baseinfo = info_list.FirstOrDefault();

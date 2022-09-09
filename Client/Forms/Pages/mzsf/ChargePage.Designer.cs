@@ -130,14 +130,14 @@
             // 
             this.btnxp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnxp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnxp.Location = new System.Drawing.Point(820, 2);
+            this.btnxp.Location = new System.Drawing.Point(653, 3);
             this.btnxp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnxp.Name = "btnxp";
             this.btnxp.Size = new System.Drawing.Size(100, 40);
             this.btnxp.StyleCustomMode = true;
             this.btnxp.Symbol = 61579;
             this.btnxp.TabIndex = 17;
-            this.btnxp.Text = "小票打印";
+            this.btnxp.Text = "小票(F4)";
             this.btnxp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnxp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnxp.Click += new System.EventHandler(this.btnxp_Click);
@@ -145,7 +145,7 @@
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uiLabel1.Location = new System.Drawing.Point(588, 5);
+            this.uiLabel1.Location = new System.Drawing.Point(421, 6);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(120, 35);
             this.uiLabel1.TabIndex = 16;
@@ -157,14 +157,14 @@
             // 
             this.btnfp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnfp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnfp.Location = new System.Drawing.Point(714, 2);
+            this.btnfp.Location = new System.Drawing.Point(547, 3);
             this.btnfp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnfp.Name = "btnfp";
             this.btnfp.Size = new System.Drawing.Size(100, 40);
             this.btnfp.StyleCustomMode = true;
             this.btnfp.Symbol = 61579;
             this.btnfp.TabIndex = 15;
-            this.btnfp.Text = "发票打印";
+            this.btnfp.Text = "发票(F3)";
             this.btnfp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnfp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnfp.Click += new System.EventHandler(this.btnfp_Click);
@@ -214,7 +214,7 @@
             // btnHuajia
             // 
             this.btnHuajia.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuajia.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnHuajia.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnHuajia.Location = new System.Drawing.Point(275, 3);
             this.btnHuajia.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHuajia.Name = "btnHuajia";
@@ -222,15 +222,16 @@
             this.btnHuajia.StyleCustomMode = true;
             this.btnHuajia.Symbol = 362139;
             this.btnHuajia.TabIndex = 12;
-            this.btnHuajia.Text = "划价";
+            this.btnHuajia.Text = "划价(F2)";
             this.btnHuajia.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnHuajia.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnHuajia.Click += new System.EventHandler(this.btnHuajia_Click);
+            this.btnHuajia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnHuajia_KeyDown);
             // 
             // uiSymbolButton1
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.Location = new System.Drawing.Point(169, 3);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
@@ -238,7 +239,7 @@
             this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
-            this.uiSymbolButton1.Text = "重新";
+            this.uiSymbolButton1.Text = "重新(F1)";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
@@ -246,15 +247,15 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnExit.Location = new System.Drawing.Point(381, 3);
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Location = new System.Drawing.Point(778, 3);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
-            this.btnExit.Text = "退出";
+            this.btnExit.Text = "退出(F12)";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -1076,11 +1077,13 @@
             this.Controls.Add(this.uiTabControl1);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.pnlTitle);
+            this.KeyPreview = true;
             this.Name = "ChargePage";
             this.PageIndex = 1101;
             this.Text = "划价收费";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChargePage_FormClosed);
             this.Load += new System.EventHandler(this.ChargePage_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChargePage_KeyDown);
             this.pnlTitle.ResumeLayout(false);
             this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox1.PerformLayout();

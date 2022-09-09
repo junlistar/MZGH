@@ -475,6 +475,12 @@
     <Compile Include="Forms\Wedgit\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\ProcessingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\ProcessingForm.Designer.cs">
+      <DependentUpon>ProcessingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\ReadCard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -873,6 +879,9 @@
     <EmbeddedResource Include="Forms\Wedgit\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\ProcessingForm.resx">
+      <DependentUpon>ProcessingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\ReadCard.resx">
       <DependentUpon>ReadCard.cs</DependentUpon>
     </EmbeddedResource>
@@ -1010,6 +1019,10 @@
     <Content Include="FastReport\dll\FastReport.xml" />
     <None Include="Resources\Image1.bmp" />
     <None Include="Resources\sys.ico" />
+    <Content Include="Images\index.jpeg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\bg.jpeg" />
     <Content Include="sys.ico" />
     <None Include="FastReport\File\test.frx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
