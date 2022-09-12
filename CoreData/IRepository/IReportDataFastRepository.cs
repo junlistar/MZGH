@@ -11,6 +11,7 @@ namespace Data.IRepository
         DataSet GetReportDataBySql(string sql, string tb_name);
         DataTable GetDateTableBySql(string sql);
 
+        DataTable GetMzghBill(string code, string patient_id, string times);
         DataTable GetMzsfBill(string code, string patient_id, string ledger_sn);
         DataTable GetGhDailyByReportCode(string code, string report_date, string price_opera, string mz_dept_no);
         DataTable GetMzsfDailyByReportCode(string code, string report_date, string price_opera, string cash_date);

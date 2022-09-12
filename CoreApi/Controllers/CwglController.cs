@@ -91,9 +91,24 @@ namespace CoreApi.Controllers
                 return ErrorResult<string>(ex.Message);
             }
         } 
+        public ResponseResult<string> GetMzghBill(string code, string patient_id, string times)
+        {
+            Log.Information($"GetMzghBill,{code},{patient_id},{times}");
+            try
+            {
+                var dt = _reportDataFastRepository.GetMzghBill(code, patient_id, times);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
+        }
         public ResponseResult<string> GetMzsfBill(string code, string patient_id, string ledger_sn)
         {
-            Log.Information($"GetGhDailyByReportCode,{code},{patient_id},{ledger_sn}");
+            Log.Information($"GetMzsfBill,{code},{patient_id},{ledger_sn}");
             try
             {
                 var dt = _reportDataFastRepository.GetMzsfBill(code, patient_id, ledger_sn);

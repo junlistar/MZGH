@@ -172,67 +172,34 @@ namespace Client.Forms.Wedgit
                     string sql = rdvm.report_sql;
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
-                        TargetReport.Load(Stream);
+                        TargetReport.Load(Stream); 
 
-                        #region sql语句直连方式
-                        ////查询参数
-                        //string param_sql = "select * from  rt_report_params_fast_net where report_code = 220001";
-                        //var dt_param = DbHelper.ExecuteDataTable(param_sql);
-                        //if (dt_param != null && dt_param.Rows.Count > 0)
-                        //{
-                        //    for (int i = 0; i < dt_param.Rows.Count; i++)
-                        //    {
-                        //        sql = sql.Replace(":" + dt_param.Rows[i]["param_name"].ToString(), "'" + GuaHao.PatientVM.patient_id + "'");
-                        //    }
-                        //}
-                        //var ds = DbHelper.GetDataSet(sql, "ghinfo");
-
-                        //TargetReport.RegisterData(ds);
-                        #endregion
-
-
-                        #region 接口方式
-                        //查询数据 
-                        string paramurl = string.Format($"/api/GuaHao/GetReportParam?code={SessionHelper.mzgh_report_code}");
+                        string paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={GuaHao.PatientVM.patient_id}&times={GuaHao.PatientVM.max_times}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                        string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
-                        var result = WebApiHelper.DeserializeObject<ResponseResult<List<ReportParamVM>>>(responseJson);
-                        if (result.status == 1)
-                        {
-                            foreach (var item in result.data)
-                            {
-                                if (item.param_name == "patient_id")
-                                {
-                                    sql = sql.Replace(":" + item.param_name, "'" + GuaHao.PatientVM.patient_id + "'");
-                                }
-                                else if (item.param_name == "times")
-                                {
-                                    sql = sql.Replace(":" + item.param_name, "'" + GuaHao.PatientVM.max_times + "'");
-                                }
-
-                            }
-                        }
-                        paramurl = string.Format($"/api/GuaHao/GetReportDataBySql?sql={sql}&tb_name={"ghinfo"}");
-
-                        //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                        responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = HttpClientUtil.Get(paramurl);
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
                         if (ds_result.status == 1)
                         {
-                           
-                            var jsontb = ds_result.data;
-                            var dt = DataTableHelper.ToDataTable(jsontb);
-                            var dataset = new DataSet();
-                            dataset.Tables.Add(dt);
-                            dataset.Tables[0].TableName = "DataTable";
-                            TargetReport.RegisterData(dataset);
+                            if (ds_result.data != "[]")
+                            {
+                                var jsontb = ds_result.data;
+                                var dt = DataTableHelper.ToDataTable(jsontb);
+                                var dataset = new DataSet();
+                                dataset.Tables.Add(dt);
+                                dataset.Tables[0].TableName = "DataTable";
+                                TargetReport.RegisterData(dataset);
 
-                            var dataset2 = dataset.Copy();
-                            dataset2.Tables[0].TableName = "DataTable2";
-                            TargetReport.RegisterData(dataset2);
+                                var dataset2 = dataset.Copy();
+                                dataset2.Tables[0].TableName = "DataTable2";
+                                TargetReport.RegisterData(dataset2);
+                            }
+                            else
+                            {
+                                UIMessageTip.Show("该报表无数据");
+                            }
                         }
-                        #endregion
+                         
                     }
                 }
                 //操作方式：DESIGN-设计;PREVIEW-预览;PRINT-打印

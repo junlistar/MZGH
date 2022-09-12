@@ -22,6 +22,25 @@ namespace Data.Repository
             return ExecuteTable(sql,null, CommandType.Text);
 
         }
+
+        public DataTable GetMzghBill(string code, string patient_id, string times)
+        {
+            var reportData = GetReportDataByCode(code);
+            string sql = reportData.report_sql;
+            var paramlist = reportParamFastRepository.GetReportParam(code);
+            foreach (var item in paramlist)
+            {
+                if (item.param_name == "patient_id")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + patient_id + "'");
+                }
+                else if (item.param_name == "times")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + times + "'");
+                }
+            }
+            return ExecuteTable(sql, null, CommandType.Text);
+        }
         public DataTable GetMzsfBill(string code, string patient_id, string ledger_sn)
         {
             var reportData = GetReportDataByCode(code);
