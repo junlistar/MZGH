@@ -47,6 +47,8 @@ namespace CoreApi.Controllers
         private readonly IReportParamFastRepository _reportParamFastRepository;
         private readonly IRequestHourRepository _requestHourRepository;
         private readonly IRequestTimeRepository _requestTimeRepository;
+        private readonly IGhDoctorOutRepository _ghDocOutRepository;
+
         private readonly ICommonRepository _commonRepository;
 
         public GuaHaoController(ILogger<WeatherForecastController> logger, IUnitRepository unitRepository, IGhRequestRepository repository, IPatientRepository patientRepository,
@@ -54,7 +56,7 @@ namespace CoreApi.Controllers
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
             IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository, IRequestHourRepository requestHourRepository,
-            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository, ICommonRepository commonRepository)
+            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository, IGhDoctorOutRepository ghDocOutRepository, ICommonRepository commonRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -77,7 +79,8 @@ namespace CoreApi.Controllers
             _requestHourRepository = requestHourRepository;
             _reportParamFastRepository = reportParamFastRepository;
             _requestTimeRepository = requestTimeRepository;
-            _commonRepository = commonRepository;
+            _ghDocOutRepository = ghDocOutRepository;
+             _commonRepository = commonRepository;
 
         }
 
@@ -138,6 +141,7 @@ namespace CoreApi.Controllers
 
             return list;
         }
+
         [HttpGet]
         public ResponseResult<List<GhRefund>> GetGhRefund(string datestr, string patient_id)
         {
@@ -1094,6 +1098,8 @@ namespace CoreApi.Controllers
                 return ErrorResult<string>(ex.Message);
             }
         }
+
+
         public ResponseResult<string> GetDateTableBySql(string sql)
         {
             Log.Information($"GetDateTableBySql,{sql}");
@@ -1216,6 +1222,35 @@ namespace CoreApi.Controllers
                 string strData = sr.ReadToEndAsync().Result;
                 Log.Information($"============== {strData}");
                 return _commonRepository.AddYbLog(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<List<GhDoctorOut>> GetGhDoctorOuts()
+        {
+            Log.Information($"GetGhDoctorOuts");
+            try
+            {
+                return _ghDocOutRepository.GetGhDoctorOuts();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GhDoctorOut>>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> UpdateGhDoctorOut()
+        {
+            Log.Information($"UpdateGhDoctorOut,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ghDocOutRepository.UpdateGhDoctorOut(strData);
             }
             catch (Exception ex)
             {

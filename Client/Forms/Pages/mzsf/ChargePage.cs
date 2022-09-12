@@ -17,6 +17,7 @@ using Client.ViewModel;
 using Sunny.UI;
 using Client;
 using Client.Forms.Pages.mzgh;
+using System.Net.Http.Headers;
 
 namespace Mzsf.Forms.Pages
 {
@@ -155,6 +156,14 @@ namespace Mzsf.Forms.Pages
                         current_patient_id = userInfo.patient_id;
 
                         BindUserInfo(userInfo);
+
+                        if (YBHelper.currentYBInfo != null)
+                        {
+                            lbl_ybye.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
+                            lbl_ybye.Show();
+                            return;
+
+                        }
 
                         BindOrders(userInfo.patient_id);
                     }
@@ -685,6 +694,7 @@ namespace Mzsf.Forms.Pages
 
 
             lblNodata.Hide();
+            lbl_ybye.Hide();
             //txtCode.Text = "";
             ClearUserInfo();
 
@@ -715,6 +725,8 @@ namespace Mzsf.Forms.Pages
             SessionHelper.patientVM = null;
             SessionHelper.mzOrders = null;
             SessionHelper.cprCharges = null;
+
+            YBHelper.currentYBInfo = null;
             ClearTab();
         }
 

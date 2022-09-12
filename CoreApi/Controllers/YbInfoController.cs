@@ -206,7 +206,7 @@ namespace CoreApi.Controllers
         }
         public ResponseResult<UserInfoResponseModel> GetYjsUserInfo(string patient_id, int admiss_times)
         {
-            Log.Information($"GetYbkDetailInfo");
+            Log.Information($"GetYjsUserInfo");
             try
             {
                 return _ybInfoRepository.GetYjsUserInfo(patient_id, admiss_times);

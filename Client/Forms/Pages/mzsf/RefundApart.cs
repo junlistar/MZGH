@@ -47,6 +47,7 @@ namespace Mzsf.Forms.Pages
 
             //ckall.Location = dgvCpr.Location;
 
+            
             BindDrugDetails(patient_id, ledger_sn, tbl_flag);
         }
 

@@ -95,6 +95,7 @@
             this.lblOrderCharge = new System.Windows.Forms.Label();
             this.lblOrderTotalCharge = new System.Windows.Forms.Label();
             this.pnlAddOrder = new Sunny.UI.UIPanel();
+            this.lbl_ybye = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
@@ -276,7 +277,7 @@
             this.lblNodata.AutoSize = true;
             this.lblNodata.Font = new System.Drawing.Font("微软雅黑", 14F);
             this.lblNodata.ForeColor = System.Drawing.Color.Red;
-            this.lblNodata.Location = new System.Drawing.Point(245, 32);
+            this.lblNodata.Location = new System.Drawing.Point(768, 29);
             this.lblNodata.Name = "lblNodata";
             this.lblNodata.Size = new System.Drawing.Size(145, 25);
             this.lblNodata.TabIndex = 6;
@@ -286,6 +287,7 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.lbl_ybye);
             this.uiGroupBox1.Controls.Add(this.txtBarcode);
             this.uiGroupBox1.Controls.Add(this.label21);
             this.uiGroupBox1.Controls.Add(this.btnEditRelation);
@@ -1066,6 +1068,17 @@
             this.pnlAddOrder.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // lbl_ybye
+            // 
+            this.lbl_ybye.AutoSize = true;
+            this.lbl_ybye.ForeColor = System.Drawing.Color.Red;
+            this.lbl_ybye.Location = new System.Drawing.Point(246, 34);
+            this.lbl_ybye.Name = "lbl_ybye";
+            this.lbl_ybye.Size = new System.Drawing.Size(42, 21);
+            this.lbl_ybye.TabIndex = 54;
+            this.lbl_ybye.Text = "余额";
+            this.lbl_ybye.Visible = false;
+            // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1166,5 +1179,6 @@
         private Sunny.UI.UILabel uiLabel1;
         private Sunny.UI.UISymbolButton btnfp;
         private Sunny.UI.UISymbolButton btnxp;
+        private System.Windows.Forms.Label lbl_ybye;
     }
 }

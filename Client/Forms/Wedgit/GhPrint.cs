@@ -220,12 +220,17 @@ namespace Client.Forms.Wedgit
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
                         if (ds_result.status == 1)
                         {
+                           
                             var jsontb = ds_result.data;
                             var dt = DataTableHelper.ToDataTable(jsontb);
                             var dataset = new DataSet();
                             dataset.Tables.Add(dt);
                             dataset.Tables[0].TableName = "DataTable";
                             TargetReport.RegisterData(dataset);
+
+                            var dataset2 = dataset.Copy();
+                            dataset2.Tables[0].TableName = "DataTable2";
+                            TargetReport.RegisterData(dataset2);
                         }
                         #endregion
                     }

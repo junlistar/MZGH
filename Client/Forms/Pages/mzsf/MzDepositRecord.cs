@@ -32,6 +32,7 @@ namespace Client.Forms.Pages.mzsf
             txt_patientid.Text = patient_id;
 
             BindData();
+            dgv_mzdeposit.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
         }
 
         public void BindData()

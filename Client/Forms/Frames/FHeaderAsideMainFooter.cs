@@ -55,6 +55,11 @@ namespace Client
             SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
 
+            //读取医保配置
+            YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
+            YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
+
+
             MainTabControl.TabBackColor = Color.FromArgb(60, 95, 145); 
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
@@ -108,12 +113,13 @@ namespace Client
 
                 pageIndex = 1300;
                 parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
-                Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+                Aside.CreateChildNode(parent, "号表模板", 61508, 24, 1303);
                 Aside.CreateChildNode(parent, "生成号表", 61637, 24, 1304);
                 Aside.CreateChildNode(parent, "号表维护", 61674, 24, 1305);
                 Aside.CreateChildNode(parent, "临时号表维护", 61508, 24, 1306);
                 Aside.CreateChildNode(parent, "时间段维护", 261463, 24, 1301);
                 Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
+                Aside.CreateChildNode(parent, "停诊管理", 261463, 24, 1307);
 
                 pageIndex = 1400;
                 parent = Aside.CreateNode("用户报表", 61953, 24, pageIndex);
@@ -203,9 +209,9 @@ namespace Client
                 if (function_list.Where(p => p.func_desc.Trim() == "号表管理").Count() > 0)
                 {
                     parent = Aside.CreateNode("号表管理", 61498, 24, pageIndex);
-                    if (function_list.Where(p => p.func_desc.Trim() == "基础号表维护").Count() > 0)
+                    if (function_list.Where(p => p.func_desc.Trim() == "号表模板").Count() > 0)
                     {
-                        Aside.CreateChildNode(parent, "基础号表维护", 61508, 24, 1303);
+                        Aside.CreateChildNode(parent, "号表模板", 61508, 24, 1303);
                     }
                     if (function_list.Where(p => p.func_desc.Trim() == "生成号表").Count() > 0)
                     {
@@ -226,6 +232,10 @@ namespace Client
                     if (function_list.Where(p => p.func_desc.Trim() == "分时段维护").Count() > 0)
                     {
                         Aside.CreateChildNode(parent, "分时段维护", 261463, 24, 1302);
+                    }
+                    if (function_list.Where(p => p.func_desc.Trim() == "停诊管理").Count() > 0)
+                    {
+                        Aside.CreateChildNode(parent, "停诊管理", 261463, 24, 1307);
                     }
 
 
@@ -348,6 +358,8 @@ namespace Client
                         obj = new Hbwh(); break;
                     case 1306:
                         obj = new LsHbwh(); break;
+                    case 1307:
+                        obj = new DocOutManage(); break;
                     case 1201:
                         obj = new GuahaoRijie(); break;
                     case 1202:

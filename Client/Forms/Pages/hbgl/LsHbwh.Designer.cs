@@ -659,6 +659,7 @@
             this.dgvlist.Size = new System.Drawing.Size(1228, 453);
             this.dgvlist.TabIndex = 8;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgvlist.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellContentClick);
             // 
             // LsHbwh
             // 

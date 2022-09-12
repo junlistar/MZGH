@@ -44,7 +44,9 @@ namespace Client
             await Search();
 
             LoadingHelper.CloseForm();//显示
-            //LoadData();
+                                      //LoadData();
+
+            dgvDeposit.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
         }
 
 

@@ -50,6 +50,7 @@ namespace Client.Forms.Pages.hbgl
                 dgvRequestTime.DataSource = dat;
 
                 dgvRequestTime.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                dgvRequestTime.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
             }
             catch (Exception ex)
             {

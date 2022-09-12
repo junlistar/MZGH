@@ -22,6 +22,26 @@ namespace Data.Repository
             return ExecuteTable(sql,null, CommandType.Text);
 
         }
+        public DataTable GetMzsfBill(string code, string patient_id, string ledger_sn)
+        {
+            var reportData = GetReportDataByCode(code);
+            string sql = reportData.report_sql;
+            var paramlist = reportParamFastRepository.GetReportParam(code);
+            foreach (var item in paramlist)
+            {
+                if (item.param_name == "patient_id")
+                {
+                    sql = sql.Replace(":" + item.param_name, "'" + patient_id + "'");
+                }
+                else if (item.param_name == "ledger_sn")
+                {
+                    sql = sql.Replace(":" + item.param_name, ledger_sn);
+                } 
+            }
+            return ExecuteTable(sql, null, CommandType.Text);
+        }
+
+
         public DataTable GetGhDailyByReportCode(string code,string report_date, string price_opera ,string mz_dept_no)
         {
             var reportData = GetReportDataByCode(code);

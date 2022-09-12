@@ -34,6 +34,7 @@ namespace Client.Forms.Pages.hbgl
 
             dgvRequestHour.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
+            dgvRequestHour.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
         }
 
 

@@ -590,7 +590,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Refund";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "退号（按ESC退出）";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1068, 645);
             this.Load += new System.EventHandler(this.Refund_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Refund_KeyDown);

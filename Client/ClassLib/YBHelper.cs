@@ -74,6 +74,16 @@ namespace Client.ClassLib
         /// 交易签到流水号 421000G0000000244038
         /// </summary>
         public static string sign_no = "421000G0000000244038";
+        /// <summary>
+        /// 是否可以增加诊断1,0
+        /// </summary>
+        public static string edit_diseinfo = "0";
+        /// <summary>
+        /// 医保身份唯一 1,0
+        /// </summary>
+        public static string yb_identity_only = "0";
+         
+        
 
 
         public static void AddYBLog(string info_code,int admiss_times, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)

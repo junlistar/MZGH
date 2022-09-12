@@ -75,14 +75,28 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             } 
-        } 
-
+        }
         public ResponseResult<string> GetGhDailyByReportCode(string code, string report_date, string price_opera, string mz_dept_no)
         {
             Log.Information($"GetGhDailyByReportCode,{code},{report_date},{price_opera},{mz_dept_no}");
             try
             {
                 var dt = _reportDataFastRepository.GetGhDailyByReportCode(code, report_date, price_opera, mz_dept_no);
+
+                return JsonConvert.SerializeObject(dt, new DataTableConverter());
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<string>(ex.Message);
+            }
+        } 
+        public ResponseResult<string> GetMzsfBill(string code, string patient_id, string ledger_sn)
+        {
+            Log.Information($"GetGhDailyByReportCode,{code},{patient_id},{ledger_sn}");
+            try
+            {
+                var dt = _reportDataFastRepository.GetMzsfBill(code, patient_id, ledger_sn);
 
                 return JsonConvert.SerializeObject(dt, new DataTableConverter());
             }

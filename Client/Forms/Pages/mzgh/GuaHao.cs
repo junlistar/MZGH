@@ -1250,6 +1250,9 @@ namespace Client
 
                     if (YBHelper.currentYBInfo != null)
                     {
+                        lblMsg.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
+                        lblMsg.Show();
+
                         //保存用户的医保信息
                         var d = new
                         {

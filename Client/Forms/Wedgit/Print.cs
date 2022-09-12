@@ -152,64 +152,32 @@ namespace Client.Forms.Wedgit
                     using (MemoryStream Stream = new MemoryStream(ReportBytes))
                     {
                         TargetReport.Load(Stream);
-
-
-                        #region 接口方式
-                        //查询数据 
-                        string paramurl = string.Format($"/api/GuaHao/GetReportParam?code={_report_code}");
-
+                         
+                        string paramurl = string.Format($"/api/cwgl/GetMzsfBill?code={_report_code}&patient_id={_patient_id}&ledger_sn={_ledger_sn}");
+                      
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                        string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
-                        var result = WebApiHelper.DeserializeObject<ResponseResult<List<ReportParamVM>>>(responseJson);
-                        if (result.status == 1)
-                        {
-                            foreach (var item in result.data)
-                            {
-                                if (item.param_name == "patient_id")
-                                {
-                                    sql = sql.Replace(":" + item.param_name, "'"+  _patient_id+ "'");
-                                }
-                                else if (item.param_name == "ledger_sn")
-                                {
-                                    sql = sql.Replace(":" + item.param_name, _ledger_sn);
-                                }
-
-                                //if (item.param_name == "report_date")
-                                //{
-                                //    sql = sql.Replace(":" + item.param_name, "'1900-01-01 00:00:00'");
-                                //}
-                                //else if (item.param_name == "price_opera")
-                                //{
-                                //    sql = sql.Replace(":" + item.param_name, "'" + SessionHelper.uservm.user_mi+ "'");
-                                //}
-                                //else if (item.param_name == "mz_dept_no")
-                                //{
-                                //    sql = sql.Replace(":" + item.param_name, "'1'");
-                                //}
-
-                            }
-                        }
-                        paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
-
-                        //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                        responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = HttpClientUtil.Get(paramurl);
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
                         if (ds_result.status == 1)
                         {
-                            var jsontb = ds_result.data;
-                            var dt = DataTableHelper.ToDataTable(jsontb);
-                            var dataset = new DataSet();
-                            dataset.Tables.Add(dt);
-                            dataset.Tables[0].TableName = "DataTable";
-                            TargetReport.RegisterData(dataset);
-                             
-                            var dataset2 = dataset.Copy();
-                            dataset2.Tables[0].TableName = "DataTable2"; 
-                            TargetReport.RegisterData(dataset2);
+                            if (ds_result.data != "[]")
+                            {
+                                var jsontb = ds_result.data;
+                                var dt = DataTableHelper.ToDataTable(jsontb);
+                                var dataset = new DataSet();
+                                dataset.Tables.Add(dt);
+                                dataset.Tables[0].TableName = "DataTable";
+                                TargetReport.RegisterData(dataset);
 
-                            //TargetReport.Design();
-                        }
-                        #endregion
+                                var dataset2 = dataset.Copy();
+                                dataset2.Tables[0].TableName = "DataTable2";
+                                TargetReport.RegisterData(dataset2); 
+                            }
+                            else
+                            { 
+                                UIMessageTip.Show("该报表无数据");
+                            } 
+                        } 
                     }
                 }
                 //操作方式：DESIGN-设计;PREVIEW-预览;PRINT-打印

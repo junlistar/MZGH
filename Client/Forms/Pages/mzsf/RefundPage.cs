@@ -30,6 +30,7 @@ namespace Mzsf.Forms.Pages
         {
             ClearDataBind();
             Search();
+            dgvRefund.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
 
         }
 

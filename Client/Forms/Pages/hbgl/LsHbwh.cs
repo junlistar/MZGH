@@ -55,8 +55,8 @@ namespace Client
             uiToolTip1.SetToolTip(btnReset, btnReset.Text + "[F2]");
             uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
-
-
+             
+            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
             dgvlist.CellDoubleClick += dgvlist_CellDoubleClick;
         }
 
@@ -1514,6 +1514,11 @@ namespace Client
                 log.Error(ex.ToString());
             }
             return false;
+        }
+
+        private void dgvlist_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

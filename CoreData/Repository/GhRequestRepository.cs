@@ -173,6 +173,12 @@ namespace Data.Repository
 
                         var current_list = new List<GhRequest>();
 
+                        //查询停诊信息
+
+                        GhDoctorOutRepository ghDoctorOut = new GhDoctorOutRepository();
+                        var outlist = ghDoctorOut.GetGhDoctorOuts();
+
+
                         //组装当期数据
                         for (int i = 0; i < week_arr.Length; i++)
                         {
@@ -196,6 +202,28 @@ namespace Data.Repository
                                 foreach (var item in daylist)
                                 {
                                     item.request_date = request_date;
+                                    //判断医生是否停诊
+                                    bool _isout = false;
+                                    if (outlist!=null &&!string.IsNullOrEmpty(item.doctor_sn))
+                                    {
+                                        var _outlist = outlist.Where(p => p.doctor_id == item.doctor_sn);
+                                        if (_outlist.Count()>0)
+                                        { 
+                                            foreach (var doc_out in _outlist.ToList())
+                                            {
+                                                if (doc_out.begin_date<=item.request_date && item.request_date<doc_out.end_date)
+                                                {
+                                                    _isout = true;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (_isout)
+                                    {
+                                        item.open_flag = "0";
+                                    }
+
                                     GhRequest ghRequest = new GhRequest();
                                     ghRequest.ampm = item.ampm;
                                     ghRequest.ap = item.ampm;

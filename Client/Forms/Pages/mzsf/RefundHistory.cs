@@ -186,6 +186,7 @@ namespace Mzsf.Forms.Pages
             lblZongji.Text = total_charge.ToString();
             lblTuikuan.Text = "0";
 
+            dgvCpr.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
 
             BindDrugDetails(patient_id, ledger_sn, tbl_flag);
         }

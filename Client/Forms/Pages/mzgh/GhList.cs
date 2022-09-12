@@ -66,6 +66,8 @@ namespace Client
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
             uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F2]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
+
+            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
         }
 
 

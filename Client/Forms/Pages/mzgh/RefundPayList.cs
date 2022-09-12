@@ -37,6 +37,7 @@ namespace Client
             _datestr = datestr;
             _patient_id = patient_id;
             _times = times;
+            dgvpaylist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
         }
 
         private void RefundPayList_Load(object sender, EventArgs e)

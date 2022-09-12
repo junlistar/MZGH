@@ -1,0 +1,5 @@
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.csproj.AssemblyReference.cache
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\Client.Forms.Wedgit.AddZhenduan.resources
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.YBJSPreview.resources
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.csproj.GenerateResource.cache
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.csproj.CoreCompileInputs.cache

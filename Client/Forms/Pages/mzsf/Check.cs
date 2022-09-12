@@ -450,7 +450,7 @@ namespace Mzsf.Forms.Pages
 
                         SessionHelper.cardno = yBResponse.output.baseinfo.certno;
 
-                        if (yBResponse.output.baseinfo.certno != SessionHelper.patientVM.hic_no)
+                        if (YBHelper.yb_identity_only == "1" && yBResponse.output.baseinfo.certno != SessionHelper.patientVM.hic_no)
                         {
                             //如果号码不一致，提示返回
                             MessageBox.Show("医保卡与患者身份不一致！");

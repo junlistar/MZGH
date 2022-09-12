@@ -62,8 +62,9 @@ namespace Client
             uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
-            BindBottomData();
+            BindBottomData(); 
 
+            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color; 
         }
 
         public void InitDic()

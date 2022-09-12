@@ -208,7 +208,7 @@
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(168, 38);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "基础号表维护";
+            this.lblTitle.Text = "号表模板维护";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 

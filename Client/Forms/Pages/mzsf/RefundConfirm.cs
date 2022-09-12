@@ -53,6 +53,8 @@ namespace Mzsf.Forms.Pages
             //绑定付款项目信息
             BindDrugDetails(patient_id, ledger_sn, table_flag);
 
+            dgvCpr.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+
         }
         public void GetPatientInfo()
         {

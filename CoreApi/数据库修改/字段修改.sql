@@ -835,3 +835,15 @@ values ('6','绝育复通手术')
 if not exists(select * from syscolumns where id=object_id('gh_request') and name='workroom') begin
 ALTER TABLE gh_request ADD workroom  varchar(100) default (null)
 end
+
+CREATE TABLE [dbo].[gh_doctor_leave](
+	[sn] [varchar](50) NOT NULL,
+	[doctor_id] [varchar](50) NULL,
+	[begin_date] [datetime] NULL,
+	[end_date] [datetime] NULL,
+	[is_delete] [bit] NULL,
+ CONSTRAINT [PK_gh_doctor_leave] PRIMARY KEY CLUSTERED 
+(
+	[sn] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]

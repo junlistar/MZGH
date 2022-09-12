@@ -1,6 +1,7 @@
 ﻿using Client.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Client.ClassLib
         public static PatientVM patientVM;
 
         public static int gh_pay_countdown = 120;//second
+        public static Color dgv_row_seleced_color = Color.FromArgb(104, 173, 255);
 
         //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
         public static MzClientConfigVM MzClientConfigVM; 

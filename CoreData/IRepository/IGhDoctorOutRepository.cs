@@ -12,6 +12,8 @@ namespace Data.IRepository
 
         List<GhDoctorOut> GetGhDoctorOuts();
 
+        bool UpdateGhDoctorOut(string jsonStr);
+
 
         #endregion
     }

@@ -508,6 +508,8 @@ namespace Client
             var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1);
             GetRequestData(dt_from, dt_to);
 
+            dgvRequest.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+
         }
 
         public string GetWeekStr(int week)

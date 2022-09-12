@@ -63,6 +63,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txt_psn_no = new System.Windows.Forms.Label();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.lnkSetEmptyDate = new Sunny.UI.UILinkLabel();
+            this.cbx_mzmb = new Sunny.UI.UIComboBox();
             this.btnDelZd = new Sunny.UI.UIButton();
             this.btnAddzd = new Sunny.UI.UIButton();
             this.txtDoct = new Sunny.UI.UITextBox();
@@ -134,8 +136,6 @@
             this.label23 = new System.Windows.Forms.Label();
             this.btnYJS = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
-            this.cbx_mzmb = new Sunny.UI.UIComboBox();
-            this.lnkSetEmptyDate = new Sunny.UI.UILinkLabel();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cbxx)).BeginInit();
             this.uiGroupBox2.SuspendLayout();
@@ -161,7 +161,7 @@
             this.btnJieSuan.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnJieSuan.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnJieSuan.Size = new System.Drawing.Size(100, 35);
-            this.btnJieSuan.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnJieSuan.Style = Sunny.UI.UIStyle.Custom;
             this.btnJieSuan.TabIndex = 7;
             this.btnJieSuan.Text = "结算";
             this.btnJieSuan.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -185,7 +185,7 @@
             this.uiSymbolButton2.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton2.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton2.Size = new System.Drawing.Size(100, 35);
-            this.uiSymbolButton2.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiSymbolButton2.Style = Sunny.UI.UIStyle.Custom;
             this.uiSymbolButton2.Symbol = 61453;
             this.uiSymbolButton2.TabIndex = 8;
             this.uiSymbolButton2.Text = "取消";
@@ -226,7 +226,7 @@
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.uiGroupBox1.Size = new System.Drawing.Size(872, 213);
-            this.uiGroupBox1.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiGroupBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox1.TabIndex = 10;
             this.uiGroupBox1.Text = "基本信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,7 +250,7 @@
             this.lst_ident.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.lst_ident.ShowText = false;
             this.lst_ident.Size = new System.Drawing.Size(730, 52);
-            this.lst_ident.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.lst_ident.Style = Sunny.UI.UIStyle.Custom;
             this.lst_ident.TabIndex = 38;
             this.lst_ident.Text = "uiListBox1";
             this.lst_ident.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -341,7 +341,7 @@
             this.dgv_cbxx.ShowRect = false;
             this.dgv_cbxx.Size = new System.Drawing.Size(866, 81);
             this.dgv_cbxx.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dgv_cbxx.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.dgv_cbxx.Style = Sunny.UI.UIStyle.Custom;
             this.dgv_cbxx.TabIndex = 35;
             this.dgv_cbxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -519,11 +519,49 @@
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox2.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.uiGroupBox2.Size = new System.Drawing.Size(872, 282);
-            this.uiGroupBox2.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiGroupBox2.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox2.TabIndex = 11;
             this.uiGroupBox2.Text = "就诊信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // lnkSetEmptyDate
+            // 
+            this.lnkSetEmptyDate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.lnkSetEmptyDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lnkSetEmptyDate.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.lnkSetEmptyDate.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.lnkSetEmptyDate.Location = new System.Drawing.Point(737, 126);
+            this.lnkSetEmptyDate.Name = "lnkSetEmptyDate";
+            this.lnkSetEmptyDate.Size = new System.Drawing.Size(50, 23);
+            this.lnkSetEmptyDate.Style = Sunny.UI.UIStyle.Custom;
+            this.lnkSetEmptyDate.TabIndex = 44;
+            this.lnkSetEmptyDate.TabStop = true;
+            this.lnkSetEmptyDate.Text = "置空";
+            this.lnkSetEmptyDate.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.lnkSetEmptyDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.lnkSetEmptyDate.Click += new System.EventHandler(this.lnkSetEmptyDate_Click);
+            // 
+            // cbx_mzmb
+            // 
+            this.cbx_mzmb.DataSource = null;
+            this.cbx_mzmb.FillColor = System.Drawing.Color.White;
+            this.cbx_mzmb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbx_mzmb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbx_mzmb.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
+            this.cbx_mzmb.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbx_mzmb.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            this.cbx_mzmb.Location = new System.Drawing.Point(440, 157);
+            this.cbx_mzmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbx_mzmb.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbx_mzmb.Name = "cbx_mzmb";
+            this.cbx_mzmb.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbx_mzmb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.cbx_mzmb.Size = new System.Drawing.Size(213, 29);
+            this.cbx_mzmb.Style = Sunny.UI.UIStyle.Custom;
+            this.cbx_mzmb.TabIndex = 27;
+            this.cbx_mzmb.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_mzmb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnDelZd
             // 
@@ -542,11 +580,10 @@
             this.btnDelZd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnDelZd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnDelZd.Size = new System.Drawing.Size(52, 25);
-            this.btnDelZd.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnDelZd.Style = Sunny.UI.UIStyle.Custom;
             this.btnDelZd.TabIndex = 43;
             this.btnDelZd.Text = "删除";
             this.btnDelZd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDelZd.Visible = false;
             this.btnDelZd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnDelZd.Click += new System.EventHandler(this.btnDelZd_Click);
             // 
@@ -567,11 +604,10 @@
             this.btnAddzd.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnAddzd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnAddzd.Size = new System.Drawing.Size(52, 25);
-            this.btnAddzd.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnAddzd.Style = Sunny.UI.UIStyle.Custom;
             this.btnAddzd.TabIndex = 42;
             this.btnAddzd.Text = "添加";
             this.btnAddzd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAddzd.Visible = false;
             this.btnAddzd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnAddzd.Click += new System.EventHandler(this.btnAddzd_Click);
             // 
@@ -594,7 +630,7 @@
             this.txtDoct.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtDoct.ShowText = false;
             this.txtDoct.Size = new System.Drawing.Size(240, 29);
-            this.txtDoct.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtDoct.Style = Sunny.UI.UIStyle.Custom;
             this.txtDoct.TabIndex = 41;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -613,7 +649,7 @@
             this.chkuse_flag.Name = "chkuse_flag";
             this.chkuse_flag.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.chkuse_flag.Size = new System.Drawing.Size(150, 29);
-            this.chkuse_flag.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.chkuse_flag.Style = Sunny.UI.UIStyle.Custom;
             this.chkuse_flag.TabIndex = 40;
             this.chkuse_flag.Text = "使用个人账户";
             this.chkuse_flag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -681,7 +717,7 @@
             this.dgvjzxx.ShowRect = false;
             this.dgvjzxx.Size = new System.Drawing.Size(863, 81);
             this.dgvjzxx.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.dgvjzxx.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.dgvjzxx.Style = Sunny.UI.UIStyle.Custom;
             this.dgvjzxx.TabIndex = 39;
             this.dgvjzxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -744,7 +780,7 @@
             this.btnLoadMb.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnLoadMb.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnLoadMb.Size = new System.Drawing.Size(75, 25);
-            this.btnLoadMb.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnLoadMb.Style = Sunny.UI.UIStyle.Custom;
             this.btnLoadMb.TabIndex = 32;
             this.btnLoadMb.Text = "获取慢病";
             this.btnLoadMb.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -764,7 +800,7 @@
             this.birctrl_matn_date.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.birctrl_matn_date.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.birctrl_matn_date.Size = new System.Drawing.Size(176, 29);
-            this.birctrl_matn_date.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.birctrl_matn_date.Style = Sunny.UI.UIStyle.Custom;
             this.birctrl_matn_date.SymbolDropDown = 61555;
             this.birctrl_matn_date.SymbolNormal = 61555;
             this.birctrl_matn_date.TabIndex = 31;
@@ -792,7 +828,7 @@
             this.caty_name.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.caty_name.ShowText = false;
             this.caty_name.Size = new System.Drawing.Size(118, 29);
-            this.caty_name.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.caty_name.Style = Sunny.UI.UIStyle.Custom;
             this.caty_name.TabIndex = 30;
             this.caty_name.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.caty_name.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -816,7 +852,7 @@
             this.caty_code.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.caty_code.ShowText = false;
             this.caty_code.Size = new System.Drawing.Size(70, 29);
-            this.caty_code.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.caty_code.Style = Sunny.UI.UIStyle.Custom;
             this.caty_code.TabIndex = 29;
             this.caty_code.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.caty_code.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -840,7 +876,7 @@
             this.txtks.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtks.ShowText = false;
             this.txtks.Size = new System.Drawing.Size(157, 29);
-            this.txtks.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtks.Style = Sunny.UI.UIStyle.Custom;
             this.txtks.TabIndex = 28;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -867,7 +903,7 @@
             this.mdtrt_cert_no.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.mdtrt_cert_no.ShowText = false;
             this.mdtrt_cert_no.Size = new System.Drawing.Size(203, 29);
-            this.mdtrt_cert_no.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.mdtrt_cert_no.Style = Sunny.UI.UIStyle.Custom;
             this.mdtrt_cert_no.TabIndex = 28;
             this.mdtrt_cert_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.mdtrt_cert_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -888,7 +924,7 @@
             this.psn_setlway.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.psn_setlway.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.psn_setlway.Size = new System.Drawing.Size(168, 29);
-            this.psn_setlway.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.psn_setlway.Style = Sunny.UI.UIStyle.Custom;
             this.psn_setlway.TabIndex = 27;
             this.psn_setlway.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.psn_setlway.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -909,7 +945,7 @@
             this.med_type.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.med_type.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.med_type.Size = new System.Drawing.Size(160, 29);
-            this.med_type.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.med_type.Style = Sunny.UI.UIStyle.Custom;
             this.med_type.TabIndex = 26;
             this.med_type.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.med_type.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -933,7 +969,7 @@
             this.txtfph.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtfph.ShowText = false;
             this.txtfph.Size = new System.Drawing.Size(203, 29);
-            this.txtfph.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtfph.Style = Sunny.UI.UIStyle.Custom;
             this.txtfph.TabIndex = 26;
             this.txtfph.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtfph.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -954,7 +990,7 @@
             this.birctrl_type.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.birctrl_type.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.birctrl_type.Size = new System.Drawing.Size(174, 29);
-            this.birctrl_type.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.birctrl_type.Style = Sunny.UI.UIStyle.Custom;
             this.birctrl_type.TabIndex = 25;
             this.birctrl_type.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.birctrl_type.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -975,7 +1011,7 @@
             this.mdtrt_cert_type.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.mdtrt_cert_type.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.mdtrt_cert_type.Size = new System.Drawing.Size(203, 29);
-            this.mdtrt_cert_type.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.mdtrt_cert_type.Style = Sunny.UI.UIStyle.Custom;
             this.mdtrt_cert_type.TabIndex = 23;
             this.mdtrt_cert_type.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.mdtrt_cert_type.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -996,7 +1032,7 @@
             this.jz_insutype.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.jz_insutype.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.jz_insutype.Size = new System.Drawing.Size(239, 29);
-            this.jz_insutype.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.jz_insutype.Style = Sunny.UI.UIStyle.Custom;
             this.jz_insutype.TabIndex = 22;
             this.jz_insutype.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.jz_insutype.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -1153,7 +1189,7 @@
             this.uiGroupBox3.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox3.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.uiGroupBox3.Size = new System.Drawing.Size(872, 166);
-            this.uiGroupBox3.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiGroupBox3.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox3.TabIndex = 12;
             this.uiGroupBox3.Text = "结算信息";
             this.uiGroupBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1178,7 +1214,7 @@
             this.jsxx_balc.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.jsxx_balc.ShowText = false;
             this.jsxx_balc.Size = new System.Drawing.Size(90, 25);
-            this.jsxx_balc.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.jsxx_balc.Style = Sunny.UI.UIStyle.Custom;
             this.jsxx_balc.TabIndex = 34;
             this.jsxx_balc.Text = "0";
             this.jsxx_balc.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1203,7 +1239,7 @@
             this.hosp_part_amt.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.hosp_part_amt.ShowText = false;
             this.hosp_part_amt.Size = new System.Drawing.Size(90, 25);
-            this.hosp_part_amt.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.hosp_part_amt.Style = Sunny.UI.UIStyle.Custom;
             this.hosp_part_amt.TabIndex = 34;
             this.hosp_part_amt.Text = "0";
             this.hosp_part_amt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1228,7 +1264,7 @@
             this.psn_part_amt.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.psn_part_amt.ShowText = false;
             this.psn_part_amt.Size = new System.Drawing.Size(90, 25);
-            this.psn_part_amt.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.psn_part_amt.Style = Sunny.UI.UIStyle.Custom;
             this.psn_part_amt.TabIndex = 35;
             this.psn_part_amt.Text = "0";
             this.psn_part_amt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1253,7 +1289,7 @@
             this.psn_cash_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.psn_cash_pay.ShowText = false;
             this.psn_cash_pay.Size = new System.Drawing.Size(90, 25);
-            this.psn_cash_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.psn_cash_pay.Style = Sunny.UI.UIStyle.Custom;
             this.psn_cash_pay.TabIndex = 30;
             this.psn_cash_pay.Text = "0";
             this.psn_cash_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1278,7 +1314,7 @@
             this.hifob_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.hifob_pay.ShowText = false;
             this.hifob_pay.Size = new System.Drawing.Size(90, 25);
-            this.hifob_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.hifob_pay.Style = Sunny.UI.UIStyle.Custom;
             this.hifob_pay.TabIndex = 36;
             this.hifob_pay.Text = "0";
             this.hifob_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1303,7 +1339,7 @@
             this.fund_pay_sumamt.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.fund_pay_sumamt.ShowText = false;
             this.fund_pay_sumamt.Size = new System.Drawing.Size(90, 25);
-            this.fund_pay_sumamt.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.fund_pay_sumamt.Style = Sunny.UI.UIStyle.Custom;
             this.fund_pay_sumamt.TabIndex = 35;
             this.fund_pay_sumamt.Text = "0";
             this.fund_pay_sumamt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1328,7 +1364,7 @@
             this.hifp_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.hifp_pay.ShowText = false;
             this.hifp_pay.Size = new System.Drawing.Size(90, 25);
-            this.hifp_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.hifp_pay.Style = Sunny.UI.UIStyle.Custom;
             this.hifp_pay.TabIndex = 33;
             this.hifp_pay.Text = "0";
             this.hifp_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1353,7 +1389,7 @@
             this.hifmi_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.hifmi_pay.ShowText = false;
             this.hifmi_pay.Size = new System.Drawing.Size(90, 25);
-            this.hifmi_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.hifmi_pay.Style = Sunny.UI.UIStyle.Custom;
             this.hifmi_pay.TabIndex = 36;
             this.hifmi_pay.Text = "0";
             this.hifmi_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1378,7 +1414,7 @@
             this.oth_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.oth_pay.ShowText = false;
             this.oth_pay.Size = new System.Drawing.Size(90, 25);
-            this.oth_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.oth_pay.Style = Sunny.UI.UIStyle.Custom;
             this.oth_pay.TabIndex = 31;
             this.oth_pay.Text = "0";
             this.oth_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1403,7 +1439,7 @@
             this.act_pay_dedc.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.act_pay_dedc.ShowText = false;
             this.act_pay_dedc.Size = new System.Drawing.Size(90, 25);
-            this.act_pay_dedc.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.act_pay_dedc.Style = Sunny.UI.UIStyle.Custom;
             this.act_pay_dedc.TabIndex = 33;
             this.act_pay_dedc.Text = "0";
             this.act_pay_dedc.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1428,7 +1464,7 @@
             this.acct_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.acct_pay.ShowText = false;
             this.acct_pay.Size = new System.Drawing.Size(90, 25);
-            this.acct_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.acct_pay.Style = Sunny.UI.UIStyle.Custom;
             this.acct_pay.TabIndex = 28;
             this.acct_pay.Text = "0";
             this.acct_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1453,7 +1489,7 @@
             this.hifes_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.hifes_pay.ShowText = false;
             this.hifes_pay.Size = new System.Drawing.Size(90, 25);
-            this.hifes_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.hifes_pay.Style = Sunny.UI.UIStyle.Custom;
             this.hifes_pay.TabIndex = 32;
             this.hifes_pay.Text = "0";
             this.hifes_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1478,7 +1514,7 @@
             this.maf_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.maf_pay.ShowText = false;
             this.maf_pay.Size = new System.Drawing.Size(90, 25);
-            this.maf_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.maf_pay.Style = Sunny.UI.UIStyle.Custom;
             this.maf_pay.TabIndex = 28;
             this.maf_pay.Text = "0";
             this.maf_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1503,7 +1539,7 @@
             this.fulamt_ownpay_amt.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.fulamt_ownpay_amt.ShowText = false;
             this.fulamt_ownpay_amt.Size = new System.Drawing.Size(90, 25);
-            this.fulamt_ownpay_amt.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.fulamt_ownpay_amt.Style = Sunny.UI.UIStyle.Custom;
             this.fulamt_ownpay_amt.TabIndex = 29;
             this.fulamt_ownpay_amt.Text = "0";
             this.fulamt_ownpay_amt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1528,7 +1564,7 @@
             this.cvlserv_pay.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.cvlserv_pay.ShowText = false;
             this.cvlserv_pay.Size = new System.Drawing.Size(90, 25);
-            this.cvlserv_pay.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.cvlserv_pay.Style = Sunny.UI.UIStyle.Custom;
             this.cvlserv_pay.TabIndex = 28;
             this.cvlserv_pay.Text = "0";
             this.cvlserv_pay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1553,7 +1589,7 @@
             this.medfee_sumamt.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.medfee_sumamt.ShowText = false;
             this.medfee_sumamt.Size = new System.Drawing.Size(90, 25);
-            this.medfee_sumamt.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.medfee_sumamt.Style = Sunny.UI.UIStyle.Custom;
             this.medfee_sumamt.TabIndex = 27;
             this.medfee_sumamt.Text = "0";
             this.medfee_sumamt.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1720,7 +1756,7 @@
             this.btnYJS.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnYJS.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnYJS.Size = new System.Drawing.Size(100, 35);
-            this.btnYJS.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnYJS.Style = Sunny.UI.UIStyle.Custom;
             this.btnYJS.TabIndex = 13;
             this.btnYJS.Text = "预结算";
             this.btnYJS.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1744,51 +1780,13 @@
             this.uiSymbolButton4.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton4.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.uiSymbolButton4.Size = new System.Drawing.Size(100, 35);
-            this.uiSymbolButton4.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiSymbolButton4.Style = Sunny.UI.UIStyle.Custom;
             this.uiSymbolButton4.Symbol = 61453;
             this.uiSymbolButton4.TabIndex = 14;
             this.uiSymbolButton4.Text = "未对照";
             this.uiSymbolButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiSymbolButton4.Visible = false;
             this.uiSymbolButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cbx_mzmb
-            // 
-            this.cbx_mzmb.DataSource = null;
-            this.cbx_mzmb.FillColor = System.Drawing.Color.White;
-            this.cbx_mzmb.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.cbx_mzmb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbx_mzmb.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(234)))), ((int)(((byte)(232)))));
-            this.cbx_mzmb.ItemSelectBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.cbx_mzmb.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            this.cbx_mzmb.Location = new System.Drawing.Point(440, 157);
-            this.cbx_mzmb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbx_mzmb.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbx_mzmb.Name = "cbx_mzmb";
-            this.cbx_mzmb.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbx_mzmb.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.cbx_mzmb.Size = new System.Drawing.Size(213, 29);
-            this.cbx_mzmb.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.cbx_mzmb.TabIndex = 27;
-            this.cbx_mzmb.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbx_mzmb.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // lnkSetEmptyDate
-            // 
-            this.lnkSetEmptyDate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
-            this.lnkSetEmptyDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lnkSetEmptyDate.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.lnkSetEmptyDate.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.lnkSetEmptyDate.Location = new System.Drawing.Point(737, 126);
-            this.lnkSetEmptyDate.Name = "lnkSetEmptyDate";
-            this.lnkSetEmptyDate.Size = new System.Drawing.Size(50, 23);
-            this.lnkSetEmptyDate.Style = Sunny.UI.UIStyle.LayuiGreen;
-            this.lnkSetEmptyDate.TabIndex = 44;
-            this.lnkSetEmptyDate.TabStop = true;
-            this.lnkSetEmptyDate.Text = "置空";
-            this.lnkSetEmptyDate.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.lnkSetEmptyDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.lnkSetEmptyDate.Click += new System.EventHandler(this.lnkSetEmptyDate_Click);
             // 
             // YBJSPreview
             // 
