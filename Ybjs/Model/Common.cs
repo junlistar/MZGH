@@ -79,7 +79,13 @@ namespace YbjsLib.Model
 
     }
 
-
+    public class YbhzzdVM
+    {
+        public string charge_code { get; set; }
+        public string searial { get; set; }
+        public string ybhz_code { get; set; }
+        public string old_code { get; set; }
+    }
     public class UserDicVM
     {
         public string emp_sn { get; set; }

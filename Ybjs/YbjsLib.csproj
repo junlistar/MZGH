@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SunnyUI, Version=3.2.0.0, Culture=neutral, PublicKeyToken=27d7d2e821d97aeb, processorArchitecture=MSIL">
       <HintPath>..\packages\SunnyUI.3.2.0\lib\net472\SunnyUI.dll</HintPath>
     </Reference>
@@ -40,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -50,15 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddZhenduan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddZhenduan.Designer.cs">
-      <DependentUpon>AddZhenduan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Model\Common.cs" />
     <Compile Include="Model\ComUtil.cs" />
+    <Compile Include="Model\HttpClientUtil.cs" />
     <Compile Include="Model\WebApiHelper.cs" />
+    <Compile Include="Model\YBHelper.cs" />
     <Compile Include="Model\YbInfo.cs" />
     <Compile Include="Model\YBResponse.cs" />
     <Compile Include="Ybjs.cs" />
@@ -71,9 +72,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AddZhenduan.resx">
-      <DependentUpon>AddZhenduan.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="YBJSPreview.resx">
       <DependentUpon>YBJSPreview.cs</DependentUpon>
     </EmbeddedResource>

@@ -54,5 +54,5 @@ namespace YbjsLib.Model
         public string yb_name { get; set; }
     }
 
-
+     
 }
