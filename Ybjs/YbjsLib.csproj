@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddZhenduan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddZhenduan.Designer.cs">
+      <DependentUpon>AddZhenduan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Common.cs" />
     <Compile Include="Model\ComUtil.cs" />
     <Compile Include="Model\HttpClientUtil.cs" />
@@ -72,6 +78,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddZhenduan.resx">
+      <DependentUpon>AddZhenduan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="YBJSPreview.resx">
       <DependentUpon>YBJSPreview.cs</DependentUpon>
     </EmbeddedResource>

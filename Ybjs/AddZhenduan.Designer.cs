@@ -1,4 +1,4 @@
-﻿namespace Client.Forms.Wedgit
+﻿namespace YbjsLib
 {
     partial class AddZhenduan
     {

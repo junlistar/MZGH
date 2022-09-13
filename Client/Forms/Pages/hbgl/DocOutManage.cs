@@ -91,5 +91,10 @@ namespace Client.Forms.Pages.hbgl
             //dgvlist.Rows[index].DefaultCellStyle.BackColor = SessionHelper.dgv_row_seleced_color;
            
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -18,16 +18,11 @@ namespace YbjsLib
         {
             InitializeComponent();
         }
-
-        public List<ChargeItemVM> chargeItems;
-
-        public GHRequestVM ghRequest;
-
         public string patient_id;
-        public int admiss_times; 
+        public int admiss_times;
         public string insuplcAdmdvs;
 
-
+        public string icd_code;
         public string dept_sn;
         public string doct_sn;
         public string opter;
@@ -43,14 +38,9 @@ namespace YbjsLib
         UIDataGridView dgv = new UIDataGridView();
         UIDataGridView dgvys = new UIDataGridView();
 
-        public List<UserDicVM> doctList;
-        public List<UnitVM> unitList;
-        List<Diseinfo> diseinfoList;
-        List<IcdCodeVM> icdCodes;
-        List<DiagTypeVM> diagTypeList;
 
         MzjsResponse mzjsResponse;
-         
+
 
         //数据
         string json_2207;
@@ -58,114 +48,96 @@ namespace YbjsLib
 
         private void YBJSPreview_Load(object sender, EventArgs e)
         {
-            mzjsResponse = new MzjsResponse();
-
-            dgvys.KeyDown += Dgvys_KeyDown;
-
-            dgv.CellClick += dgvks_CellContentClick;
-            dgv.KeyDown += dgvks_KeyDown;
-
-            //加载下拉框字典数据
-            if (YBHelper.insutypes!=null)
+            try
             {
-                var _list = YBHelper.insutypes;
-                jz_insutype.DataSource = _list;
-                jz_insutype.ValueMember = "code";
-                jz_insutype.DisplayMember = "name";
-            }
-            if (YBHelper.mdtrtCertTypes!=null)
-            {
-                var _list = YBHelper.mdtrtCertTypes;
-                mdtrt_cert_type.DataSource = _list;
-                mdtrt_cert_type.ValueMember = "code";
-                mdtrt_cert_type.DisplayMember = "name";
-            }
-            if (YBHelper.medTypes != null) 
-            {
-                var _list = YBHelper.medTypes;
-                med_type.DataSource = _list;
-                med_type.ValueMember = "code";
-                med_type.DisplayMember = "name";
-            }
-            if (YBHelper.birctrlTypes!=null)
-            {
-                var _list = YBHelper.birctrlTypes;
-                var _birctrlTypes = _list;
-                var _birItem = new BirctrlTypeVM();
-                _birItem.code = "";
-                _birItem.name = "";
-                _birctrlTypes.Insert(0, _birItem);
-                birctrl_type.DataSource = _birctrlTypes;
-                birctrl_type.ValueMember = "code";
-                birctrl_type.DisplayMember = "name";
-            }
-            var setway = new List<ComboxItem>();
-            setway.Add(new ComboxItem("按项目结算", "01"));
-            setway.Add(new ComboxItem("按定额结算", "02"));
-            psn_setlway.DataSource = setway;
-            psn_setlway.ValueMember = "value";
-            psn_setlway.DisplayMember = "name";
 
-            birctrl_matn_date.Text = "";
+                mzjsResponse = new MzjsResponse();
 
-            if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.baseinfo != null)
-            {
-                txt_psn_no.Text = YBHelper.userInfoResponseModel.baseinfo.psn_no;
-                psn_name.Text = YBHelper.userInfoResponseModel.baseinfo.psn_name;
-                gend.Text = YBHelper.userInfoResponseModel.baseinfo.gend == "1" ? "男" : "女";
-                brdy.Text = YBHelper.userInfoResponseModel.baseinfo.brdy;
+                dgvys.KeyDown += Dgvys_KeyDown;
 
+                dgv.CellClick += dgvks_CellContentClick;
+                dgv.KeyDown += dgvks_KeyDown;
 
-                mdtrt_cert_type.SelectedValue = YBHelper.userInfoResponseModel.baseinfo.psn_cert_type;
-                mdtrt_cert_no.Text = YBHelper.userInfoResponseModel.baseinfo.certno;
-            }
-            if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.insuinfo != null)
-            {
-                dgv_cbxx.Init();
-                dgv_cbxx.AutoGenerateColumns = false;
-                dgv_cbxx.DataSource = YBHelper.userInfoResponseModel.insuinfo;
-
-                lbl_insplcadmdvs.Text = YBHelper.userInfoResponseModel.insuinfo[0].insuplc_admdvs;
-                jz_insutype.SelectedValue = YBHelper.userInfoResponseModel.insuinfo[0].insutype;
-            }
-
-            if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.idetinfo != null)
-            {
-                foreach (var item in YBHelper.userInfoResponseModel.idetinfo)
+                //加载下拉框字典数据
+                if (YBHelper.insutypes != null)
                 {
-                    lst_ident.Items.Add(item.psn_idet_type + "  " + item.psn_type_lv + "    " + item.begntime + "    " + item.endtime + "   " + item.memo);
+                    var _list = YBHelper.insutypes;
+                    jz_insutype.DataSource = _list;
+                    jz_insutype.ValueMember = "code";
+                    jz_insutype.DisplayMember = "name";
                 }
-            }
-
-
-            #region 绑定医生科室信息
-
-            txtDoct.TextChanged -= txtDoct_TextChanged;
-            txtks.TextChanged -= txtks_TextChanged;
-
-            if (ghRequest != null)
-            {
-                var _doct = doctList.Where(p => p.code == ghRequest.doctor_sn).FirstOrDefault();
-
-                if (_doct != null)
+                if (YBHelper.mdtrtCertTypes != null)
                 {
-                    txtDoct.TagString = _doct.yb_ys_code;
-                    txtDoct.Text = _doct.name;
+                    var _list = YBHelper.mdtrtCertTypes;
+                    mdtrt_cert_type.DataSource = _list;
+                    mdtrt_cert_type.ValueMember = "code";
+                    mdtrt_cert_type.DisplayMember = "name";
+                }
+                if (YBHelper.medTypes != null)
+                {
+                    var _list = YBHelper.medTypes;
+                    med_type.DataSource = _list;
+                    med_type.ValueMember = "code";
+                    med_type.DisplayMember = "name";
+                }
+                if (YBHelper.birctrlTypes != null)
+                {
+                    var _list = YBHelper.birctrlTypes;
+                    var _birctrlTypes = _list;
+                    var _birItem = new BirctrlTypeVM();
+                    _birItem.code = "";
+                    _birItem.name = "";
+                    _birctrlTypes.Insert(0, _birItem);
+                    birctrl_type.DataSource = _birctrlTypes;
+                    birctrl_type.ValueMember = "code";
+                    birctrl_type.DisplayMember = "name";
+                }
+                var setway = new List<ComboxItem>();
+                setway.Add(new ComboxItem("按项目结算", "01"));
+                setway.Add(new ComboxItem("按定额结算", "02"));
+                psn_setlway.DataSource = setway;
+                psn_setlway.ValueMember = "value";
+                psn_setlway.DisplayMember = "name";
+
+                birctrl_matn_date.Text = "";
+
+                if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.baseinfo != null)
+                {
+                    txt_psn_no.Text = YBHelper.userInfoResponseModel.baseinfo.psn_no;
+                    psn_name.Text = YBHelper.userInfoResponseModel.baseinfo.psn_name;
+                    gend.Text = YBHelper.userInfoResponseModel.baseinfo.gend == "1" ? "男" : "女";
+                    brdy.Text = YBHelper.userInfoResponseModel.baseinfo.brdy;
+
+
+                    mdtrt_cert_type.SelectedValue = YBHelper.userInfoResponseModel.baseinfo.psn_cert_type;
+                    mdtrt_cert_no.Text = YBHelper.userInfoResponseModel.baseinfo.certno;
+                }
+                if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.insuinfo != null)
+                {
+                    dgv_cbxx.Init();
+                    dgv_cbxx.AutoGenerateColumns = false;
+                    dgv_cbxx.DataSource = YBHelper.userInfoResponseModel.insuinfo;
+
+                    lbl_insplcadmdvs.Text = YBHelper.userInfoResponseModel.insuinfo[0].insuplc_admdvs;
+                    jz_insutype.SelectedValue = YBHelper.userInfoResponseModel.insuinfo[0].insutype;
                 }
 
-                var _dept = unitList.Where(p => p.unit_sn == ghRequest.unit_sn).FirstOrDefault();
-                if (_dept != null)
+                if (YBHelper.userInfoResponseModel != null && YBHelper.userInfoResponseModel.idetinfo != null)
                 {
-                    txtks.TagString = _dept.code;
-                    txtks.Text = _dept.name;
-                    caty_code.Text = _dept.yb_ks_code;
-                    caty_name.Text = _dept.yb_ks_name;
+                    foreach (var item in YBHelper.userInfoResponseModel.idetinfo)
+                    {
+                        lst_ident.Items.Add(item.psn_idet_type + "  " + item.psn_type_lv + "    " + item.begntime + "    " + item.endtime + "   " + item.memo);
+                    }
                 }
-            }
-            else
-            {
-                var _dept = unitList.Where(p => p.unit_sn == dept_sn).FirstOrDefault();
-                var _doct = doctList.Where(p => p.code == doct_sn).FirstOrDefault();
+
+
+                #region 绑定医生科室信息
+
+                txtDoct.TextChanged -= txtDoct_TextChanged;
+                txtks.TextChanged -= txtks_TextChanged;
+
+                var _dept = YBHelper.unitList.Where(p => p.unit_sn == dept_sn).FirstOrDefault();
+                var _doct = YBHelper.doctList.Where(p => p.code == doct_sn || p.yb_ys_code == doct_sn).FirstOrDefault();
                 if (_dept != null)
                 {
                     txtks.Text = _dept.name;
@@ -179,51 +151,70 @@ namespace YbjsLib
                     txtDoct.TagString = _doct.yb_ys_code;
                     txtDoct.Text = _doct.name;
                 }
-            }
 
-            txtDoct.TextChanged += txtDoct_TextChanged;
-            txtks.TextChanged += txtks_TextChanged;
 
-            #endregion
+                txtDoct.TextChanged += txtDoct_TextChanged;
+                txtks.TextChanged += txtks_TextChanged;
 
-            #region 绑定诊断信息
+                #endregion
 
-            if (ghRequest != null)
-            {
-                diseinfoList = new List<Diseinfo>();
+                #region 绑定诊断信息
+
+                YBHelper.diseinfoList = new List<Diseinfo>();
                 Diseinfo diseinfo = new Diseinfo();
                 diseinfo.vali_flag = "1";
-                if (!string.IsNullOrEmpty(ghRequest.icd_code))
+                if (!string.IsNullOrEmpty(icd_code))
                 {
-                    var _icdmodel = icdCodes.Where(p => p.code == ghRequest.icd_code).FirstOrDefault();
+                    var _icdmodel = YBHelper.icdCodes.Where(p => p.code == icd_code).FirstOrDefault();
                     if (_icdmodel != null)
                     {
                         diseinfo.diag_code = _icdmodel.yb_code;
                         diseinfo.diag_name = _icdmodel.yb_name;
-                        diseinfo.diag_type = diagTypeList[0].code;
-                        diseinfo.diag_type_name = diagTypeList[0].name;
+                        diseinfo.diag_type = YBHelper.diagTypeList[0].code;
+                        diseinfo.diag_type_name = YBHelper.diagTypeList[0].name;
                         diseinfo.vali_flag = "1";
-                        diseinfoList.Add(diseinfo);
+                        YBHelper.diseinfoList.Add(diseinfo);
                     }
                     LoadIcdData();
                 }
 
+
+
+                #endregion
+
+
             }
-
-            #endregion
-
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
         {
             try
             {
-
                 //门诊结算
+                var jsRequest = new YBRequest<MZJS2207A>();
+                jsRequest.infno = "2207A";
 
-                var jsRequest = WebApiHelper.DeserializeObject<YBRequest<MZJS2207A>>(json_2207);
+                jsRequest.msgid = YBHelper.msgid;
+                jsRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+                jsRequest.insuplc_admdvs = insuplcAdmdvs;
+                jsRequest.recer_sys_code = YBHelper.recer_sys_code;
+                jsRequest.dev_no = "";
+                jsRequest.dev_safe_info = "";
+                jsRequest.cainfo = "";
+                jsRequest.signtype = "";
+                jsRequest.infver = YBHelper.infver;
+                jsRequest.opter_type = YBHelper.opter_type;
+                jsRequest.opter = opter;
+                jsRequest.opter_name = opter_name;
+                jsRequest.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                jsRequest.fixmedins_code = YBHelper.fixmedins_code;
+                jsRequest.fixmedins_name = YBHelper.fixmedins_name;
+                jsRequest.sign_no = YBHelper.msgid;
+                jsRequest.input = new RepModel<MZJS2207A>();
 
 
                 MZJS2207A _mzyjs = new MZJS2207A();
@@ -246,11 +237,35 @@ namespace YbjsLib
                 var Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
 
+                //提交门诊挂号结算信息
+                YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jsRequest.sign_no, jsRequest.infver, 0, opter, jsRequest.inf_time);
 
                 var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                // return parm[2].ToString();
+                YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), patient_id, jsRequest.sign_no, jsRequest.infver, 1, opter, jsRequest.inf_time);
 
+                //log.Debug("结算返回：" + parm[2].ToString());
+
+                var _jsresp = WebApiHelper.DeserializeObject<YBResponse<MzjsResponse>>(parm[2].ToString());
+
+                if (_jsresp != null && !string.IsNullOrEmpty(_jsresp.err_msg))
+                {
+                    MessageBox.Show(_jsresp.err_msg);
+                    return;
+                }
+                else if (_jsresp.output != null)
+                {
+                    //记录医保日志 
+                    var paramurl = string.Format($"/api/YbInfo/AddYB2207");
+                    _jsresp.output.patient_id = patient_id;
+                    _jsresp.output.admiss_times = admiss_times.ToString();
+                    HttpClientUtil.PostJSON(paramurl, _jsresp.output);
+
+                    YBHelper.mzjsResponse = _jsresp.output;
+                    var setl_id = _jsresp.output.setlinfo.setl_id;
+                    //log.Debug($"医保结算成功:patient_id:{patient_id},admiss_times:{admiss_times},setl_id:{setl_id}");
+                }
+                DialogResult = DialogResult.OK;
                 this.Close();
             }
             catch (Exception ex)
@@ -274,7 +289,7 @@ namespace YbjsLib
             }
 
             //判断是否有诊断信息
-            if (diseinfoList == null || diseinfoList.Count == 0)
+            if (YBHelper.diseinfoList == null || YBHelper.diseinfoList.Count == 0)
             {
                 UIMessageBox.ShowError("诊断信息为空！");
                 return;
@@ -359,7 +374,7 @@ namespace YbjsLib
             var Outputxml = "";
             var parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID,admiss_times, json, patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
 
             var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
@@ -392,28 +407,28 @@ namespace YbjsLib
             var mzmxRequest = new YBRequest<List<feedetail>>();
             mzmxRequest.infno = ((int)InfoNoEnum.门诊明细上传).ToString();
 
-            jzxxRequest.msgid = YBHelper.msgid;
-            jzxxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-            jzxxRequest.insuplc_admdvs = insuplcAdmdvs;
-            jzxxRequest.recer_sys_code = YBHelper.recer_sys_code;
-            jzxxRequest.dev_no = "";
-            jzxxRequest.dev_safe_info = "";
-            jzxxRequest.cainfo = "";
-            jzxxRequest.signtype = "";
-            jzxxRequest.infver = YBHelper.infver;
-            jzxxRequest.opter_type = YBHelper.opter_type;
-            jzxxRequest.opter = opter;
-            jzxxRequest.opter_name = opter_name;
-            jzxxRequest.inf_time = _dt;
-            jzxxRequest.fixmedins_code = YBHelper.fixmedins_code;
-            jzxxRequest.fixmedins_name = YBHelper.fixmedins_name;
-            jzxxRequest.sign_no = YBHelper.msgid;
+            mzmxRequest.msgid = YBHelper.msgid;
+            mzmxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+            mzmxRequest.insuplc_admdvs = insuplcAdmdvs;
+            mzmxRequest.recer_sys_code = YBHelper.recer_sys_code;
+            mzmxRequest.dev_no = "";
+            mzmxRequest.dev_safe_info = "";
+            mzmxRequest.cainfo = "";
+            mzmxRequest.signtype = "";
+            mzmxRequest.infver = YBHelper.infver;
+            mzmxRequest.opter_type = YBHelper.opter_type;
+            mzmxRequest.opter = opter;
+            mzmxRequest.opter_name = opter_name;
+            mzmxRequest.inf_time = _dt;
+            mzmxRequest.fixmedins_code = YBHelper.fixmedins_code;
+            mzmxRequest.fixmedins_name = YBHelper.fixmedins_name;
+            mzmxRequest.sign_no = YBHelper.msgid;
             mzmxRequest.input = new RepModel<List<feedetail>>();
             List<feedetail> feedetails = new List<feedetail>();
             int _index = 1;
-            if (chargeItems != null)
+            if (YBHelper.chargeItems != null)
             {
-                foreach (var item in chargeItems)
+                foreach (var item in YBHelper.chargeItems)
                 {
                     feedetail _detail = new feedetail();
                     _detail.feedetl_sn = patient_id + "_" + admiss_times + "_" + _index++;
@@ -485,11 +500,11 @@ namespace YbjsLib
             Outputxml = "";
             parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID, admiss_times, json,patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
 
             result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-            YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(),patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1,opter, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 1, opter, jzxxRequest.inf_time);
 
             //log.Debug("明细提交返回：" + parm[2]);
 
@@ -516,22 +531,22 @@ namespace YbjsLib
             var yjsRequest = new YBRequest<MZJS2207A>();
             yjsRequest.infno = ((int)InfoNoEnum.预结算).ToString();
 
-            jzxxRequest.msgid = YBHelper.msgid;
-            jzxxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-            jzxxRequest.insuplc_admdvs = insuplcAdmdvs;
-            jzxxRequest.recer_sys_code = YBHelper.recer_sys_code;
-            jzxxRequest.dev_no = "";
-            jzxxRequest.dev_safe_info = "";
-            jzxxRequest.cainfo = "";
-            jzxxRequest.signtype = "";
-            jzxxRequest.infver = YBHelper.infver;
-            jzxxRequest.opter_type = YBHelper.opter_type;
-            jzxxRequest.opter = opter;
-            jzxxRequest.opter_name = opter_name;
-            jzxxRequest.inf_time = _dt;
-            jzxxRequest.fixmedins_code = YBHelper.fixmedins_code;
-            jzxxRequest.fixmedins_name = YBHelper.fixmedins_name;
-            jzxxRequest.sign_no = YBHelper.msgid;
+            yjsRequest.msgid = YBHelper.msgid;
+            yjsRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+            yjsRequest.insuplc_admdvs = insuplcAdmdvs;
+            yjsRequest.recer_sys_code = YBHelper.recer_sys_code;
+            yjsRequest.dev_no = "";
+            yjsRequest.dev_safe_info = "";
+            yjsRequest.cainfo = "";
+            yjsRequest.signtype = "";
+            yjsRequest.infver = YBHelper.infver;
+            yjsRequest.opter_type = YBHelper.opter_type;
+            yjsRequest.opter = opter;
+            yjsRequest.opter_name = opter_name;
+            yjsRequest.inf_time = _dt;
+            yjsRequest.fixmedins_code = YBHelper.fixmedins_code;
+            yjsRequest.fixmedins_name = YBHelper.fixmedins_name;
+            yjsRequest.sign_no = YBHelper.msgid;
             yjsRequest.input = new RepModel<MZJS2207A>();
             // mzmxRequest = new RepModel<List<feedetail>>();
 
@@ -554,7 +569,7 @@ namespace YbjsLib
             Outputxml = "";
             parm = new object[] { BusinessID, json, Outputxml };
 
-            YBHelper.AddYBLog(BusinessID,admiss_times, json, patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jzxxRequest.sign_no, jzxxRequest.infver, 0, opter, jzxxRequest.inf_time);
 
             result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
@@ -566,7 +581,7 @@ namespace YbjsLib
 
             if (_yjsresp != null && !string.IsNullOrEmpty(_yjsresp.err_msg))
             {
-                MessageBox.Show(_yjsresp.err_msg); 
+                MessageBox.Show(_yjsresp.err_msg);
                 return;
             }
             else
@@ -654,7 +669,7 @@ namespace YbjsLib
                 var pbl = tb.Parent as UIPanel;
                 //获取数据 
 
-                if (doctList != null && doctList.Count > 0)
+                if (YBHelper.doctList != null && YBHelper.doctList.Count > 0)
                 {
                     var ipt = txtDoct.Text.Trim();
 
@@ -669,7 +684,7 @@ namespace YbjsLib
                     dgvys.ReadOnly = true;
 
 
-                    List<UserDicVM> vm = doctList;
+                    List<UserDicVM> vm = YBHelper.doctList;
 
                     if (!string.IsNullOrWhiteSpace(ipt))
                     {
@@ -709,7 +724,7 @@ namespace YbjsLib
                 txtDoct.TextChanged -= txtDoct_TextChanged;
                 txtDoct.Text = name;
 
-                var _ybinfo = doctList.Where(p => p.code == code).FirstOrDefault();
+                var _ybinfo = YBHelper.doctList.Where(p => p.code == code).FirstOrDefault();
                 if (_ybinfo != null)
                 {
                     txtDoct.TagString = _ybinfo.yb_ys_code;
@@ -808,7 +823,7 @@ namespace YbjsLib
                 var pbl = tb.Parent as UIPanel;
                 //获取数据 
 
-                if (unitList != null && unitList.Count > 0)
+                if (YBHelper.unitList != null && YBHelper.unitList.Count > 0)
                 {
                     var ipt = txtks.Text.Trim();
 
@@ -823,7 +838,7 @@ namespace YbjsLib
                     dgv.ReadOnly = true;
 
 
-                    List<UnitVM> vm = unitList;
+                    List<UnitVM> vm = YBHelper.unitList;
 
                     if (!string.IsNullOrWhiteSpace(ipt))
                     {
@@ -849,88 +864,87 @@ namespace YbjsLib
 
         private void dgvks_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //try
-            //{
-            //    if (e.RowIndex == -1)
-            //    {
-            //        return;
-            //    }
-            //    var obj = sender as UIDataGridView;
-            //    var unit_sn = obj.Rows[e.RowIndex].Cells["unit_sn"].Value.ToString();
-            //    var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
-            //    txtks.TextChanged -= txtks_TextChanged;
-            //    txtks.Text = name;
-            //    txtks.TagString = unit_sn;
-            //    txtks.TextChanged += txtks_TextChanged;
+            try
+            {
+                if (e.RowIndex == -1)
+                {
+                    return;
+                }
+                var obj = sender as UIDataGridView;
+                var unit_sn = obj.Rows[e.RowIndex].Cells["unit_sn"].Value.ToString();
+                var name = obj.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                txtks.TextChanged -= txtks_TextChanged;
+                txtks.Text = name;
+                txtks.TagString = unit_sn;
+                txtks.TextChanged += txtks_TextChanged;
 
-            //    var _ybksInfo = SessionHelper.units.Where(p => p.code == unit_sn).FirstOrDefault();
-            //    caty_code.Text = _ybksInfo.yb_ks_code;
-            //    caty_name.Text = _ybksInfo.yb_ks_name;
+                var _ybksInfo = YBHelper.unitList.Where(p => p.code == unit_sn).FirstOrDefault();
+                caty_code.Text = _ybksInfo.yb_ks_code;
+                caty_name.Text = _ybksInfo.yb_ks_name;
 
-            //    dgv.Hide();
+                dgv.Hide();
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //    log.Error(ex.ToString());
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAddzd_Click(object sender, EventArgs e)
         {
-            //var _ys_ybcode = txtDoct.TagString;
-            //if (string.IsNullOrEmpty(_ys_ybcode))
-            //{
-            //    UIMessageBox.Show("医生医保编号为空，请选择正确的医生");
-            //    return;
-            //}
+            var _ys_ybcode = txtDoct.TagString;
+            if (string.IsNullOrEmpty(_ys_ybcode))
+            {
+                UIMessageBox.Show("医生医保编号为空，请选择正确的医生");
+                return;
+            }
 
-            //AddZhenduan addZhenduan = new AddZhenduan();
-            //if (addZhenduan.ShowDialog() == DialogResult.OK)
-            //{
-            //    LoadIcdData();
-            //}
+            AddZhenduan addZhenduan = new AddZhenduan();
+            if (addZhenduan.ShowDialog() == DialogResult.OK)
+            {
+                LoadIcdData();
+            }
         }
 
         private void btnDelZd_Click(object sender, EventArgs e)
         {
-            //var _index = dgvjzxx.SelectedIndex;
-            //var _diag_code = dgvjzxx.Rows[_index].Cells["diag_code"].Value;
-            //if (_diag_code != null)
-            //{
-            //    foreach (var item in SessionHelper.diseinfoList.ToArray())
-            //    {
-            //        SessionHelper.diseinfoList.Remove(item);
-            //    }
-            //    LoadIcdData();
-            //}
+            var _index = dgvjzxx.SelectedIndex;
+            var _diag_code = dgvjzxx.Rows[_index].Cells["diag_code"].Value;
+            if (_diag_code != null)
+            {
+                foreach (var item in YBHelper.diseinfoList.ToArray())
+                {
+                    YBHelper.diseinfoList.Remove(item);
+                }
+                LoadIcdData();
+            }
         }
 
         public void LoadIcdData()
         {
-            ////更新数据表
-            //if (SessionHelper.diseinfoList != null)
-            //{
-            //    foreach (var item in SessionHelper.diseinfoList)
-            //    {
-            //        item.dise_dor_no = txtDoct.TagString;
-            //        item.dise_dor_name = txtDoct.Text;
-            //        item.diag_dept = txtks.TagString;
-            //    }
+            //更新数据表
+            if (YBHelper.diseinfoList != null)
+            {
+                foreach (var item in YBHelper.diseinfoList)
+                {
+                    item.dise_dor_no = txtDoct.TagString;
+                    item.dise_dor_name = txtDoct.Text;
+                    item.diag_dept = txtks.TagString;
+                }
 
-            //    var _dat = SessionHelper.diseinfoList.Select(p => new
-            //    {
-            //        diag_type_name = p.diag_type_name,
-            //        diag_code = p.diag_code,
-            //        diag_name = p.diag_name,
-            //        diag_dept = p.diag_dept,
-            //        dise_dor_no = p.dise_dor_no,
-            //        dise_dor_name = p.dise_dor_name,
-            //        vali_flag = p.vali_flag == "1" ? "有效" : ""
-            //    }).ToList();
-            //    dgvjzxx.DataSource = _dat;
-            //}
+                var _dat = YBHelper.diseinfoList.Select(p => new
+                {
+                    diag_type_name = p.diag_type_name,
+                    diag_code = p.diag_code,
+                    diag_name = p.diag_name,
+                    diag_dept = p.diag_dept,
+                    dise_dor_no = p.dise_dor_no,
+                    dise_dor_name = p.dise_dor_name,
+                    vali_flag = p.vali_flag == "1" ? "有效" : ""
+                }).ToList();
+                dgvjzxx.DataSource = _dat;
+            }
         }
         /// <summary>
         /// 获取慢病

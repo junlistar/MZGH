@@ -46,7 +46,13 @@ namespace Client
         Dictionary<int, double> dicPay = new Dictionary<int, double>();
         List<GHPayModel> paylist = new List<GHPayModel>();
         List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
-         
+
+        //用户医保信息返回
+        public UserInfoResponseModel userInfoResponseModel;
+        public GHResponseModel gHResponseModel;
+        public MzjsResponse mzjsResponse;
+
+
         public SelectPayType(GHRequestVM _vm, string _patientId)
         {
             InitializeComponent(); vm = _vm; patientId = _patientId;
@@ -172,9 +178,9 @@ namespace Client
 
                 //查询用户医保信息 
                 var insuplc_admdvs = GuaHao.PatientVM.yb_insuplc_admdvs.Trim();
-                var mdtrt_id = YBHelper.currentYBPay.output.data.mdtrt_id;
-                var ipt_otp_no = YBHelper.currentYBPay.output.data.ipt_otp_no;
-                var psn_no = YBHelper.currentYBPay.output.data.psn_no;
+                var mdtrt_id = gHResponseModel.mdtrt_id;
+                var ipt_otp_no = gHResponseModel.ipt_otp_no;
+                var psn_no = gHResponseModel.psn_no;
 
 
 
@@ -257,7 +263,7 @@ namespace Client
                 timer1.Stop(); lblmsg.Visible = false;
             }
         }
-         
+
 
 
         public void OpenPayWindow(PayMethodEnum payMethod, string his_cheque_type)
@@ -365,7 +371,7 @@ namespace Client
                     }
                     else
                     {
-                        log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je); 
+                        log.Info("取消支付：" + his_cheque_type + ",金额：" + left_je);
                     }
                 }
                 else if (payMethod == PayMethodEnum.Yibao)
@@ -376,7 +382,7 @@ namespace Client
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.mzjsResponse.setlinfo.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
 
                         this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
@@ -385,7 +391,7 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id ,YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
                     }
                     else
                     {
@@ -445,10 +451,39 @@ namespace Client
         public bool YiBaoPay(decimal left_je)
         {
             try
-            { 
-                string admiss_times = (GuaHao.PatientVM.max_times + 1).ToString();
+            {
+                int admiss_times = GuaHao.PatientVM.max_times + 1;
                 string patient_id = GuaHao.PatientVM.patient_id;
+                //机制号
+                var sn_no = GetReceiptMaxNo();
 
+                string ybhzComaper_str = WebApiHelper.SerializeObject(SessionHelper.ybhzCompare);
+                string doctList_str = WebApiHelper.SerializeObject(SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList());
+                string unitList_str = WebApiHelper.SerializeObject(SessionHelper.units);
+                //string diseinfoList_str = WebApiHelper.SerializeObject();
+                string icdCodes_str = WebApiHelper.SerializeObject(SessionHelper.icdCodes);
+                string diagTypeList_str = WebApiHelper.SerializeObject(SessionHelper.diagTypes);
+                string chargeItems_str = WebApiHelper.SerializeObject(chargeItems);
+                string insutypes_str = WebApiHelper.SerializeObject(SessionHelper.insutypes);
+                string birctrlTypes_str = WebApiHelper.SerializeObject(SessionHelper.birctrlTypes);
+                string medTypes_str = WebApiHelper.SerializeObject(SessionHelper.medTypes);
+                string mdtrtCertTypes_str = WebApiHelper.SerializeObject(SessionHelper.mdtrtCertTypes);
+
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+
+                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str);
+
+                object[] objparam = new object[3];
+
+                var js_result = ybjs.PreDeal(patient_id, admiss_times, GuaHao.PatientVM.hic_no, left_je, sn_no, vm.icd_code, vm.yb_ys_code, vm.doctor_name, vm.unit_sn, vm.unit_name, vm.clinic_name, SessionHelper.uservm.user_mi, SessionHelper.uservm.name, ref objparam);
+                if (js_result)
+                {
+                    userInfoResponseModel = WebApiHelper.DeserializeObject<UserInfoResponseModel>(objparam[0].ToString());
+                    gHResponseModel = WebApiHelper.DeserializeObject<GHResponseModel>(objparam[1].ToString());
+                    mzjsResponse = WebApiHelper.DeserializeObject<MzjsResponse>(objparam[2].ToString());
+
+                }
+                return js_result;
 
                 string json = "";
                 string BusinessID = "1101";
@@ -462,105 +497,103 @@ namespace Client
                 //if (string.IsNullOrEmpty(GuaHao.PatientVM.yb_insuplc_admdvs) || string.IsNullOrEmpty(GuaHao.PatientVM.hic_no)
                 //   || string.IsNullOrEmpty(GuaHao.PatientVM.yb_insutype) || string.IsNullOrEmpty(GuaHao.PatientVM.yb_psn_no))
                 //{
-                    YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
-                    request.infno = ((int)InfoNoEnum.人员信息).ToString();
-                    request.msgid = YBHelper.msgid;
-                    request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                    request.insuplc_admdvs = "421002";
-                    request.recer_sys_code = YBHelper.recer_sys_code;
-                    request.dev_no = "";
-                    request.dev_safe_info = "";
-                    request.cainfo = "";
-                    request.signtype = "";
-                    request.infver = YBHelper.infver;
-                    request.opter_type = YBHelper.opter_type;
-                    request.opter = SessionHelper.uservm.user_mi;
-                    request.opter_name = SessionHelper.uservm.name;
-                    request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    request.fixmedins_code = YBHelper.fixmedins_code;
-                    request.fixmedins_name = YBHelper.fixmedins_name;
-                    request.sign_no = YBHelper.msgid;
+                YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+                request.infno = ((int)InfoNoEnum.人员信息).ToString();
+                request.msgid = YBHelper.msgid;
+                request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                request.insuplc_admdvs = "421002";
+                request.recer_sys_code = YBHelper.recer_sys_code;
+                request.dev_no = "";
+                request.dev_safe_info = "";
+                request.cainfo = "";
+                request.signtype = "";
+                request.infver = YBHelper.infver;
+                request.opter_type = YBHelper.opter_type;
+                request.opter = SessionHelper.uservm.user_mi;
+                request.opter_name = SessionHelper.uservm.name;
+                request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                request.fixmedins_code = YBHelper.fixmedins_code;
+                request.fixmedins_name = YBHelper.fixmedins_name;
+                request.sign_no = YBHelper.msgid;
 
-                    request.input = new RepModel<UserInfoRequestModel>();
-                    request.input.data = new UserInfoRequestModel();
-                    request.input.data.mdtrt_cert_type = "03";
-                    request.input.data.psn_cert_type = "1";
+                request.input = new RepModel<UserInfoRequestModel>();
+                request.input.data = new UserInfoRequestModel();
+                request.input.data.mdtrt_cert_type = "03";
+                request.input.data.psn_cert_type = "1";
 
-                    json = WebApiHelper.SerializeObject(request);
+                json = WebApiHelper.SerializeObject(request);
 
-                    //调用 com名称  方法  参数
-                    BusinessID = ((int)InfoNoEnum.人员信息).ToString();
-                    Dataxml = json;
-                    Outputxml = "";
-                    parm = new object[] { BusinessID, json, Outputxml };
+                //调用 com名称  方法  参数
+                BusinessID = ((int)InfoNoEnum.人员信息).ToString();
+                Dataxml = json;
+                Outputxml = "";
+                parm = new object[] { BusinessID, json, Outputxml };
 
-                    InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                    log.Debug(parm[2]);
+                log.Debug(parm[2]);
 
-                    YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
 
-                    if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                {
+                    MessageBox.Show(yBResponse.err_msg);
+                    log.Error(yBResponse.err_msg);
+                    return false;
+                }
+                else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
+                {
+                    //记录医保日志
+                    var paramurl = string.Format($"/api/YbInfo/AddYB1101");
+                    yBResponse.output.patient_id = patient_id;
+                    yBResponse.output.admiss_times = admiss_times.ToString();
+                    HttpClientUtil.PostJSON(paramurl, yBResponse.output);
+
+                    SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+
+                    if (YBHelper.yb_identity_only == "1" && yBResponse.output.baseinfo.certno != GuaHao.PatientVM.hic_no)
                     {
-                        MessageBox.Show(yBResponse.err_msg);
-                        log.Error(yBResponse.err_msg);
+                        //如果号码不一致，提示返回
+                        MessageBox.Show("医保卡与患者身份不一致！");
                         return false;
                     }
-                    else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
+
+                    YBHelper.currentYBInfo = yBResponse;
+
+                    GuaHao.PatientVM.yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
+                    GuaHao.PatientVM.yb_insutype = yBResponse.output.insuinfo[0].insutype;
+                    GuaHao.PatientVM.yb_psn_no = yBResponse.output.baseinfo.psn_no;
+
+                    //保存用户的医保信息
+                    var d = new
                     {
-                        //记录医保日志
-                        var paramurl = string.Format($"/api/YbInfo/AddYB1101");
-                        yBResponse.output.patient_id = patient_id;
-                        yBResponse.output.admiss_times = admiss_times;
-                        HttpClientUtil.PostJSON(paramurl, yBResponse.output); 
+                        yb_psn_no = yBResponse.output.baseinfo.psn_no,
+                        social_no = yBResponse.output.baseinfo.certno,
+                        pid = patientId,
+                        yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
+                        yb_insutype = yBResponse.output.insuinfo[0].insutype,
+                        opera = SessionHelper.uservm.user_mi
+                    };
+                    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
 
-                        SessionHelper.cardno = yBResponse.output.baseinfo.certno;
+                    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+                    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 
-                        if (YBHelper.yb_identity_only =="1" && yBResponse.output.baseinfo.certno != GuaHao.PatientVM.hic_no)
-                        {
-                            //如果号码不一致，提示返回
-                            MessageBox.Show("医保卡与患者身份不一致！");
-                            return false;
-                        }
+                    if (responseJson.data == 1)
+                    {
+                        log.Debug("修改用户医保信息成功");
 
-                        YBHelper.currentYBInfo = yBResponse;
-
-                        GuaHao.PatientVM.yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs;
-                        GuaHao.PatientVM.yb_insutype = yBResponse.output.insuinfo[0].insutype;
-                        GuaHao.PatientVM.yb_psn_no = yBResponse.output.baseinfo.psn_no;
-
-                        //保存用户的医保信息
-                        var d = new
-                        {
-                            yb_psn_no = yBResponse.output.baseinfo.psn_no,
-                            social_no = yBResponse.output.baseinfo.certno,
-                            pid = patientId,
-                            yb_insuplc_admdvs = yBResponse.output.insuinfo[0].insuplc_admdvs,
-                            yb_insutype = yBResponse.output.insuinfo[0].insutype,
-                            opera = SessionHelper.uservm.user_mi
-                        };
-                        var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                        httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                        paramurl = string.Format($"/api/GuaHao/UpdateUserYBInfo?pid={d.pid}&social_no={d.social_no}&yb_psn_no={d.yb_psn_no}&yb_insutype={d.yb_insutype}&yb_insuplc_admdvs={d.yb_insuplc_admdvs}");
-
-                        string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                        var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
-                        if (responseJson.data == 1)
-                        {
-                            log.Debug("修改用户医保信息成功");
-
-                        }
-                        else
-                        {
-                            log.Error(responseJson.message);
-                        }
                     }
+                    else
+                    {
+                        log.Error(responseJson.message);
+                    }
+                }
 
                 //}
-                //机制号
-                var sn_no = GetReceiptMaxNo();
-                max_sn = int.Parse(sn_no);
+
 
                 //门诊挂号
                 YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
@@ -596,7 +629,7 @@ namespace Client
                 ghRequest.input.data.mdtrt_cert_no = GuaHao.PatientVM.hic_no;
 
                 ghRequest.input.data.ipt_otp_no = sn_no; //机制号 唯一" ipt_otp_no": "1533956",
-                ghRequest.input.data.atddr_no = vm.yb_ys_code =="" ? "D421003007628" : vm.yb_ys_code; //"D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
+                ghRequest.input.data.atddr_no = vm.yb_ys_code == "" ? "D421003007628" : vm.yb_ys_code; //"D421003007628"; //医生医保编号 "atddr_no": "D421003007628",
                 ghRequest.input.data.dr_name = vm.doctor_name;
                 ghRequest.input.data.dept_code = vm.unit_sn;
                 ghRequest.input.data.dept_name = vm.unit_name;
@@ -616,7 +649,7 @@ namespace Client
 
                 var resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
 
-                if (resp!=null &&!string.IsNullOrEmpty(resp.err_msg))
+                if (resp != null && !string.IsNullOrEmpty(resp.err_msg))
                 {
                     MessageBox.Show(resp.err_msg);
                     log.Error(resp.err_msg);
@@ -625,10 +658,10 @@ namespace Client
                 {
                     //记录医保日志
                     var paramurl = string.Format($"/api/YbInfo/AddYB2201");
-                    resp.output.data.patient_id =patient_id;
-                    resp.output.data.admiss_times = admiss_times;
+                    resp.output.data.patient_id = patient_id;
+                    resp.output.data.admiss_times = admiss_times.ToString();
                     HttpClientUtil.PostJSON(paramurl, resp.output.data);
-                     
+
                     //保存医保支付信息，用于退款
                     YBHelper.currentYBPay = resp;
                     //就诊ID 医保返回唯一流水
@@ -640,7 +673,7 @@ namespace Client
 
                     //弹出预结算信息
                     YBJSPreview yBJSPreview = new YBJSPreview();
-                    yBJSPreview.admiss_times = int.Parse(admiss_times);
+                    yBJSPreview.admiss_times = admiss_times;
                     yBJSPreview.patient_id = patient_id;
                     yBJSPreview.mdtrt_id = mdtrt_id;
                     yBJSPreview.psn_no = psn_no;
@@ -656,7 +689,7 @@ namespace Client
                     if (yBJSPreview.ShowDialog() != DialogResult.OK)
                     {
                         return false;
-                    } 
+                    }
                     return true;
 
                     #region 退款代码 （备用）
@@ -845,7 +878,7 @@ namespace Client
                 OpenPayWindow(PayMethodEnum.Yinlian, btn.TagString);
             }
             else if (btn.Text.Contains("医保"))
-            { 
+            {
                 if (string.IsNullOrEmpty(vm.yb_ys_code))
                 {
                     UIMessageBox.ShowError("医生医保编号为空，不能进行医保支付");
@@ -1242,7 +1275,7 @@ namespace Client
                     else
                     {
                         UIMessageTip.ShowError(_fpdata);
-                    } 
+                    }
                 }
                 else
                 {
@@ -1254,14 +1287,14 @@ namespace Client
             catch (Exception ex)
             {
                 string ermsg = ex.ToString();
-                if (ermsg.IndexOf("无法连接")>-1)
+                if (ermsg.IndexOf("无法连接") > -1)
                 {
                     UIMessageBox.ShowError("生成电子发票失败，请检查财政票据客户端是否运行中");
                 }
                 else
                 {
                     UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
-                } 
+                }
                 log.Error(ex.ToString());
             }
 

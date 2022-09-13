@@ -12,23 +12,32 @@ namespace YbjsLib
     {
         //public string Do(string infno,string base) 
 
-        public string Init(string ybhzComaper_str,string doctList_str,string unitList_str,string diseinfoList_str,string icdCodes_str,string diagTypeList_str,
-            string chargeItems_str,string insutypes_str,string birctrlTypes_str,string medTypes_str,string mdtrtCertTypes_str)
+        public string Init(string ybhzComaper_str, string doctList_str, string unitList_str, string icdCodes_str, string diagTypeList_str,
+            string chargeItems_str, string insutypes_str, string birctrlTypes_str, string medTypes_str, string mdtrtCertTypes_str, string yb_identity_only = "0")
         {
             //初始化数据下拉列表 
-            YBHelper.ybhzCompare = WebApiHelper.DeserializeObject<List<YbhzzdVM>>(ybhzComaper_str); 
-            YBHelper.doctList = WebApiHelper.DeserializeObject<List<UserDicVM>>(doctList_str); 
-            YBHelper.unitList = WebApiHelper.DeserializeObject<List<UnitVM>>(unitList_str); 
-            YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str); 
-            YBHelper.icdCodes = WebApiHelper.DeserializeObject<List<IcdCodeVM>>(icdCodes_str); 
+            YBHelper.ybhzCompare = WebApiHelper.DeserializeObject<List<YbhzzdVM>>(ybhzComaper_str);
+            YBHelper.doctList = WebApiHelper.DeserializeObject<List<UserDicVM>>(doctList_str);
+            YBHelper.unitList = WebApiHelper.DeserializeObject<List<UnitVM>>(unitList_str);
+            YBHelper.icdCodes = WebApiHelper.DeserializeObject<List<IcdCodeVM>>(icdCodes_str);
             YBHelper.diagTypeList = WebApiHelper.DeserializeObject<List<DiagTypeVM>>(diagTypeList_str);
-            YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<ChargeItemVM>>(chargeItems_str);
 
             YBHelper.insutypes = WebApiHelper.DeserializeObject<List<InsutypeVM>>(insutypes_str);
             YBHelper.birctrlTypes = WebApiHelper.DeserializeObject<List<BirctrlTypeVM>>(birctrlTypes_str);
             YBHelper.medTypes = WebApiHelper.DeserializeObject<List<MedTypeVM>>(medTypes_str);
             YBHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<List<MdtrtCertTypeVM>>(mdtrtCertTypes_str);
-              
+
+            //YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
+            YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<ChargeItemVM>>(chargeItems_str);
+
+
+            YBHelper.yb_identity_only = yb_identity_only;
+
+            if (HttpClientFactory.GetHttpClient().BaseAddress == null)
+            {
+                HttpClientFactory.GetHttpClient().BaseAddress = new Uri("http://localhost:5000");
+            }
+
             return "";
         }
 
@@ -85,18 +94,74 @@ namespace YbjsLib
             return "";
         }
 
-        public string M2201(string patient_id, int admiss_times, decimal left_je, string psn_no, string insutype, string insuplc_admdvs, string mdtrt_cert_no, string ipt_otp_no,
-            string yb_ys_code, string doctor_name, string unit_sn, string unit_name, string clinic_name, string opter, string opter_name)
+        public bool PreDeal(string patient_id, int admiss_times, string hic_no, decimal left_je, string ipt_otp_no,
+            string icd_code, string yb_ys_code, string doctor_name, string unit_sn, string unit_name, string clinic_name, string opter, string opter_name, ref object[] res)
         {
             try
-            {
+            {  //1101 读取人员信息
+                YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+                request.infno = "1101";
+                request.msgid = YBHelper.msgid;
+                request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+                request.insuplc_admdvs = "421002";
+                request.recer_sys_code = YBHelper.recer_sys_code;
+                request.dev_no = "";
+                request.dev_safe_info = "";
+                request.cainfo = "";
+                request.signtype = "";
+                request.infver = YBHelper.infver;
+                request.opter_type = YBHelper.opter_type;
+                request.opter = opter;
+                request.opter_name = opter_name;
+                request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                request.fixmedins_code = YBHelper.fixmedins_code;
+                request.fixmedins_name = YBHelper.fixmedins_name;
+                request.sign_no = YBHelper.msgid;
+
+                request.input = new RepModel<UserInfoRequestModel>();
+                request.input.data = new UserInfoRequestModel();
+                request.input.data.mdtrt_cert_type = "03";
+                request.input.data.psn_cert_type = "1";
+
+                var json = WebApiHelper.SerializeObject(request);
+
+                //调用 com名称  方法  参数
+                var BusinessID = ((int)InfoNoEnum.人员信息).ToString();
+                var Dataxml = json;
+                var Outputxml = "";
+                var parm = new object[] { BusinessID, json, Outputxml };
+
+                ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+                if (!string.IsNullOrEmpty(yBResponse.err_msg))
+                {
+                    MessageBox.Show(yBResponse.err_msg);
+                    return false;
+                }
+                else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
+                {
+                    //记录医保日志
+                    var paramurl = string.Format($"/api/YbInfo/AddYB1101");
+                    yBResponse.output.patient_id = patient_id;
+                    yBResponse.output.admiss_times = admiss_times.ToString();
+                    HttpClientUtil.PostJSON(paramurl, yBResponse.output);
+
+                    if (YBHelper.yb_identity_only == "1" && yBResponse.output.baseinfo.certno != hic_no)
+                    {
+                        //如果号码不一致，提示返回
+                        MessageBox.Show("医保卡与患者身份不一致！");
+                        return false;
+                    }
+                }
+                YBHelper.userInfoResponseModel = yBResponse.output;
                 //门诊挂号
                 YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
                 ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
 
                 ghRequest.msgid = YBHelper.msgid;
                 ghRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                ghRequest.insuplc_admdvs = insuplc_admdvs;
+                ghRequest.insuplc_admdvs = YBHelper.userInfoResponseModel.insuinfo[0].insuplc_admdvs;
                 ghRequest.recer_sys_code = YBHelper.recer_sys_code;
                 ghRequest.dev_no = "";
                 ghRequest.dev_safe_info = "";
@@ -114,14 +179,14 @@ namespace YbjsLib
                 ghRequest.input = new RepModel<GHRequestModel>();
                 ghRequest.input.data = new GHRequestModel();
 
-                ghRequest.input.data.psn_no = psn_no;
-                ghRequest.input.data.insutype = insutype;
+                ghRequest.input.data.psn_no = YBHelper.userInfoResponseModel.baseinfo.psn_no;
+                ghRequest.input.data.insutype = YBHelper.userInfoResponseModel.insuinfo[0].insutype;
 
                 ghRequest.input.data.begntime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 //ghRequest.input.data.mdtrt_cert_type = yBResponse.output.baseinfo.psn_cert_type;
                 //ghRequest.input.data.mdtrt_cert_no = yBResponse.output.baseinfo.certno;
                 ghRequest.input.data.mdtrt_cert_type = "02";//身份证
-                ghRequest.input.data.mdtrt_cert_no = mdtrt_cert_no;
+                ghRequest.input.data.mdtrt_cert_no = YBHelper.userInfoResponseModel.baseinfo.certno;
 
                 ghRequest.input.data.ipt_otp_no = ipt_otp_no; //机制号 唯一" ipt_otp_no": "1533956",
                 ghRequest.input.data.atddr_no = yb_ys_code == "" ? "D421003007628" : yb_ys_code;
@@ -130,12 +195,12 @@ namespace YbjsLib
                 ghRequest.input.data.dept_name = unit_name;
                 ghRequest.input.data.caty = clinic_name;
 
-                var json = WebApiHelper.SerializeObject(ghRequest);
+                json = WebApiHelper.SerializeObject(ghRequest);
 
-                var BusinessID = "2201";
-                var Dataxml = json;
-                var Outputxml = "";
-                var parm = new object[] { BusinessID, json, Outputxml };
+                BusinessID = "2201";
+                Dataxml = json;
+                Outputxml = "";
+                parm = new object[] { BusinessID, json, Outputxml };
 
                 //提交门诊挂号信息
                 var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
@@ -145,7 +210,7 @@ namespace YbjsLib
                 if (resp != null && !string.IsNullOrEmpty(resp.err_msg))
                 {
                     MessageBox.Show(resp.err_msg);
-
+                    return false;
                 }
                 else if (resp.output != null && !string.IsNullOrEmpty(resp.output.data.mdtrt_id))
                 {
@@ -155,6 +220,7 @@ namespace YbjsLib
                     resp.output.data.admiss_times = admiss_times.ToString();
                     HttpClientUtil.PostJSON(paramurl, resp.output.data);
 
+                    YBHelper.gHResponseModel = resp.output.data;
 
                     YBJSPreview yBJSPreview = new YBJSPreview();
                     yBJSPreview.patient_id = patient_id;
@@ -162,6 +228,7 @@ namespace YbjsLib
                     yBJSPreview.insuplcAdmdvs = YBHelper.userInfoResponseModel.insuinfo[0].insuplc_admdvs;
                     yBJSPreview.dept_sn = unit_sn;
                     yBJSPreview.doct_sn = yb_ys_code;
+                    yBJSPreview.icd_code = icd_code;
                     yBJSPreview.opter = opter;
                     yBJSPreview.opter_name = opter_name;
                     yBJSPreview.mdtrt_id = resp.output.data.mdtrt_id;
@@ -169,16 +236,29 @@ namespace YbjsLib
                     yBJSPreview.ipt_otp_no = resp.output.data.ipt_otp_no;
                     yBJSPreview.left_je = left_je;
 
-                    yBJSPreview.ShowDialog();
-                     
-                    return parm[2].ToString();
+                    if (yBJSPreview.ShowDialog() != DialogResult.OK)
+                    {
+                        return false;
+                    }
+                    if (res == null)
+                    {
+                        res = new object[3];
+                    }
+                    //             public static UserInfoResponseModel userInfoResponseModel;
+                    //public static GHResponseModel gHResponseModel;
+                    //public static MzjsResponse mzjsResponse;
+                    res[0] = WebApiHelper.SerializeObject(YBHelper.userInfoResponseModel);
+                    res[1] = WebApiHelper.SerializeObject(YBHelper.gHResponseModel);
+                    res[2] = WebApiHelper.SerializeObject(YBHelper.mzjsResponse);
+
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            return "";
+            return false;
         }
 
 

@@ -39,7 +39,7 @@ namespace Client.Forms.Wedgit
 
             jscxRequest.msgid = YBHelper.msgid;
             jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-            jscxRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
+            jscxRequest.insuplc_admdvs = YBHelper.mdtrtarea_admvs;
             jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
             jscxRequest.dev_no = "";
             jscxRequest.dev_safe_info = "";
@@ -69,11 +69,11 @@ namespace Client.Forms.Wedgit
             var parm = new object[] { BusinessID, json, Outputxml };
 
 
-            YBHelper.AddYBLog(BusinessID,0 ,json, SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID,0 ,json, _psn_no, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
             //提交
             var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-            YBHelper.AddYBLog(BusinessID,0, parm[2].ToString(), SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
+            YBHelper.AddYBLog(BusinessID,0, parm[2].ToString(), _psn_no, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
 
             log.Debug("结算撤销返回：" + parm[2]);
 

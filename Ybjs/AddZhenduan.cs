@@ -6,17 +6,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Client.ClassLib;
-using Client.ViewModel;
+using System.Windows.Forms; 
 using Sunny.UI;
-using log4net;
+using YbjsLib.Model;
 
-namespace Client.Forms.Wedgit
+namespace YbjsLib
 {
     public partial class AddZhenduan : UIForm
-    {
-        private static ILog log = LogManager.GetLogger(typeof(AddZhenduan));//typeof放当前类
+    { 
         public AddZhenduan()
         {
             InitializeComponent();
@@ -26,11 +23,11 @@ namespace Client.Forms.Wedgit
 
         private void AddZhenduan_Load(object sender, EventArgs e)
         {
-            cbxzdlb.DataSource = SessionHelper.diagTypes;
+            cbxzdlb.DataSource = YBHelper.diagTypeList;
             cbxzdlb.DisplayMember = "name";
             cbxzdlb.ValueMember = "code";
 
-            icdCodes = SessionHelper.icdCodes;
+            icdCodes = YBHelper.icdCodes;
 
 
             dgvicd.CellClick += dgvicd_CellContentClick; dgvicd.KeyDown += dgvicd_KeyDown;
@@ -80,8 +77,7 @@ namespace Client.Forms.Wedgit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.ToString());
+                MessageBox.Show(ex.Message); 
             }
         }
 
@@ -128,8 +124,7 @@ namespace Client.Forms.Wedgit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.ToString());
+                MessageBox.Show(ex.Message); 
             }
         }
         private void dgvicd_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -154,8 +149,7 @@ namespace Client.Forms.Wedgit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                log.Error(ex.ToString());
+                MessageBox.Show(ex.Message); 
             }
         }
 
@@ -176,12 +170,12 @@ namespace Client.Forms.Wedgit
             diseinfo.diag_type = cbxzdlb.SelectedValue.ToString();
             diseinfo.diag_type_name = cbxzdlb.Text;
             diseinfo.vali_flag = "1";
-            if (SessionHelper.diseinfoList == null)
+            if (YBHelper.diseinfoList == null)
             {
-                SessionHelper.diseinfoList = new List<Diseinfo>();
+                YBHelper.diseinfoList = new List<Diseinfo>();
             }
 
-            SessionHelper.diseinfoList.Add(diseinfo);
+            YBHelper.diseinfoList.Add(diseinfo);
         }
     }
 }

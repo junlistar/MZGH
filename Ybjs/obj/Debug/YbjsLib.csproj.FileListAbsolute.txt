@@ -11,3 +11,4 @@ D:\lijun\github\Mzgh\Ybjs\bin\Debug\Newtonsoft.Json.xml
 D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.csproj.CopyComplete
 D:\lijun\github\Mzgh\Ybjs\obj\Debug\Ybjs.dll
 D:\lijun\github\Mzgh\Ybjs\obj\Debug\Ybjs.pdb
+D:\lijun\github\Mzgh\Ybjs\obj\Debug\YbjsLib.AddZhenduan.resources

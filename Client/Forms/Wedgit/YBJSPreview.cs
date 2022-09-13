@@ -206,8 +206,7 @@ namespace Client.Forms.Wedgit
                             SessionHelper.diseinfoList.Add(diseinfo);
                         }
                         LoadIcdData();
-                    }
-
+                    } 
                 }
 
                 #endregion
@@ -304,6 +303,7 @@ namespace Client.Forms.Wedgit
                 log.Debug("结算返回：" + parm[2].ToString());
 
                 var _jsresp = WebApiHelper.DeserializeObject<YBResponse<MzjsResponse>>(parm[2].ToString());
+                 
 
                 if (_jsresp != null && !string.IsNullOrEmpty(_jsresp.err_msg))
                 {

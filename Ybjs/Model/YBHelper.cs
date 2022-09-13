@@ -27,12 +27,12 @@ namespace YbjsLib.Model
 
         public static YBResponse<UserInfoResponseModel> currentYBInfo;
         public static YBResponse<RepModel<GHResponseModel>> currentYBPay;
-
-        public static MzjsResponse mzjsResponse;
-
          
         //用户医保信息返回
         public static UserInfoResponseModel userInfoResponseModel;
+        public static GHResponseModel gHResponseModel;
+        public static MzjsResponse mzjsResponse;
+
 
         public static List<InsutypeVM> insutypes;
         public static List<BirctrlTypeVM> birctrlTypes;

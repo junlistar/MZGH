@@ -318,7 +318,7 @@ namespace Client.ClassLib
         /// <returns>JSON格式的字符串</returns> 
         public static string SerializeObject(object obj)
         {
-            JavaScriptSerializer jss = new JavaScriptSerializer();
+            JavaScriptSerializer jss = new JavaScriptSerializer(); jss.MaxJsonLength = int.MaxValue;
             try
             {
                 return jss.Serialize(obj);
