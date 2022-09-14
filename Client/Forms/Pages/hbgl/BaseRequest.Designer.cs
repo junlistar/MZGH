@@ -719,7 +719,7 @@
             this.KeyPreview = true;
             this.Name = "BaseRequest";
             this.PageIndex = 1303;
-            this.Text = "基础号表维护";
+            this.Text = "号表模板";
             this.Initialize += new System.EventHandler(this.BaseRequest_Initialize);
             this.Load += new System.EventHandler(this.BaseRequest_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BaseRequest_KeyDown);

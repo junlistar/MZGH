@@ -50,6 +50,12 @@
     <None Update="SQLS\mzgh_ghdoctorout_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_ghdoctorout_getbyparam.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mzgh_ghdoctorout_getbydoct.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_mzpatientybkinfo_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

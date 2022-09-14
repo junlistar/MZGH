@@ -68,6 +68,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
             dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+             
         }
 
 
@@ -317,6 +318,7 @@ namespace Client
                     dgv.Height = 200;
                     dgv.BringToFront();
                     dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgv.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgv.RowHeadersVisible = false;
                     dgv.BackgroundColor = Color.White;
                     dgv.ReadOnly = true;
@@ -375,9 +377,12 @@ namespace Client
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            LoadingHelper.ShowLoadingScreen();//显示
+             
             //查询列表
-            InitData();
+            InitData(); 
 
+            LoadingHelper.CloseForm();//关闭
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -405,6 +410,7 @@ namespace Client
                     dgvzk.Height = 200;
                     dgvzk.BringToFront();
                     dgvzk.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvzk.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgvzk.RowHeadersVisible = false;
                     dgvzk.BackgroundColor = Color.White;
                     dgvzk.ReadOnly = true;
@@ -483,6 +489,7 @@ namespace Client
                     dgvhb.Height = 200;
                     dgvhb.BringToFront();
                     dgvhb.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvhb.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgvhb.RowHeadersVisible = false;
                     dgvhb.BackgroundColor = Color.White;
                     dgvhb.ReadOnly = true;
@@ -562,6 +569,7 @@ namespace Client
                     dgvhl.Height = 200;
                     dgvhl.BringToFront();
                     dgvhl.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvhl.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgvhl.RowHeadersVisible = false;
                     dgvhl.BackgroundColor = Color.White;
                     dgvhl.ReadOnly = true;
@@ -651,13 +659,11 @@ namespace Client
         private void txtDoct_TextChanged(object sender, EventArgs e)
         {
             try
-            {
-
+            { 
                 if (txtDoct.Text == "")
                 {
                     return;
-                }
-
+                } 
                 //查询信息 显示到girdview
                 var tb = sender as UITextBox;
                 var pbl = tb.Parent as UIPanel;
@@ -674,6 +680,7 @@ namespace Client
                     dgvys.Height = 200;
                     dgvys.BringToFront();
                     dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvys.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgvys.RowHeadersVisible = false;
                     dgvys.BackgroundColor = Color.White;
                     dgvys.ReadOnly = true;
@@ -756,6 +763,7 @@ namespace Client
                     dgvghy.Height = 200;
                     dgvghy.BringToFront();
                     dgvghy.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                     dgvghy.RowHeadersVisible = false;
                     dgvghy.BackgroundColor = Color.White;
                     dgvghy.ReadOnly = true;
@@ -885,6 +893,10 @@ namespace Client
                         dgv.Hide();
                     }
                 }
+                else if(e.KeyCode == Keys.Escape)
+                {
+                    dgv.Hide();
+                }
             }
             catch (Exception ex)
             {
@@ -931,6 +943,10 @@ namespace Client
 
                         dgvzk.Hide();
                     }
+                }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    dgvzk.Hide();
                 }
             }
             catch (Exception ex)
@@ -981,6 +997,10 @@ namespace Client
                         dgvhb.Hide();
                     }
                 }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    dgvhb.Hide();
+                }
             }
             catch (Exception ex)
             {
@@ -1027,6 +1047,10 @@ namespace Client
 
                         dgvhl.Hide();
                     }
+                }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    dgvhl.Hide();
                 }
             }
             catch (Exception ex)
@@ -1089,6 +1113,10 @@ namespace Client
                         dgvys.Hide();
                     }
                 }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    dgvys.Hide();
+                }
             }
             catch (Exception ex)
             {
@@ -1120,6 +1148,10 @@ namespace Client
 
                         dgvghy.Hide();
                     }
+                }
+                else if (e.KeyCode == Keys.Escape)
+                {
+                    dgvghy.Hide();
                 }
             }
             catch (Exception ex)

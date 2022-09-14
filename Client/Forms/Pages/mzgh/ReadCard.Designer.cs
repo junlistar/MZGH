@@ -50,6 +50,7 @@
             this.uiWaitingBar1.MinimumSize = new System.Drawing.Size(70, 23);
             this.uiWaitingBar1.Name = "uiWaitingBar1";
             this.uiWaitingBar1.Size = new System.Drawing.Size(582, 23);
+            this.uiWaitingBar1.Style = Sunny.UI.UIStyle.Custom;
             this.uiWaitingBar1.TabIndex = 0;
             this.uiWaitingBar1.Text = "uiWaitingBar1";
             this.uiWaitingBar1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -60,6 +61,7 @@
             this.lblInfo.Location = new System.Drawing.Point(252, 75);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(290, 43);
+            this.lblInfo.Style = Sunny.UI.UIStyle.Custom;
             this.lblInfo.TabIndex = 1;
             this.lblInfo.Text = "请将卡片放置在读卡器上";
             this.lblInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -72,9 +74,10 @@
             // lblmsg
             // 
             this.lblmsg.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblmsg.Location = new System.Drawing.Point(237, 190);
+            this.lblmsg.Location = new System.Drawing.Point(254, 179);
             this.lblmsg.Name = "lblmsg";
             this.lblmsg.Size = new System.Drawing.Size(284, 23);
+            this.lblmsg.Style = Sunny.UI.UIStyle.Custom;
             this.lblmsg.TabIndex = 2;
             this.lblmsg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblmsg.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -92,6 +95,7 @@
             this.uiTabControl1.SelectedIndex = 0;
             this.uiTabControl1.Size = new System.Drawing.Size(902, 317);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl1.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl1.TabIndex = 3;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -101,6 +105,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.lblInfo);
+            this.tabPage1.Controls.Add(this.lblmsg);
             this.tabPage1.Controls.Add(this.uiWaitingBar1);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
@@ -155,6 +160,7 @@
             this.txt_sfz.Name = "txt_sfz";
             this.txt_sfz.ShowText = false;
             this.txt_sfz.Size = new System.Drawing.Size(359, 45);
+            this.txt_sfz.Style = Sunny.UI.UIStyle.Custom;
             this.txt_sfz.TabIndex = 0;
             this.txt_sfz.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_sfz.Watermark = "输入身份证号码";
@@ -165,7 +171,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(906, 358);
             this.Controls.Add(this.uiTabControl1);
-            this.Controls.Add(this.lblmsg);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

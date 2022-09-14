@@ -19,6 +19,21 @@ namespace Data.Repository
             return Select(ghsql);
         }
 
+        public List<GhDoctorOut> GetGhDoctorOutsByParams(string doctor_id, string date1)
+        {
+            string ghsql = GetSqlByTag("mzgh_ghdoctorout_getbydoct");
+
+            var para = new DynamicParameters();
+            para.Add("@doctor_id", "%" + doctor_id + "%");
+            if (!string.IsNullOrEmpty(date1))
+            {
+                ghsql = GetSqlByTag("mzgh_ghdoctorout_getbyparam");
+                para.Add("@begin_date", date1);
+            }
+           
+            return Select(ghsql, para);
+        }
+
         public bool UpdateGhDoctorOut(string jsonStr)
         {
             GhDoctorOut _mod = JsonConvert.DeserializeObject<GhDoctorOut>(jsonStr);

@@ -80,7 +80,7 @@ namespace CoreApi.Controllers
             _reportParamFastRepository = reportParamFastRepository;
             _requestTimeRepository = requestTimeRepository;
             _ghDocOutRepository = ghDocOutRepository;
-             _commonRepository = commonRepository;
+            _commonRepository = commonRepository;
 
         }
 
@@ -277,16 +277,16 @@ namespace CoreApi.Controllers
                 }
                 else if (ex.Message.Contains("not found"))
                 {
-                    errormsg = "无法连接到数据库！"; 
+                    errormsg = "无法连接到数据库！";
                 }
-                Log.Error(errormsg); 
+                Log.Error(errormsg);
                 return ErrorResult<IEnumerable<LoginUsers>>(errormsg);
             }
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
                 return ErrorResult<IEnumerable<LoginUsers>>(ex.Message);
-            } 
+            }
             return list;
 
         }
@@ -577,8 +577,8 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<MzClientConfig>(ex.Message);
-            } 
-        } 
+            }
+        }
 
         public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {
@@ -626,7 +626,7 @@ namespace CoreApi.Controllers
             }
             return list;
         }
-       
+
         public ResponseResult<List<Patient>> GetPatientBySfzId(string sfzid)
         {
             Log.Information($"GetPatientBySfzId,{sfzid}");
@@ -1196,7 +1196,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<MzThridPayView>>(ex.Message);
             }
-        } 
+        }
         public ResponseResult<bool> UpdateMzClientConfig()
         {
             Log.Information($"UpdateMzClientConfig,");
@@ -1235,6 +1235,19 @@ namespace CoreApi.Controllers
             try
             {
                 return _ghDocOutRepository.GetGhDoctorOuts();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GhDoctorOut>>(ex.Message);
+            }
+        }
+        public ResponseResult<List<GhDoctorOut>> GetGhDoctorOutsByParams(string doctor_id, string date1)
+        {
+            Log.Information($"GetGhDoctorOutsByParams,{doctor_id},{date1}");
+            try
+            {
+                return _ghDocOutRepository.GetGhDoctorOutsByParams(doctor_id, date1);
             }
             catch (Exception ex)
             {

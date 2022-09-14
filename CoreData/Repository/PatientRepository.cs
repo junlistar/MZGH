@@ -346,7 +346,7 @@ namespace Data.Repository
                 var chargeItems = chargeItemResp.GetChargeItemsByRecordSN(record_sn);
 
                 Serilog.Log.Debug($"获取发票信息");
-                var dtreceipt = opreceiptResp.GetCurrentReceiptNo();
+                var dtreceipt = opreceiptResp.GetCurrentReceiptNo(opera);
 
                 //查询当前号是否超过数量
                 string exsitsql = GetSqlByTag("mzgh_ghrequest_getbycurrentno");

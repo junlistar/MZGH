@@ -46,7 +46,7 @@ namespace YbjsLib.Model
         public static List<IcdCodeVM> icdCodes;
         public static List<DiagTypeVM> diagTypeList;
 
-        public static List<ChargeItemVM> chargeItems;
+        public static List<YBChargeItem> chargeItems;
 
         /// <summary>
         /// 发送方报文 ID

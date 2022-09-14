@@ -26,13 +26,18 @@ namespace Mzsf.Forms.Pages
         private static ILog log = LogManager.GetLogger(typeof(Check));//typeof放当前类
 
         List<GHPayModel> paylist = new List<GHPayModel>();
-        //List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
+        List<ChargeItemVM> chargeItems = new List<ChargeItemVM>();
 
+         //用户医保信息返回
+        public UserInfoResponseModel userInfoResponseModel;
+        public GHResponseModel gHResponseModel;
         MzjsResponse mzjsResponse;
 
         decimal total_charge = 0;
         public int times = 0;
         public string doct_code = "";
+        public string doct_name = "";
+        public  string unit_name = "";
         public string unit_code = "";
         public string icd_code = "";
 
@@ -303,10 +308,12 @@ namespace Mzsf.Forms.Pages
                     {
                         log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
                         //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id));
+                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+                        //paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id));
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
+                        //AddMzThridPay(his_cheque_type, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.currentYBPay.output.data.mdtrt_id, YBHelper.mzjsResponse.setlinfo.setl_id, YBHelper.currentYBPay.output.data.ipt_otp_no, YBHelper.currentYBPay.output.data.psn_no, SessionHelper.patientVM.yb_insuplc_admdvs, (decimal)left_je);
 
                     }
                     else
@@ -380,12 +387,69 @@ namespace Mzsf.Forms.Pages
             dgvfk.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
+        public List<YBChargeItem> GetChargeItems()
+        {
+            List<YBChargeItem> _list = new List<YBChargeItem>();
+            
+            foreach (var item in SessionHelper.cprCharges)
+            {
+                YBChargeItem _detail = new YBChargeItem(); 
+                _detail.charge_code = item.charge_code;
+                _detail.charge_price = item.charge_price;
+                _detail.charge_amount = item.charge_amount;
+                _detail.orig_price = item.orig_price; 
+                _list.Add(_detail);
+            }
+            return _list;
+        }
+
         public bool YiBaoPay(decimal left_je)
         {
             try
             {
-                string admiss_times = (SessionHelper.patientVM.max_times + 1).ToString();
+                int admiss_times = SessionHelper.patientVM.max_times + 1;
                 string patient_id = SessionHelper.patientVM.patient_id;
+
+                //机制号
+                var sn_no = GetReceiptMaxNo();
+                var max_sn = int.Parse(sn_no);
+
+                string ybhzComaper_str = WebApiHelper.SerializeObject(SessionHelper.ybhzCompare);
+                string doctList_str = WebApiHelper.SerializeObject(SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList());
+                string unitList_str = WebApiHelper.SerializeObject(SessionHelper.units);
+                //string diseinfoList_str = WebApiHelper.SerializeObject();
+                string icdCodes_str = WebApiHelper.SerializeObject(SessionHelper.icdCodes);
+                string diagTypeList_str = WebApiHelper.SerializeObject(SessionHelper.diagTypes);
+                string chargeItems_str = WebApiHelper.SerializeObject(GetChargeItems());
+                string insutypes_str = WebApiHelper.SerializeObject(SessionHelper.insutypes);
+                string birctrlTypes_str = WebApiHelper.SerializeObject(SessionHelper.birctrlTypes);
+                string medTypes_str = WebApiHelper.SerializeObject(SessionHelper.medTypes);
+                string mdtrtCertTypes_str = WebApiHelper.SerializeObject(SessionHelper.mdtrtCertTypes);
+
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+
+                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str);
+
+                object[] objparam = new object[3];
+                if (doct_code=="")
+                {
+                    doct_code = SessionHelper.uservm.user_mi;
+                    doct_name = SessionHelper.uservm.name;
+                }
+                if (unit_code=="")
+                {
+                    unit_code = SessionHelper.uservm.dept_sn; 
+                    unit_name = SessionHelper.units.Where(p=>p.code == unit_code).FirstOrDefault().name;
+                } 
+                var js_result = ybjs.PreDeal(patient_id, admiss_times, SessionHelper.patientVM.hic_no, left_je, sn_no, icd_code, doct_code, doct_name, unit_code, unit_name, unit_code, SessionHelper.uservm.user_mi, SessionHelper.uservm.name, ref objparam);
+                if (js_result)
+                {
+                    userInfoResponseModel = WebApiHelper.DeserializeObject<UserInfoResponseModel>(objparam[0].ToString());
+                    gHResponseModel = WebApiHelper.DeserializeObject<GHResponseModel>(objparam[1].ToString());
+                    mzjsResponse = WebApiHelper.DeserializeObject<MzjsResponse>(objparam[2].ToString());
+
+                }
+                return js_result;
 
                 string json = "";
                 string BusinessID = "1101";
@@ -445,7 +509,7 @@ namespace Mzsf.Forms.Pages
                         //记录医保日志
                         var paramurl = string.Format($"/api/YbInfo/AddYB1101");
                         yBResponse.output.patient_id = patient_id;
-                        yBResponse.output.admiss_times = admiss_times;
+                        yBResponse.output.admiss_times = admiss_times.ToString();
                         HttpClientUtil.PostJSON(paramurl, yBResponse.output);
 
                         SessionHelper.cardno = yBResponse.output.baseinfo.certno;
@@ -493,9 +557,7 @@ namespace Mzsf.Forms.Pages
 
                 //}
 
-                //机制号
-                var sn_no = GetReceiptMaxNo();
-                var max_sn = int.Parse(sn_no);
+                
 
                 //门诊挂号
                 YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
@@ -563,7 +625,7 @@ namespace Mzsf.Forms.Pages
                     //记录医保日志
                     var paramurl = string.Format($"/api/YbInfo/AddYB2201");
                     resp.output.data.patient_id = patient_id;
-                    resp.output.data.admiss_times = admiss_times;
+                    resp.output.data.admiss_times = admiss_times.ToString();
                     HttpClientUtil.PostJSON(paramurl, resp.output.data);
                     //MessageBox.Show(resp.output.data.mdtrt_id);
 
@@ -583,7 +645,7 @@ namespace Mzsf.Forms.Pages
 
                     //弹出预结算信息
                     YBJSPreview yBJSPreview = new YBJSPreview();
-                    yBJSPreview.admiss_times = int.Parse(admiss_times);
+                    yBJSPreview.admiss_times = admiss_times;
                     yBJSPreview.patient_id = patient_id;
                     yBJSPreview.mdtrt_id = mdtrt_id;
                     yBJSPreview.psn_no = psn_no;

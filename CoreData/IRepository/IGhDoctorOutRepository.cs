@@ -9,8 +9,9 @@ namespace Data.IRepository
     {
         #region 扩展的dapper操作
 
-
+        
         List<GhDoctorOut> GetGhDoctorOuts();
+        List<GhDoctorOut> GetGhDoctorOutsByParams(string doctor_id, string date1);
 
         bool UpdateGhDoctorOut(string jsonStr);
 

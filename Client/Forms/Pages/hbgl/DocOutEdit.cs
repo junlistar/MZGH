@@ -63,6 +63,8 @@ namespace Client.Forms.Pages.hbgl
                 txtDate2.Text = vm.end_date.ToShortDateString();
                 chk_status.Checked = vm.is_delete == 1 ? false : true;
             }
+
+            dgvys.KeyDown += Dgvys_KeyDown;
         }
 
         private void uiSymbolButton1_Click(object sender, EventArgs e)
@@ -79,7 +81,7 @@ namespace Client.Forms.Pages.hbgl
                     vm.doctor_id = txtDoct.TagString;
                     vm.begin_date = txtDate.Value;
                     vm.end_date = txtDate2.Value.AddDays(1).AddSeconds(-1);
-                    vm.is_delete = chk_status.Checked ? 0 : 1;
+                    vm.is_delete = 0;//chk_status.Checked ? 0 : 1;
 
                     string paramurl = string.Format($"/api/GuaHao/UpdateGhDoctorOut");
                     var json = HttpClientUtil.PostJSON(paramurl, vm);
@@ -168,6 +170,7 @@ namespace Client.Forms.Pages.hbgl
                 dgvys.Height = 200;
                 dgvys.BringToFront();
                 dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvys.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                 dgvys.RowHeadersVisible = false;
                 dgvys.BackgroundColor = Color.White;
                 dgvys.ReadOnly = true;

@@ -25,11 +25,11 @@ namespace Client.ViewModel
             {
                 if (is_delete == 1)
                 {
-                    return "不启用";
+                    return "已删除";
                 }
                 else
                 {
-                    return "启用";
+                    return "";
                 }
             }
         }

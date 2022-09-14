@@ -11,12 +11,15 @@ namespace Data.Repository
     public class GhOpReceiptRepository : RepositoryBase<GhOpReceipt>, IGhOpReceiptRepository
     {
 
-        public List<GhOpReceipt> GetCurrentReceiptNo()
+        public List<GhOpReceipt> GetCurrentReceiptNo(string opera)
         {
             //string ghsql = "select top 1 * from gh_op_receipt order by happen_date desc ";
             string ghsql = GetSqlByTag("mzgh_ghopreceipt_getnew");
-             
-            return  Select(ghsql);
+
+            var param = new DynamicParameters();
+            var para = new DynamicParameters();
+            para.Add("@operator", opera==""?"00000": opera);
+            return  Select(ghsql,para);
 
 
         }

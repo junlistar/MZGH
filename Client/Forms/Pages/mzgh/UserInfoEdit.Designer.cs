@@ -89,6 +89,7 @@
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel1.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 0;
             this.uiLabel1.Text = "ID码";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -101,6 +102,7 @@
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel2.Size = new System.Drawing.Size(61, 23);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 1;
             this.uiLabel2.Text = "磁卡号";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -113,6 +115,7 @@
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel3.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 2;
             this.uiLabel3.Text = "患者姓名";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,6 +128,7 @@
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel6.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel6.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel6.TabIndex = 5;
             this.uiLabel6.Text = "手机号码";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -140,6 +144,7 @@
             this.txtCardId.Name = "txtCardId";
             this.txtCardId.ShowText = false;
             this.txtCardId.Size = new System.Drawing.Size(179, 29);
+            this.txtCardId.Style = Sunny.UI.UIStyle.Custom;
             this.txtCardId.TabIndex = 2;
             this.txtCardId.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCardId.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -155,6 +160,7 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.ShowText = false;
             this.txtUserName.Size = new System.Drawing.Size(200, 29);
+            this.txtUserName.Style = Sunny.UI.UIStyle.Custom;
             this.txtUserName.TabIndex = 3;
             this.txtUserName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtUserName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -169,6 +175,7 @@
             this.txtTel.Name = "txtTel";
             this.txtTel.ShowText = false;
             this.txtTel.Size = new System.Drawing.Size(179, 29);
+            this.txtTel.Style = Sunny.UI.UIStyle.Custom;
             this.txtTel.TabIndex = 4;
             this.txtTel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -180,6 +187,7 @@
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel8.Size = new System.Drawing.Size(87, 23);
+            this.uiLabel8.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel8.TabIndex = 17;
             this.uiLabel8.Text = "现住址";
             this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -192,6 +200,7 @@
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel9.Size = new System.Drawing.Size(86, 23);
+            this.uiLabel9.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel9.TabIndex = 18;
             this.uiLabel9.Text = "患者职业";
             this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -207,6 +216,7 @@
             this.txthomestreet.Name = "txthomestreet";
             this.txthomestreet.ShowText = false;
             this.txthomestreet.Size = new System.Drawing.Size(493, 29);
+            this.txthomestreet.Style = Sunny.UI.UIStyle.Custom;
             this.txthomestreet.TabIndex = 15;
             this.txthomestreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthomestreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -221,6 +231,7 @@
             this.txtZhiye.Name = "txtZhiye";
             this.txtZhiye.ShowText = false;
             this.txtZhiye.Size = new System.Drawing.Size(493, 29);
+            this.txtZhiye.Style = Sunny.UI.UIStyle.Custom;
             this.txtZhiye.TabIndex = 14;
             this.txtZhiye.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtZhiye.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -236,6 +247,7 @@
             this.txtpatientid.ReadOnly = true;
             this.txtpatientid.ShowText = false;
             this.txtpatientid.Size = new System.Drawing.Size(200, 29);
+            this.txtpatientid.Style = Sunny.UI.UIStyle.Custom;
             this.txtpatientid.TabIndex = 1111;
             this.txtpatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtpatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -249,6 +261,7 @@
             this.uiLine1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLine1.Name = "uiLine1";
             this.uiLine1.Size = new System.Drawing.Size(760, 16);
+            this.uiLine1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLine1.TabIndex = 36;
             this.uiLine1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -259,6 +272,7 @@
             this.uiLabel14.Name = "uiLabel14";
             this.uiLabel14.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel14.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel14.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel14.TabIndex = 37;
             this.uiLabel14.Text = "婚姻状况";
             this.uiLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -281,6 +295,7 @@
             this.cbxmarrycode.Name = "cbxmarrycode";
             this.cbxmarrycode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxmarrycode.Size = new System.Drawing.Size(179, 29);
+            this.cbxmarrycode.Style = Sunny.UI.UIStyle.Custom;
             this.cbxmarrycode.TabIndex = 8;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -326,6 +341,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.Size = new System.Drawing.Size(678, 403);
+            this.uiGroupBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox1.TabIndex = 39;
             this.uiGroupBox1.Text = "基本信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -356,6 +372,7 @@
             this.cbxSex.Name = "cbxSex";
             this.cbxSex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxSex.Size = new System.Drawing.Size(179, 29);
+            this.cbxSex.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSex.TabIndex = 6;
             this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -370,6 +387,7 @@
             this.txtshebaohao.Name = "txtshebaohao";
             this.txtshebaohao.ShowText = false;
             this.txtshebaohao.Size = new System.Drawing.Size(201, 29);
+            this.txtshebaohao.Style = Sunny.UI.UIStyle.Custom;
             this.txtshebaohao.TabIndex = 11;
             this.txtshebaohao.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtshebaohao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -381,6 +399,7 @@
             this.uiLabel12.Name = "uiLabel12";
             this.uiLabel12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel12.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel12.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel12.TabIndex = 66;
             this.uiLabel12.Text = "社保号";
             this.uiLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -396,6 +415,7 @@
             this.txtemployername.Name = "txtemployername";
             this.txtemployername.ShowText = false;
             this.txtemployername.Size = new System.Drawing.Size(493, 29);
+            this.txtemployername.Style = Sunny.UI.UIStyle.Custom;
             this.txtemployername.TabIndex = 13;
             this.txtemployername.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtemployername.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -426,6 +446,7 @@
             this.cbxShenfen.Name = "cbxShenfen";
             this.cbxShenfen.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxShenfen.Size = new System.Drawing.Size(179, 29);
+            this.cbxShenfen.Style = Sunny.UI.UIStyle.Custom;
             this.cbxShenfen.TabIndex = 10;
             this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -437,6 +458,7 @@
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel5.Size = new System.Drawing.Size(49, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel5.TabIndex = 43;
             this.uiLabel5.Text = "身份";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -452,6 +474,7 @@
             this.txthomedistrict.Name = "txthomedistrict";
             this.txthomedistrict.ShowText = false;
             this.txthomedistrict.Size = new System.Drawing.Size(200, 29);
+            this.txthomedistrict.Style = Sunny.UI.UIStyle.Custom;
             this.txthomedistrict.TabIndex = 9;
             this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -473,6 +496,7 @@
             this.cbxChargeType.Name = "cbxChargeType";
             this.cbxChargeType.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxChargeType.Size = new System.Drawing.Size(179, 29);
+            this.cbxChargeType.Style = Sunny.UI.UIStyle.Custom;
             this.cbxChargeType.TabIndex = 12;
             this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -489,6 +513,7 @@
             this.sfz_birthday.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.sfz_birthday.ShowToday = true;
             this.sfz_birthday.Size = new System.Drawing.Size(200, 29);
+            this.sfz_birthday.Style = Sunny.UI.UIStyle.Custom;
             this.sfz_birthday.SymbolDropDown = 61555;
             this.sfz_birthday.SymbolNormal = 61555;
             this.sfz_birthday.TabIndex = 7;
@@ -513,6 +538,7 @@
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel4.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 39;
             this.uiLabel4.Text = "病人来自";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -525,6 +551,7 @@
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel7.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel7.TabIndex = 41;
             this.uiLabel7.Text = "费别";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -549,6 +576,7 @@
             this.sfz_card_no.Name = "sfz_card_no";
             this.sfz_card_no.ShowText = false;
             this.sfz_card_no.Size = new System.Drawing.Size(200, 29);
+            this.sfz_card_no.Style = Sunny.UI.UIStyle.Custom;
             this.sfz_card_no.TabIndex = 5;
             this.sfz_card_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_card_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -579,6 +607,7 @@
             this.cbxRelation.Name = "cbxRelation";
             this.cbxRelation.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxRelation.Size = new System.Drawing.Size(200, 29);
+            this.cbxRelation.Style = Sunny.UI.UIStyle.Custom;
             this.cbxRelation.TabIndex = 18;
             this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -593,6 +622,7 @@
             this.txtRelationName.Name = "txtRelationName";
             this.txtRelationName.ShowText = false;
             this.txtRelationName.Size = new System.Drawing.Size(201, 29);
+            this.txtRelationName.Style = Sunny.UI.UIStyle.Custom;
             this.txtRelationName.TabIndex = 16;
             this.txtRelationName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtRelationName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -638,6 +668,7 @@
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox2.Size = new System.Drawing.Size(678, 234);
+            this.uiGroupBox2.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox2.TabIndex = 40;
             this.uiGroupBox2.Text = "监护人信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -657,6 +688,7 @@
             this.cbx_relsex.Name = "cbx_relsex";
             this.cbx_relsex.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbx_relsex.Size = new System.Drawing.Size(181, 29);
+            this.cbx_relsex.Style = Sunny.UI.UIStyle.Custom;
             this.cbx_relsex.TabIndex = 19;
             this.cbx_relsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbx_relsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -668,6 +700,7 @@
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel10.Size = new System.Drawing.Size(72, 23);
+            this.uiLabel10.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel10.TabIndex = 88;
             this.uiLabel10.Text = "性别";
             this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -683,6 +716,7 @@
             this.txt_rel_address.Name = "txt_rel_address";
             this.txt_rel_address.ShowText = false;
             this.txt_rel_address.Size = new System.Drawing.Size(493, 29);
+            this.txt_rel_address.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_address.TabIndex = 22;
             this.txt_rel_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -706,6 +740,7 @@
             this.txt_rel_tel.Name = "txt_rel_tel";
             this.txt_rel_tel.ShowText = false;
             this.txt_rel_tel.Size = new System.Drawing.Size(181, 29);
+            this.txt_rel_tel.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_tel.TabIndex = 17;
             this.txt_rel_tel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_tel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -717,6 +752,7 @@
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.uiLabel11.Size = new System.Drawing.Size(100, 23);
+            this.uiLabel11.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel11.TabIndex = 80;
             this.uiLabel11.Text = "联系电话";
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -734,6 +770,7 @@
             this.txt_rel_birth.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.txt_rel_birth.ShowToday = true;
             this.txt_rel_birth.Size = new System.Drawing.Size(181, 29);
+            this.txt_rel_birth.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_birth.SymbolDropDown = 61555;
             this.txt_rel_birth.SymbolNormal = 61555;
             this.txt_rel_birth.TabIndex = 21;
@@ -752,6 +789,7 @@
             this.txt_rel_sfzid.Name = "txt_rel_sfzid";
             this.txt_rel_sfzid.ShowText = false;
             this.txt_rel_sfzid.Size = new System.Drawing.Size(200, 29);
+            this.txt_rel_sfzid.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_sfzid.TabIndex = 20;
             this.txt_rel_sfzid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_sfzid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

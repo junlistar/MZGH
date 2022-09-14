@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YbjsLib.Model;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace YbjsLib
 {
@@ -28,14 +29,15 @@ namespace YbjsLib
             YBHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<List<MdtrtCertTypeVM>>(mdtrtCertTypes_str);
 
             //YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
-            YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<ChargeItemVM>>(chargeItems_str);
+            YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<YBChargeItem>>(chargeItems_str);
 
 
             YBHelper.yb_identity_only = yb_identity_only;
 
             if (HttpClientFactory.GetHttpClient().BaseAddress == null)
             {
-                HttpClientFactory.GetHttpClient().BaseAddress = new Uri("http://localhost:5000");
+                //HttpClientFactory.GetHttpClient().BaseAddress = new Uri("http://localhost:5000");
+                HttpClientFactory.GetHttpClient().BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
             }
 
             return "";
@@ -155,6 +157,8 @@ namespace YbjsLib
                     }
                 }
                 YBHelper.userInfoResponseModel = yBResponse.output;
+                res[0] = WebApiHelper.SerializeObject(YBHelper.userInfoResponseModel);
+
                 //门诊挂号
                 YBRequest<GHRequestModel> ghRequest = new YBRequest<GHRequestModel>();
                 ghRequest.infno = ((int)InfoNoEnum.门诊挂号).ToString();
@@ -221,6 +225,7 @@ namespace YbjsLib
                     HttpClientUtil.PostJSON(paramurl, resp.output.data);
 
                     YBHelper.gHResponseModel = resp.output.data;
+                    res[1] = WebApiHelper.SerializeObject(YBHelper.gHResponseModel);
 
                     YBJSPreview yBJSPreview = new YBJSPreview();
                     yBJSPreview.patient_id = patient_id;
@@ -257,7 +262,7 @@ namespace YbjsLib
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            } 
             return false;
         }
 

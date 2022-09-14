@@ -118,9 +118,15 @@ namespace Client
                     txtTel.Focus();
                     return;
                 }
-                if (cbxSex.SelectedValue ==null)
+                if (cbxSex.Text =="")
                 {
                     UIMessageTip.ShowError("请选择性别!");
+                    cbxSex.Focus();
+                    return;
+                }
+                else if(cbxSex.Text!="男" && cbxSex.Text != "女")
+                {
+                    UIMessageTip.ShowError("性别不正确!");
                     cbxSex.Focus();
                     return;
                 }
@@ -1141,37 +1147,7 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
-        }
-
-        //private void lklduka_Click(object sender, EventArgs e)
-        //{
-        //    ReadCard rc = new ReadCard("身份证", true);
-        //    //关闭，刷新
-        //    rc.FormClosed += Rc_FormClosed; ;
-        //    rc.ShowDialog();
-        //}
-
-        //private void Rc_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    if (SessionHelper.CardReader != null)
-        //    {
-        //        this.sfz_card_no.Text = SessionHelper.CardReader.IDCard;
-        //        this.sfz_name.Text = SessionHelper.CardReader.IDCard;
-        //        this.sfz_folk.Text = SessionHelper.CardReader.Folk;
-        //        this.sfz_address.Text = SessionHelper.CardReader.Address;
-        //        this.txtUserName.Text = SessionHelper.CardReader.Name;
-        //        this.txthomestreet.Text = SessionHelper.CardReader.Address;
-
-        //        sfz_sex.Text = SessionHelper.CardReader.Sex;
-
-        //        if (!string.IsNullOrWhiteSpace(SessionHelper.CardReader.BirthDay))
-        //        {
-        //            sfz_birthday.Value = Convert.ToDateTime(SessionHelper.CardReader.BirthDay);
-        //        }
-        //    }
-        //}
-
-
+        } 
         private void txthomedistrict_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -1245,11 +1221,7 @@ namespace Client
                 SaveData();
             }
         }
-
-        private void uiLinkLabel1_Click(object sender, EventArgs e)
-        {
-
-        }
+         
 
         private void uiGroupBox1_Click(object sender, EventArgs e)
         {
@@ -1263,5 +1235,6 @@ namespace Client
                // e.Handled = true;
             }
         }
+         
     }
 }

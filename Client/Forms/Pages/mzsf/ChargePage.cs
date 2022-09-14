@@ -161,8 +161,6 @@ namespace Mzsf.Forms.Pages
                         {
                             lbl_ybye.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
                             lbl_ybye.Show();
-                            return;
-
                         }
 
                         BindOrders(userInfo.patient_id);
@@ -225,10 +223,12 @@ namespace Mzsf.Forms.Pages
                     if (result.data.Count > 0)
                     {
                         //绑定科室 医生信息
-                        current_unit_sn = result.data[0].visit_dept;
                         txtUnit.Text = result.data[0].unit_name;
                         txtDoct.Text = result.data[0].doct_name;
                         current_doct_sn = result.data[0].doctor_code;
+                        current_unit_sn = result.data[0].visit_dept;
+                        current_unit_name = result.data[0].unit_name;
+                        current_doct_name = result.data[0].doct_name;
                         current_icd_code = result.data[0].icd_code;
                         current_times = result.data[0].times;
                         if (result.data.Count > 1)
@@ -238,10 +238,10 @@ namespace Mzsf.Forms.Pages
                             {
                                 //绑定科室 医生信息
                                 txtUnit.Text = current_unit_name;
-                                txtDoct.Text = current_doct_name; 
+                                txtDoct.Text = current_doct_name;
                                 lblTimes.Text = "来访号：" + current_times;
                             }
-                        } 
+                        }
                     }
                     //查询处方
                     GetOrders(patient_id, current_times);
@@ -638,7 +638,7 @@ namespace Mzsf.Forms.Pages
         public void BindOrderTypes()
         {
 
-            if (SessionHelper.mzOrderTypes!=null )
+            if (SessionHelper.mzOrderTypes != null)
             {
                 var orderTypes = SessionHelper.mzOrderTypes;
                 orderTypes = orderTypes.Where(p => p.name.Contains("诊疗")).ToList();
@@ -857,7 +857,7 @@ namespace Mzsf.Forms.Pages
                     MessageBox.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                { 
+                {
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
@@ -883,11 +883,11 @@ namespace Mzsf.Forms.Pages
             Reset();
         }
         public void Reset()
-        {
+        { 
+            InitUI();
+
             txtCode.Text = "";
             txtCode.Focus();
-
-            InitUI();
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -958,9 +958,11 @@ namespace Mzsf.Forms.Pages
                 Check check = new Check();
                 check.times = current_times;
                 check.doct_code = current_doct_sn;
+                check.doct_name = current_doct_name;
                 check.unit_code = current_unit_sn;
+                check.unit_name = current_unit_name;
                 check.icd_code = current_icd_code;
-                 
+
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
                 if (dresult == DialogResult.OK)
@@ -1247,12 +1249,12 @@ namespace Mzsf.Forms.Pages
                     }
 
                 }
-            } 
-            if (SessionHelper.mzOrders.Count==0)
+            }
+            if (SessionHelper.mzOrders.Count == 0)
             {
                 lblOrderCharge.Text = "0";
                 lblOrderItemCount.Text = "0";
-                lblOrderTotalCharge.Text = "0"; 
+                lblOrderTotalCharge.Text = "0";
             }
 
 
@@ -1390,15 +1392,14 @@ namespace Mzsf.Forms.Pages
         }
 
         public void BindBaseInfo(string patient_id)
-        {//获取数据   
-            Task<HttpResponseMessage> task = null;
-            string json = "";
+        {
+            //获取数据    
             string paramurl = string.Format($"/api/guahao/GetPatientByPatientId?pid={patient_id}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
             {
-                json = HttpClientUtil.Get(paramurl);
+                var json = HttpClientUtil.Get(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
                 if (result.status == 1)
                 {
@@ -1454,7 +1455,7 @@ namespace Mzsf.Forms.Pages
 
         private void btnHuajia_KeyDown(object sender, KeyEventArgs e)
         {
-           
+
         }
 
         private void ChargePage_KeyDown(object sender, KeyEventArgs e)

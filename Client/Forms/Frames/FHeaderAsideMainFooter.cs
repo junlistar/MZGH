@@ -785,12 +785,12 @@ namespace Client
                 if (login.IsLogin)
                 {
                     UIMessageTip.ShowOk("登录成功");
-                    var pages = GetPages<UIPage>();
+                    //var pages = GetPages<UIPage>();
 
-                    foreach (var page in pages)
-                    {
-                        RemovePage(page.PageIndex);
-                    }
+                    //foreach (var page in pages)
+                    //{
+                    //    RemovePage(page.PageIndex);
+                    //}
                     this.Show();
                     timerlogout.Start();
                 }

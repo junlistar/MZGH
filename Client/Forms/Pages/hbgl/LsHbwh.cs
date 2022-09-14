@@ -486,6 +486,7 @@ namespace Client
                 dgv.Height = 200;
                 dgv.BringToFront();
                 dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                 dgv.RowHeadersVisible = false;
                 dgv.BackgroundColor = Color.White;
                 dgv.ReadOnly = true;
@@ -547,6 +548,7 @@ namespace Client
                 dgvzk.Height = 200;
                 dgvzk.BringToFront();
                 dgvzk.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvzk.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                 dgvzk.RowHeadersVisible = false;
                 dgvzk.BackgroundColor = Color.White;
                 dgvzk.ReadOnly = true;
@@ -606,6 +608,7 @@ namespace Client
                 dgvys.Height = 200;
                 dgvys.BringToFront();
                 dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvys.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                 dgvys.RowHeadersVisible = false;
                 dgvys.BackgroundColor = Color.White;
                 dgvys.ReadOnly = true;
@@ -665,6 +668,7 @@ namespace Client
                 dgvhb.Height = 200;
                 dgvhb.BringToFront();
                 dgvhb.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvhb.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
                 dgvhb.RowHeadersVisible = false;
                 dgvhb.BackgroundColor = Color.White;
                 dgvhb.ReadOnly = true;

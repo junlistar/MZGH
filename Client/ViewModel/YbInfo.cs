@@ -53,6 +53,13 @@ namespace Client.ViewModel
         public string yb_code { get; set; }
         public string yb_name { get; set; }
     }
+    public class YBChargeItem
+    {
+        public int charge_amount { get; set; }
+        public decimal orig_price { get; set; }
+        public decimal charge_price { get; set; }
+        public string charge_code { get; set; }
 
+    }
 
 }

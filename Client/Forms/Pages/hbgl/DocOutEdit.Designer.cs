@@ -179,6 +179,7 @@
             this.chk_status.Size = new System.Drawing.Size(150, 29);
             this.chk_status.TabIndex = 43;
             this.chk_status.Text = "是否启用";
+            this.chk_status.Visible = false;
             this.chk_status.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // DocOutEdit

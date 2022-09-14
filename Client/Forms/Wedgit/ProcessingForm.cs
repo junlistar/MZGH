@@ -24,10 +24,10 @@ namespace Client.Forms.Wedgit
 
         private void ProcessingForm_Load(object sender, EventArgs e)
         {
-            //ping
+            //加载数据字典
+            _demoBGWorker.WorkerReportsProgress = true;
             _demoBGWorker.DoWork += BGWorker_DoWork;
             _demoBGWorker.RunWorkerAsync();
-            _demoBGWorker.WorkerReportsProgress = true;
             _demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
         }
 

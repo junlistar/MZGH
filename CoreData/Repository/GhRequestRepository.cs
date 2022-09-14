@@ -176,7 +176,7 @@ namespace Data.Repository
                         //查询停诊信息
 
                         GhDoctorOutRepository ghDoctorOut = new GhDoctorOutRepository();
-                        var outlist = ghDoctorOut.GetGhDoctorOuts();
+                        var outlist = ghDoctorOut.GetGhDoctorOuts().Where(p=>p.is_delete==0).ToList();
 
 
                         //组装当期数据

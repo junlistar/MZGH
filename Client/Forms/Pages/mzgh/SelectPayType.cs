@@ -391,7 +391,7 @@ namespace Client
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, GuaHao.PatientVM.yb_insuplc_admdvs, (decimal)left_je);
+                        AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
                     }
                     else
                     {
@@ -447,7 +447,21 @@ namespace Client
                 log.Error(ex.ToString());
             }
         }
+        public List<YBChargeItem> GetChargeItems()
+        {
+            List<YBChargeItem> _list = new List<YBChargeItem>();
 
+            foreach (var item in chargeItems)
+            {
+                YBChargeItem _detail = new YBChargeItem();
+                _detail.charge_code = item.charge_code;
+                _detail.charge_price = item.charge_price;
+                _detail.charge_amount = 1;
+                _detail.orig_price = item.charge_price;
+                _list.Add(_detail);
+            }
+            return _list;
+        }
         public bool YiBaoPay(decimal left_je)
         {
             try
@@ -463,7 +477,7 @@ namespace Client
                 //string diseinfoList_str = WebApiHelper.SerializeObject();
                 string icdCodes_str = WebApiHelper.SerializeObject(SessionHelper.icdCodes);
                 string diagTypeList_str = WebApiHelper.SerializeObject(SessionHelper.diagTypes);
-                string chargeItems_str = WebApiHelper.SerializeObject(chargeItems);
+                string chargeItems_str = WebApiHelper.SerializeObject(GetChargeItems());
                 string insutypes_str = WebApiHelper.SerializeObject(SessionHelper.insutypes);
                 string birctrlTypes_str = WebApiHelper.SerializeObject(SessionHelper.birctrlTypes);
                 string medTypes_str = WebApiHelper.SerializeObject(SessionHelper.medTypes);
