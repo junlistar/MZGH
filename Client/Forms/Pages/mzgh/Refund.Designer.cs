@@ -83,6 +83,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(42, 32);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(66, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 0;
             this.uiLabel1.Text = "姓名：";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -94,6 +95,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(42, 62);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 1;
             this.uiLabel2.Text = "性别：";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -105,6 +107,7 @@
             this.uiLabel3.Location = new System.Drawing.Point(196, 62);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(58, 23);
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 2;
             this.uiLabel3.Text = "年龄：";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,6 +223,7 @@
             this.dgvDeposit.ShowGridLine = true;
             this.dgvDeposit.ShowRect = false;
             this.dgvDeposit.Size = new System.Drawing.Size(1060, 411);
+            this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvDeposit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeposit_CellDoubleClick);
@@ -350,6 +354,7 @@
             this.uiLabel4.Location = new System.Drawing.Point(14, 41);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(76, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 9;
             this.uiLabel4.Text = "挂号日期";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -367,6 +372,7 @@
             this.dtprq.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.dtprq.ShowToday = true;
             this.dtprq.Size = new System.Drawing.Size(209, 29);
+            this.dtprq.Style = Sunny.UI.UIStyle.Custom;
             this.dtprq.SymbolDropDown = 61555;
             this.dtprq.SymbolNormal = 61555;
             this.dtprq.TabIndex = 10;
@@ -382,6 +388,7 @@
             this.uiLabel5.Location = new System.Drawing.Point(45, 79);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(45, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel5.TabIndex = 11;
             this.uiLabel5.Text = "卡号";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -398,6 +405,7 @@
             this.txtCode.ReadOnly = true;
             this.txtCode.ShowText = false;
             this.txtCode.Size = new System.Drawing.Size(209, 29);
+            this.txtCode.Style = Sunny.UI.UIStyle.Custom;
             this.txtCode.TabIndex = 12;
             this.txtCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -420,6 +428,7 @@
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.Size = new System.Drawing.Size(1060, 45);
+            this.pnlTitle.Style = Sunny.UI.UIStyle.Custom;
             this.pnlTitle.TabIndex = 13;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -429,7 +438,7 @@
             // 
             this.btnCashRefund.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCashRefund.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCashRefund.Location = new System.Drawing.Point(386, 2);
+            this.btnCashRefund.Location = new System.Drawing.Point(308, 3);
             this.btnCashRefund.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCashRefund.Name = "btnCashRefund";
             this.btnCashRefund.Size = new System.Drawing.Size(100, 40);
@@ -447,6 +456,7 @@
             this.lblhidid.Location = new System.Drawing.Point(829, 4);
             this.lblhidid.Name = "lblhidid";
             this.lblhidid.Size = new System.Drawing.Size(100, 23);
+            this.lblhidid.Style = Sunny.UI.UIStyle.Custom;
             this.lblhidid.TabIndex = 15;
             this.lblhidid.Text = "uiLabel6";
             this.lblhidid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -457,7 +467,7 @@
             // 
             this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton1.Location = new System.Drawing.Point(174, 2);
+            this.uiSymbolButton1.Location = new System.Drawing.Point(682, 2);
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
@@ -466,6 +476,7 @@
             this.uiSymbolButton1.TabIndex = 10;
             this.uiSymbolButton1.Text = "重新";
             this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Visible = false;
             this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiSymbolButton1.Click += new System.EventHandler(this.uiSymbolButton1_Click);
             // 
@@ -473,7 +484,7 @@
             // 
             this.uiSymbolButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiSymbolButton2.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSymbolButton2.Location = new System.Drawing.Point(492, 2);
+            this.uiSymbolButton2.Location = new System.Drawing.Point(414, 3);
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
             this.uiSymbolButton2.Size = new System.Drawing.Size(100, 40);
@@ -489,7 +500,7 @@
             // 
             this.btnTuihao.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTuihao.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTuihao.Location = new System.Drawing.Point(280, 2);
+            this.btnTuihao.Location = new System.Drawing.Point(202, 3);
             this.btnTuihao.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuihao.Name = "btnTuihao";
             this.btnTuihao.Size = new System.Drawing.Size(100, 40);
@@ -507,6 +518,7 @@
             this.lblTitle.Location = new System.Drawing.Point(43, 4);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(70, 38);
+            this.lblTitle.Style = Sunny.UI.UIStyle.Custom;
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "退号";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -526,6 +538,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.Size = new System.Drawing.Size(408, 128);
+            this.uiGroupBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox1.TabIndex = 14;
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -549,6 +562,7 @@
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox2.Size = new System.Drawing.Size(426, 128);
+            this.uiGroupBox2.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox2.TabIndex = 15;
             this.uiGroupBox2.Text = "用户信息";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -573,6 +587,7 @@
             this.uiLabel6.Location = new System.Drawing.Point(27, 92);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(75, 23);
+            this.uiLabel6.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel6.TabIndex = 6;
             this.uiLabel6.Text = "身份证：";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;

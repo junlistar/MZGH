@@ -71,7 +71,10 @@ namespace Client.ViewModel
         public DateTime price_date { get; set; }
 
         public string out_trade_no { get; set; }
-
+        public string admiss_times { get; set; }
+        public string mdtrt_id { get; set; }
+        public string psn_no { get; set; }
+        public string setl_id { get; set; } 
 
     }
 }

@@ -248,6 +248,13 @@ namespace Client
 
                                     var _jscxresp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
 
+                                    if (string.IsNullOrEmpty(_jscxresp.err_msg))
+                                    {
+                                        //记录医保日志
+                                        var _url = string.Format($"/api/YbInfo/AddYB2208?patient_id={_patient_id}&admiss_times={item.admiss_times}&mdtrt_id={item.mdtrt_id}");
+                                        HttpClientUtil.Get(_url);
+                                    }
+
                                 }
                             }
                         }

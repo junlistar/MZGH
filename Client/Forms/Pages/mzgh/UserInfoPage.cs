@@ -32,8 +32,11 @@ namespace Client.Forms.Pages
 
         private void UserInfoPage_Initialize(object sender, EventArgs e)
         {
-            dgv_cbxx.Init(); dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgv_sfxx.Init(); dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgv_cbxx.AutoResizeColumns();
+            dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgv_sfxx.AutoResizeColumns();
+            //dgv_sfxx.AutoResizeColumnHeadersHeight();
+            dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
         }
 
         private void UserInfoPage_Load(object sender, EventArgs e)
@@ -898,6 +901,15 @@ namespace Client.Forms.Pages
                     //绑定用户基本信息
                     BindUserInfo(userInfo);
 
+                    if (YBHelper.currentYBInfo != null)
+                    { 
+                        //记录医保日志
+                        paramurl = string.Format($"/api/YbInfo/AddYB1101");
+                        YBHelper.currentYBInfo.output.patient_id = userInfo.patient_id;
+                        YBHelper.currentYBInfo.output.admiss_times = (userInfo.max_times+1).ToString();
+                        HttpClientUtil.PostJSON(paramurl, YBHelper.currentYBInfo.output);
+                    }
+
                     //查询绑定监护人信息
                     BindRelativeInfo(userInfo.patient_id);
 
@@ -1079,40 +1091,40 @@ namespace Client.Forms.Pages
 
         private void btnYBK_Click(object sender, EventArgs e)
         {
-            //清空缓存
-            SessionHelper.CardReader = null;
-            YBHelper.currentYBInfo = null;
+            ////清空缓存
+            //SessionHelper.CardReader = null;
+            //YBHelper.currentYBInfo = null;
 
-            btnCika.FillColor = lvse;
-            btnIDCard.FillColor = lvse;
-            btnSFZ.FillColor = lvse;
-            btnYBK.FillColor = hongse;
+            //btnCika.FillColor = lvse;
+            //btnIDCard.FillColor = lvse;
+            //btnSFZ.FillColor = lvse;
+            //btnYBK.FillColor = hongse;
 
-            YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
-            request.infno = ((int)InfoNoEnum.人员信息).ToString();
-            request.msgid = YBHelper.msgid;
-            request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-            request.insuplc_admdvs = "421002";
-            request.recer_sys_code = YBHelper.recer_sys_code;
-            request.dev_no = "";
-            request.dev_safe_info = "";
-            request.cainfo = "";
-            request.signtype = "";
-            request.infver = YBHelper.infver;
-            request.opter_type = YBHelper.opter_type;
-            request.opter = SessionHelper.uservm.user_mi;
-            request.opter_name = SessionHelper.uservm.name;
-            request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            request.fixmedins_code = YBHelper.fixmedins_code;
-            request.fixmedins_name = YBHelper.fixmedins_name;
-            request.sign_no = YBHelper.msgid;
+            //YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+            //request.infno = ((int)InfoNoEnum.人员信息).ToString();
+            //request.msgid = YBHelper.msgid;
+            //request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+            //request.insuplc_admdvs = "421002";
+            //request.recer_sys_code = YBHelper.recer_sys_code;
+            //request.dev_no = "";
+            //request.dev_safe_info = "";
+            //request.cainfo = "";
+            //request.signtype = "";
+            //request.infver = YBHelper.infver;
+            //request.opter_type = YBHelper.opter_type;
+            //request.opter = SessionHelper.uservm.user_mi;
+            //request.opter_name = SessionHelper.uservm.name;
+            //request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //request.fixmedins_code = YBHelper.fixmedins_code;
+            //request.fixmedins_name = YBHelper.fixmedins_name;
+            //request.sign_no = YBHelper.msgid;
 
-            request.input = new RepModel<UserInfoRequestModel>();
-            request.input.data = new UserInfoRequestModel();
-            request.input.data.mdtrt_cert_type = "03";
-            request.input.data.psn_cert_type = "1";
+            //request.input = new RepModel<UserInfoRequestModel>();
+            //request.input.data = new UserInfoRequestModel();
+            //request.input.data.mdtrt_cert_type = "03";
+            //request.input.data.psn_cert_type = "1";
 
-            string json = WebApiHelper.SerializeObject(request);
+            //string json = WebApiHelper.SerializeObject(request);
 
 
             try
@@ -1120,16 +1132,20 @@ namespace Client.Forms.Pages
                 //var res = DataPost("http://10.87.82.212:8080", json);
 
                 //调用 com名称  方法  参数
-                string BusinessID = "1101";
-                string Dataxml = json;
-                string Outputxml = "";
-                var parm = new object[] { BusinessID, json, Outputxml };
+                //string BusinessID = "1101";
+                //string Dataxml = json;
+                //string Outputxml = "";
+                //var parm = new object[] { BusinessID, json, Outputxml };
 
-                var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                //var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                log.Debug(parm[2]);
+                //log.Debug(parm[2]);
 
-                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+
+                var param2 = ybjs.M1101(SessionHelper.uservm.user_mi, SessionHelper.uservm.name);
+
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(param2.ToString());
 
                 if (!string.IsNullOrEmpty(yBResponse.err_msg))
                 {
@@ -1139,7 +1155,7 @@ namespace Client.Forms.Pages
                 {
                     Task.Run(() =>
                     {
-                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(parm[2].ToString());
+                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(param2.ToString());
                     });
                     YBHelper.currentYBInfo = yBResponse;
 

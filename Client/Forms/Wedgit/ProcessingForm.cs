@@ -72,7 +72,7 @@ namespace Client.Forms.Wedgit
             }
 
         }
-
+       
         public void InitDic(BackgroundWorker bgWorker)
         {
             try

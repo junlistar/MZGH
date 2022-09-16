@@ -19,6 +19,8 @@ namespace Data.IRepository
 
         bool AddYB2207(string jsonStr);
 
+        bool AddYB2208(string patient_id, string admiss_times, string mdtrt_id);
+
         List<Insutype> GetInsutypes();
 
         List<MdtrtCertType> GetMdtrtCertTypes();

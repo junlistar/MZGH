@@ -103,7 +103,7 @@ namespace Client.Forms.Pages.hbgl
 
             };
 
-            if (d.ampm != null && d.ampm.ToString() != "")
+            if (d.ampm != null && d.ampm.ToString() == "")
             {
                 UIMessageTip.ShowError("请将数据填写完整！");
                 return;
@@ -115,8 +115,7 @@ namespace Client.Forms.Pages.hbgl
             }
 
             try
-            {
-                // EditRequestTime(string section, string section_name, string start_time, string end_time,string ampm)
+            { 
                 string time1 = d.start_time;
                 string time2 = d.end_time;
 
@@ -146,28 +145,28 @@ namespace Client.Forms.Pages.hbgl
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            // DeleteRequestTime(string section)
-            var d = new
-            {
-                section = txt_section.Text,
-            };
-
-            if (string.IsNullOrWhiteSpace(d.section))
-            {
-                UIMessageTip.ShowError("请选择数据项目进行操作！");
-                return;
-            }
-
-            if (!UIMessageDialog.ShowAskDialog(this, "确定要进行删除操作吗？"))
-            {
-                return;
-            }
-
-            string paramurl = string.Format($"/api/GuaHao/DeleteRequestTime?section={d.section}");
-
-            log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
             try
-            {
+            { 
+                var d = new
+                {
+                    section = txt_section.Text,
+                };
+
+                if (string.IsNullOrWhiteSpace(d.section))
+                {
+                    UIMessageTip.ShowError("请选择数据项目进行操作！");
+                    return;
+                }
+
+                if (!UIMessageDialog.ShowAskDialog(this, "确定要进行删除操作吗？"))
+                {
+                    return;
+                }
+
+                string paramurl = string.Format($"/api/GuaHao/DeleteRequestTime?section={d.section}");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
                 string json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
@@ -184,15 +183,14 @@ namespace Client.Forms.Pages.hbgl
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
+                MessageBox.Show(ex.Message);
+                log.Error(ex.ToString()); ;
             }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ResetTextData();
-
-
+            ResetTextData();  
         }
         public void ResetTextData()
         {

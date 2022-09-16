@@ -12,35 +12,53 @@ namespace YbjsLib
     public class Ybjs
     {
         //public string Do(string infno,string base) 
+        public Ybjs()
+        { 
+            YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
+            YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
+            YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
+            YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
+            YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
+            YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
+            YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
+            YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
+        }
 
-        public string Init(string ybhzComaper_str, string doctList_str, string unitList_str, string icdCodes_str, string diagTypeList_str,
-            string chargeItems_str, string insutypes_str, string birctrlTypes_str, string medTypes_str, string mdtrtCertTypes_str, string yb_identity_only = "0")
+
+        public void Init(string ybhzComaper_str, string doctList_str, string unitList_str, string icdCodes_str, string diagTypeList_str,
+            string chargeItems_str, string insutypes_str, string birctrlTypes_str, string medTypes_str, string mdtrtCertTypes_str, string yb_identity_only = "0", string edit_diseinfo = "0")
         {
-            //初始化数据下拉列表 
-            YBHelper.ybhzCompare = WebApiHelper.DeserializeObject<List<YbhzzdVM>>(ybhzComaper_str);
-            YBHelper.doctList = WebApiHelper.DeserializeObject<List<UserDicVM>>(doctList_str);
-            YBHelper.unitList = WebApiHelper.DeserializeObject<List<UnitVM>>(unitList_str);
-            YBHelper.icdCodes = WebApiHelper.DeserializeObject<List<IcdCodeVM>>(icdCodes_str);
-            YBHelper.diagTypeList = WebApiHelper.DeserializeObject<List<DiagTypeVM>>(diagTypeList_str);
-
-            YBHelper.insutypes = WebApiHelper.DeserializeObject<List<InsutypeVM>>(insutypes_str);
-            YBHelper.birctrlTypes = WebApiHelper.DeserializeObject<List<BirctrlTypeVM>>(birctrlTypes_str);
-            YBHelper.medTypes = WebApiHelper.DeserializeObject<List<MedTypeVM>>(medTypes_str);
-            YBHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<List<MdtrtCertTypeVM>>(mdtrtCertTypes_str);
-
-            //YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
-            YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<YBChargeItem>>(chargeItems_str);
-
-
-            YBHelper.yb_identity_only = yb_identity_only;
-
-            if (HttpClientFactory.GetHttpClient().BaseAddress == null)
+            try
             {
-                //HttpClientFactory.GetHttpClient().BaseAddress = new Uri("http://localhost:5000");
-                HttpClientFactory.GetHttpClient().BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
-            }
 
-            return "";
+                //初始化数据下拉列表 
+                YBHelper.ybhzCompare = WebApiHelper.DeserializeObject<List<YbhzzdVM>>(ybhzComaper_str);
+                YBHelper.doctList = WebApiHelper.DeserializeObject<List<UserDicVM>>(doctList_str);
+                YBHelper.unitList = WebApiHelper.DeserializeObject<List<UnitVM>>(unitList_str);
+                YBHelper.icdCodes = WebApiHelper.DeserializeObject<List<IcdCodeVM>>(icdCodes_str);
+                YBHelper.diagTypeList = WebApiHelper.DeserializeObject<List<DiagTypeVM>>(diagTypeList_str);
+
+                YBHelper.insutypes = WebApiHelper.DeserializeObject<List<InsutypeVM>>(insutypes_str);
+                YBHelper.birctrlTypes = WebApiHelper.DeserializeObject<List<BirctrlTypeVM>>(birctrlTypes_str);
+                YBHelper.medTypes = WebApiHelper.DeserializeObject<List<MedTypeVM>>(medTypes_str);
+                YBHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<List<MdtrtCertTypeVM>>(mdtrtCertTypes_str);
+
+                //YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
+                YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<YBChargeItem>>(chargeItems_str);
+                 
+                if (HttpClientFactory.GetHttpClient().BaseAddress == null)
+                {
+                    //HttpClientFactory.GetHttpClient().BaseAddress = new Uri("http://localhost:5000");
+                    HttpClientFactory.GetHttpClient().BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+                } 
+                YBHelper.yb_identity_only = yb_identity_only;
+                YBHelper.edit_diseinfo = edit_diseinfo;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 
@@ -84,7 +102,10 @@ namespace YbjsLib
                 ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                 YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
-
+                if (yBResponse==null)
+                {
+                    return "";
+                }
                 YBHelper.userInfoResponseModel = yBResponse.output;
 
                 return parm[2].ToString();
@@ -100,12 +121,13 @@ namespace YbjsLib
             string icd_code, string yb_ys_code, string doctor_name, string unit_sn, string unit_name, string clinic_name, string opter, string opter_name, ref object[] res)
         {
             try
-            {  //1101 读取人员信息
+            { 
+                //1101 读取人员信息
                 YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
                 request.infno = "1101";
                 request.msgid = YBHelper.msgid;
                 request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                request.insuplc_admdvs = "421002";
+                request.insuplc_admdvs = YBHelper.mdtrtarea_admvs;
                 request.recer_sys_code = YBHelper.recer_sys_code;
                 request.dev_no = "";
                 request.dev_safe_info = "";
@@ -230,7 +252,6 @@ namespace YbjsLib
                     YBJSPreview yBJSPreview = new YBJSPreview();
                     yBJSPreview.patient_id = patient_id;
                     yBJSPreview.admiss_times = admiss_times;
-                    yBJSPreview.insuplcAdmdvs = YBHelper.userInfoResponseModel.insuinfo[0].insuplc_admdvs;
                     yBJSPreview.dept_sn = unit_sn;
                     yBJSPreview.doct_sn = yb_ys_code;
                     yBJSPreview.icd_code = icd_code;
@@ -262,7 +283,7 @@ namespace YbjsLib
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            } 
+            }
             return false;
         }
 

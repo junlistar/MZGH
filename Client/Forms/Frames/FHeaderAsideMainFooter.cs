@@ -56,6 +56,12 @@ namespace Client
             SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
 
             //读取医保配置
+            YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
+            YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
+            YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
+            YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
+            YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
+            YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
             YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
             YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
 
@@ -458,7 +464,7 @@ namespace Client
                         //statusstrip信息
                         tsslblName.Text = SessionHelper.uservm.name;
 
-                        tsslblMidhost.Text = ConfigurationManager.AppSettings.Get("apihost");
+                        tsslblMidhost.Text = SessionHelper.MyHttpClient.BaseAddress.ToString();
                         timer1.Interval = 1000;
                         timer1.Start();
 
@@ -484,15 +490,7 @@ namespace Client
                         SessionHelper.clientWidth = this.Width;
 
                         this.FormClosing += FHeaderAsideMainFooter_FormClosing;
-
-                        ////ping
-                        //_demoBGWorker.DoWork += BGWorker_DoWork;
-                        //_demoBGWorker.RunWorkerAsync();
-                        //_demoBGWorker.WorkerReportsProgress = true;
-                        //_demoBGWorker.ProgressChanged += BGWorker_ProgressChanged;
-
-                        //timerSignal.Interval = 1000 * 5;//10s
-                        //timerSignal.Start();
+                         
                     };
                 }
                 else
@@ -723,9 +721,7 @@ namespace Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tsslblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-
+            tsslblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");  
         }
 
         private void FHeaderAsideMainFooter_FormClosing(object sender, FormClosingEventArgs e)

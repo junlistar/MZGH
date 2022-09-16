@@ -40,6 +40,7 @@ namespace YbjsLib
 
 
         MzjsResponse mzjsResponse;
+        MzjsResponse yjsResponse;
 
 
         //数据
@@ -178,6 +179,11 @@ namespace YbjsLib
                     LoadIcdData();
                 }
 
+                if (YBHelper.edit_diseinfo=="1")
+                {
+                    btnAddzd.Show();
+                    btnDelZd.Show();
+                }
 
 
                 #endregion
@@ -196,7 +202,7 @@ namespace YbjsLib
             {
                 //门诊结算
                 var jsRequest = new YBRequest<MZJS2207A>();
-                jsRequest.infno = "2207A";
+                jsRequest.infno = "2207";
 
                 jsRequest.msgid = YBHelper.msgid;
                 jsRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
@@ -215,7 +221,7 @@ namespace YbjsLib
                 jsRequest.fixmedins_name = YBHelper.fixmedins_name;
                 jsRequest.sign_no = YBHelper.msgid;
                 jsRequest.input = new RepModel<MZJS2207A>();
-
+                 
 
                 MZJS2207A _mzyjs = new MZJS2207A();
                 _mzyjs.psn_no = psn_no;
@@ -229,10 +235,18 @@ namespace YbjsLib
                 _mzyjs.insutype = jz_insutype.SelectedValue.ToString(); //GuaHao.PatientVM.yb_insutype;
                 _mzyjs.acct_used_flag = chkuse_flag.Checked ? "1" : "0";//0 否 1 是
 
+                if (yjsResponse!=null)
+                {
+                    _mzyjs.fulamt_ownpay_amt = yjsResponse.setlinfo.fulamt_ownpay_amt;
+                    _mzyjs.overlmt_selfpay = yjsResponse.setlinfo.overlmt_selfpay;
+                    _mzyjs.preselfpay_amt = yjsResponse.setlinfo.preselfpay_amt;
+                    _mzyjs.inscp_scp_amt = yjsResponse.setlinfo.inscp_scp_amt;
+                }
+
                 jsRequest.input.data = _mzyjs;
 
                 var json = WebApiHelper.SerializeObject(jsRequest);
-                var BusinessID = "2207A";
+                var BusinessID = "2207";
                 var Dataxml = json;
                 var Outputxml = "";
                 var parm = new object[] { BusinessID, json, Outputxml };
@@ -281,6 +295,8 @@ namespace YbjsLib
 
         private void btnYJS_Click(object sender, EventArgs e)
         {
+            insuplcAdmdvs = lbl_insplcadmdvs.Text;
+
             //判断医生医保编号是否正确
             if (string.IsNullOrEmpty(txtDoct.TagString))
             {
@@ -612,6 +628,8 @@ namespace YbjsLib
 
                 btnYJS.Enabled = false;
                 btnJieSuan.Enabled = true;
+
+                yjsResponse = _yjsresp.output;
             }
         }
 
@@ -694,10 +712,12 @@ namespace YbjsLib
 
                     dgvys.Columns["code"].HeaderText = "编号";
                     dgvys.Columns["name"].HeaderText = "名称";
+                    dgvys.Columns["yb_ys_code"].HeaderText = "医保编号";
                     dgvys.Columns["py_code"].Visible = false;
                     dgvys.Columns["d_code"].Visible = false;
                     dgvys.Columns["emp_sn"].Visible = false;
-                    dgvys.Columns["yb_ys_code"].Visible = false;
+                    dgvys.Columns["dept_sn"].Visible = false;  
+                    dgvys.Columns["dept_name"].Visible = false;
                     dgvys.AutoResizeColumns();
 
                     dgvys.CellClick -= dgvys_CellContentClick;
@@ -1029,5 +1049,16 @@ namespace YbjsLib
             birctrl_matn_date.Text = "";
         }
 
+        private void dgv_cbxx_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //获取参保地信息，显示到界面，并传入预结算
+            var _index = dgv_cbxx.SelectedIndex;
+            var _insuplc_admdvs = dgv_cbxx.Rows[_index].Cells["insuplc_admdvs"].Value;
+            if (_insuplc_admdvs!=null)
+            {
+                lbl_insplcadmdvs.Text = _insuplc_admdvs.ToString();
+                insuplcAdmdvs = _insuplc_admdvs.ToString();
+            } 
+        }
     }
 }

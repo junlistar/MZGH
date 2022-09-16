@@ -157,11 +157,7 @@ namespace Mzsf.Forms.Pages
 
                         BindUserInfo(userInfo);
 
-                        if (YBHelper.currentYBInfo != null)
-                        {
-                            lbl_ybye.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
-                            lbl_ybye.Show();
-                        }
+                       
 
                         BindOrders(userInfo.patient_id);
                     }
@@ -242,7 +238,26 @@ namespace Mzsf.Forms.Pages
                                 lblTimes.Text = "来访号：" + current_times;
                             }
                         }
+                        else
+                        {
+                            //绑定科室 医生信息
+                            txtUnit.Text = current_unit_name;
+                            txtDoct.Text = current_doct_name;
+                            lblTimes.Text = "来访号：" + current_times;
+                        }
                     }
+                    if (YBHelper.currentYBInfo != null)
+                    {
+                        lbl_ybye.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
+                        lbl_ybye.Show();
+
+                        //记录医保日志
+                        paramurl = string.Format($"/api/YbInfo/AddYB1101");
+                        YBHelper.currentYBInfo.output.patient_id = patient_id;
+                        YBHelper.currentYBInfo.output.admiss_times = current_times.ToString();
+                        HttpClientUtil.PostJSON(paramurl, YBHelper.currentYBInfo.output);
+                    }
+
                     //查询处方
                     GetOrders(patient_id, current_times);
                 }
@@ -363,8 +378,8 @@ namespace Mzsf.Forms.Pages
                 lblstreet.Text = userInfo.home_street;
                 txtHicno.Text = userInfo.hic_no;
 
-                lblTimes.Text = "来访号：" + userInfo.max_times;
-                lblTimes.Tag = userInfo.max_times;
+                lblTimes.Text = "来访号：" + (userInfo.max_times+1);
+                lblTimes.Tag =( userInfo.max_times+1);
 
                 if (!string.IsNullOrEmpty(userInfo.home_district))
                 {
@@ -802,55 +817,61 @@ namespace Mzsf.Forms.Pages
 
         private void btnYBK_Click(object sender, EventArgs e)
         {
-            YBHelper.currentYBInfo = null;
+            //YBHelper.currentYBInfo = null;
 
-            btnCika.FillColor = lvse;
-            btnIDCard.FillColor = lvse;
-            btnSFZ.FillColor = lvse;
-            btnYBK.FillColor = hongse;
+            //btnCika.FillColor = lvse;
+            //btnIDCard.FillColor = lvse;
+            //btnSFZ.FillColor = lvse;
+            //btnYBK.FillColor = hongse;
 
-            YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
-            request.infno = ((int)InfoNoEnum.人员信息).ToString();
-            request.msgid = YBHelper.msgid;
-            request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-            request.insuplc_admdvs = "421002";
-            request.recer_sys_code = YBHelper.recer_sys_code;
-            request.dev_no = "";
-            request.dev_safe_info = "";
-            request.cainfo = "";
-            request.signtype = "";
-            request.infver = YBHelper.infver;
-            request.opter_type = YBHelper.opter_type;
-            request.opter = SessionHelper.uservm.user_mi;
-            request.opter_name = SessionHelper.uservm.name;
-            request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            request.fixmedins_code = YBHelper.fixmedins_code;
-            request.fixmedins_name = YBHelper.fixmedins_name;
-            request.sign_no = YBHelper.msgid;
+            //YBRequest<UserInfoRequestModel> request = new YBRequest<UserInfoRequestModel>();
+            //request.infno = ((int)InfoNoEnum.人员信息).ToString();
+            //request.msgid = YBHelper.msgid;
+            //request.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
+            //request.insuplc_admdvs = "421002";
+            //request.recer_sys_code = YBHelper.recer_sys_code;
+            //request.dev_no = "";
+            //request.dev_safe_info = "";
+            //request.cainfo = "";
+            //request.signtype = "";
+            //request.infver = YBHelper.infver;
+            //request.opter_type = YBHelper.opter_type;
+            //request.opter = SessionHelper.uservm.user_mi;
+            //request.opter_name = SessionHelper.uservm.name;
+            //request.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            //request.fixmedins_code = YBHelper.fixmedins_code;
+            //request.fixmedins_name = YBHelper.fixmedins_name;
+            //request.sign_no = YBHelper.msgid;
 
-            request.input = new RepModel<UserInfoRequestModel>();
-            request.input.data = new UserInfoRequestModel();
-            request.input.data.mdtrt_cert_type = "03";
-            request.input.data.psn_cert_type = "1";
+            //request.input = new RepModel<UserInfoRequestModel>();
+            //request.input.data = new UserInfoRequestModel();
+            //request.input.data.mdtrt_cert_type = "03";
+            //request.input.data.psn_cert_type = "1";
 
-            string json = WebApiHelper.SerializeObject(request);
+            //string json = WebApiHelper.SerializeObject(request);
 
 
             try
             {
                 //var res = DataPost("http://10.87.82.212:8080", json);
 
-                //调用 com名称  方法  参数
-                string BusinessID = "1101";
-                string Dataxml = json;
-                string Outputxml = "";
-                var parm = new object[] { BusinessID, json, Outputxml };
+                ////调用 com名称  方法  参数
+                //string BusinessID = "1101";
+                //string Dataxml = json;
+                //string Outputxml = "";
+                //var parm = new object[] { BusinessID, json, Outputxml };
 
-                var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                //var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
-                log.Debug(parm[2]);
+                //log.Debug(parm[2]);
 
-                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+                //YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
+
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+
+                var param2 = ybjs.M1101(SessionHelper.uservm.user_mi, SessionHelper.uservm.name);
+
+                YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(param2.ToString());
 
                 if (!string.IsNullOrEmpty(yBResponse.err_msg))
                 {
@@ -866,7 +887,7 @@ namespace Mzsf.Forms.Pages
 
                     Task.Run(() =>
                     {
-                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(parm[2].ToString());
+                        YBHelper.SaveCardData(yBResponse.output); YBHelper.SaveCardDataAll(param2.ToString());
                     });
                 }
             }

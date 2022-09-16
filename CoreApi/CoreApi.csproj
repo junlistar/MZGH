@@ -59,6 +59,9 @@
     <None Update="SQLS\mzgh_mzpatientybkinfo_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_mzpatient_update_times.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzsf_mzdeposit_print_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

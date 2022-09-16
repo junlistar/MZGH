@@ -68,8 +68,8 @@ namespace Client.Forms.Pages.hbgl
                     list = result.data;
 
                     dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
-
-                    dgvlist.DataSource = list;
+                  
+                    dgvlist.DataSource = list; dgvlist.AutoResizeColumns();
                 }
                 else
                 {
@@ -131,13 +131,13 @@ namespace Client.Forms.Pages.hbgl
 
         private void DocOutManage_Initialize(object sender, EventArgs e)
         {
-            var _dt = DateTime.Now;
-            txtDate.Value = _dt; 
+            txtDate.Text = "";
             dgvys.KeyDown += Dgvys_KeyDown;
 
             docList = SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList();
 
-            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            //默认查询
+            LoadData();
         }
 
         UIDataGridView dgvys = new UIDataGridView();
@@ -290,7 +290,7 @@ namespace Client.Forms.Pages.hbgl
             txtDoct.TextChanged -= txtDoct_TextChanged;
             txtDoct.Text = "";
             txtDoct.TextChanged += txtDoct_TextChanged;
-            dgvlist.DataSource = null; 
+            dgvlist.DataSource = new List<GhDoctorOutVM>(); ; 
         }
     }
 }

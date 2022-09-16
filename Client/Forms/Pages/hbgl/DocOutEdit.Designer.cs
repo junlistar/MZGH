@@ -38,6 +38,7 @@
             this.btnClose = new Sunny.UI.UISymbolButton();
             this.uiLine1 = new Sunny.UI.UILine();
             this.chk_status = new Sunny.UI.UICheckBox();
+            this.lblErrorMsg = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDate2
@@ -92,11 +93,11 @@
             // uiLabel1
             // 
             this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(65, 134);
+            this.uiLabel1.Location = new System.Drawing.Point(51, 134);
             this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(76, 23);
+            this.uiLabel1.Size = new System.Drawing.Size(90, 23);
             this.uiLabel1.TabIndex = 34;
-            this.uiLabel1.Text = "停诊日期";
+            this.uiLabel1.Text = "停诊日期：";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -120,11 +121,11 @@
             // uiLabel10
             // 
             this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(65, 87);
+            this.uiLabel10.Location = new System.Drawing.Point(51, 87);
             this.uiLabel10.Name = "uiLabel10";
-            this.uiLabel10.Size = new System.Drawing.Size(79, 23);
+            this.uiLabel10.Size = new System.Drawing.Size(93, 23);
             this.uiLabel10.TabIndex = 38;
-            this.uiLabel10.Text = "停诊医生";
+            this.uiLabel10.Text = "停诊医生：";
             this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel10.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -172,7 +173,7 @@
             this.chk_status.Checked = true;
             this.chk_status.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chk_status.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chk_status.Location = new System.Drawing.Point(148, 181);
+            this.chk_status.Location = new System.Drawing.Point(440, 135);
             this.chk_status.MinimumSize = new System.Drawing.Size(1, 1);
             this.chk_status.Name = "chk_status";
             this.chk_status.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -182,10 +183,21 @@
             this.chk_status.Visible = false;
             this.chk_status.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // lblErrorMsg
+            // 
+            this.lblErrorMsg.AutoSize = true;
+            this.lblErrorMsg.ForeColor = System.Drawing.Color.Red;
+            this.lblErrorMsg.Location = new System.Drawing.Point(51, 187);
+            this.lblErrorMsg.Name = "lblErrorMsg";
+            this.lblErrorMsg.Size = new System.Drawing.Size(90, 21);
+            this.lblErrorMsg.TabIndex = 44;
+            this.lblErrorMsg.Text = "冲突日期：";
+            // 
             // DocOutEdit
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(510, 319);
+            this.Controls.Add(this.lblErrorMsg);
             this.Controls.Add(this.chk_status);
             this.Controls.Add(this.uiLine1);
             this.Controls.Add(this.btnClose);
@@ -205,6 +217,7 @@
             this.Load += new System.EventHandler(this.DocOutEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocOutEdit_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -220,5 +233,6 @@
         private Sunny.UI.UISymbolButton btnClose;
         private Sunny.UI.UILine uiLine1;
         private Sunny.UI.UICheckBox chk_status;
+        private System.Windows.Forms.Label lblErrorMsg;
     }
 }

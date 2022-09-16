@@ -27,14 +27,22 @@ namespace Client.Forms.Pages.hbgl
 
         public void BindData()
         {
-            GetData();
+            try
+            { 
+                GetData();
 
-            dgvRequestHour.Init();
-            this.dgvRequestHour.DataSource = SessionHelper.requestHours;
+                dgvRequestHour.Init();
+                this.dgvRequestHour.DataSource = SessionHelper.requestHours;
 
-            dgvRequestHour.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                dgvRequestHour.CellBorderStyle = DataGridViewCellBorderStyle.Single;
 
-            dgvRequestHour.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+                dgvRequestHour.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
         }
 
 
@@ -43,7 +51,7 @@ namespace Client.Forms.Pages.hbgl
             try
             {
                 //获取挂号时间段 
-                var paramurl = string.Format($"/api/GuaHao/GetRequestHours"); 
+                var paramurl = string.Format($"/api/GuaHao/GetRequestHours");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string json = HttpClientUtil.Get(paramurl);
                 SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
@@ -67,12 +75,20 @@ namespace Client.Forms.Pages.hbgl
 
         private void dgvRequestHour_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1)
+            try
+            { 
+                if (e.RowIndex != -1)
+                {
+                    txtCode.Text = dgvRequestHour.Rows[e.RowIndex].Cells["code"].Value.ToString();
+                    txtName.Text = dgvRequestHour.Rows[e.RowIndex].Cells["name"].Value.ToString();
+                    cbxHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
+                    cbxHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
+                }
+            }
+            catch (Exception ex)
             {
-                txtCode.Text = dgvRequestHour.Rows[e.RowIndex].Cells["code"].Value.ToString();
-                txtName.Text = dgvRequestHour.Rows[e.RowIndex].Cells["name"].Value.ToString();
-                cbxHour1.Text = dgvRequestHour.Rows[e.RowIndex].Cells["start_hour"].Value.ToString();
-                cbxHour2.Text = dgvRequestHour.Rows[e.RowIndex].Cells["end_hour"].Value.ToString();
+                MessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
             }
         }
 
@@ -102,7 +118,7 @@ namespace Client.Forms.Pages.hbgl
                 {
                     UIMessageTip.ShowWarning("开始小时数必须小于等于结束小时数！");
                     return;
-                } 
+                }
                 string paramurl = string.Format($"/api/GuaHao/EditRequestHour?code={d.code}&name={d.name}&start_hour={d.start_hour}&end_hour={d.end_hour}");
 
                 log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
@@ -144,7 +160,7 @@ namespace Client.Forms.Pages.hbgl
             {
                 return;
             }
-             
+
             string paramurl = string.Format($"/api/GuaHao/DeleteRequestHour?code={d.code}");
 
             log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);

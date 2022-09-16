@@ -42,6 +42,8 @@ namespace Client.Forms.Pages.hbgl
 
         private void DocOutEdit_Load(object sender, EventArgs e)
         {
+            lblErrorMsg.Text = "";
+
             txtDoct.Text = "";
             this.txtDate.Text = "";
             this.txtDate2.Text = "";
@@ -71,22 +73,51 @@ namespace Client.Forms.Pages.hbgl
         {
             try
             {
+                lblErrorMsg.Text = "";
                 if (vm==null)
                 {
                     vm = new GhDoctorOutVM();
                 }
 
                 if (!string.IsNullOrWhiteSpace(txtDoct.Text))
-                {
+                {  
                     vm.doctor_id = txtDoct.TagString;
                     vm.begin_date = txtDate.Value;
                     vm.end_date = txtDate2.Value.AddDays(1).AddSeconds(-1);
                     vm.is_delete = 0;//chk_status.Checked ? 0 : 1;
 
-                    string paramurl = string.Format($"/api/GuaHao/UpdateGhDoctorOut");
-                    var json = HttpClientUtil.PostJSON(paramurl, vm);
-                    var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-                    if (result.status == 1)
+                    if (vm.begin_date>vm.end_date)
+                    {
+                        lblErrorMsg.Text = "开始日期必须大于结束日期";
+                        return;
+                    }
+
+
+                    //查询当前医生的停诊信息
+                    var paramurl = string.Format($"/api/GuaHao/GetGhDoctorOutsByParams?doctor_id={ vm.doctor_id}&date1=");
+                    var json = HttpClientUtil.Get(paramurl);
+                    var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhDoctorOutVM>>>(json);
+                    if (result.status==1&& result.data!=null)
+                    {
+                        var _msg = "";
+                        foreach (var item in result.data)
+                        {
+                            if (item.sn!=vm.sn && ((vm.begin_date>=item.begin_date && vm.begin_date<=item.end_date) || (vm.end_date>=item.begin_date && vm.end_date<=item.end_date) || (vm.end_date >= item.end_date && vm.begin_date <= item.begin_date)))
+                            {
+                                _msg += $"日期冲突：{item.begin_date} - {item.end_date}\r\n"; 
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(_msg))
+                        {
+                            lblErrorMsg.Text = _msg;
+                            return;
+                        }
+                    }
+
+                    paramurl = string.Format($"/api/GuaHao/UpdateGhDoctorOut");
+                    json = HttpClientUtil.PostJSON(paramurl, vm);
+                    var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                    if (result1.status == 1)
                     {
                         UIMessageTip.ShowOk("保存成功！");
                         DialogResult = DialogResult.OK;
@@ -95,8 +126,7 @@ namespace Client.Forms.Pages.hbgl
                     else
                     {
                         UIMessageTip.ShowError("保存失败！" + result.message);
-                    }
-                    return;
+                    } 
                 }
             }
             catch (Exception ex)

@@ -116,7 +116,7 @@ namespace Data.Repository
                     para.Add("@psn_no", _dat.psn_no);
                     para.Add("@ipt_otp_no", _dat.ipt_otp_no);
 
-                    connection.Execute(del_sql, para, transaction);
+                    //connection.Execute(del_sql, para, transaction);
 
                     connection.Execute(sql, para, transaction);
 
@@ -150,7 +150,7 @@ namespace Data.Repository
                         var para = new DynamicParameters();
                         para.Add("@patient_id", _dat.patient_id);
                         para.Add("@admiss_times", _dat.admiss_times);
-                        connection.Execute(del_sql, para, transaction);
+                        //connection.Execute(del_sql, para, transaction);
 
                         foreach (var item in _dat.diseinfo)
                         {
@@ -204,7 +204,7 @@ namespace Data.Repository
                         var para = new DynamicParameters();
                         para.Add("@patient_id", _mod.patient_id);
                         para.Add("@admiss_times", _mod.admiss_times);
-                        connection.Execute(del_sql, para, transaction);
+                        //connection.Execute(del_sql, para, transaction);
 
                         foreach (var _dat in _mod.diseinfo)
                         {
@@ -264,7 +264,7 @@ namespace Data.Repository
                     para.Add("@patient_id", _mod.patient_id);
                     para.Add("@admiss_times", _mod.admiss_times);
 
-                    connection.Execute(del_sql, para, transaction);
+                    //connection.Execute(del_sql, para, transaction);
 
                     if (_mod.setlinfo != null)
                     {
@@ -310,8 +310,24 @@ namespace Data.Repository
                         para.Add("@clr_optins", _dat.clr_optins);
                         para.Add("@clr_way", _dat.clr_way);
                         para.Add("@clr_type", _dat.clr_type);
-                         
+
                         connection.Execute(sql, para, transaction);
+
+                        //更新基本信息
+                        sql = @"update ybNew_1101_baseinfo set insuplc_admdvs=@insuplc_admdvs
+where patient_id = @patient_id and admiss_times = @admiss_times";
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", _mod.patient_id);
+                        para.Add("@admiss_times", _mod.admiss_times);
+                        para.Add("@insuplc_admdvs", _dat.clr_optins);
+                        connection.Execute(sql, para, transaction);
+
+                        //更新2207存储过程ybNew_2207_save
+                        para = new DynamicParameters();
+                        para.Add("@patient_id", _mod.patient_id);
+                        para.Add("@admiss_times", _mod.admiss_times);
+                        para.Add("@mdtrt_id", _dat.mdtrt_id);
+                        connection.Execute("ybNew_2207_save", para, transaction, null, CommandType.StoredProcedure);
 
                         transaction.Commit();
                         return true;
@@ -325,6 +341,34 @@ namespace Data.Repository
                 }
             }
         }
+        //预结算信息
+        public bool AddYB2208(string patient_id, string admiss_times, string mdtrt_id)
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                IDbTransaction transaction = connection.BeginTransaction();
+                try
+                {
+
+                    //更新2207存储过程ybNew_2207_save
+                    var para = new DynamicParameters();
+                    para.Add("@patient_id", patient_id);
+                    para.Add("@admiss_times", admiss_times);
+                    para.Add("@mdtrt_id", mdtrt_id);
+                    connection.Execute("ybNew_2208_save", para, transaction, null, CommandType.StoredProcedure);
+
+                    transaction.Commit();
+                    return true;
+
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+        }
+
 
 
         public List<Insutype> GetInsutypes()
@@ -363,7 +407,7 @@ namespace Data.Repository
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql =GetSqlByTag("yb_zd_diagtype");
+                string sql = GetSqlByTag("yb_zd_diagtype");
 
                 return connection.Query<DiagType>(sql).ToList();
             }
@@ -383,19 +427,19 @@ namespace Data.Repository
 
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
             {
-                string sql = GetSqlByTag("yb_zd_birctrltype"); 
+                string sql = GetSqlByTag("yb_zd_birctrltype");
 
                 return connection.Query<BirctrlType>(sql).ToList();
             }
         }
 
 
-        public UserInfoResponseModel GetYjsUserInfo(string patient_id,int admiss_times)
+        public UserInfoResponseModel GetYjsUserInfo(string patient_id, int admiss_times)
         {
             try
-            { 
+            {
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
-                { 
+                {
                     UserInfoResponseModel responseModel = new UserInfoResponseModel();
 
                     IDbTransaction transaction = connection.BeginTransaction();
@@ -434,5 +478,5 @@ namespace Data.Repository
             }
         }
 
-    } 
+    }
 }

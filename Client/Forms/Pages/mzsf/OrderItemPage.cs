@@ -161,7 +161,7 @@ namespace Mzsf.Forms.Pages
                     return true;
                 }
                 else
-                { 
+                {
                     var kucun = dgv.Rows[sel_index].Cells["amount"].Value.ToString();
                     if (kucun == "0" && _order_type != "01")
                     {
@@ -253,7 +253,7 @@ namespace Mzsf.Forms.Pages
 
         public void BindMbData()
         {
-            if (SessionHelper.mbChargeList!=null)
+            if (SessionHelper.mbChargeList != null)
             {
                 dgv.Hide();
                 txtName.TextChanged -= txtName_TextChanged;
@@ -273,8 +273,8 @@ namespace Mzsf.Forms.Pages
                     //chargeVM.charge_amount = _quantity;
                     //chargeVM.serial_no = _serial;
                     //chargeVM.charge_code = _code;
-                    if (index>=dgvOrderDetail.Rows.Count)
-                    { 
+                    if (index >= dgvOrderDetail.Rows.Count)
+                    {
                         AddNewRow();
                     }
 
@@ -288,7 +288,7 @@ namespace Mzsf.Forms.Pages
                     dgvOrderDetail.Rows[index].Cells["code"].Value = _item.charge_code;
 
                     dgvOrderDetail.Rows[index].Cells["total_price"].Value = _item.charge_amount * _item.orig_price;
-                    
+
 
                     index = index + 1;
                 }
@@ -629,39 +629,43 @@ namespace Mzsf.Forms.Pages
             //}
             //else
             //{
-                foreach (var aa in item_list.ToArray())
+            foreach (var aa in item_list.ToArray())
+            {
+                SessionHelper.cprCharges.Remove(aa);
+            }
+            index = 1;
+
+            foreach (DataGridViewRow row in dgvOrderDetail.Rows)
+            {
+                if (row.Cells["charge_code_lookup"].Value == null)
                 {
-                    SessionHelper.cprCharges.Remove(aa);
-                }
-                index = 1;
-
-                foreach (DataGridViewRow row in dgvOrderDetail.Rows)
+                    return;
+                } 
+                var charge_code_lookup = row.Cells["charge_code_lookup"].Value.ToString();
+                var orig_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
+                var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
+                var code = row.Cells["code"].Value.ToString();
+                var serial = "";
+                if (row.Cells["serial"].Value != null)
                 {
-                    var charge_code_lookup = row.Cells["charge_code_lookup"].Value.ToString();
-                    var orig_price = Convert.ToDecimal(row.Cells["charge_price"].Value);
-                    var charge_amount = Convert.ToInt32(row.Cells["charge_amount"].Value);
-                    var code = row.Cells["code"].Value.ToString();
-                    var serial = "";
-                    if (row.Cells["serial"].Value != null)
-                    {
-                        serial = row.Cells["serial"].Value.ToString();
-                    }
-
-                    var chargeVM = new CprChargesVM();
-                    chargeVM.charge_code_lookup = charge_code_lookup;
-                    chargeVM.orig_price = orig_price;
-                    chargeVM.charge_amount = charge_amount;
-                    chargeVM.charge_price = orig_price * charge_amount;
-                    chargeVM.item_no = index++;
-                    chargeVM.order_no = _order_no;
-                    chargeVM.serial_no = serial;
-
-                    chargeVM.charge_code = code;
-                    chargeVM.order_type = _order_type;
-
-                    SessionHelper.cprCharges.Add(chargeVM);
-
+                    serial = row.Cells["serial"].Value.ToString();
                 }
+
+                var chargeVM = new CprChargesVM();
+                chargeVM.charge_code_lookup = charge_code_lookup;
+                chargeVM.orig_price = orig_price;
+                chargeVM.charge_amount = charge_amount;
+                chargeVM.charge_price = orig_price * charge_amount;
+                chargeVM.item_no = index++;
+                chargeVM.order_no = _order_no;
+                chargeVM.serial_no = serial;
+
+                chargeVM.charge_code = code;
+                chargeVM.order_type = _order_type;
+
+                SessionHelper.cprCharges.Add(chargeVM);
+
+            }
 
 
             //}
@@ -675,7 +679,7 @@ namespace Mzsf.Forms.Pages
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            AddNewRow(); 
+            AddNewRow();
         }
 
         public void AddNewRow()
@@ -689,7 +693,7 @@ namespace Mzsf.Forms.Pages
                     this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
                     BindSelectedRowData(new_index);
                     txtName.Focus();
-                }  
+                }
             }
             catch (Exception ex)
             {
@@ -704,7 +708,7 @@ namespace Mzsf.Forms.Pages
                 if (dgvOrderDetail.SelectedRows.Count > 0)
                 {
                     //dgv.Rows.Remove(dgv.SelectedRows[0]);
-                    
+
 
                     var row = dgvOrderDetail.Rows[dgvOrderDetail.SelectedIndex];
 

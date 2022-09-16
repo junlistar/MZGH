@@ -722,6 +722,10 @@ namespace Client
             //cbxWeek.Text = "";
             //cbxDay.Text = "";
             cbxOpenFlag.Text = "";
+             
+            var _dt_now = DateTime.Now.ToShortDateString();
+            txtDate.Text = _dt_now;
+            txtDate2.Text = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToShortDateString();
 
             txtks.TextChanged += txtks_TextChanged;
             txtzk.TextChanged += txtzk_TextChanged;

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -38,7 +38,8 @@ namespace Data.Repository
         {
             GhDoctorOut _mod = JsonConvert.DeserializeObject<GhDoctorOut>(jsonStr);
             using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
-            {
+            { 
+                var para = new DynamicParameters();  
                 string sql = @"";
                 if (string.IsNullOrEmpty(_mod.sn))
                 {
@@ -48,8 +49,7 @@ namespace Data.Repository
                 else
                 {
                     sql = GetSqlByTag("mzgh_ghdoctorout_edit");
-                }
-                var para = new DynamicParameters();
+                } 
                 para.Add("@sn", _mod.sn); 
                 para.Add("@doctor_id", _mod.doctor_id); 
                 para.Add("@begin_date", _mod.begin_date); 

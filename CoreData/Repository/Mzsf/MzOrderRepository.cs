@@ -62,6 +62,7 @@ namespace Data.Repository.Mzsf
                                 visit_info.doctor_code = operaModel.code;
                                 visit_info.name = operaModel.name; 
                             }
+                        
                         }
                         string insert_sql = "";
 
@@ -489,8 +490,15 @@ namespace Data.Repository.Mzsf
                         para.Add("@charge_times", 1);  //??
                         para.Add("@patient_id", patient_id);
                         para.Add("@times", times);
-                        connection.Execute(sql8, para, transaction);
-
+                        int _count = connection.Execute(sql8, para, transaction);
+                        if (_count==0)
+                        {
+                            //更新最大次数,没有就诊记录
+                            string update_times_sql = GetSqlByTag("mzgh_mzpatient_update_times");
+                            para = new DynamicParameters();
+                            para.Add("@patient_id", patient_id);
+                            connection.Execute(update_times_sql, para, transaction);
+                        } 
 
                         //9.更新detail_charge项目
                         Serilog.Log.Debug("更新 detail_charge项目 ");

@@ -125,7 +125,20 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-         
+        public ResponseResult<bool> AddYB2208(string patient_id, string admiss_times, string mdtrt_id)
+        {
+            Log.Information($"AddYB2208,{patient_id},{admiss_times},{mdtrt_id}");
+            try
+            {
+                return _ybInfoRepository.AddYB2208(patient_id, admiss_times, mdtrt_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
         public ResponseResult<List<Insutype>> GetInsutypes()
         {
             Log.Information($"GetInsutypes,");

@@ -407,7 +407,7 @@ namespace Mzsf.Forms.Pages
         {
             try
             {
-                int admiss_times = SessionHelper.patientVM.max_times + 1;
+                int admiss_times = times;
                 string patient_id = SessionHelper.patientVM.patient_id;
 
                 //机制号
@@ -428,7 +428,7 @@ namespace Mzsf.Forms.Pages
 
                 YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
 
-                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str);
+                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str,"0","0");
 
                 object[] objparam = new object[3];
                 if (doct_code=="")

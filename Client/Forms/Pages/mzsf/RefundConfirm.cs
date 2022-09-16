@@ -186,62 +186,7 @@ namespace Mzsf.Forms.Pages
                             else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
                             {
                                 log.Info("医保退款：");
-                                //门诊挂号撤销
-
-                                ////查询用户医保信息
-                                //var insuplc_admdvs = _userInfo.yb_insuplc_admdvs.Trim();
-                                //var mdtrt_id = item.cheque_no;
-                                //var ipt_otp_no = receipt_sn;
-                                //var psn_no = _userInfo.yb_psn_no;
-
-                                //YBRequest<GHRefundRequestModel> ghRefund = new YBRequest<GHRefundRequestModel>();
-                                //ghRefund.infno = ((int)InfoNoEnum.门诊挂号撤销).ToString();
-
-                                //ghRefund.msgid = YBHelper.msgid;
-                                //ghRefund.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;
-                                //ghRefund.insuplc_admdvs = insuplc_admdvs;
-                                //ghRefund.recer_sys_code = YBHelper.recer_sys_code;
-                                //ghRefund.dev_no = "";
-                                //ghRefund.dev_safe_info = "";
-                                //ghRefund.cainfo = "";
-                                //ghRefund.signtype = "";
-                                //ghRefund.infver = YBHelper.infver;
-                                //ghRefund.opter_type = YBHelper.opter_type;
-                                //ghRefund.opter = SessionHelper.uservm.user_mi;
-                                //ghRefund.opter_name = SessionHelper.uservm.name;
-                                //ghRefund.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                                //ghRefund.fixmedins_code = YBHelper.fixmedins_code;
-                                //ghRefund.fixmedins_name = YBHelper.fixmedins_name;
-                                //ghRefund.sign_no = YBHelper.msgid;
-
-                                //ghRefund.input = new RepModel<GHRefundRequestModel>();
-                                //ghRefund.input.data = new GHRefundRequestModel();
-                                //ghRefund.input.data.mdtrt_id = mdtrt_id;
-                                //ghRefund.input.data.psn_no = psn_no;
-                                //ghRefund.input.data.ipt_otp_no = item.receipt_sn;// ipt_otp_no;
-
-
-                                //json = WebApiHelper.SerializeObject(ghRefund);
-
-                                //var BusinessID = "2202";
-                                //var Dataxml = json;
-                                //var Outputxml = "";
-                                //var parm = new object[] { BusinessID, json, Outputxml };
-
-                                //ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
-
-                                //log.Debug(parm[2]);
-
-                                //var refund_resp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
-
-                                //if (!string.IsNullOrEmpty(refund_resp.err_msg))
-                                //{
-                                //    MessageBox.Show(refund_resp.err_msg);
-                                //    log.Error(refund_resp.err_msg);
-                                //    return;
-                                //}
-
-
+                               
                                 //门诊结算撤销
                                 var jscxRequest = new YBRequest<MZJSCX>();
                                 jscxRequest.infno = "2208";
@@ -287,6 +232,12 @@ namespace Mzsf.Forms.Pages
 
                                 var _jscxresp = WebApiHelper.DeserializeObject<YBResponse<RepModel<GHResponseModel>>>(parm[2].ToString());
 
+                                if (string.IsNullOrEmpty(_jscxresp.err_msg))
+                                {
+                                    //记录医保日志
+                                    var _url = string.Format($"/api/YbInfo/AddYB2208?patient_id={_patient.patient_id}&admiss_times={item.admiss_times}&mdtrt_id={item.mdtrt_id}"); 
+                                    HttpClientUtil.Get(_url);
+                                }
                             }
                         }
                     }
