@@ -98,7 +98,9 @@ namespace Client.ClassLib
         public BaseInfo baseinfo { get; set; }
         public List<InsuInfo> insuinfo { get; set; }
         public List<IdetInfo> idetinfo { get; set; }
+        public JiuzhenInfo jiuzhenInfo { get; set; }
 
+        public List<Diseinfo> diseinfo { get; set; }
 
     }
     public class BaseInfo
@@ -116,6 +118,8 @@ namespace Client.ClassLib
     }
     public class InsuInfo
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public decimal balc { get; set; }
         public string insutype { get; set; }
         public string psn_insu_stas { get; set; }
@@ -128,12 +132,31 @@ namespace Client.ClassLib
     }
     public class IdetInfo
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string psn_idet_type { get; set; }
         public string psn_type_lv { get; set; }
         public string memo { get; set; }
         public string begntime { get; set; }
         public string endtime { get; set; }
     }
+
+    public class JiuzhenInfo
+    {
+        public string atddr_no { get; set; }
+        public string dr_name { get; set; }
+        public string dept_code { get; set; }
+        public string dept_name { get; set; }
+        public string med_type { get; set; }
+        public string psn_setlway { get; set; }
+        public string acct_used_flag { get; set; }
+        public string psn_no { get; set; }
+        public string insutype { get; set; }
+        public string caty { get; set; }
+        public string caty_name { get; set; }
+        public string mdtrt_cert_type { get; set; }
+    }
+
 
     #endregion
 

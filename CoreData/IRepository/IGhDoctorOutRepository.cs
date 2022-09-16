@@ -15,6 +15,8 @@ namespace Data.IRepository
 
         bool UpdateGhDoctorOut(string jsonStr);
 
+        List<BaseRequest> GetExistGhrequest(string doctor_sn, string t1, string t2);
+
 
         #endregion
     }

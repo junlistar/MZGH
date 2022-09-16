@@ -414,10 +414,21 @@ namespace Mzsf.Forms.Pages
                 var sn_no = GetReceiptMaxNo();
                 var max_sn = int.Parse(sn_no);
 
+                //获取预结算数据   GetYBCardInfo(string patient_id, int admiss_times, string doctor_code, string apply_unit)
+                var yburl = string.Format($"/api/YbInfo/GetYBCardInfo?patient_id={patient_id}&admiss_times={admiss_times}&doctor_code={doct_code}&apply_unit={unit_code}");
+                var ybjsonstr = HttpClientUtil.Get(yburl);
+                var ybresult = WebApiHelper.DeserializeObject<ResponseResult<UserInfoResponseModel>>(ybjsonstr);
+
+                //基础数据(读卡存在了)
+
+                //就诊数据
+                var jiuzhenInfo = ybresult.data.jiuzhenInfo;
+                var diseinfos = ybresult.data.diseinfo;
+
                 string ybhzComaper_str = WebApiHelper.SerializeObject(SessionHelper.ybhzCompare);
                 string doctList_str = WebApiHelper.SerializeObject(SessionHelper.userDics.Where(p => !string.IsNullOrEmpty(p.yb_ys_code)).ToList());
                 string unitList_str = WebApiHelper.SerializeObject(SessionHelper.units);
-                //string diseinfoList_str = WebApiHelper.SerializeObject();
+                string diseinfoList_str = WebApiHelper.SerializeObject(diseinfos);
                 string icdCodes_str = WebApiHelper.SerializeObject(SessionHelper.icdCodes);
                 string diagTypeList_str = WebApiHelper.SerializeObject(SessionHelper.diagTypes);
                 string chargeItems_str = WebApiHelper.SerializeObject(GetChargeItems());
@@ -425,10 +436,11 @@ namespace Mzsf.Forms.Pages
                 string birctrlTypes_str = WebApiHelper.SerializeObject(SessionHelper.birctrlTypes);
                 string medTypes_str = WebApiHelper.SerializeObject(SessionHelper.medTypes);
                 string mdtrtCertTypes_str = WebApiHelper.SerializeObject(SessionHelper.mdtrtCertTypes);
+                string jiuzhenInfo_str = WebApiHelper.SerializeObject(jiuzhenInfo);
 
                 YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
-
-                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str,"0","0");
+                 
+                ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, diseinfoList_str, jiuzhenInfo_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str, "0", "1");
 
                 object[] objparam = new object[3];
                 if (doct_code=="")

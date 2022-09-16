@@ -223,6 +223,12 @@
     <Compile Include="Forms\Pages\hbgl\DocOutManage.Designer.cs">
       <DependentUpon>DocOutManage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\hbgl\DoctoutGhRequest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\hbgl\DoctoutGhRequest.Designer.cs">
+      <DependentUpon>DoctoutGhRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\hbgl\LsHbwh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -765,6 +771,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\DocOutManage.resx">
       <DependentUpon>DocOutManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\hbgl\DoctoutGhRequest.resx">
+      <DependentUpon>DoctoutGhRequest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\hbgl\LsHbwh.resx">
       <DependentUpon>LsHbwh.cs</DependentUpon>

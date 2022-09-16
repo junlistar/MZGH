@@ -157,7 +157,7 @@ namespace Mzsf.Forms.Pages
 
                         BindUserInfo(userInfo);
 
-                       
+
 
                         BindOrders(userInfo.patient_id);
                     }
@@ -378,8 +378,8 @@ namespace Mzsf.Forms.Pages
                 lblstreet.Text = userInfo.home_street;
                 txtHicno.Text = userInfo.hic_no;
 
-                lblTimes.Text = "来访号：" + (userInfo.max_times+1);
-                lblTimes.Tag =( userInfo.max_times+1);
+                lblTimes.Text = "来访号：" + (userInfo.max_times + 1);
+                lblTimes.Tag = (userInfo.max_times + 1);
 
                 if (!string.IsNullOrEmpty(userInfo.home_district))
                 {
@@ -737,6 +737,14 @@ namespace Mzsf.Forms.Pages
 
             current_patient_id = "";
 
+            current_times = 0;
+            current_unit_sn = "";
+            current_unit_name = "";
+            current_doct_name = "";
+            current_doct_sn = "";
+            current_patient_id = "";
+            current_icd_code = "";
+
             SessionHelper.patientVM = null;
             SessionHelper.mzOrders = null;
             SessionHelper.cprCharges = null;
@@ -904,7 +912,7 @@ namespace Mzsf.Forms.Pages
             Reset();
         }
         public void Reset()
-        { 
+        {
             InitUI();
 
             txtCode.Text = "";

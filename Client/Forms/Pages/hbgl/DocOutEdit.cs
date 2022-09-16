@@ -82,6 +82,7 @@ namespace Client.Forms.Pages.hbgl
                 if (!string.IsNullOrWhiteSpace(txtDoct.Text))
                 {  
                     vm.doctor_id = txtDoct.TagString;
+                    vm.doctor_name = txtDoct.Text;
                     vm.begin_date = txtDate.Value;
                     vm.end_date = txtDate2.Value.AddDays(1).AddSeconds(-1);
                     vm.is_delete = 0;//chk_status.Checked ? 0 : 1;
@@ -91,8 +92,7 @@ namespace Client.Forms.Pages.hbgl
                         lblErrorMsg.Text = "开始日期必须大于结束日期";
                         return;
                     }
-
-
+                     
                     //查询当前医生的停诊信息
                     var paramurl = string.Format($"/api/GuaHao/GetGhDoctorOutsByParams?doctor_id={ vm.doctor_id}&date1=");
                     var json = HttpClientUtil.Get(paramurl);
@@ -114,6 +114,36 @@ namespace Client.Forms.Pages.hbgl
                         }
                     }
 
+                    //1.停诊提交时，如果停诊期间存在已生成的排班数据，需要提示是否更新
+
+                    //2.要展示已经挂出了多少号和列出已经生成的排班数据，然后选择是否更新
+
+                    //3.最后一步要提示如有疑问，请到号表维护处理。
+
+                    //查询停诊期间存在的已生成排版数据
+
+                    paramurl = string.Format($"/api/GuaHao/GetExistGhrequest?doctor_sn={vm.doctor_id}&t1={vm.begin_date}&t2={vm.end_date}");
+                    json = HttpClientUtil.PostJSON(paramurl, vm);
+                    var ghresult = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
+                    if (ghresult.status==1)
+                    {
+                        if (ghresult.data!=null)
+                        {
+                            //列出已经生成的排班数据
+                            if (UIMessageDialog.ShowAskDialog(this,"停诊期间存在已生成的排班数据，是否更新？"))
+                            {
+                                DoctoutGhRequest doctoutGh = new DoctoutGhRequest();
+                                doctoutGh.list = ghresult.data;
+                                doctoutGh.doct_name = vm.doctor_name;
+                                doctoutGh.doct_sn = vm.doctor_id;
+                                doctoutGh.t1 = vm.begin_date.ToString("yyyy-MM-dd HH:mm:ss");
+                                doctoutGh.t2 = vm.end_date.ToString("yyyy-MM-dd HH:mm:ss");
+
+                                doctoutGh.ShowDialog(); 
+
+                            } 
+                        } 
+                    } 
                     paramurl = string.Format($"/api/GuaHao/UpdateGhDoctorOut");
                     json = HttpClientUtil.PostJSON(paramurl, vm);
                     var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);

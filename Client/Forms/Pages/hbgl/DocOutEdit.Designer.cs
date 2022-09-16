@@ -212,7 +212,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DocOutEdit";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "医生停诊编辑";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.DocOutEdit_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocOutEdit_KeyDown);

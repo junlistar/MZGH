@@ -73,10 +73,15 @@ namespace Data.Entities
         public List<InsuInfo> insuinfo { get; set; }
         public List<IdetInfo> idetinfo { get; set; }
 
-        
+        public JiuzhenInfo jiuzhenInfo { get; set; }
+
+        public List<Diseinfo> diseinfo { get; set; }
+
     }
     public class BaseInfo
     {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string psn_no { get; set; }
         public string psn_cert_type { get; set; }
         public string certno { get; set; }
@@ -89,7 +94,9 @@ namespace Data.Entities
 
     }
     public class InsuInfo
-    { 
+    {
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public decimal balc { get; set; }
         public string insutype { get; set; }
         public string psn_insu_stas { get; set; }
@@ -101,7 +108,8 @@ namespace Data.Entities
         public string emp_name { get; set; }
     }
     public class IdetInfo {
-
+        public string patient_id { get; set; }
+        public string admiss_times { get; set; }
         public string psn_idet_type { get; set; }
         public string psn_type_lv { get; set; }
         public string memo { get; set; }
@@ -193,6 +201,22 @@ namespace Data.Entities
         public string dise_dor_name { get; set; }
         public string diag_time { get; set; }
         public string vali_flag { get; set; }
+    }
+
+    public class JiuzhenInfo
+    { 
+        public string atddr_no { get; set; }
+        public string dr_name { get; set; }
+        public string dept_code { get; set; }
+        public string dept_name { get; set; }
+        public string med_type { get; set; }
+        public string psn_setlway { get; set; }
+        public string acct_used_flag { get; set; }
+        public string psn_no { get; set; }
+        public string insutype { get; set; }
+        public string caty { get; set; }
+        public string caty_name { get; set; }
+        public string mdtrt_cert_type { get; set; }
     }
 
 

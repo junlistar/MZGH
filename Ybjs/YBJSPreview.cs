@@ -136,21 +136,42 @@ namespace YbjsLib
 
                 txtDoct.TextChanged -= txtDoct_TextChanged;
                 txtks.TextChanged -= txtks_TextChanged;
+                 
 
-                var _dept = YBHelper.unitList.Where(p => p.unit_sn == dept_sn).FirstOrDefault();
-                var _doct = YBHelper.doctList.Where(p => p.code == doct_sn || p.yb_ys_code == doct_sn).FirstOrDefault();
-                if (_dept != null)
+                if (YBHelper.jiuzhenInfo != null)
                 {
-                    txtks.Text = _dept.name;
-                    txtks.TagString = _dept.unit_sn;
-                    caty_code.Text = _dept.yb_ks_code;
-                    caty_name.Text = _dept.yb_ks_name;
+                    txtDoct.TagString = YBHelper.jiuzhenInfo.atddr_no;
+                    txtDoct.Text = YBHelper.jiuzhenInfo.dr_name;
+
+                    txtks.Text = YBHelper.jiuzhenInfo.dept_name;
+                    txtks.TagString = YBHelper.jiuzhenInfo.dept_code;
+                    caty_code.Text = YBHelper.jiuzhenInfo.caty;
+                    caty_name.Text = YBHelper.jiuzhenInfo.caty_name;
+
+                    med_type.SelectedValue = YBHelper.jiuzhenInfo.med_type;
+                    psn_setlway.SelectedValue = YBHelper.jiuzhenInfo.psn_setlway;
+                    chkuse_flag.Checked = YBHelper.jiuzhenInfo.acct_used_flag=="1";
+                    jz_insutype.SelectedValue = YBHelper.jiuzhenInfo.insutype;
+                    mdtrt_cert_type.SelectedValue = YBHelper.jiuzhenInfo.mdtrt_cert_type;
                 }
-
-                if (_doct != null)
+                else
                 {
-                    txtDoct.TagString = _doct.yb_ys_code;
-                    txtDoct.Text = _doct.name;
+                    //不同身份医保支付接口会获取不到科室医生信息
+                    var _dept = YBHelper.unitList.Where(p => p.unit_sn == dept_sn).FirstOrDefault();
+                    var _doct = YBHelper.doctList.Where(p => p.code == doct_sn || p.yb_ys_code == doct_sn).FirstOrDefault();
+                    if (_dept != null)
+                    {
+                        txtks.Text = _dept.name;
+                        txtks.TagString = _dept.unit_sn;
+                        caty_code.Text = _dept.yb_ks_code;
+                        caty_name.Text = _dept.yb_ks_name;
+                    }
+
+                    if (_doct != null)
+                    {
+                        txtDoct.TagString = _doct.yb_ys_code;
+                        txtDoct.Text = _doct.name;
+                    }
                 }
 
 
@@ -179,7 +200,7 @@ namespace YbjsLib
                     LoadIcdData();
                 }
 
-                if (YBHelper.edit_diseinfo=="1")
+                if (YBHelper.edit_diseinfo == "1")
                 {
                     btnAddzd.Show();
                     btnDelZd.Show();
@@ -221,7 +242,7 @@ namespace YbjsLib
                 jsRequest.fixmedins_name = YBHelper.fixmedins_name;
                 jsRequest.sign_no = YBHelper.msgid;
                 jsRequest.input = new RepModel<MZJS2207A>();
-                 
+
 
                 MZJS2207A _mzyjs = new MZJS2207A();
                 _mzyjs.psn_no = psn_no;
@@ -235,7 +256,7 @@ namespace YbjsLib
                 _mzyjs.insutype = jz_insutype.SelectedValue.ToString(); //GuaHao.PatientVM.yb_insutype;
                 _mzyjs.acct_used_flag = chkuse_flag.Checked ? "1" : "0";//0 否 1 是
 
-                if (yjsResponse!=null)
+                if (yjsResponse != null)
                 {
                     _mzyjs.fulamt_ownpay_amt = yjsResponse.setlinfo.fulamt_ownpay_amt;
                     _mzyjs.overlmt_selfpay = yjsResponse.setlinfo.overlmt_selfpay;
@@ -716,7 +737,7 @@ namespace YbjsLib
                     dgvys.Columns["py_code"].Visible = false;
                     dgvys.Columns["d_code"].Visible = false;
                     dgvys.Columns["emp_sn"].Visible = false;
-                    dgvys.Columns["dept_sn"].Visible = false;  
+                    dgvys.Columns["dept_sn"].Visible = false;
                     dgvys.Columns["dept_name"].Visible = false;
                     dgvys.AutoResizeColumns();
 
@@ -1054,11 +1075,11 @@ namespace YbjsLib
             //获取参保地信息，显示到界面，并传入预结算
             var _index = dgv_cbxx.SelectedIndex;
             var _insuplc_admdvs = dgv_cbxx.Rows[_index].Cells["insuplc_admdvs"].Value;
-            if (_insuplc_admdvs!=null)
+            if (_insuplc_admdvs != null)
             {
                 lbl_insplcadmdvs.Text = _insuplc_admdvs.ToString();
                 insuplcAdmdvs = _insuplc_admdvs.ToString();
-            } 
+            }
         }
     }
 }

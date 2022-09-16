@@ -32,7 +32,7 @@ namespace YbjsLib.Model
         public static UserInfoResponseModel userInfoResponseModel;
         public static GHResponseModel gHResponseModel;
         public static MzjsResponse mzjsResponse;
-
+        public static JiuzhenInfo jiuzhenInfo; 
 
         public static List<InsutypeVM> insutypes;
         public static List<BirctrlTypeVM> birctrlTypes;

@@ -121,4 +121,20 @@ namespace YbjsLib.Model
         public string yb_ks_code { get; set; }
         public string yb_ks_name { get; set; }
     }
+    public class JiuzhenInfo
+    {
+        public string atddr_no { get; set; }
+        public string dr_name { get; set; }
+        public string dept_code { get; set; }
+        public string dept_name { get; set; }
+        public string med_type { get; set; }
+        public string psn_setlway { get; set; }
+        public string acct_used_flag { get; set; }
+        public string psn_no { get; set; }
+        public string insutype { get; set; }
+        public string caty { get; set; }
+        public string caty_name { get; set; }
+        public string mdtrt_cert_type { get; set; }
+    }
+
 }

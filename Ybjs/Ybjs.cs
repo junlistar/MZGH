@@ -25,7 +25,7 @@ namespace YbjsLib
         }
 
 
-        public void Init(string ybhzComaper_str, string doctList_str, string unitList_str, string icdCodes_str, string diagTypeList_str,
+        public void Init(string ybhzComaper_str, string doctList_str, string unitList_str, string icdCodes_str, string diagTypeList_str,string diseinfoList_str,string jiuzhenInfo_str,
             string chargeItems_str, string insutypes_str, string birctrlTypes_str, string medTypes_str, string mdtrtCertTypes_str, string yb_identity_only = "0", string edit_diseinfo = "0")
         {
             try
@@ -43,7 +43,7 @@ namespace YbjsLib
                 YBHelper.medTypes = WebApiHelper.DeserializeObject<List<MedTypeVM>>(medTypes_str);
                 YBHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<List<MdtrtCertTypeVM>>(mdtrtCertTypes_str);
 
-                //YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
+                YBHelper.diseinfoList = WebApiHelper.DeserializeObject<List<Diseinfo>>(diseinfoList_str);
                 YBHelper.chargeItems = WebApiHelper.DeserializeObject<List<YBChargeItem>>(chargeItems_str);
                  
                 if (HttpClientFactory.GetHttpClient().BaseAddress == null)
@@ -54,14 +54,14 @@ namespace YbjsLib
                 YBHelper.yb_identity_only = yb_identity_only;
                 YBHelper.edit_diseinfo = edit_diseinfo;
 
+                YBHelper.jiuzhenInfo = WebApiHelper.DeserializeObject<JiuzhenInfo>(jiuzhenInfo_str);
+                 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-
+        } 
         public string M1101(string opter, string opter_name)
         {
             try

@@ -140,6 +140,12 @@ namespace Client.ViewModel
             }
         }
 
+        public int ygsl
+        {
+            get { return current_no - begin_no; }
+        }
+             
+
 
     }
 

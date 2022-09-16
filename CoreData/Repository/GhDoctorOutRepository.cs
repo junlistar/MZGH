@@ -57,8 +57,23 @@ namespace Data.Repository
                 para.Add("@is_delete", _mod.is_delete);  
 
                 return connection.Execute(sql, para) > 0;
-            }
+            } 
+        }
 
+        public List<BaseRequest> GetExistGhrequest(string doctor_sn,string t1,string t2)
+        {
+            
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                var para = new DynamicParameters();
+                string sql = GetSqlByTag("mzgh_ghrequest_getbydoctdate");
+                 
+                para.Add("@doctor_sn", doctor_sn);
+                para.Add("@P1", t1);
+                para.Add("@P2", t2); 
+
+                return connection.Query<BaseRequest>(sql, para).ToList();
+            }
         }
 
     }

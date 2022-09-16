@@ -31,15 +31,15 @@ namespace Client.Forms.Pages
                 UIMessageTip.ShowError("加载背景图片失败！");
                 log.Error(ex.ToString());
             }
-            UIButton btn1 = new UIButton();
-            btn1.Style = UIStyle.Green;
-            btn1.StyleCustomMode = true;
-            btn1.Text = "按钮"; 
-            btn1.Width = 86;
-            btn1.Height = 31; 
+            //UIButton btn1 = new UIButton();
+            //btn1.Style = UIStyle.Green;
+            //btn1.StyleCustomMode = true;
+            //btn1.Text = "按钮"; 
+            //btn1.Width = 86;
+            //btn1.Height = 31; 
 
-            listBox1.Items.Add(btn1);
-            listBox1.Items.Add("212313123");
+            //listBox1.Items.Add(btn1);
+            //listBox1.Items.Add("212313123");
         }
     }
 }

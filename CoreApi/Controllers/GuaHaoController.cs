@@ -1271,5 +1271,18 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+        public ResponseResult<List<BaseRequest>> GetExistGhrequest(string doctor_sn, string t1, string t2)
+        {
+            Log.Information($"GetExistGhrequest,{doctor_sn},{t1},{t2}");
+            try
+            {
+                return _ghDocOutRepository.GetExistGhrequest(doctor_sn, t1,t2);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<BaseRequest>>(ex.Message);
+            }
+        } 
     }
 }

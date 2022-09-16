@@ -26,7 +26,7 @@ namespace CoreApi.Controllers
     [Route("api/[controller]/[action]")]
     public class YbInfoController : ApiControllerBase
     {
-        private readonly IMzWebReportRepository _mzWebReportRepository;  
+        private readonly IMzWebReportRepository _mzWebReportRepository;
         private readonly IYbInfoRepository _ybInfoRepository;
 
         public YbInfoController(IMzWebReportRepository mzWebReportRepository, IYbInfoRepository ybInfoRepository)
@@ -41,7 +41,7 @@ namespace CoreApi.Controllers
             return "ok";
         }
 
-      
+
         public ResponseResult<bool> AddYB1101()
         {
             Log.Information($"AddYB1101,");
@@ -143,7 +143,7 @@ namespace CoreApi.Controllers
         {
             Log.Information($"GetInsutypes,");
             try
-            {    
+            {
                 return _ybInfoRepository.GetInsutypes();
             }
             catch (Exception ex)
@@ -223,6 +223,19 @@ namespace CoreApi.Controllers
             try
             {
                 return _ybInfoRepository.GetYjsUserInfo(patient_id, admiss_times);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<UserInfoResponseModel>(ex.Message);
+            }
+        }
+        public ResponseResult<UserInfoResponseModel> GetYBCardInfo(string patient_id, int admiss_times, string doctor_code, string apply_unit)
+        {
+            Log.Information($"GetYBCardInfo");
+            try
+            {
+                return _ybInfoRepository.GetYBCardInfo(patient_id, admiss_times, doctor_code, apply_unit);
             }
             catch (Exception ex)
             {

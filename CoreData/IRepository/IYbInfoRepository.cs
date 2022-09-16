@@ -35,6 +35,8 @@ namespace Data.IRepository
 
         UserInfoResponseModel GetYjsUserInfo(string patient_id, int admiss_times);
 
+        UserInfoResponseModel GetYBCardInfo(string patient_id, int admiss_times, string doctor_code, string apply_unit);
+
         #endregion
     }
 }

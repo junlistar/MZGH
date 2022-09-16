@@ -478,5 +478,52 @@ where patient_id = @patient_id and admiss_times = @admiss_times";
             }
         }
 
+        public UserInfoResponseModel GetYBCardInfo(string patient_id,int admiss_times,string doctor_code,string apply_unit)
+        {
+            try
+            {
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                {
+                    UserInfoResponseModel responseModel = new UserInfoResponseModel();
+
+                    IDbTransaction transaction = connection.BeginTransaction();
+
+                    try
+                    {
+                        var para = new DynamicParameters();
+                        para.Add("@patient_id", patient_id);
+                        para.Add("@admiss_times", admiss_times);
+                        para.Add("@doctor_code", doctor_code);
+                        para.Add("@apply_unit", apply_unit);
+                        var _reader = connection.QueryMultiple("ybNew_getCardInfo", para, transaction, null, CommandType.StoredProcedure);
+
+                        responseModel.baseinfo = _reader.Read<BaseInfo>().FirstOrDefault();
+
+                        responseModel.insuinfo = _reader.Read<InsuInfo>().ToList();
+
+                        responseModel.idetinfo = _reader.Read<IdetInfo>().ToList();
+
+                        responseModel.jiuzhenInfo = _reader.Read<JiuzhenInfo>().FirstOrDefault();
+
+                        responseModel.diseinfo = _reader.Read<Diseinfo>().ToList();
+                         
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                    return responseModel;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
     }
 }

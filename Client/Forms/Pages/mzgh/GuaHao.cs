@@ -436,17 +436,15 @@ namespace Client
                         btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
                     }
                     btn1.Click += btnks_Click;
-                    gbxUnits.Add(btn1);
-
-                   
+                    gbxUnits.Add(btn1); 
                 }
-                var _clist = gbxUnits.GetAllControls();
-                if (_clist != null && _clist.Count > 3)
-                {
-                   var _btn = _clist[3] as UIButton; 
-                    ActiveControl = _btn; _btn.Focus();
-                    _btn.Style = UIStyle.Red;
-                }
+                //var _clist = gbxUnits.GetAllControls();
+                //if (_clist != null && _clist.Count > 3)
+                //{
+                //   var _btn = _clist[3] as UIButton; 
+                //    ActiveControl = _btn; _btn.Focus();
+                //    _btn.Style = UIStyle.Red;
+                //}
                 #endregion
             }
             catch (Exception ex)

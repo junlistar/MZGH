@@ -311,7 +311,7 @@ namespace Mzsf.Forms.Pages
                     charge_price = q.orig_price,
                     charge_amount = q.charge_amount,
                     caoyao_fu = q.caoyao_fu,
-                    total_price = q.charge_price,
+                    total_price = q.total_price,
                     fybl = "",
                     yongfa = "",
                     comment = q.comment,
