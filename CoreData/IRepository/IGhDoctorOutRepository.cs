@@ -17,6 +17,8 @@ namespace Data.IRepository
 
         List<BaseRequest> GetExistGhrequest(string doctor_sn, string t1, string t2);
 
+        bool UpdateGhOpenFlag(string record_str);
+
 
         #endregion
     }

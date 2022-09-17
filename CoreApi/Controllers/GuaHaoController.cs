@@ -1283,6 +1283,19 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<BaseRequest>>(ex.Message);
             }
+        }
+        public ResponseResult<bool> UpdateGhOpenFlag(string record_str)
+        {
+            Log.Information($"UpdateGhOpenFlag,{record_str}");
+            try
+            {    
+                return _ghDocOutRepository.UpdateGhOpenFlag(record_str);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
         } 
     }
 }

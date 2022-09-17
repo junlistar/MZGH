@@ -62,7 +62,7 @@ namespace Client
         UIHeaderAsideMainFooterFrame parentForm;
 
         //科室搜索框
-        UIListBox lstunits = new UIListBox();
+        //UIListBox lstunits = new UIListBox();
 
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
@@ -1689,6 +1689,17 @@ namespace Client
 
                 BindUnit(_source); isBreadHandleSet = true;
                 uiBreadcrumb2.ItemIndex = 0;
+
+                //下拉listbox
+                lstunits.Items.Clear();
+
+                foreach (var key in requestDic.Keys)
+                {
+                    if (_list.Where(p => p.name == key).Count() > 0)
+                    {
+                        lstunits.Items.Add(key);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -1701,11 +1712,34 @@ namespace Client
         {
             if (e.KeyCode == Keys.Down)
             {
+                this.lstunits.Focus();
+                if (lstunits.Items.Count > 0)
+                {
+                    lstunits.SelectedIndex = 0;
+                }
 
             }
             else if (e.KeyCode == Keys.Enter)
             {
                 FilterGuahaoData();
+            }
+        }
+        private void lstunits_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (lstunits.Items.Count > 0)
+                {
+                    if (lstunits.SelectedIndex == -1)
+                    {
+                        request_key = lstunits.Items[0].ToString();
+                    }
+                    else
+                    {
+                        request_key = lstunits.SelectedItem.ToString();
+                    }
+                    //todo: 选择挂号科室 
+                }
             }
         }
 

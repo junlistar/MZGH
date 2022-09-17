@@ -149,7 +149,7 @@ namespace Client.Forms.Pages.hbgl
                     var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                     if (result1.status == 1)
                     {
-                        UIMessageTip.ShowOk("保存成功！");
+                        UIMessageTip.ShowOk("保存停诊日期成功！如有疑问，请到号表维护处理！");
                         DialogResult = DialogResult.OK;
                         this.Close();
                     }

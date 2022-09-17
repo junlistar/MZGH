@@ -389,6 +389,14 @@ namespace YbjsLib.Model
 
     #endregion
 
+    public class MzjsPrintModel
+    {
+        public string mdtrt_id { get; set; }
+        public string setl_id { get; set; }
+        public string psn_no { get; set; }
+        public string med_type { get; set; }
+    }
+
 
     #region 门诊结算请求模型
 

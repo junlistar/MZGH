@@ -299,6 +299,52 @@ namespace YbjsLib
                     YBHelper.mzjsResponse = _jsresp.output;
                     var setl_id = _jsresp.output.setlinfo.setl_id;
                     //log.Debug($"医保结算成功:patient_id:{patient_id},admiss_times:{admiss_times},setl_id:{setl_id}");
+
+                    //医保结算打印单据
+                    //门诊结算
+                    var jsPrint = new YBRequest<MzjsPrintModel>();
+                    jsPrint.infno = "YH03";
+
+                    jsPrint.msgid = YBHelper.msgid;
+                    jsPrint.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
+                    jsPrint.insuplc_admdvs = insuplcAdmdvs;
+                    jsPrint.recer_sys_code = YBHelper.recer_sys_code;
+                    jsPrint.dev_no = "";
+                    jsPrint.dev_safe_info = "";
+                    jsPrint.cainfo = "";
+                    jsPrint.signtype = "";
+                    jsPrint.infver = YBHelper.infver;
+                    jsPrint.opter_type = YBHelper.opter_type;
+                    jsPrint.opter = opter;
+                    jsPrint.opter_name = opter_name;
+                    jsPrint.inf_time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                    jsPrint.fixmedins_code = YBHelper.fixmedins_code;
+                    jsPrint.fixmedins_name = YBHelper.fixmedins_name;
+                    jsPrint.sign_no = YBHelper.msgid;
+                    jsPrint.input = new RepModel<MzjsPrintModel>();
+
+                    MzjsPrintModel mzjsPrintModel = new MzjsPrintModel();
+                    mzjsPrintModel.mdtrt_id = _jsresp.output.setlinfo.mdtrt_id;
+                    mzjsPrintModel.psn_no = _jsresp.output.setlinfo.psn_no;
+                    mzjsPrintModel.med_type = _jsresp.output.setlinfo.med_type;
+                    mzjsPrintModel.setl_id = _jsresp.output.setlinfo.setl_id;
+
+                    jsPrint.input.data = mzjsPrintModel;
+
+                    json = WebApiHelper.SerializeObject(jsRequest);
+                    BusinessID = "YH03";
+                     Dataxml = json;
+                     Outputxml = "";
+                     parm = new object[] { BusinessID, json, Outputxml };
+
+                    //提交门诊挂号结算信息
+                    YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jsRequest.sign_no, jsRequest.infver, 0, opter, jsRequest.inf_time);
+
+                    result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+                    YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), patient_id, jsRequest.sign_no, jsRequest.infver, 1, opter, jsRequest.inf_time);
+
+
                 }
                 DialogResult = DialogResult.OK;
                 this.Close();
