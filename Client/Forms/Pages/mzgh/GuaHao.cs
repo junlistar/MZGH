@@ -436,6 +436,11 @@ namespace Client
                         btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize);
                     }
                     btn1.Click += btnks_Click;
+
+                    btn1.Enter += Btn1_Enter;
+                    btn1.Leave += Btn1_Leave;
+                    btn1.KeyUp += Btn1_KeyUp;
+
                     gbxUnits.Add(btn1); 
                 }
                 //var _clist = gbxUnits.GetAllControls();
@@ -445,12 +450,40 @@ namespace Client
                 //    ActiveControl = _btn; _btn.Focus();
                 //    _btn.Style = UIStyle.Red;
                 //}
+
+                var _cts = gbxUnits.GetAllControls();
+                if (_cts.Count > 3)
+                {
+                    var _btn = _cts[3] as UIButton;
+                    _btn.Focus();
+                }
                 #endregion
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.ToString());
+            }
+        }
+        private void Btn1_Leave(object sender, EventArgs e)
+        {
+            var _btn = sender as UIButton;
+            _btn.Style = UIStyle.LayuiGreen;
+        }
+
+        private void Btn1_Enter(object sender, EventArgs e)
+        {
+            var _btn = sender as UIButton;
+            _btn.Style = UIStyle.Red;
+            UIMessageTip.Show(_btn.Text);
+        }
+        private void Btn1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var _btn = sender as UIButton;
+                UIMessageTip.Show(_btn.Text);
+                btnks_Click(sender, e);
             }
         }
 
@@ -1690,16 +1723,16 @@ namespace Client
                 BindUnit(_source); isBreadHandleSet = true;
                 uiBreadcrumb2.ItemIndex = 0;
 
-                //下拉listbox
-                lstunits.Items.Clear();
+                ////下拉listbox
+                //lstunits.Items.Clear();
 
-                foreach (var key in requestDic.Keys)
-                {
-                    if (_list.Where(p => p.name == key).Count() > 0)
-                    {
-                        lstunits.Items.Add(key);
-                    }
-                }
+                //foreach (var key in requestDic.Keys)
+                //{
+                //    if (_list.Where(p => p.name == key).Count() > 0)
+                //    {
+                //        lstunits.Items.Add(key);
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -1712,11 +1745,11 @@ namespace Client
         {
             if (e.KeyCode == Keys.Down)
             {
-                this.lstunits.Focus();
-                if (lstunits.Items.Count > 0)
-                {
-                    lstunits.SelectedIndex = 0;
-                }
+                //this.lstunits.Focus();
+                //if (lstunits.Items.Count > 0)
+                //{
+                //    lstunits.SelectedIndex = 0;
+                //}
 
             }
             else if (e.KeyCode == Keys.Enter)

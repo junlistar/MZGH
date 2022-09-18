@@ -942,6 +942,7 @@
             this.lstunits.Size = new System.Drawing.Size(270, 180);
             this.lstunits.TabIndex = 19;
             this.lstunits.Text = "uiListBox1";
+            this.lstunits.Visible = false;
             this.lstunits.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.lstunits.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstunits_KeyUp);
             // 
