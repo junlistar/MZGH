@@ -255,7 +255,7 @@ namespace Client
                                 dgvlist.Columns["open_flag" + _name_index].Visible = false;
                             }
                             else
-                            {
+                            { 
                                 //dgvlist.Columns["sn"].Visible = false;
                                 dgvlist.Columns["bc"].HeaderText = "班次";
                                 dgvlist.Columns["xe"].HeaderText = "限额";
@@ -280,7 +280,8 @@ namespace Client
                         dgvlist.Columns["doct_name"].HeaderText = "出诊医生";
                         //dgvlist.Columns["group_name"].HeaderText = "出诊科室";
 
-
+                        //左侧冻结
+                        dgvlist.Columns["doct_name"].Frozen = true;
 
                         //dgvlist.Columns["unit_sn"].Visible= false;
                         //dgvlist.Columns["group_sn"].Visible = false;

@@ -67,6 +67,8 @@ namespace Client
         Client.Forms.Wedgit.KeySuggest ks;
         bool isBreadHandleSet = false;//维护是否是手动设置面包屑状态
 
+        bool isKeyEnter = false;//如果是回车确认筛选挂号数据
+
 
         public void GuaHao_Load(object sender, EventArgs e)
         {
@@ -77,8 +79,18 @@ namespace Client
                 log.Debug("Load");
                 log.Debug((new System.Diagnostics.StackTrace().GetFrame(0).GetMethod()).Name);
 
+
                 log.Debug("初始化界面控件显示");
                 InitUIText();
+
+
+                //查询并设置发票
+                ReceiptInit receiptInit = new ReceiptInit();
+                if (receiptInit.ShowDialog() == DialogResult.OK)
+                {
+
+                };
+
 
                 parentForm = this.Parent as UIHeaderAsideMainFooterFrame;
 
@@ -443,20 +455,21 @@ namespace Client
 
                     gbxUnits.Add(btn1); 
                 }
-                //var _clist = gbxUnits.GetAllControls();
-                //if (_clist != null && _clist.Count > 3)
-                //{
-                //   var _btn = _clist[3] as UIButton; 
-                //    ActiveControl = _btn; _btn.Focus();
-                //    _btn.Style = UIStyle.Red;
-                //}
 
-                var _cts = gbxUnits.GetAllControls();
-                if (_cts.Count > 3)
+                //如果是回车操作，默认选择第一项
+                if (isKeyEnter)
                 {
-                    var _btn = _cts[3] as UIButton;
-                    _btn.Focus();
+                    isKeyEnter = false;
+                    var _cts = gbxUnits.GetAllControls();
+                    if (_cts.Count > 3)
+                    {
+                        var _btn = _cts[3] as UIButton;
+                        _btn.Focus();
+                    }
                 }
+               
+
+
                 #endregion
             }
             catch (Exception ex)
@@ -475,17 +488,27 @@ namespace Client
         {
             var _btn = sender as UIButton;
             _btn.Style = UIStyle.Red;
-            UIMessageTip.Show(_btn.Text);
+            //UIMessageTip.Show(_btn.Text);
         }
         private void Btn1_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 var _btn = sender as UIButton;
-                UIMessageTip.Show(_btn.Text);
+                //UIMessageTip.Show(_btn.Text);
                 btnks_Click(sender, e);
+                e.Handled = true;
             }
         }
+        private void Btn2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                var _btn = sender as UIButton;
+                btnClinic_Click(sender, e);
+            }
+        }
+
 
         /// <summary>
         /// 绑定专科医生数据
@@ -596,7 +619,19 @@ namespace Client
                 btn1.Text += " (￥" + list[i].je + "元)";
 
                 btn1.Click += btnClinic_Click;
+                 
+                btn1.Enter += Btn1_Enter;
+                btn1.Leave += Btn1_Leave;
+                btn1.KeyDown += Btn2_KeyUp;
+
                 gbxUnits.Add(btn1);
+            }
+
+            var _cts = gbxUnits.GetAllControls();
+            if (_cts.Count > 3)
+            {
+                var _btn = _cts[3] as UIButton;
+                _btn.Focus();
             }
             #endregion
         }
@@ -622,7 +657,7 @@ namespace Client
                         }
 
                         SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
-                        fe.ShowDialog();
+                        var _dr = fe.ShowDialog();
 
                         uiBreadcrumb2.ItemIndex = 0;
                         //打印发票
@@ -1654,6 +1689,8 @@ namespace Client
         private void GuaHao_Initialize(object sender, EventArgs e)
         {
             // this.Focus();
+
+
         }
 
 
@@ -1720,8 +1757,11 @@ namespace Client
                     }
                 }
 
-                BindUnit(_source); isBreadHandleSet = true;
+                isBreadHandleSet = true;
                 uiBreadcrumb2.ItemIndex = 0;
+
+                BindUnit(_source);
+
 
                 ////下拉listbox
                 //lstunits.Items.Clear();
@@ -1754,6 +1794,7 @@ namespace Client
             }
             else if (e.KeyCode == Keys.Enter)
             {
+                isKeyEnter = true;
                 FilterGuahaoData();
             }
         }

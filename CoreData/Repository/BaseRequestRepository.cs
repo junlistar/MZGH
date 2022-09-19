@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using Serilog;
 
 namespace Data.Repository
 {
@@ -68,7 +69,7 @@ namespace Data.Repository
             else
             {
                 //医生不为空，则日期，上下午，医生 唯一条件
-                sql = @"select * from gh_base_request where week=@week and ampm=@ampm and doctor_sn=@doctor_sn";
+                sql = @"select * from gh_base_request where day=@day and ampm=@ampm and doctor_sn=@doctor_sn";
             }
             para.Add("@week", item.week);
             para.Add("@day", item.day);
@@ -89,15 +90,22 @@ namespace Data.Repository
             para.Add("@doctor_sn", item.doctor_sn);
             para.Add("@clinic_type", item.clinic_type);
 
-
+            Log.Debug(sql);
+            Log.Debug(item.day.ToString());
+            Log.Debug(item.ampm);
+            Log.Debug(item.doctor_sn);
             var requestlist = Select(sql, para);
 
-            if (requestlist != null && requestlist.Count > 0)
+            Log.Debug(requestlist.Count.ToString());
+
+            var _existCount = requestlist.Where(p => p.request_sn != item.request_sn).Count();
+
+            Log.Debug(_existCount.ToString());
+
+            if (requestlist != null && _existCount > 0)
             {
-                if (string.IsNullOrEmpty(item.request_sn) || requestlist.Where(p => p.request_sn != item.request_sn).Count() > 0)
-                {
-                    return true;
-                }
+                Log.Debug(sql);
+                return true; 
             }
 
             return false;
@@ -115,6 +123,8 @@ namespace Data.Repository
             baseRequest.clinic_type = clinic_type;
             baseRequest.ampm = ampm;
             baseRequest.group_sn = group_sn;
+            baseRequest.day =int.Parse(day);
+            baseRequest.week = int.Parse(week);
 
             if (IsExistBaseRecord(baseRequest))
             {
@@ -123,7 +133,7 @@ namespace Data.Repository
 
             //修改
             if (!string.IsNullOrEmpty(request_sn))
-            {  
+            {
                 string sql = GetSqlByTag("mzgh_ghbaserequest_update");
                 var para = new DynamicParameters();
                 para.Add("@request_sn", request_sn);
@@ -467,7 +477,7 @@ namespace Data.Repository
         }
 
         public bool CheckGhRepeat(string patient_id, string record_sn)
-        { 
+        {
             string sql = GetSqlByTag("mzgh_mzvisit_checkrepeat");
 
             var para = new DynamicParameters();

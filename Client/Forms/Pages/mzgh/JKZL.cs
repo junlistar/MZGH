@@ -62,16 +62,18 @@ namespace Client
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSave_Click(object sender, EventArgs e)
-        { 
+        {
 
             ////获取数据 
             //MzghLib lib = new MzghLib();
 
             //lib.GuaHao(patientId, vm.record_sn);
 
-           // MessageBox.Show("打印发票");
+            // MessageBox.Show("打印发票");
 
             //this.FormClosed += mainwindow.Main_Load;
+
+            DialogResult = DialogResult.OK;
 
             this.Close();
         }
@@ -94,6 +96,19 @@ namespace Client
                 this.txtzlje.Text = (ipt - pay).ToString("N2");
                 btnSave.Enabled = true;
 
+            }
+        }
+
+        private void JKZL_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode== Keys.Enter)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
         }
     }

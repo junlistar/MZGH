@@ -2136,6 +2136,56 @@ namespace Client
             }
         }
 
+        private void SelectPayType_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //提交
+                log.Info("提交支付");
 
+                TiJiaoZhifu();
+            }
+            else if (e.KeyCode == Keys.NumPad1)
+            {
+                //子控件从第4位开始
+                var _cts = gbxChequelist.GetAllControls();
+                if (_cts.Count>3)
+                { 
+                    ChequeCompare_Click(_cts[3], e);
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad2)
+            {
+                var _cts = gbxChequelist.GetAllControls();
+                if (_cts.Count > 4)
+                {
+                    ChequeCompare_Click(_cts[4], e);
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad3)
+            {
+                var _cts = gbxChequelist.GetAllControls();
+                if (_cts.Count > 5)
+                {
+                    ChequeCompare_Click(_cts[5], e);
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad4)
+            {
+                var _cts = gbxChequelist.GetAllControls();
+                if (_cts.Count > 6)
+                {
+                    ChequeCompare_Click(_cts[6], e);
+                }
+            }
+            else if (e.KeyCode == Keys.NumPad5)
+            {
+                var _cts = gbxChequelist.GetAllControls();
+                if (_cts.Count > 7)
+                {
+                    ChequeCompare_Click(_cts[7], e);
+                }
+            }
+        }
     }
 }

@@ -37,8 +37,8 @@ namespace Client
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                //Application.Run(new FHeaderAsideMainFooter());
-                Application.Run(new Form1());
+                Application.Run(new FHeaderAsideMainFooter());
+                //Application.Run(new Form1());
 
                 //菜单管理
 

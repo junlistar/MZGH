@@ -48,6 +48,7 @@ namespace CoreApi.Controllers
         private readonly IRequestHourRepository _requestHourRepository;
         private readonly IRequestTimeRepository _requestTimeRepository;
         private readonly IGhDoctorOutRepository _ghDocOutRepository;
+        private readonly IGhOpReceiptRepository _ghOpReceiptRepository;
 
         private readonly ICommonRepository _commonRepository;
 
@@ -56,7 +57,8 @@ namespace CoreApi.Controllers
             IGhSearchRepository ghSearchRepository, IUserDicRepository userDicRepository, IChargeTypeRepository chargeTypeRepository, IDistrictCodeRepository districtCodeRepository,
             IOccupationCodeRepository occupationCodeRepository, IResponceTypeRepository responceTypeRepository, IBaseRequestRepository baseRequestRepository,
             IChargeItemRepository chargeItemRepository, IMzHaomingRepository mzHaomingRepository, IReportDataFastRepository reportDataFastRepository, IRequestHourRepository requestHourRepository,
-            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository, IGhDoctorOutRepository ghDocOutRepository, ICommonRepository commonRepository)
+            IReportParamFastRepository reportParamFastRepository, IRequestTimeRepository requestTimeRepository, IGhDoctorOutRepository ghDocOutRepository, ICommonRepository commonRepository,
+            IGhOpReceiptRepository ghOpReceiptRepository)
         {
             _logger = logger;
             _unitRepository = unitRepository;
@@ -81,6 +83,7 @@ namespace CoreApi.Controllers
             _requestTimeRepository = requestTimeRepository;
             _ghDocOutRepository = ghDocOutRepository;
             _commonRepository = commonRepository;
+            _ghOpReceiptRepository = ghOpReceiptRepository;
 
         }
 
@@ -661,13 +664,13 @@ namespace CoreApi.Controllers
         }
 
         public ResponseResult<int> EditBaseRequest(string request_sn, string unit_sn, string group_sn, string doctor_sn, string clinic_type,
-           string week, string day, string ampm, int totle_num, string workroom, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
+           string week, string day, string ampm, int totle_num, string woork_room, string open_flag, string op_id, int temp_flag, int limit_appoint_percent)
         {
-            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{workroom},{open_flag},{op_id},{temp_flag},{limit_appoint_percent}");
+            Log.Information($"EditBaseRequest,{request_sn},{unit_sn},{group_sn},{doctor_sn},{clinic_type},{week},{day},{ampm},{totle_num},{woork_room},{open_flag},{op_id},{temp_flag},{limit_appoint_percent}");
             try
             {
                 return _baseRequestRepository.EditBaseRequest(request_sn, unit_sn, group_sn, doctor_sn, clinic_type,
-            week, day, ampm, totle_num, workroom, open_flag, op_id, temp_flag, limit_appoint_percent);
+            week, day, ampm, totle_num, woork_room, open_flag, op_id, temp_flag, limit_appoint_percent);
             }
             catch (Exception ex)
             {
@@ -1296,6 +1299,35 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        } 
+        }
+        public ResponseResult<List<GhOpReceipt>> GetOpReceipts(string opera)
+        {
+            Log.Information($"GetOpReceipts,{opera}");
+            try
+            {
+                return _ghOpReceiptRepository.GetOpReceipts(opera);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GhOpReceipt>>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> EditOpReceipt()
+        {
+            Log.Information($"EditOpReceipt,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ghOpReceiptRepository.EditOpReceipt(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
     }
 }

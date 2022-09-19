@@ -12,7 +12,9 @@ namespace Data.IRepository
 
         List<GhOpReceipt> GetCurrentReceiptNo(string opera);
 
+        List<GhOpReceipt> GetOpReceipts(string opera);
 
+        bool EditOpReceipt(string jsonStr);
         #endregion
     }
 }

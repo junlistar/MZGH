@@ -118,7 +118,7 @@ namespace Client.Forms.Pages.hbgl
                 }
                 record_str = string.Join(",", recordlist);
 
-                if (string.IsNullOrWhiteSpace(record_str))
+                if (!string.IsNullOrWhiteSpace(record_str))
                 {
                     //todo: update
                     //UpdateGhOpenFlag(string record_str)
@@ -129,7 +129,8 @@ namespace Client.Forms.Pages.hbgl
                     var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                     if (result.status == 1)
                     {
-                        UIMessageBox.ShowSuccess("更新成功！");
+                        UIMessageBox.ShowSuccess("更新排班数据成功！");
+                        DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
@@ -145,6 +146,11 @@ namespace Client.Forms.Pages.hbgl
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.Message);
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

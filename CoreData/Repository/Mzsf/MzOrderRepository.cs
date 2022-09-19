@@ -928,7 +928,7 @@ namespace Data.Repository.Mzsf
                             Serilog.Log.Debug($"不退款，添加一条新数据");
 
                             item.ledger_sn = max_ledger_sn;
-                            item.confirm_date = dt_now;
+                            //item.confirm_date = dt_now;
                             item.enter_date = dt_now;
                             item.happen_date = dt_now;
                             item.price_date = dt_now;

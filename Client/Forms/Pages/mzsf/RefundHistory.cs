@@ -91,7 +91,7 @@ namespace Mzsf.Forms.Pages
                         else
                         {
                             item.is_delete = true;
-                            refund_charge += item.sum_total;
+                            refund_charge += item.total_price;
                         }
                     }
 
@@ -104,7 +104,7 @@ namespace Mzsf.Forms.Pages
                         caoyao_fu = p.caoyao_fu,
                         orig_price = p.orig_price,
                         charge_price = p.charge_price,
-                        sum_total = p.sum_total,
+                        sum_total = p.total_price,
                         charge_code = p.charge_code,
                         order_type = p.order_type,
                         is_delete = p.is_delete,
@@ -118,7 +118,7 @@ namespace Mzsf.Forms.Pages
                     dgvCpr.AutoResizeColumns();
 
                     //退款金额处理
-                    lblZongji.Text = result.data.Sum(p => p.sum_total).ToString();
+                    lblZongji.Text = result.data.Sum(p => p.total_price).ToString();
                     lblTuikuan.Text = refund_charge.ToString();
                     //lblTuikuan.Text = result.data.Sum(p => p.sum_total).ToString();
                 }

@@ -47,7 +47,7 @@
             this.lbl1.Location = new System.Drawing.Point(124, 73);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(87, 23);
-            this.lbl1.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.lbl1.Style = Sunny.UI.UIStyle.Custom;
             this.lbl1.TabIndex = 0;
             this.lbl1.Text = "应交金额:";
             this.lbl1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -59,7 +59,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(128, 122);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(83, 23);
-            this.uiLabel2.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 1;
             this.uiLabel2.Text = "实收金额:";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -71,7 +71,7 @@
             this.uiLabel3.Location = new System.Drawing.Point(128, 169);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(79, 23);
-            this.uiLabel3.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 2;
             this.uiLabel3.Text = "找零金额:";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -97,7 +97,7 @@
             this.txtyjzje.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtyjzje.ShowText = false;
             this.txtyjzje.Size = new System.Drawing.Size(150, 29);
-            this.txtyjzje.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtyjzje.Style = Sunny.UI.UIStyle.Custom;
             this.txtyjzje.TabIndex = 10;
             this.txtyjzje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtyjzje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -121,7 +121,7 @@
             this.txtjkje.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtjkje.ShowText = false;
             this.txtjkje.Size = new System.Drawing.Size(150, 29);
-            this.txtjkje.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtjkje.Style = Sunny.UI.UIStyle.Custom;
             this.txtjkje.TabIndex = 3;
             this.txtjkje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtjkje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -147,7 +147,7 @@
             this.txtzlje.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
             this.txtzlje.ShowText = false;
             this.txtzlje.Size = new System.Drawing.Size(150, 29);
-            this.txtzlje.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.txtzlje.Style = Sunny.UI.UIStyle.Custom;
             this.txtzlje.TabIndex = 5;
             this.txtzlje.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzlje.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -170,7 +170,7 @@
             this.btnSave.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnSave.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnSave.Size = new System.Drawing.Size(100, 35);
-            this.btnSave.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnSave.Style = Sunny.UI.UIStyle.Custom;
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "确定";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -195,7 +195,7 @@
             this.btnCancel.RectPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnCancel.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(109)))));
             this.btnCancel.Size = new System.Drawing.Size(100, 35);
-            this.btnCancel.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.btnCancel.Style = Sunny.UI.UIStyle.Custom;
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "取消";
             this.btnCancel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -208,7 +208,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(375, 76);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(83, 23);
-            this.uiLabel1.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 11;
             this.uiLabel1.Text = "元";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -220,7 +220,7 @@
             this.uiLabel4.Location = new System.Drawing.Point(375, 123);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(83, 23);
-            this.uiLabel4.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 12;
             this.uiLabel4.Text = "元";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -232,7 +232,7 @@
             this.uiLabel5.Location = new System.Drawing.Point(375, 173);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(83, 23);
-            this.uiLabel5.Style = Sunny.UI.UIStyle.LayuiGreen;
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel5.TabIndex = 13;
             this.uiLabel5.Text = "元";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,6 +254,7 @@
             this.Controls.Add(this.uiLabel3);
             this.Controls.Add(this.uiLabel2);
             this.Controls.Add(this.lbl1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "JKZL";
@@ -263,6 +264,7 @@
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 528, 320);
             this.Load += new System.EventHandler(this.JKZL_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.JKZL_KeyUp);
             this.ResumeLayout(false);
 
         }

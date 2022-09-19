@@ -56,6 +56,9 @@
     <None Update="SQLS\mzgh_ghdoctorout_getbydoct.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_ghopreceipt_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_ghrequest_getbydoctdate.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

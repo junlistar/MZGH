@@ -280,6 +280,8 @@ namespace Client
                         dgvlist.Columns["doct_name"].HeaderText = "出诊医生";
                         //dgvlist.Columns["group_name"].HeaderText = "出诊科室";
 
+                        //左侧冻结
+                        dgvlist.Columns["doct_name"].Frozen = true;
 
 
                         //dgvlist.Columns["unit_sn"].Visible= false;

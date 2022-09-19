@@ -423,7 +423,7 @@ namespace Mzsf.Forms.Pages
                         caoyao_fu = p.caoyao_fu,
                         orig_price = p.orig_price,
                         charge_price = p.charge_price,
-                        sum_total = p.sum_total,
+                        sum_total = p.total_price,
                         charge_code = p.charge_code,
                         order_type = p.order_type,
                         confirm_flag = p.confirm_flag,
@@ -448,7 +448,7 @@ namespace Mzsf.Forms.Pages
 
 
                     //退款金额处理
-                    lblZongji.Text = result.data.Sum(p => p.sum_total).ToString();
+                    lblZongji.Text = result.data.Sum(p => p.total_price).ToString();
                     lblTuikuan.Text = "0";
                     //lblTuikuan.Text = result.data.Sum(p => p.sum_total).ToString();
 

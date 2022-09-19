@@ -136,7 +136,7 @@ namespace YbjsLib
 
                 txtDoct.TextChanged -= txtDoct_TextChanged;
                 txtks.TextChanged -= txtks_TextChanged;
-                 
+
 
                 if (YBHelper.jiuzhenInfo != null)
                 {
@@ -150,7 +150,7 @@ namespace YbjsLib
 
                     med_type.SelectedValue = YBHelper.jiuzhenInfo.med_type;
                     psn_setlway.SelectedValue = YBHelper.jiuzhenInfo.psn_setlway;
-                    chkuse_flag.Checked = YBHelper.jiuzhenInfo.acct_used_flag=="1";
+                    chkuse_flag.Checked = YBHelper.jiuzhenInfo.acct_used_flag == "1";
                     jz_insutype.SelectedValue = YBHelper.jiuzhenInfo.insutype;
                     mdtrt_cert_type.SelectedValue = YBHelper.jiuzhenInfo.mdtrt_cert_type;
                 }
@@ -331,19 +331,23 @@ namespace YbjsLib
 
                     jsPrint.input.data = mzjsPrintModel;
 
-                    json = WebApiHelper.SerializeObject(jsRequest);
+                    json = WebApiHelper.SerializeObject(jsPrint);
                     BusinessID = "YH03";
-                     Dataxml = json;
-                     Outputxml = "";
-                     parm = new object[] { BusinessID, json, Outputxml };
+                    Dataxml = json;
+                    Outputxml = "";
+                    parm = new object[] { BusinessID, json, Outputxml };
 
-                    //提交门诊挂号结算信息
-                    YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jsRequest.sign_no, jsRequest.infver, 0, opter, jsRequest.inf_time);
+                    Task.Run(() =>
+                    {
 
-                    result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                        //提交门诊挂号结算信息
+                        YBHelper.AddYBLog(BusinessID, admiss_times, json, patient_id, jsRequest.sign_no, jsRequest.infver, 0, opter, jsRequest.inf_time);
 
-                    YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), patient_id, jsRequest.sign_no, jsRequest.infver, 1, opter, jsRequest.inf_time);
+                        result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
+                        YBHelper.AddYBLog(BusinessID, admiss_times, parm[2].ToString(), patient_id, jsRequest.sign_no, jsRequest.infver, 1, opter, jsRequest.inf_time);
+
+                    });
 
                 }
                 DialogResult = DialogResult.OK;

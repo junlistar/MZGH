@@ -53,14 +53,14 @@ namespace Client.Forms.Pages.hbgl
             {
                 //绑定数据
                 var _doct = docList.Where(p => p.code == vm.doctor_id).FirstOrDefault();
-                if (_doct!=null)
+                if (_doct != null)
                 {
                     txtDoct.TextChanged -= txtDoct_TextChanged;
                     txtDoct.Text = _doct.name;
                     txtDoct.TagString = vm.doctor_id;
                     txtDoct.TextChanged += txtDoct_TextChanged;
                 }
-                 
+
                 txtDate.Text = vm.begin_date.ToShortDateString();
                 txtDate2.Text = vm.end_date.ToShortDateString();
                 chk_status.Checked = vm.is_delete == 1 ? false : true;
@@ -74,37 +74,37 @@ namespace Client.Forms.Pages.hbgl
             try
             {
                 lblErrorMsg.Text = "";
-                if (vm==null)
+                if (vm == null)
                 {
                     vm = new GhDoctorOutVM();
                 }
 
                 if (!string.IsNullOrWhiteSpace(txtDoct.Text))
-                {  
+                {
                     vm.doctor_id = txtDoct.TagString;
                     vm.doctor_name = txtDoct.Text;
                     vm.begin_date = txtDate.Value;
                     vm.end_date = txtDate2.Value.AddDays(1).AddSeconds(-1);
                     vm.is_delete = 0;//chk_status.Checked ? 0 : 1;
 
-                    if (vm.begin_date>vm.end_date)
+                    if (vm.begin_date > vm.end_date)
                     {
                         lblErrorMsg.Text = "开始日期必须大于结束日期";
                         return;
                     }
-                     
+
                     //查询当前医生的停诊信息
                     var paramurl = string.Format($"/api/GuaHao/GetGhDoctorOutsByParams?doctor_id={ vm.doctor_id}&date1=");
                     var json = HttpClientUtil.Get(paramurl);
                     var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhDoctorOutVM>>>(json);
-                    if (result.status==1&& result.data!=null)
+                    if (result.status == 1 && result.data != null)
                     {
                         var _msg = "";
                         foreach (var item in result.data)
                         {
-                            if (item.sn!=vm.sn && ((vm.begin_date>=item.begin_date && vm.begin_date<=item.end_date) || (vm.end_date>=item.begin_date && vm.end_date<=item.end_date) || (vm.end_date >= item.end_date && vm.begin_date <= item.begin_date)))
+                            if (item.sn != vm.sn && ((vm.begin_date >= item.begin_date && vm.begin_date <= item.end_date) || (vm.end_date >= item.begin_date && vm.end_date <= item.end_date) || (vm.end_date >= item.end_date && vm.begin_date <= item.begin_date)))
                             {
-                                _msg += $"日期冲突：{item.begin_date} - {item.end_date}\r\n"; 
+                                _msg += $"日期冲突：{item.begin_date} - {item.end_date}\r\n";
                             }
                         }
                         if (!string.IsNullOrEmpty(_msg))
@@ -125,12 +125,12 @@ namespace Client.Forms.Pages.hbgl
                     paramurl = string.Format($"/api/GuaHao/GetExistGhrequest?doctor_sn={vm.doctor_id}&t1={vm.begin_date}&t2={vm.end_date}");
                     json = HttpClientUtil.PostJSON(paramurl, vm);
                     var ghresult = WebApiHelper.DeserializeObject<ResponseResult<List<BaseRequestVM>>>(json);
-                    if (ghresult.status==1)
+                    if (ghresult.status == 1)
                     {
-                        if (ghresult.data!=null)
+                        if (ghresult.data != null && ghresult.data.Count > 0)
                         {
                             //列出已经生成的排班数据
-                            if (UIMessageDialog.ShowAskDialog(this,"停诊期间存在已生成的排班数据，是否更新？"))
+                            if (UIMessageDialog.ShowAskDialog(this, "停诊期间存在已生成的排班数据，是否更新？"))
                             {
                                 DoctoutGhRequest doctoutGh = new DoctoutGhRequest();
                                 doctoutGh.list = ghresult.data;
@@ -139,30 +139,36 @@ namespace Client.Forms.Pages.hbgl
                                 doctoutGh.t1 = vm.begin_date.ToString("yyyy-MM-dd HH:mm:ss");
                                 doctoutGh.t2 = vm.end_date.ToString("yyyy-MM-dd HH:mm:ss");
 
-                                doctoutGh.ShowDialog(); 
-
-                            } 
-                        } 
-                    } 
+                                if (doctoutGh.ShowDialog() != DialogResult.OK)
+                                {
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
                     paramurl = string.Format($"/api/GuaHao/UpdateGhDoctorOut");
                     json = HttpClientUtil.PostJSON(paramurl, vm);
                     var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                     if (result1.status == 1)
                     {
-                        UIMessageTip.ShowOk("保存停诊日期成功！如有疑问，请到号表维护处理！");
+                        UIMessageBox.ShowInfo("保存停诊日期成功！如有疑问，请到号表维护处理！");
                         DialogResult = DialogResult.OK;
                         this.Close();
                     }
                     else
                     {
-                        UIMessageTip.ShowError("保存失败！" + result.message);
-                    } 
+                        UIMessageBox.ShowError("保存失败！" + result.message);
+                    }
                 }
             }
             catch (Exception ex)
             {
 
-                UIMessageTip.ShowError("保存失败！" + ex.Message);
+                UIMessageBox.ShowError("保存失败！" + ex.Message);
                 log.Error(ex.ToString());
             }
         }
@@ -224,8 +230,8 @@ namespace Client.Forms.Pages.hbgl
                 var ipt = txtDoct.Text.Trim();
 
                 dgvys.Parent = this;
-                dgvys.Top =  tb.Top + tb.Height;
-                dgvys.Left =  tb.Left;
+                dgvys.Top = tb.Top + tb.Height;
+                dgvys.Left = tb.Left;
                 dgvys.Width = tb.Width;
                 dgvys.Height = 200;
                 dgvys.BringToFront();

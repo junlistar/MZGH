@@ -627,7 +627,7 @@ namespace Client
                 }
                 else
                 {
-                    UIMessageTip.ShowError("保存失败!");
+                    UIMessageTip.ShowError("保存失败!"+ result1.message);
                     log.Error(result1.message);
                     return;
                 }

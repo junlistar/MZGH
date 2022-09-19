@@ -196,7 +196,7 @@ namespace Client
                             weekstr = p.weekstr,
                             daystr = p.daystr,
                             apstr = p.apstr,
-                            winnostr = p.winnostr,
+                            workroom = p.workroom,
                             totle_num = p.totle_num,
                             open_flag_str = p.open_flag_str,
                             op_date_str = p.op_date_str,
