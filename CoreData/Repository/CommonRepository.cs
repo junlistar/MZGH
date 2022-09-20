@@ -23,6 +23,18 @@ namespace Data.Repository
 
             }
         }
+        public List<YbName> GetYbName()
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                //IDbTransaction transaction = connection.BeginTransaction();
+
+                string sql = GetSqlByTag("zd_ybname_get");
+
+                return connection.Query<YbName>(sql).AsList();
+
+            }
+        }
 
         public List<Ybhzzd> GetYbhzzdList()
         {

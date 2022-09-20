@@ -127,12 +127,13 @@ namespace Client
             var week = "%";
             var day = "%";
             var window_no = "%";
+            window_no = txt_workroom.Text.Trim();
             var open_flag = "%";
 
             if (cbxSXW.Text != "全部")
             {
                 ampm = cbxSXW.SelectedValue.ToString();
-            }
+            }  
 
 
             switch (cbxWeek.Text)
@@ -560,8 +561,7 @@ namespace Client
             txtzk.Text = "";
             txtDoct.Text = "";
             txtHaobie.Text = "";
-            cbxSXW.Text = "全部";
-            cbxWinNo.Text = "";
+            cbxSXW.Text = "全部"; 
             cbxWeek.Text = "";
             cbxDay.Text = "全部";
             cbxOpenFlag.Text = "全部";

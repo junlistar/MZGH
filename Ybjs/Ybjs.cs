@@ -247,7 +247,6 @@ namespace YbjsLib
                     HttpClientUtil.PostJSON(paramurl, resp.output.data);
 
                     YBHelper.gHResponseModel = resp.output.data;
-                    res[1] = WebApiHelper.SerializeObject(YBHelper.gHResponseModel);
 
                     YBJSPreview yBJSPreview = new YBJSPreview();
                     yBJSPreview.patient_id = patient_id;
@@ -268,7 +267,7 @@ namespace YbjsLib
                     }
                     if (res == null)
                     {
-                        res = new object[3];
+                        res = new object[4];
                     }
                     //             public static UserInfoResponseModel userInfoResponseModel;
                     //public static GHResponseModel gHResponseModel;
@@ -276,6 +275,7 @@ namespace YbjsLib
                     res[0] = WebApiHelper.SerializeObject(YBHelper.userInfoResponseModel);
                     res[1] = WebApiHelper.SerializeObject(YBHelper.gHResponseModel);
                     res[2] = WebApiHelper.SerializeObject(YBHelper.mzjsResponse);
+                    res[3] = WebApiHelper.SerializeObject(YBHelper.acct_used_flag);
 
                     return true;
                 }

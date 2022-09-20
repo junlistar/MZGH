@@ -29,7 +29,7 @@ and b.unit_sn like @unit_sn and
       b.clinic_type like @clinic_type and
       b.req_type like @req_type and 
       b.ampm like @ampm and
-      isnull(cast(b.window_no as char),'') like @window_no and
+      isnull(cast(b.workroom as char),'') like @window_no and
       b.open_flag like @open_flag and delete_flag is null
 
 

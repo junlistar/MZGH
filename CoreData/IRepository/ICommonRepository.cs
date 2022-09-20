@@ -11,6 +11,8 @@ namespace Data.IRepository
          
         List<PageChequeCompare> GetPageChequeCompares();
 
+        List<YbName> GetYbName();
+
         MzClientConfig GetMzClientConfig();
 
         List<Ybhzzd> GetYbhzzdList();

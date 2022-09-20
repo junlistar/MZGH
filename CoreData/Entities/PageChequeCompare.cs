@@ -12,6 +12,16 @@ namespace Data.Entities
         public string page_name { get; set; }
 
     }
+
+    public class YbName : BaseModel
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+        public string dllname { get; set; }
+        public string parms { get; set; }
+        public string del_flag { get; set; } 
+    }
+
     public class Common
     {
 

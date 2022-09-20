@@ -45,7 +45,7 @@ namespace Client.ViewModel
         public decimal orig_price { get; set; }
         public decimal charge_price { get; set; }
         public string charge_group { get; set; }
-        public string caoyao_fu { get; set; }
+        public int caoyao_fu { get; set; }
         public string back_amount { get; set; }
         public string happen_date { get; set; }
         public string price_date { get; set; }
@@ -102,7 +102,7 @@ namespace Client.ViewModel
         {
             get
             {
-                return charge_amount * orig_price;
+                return charge_amount * orig_price * caoyao_fu;
             }
         }
 
@@ -116,7 +116,11 @@ namespace Client.ViewModel
         {
             get
             {
-                if (hasBackYp &&confirm_flag == "1" && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
+                //if (hasBackYp &&confirm_flag == "1" && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
+                //{
+                //    return confirm_name + "(" + confirm_date + ")";
+                //}
+                if (hasBackYp && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
                 {
                     return confirm_name + "(" + confirm_date + ")";
                 }

@@ -28,26 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.btnAdd = new Sunny.UI.UISymbolButton();
-            this.btnDel = new Sunny.UI.UISymbolButton();
+            this.lblTitle = new Sunny.UI.UILabel();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
-            this.lblTitle = new Sunny.UI.UILabel();
+            this.btnAdd = new Sunny.UI.UISymbolButton();
+            this.btnDel = new Sunny.UI.UISymbolButton();
             this.uiPanel2 = new Sunny.UI.UIPanel();
-            this.uiLabel1 = new Sunny.UI.UILabel();
-            this.uiLabel2 = new Sunny.UI.UILabel();
-            this.txtbegin = new Sunny.UI.UITextBox();
-            this.txtend = new Sunny.UI.UITextBox();
+            this.cbxflag = new Sunny.UI.UIComboBox();
+            this.uiLabel4 = new Sunny.UI.UILabel();
             this.txtstep = new Sunny.UI.UITextBox();
             this.uiLabel3 = new Sunny.UI.UILabel();
-            this.uiLabel4 = new Sunny.UI.UILabel();
-            this.cbxflag = new Sunny.UI.UIComboBox();
+            this.txtend = new Sunny.UI.UITextBox();
+            this.txtbegin = new Sunny.UI.UITextBox();
+            this.uiLabel2 = new Sunny.UI.UILabel();
+            this.uiLabel1 = new Sunny.UI.UILabel();
             this.dgvlist = new Sunny.UI.UIDataGridView();
             this.opera = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.happen_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,40 +77,20 @@
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(741, 47);
             this.uiPanel1.TabIndex = 0;
+            this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // btnAdd
+            // lblTitle
             // 
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.Location = new System.Drawing.Point(187, 4);
-            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(100, 40);
-            this.btnAdd.StyleCustomMode = true;
-            this.btnAdd.Symbol = 61543;
-            this.btnAdd.TabIndex = 11;
-            this.btnAdd.Text = "增加";
-            this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // btnDel
-            // 
-            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDel.Location = new System.Drawing.Point(293, 4);
-            this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(100, 40);
-            this.btnDel.StyleCustomMode = true;
-            this.btnDel.Symbol = 61544;
-            this.btnDel.TabIndex = 10;
-            this.btnDel.Text = "删除";
-            this.btnDel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnDel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Location = new System.Drawing.Point(15, 7);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(145, 31);
+            this.lblTitle.TabIndex = 14;
+            this.lblTitle.Text = "发票号初始";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // btnSave
             // 
@@ -145,16 +125,37 @@
             this.btnExit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // lblTitle
+            // btnAdd
             // 
-            this.lblTitle.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(15, 7);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(145, 31);
-            this.lblTitle.TabIndex = 14;
-            this.lblTitle.Text = "发票号初始";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.Location = new System.Drawing.Point(187, 4);
+            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(100, 40);
+            this.btnAdd.StyleCustomMode = true;
+            this.btnAdd.Symbol = 61543;
+            this.btnAdd.TabIndex = 11;
+            this.btnAdd.Text = "增加";
+            this.btnAdd.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAdd.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDel.Location = new System.Drawing.Point(293, 4);
+            this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(100, 40);
+            this.btnDel.StyleCustomMode = true;
+            this.btnDel.Symbol = 61544;
+            this.btnDel.TabIndex = 10;
+            this.btnDel.Text = "删除";
+            this.btnDel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnDel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // uiPanel2
             // 
@@ -175,60 +176,39 @@
             this.uiPanel2.Name = "uiPanel2";
             this.uiPanel2.Size = new System.Drawing.Size(741, 56);
             this.uiPanel2.TabIndex = 1;
+            this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiLabel1
+            // cbxflag
             // 
-            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel1.Location = new System.Drawing.Point(20, 17);
-            this.uiLabel1.Name = "uiLabel1";
-            this.uiLabel1.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel1.TabIndex = 0;
-            this.uiLabel1.Text = "起始号";
-            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.cbxflag.DataSource = null;
+            this.cbxflag.FillColor = System.Drawing.Color.White;
+            this.cbxflag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbxflag.Items.AddRange(new object[] {
+            "当前使用",
+            "已删除"});
+            this.cbxflag.Location = new System.Drawing.Point(583, 14);
+            this.cbxflag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbxflag.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cbxflag.Name = "cbxflag";
+            this.cbxflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cbxflag.Size = new System.Drawing.Size(150, 29);
+            this.cbxflag.TabIndex = 5;
+            this.cbxflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.cbxflag.SelectedIndexChanged += new System.EventHandler(this.cbxflag_SelectedIndexChanged);
             // 
-            // uiLabel2
+            // uiLabel4
             // 
-            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel2.Location = new System.Drawing.Point(222, 17);
-            this.uiLabel2.Name = "uiLabel2";
-            this.uiLabel2.Size = new System.Drawing.Size(64, 23);
-            this.uiLabel2.TabIndex = 1;
-            this.uiLabel2.Text = "结束号";
-            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txtbegin
-            // 
-            this.txtbegin.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtbegin.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtbegin.Location = new System.Drawing.Point(88, 14);
-            this.txtbegin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtbegin.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtbegin.Name = "txtbegin";
-            this.txtbegin.ShowText = false;
-            this.txtbegin.Size = new System.Drawing.Size(122, 29);
-            this.txtbegin.TabIndex = 2;
-            this.txtbegin.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtbegin.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtbegin.Leave += new System.EventHandler(this.txtbegin_Leave);
-            // 
-            // txtend
-            // 
-            this.txtend.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtend.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtend.Location = new System.Drawing.Point(282, 14);
-            this.txtend.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtend.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtend.Name = "txtend";
-            this.txtend.ShowText = false;
-            this.txtend.Size = new System.Drawing.Size(122, 29);
-            this.txtend.TabIndex = 3;
-            this.txtend.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtend.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtend.Leave += new System.EventHandler(this.txtend_Leave);
+            this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel4.Location = new System.Drawing.Point(541, 17);
+            this.uiLabel4.Name = "uiLabel4";
+            this.uiLabel4.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel4.TabIndex = 6;
+            this.uiLabel4.Text = "状态";
+            this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtstep
             // 
@@ -260,53 +240,75 @@
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiLabel3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiLabel4
+            // txtend
             // 
-            this.uiLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel4.Location = new System.Drawing.Point(541, 17);
-            this.uiLabel4.Name = "uiLabel4";
-            this.uiLabel4.Size = new System.Drawing.Size(44, 23);
-            this.uiLabel4.TabIndex = 6;
-            this.uiLabel4.Text = "状态";
-            this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtend.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtend.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtend.Location = new System.Drawing.Point(282, 14);
+            this.txtend.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtend.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtend.Name = "txtend";
+            this.txtend.ShowText = false;
+            this.txtend.Size = new System.Drawing.Size(122, 29);
+            this.txtend.TabIndex = 3;
+            this.txtend.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtend.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtend.Leave += new System.EventHandler(this.txtend_Leave);
             // 
-            // cbxflag
+            // txtbegin
             // 
-            this.cbxflag.DataSource = null;
-            this.cbxflag.FillColor = System.Drawing.Color.White;
-            this.cbxflag.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxflag.Items.AddRange(new object[] {
-            "当前使用",
-            "已删除"});
-            this.cbxflag.Location = new System.Drawing.Point(583, 14);
-            this.cbxflag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxflag.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxflag.Name = "cbxflag";
-            this.cbxflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxflag.Size = new System.Drawing.Size(150, 29);
-            this.cbxflag.TabIndex = 5;
-            this.cbxflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.cbxflag.SelectedIndexChanged += new System.EventHandler(this.cbxflag_SelectedIndexChanged);
+            this.txtbegin.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtbegin.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtbegin.Location = new System.Drawing.Point(88, 14);
+            this.txtbegin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtbegin.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtbegin.Name = "txtbegin";
+            this.txtbegin.ShowText = false;
+            this.txtbegin.Size = new System.Drawing.Size(122, 29);
+            this.txtbegin.TabIndex = 2;
+            this.txtbegin.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtbegin.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtbegin.Leave += new System.EventHandler(this.txtbegin_Leave);
+            // 
+            // uiLabel2
+            // 
+            this.uiLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel2.Location = new System.Drawing.Point(222, 17);
+            this.uiLabel2.Name = "uiLabel2";
+            this.uiLabel2.Size = new System.Drawing.Size(64, 23);
+            this.uiLabel2.TabIndex = 1;
+            this.uiLabel2.Text = "结束号";
+            this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Location = new System.Drawing.Point(20, 17);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(64, 23);
+            this.uiLabel1.TabIndex = 0;
+            this.uiLabel1.Text = "起始号";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // dgvlist
             // 
-            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.dgvlist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvlist.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle47.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle47.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvlist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvlist.ColumnHeadersHeight = 32;
             this.dgvlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvlist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -317,34 +319,34 @@
             this.end_no,
             this.step_length,
             this.deleted_flag});
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle48.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle48.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvlist.Location = new System.Drawing.Point(4, 160);
             this.dgvlist.Name = "dgvlist";
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvlist.RowHeight = 0;
-            dataGridViewCellStyle50.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle50.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle50.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvlist.RowTemplate.Height = 23;
             this.dgvlist.SelectedIndex = -1;
             this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -408,7 +410,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ReceiptInit";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "发票号初始";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.ReceiptInit_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.ReceiptInit_KeyUp);

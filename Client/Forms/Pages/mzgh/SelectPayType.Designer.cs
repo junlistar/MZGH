@@ -128,7 +128,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 35);
             this.btnBack.Style = Sunny.UI.UIStyle.Custom;
-            this.btnBack.TabIndex = 13;
+            this.btnBack.TabIndex = 99;
             this.btnBack.Text = "取消";
             this.btnBack.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnBack.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -527,6 +527,7 @@
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 763, 465);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SelectPayType_FormClosed);
             this.Load += new System.EventHandler(this.SelectPayType_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SelectPayType_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SelectPayType_KeyUp);
             this.uiGroupBox1.ResumeLayout(false);
             this.ResumeLayout(false);

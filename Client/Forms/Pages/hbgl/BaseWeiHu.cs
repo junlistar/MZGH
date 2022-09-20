@@ -126,7 +126,10 @@ namespace Client
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
-
+            if (txt_workroom.Text!="")
+            {
+                window_no = txt_workroom.Text;
+            }
 
             if (cbxOpenFlag.Text == "开放")
             {
@@ -493,8 +496,7 @@ namespace Client
             txtzk.Text = "";
             txtDoct.Text = "";
             txtHaobie.Text = "";
-            cbxSXW.Text = "";
-            cbxWinNo.Text = "";
+            cbxSXW.Text = ""; 
             //cbxWeek.Text = "";
             //cbxDay.Text = "";
             cbxOpenFlag.Text = "";

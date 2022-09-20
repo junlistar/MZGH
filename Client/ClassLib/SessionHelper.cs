@@ -55,6 +55,10 @@ namespace Client.ClassLib
         public static List<RelativeCodeVM> relativeCodes;
         //支付类型比较
         public static List<PageChequeCompareVM> pageChequeCompares;
+        //医保支付类型
+        public static List<YbNameVM> ybNames; 
+
+
         //医保目录字典
         public static List<YbhzzdVM> ybhzCompare;
         //医保字典

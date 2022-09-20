@@ -219,5 +219,22 @@ namespace Data.Repository
 
             }
         }
+
+        public List<GHReceiptModel> GetGhDepositReceipts(string patient_id)
+        {
+            var sql = GetSqlByTag("mzgh_ghdeposit_print_get");
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                //IDbTransaction transaction = connection.BeginTransaction();
+
+                var para = new DynamicParameters();
+
+                para.Add("@patient_id", patient_id);
+
+                return connection.Query<GHReceiptModel>(sql, para).AsList();
+
+            }
+
+        }
     }
 }

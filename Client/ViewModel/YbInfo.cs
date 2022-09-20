@@ -59,7 +59,7 @@ namespace Client.ViewModel
         public decimal orig_price { get; set; }
         public decimal charge_price { get; set; }
         public string charge_code { get; set; }
-
+        public int caoyao_fu { get; set; }
     }
 
 }

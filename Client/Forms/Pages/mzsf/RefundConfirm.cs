@@ -148,45 +148,10 @@ namespace Mzsf.Forms.Pages
                             log.Info("有外部订单号：" + item.cheque_no);
 
                             var page_model = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.cheque_type).FirstOrDefault();
-
-                            if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
-                            {
-                                log.Info("微信退款：");
-                                //微信退款
-                                //var transaction_id = "";
-                                //var out_trade_no = vm.cheque_no;
-                                //var total_fee = vm.charge.ToString();
-                                //var redfund_fee = vm.charge.ToString();
-
-                                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                                //log.Info("微信退款返回字符串：" + wx_response);
-
-                            }
-                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
-                            {
-                                log.Info("支付宝退款：");
-                                //支付宝退款
-                                //var cof = AliConfig.GetConfig();
-                                //Factory.SetOptions(cof);
-
-                                ////全部退款
-                                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(vm.cheque_no, vm.charge.ToString());
-                                ////部分退款
-                                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
-
-                                //if (ResponseChecker.Success(response))
-                                //{
-                                //    log.Info("支付宝退款调用成功");
-                                //}
-                                //else
-                                //{
-                                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                                //}
-                            }
-                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
+                           if (page_model == null || int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
                             {
                                 log.Info("医保退款：");
-                               
+
                                 //门诊结算撤销
                                 var jscxRequest = new YBRequest<MZJSCX>();
                                 jscxRequest.infno = "2208";
@@ -235,10 +200,45 @@ namespace Mzsf.Forms.Pages
                                 if (string.IsNullOrEmpty(_jscxresp.err_msg))
                                 {
                                     //记录医保日志
-                                    var _url = string.Format($"/api/YbInfo/AddYB2208?patient_id={_patient.patient_id}&admiss_times={item.admiss_times}&mdtrt_id={item.mdtrt_id}"); 
+                                    var _url = string.Format($"/api/YbInfo/AddYB2208?patient_id={_patient.patient_id}&admiss_times={item.admiss_times}&mdtrt_id={item.mdtrt_id}");
                                     HttpClientUtil.Get(_url);
                                 }
                             }
+                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
+                            {
+                                log.Info("微信退款：");
+                                //微信退款
+                                //var transaction_id = "";
+                                //var out_trade_no = vm.cheque_no;
+                                //var total_fee = vm.charge.ToString();
+                                //var redfund_fee = vm.charge.ToString();
+
+                                //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                                //log.Info("微信退款返回字符串：" + wx_response);
+
+                            }
+                            else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
+                            {
+                                log.Info("支付宝退款：");
+                                //支付宝退款
+                                //var cof = AliConfig.GetConfig();
+                                //Factory.SetOptions(cof);
+
+                                ////全部退款
+                                //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(vm.cheque_no, vm.charge.ToString());
+                                ////部分退款
+                                ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                                //if (ResponseChecker.Success(response))
+                                //{
+                                //    log.Info("支付宝退款调用成功");
+                                //}
+                                //else
+                                //{
+                                //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                                //}
+                            }
+                            
                         }
                     }
 
@@ -547,7 +547,7 @@ namespace Mzsf.Forms.Pages
                     //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
                     //var _back = dgvCpr.Rows[rowIndex].Cells["back"].Value.ToString();
                     //var _charge_amount = dgvCpr.Rows[rowIndex].Cells["charge_amount"].Value.ToString();
-
+                     
                     if ( dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "")
                     {
                         UIMessageTip.Show("该项目已确认，不能退费");

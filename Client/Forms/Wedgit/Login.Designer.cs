@@ -33,6 +33,7 @@
             this.btnLostPwd = new Sunny.UI.UILinkLabel();
             this.btnEditPwd = new Sunny.UI.UILinkLabel();
             this.btnScanLogin = new Sunny.UI.UILinkLabel();
+            this.imgQRCode = new System.Windows.Forms.PictureBox();
             this.lblTitle2 = new Sunny.UI.UILabel();
             this.lblTitle1 = new Sunny.UI.UILabel();
             this.txtSign = new Sunny.UI.UITextBox();
@@ -44,10 +45,9 @@
             this.uiSymbolLabel1 = new Sunny.UI.UISymbolLabel();
             this.uiSymbolLabel2 = new Sunny.UI.UISymbolLabel();
             this.uiSymbolLabel3 = new Sunny.UI.UISymbolLabel();
-            this.imgQRCode = new System.Windows.Forms.PictureBox();
             this.uiPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // uiPanel1
@@ -124,6 +124,18 @@
             this.btnScanLogin.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.btnScanLogin.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnScanLogin.Click += new System.EventHandler(this.btnScanLogin_Click);
+            // 
+            // imgQRCode
+            // 
+            this.imgQRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.imgQRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgQRCode.Location = new System.Drawing.Point(40, 89);
+            this.imgQRCode.Name = "imgQRCode";
+            this.imgQRCode.Size = new System.Drawing.Size(248, 223);
+            this.imgQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgQRCode.TabIndex = 14;
+            this.imgQRCode.TabStop = false;
+            this.imgQRCode.Visible = false;
             // 
             // lblTitle2
             // 
@@ -205,6 +217,7 @@
             this.txtPwd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPwd.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
             this.txtPwd.ShowText = false;
             this.txtPwd.Size = new System.Drawing.Size(237, 39);
             this.txtPwd.Style = Sunny.UI.UIStyle.Custom;
@@ -292,18 +305,6 @@
             this.uiSymbolLabel3.MouseEnter += new System.EventHandler(this.uiSymbolLabel3_MouseEnter);
             this.uiSymbolLabel3.MouseLeave += new System.EventHandler(this.uiSymbolLabel3_MouseLeave);
             // 
-            // imgQRCode
-            // 
-            this.imgQRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.imgQRCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgQRCode.Location = new System.Drawing.Point(40, 89);
-            this.imgQRCode.Name = "imgQRCode";
-            this.imgQRCode.Size = new System.Drawing.Size(248, 223);
-            this.imgQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgQRCode.TabIndex = 14;
-            this.imgQRCode.TabStop = false;
-            this.imgQRCode.Visible = false;
-            // 
             // Login
             // 
             this.AllowShowTitle = false;
@@ -327,8 +328,8 @@
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Login_MouseUp);
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgQRCode)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

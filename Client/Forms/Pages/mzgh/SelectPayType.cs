@@ -51,6 +51,7 @@ namespace Client
         public UserInfoResponseModel userInfoResponseModel;
         public GHResponseModel gHResponseModel;
         public MzjsResponse mzjsResponse;
+        string acct_used_flag;
 
 
         public SelectPayType(GHRequestVM _vm, string _patientId)
@@ -376,22 +377,86 @@ namespace Client
                 }
                 else if (payMethod == PayMethodEnum.Yibao)
                 {
+                    var _fund_pay_code = "";
+                    var _acct_pay_code = "";
+                    try
+                    {
+                        var _ybmodel = SessionHelper.ybNames[0].parms;
+
+                        var pay_arr = _ybmodel.Split(";");
+                        _acct_pay_code = pay_arr[0].Split("=")[1];
+                        _fund_pay_code = pay_arr[1].Split("=")[1];
+
+                        if (_acct_pay_code.Contains("<"))
+                        {
+                            _acct_pay_code = _acct_pay_code.Substring(0, _acct_pay_code.IndexOf("<"));
+                        }
+                        if (_fund_pay_code.Contains("<"))
+                        {
+                            _fund_pay_code = _fund_pay_code.Substring(0, _fund_pay_code.IndexOf("<"));
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("没有获取到医保支付配置表数据：YbName");
+                        return;
+                    }
+
+
 
                     //刷医保卡，再挂号 
                     if (YiBaoPay(Convert.ToDecimal(left_je)))
                     {
-                        log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
-                        //保存支付数据，用于退款
-                        paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+                        //基金支付总额 6
+                        var _fund_pay_sumamt = mzjsResponse.setlinfo.fund_pay_sumamt;
+                        //个人账户 a
+                        var _acct_pay = mzjsResponse.setlinfo.acct_pay;
+                        //个人现金 1
+                        var _psn_cash_pay = mzjsResponse.setlinfo.psn_cash_pay;
 
-                        this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
+                        if (decimal.Parse(_fund_pay_sumamt) != 0)
+                        {
+                            log.Info("完成支付：" + _fund_pay_code + ",金额：" + decimal.Parse(_fund_pay_sumamt));
+                            this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + decimal.Parse(_fund_pay_sumamt));
+
+                            paylist.Add(new GHPayModel(_fund_pay_code, decimal.Parse(_fund_pay_sumamt), mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+
+                            //保存到数据库
+                            AddMzThridPay(_fund_pay_code, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
+                        }
+                        if (acct_used_flag == "1")
+                        {
+                            if (decimal.Parse(_acct_pay) != 0)
+                            {
+                                log.Info("完成支付：" + _acct_pay_code + ",金额：" + decimal.Parse(_acct_pay));
+                                this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + decimal.Parse(_acct_pay));
+                                paylist.Add(new GHPayModel(_acct_pay_code, decimal.Parse(_acct_pay), mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+                                //保存到数据库
+                                AddMzThridPay(_acct_pay_code, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
+
+                            }
+                        }
+                        if (acct_used_flag == "0")
+                        {
+                            if (decimal.Parse(_psn_cash_pay) != 0)
+                            {
+                                log.Info("完成支付：" + "1" + ",金额：" + decimal.Parse(_psn_cash_pay));
+                                this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(PayMethodEnum.Xianjin) + "，金额： " + decimal.Parse(_psn_cash_pay));
+                                paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, "", ""));
+                            }
+                        } 
+                       // log.Info("完成支付：" + his_cheque_type + ",金额：" + left_je);
+                        //保存支付数据，用于退款
+                        //paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id));
+
+                       // this.uiListBox1.Items.Add("支付方式：" + PayMethod.GetPayStringByEnum(payMethod) + "，金额： " + left_je);
 
                         //总金额-支付金额
                         lblyfje.Text = (Convert.ToDecimal(lblyfje.Text) + Convert.ToDecimal(left_je)).ToString();
                         lblsyje.Text = (Convert.ToDecimal(vm.je) - Convert.ToDecimal(lblyfje.Text)).ToString();
 
                         //保存到数据库
-                        AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
+                       // AddMzThridPay(his_cheque_type, gHResponseModel.mdtrt_id, mzjsResponse.setlinfo.mdtrt_id, mzjsResponse.setlinfo.setl_id, gHResponseModel.ipt_otp_no, gHResponseModel.psn_no, userInfoResponseModel.insuinfo[0].insuplc_admdvs, (decimal)left_je);
                     }
                     else
                     {
@@ -504,15 +569,15 @@ namespace Client
 
                 ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, diseinfoList_str, jiuzhenInfo_str,chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str,"0","1");
 
-                object[] objparam = new object[3];
+                object[] objparam = new object[4];
 
                 var js_result = ybjs.PreDeal(patient_id, admiss_times, GuaHao.PatientVM.hic_no, left_je, sn_no, vm.icd_code, vm.yb_ys_code, vm.doctor_name, vm.unit_sn, vm.unit_name, vm.clinic_name, SessionHelper.uservm.user_mi, SessionHelper.uservm.name, ref objparam);
                 if (js_result)
                 {
                     userInfoResponseModel = WebApiHelper.DeserializeObject<UserInfoResponseModel>(objparam[0].ToString());
                     gHResponseModel = WebApiHelper.DeserializeObject<GHResponseModel>(objparam[1].ToString());
-                    mzjsResponse = WebApiHelper.DeserializeObject<MzjsResponse>(objparam[2].ToString());
-
+                    mzjsResponse = WebApiHelper.DeserializeObject<MzjsResponse>(objparam[2].ToString()); 
+                    acct_used_flag = WebApiHelper.DeserializeObject<string>(objparam[3].ToString());
                 }
                 return js_result;
 
@@ -2138,6 +2203,11 @@ namespace Client
 
         private void SelectPayType_KeyUp(object sender, KeyEventArgs e)
         {
+            
+        }
+
+        private void SelectPayType_KeyDown(object sender, KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.Enter)
             {
                 //提交
@@ -2149,8 +2219,8 @@ namespace Client
             {
                 //子控件从第4位开始
                 var _cts = gbxChequelist.GetAllControls();
-                if (_cts.Count>3)
-                { 
+                if (_cts.Count > 3)
+                {
                     ChequeCompare_Click(_cts[3], e);
                 }
             }

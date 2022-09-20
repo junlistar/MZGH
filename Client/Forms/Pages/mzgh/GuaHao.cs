@@ -1844,15 +1844,25 @@ namespace Client
             ReadCika rc = new ReadCika("ID号");
             rc.FormClosed += Rc_FormClosed;
             rc.ShowDialog();
-        }
-
-
-
+        } 
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
+            var _pid = lblPatientid.Text;
+            if (string.IsNullOrEmpty(lblPatientid.Text))
+            {
+                UIMessageTip.Show("没有患者信息，请先查询");
+                return;
+            }
+
+            GhDepositRecord ghDepositRecord = new GhDepositRecord();
+            ghDepositRecord.patient_id = lblPatientid.Text;
+
+            ghDepositRecord.ShowDialog();
+
+
             //补打小票
-            XiaopiaoDayin();
+            //XiaopiaoDayin();
         }
         /// <summary>
         /// 小票打印

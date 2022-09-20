@@ -47,12 +47,12 @@ namespace Client
         public void LoadData()
         {
             try
-            { 
+            {
                 var paramurl = string.Format($"/api/GuaHao/GetGhRefundPayList?request_date={_datestr}&patient_id={_patient_id}&times={_times}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
-                var json = HttpClientUtil.Get(paramurl); 
+                var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundPayVM>>>(json);
                 if (result.status == 1)
@@ -62,7 +62,7 @@ namespace Client
                     this.dgvpaylist.DataSource = result.data;
                     //dgvpaylist.AutoGenerateColumns = false;
                     dgvpaylist.AutoResizeColumns();
-                   // dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    // dgvpaylist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                 }
                 else
                 {
@@ -90,7 +90,7 @@ namespace Client
                 var paramurl = string.Format($"/api/GuaHao/GetGhRefund?datestr={_datestr}&patient_id={_patient_id}");
 
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                 
+
                 var json = HttpClientUtil.Get(paramurl);
 
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhRefundVM>>>(json);
@@ -110,41 +110,7 @@ namespace Client
 
                                 var page_model = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.cheque_type).FirstOrDefault();
 
-                                if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
-                                {
-                                    log.Info("微信退款：");
-                                    //微信退款
-                                    //var transaction_id = "";
-                                    //var out_trade_no = vm.cheque_no;
-                                    //var total_fee = vm.charge.ToString();
-                                    //var redfund_fee = vm.charge.ToString();
-
-                                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
-                                    //log.Info("微信退款返回字符串：" + wx_response);
-
-                                }
-                                else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
-                                {
-                                    log.Info("支付宝退款：");
-                                    //支付宝退款
-                                    //var cof = AliConfig.GetConfig();
-                                    //Factory.SetOptions(cof);
-
-                                    ////全部退款
-                                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(vm.cheque_no, vm.charge.ToString());
-                                    ////部分退款
-                                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
-
-                                    //if (ResponseChecker.Success(response))
-                                    //{
-                                    //    log.Info("支付宝退款调用成功");
-                                    //}
-                                    //else
-                                    //{
-                                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
-                                    //}
-                                }
-                                else if (int.Parse(page_model.page_code)== (int)PayMethodEnum.Yibao)
+                                if (page_model == null || int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
                                 {
                                     log.Info("医保退款：");
                                     //门诊挂号撤销
@@ -228,7 +194,7 @@ namespace Client
                                     MZJSCX _mzjscx = new MZJSCX();
                                     _mzjscx.psn_no = SessionHelper.patientVM.yb_psn_no;
                                     _mzjscx.setl_id = item.out_trade_no;//结算返回值 
-                                    _mzjscx.mdtrt_id =item.cheque_no;
+                                    _mzjscx.mdtrt_id = item.cheque_no;
 
                                     jscxRequest.input.data = _mzjscx;
 
@@ -241,7 +207,7 @@ namespace Client
 
                                     YBHelper.AddYBLog(BusinessID, _times, json, SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
                                     //提交
-                                     ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+                                    ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
 
                                     log.Debug("结算撤销返回：" + parm[2]);
                                     YBHelper.AddYBLog(BusinessID, _times, parm[2].ToString(), SessionHelper.patientVM.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
@@ -255,7 +221,42 @@ namespace Client
                                         HttpClientUtil.Get(_url);
                                     }
 
+                                } 
+                                else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.WeiXin)
+                                {
+                                    log.Info("微信退款：");
+                                    //微信退款
+                                    //var transaction_id = "";
+                                    //var out_trade_no = vm.cheque_no;
+                                    //var total_fee = vm.charge.ToString();
+                                    //var redfund_fee = vm.charge.ToString();
+
+                                    //var wx_response = WxPayAPI.Refund.Run(transaction_id, out_trade_no, total_fee, redfund_fee);
+                                    //log.Info("微信退款返回字符串：" + wx_response);
+
                                 }
+                                else if (int.Parse(page_model.page_code) == (int)PayMethodEnum.Zhifubao)
+                                {
+                                    log.Info("支付宝退款：");
+                                    //支付宝退款
+                                    //var cof = AliConfig.GetConfig();
+                                    //Factory.SetOptions(cof);
+
+                                    ////全部退款
+                                    //AlipayTradeRefundResponse response = Factory.Payment.Common().Refund(vm.cheque_no, vm.charge.ToString());
+                                    ////部分退款
+                                    ////AlipayTradeRefundResponse response = Factory.Payment.Common().Optional("out_request_no", "2020093011380002-2").Refund("2020093011380003", "0.02");
+
+                                    //if (ResponseChecker.Success(response))
+                                    //{
+                                    //    log.Info("支付宝退款调用成功");
+                                    //}
+                                    //else
+                                    //{
+                                    //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
+                                    //}
+                                }
+
                             }
                         }
 
@@ -303,7 +304,7 @@ namespace Client
             }
         }
 
-      
+
         private void RefundPayList_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)

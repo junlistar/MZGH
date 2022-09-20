@@ -68,6 +68,9 @@
     <None Update="SQLS\mzgh_mzpatient_update_times.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mzgh_ghdeposit_print_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzsf_mzdeposit_print_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -321,6 +324,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\zd_mzclientconfig_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\zd_ybname_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\zd_pagechequecompare_get.sql">

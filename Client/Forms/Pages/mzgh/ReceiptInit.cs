@@ -58,6 +58,7 @@ namespace Client.Forms.Pages.mzgh
                 deleted_flag = p.deleted_flag,
             }).ToList();
             dgvlist.DataSource = _dat;
+            dgvlist.AutoResizeColumns();
 
             var _index = dgvlist.Rows.Count;
             if (_index > 0)

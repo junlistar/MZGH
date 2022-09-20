@@ -734,8 +734,7 @@ namespace Client
             txtzk.Text = "";
             txtDoct.Text = "";
             txtHaobie.Text = "";
-            cbxSXW.Text = "";
-            cbxWinNo.Text = "";
+            cbxSXW.Text = ""; 
             //cbxWeek.Text = "";
             //cbxDay.Text = "";
             cbxOpenFlag.Text = "";

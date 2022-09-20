@@ -112,6 +112,14 @@ namespace Client.ViewModel
         public string page_name { get; set; }
 
     }
+    public class YbNameVM
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+        public string dllname { get; set; }
+        public string parms { get; set; }
+        public string del_flag { get; set; }
+    }
 
     public class YbhzzdVM
     {

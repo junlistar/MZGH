@@ -22,7 +22,9 @@ namespace Data.IRepository
         List<MzThridPayView> GetThirdPayList(string bengin, string end, string his_status, string patient_id);
          
         List<MzThridPayView> GetYbPayList(string bengin, string end, string his_status, string patient_id);
-        
+
+        List<GHReceiptModel> GetGhDepositReceipts(string patient_id);
+
         #endregion
     }
 }

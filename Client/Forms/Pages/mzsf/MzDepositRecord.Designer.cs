@@ -141,7 +141,7 @@
             this.dgv_mzdeposit.RowTemplate.Height = 23;
             this.dgv_mzdeposit.SelectedIndex = -1;
             this.dgv_mzdeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_mzdeposit.ShowGridLine = false;
+            this.dgv_mzdeposit.ShowGridLine = true;
             this.dgv_mzdeposit.ShowRect = false;
             this.dgv_mzdeposit.Size = new System.Drawing.Size(705, 286);
             this.dgv_mzdeposit.TabIndex = 3;
@@ -226,7 +226,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MzDepositRecord";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "门诊收费记录";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.MzDepositRecord_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MzDepositRecord_KeyUp);

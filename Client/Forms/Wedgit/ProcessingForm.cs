@@ -197,8 +197,15 @@ namespace Client.Forms.Wedgit
                 paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 json = HttpClientUtil.Get(paramurl);
-
                 SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
+
+                //支付类型比较 
+                bgWorker.ReportProgress(40, "获取医保支付类型");
+                paramurl = string.Format($"/api/GuaHao/GetYbName");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.ybNames = WebApiHelper.DeserializeObject<ResponseResult<List<YbNameVM>>>(json).data;
+               
 
                 //医保目录类型比较 
                 bgWorker.ReportProgress(45, "获取医保目录类型比较");

@@ -60,7 +60,6 @@
             this.txtDate = new Sunny.UI.UIDatePicker();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtHaobie = new Sunny.UI.UITextBox();
-            this.cbxWinNo = new Sunny.UI.UIComboBox();
             this.uiLabel6 = new Sunny.UI.UILabel();
             this.txtDoct = new Sunny.UI.UITextBox();
             this.txtzk = new Sunny.UI.UITextBox();
@@ -75,6 +74,7 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.lblTotalCount = new Sunny.UI.UILabel();
+            this.txt_workroom = new Sunny.UI.UITextBox();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -332,12 +332,12 @@
             // 
             this.uiGroupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiGroupBox1.Controls.Add(this.txt_workroom);
             this.uiGroupBox1.Controls.Add(this.cbxRequestType);
             this.uiGroupBox1.Controls.Add(this.uiLabel7);
             this.uiGroupBox1.Controls.Add(this.txtDate);
             this.uiGroupBox1.Controls.Add(this.uiLabel1);
             this.uiGroupBox1.Controls.Add(this.txtHaobie);
-            this.uiGroupBox1.Controls.Add(this.cbxWinNo);
             this.uiGroupBox1.Controls.Add(this.uiLabel6);
             this.uiGroupBox1.Controls.Add(this.txtDoct);
             this.uiGroupBox1.Controls.Add(this.txtzk);
@@ -439,24 +439,6 @@
             this.txtHaobie.TextChanged += new System.EventHandler(this.txtHaobie_TextChanged);
             this.txtHaobie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtHaobie_KeyUp);
             this.txtHaobie.Leave += new System.EventHandler(this.txtHaobie_Leave);
-            // 
-            // cbxWinNo
-            // 
-            this.cbxWinNo.DataSource = null;
-            this.cbxWinNo.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.cbxWinNo.FillColor = System.Drawing.Color.White;
-            this.cbxWinNo.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxWinNo.Items.AddRange(new object[] {
-            "所有窗口"});
-            this.cbxWinNo.Location = new System.Drawing.Point(467, 108);
-            this.cbxWinNo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbxWinNo.MinimumSize = new System.Drawing.Size(63, 0);
-            this.cbxWinNo.Name = "cbxWinNo";
-            this.cbxWinNo.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.cbxWinNo.Size = new System.Drawing.Size(200, 29);
-            this.cbxWinNo.TabIndex = 23;
-            this.cbxWinNo.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.cbxWinNo.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel6
             // 
@@ -640,6 +622,20 @@
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // txt_workroom
+            // 
+            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_workroom.Location = new System.Drawing.Point(467, 105);
+            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_workroom.Name = "txt_workroom";
+            this.txt_workroom.ShowText = false;
+            this.txt_workroom.Size = new System.Drawing.Size(200, 29);
+            this.txt_workroom.TabIndex = 29;
+            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // BaseWeiHu
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -683,7 +679,6 @@
         private Sunny.UI.UILabel uiLabel3;
         private Sunny.UI.UIComboBox cbxSXW;
         private Sunny.UI.UILabel uiLabel2;
-        private Sunny.UI.UIComboBox cbxWinNo;
         private Sunny.UI.UILabel uiLabel6;
         private Sunny.UI.UITextBox txtHaobie;
         private Sunny.UI.UISymbolButton btnAdd;
@@ -706,5 +701,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn begin_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn current_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn toend_no;
+        private Sunny.UI.UITextBox txt_workroom;
     }
 }

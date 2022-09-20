@@ -604,13 +604,18 @@ namespace Mzsf.Forms.Pages
             {
                 _serial = dgvOrderDetail.Rows[index].Cells["serial"].Value.ToString();
             }
+            var _caoyao_fu = 1;
+            if (dgvOrderDetail.Rows[index].Cells["caoyao_fu"].Value != null)
+            {
+                _caoyao_fu = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["_caoyao_fu"].Value.ToString());
+            }
 
 
             CprChargesVM vm = new CprChargesVM();
             vm.charge_code_lookup = _charge_code_lookup;
             vm.orig_price = _orig_price;
             vm.charge_amount = _charge_amount;
-            vm.charge_price = _orig_price * _charge_amount;
+            vm.charge_price = _orig_price * _charge_amount* _caoyao_fu;
             vm.item_no = (index + 1);
             vm.order_no = _order_no;
 
@@ -650,12 +655,16 @@ namespace Mzsf.Forms.Pages
                 {
                     serial = row.Cells["serial"].Value.ToString();
                 }
-
+                var caoyao_fu = 1;
+                if (row.Cells["caoyao_fu"].Value != null)
+                {
+                    caoyao_fu = Convert.ToInt32(row.Cells["caoyao_fu"].Value);
+                }
                 var chargeVM = new CprChargesVM();
                 chargeVM.charge_code_lookup = charge_code_lookup;
                 chargeVM.orig_price = orig_price;
                 chargeVM.charge_amount = charge_amount;
-                chargeVM.charge_price = orig_price * charge_amount;
+                chargeVM.charge_price = orig_price * charge_amount* caoyao_fu;
                 chargeVM.item_no = index++;
                 chargeVM.order_no = _order_no;
                 chargeVM.serial_no = serial;

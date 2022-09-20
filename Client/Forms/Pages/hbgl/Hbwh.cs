@@ -156,7 +156,7 @@ namespace Client
             {
                 ampm = cbxSXW.SelectedValue.ToString();
             }
-
+          
             if (cbxOpenFlag.Text == "开放")
             {
                 open_flag = "1";
@@ -718,8 +718,7 @@ namespace Client
             txtzk.Text = "";
             txtDoct.Text = "";
             txtHaobie.Text = "";
-            cbxSXW.Text = "";
-            cbxWinNo.Text = "";
+            cbxSXW.Text = ""; 
             //cbxWeek.Text = "";
             //cbxDay.Text = "";
             cbxOpenFlag.Text = "";

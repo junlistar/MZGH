@@ -370,11 +370,30 @@ namespace Client.Forms.Pages.yhbb
                         }
 
                         //paramurl = string.Format($"/api/cwgl/GetGhDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&mz_dept_no={"1"}");
-                        var paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
+                        //var paramurl = string.Format($"/api/GuaHao/GetDateTableBySql?sql={sql}");
 
+                        //log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                        //var responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        //var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
+
+                        var paramurl = "";
+
+                        if (_report_code == "220001")
+                        {
+                            paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={txt_patientid.Text}&times={txt_tims.Text}");
+
+                        }
+                        else if (_report_code == "220007")
+                        {
+                            paramurl = string.Format($"/api/cwgl/GetMzsfBill?code={_report_code}&patient_id={txt_patientid.Text}&ledger_sn={txt_tims.Text}");
+
+                        }
+
+                         
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                        var responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
+                        var responseJson = HttpClientUtil.Get(paramurl);
                         var ds_result = WebApiHelper.DeserializeObject<ResponseResult<string>>(responseJson);
+
                         if (ds_result.status == 1)
                         {
                             if (ds_result.data != "[]")

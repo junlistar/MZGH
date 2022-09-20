@@ -13,7 +13,7 @@ where a.unit_sn like @unit_sn and
       isnull(cast(a.week as char),'') like @week and
       isnull(cast(a.day as char),'') like @day and
       a.ampm like @ampm and
-      isnull(cast(a.window_no as char),'') like @window_no and
+      isnull(cast(a.workroom as char),'') like @window_no and
       a.open_flag like @open_flag --and 
       --isnull(cast(a.temp_flag as int),0) like @temp_flag  
 order by op_date desc,unit_sn,

@@ -553,6 +553,22 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<YbName>> GetYbName()
+        {
+            Log.Information($"GetYbName");
+            var list = new List<YbName>();
+            try
+            {
+                list = _commonRepository.GetYbName();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<YbName>>(ex.Message);
+            }
+            return list;
+        }
+         
 
         public ResponseResult<List<Ybhzzd>> GetYbhzzdList()
         {
@@ -1200,6 +1216,20 @@ namespace CoreApi.Controllers
                 return ErrorResult<List<MzThridPayView>>(ex.Message);
             }
         }
+        public ResponseResult<List<GHReceiptModel>> GetGhDepositReceipts(string patient_id)
+        {
+            Log.Information($"GetGhDepositReceipts,{patient_id}");
+            try
+            {
+                return _ghDepositRepository.GetGhDepositReceipts(patient_id);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<GHReceiptModel>>(ex.Message);
+            }
+        }
+         
         public ResponseResult<bool> UpdateMzClientConfig()
         {
             Log.Information($"UpdateMzClientConfig,");
