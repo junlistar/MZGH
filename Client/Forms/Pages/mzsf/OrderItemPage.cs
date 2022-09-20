@@ -607,7 +607,7 @@ namespace Mzsf.Forms.Pages
             var _caoyao_fu = 1;
             if (dgvOrderDetail.Rows[index].Cells["caoyao_fu"].Value != null)
             {
-                _caoyao_fu = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["_caoyao_fu"].Value.ToString());
+                _caoyao_fu = Convert.ToInt32(dgvOrderDetail.Rows[index].Cells["caoyao_fu"].Value.ToString());
             }
 
 
@@ -616,6 +616,7 @@ namespace Mzsf.Forms.Pages
             vm.orig_price = _orig_price;
             vm.charge_amount = _charge_amount;
             vm.charge_price = _orig_price * _charge_amount* _caoyao_fu;
+            vm.caoyao_fu = _caoyao_fu;
             vm.item_no = (index + 1);
             vm.order_no = _order_no;
 
@@ -665,6 +666,7 @@ namespace Mzsf.Forms.Pages
                 chargeVM.orig_price = orig_price;
                 chargeVM.charge_amount = charge_amount;
                 chargeVM.charge_price = orig_price * charge_amount* caoyao_fu;
+                chargeVM.caoyao_fu = caoyao_fu;
                 chargeVM.item_no = index++;
                 chargeVM.order_no = _order_no;
                 chargeVM.serial_no = serial;

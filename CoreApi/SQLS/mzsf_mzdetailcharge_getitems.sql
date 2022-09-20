@@ -1,5 +1,5 @@
 ﻿--221016 门诊收费 -  查询mz_receipt_charge
-select patient_id,times,order_type,order_no,bill_code,exec_sn,(charge_amount* orig_price) charge from 
+select patient_id,times,order_type,order_no,bill_code,exec_sn,(charge_amount* orig_price *caoyao_fu) charge from 
  mz_detail_charge 
  WHERE patient_id = @patient_id
  AND       times =@times and ledger_sn=@ledger_sn

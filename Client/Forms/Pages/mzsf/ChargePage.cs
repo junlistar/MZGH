@@ -531,6 +531,9 @@ namespace Mzsf.Forms.Pages
                             pblSum.Show();
                             uiTabControl1.ShowActiveCloseButton = true;
 
+                            //锁定处方
+                            LockOrder(SessionHelper.uservm.user_mi, patient_id, times, "2");
+                            is_order_lock = true;
 
                             return;
 
@@ -554,9 +557,7 @@ namespace Mzsf.Forms.Pages
                             //pblSum.Show(); //this.pnlAddOrder.Show();
                             //uiTabControl1.ShowCloseButton = true;
 
-                            ////锁定处方
-                            //LockOrder(SessionHelper.uservm.user_mi, patient_id, times, "2");
-                            //is_order_lock = true;
+                           
                         }
                         else
                         {
@@ -957,8 +958,7 @@ namespace Mzsf.Forms.Pages
                 //var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
                 var _order = SessionHelper.mzOrders.OrderBy(p => p.order_no).ToList()[tabindex];
                 if (_order != null)
-                {
-
+                { 
                     var order = SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no);
 
                     lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
