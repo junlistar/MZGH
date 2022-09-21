@@ -104,7 +104,7 @@ namespace Mzsf.Forms.Pages
                 cash_date = p.cash_date,
                 times = p.times,
                 ledger_sn = p.ledger_sn,
-                charge_total = p.charge_total,
+                charge_total = Math.Round(p.charge_total,2),
                 charge_status = p.charge_status,
                 cheque_type_name = p.cheque_type_name,
                 cash_name = p.cash_name,

@@ -1093,7 +1093,7 @@ namespace YbjsLib
                 var _jsresp = WebApiHelper.DeserializeObject<YBResponse<Response5301>>(parm[2].ToString());
 
                 //绑定下拉框
-                if (_jsresp.output.feedetail != null)
+                if (_jsresp.output.feedetail != null&& _jsresp.output.feedetail.Count>0)
                 {
                     var _mblist = _jsresp.output.feedetail;
                     var _mbItem = new Response5301Feedetail();
@@ -1113,7 +1113,8 @@ namespace YbjsLib
             }
             catch (Exception ex)
             {
-                UIMessageBox.Show(ex.Message);
+                UIMessageBox.Show("没有查询到慢病数据");
+                //UIMessageBox.Show(ex.Message);
                 //log.Error(ex.ToString());
             }
         }

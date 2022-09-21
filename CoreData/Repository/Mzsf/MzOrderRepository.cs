@@ -655,7 +655,7 @@ namespace Data.Repository.Mzsf
                         {
                             var pay_detail = pay_method.Split('-');
                             var cheque_type = pay_detail[0];
-                            var charge = decimal.Parse(pay_detail[1]);
+                            var charge = double.Parse(pay_detail[1]);
                             var cheque_no = pay_detail[2];//订单编号
                             var out_trade_no = pay_detail[3];//医保交易编号
                             //var cheque_no = current_no;

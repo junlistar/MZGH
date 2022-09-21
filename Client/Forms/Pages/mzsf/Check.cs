@@ -50,7 +50,7 @@ namespace Mzsf.Forms.Pages
         {
             dgvzd.Init();
             dgvfk.Init();
-            total_charge = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2);
+            total_charge = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price),2);
 
             lblzje.Text = "0.00";
             lblyfje.Text = "0.00";
@@ -361,8 +361,32 @@ namespace Mzsf.Forms.Pages
                         {
                             if (decimal.Parse(_psn_cash_pay) != 0)
                             {
-                                log.Info("完成支付：" + "1" + ",金额：" + decimal.Parse(_psn_cash_pay));
-                                paylist.Add(new GHPayModel(his_cheque_type, (decimal)left_je, "", ""));
+                                JKZL xjzf = new JKZL("1", _psn_cash_pay);
+                                if (chkcomb.Checked)
+                                {
+                                    xjzf.lbl1.Text = "本次支付:";
+                                }
+                                this.BringToFront();
+                                xjzf.ShowDialog();
+
+                                if (xjzf.DialogResult == DialogResult.OK)
+                                {
+                                    log.Info("完成支付：" + 1 + ",金额：" + _psn_cash_pay);
+                                    //保存支付数据，用于退款
+                                    paylist.Add(new GHPayModel("1", decimal.Parse(_psn_cash_pay)));
+
+                                }
+                                else
+                                {
+                                    log.Info("取消支付：" + 1 + ",金额：" + _psn_cash_pay);
+
+                                    UIMessageBox.ShowError("医保完成支付，现金支付失败！");
+
+                                    return;
+                                }
+
+                                //log.Info("完成支付：" + "1" + ",金额：" + decimal.Parse(_psn_cash_pay));
+                                //paylist.Add(new GHPayModel("1", decimal.Parse(_psn_cash_pay), "", ""));
                             }
                         }
 
@@ -382,7 +406,7 @@ namespace Mzsf.Forms.Pages
                 }
                 else if (payMethod == PayMethodEnum.Xianjin)
                 {
-                    JKZL xjzf = new JKZL((his_cheque_type).ToString(), left_je.ToString());
+                    JKZL xjzf = new JKZL(his_cheque_type.ToString(), left_je.ToString());
                     if (chkcomb.Checked)
                     {
                         xjzf.lbl1.Text = "本次支付:";
@@ -1888,6 +1912,7 @@ namespace Mzsf.Forms.Pages
                     }
                     else
                     {
+                        log.Error(_fpdata);
                         UIMessageTip.ShowError(_fpdata);
                     }
                 }

@@ -329,7 +329,7 @@
             this.Name = "FunctionList";
             this.PageIndex = 1501;
             this.StyleCustomMode = true;
-            this.Text = "功能列表(按Enter保存，ESC退出)";
+            this.Text = "菜单管理";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.AddFunction_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddGroup_KeyUp);

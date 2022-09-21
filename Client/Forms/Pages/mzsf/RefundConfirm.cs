@@ -448,7 +448,7 @@ namespace Mzsf.Forms.Pages
 
 
                     //退款金额处理
-                    lblZongji.Text = result.data.Sum(p => p.total_price).ToString();
+                    lblZongji.Text =Math.Round(result.data.Sum(p => p.total_price),2).ToString();
                     lblTuikuan.Text = "0";
                     //lblTuikuan.Text = result.data.Sum(p => p.sum_total).ToString();
 
@@ -525,7 +525,7 @@ namespace Mzsf.Forms.Pages
                         refund_item_str += "," + order_type + "-" + charge_code + "-" + charge;
                     }
                 }
-                lblTuikuan.Text = t_price.ToString();
+                lblTuikuan.Text = Math.Round(t_price, 2).ToString();
             }
             catch (Exception ex)
             {

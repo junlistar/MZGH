@@ -313,7 +313,7 @@ namespace Mzsf.Forms.Pages
                     caoyao_fu = q.caoyao_fu,
                     total_price = q.total_price,
                     fybl = "",
-                    yongfa = "",
+                    yongfa = q.supply_code_lookup,
                     comment = q.comment,
                     dosage = q.dosage,
                     freq_code = q.freq_code,

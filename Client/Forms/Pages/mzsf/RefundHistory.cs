@@ -118,8 +118,8 @@ namespace Mzsf.Forms.Pages
                     dgvCpr.AutoResizeColumns();
 
                     //退款金额处理
-                    lblZongji.Text = result.data.Sum(p => p.total_price).ToString();
-                    lblTuikuan.Text = refund_charge.ToString();
+                    lblZongji.Text = Math.Round(result.data.Sum(p => p.total_price),2).ToString();
+                    lblTuikuan.Text = Math.Round(refund_charge,2).ToString();
                     //lblTuikuan.Text = result.data.Sum(p => p.sum_total).ToString();
                 }
                 else
@@ -180,10 +180,8 @@ namespace Mzsf.Forms.Pages
 
         private void RefundConfirm_Load(object sender, EventArgs e)
         {
-            lblZongji.Text = total_charge.ToString();
-            lblTuikuan.Text = total_charge.ToString();
-
-            lblZongji.Text = total_charge.ToString();
+             
+            lblZongji.Text = Math.Round(total_charge, 2).ToString();
             lblTuikuan.Text = "0";
 
             dgvCpr.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;

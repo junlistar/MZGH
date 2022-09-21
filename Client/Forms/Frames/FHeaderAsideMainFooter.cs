@@ -66,7 +66,7 @@ namespace Client
             YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
 
 
-            MainTabControl.TabBackColor = Color.FromArgb(60, 95, 145); 
+            MainTabControl.TabBackColor = Color.FromArgb(60, 95, 145);
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
 
@@ -75,6 +75,22 @@ namespace Client
             if (index == 0)
             {
                 return false;
+            }
+
+            string slectedTab = this.MainTabControl.SelectedTab.Text;//获取当前TabItem的显示文本
+
+            try
+            {
+
+                if (slectedTab == "划价收费")
+                {
+                    Form frm = this.MainTabControl.TabPages[index].Controls.Find("ChargePage", false)[0] as Form;//获取内嵌的Form对象
+                    frm.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
             }
             return true;
         }
@@ -137,7 +153,7 @@ namespace Client
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
-                // Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                 Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
 
                 pageIndex = 1600;
@@ -457,7 +473,7 @@ namespace Client
 
                     ProcessingForm processingForm = new ProcessingForm();
                     if (processingForm.ShowDialog() == DialogResult.OK)
-                    { 
+                    {
                         this.WindowState = FormWindowState.Maximized;
                         this.Show();
 
@@ -490,7 +506,7 @@ namespace Client
                         SessionHelper.clientWidth = this.Width;
 
                         this.FormClosing += FHeaderAsideMainFooter_FormClosing;
-                         
+
                     };
                 }
                 else
@@ -721,7 +737,7 @@ namespace Client
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            tsslblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");  
+            tsslblTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         private void FHeaderAsideMainFooter_FormClosing(object sender, FormClosingEventArgs e)

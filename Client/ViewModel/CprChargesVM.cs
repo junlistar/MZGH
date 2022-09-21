@@ -26,6 +26,7 @@ namespace Client.ViewModel
             }
         }
         public string exec_SN_lookup { get; set; }
+        public string supply_code_lookup { get; set; }
 
         public string patient_id { get; set; }
         public int times { get; set; }

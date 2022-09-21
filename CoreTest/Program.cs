@@ -106,7 +106,7 @@ namespace CoreTest
 
                 FpDataRepository fpDataRepository = new FpDataRepository();
                 var aa = fpDataRepository.GetFPRegistrationData("000174985600", 40, 1);
-
+                 
             }
             catch (SqlException ex)
             {

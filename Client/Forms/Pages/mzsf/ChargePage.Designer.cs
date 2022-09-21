@@ -40,6 +40,7 @@
             this.lblTitle = new Sunny.UI.UILabel();
             this.lblNodata = new System.Windows.Forms.Label();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.lbl_ybye = new System.Windows.Forms.Label();
             this.txtBarcode = new Sunny.UI.UITextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.btnEditRelation = new Sunny.UI.UISymbolButton();
@@ -95,7 +96,6 @@
             this.lblOrderCharge = new System.Windows.Forms.Label();
             this.lblOrderTotalCharge = new System.Windows.Forms.Label();
             this.pnlAddOrder = new Sunny.UI.UIPanel();
-            this.lbl_ybye = new System.Windows.Forms.Label();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
@@ -336,6 +336,17 @@
             this.uiGroupBox1.Text = "患者信息";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // lbl_ybye
+            // 
+            this.lbl_ybye.AutoSize = true;
+            this.lbl_ybye.ForeColor = System.Drawing.Color.Red;
+            this.lbl_ybye.Location = new System.Drawing.Point(246, 34);
+            this.lbl_ybye.Name = "lbl_ybye";
+            this.lbl_ybye.Size = new System.Drawing.Size(42, 21);
+            this.lbl_ybye.TabIndex = 54;
+            this.lbl_ybye.Text = "余额";
+            this.lbl_ybye.Visible = false;
             // 
             // txtBarcode
             // 
@@ -1068,17 +1079,6 @@
             this.pnlAddOrder.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // lbl_ybye
-            // 
-            this.lbl_ybye.AutoSize = true;
-            this.lbl_ybye.ForeColor = System.Drawing.Color.Red;
-            this.lbl_ybye.Location = new System.Drawing.Point(246, 34);
-            this.lbl_ybye.Name = "lbl_ybye";
-            this.lbl_ybye.Size = new System.Drawing.Size(42, 21);
-            this.lbl_ybye.TabIndex = 54;
-            this.lbl_ybye.Text = "余额";
-            this.lbl_ybye.Visible = false;
-            // 
             // ChargePage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1094,6 +1094,7 @@
             this.Name = "ChargePage";
             this.PageIndex = 1101;
             this.Text = "划价收费";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChargePage_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChargePage_FormClosed);
             this.Load += new System.EventHandler(this.ChargePage_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChargePage_KeyDown);

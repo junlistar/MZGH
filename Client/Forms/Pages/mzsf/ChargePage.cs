@@ -557,7 +557,7 @@ namespace Mzsf.Forms.Pages
                             //pblSum.Show(); //this.pnlAddOrder.Show();
                             //uiTabControl1.ShowCloseButton = true;
 
-                           
+
                         }
                         else
                         {
@@ -698,9 +698,28 @@ namespace Mzsf.Forms.Pages
 
             //}
         }
+        public void UnLock()
+        {
+            try
+            { 
+                if (is_order_lock)
+                {
+                    //解除锁定处方
+                    LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
+                    is_order_lock = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
 
         private void InitUI()
         {
+            UnLock();
+
             this.uiTabControl1.Hide();
             this.pblSum.Hide();
             //this.pnlAddOrder.Hide();
@@ -958,12 +977,12 @@ namespace Mzsf.Forms.Pages
                 //var _order = SessionHelper.mzOrders.Where(p => p.order_no == tabindex + 1).FirstOrDefault();
                 var _order = SessionHelper.mzOrders.OrderBy(p => p.order_no).ToList()[tabindex];
                 if (_order != null)
-                { 
+                {
                     var order = SessionHelper.cprCharges.Where(p => p.order_no == _order.order_no);
 
-                    lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 2).ToString();
+                    lblOrderCharge.Text = Math.Round(order.Sum(p => p.total_price), 4).ToString();
                     lblOrderItemCount.Text = order.Count().ToString();
-                    lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 2).ToString();
+                    lblOrderTotalCharge.Text = Math.Round(SessionHelper.cprCharges.Sum(p => p.total_price), 4).ToString();
                 }
             }
             catch (Exception ex)
@@ -1391,12 +1410,7 @@ namespace Mzsf.Forms.Pages
 
         private void ChargePage_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (is_order_lock)
-            {
-                //解除锁定处方
-                LockOrder(SessionHelper.uservm.user_mi, current_patient_id, current_times, "1");
-                is_order_lock = false;
-            }
+            UnLock();
         }
 
         private void uiButton1_Click(object sender, EventArgs e)
@@ -1510,6 +1524,11 @@ namespace Mzsf.Forms.Pages
             {
                 this.Close();
             }
+        }
+
+        private void ChargePage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }

@@ -15,7 +15,7 @@ where goods_where_code = 'OTC'
              END,      
         --b.stock_amount,    
         --b.stock_amount2,    
-        --supply_code_lookup = d.supply_name,    
+        supply_code_lookup = d.supply_name,    
         --freq_code_lookup = '(' + RTRIM(a.freq_code) + ')',    
         exec_SN_lookup = f.name--,    
         --s.class_code supply_class      
@@ -24,7 +24,7 @@ where goods_where_code = 'OTC'
      --                       a.serial_no = b.serial AND a.group_no = b.group_no    
      LEFT JOIN view_mz_charge_all c ON a.charge_code = c.code AND    
                             a.serial_no = c.serial     
-     --LEFT JOIN yz_supply d ON a.supply_code = d.supply_code    
+     LEFT JOIN yz_supply d ON a.supply_code = d.supply_code    
      --LEFT JOIN yz_frequency e ON a.freq_code = e.code      
      LEFT JOIN zd_unit_code f ON a.exec_sn = f.unit_sn     
      --LEFT JOIN yz_supply s ON a.supply_code = s.supply_code     

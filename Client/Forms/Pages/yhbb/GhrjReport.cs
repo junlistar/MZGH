@@ -338,7 +338,7 @@ namespace Client.Forms.Pages.yhbb
                                 }
                                 else if (item.param_name == "price_opera")
                                 {
-                                    sql = sql.Replace(":" + item.param_name, "'" + SessionHelper.uservm.user_mi + "'");
+                                    sql = sql.Replace(":" + item.param_name, "'" + opera + "'");
                                 }
                                 else if (item.param_name == "mz_dept_no")
                                 {

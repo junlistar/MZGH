@@ -339,7 +339,7 @@ namespace Client.Forms.Pages.yhbb
                                 }
                                 else if (item.param_name == "price_opera")
                                 {
-                                    sql = sql.Replace(":" + item.param_name, "'" + SessionHelper.uservm.user_mi + "'");
+                                    sql = sql.Replace(":" + item.param_name, "'" + opera + "'");
                                 }
                                 else if (item.param_name == "mz_dept_no")
                                 {
@@ -358,7 +358,7 @@ namespace Client.Forms.Pages.yhbb
                             cash_date = "6008-01-01";
                         }
 
-                        paramurl = string.Format($"/api/cwgl/GetMzsfDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={SessionHelper.uservm.user_mi}&cash_date={cash_date}");
+                        paramurl = string.Format($"/api/cwgl/GetMzsfDailyByReportCode?code={_report_code}&report_date={report_date}&price_opera={opera}&cash_date={cash_date}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
