@@ -64,9 +64,9 @@
             this.dgvpaylist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvpaylist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -96,7 +96,7 @@
             this.dgvpaylist.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvpaylist.EnableHeadersVisualStyles = false;
             this.dgvpaylist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvpaylist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvpaylist.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvpaylist.Location = new System.Drawing.Point(3, 114);
             this.dgvpaylist.MultiSelect = false;
             this.dgvpaylist.Name = "dgvpaylist";
@@ -122,6 +122,8 @@
             this.dgvpaylist.ShowGridLine = true;
             this.dgvpaylist.ShowRect = false;
             this.dgvpaylist.Size = new System.Drawing.Size(732, 262);
+            this.dgvpaylist.Style = Sunny.UI.UIStyle.Custom;
+            this.dgvpaylist.StyleCustomMode = true;
             this.dgvpaylist.TabIndex = 0;
             this.dgvpaylist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -223,6 +225,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(3, 88);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(94, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 3;
             this.uiLabel1.Text = "支付信息";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -234,6 +237,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(172, 52);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(403, 32);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 4;
             this.uiLabel2.Text = "是否确认退款？";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,12 +248,11 @@
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnCancel.Location = new System.Drawing.Point(631, 394);
+            this.btnCancel.Location = new System.Drawing.Point(634, 394);
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Radius = 1;
-            this.btnCancel.Size = new System.Drawing.Size(104, 34);
-            this.btnCancel.StyleCustomMode = true;
+            this.btnCancel.Size = new System.Drawing.Size(101, 34);
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 44;
             this.btnCancel.Text = "取消";
@@ -266,7 +269,6 @@
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(101, 34);
-            this.btnSave.StyleCustomMode = true;
             this.btnSave.TabIndex = 43;
             this.btnSave.Text = "确定";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

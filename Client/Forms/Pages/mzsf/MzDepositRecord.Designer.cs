@@ -39,6 +39,7 @@
             this.dgv_mzdeposit = new Sunny.UI.UIDataGridView();
             this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,6 +68,7 @@
             this.txt_patientid.Name = "txt_patientid";
             this.txt_patientid.ShowText = false;
             this.txt_patientid.Size = new System.Drawing.Size(198, 29);
+            this.txt_patientid.Style = Sunny.UI.UIStyle.Custom;
             this.txt_patientid.TabIndex = 1;
             this.txt_patientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_patientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -79,6 +81,7 @@
             this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(83, 28);
+            this.btnSearch.Style = Sunny.UI.UIStyle.Custom;
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "查询";
             this.btnSearch.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -94,9 +97,9 @@
             this.dgv_mzdeposit.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_mzdeposit.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -106,6 +109,7 @@
             this.dgv_mzdeposit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.pid,
             this.ledger_sn,
+            this.times,
             this.charge_total,
             this.cash_name,
             this.cash_date,
@@ -120,7 +124,7 @@
             this.dgv_mzdeposit.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_mzdeposit.EnableHeadersVisualStyles = false;
             this.dgv_mzdeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgv_mzdeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgv_mzdeposit.GridColor = System.Drawing.Color.PowderBlue;
             this.dgv_mzdeposit.Location = new System.Drawing.Point(15, 91);
             this.dgv_mzdeposit.Name = "dgv_mzdeposit";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -143,7 +147,9 @@
             this.dgv_mzdeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_mzdeposit.ShowGridLine = true;
             this.dgv_mzdeposit.ShowRect = false;
-            this.dgv_mzdeposit.Size = new System.Drawing.Size(705, 286);
+            this.dgv_mzdeposit.Size = new System.Drawing.Size(732, 286);
+            this.dgv_mzdeposit.Style = Sunny.UI.UIStyle.Custom;
+            this.dgv_mzdeposit.StyleCustomMode = true;
             this.dgv_mzdeposit.TabIndex = 3;
             this.dgv_mzdeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -158,6 +164,13 @@
             this.ledger_sn.DataPropertyName = "ledger_sn";
             this.ledger_sn.HeaderText = "交款次数";
             this.ledger_sn.Name = "ledger_sn";
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "times";
+            this.times.Name = "times";
+            this.times.Visible = false;
             // 
             // charge_total
             // 
@@ -188,10 +201,11 @@
             // 
             this.btnxp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnxp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnxp.Location = new System.Drawing.Point(637, 54);
+            this.btnxp.Location = new System.Drawing.Point(664, 54);
             this.btnxp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnxp.Name = "btnxp";
             this.btnxp.Size = new System.Drawing.Size(83, 28);
+            this.btnxp.Style = Sunny.UI.UIStyle.Custom;
             this.btnxp.TabIndex = 4;
             this.btnxp.Text = "小票打印";
             this.btnxp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -202,10 +216,11 @@
             // 
             this.btnfp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnfp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnfp.Location = new System.Drawing.Point(548, 54);
+            this.btnfp.Location = new System.Drawing.Point(575, 54);
             this.btnfp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnfp.Name = "btnfp";
             this.btnfp.Size = new System.Drawing.Size(83, 28);
+            this.btnfp.Style = Sunny.UI.UIStyle.Custom;
             this.btnfp.TabIndex = 5;
             this.btnfp.Text = "发票打印";
             this.btnfp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -215,7 +230,7 @@
             // MzDepositRecord
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(732, 391);
+            this.ClientSize = new System.Drawing.Size(759, 391);
             this.Controls.Add(this.btnfp);
             this.Controls.Add(this.btnxp);
             this.Controls.Add(this.dgv_mzdeposit);
@@ -248,6 +263,7 @@
         private Sunny.UI.UIButton btnfp;
         private System.Windows.Forms.DataGridViewTextBoxColumn pid;
         private System.Windows.Forms.DataGridViewTextBoxColumn ledger_sn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn times;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn cash_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cash_date;

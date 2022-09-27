@@ -33,6 +33,9 @@ namespace Client
         List<UserDicVM> userDics = null;
         private void GhList_Load(object sender, EventArgs e)
         {
+            
+            StyleHelper.SetGridColor(dgvlist);//设置样式
+
             //初始化查询控件
             InitUI();
 
@@ -65,10 +68,7 @@ namespace Client
             //设置按钮提示文字信息
             uiToolTip1.SetToolTip(btnSearch, btnSearch.Text + "[F1]");
             uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F2]");
-            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
-
-            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
-             
+            uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]"); 
         }
 
 
@@ -132,7 +132,7 @@ namespace Client
                 int zrc = 0;
                 int ghrc = 0;
                 int thrc = 0;
-                  
+
                 var gh_date = txtRiqi.Text;
                 var ampm = "%";
                 switch (cbxSXW.Text)
@@ -168,7 +168,7 @@ namespace Client
                 log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
                 var json = HttpClientUtil.Get(paramurl);
-                  
+
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<GhSearchVM>>>(json);
                 if (result.status == 1)
                 {
@@ -207,6 +207,7 @@ namespace Client
                         unit_name = p.unit_name,
                         visit_flag = p.visit_flag,
                         visit_status = p.visit_status,
+                        billNo = p.billNo
                     }).ToList();
                     //dgvlist.Init();
                     dgvlist.DataSource = source;
@@ -269,6 +270,7 @@ namespace Client
                 unit_name = p.unit_name,
                 visit_flag = p.visit_flag,
                 visit_status = p.visit_status,
+                billNo = p.billNo
             }).ToList();
             //dgvlist.Init();
             dgvlist.DataSource = source;
@@ -378,9 +380,9 @@ namespace Client
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadingHelper.ShowLoadingScreen();//显示
-             
+
             //查询列表
-            InitData(); 
+            InitData();
 
             LoadingHelper.CloseForm();//关闭
         }
@@ -659,11 +661,11 @@ namespace Client
         private void txtDoct_TextChanged(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 if (txtDoct.Text == "")
                 {
                     return;
-                } 
+                }
                 //查询信息 显示到girdview
                 var tb = sender as UITextBox;
                 var pbl = tb.Parent as UIPanel;
@@ -893,7 +895,7 @@ namespace Client
                         dgv.Hide();
                     }
                 }
-                else if(e.KeyCode == Keys.Escape)
+                else if (e.KeyCode == Keys.Escape)
                 {
                     dgv.Hide();
                 }
@@ -1072,7 +1074,7 @@ namespace Client
                 }
             }
         }
-         
+
         /// <summary>
         /// fastreport打印
         /// </summary>
@@ -1088,7 +1090,7 @@ namespace Client
             return report;
         }
 
-       
+
         private void txtDoct_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -1215,11 +1217,7 @@ namespace Client
             }
 
         }
-
-        private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            
-        }
+         
         /// <summary>
         /// 打印电子发票
         /// </summary>
@@ -1235,20 +1233,28 @@ namespace Client
             //补打电子发票
             try
             {
-                if (dgvlist.SelectedIndex==-1)
+                if (dgvlist.SelectedIndex == -1)
                 {
-                    UIMessageTip.ShowError("没有数据");
+                    UIMessageTip.ShowError("请选择数据行");
                     return;
                 }
 
                 //获取选择参数
                 var _patientId = dgvlist.Rows[dgvlist.SelectedIndex].Cells["patient_id"].Value;
+                var _ledger_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["ledger_sn"].Value;
+                var _times = dgvlist.Rows[dgvlist.SelectedIndex].Cells["times"].Value;
+                var _charge_fee = dgvlist.Rows[dgvlist.SelectedIndex].Cells["charge_fee"].Value;
+
                 if (_patientId == null)
                 {
-                    UIMessageTip.Show("没有数据！");
+                    UIMessageTip.ShowError("patientId数据为空！");
                     return;
                 }
-                var _ledger_sn = dgvlist.Rows[dgvlist.SelectedIndex].Cells["ledger_sn"].Value;
+                if (_ledger_sn == null)
+                {
+                    UIMessageTip.ShowError("ledger_sn数据为空！");
+                    return;
+                }
                 var _subsys_id = "mz";
 
                 //查询电子发票记录表  <List<FpData>> GetFpDatasByParams(string patient_id, int ledger_sn, string subsys_id)
@@ -1269,63 +1275,37 @@ namespace Client
                 }
                 if (result.data == null || result.data.Count == 0)
                 {
-                    UIMessageTip.Show("没有电子发票数据！");
+                    if (UIMessageDialog.ShowAskDialog(this, "没有电子发票数据,是否生成？"))
+                    {
+                        var _add_result = ElecBillHelper.CreateElecBill(_patientId.ToString(), Convert.ToInt32(_ledger_sn), Convert.ToInt32(_times), _charge_fee.ToString(), BillTypeEnum.GuaHao);
+                        if (_add_result)
+                        {
+                            json = HttpClientUtil.Get(paramurl);
 
-                    log.Error("没有电子发票数据！");
+                            result = WebApiHelper.DeserializeObject<ResponseResult<List<FpData>>>(json);
+                        }
+                        else
+                        {
+                            log.Error("重新生成电子发票数据失败！");
 
-                    return;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        log.Error("没有电子发票数据！");
+
+                        return;
+                    } 
+                  
                 }
 
                 string _billBatchCode = result.data[0].billBatchCode;
                 string _billNo = result.data[0].billNo;
                 string _random = result.data[0].random;
 
-                string ip = ConfigurationManager.AppSettings["ip"];
-                string port = ConfigurationManager.AppSettings["port"];
-                string dllName = ConfigurationManager.AppSettings["dllName"];
-                string func = ConfigurationManager.AppSettings["func"];
-
-                string noise = Guid.NewGuid().ToString();
-
-                string appid = ConfigurationManager.AppSettings["appid"];
-                string key = ConfigurationManager.AppSettings["key"];
-                string version = ConfigurationManager.AppSettings["version"];
-
-                string method = "printElectBill";
-
-                var _data = new
-                {
-                    billBatchCode = _billBatchCode,
-                    billNo = _billNo,
-                    random = _random,
-                };
-
-                var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
-                var stringSignTemp = stringA + $"&key={key}&version={version}";
-
-                var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
-
-                var _params = new
-                {
-                    appid = appid,
-                    data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
-                    noise = noise,
-                    version = version,
-                    sign = _sign
-                };
-
-                var _payload = new
-                {
-                    method = method,
-                    @params = _params
-                };
-                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
-                string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
-                //var reslt = HttpClientUtil.Get(url);
-                Task.Run(() =>
-                {
-                    HttpClientUtil.Get(url);
-                });
+                ElecBillHelper.PrintElecBill(_billBatchCode, _billNo, _random);
+                 
             }
             catch (Exception ex)
             {
@@ -1334,5 +1314,6 @@ namespace Client
                 log.Error(ex.Message);
             }
         }
+         
     }
 }

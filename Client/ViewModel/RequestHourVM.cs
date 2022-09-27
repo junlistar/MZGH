@@ -13,5 +13,12 @@ namespace Client.ViewModel
         public string code { get; set; }
         public string name { get; set; }
 
+        public string desc
+        {
+            get
+            {
+                return start_hour + "时-" + end_hour + "时";
+            }
+        }
     } 
 }

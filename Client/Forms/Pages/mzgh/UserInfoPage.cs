@@ -41,6 +41,9 @@ namespace Client.Forms.Pages
 
         private void UserInfoPage_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgv_cbxx);//设置样式
+            StyleHelper.SetGridColor(dgv_sfxx);//设置样式
+
             //加载数据字典
             InitDic();
 

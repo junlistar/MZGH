@@ -187,6 +187,7 @@
     <Compile Include="ClassLib\RowMergeView.Designer.cs">
       <DependentUpon>RowMergeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ClassLib\StyleHelper.cs" />
     <Compile Include="FastReport\Create.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -726,6 +727,7 @@
       <DependentUpon>UserInfoEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseRequestVM.cs" />
+    <Compile Include="ViewModel\FpConfigVM.cs" />
     <Compile Include="ViewModel\GhDoctorOutVM.cs" />
     <Compile Include="ViewModel\GHReceiptModel.cs" />
     <Compile Include="ViewModel\MzChargePatternVM.cs" />
@@ -1053,7 +1055,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="4yq5wm0nvn.ico" />
+    <Content Include="4yq5wm0nvn.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FastReport\dll\FastReport.Bars.dll" />
     <Content Include="FastReport\dll\FastReport.Compat.dll" />
     <Content Include="FastReport\dll\FastReport.DataVisualization.dll" />

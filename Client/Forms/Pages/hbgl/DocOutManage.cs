@@ -292,5 +292,10 @@ namespace Client.Forms.Pages.hbgl
             txtDoct.TextChanged += txtDoct_TextChanged;
             dgvlist.DataSource = new List<GhDoctorOutVM>(); ; 
         }
+
+        private void DocOutManage_Load(object sender, EventArgs e)
+        { 
+            StyleHelper.SetGridColor(dgvlist);//设置样式
+        }
     }
 }

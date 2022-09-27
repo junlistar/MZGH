@@ -56,6 +56,7 @@
             this.end_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.step_length = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deleted_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deleted_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             this.uiPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
@@ -76,6 +77,7 @@
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(741, 47);
+            this.uiPanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel1.TabIndex = 0;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -87,6 +89,7 @@
             this.lblTitle.Location = new System.Drawing.Point(15, 7);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(145, 31);
+            this.lblTitle.Style = Sunny.UI.UIStyle.Custom;
             this.lblTitle.TabIndex = 14;
             this.lblTitle.Text = "发票号初始";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -101,7 +104,7 @@
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 40);
-            this.btnSave.StyleCustomMode = true;
+            this.btnSave.Style = Sunny.UI.UIStyle.Custom;
             this.btnSave.Symbol = 61487;
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "保存";
@@ -117,7 +120,7 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
+            this.btnExit.Style = Sunny.UI.UIStyle.Custom;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 12;
             this.btnExit.Text = "退出";
@@ -133,7 +136,7 @@
             this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 40);
-            this.btnAdd.StyleCustomMode = true;
+            this.btnAdd.Style = Sunny.UI.UIStyle.Custom;
             this.btnAdd.Symbol = 61543;
             this.btnAdd.TabIndex = 11;
             this.btnAdd.Text = "增加";
@@ -149,7 +152,7 @@
             this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(100, 40);
-            this.btnDel.StyleCustomMode = true;
+            this.btnDel.Style = Sunny.UI.UIStyle.Custom;
             this.btnDel.Symbol = 61544;
             this.btnDel.TabIndex = 10;
             this.btnDel.Text = "删除";
@@ -175,6 +178,7 @@
             this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel2.Name = "uiPanel2";
             this.uiPanel2.Size = new System.Drawing.Size(741, 56);
+            this.uiPanel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel2.TabIndex = 1;
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -194,6 +198,7 @@
             this.cbxflag.Name = "cbxflag";
             this.cbxflag.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxflag.Size = new System.Drawing.Size(150, 29);
+            this.cbxflag.Style = Sunny.UI.UIStyle.Custom;
             this.cbxflag.TabIndex = 5;
             this.cbxflag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxflag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -205,6 +210,7 @@
             this.uiLabel4.Location = new System.Drawing.Point(541, 17);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 6;
             this.uiLabel4.Text = "状态";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -222,6 +228,7 @@
             this.txtstep.Name = "txtstep";
             this.txtstep.ShowText = false;
             this.txtstep.Size = new System.Drawing.Size(40, 29);
+            this.txtstep.Style = Sunny.UI.UIStyle.Custom;
             this.txtstep.TabIndex = 4;
             this.txtstep.Text = "1";
             this.txtstep.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -235,6 +242,7 @@
             this.uiLabel3.Location = new System.Drawing.Point(413, 17);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(64, 23);
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 4;
             this.uiLabel3.Text = "递增值";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -250,6 +258,7 @@
             this.txtend.Name = "txtend";
             this.txtend.ShowText = false;
             this.txtend.Size = new System.Drawing.Size(122, 29);
+            this.txtend.Style = Sunny.UI.UIStyle.Custom;
             this.txtend.TabIndex = 3;
             this.txtend.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtend.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -265,6 +274,7 @@
             this.txtbegin.Name = "txtbegin";
             this.txtbegin.ShowText = false;
             this.txtbegin.Size = new System.Drawing.Size(122, 29);
+            this.txtbegin.Style = Sunny.UI.UIStyle.Custom;
             this.txtbegin.TabIndex = 2;
             this.txtbegin.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtbegin.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -276,6 +286,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(222, 17);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(64, 23);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 1;
             this.uiLabel2.Text = "结束号";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -287,6 +298,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(20, 17);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(64, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 0;
             this.uiLabel1.Text = "起始号";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -302,9 +314,9 @@
             this.dgvlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -318,7 +330,8 @@
             this.current_no,
             this.end_no,
             this.step_length,
-            this.deleted_flag});
+            this.deleted_flag,
+            this.deleted_flag_str});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -329,7 +342,7 @@
             this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvlist.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvlist.Location = new System.Drawing.Point(4, 160);
             this.dgvlist.Name = "dgvlist";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -353,6 +366,8 @@
             this.dgvlist.ShowGridLine = false;
             this.dgvlist.ShowRect = false;
             this.dgvlist.Size = new System.Drawing.Size(741, 168);
+            this.dgvlist.Style = Sunny.UI.UIStyle.Custom;
+            this.dgvlist.StyleCustomMode = true;
             this.dgvlist.TabIndex = 2;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -398,6 +413,13 @@
             this.deleted_flag.DataPropertyName = "deleted_flag";
             this.deleted_flag.HeaderText = "状态";
             this.deleted_flag.Name = "deleted_flag";
+            this.deleted_flag.Visible = false;
+            // 
+            // deleted_flag_str
+            // 
+            this.deleted_flag_str.DataPropertyName = "deleted_flag_str";
+            this.deleted_flag_str.HeaderText = "使用状态";
+            this.deleted_flag_str.Name = "deleted_flag_str";
             // 
             // ReceiptInit
             // 
@@ -448,5 +470,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn end_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn step_length;
         private System.Windows.Forms.DataGridViewTextBoxColumn deleted_flag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn deleted_flag_str;
     }
 }

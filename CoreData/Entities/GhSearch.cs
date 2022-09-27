@@ -36,5 +36,6 @@ namespace Data.Entities
 
         public int ledger_sn { get; set; }
 
+        public string billNo { get; set; }
     }
 }

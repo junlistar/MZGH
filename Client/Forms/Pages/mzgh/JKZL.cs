@@ -98,10 +98,11 @@ namespace Client
 
             }
         }
+ 
 
-        private void JKZL_KeyUp(object sender, KeyEventArgs e)
+        private void JKZL_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode== Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
                 DialogResult = DialogResult.OK;
                 this.Close();

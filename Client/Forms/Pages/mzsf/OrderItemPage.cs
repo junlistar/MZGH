@@ -53,6 +53,8 @@ namespace Mzsf.Forms.Pages
             }
             else
             {
+                StyleHelper.SetGridColor(dgvOrderDetail);//设置样式
+
                 lblNodata.Hide();
 
                 if (SessionHelper.cprCharges.Count(p => p.order_no == _order_no) > 0)

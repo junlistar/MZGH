@@ -77,9 +77,9 @@
             this.dgvOrderDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvOrderDetail.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -113,7 +113,7 @@
             this.dgvOrderDetail.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvOrderDetail.EnableHeadersVisualStyles = false;
             this.dgvOrderDetail.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvOrderDetail.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvOrderDetail.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvOrderDetail.Location = new System.Drawing.Point(0, 89);
             this.dgvOrderDetail.Name = "dgvOrderDetail";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -204,6 +204,7 @@
             this.fybl.DataPropertyName = "fybl";
             this.fybl.HeaderText = "费用比例";
             this.fybl.Name = "fybl";
+            this.fybl.Visible = false;
             // 
             // yongfa
             // 
@@ -441,6 +442,7 @@
         private Sunny.UI.UITextBox txtName;
         private Sunny.UI.UISymbolButton btnAddItem;
         private Sunny.UI.UISymbolButton btnDeleteItem;
+        private System.Windows.Forms.Label lblNodata;
         private System.Windows.Forms.DataGridViewTextBoxColumn item_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn serial;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code_lookup_str;
@@ -457,6 +459,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn freq_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn parent_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn code;
-        private System.Windows.Forms.Label lblNodata;
     }
 }

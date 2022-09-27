@@ -522,5 +522,10 @@ namespace Client
             var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((week - 1) * 7) + 1).ToString("MM-dd");
             return dt_from + "至" + dt_to;
         }
+
+        private void Schb_Load(object sender, EventArgs e)
+        {
+            StyleHelper.SetGridColor(dgvRequest);//设置样式
+        }
     }
 }

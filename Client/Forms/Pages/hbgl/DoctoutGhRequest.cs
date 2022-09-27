@@ -30,6 +30,8 @@ namespace Client.Forms.Pages.hbgl
 
         private void DoctoutGhRequest_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvlist);//设置样式
+
             lbl_doctname.Text = doct_name;
             lbl_t1.Text = t1;
             lbl_t2.Text = t2;

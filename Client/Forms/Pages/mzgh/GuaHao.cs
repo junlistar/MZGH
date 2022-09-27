@@ -86,6 +86,7 @@ namespace Client
 
                 //查询并设置发票
                 ReceiptInit receiptInit = new ReceiptInit();
+                receiptInit.Style = this.Style;
                 if (receiptInit.ShowDialog() == DialogResult.OK)
                 {
 
@@ -151,9 +152,11 @@ namespace Client
                     btn1.Style = UIStyle.Green;
                     btn1.StyleCustomMode = true;
                     btn1.Text = hourslist[i].name;
-                    btn1.TagString = hourslist[i].code;
+                    btn1.TagString = hourslist[i].code; 
                     btn1.Width = 86;
                     btn1.Height = 31;
+                     
+                    uiToolTip1.SetToolTip(btn1, hourslist[i].desc);
 
                     if (i == 0)
                     {
@@ -973,8 +976,8 @@ namespace Client
                     UIMessageTip.Show(yBResponse.err_msg);
                 }
                 else if (yBResponse.output != null && !string.IsNullOrEmpty(yBResponse.output.baseinfo.certno))
-                { 
-
+                {
+                    log.Debug(yBResponse.ToString());
                     YBHelper.currentYBInfo = yBResponse;
 
                     SessionHelper.cardno = yBResponse.output.baseinfo.certno;
@@ -1855,14 +1858,14 @@ namespace Client
                 return;
             }
 
-            GhDepositRecord ghDepositRecord = new GhDepositRecord();
-            ghDepositRecord.patient_id = lblPatientid.Text;
+            //GhDepositRecord ghDepositRecord = new GhDepositRecord();
+            //ghDepositRecord.patient_id = lblPatientid.Text;
 
-            ghDepositRecord.ShowDialog();
+            //ghDepositRecord.ShowDialog();
 
 
             //补打小票
-            //XiaopiaoDayin();
+            XiaopiaoDayin();
         }
         /// <summary>
         /// 小票打印

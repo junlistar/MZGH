@@ -49,12 +49,12 @@
             this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.btnTuikuan = new Sunny.UI.UISymbolButton();
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
-            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +70,7 @@
             this.confirm_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ckall = new Sunny.UI.UICheckBox();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -147,9 +148,9 @@
             this.dgvDeposit.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvDeposit.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -171,7 +172,7 @@
             this.dgvDeposit.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDeposit.EnableHeadersVisualStyles = false;
             this.dgvDeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvDeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvDeposit.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvDeposit.Location = new System.Drawing.Point(4, 166);
             this.dgvDeposit.Name = "dgvDeposit";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -227,6 +228,7 @@
             // 
             this.uiPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiPanel2.Controls.Add(this.label2);
             this.uiPanel2.Controls.Add(this.btnExit);
             this.uiPanel2.Controls.Add(this.btnTuikuan);
             this.uiPanel2.Controls.Add(this.btnBufenTuikuan);
@@ -242,6 +244,17 @@
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(416, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(411, 25);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "全部退款资金将原路退回，部分退款为现金退款";
             // 
             // btnExit
             // 
@@ -278,7 +291,7 @@
             // 
             this.btnBufenTuikuan.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBufenTuikuan.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnBufenTuikuan.Location = new System.Drawing.Point(770, 2);
+            this.btnBufenTuikuan.Location = new System.Drawing.Point(995, 0);
             this.btnBufenTuikuan.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnBufenTuikuan.Name = "btnBufenTuikuan";
             this.btnBufenTuikuan.Size = new System.Drawing.Size(100, 40);
@@ -312,9 +325,9 @@
             this.dgvCpr.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvCpr.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -347,7 +360,7 @@
             this.dgvCpr.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvCpr.EnableHeadersVisualStyles = false;
             this.dgvCpr.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvCpr.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvCpr.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvCpr.Location = new System.Drawing.Point(4, 297);
             this.dgvCpr.Name = "dgvCpr";
             this.dgvCpr.ReadOnly = true;
@@ -375,22 +388,6 @@
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
-            // 
-            // ckall
-            // 
-            this.ckall.BackColor = System.Drawing.Color.Transparent;
-            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(6, 298);
-            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ckall.Name = "ckall";
-            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.ckall.Size = new System.Drawing.Size(73, 30);
-            this.ckall.Style = Sunny.UI.UIStyle.Custom;
-            this.ckall.TabIndex = 14;
-            this.ckall.Text = "全选";
-            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // chkback
             // 
@@ -503,6 +500,22 @@
             this.confirm_date.ReadOnly = true;
             this.confirm_date.Visible = false;
             // 
+            // ckall
+            // 
+            this.ckall.BackColor = System.Drawing.Color.Transparent;
+            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ckall.Location = new System.Drawing.Point(6, 298);
+            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ckall.Name = "ckall";
+            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
+            this.ckall.TabIndex = 14;
+            this.ckall.Text = "全选";
+            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
+            // 
             // RefundConfirm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -565,5 +578,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_date;
+        private System.Windows.Forms.Label label2;
     }
 }

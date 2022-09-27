@@ -96,5 +96,18 @@ namespace Mzsf.Forms.Pages
 
             }
         }
+
+        private void JKZL_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }

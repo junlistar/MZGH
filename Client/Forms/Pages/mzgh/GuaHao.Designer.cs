@@ -124,7 +124,6 @@
             this.btnEditUser1.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnEditUser1.Name = "btnEditUser1";
             this.btnEditUser1.Size = new System.Drawing.Size(100, 40);
-            this.btnEditUser1.StyleCustomMode = true;
             this.btnEditUser1.Symbol = 61508;
             this.btnEditUser1.TabIndex = 12;
             this.btnEditUser1.Text = "编辑(F3)";
@@ -140,7 +139,6 @@
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
             this.uiSymbolButton1.Text = "重新(F1)";
@@ -156,7 +154,6 @@
             this.btnRePrint.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRePrint.Name = "btnRePrint";
             this.btnRePrint.Size = new System.Drawing.Size(100, 40);
-            this.btnRePrint.StyleCustomMode = true;
             this.btnRePrint.Symbol = 61487;
             this.btnRePrint.TabIndex = 9;
             this.btnRePrint.Text = "补打(F4)";
@@ -172,7 +169,6 @@
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
             this.uiSymbolButton2.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton2.StyleCustomMode = true;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
             this.uiSymbolButton2.Text = "退出(F12)";
@@ -188,7 +184,6 @@
             this.btnTuihao.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuihao.Name = "btnTuihao";
             this.btnTuihao.Size = new System.Drawing.Size(100, 40);
-            this.btnTuihao.StyleCustomMode = true;
             this.btnTuihao.Symbol = 62005;
             this.btnTuihao.TabIndex = 7;
             this.btnTuihao.Text = "退号(F2)";
@@ -880,7 +875,6 @@
             this.uiBreadcrumb2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiBreadcrumb2.Name = "uiBreadcrumb2";
             this.uiBreadcrumb2.Size = new System.Drawing.Size(242, 29);
-            this.uiBreadcrumb2.StyleCustomMode = true;
             this.uiBreadcrumb2.TabIndex = 4;
             this.uiBreadcrumb2.Text = "uiBreadcrumb2";
             this.uiBreadcrumb2.UnSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));

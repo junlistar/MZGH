@@ -598,6 +598,19 @@ namespace CoreApi.Controllers
                 return ErrorResult<MzClientConfig>(ex.Message);
             }
         }
+        public ResponseResult<FpConfig> GetFPConfig()
+        {
+            Log.Information($"GetFPConfig");
+            try
+            {
+                return _commonRepository.GetFPConfig();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<FpConfig>(ex.Message);
+            }
+        } 
 
         public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {
@@ -1352,6 +1365,22 @@ namespace CoreApi.Controllers
                 string strData = sr.ReadToEndAsync().Result;
                 Log.Information($"============== {strData}");
                 return _ghOpReceiptRepository.EditOpReceipt(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> DeleteOpReceipt()
+        {
+            Log.Information($"DeleteOpReceipt,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _ghOpReceiptRepository.DeleteOpReceipt(strData);
             }
             catch (Exception ex)
             {

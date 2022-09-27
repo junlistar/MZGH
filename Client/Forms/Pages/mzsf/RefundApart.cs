@@ -42,13 +42,14 @@ namespace Mzsf.Forms.Pages
 
         private void RefundConfirm_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvCpr);//设置样式
+
             lblZongji.Text = total_charge.ToString();
             lblTuikuan.Text = "0";
-
-            //ckall.Location = dgvCpr.Location;
-
-            
+             
             BindDrugDetails(patient_id, ledger_sn, tbl_flag);
+
+
         }
 
       

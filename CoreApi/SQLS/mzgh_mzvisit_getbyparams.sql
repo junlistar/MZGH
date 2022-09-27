@@ -24,7 +24,8 @@ select
         sum(i.charge_total) charge_fee,
         i.receipt_sn,
         i.receipt_no,i.ledger_sn,
-        p.p_bar_code 
+        p.p_bar_code, 
+		fd.billNo
 from    view_mz_visit_table a left join  zd_unit_code b on a.visit_dept = b.unit_sn
         left join  zd_unit_code b1 on a.group_sn = b1.unit_sn 
         left join  a_employee_mi c on a.doctor_code = c.emp_sn
@@ -37,6 +38,7 @@ from    view_mz_visit_table a left join  zd_unit_code b on a.visit_dept = b.unit
         left join  gh_receipt i on a.patient_id = i.patient_id and
                      a.times = i.times 
         left join  view_mz_allpatient p on a.patient_id = p.patient_id  
+		left join fp_data fd on i.patient_id=fd.patient_id and i.ledger_sn= fd.ledger_sn 
 where datediff(dd,a.gh_date,@gh_date)=0 and 
         a.visit_dept like @visit_dept and
         a.clinic_type like @clinic_type and
@@ -66,8 +68,9 @@ group by
         a.ampm,
         a.flag,
         i.receipt_sn,
-        i.receipt_no,ledger_sn,
-        p.p_bar_code        
+        i.receipt_no,i.ledger_sn,
+        p.p_bar_code,
+        fd.billNo  
 order by
         a.gh_date,
         i.receipt_sn,

@@ -69,5 +69,30 @@ namespace Data.Repository
 
             }
         }
+
+        public bool DeleteOpReceipt(string jsonStr)
+        {
+            GhOpReceipt _mod = JsonConvert.DeserializeObject<GhOpReceipt>(jsonStr);
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                var para = new DynamicParameters(); 
+                para.Add("@opera", _mod.@operator);
+                para.Add("@happen_date", _mod.happen_date);
+                para.Add("@opera", _mod.@operator);
+                para.Add("@happen_date", _mod.happen_date);
+                para.Add("@start_no", _mod.start_no);
+                para.Add("@current_no", _mod.current_no);
+                para.Add("@end_no", _mod.end_no);
+                para.Add("@step_length", _mod.step_length);
+                para.Add("@deleted_flag", "1");
+                para.Add("@report_flag", _mod.report_flag);
+                 
+                string   sql = @" update gh_op_receipt set deleted_flag = @deleted_flag
+  where operator= @opera and happen_date = @happen_date"; 
+
+                return connection.Execute(sql, para) > 0;
+
+            }
+        }
     }
 }

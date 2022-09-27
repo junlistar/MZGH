@@ -163,14 +163,14 @@ namespace Mzsf.Forms.Pages
                     }
                     else
                     {
-                        MessageBox.Show("没有查到用户数据");
+                        UIMessageTip.ShowWarning("没有查到用户数据");
                         lblNodata.Text = "没有查到用户数据";
                         lblNodata.Show();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("没有查到用户数据");
+                    UIMessageTip.ShowWarning("没有查到用户数据");
                     lblNodata.Text = "没有查到用户数据";
                     lblNodata.Show();
                 }
@@ -520,6 +520,7 @@ namespace Mzsf.Forms.Pages
                                 }
                                 page.TagString = orderVM.order_no.ToString();
                                 page.setData = UpdateBottomPrice;
+                                page.Style = this.Style;
 
                                 uiTabControl1.AddPage(page);
                                 uiTabControl1.TabPages[pageIndex].Text = orderVM.title;
@@ -1010,6 +1011,7 @@ namespace Mzsf.Forms.Pages
                 check.unit_code = current_unit_sn;
                 check.unit_name = current_unit_name;
                 check.icd_code = current_icd_code;
+                check.SetStyle(this.Style);
 
                 //check.FormClosed += Check_FormClosed;
                 var dresult = check.ShowDialog();
@@ -1058,6 +1060,12 @@ namespace Mzsf.Forms.Pages
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddOrder_Click(object sender, EventArgs e)
+        {
+
+            AddOrder();
+        }
+
+        public void AddOrder()
         {
             if (current_patient_id == "")
             {
@@ -1110,11 +1118,12 @@ namespace Mzsf.Forms.Pages
             var page = new OrderItemPage(max_order_no + 1, cbxOrderType.SelectedValue.ToString());
             page.TagString = (max_order_no + 1).ToString();
             page.setData = UpdateBottomPrice;
+            page.SetStyle(this.Style);
             uiTabControl1.AddPage(page);
             uiTabControl1.TabPages[uiTabControl1.TabCount - 1].Text = "处方" + (max_order_no + 1) + "：" + cbxOrderType.Text;
             uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
             uiTabControl1.ShowCloseButton = true;
-
+            txtCode.Text = "";
         }
 
         public bool CreateVisitRecord()
@@ -1492,7 +1501,7 @@ namespace Mzsf.Forms.Pages
 
             Client.Forms.Pages.mzsf.MzDepositRecord mzDepositRecord = new Client.Forms.Pages.mzsf.MzDepositRecord();
             mzDepositRecord.patient_id = lblPatientid.Text;
-
+            mzDepositRecord.Style = this.Style;
             mzDepositRecord.ShowDialog();
         }
 
@@ -1523,6 +1532,10 @@ namespace Mzsf.Forms.Pages
             if (e.KeyCode == Keys.F12)
             {
                 this.Close();
+            }
+            else if (e.KeyCode== Keys.Add)
+            {
+                AddOrder();
             }
         }
 

@@ -51,7 +51,7 @@ namespace Client.ViewModel
         public string p_bar_code { get; set; }
 
         public int ledger_sn { get; set; }
-
+        public string billNo { get; set; }
     }
 
     public class GhRefundPayVM

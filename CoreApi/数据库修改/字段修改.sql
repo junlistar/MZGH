@@ -847,3 +847,29 @@ CREATE TABLE [dbo].[gh_doctor_leave](
 	[sn] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+
+USE [his_gx_test]
+GO
+
+CREATE FUNCTION [dbo].[Get_mzCheque_name_20220922] (@pid VARCHAR(12), @ledger INT, @flag VARCHAR(1) = '')  
+RETURNS VARCHAR(200) AS  
+BEGIN 
+  DECLARE @str VARCHAR(200)
+  DECLARE @table VARCHAR(31)    
+  SET @str = ''
+  IF @flag = 'b'
+  BEGIN
+    SELECT @str= @str +isnull(c.psn_name+':','')+ ISNULL(b.[name],'') + '(' + CONVERT(VARCHAR, CAST(charge AS DECIMAL(10, 2))) + ') ' FROM mz_deposit_b a with(nolock)
+      LEFT JOIN zd_cheque_type b with(nolock) ON a.cheque_type = b.code
+	  LEFT JOIN  ybNew_2207_result c with(nolock)  on a.patient_id=c.patient_id and  a.business_no=c.setl_id
+	  WHERE a.patient_id = @pid and a.ledger_sn = @ledger  
+  END ELSE
+  BEGIN
+    SELECT @str= @str +isnull(c.psn_name+':','')+ ISNULL(b.[name],'') + '(' + CONVERT(VARCHAR, CAST(charge AS DECIMAL(10, 2))) + ') ' FROM mz_deposit a with(nolock)
+      LEFT JOIN zd_cheque_type b with(nolock) ON a.cheque_type = b.code
+	   LEFT JOIN  ybNew_2207_result c with(nolock)  on a.patient_id=c.patient_id and  a.business_no=c.setl_id
+	  WHERE a.patient_id = @pid and a.ledger_sn = @ledger
+  END
+  RETURN @str
+END
+

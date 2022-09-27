@@ -22,7 +22,9 @@ namespace Client.ClassLib
         public static Color dgv_row_seleced_color = Color.FromArgb(104, 173, 255);
 
         //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
-        public static MzClientConfigVM MzClientConfigVM; 
+        public static MzClientConfigVM MzClientConfigVM;
+
+        public static FpConfigVM fpConfigVM;
 
         public static string cardno = "";
 

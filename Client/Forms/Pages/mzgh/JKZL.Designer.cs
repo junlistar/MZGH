@@ -264,7 +264,7 @@
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 528, 320);
             this.Load += new System.EventHandler(this.JKZL_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.JKZL_KeyUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.JKZL_KeyDown);
             this.ResumeLayout(false);
 
         }

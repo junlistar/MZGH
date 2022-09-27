@@ -74,6 +74,7 @@
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
             this.uiPanel1.Size = new System.Drawing.Size(1028, 61);
+            this.uiPanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel1.TabIndex = 5;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -132,6 +133,7 @@
             this.uiPanel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel2.Name = "uiPanel2";
             this.uiPanel2.Size = new System.Drawing.Size(1028, 45);
+            this.uiPanel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel2.TabIndex = 7;
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -145,7 +147,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(103, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.TabIndex = 11;
             this.btnExit.Text = "退出";
             this.btnExit.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -160,6 +161,7 @@
             this.btnXianjintui.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnXianjintui.Name = "btnXianjintui";
             this.btnXianjintui.Size = new System.Drawing.Size(103, 40);
+            this.btnXianjintui.Style = Sunny.UI.UIStyle.Custom;
             this.btnXianjintui.TabIndex = 10;
             this.btnXianjintui.Text = "现金退款";
             this.btnXianjintui.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -241,6 +243,7 @@
             this.dgvCpr.ShowGridLine = false;
             this.dgvCpr.ShowRect = false;
             this.dgvCpr.Size = new System.Drawing.Size(1025, 440);
+            this.dgvCpr.Style = Sunny.UI.UIStyle.Custom;
             this.dgvCpr.TabIndex = 8;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
@@ -323,6 +326,7 @@
             this.ckall.Name = "ckall";
             this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
             this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
             this.ckall.TabIndex = 9;
             this.ckall.Text = "全选";
             this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

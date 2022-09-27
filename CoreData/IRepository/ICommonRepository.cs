@@ -13,7 +13,8 @@ namespace Data.IRepository
 
         List<YbName> GetYbName();
 
-        MzClientConfig GetMzClientConfig();
+        MzClientConfig GetMzClientConfig(); 
+        FpConfig GetFPConfig();
 
         List<Ybhzzd> GetYbhzzdList();
 

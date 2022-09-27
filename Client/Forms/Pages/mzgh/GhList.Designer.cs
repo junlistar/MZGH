@@ -36,6 +36,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -72,10 +75,13 @@
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.txtRiqi = new Sunny.UI.UIDatePicker();
             this.dgvlist = new Sunny.UI.UIDataGridView();
+            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
+            this.lblTotalCount = new Sunny.UI.UILabel();
             this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.billNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.response_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unit_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -98,8 +104,6 @@
             this.gh_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gh_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ampm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
-            this.lblTotalCount = new Sunny.UI.UILabel();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvks)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -122,6 +126,7 @@
             this.pnlTitle.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlTitle.Name = "pnlTitle";
             this.pnlTitle.Size = new System.Drawing.Size(1225, 45);
+            this.pnlTitle.Style = Sunny.UI.UIStyle.Custom;
             this.pnlTitle.TabIndex = 1;
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -135,7 +140,7 @@
             this.btnRePrint.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRePrint.Name = "btnRePrint";
             this.btnRePrint.Size = new System.Drawing.Size(100, 40);
-            this.btnRePrint.StyleCustomMode = true;
+            this.btnRePrint.Style = Sunny.UI.UIStyle.Custom;
             this.btnRePrint.Symbol = 61487;
             this.btnRePrint.TabIndex = 13;
             this.btnRePrint.Text = "补打(F3)";
@@ -191,6 +196,7 @@
             this.dgvks.ShowGridLine = true;
             this.dgvks.ShowRect = false;
             this.dgvks.Size = new System.Drawing.Size(275, 28);
+            this.dgvks.Style = Sunny.UI.UIStyle.Custom;
             this.dgvks.TabIndex = 4;
             this.dgvks.Visible = false;
             this.dgvks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -205,7 +211,7 @@
             this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 40);
-            this.btnSearch.StyleCustomMode = true;
+            this.btnSearch.Style = Sunny.UI.UIStyle.Custom;
             this.btnSearch.Symbol = 61442;
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "查询(F1)";
@@ -221,7 +227,7 @@
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton1.StyleCustomMode = true;
+            this.uiSymbolButton1.Style = Sunny.UI.UIStyle.Custom;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
             this.uiSymbolButton1.Text = "重新(F2)";
@@ -237,7 +243,7 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
+            this.btnExit.Style = Sunny.UI.UIStyle.Custom;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出(F12)";
@@ -251,6 +257,7 @@
             this.lblTitle.Location = new System.Drawing.Point(45, 4);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(114, 35);
+            this.lblTitle.Style = Sunny.UI.UIStyle.Custom;
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "挂号查询";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -291,6 +298,7 @@
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.Size = new System.Drawing.Size(1225, 151);
+            this.uiGroupBox1.Style = Sunny.UI.UIStyle.Custom;
             this.uiGroupBox1.TabIndex = 2;
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -306,6 +314,7 @@
             this.txtGhUser.Name = "txtGhUser";
             this.txtGhUser.ShowText = false;
             this.txtGhUser.Size = new System.Drawing.Size(182, 29);
+            this.txtGhUser.Style = Sunny.UI.UIStyle.Custom;
             this.txtGhUser.TabIndex = 21;
             this.txtGhUser.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtGhUser.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -323,6 +332,7 @@
             this.txtDoct.Name = "txtDoct";
             this.txtDoct.ShowText = false;
             this.txtDoct.Size = new System.Drawing.Size(182, 29);
+            this.txtDoct.Style = Sunny.UI.UIStyle.Custom;
             this.txtDoct.TabIndex = 20;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -340,6 +350,7 @@
             this.txtName.Name = "txtName";
             this.txtName.ShowText = false;
             this.txtName.Size = new System.Drawing.Size(222, 29);
+            this.txtName.Style = Sunny.UI.UIStyle.Custom;
             this.txtName.TabIndex = 19;
             this.txtName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -354,6 +365,7 @@
             this.txtcode.Name = "txtcode";
             this.txtcode.ShowText = false;
             this.txtcode.Size = new System.Drawing.Size(262, 29);
+            this.txtcode.Style = Sunny.UI.UIStyle.Custom;
             this.txtcode.TabIndex = 18;
             this.txtcode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtcode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -368,6 +380,7 @@
             this.txtHaolei.Name = "txtHaolei";
             this.txtHaolei.ShowText = false;
             this.txtHaolei.Size = new System.Drawing.Size(222, 29);
+            this.txtHaolei.Style = Sunny.UI.UIStyle.Custom;
             this.txtHaolei.TabIndex = 17;
             this.txtHaolei.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtHaolei.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -385,6 +398,7 @@
             this.txtHaobie.Name = "txtHaobie";
             this.txtHaobie.ShowText = false;
             this.txtHaobie.Size = new System.Drawing.Size(222, 29);
+            this.txtHaobie.Style = Sunny.UI.UIStyle.Custom;
             this.txtHaobie.TabIndex = 16;
             this.txtHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -402,6 +416,7 @@
             this.txtzk.Name = "txtzk";
             this.txtzk.ShowText = false;
             this.txtzk.Size = new System.Drawing.Size(262, 29);
+            this.txtzk.Style = Sunny.UI.UIStyle.Custom;
             this.txtzk.TabIndex = 15;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -419,6 +434,7 @@
             this.txtks.Name = "txtks";
             this.txtks.ShowText = false;
             this.txtks.Size = new System.Drawing.Size(262, 29);
+            this.txtks.Style = Sunny.UI.UIStyle.Custom;
             this.txtks.TabIndex = 14;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -437,6 +453,7 @@
             this.cbxJiahao.Name = "cbxJiahao";
             this.cbxJiahao.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxJiahao.Size = new System.Drawing.Size(182, 29);
+            this.cbxJiahao.Style = Sunny.UI.UIStyle.Custom;
             this.cbxJiahao.TabIndex = 4;
             this.cbxJiahao.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxJiahao.Visible = false;
@@ -448,6 +465,7 @@
             this.uiLabel6.Location = new System.Drawing.Point(952, 104);
             this.uiLabel6.Name = "uiLabel6";
             this.uiLabel6.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel6.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel6.TabIndex = 7;
             this.uiLabel6.Text = "加号";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -460,6 +478,7 @@
             this.uiLabel12.Location = new System.Drawing.Point(286, 107);
             this.uiLabel12.Name = "uiLabel12";
             this.uiLabel12.Size = new System.Drawing.Size(59, 23);
+            this.uiLabel12.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel12.TabIndex = 13;
             this.uiLabel12.Text = "磁卡号";
             this.uiLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -471,6 +490,7 @@
             this.uiLabel11.Location = new System.Drawing.Point(937, 70);
             this.uiLabel11.Name = "uiLabel11";
             this.uiLabel11.Size = new System.Drawing.Size(59, 23);
+            this.uiLabel11.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel11.TabIndex = 12;
             this.uiLabel11.Text = "挂号员";
             this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -482,6 +502,7 @@
             this.uiLabel10.Location = new System.Drawing.Point(952, 30);
             this.uiLabel10.Name = "uiLabel10";
             this.uiLabel10.Size = new System.Drawing.Size(42, 23);
+            this.uiLabel10.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel10.TabIndex = 11;
             this.uiLabel10.Text = "医生";
             this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -493,6 +514,7 @@
             this.uiLabel9.Location = new System.Drawing.Point(638, 106);
             this.uiLabel9.Name = "uiLabel9";
             this.uiLabel9.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel9.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel9.TabIndex = 10;
             this.uiLabel9.Text = "姓名";
             this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -504,6 +526,7 @@
             this.uiLabel8.Location = new System.Drawing.Point(299, 74);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel8.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel8.TabIndex = 9;
             this.uiLabel8.Text = "专科";
             this.uiLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -515,6 +538,7 @@
             this.uiLabel7.Location = new System.Drawing.Point(638, 70);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel7.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel7.TabIndex = 8;
             this.uiLabel7.Text = "号类";
             this.uiLabel7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -526,6 +550,7 @@
             this.uiLabel5.Location = new System.Drawing.Point(638, 37);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel5.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel5.TabIndex = 6;
             this.uiLabel5.Text = "号别";
             this.uiLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -537,6 +562,7 @@
             this.uiLabel4.Location = new System.Drawing.Point(299, 37);
             this.uiLabel4.Name = "uiLabel4";
             this.uiLabel4.Size = new System.Drawing.Size(44, 23);
+            this.uiLabel4.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel4.TabIndex = 5;
             this.uiLabel4.Text = "科室";
             this.uiLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -554,6 +580,7 @@
             this.cbxStatus.Name = "cbxStatus";
             this.cbxStatus.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxStatus.Size = new System.Drawing.Size(150, 29);
+            this.cbxStatus.Style = Sunny.UI.UIStyle.Custom;
             this.cbxStatus.TabIndex = 4;
             this.cbxStatus.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxStatus.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -564,6 +591,7 @@
             this.uiLabel3.Location = new System.Drawing.Point(22, 106);
             this.uiLabel3.Name = "uiLabel3";
             this.uiLabel3.Size = new System.Drawing.Size(77, 23);
+            this.uiLabel3.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel3.TabIndex = 4;
             this.uiLabel3.Text = "挂号状态";
             this.uiLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -581,6 +609,7 @@
             this.cbxSXW.Name = "cbxSXW";
             this.cbxSXW.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.cbxSXW.Size = new System.Drawing.Size(150, 29);
+            this.cbxSXW.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSXW.TabIndex = 3;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -591,6 +620,7 @@
             this.uiLabel2.Location = new System.Drawing.Point(38, 70);
             this.uiLabel2.Name = "uiLabel2";
             this.uiLabel2.Size = new System.Drawing.Size(63, 23);
+            this.uiLabel2.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel2.TabIndex = 2;
             this.uiLabel2.Text = "上下午";
             this.uiLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -602,6 +632,7 @@
             this.uiLabel1.Location = new System.Drawing.Point(47, 35);
             this.uiLabel1.Name = "uiLabel1";
             this.uiLabel1.Size = new System.Drawing.Size(52, 23);
+            this.uiLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiLabel1.TabIndex = 1;
             this.uiLabel1.Text = "日期";
             this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -618,6 +649,7 @@
             this.txtRiqi.Name = "txtRiqi";
             this.txtRiqi.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
             this.txtRiqi.Size = new System.Drawing.Size(150, 29);
+            this.txtRiqi.Style = Sunny.UI.UIStyle.Custom;
             this.txtRiqi.SymbolDropDown = 61555;
             this.txtRiqi.SymbolNormal = 61555;
             this.txtRiqi.TabIndex = 0;
@@ -652,6 +684,7 @@
             this.patient_id,
             this.p_bar_code,
             this.receipt_no,
+            this.billNo,
             this.receipt_sn,
             this.response_name,
             this.unit_name,
@@ -674,35 +707,35 @@
             this.gh_date,
             this.gh_time,
             this.ampm});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvlist.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvlist.Location = new System.Drawing.Point(3, 219);
             this.dgvlist.Name = "dgvlist";
             this.dgvlist.ReadOnly = true;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvlist.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvlist.RowHeight = 0;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvlist.RowTemplate.Height = 23;
             this.dgvlist.SelectedIndex = -1;
             this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -712,6 +745,25 @@
             this.dgvlist.StyleCustomMode = true;
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiToolTip1
+            // 
+            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
+            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
+            this.uiToolTip1.OwnerDraw = true;
+            // 
+            // lblTotalCount
+            // 
+            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
+            this.lblTotalCount.Name = "lblTotalCount";
+            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
+            this.lblTotalCount.Style = Sunny.UI.UIStyle.Custom;
+            this.lblTotalCount.TabIndex = 7;
+            this.lblTotalCount.Text = "总计：";
+            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // patient_name
             // 
@@ -740,6 +792,13 @@
             this.receipt_no.HeaderText = "发票号";
             this.receipt_no.Name = "receipt_no";
             this.receipt_no.ReadOnly = true;
+            // 
+            // billNo
+            // 
+            this.billNo.DataPropertyName = "billNo";
+            this.billNo.HeaderText = "电子发票";
+            this.billNo.Name = "billNo";
+            this.billNo.ReadOnly = true;
             // 
             // receipt_sn
             // 
@@ -788,6 +847,8 @@
             // ledger_sn
             // 
             this.ledger_sn.DataPropertyName = "ledger_sn";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ledger_sn.DefaultCellStyle = dataGridViewCellStyle8;
             this.ledger_sn.HeaderText = "结账次数";
             this.ledger_sn.Name = "ledger_sn";
             this.ledger_sn.ReadOnly = true;
@@ -795,6 +856,8 @@
             // times
             // 
             this.times.DataPropertyName = "times";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.times.DefaultCellStyle = dataGridViewCellStyle9;
             this.times.HeaderText = "就诊次数";
             this.times.Name = "times";
             this.times.ReadOnly = true;
@@ -833,6 +896,10 @@
             // charge_fee
             // 
             this.charge_fee.DataPropertyName = "charge_fee";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.charge_fee.DefaultCellStyle = dataGridViewCellStyle10;
             this.charge_fee.HeaderText = "金额(元)";
             this.charge_fee.Name = "charge_fee";
             this.charge_fee.ReadOnly = true;
@@ -904,24 +971,6 @@
             this.ampm.ReadOnly = true;
             this.ampm.Visible = false;
             // 
-            // uiToolTip1
-            // 
-            this.uiToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(54)))), ((int)(((byte)(54)))));
-            this.uiToolTip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(239)))), ((int)(((byte)(239)))));
-            this.uiToolTip1.OwnerDraw = true;
-            // 
-            // lblTotalCount
-            // 
-            this.lblTotalCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblTotalCount.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalCount.Location = new System.Drawing.Point(9, 638);
-            this.lblTotalCount.Name = "lblTotalCount";
-            this.lblTotalCount.Size = new System.Drawing.Size(641, 33);
-            this.lblTotalCount.TabIndex = 7;
-            this.lblTotalCount.Text = "总计：";
-            this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // GhList
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -933,7 +982,8 @@
             this.KeyPreview = true;
             this.Name = "GhList";
             this.PageIndex = 1002;
-            this.StyleCustomMode = true;
+            this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(110)))), ((int)(((byte)(190)))), ((int)(((byte)(40)))));
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "挂号查询";
             this.Load += new System.EventHandler(this.GhList_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GhList_KeyDown);
@@ -987,6 +1037,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn p_bar_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn receipt_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn billNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn receipt_sn;
         private System.Windows.Forms.DataGridViewTextBoxColumn response_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit_name;

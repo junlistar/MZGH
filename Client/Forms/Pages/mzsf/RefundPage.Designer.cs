@@ -30,9 +30,11 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTitle = new Sunny.UI.UIPanel();
             this.btnYBTuifei = new Sunny.UI.UISymbolButton();
             this.btnRefundDetail = new Sunny.UI.UISymbolButton();
@@ -51,19 +53,6 @@
             this.txtEndDate = new Sunny.UI.UIDatePicker();
             this.txtBeginDate = new Sunny.UI.UIDatePicker();
             this.dgvRefund = new Sunny.UI.UIDataGridView();
-            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.lblCharge = new System.Windows.Forms.Label();
             this.lblPayType = new System.Windows.Forms.Label();
@@ -82,6 +71,19 @@
             this.lblPatientId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotalCount = new Sunny.UI.UILabel();
+            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -120,7 +122,6 @@
             this.btnYBTuifei.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnYBTuifei.Name = "btnYBTuifei";
             this.btnYBTuifei.Size = new System.Drawing.Size(100, 40);
-            this.btnYBTuifei.StyleCustomMode = true;
             this.btnYBTuifei.Symbol = 62164;
             this.btnYBTuifei.TabIndex = 14;
             this.btnYBTuifei.Text = "医保退费";
@@ -137,7 +138,6 @@
             this.btnRefundDetail.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRefundDetail.Name = "btnRefundDetail";
             this.btnRefundDetail.Size = new System.Drawing.Size(100, 40);
-            this.btnRefundDetail.StyleCustomMode = true;
             this.btnRefundDetail.Symbol = 61641;
             this.btnRefundDetail.TabIndex = 13;
             this.btnRefundDetail.Text = "退费详情";
@@ -153,7 +153,6 @@
             this.btnHuajia.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHuajia.Name = "btnHuajia";
             this.btnHuajia.Size = new System.Drawing.Size(100, 40);
-            this.btnHuajia.StyleCustomMode = true;
             this.btnHuajia.Symbol = 362139;
             this.btnHuajia.TabIndex = 12;
             this.btnHuajia.Text = "退费(F3)";
@@ -169,7 +168,6 @@
             this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 40);
-            this.btnSearch.StyleCustomMode = true;
             this.btnSearch.Symbol = 61442;
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "查询(F1)";
@@ -185,7 +183,6 @@
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
             this.uiSymbolButton1.Text = "重新(F2)";
@@ -201,7 +198,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出(F12)";
@@ -387,139 +383,47 @@
             this.charge_total,
             this.report_date,
             this.times});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvRefund.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvRefund.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRefund.EnableHeadersVisualStyles = false;
             this.dgvRefund.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvRefund.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvRefund.Location = new System.Drawing.Point(3, 185);
             this.dgvRefund.Name = "dgvRefund";
             this.dgvRefund.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRefund.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRefund.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvRefund.RowHeight = 0;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgvRefund.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgvRefund.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvRefund.RowTemplate.Height = 23;
             this.dgvRefund.SelectedIndex = -1;
             this.dgvRefund.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvRefund.ShowGridLine = false;
             this.dgvRefund.ShowRect = false;
             this.dgvRefund.Size = new System.Drawing.Size(870, 485);
+            this.dgvRefund.StyleCustomMode = true;
             this.dgvRefund.TabIndex = 5;
             this.dgvRefund.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvRefund.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellClick);
             this.dgvRefund.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellDoubleClick);
             this.dgvRefund.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefund_RowPostPaint);
-            // 
-            // receipt_no
-            // 
-            this.receipt_no.DataPropertyName = "receipt_no";
-            this.receipt_no.HeaderText = "发票号";
-            this.receipt_no.Name = "receipt_no";
-            this.receipt_no.ReadOnly = true;
-            // 
-            // patient_name
-            // 
-            this.patient_name.DataPropertyName = "patient_name";
-            this.patient_name.HeaderText = "病人姓名";
-            this.patient_name.Name = "patient_name";
-            this.patient_name.ReadOnly = true;
-            // 
-            // patient_id
-            // 
-            this.patient_id.DataPropertyName = "patient_id";
-            this.patient_id.HeaderText = "病人ID";
-            this.patient_id.Name = "patient_id";
-            this.patient_id.ReadOnly = true;
-            // 
-            // p_bar_code
-            // 
-            this.p_bar_code.DataPropertyName = "p_bar_code";
-            this.p_bar_code.HeaderText = "磁卡号";
-            this.p_bar_code.Name = "p_bar_code";
-            this.p_bar_code.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "账页";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            // 
-            // cash_date
-            // 
-            this.cash_date.DataPropertyName = "cash_date";
-            this.cash_date.HeaderText = "收费时间";
-            this.cash_date.Name = "cash_date";
-            this.cash_date.ReadOnly = true;
-            // 
-            // cash_name
-            // 
-            this.cash_name.DataPropertyName = "cash_name";
-            this.cash_name.HeaderText = "收费员";
-            this.cash_name.Name = "cash_name";
-            this.cash_name.ReadOnly = true;
-            // 
-            // cheque_type_name
-            // 
-            this.cheque_type_name.DataPropertyName = "cheque_type_name";
-            this.cheque_type_name.HeaderText = "支付方式";
-            this.cheque_type_name.Name = "cheque_type_name";
-            this.cheque_type_name.ReadOnly = true;
-            // 
-            // receipt_sn
-            // 
-            this.receipt_sn.DataPropertyName = "receipt_sn";
-            this.receipt_sn.HeaderText = "机制号";
-            this.receipt_sn.Name = "receipt_sn";
-            this.receipt_sn.ReadOnly = true;
-            // 
-            // charge_status
-            // 
-            this.charge_status.DataPropertyName = "charge_status";
-            this.charge_status.HeaderText = "状态";
-            this.charge_status.Name = "charge_status";
-            this.charge_status.ReadOnly = true;
-            // 
-            // charge_total
-            // 
-            this.charge_total.DataPropertyName = "charge_total";
-            this.charge_total.HeaderText = "总额";
-            this.charge_total.Name = "charge_total";
-            this.charge_total.ReadOnly = true;
-            // 
-            // report_date
-            // 
-            this.report_date.DataPropertyName = "report_date";
-            this.report_date.HeaderText = "结账日期";
-            this.report_date.Name = "report_date";
-            this.report_date.ReadOnly = true;
-            this.report_date.Visible = false;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "times";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            this.times.Visible = false;
             // 
             // uiGroupBox2
             // 
@@ -716,6 +620,105 @@
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // receipt_no
+            // 
+            this.receipt_no.DataPropertyName = "receipt_no";
+            this.receipt_no.HeaderText = "发票号";
+            this.receipt_no.Name = "receipt_no";
+            this.receipt_no.ReadOnly = true;
+            // 
+            // patient_name
+            // 
+            this.patient_name.DataPropertyName = "patient_name";
+            this.patient_name.HeaderText = "病人姓名";
+            this.patient_name.Name = "patient_name";
+            this.patient_name.ReadOnly = true;
+            // 
+            // patient_id
+            // 
+            this.patient_id.DataPropertyName = "patient_id";
+            this.patient_id.HeaderText = "病人ID";
+            this.patient_id.Name = "patient_id";
+            this.patient_id.ReadOnly = true;
+            // 
+            // p_bar_code
+            // 
+            this.p_bar_code.DataPropertyName = "p_bar_code";
+            this.p_bar_code.HeaderText = "磁卡号";
+            this.p_bar_code.Name = "p_bar_code";
+            this.p_bar_code.ReadOnly = true;
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ledger_sn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ledger_sn.HeaderText = "账页";
+            this.ledger_sn.Name = "ledger_sn";
+            this.ledger_sn.ReadOnly = true;
+            // 
+            // cash_date
+            // 
+            this.cash_date.DataPropertyName = "cash_date";
+            this.cash_date.HeaderText = "收费时间";
+            this.cash_date.Name = "cash_date";
+            this.cash_date.ReadOnly = true;
+            // 
+            // cash_name
+            // 
+            this.cash_name.DataPropertyName = "cash_name";
+            this.cash_name.HeaderText = "收费员";
+            this.cash_name.Name = "cash_name";
+            this.cash_name.ReadOnly = true;
+            // 
+            // cheque_type_name
+            // 
+            this.cheque_type_name.DataPropertyName = "cheque_type_name";
+            this.cheque_type_name.HeaderText = "支付方式";
+            this.cheque_type_name.Name = "cheque_type_name";
+            this.cheque_type_name.ReadOnly = true;
+            // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "机制号";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            // 
+            // charge_status
+            // 
+            this.charge_status.DataPropertyName = "charge_status";
+            this.charge_status.HeaderText = "状态";
+            this.charge_status.Name = "charge_status";
+            this.charge_status.ReadOnly = true;
+            // 
+            // charge_total
+            // 
+            this.charge_total.DataPropertyName = "charge_total";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.charge_total.DefaultCellStyle = dataGridViewCellStyle4;
+            this.charge_total.HeaderText = "总额";
+            this.charge_total.Name = "charge_total";
+            this.charge_total.ReadOnly = true;
+            // 
+            // report_date
+            // 
+            this.report_date.DataPropertyName = "report_date";
+            this.report_date.HeaderText = "结账日期";
+            this.report_date.Name = "report_date";
+            this.report_date.ReadOnly = true;
+            this.report_date.Visible = false;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "times";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
+            this.times.Visible = false;
+            // 
             // RefundPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -773,6 +776,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblPatientId;
         private System.Windows.Forms.Label label3;
+        private Sunny.UI.UITextBox txtBarcode;
+        private System.Windows.Forms.Label label2;
+        private Sunny.UI.UISymbolButton btnRefundDetail;
+        private Sunny.UI.UIComboBox cbxRefundStatus;
+        private System.Windows.Forms.Label label4;
+        private Sunny.UI.UILabel lblTotalCount;
+        private Sunny.UI.UISymbolButton btnYBTuifei;
         private System.Windows.Forms.DataGridViewTextBoxColumn receipt_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
@@ -786,12 +796,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_total;
         private System.Windows.Forms.DataGridViewTextBoxColumn report_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn times;
-        private Sunny.UI.UITextBox txtBarcode;
-        private System.Windows.Forms.Label label2;
-        private Sunny.UI.UISymbolButton btnRefundDetail;
-        private Sunny.UI.UIComboBox cbxRefundStatus;
-        private System.Windows.Forms.Label label4;
-        private Sunny.UI.UILabel lblTotalCount;
-        private Sunny.UI.UISymbolButton btnYBTuifei;
     }
 }

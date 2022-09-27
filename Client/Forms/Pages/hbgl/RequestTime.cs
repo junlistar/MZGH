@@ -22,6 +22,7 @@ namespace Client.Forms.Pages.hbgl
 
         private void RequestHour_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvRequestTime);//设置样式
             BindData();
         }
 

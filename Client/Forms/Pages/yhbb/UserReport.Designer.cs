@@ -145,6 +145,7 @@
             this.txt_tims.ShowText = false;
             this.txt_tims.Size = new System.Drawing.Size(150, 29);
             this.txt_tims.TabIndex = 2;
+            this.txt_tims.Text = "0";
             this.txt_tims.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_tims.Type = Sunny.UI.UITextBox.UIEditType.Integer;
             this.txt_tims.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -209,7 +210,6 @@
             this.btnPrint.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnPrint.Size = new System.Drawing.Size(100, 40);
             this.btnPrint.Style = Sunny.UI.UIStyle.Orange;
-            this.btnPrint.StyleCustomMode = true;
             this.btnPrint.Symbol = 61487;
             this.btnPrint.TabIndex = 13;
             this.btnPrint.Text = "打印";
@@ -235,7 +235,6 @@
             this.btnSearch.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnSearch.Size = new System.Drawing.Size(100, 40);
             this.btnSearch.Style = Sunny.UI.UIStyle.Green;
-            this.btnSearch.StyleCustomMode = true;
             this.btnSearch.Symbol = 61573;
             this.btnSearch.TabIndex = 12;
             this.btnSearch.Text = "查询";
@@ -261,7 +260,6 @@
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";

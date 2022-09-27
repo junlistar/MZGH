@@ -917,14 +917,22 @@ namespace Client
                 {
                     UISymbolButton btn1 = new UISymbolButton();
 
-                    btn1.Style = Sunny.UI.UIStyle.Blue;
-                    btn1.StyleCustomMode = true;
+                    //btn1.Style = Sunny.UI.UIStyle.Blue;
+                    //btn1.StyleCustomMode = true;
                     btn1.Width = btnWidth;
                     btn1.Height = btnHeight;
-                    btn1.Text = _ds[i].page_name;
+                    btn1.Text = _ds[i].page_name + "("+ (i+1)+")";
                     btn1.TagString = _ds[i].his_code;
-
-                    if (_ds[i].page_name.Contains("微信"))
+                     
+                    if (_ds[i].page_name.Contains("现金"))
+                    {
+                        btn1.Symbol = 361783;
+                    }
+                    else if (_ds[i].page_name.Contains("医保"))
+                    {
+                        btn1.Symbol = 62147;
+                    }
+                    else if (_ds[i].page_name.Contains("微信"))
                     {
                         btn1.Symbol = 161911;
                     }
@@ -936,15 +944,7 @@ namespace Client
                     {
                         btn1.Symbol = 161940;
                     }
-                    else if (_ds[i].page_name.Contains("医保"))
-                    {
-                        btn1.Symbol = 62147;
-                    }
-                    else if (_ds[i].page_name.Contains("现金"))
-                    {
-                        btn1.Symbol = 361783;
-                    }
-                    btn1.Font = new Font("微软雅黑", 16, FontStyle.Regular);
+                    btn1.Font = new Font("微软雅黑", 14, FontStyle.Regular);
                     btn1.Click += ChequeCompare_Click; ;
                     gbxChequelist.Add(btn1);
                 }
@@ -2215,7 +2215,7 @@ namespace Client
 
                 TiJiaoZhifu();
             }
-            else if (e.KeyCode == Keys.NumPad1)
+            else if (e.KeyCode == Keys.NumPad1 || e.KeyValue == 49)
             {
                 //子控件从第4位开始
                 var _cts = gbxChequelist.GetAllControls();
@@ -2224,7 +2224,7 @@ namespace Client
                     ChequeCompare_Click(_cts[3], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad2)
+            else if (e.KeyCode == Keys.NumPad2 || e.KeyValue == 50)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 4)
@@ -2232,7 +2232,7 @@ namespace Client
                     ChequeCompare_Click(_cts[4], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad3)
+            else if (e.KeyCode == Keys.NumPad3 || e.KeyValue == 51)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 5)
@@ -2240,7 +2240,7 @@ namespace Client
                     ChequeCompare_Click(_cts[5], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad4)
+            else if (e.KeyCode == Keys.NumPad4 || e.KeyValue == 52)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 6)
@@ -2248,7 +2248,7 @@ namespace Client
                     ChequeCompare_Click(_cts[6], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad5)
+            else if (e.KeyCode == Keys.NumPad5 || e.KeyValue == 53)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 7)

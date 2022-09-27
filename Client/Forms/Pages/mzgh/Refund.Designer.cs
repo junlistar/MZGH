@@ -162,9 +162,9 @@
             this.dgvDeposit.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvDeposit.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -198,7 +198,7 @@
             this.dgvDeposit.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDeposit.EnableHeadersVisualStyles = false;
             this.dgvDeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvDeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvDeposit.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvDeposit.Location = new System.Drawing.Point(4, 231);
             this.dgvDeposit.Name = "dgvDeposit";
             this.dgvDeposit.ReadOnly = true;
@@ -224,6 +224,7 @@
             this.dgvDeposit.ShowRect = false;
             this.dgvDeposit.Size = new System.Drawing.Size(1060, 411);
             this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
+            this.dgvDeposit.StyleCustomMode = true;
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvDeposit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDeposit_CellDoubleClick);
@@ -442,7 +443,6 @@
             this.btnCashRefund.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCashRefund.Name = "btnCashRefund";
             this.btnCashRefund.Size = new System.Drawing.Size(100, 40);
-            this.btnCashRefund.StyleCustomMode = true;
             this.btnCashRefund.Symbol = 62005;
             this.btnCashRefund.TabIndex = 16;
             this.btnCashRefund.Text = "现金退";
@@ -488,7 +488,6 @@
             this.uiSymbolButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton2.Name = "uiSymbolButton2";
             this.uiSymbolButton2.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton2.StyleCustomMode = true;
             this.uiSymbolButton2.Symbol = 61579;
             this.uiSymbolButton2.TabIndex = 8;
             this.uiSymbolButton2.Text = "退出";
@@ -504,7 +503,6 @@
             this.btnTuihao.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuihao.Name = "btnTuihao";
             this.btnTuihao.Size = new System.Drawing.Size(100, 40);
-            this.btnTuihao.StyleCustomMode = true;
             this.btnTuihao.Symbol = 62005;
             this.btnTuihao.TabIndex = 7;
             this.btnTuihao.Text = "退号";

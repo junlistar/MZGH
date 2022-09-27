@@ -55,6 +55,7 @@
             this.current_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toend_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txt_workroom = new Sunny.UI.UITextBox();
             this.cbxRequestType = new Sunny.UI.UIComboBox();
             this.uiLabel7 = new Sunny.UI.UILabel();
             this.txtDate = new Sunny.UI.UIDatePicker();
@@ -74,7 +75,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.lblTotalCount = new Sunny.UI.UILabel();
-            this.txt_workroom = new Sunny.UI.UITextBox();
             this.pnlTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -108,7 +108,6 @@
             this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 40);
-            this.btnAdd.StyleCustomMode = true;
             this.btnAdd.Symbol = 61508;
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "编辑";
@@ -124,7 +123,6 @@
             this.btnSearch.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 40);
-            this.btnSearch.StyleCustomMode = true;
             this.btnSearch.Symbol = 61442;
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "查询";
@@ -140,7 +138,6 @@
             this.btnReset.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(100, 40);
-            this.btnReset.StyleCustomMode = true;
             this.btnReset.Symbol = 61473;
             this.btnReset.TabIndex = 10;
             this.btnReset.Text = "重新";
@@ -156,7 +153,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -185,9 +181,9 @@
             this.dgvlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvlist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -218,7 +214,7 @@
             this.dgvlist.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvlist.EnableHeadersVisualStyles = false;
             this.dgvlist.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvlist.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvlist.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvlist.Location = new System.Drawing.Point(2, 217);
             this.dgvlist.Name = "dgvlist";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -242,6 +238,7 @@
             this.dgvlist.ShowGridLine = false;
             this.dgvlist.ShowRect = false;
             this.dgvlist.Size = new System.Drawing.Size(1181, 447);
+            this.dgvlist.StyleCustomMode = true;
             this.dgvlist.TabIndex = 3;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvlist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvlist_CellClick);
@@ -361,6 +358,20 @@
             this.uiGroupBox1.Text = "查询条件";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txt_workroom
+            // 
+            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_workroom.Location = new System.Drawing.Point(467, 105);
+            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_workroom.Name = "txt_workroom";
+            this.txt_workroom.ShowText = false;
+            this.txt_workroom.Size = new System.Drawing.Size(200, 29);
+            this.txt_workroom.TabIndex = 29;
+            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cbxRequestType
             // 
@@ -621,20 +632,6 @@
             this.lblTotalCount.Text = "总计：";
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txt_workroom
-            // 
-            this.txt_workroom.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_workroom.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_workroom.Location = new System.Drawing.Point(467, 105);
-            this.txt_workroom.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_workroom.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_workroom.Name = "txt_workroom";
-            this.txt_workroom.ShowText = false;
-            this.txt_workroom.Size = new System.Drawing.Size(200, 29);
-            this.txt_workroom.TabIndex = 29;
-            this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // BaseWeiHu
             // 

@@ -167,5 +167,10 @@ namespace Client.Forms.Pages.zfgl
             ResetSearch();
             Search();
         }
+
+        private void WindowPay_Load(object sender, EventArgs e)
+        {
+            StyleHelper.SetGridColor(dgv_paylist);//设置样式
+        }
     }
 }

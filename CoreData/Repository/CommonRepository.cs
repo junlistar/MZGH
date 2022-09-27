@@ -56,6 +56,15 @@ namespace Data.Repository
                 return connection.Query<MzClientConfig>(sql).FirstOrDefault();
             }
         }
+        public FpConfig GetFPConfig()
+        {
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+            {
+                string sql = GetSqlByTag("zd_fpconfig_get");
+
+                return connection.Query<FpConfig>(sql).FirstOrDefault();
+            }
+        }
 
         public bool UpdateMzClientConfig(string jsonStr)
         {

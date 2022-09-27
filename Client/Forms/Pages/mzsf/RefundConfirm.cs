@@ -45,6 +45,9 @@ namespace Mzsf.Forms.Pages
 
         private void RefundConfirm_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvDeposit);//设置样式
+            StyleHelper.SetGridColor(dgvCpr);//设置样式
+
             lblZongji.Text = total_charge.ToString();
             lblTuikuan.Text = total_charge.ToString();
             GetPatientInfo();
@@ -52,8 +55,7 @@ namespace Mzsf.Forms.Pages
             BindDepositList(patient_id, ledger_sn);
             //绑定付款项目信息
             BindDrugDetails(patient_id, ledger_sn, table_flag);
-
-            dgvCpr.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+             
 
         }
         public void GetPatientInfo()

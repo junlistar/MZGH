@@ -88,11 +88,11 @@ namespace Mzsf.Forms.Pages
             {
                 UISymbolButton btn1 = new UISymbolButton();
 
-                btn1.Style = Sunny.UI.UIStyle.Blue;
-                btn1.StyleCustomMode = true;
+                //btn1.Style = Sunny.UI.UIStyle.Blue;
+                //btn1.StyleCustomMode = true;
                 btn1.Width = btnWidth;
                 btn1.Height = btnHeight;
-                btn1.Text = _ds[i].page_name;
+                btn1.Text = _ds[i].page_name + "(" + (i + 1) + ")";
                 btn1.TagString = _ds[i].his_code;
 
                 if (_ds[i].page_name.Contains("微信"))
@@ -1419,7 +1419,7 @@ namespace Mzsf.Forms.Pages
 
                 TiJiaoZhifu();
             }
-            else if (e.KeyCode == Keys.NumPad1)
+            else if (e.KeyCode == Keys.NumPad1 || e.KeyValue == 49)
             {
                 //子控件从第4位开始
                 var _cts = gbxChequelist.GetAllControls();
@@ -1428,7 +1428,7 @@ namespace Mzsf.Forms.Pages
                     ChequeCompare_Click(_cts[3], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad2)
+            else if (e.KeyCode == Keys.NumPad2 || e.KeyValue == 50)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 4)
@@ -1436,7 +1436,7 @@ namespace Mzsf.Forms.Pages
                     ChequeCompare_Click(_cts[4], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad3)
+            else if (e.KeyCode == Keys.NumPad3 || e.KeyValue == 51)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 5)
@@ -1444,7 +1444,7 @@ namespace Mzsf.Forms.Pages
                     ChequeCompare_Click(_cts[5], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad4)
+            else if (e.KeyCode == Keys.NumPad4 || e.KeyValue == 52)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 6)
@@ -1452,7 +1452,7 @@ namespace Mzsf.Forms.Pages
                     ChequeCompare_Click(_cts[6], e);
                 }
             }
-            else if (e.KeyCode == Keys.NumPad5)
+            else if (e.KeyCode == Keys.NumPad5 || e.KeyValue == 53)
             {
                 var _cts = gbxChequelist.GetAllControls();
                 if (_cts.Count > 7)

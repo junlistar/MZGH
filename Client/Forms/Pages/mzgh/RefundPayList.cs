@@ -36,12 +36,12 @@ namespace Client
             _userInfo = userInfo;
             _datestr = datestr;
             _patient_id = patient_id;
-            _times = times;
-            dgvpaylist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            _times = times; 
         }
 
         private void RefundPayList_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvpaylist);//设置样式
             LoadData();
         }
         public void LoadData()

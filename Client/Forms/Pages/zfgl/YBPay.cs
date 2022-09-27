@@ -154,5 +154,10 @@ namespace Client.Forms.Pages.zfgl
         {
 
         }
+
+        private void YBPay_Load(object sender, EventArgs e)
+        {
+            StyleHelper.SetGridColor(dgv_paylist);//设置样式
+        }
     }
 }

@@ -72,7 +72,25 @@
             this.label8 = new System.Windows.Forms.Label();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.dgv_sfxx = new Sunny.UI.UIDataGridView();
+            this.psn_idet_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.psn_type_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.begntime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.admiss_times1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_cbxx = new Sunny.UI.UIDataGridView();
+            this.balc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.insutype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.psn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.psn_insu_stas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.psn_insu_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.paus_insu_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cvlserv_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.insuplc_admdvs = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emp_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.admiss_times = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_sfxx = new Sunny.UI.UISymbolButton();
             this.btn_cbxx = new Sunny.UI.UISymbolButton();
             this.label16 = new System.Windows.Forms.Label();
@@ -126,24 +144,6 @@
             this.label36 = new System.Windows.Forms.Label();
             this.txthometel = new Sunny.UI.UITextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.psn_idet_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.psn_type_lv = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.begntime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.endtime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.admiss_times1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_id1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.balc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.insutype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.psn_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.psn_insu_stas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.psn_insu_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.paus_insu_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cvlserv_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.insuplc_admdvs = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emp_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.admiss_times = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.txt_relationname.SuspendLayout();
@@ -344,7 +344,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -678,6 +677,51 @@
             this.dgv_sfxx.TabIndex = 35;
             this.dgv_sfxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // psn_idet_type
+            // 
+            this.psn_idet_type.DataPropertyName = "psn_idet_type";
+            this.psn_idet_type.HeaderText = "人员身份类别";
+            this.psn_idet_type.Name = "psn_idet_type";
+            this.psn_idet_type.Visible = false;
+            // 
+            // psn_type_lv
+            // 
+            this.psn_type_lv.DataPropertyName = "psn_type_lv";
+            this.psn_type_lv.HeaderText = "人员类别等级";
+            this.psn_type_lv.Name = "psn_type_lv";
+            // 
+            // memo
+            // 
+            this.memo.DataPropertyName = "memo";
+            this.memo.HeaderText = "备注";
+            this.memo.Name = "memo";
+            // 
+            // begntime
+            // 
+            this.begntime.DataPropertyName = "begntime";
+            this.begntime.HeaderText = "开始时间";
+            this.begntime.Name = "begntime";
+            // 
+            // endtime
+            // 
+            this.endtime.DataPropertyName = "endtime";
+            this.endtime.HeaderText = "结束时间";
+            this.endtime.Name = "endtime";
+            // 
+            // admiss_times1
+            // 
+            this.admiss_times1.DataPropertyName = "admiss_times";
+            this.admiss_times1.HeaderText = "admiss_times";
+            this.admiss_times1.Name = "admiss_times1";
+            this.admiss_times1.Visible = false;
+            // 
+            // patient_id1
+            // 
+            this.patient_id1.DataPropertyName = "patient_id";
+            this.patient_id1.HeaderText = "patient_id1";
+            this.patient_id1.Name = "patient_id1";
+            this.patient_id1.Visible = false;
+            // 
             // dgv_cbxx
             // 
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -743,6 +787,75 @@
             this.dgv_cbxx.Size = new System.Drawing.Size(662, 119);
             this.dgv_cbxx.TabIndex = 34;
             this.dgv_cbxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // balc
+            // 
+            this.balc.DataPropertyName = "balc";
+            this.balc.HeaderText = "余额";
+            this.balc.Name = "balc";
+            // 
+            // insutype
+            // 
+            this.insutype.DataPropertyName = "insutype";
+            this.insutype.HeaderText = "险种类型";
+            this.insutype.Name = "insutype";
+            // 
+            // psn_type
+            // 
+            this.psn_type.DataPropertyName = "psn_type";
+            this.psn_type.HeaderText = "人员类别";
+            this.psn_type.Name = "psn_type";
+            // 
+            // psn_insu_stas
+            // 
+            this.psn_insu_stas.DataPropertyName = "psn_insu_stas";
+            this.psn_insu_stas.HeaderText = "人员参保状态";
+            this.psn_insu_stas.Name = "psn_insu_stas";
+            // 
+            // psn_insu_date
+            // 
+            this.psn_insu_date.DataPropertyName = "psn_insu_date";
+            this.psn_insu_date.HeaderText = "个人参保日期";
+            this.psn_insu_date.Name = "psn_insu_date";
+            // 
+            // paus_insu_date
+            // 
+            this.paus_insu_date.DataPropertyName = "paus_insu_date";
+            this.paus_insu_date.HeaderText = "暂停参保日期";
+            this.paus_insu_date.Name = "paus_insu_date";
+            // 
+            // cvlserv_flag
+            // 
+            this.cvlserv_flag.DataPropertyName = "cvlserv_flag";
+            this.cvlserv_flag.HeaderText = "公务员标志";
+            this.cvlserv_flag.Name = "cvlserv_flag";
+            this.cvlserv_flag.Visible = false;
+            // 
+            // insuplc_admdvs
+            // 
+            this.insuplc_admdvs.DataPropertyName = "insuplc_admdvs";
+            this.insuplc_admdvs.HeaderText = "参保地医保区划";
+            this.insuplc_admdvs.Name = "insuplc_admdvs";
+            // 
+            // emp_name
+            // 
+            this.emp_name.DataPropertyName = "emp_name";
+            this.emp_name.HeaderText = "单位名称";
+            this.emp_name.Name = "emp_name";
+            // 
+            // admiss_times
+            // 
+            this.admiss_times.DataPropertyName = "admiss_times";
+            this.admiss_times.HeaderText = "admiss_times";
+            this.admiss_times.Name = "admiss_times";
+            this.admiss_times.Visible = false;
+            // 
+            // patient_id
+            // 
+            this.patient_id.DataPropertyName = "patient_id";
+            this.patient_id.HeaderText = "patient_id";
+            this.patient_id.Name = "patient_id";
+            this.patient_id.Visible = false;
             // 
             // btn_sfxx
             // 
@@ -1524,120 +1637,6 @@
             this.label23.Size = new System.Drawing.Size(42, 21);
             this.label23.TabIndex = 30;
             this.label23.Text = "电话";
-            // 
-            // psn_idet_type
-            // 
-            this.psn_idet_type.DataPropertyName = "psn_idet_type";
-            this.psn_idet_type.HeaderText = "人员身份类别";
-            this.psn_idet_type.Name = "psn_idet_type";
-            this.psn_idet_type.Visible = false;
-            // 
-            // psn_type_lv
-            // 
-            this.psn_type_lv.DataPropertyName = "psn_type_lv";
-            this.psn_type_lv.HeaderText = "人员类别等级";
-            this.psn_type_lv.Name = "psn_type_lv";
-            // 
-            // memo
-            // 
-            this.memo.DataPropertyName = "memo";
-            this.memo.HeaderText = "备注";
-            this.memo.Name = "memo";
-            // 
-            // begntime
-            // 
-            this.begntime.DataPropertyName = "begntime";
-            this.begntime.HeaderText = "开始时间";
-            this.begntime.Name = "begntime";
-            // 
-            // endtime
-            // 
-            this.endtime.DataPropertyName = "endtime";
-            this.endtime.HeaderText = "结束时间";
-            this.endtime.Name = "endtime";
-            // 
-            // admiss_times1
-            // 
-            this.admiss_times1.DataPropertyName = "admiss_times";
-            this.admiss_times1.HeaderText = "admiss_times";
-            this.admiss_times1.Name = "admiss_times1";
-            this.admiss_times1.Visible = false;
-            // 
-            // patient_id1
-            // 
-            this.patient_id1.DataPropertyName = "patient_id";
-            this.patient_id1.HeaderText = "patient_id1";
-            this.patient_id1.Name = "patient_id1";
-            this.patient_id1.Visible = false;
-            // 
-            // balc
-            // 
-            this.balc.DataPropertyName = "balc";
-            this.balc.HeaderText = "余额";
-            this.balc.Name = "balc";
-            // 
-            // insutype
-            // 
-            this.insutype.DataPropertyName = "insutype";
-            this.insutype.HeaderText = "险种类型";
-            this.insutype.Name = "insutype";
-            // 
-            // psn_type
-            // 
-            this.psn_type.DataPropertyName = "psn_type";
-            this.psn_type.HeaderText = "人员类别";
-            this.psn_type.Name = "psn_type";
-            // 
-            // psn_insu_stas
-            // 
-            this.psn_insu_stas.DataPropertyName = "psn_insu_stas";
-            this.psn_insu_stas.HeaderText = "人员参保状态";
-            this.psn_insu_stas.Name = "psn_insu_stas";
-            // 
-            // psn_insu_date
-            // 
-            this.psn_insu_date.DataPropertyName = "psn_insu_date";
-            this.psn_insu_date.HeaderText = "个人参保日期";
-            this.psn_insu_date.Name = "psn_insu_date";
-            // 
-            // paus_insu_date
-            // 
-            this.paus_insu_date.DataPropertyName = "paus_insu_date";
-            this.paus_insu_date.HeaderText = "暂停参保日期";
-            this.paus_insu_date.Name = "paus_insu_date";
-            // 
-            // cvlserv_flag
-            // 
-            this.cvlserv_flag.DataPropertyName = "cvlserv_flag";
-            this.cvlserv_flag.HeaderText = "公务员标志";
-            this.cvlserv_flag.Name = "cvlserv_flag";
-            this.cvlserv_flag.Visible = false;
-            // 
-            // insuplc_admdvs
-            // 
-            this.insuplc_admdvs.DataPropertyName = "insuplc_admdvs";
-            this.insuplc_admdvs.HeaderText = "参保地医保区划";
-            this.insuplc_admdvs.Name = "insuplc_admdvs";
-            // 
-            // emp_name
-            // 
-            this.emp_name.DataPropertyName = "emp_name";
-            this.emp_name.HeaderText = "单位名称";
-            this.emp_name.Name = "emp_name";
-            // 
-            // admiss_times
-            // 
-            this.admiss_times.DataPropertyName = "admiss_times";
-            this.admiss_times.HeaderText = "admiss_times";
-            this.admiss_times.Name = "admiss_times";
-            this.admiss_times.Visible = false;
-            // 
-            // patient_id
-            // 
-            this.patient_id.DataPropertyName = "patient_id";
-            this.patient_id.HeaderText = "patient_id";
-            this.patient_id.Name = "patient_id";
-            this.patient_id.Visible = false;
             // 
             // UserInfoPage
             // 

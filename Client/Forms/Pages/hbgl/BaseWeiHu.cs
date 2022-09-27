@@ -43,7 +43,7 @@ namespace Client
             uiToolTip1.SetToolTip(btnAdd, btnAdd.Text + "[F3]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
 
-            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            StyleHelper.SetGridColor(dgvlist);//设置样式
         }
 
         public void InitDic()

@@ -39,13 +39,13 @@
             this.cbxStatus = new Sunny.UI.UIComboBox();
             this.btn_jkmx = new Sunny.UI.UISymbolButton();
             this.uiSymbolButton4 = new Sunny.UI.UISymbolButton();
+            this.txtDate = new Sunny.UI.UIDatePicker();
             this.uiSymbolButton3 = new Sunny.UI.UISymbolButton();
             this.label2 = new System.Windows.Forms.Label();
             this.uiSymbolButton2 = new Sunny.UI.UISymbolButton();
             this.label1 = new System.Windows.Forms.Label();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
             this.pnlReport = new Sunny.UI.UIPanel();
-            this.txtDate = new Sunny.UI.UIDatePicker();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.pnlReport.SuspendLayout();
@@ -98,7 +98,6 @@
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(100, 40);
             this.btnPrint.Style = Sunny.UI.UIStyle.DarkBlue;
-            this.btnPrint.StyleCustomMode = true;
             this.btnPrint.Symbol = 61487;
             this.btnPrint.TabIndex = 12;
             this.btnPrint.Text = "打印";
@@ -124,7 +123,6 @@
             this.btnSave.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnSave.Size = new System.Drawing.Size(100, 40);
             this.btnSave.Style = Sunny.UI.UIStyle.Orange;
-            this.btnSave.StyleCustomMode = true;
             this.btnSave.Symbol = 61639;
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "结算";
@@ -150,7 +148,6 @@
             this.btnRefresh.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
             this.btnRefresh.Style = Sunny.UI.UIStyle.Green;
-            this.btnRefresh.StyleCustomMode = true;
             this.btnRefresh.Symbol = 61442;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Text = "预览";
@@ -176,7 +173,6 @@
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -272,6 +268,27 @@
             this.uiSymbolButton4.Visible = false;
             this.uiSymbolButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // txtDate
+            // 
+            this.txtDate.FillColor = System.Drawing.Color.White;
+            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate.Location = new System.Drawing.Point(129, 22);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate.MaxLength = 10;
+            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.ShowToday = true;
+            this.txtDate.Size = new System.Drawing.Size(204, 29);
+            this.txtDate.SymbolDropDown = 61555;
+            this.txtDate.SymbolNormal = 61555;
+            this.txtDate.TabIndex = 2;
+            this.txtDate.Text = "1900-01-01";
+            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
+            // 
             // uiSymbolButton3
             // 
             this.uiSymbolButton3.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -351,27 +368,6 @@
             this.pnlReport.Text = "uiPanel2";
             this.pnlReport.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlReport.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txtDate
-            // 
-            this.txtDate.FillColor = System.Drawing.Color.White;
-            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(129, 22);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtDate.MaxLength = 10;
-            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.ShowToday = true;
-            this.txtDate.Size = new System.Drawing.Size(204, 29);
-            this.txtDate.SymbolDropDown = 61555;
-            this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 2;
-            this.txtDate.Text = "1900-01-01";
-            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.txtDate.TextChanged += new System.EventHandler(this.txtDate_TextChanged);
             // 
             // GuahaoRijie
             // 

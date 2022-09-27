@@ -41,6 +41,8 @@ namespace Client
 
         private void RefundPayList_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvpaylist);//设置样式
+
             LoadData();
         }
         public void LoadData()
@@ -55,7 +57,15 @@ namespace Client
             if (result.status==1)
             {
                 paylist = result.data;
-                this.dgvpaylist.DataSource = result.data;
+                this.dgvpaylist.DataSource = result.data.Select(p=> new
+                {
+                    item_no= p.item_no,
+                    charge = p.charge,
+                    cheque_name = p.cheque_name,
+                    cheque_no = p.cheque_no,
+                    price_opera = p.price_opera,
+                    price_date = p.price_date, 
+                }).ToList();
                 dgvpaylist.AutoGenerateColumns = false;
                 this.dgvpaylist.AutoResizeColumns();
             }

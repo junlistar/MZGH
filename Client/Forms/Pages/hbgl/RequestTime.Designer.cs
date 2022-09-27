@@ -90,7 +90,6 @@
             this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 40);
-            this.btnAdd.StyleCustomMode = true;
             this.btnAdd.Symbol = 61543;
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "新增";
@@ -106,7 +105,6 @@
             this.btnDel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(100, 40);
-            this.btnDel.StyleCustomMode = true;
             this.btnDel.Symbol = 61532;
             this.btnDel.TabIndex = 11;
             this.btnDel.Text = "删除";
@@ -122,7 +120,6 @@
             this.btnRefresh.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
-            this.btnRefresh.StyleCustomMode = true;
             this.btnRefresh.Symbol = 61473;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Text = "刷新";
@@ -138,7 +135,6 @@
             this.btnTuichu.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTuichu.Name = "btnTuichu";
             this.btnTuichu.Size = new System.Drawing.Size(100, 40);
-            this.btnTuichu.StyleCustomMode = true;
             this.btnTuichu.Symbol = 61579;
             this.btnTuichu.TabIndex = 8;
             this.btnTuichu.Text = "退出";
@@ -168,9 +164,9 @@
             this.dgvRequestTime.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvRequestTime.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -193,7 +189,7 @@
             this.dgvRequestTime.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRequestTime.EnableHeadersVisualStyles = false;
             this.dgvRequestTime.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvRequestTime.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvRequestTime.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvRequestTime.Location = new System.Drawing.Point(4, 53);
             this.dgvRequestTime.Name = "dgvRequestTime";
             this.dgvRequestTime.ReadOnly = true;
@@ -217,6 +213,7 @@
             this.dgvRequestTime.ShowGridLine = false;
             this.dgvRequestTime.ShowRect = false;
             this.dgvRequestTime.Size = new System.Drawing.Size(647, 541);
+            this.dgvRequestTime.StyleCustomMode = true;
             this.dgvRequestTime.TabIndex = 15;
             this.dgvRequestTime.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvRequestTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequestHour_CellClick);

@@ -59,9 +59,9 @@
             this.dgvpaylist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvpaylist.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -115,6 +115,7 @@
             this.dgvpaylist.ShowGridLine = true;
             this.dgvpaylist.ShowRect = false;
             this.dgvpaylist.Size = new System.Drawing.Size(794, 262);
+            this.dgvpaylist.Style = Sunny.UI.UIStyle.Custom;
             this.dgvpaylist.TabIndex = 0;
             this.dgvpaylist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvpaylist.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvpaylist_CellContentClick);
@@ -217,6 +218,7 @@
             this.btnCacel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCacel.Name = "btnCacel";
             this.btnCacel.Size = new System.Drawing.Size(100, 35);
+            this.btnCacel.Style = Sunny.UI.UIStyle.Custom;
             this.btnCacel.TabIndex = 2;
             this.btnCacel.Text = "返回";
             this.btnCacel.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

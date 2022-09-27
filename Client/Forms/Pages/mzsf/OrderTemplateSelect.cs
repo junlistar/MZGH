@@ -28,6 +28,8 @@ namespace Client.Forms.Pages.mzsf
 
         private void OrderTemplateSelect_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvTp);//设置样式
+            StyleHelper.SetGridColor(dgvTpDetails);//设置样式
             LoadTemplate();
         }
 

@@ -37,16 +37,15 @@ namespace Client
 
         private async void Refund_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvDeposit);//设置样式
+
             this.dtprq.Value = DateTime.Now;
             this.txtCode.Text = _barcode;
 
             LoadingHelper.ShowLoadingScreen();//显示
             await Search();
 
-            LoadingHelper.CloseForm();//显示
-                                      //LoadData();
-
-            dgvDeposit.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            LoadingHelper.CloseForm();//显示 
         }
 
 

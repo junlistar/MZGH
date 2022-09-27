@@ -48,6 +48,8 @@ namespace Client
         }
         private void BaseRequest_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvlist);//设置样式
+
             InitDic();
 
             //设置按钮提示文字信息
@@ -220,8 +222,9 @@ namespace Client
                     var jsontb = result.data;
                     var dataTable = DataTableHelper.ToDataTable(jsontb);
 
-                    dataTable = ManaDT(dataTable);
-                    dgvlist.MergeColumnHeaderBackColor = UIColor.Blue;
+                    dataTable = ManaDT(dataTable); 
+                    dgvlist.MergeColumnHeaderBackColor = Color.SkyBlue;// UIColor.Blue;
+                    dgvlist.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;// UIColor.Blue;
                     this.dgvlist.DataSource = dataTable;
                     this.dgvlist.ColumnHeadersHeight = 40;
                     this.dgvlist.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;

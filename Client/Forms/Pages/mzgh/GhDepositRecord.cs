@@ -66,6 +66,8 @@ namespace Client.Forms.Pages.mzgh
 
         private void GhDepositRecord_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgv_mzdeposit);//设置样式
+
             txt_patientid.Text = patient_id;
 
             BindData();

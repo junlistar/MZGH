@@ -44,6 +44,8 @@ namespace Client
             this.uiSignal1 = new Sunny.UI.UISignal();
             this.timerSignal = new System.Windows.Forms.Timer(this.components);
             this.timerlogout = new System.Windows.Forms.Timer(this.components);
+            this.uiStyleManager1 = new Sunny.UI.UIStyleManager(this.components);
+            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
             this.Footer.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,6 +90,7 @@ namespace Client
             // Header
             // 
             this.Header.Size = new System.Drawing.Size(1024, 110);
+            this.Header.Style = Sunny.UI.UIStyle.Custom;
             // 
             // statusStrip1
             // 
@@ -182,21 +185,34 @@ namespace Client
             this.timerlogout.Interval = 1000;
             this.timerlogout.Tick += new System.EventHandler(this.timerlogout_Tick);
             // 
+            // uiContextMenuStrip1
+            // 
+            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiContextMenuStrip1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
+            this.uiContextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.uiContextMenuStrip1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiContextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.uiContextMenuStrip1_ItemClicked);
+            // 
             // FHeaderAsideMainFooter
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 720);
+            this.ExtendBox = true;
+            this.ExtendMenu = this.uiContextMenuStrip1;
+            this.ExtendSymbol = 362783;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FHeaderAsideMainFooter";
-            this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(77)))), ((int)(((byte)(132)))));
             this.ShowTitleIcon = true;
             this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "门诊挂号系统";
-            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(77)))), ((int)(((byte)(132)))));
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 1024, 720);
             this.Load += new System.EventHandler(this.FHeaderAsideMainFooter_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FHeaderAsideMainFooter_KeyUp);
+            this.Controls.SetChildIndex(this.Header, 0);
+            this.Controls.SetChildIndex(this.Aside, 0);
+            this.Controls.SetChildIndex(this.Footer, 0);
             this.Footer.ResumeLayout(false);
             this.Footer.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -218,5 +234,7 @@ namespace Client
         private UISignal uiSignal1;
         private System.Windows.Forms.Timer timerSignal;
         private System.Windows.Forms.Timer timerlogout;
+        private UIStyleManager uiStyleManager1;
+        private UIContextMenuStrip uiContextMenuStrip1;
     }
 }

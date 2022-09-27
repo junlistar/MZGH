@@ -264,6 +264,22 @@ namespace Client.Forms.Wedgit
                     UIMessageTip.Show("没有获取到数据库客户端配置数据");
                     log.Error("没有获取到数据库客户端配置数据");
                 }
+                //电子发票配置 
+                bgWorker.ReportProgress(95, "获取电子发票配置");
+                paramurl = string.Format($"/api/GuaHao/GetFPConfig");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                FpConfigVM fpConfigVM = WebApiHelper.DeserializeObject<ResponseResult<FpConfigVM>>(json).data;
+                if (fpConfigVM != null)
+                {
+                    //电子发票配置
+                    SessionHelper.fpConfigVM = fpConfigVM;
+                }
+                else
+                {
+                    UIMessageTip.Show("没有获取到数据库发票配置数据");
+                    log.Error("没有获取到数据库发票配置数据");
+                }
                 bgWorker.ReportProgress(100, "字典加载完毕！");
                 
             }

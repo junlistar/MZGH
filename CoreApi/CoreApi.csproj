@@ -320,6 +320,9 @@
     <None Update="SQLS\mzsf_fpdata_getbyparams.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\zd_fpconfig_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\zd_mzclientconfig_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

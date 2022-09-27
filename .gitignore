@@ -51,3 +51,11 @@
 /MzsfApi/bin
 /MzsfApi/obj
 /.vs/Mzgh/v17/.suo
+/CoreTest/bin/
+/FastReportClient/bin
+/FastReportClient/obj
+/FastReportClient/obj
+/FastReportClient/obj/
+/Ybjs/obj
+/MzInstaller/Release
+/MzInstaller/Debug

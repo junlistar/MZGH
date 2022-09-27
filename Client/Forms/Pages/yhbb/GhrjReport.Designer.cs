@@ -76,7 +76,6 @@
             this.btnPrint.Radius = 1;
             this.btnPrint.Size = new System.Drawing.Size(100, 40);
             this.btnPrint.Style = Sunny.UI.UIStyle.DarkBlue;
-            this.btnPrint.StyleCustomMode = true;
             this.btnPrint.Symbol = 61487;
             this.btnPrint.TabIndex = 13;
             this.btnPrint.Text = "打印";
@@ -103,7 +102,6 @@
             this.btnRefresh.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
             this.btnRefresh.Style = Sunny.UI.UIStyle.Green;
-            this.btnRefresh.StyleCustomMode = true;
             this.btnRefresh.Symbol = 61442;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Text = "预览";
@@ -130,7 +128,6 @@
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";

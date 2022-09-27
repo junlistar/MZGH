@@ -311,6 +311,9 @@ namespace Client.ViewModel
         public int step_length { get; set; }
 
         public string deleted_flag { get; set; }
+        public string deleted_flag_str { get {
+                return deleted_flag == "0" ? "使用" : "删除";
+            } }
         public string report_flag { get; set; }
         public string receipt_type { get; set; }
 

@@ -77,7 +77,6 @@
             this.btnEdit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(124)))), ((int)(((byte)(32)))));
             this.btnEdit.Size = new System.Drawing.Size(100, 40);
             this.btnEdit.Style = Sunny.UI.UIStyle.Orange;
-            this.btnEdit.StyleCustomMode = true;
             this.btnEdit.Symbol = 61487;
             this.btnEdit.TabIndex = 13;
             this.btnEdit.Text = "编辑";
@@ -103,7 +102,6 @@
             this.btnAdd.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnAdd.Size = new System.Drawing.Size(100, 40);
             this.btnAdd.Style = Sunny.UI.UIStyle.Green;
-            this.btnAdd.StyleCustomMode = true;
             this.btnAdd.Symbol = 61573;
             this.btnAdd.TabIndex = 12;
             this.btnAdd.Text = "添加";
@@ -129,7 +127,6 @@
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -199,6 +196,7 @@
             this.pnl_browser.Name = "pnl_browser";
             this.pnl_browser.Size = new System.Drawing.Size(972, 629);
             this.pnl_browser.TabIndex = 29;
+            this.pnl_browser.Text = null;
             this.pnl_browser.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnl_browser.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 

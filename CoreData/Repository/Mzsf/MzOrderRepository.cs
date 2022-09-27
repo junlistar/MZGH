@@ -62,7 +62,13 @@ namespace Data.Repository.Mzsf
                                 visit_info.doctor_code = operaModel.code;
                                 visit_info.name = operaModel.name; 
                             }
-                        
+                            //更新mi times
+                            string uptimes_sql = "update mz_patient_mi set max_times=@times where patient_id=@patient_id";
+                            para = new DynamicParameters();
+                            para.Add("@times", times);
+                            para.Add("@patient_id", patient_id);
+                            connection.Execute(uptimes_sql, para);
+
                         }
                         string insert_sql = "";
 

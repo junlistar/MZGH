@@ -65,8 +65,7 @@ namespace Client
             YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
             YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
 
-
-            MainTabControl.TabBackColor = Color.FromArgb(60, 95, 145);
+            uiStyleManager1.Style = UIStyle.Blue;
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
 
@@ -101,7 +100,9 @@ namespace Client
             Aside.TabControl = MainTabControl;
             Aside.TabControl.ShowCloseButton = true;
             Aside.TabControl.TabVisible = true;
-            //Aside.TabControl.TabBackColor = Color.FromArgb(60, 95, 145);
+            //Aside.TabControl.Style = uiStyleManager1.Style;
+            Aside.TabControl.StyleCustomMode = true;
+            Aside.TabControl.TabBackColor = Color.FromArgb(60, 95, 145);
             Aside.TabControl.TabSelectedColor = Color.FromArgb(6, 146, 151);
             Aside.TabControl.TabSelectedForeColor = Color.White;
 
@@ -153,7 +154,7 @@ namespace Client
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
-                 Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
 
                 pageIndex = 1600;
@@ -409,7 +410,7 @@ namespace Client
                     default:
                         break;
                 }
-
+                obj.Style = uiStyleManager1.Style;
                 obj.TagString = pageIndex.ToString();
                 obj.FormClosing += Obj_FormClosing; ;
                 page = AddPage(obj, pageIndex);
@@ -446,7 +447,15 @@ namespace Client
             //RemovePage(int.Parse((sender as UIPage).TagString));//
             //Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
         }
-
+        public void LoadCorlorStyles()
+        {
+            var styles = UIStyles.PopularStyles();
+            foreach (UIStyle style in styles)
+            {
+                //Header.CreateChildNode(Header.Nodes[4], style.DisplayText(), style.Value());
+                uiContextMenuStrip1.Items.Add(style.DisplayText());
+            } 
+        }
 
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
@@ -454,6 +463,8 @@ namespace Client
             {
 
                 this.MinimumSize = new Size(this.Width, this.Height);
+
+                LoadCorlorStyles();
 
                 //显示默认页面
                 AddPage(new Client.Forms.Pages.DefaultPage(), 9999);
@@ -812,7 +823,18 @@ namespace Client
                     this.Close();
                 }
             }
-        }
+        } 
 
+        private void uiContextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        { 
+            var styles = UIStyles.PopularStyles();
+            foreach (UIStyle style in styles)
+            { 
+                if (style.DisplayText() ==e.ClickedItem.Text)
+                {
+                    uiStyleManager1.Style = style; 
+                } 
+            }
+        }
     }
 }

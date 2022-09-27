@@ -224,7 +224,8 @@ namespace Client
                 barcode = cardId;
 
                 //根据patientId查找已存在的病人 
-                var paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
+                //var paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={cardId}");
+                var paramurl = string.Format($"/api/GuaHao/GetPatientByBarcode?barcode={cardId}"); ;
                 var json = await HttpClientUtil.GetAsync(paramurl);
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
@@ -250,7 +251,8 @@ namespace Client
                 if (!string.IsNullOrEmpty(hicno))
                 {
 
-                    paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
+                    // paramurl = string.Format($"/api/GuaHao/GetPatientByCard?cardno={hicno}");
+                    paramurl = string.Format($"/api/GuaHao/GetPatientBySfzId?sfzid={hicno}");
                     json = await HttpClientUtil.GetAsync(paramurl);
                     result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(json);
 
@@ -346,34 +348,7 @@ namespace Client
                 //json = HttpClientUtil.PostJSON(paramurl, _patientVM);
                 json = await HttpClientUtil.PostJSONAsync(paramurl, _patientVM);
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-
-                //var d = new
-                //{
-                //    pid = patientId,
-                //    hicno = hicno,
-                //    sno = sno,
-                //    barcode = barcode,
-                //    name = userName,
-                //    sex = sex,
-                //    birth = birth,
-                //    tel = tel,
-                //    home_district = district,
-                //    home_street = street,
-                //    occupation_type = zhiye,
-                //    response_type = response_type,
-                //    charge_type = charge_type,
-                //    marry_code = marrycode,
-                //    relation_code = relation_code,
-                //    relation_name = relation_name,
-                //    opera = SessionHelper.uservm.user_mi
-                //};
-                //var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                //httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                //paramurl = string.Format($"/api/GuaHao/EditUserInfo?pid={d.pid}&sno={d.sno}&hicno={d.hicno}&barcode={d.barcode}&name={d.name}&sex={d.sex}&birthday={d.birth}&tel={d.tel}&home_district={d.home_district}&home_street={d.home_street}&occupation_type={d.occupation_type}&response_type={d.response_type}&charge_type={d.charge_type}&marry_code={d.marry_code}&relation_code={d.relation_code}&relation_name={d.relation_name}&opera={d.opera}");
-
-                //string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-                //var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
+ 
                 if (responseJson.status == 1)
                 {
                     barCode = cardId;

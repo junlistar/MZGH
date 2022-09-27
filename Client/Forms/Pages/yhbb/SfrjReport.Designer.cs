@@ -34,6 +34,7 @@
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.lblTitle = new Sunny.UI.UILabel();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.txtDate = new Sunny.UI.UIDatePicker();
             this.txtGhUser = new Sunny.UI.UITextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbxStatus = new Sunny.UI.UIComboBox();
@@ -41,7 +42,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pnlReport = new Sunny.UI.UIPanel();
             this.previewControl1 = new FastReport.Preview.PreviewControl();
-            this.txtDate = new Sunny.UI.UIDatePicker();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.pnlReport.SuspendLayout();
@@ -76,7 +76,6 @@
             this.btnPrint.Radius = 1;
             this.btnPrint.Size = new System.Drawing.Size(100, 40);
             this.btnPrint.Style = Sunny.UI.UIStyle.DarkBlue;
-            this.btnPrint.StyleCustomMode = true;
             this.btnPrint.Symbol = 61487;
             this.btnPrint.TabIndex = 13;
             this.btnPrint.Text = "打印";
@@ -103,7 +102,6 @@
             this.btnRefresh.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(152)))), ((int)(((byte)(32)))));
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
             this.btnRefresh.Style = Sunny.UI.UIStyle.Green;
-            this.btnRefresh.StyleCustomMode = true;
             this.btnRefresh.Symbol = 61442;
             this.btnRefresh.TabIndex = 10;
             this.btnRefresh.Text = "预览";
@@ -130,7 +128,6 @@
             this.btnExit.RectSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(138)))));
             this.btnExit.Size = new System.Drawing.Size(100, 40);
             this.btnExit.Style = Sunny.UI.UIStyle.Colorful;
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -169,6 +166,26 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txtDate
+            // 
+            this.txtDate.FillColor = System.Drawing.Color.White;
+            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDate.Location = new System.Drawing.Point(104, 17);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDate.MaxLength = 10;
+            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txtDate.ShowToday = true;
+            this.txtDate.Size = new System.Drawing.Size(150, 29);
+            this.txtDate.SymbolDropDown = 61555;
+            this.txtDate.SymbolNormal = 61555;
+            this.txtDate.TabIndex = 29;
+            this.txtDate.Text = "2022-08-26";
+            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDate.Value = new System.DateTime(2022, 8, 26, 15, 26, 32, 892);
+            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtGhUser
             // 
@@ -264,26 +281,6 @@
             this.previewControl1.TabIndex = 21;
             this.previewControl1.ToolbarVisible = false;
             this.previewControl1.Visible = false;
-            // 
-            // txtDate
-            // 
-            this.txtDate.FillColor = System.Drawing.Color.White;
-            this.txtDate.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDate.Location = new System.Drawing.Point(104, 17);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtDate.MaxLength = 10;
-            this.txtDate.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txtDate.ShowToday = true;
-            this.txtDate.Size = new System.Drawing.Size(150, 29);
-            this.txtDate.SymbolDropDown = 61555;
-            this.txtDate.SymbolNormal = 61555;
-            this.txtDate.TabIndex = 29;
-            this.txtDate.Text = "2022-08-26";
-            this.txtDate.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtDate.Value = new System.DateTime(2022, 8, 26, 15, 26, 32, 892);
-            this.txtDate.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // SfrjReport
             // 

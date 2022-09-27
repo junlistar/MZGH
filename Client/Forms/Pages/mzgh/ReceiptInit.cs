@@ -26,6 +26,7 @@ namespace Client.Forms.Pages.mzgh
 
         private void ReceiptInit_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvlist);//设置样式
             BindData();
         }
 
@@ -56,6 +57,7 @@ namespace Client.Forms.Pages.mzgh
                 end_no = p.end_no,
                 step_length = p.step_length,
                 deleted_flag = p.deleted_flag,
+                deleted_flag_str = p.deleted_flag_str,
             }).ToList();
             dgvlist.DataSource = _dat;
             dgvlist.AutoResizeColumns();
@@ -63,9 +65,14 @@ namespace Client.Forms.Pages.mzgh
             var _index = dgvlist.Rows.Count;
             if (_index > 0)
             {
-                dgvlist.SelectedIndex = _index - 1;
+                //this.dgvlist.CurrentCell = this.dgvlist[1, _index - 1];
+                //UIMessageTip.Show(this.dgvlist.BindingContext[this.dgvlist.DataSource].Position.ToString());
+                this.dgvlist.BindingContext[this.dgvlist.DataSource].Position =  _index - 1;
+                //dgvlist.SelectedIndex = _index - 1;
+                // dgvlist.Rows[_index - 1].Selected = true;
             }
-
+            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -92,7 +99,7 @@ namespace Client.Forms.Pages.mzgh
 
             btnSave.Enabled = true;
 
-            if (list != null && list.Count>0&& string.IsNullOrEmpty(list[list.Count - 1].@operator))
+            if (list != null && list.Count > 0 && string.IsNullOrEmpty(list[list.Count - 1].@operator))
             {
                 return;
             }
@@ -112,40 +119,49 @@ namespace Client.Forms.Pages.mzgh
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (list != null && string.IsNullOrEmpty(list[list.Count - 1].@operator))
+            try
             {
-                if (string.IsNullOrEmpty(list[list.Count - 1].start_no))
-                {
-                    UIMessageTip.ShowWarning("数据不能为空");
-                    txtbegin.Focus();
-                    return;
-                }
-                if (string.IsNullOrEmpty(list[list.Count - 1].end_no))
-                {
-                    UIMessageTip.ShowWarning("数据不能为空");
-                    txtend.Focus();
-                    return;
-                }
-                if (string.IsNullOrEmpty(cbxflag.Text))
-                {
-                    UIMessageTip.ShowWarning("数据不能为空");
-                    cbxflag.Focus();
-                    return;
-                }
-                //保存数据 
 
-                var paramurl = string.Format($"/api/GuaHao/EditOpReceipt");
-                list[list.Count - 1].@operator = SessionHelper.uservm.user_mi;
-                var json = HttpClientUtil.PostJSON(paramurl, list[list.Count - 1]);
-                var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
-                if (result1.status == 1)
+                if (list != null && string.IsNullOrEmpty(list[list.Count - 1].@operator))
                 {
-                    UIMessageTip.Show("保存成功");
+                    if (string.IsNullOrEmpty(list[list.Count - 1].start_no))
+                    {
+                        UIMessageTip.ShowWarning("数据不能为空");
+                        txtbegin.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(list[list.Count - 1].end_no))
+                    {
+                        UIMessageTip.ShowWarning("数据不能为空");
+                        txtend.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrEmpty(cbxflag.Text))
+                    {
+                        UIMessageTip.ShowWarning("数据不能为空");
+                        cbxflag.Focus();
+                        return;
+                    }
+                    //保存数据 
+
+                    var paramurl = string.Format($"/api/GuaHao/EditOpReceipt");
+                    list[list.Count - 1].@operator = SessionHelper.uservm.user_mi;
+                    var json = HttpClientUtil.PostJSON(paramurl, list[list.Count - 1]);
+                    var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                    if (result1.status == 1)
+                    {
+                        UIMessageTip.Show("保存成功");
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError(result1.message);
+                    }
                 }
-                else
-                {
-                    UIMessageTip.ShowError(result1.message);
-                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
             }
         }
 
@@ -200,17 +216,37 @@ namespace Client.Forms.Pages.mzgh
 
         private void btnDel_Click(object sender, EventArgs e)
         {
-            var _index = dgvlist.SelectedIndex;
-            if (_index!=-1)
+            try
             {
-                if (UIMessageDialog.ShowAskDialog(this,"是否确定删除数据？") )
-                {
 
+                var _index = dgvlist.SelectedIndex;
+                if (_index != -1)
+                {
+                    if (UIMessageDialog.ShowAskDialog(this, "是否确定删除数据？"))
+                    {
+                        var paramurl = string.Format($"/api/GuaHao/DeleteOpReceipt");
+                        list[list.Count - 1].@operator = SessionHelper.uservm.user_mi;
+                        var json = HttpClientUtil.PostJSON(paramurl, list[_index]);
+                        var result1 = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+                        if (result1.status == 1)
+                        {
+                            UIMessageTip.Show("删除成功"); BindData();
+                        }
+                        else
+                        {
+                            UIMessageTip.ShowError(result1.message);
+                        }
+                    }
+                }
+                else
+                {
+                    UIMessageTip.ShowWarning("没有数据！");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                UIMessageTip.ShowWarning("没有数据！");
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
             }
         }
     }

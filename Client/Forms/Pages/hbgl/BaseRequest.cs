@@ -36,6 +36,7 @@ namespace Client
         }
         private void BaseRequest_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvlist);//设置样式
 
             InitDic();
 
@@ -64,7 +65,6 @@ namespace Client
 
             BindBottomData(); 
 
-            dgvlist.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
              
             dgvhl.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
             dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;

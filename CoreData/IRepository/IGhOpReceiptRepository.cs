@@ -15,6 +15,9 @@ namespace Data.IRepository
         List<GhOpReceipt> GetOpReceipts(string opera);
 
         bool EditOpReceipt(string jsonStr);
+
+        bool DeleteOpReceipt(string jsonStr);
+        
         #endregion
     }
 }

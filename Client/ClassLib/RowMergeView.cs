@@ -76,7 +76,7 @@ namespace Client.ClassLib
                             sf.Alignment = StringAlignment.Center;
                             sf.LineAlignment = StringAlignment.Center;
 
-                            g.DrawString(e.Value + "", e.CellStyle.Font, Brushes.White,
+                            g.DrawString(e.Value + "", e.CellStyle.Font, Brushes.Black,
                             new Rectangle(left, (top + bottom) / 2, right - left, (bottom - top) / 2), sf);
                             left = this.GetColumnDisplayRectangle(SpanRows[e.ColumnIndex].Left, true).Left - 2;
 
@@ -84,7 +84,7 @@ namespace Client.ClassLib
                             right = this.GetColumnDisplayRectangle(SpanRows[e.ColumnIndex].Right, true).Right - 2;
                             if (right < 0) right = this.Width;
 
-                            g.DrawString(SpanRows[e.ColumnIndex].Text, e.CellStyle.Font, Brushes.White,
+                            g.DrawString(SpanRows[e.ColumnIndex].Text, e.CellStyle.Font, Brushes.Black,
                             new Rectangle(left, top, right - left, (bottom - top) / 2), sf);
                             e.Handled = true;
                         }

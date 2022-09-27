@@ -37,8 +37,7 @@ namespace Mzsf.Forms.Pages
         {
             this.Close();
         }
-
-
+         
 
         private void BindDrugDetails(string p_id, int ledger_sn, string tbl_flag)
         {
@@ -180,12 +179,11 @@ namespace Mzsf.Forms.Pages
 
         private void RefundConfirm_Load(object sender, EventArgs e)
         {
-             
+            StyleHelper.SetGridColor(dgvCpr);//设置样式
+
             lblZongji.Text = Math.Round(total_charge, 2).ToString();
             lblTuikuan.Text = "0";
-
-            dgvCpr.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
-
+              
             BindDrugDetails(patient_id, ledger_sn, tbl_flag);
         }
 

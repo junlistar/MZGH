@@ -29,8 +29,7 @@ namespace Mzsf.Forms.Pages
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ClearDataBind();
-            Search();
-            dgvRefund.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            Search(); 
 
         }
 
@@ -75,7 +74,7 @@ namespace Mzsf.Forms.Pages
                 var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzOrderReceiptVM>>>(json);
                 if (result.status == 1)
                 {
-                    ds = result.data;
+                    ds = result.data.OrderByDescending(p => p.cash_date).ToList();
                 }
                 else
                 {
@@ -129,6 +128,8 @@ namespace Mzsf.Forms.Pages
 
         private void RefundPage_Load(object sender, EventArgs e)
         {
+            StyleHelper.SetGridColor(dgvRefund);//设置样式
+
             InitUI();
         }
 
@@ -177,7 +178,7 @@ namespace Mzsf.Forms.Pages
                 lblRecriptSn.Text = dat.receipt_sn;
                 lblDateTime.Text = dat.cash_date.ToString("yyyy-MM-dd HH:mm:ss");
                 lblPayType.Text = dat.cheque_type_name.Replace(") ", ")\r\n"); ;
-                lblCharge.Text = dat.charge_total.ToString() + "元";
+                lblCharge.Text = Math.Round(dat.charge_total,2).ToString() + "元";
 
                 //处方详情数据
                 //BindDrugDetails(dat.patient_id, dat.ledger_sn, dat.tableflag); 

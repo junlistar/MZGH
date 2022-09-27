@@ -135,8 +135,7 @@
             this.btnxp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnxp.Name = "btnxp";
             this.btnxp.Size = new System.Drawing.Size(100, 40);
-            this.btnxp.StyleCustomMode = true;
-            this.btnxp.Symbol = 61579;
+            this.btnxp.Symbol = 61787;
             this.btnxp.TabIndex = 17;
             this.btnxp.Text = "小票(F4)";
             this.btnxp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -162,8 +161,7 @@
             this.btnfp.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnfp.Name = "btnfp";
             this.btnfp.Size = new System.Drawing.Size(100, 40);
-            this.btnfp.StyleCustomMode = true;
-            this.btnfp.Symbol = 61579;
+            this.btnfp.Symbol = 61787;
             this.btnfp.TabIndex = 15;
             this.btnfp.Text = "发票(F3)";
             this.btnfp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -220,7 +218,6 @@
             this.btnHuajia.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnHuajia.Name = "btnHuajia";
             this.btnHuajia.Size = new System.Drawing.Size(100, 40);
-            this.btnHuajia.StyleCustomMode = true;
             this.btnHuajia.Symbol = 362139;
             this.btnHuajia.TabIndex = 12;
             this.btnHuajia.Text = "划价(F2)";
@@ -237,7 +234,6 @@
             this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSymbolButton1.Name = "uiSymbolButton1";
             this.uiSymbolButton1.Size = new System.Drawing.Size(100, 40);
-            this.uiSymbolButton1.StyleCustomMode = true;
             this.uiSymbolButton1.Symbol = 61473;
             this.uiSymbolButton1.TabIndex = 10;
             this.uiSymbolButton1.Text = "重新(F1)";
@@ -253,7 +249,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出(F12)";

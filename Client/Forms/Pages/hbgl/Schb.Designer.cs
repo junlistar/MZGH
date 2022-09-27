@@ -90,7 +90,6 @@
             this.btnCreate.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(100, 40);
-            this.btnCreate.StyleCustomMode = true;
             this.btnCreate.Symbol = 61639;
             this.btnCreate.TabIndex = 11;
             this.btnCreate.Text = "生成";
@@ -106,7 +105,6 @@
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";
@@ -300,9 +298,9 @@
             this.dgvRequest.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvRequest.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -331,7 +329,7 @@
             this.dgvRequest.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRequest.EnableHeadersVisualStyles = false;
             this.dgvRequest.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvRequest.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
+            this.dgvRequest.GridColor = System.Drawing.Color.PowderBlue;
             this.dgvRequest.Location = new System.Drawing.Point(2, 176);
             this.dgvRequest.Name = "dgvRequest";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -355,6 +353,7 @@
             this.dgvRequest.ShowGridLine = true;
             this.dgvRequest.ShowRect = false;
             this.dgvRequest.Size = new System.Drawing.Size(1384, 524);
+            this.dgvRequest.StyleCustomMode = true;
             this.dgvRequest.TabIndex = 7;
             this.dgvRequest.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvRequest.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRequest_CellClick);
@@ -459,6 +458,7 @@
             this.StyleCustomMode = true;
             this.Text = "生成号表";
             this.Initialize += new System.EventHandler(this.Schb_Initialize);
+            this.Load += new System.EventHandler(this.Schb_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CreateRequestRecord_KeyDown);
             this.MouseEnter += new System.EventHandler(this.CreateRequestRecord_MouseEnter);
             this.pnlTitle.ResumeLayout(false);
