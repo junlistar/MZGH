@@ -234,6 +234,7 @@ namespace Client
             //var code = this.txtCode.Text.Trim();
             var pid = lblPatientid.Text.Trim();
             UserInfoEdit ue = new UserInfoEdit(pid, dto);
+            ue.Style = this.Style;
             //关闭，刷新
             ue.FormClosed += Ue_FormClosed1;
 
@@ -660,18 +661,21 @@ namespace Client
                         }
 
                         SelectPayType fe = new SelectPayType(item, btnEditUser1.TagString);
+                        fe.Style = this.Style;
                         var _dr = fe.ShowDialog();
 
                         uiBreadcrumb2.ItemIndex = 0;
                         //打印发票
                         if (SessionHelper.do_gh_print)
                         {
-                            GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
+                           // GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
                             SessionHelper.do_gh_print = false;
 
                             Task.Run(() =>
                             {
                                 GhPrint ghprint = new GhPrint();
+                                ghprint.times = (GuaHao.PatientVM.max_times + 1).ToString();
+                                ghprint.patient_id = GuaHao.PatientVM.patient_id;
                                 ghprint.Show();
                             });
 
@@ -1017,6 +1021,7 @@ namespace Client
             else
             {
                 Refund rf = new Refund(lblPatientid.Text.Trim());
+                rf.Style = this.Style;
                 rf.ShowDialog();
             }
         }
@@ -1799,7 +1804,7 @@ namespace Client
             {
                 isKeyEnter = true;
                 FilterGuahaoData();
-            }
+            } 
         }
         private void lstunits_KeyUp(object sender, KeyEventArgs e)
         {
@@ -1858,14 +1863,14 @@ namespace Client
                 return;
             }
 
-            //GhDepositRecord ghDepositRecord = new GhDepositRecord();
-            //ghDepositRecord.patient_id = lblPatientid.Text;
+            GhDepositRecord ghDepositRecord = new GhDepositRecord();
+            ghDepositRecord.patient_id = lblPatientid.Text;
 
-            //ghDepositRecord.ShowDialog();
+            ghDepositRecord.ShowDialog();
 
 
             //补打小票
-            XiaopiaoDayin();
+            //XiaopiaoDayin();
         }
         /// <summary>
         /// 小票打印
@@ -1915,5 +1920,42 @@ namespace Client
         {
 
         }
+
+        private void uiLinkLabel1_Click(object sender, EventArgs e)
+        {
+            ArableNumberFilter(sender);
+        }
+
+        public void ArableNumberFilter(object sender)
+        {
+            var _text = (sender as UILinkLabel).Text;
+            var _arr = _text.ToCharArray().ToList();
+
+            var _list = SessionHelper.units.Where(p => _arr.Contains(p.py_code.Substring(0, 1).ToChar())).ToList();
+
+            FilterUnitData(_list);
+        }
+
+        public void FilterUnitData(List<UnitVM> _list)
+        {
+            var _source = new Dictionary<string, List<GHRequestVM>>();
+            foreach (var _item in _list)
+            {
+                if (requestDic.ContainsKey(_item.name))
+                {
+                    if (!_source.ContainsKey(_item.name))
+                    {
+                        _source.Add(_item.name, requestDic[_item.name]);
+                    }
+
+                }
+            }
+
+            isBreadHandleSet = true;
+            uiBreadcrumb2.ItemIndex = 0;
+
+            BindUnit(_source);
+        }
+         
     }
 }

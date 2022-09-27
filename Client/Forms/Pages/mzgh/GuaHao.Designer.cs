@@ -88,6 +88,11 @@
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.txtSearch = new Sunny.UI.UITextBox();
             this.lstunits = new Sunny.UI.UIListBox();
+            this.uiLinkLabel1 = new Sunny.UI.UILinkLabel();
+            this.uiLinkLabel2 = new Sunny.UI.UILinkLabel();
+            this.uiLinkLabel3 = new Sunny.UI.UILinkLabel();
+            this.uiLinkLabel4 = new Sunny.UI.UILinkLabel();
+            this.uiLinkLabel5 = new Sunny.UI.UILinkLabel();
             this.pnlTitle.SuspendLayout();
             this.pnlSearch.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
@@ -824,16 +829,17 @@
             // 
             // pnlHours
             // 
-            this.pnlHours.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlHours.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.pnlHours.Location = new System.Drawing.Point(516, 314);
             this.pnlHours.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlHours.MinimumSize = new System.Drawing.Size(1, 1);
             this.pnlHours.Name = "pnlHours";
             this.pnlHours.Padding = new System.Windows.Forms.Padding(2);
+            this.pnlHours.RectColor = System.Drawing.Color.Transparent;
             this.pnlHours.ShowText = false;
-            this.pnlHours.Size = new System.Drawing.Size(1009, 44);
+            this.pnlHours.Size = new System.Drawing.Size(497, 44);
+            this.pnlHours.Style = Sunny.UI.UIStyle.Custom;
+            this.pnlHours.StyleCustomMode = true;
             this.pnlHours.TabIndex = 18;
             this.pnlHours.Text = "uiFlowLayoutPanel1";
             this.pnlHours.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -877,7 +883,6 @@
             this.uiBreadcrumb2.Size = new System.Drawing.Size(242, 29);
             this.uiBreadcrumb2.TabIndex = 4;
             this.uiBreadcrumb2.Text = "uiBreadcrumb2";
-            this.uiBreadcrumb2.UnSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiBreadcrumb2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiBreadcrumb2.ItemIndexChanged += new Sunny.UI.UIBreadcrumb.OnValueChanged(this.uiBreadcrumb2_ItemIndexChanged);
             // 
@@ -894,7 +899,7 @@
             this.gbxUnits.Padding = new System.Windows.Forms.Padding(2);
             this.gbxUnits.ShowText = false;
             this.gbxUnits.Size = new System.Drawing.Size(1530, 428);
-            this.gbxUnits.TabIndex = 5;
+            this.gbxUnits.TabIndex = 102;
             this.gbxUnits.Text = "111111111";
             this.gbxUnits.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.gbxUnits.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -916,7 +921,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.ShowText = false;
             this.txtSearch.Size = new System.Drawing.Size(121, 29);
-            this.txtSearch.TabIndex = 6;
+            this.txtSearch.TabIndex = 101;
             this.txtSearch.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtSearch.Watermark = "筛选科室";
             this.txtSearch.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -940,10 +945,90 @@
             this.lstunits.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.lstunits.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstunits_KeyUp);
             // 
+            // uiLinkLabel1
+            // 
+            this.uiLinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel1.Location = new System.Drawing.Point(1064, 322);
+            this.uiLinkLabel1.Name = "uiLinkLabel1";
+            this.uiLinkLabel1.Size = new System.Drawing.Size(77, 23);
+            this.uiLinkLabel1.TabIndex = 103;
+            this.uiLinkLabel1.TabStop = true;
+            this.uiLinkLabel1.Text = "BCDEF";
+            this.uiLinkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLinkLabel1.Click += new System.EventHandler(this.uiLinkLabel1_Click);
+            // 
+            // uiLinkLabel2
+            // 
+            this.uiLinkLabel2.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel2.Location = new System.Drawing.Point(1147, 322);
+            this.uiLinkLabel2.Name = "uiLinkLabel2";
+            this.uiLinkLabel2.Size = new System.Drawing.Size(61, 23);
+            this.uiLinkLabel2.TabIndex = 104;
+            this.uiLinkLabel2.TabStop = true;
+            this.uiLinkLabel2.Text = "GHJkL";
+            this.uiLinkLabel2.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLinkLabel2.Click += new System.EventHandler(this.uiLinkLabel1_Click);
+            // 
+            // uiLinkLabel3
+            // 
+            this.uiLinkLabel3.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel3.Location = new System.Drawing.Point(1214, 322);
+            this.uiLinkLabel3.Name = "uiLinkLabel3";
+            this.uiLinkLabel3.Size = new System.Drawing.Size(68, 23);
+            this.uiLinkLabel3.TabIndex = 105;
+            this.uiLinkLabel3.TabStop = true;
+            this.uiLinkLabel3.Text = "MNPQ";
+            this.uiLinkLabel3.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLinkLabel3.Click += new System.EventHandler(this.uiLinkLabel1_Click);
+            // 
+            // uiLinkLabel4
+            // 
+            this.uiLinkLabel4.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel4.Location = new System.Drawing.Point(1288, 322);
+            this.uiLinkLabel4.Name = "uiLinkLabel4";
+            this.uiLinkLabel4.Size = new System.Drawing.Size(56, 23);
+            this.uiLinkLabel4.TabIndex = 106;
+            this.uiLinkLabel4.TabStop = true;
+            this.uiLinkLabel4.Text = "RSTW";
+            this.uiLinkLabel4.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLinkLabel4.Click += new System.EventHandler(this.uiLinkLabel1_Click);
+            // 
+            // uiLinkLabel5
+            // 
+            this.uiLinkLabel5.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel5.Location = new System.Drawing.Point(1355, 322);
+            this.uiLinkLabel5.Name = "uiLinkLabel5";
+            this.uiLinkLabel5.Size = new System.Drawing.Size(56, 23);
+            this.uiLinkLabel5.TabIndex = 107;
+            this.uiLinkLabel5.TabStop = true;
+            this.uiLinkLabel5.Text = "XYZ";
+            this.uiLinkLabel5.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLinkLabel5.Click += new System.EventHandler(this.uiLinkLabel1_Click);
+            // 
             // GuaHao
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1538, 793);
+            this.Controls.Add(this.uiLinkLabel5);
+            this.Controls.Add(this.uiLinkLabel4);
+            this.Controls.Add(this.uiLinkLabel3);
+            this.Controls.Add(this.uiLinkLabel2);
+            this.Controls.Add(this.uiLinkLabel1);
             this.Controls.Add(this.lstunits);
             this.Controls.Add(this.pnlHours);
             this.Controls.Add(this.txtSearch);
@@ -1032,5 +1117,10 @@
         private Sunny.UI.UILabel lblBarcode;
         private Sunny.UI.UILabel uiLabel2;
         private Sunny.UI.UIListBox lstunits;
+        private Sunny.UI.UILinkLabel uiLinkLabel1;
+        private Sunny.UI.UILinkLabel uiLinkLabel2;
+        private Sunny.UI.UILinkLabel uiLinkLabel3;
+        private Sunny.UI.UILinkLabel uiLinkLabel4;
+        private Sunny.UI.UILinkLabel uiLinkLabel5;
     }
 }

@@ -825,6 +825,7 @@ namespace Client
                             if (_record_sn != "0")
                             {
                                 RequestEdit edit = new RequestEdit(_record_sn);
+                                edit.Style = this.Style;
                                 if (edit.ShowDialog() == DialogResult.OK)
                                 {
                                     InitData();

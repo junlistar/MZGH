@@ -110,7 +110,7 @@ namespace Client
             else if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
-            }
+            } 
         }
     }
 }

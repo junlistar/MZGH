@@ -30,7 +30,9 @@ namespace Client.Forms.Wedgit
     {
         private static ILog log = LogManager.GetLogger(typeof(GhPrint));//typeof放当前类
 
-        PatientVM patientVM ;
+        public string patient_id;
+        public string times;
+
         public GhPrint()
         {
             InitializeComponent();
@@ -38,22 +40,22 @@ namespace Client.Forms.Wedgit
 
         private void GhPrint_Load(object sender, EventArgs e)
         {
-            GetPatientInfo();
+           // GetPatientInfo();
             InitializeReport("PRINT");
             this.Close();
         }
 
-        public void GetPatientInfo()
-        {
-            string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={GuaHao.PatientVM.patient_id}");
+        //public void GetPatientInfo()
+        //{
+        //    string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={GuaHao.PatientVM.patient_id}");
 
-            log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
-            string responseJson = HttpClientUtil.Get(paramurl);
+        //    log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+        //    string responseJson = HttpClientUtil.Get(paramurl);
 
-            var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(responseJson);
+        //    var result = WebApiHelper.DeserializeObject<ResponseResult<List<PatientVM>>>(responseJson);
 
-            patientVM = result.data[0];
-        }
+        //    patientVM = result.data[0];
+        //}
 
         public string FormID { get; set; } = "PRDT"; //单据ID
         //private string RptNo, RptName; //报表编号、名称
@@ -174,7 +176,7 @@ namespace Client.Forms.Wedgit
                     {
                         TargetReport.Load(Stream); 
 
-                        string paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={GuaHao.PatientVM.patient_id}&times={GuaHao.PatientVM.max_times}");
+                        string paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={patient_id}&times={times}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         var responseJson = HttpClientUtil.Get(paramurl);

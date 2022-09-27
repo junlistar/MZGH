@@ -113,7 +113,7 @@ namespace Client
                 var datestr = dtprq.Value.ToString("yyyy-MM-dd");
                 var patient_id = lblhidid.Text;
                 RefundPayList payList = new RefundPayList(userInfo, datestr, patient_id, times);
-
+                payList.Style = this.Style;
                 if (payList.ShowDialog() == DialogResult.OK)
                 {
                     Search();

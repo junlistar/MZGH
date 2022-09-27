@@ -222,7 +222,7 @@ namespace Mzsf.Forms.Pages
                 {
 
                     //if (UIInputDialog.InputDoubleDialog(this  ,ref left_je, 2,true,"请输入金额：",false))
-                    if (UIInputDialog.InputDoubleDialog(ref left_je, 2, true, $"请核对本次{ PayMethod.GetPayStringByEnum(payMethod) }支付金额："))
+                    if (UIInputDialog.InputDoubleDialog(ref left_je, 2, true, $"请核对本次{ PayMethod.GetPayStringByEnum(payMethod) }支付金额：",this.Style))
                     {
                         //UIMessageTip.ShowOk("ok");
 
@@ -265,6 +265,7 @@ namespace Mzsf.Forms.Pages
 
 
                     WxPay wxPay = new WxPay(his_cheque_type, left_je.ToString(), out_trade_no);
+                    wxPay.Style = this.Style;
                     wxPay.ShowDialog();
                     if (wxPay.DialogResult == DialogResult.OK)
                     {
@@ -285,6 +286,7 @@ namespace Mzsf.Forms.Pages
                 else if (payMethod == PayMethodEnum.Yinlian)
                 {
                     CardPay card = new CardPay(his_cheque_type, left_je.ToString());
+                    card.Style = this.Style;
                     card.ShowDialog();
                     if (card.DialogResult == DialogResult.OK)
                     {
@@ -411,7 +413,7 @@ namespace Mzsf.Forms.Pages
                     {
                         xjzf.lbl1.Text = "本次支付:";
                     }
-
+                    xjzf.Style = this.Style;
                     xjzf.ShowDialog();
                     if (xjzf.DialogResult == DialogResult.OK)
                     {

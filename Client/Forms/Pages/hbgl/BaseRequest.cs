@@ -656,7 +656,7 @@ namespace Client
         public void Add()
         {
             BaseRequestEdit edit = new BaseRequestEdit("");
-
+            edit.Style = this.Style;
             edit.ShowDialog();
 
             InitData();
@@ -761,6 +761,7 @@ namespace Client
                     current_sn = request_sn;
 
                     BaseRequestEdit edit = new BaseRequestEdit(current_sn);
+                    edit.Style = this.Style;
                     edit.FormClosed += Edit_FormClosed;
                     edit.ShowDialog();
 

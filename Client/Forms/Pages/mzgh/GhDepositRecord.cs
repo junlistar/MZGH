@@ -53,14 +53,29 @@ namespace Client.Forms.Pages.mzgh
                     {
                         patient_id = p.patient_id,
                         ledger_sn = p.ledger_sn,
+                        times = p.times,
                         charge_total = p.charge_total,
                         cash_name = p.cash_name,
                         cash_date = p.price_date, 
                     }).OrderByDescending(p => p.cash_date).ToList();
                     dgv_mzdeposit.Init();
                     dgv_mzdeposit.DataSource = _dat;
+                    dgv_mzdeposit.AutoResizeColumns();
                 }
 
+            }
+            else
+            {
+                var _ds = new List<GHReceiptModelVM>();
+                dgv_mzdeposit.DataSource = _ds.Select(p => new
+                {
+                    patient_id = p.patient_id,
+                    ledger_sn = p.ledger_sn,
+                    times = p.times,
+                    charge_total = p.charge_total,
+                    cash_name = p.cash_name,
+                    cash_date = p.price_date,
+                }).ToList();
             }
         }
 
@@ -81,13 +96,18 @@ namespace Client.Forms.Pages.mzgh
                 var _index = dgv_mzdeposit.SelectedIndex;
                 if (_index >= 0)
                 {
-                    //var _pid = dgv_mzdeposit.Rows[_index].Cells["pid"].Value.ToString();
-                    //var _ledger_sn = dgv_mzdeposit.Rows[_index].Cells["ledger_sn"].Value.ToString();
+                    var _pid = dgv_mzdeposit.Rows[_index].Cells["pid"].Value.ToString();
+                    var _times = dgv_mzdeposit.Rows[_index].Cells["times"].Value.ToString();
                     //Print ghprint = new Print(SessionHelper.mzsf_report_code);
                     //ghprint._printer = SessionHelper.sf_printer;
                     //ghprint._patient_id = _pid;
                     //ghprint._ledger_sn = _ledger_sn;
                     //ghprint.Show();
+
+                    GhPrint ghprint = new GhPrint();
+                    ghprint.times = _times;
+                    ghprint.patient_id = _pid;
+                    ghprint.Show();
                 }
 
             }
@@ -106,7 +126,9 @@ namespace Client.Forms.Pages.mzgh
                 {
                     var _pid = dgv_mzdeposit.Rows[_index].Cells["pid"].Value.ToString();
                     var _ledger_sn = dgv_mzdeposit.Rows[_index].Cells["ledger_sn"].Value.ToString();
-                    PrintElecBill(_pid, _ledger_sn);
+                    var _times = dgv_mzdeposit.Rows[_index].Cells["times"].Value.ToString();
+                    var _charge_total = dgv_mzdeposit.Rows[_index].Cells["charge_total"].Value.ToString();
+                    PrintElecBill(_pid, _ledger_sn, _times, _charge_total);
                 }
 
             }
@@ -116,7 +138,7 @@ namespace Client.Forms.Pages.mzgh
             }
         }
 
-        public void PrintElecBill(string _patientId, string _ledger_sn)
+        public void PrintElecBill(string _patientId, string _ledger_sn,string _times,string _charge_total)
         {
             //补打电子发票
             try
@@ -141,69 +163,49 @@ namespace Client.Forms.Pages.mzgh
                 }
                 if (result.data == null || result.data.Count == 0)
                 {
-                    UIMessageTip.Show("没有电子发票数据！");
+                    if (UIMessageDialog.ShowAskDialog(this, "没有电子发票数据,是否生成？"))
+                    {
+                        var _add_result = ElecBillHelper.CreateElecBill(_patientId.ToString(), Convert.ToInt32(_ledger_sn), Convert.ToInt32(_times), _charge_total.ToString(), BillTypeEnum.GuaHao);
+                        if (_add_result)
+                        {
+                            json = HttpClientUtil.Get(paramurl);
 
-                    log.Error("没有电子发票数据！");
+                            result = WebApiHelper.DeserializeObject<ResponseResult<List<FpData>>>(json);
+                        }
+                        else
+                        {
+                            log.Error("重新生成电子发票数据失败！");
 
-                    return;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        log.Error("没有电子发票数据！");
+
+                        return;
+                    }
                 }
 
                 string _billBatchCode = result.data[0].billBatchCode;
                 string _billNo = result.data[0].billNo;
                 string _random = result.data[0].random;
 
-                string ip = ConfigurationManager.AppSettings["ip"];
-                string port = ConfigurationManager.AppSettings["port"];
-                string dllName = ConfigurationManager.AppSettings["dllName"];
-                string func = ConfigurationManager.AppSettings["func"];
-
-                string noise = Guid.NewGuid().ToString();
-
-                string appid = ConfigurationManager.AppSettings["appid"];
-                string key = ConfigurationManager.AppSettings["key"];
-                string version = ConfigurationManager.AppSettings["version"];
-
-                string method = "printElectBill";
-
-                var _data = new
-                {
-                    billBatchCode = _billBatchCode,
-                    billNo = _billNo,
-                    random = _random,
-                };
-
-                var stringA = $"appid={appid}&data={StringUtil.Base64Encode(JsonConvert.SerializeObject(_data))}&noise={noise}";
-                var stringSignTemp = stringA + $"&key={key}&version={version}";
-
-                var _sign = StringUtil.GenerateMD5(stringSignTemp).ToUpper();
-
-                var _params = new
-                {
-                    appid = appid,
-                    data = StringUtil.Base64Encode(JsonConvert.SerializeObject(_data)),
-                    noise = noise,
-                    version = version,
-                    sign = _sign
-                };
-
-                var _payload = new
-                {
-                    method = method,
-                    @params = _params
-                };
-                string payload = StringUtil.Base64Encode(JsonConvert.SerializeObject(_payload));
-                string url = $"http://{ip}:{port}/extend?dllName={dllName}&func={func}&payload={payload}";
-                //var reslt = HttpClientUtil.Get(url);
-                Task.Run(() =>
-                {
-                    HttpClientUtil.Get(url);
-                });
+                ElecBillHelper.PrintElecBill(_billBatchCode, _billNo, _random);
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error("打印电子发票失败！");
                 log.Error(ex.Message);
+            }
+        }
+
+        private void GhDepositRecord_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
             }
         }
     }

@@ -434,6 +434,7 @@ namespace Mzsf.Forms.Pages
                 InitUI();
                 SearchUser();
             }
+            
         }
         /// <summary>
         /// 获取病人处方存储过程
@@ -1542,6 +1543,16 @@ namespace Mzsf.Forms.Pages
         private void ChargePage_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+         
+
+        private void txtCode_KeyPress(object sender, KeyPressEventArgs e)
+        { 
+
+            if (e.KeyChar == '+')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

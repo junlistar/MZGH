@@ -55,6 +55,7 @@
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
+            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,7 +71,6 @@
             this.confirm_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ckall = new Sunny.UI.UICheckBox();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -148,9 +148,9 @@
             this.dgvDeposit.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvDeposit.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -172,7 +172,7 @@
             this.dgvDeposit.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvDeposit.EnableHeadersVisualStyles = false;
             this.dgvDeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvDeposit.GridColor = System.Drawing.Color.PowderBlue;
+            this.dgvDeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvDeposit.Location = new System.Drawing.Point(4, 166);
             this.dgvDeposit.Name = "dgvDeposit";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -325,9 +325,9 @@
             this.dgvCpr.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvCpr.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -360,7 +360,7 @@
             this.dgvCpr.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvCpr.EnableHeadersVisualStyles = false;
             this.dgvCpr.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvCpr.GridColor = System.Drawing.Color.PowderBlue;
+            this.dgvCpr.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvCpr.Location = new System.Drawing.Point(4, 297);
             this.dgvCpr.Name = "dgvCpr";
             this.dgvCpr.ReadOnly = true;
@@ -388,6 +388,22 @@
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
+            // 
+            // ckall
+            // 
+            this.ckall.BackColor = System.Drawing.Color.Transparent;
+            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ckall.Location = new System.Drawing.Point(6, 298);
+            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ckall.Name = "ckall";
+            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
+            this.ckall.TabIndex = 14;
+            this.ckall.Text = "全选";
+            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // chkback
             // 
@@ -452,6 +468,7 @@
             this.back.HeaderText = "退药数量";
             this.back.Name = "back";
             this.back.ReadOnly = true;
+            this.back.Visible = false;
             // 
             // charge_code
             // 
@@ -500,22 +517,6 @@
             this.confirm_date.ReadOnly = true;
             this.confirm_date.Visible = false;
             // 
-            // ckall
-            // 
-            this.ckall.BackColor = System.Drawing.Color.Transparent;
-            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(6, 298);
-            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ckall.Name = "ckall";
-            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.ckall.Size = new System.Drawing.Size(73, 30);
-            this.ckall.Style = Sunny.UI.UIStyle.Custom;
-            this.ckall.TabIndex = 14;
-            this.ckall.Text = "全选";
-            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
-            // 
             // RefundConfirm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -563,6 +564,7 @@
         private Sunny.UI.UISymbolButton btnTuikuan;
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UICheckBox ckall;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkback;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
@@ -578,6 +580,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_date;
-        private System.Windows.Forms.Label label2;
     }
 }

@@ -210,7 +210,7 @@ namespace Client
                     _message = $"确认生成第 {current_week} 周 \r\n{ GetWeekStr(current_week)} 的号表数据吗？";
                 }
 
-                if (!UIMessageDialog.ShowAskDialog(this, _message))
+                if (!UIMessageDialog.ShowAskDialog(this, _message,this.Style))
                 {
                     return;
                 }

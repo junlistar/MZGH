@@ -453,7 +453,12 @@ namespace Client
             foreach (UIStyle style in styles)
             {
                 //Header.CreateChildNode(Header.Nodes[4], style.DisplayText(), style.Value());
-                uiContextMenuStrip1.Items.Add(style.DisplayText());
+                 
+                if ( style.DisplayText() != "DarkBlue" && style.DisplayText() != "Black")
+                {
+                    uiContextMenuStrip1.Items.Add(style.DisplayText());
+                }
+                
             } 
         }
 
