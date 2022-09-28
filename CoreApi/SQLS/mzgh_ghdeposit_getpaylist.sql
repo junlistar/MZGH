@@ -14,7 +14,7 @@
       ISNULL(f.receipt_sn, '') receipt_sn,
       ISNULL(f.receipt_no, '') receipt_no,
       a.name as price_opera,
-	  t.admiss_times,t.mdtrt_id,t.psn_no,t.setl_id
+	  t.admiss_times,t.mdtrt_id,t.psn_no,t.setl_id,t.clr_optins
 FROM  view_mz_visit_table v  
       --left join view_gh_deposit d on v.patient_id = d.patient_id AND v.times = d.times 
       left join gh_deposit d on v.patient_id = d.patient_id AND v.times = d.times 

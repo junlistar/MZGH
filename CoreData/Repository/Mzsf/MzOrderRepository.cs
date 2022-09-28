@@ -67,7 +67,7 @@ namespace Data.Repository.Mzsf
                             para = new DynamicParameters();
                             para.Add("@times", times);
                             para.Add("@patient_id", patient_id);
-                            connection.Execute(uptimes_sql, para);
+                            connection.Execute(uptimes_sql, para, transaction);
 
                         }
                         string insert_sql = "";

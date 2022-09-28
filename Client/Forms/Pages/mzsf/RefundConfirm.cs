@@ -160,7 +160,7 @@ namespace Mzsf.Forms.Pages
 
                                 jscxRequest.msgid = YBHelper.msgid;
                                 jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-                                jscxRequest.insuplc_admdvs = _patient.yb_insuplc_admdvs.Trim();
+                                jscxRequest.insuplc_admdvs = item.clr_optins;
                                 jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
                                 jscxRequest.dev_no = "";
                                 jscxRequest.dev_safe_info = "";
@@ -193,7 +193,7 @@ namespace Mzsf.Forms.Pages
                                 YBHelper.AddYBLog(BusinessID, times, json, _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
                                 //提交
                                 ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
-
+                                YBHelper.ReplaceText(ref parm[2]);
                                 log.Debug("结算撤销返回：" + parm[2]);
                                 YBHelper.AddYBLog(BusinessID, times, parm[2].ToString(), _patient.patient_id, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
 

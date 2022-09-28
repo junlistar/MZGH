@@ -32,6 +32,9 @@ namespace Client.Forms.Wedgit
                 UIMessageTip.Show("请将参数填写完整！");
                 return;
             }
+            //todo:查询医保结算记录insuplc_admdvs
+
+
 
             //门诊结算撤销
             var jscxRequest = new YBRequest<MZJSCX>();
@@ -39,7 +42,7 @@ namespace Client.Forms.Wedgit
 
             jscxRequest.msgid = YBHelper.msgid;
             jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-            jscxRequest.insuplc_admdvs = YBHelper.mdtrtarea_admvs;
+            jscxRequest.insuplc_admdvs = "420140";
             jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
             jscxRequest.dev_no = "";
             jscxRequest.dev_safe_info = "";
@@ -72,6 +75,8 @@ namespace Client.Forms.Wedgit
             YBHelper.AddYBLog(BusinessID,0 ,json, _psn_no, jscxRequest.sign_no, jscxRequest.infver, 0, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
             //提交
             var result = ComHelper.InvokeMethod("yinhai.yh_hb_sctr", "yh_hb_call", ref parm);
+
+            YBHelper.ReplaceText(ref parm[2]);
 
             YBHelper.AddYBLog(BusinessID,0, parm[2].ToString(), _psn_no, jscxRequest.sign_no, jscxRequest.infver, 1, SessionHelper.uservm.user_mi, jscxRequest.inf_time);
 

@@ -175,7 +175,7 @@ namespace Client
 
                                     jscxRequest.msgid = YBHelper.msgid;
                                     jscxRequest.mdtrtarea_admvs = YBHelper.mdtrtarea_admvs;// "421099";// 
-                                    jscxRequest.insuplc_admdvs = SessionHelper.patientVM.yb_insuplc_admdvs.Trim();
+                                    jscxRequest.insuplc_admdvs = item.clr_optins ;
                                     jscxRequest.recer_sys_code = YBHelper.recer_sys_code;
                                     jscxRequest.dev_no = "";
                                     jscxRequest.dev_safe_info = "";

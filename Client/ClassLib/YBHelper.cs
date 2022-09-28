@@ -82,9 +82,18 @@ namespace Client.ClassLib
         /// 医保身份唯一 1,0
         /// </summary>
         public static string yb_identity_only = "0";
-         
-        
 
+
+        public static void ReplaceText(ref object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.ToString().IndexOf("\t") > -1)
+                {
+                    obj = obj.ToString().Replace("\"\"", "null").Replace("\t", "");
+                }
+            }
+        }
 
         public static void AddYBLog(string info_code,int admiss_times, string data, string patient_id, string msgid, string ver, int flag, string opera, string oper_date)
         {

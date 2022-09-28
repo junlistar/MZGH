@@ -53,6 +53,19 @@
             this.txtEndDate = new Sunny.UI.UIDatePicker();
             this.txtBeginDate = new Sunny.UI.UIDatePicker();
             this.dgvRefund = new Sunny.UI.UIDataGridView();
+            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.lblCharge = new System.Windows.Forms.Label();
             this.lblPayType = new System.Windows.Forms.Label();
@@ -71,19 +84,6 @@
             this.lblPatientId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblTotalCount = new Sunny.UI.UILabel();
-            this.receipt_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.patient_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.p_bar_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cheque_type_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.receipt_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.report_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRefund)).BeginInit();
@@ -126,7 +126,6 @@
             this.btnYBTuifei.TabIndex = 14;
             this.btnYBTuifei.Text = "医保退费";
             this.btnYBTuifei.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnYBTuifei.Visible = false;
             this.btnYBTuifei.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnYBTuifei.Click += new System.EventHandler(this.btnYBTuifei_Click);
             // 
@@ -425,6 +424,105 @@
             this.dgvRefund.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRefund_CellDoubleClick);
             this.dgvRefund.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRefund_RowPostPaint);
             // 
+            // receipt_no
+            // 
+            this.receipt_no.DataPropertyName = "receipt_no";
+            this.receipt_no.HeaderText = "发票号";
+            this.receipt_no.Name = "receipt_no";
+            this.receipt_no.ReadOnly = true;
+            // 
+            // patient_name
+            // 
+            this.patient_name.DataPropertyName = "patient_name";
+            this.patient_name.HeaderText = "病人姓名";
+            this.patient_name.Name = "patient_name";
+            this.patient_name.ReadOnly = true;
+            // 
+            // patient_id
+            // 
+            this.patient_id.DataPropertyName = "patient_id";
+            this.patient_id.HeaderText = "病人ID";
+            this.patient_id.Name = "patient_id";
+            this.patient_id.ReadOnly = true;
+            // 
+            // p_bar_code
+            // 
+            this.p_bar_code.DataPropertyName = "p_bar_code";
+            this.p_bar_code.HeaderText = "磁卡号";
+            this.p_bar_code.Name = "p_bar_code";
+            this.p_bar_code.ReadOnly = true;
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.ledger_sn.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ledger_sn.HeaderText = "账页";
+            this.ledger_sn.Name = "ledger_sn";
+            this.ledger_sn.ReadOnly = true;
+            // 
+            // cash_date
+            // 
+            this.cash_date.DataPropertyName = "cash_date";
+            this.cash_date.HeaderText = "收费时间";
+            this.cash_date.Name = "cash_date";
+            this.cash_date.ReadOnly = true;
+            // 
+            // cash_name
+            // 
+            this.cash_name.DataPropertyName = "cash_name";
+            this.cash_name.HeaderText = "收费员";
+            this.cash_name.Name = "cash_name";
+            this.cash_name.ReadOnly = true;
+            // 
+            // cheque_type_name
+            // 
+            this.cheque_type_name.DataPropertyName = "cheque_type_name";
+            this.cheque_type_name.HeaderText = "支付方式";
+            this.cheque_type_name.Name = "cheque_type_name";
+            this.cheque_type_name.ReadOnly = true;
+            // 
+            // receipt_sn
+            // 
+            this.receipt_sn.DataPropertyName = "receipt_sn";
+            this.receipt_sn.HeaderText = "机制号";
+            this.receipt_sn.Name = "receipt_sn";
+            this.receipt_sn.ReadOnly = true;
+            // 
+            // charge_status
+            // 
+            this.charge_status.DataPropertyName = "charge_status";
+            this.charge_status.HeaderText = "状态";
+            this.charge_status.Name = "charge_status";
+            this.charge_status.ReadOnly = true;
+            // 
+            // charge_total
+            // 
+            this.charge_total.DataPropertyName = "charge_total";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.charge_total.DefaultCellStyle = dataGridViewCellStyle4;
+            this.charge_total.HeaderText = "总额";
+            this.charge_total.Name = "charge_total";
+            this.charge_total.ReadOnly = true;
+            // 
+            // report_date
+            // 
+            this.report_date.DataPropertyName = "report_date";
+            this.report_date.HeaderText = "结账日期";
+            this.report_date.Name = "report_date";
+            this.report_date.ReadOnly = true;
+            this.report_date.Visible = false;
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "times";
+            this.times.Name = "times";
+            this.times.ReadOnly = true;
+            this.times.Visible = false;
+            // 
             // uiGroupBox2
             // 
             this.uiGroupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -619,105 +717,6 @@
             this.lblTotalCount.Text = "总计：";
             this.lblTotalCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblTotalCount.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // receipt_no
-            // 
-            this.receipt_no.DataPropertyName = "receipt_no";
-            this.receipt_no.HeaderText = "发票号";
-            this.receipt_no.Name = "receipt_no";
-            this.receipt_no.ReadOnly = true;
-            // 
-            // patient_name
-            // 
-            this.patient_name.DataPropertyName = "patient_name";
-            this.patient_name.HeaderText = "病人姓名";
-            this.patient_name.Name = "patient_name";
-            this.patient_name.ReadOnly = true;
-            // 
-            // patient_id
-            // 
-            this.patient_id.DataPropertyName = "patient_id";
-            this.patient_id.HeaderText = "病人ID";
-            this.patient_id.Name = "patient_id";
-            this.patient_id.ReadOnly = true;
-            // 
-            // p_bar_code
-            // 
-            this.p_bar_code.DataPropertyName = "p_bar_code";
-            this.p_bar_code.HeaderText = "磁卡号";
-            this.p_bar_code.Name = "p_bar_code";
-            this.p_bar_code.ReadOnly = true;
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.ledger_sn.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ledger_sn.HeaderText = "账页";
-            this.ledger_sn.Name = "ledger_sn";
-            this.ledger_sn.ReadOnly = true;
-            // 
-            // cash_date
-            // 
-            this.cash_date.DataPropertyName = "cash_date";
-            this.cash_date.HeaderText = "收费时间";
-            this.cash_date.Name = "cash_date";
-            this.cash_date.ReadOnly = true;
-            // 
-            // cash_name
-            // 
-            this.cash_name.DataPropertyName = "cash_name";
-            this.cash_name.HeaderText = "收费员";
-            this.cash_name.Name = "cash_name";
-            this.cash_name.ReadOnly = true;
-            // 
-            // cheque_type_name
-            // 
-            this.cheque_type_name.DataPropertyName = "cheque_type_name";
-            this.cheque_type_name.HeaderText = "支付方式";
-            this.cheque_type_name.Name = "cheque_type_name";
-            this.cheque_type_name.ReadOnly = true;
-            // 
-            // receipt_sn
-            // 
-            this.receipt_sn.DataPropertyName = "receipt_sn";
-            this.receipt_sn.HeaderText = "机制号";
-            this.receipt_sn.Name = "receipt_sn";
-            this.receipt_sn.ReadOnly = true;
-            // 
-            // charge_status
-            // 
-            this.charge_status.DataPropertyName = "charge_status";
-            this.charge_status.HeaderText = "状态";
-            this.charge_status.Name = "charge_status";
-            this.charge_status.ReadOnly = true;
-            // 
-            // charge_total
-            // 
-            this.charge_total.DataPropertyName = "charge_total";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.charge_total.DefaultCellStyle = dataGridViewCellStyle4;
-            this.charge_total.HeaderText = "总额";
-            this.charge_total.Name = "charge_total";
-            this.charge_total.ReadOnly = true;
-            // 
-            // report_date
-            // 
-            this.report_date.DataPropertyName = "report_date";
-            this.report_date.HeaderText = "结账日期";
-            this.report_date.Name = "report_date";
-            this.report_date.ReadOnly = true;
-            this.report_date.Visible = false;
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "times";
-            this.times.Name = "times";
-            this.times.ReadOnly = true;
-            this.times.Visible = false;
             // 
             // RefundPage
             // 
