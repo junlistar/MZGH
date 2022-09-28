@@ -950,7 +950,7 @@
             this.uiLinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.uiLinkLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.uiLinkLabel1.Location = new System.Drawing.Point(1064, 322);
+            this.uiLinkLabel1.Location = new System.Drawing.Point(983, 328);
             this.uiLinkLabel1.Name = "uiLinkLabel1";
             this.uiLinkLabel1.Size = new System.Drawing.Size(77, 23);
             this.uiLinkLabel1.TabIndex = 103;
@@ -965,7 +965,7 @@
             this.uiLinkLabel2.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.uiLinkLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLinkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.uiLinkLabel2.Location = new System.Drawing.Point(1147, 322);
+            this.uiLinkLabel2.Location = new System.Drawing.Point(1066, 328);
             this.uiLinkLabel2.Name = "uiLinkLabel2";
             this.uiLinkLabel2.Size = new System.Drawing.Size(61, 23);
             this.uiLinkLabel2.TabIndex = 104;
@@ -980,7 +980,7 @@
             this.uiLinkLabel3.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.uiLinkLabel3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLinkLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.uiLinkLabel3.Location = new System.Drawing.Point(1214, 322);
+            this.uiLinkLabel3.Location = new System.Drawing.Point(1133, 328);
             this.uiLinkLabel3.Name = "uiLinkLabel3";
             this.uiLinkLabel3.Size = new System.Drawing.Size(68, 23);
             this.uiLinkLabel3.TabIndex = 105;
@@ -995,7 +995,7 @@
             this.uiLinkLabel4.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.uiLinkLabel4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLinkLabel4.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.uiLinkLabel4.Location = new System.Drawing.Point(1288, 322);
+            this.uiLinkLabel4.Location = new System.Drawing.Point(1207, 328);
             this.uiLinkLabel4.Name = "uiLinkLabel4";
             this.uiLinkLabel4.Size = new System.Drawing.Size(56, 23);
             this.uiLinkLabel4.TabIndex = 106;
@@ -1010,7 +1010,7 @@
             this.uiLinkLabel5.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
             this.uiLinkLabel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiLinkLabel5.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.uiLinkLabel5.Location = new System.Drawing.Point(1355, 322);
+            this.uiLinkLabel5.Location = new System.Drawing.Point(1274, 328);
             this.uiLinkLabel5.Name = "uiLinkLabel5";
             this.uiLinkLabel5.Size = new System.Drawing.Size(56, 23);
             this.uiLinkLabel5.TabIndex = 107;

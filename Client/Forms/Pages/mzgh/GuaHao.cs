@@ -443,6 +443,7 @@ namespace Client
                     btn1.Height = btnHeight;
                     btn1.Text = source.Keys.ElementAt(i);
                     btn1.Tag = source.Keys.ElementAt(i);
+                    btn1.TagString = i.ToString();
                     if (btn1.Text.Length > textsize * 2)
                     {
                         btn1.Text = btn1.Text.Substring(0, textsize) + "\r\n" + btn1.Text.Substring(textsize, textsize) + "\r\n" + btn1.Text.Substring(textsize * 2);
@@ -1245,7 +1246,8 @@ namespace Client
             lblrelationname.Text = "";
             lblshenfen.Text = "";
             lblfeibie.Text = "";
-        }
+        } 
+      
 
         public void SearchUser()
         {
@@ -1341,7 +1343,7 @@ namespace Client
 
                     if (YBHelper.currentYBInfo != null)
                     {
-                        lblMsg.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
+                        lblMsg.Text = $"医保余额：{YBHelper.GetYibaoBalc()}";
                         lblMsg.Show();
 
                         //记录医保日志
@@ -1928,6 +1930,8 @@ namespace Client
 
         public void ArableNumberFilter(object sender)
         {
+            isKeyEnter = true;
+
             var _text = (sender as UILinkLabel).Text;
             var _arr = _text.ToCharArray().ToList();
 
@@ -1956,6 +1960,59 @@ namespace Client
 
             BindUnit(_source);
         }
-         
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Up || keyData == Keys.Down)//|| keyData == Keys.Left || keyData == Keys.Right
+            {
+                try
+                {
+                    List<Control> _list = new List<Control>();
+                    foreach (var item in gbxUnits.GetAllControls().ToArray())
+                    {
+                        if (item is UIButton)
+                            _list.Add(item);
+                    }
+
+                    foreach (var item in _list)
+                    {
+                        if (item is UIButton)
+                        {
+                            var _btn = item as UIButton;
+                            if (_btn.Style == UIStyle.Red)
+                            {
+                                int _index = Convert.ToInt32(_btn.TagString);
+                                //计算每行摆放的按钮数量
+                                int _boxWidth = gbxUnits.Width;
+                                int _btnWidth = _btn.Width+4;
+
+                                int _rowCount = _boxWidth / _btnWidth;
+                                 
+                                if (keyData == Keys.Down)
+                                {
+                                    if (_index + _rowCount < _list.Count)
+                                    {
+                                        _list[_index + _rowCount].Focus();
+
+                                    }
+                                }
+                                else if (keyData == Keys.Up)
+                                {
+                                    if (_index - _rowCount >= 0)
+                                    {
+                                        _list[_index - _rowCount].Focus();
+                                    }
+                                }
+                                return true; 
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }  
+            } 
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
     }
 }

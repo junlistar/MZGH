@@ -59,8 +59,8 @@ namespace Client.Forms.Pages
                 btn1.StyleCustomMode = true;
                 btn1.Width = btnWidth;
                 btn1.Height = btnHeight;
-                btn1.Text = "按钮" + (i + 1);
-                btn1.Tag = (i + 1);
+                btn1.Text = "按钮" + (i +1);
+                btn1.Tag = (i);
 
                 if (btn1.Text.Length > textsize * 2)
                 {
@@ -105,7 +105,7 @@ namespace Client.Forms.Pages
         {
             var _btn = sender as UIButton;
             _btn.Style = UIStyle.Red;
-            //UIMessageTip.Show(_btn.Text);
+            UIMessageTip.Show(_btn.Tag.ToString());
         }
         private void Btn1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -113,28 +113,28 @@ namespace Client.Forms.Pages
             int _index = Convert.ToInt32(_btn.Tag);
             var _list = gbxUnits.GetAllControls();
 
-             
 
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                if (_index+1 +5 < _list.Count)
-                {
-                    _list[_index+ 1+5].Focus();
-                  
-                } 
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                if (_index-5 > 1)
-                {
-                    _list[_index +3 - 5].Focus(); 
-                } 
-            }
-            e.Handled = true;
+
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    e.Handled = true;
+            //}
+            //else if (e.KeyCode == Keys.Down)
+            //{
+            //    if (_index + 1 + 5 < _list.Count)
+            //    {
+            //        _list[_index + 1 + 5].Focus();
+
+            //    }
+            //}
+            //else if (e.KeyCode == Keys.Up)
+            //{
+            //    if (_index - 5 > 1)
+            //    {
+            //        _list[_index + 3 - 5].Focus();
+            //    }
+            //}
+            //e.Handled = true;
         }
 
 
@@ -182,35 +182,69 @@ namespace Client.Forms.Pages
 
         }
 
-        private void DefaultPage_KeyDown_1(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (keyData == Keys.Up || keyData == Keys.Down)//|| keyData == Keys.Left || keyData == Keys.Right
             {
-                var _btn = sender as UIButton;
+                try
+                {
+                    List<Control> _list = new List<Control>();
+                    foreach (var item in gbxUnits.GetAllControls().ToArray())
+                    {
+                        if (item is UIButton)
+                            _list.Add(item);
+                    }
+                     
+                    foreach (var item in _list)
+                    {
+                        if (item is UIButton)
+                        {
+                            var _btn = item as UIButton;
+                            if (_btn.Style == UIStyle.Red)
+                            {
+                                int _index = Convert.ToInt32(_btn.Tag);
 
-                e.Handled = true;
-            }
-            else if (e.KeyCode == Keys.Down)
-            {
-                e.Handled = true;
-            }
-            else if (e.KeyCode == Keys.Up)
-            {
-                e.Handled = true;
-            }
-        }
 
-        protected override bool ProcessDialogKey(Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.Left:
-                case Keys.Up:
-                case Keys.Right:
-                case Keys.Down:
-                    return false;
+                                if (keyData == Keys.Down)
+                                {
+                                    if (_index  + 5 < _list.Count)
+                                    {
+                                        _list[_index  + 5].Focus();
+
+                                    }
+                                }
+                                else if (keyData == Keys.Up)
+                                {
+                                    if (_index - 5 >= 0)
+                                    {
+                                        _list[_index  - 5].Focus();
+                                    }
+                                }
+                                return true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
+                
+
             }
-            return true;
+
+            //if (keyData == (Keys.Shift | Keys.A))
+            //{
+
+            //}
+            //else if (keyData == (Keys.Control | Keys.I))
+            //{
+
+            //}
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }

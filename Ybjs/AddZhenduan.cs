@@ -67,10 +67,11 @@ namespace YbjsLib
                         var name = dgvicd.Rows[0].Cells["name"].Value.ToString();
 
                         txt_icdcode.TextChanged -= txt_icdcode_TextChanged;
-                        txt_icdcode.Text = name;
+                        txt_icdcode.Text = code;
+                        txt_icdname.Text = name;
                         txt_icdcode.TagString = code;
                         txt_icdcode.TextChanged += txt_icdcode_TextChanged;
-
+                         
                         dgvicd.Hide();
                     }
                 }

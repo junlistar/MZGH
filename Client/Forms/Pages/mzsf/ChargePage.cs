@@ -248,7 +248,7 @@ namespace Mzsf.Forms.Pages
                     }
                     if (YBHelper.currentYBInfo != null)
                     {
-                        lbl_ybye.Text = $"医保余额：{YBHelper.currentYBInfo.output.insuinfo[0].balc}";
+                        lbl_ybye.Text = $"医保余额：{YBHelper.GetYibaoBalc()}";
                         lbl_ybye.Show();
 
                         //记录医保日志

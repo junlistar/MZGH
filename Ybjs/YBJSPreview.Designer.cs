@@ -333,6 +333,7 @@
             this.dgv_cbxx.Style = Sunny.UI.UIStyle.Custom;
             this.dgv_cbxx.TabIndex = 35;
             this.dgv_cbxx.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.dgv_cbxx.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cbxx_CellClick);
             this.dgv_cbxx.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cbxx_CellContentClick);
             // 
             // balc
@@ -1120,7 +1121,6 @@
             // 
             this.psn_cash_pay.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.psn_cash_pay.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.psn_cash_pay.ForeColor = System.Drawing.Color.Red;
             this.psn_cash_pay.Location = new System.Drawing.Point(321, 124);
             this.psn_cash_pay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.psn_cash_pay.MinimumSize = new System.Drawing.Size(1, 16);

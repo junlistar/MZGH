@@ -169,6 +169,19 @@ namespace Client.ClassLib
             }
 
         }
-
+        public static string GetYibaoBalc()
+        {
+            if (YBHelper.currentYBInfo != null)
+            {
+                foreach (var item in YBHelper.currentYBInfo.output.insuinfo)
+                {
+                    if (item.balc > 0)
+                    {
+                        return item.balc.ToString();
+                    }
+                }
+            }
+            return "0";
+        }
     }
 }

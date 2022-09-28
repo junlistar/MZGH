@@ -59,7 +59,6 @@
             this.Text = "欢迎";
             this.Initialize += new System.EventHandler(this.DefaultPage_Initialize);
             this.Load += new System.EventHandler(this.DefaultPage_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DefaultPage_KeyDown_1);
             this.ResumeLayout(false);
 
         }

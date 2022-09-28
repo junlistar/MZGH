@@ -134,7 +134,8 @@ namespace Data.Repository.Mzsf
 
                                     para = new DynamicParameters();
 
-                                    para.Add("@charge_price", int.Parse(charge_amount) * order_item.orig_price);
+                                    //para.Add("@charge_price", int.Parse(charge_amount) * order_item.orig_price);
+                                    para.Add("@charge_price", order_item.orig_price);
                                     para.Add("@patient_id", patient_id);
                                     para.Add("@times", times);
                                     para.Add("@order_type", order_type);
@@ -519,7 +520,7 @@ namespace Data.Repository.Mzsf
                                 para.Add("@confirm_date", op_date);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_price);
+                                para.Add("@sum_total", item.orig_price * item.charge_amount);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -540,7 +541,7 @@ namespace Data.Repository.Mzsf
                                 para.Add("@confirm_win", drugwin.window_no);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_price);
+                                para.Add("@sum_total", item.orig_price * item.charge_amount);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -562,7 +563,7 @@ namespace Data.Repository.Mzsf
                                 para.Add("@confirm_win", drugwin.window_no);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_price);
+                                para.Add("@sum_total", item.orig_price * item.charge_amount);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
@@ -581,7 +582,7 @@ namespace Data.Repository.Mzsf
                                 para.Add("@confirm_date", op_date);
                                 para.Add("@response_type", "01");//用户信息表身份
                                 para.Add("@charge_type", "01");//用户信息表类型
-                                para.Add("@sum_total", item.charge_price);
+                                para.Add("@sum_total", item.orig_price * item.charge_amount);
                                 para.Add("@patient_id", patient_id);
                                 para.Add("@times", times);
                                 para.Add("@order_type", item.order_type);
