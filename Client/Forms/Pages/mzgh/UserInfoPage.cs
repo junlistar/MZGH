@@ -1333,5 +1333,13 @@ namespace Client.Forms.Pages
                 SaveData();
             }
         }
+
+        private void btnColConfig_Click(object sender, EventArgs e)
+        {
+            UserInfoNullDataConfig _page = new UserInfoNullDataConfig();
+            _page.Style = this.Style;
+
+            _page.ShowDialog();
+        }
     }
 }

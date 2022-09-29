@@ -501,7 +501,7 @@ namespace Client
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {
-                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper()) || p.d_code.StartsWith(ipt.ToUpper()) || p.code.StartsWith(ipt)).ToList();
                 }
                 dgv.DataSource = vm;
 
@@ -510,6 +510,8 @@ namespace Client
                 dgv.Columns["py_code"].Visible = false;
                 dgv.Columns["d_code"].Visible = false;
                 dgv.Columns["unit_sn"].Visible = false;
+                dgv.Columns["yb_ks_code"].Visible = false;
+                dgv.Columns["yb_ks_name"].Visible = false;
                 dgv.AutoResizeColumns();
 
                 dgv.CellClick += dgvks_CellContentClick;
@@ -563,7 +565,7 @@ namespace Client
 
                 if (!string.IsNullOrWhiteSpace(ipt))
                 {
-                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
+                    vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper()) || p.d_code.StartsWith(ipt.ToUpper()) || p.code.StartsWith(ipt)).ToList();
                 }
                 dgvzk.DataSource = vm;
 
@@ -572,6 +574,8 @@ namespace Client
                 dgvzk.Columns["py_code"].Visible = false;
                 dgvzk.Columns["d_code"].Visible = false;
                 dgvzk.Columns["unit_sn"].Visible = false;
+                dgvzk.Columns["yb_ks_code"].Visible = false;
+                dgvzk.Columns["yb_ks_name"].Visible = false;
                 dgvzk.AutoResizeColumns();
 
                 dgvzk.CellClick += dgvzk_CellContentClick;

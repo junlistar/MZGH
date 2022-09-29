@@ -74,25 +74,14 @@ namespace Client
         {
             try
             {
-
-
+                 
                 log.Debug("Load");
                 log.Debug((new System.Diagnostics.StackTrace().GetFrame(0).GetMethod()).Name);
 
 
                 log.Debug("初始化界面控件显示");
                 InitUIText();
-
-
-                //查询并设置发票
-                ReceiptInit receiptInit = new ReceiptInit();
-                receiptInit.Style = this.Style;
-                if (receiptInit.ShowDialog() == DialogResult.OK)
-                {
-
-                };
-
-
+                 
                 parentForm = this.Parent as UIHeaderAsideMainFooterFrame;
 
                 log.Debug("加载挂号数据");
@@ -104,6 +93,12 @@ namespace Client
                 uiToolTip1.SetToolTip(uiSymbolButton1, uiSymbolButton1.Text + "[F1]");
                 uiToolTip1.SetToolTip(btnTuihao, btnTuihao.Text + "[F3]");
                 uiToolTip1.SetToolTip(uiSymbolButton2, uiSymbolButton2.Text + "[F4]");
+
+
+                //查询并设置发票
+                ReceiptInit receiptInit = new ReceiptInit();
+                receiptInit.Style = this.Style;
+                receiptInit.ShowDialog();
 
                 Task.Run(async () =>
                 {
@@ -1866,6 +1861,7 @@ namespace Client
             }
 
             GhDepositRecord ghDepositRecord = new GhDepositRecord();
+            ghDepositRecord.Style = this.Style;
             ghDepositRecord.patient_id = lblPatientid.Text;
 
             ghDepositRecord.ShowDialog();

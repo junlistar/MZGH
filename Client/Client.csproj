@@ -661,6 +661,12 @@
     <Compile Include="Forms\Wedgit\SelectOrder.Designer.cs">
       <DependentUpon>SelectOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Wedgit\UserInfoNullDataConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\UserInfoNullDataConfig.Designer.cs">
+      <DependentUpon>UserInfoNullDataConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Wedgit\YBJSPreview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -741,6 +747,7 @@
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\DepositVM.cs" />
     <Compile Include="ViewModel\SfzInfoVM.cs" />
+    <Compile Include="ViewModel\SysConfigVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />
     <Compile Include="ViewModel\LoginUsersVM.cs" />
@@ -996,6 +1003,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\SelectOrder.resx">
       <DependentUpon>SelectOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\UserInfoNullDataConfig.resx">
+      <DependentUpon>UserInfoNullDataConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\YBJSPreview.resx">
       <DependentUpon>YBJSPreview.cs</DependentUpon>

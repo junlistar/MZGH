@@ -873,3 +873,7 @@ BEGIN
   RETURN @str
 END
 
+go
+
+insert into sys_config values('mzPatientInfo_notNullColumns',1,'门诊挂号-患者基本信息必填字段','p_bar_code','mz')
+go

@@ -610,7 +610,35 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<FpConfig>(ex.Message);
             }
-        } 
+        }
+        public ResponseResult<SysConfig> GetSysConfig(string item_name)
+        {
+            Log.Information($"GetSysConfig");
+            try
+            {
+                return _commonRepository.GetSysConfig(item_name);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<SysConfig>(ex.Message);
+            }
+        }
+        public ResponseResult<List<string>> GetColumnNames(string obj_name)
+        {
+            Log.Information($"GetSysConfig");
+            try
+            {
+                return _commonRepository.GetColumnNames(obj_name);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<string>>(ex.Message);
+            }
+        }
+
+         
 
         public ResponseResult<List<Patient>> GetPatientByBarcode(string barcode)
         {
@@ -1275,6 +1303,23 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+
+        public ResponseResult<bool> UpdateSysConfig()
+        {
+            Log.Information($"UpdateSysConfig,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _commonRepository.UpdateSysConfig(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        } 
         public ResponseResult<List<GhDoctorOut>> GetGhDoctorOuts()
         {
             Log.Information($"GetGhDoctorOuts");

@@ -12,11 +12,13 @@ using CefSharp.WinForms;
 using Client.ClassLib;
 using Client.ViewModel;
 using Sunny.UI;
+using log4net;
 
 namespace Client.Forms.Pages.yhbb
 {
     public partial class WebReport : UIPage
     {
+        private static ILog log = LogManager.GetLogger(typeof(WebReport));//typeof放当前类
         public WebReport()
         {
             InitializeComponent();
@@ -84,17 +86,33 @@ namespace Client.Forms.Pages.yhbb
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            WebReportEdit webReportEdit = new WebReportEdit();
+            WebReportEdit webReportEdit = new WebReportEdit(); 
+            webReportEdit.Style = this.Style;
             webReportEdit.ShowDialog();
             LoadReportList();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            WebReportEdit webReportEdit = new WebReportEdit();
-            webReportEdit._code = tv_reports.SelectedNode.Name;
-            webReportEdit.ShowDialog();
-            LoadReportList();
+            try
+            {
+
+                if (tv_reports.SelectedNode==null)
+                {
+                    UIMessageTip.ShowError("请选择数据节点！");
+                    return;
+                }
+                WebReportEdit webReportEdit = new WebReportEdit();
+                webReportEdit._code = tv_reports.SelectedNode.Name;
+                webReportEdit.Style = this.Style;
+                webReportEdit.ShowDialog();
+                LoadReportList();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+            }
+          
         }
         ChromiumWebBrowser WebBrowser;
         private void WebReport_Load(object sender, EventArgs e)

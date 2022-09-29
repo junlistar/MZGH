@@ -82,12 +82,11 @@
             // btnSaveMenu
             // 
             this.btnSaveMenu.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSaveMenu.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSaveMenu.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSaveMenu.Location = new System.Drawing.Point(267, 2);
             this.btnSaveMenu.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSaveMenu.Name = "btnSaveMenu";
             this.btnSaveMenu.Size = new System.Drawing.Size(120, 40);
-            this.btnSaveMenu.StyleCustomMode = true;
             this.btnSaveMenu.Symbol = 61573;
             this.btnSaveMenu.TabIndex = 12;
             this.btnSaveMenu.Text = "保存菜单";
@@ -151,12 +150,11 @@
             // btnExit
             // 
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnExit.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnExit.Location = new System.Drawing.Point(393, 2);
             this.btnExit.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(120, 40);
-            this.btnExit.StyleCustomMode = true;
             this.btnExit.Symbol = 61579;
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "退出";

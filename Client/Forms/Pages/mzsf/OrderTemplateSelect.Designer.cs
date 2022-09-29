@@ -70,9 +70,9 @@
             this.dgvTp.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvTp.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -95,7 +95,7 @@
             this.dgvTp.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvTp.EnableHeadersVisualStyles = false;
             this.dgvTp.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvTp.GridColor = System.Drawing.Color.PowderBlue;
+            this.dgvTp.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvTp.Location = new System.Drawing.Point(3, 72);
             this.dgvTp.Name = "dgvTp";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -118,6 +118,7 @@
             this.dgvTp.ShowGridLine = false;
             this.dgvTp.ShowRect = false;
             this.dgvTp.Size = new System.Drawing.Size(841, 126);
+            this.dgvTp.Style = Sunny.UI.UIStyle.Custom;
             this.dgvTp.TabIndex = 2;
             this.dgvTp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
@@ -339,6 +340,7 @@
             this.Controls.Add(this.dgvTpDetails);
             this.Controls.Add(this.uiSymbolButton2);
             this.Controls.Add(this.uiSymbolButton1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderTemplateSelect";
@@ -347,6 +349,7 @@
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.OrderTemplateSelect_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OrderTemplateSelect_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTpDetails)).EndInit();
             this.ResumeLayout(false);

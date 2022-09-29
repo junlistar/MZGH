@@ -21,6 +21,12 @@ namespace Data.IRepository
         bool UpdateMzClientConfig(string jsonStr);
          
         bool  AddYbLog(string jsonStr);
+        bool UpdateSysConfig(string jsonStr);
+
+        SysConfig GetSysConfig(string item_name);
+
+        List<string> GetColumnNames(string obj_name);
+
         #endregion
     }
 }

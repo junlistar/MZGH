@@ -222,7 +222,7 @@ namespace Mzsf.Forms.Pages
 
                 //关闭 刷新
                 refundConfirm.FormClosed += RefundConfirm_FormClosed;
-
+                refundConfirm.Style = this.Style;
                 refundConfirm.ShowDialog();
 
             }
@@ -330,7 +330,7 @@ namespace Mzsf.Forms.Pages
                     refundHistory.receipt_no = dat.receipt_no;
                     refundHistory.receipt_sn = dat.receipt_sn;
                     refundHistory.tbl_flag = dat.tableflag;
-
+                    refundHistory.Style = this.Style;
                     refundHistory.ShowDialog();
                 }
                 else

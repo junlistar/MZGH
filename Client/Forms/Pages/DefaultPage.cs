@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Sunny.UI;
 using log4net;
 using System.Runtime.InteropServices;
+using Client.ViewModel;
+using Client.ClassLib;
 
 namespace Client.Forms.Pages
 {
@@ -42,6 +44,9 @@ namespace Client.Forms.Pages
 
             //listBox1.Items.Add(btn1);
             //listBox1.Items.Add("212313123");
+
+
+
         }
 
         public void BindButtons()
@@ -245,6 +250,27 @@ namespace Client.Forms.Pages
 
             //}
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+
+            List<UnitVM> vm = SessionHelper.units;
+
+            cdgv.DataGridView.DataSource = vm;
+            cdgv.DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            cdgv.ShowFilter = true;
+            cdgv.FilterColumnName = "code";
+        }
+
+        private void cdgv_ButtonClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cdgv_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

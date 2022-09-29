@@ -144,6 +144,7 @@
             this.label36 = new System.Windows.Forms.Label();
             this.txthometel = new Sunny.UI.UITextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.btnColConfig = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.txt_relationname.SuspendLayout();
@@ -290,6 +291,7 @@
             // 
             this.pnlTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlTitle.Controls.Add(this.btnColConfig);
             this.pnlTitle.Controls.Add(this.btnSave);
             this.pnlTitle.Controls.Add(this.btnReset);
             this.pnlTitle.Controls.Add(this.btnExit);
@@ -1638,6 +1640,21 @@
             this.label23.TabIndex = 30;
             this.label23.Text = "电话";
             // 
+            // btnColConfig
+            // 
+            this.btnColConfig.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnColConfig.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnColConfig.Location = new System.Drawing.Point(559, 2);
+            this.btnColConfig.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnColConfig.Name = "btnColConfig";
+            this.btnColConfig.Size = new System.Drawing.Size(100, 40);
+            this.btnColConfig.Symbol = 61758;
+            this.btnColConfig.TabIndex = 12;
+            this.btnColConfig.Text = "必填项";
+            this.btnColConfig.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnColConfig.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnColConfig.Click += new System.EventHandler(this.btnColConfig_Click);
+            // 
             // UserInfoPage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1778,5 +1795,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn emp_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn admiss_times;
         private System.Windows.Forms.DataGridViewTextBoxColumn patient_id;
+        private Sunny.UI.UISymbolButton btnColConfig;
     }
 }

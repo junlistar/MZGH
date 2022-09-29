@@ -35,6 +35,7 @@ namespace Client.Forms.Pages.hbgl
         private void btnAdd_Click(object sender, EventArgs e)
         {
             DocOutEdit docOutEdit = new DocOutEdit();
+            docOutEdit.Style = this.Style;
             if (docOutEdit.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -104,6 +105,7 @@ namespace Client.Forms.Pages.hbgl
                     _vm.end_date = _end_date;
                     _vm.is_delete = _is_delete;
                     DocOutEdit docOutEdit = new DocOutEdit();
+                    docOutEdit.Style = this.Style;
                     docOutEdit.vm = _vm;
                     if (docOutEdit.ShowDialog() == DialogResult.OK)
                     {
