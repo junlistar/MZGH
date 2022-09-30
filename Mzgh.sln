@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastReportClient", "FastRep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YbjsLib", "Ybjs\YbjsLib.csproj", "{9CE7EB0B-7619-4659-BD6F-5336DAA102C9}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MzInstaller", "MzInstaller\MzInstaller.vdproj", "{E00A0890-A484-40EB-9AA9-17BCF2E92731}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{37316A09-F4AF-4DAA-8AA9-25E1CB7D0E6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,8 +53,8 @@ Global
 		{9CE7EB0B-7619-4659-BD6F-5336DAA102C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CE7EB0B-7619-4659-BD6F-5336DAA102C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CE7EB0B-7619-4659-BD6F-5336DAA102C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E00A0890-A484-40EB-9AA9-17BCF2E92731}.Debug|Any CPU.ActiveCfg = Debug
-		{E00A0890-A484-40EB-9AA9-17BCF2E92731}.Release|Any CPU.ActiveCfg = Release
+		{37316A09-F4AF-4DAA-8AA9-25E1CB7D0E6E}.Debug|Any CPU.ActiveCfg = Debug
+		{37316A09-F4AF-4DAA-8AA9-25E1CB7D0E6E}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
