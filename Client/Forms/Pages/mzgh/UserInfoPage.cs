@@ -456,8 +456,89 @@ namespace Client.Forms.Pages
                 _patientVM.charge_type = _chargeType.ToString();
                 _patientVM.occupation_type = _zhiye;
                 _patientVM.employer_name = _employer_name;
+                _patientVM.hic_no = txt_sfz_no.Text;
 
                 _patientVM.update_opera = _opera;
+
+                //非空验证
+                var paramurl1 = string.Format($"/api/GuaHao/GetSysConfig?item_name={"mzPatientInfo_notNullColumns"}");
+
+                var json1 = HttpClientUtil.Get(paramurl1);
+                var result1 = WebApiHelper.DeserializeObject<ResponseResult<SysConfigVM>>(json1);
+                if (result1.status == 1 && result1.data != null)
+                {
+                    var _settings = result1.data.current_settings.Split(";");
+
+                    if (_settings.Contains("p_bar_code"))
+                    {
+                        //验证卡号 
+                        if (string.IsNullOrWhiteSpace(_patientVM.p_bar_code))
+                        {
+                            UIMessageTip.ShowError("卡号不能为空!");
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("name"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.name))
+                        {
+                            UIMessageTip.ShowWarning("姓名不能为空!");
+                            txt_name.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("home_tel"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.home_tel))
+                        {
+                            UIMessageTip.ShowWarning("手机号码不能为空!");
+                            txthometel.Focus();
+                            return;
+                        }
+                        if (!StringUtil.IsMobile(_patientVM.home_tel))
+                        {
+                            UIMessageTip.ShowWarning("手机号码格式有误!");
+                            txthometel.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("sex"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.sex))
+                        {
+                            UIMessageTip.ShowError("请选择性别!");
+                            cbxsex.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("response_type"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.response_type))
+                        {
+                            UIMessageTip.ShowWarning("请选择身份类型!");
+                            cbxResponseType.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("charge_type"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.charge_type))
+                        {
+                            UIMessageTip.ShowWarning("请选择费别!");
+                            cbxChargeTypes.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("hic_no"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.hic_no))
+                        {
+                            UIMessageTip.ShowWarning("身份证号码不能为空!");
+                            return;
+                        }
+                    }
+
+                }
 
 
                 string jsonStr = WebApiHelper.SerializeObject(_patientVM);

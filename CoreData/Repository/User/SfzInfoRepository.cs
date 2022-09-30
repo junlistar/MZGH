@@ -122,8 +122,9 @@ namespace Data.Repository
                        
                         var para = new DynamicParameters();
                         para.Add("@patient_id", patient.patient_id);
-                        para.Add("@name", patient.name);
+                        para.Add("@name", patient.name); 
                         para.Add("@home_tel", patient.home_tel);
+                        para.Add("@hic_no", patient.hic_no);
                         para.Add("@sex", patient.sex);
                         para.Add("@marry_code", patient.marry_code);
                         para.Add("@birthday", patient.birthday);

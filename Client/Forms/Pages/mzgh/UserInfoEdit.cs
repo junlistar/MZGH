@@ -72,13 +72,13 @@ namespace Client
         }
         private async void btnSave_Click(object sender, EventArgs e)
         {
-             SaveData();
+            SaveData();
         }
 
         public async void SaveData()
         {
             try
-            { 
+            {
                 //var cardType = cbxCardType.Text.ToString();
                 var cardId = txtCardId.Text.Trim();
                 var sfzId = sfz_card_no.Text.Trim();
@@ -89,68 +89,7 @@ namespace Client
                 var sex = cbxSex.Text == "男" ? "1" : "2";
                 var birth = sfz_birthday.Text;
                 var tel = this.txtTel.Text.Trim();
-
-                
-
-                //验证卡号 
-                if (string.IsNullOrWhiteSpace(cardId))
-                {
-                    UIMessageTip.ShowError("卡号不能为空!");
-                    txtCardId.Focus();
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(userName))
-                {
-                    UIMessageTip.ShowWarning("姓名不能为空!");
-                    txtUserName.Focus();
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(tel))
-                {
-                    UIMessageTip.ShowWarning("手机号码不能为空!");
-                    txtTel.Focus();
-                    return;
-                }
-
-                if (!StringUtil.IsMobile(tel))
-                {
-                    UIMessageTip.ShowWarning("手机号码格式有误!");
-                    txtTel.Focus();
-                    return;
-                }
-                if (cbxSex.Text =="")
-                {
-                    UIMessageTip.ShowError("请选择性别!");
-                    cbxSex.Focus();
-                    return;
-                }
-                else if(cbxSex.Text!="男" && cbxSex.Text != "女")
-                {
-                    UIMessageTip.ShowError("性别不正确!");
-                    cbxSex.Focus();
-                    return;
-                }
-                //if (string.IsNullOrWhiteSpace(sfzId))
-                //{
-                //    UIMessageTip.ShowWarning("身份证号码不能为空!");
-                //    sfz_card_no.Focus();
-                //    return;
-                //}
-
-                if (cbxShenfen.SelectedValue==null)
-                {
-                    UIMessageTip.ShowWarning("请选择身份类型!");
-                    cbxShenfen.Focus();
-                    return;
-                }
-
-                if (cbxChargeType.SelectedValue == null)
-                {
-                    UIMessageTip.ShowWarning("请选择费别!");
-                    cbxChargeType.Focus();
-                    return;
-                }
-
+                 
                 var marrycode = cbxmarrycode.Text;
                 switch (marrycode)
                 {
@@ -205,6 +144,13 @@ namespace Client
                 var hicno = "";
                 //磁卡
                 var barcode = "";
+
+                if (cbxSex.Text != "男" && cbxSex.Text != "女")
+                {
+                    UIMessageTip.ShowError("性别不正确!");
+                    cbxSex.Focus();
+                    return;
+                }
 
                 if (!string.IsNullOrWhiteSpace(sfzId))
                 {
@@ -340,6 +286,90 @@ namespace Client
                 _patientVM.relation_tel = txt_rel_tel.Text;
                 _patientVM.relation_sex = cbx_relsex.Text == "男" ? "1" : "2";
 
+                //非空验证
+                var paramurl1 = string.Format($"/api/GuaHao/GetSysConfig?item_name={"mzPatientInfo_notNullColumns"}");
+
+                var json1 = HttpClientUtil.Get(paramurl1);
+                var result1 = WebApiHelper.DeserializeObject<ResponseResult<SysConfigVM>>(json1);
+                if (result1.status == 1 && result1.data != null)
+                {
+                    var _settings = result1.data.current_settings.Split(";");
+
+                    if (_settings.Contains("p_bar_code"))
+                    {
+                        //验证卡号 
+                        if (string.IsNullOrWhiteSpace(_patientVM.p_bar_code))
+                        {
+                            UIMessageTip.ShowError("卡号不能为空!");
+                            txtCardId.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("name"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.name))
+                        {
+                            UIMessageTip.ShowWarning("姓名不能为空!");
+                            txtUserName.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("home_tel"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.home_tel))
+                        {
+                            UIMessageTip.ShowWarning("手机号码不能为空!");
+                            txtTel.Focus();
+                            return;
+                        }
+                        if (!StringUtil.IsMobile(_patientVM.home_tel))
+                        {
+                            UIMessageTip.ShowWarning("手机号码格式有误!");
+                            txtTel.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("sex"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.sex))
+                        {
+                            UIMessageTip.ShowError("请选择性别!");
+                            cbxSex.Focus();
+                            return;
+                        } 
+                    }
+                    if (_settings.Contains("response_type"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.response_type))
+                        {
+                            UIMessageTip.ShowWarning("请选择身份类型!");
+                            cbxShenfen.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("charge_type"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.charge_type))
+                        {
+                            UIMessageTip.ShowWarning("请选择费别!");
+                            cbxChargeType.Focus();
+                            return;
+                        }
+                    }
+                    if (_settings.Contains("hic_no"))
+                    {
+                        if (string.IsNullOrWhiteSpace(_patientVM.hic_no))
+                        {
+                            UIMessageTip.ShowWarning("身份证号码不能为空!");
+                            sfz_card_no.Focus();
+                            return;
+                        }
+                    }
+
+                }
+
+
+
                 string jsonStr = WebApiHelper.SerializeObject(_patientVM);
 
                 HttpContent httpContent = new StringContent(jsonStr, Encoding.GetEncoding("UTF-8"));
@@ -348,7 +378,7 @@ namespace Client
                 //json = HttpClientUtil.PostJSON(paramurl, _patientVM);
                 json = await HttpClientUtil.PostJSONAsync(paramurl, _patientVM);
                 var responseJson = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
- 
+
                 if (responseJson.status == 1)
                 {
                     barCode = cardId;
@@ -401,7 +431,7 @@ namespace Client
                     GetNewPatientId();
 
                     this.txtUserName.Text = "新患者";
-                    cbxSex.Text = "男";cbxmarrycode.Text = "未婚";
+                    cbxSex.Text = "男"; cbxmarrycode.Text = "未婚";
 
                     cbxRelation.Text = "";
                     cbx_relsex.Text = "";
@@ -452,9 +482,9 @@ namespace Client
                     LoadUserInfo(barCode);
                 }
                 BindEvent();
-                 
+
                 txtUserName.Focus(); this.ActiveControl = this.txtUserName;
-                
+
             }
             catch (Exception ex)
             {
@@ -712,9 +742,9 @@ namespace Client
                 if (result.status == 1 && result.data.Count > 0)
                 {
                     var relationInfo = result.data[0];
-                    if (relationInfo.relation_code!=null)
+                    if (relationInfo.relation_code != null)
                     {
-                        cbxRelation.SelectedValue = relationInfo.relation_code; 
+                        cbxRelation.SelectedValue = relationInfo.relation_code;
                     }
                     txtRelationName.Text = relationInfo.username;
                     txt_rel_sfzid.Text = relationInfo.sfz_id;
@@ -728,7 +758,7 @@ namespace Client
                 }
                 else
                 {
-                    cbxRelation.Text = ""; 
+                    cbxRelation.Text = "";
                     cbx_relsex.Text = "";
                     txt_rel_birth.Text = "";
                 }
@@ -1122,7 +1152,7 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
-        } 
+        }
         private void txthomedistrict_KeyUp(object sender, KeyEventArgs e)
         {
             try
@@ -1196,7 +1226,7 @@ namespace Client
                 SaveData();
             }
         }
-         
+
 
         private void uiGroupBox1_Click(object sender, EventArgs e)
         {
@@ -1205,11 +1235,11 @@ namespace Client
 
         private void cbxmarrycode_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode== Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
-               // e.Handled = true;
+                // e.Handled = true;
             }
         }
-         
+
     }
 }

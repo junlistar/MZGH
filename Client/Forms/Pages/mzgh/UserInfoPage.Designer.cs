@@ -50,6 +50,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.cbxmarrycode = new Sunny.UI.UIComboBox();
             this.pnlTitle = new Sunny.UI.UIPanel();
+            this.btnColConfig = new Sunny.UI.UISymbolButton();
             this.btnSave = new Sunny.UI.UISymbolButton();
             this.btnReset = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -144,7 +145,6 @@
             this.label36 = new System.Windows.Forms.Label();
             this.txthometel = new Sunny.UI.UITextBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.btnColConfig = new Sunny.UI.UISymbolButton();
             this.pnlTitle.SuspendLayout();
             this.uiGroupBox1.SuspendLayout();
             this.txt_relationname.SuspendLayout();
@@ -306,6 +306,21 @@
             this.pnlTitle.Text = null;
             this.pnlTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.pnlTitle.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // btnColConfig
+            // 
+            this.btnColConfig.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnColConfig.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnColConfig.Location = new System.Drawing.Point(559, 2);
+            this.btnColConfig.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnColConfig.Name = "btnColConfig";
+            this.btnColConfig.Size = new System.Drawing.Size(100, 40);
+            this.btnColConfig.Symbol = 61758;
+            this.btnColConfig.TabIndex = 12;
+            this.btnColConfig.Text = "必填项";
+            this.btnColConfig.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnColConfig.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.btnColConfig.Click += new System.EventHandler(this.btnColConfig_Click);
             // 
             // btnSave
             // 
@@ -1558,7 +1573,6 @@
             this.txt_sfz_no.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_sfz_no.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_sfz_no.Name = "txt_sfz_no";
-            this.txt_sfz_no.ReadOnly = true;
             this.txt_sfz_no.ShowText = false;
             this.txt_sfz_no.Size = new System.Drawing.Size(192, 29);
             this.txt_sfz_no.TabIndex = 41;
@@ -1639,21 +1653,6 @@
             this.label23.Size = new System.Drawing.Size(42, 21);
             this.label23.TabIndex = 30;
             this.label23.Text = "电话";
-            // 
-            // btnColConfig
-            // 
-            this.btnColConfig.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnColConfig.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnColConfig.Location = new System.Drawing.Point(559, 2);
-            this.btnColConfig.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnColConfig.Name = "btnColConfig";
-            this.btnColConfig.Size = new System.Drawing.Size(100, 40);
-            this.btnColConfig.Symbol = 61758;
-            this.btnColConfig.TabIndex = 12;
-            this.btnColConfig.Text = "必填项";
-            this.btnColConfig.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnColConfig.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.btnColConfig.Click += new System.EventHandler(this.btnColConfig_Click);
             // 
             // UserInfoPage
             // 

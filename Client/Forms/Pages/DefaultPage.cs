@@ -225,8 +225,7 @@ namespace Client.Forms.Pages
                                         _list[_index  - 5].Focus();
                                     }
                                 }
-                                return true;
-                                break;
+                                return true; 
                             }
                         }
                     }
@@ -234,10 +233,7 @@ namespace Client.Forms.Pages
                 catch (Exception ex)
                 {
 
-                }
-
-
-                
+                } 
 
             }
 
@@ -252,25 +248,6 @@ namespace Client.Forms.Pages
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void uiButton1_Click(object sender, EventArgs e)
-        {
-
-            List<UnitVM> vm = SessionHelper.units;
-
-            cdgv.DataGridView.DataSource = vm;
-            cdgv.DataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            cdgv.ShowFilter = true;
-            cdgv.FilterColumnName = "code";
-        }
-
-        private void cdgv_ButtonClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cdgv_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
