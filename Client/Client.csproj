@@ -42,10 +42,11 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -744,6 +745,7 @@
     <Compile Include="ViewModel\MzPatientSfzVM.cs" />
     <Compile Include="ViewModel\DepositVM.cs" />
     <Compile Include="ViewModel\SfzInfoVM.cs" />
+    <Compile Include="ViewModel\ThirdLoginVM.cs" />
     <Compile Include="ViewModel\SysConfigVM.cs" />
     <Compile Include="ViewModel\XTGroupVM.cs" />
     <Compile Include="ViewModel\CprChargesVM.cs" />

@@ -136,12 +136,19 @@ namespace Client.Forms.Pages.mzsf
 
         private void OrderTemplateSelect_KeyUp(object sender, KeyEventArgs e)
         {
+            e.Handled = true;
+        }
+
+        private void OrderTemplateSelect_KeyDown(object sender, KeyEventArgs e)
+        {
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
                 Save();
             }
             else if (e.KeyCode == Keys.Escape)
             {
+                e.Handled = true;
                 this.Close();
             }
         }

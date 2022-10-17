@@ -1,0 +1,11 @@
+D:\lijun\github\Mzgh\testFomr\bin\Debug\testFomr.exe.config
+D:\lijun\github\Mzgh\testFomr\bin\Debug\testFomr.exe
+D:\lijun\github\Mzgh\testFomr\bin\Debug\testFomr.pdb
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.csproj.AssemblyReference.cache
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.csproj.SuggestedBindingRedirects.cache
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.Form1.resources
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.Properties.Resources.resources
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.csproj.GenerateResource.cache
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.csproj.CoreCompileInputs.cache
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.exe
+D:\lijun\github\Mzgh\testFomr\obj\Debug\testFomr.pdb

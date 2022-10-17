@@ -45,6 +45,20 @@ namespace Data.Repository
             return Select(sql, para);
 
         }
+        public List<LoginUsers> GetLoginUserByUserMi(string usermi)
+        {
+            
+            var para = new DynamicParameters(); 
+            string sql = GetSqlByTag("mzgh_xtuser_autologin");
+            
+            para.Add("@user_mi", usermi);
+
+            Log.Debug($"三方调用登录查询mzgh_xtuser_autologin,usermi={usermi}");
+
+            return Select(sql, para);
+
+        }
+        
 
         public int UpdateUserPassWord(string uname, string pwd)
         {

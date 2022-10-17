@@ -1538,6 +1538,7 @@ namespace Mzsf.Forms.Pages
             {
                 AddOrder();
             }
+           
         }
 
         private void ChargePage_FormClosing(object sender, FormClosingEventArgs e)

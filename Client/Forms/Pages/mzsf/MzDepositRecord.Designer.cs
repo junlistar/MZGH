@@ -30,13 +30,16 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.txt_patientid = new Sunny.UI.UITextBox();
             this.btnSearch = new Sunny.UI.UIButton();
             this.dgv_mzdeposit = new Sunny.UI.UIDataGridView();
+            this.btnxp = new Sunny.UI.UIButton();
+            this.btnfp = new Sunny.UI.UIButton();
             this.pid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ledger_sn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.times = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,8 +47,6 @@
             this.cash_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cash_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backfee_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnxp = new Sunny.UI.UIButton();
-            this.btnfp = new Sunny.UI.UIButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_mzdeposit)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,34 +115,34 @@
             this.cash_name,
             this.cash_date,
             this.backfee_date});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_mzdeposit.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_mzdeposit.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_mzdeposit.EnableHeadersVisualStyles = false;
             this.dgv_mzdeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgv_mzdeposit.GridColor = System.Drawing.Color.PowderBlue;
             this.dgv_mzdeposit.Location = new System.Drawing.Point(15, 91);
             this.dgv_mzdeposit.Name = "dgv_mzdeposit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_mzdeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_mzdeposit.RowHeight = 0;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.dgv_mzdeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_mzdeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgv_mzdeposit.RowHeight = 0;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(236)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.dgv_mzdeposit.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_mzdeposit.RowTemplate.Height = 23;
             this.dgv_mzdeposit.SelectedIndex = -1;
             this.dgv_mzdeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -152,50 +153,6 @@
             this.dgv_mzdeposit.StyleCustomMode = true;
             this.dgv_mzdeposit.TabIndex = 3;
             this.dgv_mzdeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // pid
-            // 
-            this.pid.DataPropertyName = "patient_id";
-            this.pid.HeaderText = "病人Id";
-            this.pid.Name = "pid";
-            // 
-            // ledger_sn
-            // 
-            this.ledger_sn.DataPropertyName = "ledger_sn";
-            this.ledger_sn.HeaderText = "交款次数";
-            this.ledger_sn.Name = "ledger_sn";
-            // 
-            // times
-            // 
-            this.times.DataPropertyName = "times";
-            this.times.HeaderText = "times";
-            this.times.Name = "times";
-            this.times.Visible = false;
-            // 
-            // charge_total
-            // 
-            this.charge_total.DataPropertyName = "charge_total";
-            this.charge_total.HeaderText = "总金额";
-            this.charge_total.Name = "charge_total";
-            // 
-            // cash_name
-            // 
-            this.cash_name.DataPropertyName = "cash_name";
-            this.cash_name.HeaderText = "操作员";
-            this.cash_name.Name = "cash_name";
-            // 
-            // cash_date
-            // 
-            this.cash_date.DataPropertyName = "cash_date";
-            this.cash_date.HeaderText = "交款日期";
-            this.cash_date.Name = "cash_date";
-            // 
-            // backfee_date
-            // 
-            this.backfee_date.DataPropertyName = "backfee_date";
-            this.backfee_date.HeaderText = "退款日期";
-            this.backfee_date.Name = "backfee_date";
-            this.backfee_date.Visible = false;
             // 
             // btnxp
             // 
@@ -226,6 +183,54 @@
             this.btnfp.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnfp.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnfp.Click += new System.EventHandler(this.btnfp_Click);
+            // 
+            // pid
+            // 
+            this.pid.DataPropertyName = "patient_id";
+            this.pid.HeaderText = "病人Id";
+            this.pid.Name = "pid";
+            // 
+            // ledger_sn
+            // 
+            this.ledger_sn.DataPropertyName = "ledger_sn";
+            this.ledger_sn.HeaderText = "交款次数";
+            this.ledger_sn.Name = "ledger_sn";
+            // 
+            // times
+            // 
+            this.times.DataPropertyName = "times";
+            this.times.HeaderText = "times";
+            this.times.Name = "times";
+            this.times.Visible = false;
+            // 
+            // charge_total
+            // 
+            this.charge_total.DataPropertyName = "charge_total";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.charge_total.DefaultCellStyle = dataGridViewCellStyle3;
+            this.charge_total.HeaderText = "总金额";
+            this.charge_total.Name = "charge_total";
+            // 
+            // cash_name
+            // 
+            this.cash_name.DataPropertyName = "cash_name";
+            this.cash_name.HeaderText = "操作员";
+            this.cash_name.Name = "cash_name";
+            // 
+            // cash_date
+            // 
+            this.cash_date.DataPropertyName = "cash_date";
+            this.cash_date.HeaderText = "交款日期";
+            this.cash_date.Name = "cash_date";
+            // 
+            // backfee_date
+            // 
+            this.backfee_date.DataPropertyName = "backfee_date";
+            this.backfee_date.HeaderText = "退款日期";
+            this.backfee_date.Name = "backfee_date";
+            this.backfee_date.Visible = false;
             // 
             // MzDepositRecord
             // 

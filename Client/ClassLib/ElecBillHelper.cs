@@ -138,6 +138,23 @@ namespace Client.ClassLib
                     log.Error(result.message);
                     throw new Exception(result.message);
                 }
+                if (result.data.PayChannelDetails!=null)
+                {
+                    foreach (var item in result.data.PayChannelDetails)
+                    {
+                        item.payChannelValue = StringUtil.RoundCharge(item.payChannelValue);
+                    } 
+                }
+                if (result.data.ChargeDetails!=null)
+                {
+                    foreach (var item in result.data.ChargeDetails)
+                    {
+                        item.amt = StringUtil.RoundCharge(item.amt);
+                        item.selfAmt = StringUtil.RoundCharge(item.selfAmt);
+                        item.std = StringUtil.RoundCharge(item.std); 
+                    }
+                }
+
                 var _data = new
                 {
                     busNo = result.data.MainData.busNo,             //业务流水号

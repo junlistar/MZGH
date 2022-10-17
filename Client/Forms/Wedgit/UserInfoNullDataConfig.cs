@@ -81,6 +81,12 @@ namespace Client.Forms.Wedgit
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Save();
+            this.Close();
+        }
+
+        public void Save()
+        {
             try
             {
                 var _item_name = txtItemName.Text;
@@ -101,14 +107,14 @@ namespace Client.Forms.Wedgit
                 _vm.item_name = _item_name;
                 _vm.current_value = _value;
                 _vm.current_settings = _settings;
-                 
+
                 var paramurl = string.Format($"/api/GuaHao/UpdateSysConfig");
 
                 var json = HttpClientUtil.PostJSON(paramurl, _vm);
                 var cols_result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
                 if (cols_result.status == 1)
                 {
-                    UIMessageTip.ShowOk("修改成功！");
+                    UIMessageBox.ShowSuccess("修改成功！");
                 }
                 else
                 {
@@ -126,6 +132,20 @@ namespace Client.Forms.Wedgit
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void UserInfoNullDataConfig_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                e.Handled = true;
+                this.Close();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                Save(); 
+            }
         }
     }
 }

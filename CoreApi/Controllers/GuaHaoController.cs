@@ -290,8 +290,21 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<IEnumerable<LoginUsers>>(ex.Message);
             }
+            return list; 
+        }
+        public ResponseResult<IEnumerable<LoginUsers>> GetLoginUserByUserMi(string usermi)
+        {
+            Log.Information($"GetLoginUserByUserMi,{usermi}");
+            var list = new List<LoginUsers>();
+            try
+            {
+                list = _userLoginRepository.GetLoginUserByUserMi(usermi);
+            } 
+            catch (Exception ex)
+            { 
+                return ErrorResult<IEnumerable<LoginUsers>>(ex.Message);
+            }
             return list;
-
         }
         public ResponseResult<int> UpdateUserPassWord(string uname, string pwd)
         {

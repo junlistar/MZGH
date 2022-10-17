@@ -74,7 +74,15 @@ namespace Client.Forms.Pages
             cbxChargeTypes.ValueMember = "code";
             cbxChargeTypes.DisplayMember = "name";
 
+            Task.Run(async () =>
+            {
+                await Task.Delay(500);
 
+                this.Invoke(new Action(() =>
+                {
+                    txtCode.Focus();
+                }));
+            });
         }
         #region 文本框搜索查询事件
 
@@ -961,7 +969,7 @@ namespace Client.Forms.Pages
                 }
 
                 if (result.status == 1 && result.data != null && result.data.Count > 0)
-                { 
+                {
                     //默认取最大的patient_id数据
                     var userInfo = result.data.OrderByDescending(p => p.patient_id).FirstOrDefault();
 
@@ -986,11 +994,11 @@ namespace Client.Forms.Pages
                     BindUserInfo(userInfo);
 
                     if (YBHelper.currentYBInfo != null)
-                    { 
+                    {
                         //记录医保日志
                         paramurl = string.Format($"/api/YbInfo/AddYB1101");
                         YBHelper.currentYBInfo.output.patient_id = userInfo.patient_id;
-                        YBHelper.currentYBInfo.output.admiss_times = (userInfo.max_times+1).ToString();
+                        YBHelper.currentYBInfo.output.admiss_times = (userInfo.max_times + 1).ToString();
                         HttpClientUtil.PostJSON(paramurl, YBHelper.currentYBInfo.output);
                     }
 
@@ -1288,8 +1296,8 @@ namespace Client.Forms.Pages
             {
                 MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
-            } 
-        } 
+            }
+        }
 
         public void GetYbkDetailInfo(string certno)
         {
@@ -1321,13 +1329,13 @@ namespace Client.Forms.Pages
                     if (result.data != null && result.data.insuinfo != null)
                     {
                         dgv_cbxx.DataSource = result.data.insuinfo;
-                  
+
                         dgv_cbxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
                     if (result.data != null && result.data.idetinfo != null)
                     {
                         dgv_sfxx.DataSource = result.data.idetinfo;
-                       
+
                         dgv_sfxx.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
                 }
@@ -1344,7 +1352,7 @@ namespace Client.Forms.Pages
             }
         }
 
-         
+
 
         private void uiGroupBox5_Click(object sender, EventArgs e)
         {

@@ -972,10 +972,10 @@
             this.btnAddOrder.Location = new System.Drawing.Point(254, 6);
             this.btnAddOrder.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnAddOrder.Name = "btnAddOrder";
-            this.btnAddOrder.Size = new System.Drawing.Size(100, 29);
-            this.btnAddOrder.Symbol = 362139;
+            this.btnAddOrder.Size = new System.Drawing.Size(111, 29);
+            this.btnAddOrder.Symbol = 61787;
             this.btnAddOrder.TabIndex = 26;
-            this.btnAddOrder.Text = "增处方";
+            this.btnAddOrder.Text = "增处方(+)";
             this.btnAddOrder.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnAddOrder.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.btnAddOrder.Click += new System.EventHandler(this.btnAddOrder_Click);

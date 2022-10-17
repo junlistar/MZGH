@@ -349,6 +349,7 @@
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.OrderTemplateSelect_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrderTemplateSelect_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.OrderTemplateSelect_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTpDetails)).EndInit();

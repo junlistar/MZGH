@@ -1,0 +1,30 @@
+is_global = true
+build_property.ApplicationManifest = 
+build_property.StartupObject = 
+build_property.ApplicationDefaultFont = 
+build_property.ApplicationHighDpiMode = 
+build_property.ApplicationUseCompatibleTextRendering = 
+build_property.ApplicationVisualStyles = 
+build_property.TargetFramework = net6.0-windows
+build_property.TargetPlatformMinVersion = 7.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = WinFormsApp1
+build_property.RootNamespace = WinFormsApp1
+build_property.ProjectDir = D:\lijun\github\Mzgh\WinFormsApp1\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\lijun\github\Mzgh\WinFormsApp1
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/lijun/github/Mzgh/WinFormsApp1/wwwroot/App.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxBcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/lijun/github/Mzgh/WinFormsApp1/wwwroot/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxfSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 

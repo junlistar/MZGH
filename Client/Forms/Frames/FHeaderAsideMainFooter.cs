@@ -22,6 +22,7 @@ using Client.Forms.Pages.yhbb;
 using Client.Forms.Pages.zfgl;
 using Client.Forms.Pages.xt;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Client
 {
@@ -35,8 +36,22 @@ namespace Client
         List<XTUserGroupVM> function_list;
         List<XTFunctionsVM> all_list;
 
-        public FHeaderAsideMainFooter()
+        //启动传参
+        string[] arg;
+
+        public FHeaderAsideMainFooter(string[] args)
         {
+            arg = args;
+            if (args!=null && args.Count()>0)
+            { 
+                log.Debug($"程序被调用，参数：{args[0]}"); 
+            }
+            else
+            {
+                log.Debug("直接打开程序");
+            }
+            
+
             InitializeComponent();
 
             SessionHelper.MyHttpClient = ClassLib.HttpClientFactory.GetHttpClient();
@@ -453,15 +468,39 @@ namespace Client
             foreach (UIStyle style in styles)
             {
                 //Header.CreateChildNode(Header.Nodes[4], style.DisplayText(), style.Value());
-                 
-                if ( style.DisplayText() != "DarkBlue" && style.DisplayText() != "Black")
+
+                if (style.DisplayText() != "DarkBlue" && style.DisplayText() != "Black")
                 {
                     uiContextMenuStrip1.Items.Add(style.DisplayText());
                 }
-                
-            } 
-        }
 
+            }
+        }
+        private string ConvertStringToJson(string str)
+
+        {
+            //格式化json字符串
+            JsonSerializer serializer = new JsonSerializer();
+            TextReader tr = new StringReader(str);
+            JsonTextReader jtr = new JsonTextReader(tr);
+            object obj = serializer.Deserialize(jtr);
+            if (obj != null)
+            {
+                StringWriter textWriter = new StringWriter();
+                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
+                {
+                    Formatting = Formatting.Indented,
+                    Indentation = 4,
+                    IndentChar = ' '
+                };
+                serializer.Serialize(jsonWriter, obj);
+                return textWriter.ToString();
+            }
+            else
+            {
+                return str;
+            }
+        }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
             try
@@ -481,60 +520,105 @@ namespace Client
 
                 tlsInfo.Text = "";
 
-                Login frm = new Login();
-                frm.ShowDialog();
-                if (frm.IsLogin)
+                if (arg!=null && arg.Count()>0)
                 {
-                    UIMessageTip.ShowOk("登录成功");
-
-                    ProcessingForm processingForm = new ProcessingForm();
-                    if (processingForm.ShowDialog() == DialogResult.OK)
+                    var _jstr = arg[0];
+                    log.Debug($"第三方传递json值：{_jstr}"); 
+                    
+                    var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr); 
+                    if (_hisloginvm!=null&& !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
                     {
-                        this.WindowState = FormWindowState.Maximized;
-                        this.Show();
+                        //获取用户费别信息 
+                        string json;
+                        string paramurl = string.Format($"/api/GuaHao/GetLoginUserByUserMi?usermi={_hisloginvm.UserMi}");
+                        json = HttpClientUtil.Get(paramurl); 
+                        var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
+                        if (result.status == 1)
+                        {
 
-                        //statusstrip信息
-                        tsslblName.Text = SessionHelper.uservm.name;
-
-                        tsslblMidhost.Text = SessionHelper.MyHttpClient.BaseAddress.ToString();
-                        timer1.Interval = 1000;
-                        timer1.Start();
-
-                        timerlogout.Interval = 1000;
-                        timerlogout.Start();
-
-                        //加载字典数据 
-                        //InitDic();
-
-                        //读取打印机配置
-                        InitPrinter();
-
-                        //获取菜单权限 
-                        GetUserFunctions(SessionHelper.uservm.user_group);
-
-                        //绑定名称，版本号
-                        this.Text = SessionHelper.MzClientConfigVM.client_name + " " + SessionHelper.MzClientConfigVM.client_version;
-
-                        //绑定菜单
-                        MenuBind();
-
-                        SessionHelper.clientHeight = this.Height;
-                        SessionHelper.clientWidth = this.Width;
-
-                        this.FormClosing += FHeaderAsideMainFooter_FormClosing;
-
-                    };
+                            if (result.data != null && result.data.Count > 0)
+                            {
+                                SessionHelper.uservm = result.data[0];
+                                LoadFormData();
+                            }
+                            else
+                            {
+                                MessageBox.Show($"没有找到usermi:{_hisloginvm.UserMi},对应的用户信息!");
+                                this.Close();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("没有获取到UserMi");
+                        this.Close();
+                    }
+                    
                 }
                 else
                 {
-                    this.Close();
+                    Login frm = new Login();
+                    frm.ShowDialog();
+                    if (frm.IsLogin)
+                    {
+                        LoadFormData();
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
+                
             }
             catch (Exception ex)
             {
-                log.Error(ex.Message);
-                UIMessageTip.Show(ex.Message);
+                log.Error(ex.ToString()); ;
+                MessageBox.Show(ex.Message);
+                this.Close();
             }
+        }
+
+        public void LoadFormData()
+        {
+            UIMessageTip.ShowOk("登录成功");
+
+            ProcessingForm processingForm = new ProcessingForm();
+            if (processingForm.ShowDialog() == DialogResult.OK)
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.Show();
+
+                //statusstrip信息
+                tsslblName.Text = SessionHelper.uservm.name;
+
+                tsslblMidhost.Text = SessionHelper.MyHttpClient.BaseAddress.ToString();
+                timer1.Interval = 1000;
+                timer1.Start();
+
+                timerlogout.Interval = 1000;
+                timerlogout.Start();
+
+                //加载字典数据 
+                //InitDic();
+
+                //读取打印机配置
+                InitPrinter();
+
+                //获取菜单权限 
+                GetUserFunctions(SessionHelper.uservm.user_group);
+
+                //绑定名称，版本号
+                this.Text = SessionHelper.MzClientConfigVM.client_name + " " + SessionHelper.MzClientConfigVM.client_version;
+
+                //绑定菜单
+                MenuBind();
+
+                SessionHelper.clientHeight = this.Height;
+                SessionHelper.clientWidth = this.Width;
+
+                this.FormClosing += FHeaderAsideMainFooter_FormClosing;
+
+            };
         }
         public void GetUserFunctions(string user_group)
         {
@@ -828,19 +912,19 @@ namespace Client
                     this.Close();
                 }
             }
-        } 
+        }
 
         private void uiContextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        { 
+        {
             var styles = UIStyles.PopularStyles();
             foreach (UIStyle style in styles)
-            { 
-                if (style.DisplayText() ==e.ClickedItem.Text)
+            {
+                if (style.DisplayText() == e.ClickedItem.Text)
                 {
-                    uiStyleManager1.Style = style; 
-                } 
+                    uiStyleManager1.Style = style;
+                }
             }
         }
-     
+
     }
 }

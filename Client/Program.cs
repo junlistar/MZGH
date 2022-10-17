@@ -17,7 +17,7 @@ namespace Client
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             //try
             //{
@@ -37,7 +37,7 @@ namespace Client
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FHeaderAsideMainFooter());
+                Application.Run(new FHeaderAsideMainFooter(args));
                 //Application.Run(new Form1());
 
                 //菜单管理

@@ -1,13 +1,14 @@
 using Autofac;
 using LogDashboard;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting; 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting; 
-using System; 
-using System.IO; 
-using System.Reflection; 
+using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
+using System.Reflection;
+using WatchDog;
 
 
 namespace CoreApi
@@ -17,17 +18,19 @@ namespace CoreApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-              
+
         }
 
         public IConfiguration Configuration { get; }
-         
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        { 
+        {
 
             services.AddLogDashboard();
+
+            services.AddWatchDogServices();
 
             services.AddControllers().AddControllersAsServices();//
 
@@ -42,12 +45,18 @@ namespace CoreApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseWatchDog(opt =>
+            {
+                opt.WatchPageUsername = "admin";
+                opt.WatchPagePassword = "123";
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseLogDashboard();
-             
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -57,7 +66,8 @@ namespace CoreApi
                 endpoints.MapControllers();
             });
 
-            
+           
+
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {

@@ -238,12 +238,14 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.uiLine1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "UserInfoNullDataConfig";
             this.Text = "患者信息必填项配置";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.UserInfoNullDataConfig_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UserInfoNullDataConfig_KeyUp);
             this.ResumeLayout(false);
 
         }

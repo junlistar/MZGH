@@ -24,6 +24,8 @@ namespace Data.IRepository
 
         List<LoginUsers> GetLoginUser(string uname,string pwd);
 
+        List<LoginUsers> GetLoginUserByUserMi(string usermi);
+
         int UpdateUserPassWord(string uname, string pwd);
 
         #endregion
