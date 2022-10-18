@@ -42,15 +42,15 @@ namespace Client
         public FHeaderAsideMainFooter(string[] args)
         {
             arg = args;
-            if (args!=null && args.Count()>0)
-            { 
-                log.Debug($"程序被调用，参数：{args[0]}"); 
+            if (args != null && args.Count() > 0)
+            {
+                log.Debug($"程序被调用，参数：{args[0]}");
             }
             else
             {
                 log.Debug("直接打开程序");
             }
-            
+
 
             InitializeComponent();
 
@@ -476,31 +476,7 @@ namespace Client
 
             }
         }
-        private string ConvertStringToJson(string str)
 
-        {
-            //格式化json字符串
-            JsonSerializer serializer = new JsonSerializer();
-            TextReader tr = new StringReader(str);
-            JsonTextReader jtr = new JsonTextReader(tr);
-            object obj = serializer.Deserialize(jtr);
-            if (obj != null)
-            {
-                StringWriter textWriter = new StringWriter();
-                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
-                {
-                    Formatting = Formatting.Indented,
-                    Indentation = 4,
-                    IndentChar = ' '
-                };
-                serializer.Serialize(jsonWriter, obj);
-                return textWriter.ToString();
-            }
-            else
-            {
-                return str;
-            }
-        }
         private void FHeaderAsideMainFooter_Load(object sender, System.EventArgs e)
         {
             try
@@ -520,18 +496,34 @@ namespace Client
 
                 tlsInfo.Text = "";
 
-                if (arg!=null && arg.Count()>0)
+                if (arg != null && arg.Count() > 0)
                 {
                     var _jstr = arg[0];
-                    log.Debug($"第三方传递json值：{_jstr}"); 
-                    
-                    var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr); 
-                    if (_hisloginvm!=null&& !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
+                    log.Debug($"第三方传递json值：{_jstr}");
+                    var _usermi = "";
+                    try
+                    {
+                        var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
+                        if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
+                        {
+                            _usermi = _hisloginvm.UserMi;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var _index = _jstr.IndexOf("UserMi:");
+                        _jstr = _jstr.Substring(_index + 7);
+                        _index= _jstr.IndexOf(",");
+                        _usermi = _jstr.Substring(0, _index);
+                        //MessageBox.Show(_usermi);
+                    }
+
+                    if (_usermi != "")
                     {
                         //获取用户费别信息 
                         string json;
-                        string paramurl = string.Format($"/api/GuaHao/GetLoginUserByUserMi?usermi={_hisloginvm.UserMi}");
-                        json = HttpClientUtil.Get(paramurl); 
+                        string paramurl = string.Format($"/api/GuaHao/GetLoginUserByUserMi?usermi={_usermi}");
+                        json = HttpClientUtil.Get(paramurl);
                         var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
                         if (result.status == 1)
                         {
@@ -543,7 +535,7 @@ namespace Client
                             }
                             else
                             {
-                                MessageBox.Show($"没有找到usermi:{_hisloginvm.UserMi},对应的用户信息!");
+                                MessageBox.Show($"没有找到usermi:{_usermi},对应的用户信息!");
                                 this.Close();
                             }
                         }
@@ -553,7 +545,7 @@ namespace Client
                         MessageBox.Show("没有获取到UserMi");
                         this.Close();
                     }
-                    
+
                 }
                 else
                 {
@@ -568,7 +560,7 @@ namespace Client
                         this.Close();
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {

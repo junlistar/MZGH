@@ -416,7 +416,7 @@
             // charge_amount
             // 
             this.charge_amount.DataPropertyName = "charge_amount";
-            this.charge_amount.HeaderText = "数量";
+            this.charge_amount.HeaderText = "可退数量";
             this.charge_amount.Name = "charge_amount";
             this.charge_amount.ReadOnly = true;
             // 

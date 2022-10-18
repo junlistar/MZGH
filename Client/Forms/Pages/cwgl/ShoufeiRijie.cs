@@ -281,12 +281,14 @@ namespace Client.Forms.Pages.cwgl
                                     //禁用结算按钮
                                     btnSave.Enabled = true;
                                 }
-
                                 previewControl1.Show();
-                                TargetReport.Preview = previewControl1;
+                                TargetReport.Preview = previewControl1; 
+
+
                                 TargetReport.Prepare();
                                 TargetReport.Show();
-
+                                
+                                previewControl1.ZoomPageWidth(); 
                             }
                             else
                             {
