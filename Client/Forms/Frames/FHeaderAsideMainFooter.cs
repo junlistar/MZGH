@@ -513,7 +513,7 @@ namespace Client
                     {
                         var _index = _jstr.IndexOf("UserMi:");
                         _jstr = _jstr.Substring(_index + 7);
-                        _index= _jstr.IndexOf(",");
+                        _index = _jstr.IndexOf(",");
                         _usermi = _jstr.Substring(0, _index);
                         //MessageBox.Show(_usermi);
                     }
@@ -754,74 +754,6 @@ namespace Client
         }
 
 
-        private bool Frm_OnLogin(string userName, string password)
-        {
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                UIMessageTip.ShowWarning("请输入登录名!");
-                return false;
-            }
-            try
-            {
-                Task<HttpResponseMessage> task = null;
-                string json = "";
-                string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={userName}&pwd={password}");
-
-                log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-
-                task = SessionHelper.MyHttpClient.GetAsync(paramurl);
-
-                task.Wait();
-                var response = task.Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var read = response.Content.ReadAsStringAsync();
-                    read.Wait();
-                    json = read.Result;
-                }
-                else
-                {
-                    log.Info(" 访问登录接口失败!" + json);
-                    UIMessageTip.ShowWarning(" 访问登录接口失败!");
-                    return false;
-                }
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
-                if (result.status == 1)
-                {
-                    if (result.data != null && result.data.Count > 0)
-                    {
-                        SessionHelper.uservm = result.data[0];
-                        return true;
-                    }
-                    else
-                    {
-                        UIMessageTip.ShowWarning(" 登录名或密码有误!");
-                    }
-                }
-                else
-                {
-                    UIMessageBox.ShowError(result.message);
-                    log.Error(result.message);
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                if (ex.InnerException != null && ex.InnerException.InnerException != null)
-                {
-                    log.Error(ex.InnerException.InnerException.Message.ToString());
-                    UIMessageTip.ShowError(ex.InnerException.InnerException.Message);
-                }
-                else
-                {
-                    log.Error(ex.InnerException.ToString());
-                    UIMessageTip.ShowError(ex.InnerException.Message);
-                }
-
-            }
-            return false;
-        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -918,5 +850,205 @@ namespace Client
             }
         }
 
+        public void InitDic()
+        {
+            try
+            {
+
+                log.Info("初始化数据字典：InitDic");
+
+                //获取用户费别信息 
+                string json;
+                string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
+
+
+                //获取地区信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetDistrictCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.districtCodes = WebApiHelper.DeserializeObject<ResponseResult<List<DistrictCodeVM>>>(json).data;
+
+
+                //获取职业信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetOccupationCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.occupationCodes = WebApiHelper.DeserializeObject<ResponseResult<List<OccupationCodeVM>>>(json).data;
+
+                //获取身份信息
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetResponceTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.responseTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ResponceTypeVM>>>(json).data;
+
+
+                //获取科室
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetUnits");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.units = WebApiHelper.DeserializeObject<ResponseResult<List<UnitVM>>>(json).data;
+
+                //获取号别
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetClinicTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.clinicTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ClinicTypeVM>>>(json).data;
+
+                //获取RequestType
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetRequestTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.requestTypes = WebApiHelper.DeserializeObject<ResponseResult<List<RequestTypeVM>>>(json).data;
+
+                //获取用户
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetUserDic");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.userDics = WebApiHelper.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
+
+                //获取挂号时间段
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetRequestHours");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.requestHours = WebApiHelper.DeserializeObject<ResponseResult<List<RequestHourVM>>>(json).data;
+
+                //GetRelativeCodes   
+                paramurl = string.Format($"/api/GuaHao/GetRelativeCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                SessionHelper.relativeCodes = WebApiHelper.DeserializeObject<ResponseResult<List<RelativeCodeVM>>>(json).data;
+
+                //处方模板
+                paramurl = string.Format($"/api/mzsf/GetMzChargePatterns");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternVM>>>(json);
+                if (result.status == 1)
+                {
+                    SessionHelper.MzChargePatterns = result.data;
+                }
+                //处方模板详细
+                paramurl = string.Format($"/api/mzsf/GetMzPatternDetails");
+
+                log.Debug("请求接口数据：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                var detail_result = WebApiHelper.DeserializeObject<ResponseResult<List<MzChargePatternDetailVM>>>(json);
+                if (detail_result.status == 1)
+                {
+                    SessionHelper.MzChargePatternDetails = detail_result.data;
+                }
+                //处方类型
+                paramurl = string.Format($"/api/mzsf/GetOrderTypes");
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.mzOrderTypes = WebApiHelper.DeserializeObject<ResponseResult<List<OrderTypeVM>>>(json).data;
+
+                //支付类型比较 
+                paramurl = string.Format($"/api/GuaHao/GetPageChequeCompares");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.pageChequeCompares = WebApiHelper.DeserializeObject<ResponseResult<List<PageChequeCompareVM>>>(json).data;
+
+                //支付类型比较 
+                paramurl = string.Format($"/api/GuaHao/GetYbName");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.ybNames = WebApiHelper.DeserializeObject<ResponseResult<List<YbNameVM>>>(json).data;
+
+
+                //医保目录类型比较 
+                paramurl = string.Format($"/api/GuaHao/GetYbhzzdList");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+
+                SessionHelper.ybhzCompare = WebApiHelper.DeserializeObject<ResponseResult<List<YbhzzdVM>>>(json).data;
+
+                //医保字典 
+                paramurl = string.Format($"/api/YbInfo/GetInsutypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.insutypes = WebApiHelper.DeserializeObject<ResponseResult<List<InsutypeVM>>>(json).data;
+
+                paramurl = string.Format($"/api/YbInfo/GetMdtrtCertTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.mdtrtCertTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MdtrtCertTypeVM>>>(json).data;
+
+
+                paramurl = string.Format($"/api/YbInfo/GetMedTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.medTypes = WebApiHelper.DeserializeObject<ResponseResult<List<MedTypeVM>>>(json).data;
+
+
+                paramurl = string.Format($"/api/YbInfo/GetDiagTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.diagTypes = WebApiHelper.DeserializeObject<ResponseResult<List<DiagTypeVM>>>(json).data;
+
+
+                paramurl = string.Format($"/api/YbInfo/GetIcdCodes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.icdCodes = WebApiHelper.DeserializeObject<ResponseResult<List<IcdCodeVM>>>(json).data;
+
+
+                paramurl = string.Format($"/api/YbInfo/GetBirctrlTypes");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.birctrlTypes = WebApiHelper.DeserializeObject<ResponseResult<List<BirctrlTypeVM>>>(json).data;
+
+                //客户端配置 
+                paramurl = string.Format($"/api/GuaHao/GetMzClientConfig");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                MzClientConfigVM mzClientConfig = WebApiHelper.DeserializeObject<ResponseResult<MzClientConfigVM>>(json).data;
+                if (mzClientConfig != null)
+                {
+                    //系统配置信息，医院名称，版本号，挂号搜索词长度配置等
+                    SessionHelper.MzClientConfigVM = mzClientConfig;
+                }
+                else
+                {
+                    UIMessageTip.Show("没有获取到数据库客户端配置数据");
+                    log.Error("没有获取到数据库客户端配置数据");
+                }
+                //电子发票配置 
+                paramurl = string.Format($"/api/GuaHao/GetFPConfig");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                FpConfigVM fpConfigVM = WebApiHelper.DeserializeObject<ResponseResult<FpConfigVM>>(json).data;
+                if (fpConfigVM != null)
+                {
+                    //电子发票配置
+                    SessionHelper.fpConfigVM = fpConfigVM;
+                }
+                else
+                {
+                    UIMessageTip.Show("没有获取到数据库发票配置数据");
+                    log.Error("没有获取到数据库发票配置数据");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+
+        }
     }
 }

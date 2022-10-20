@@ -105,7 +105,7 @@ namespace Client.Forms.Pages.yhbb
                     dgvghy.Parent = this;
                     dgvghy.Top = pbl.Top + tb.Top + tb.Height;
                     dgvghy.Left = pbl.Left + tb.Left;
-                    dgvghy.Width = tb.Width;
+                    dgvghy.Width =500;
                     dgvghy.Height = 200;
                     dgvghy.BringToFront();
                     dgvghy.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -121,9 +121,12 @@ namespace Client.Forms.Pages.yhbb
                         vm = vm.Where(p => p.py_code.StartsWith(ipt.ToUpper())).ToList();
                     }
                     dgvghy.DataSource = vm;
-
+                     
                     dgvghy.Columns["code"].HeaderText = "编号";
                     dgvghy.Columns["name"].HeaderText = "名称";
+                    dgvghy.Columns["dept_sn"].HeaderText = "部门编号";
+                    dgvghy.Columns["dept_name"].HeaderText = "部门名称";
+                    dgvghy.Columns["yb_ys_code"].Visible = false;
                     dgvghy.Columns["py_code"].Visible = false;
                     dgvghy.Columns["d_code"].Visible = false;
                     dgvghy.Columns["emp_sn"].Visible = false;

@@ -34,7 +34,7 @@ namespace Client
 
         private void BaseRequestEdit_Load(object sender, EventArgs e)
         {
-            if (_temp_flag=="1")
+            if (_temp_flag == "1")
             {
                 this.Text = "临时号表编辑(按ESC退出)";
             }
@@ -461,7 +461,7 @@ namespace Client
                     UIMessageTip.ShowError("请输入诊室！");
                     txt_workroom.Focus();
                     return;
-                } 
+                }
 
                 var request_date = txtDate.Text;
                 int limit_appoint_percent = 0;
@@ -502,7 +502,7 @@ namespace Client
                     txtTotalNum.Focus();
                     return;
                 }
-                if (cbxOpenFlag.Text== "开放")
+                if (cbxOpenFlag.Text == "开放")
                 {
                     open_flag = 1;
                 }
@@ -515,45 +515,45 @@ namespace Client
                     UIMessageTip.ShowError("请选择开放状态！");
                     cbxOpenFlag.Focus();
                     return;
-                } 
-
-                //判断是否存在
-                Task<HttpResponseMessage> task = null;
-
-                var d = new
-                {
-                    record_sn = _record_sn,
-                    request_date = request_date,
-                    unit_sn = visit_dept,
-                    group_sn = group_sn,
-                    doctor_sn = doctor_code,
-                    clinic_type = clinic_type,
-                    request_type = request_type,
-                    ampm = ampm,
-                    totle_num = total_num,
-                    workroom = workroom,
-                    open_flag = open_flag,
-                    op_id = SessionHelper.uservm.user_mi,
-                    limit_appoint_percent = limit_appoint_percent
-                };
-                var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&workroom={d.workroom}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
-
-                string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
-
-                var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
-
-                if (responseJson.status == 1)
-                {
-                    UIMessageTip.ShowOk("操作成功!");
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
                 }
-                else
-                {
-                    UIMessageTip.ShowError(responseJson.message);
-                    log.Error(responseJson.message);
+
+                if (UIMessageDialog.ShowAskDialog(this, "修改将重新生成分时段挂号数据，是否确认修改？"))
+                { 
+                    var d = new
+                    {
+                        record_sn = _record_sn,
+                        request_date = request_date,
+                        unit_sn = visit_dept,
+                        group_sn = group_sn,
+                        doctor_sn = doctor_code,
+                        clinic_type = clinic_type,
+                        request_type = request_type,
+                        ampm = ampm,
+                        totle_num = total_num,
+                        workroom = workroom,
+                        open_flag = open_flag,
+                        op_id = SessionHelper.uservm.user_mi,
+                        limit_appoint_percent = limit_appoint_percent
+                    };
+                    var data = WebApiHelper.SerializeObject(d); HttpContent httpContent = new StringContent(data);
+                    httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                    var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&workroom={d.workroom}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
+
+                    string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+
+                    var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
+
+                    if (responseJson.status == 1)
+                    {
+                        UIMessageTip.ShowOk("操作成功!");
+                        this.DialogResult = DialogResult.OK;
+                        this.Close();
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError(responseJson.message);
+                        log.Error(responseJson.message);
+                    }
                 }
             }
             catch (Exception ex)

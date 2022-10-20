@@ -204,7 +204,7 @@ namespace Client.Forms.Pages.hbgl
                 dgvys.Parent = this;
                 dgvys.Top = pbl.Top + tb.Top + tb.Height;
                 dgvys.Left = pbl.Left + tb.Left;
-                dgvys.Width = tb.Width;
+                dgvys.Width = 500;
                 dgvys.Height = 200;
                 dgvys.BringToFront();
                 dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -224,6 +224,9 @@ namespace Client.Forms.Pages.hbgl
 
                 dgvys.Columns["code"].HeaderText = "编号";
                 dgvys.Columns["name"].HeaderText = "名称";
+                dgvys.Columns["dept_sn"].HeaderText = "部门编号";
+                dgvys.Columns["dept_name"].HeaderText = "部门名称";
+                dgvys.Columns["yb_ys_code"].Visible = false;
                 dgvys.Columns["py_code"].Visible = false;
                 dgvys.Columns["d_code"].Visible = false;
                 dgvys.Columns["emp_sn"].Visible = false;

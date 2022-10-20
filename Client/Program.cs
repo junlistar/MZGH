@@ -22,36 +22,36 @@ namespace Client
             //try
             //{
 
-                ////设置应用程序处理异常方式：ThreadException处理
-                //Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-                ////UI线程的未处理异常捕获
-                //Application.ThreadException += Application_ThreadException;
-                ////非UI线程的未处理异常捕获
-                //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            ////设置应用程序处理异常方式：ThreadException处理
+            //Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            ////UI线程的未处理异常捕获
+            //Application.ThreadException += Application_ThreadException;
+            ////非UI线程的未处理异常捕获
+            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
 
-                //这段代码要在程序运行的入口进行配置
-                log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
+            //这段代码要在程序运行的入口进行配置
+            log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
 
-                log.Debug("打开了程序");
+            log.Debug("打开了程序");
 
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FHeaderAsideMainFooter(args));
-                //Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FHeaderAsideMainFooter(args));
+            //Application.Run(new Form1());
 
-                //菜单管理
+            //菜单管理
 
-                log.Debug("关闭了程序");
+            log.Debug("关闭了程序");
 
-                 
+
             //}
             //catch (Exception ex)
             //{
             //    string str = ExceptionToString(ex, "主线程");
             //    MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //} 
-           
+
         }
         /// <summary>
         /// 提取异常信息

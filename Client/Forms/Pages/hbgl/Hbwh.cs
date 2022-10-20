@@ -471,7 +471,7 @@ namespace Client
                 dgv.Parent = this;
                 dgv.Top = pbl.Top + tb.Top + tb.Height;
                 dgv.Left = pbl.Left + tb.Left;
-                dgv.Width = tb.Width;
+                dgv.Width = 300;
                 dgv.Height = 200;
                 dgv.BringToFront();
                 dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -535,7 +535,7 @@ namespace Client
                 dgvzk.Parent = this;
                 dgvzk.Top = pbl.Top + tb.Top + tb.Height;
                 dgvzk.Left = pbl.Left + tb.Left;
-                dgvzk.Width = tb.Width;
+                dgvzk.Width = 300;
                 dgvzk.Height = 200;
                 dgvzk.BringToFront();
                 dgvzk.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -597,7 +597,7 @@ namespace Client
                 dgvys.Parent = this;
                 dgvys.Top = pbl.Top + tb.Top + tb.Height;
                 dgvys.Left = pbl.Left + tb.Left;
-                dgvys.Width = tb.Width;
+                dgvys.Width = 500;
                 dgvys.Height = 200;
                 dgvys.BringToFront();
                 dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -617,6 +617,9 @@ namespace Client
 
                 dgvys.Columns["code"].HeaderText = "编号";
                 dgvys.Columns["name"].HeaderText = "名称";
+                dgvys.Columns["dept_sn"].HeaderText = "部门编号";
+                dgvys.Columns["dept_name"].HeaderText = "部门名称";
+                dgvys.Columns["yb_ys_code"].Visible = false;
                 dgvys.Columns["py_code"].Visible = false;
                 dgvys.Columns["d_code"].Visible = false;
                 dgvys.Columns["emp_sn"].Visible = false;
@@ -657,7 +660,7 @@ namespace Client
                 dgvhb.Parent = this;
                 dgvhb.Top = pbl.Top + tb.Top + tb.Height;
                 dgvhb.Left = pbl.Left + tb.Left;
-                dgvhb.Width = tb.Width;
+                dgvhb.Width = 250;
                 dgvhb.Height = 200;
                 dgvhb.BringToFront();
                 dgvhb.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -665,7 +668,7 @@ namespace Client
                 dgvhb.RowHeadersVisible = false;
                 dgvhb.BackgroundColor = Color.White;
                 dgvhb.ReadOnly = true;
-
+                 
 
                 List<ClinicTypeVM> vm = clinicTypes;
 

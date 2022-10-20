@@ -40,7 +40,6 @@ namespace Client
 
             InitDic();
 
-            InitData();
 
             dgv.CellClick += dgvks_CellContentClick;
             dgv.KeyDown += dgvks_KeyDown;
@@ -62,12 +61,11 @@ namespace Client
             uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");
             uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
-
-            BindBottomData(); 
-
              
             dgvhl.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
-            dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color; 
+
+            InitData();
         }
 
         public void InitDic()
@@ -408,7 +406,7 @@ namespace Client
                     dgvys.Parent = this;
                     dgvys.Top = pbl.Top + tb.Top + tb.Height;
                     dgvys.Left = pbl.Left + tb.Left;
-                    dgvys.Width = tb.Width;
+                    dgvys.Width = 500;
                     dgvys.Height = 200;
                     dgvys.BringToFront();
                     dgvys.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -428,6 +426,9 @@ namespace Client
 
                     dgvys.Columns["code"].HeaderText = "编号";
                     dgvys.Columns["name"].HeaderText = "名称";
+                    dgvys.Columns["dept_sn"].HeaderText = "部门编号";
+                    dgvys.Columns["dept_name"].HeaderText = "部门名称";
+                    dgvys.Columns["yb_ys_code"].Visible = false;
                     dgvys.Columns["py_code"].Visible = false;
                     dgvys.Columns["d_code"].Visible = false;
                     dgvys.Columns["emp_sn"].Visible = false;
@@ -729,10 +730,11 @@ namespace Client
                     weekstr = p.weekstr,
                     daystr = p.daystr,
                     apstr = p.apstr,
-                    winnostr = p.winnostr,
+                    workroom = p.workroom,
                     totle_num = p.totle_num,
                     open_flag_str = p.open_flag_str,
-                    op_date_str = p.op_date_str
+                    op_date_str = p.op_date_str,
+                    limit_appoint_percent = p.limit_appoint_percent
                 }).ToList();
                 dgvlist.AutoResizeColumns();
                 dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
@@ -780,7 +782,6 @@ namespace Client
 
         private void Edit_FormClosed(object sender, FormClosedEventArgs e)
         {
-            InitData();
         }
 
         private void txtks_KeyUp(object sender, KeyEventArgs e)
@@ -1077,8 +1078,11 @@ namespace Client
                             case "open_flag_str":
                                 list = list.OrderBy(p => p.open_flag).ToList();
                                 break;
-                            case "winnostr":
-                                list = list.OrderBy(p => p.window_no).ToList();
+                            case "limit_appoint_percent":
+                                list = list.OrderByDescending(p => p.limit_appoint_percent).ToList();
+                                break;
+                            case "workroom":
+                                list = list.OrderByDescending(p => p.workroom).ToList();
                                 break;
                             default:
                                 break;
@@ -1110,8 +1114,11 @@ namespace Client
                             case "open_flag_str":
                                 list = list.OrderByDescending(p => p.open_flag).ToList();
                                 break;
-                            case "winnostr":
-                                list = list.OrderByDescending(p => p.window_no).ToList();
+                            case "limit_appoint_percent":
+                                list = list.OrderByDescending(p => p.limit_appoint_percent).ToList();
+                                break;
+                            case "workroom":
+                                list = list.OrderByDescending(p => p.workroom).ToList();
                                 break;
                             default:
                                 break;
@@ -1133,10 +1140,11 @@ namespace Client
                         weekstr = p.weekstr,
                         daystr = p.daystr,
                         apstr = p.apstr,
-                        winnostr = p.winnostr,
+                        workroom = p.workroom,
                         totle_num = p.totle_num,
                         open_flag_str = p.open_flag_str,
-                        op_date_str = p.op_date_str
+                        op_date_str = p.op_date_str,
+                        limit_appoint_percent = p.limit_appoint_percent
                     }).ToList();
 
                     dgvlist.DataSource = ds; dgvlist.AutoResizeColumns();
@@ -1175,22 +1183,7 @@ namespace Client
         {
             return text.Replace("↑", "").Replace("↓", "");
         }
-
-        private void dgvlist_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            //if (e.RowIndex != -1)
-            //{
-            //    dgvlist.Rows[e.RowIndex].Cells["unit_name"].Style.ForeColor = Color.Green;
-            //    dgvlist.Rows[e.RowIndex].Cells["doct_name"].Style.ForeColor = UIColor.Blue;
-            //    dgvlist.Rows[e.RowIndex].Cells["clinic_name"].Style.ForeColor = UIColor.Purple;
-            //    dgvlist.Rows[e.RowIndex].Cells["daystr"].Style.ForeColor = UIColor.Green;
-            //    dgvlist.Rows[e.RowIndex].Cells["apstr"].Style.ForeColor = UIColor.Orange;
-            //    dgvlist.Rows[e.RowIndex].Cells["totle_num"].Style.ForeColor = UIColor.Blue;
-            //    dgvlist.Rows[e.RowIndex].Cells["winnostr"].Style.ForeColor = UIColor.Purple;
-            //    dgvlist.Rows[e.RowIndex].Cells["open_flag_str"].Style.ForeColor = Color.Orange;
-
-            //}
-        }
+ 
 
         public void SetGridTextColor()
         {

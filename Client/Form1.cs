@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
 using System.Linq;
+using Client.ClassLib;
 
 namespace Client
 {
@@ -34,8 +35,7 @@ namespace Client
             //this.rowMergeView1.MergeColumnNames.Add("current_no");
             //this.rowMergeView1.AddSpanHeader(2, 2, "男女数据");
 
-
-          
+            ControlHelper.SetIE(ControlHelper.IeVersion.强制ie10);
 
         }
 
@@ -97,6 +97,11 @@ namespace Client
                 var _btn = _cts[3] as UIButton;
                 _btn.Focus();
             }
+        }
+
+        private void webView21_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

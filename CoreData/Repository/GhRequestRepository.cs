@@ -176,7 +176,7 @@ namespace Data.Repository
                         //查询停诊信息
 
                         GhDoctorOutRepository ghDoctorOut = new GhDoctorOutRepository();
-                        var outlist = ghDoctorOut.GetGhDoctorOuts().Where(p=>p.is_delete==0).ToList();
+                        var outlist = ghDoctorOut.GetGhDoctorOuts().Where(p => p.is_delete == 0).ToList();
 
 
                         //组装当期数据
@@ -204,14 +204,14 @@ namespace Data.Repository
                                     item.request_date = request_date;
                                     //判断医生是否停诊
                                     bool _isout = false;
-                                    if (outlist!=null &&!string.IsNullOrEmpty(item.doctor_sn))
+                                    if (outlist != null && !string.IsNullOrEmpty(item.doctor_sn))
                                     {
                                         var _outlist = outlist.Where(p => p.doctor_id == item.doctor_sn);
-                                        if (_outlist.Count()>0)
-                                        { 
+                                        if (_outlist.Count() > 0)
+                                        {
                                             foreach (var doc_out in _outlist.ToList())
                                             {
-                                                if (doc_out.begin_date<=item.request_date && item.request_date<doc_out.end_date)
+                                                if (doc_out.begin_date <= item.request_date && item.request_date < doc_out.end_date)
                                                 {
                                                     _isout = true;
                                                     break;
@@ -242,7 +242,7 @@ namespace Data.Repository
                                     ghRequest.req_type = item.req_type;
                                     ghRequest.temp_flag = item.temp_flag;
                                     ghRequest.unit_sn = item.unit_sn;
-                                    ghRequest.window_no = item.window_no.ToString(); 
+                                    ghRequest.window_no = item.window_no.ToString();
                                     ghRequest.workroom = item.workroom;
 
                                     current_list.Add(ghRequest);
@@ -269,7 +269,7 @@ namespace Data.Repository
                         {
                             if (string.IsNullOrEmpty(item.doctor_sn))
                             {
-                                if (list_request.Where(p=>p.request_date == item.request_date && p.unit_sn==item.unit_sn&& p.clinic_type==item.clinic_type&& p.ampm == item.ampm).Count()>0)
+                                if (list_request.Where(p => p.request_date == item.request_date && p.unit_sn == item.unit_sn && p.clinic_type == item.clinic_type && p.ampm == item.ampm).Count() > 0)
                                 {
                                     current_list.Remove(item);
                                 }
@@ -307,6 +307,20 @@ namespace Data.Repository
 
                             connection.Execute(insertsql, para, transaction);
                         }
+
+                        //写入分时段挂号信息
+                        //@Op_type 操作类别，1:生成，2：重新生成，3：补生成
+                        //@sDate   生成号源表开始日期
+                        //@eDate   生成号源表结束日期
+                        string ghsql = GetSqlByTag("mzgh_requestnolist");
+
+                        para = new DynamicParameters();
+                        para.Add("@Op_type", 2);
+                        para.Add("@sDate", begin);
+                        para.Add("@eDate", end);
+                        //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
+
+                        connection.Execute(ghsql, para, transaction);
 
                         transaction.Commit();
 
@@ -579,7 +593,7 @@ namespace Data.Repository
                 //医生不为空，则日期，上下午，医生 唯一条件
                 sql = GetSqlByTag("mzgh_ghrequest_getbydoct");
             }
-            para.Add("@request_date", item.request_date); 
+            para.Add("@request_date", item.request_date);
             para.Add("@ampm", item.ampm);
             para.Add("@unit_sn", item.unit_sn);
             if (string.IsNullOrWhiteSpace(item.group_sn))
@@ -629,60 +643,130 @@ namespace Data.Repository
             {
                 throw new Exception("数据重复！");
             }
-            //修改
-            if (!string.IsNullOrEmpty(record_sn))
+            using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
             {
+                IDbTransaction transaction = connection.BeginTransaction();
 
-                string sql = GetSqlByTag("mzgh_ghrequest_update");
-                var para = new DynamicParameters();
-                para.Add("@record_sn", record_sn);
-                para.Add("@request_date", request_date);
+                try
+                {
+                    //修改
+                    if (!string.IsNullOrEmpty(record_sn))
+                    {
 
-                para.Add("@ampm", ampm);
-                para.Add("@unit_sn", unit_sn);
-                para.Add("@group_sn", group_sn);
-                para.Add("@doctor_sn", doctor_sn);
-                para.Add("@clinic_type", clinic_type);
-                para.Add("@req_type", request_type);
+                        string sql = GetSqlByTag("mzgh_ghrequest_update");
+                        var para = new DynamicParameters();
+                        para.Add("@record_sn", record_sn);
+                        para.Add("@request_date", request_date);
 
-                para.Add("@end_no", totle_num);
+                        para.Add("@ampm", ampm);
+                        para.Add("@unit_sn", unit_sn);
+                        para.Add("@group_sn", group_sn);
+                        para.Add("@doctor_sn", doctor_sn);
+                        para.Add("@clinic_type", clinic_type);
+                        para.Add("@req_type", request_type);
 
-                para.Add("@enter_opera", op_id);
-                para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                para.Add("@open_flag", open_flag);
-                //para.Add("@window_no", window_no);
-                para.Add("@workroom", workroom);
-                para.Add("@limit_appoint_percent", limit_appoint_percent);
+                        para.Add("@end_no", totle_num);
 
-                return Update(sql, para);
-            }
-            else
-            {
-                //新增
-                string insertsql = GetSqlByTag("mzgh_ghrequest_add");
-                var para = new DynamicParameters();
+                        para.Add("@enter_opera", op_id);
+                        para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        para.Add("@open_flag", open_flag);
+                        //para.Add("@window_no", window_no);
+                        para.Add("@workroom", workroom);
+                        para.Add("@limit_appoint_percent", limit_appoint_percent);
+                        connection.Execute(sql, para, transaction);
+                        //return Update(sql, para);
 
-                var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                para = new DynamicParameters();
-                para.Add("@request_date", request_date);
-                para.Add("@ampm", ampm);
-                para.Add("@unit_sn", unit_sn);
-                para.Add("@group_sn", group_sn);
-                para.Add("@doctor_sn", doctor_sn);
-                para.Add("@clinic_type", clinic_type);
-                para.Add("@req_type", request_type);
-                para.Add("@begin_no", 1);
-                para.Add("@current_no", 1);
-                para.Add("@end_no", totle_num);
-                para.Add("@enter_opera", op_id);
-                para.Add("@enter_date", enter_date);
-                para.Add("@open_flag", open_flag);
-                para.Add("@window_no", 0);
-                para.Add("@workroom", workroom);
-                para.Add("@temp_flag", 1);
-                para.Add("@limit_appoint_percent", limit_appoint_percent);
+                        //写入分时段挂号信息
+                        //@Op_type 操作类别，1:生成，2：重新生成，3：补生成
+                        //@sDate   生成号源表开始日期
+                        //@eDate   生成号源表结束日期
+                        string ghsql = GetSqlByTag("mzgh_requestnolist");
 
-                return Update(insertsql, para);
+                        para = new DynamicParameters();
+                        para.Add("@Op_type", 2);
+                        para.Add("@sDate", request_date);
+                        para.Add("@eDate", request_date);
+                        para.Add("@Dept", unit_sn);
+                        para.Add("@Doctor", doctor_sn);
+                        //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
+
+                        DataTable dt = new DataTable();
+                        var reader = connection.ExecuteReader(ghsql, para, transaction);
+                        dt.Load(reader);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            var code = dt.Rows[0][0].ToString();
+                            if (code != "0")
+                            {
+                                throw new Exception(dt.Rows[0][1].ToString());
+                            }
+                        }
+                    }
+                    else
+                    {
+
+                        //新增
+                        string insertsql = GetSqlByTag("mzgh_ghrequest_add");
+                        var para = new DynamicParameters();
+
+                        var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        para = new DynamicParameters();
+                        para.Add("@request_date", request_date);
+                        para.Add("@ampm", ampm);
+                        para.Add("@unit_sn", unit_sn);
+                        para.Add("@group_sn", group_sn);
+                        para.Add("@doctor_sn", doctor_sn);
+                        para.Add("@clinic_type", clinic_type);
+                        para.Add("@req_type", request_type);
+                        para.Add("@begin_no", 1);
+                        para.Add("@current_no", 1);
+                        para.Add("@end_no", totle_num);
+                        para.Add("@enter_opera", op_id);
+                        para.Add("@enter_date", enter_date);
+                        para.Add("@open_flag", open_flag);
+                        para.Add("@window_no", 0);
+                        para.Add("@workroom", workroom);
+                        para.Add("@temp_flag", 1);
+                        para.Add("@limit_appoint_percent", limit_appoint_percent);
+
+                        connection.Execute(insertsql, para, transaction);
+                        //Update(insertsql, para);
+
+                        //新增临时号表 生成对应的分时段号信息
+
+                        //写入分时段挂号信息
+                        //@Op_type 操作类别，1:生成，2：重新生成，3：补生成
+                        //@sDate   生成号源表开始日期
+                        //@eDate   生成号源表结束日期
+                        string ghsql = GetSqlByTag("mzgh_requestnolist");
+
+                        para = new DynamicParameters();
+                        para.Add("@Op_type", 3);
+                        para.Add("@sDate", request_date);
+                        para.Add("@eDate", request_date);
+                        //exec mzgh_CreateRequestNo_List @Op_type,@sDate,@eDate
+                        DataTable dt = new DataTable();
+                        var reader = connection.ExecuteReader(ghsql, para, transaction);
+                        dt.Load(reader);
+                        if (dt != null && dt.Rows.Count > 0)
+                        {
+                            var code = dt.Rows[0][0].ToString();
+                            if (code != "0")
+                            {
+                                throw new Exception(dt.Rows[0][1].ToString());
+                            }
+                        }
+
+                    }
+                    transaction.Commit();
+
+                    return 1;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw ex;
+                }
 
             }
         }
@@ -702,9 +786,9 @@ namespace Data.Repository
         {
             string sql = "update gh_request set delete_flag=1 where record_sn=@record_sn";
             var para = new DynamicParameters();
-            para.Add("@record_sn", record_sn); 
+            para.Add("@record_sn", record_sn);
 
-            return Update(sql, para); 
+            return Update(sql, para);
         }
     }
 }

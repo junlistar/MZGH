@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Reflection;
-using WatchDog;
+//using WatchDog;
 
 
 namespace CoreApi
@@ -30,7 +30,7 @@ namespace CoreApi
 
             services.AddLogDashboard();
 
-            services.AddWatchDogServices();
+            //services.AddWatchDogServices();
 
             services.AddControllers().AddControllersAsServices();//
 
@@ -45,11 +45,11 @@ namespace CoreApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseWatchDog(opt =>
-            {
-                opt.WatchPageUsername = "admin";
-                opt.WatchPagePassword = "123";
-            });
+            //app.UseWatchDog(opt =>
+            //{
+            //    opt.WatchPageUsername = "admin";
+            //    opt.WatchPagePassword = "123";
+            //});
 
             if (env.IsDevelopment())
             {

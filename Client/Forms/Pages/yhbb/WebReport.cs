@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CefSharp;
-using CefSharp.WinForms;
+//using CefSharp;
+//using CefSharp.WinForms;
 using Client.ClassLib;
 using Client.ViewModel;
 using Sunny.UI;
@@ -27,7 +27,7 @@ namespace Client.Forms.Pages.yhbb
         private void WebReport_Initialize(object sender, EventArgs e)
         {
             LoadReportList();
-            ControlHelper.SetIE(ControlHelper.IeVersion.标准ie8);
+            ControlHelper.SetIE(ControlHelper.IeVersion.强制ie10);
         }
 
         public void LoadReportList()
@@ -57,26 +57,17 @@ namespace Client.Forms.Pages.yhbb
             string url = "";
             try
             { 
-                var _obj = sender as UITreeView;
-                //UIMessageTip.Show(_obj.SelectedNode.Name);
+                var _obj = sender as UITreeView; 
 
                 url = _obj.SelectedNode.Tag.ToString();
 
-                //var geckoWebBrowser = new GeckoWebBrowser { Dock = DockStyle.Fill };
+                webBrowser1.Url = new Uri(url);
+                  
+                //WebBrowser = new ChromiumWebBrowser(url); 
+                //WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
+                //// 添加到窗口的控件列表中
                 //pnl_browser.Controls.Clear();
-                //pnl_browser.Controls.Add(geckoWebBrowser);
-                //geckoWebBrowser.Navigate(url);
-
-
-                WebBrowser = new ChromiumWebBrowser(url);
-                //{
-                //    // 填充整个父控件
-                //    Dock = DockStyle.Fill
-                //};
-                WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
-                // 添加到窗口的控件列表中
-                pnl_browser.Controls.Clear();
-                pnl_browser.Controls.Add(WebBrowser);
+                //pnl_browser.Controls.Add(WebBrowser);
             }
             catch (Exception ex)
             {
@@ -114,35 +105,26 @@ namespace Client.Forms.Pages.yhbb
             }
           
         }
-        ChromiumWebBrowser WebBrowser;
+        //ChromiumWebBrowser WebBrowser;
         private void WebReport_Load(object sender, EventArgs e)
         {
-            var settings = new CefSettings()
-            {
-                UserAgent = "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Mobile Safari/537.36",
-            };
-
-            //Perform dependency check to make sure all relevant resources are in our output directory.
-            //Cef.Initialize(settings, performDependencyCheck: true, browserProcessHandler: null);
-
-            // cefsharp提供的浏览器控件，一般用它充满窗口就搞定了
-            //WebBrowser = new ChromiumWebBrowser("http://www.163.com")
+            webBrowser1.ScriptErrorsSuppressed = true;
+            //var settings = new CefSettings()
             //{
-            //    // 填充整个父控件
-            //    Dock = DockStyle.Fill
+            //    UserAgent = "Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Mobile Safari/537.36",
             //};
-           // WebBrowser.FrameLoadEnd += new EventHandler<FrameLoadEndEventArgs>(FrameEndFunc);
+             
 
         }
-        private void FrameEndFunc(object sender, FrameLoadEndEventArgs e)
-        {
-            //MessageBox.Show(WebBrowser.GetSourceAsync().Result);
-            //this.BeginInvoke(new Action(() =>
-            //{
-            //    String html = WebBrowser.GetSourceAsync().Result;
-            //    richTextBox1.Text = html;
-            //}));
-        }
+        //private void FrameEndFunc(object sender, FrameLoadEndEventArgs e)
+        //{
+        //    //MessageBox.Show(WebBrowser.GetSourceAsync().Result);
+        //    //this.BeginInvoke(new Action(() =>
+        //    //{
+        //    //    String html = WebBrowser.GetSourceAsync().Result;
+        //    //    richTextBox1.Text = html;
+        //    //}));
+        //}
 
         private void WebReport_ForeColorChanged(object sender, EventArgs e)
         {
@@ -150,7 +132,12 @@ namespace Client.Forms.Pages.yhbb
 
         private void WebReport_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Cef.Shutdown();
+            //Cef.Shutdown();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
