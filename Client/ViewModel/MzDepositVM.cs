@@ -35,5 +35,7 @@ namespace Client.ViewModel
         public string admiss_times { get; set; }
         public string clr_optins { get; set; } 
         
+        public decimal bcje { get; set; }
+        public decimal ytje { get; set; }
     }
 }

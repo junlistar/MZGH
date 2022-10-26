@@ -13,6 +13,7 @@ using log4net;
 using Client.ClassLib;
 using Client.ViewModel;
 using Sunny.UI;
+using Client.Forms.Pages.mzsf;
 
 namespace Mzsf.Forms.Pages
 {
@@ -55,13 +56,13 @@ namespace Mzsf.Forms.Pages
             BindDepositList(patient_id, ledger_sn);
             //绑定付款项目信息
             BindDrugDetails(patient_id, ledger_sn, table_flag);
-             
+
 
         }
         public void GetPatientInfo()
         {
             try
-            { 
+            {
                 string paramurl = string.Format($"/api/GuaHao/GetPatientByPatientId?pid={patient_id}");
 
                 var json = HttpClientUtil.Get(paramurl);
@@ -97,10 +98,17 @@ namespace Mzsf.Forms.Pages
                     return;
                 }
 
-                string msg = "退款金额(￥)：" + je + "，是否确定？";
+                //打开划价退款界面
+                RefundBill refundBill = new RefundBill();
+                refundBill.zje = decimal.Parse(lblZongji.Text);
+                refundBill.tkje = decimal.Parse(lblTuikuan.Text);
+                refundBill.deposit_list = deposit_list.ToArray();
+                if (refundBill.ShowDialog() == DialogResult.OK)
+                { 
+                    //string msg = "退款金额(￥)：" + je + "，是否确定？";
 
-                if (UIMessageDialog.ShowAskDialog(this, msg))
-                {
+                    //if (UIMessageDialog.ShowAskDialog(this, msg))
+                    //{
                     //提交部分退款
                     if (refund_item_str != "")
                     {
@@ -123,6 +131,7 @@ namespace Mzsf.Forms.Pages
                         RefundPart(refund_item_str);
                     }
 
+                    //} 
                 }
             }
             catch (Exception ex)
@@ -150,7 +159,7 @@ namespace Mzsf.Forms.Pages
                             log.Info("有外部订单号：" + item.cheque_no);
 
                             var page_model = SessionHelper.pageChequeCompares.Where(p => p.his_code == item.cheque_type).FirstOrDefault();
-                           if (page_model == null || int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
+                            if (page_model == null || int.Parse(page_model.page_code) == (int)PayMethodEnum.Yibao)
                             {
                                 log.Info("医保退款：");
 
@@ -240,7 +249,7 @@ namespace Mzsf.Forms.Pages
                                 //    log.Error("支付宝退款调用失败，原因：" + response.Msg);
                                 //}
                             }
-                            
+
                         }
                     }
 
@@ -371,8 +380,9 @@ namespace Mzsf.Forms.Pages
                             refund_charge = p.refund_charge
 
                         }).ToList();
-                        dgvDeposit.Init();
+                        //dgvDeposit.Init();
                         dgvDeposit.DataSource = dat;
+                        dgvDeposit.AutoResizeColumns();
                         dgvDeposit.CellBorderStyle = DataGridViewCellBorderStyle.Single;
                     }
 
@@ -419,7 +429,8 @@ namespace Mzsf.Forms.Pages
                     {
                         chkback = 1,
                         back = p.back,
-                        charge_amount = p.charge_amount,
+                        //charge_amount = p.charge_amount,
+                        ktsl = p.ktsl,
                         charge_name = p.charge_name,
                         cf_amount = p.charge_amount,
                         caoyao_fu = p.caoyao_fu,
@@ -450,7 +461,7 @@ namespace Mzsf.Forms.Pages
 
 
                     //退款金额处理
-                    lblZongji.Text =Math.Round(result.data.Sum(p => p.total_price),2).ToString();
+                    lblZongji.Text = Math.Round(result.data.Sum(p => p.total_price), 2).ToString();
                     lblTuikuan.Text = "0";
                     //lblTuikuan.Text = result.data.Sum(p => p.sum_total).ToString();
 
@@ -478,7 +489,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "")
+                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "" && dgvCpr.Rows[i].Cells["back"].Value.ToString() == "0")
                         {
                             continue;
                         }
@@ -491,7 +502,7 @@ namespace Mzsf.Forms.Pages
                 {
                     for (int i = 0; i < dgvCpr.Rows.Count; i++)
                     {
-                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "")
+                        if (dgvCpr.Rows[i].Cells["confirm_flag_str"].Value.ToString() != "" && dgvCpr.Rows[i].Cells["back"].Value.ToString() == "0")
                         {
                             continue;
                         }
@@ -520,11 +531,14 @@ namespace Mzsf.Forms.Pages
                     if (Convert.ToBoolean(dgvCpr.Rows[i].Cells[0].Value))
                     {
                         var charge = Convert.ToDecimal(dgvCpr.Rows[i].Cells["sum_total"].Value);
-                        t_price += charge;
+                        var _ktsl = Convert.ToDecimal(dgvCpr.Rows[i].Cells["charge_amount"].Value);
+                        var _orig_price = Convert.ToDecimal(dgvCpr.Rows[i].Cells["orig_price"].Value);
+                        //t_price += charge;
+                        t_price += _ktsl * _orig_price;
 
                         var order_type = dgvCpr.Rows[i].Cells["order_type"].Value;
                         var charge_code = dgvCpr.Rows[i].Cells["charge_code"].Value;
-                        refund_item_str += "," + order_type + "-" + charge_code + "-" + charge;
+                        refund_item_str += "," + order_type + "-" + charge_code + "-" + _ktsl + "-" + _ktsl * _orig_price;
                     }
                 }
                 lblTuikuan.Text = Math.Round(t_price, 2).ToString();
@@ -549,8 +563,8 @@ namespace Mzsf.Forms.Pages
                     //if (dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value != null && Convert.ToInt32(dgvCpr.Rows[rowIndex].Cells["confirm_flag"].Value) == 1)
                     //var _back = dgvCpr.Rows[rowIndex].Cells["back"].Value.ToString();
                     //var _charge_amount = dgvCpr.Rows[rowIndex].Cells["charge_amount"].Value.ToString();
-                     
-                    if ( dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value != null && dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "")
+
+                    if (dgvCpr.Rows[rowIndex].Cells["confirm_flag_str"].Value.ToString() != "" && dgvCpr.Rows[rowIndex].Cells["back"].Value.ToString() == "0")
                     {
                         UIMessageTip.Show("该项目已确认，不能退费");
                         return;
@@ -613,8 +627,8 @@ namespace Mzsf.Forms.Pages
                     foreach (DataGridViewRow row in dgvCpr.Rows)
                     {
                         //if (row.Cells["confirm_flag"].Value == null || Convert.ToInt32(row.Cells["confirm_flag"].Value) != 1)
-                         
-                        if (row.Cells["confirm_flag_str"].Value== null ||row.Cells["confirm_flag_str"].Value.ToString() == "")
+
+                        if (row.Cells["confirm_flag_str"].Value.ToString() == "" || row.Cells["back"].Value.ToString() != "0")
                         {
                             row.Cells[0].Value = "True";
                         }

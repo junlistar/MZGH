@@ -121,7 +121,7 @@ namespace Client.ViewModel
                 //{
                 //    return confirm_name + "(" + confirm_date + ")";
                 //}
-                if (hasBackYp && !string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
+                if (!string.IsNullOrEmpty(confirm_date) && !string.IsNullOrEmpty(confirm_opera))
                 {
                     return confirm_name + "(" + confirm_date + ")";
                 }
@@ -133,11 +133,28 @@ namespace Client.ViewModel
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(back) && back != charge_amount.ToString())
+                if (!string.IsNullOrWhiteSpace(back) && back != "0")
                 {
                     return true;
                 }
                 return false;
+            }
+        }
+        /// <summary>
+        /// 可退数量
+        /// </summary>
+        public string ktsl
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(confirm_flag_str))
+                {
+                    return charge_amount.ToString();
+                }
+                else
+                {
+                    return back;
+                }
             }
         }
     }

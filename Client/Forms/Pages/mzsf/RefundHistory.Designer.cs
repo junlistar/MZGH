@@ -39,6 +39,7 @@
             this.lblZongji = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
+            this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cf_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +47,6 @@
             this.orig_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sum_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.is_delete = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,9 +126,9 @@
             this.dgvCpr.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgvCpr.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.SkyBlue;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
@@ -136,6 +136,7 @@
             this.dgvCpr.ColumnHeadersHeight = 32;
             this.dgvCpr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCpr.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.back,
             this.charge_amount,
             this.charge_name,
             this.cf_amount,
@@ -143,7 +144,6 @@
             this.orig_price,
             this.charge_price,
             this.sum_total,
-            this.back,
             this.charge_code,
             this.order_type,
             this.is_delete});
@@ -157,7 +157,7 @@
             this.dgvCpr.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvCpr.EnableHeadersVisualStyles = false;
             this.dgvCpr.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dgvCpr.GridColor = System.Drawing.Color.PowderBlue;
+            this.dgvCpr.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
             this.dgvCpr.Location = new System.Drawing.Point(13, 111);
             this.dgvCpr.Name = "dgvCpr";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -184,6 +184,12 @@
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvCpr_RowPostPaint);
+            // 
+            // back
+            // 
+            this.back.DataPropertyName = "back";
+            this.back.HeaderText = "退药数量";
+            this.back.Name = "back";
             // 
             // charge_amount
             // 
@@ -226,13 +232,6 @@
             this.sum_total.DataPropertyName = "sum_total";
             this.sum_total.HeaderText = "合计";
             this.sum_total.Name = "sum_total";
-            // 
-            // back
-            // 
-            this.back.DataPropertyName = "back";
-            this.back.HeaderText = "退药数量";
-            this.back.Name = "back";
-            this.back.Visible = false;
             // 
             // charge_code
             // 
@@ -285,6 +284,7 @@
         private System.Windows.Forms.Label lblZongji;
         private System.Windows.Forms.Label label6;
         private Sunny.UI.UIDataGridView dgvCpr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn back;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn cf_amount;
@@ -292,7 +292,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orig_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn sum_total;
-        private System.Windows.Forms.DataGridViewTextBoxColumn back;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn order_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn is_delete;

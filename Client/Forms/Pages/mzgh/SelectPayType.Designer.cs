@@ -232,7 +232,7 @@
             // 
             // btnxj
             // 
-            this.btnxj.BackgroundImage = global::Client.Properties.Resources.xj;
+            this.btnxj.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.xj;
             this.btnxj.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnxj.Location = new System.Drawing.Point(556, 35);
             this.btnxj.Name = "btnxj";
@@ -243,7 +243,7 @@
             // 
             // btnybk
             // 
-            this.btnybk.BackgroundImage = global::Client.Properties.Resources.ybk;
+            this.btnybk.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.ybk;
             this.btnybk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnybk.Location = new System.Drawing.Point(427, 35);
             this.btnybk.Name = "btnybk";
@@ -254,7 +254,7 @@
             // 
             // btnyl
             // 
-            this.btnyl.BackgroundImage = global::Client.Properties.Resources.yl;
+            this.btnyl.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.yl;
             this.btnyl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnyl.Location = new System.Drawing.Point(301, 35);
             this.btnyl.Name = "btnyl";
@@ -265,7 +265,7 @@
             // 
             // button1
             // 
-            this.button1.BackgroundImage = global::Client.Properties.Resources.zfb;
+            this.button1.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.zfb;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Location = new System.Drawing.Point(177, 35);
             this.button1.Name = "button1";
@@ -276,7 +276,7 @@
             // 
             // btnwx
             // 
-            this.btnwx.BackgroundImage = global::Client.Properties.Resources.wxzf;
+            this.btnwx.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.wxzf;
             this.btnwx.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnwx.Location = new System.Drawing.Point(48, 35);
             this.btnwx.Name = "btnwx";

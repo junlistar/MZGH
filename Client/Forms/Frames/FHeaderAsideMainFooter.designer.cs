@@ -1,6 +1,6 @@
 ﻿using Sunny.UI;
 
-namespace Client
+namespace GuxHis.Mzsf
 {
     partial class FHeaderAsideMainFooter
     {
@@ -41,18 +41,18 @@ namespace Client
             this.tsslblTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlsInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.uiSignal1 = new Sunny.UI.UISignal();
             this.timerSignal = new System.Windows.Forms.Timer(this.components);
             this.timerlogout = new System.Windows.Forms.Timer(this.components);
             this.uiStyleManager1 = new Sunny.UI.UIStyleManager(this.components);
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
+            this.lblAbout = new System.Windows.Forms.LinkLabel();
             this.Footer.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Footer
             // 
-            this.Footer.Controls.Add(this.uiSignal1);
+            this.Footer.Controls.Add(this.lblAbout);
             this.Footer.Controls.Add(this.statusStrip1);
             this.Footer.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(173)))), ((int)(((byte)(178)))), ((int)(((byte)(181)))));
             this.Footer.Location = new System.Drawing.Point(250, 696);
@@ -161,20 +161,6 @@ namespace Client
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // uiSignal1
-            // 
-            this.uiSignal1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiSignal1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.uiSignal1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiSignal1.Location = new System.Drawing.Point(735, 4);
-            this.uiSignal1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSignal1.Name = "uiSignal1";
-            this.uiSignal1.Size = new System.Drawing.Size(39, 16);
-            this.uiSignal1.Style = Sunny.UI.UIStyle.Custom;
-            this.uiSignal1.TabIndex = 7;
-            this.uiSignal1.Text = "uiSignal1";
-            this.uiSignal1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
             // timerSignal
             // 
             this.timerSignal.Interval = 1000;
@@ -194,10 +180,25 @@ namespace Client
             this.uiContextMenuStrip1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiContextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.uiContextMenuStrip1_ItemClicked);
             // 
+            // lblAbout
+            // 
+            this.lblAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAbout.AutoSize = true;
+            this.lblAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblAbout.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblAbout.Location = new System.Drawing.Point(729, 0);
+            this.lblAbout.Name = "lblAbout";
+            this.lblAbout.Size = new System.Drawing.Size(42, 21);
+            this.lblAbout.TabIndex = 7;
+            this.lblAbout.TabStop = true;
+            this.lblAbout.Text = "关于";
+            this.lblAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblAbout_LinkClicked);
+            // 
             // FHeaderAsideMainFooter
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1024, 720);
+            this.CloseAskString = "";
             this.ExtendBox = true;
             this.ExtendMenu = this.uiContextMenuStrip1;
             this.ExtendSymbol = 362783;
@@ -231,10 +232,10 @@ namespace Client
         protected System.Windows.Forms.ToolStripStatusLabel tsslblTime;
         public System.Windows.Forms.ToolStripStatusLabel tlsInfo;
         private System.Windows.Forms.Timer timer1;
-        private UISignal uiSignal1;
         private System.Windows.Forms.Timer timerSignal;
         private System.Windows.Forms.Timer timerlogout;
         private UIStyleManager uiStyleManager1;
         private UIContextMenuStrip uiContextMenuStrip1;
+        private System.Windows.Forms.LinkLabel lblAbout;
     }
 }

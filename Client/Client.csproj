@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{427582F4-6599-4401-80B3-B26D8414FF66}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Client</RootNamespace>
-    <AssemblyName>Client</AssemblyName>
+    <RootNamespace>GuxHis.Mzsf</RootNamespace>
+    <AssemblyName>GuXHisMzsfAndMzgh</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -333,6 +333,12 @@
     <Compile Include="Forms\Pages\mzsf\RefundApart.Designer.cs">
       <DependentUpon>RefundApart.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Pages\mzsf\RefundBill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Pages\mzsf\RefundBill.Designer.cs">
+      <DependentUpon>RefundBill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Pages\mzsf\RefundConfirm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -452,6 +458,12 @@
     </Compile>
     <Compile Include="Forms\Pages\zfgl\YBPay.Designer.cs">
       <DependentUpon>YBPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wedgit\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wedgit\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Wedgit\AddZhenduan.cs">
       <SubType>Form</SubType>
@@ -838,6 +850,9 @@
     <EmbeddedResource Include="Forms\Pages\mzsf\RefundApart.resx">
       <DependentUpon>RefundApart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Pages\mzsf\RefundBill.resx">
+      <DependentUpon>RefundBill.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\mzsf\RefundConfirm.resx">
       <DependentUpon>RefundConfirm.cs</DependentUpon>
     </EmbeddedResource>
@@ -897,6 +912,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Pages\zfgl\YBPay.resx">
       <DependentUpon>YBPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wedgit\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Wedgit\AddZhenduan.resx">
       <DependentUpon>AddZhenduan.cs</DependentUpon>

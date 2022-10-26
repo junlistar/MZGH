@@ -83,15 +83,32 @@ namespace Mzsf.Forms.Pages
                     }
                     foreach (var item in result.data)
                     {
-                        if (new_data.Where(p => p.charge_code == item.charge_code).Count() > 0)
-                        {
-                            item.is_delete = false;
-                        }
-                        else
+                        var _dat = new_data.Where(p => p.charge_code == item.charge_code).FirstOrDefault();
+                        if (_dat== null)
+                        //if (new_data.Where(p => p.charge_code == item.charge_code).Count() > 0)
                         {
                             item.is_delete = true;
-                            refund_charge += item.total_price;
+                            item.back = item.charge_amount.ToString();
+                            refund_charge += item.charge_amount * item.orig_price; ;
                         }
+                        else if (_dat != null )
+                        {
+
+                            if (_dat.charge_amount == item.charge_amount)
+                            { 
+                                //refund_charge += item.charge_amount * item.orig_price; ;
+                                item.is_delete = false;
+                                //item.back = item.charge_amount.ToString();
+                                item.back = "0";
+                            }
+                            else
+                            {
+                                item.is_delete = true;
+                                refund_charge += (item.charge_amount - _dat.charge_amount) * item.orig_price;
+                                item.back = (item.charge_amount - _dat.charge_amount).ToString();
+                            }
+
+                        } 
                     }
 
                     var list = result.data.Select(p => new

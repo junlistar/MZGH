@@ -28,16 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiFlowLayoutPanel1 = new Sunny.UI.UIFlowLayoutPanel();
             this.uiButton1 = new Sunny.UI.UIButton();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.uiImageButton1 = new Sunny.UI.UIImageButton();
+            this.uiLinkLabel1 = new Sunny.UI.UILinkLabel();
+            this.uiButton2 = new Sunny.UI.UIButton();
+            this.uiSymbolButton1 = new Sunny.UI.UISymbolButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.rowMergeView1 = new Client.ClassLib.RowMergeView();
+            ((System.ComponentModel.ISupportInitialize)(this.uiImageButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rowMergeView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +69,7 @@
             this.uiButton1.Location = new System.Drawing.Point(635, 157);
             this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(100, 35);
+            this.uiButton1.Size = new System.Drawing.Size(114, 35);
             this.uiButton1.TabIndex = 2;
             this.uiButton1.Text = "uiButton1";
             this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -78,6 +84,76 @@
             this.webBrowser1.Size = new System.Drawing.Size(980, 383);
             this.webBrowser1.TabIndex = 3;
             this.webBrowser1.Url = new System.Uri("https://www.ifeng.com/", System.UriKind.Absolute);
+            // 
+            // uiImageButton1
+            // 
+            this.uiImageButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiImageButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiImageButton1.ImageLocation = "";
+            this.uiImageButton1.ImageOffset = new System.Drawing.Point(-1000, 0);
+            this.uiImageButton1.Location = new System.Drawing.Point(775, 156);
+            this.uiImageButton1.Name = "uiImageButton1";
+            this.uiImageButton1.Size = new System.Drawing.Size(217, 36);
+            this.uiImageButton1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.uiImageButton1.TabIndex = 4;
+            this.uiImageButton1.TabStop = false;
+            this.uiImageButton1.Text = "11111111111111";
+            this.uiImageButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.uiImageButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLinkLabel1
+            // 
+            this.uiLinkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(155)))), ((int)(((byte)(40)))));
+            this.uiLinkLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLinkLabel1.Image = ((System.Drawing.Image)(resources.GetObject("uiLinkLabel1.Image")));
+            this.uiLinkLabel1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
+            this.uiLinkLabel1.Location = new System.Drawing.Point(694, 233);
+            this.uiLinkLabel1.Name = "uiLinkLabel1";
+            this.uiLinkLabel1.Size = new System.Drawing.Size(100, 23);
+            this.uiLinkLabel1.TabIndex = 5;
+            this.uiLinkLabel1.TabStop = true;
+            this.uiLinkLabel1.Text = "uiLinkLabel1";
+            this.uiLinkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.uiLinkLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton2.Location = new System.Drawing.Point(649, 104);
+            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.Size = new System.Drawing.Size(100, 35);
+            this.uiButton2.TabIndex = 6;
+            this.uiButton2.Text = "uiButton2";
+            this.uiButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiSymbolButton1
+            // 
+            this.uiSymbolButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiSymbolButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.Image = ((System.Drawing.Image)(resources.GetObject("uiSymbolButton1.Image")));
+            this.uiSymbolButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiSymbolButton1.Location = new System.Drawing.Point(802, 12);
+            this.uiSymbolButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSymbolButton1.Name = "uiSymbolButton1";
+            this.uiSymbolButton1.Size = new System.Drawing.Size(225, 127);
+            this.uiSymbolButton1.TabIndex = 7;
+            this.uiSymbolButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiSymbolButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(847, 211);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(105, 45);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // rowMergeView1
             // 
@@ -135,6 +211,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1099, 701);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.uiSymbolButton1);
+            this.Controls.Add(this.uiButton2);
+            this.Controls.Add(this.uiLinkLabel1);
+            this.Controls.Add(this.uiImageButton1);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.uiFlowLayoutPanel1);
@@ -142,6 +223,8 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.uiImageButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rowMergeView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -153,5 +236,10 @@
         private Sunny.UI.UIFlowLayoutPanel uiFlowLayoutPanel1;
         private Sunny.UI.UIButton uiButton1;
         private System.Windows.Forms.WebBrowser webBrowser1;
+        private Sunny.UI.UIImageButton uiImageButton1;
+        private Sunny.UI.UILinkLabel uiLinkLabel1;
+        private Sunny.UI.UIButton uiButton2;
+        private Sunny.UI.UISymbolButton uiSymbolButton1;
+        private System.Windows.Forms.Button button1;
     }
 }

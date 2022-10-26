@@ -1,4 +1,6 @@
 ﻿using Client.FastReportLib;
+using Client;
+using GuxHis.Mzsf;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -8,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Client
+namespace GuxHis
 {
     internal static class Program
     {
@@ -19,17 +21,6 @@ namespace Client
         [STAThread]
         static void Main(string[] args)
         {
-            //try
-            //{
-
-            ////设置应用程序处理异常方式：ThreadException处理
-            //Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-            ////UI线程的未处理异常捕获
-            //Application.ThreadException += Application_ThreadException;
-            ////非UI线程的未处理异常捕获
-            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
-
             //这段代码要在程序运行的入口进行配置
             log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
 
@@ -40,84 +31,55 @@ namespace Client
             Application.Run(new FHeaderAsideMainFooter(args));
             //Application.Run(new Form1());
 
-            //菜单管理
-
+            //菜单管理 
             log.Debug("关闭了程序");
-
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    string str = ExceptionToString(ex, "主线程");
-            //    MessageBox.Show(str, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //} 
-
         }
-        /// <summary>
-        /// 提取异常信息
-        /// </summary>
-        private static string ExceptionToString(Exception ex, string info)
+    }
+
+    public class ShowWinForm
+    {
+        private static ILog log = LogManager.GetLogger(typeof(ShowWinForm));//typeof放当前类
+        //包含控件的窗口句柄
+        public IntPtr intPtr;
+
+        FHeaderAsideMainFooter mf;
+
+        public IntPtr GetWinFormHandle()
         {
-            StringBuilder str = new StringBuilder($"{DateTime.Now}, {info}发生了一个错误！{Environment.NewLine}");
-            if (ex.InnerException == null)
+            if (mf!=null)
             {
-                str.Append($"【对象名称】：{ex.Source}{Environment.NewLine}");
-                str.Append($"【异常类型】：{ex.GetType().Name}{Environment.NewLine}");
-                str.Append($"【详细信息】：{ex.Message}{Environment.NewLine}");
-                str.Append($"【堆栈调用】：{ex.ToString()}");
+                intPtr = mf.GetGuxHisMzsfHandle();
+                return intPtr;
             }
-            else
-            {
-                str.Append($"【对象名称】：{ex.InnerException.Source}{Environment.NewLine}");
-                str.Append($"【异常类型】：{ex.InnerException.GetType().Name}{Environment.NewLine}");
-                str.Append($"【详细信息】：{ex.InnerException.Message}{Environment.NewLine}");
-                str.Append($"【堆栈调用】：{ex.InnerException.StackTrace}");
-            }
-            return str.ToString();
+            return IntPtr.Zero;
         }
-
-        /// <summary>
-        /// UI线程未捕获异常处理函数
-        /// </summary>
-        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        public ShowWinForm()
         {
-            try
-            {
-                string msg = ExceptionToString(e.Exception, "UI线程");
-                MessageBox.Show(msg, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                string msg = ExceptionToString(ex, "UI线程 处理函数");
-                MessageBox.Show(msg, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show("无参数"); //LoadCompoment();
         }
-
-        /// <summary>
-        /// 非UI线程未捕获异常处理函数
-        /// </summary>
-        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        public void SetRunParams(string args)
         {
-            try
+            MessageBox.Show($"参数:{args}");
+            //log.Debug($"程序被调用，参数：{args}");
+
+            if (!string.IsNullOrEmpty(args))
             {
-                string msg;
-                if (e.ExceptionObject is Exception ex)
-                {
-                    msg = ExceptionToString(ex, "非UI线程");
-                }
-                else
-                {
-                    msg = $"发生了一个错误！信息:{e.ExceptionObject}";
-                }
-                MessageBox.Show(msg, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                string msg = ExceptionToString(ex, "非UI线程 处理函数");
-                MessageBox.Show(msg, "系统错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"参数打开界面");
+                //mf = new FHeaderAsideMainFooter(new string[] { args });
+                //mf = new FHeaderAsideMainFooter();
+                //Application.Run(mf);
+
+                //这段代码要在程序运行的入口进行配置
+                log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
+
+                log.Debug("打开了程序");
+                mf = new FHeaderAsideMainFooter(new string[] { args });
+                Application.Run(mf);
+                //Application.Run(new Form1());
+
+                //菜单管理 
+                log.Debug("关闭了程序");
             }
         }
-
-
     }
 }

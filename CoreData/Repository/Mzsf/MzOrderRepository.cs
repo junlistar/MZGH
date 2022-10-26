@@ -777,6 +777,7 @@ namespace Data.Repository.Mzsf
 
                 //整理退款项目
                 List<string> charge_code_list = new List<string>();
+                Dictionary<string, int> charge_code_dic = new Dictionary<string, int>();
                 decimal refund_charge = 0;
                 var refund_item_arr = refund_item_str.Split(",");
                 foreach (var item in refund_item_arr)
@@ -784,10 +785,12 @@ namespace Data.Repository.Mzsf
                     var refund_item = item.Split("-");
                     var order_type = refund_item[0];
                     var charge_code = refund_item[1];
-                    var price = Convert.ToDecimal(refund_item[2]);
+                    var ktsl =int.Parse(refund_item[2]);
+                    var price = Convert.ToDecimal(refund_item[3]);
 
                     refund_charge += price;
                     charge_code_list.Add(charge_code);
+                    charge_code_dic.Add(charge_code, ktsl);
                 }
 
 
@@ -925,8 +928,16 @@ namespace Data.Repository.Mzsf
                         foreach (var item in detail_charge_list)
                         {
                             Serilog.Log.Debug($"判断charge_code :{item.charge_code}");
-                            if (charge_code_list.Contains(item.charge_code)) //还要判断数量
+
+                            //这里判断处方数量和付数相乘的结果，新结果默认付数为1
+
+                            if (charge_code_dic.ContainsKey(item.charge_code))
                             {
+                                item.charge_amount = (item.charge_amount * int.Parse(item.caoyao_fu)) - charge_code_dic[item.charge_code];
+                            }
+                            
+                            if (charge_code_list.Contains(item.charge_code) && item.charge_amount<=0) //还要判断数量
+                            { 
                                 Serilog.Log.Debug($"退款，不写入");
                                 //选择退款的，不写入
                                 continue;
@@ -964,12 +975,13 @@ namespace Data.Repository.Mzsf
                             para.Add("@charge_amount", item.charge_amount);
                             para.Add("@orig_price", item.orig_price);
                             para.Add("@charge_group", item.charge_group);
-                            para.Add("@caoyao_fu", item.caoyao_fu);
+                            para.Add("@caoyao_fu", 1); //默认1
                             para.Add("@back_amount", item.back_amount);
 
                             para.Add("@happen_date", item.happen_date);
                             para.Add("@price_data", item.price_date);
                             para.Add("@confirm_date", item.confirm_date);
+                            para.Add("@confirm_opera", item.confirm_opera); 
                             para.Add("@price_opera", opera);
                             para.Add("@enter_date", item.enter_date);
                             para.Add("@enter_opera", opera);
@@ -988,7 +1000,7 @@ namespace Data.Repository.Mzsf
                             para.Add("@separate_flag", item.seperate_flag);
                             para.Add("@supprice_flag", item.supprice_flag);
                             para.Add("@poision_flag", item.poision_flag);
-                            para.Add("@sum_total", item.sum_total);
+                            para.Add("@sum_total", item.charge_amount* item.orig_price);
                             para.Add("@response_type", item.response_type);
                             para.Add("@charge_type", item.charge_type);
 

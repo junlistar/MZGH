@@ -38,4 +38,5 @@ namespace CoreApi
                     webBuilder.UseStartup<Startup>();
                 }).UseServiceProviderFactory(new AutofacServiceProviderFactory());//使用Autofac服务提供工厂(强类型)--> 集成Autofac;
     }
+
 }

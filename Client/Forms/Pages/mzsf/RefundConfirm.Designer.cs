@@ -44,10 +44,6 @@
             this.lblZongji = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvDeposit = new Sunny.UI.UIDataGridView();
-            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -55,7 +51,6 @@
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
-            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,13 +59,18 @@
             this.orig_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_price = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sum_total = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.confirm_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.confirm_flag_str = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ckall = new Sunny.UI.UICheckBox();
+            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -86,11 +86,11 @@
             this.uiPanel1.Controls.Add(this.lblZongji);
             this.uiPanel1.Controls.Add(this.label6);
             this.uiPanel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiPanel1.Location = new System.Drawing.Point(4, 95);
+            this.uiPanel1.Location = new System.Drawing.Point(4, 93);
             this.uiPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPanel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPanel1.Name = "uiPanel1";
-            this.uiPanel1.Size = new System.Drawing.Size(1132, 63);
+            this.uiPanel1.Size = new System.Drawing.Size(527, 151);
             this.uiPanel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiPanel1.TabIndex = 5;
             this.uiPanel1.Text = null;
@@ -102,7 +102,7 @@
             this.lblTuikuan.AutoSize = true;
             this.lblTuikuan.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.lblTuikuan.ForeColor = System.Drawing.Color.Red;
-            this.lblTuikuan.Location = new System.Drawing.Point(570, 17);
+            this.lblTuikuan.Location = new System.Drawing.Point(246, 80);
             this.lblTuikuan.Name = "lblTuikuan";
             this.lblTuikuan.Size = new System.Drawing.Size(70, 35);
             this.lblTuikuan.TabIndex = 7;
@@ -112,7 +112,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label5.Location = new System.Drawing.Point(369, 17);
+            this.label5.Location = new System.Drawing.Point(45, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(195, 35);
             this.label5.TabIndex = 6;
@@ -123,7 +123,7 @@
             this.lblZongji.AutoSize = true;
             this.lblZongji.Font = new System.Drawing.Font("微软雅黑", 20F);
             this.lblZongji.ForeColor = System.Drawing.Color.Red;
-            this.lblZongji.Location = new System.Drawing.Point(213, 17);
+            this.lblZongji.Location = new System.Drawing.Point(246, 25);
             this.lblZongji.Name = "lblZongji";
             this.lblZongji.Size = new System.Drawing.Size(70, 35);
             this.lblZongji.TabIndex = 5;
@@ -133,7 +133,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 20F);
-            this.label6.Location = new System.Drawing.Point(12, 17);
+            this.label6.Location = new System.Drawing.Point(45, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(195, 35);
             this.label6.TabIndex = 4;
@@ -173,7 +173,7 @@
             this.dgvDeposit.EnableHeadersVisualStyles = false;
             this.dgvDeposit.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvDeposit.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.dgvDeposit.Location = new System.Drawing.Point(4, 166);
+            this.dgvDeposit.Location = new System.Drawing.Point(538, 93);
             this.dgvDeposit.Name = "dgvDeposit";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -194,35 +194,10 @@
             this.dgvDeposit.SelectedIndex = -1;
             this.dgvDeposit.ShowGridLine = false;
             this.dgvDeposit.ShowRect = false;
-            this.dgvDeposit.Size = new System.Drawing.Size(1132, 125);
+            this.dgvDeposit.Size = new System.Drawing.Size(598, 151);
             this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // cheque_name
-            // 
-            this.cheque_name.DataPropertyName = "cheque_name";
-            this.cheque_name.HeaderText = "付款类型";
-            this.cheque_name.Name = "cheque_name";
-            // 
-            // amount
-            // 
-            this.amount.DataPropertyName = "amount";
-            this.amount.HeaderText = "本次金额";
-            this.amount.Name = "amount";
-            this.amount.Visible = false;
-            // 
-            // charge
-            // 
-            this.charge.DataPropertyName = "charge";
-            this.charge.HeaderText = "原收金额";
-            this.charge.Name = "charge";
-            // 
-            // refund_charge
-            // 
-            this.refund_charge.DataPropertyName = "refund_charge";
-            this.refund_charge.HeaderText = "应退金额";
-            this.refund_charge.Name = "refund_charge";
             // 
             // uiPanel2
             // 
@@ -343,11 +318,11 @@
             this.orig_price,
             this.charge_price,
             this.sum_total,
+            this.confirm_flag_str,
             this.back,
             this.charge_code,
             this.order_type,
             this.confirm_flag,
-            this.confirm_flag_str,
             this.confirm_name,
             this.confirm_date});
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -361,7 +336,7 @@
             this.dgvCpr.EnableHeadersVisualStyles = false;
             this.dgvCpr.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dgvCpr.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(104)))), ((int)(((byte)(173)))), ((int)(((byte)(255)))));
-            this.dgvCpr.Location = new System.Drawing.Point(4, 297);
+            this.dgvCpr.Location = new System.Drawing.Point(4, 252);
             this.dgvCpr.Name = "dgvCpr";
             this.dgvCpr.ReadOnly = true;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -383,27 +358,11 @@
             this.dgvCpr.SelectedIndex = -1;
             this.dgvCpr.ShowGridLine = false;
             this.dgvCpr.ShowRect = false;
-            this.dgvCpr.Size = new System.Drawing.Size(1132, 325);
+            this.dgvCpr.Size = new System.Drawing.Size(1132, 332);
             this.dgvCpr.Style = Sunny.UI.UIStyle.Custom;
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
-            // 
-            // ckall
-            // 
-            this.ckall.BackColor = System.Drawing.Color.Transparent;
-            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(6, 298);
-            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ckall.Name = "ckall";
-            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.ckall.Size = new System.Drawing.Size(73, 30);
-            this.ckall.Style = Sunny.UI.UIStyle.Custom;
-            this.ckall.TabIndex = 14;
-            this.ckall.Text = "全选";
-            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // chkback
             // 
@@ -415,7 +374,7 @@
             // 
             // charge_amount
             // 
-            this.charge_amount.DataPropertyName = "charge_amount";
+            this.charge_amount.DataPropertyName = "ktsl";
             this.charge_amount.HeaderText = "可退数量";
             this.charge_amount.Name = "charge_amount";
             this.charge_amount.ReadOnly = true;
@@ -462,13 +421,19 @@
             this.sum_total.Name = "sum_total";
             this.sum_total.ReadOnly = true;
             // 
+            // confirm_flag_str
+            // 
+            this.confirm_flag_str.DataPropertyName = "confirm_flag_str";
+            this.confirm_flag_str.HeaderText = "确认状态";
+            this.confirm_flag_str.Name = "confirm_flag_str";
+            this.confirm_flag_str.ReadOnly = true;
+            // 
             // back
             // 
             this.back.DataPropertyName = "back";
             this.back.HeaderText = "退药数量";
             this.back.Name = "back";
             this.back.ReadOnly = true;
-            this.back.Visible = false;
             // 
             // charge_code
             // 
@@ -494,13 +459,6 @@
             this.confirm_flag.ReadOnly = true;
             this.confirm_flag.Visible = false;
             // 
-            // confirm_flag_str
-            // 
-            this.confirm_flag_str.DataPropertyName = "confirm_flag_str";
-            this.confirm_flag_str.HeaderText = "确认状态";
-            this.confirm_flag_str.Name = "confirm_flag_str";
-            this.confirm_flag_str.ReadOnly = true;
-            // 
             // confirm_name
             // 
             this.confirm_name.DataPropertyName = "confirm_name";
@@ -517,10 +475,52 @@
             this.confirm_date.ReadOnly = true;
             this.confirm_date.Visible = false;
             // 
+            // ckall
+            // 
+            this.ckall.BackColor = System.Drawing.Color.Transparent;
+            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ckall.Location = new System.Drawing.Point(6, 254);
+            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ckall.Name = "ckall";
+            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
+            this.ckall.TabIndex = 14;
+            this.ckall.Text = "全选";
+            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
+            // 
+            // cheque_name
+            // 
+            this.cheque_name.DataPropertyName = "cheque_name";
+            this.cheque_name.HeaderText = "付款类型";
+            this.cheque_name.Name = "cheque_name";
+            // 
+            // amount
+            // 
+            this.amount.DataPropertyName = "amount";
+            this.amount.HeaderText = "本次金额";
+            this.amount.Name = "amount";
+            this.amount.Visible = false;
+            // 
+            // charge
+            // 
+            this.charge.DataPropertyName = "charge";
+            this.charge.HeaderText = "原收金额";
+            this.charge.Name = "charge";
+            // 
+            // refund_charge
+            // 
+            this.refund_charge.DataPropertyName = "refund_charge";
+            this.refund_charge.HeaderText = "应退金额";
+            this.refund_charge.Name = "refund_charge";
+            this.refund_charge.Visible = false;
+            // 
             // RefundConfirm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1140, 625);
+            this.ClientSize = new System.Drawing.Size(1140, 587);
             this.Controls.Add(this.ckall);
             this.Controls.Add(this.dgvCpr);
             this.Controls.Add(this.uiPanel2);
@@ -556,10 +556,6 @@
         private Sunny.UI.UIPanel uiPanel2;
         private Sunny.UI.UIButton btnBufenTuikuan;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge;
-        private System.Windows.Forms.DataGridViewTextBoxColumn refund_charge;
         private Sunny.UI.UIDataGridView dgvCpr;
         private Sunny.UI.UISymbolButton btnTuikuan;
         private Sunny.UI.UISymbolButton btnExit;
@@ -573,12 +569,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn orig_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_price;
         private System.Windows.Forms.DataGridViewTextBoxColumn sum_total;
+        private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn back;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn order_type;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag_str;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge;
+        private System.Windows.Forms.DataGridViewTextBoxColumn refund_charge;
     }
 }

@@ -290,7 +290,7 @@
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackgroundImage = global::Client.Properties.Resources.com_login;
+            this.BackgroundImage = global::GuxHis.Mzsf.Properties.Resources.com_login;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(960, 540);
             this.Controls.Add(this.uiSymbolLabel3);
