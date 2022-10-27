@@ -12,16 +12,26 @@ namespace YbjsLib
     public class Ybjs
     {
         //public string Do(string infno,string base) 
-        public Ybjs()
+        public Ybjs(string mdtrtarea_admvs="",string recer_sys_code = "", string infver = "", string opter_type = "", string fixmedins_code = "",
+            string fixmedins_name = "", string edit_diseinfo = "", string yb_identity_only = "")
         {
-            YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
-            YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
-            YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
-            YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
-            YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
-            YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
-            YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
-            YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
+            YBHelper.mdtrtarea_admvs = mdtrtarea_admvs;
+            YBHelper.recer_sys_code = recer_sys_code;
+            YBHelper.infver = infver;
+            YBHelper.opter_type = opter_type;
+            YBHelper.fixmedins_code = fixmedins_code;
+            YBHelper.fixmedins_name = fixmedins_name;
+            YBHelper.edit_diseinfo = edit_diseinfo;
+            YBHelper.yb_identity_only = yb_identity_only;
+
+            //YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
+            //YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
+            //YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
+            //YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
+            //YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
+            //YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
+            //YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
+            //YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only")
         }
 
 

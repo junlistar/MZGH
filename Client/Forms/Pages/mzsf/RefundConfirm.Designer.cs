@@ -44,6 +44,10 @@
             this.lblZongji = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvDeposit = new Sunny.UI.UIDataGridView();
+            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.btnExit = new Sunny.UI.UISymbolButton();
@@ -51,6 +55,7 @@
             this.btnBufenTuikuan = new Sunny.UI.UIButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCpr = new Sunny.UI.UIDataGridView();
+            this.ckall = new Sunny.UI.UICheckBox();
             this.chkback = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.charge_amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,14 +68,10 @@
             this.back = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.charge_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.order_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.order_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_flag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.confirm_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ckall = new Sunny.UI.UICheckBox();
-            this.cheque_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.refund_charge = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDeposit)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -199,6 +200,32 @@
             this.dgvDeposit.TabIndex = 6;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // cheque_name
+            // 
+            this.cheque_name.DataPropertyName = "cheque_name";
+            this.cheque_name.HeaderText = "付款类型";
+            this.cheque_name.Name = "cheque_name";
+            // 
+            // amount
+            // 
+            this.amount.DataPropertyName = "amount";
+            this.amount.HeaderText = "本次金额";
+            this.amount.Name = "amount";
+            this.amount.Visible = false;
+            // 
+            // charge
+            // 
+            this.charge.DataPropertyName = "charge";
+            this.charge.HeaderText = "原收金额";
+            this.charge.Name = "charge";
+            // 
+            // refund_charge
+            // 
+            this.refund_charge.DataPropertyName = "refund_charge";
+            this.refund_charge.HeaderText = "应退金额";
+            this.refund_charge.Name = "refund_charge";
+            this.refund_charge.Visible = false;
+            // 
             // uiPanel2
             // 
             this.uiPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -322,6 +349,7 @@
             this.back,
             this.charge_code,
             this.order_type,
+            this.order_no,
             this.confirm_flag,
             this.confirm_name,
             this.confirm_date});
@@ -363,6 +391,22 @@
             this.dgvCpr.TabIndex = 9;
             this.dgvCpr.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.dgvCpr.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCpr_CellClick);
+            // 
+            // ckall
+            // 
+            this.ckall.BackColor = System.Drawing.Color.Transparent;
+            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ckall.Location = new System.Drawing.Point(6, 254);
+            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.ckall.Name = "ckall";
+            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.ckall.Size = new System.Drawing.Size(73, 30);
+            this.ckall.Style = Sunny.UI.UIStyle.Custom;
+            this.ckall.TabIndex = 14;
+            this.ckall.Text = "全选";
+            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
             // 
             // chkback
             // 
@@ -451,6 +495,14 @@
             this.order_type.ReadOnly = true;
             this.order_type.Visible = false;
             // 
+            // order_no
+            // 
+            this.order_no.DataPropertyName = "order_no";
+            this.order_no.HeaderText = "order_no";
+            this.order_no.Name = "order_no";
+            this.order_no.ReadOnly = true;
+            this.order_no.Visible = false;
+            // 
             // confirm_flag
             // 
             this.confirm_flag.DataPropertyName = "confirm_flag";
@@ -474,48 +526,6 @@
             this.confirm_date.Name = "confirm_date";
             this.confirm_date.ReadOnly = true;
             this.confirm_date.Visible = false;
-            // 
-            // ckall
-            // 
-            this.ckall.BackColor = System.Drawing.Color.Transparent;
-            this.ckall.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ckall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ckall.Location = new System.Drawing.Point(6, 254);
-            this.ckall.MinimumSize = new System.Drawing.Size(1, 1);
-            this.ckall.Name = "ckall";
-            this.ckall.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.ckall.Size = new System.Drawing.Size(73, 30);
-            this.ckall.Style = Sunny.UI.UIStyle.Custom;
-            this.ckall.TabIndex = 14;
-            this.ckall.Text = "全选";
-            this.ckall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            this.ckall.CheckedChanged += new System.EventHandler(this.ckall_CheckedChanged);
-            // 
-            // cheque_name
-            // 
-            this.cheque_name.DataPropertyName = "cheque_name";
-            this.cheque_name.HeaderText = "付款类型";
-            this.cheque_name.Name = "cheque_name";
-            // 
-            // amount
-            // 
-            this.amount.DataPropertyName = "amount";
-            this.amount.HeaderText = "本次金额";
-            this.amount.Name = "amount";
-            this.amount.Visible = false;
-            // 
-            // charge
-            // 
-            this.charge.DataPropertyName = "charge";
-            this.charge.HeaderText = "原收金额";
-            this.charge.Name = "charge";
-            // 
-            // refund_charge
-            // 
-            this.refund_charge.DataPropertyName = "refund_charge";
-            this.refund_charge.HeaderText = "应退金额";
-            this.refund_charge.Name = "refund_charge";
-            this.refund_charge.Visible = false;
             // 
             // RefundConfirm
             // 
@@ -561,6 +571,10 @@
         private Sunny.UI.UISymbolButton btnExit;
         private Sunny.UI.UICheckBox ckall;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn charge;
+        private System.Windows.Forms.DataGridViewTextBoxColumn refund_charge;
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkback;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_name;
@@ -573,12 +587,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn back;
         private System.Windows.Forms.DataGridViewTextBoxColumn charge_code;
         private System.Windows.Forms.DataGridViewTextBoxColumn order_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn order_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_flag;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_name;
         private System.Windows.Forms.DataGridViewTextBoxColumn confirm_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cheque_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn charge;
-        private System.Windows.Forms.DataGridViewTextBoxColumn refund_charge;
     }
 }

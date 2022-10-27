@@ -897,11 +897,18 @@ namespace Mzsf.Forms.Pages
 
                 //YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
 
-                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs(YBHelper.mdtrtarea_admvs, YBHelper.recer_sys_code, YBHelper.infver, YBHelper.opter_type,
+                    YBHelper.fixmedins_code, YBHelper.fixmedins_name, YBHelper.edit_diseinfo, YBHelper.yb_identity_only);
 
                 var param2 = ybjs.M1101(SessionHelper.uservm.user_mi, SessionHelper.uservm.name);
 
                 YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(param2.ToString());
+
+                if (yBResponse==null)
+                {
+                    UIMessageBox.ShowError("读取医保卡失败，请检查 设备和网络 是否连接成功！");
+                    return;
+                }
 
                 if (!string.IsNullOrEmpty(yBResponse.err_msg))
                 {

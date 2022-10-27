@@ -1233,7 +1233,8 @@ namespace Client.Forms.Pages
 
                 //log.Debug(parm[2]);
 
-                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs(YBHelper.mdtrtarea_admvs, YBHelper.recer_sys_code, YBHelper.infver, YBHelper.opter_type,
+                    YBHelper.fixmedins_code, YBHelper.fixmedins_name, YBHelper.edit_diseinfo, YBHelper.yb_identity_only);
 
                 var param2 = ybjs.M1101(SessionHelper.uservm.user_mi, SessionHelper.uservm.name);
 

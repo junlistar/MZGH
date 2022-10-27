@@ -522,7 +522,8 @@ namespace Mzsf.Forms.Pages
                 string mdtrtCertTypes_str = WebApiHelper.SerializeObject(SessionHelper.mdtrtCertTypes);
                 string jiuzhenInfo_str = WebApiHelper.SerializeObject(jiuzhenInfo);
 
-                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs();
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs(YBHelper.mdtrtarea_admvs, YBHelper.recer_sys_code, YBHelper.infver, YBHelper.opter_type,
+                    YBHelper.fixmedins_code, YBHelper.fixmedins_name, YBHelper.edit_diseinfo, YBHelper.yb_identity_only);
 
                 ybjs.Init(ybhzComaper_str, doctList_str, unitList_str, icdCodes_str, diagTypeList_str, diseinfoList_str, jiuzhenInfo_str, chargeItems_str, insutypes_str, birctrlTypes_str, medTypes_str, mdtrtCertTypes_str, "0", "1");
 

@@ -83,7 +83,7 @@ namespace Mzsf.Forms.Pages
                     }
                     foreach (var item in result.data)
                     {
-                        var _dat = new_data.Where(p => p.charge_code == item.charge_code).FirstOrDefault();
+                        var _dat = new_data.Where(p => p.charge_code == item.charge_code && p.order_no== item.order_no).FirstOrDefault();
                         if (_dat== null)
                         //if (new_data.Where(p => p.charge_code == item.charge_code).Count() > 0)
                         {

@@ -784,13 +784,14 @@ namespace Data.Repository.Mzsf
                 {
                     var refund_item = item.Split("-");
                     var order_type = refund_item[0];
-                    var charge_code = refund_item[1];
-                    var ktsl =int.Parse(refund_item[2]);
-                    var price = Convert.ToDecimal(refund_item[3]);
+                    var order_no = refund_item[1];
+                    var charge_code = refund_item[2];
+                    var ktsl =int.Parse(refund_item[3]);
+                    var price = Convert.ToDecimal(refund_item[4]);
 
                     refund_charge += price;
-                    charge_code_list.Add(charge_code);
-                    charge_code_dic.Add(charge_code, ktsl);
+                    charge_code_list.Add(order_no + "-" +charge_code);
+                    charge_code_dic.Add(order_no + "-" + charge_code, ktsl);
                 }
 
 
@@ -930,13 +931,13 @@ namespace Data.Repository.Mzsf
                             Serilog.Log.Debug($"判断charge_code :{item.charge_code}");
 
                             //这里判断处方数量和付数相乘的结果，新结果默认付数为1
-
-                            if (charge_code_dic.ContainsKey(item.charge_code))
+                           
+                            if (charge_code_dic.ContainsKey(item.order_no + "-" + item.charge_code))
                             {
-                                item.charge_amount = (item.charge_amount * int.Parse(item.caoyao_fu)) - charge_code_dic[item.charge_code];
+                                item.charge_amount = (item.charge_amount * int.Parse(item.caoyao_fu)) - charge_code_dic[item.order_no + "-" + item.charge_code];
                             }
                             
-                            if (charge_code_list.Contains(item.charge_code) && item.charge_amount<=0) //还要判断数量
+                            if (charge_code_list.Contains(item.order_no + "-" + item.charge_code) && item.charge_amount<=0) //还要判断数量
                             { 
                                 Serilog.Log.Debug($"退款，不写入");
                                 //选择退款的，不写入

@@ -22,6 +22,7 @@ using Client.Forms.Pages.zfgl;
 using Client.Forms.Pages.xt;
 using System.IO;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace GuxHis.Mzsf
 {
@@ -77,64 +78,65 @@ namespace GuxHis.Mzsf
         { 
             InitializeComponent();
 
-            SessionHelper.MyHttpClient = Client.ClassLib.HttpClientFactory.GetHttpClient();
+            SessionHelper.MyHttpClient = HttpClientFactory.GetHttpClient();
 
-            Configuration con = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            string assemblyPath = Assembly.GetExecutingAssembly().GetName().CodeBase;//获取运行项目当前DLL的路径       
+           
+            assemblyPath = assemblyPath.Remove(0, 8); //去除前缀            
+            string configUrl = assemblyPath + ".config"; //添加 .config 后缀，得到配置文件路径
+            //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+            Configuration con = ConfigurationManager.OpenExeConfiguration(assemblyPath);
+            //MessageBox.Show(string.Join(",", con.AppSettings.Settings.AllKeys));
 
-            //MessageBox.Show(string.Join(",",con.AppSettings.Settings.AllKeys));
-            //Configuration con = ConfigurationManager.OpenExeConfiguration(Application.StartupPath + @"\Mzsf.dll");
-
-            //MessageBox.Show(con.AppSettings.Settings["apihost"].Value);
-
-            //SessionHelper.MyHttpClient.BaseAddress = new Uri(con.AppSettings.Settings["apihost"].Value);
-
-            //MyMessager msg = new MyMessager();
-            //Application.AddMessageFilter(msg);
-
-
-            //LogOutSeconds = int.Parse(con.AppSettings.Settings["LogOutSeconds"].Value);
-
-            ////报表编号获取（门诊挂号，门诊收费）
-            //SessionHelper.mzgh_report_code = int.Parse(con.AppSettings.Settings["mzgh_report_code"].Value);
-            //SessionHelper.mzsf_report_code = int.Parse(con.AppSettings.Settings["mzsf_report_code"].Value);
-            ////挂号日结，收费日结
-            //SessionHelper.ghrj_report_code = int.Parse(con.AppSettings.Settings["ghrj_report_code"].Value);
-            //SessionHelper.sfrj_report_code = int.Parse(con.AppSettings.Settings["sfrj_report_code"].Value);
-
-            ////读取医保配置
-            //YBHelper.mdtrtarea_admvs = con.AppSettings.Settings["mdtrtarea_admvs"].Value;
-            //YBHelper.recer_sys_code = con.AppSettings.Settings["recer_sys_code"].Value;
-            //YBHelper.infver = con.AppSettings.Settings["infver"].Value;
-            //YBHelper.opter_type = con.AppSettings.Settings["opter_type"].Value;
-            //YBHelper.fixmedins_code = con.AppSettings.Settings["fixmedins_code"].Value;
-            //YBHelper.fixmedins_name = con.AppSettings.Settings["fixmedins_name"].Value;
-            //YBHelper.edit_diseinfo = con.AppSettings.Settings["edit_diseinfo"].Value;
-            //YBHelper.yb_identity_only = con.AppSettings.Settings["yb_identity_only"].Value;
-
-            SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+            SessionHelper.MyHttpClient.BaseAddress = new Uri(con.AppSettings.Settings["apihost"].Value);
 
             MyMessager msg = new MyMessager();
             Application.AddMessageFilter(msg);
 
+            LogOutSeconds = int.Parse(con.AppSettings.Settings["LogOutSeconds"].Value);
 
-            LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
-
-            //报表编号获取（门诊挂号，门诊收费） 
-            SessionHelper.mzgh_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
-            SessionHelper.mzsf_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
+            //报表编号获取（门诊挂号，门诊收费）
+            SessionHelper.mzgh_report_code = int.Parse(con.AppSettings.Settings["mzgh_report_code"].Value);
+            SessionHelper.mzsf_report_code = int.Parse(con.AppSettings.Settings["mzsf_report_code"].Value);
             //挂号日结，收费日结
-            SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
-            SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
+            SessionHelper.ghrj_report_code = int.Parse(con.AppSettings.Settings["ghrj_report_code"].Value);
+            SessionHelper.sfrj_report_code = int.Parse(con.AppSettings.Settings["sfrj_report_code"].Value);
 
             //读取医保配置
-            YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
-            YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
-            YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
-            YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
-            YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
-            YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
-            YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
-            YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
+            YBHelper.mdtrtarea_admvs = con.AppSettings.Settings["mdtrtarea_admvs"].Value;
+            YBHelper.recer_sys_code = con.AppSettings.Settings["recer_sys_code"].Value;
+            YBHelper.infver = con.AppSettings.Settings["infver"].Value;
+            YBHelper.opter_type = con.AppSettings.Settings["opter_type"].Value;
+            YBHelper.fixmedins_code = con.AppSettings.Settings["fixmedins_code"].Value;
+            YBHelper.fixmedins_name = con.AppSettings.Settings["fixmedins_name"].Value;
+            YBHelper.edit_diseinfo = con.AppSettings.Settings["edit_diseinfo"].Value;
+            YBHelper.yb_identity_only = con.AppSettings.Settings["yb_identity_only"].Value;
+
+            //MessageBox.Show(con.AppSettings.Settings["apihost"].Value);
+            //--------------------------------------------------------------------------------------------------------------------------------------
+            //SessionHelper.MyHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("apihost"));
+
+            //MyMessager msg = new MyMessager();
+            //Application.AddMessageFilter(msg);
+
+            //LogOutSeconds = int.Parse(ConfigurationManager.AppSettings.Get("LogOutSeconds"));
+
+            ////报表编号获取（门诊挂号，门诊收费） 
+            //SessionHelper.mzgh_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzgh_report_code"));
+            //SessionHelper.mzsf_report_code = int.Parse(ConfigurationManager.AppSettings.Get("mzsf_report_code"));
+            ////挂号日结，收费日结
+            //SessionHelper.ghrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("ghrj_report_code"));
+            //SessionHelper.sfrj_report_code = int.Parse(ConfigurationManager.AppSettings.Get("sfrj_report_code"));
+
+            ////读取医保配置
+            //YBHelper.mdtrtarea_admvs = ConfigurationManager.AppSettings.Get("mdtrtarea_admvs");
+            //YBHelper.recer_sys_code = ConfigurationManager.AppSettings.Get("recer_sys_code");
+            //YBHelper.infver = ConfigurationManager.AppSettings.Get("infver");
+            //YBHelper.opter_type = ConfigurationManager.AppSettings.Get("opter_type");
+            //YBHelper.fixmedins_code = ConfigurationManager.AppSettings.Get("fixmedins_code");
+            //YBHelper.fixmedins_name = ConfigurationManager.AppSettings.Get("fixmedins_name");
+            //YBHelper.edit_diseinfo = ConfigurationManager.AppSettings.Get("edit_diseinfo");
+            //YBHelper.yb_identity_only = ConfigurationManager.AppSettings.Get("yb_identity_only");
 
             uiStyleManager1.Style = UIStyle.Blue;
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;

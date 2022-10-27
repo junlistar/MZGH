@@ -439,6 +439,7 @@ namespace Mzsf.Forms.Pages
                         sum_total = p.total_price,
                         charge_code = p.charge_code,
                         order_type = p.order_type,
+                        order_no = p.order_no,
                         confirm_flag = p.confirm_flag,
                         confirm_flag_str = p.confirm_flag_str,
                         confirm_name = p.confirm_name,
@@ -537,8 +538,9 @@ namespace Mzsf.Forms.Pages
                         t_price += _ktsl * _orig_price;
 
                         var order_type = dgvCpr.Rows[i].Cells["order_type"].Value;
+                        var order_no = dgvCpr.Rows[i].Cells["order_no"].Value;
                         var charge_code = dgvCpr.Rows[i].Cells["charge_code"].Value;
-                        refund_item_str += "," + order_type + "-" + charge_code + "-" + _ktsl + "-" + _ktsl * _orig_price;
+                        refund_item_str += "," + order_type + "-" + order_no + "-" + charge_code + "-" + _ktsl + "-" + _ktsl * _orig_price;
                     }
                 }
                 lblTuikuan.Text = Math.Round(t_price, 2).ToString();
