@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{427582F4-6599-4401-80B3-B26D8414FF66}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>GuxHis.Mzsf</RootNamespace>
-    <AssemblyName>Mzsf</AssemblyName>
+    <RootNamespace>GuXHis</RootNamespace>
+    <AssemblyName>GuXHisMzsfAndMzgh</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

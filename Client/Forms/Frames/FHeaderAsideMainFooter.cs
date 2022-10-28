@@ -64,6 +64,8 @@ namespace GuxHis.Mzsf
             {
                 //MessageBox.Show($"程序被调用，参数：{args[0]}");
                 log.Debug($"程序被调用，参数：{args[0]}");
+                //不显示标题栏
+                this.ShowTitle = false;
             }
             else
             {
@@ -78,17 +80,21 @@ namespace GuxHis.Mzsf
         { 
             InitializeComponent();
 
-            SessionHelper.MyHttpClient = HttpClientFactory.GetHttpClient();
-
             string assemblyPath = Assembly.GetExecutingAssembly().GetName().CodeBase;//获取运行项目当前DLL的路径       
-           
+
             assemblyPath = assemblyPath.Remove(0, 8); //去除前缀            
             string configUrl = assemblyPath + ".config"; //添加 .config 后缀，得到配置文件路径
-            //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
+
             Configuration con = ConfigurationManager.OpenExeConfiguration(assemblyPath);
+
+            if (SessionHelper.MyHttpClient == null)
+            {
+                SessionHelper.MyHttpClient = HttpClientFactory.GetHttpClient();
+                SessionHelper.MyHttpClient.BaseAddress = new Uri(con.AppSettings.Settings["apihost"].Value);
+            } 
+            //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
             //MessageBox.Show(string.Join(",", con.AppSettings.Settings.AllKeys));
 
-            SessionHelper.MyHttpClient.BaseAddress = new Uri(con.AppSettings.Settings["apihost"].Value);
 
             MyMessager msg = new MyMessager();
             Application.AddMessageFilter(msg);
@@ -559,7 +565,7 @@ namespace GuxHis.Mzsf
                 if (arg != null && arg.Count() > 0)
                 {
                     var _jstr = arg[0];
-                    log.Debug($"第三方传递json值：{_jstr}");
+                    //log.Debug($"第三方传递json值：{_jstr}");
                     var _usermi = "";
                     try
                     {
