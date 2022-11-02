@@ -1,0 +1,6 @@
+D:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.AssemblyReference.cache
+D:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.CoreCompileInputs.cache
+D:\lijun\github\Mzgh\Midware\bin\Debug\GuXHisMzsfAndMzgh.dll
+D:\lijun\github\Mzgh\Midware\bin\Debug\GuXHisMzsfAndMzgh.pdb
+D:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.dll
+D:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.pdb

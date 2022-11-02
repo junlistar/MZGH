@@ -24,7 +24,7 @@ namespace Client.Forms.Pages.cwgl
 
         public Color sel_color = Color.FromArgb(230, 80, 80);
         public string _searchKey = "jkmx";
-        public int _report_code;
+        public string _report_code;
 
         public GuahaoRijie()
         {
@@ -42,7 +42,7 @@ namespace Client.Forms.Pages.cwgl
 
             btn_jkmx.FillColor = sel_color;
 
-            _report_code = SessionHelper.ghrj_report_code;
+            _report_code = SessionHelper.MzClientConfigVM.ghrj_report_code;
 
             btnSave.Enabled = false;
 

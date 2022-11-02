@@ -79,12 +79,12 @@ namespace Client.ClassLib
         /// </summary>
         public static CardReader_Data CardReader;
 
-        //门诊挂号，收费打印，报表编号
-        public static int mzgh_report_code;
-        public static int mzsf_report_code;
-        //挂号日结，收费日结
-        public static int ghrj_report_code;
-        public static int sfrj_report_code;
+        ////门诊挂号，收费打印，报表编号
+        //public static int mzgh_report_code;
+        //public static int mzsf_report_code;
+        ////挂号日结，收费日结
+        //public static int ghrj_report_code;
+        //public static int sfrj_report_code;
 
          
         //标志 挂号操作是否需要打印

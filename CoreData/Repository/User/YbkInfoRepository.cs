@@ -52,7 +52,7 @@ namespace Data.Repository
                 YBResponse<UserInfoResponseModel> yBResponse = JsonConvert.DeserializeObject<YBResponse<UserInfoResponseModel>>(jsonStr);
 
                 DynamicParameters para = new DynamicParameters();
-                var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var dt_now = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss");
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {

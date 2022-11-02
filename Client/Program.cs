@@ -26,7 +26,7 @@ namespace GuXHis
             //这段代码要在程序运行的入口进行配置
             log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
 
-            log.Debug("打开了程序");
+            log.Debug("打开了程序"); 
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -58,14 +58,14 @@ namespace GuXHis
         {
             MessageBox.Show("无参数"); //LoadCompoment();
         }
-        public void SetRunParams(string args)
+        public void SetRunParams(string[] args)
         {
             try
             {
                 MessageBox.Show($"参数:{args}");
                 //log.Debug($"程序被调用，参数：{args}");
 
-                if (!string.IsNullOrEmpty(args))
+                if (!string.IsNullOrEmpty(args[0]))
                 {
                     //mf = new FHeaderAsideMainFooter(new string[] { args });
                     //mf = new FHeaderAsideMainFooter();
@@ -75,7 +75,7 @@ namespace GuXHis
                     //log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
 
                     log.Debug("打开了程序");
-                    mf = new FHeaderAsideMainFooter(new string[] { args });
+                    mf = new FHeaderAsideMainFooter(new string[] { args[0] });
                     //mf.Show();
                     Application.Run(mf);
                     //Application.Run(new Form1());

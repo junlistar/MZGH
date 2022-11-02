@@ -53,17 +53,21 @@
             this.cbxDefaultPrint = new Sunny.UI.UIComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.uiTextBox1 = new Sunny.UI.UITextBox();
-            this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
+            this.txt_mzgh_report_code = new Sunny.UI.UITextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txt_mzsf_report_code = new Sunny.UI.UITextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txt_ghrj_report_code = new Sunny.UI.UITextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txt_sfrj_report_code = new Sunny.UI.UITextBox();
             this.pnlTitle.SuspendLayout();
             this.uiPanel1.SuspendLayout();
-            this.uiGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 65);
+            this.label1.Location = new System.Drawing.Point(115, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 21);
             this.label1.TabIndex = 0;
@@ -73,7 +77,7 @@
             // 
             this.txt_clientname.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_clientname.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_clientname.Location = new System.Drawing.Point(178, 62);
+            this.txt_clientname.Location = new System.Drawing.Point(212, 62);
             this.txt_clientname.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_clientname.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_clientname.Name = "txt_clientname";
@@ -87,7 +91,7 @@
             // 
             this.txt_clientversion.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_clientversion.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_clientversion.Location = new System.Drawing.Point(178, 101);
+            this.txt_clientversion.Location = new System.Drawing.Point(212, 101);
             this.txt_clientversion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_clientversion.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_clientversion.Name = "txt_clientversion";
@@ -100,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(65, 104);
+            this.label2.Location = new System.Drawing.Point(99, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 21);
             this.label2.TabIndex = 3;
@@ -110,7 +114,7 @@
             // 
             this.txt_ghsearchkeylength.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_ghsearchkeylength.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_ghsearchkeylength.Location = new System.Drawing.Point(178, 140);
+            this.txt_ghsearchkeylength.Location = new System.Drawing.Point(212, 140);
             this.txt_ghsearchkeylength.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_ghsearchkeylength.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_ghsearchkeylength.Name = "txt_ghsearchkeylength";
@@ -125,7 +129,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 142);
+            this.label3.Location = new System.Drawing.Point(83, 142);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(122, 21);
             this.label3.TabIndex = 3;
@@ -135,7 +139,7 @@
             // 
             this.txt_systype.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_systype.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_systype.Location = new System.Drawing.Point(178, 23);
+            this.txt_systype.Location = new System.Drawing.Point(212, 23);
             this.txt_systype.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_systype.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_systype.Name = "txt_systype";
@@ -149,7 +153,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(96, 26);
+            this.label4.Location = new System.Drawing.Point(130, 26);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 21);
             this.label4.TabIndex = 5;
@@ -158,7 +162,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(96, 356);
+            this.label5.Location = new System.Drawing.Point(130, 356);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 7;
@@ -167,7 +171,7 @@
             // txt_updatetime
             // 
             this.txt_updatetime.AutoSize = true;
-            this.txt_updatetime.Location = new System.Drawing.Point(181, 356);
+            this.txt_updatetime.Location = new System.Drawing.Point(215, 356);
             this.txt_updatetime.Name = "txt_updatetime";
             this.txt_updatetime.Size = new System.Drawing.Size(0, 21);
             this.txt_updatetime.TabIndex = 8;
@@ -176,7 +180,7 @@
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSave.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSave.Location = new System.Drawing.Point(178, 390);
+            this.btnSave.Location = new System.Drawing.Point(212, 390);
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(100, 35);
@@ -250,7 +254,14 @@
             this.uiPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiPanel1.Controls.Add(this.uiGroupBox1);
+            this.uiPanel1.Controls.Add(this.label13);
+            this.uiPanel1.Controls.Add(this.label12);
+            this.uiPanel1.Controls.Add(this.txt_sfrj_report_code);
+            this.uiPanel1.Controls.Add(this.label11);
+            this.uiPanel1.Controls.Add(this.txt_ghrj_report_code);
+            this.uiPanel1.Controls.Add(this.label10);
+            this.uiPanel1.Controls.Add(this.txt_mzsf_report_code);
+            this.uiPanel1.Controls.Add(this.txt_mzgh_report_code);
             this.uiPanel1.Controls.Add(this.jsbbprint);
             this.uiPanel1.Controls.Add(this.label9);
             this.uiPanel1.Controls.Add(this.sfprint);
@@ -286,7 +297,7 @@
             this.jsbbprint.DataSource = null;
             this.jsbbprint.FillColor = System.Drawing.Color.White;
             this.jsbbprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.jsbbprint.Location = new System.Drawing.Point(178, 296);
+            this.jsbbprint.Location = new System.Drawing.Point(776, 140);
             this.jsbbprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.jsbbprint.MinimumSize = new System.Drawing.Size(63, 0);
             this.jsbbprint.Name = "jsbbprint";
@@ -299,7 +310,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(49, 299);
+            this.label9.Location = new System.Drawing.Point(647, 143);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(122, 21);
             this.label9.TabIndex = 12;
@@ -310,7 +321,7 @@
             this.sfprint.DataSource = null;
             this.sfprint.FillColor = System.Drawing.Color.White;
             this.sfprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sfprint.Location = new System.Drawing.Point(178, 257);
+            this.sfprint.Location = new System.Drawing.Point(776, 101);
             this.sfprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.sfprint.MinimumSize = new System.Drawing.Size(63, 0);
             this.sfprint.Name = "sfprint";
@@ -323,7 +334,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(49, 260);
+            this.label8.Location = new System.Drawing.Point(647, 104);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(122, 21);
             this.label8.TabIndex = 14;
@@ -334,7 +345,7 @@
             this.ghprint.DataSource = null;
             this.ghprint.FillColor = System.Drawing.Color.White;
             this.ghprint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ghprint.Location = new System.Drawing.Point(178, 218);
+            this.ghprint.Location = new System.Drawing.Point(776, 62);
             this.ghprint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ghprint.MinimumSize = new System.Drawing.Size(63, 0);
             this.ghprint.Name = "ghprint";
@@ -347,7 +358,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(49, 221);
+            this.label7.Location = new System.Drawing.Point(647, 65);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(122, 21);
             this.label7.TabIndex = 12;
@@ -358,7 +369,7 @@
             this.cbxDefaultPrint.DataSource = null;
             this.cbxDefaultPrint.FillColor = System.Drawing.Color.White;
             this.cbxDefaultPrint.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cbxDefaultPrint.Location = new System.Drawing.Point(178, 179);
+            this.cbxDefaultPrint.Location = new System.Drawing.Point(776, 23);
             this.cbxDefaultPrint.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbxDefaultPrint.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbxDefaultPrint.Name = "cbxDefaultPrint";
@@ -371,7 +382,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(49, 182);
+            this.label6.Location = new System.Drawing.Point(647, 26);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(122, 21);
             this.label6.TabIndex = 10;
@@ -380,42 +391,94 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(25, 40);
+            this.label10.Location = new System.Drawing.Point(35, 179);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(90, 21);
+            this.label10.Size = new System.Drawing.Size(170, 21);
             this.label10.TabIndex = 16;
-            this.label10.Text = "客户端名称";
+            this.label10.Text = "挂号收费打印报表编号";
             // 
-            // uiTextBox1
+            // txt_mzgh_report_code
             // 
-            this.uiTextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTextBox1.Location = new System.Drawing.Point(122, 37);
-            this.uiTextBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox1.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox1.Name = "uiTextBox1";
-            this.uiTextBox1.ShowText = false;
-            this.uiTextBox1.Size = new System.Drawing.Size(352, 29);
-            this.uiTextBox1.TabIndex = 17;
-            this.uiTextBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_mzgh_report_code.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_mzgh_report_code.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_mzgh_report_code.Location = new System.Drawing.Point(212, 179);
+            this.txt_mzgh_report_code.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_mzgh_report_code.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_mzgh_report_code.Name = "txt_mzgh_report_code";
+            this.txt_mzgh_report_code.ShowText = false;
+            this.txt_mzgh_report_code.Size = new System.Drawing.Size(352, 29);
+            this.txt_mzgh_report_code.TabIndex = 17;
+            this.txt_mzgh_report_code.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_mzgh_report_code.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // uiGroupBox1
+            // label11
             // 
-            this.uiGroupBox1.Controls.Add(this.uiTextBox1);
-            this.uiGroupBox1.Controls.Add(this.label10);
-            this.uiGroupBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiGroupBox1.Location = new System.Drawing.Point(558, 5);
-            this.uiGroupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox1.Name = "uiGroupBox1";
-            this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(508, 294);
-            this.uiGroupBox1.TabIndex = 18;
-            this.uiGroupBox1.Text = "医保信息配置";
-            this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiGroupBox1.Visible = false;
-            this.uiGroupBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(34, 222);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(170, 21);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "门诊收费打印报表编号";
+            // 
+            // txt_mzsf_report_code
+            // 
+            this.txt_mzsf_report_code.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_mzsf_report_code.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_mzsf_report_code.Location = new System.Drawing.Point(212, 218);
+            this.txt_mzsf_report_code.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_mzsf_report_code.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_mzsf_report_code.Name = "txt_mzsf_report_code";
+            this.txt_mzsf_report_code.ShowText = false;
+            this.txt_mzsf_report_code.Size = new System.Drawing.Size(352, 29);
+            this.txt_mzsf_report_code.TabIndex = 6;
+            this.txt_mzsf_report_code.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_mzsf_report_code.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(66, 259);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(138, 21);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "挂号日结报表编号";
+            // 
+            // txt_ghrj_report_code
+            // 
+            this.txt_ghrj_report_code.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_ghrj_report_code.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_ghrj_report_code.Location = new System.Drawing.Point(212, 257);
+            this.txt_ghrj_report_code.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_ghrj_report_code.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_ghrj_report_code.Name = "txt_ghrj_report_code";
+            this.txt_ghrj_report_code.ShowText = false;
+            this.txt_ghrj_report_code.Size = new System.Drawing.Size(352, 29);
+            this.txt_ghrj_report_code.TabIndex = 6;
+            this.txt_ghrj_report_code.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_ghrj_report_code.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(67, 299);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(138, 21);
+            this.label13.TabIndex = 5;
+            this.label13.Text = "收费日结报表编号";
+            // 
+            // txt_sfrj_report_code
+            // 
+            this.txt_sfrj_report_code.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_sfrj_report_code.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_sfrj_report_code.Location = new System.Drawing.Point(212, 296);
+            this.txt_sfrj_report_code.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_sfrj_report_code.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_sfrj_report_code.Name = "txt_sfrj_report_code";
+            this.txt_sfrj_report_code.ShowText = false;
+            this.txt_sfrj_report_code.Size = new System.Drawing.Size(352, 29);
+            this.txt_sfrj_report_code.TabIndex = 6;
+            this.txt_sfrj_report_code.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sfrj_report_code.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // MzClientConfig
             // 
@@ -429,8 +492,6 @@
             this.pnlTitle.ResumeLayout(false);
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
-            this.uiGroupBox1.ResumeLayout(false);
-            this.uiGroupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -461,8 +522,13 @@
         private System.Windows.Forms.Label label8;
         private Sunny.UI.UIComboBox ghprint;
         private System.Windows.Forms.Label label7;
-        private Sunny.UI.UIGroupBox uiGroupBox1;
-        private Sunny.UI.UITextBox uiTextBox1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private Sunny.UI.UITextBox txt_sfrj_report_code;
+        private System.Windows.Forms.Label label11;
+        private Sunny.UI.UITextBox txt_ghrj_report_code;
         private System.Windows.Forms.Label label10;
+        private Sunny.UI.UITextBox txt_mzsf_report_code;
+        private Sunny.UI.UITextBox txt_mzgh_report_code;
     }
 }

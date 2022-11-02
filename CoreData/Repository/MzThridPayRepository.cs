@@ -47,7 +47,7 @@ namespace Data.Repository
             para.Add("@cheque_type", cheque_type);
             para.Add("@cheque_no", cheque_no);  
             para.Add("@charge", charge);
-            para.Add("@refund_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            para.Add("@refund_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
             para.Add("@price_date", price_date); 
 
             return Update(update_sql, para);

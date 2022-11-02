@@ -13,6 +13,11 @@ namespace Data
     public class RepositoryBase<T> : IRepositoryBase<T>
     {
 
+        public DateTime GetServerDateTime()
+        {
+            return Convert.ToDateTime(ExcuteScalar("select GetDate()",null));
+        }
+
         public string GetSqlByTag(int tag)
         {
             //string tag_sql = "select [sql] from wh_tag_sql  where tag = @tag ";

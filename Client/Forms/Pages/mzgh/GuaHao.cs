@@ -239,6 +239,7 @@ namespace Client
 
 
             ue.ShowDialog();
+            ue.Refresh();
 
             if (ue.DialogResult == DialogResult.Cancel)
             {

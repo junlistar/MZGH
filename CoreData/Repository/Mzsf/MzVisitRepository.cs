@@ -45,7 +45,7 @@ namespace Data.Repository.Mzsf
             para.Add("@unit_sn", unit_sn);
             para.Add("@doctor_sn", doctor_sn);
             para.Add("@visit_flag", "1");
-            para.Add("@visit_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            para.Add("@visit_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
 
             return base.ExecQuerySP(sql, para);
 

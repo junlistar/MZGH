@@ -1034,7 +1034,7 @@ namespace Mzsf.Forms.Pages
                             {
                                 SessionHelper.do_sf_print = false;
                                 //打印发票 
-                                Print ghprint = new Print(SessionHelper.mzsf_report_code);
+                                Print ghprint = new Print(SessionHelper.MzClientConfigVM.mzsf_report_code);
                                 ghprint._printer = SessionHelper.sf_printer;
                                 ghprint._patient_id = SessionHelper.patientVM.patient_id;
                                 ghprint._ledger_sn = SessionHelper.sf_print_user_ledger.ToString();
@@ -1434,7 +1434,7 @@ namespace Mzsf.Forms.Pages
         {
             SessionHelper.sf_print_user_ledger = 352;
             //打印发票 
-            Print ghprint = new Print(SessionHelper.mzsf_report_code);
+            Print ghprint = new Print(SessionHelper.MzClientConfigVM.mzsf_report_code);
             ghprint.Show();
         }
 

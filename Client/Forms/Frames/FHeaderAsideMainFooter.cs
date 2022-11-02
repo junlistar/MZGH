@@ -38,6 +38,7 @@ namespace GuxHis.Mzsf
 
         //启动传参
         string[] arg;
+        string _str;
         //包含控件的窗口句柄
         public IntPtr intPtr;
 
@@ -62,7 +63,7 @@ namespace GuxHis.Mzsf
             arg = args;
             if (args != null && args.Count() > 0)
             {
-                //MessageBox.Show($"程序被调用，参数：{args[0]}");
+                MessageBox.Show($"程序被调用，参数：{args[0]}");
                 log.Debug($"程序被调用，参数：{args[0]}");
                 //不显示标题栏
                 this.ShowTitle = false;
@@ -75,13 +76,13 @@ namespace GuxHis.Mzsf
             LoadCompoment();
 
         }
-
+     
         public void LoadCompoment()
         { 
             InitializeComponent();
 
             string assemblyPath = Assembly.GetExecutingAssembly().GetName().CodeBase;//获取运行项目当前DLL的路径       
-
+           
             assemblyPath = assemblyPath.Remove(0, 8); //去除前缀            
             string configUrl = assemblyPath + ".config"; //添加 .config 后缀，得到配置文件路径
 
@@ -102,11 +103,11 @@ namespace GuxHis.Mzsf
             LogOutSeconds = int.Parse(con.AppSettings.Settings["LogOutSeconds"].Value);
 
             //报表编号获取（门诊挂号，门诊收费）
-            SessionHelper.mzgh_report_code = int.Parse(con.AppSettings.Settings["mzgh_report_code"].Value);
-            SessionHelper.mzsf_report_code = int.Parse(con.AppSettings.Settings["mzsf_report_code"].Value);
-            //挂号日结，收费日结
-            SessionHelper.ghrj_report_code = int.Parse(con.AppSettings.Settings["ghrj_report_code"].Value);
-            SessionHelper.sfrj_report_code = int.Parse(con.AppSettings.Settings["sfrj_report_code"].Value);
+            //SessionHelper.mzgh_report_code = int.Parse(con.AppSettings.Settings["mzgh_report_code"].Value);
+            //SessionHelper.mzsf_report_code = int.Parse(con.AppSettings.Settings["mzsf_report_code"].Value);
+            ////挂号日结，收费日结
+            //SessionHelper.ghrj_report_code = int.Parse(con.AppSettings.Settings["ghrj_report_code"].Value);
+            //SessionHelper.sfrj_report_code = int.Parse(con.AppSettings.Settings["sfrj_report_code"].Value);
 
             //读取医保配置
             YBHelper.mdtrtarea_admvs = con.AppSettings.Settings["mdtrtarea_admvs"].Value;
@@ -547,8 +548,7 @@ namespace GuxHis.Mzsf
             try
             {
                 this.Hide();
-
-                //MessageBox.Show("Load");
+                 
                 this.MinimumSize = new Size(this.Width, this.Height);
 
                 LoadCorlorStyles();
@@ -564,29 +564,33 @@ namespace GuxHis.Mzsf
 
                 if (arg != null && arg.Count() > 0)
                 {
-                    var _jstr = arg[0];
-                    //log.Debug($"第三方传递json值：{_jstr}");
-                    var _usermi = "";
+                    //var _jstr = arg[0];
+                    var _jstr = string.Join("",arg);
+                    
+                    log.Debug($"第三方传递json值：{_jstr}");
+                    var _usermi = ""; 
                     try
                     {
                         var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
+                        
                         if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
                         {
                             _usermi = _hisloginvm.UserMi;
                         }
+                        //MessageBox.Show("try:" + _usermi);
                     }
                     catch (Exception ex)
                     {
-                        var _index = _jstr.IndexOf("UserMi:");
+                        log.Error(ex.ToString());
+                        var _index = _jstr.IndexOf("UserMi"); 
                         if (_index>0)
                         {
-                            _jstr = _jstr.Substring(_index + 7);
+                            _jstr = _jstr.Substring(_index + 7); 
                             _index = _jstr.IndexOf(",");
-                            _usermi = _jstr.Substring(0, _index);
-                            //MessageBox.Show(_usermi);
-                        } 
-                    }
-
+                            _usermi = _jstr.Substring(0, _index); 
+                        }
+                        //MessageBox.Show("catch:" + _usermi);
+                    } 
                     if (_usermi != "")
                     {
                         //获取用户费别信息 
@@ -615,9 +619,9 @@ namespace GuxHis.Mzsf
                         this.Close();
                     }
 
-                }
+                } 
                 else
-                {
+                { 
                     Login frm = new Login();
                     frm.ShowDialog();
                     if (frm.IsLogin)

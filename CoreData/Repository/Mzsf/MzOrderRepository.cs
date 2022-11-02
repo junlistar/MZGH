@@ -36,7 +36,7 @@ namespace Data.Repository.Mzsf
             try
             {
                 DynamicParameters para = new DynamicParameters();
-                var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var dt_now = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss");
 
                 using (IDbConnection connection = DataBaseConfig.GetSqlConnection(DBConnectionEnum.Write))
                 {
@@ -296,7 +296,7 @@ namespace Data.Repository.Mzsf
                 max_ledger_sn = Convert.ToInt32(ExcuteScalar(mxa_ledger_sql, para)) + 1;
 
 
-                var op_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var op_date = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); ;
 
 
                 Serilog.Log.Debug($"查询处方信息patient_id：{patient_id},times:{times}");
@@ -764,7 +764,7 @@ namespace Data.Repository.Mzsf
             {
                 Serilog.Log.Debug("门诊退费，部分退费业务开始： ");
                 DynamicParameters para = new DynamicParameters();
-                var dt_now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var dt_now = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss");
 
                 //门诊发票号 根据当前用户获取  
                 MzOpReceiptRepository opreceiptResp = new MzOpReceiptRepository();
@@ -1022,11 +1022,12 @@ namespace Data.Repository.Mzsf
                             connection.Execute(insert_1, para, transaction);
 
                             //对应的退药记录（没有选择退费的），也写到新纪录，放置数据丢失
-                            string back_sql = @"insert into mz_detail_charge_bak 
-		select patient_id,times,order_type,order_no,item_no,@new_ledger_sn,group_no,confirm_date,confirm_opera,accept_flag,back_amount,buy_price,order_comment,trans_flag,charge_code,serial,page_no from mz_detail_charge_bak
-		where patient_id=@patient_id and times=@times and order_type=@order_type and order_no=@order_no and item_no=@item_no and ledger_sn=@ledger_sn and charge_code=@charge_code and serial_no=@serial_no and group_no=@group_no";
+                            string back_sql = @"insert into mz_detail_charge_back (patient_id,times,order_type,order_no,item_no,ledger_sn,group_no,confirm_date,confirm_opera,accept_flag,back_amount,buy_price,order_comment,trans_flag,charge_code,serial,page_no)
+		select patient_id,times,order_type,order_no,item_no,@new_ledger_sn,group_no,confirm_date,confirm_opera,@accept_flag,back_amount,buy_price,order_comment,trans_flag,charge_code,serial,page_no from mz_detail_charge_back
+		where patient_id=@patient_id and times=@times and order_type=@order_type and order_no=@order_no and item_no=@item_no and ledger_sn=@ledger_sn and charge_code=@charge_code and serial=@serial and group_no=@group_no";
                             para = new DynamicParameters();
                             para.Add("@new_ledger_sn", item.ledger_sn);
+                            para.Add("@accept_flag", 0);
                             para.Add("@patient_id", item.patient_id);
                             para.Add("@times", item.times);
                             para.Add("@order_type", item.order_type);
@@ -1034,7 +1035,7 @@ namespace Data.Repository.Mzsf
                             para.Add("@item_no", item.item_no);
                             para.Add("@ledger_sn", item.parent_ledger_sn);
                             para.Add("@charge_code", item.charge_code);
-                            para.Add("@serial_no", item.serial_no);
+                            para.Add("@serial", item.serial_no);
                             para.Add("@group_no", item.group_no);
 
                             connection.Execute(back_sql, para, transaction); 

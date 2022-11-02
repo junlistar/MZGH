@@ -105,7 +105,7 @@ namespace Data.Repository
 
                         var request_date = Convert.ToDateTime(begin);
                         var end_date = Convert.ToDateTime(end);
-                        var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        var enter_date = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); ;
                         var req_type = "01";//门诊号
 
                         string weeks = "1";
@@ -357,8 +357,8 @@ namespace Data.Repository
 
                         string insertsql = GetSqlByTag("mzgh_ghrequest_add");
 
-                        var request_date = DateTime.Now.ToShortDateString();
-                        var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        var request_date = GetServerDateTime().ToShortDateString();
+                        var enter_date = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); ;
                         var req_type = "01";//门诊号
 
                         string weeks = "1";
@@ -503,7 +503,7 @@ namespace Data.Repository
                     para.Add("@current_no", 1);
                     para.Add("@end_no", item.totle_num);
                     para.Add("@enter_opera", op_id);
-                    para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    para.Add("@enter_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
                     para.Add("@open_flag", item.open_flag);
                     para.Add("@window_no", item.window_no);
 
@@ -514,7 +514,7 @@ namespace Data.Repository
             {
                 var request_date = Convert.ToDateTime(begin);
                 var end_date = Convert.ToDateTime(end);
-                var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                var enter_date = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss");
                 var req_type = "01";//门诊号
 
                 var week_arr = weeks.Split(',');//1,2,4,1
@@ -668,7 +668,7 @@ namespace Data.Repository
                         para.Add("@end_no", totle_num);
 
                         para.Add("@enter_opera", op_id);
-                        para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        para.Add("@enter_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
                         para.Add("@open_flag", open_flag);
                         //para.Add("@window_no", window_no);
                         para.Add("@workroom", workroom);
@@ -709,7 +709,7 @@ namespace Data.Repository
                         string insertsql = GetSqlByTag("mzgh_ghrequest_add");
                         var para = new DynamicParameters();
 
-                        var enter_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        var enter_date = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); ;
                         para = new DynamicParameters();
                         para.Add("@request_date", request_date);
                         para.Add("@ampm", ampm);

@@ -24,7 +24,7 @@ namespace Client.Forms.Pages.cwgl
 
         public Color sel_color = Color.FromArgb(230, 80, 80);
         public string _searchKey = "hzrb";
-        public int _report_code;
+        public string _report_code;
 
         public ShoufeiRijie()
         {
@@ -42,7 +42,7 @@ namespace Client.Forms.Pages.cwgl
 
             btn_hzrb.FillColor = sel_color;
 
-            _report_code = SessionHelper.sfrj_report_code;
+            _report_code = SessionHelper.MzClientConfigVM.sfrj_report_code;
 
             btnSave.Enabled = false;
 

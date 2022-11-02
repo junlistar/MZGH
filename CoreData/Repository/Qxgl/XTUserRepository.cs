@@ -35,7 +35,7 @@ namespace Data.Repository
             para.Add("@subsys_id", subsys_id);
             para.Add("@pass_word", pass_word);
             para.Add("@user_group", user_group);
-            para.Add("@create_pw_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            para.Add("@create_pw_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
             para.Add("@user_mi", user_mi); 
 
             return Update(sql, para);

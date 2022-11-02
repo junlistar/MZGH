@@ -147,7 +147,7 @@ namespace Data.Repository
 
                 para.Add("@totle_num", totle_num);
                 para.Add("@op_id", op_id);
-                para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                para.Add("@op_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
                 para.Add("@workroom", workroom);
                 para.Add("@limit_appoint_percent", limit_appoint_percent);
@@ -181,7 +181,7 @@ namespace Data.Repository
 
                 para.Add("@totle_num", totle_num);
                 para.Add("@op_id", op_id);
-                para.Add("@op_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                para.Add("@op_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
                 para.Add("@open_flag", open_flag);
                 para.Add("@workroom", workroom);
                 para.Add("@temp_flag", temp_flag);

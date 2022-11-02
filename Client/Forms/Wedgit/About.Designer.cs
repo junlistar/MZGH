@@ -44,7 +44,7 @@
             // About
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(508, 269);
+            this.ClientSize = new System.Drawing.Size(509, 271);
             this.Controls.Add(this.textBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

@@ -77,6 +77,10 @@ namespace Data.Repository
                 para.Add("@client_name", clientConfig.client_name);
                 para.Add("@client_version", clientConfig.client_version);
                 para.Add("@client_ghsearchkey_length", clientConfig.client_ghsearchkey_length);
+                para.Add("@mzgh_report_code", clientConfig.mzgh_report_code);
+                para.Add("@mzsf_report_code", clientConfig.mzsf_report_code);
+                para.Add("@ghrj_report_code", clientConfig.ghrj_report_code);
+                para.Add("@sfrj_report_code", clientConfig.sfrj_report_code);
                 para.Add("@sys_type", clientConfig.sys_type);
 
                 return connection.Execute(sql, para) > 0;

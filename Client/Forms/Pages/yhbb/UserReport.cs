@@ -380,7 +380,7 @@ namespace Client.Forms.Pages.yhbb
 
                         if (_report_code == "220001")
                         {
-                            paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={txt_patientid.Text}&times={txt_tims.Text}");
+                            paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.MzClientConfigVM.mzgh_report_code}&patient_id={txt_patientid.Text}&times={txt_tims.Text}");
 
                         }
                         else if (_report_code == "220007")

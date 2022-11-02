@@ -94,7 +94,7 @@ namespace Data.Repository
                             para.Add("@cheque_no", item.cheque_no);
                             para.Add("@depo_status", depo_refund_status);
                             para.Add("@price_opera", opera);
-                            para.Add("@price_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@price_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
                             //para.Add("@report_date", null);
                             para.Add("@mz_dept_no", item.mz_dept_no);
                             //para.Add("@print_flag", item.print_flag);

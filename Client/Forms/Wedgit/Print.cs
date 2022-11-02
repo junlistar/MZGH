@@ -30,13 +30,13 @@ namespace Client.Forms.Wedgit
     {
         private static ILog log = LogManager.GetLogger(typeof(Print));//typeof放当前类
 
-        public int _report_code;
+        public string _report_code;
         public string _printer;
 
         public string _patient_id;
         public string _ledger_sn;
 
-        public Print(int report_code)
+        public Print(string report_code)
         {
             InitializeComponent();
             _report_code = report_code;

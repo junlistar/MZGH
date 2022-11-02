@@ -26,7 +26,7 @@ namespace Client.Forms.Pages.yhbb
             InitializeComponent();
         }
 
-        public int _report_code;
+        public string _report_code;
         string report_date;
         string opera;
 
@@ -171,7 +171,7 @@ namespace Client.Forms.Pages.yhbb
         private void SfrjReport_Load(object sender, EventArgs e)
         {
             txtDate.Value = DateTime.Now;
-            _report_code = SessionHelper.sfrj_report_code;
+            _report_code = SessionHelper.MzClientConfigVM.sfrj_report_code;
 
             dgvghy.CellClick += dgvghy_CellContentClick;
             dgvghy.KeyDown += Dgvghy_KeyDown;

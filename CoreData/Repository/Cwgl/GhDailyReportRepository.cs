@@ -99,7 +99,7 @@ namespace Data.Repository
                         var ghOpReceiptCancelList = connection.Query<GhOpReceipt>(sql5, para, transaction);
 
                         ////////////////////更新以上表的report_date 
-                        string dtNow = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        string dtNow = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); ;
                         string upsql1 = GetSqlByTag("mzsf_ghdeposit_update_reportdate");
                         para = new DynamicParameters();
                         para.Add("@P1", dtNow);

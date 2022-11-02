@@ -107,6 +107,8 @@ namespace Data.Repository
 
                 try
                 { 
+                    var _dt = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss");
+
                     //查询是否存在
                     string issql = GetSqlByTag("mzgh_mzpatient_getbypid");
                     var para = new DynamicParameters();
@@ -137,7 +139,7 @@ namespace Data.Repository
                         para.Add("@relation_code", relation_code);
                         para.Add("@relation_name", relation_name);
                         para.Add("@marry_code", marry_code);
-                        para.Add("@update_date", DateTime.Now);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
+                        para.Add("@update_date", _dt);// DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss fff")
                         para.Add("@update_opera", opera);
                         para.Add("@patient_id", pid);
 
@@ -168,8 +170,8 @@ namespace Data.Repository
                         para.Add("@relation_code", relation_code);
                         para.Add("@relation_name", relation_name);
 
-                        para.Add("@enter_date", DateTime.Now);
-                        para.Add("@update_date", DateTime.Now);
+                        para.Add("@enter_date",_dt);
+                        para.Add("@update_date",_dt);
 
                         para.Add("@enter_opera", opera);
                         para.Add("@update_opera", opera);
@@ -198,7 +200,7 @@ namespace Data.Repository
                         para.Add("@relation_code", relation_code);
                         para.Add("@relation_name", relation_name);
                         para.Add("@opera", opera);
-                        para.Add("@update_date", DateTime.Now);
+                        para.Add("@update_date", _dt);
                         connection.Execute(relationsql, para, transaction);
                     }
 
@@ -224,6 +226,7 @@ namespace Data.Repository
 
                 try
                 {
+                    var _dt = GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"); 
                     //查询是否存在
                     string issql = GetSqlByTag("mzgh_mzpatient_getbypid");
                     var para = new DynamicParameters();
@@ -255,8 +258,8 @@ namespace Data.Repository
                     para.Add("@addition_no1", patient.addition_no1);
                     para.Add("@employer_name", patient.employer_name);
                      
-                    para.Add("@enter_date", DateTime.Now);
-                    para.Add("@update_date", DateTime.Now);
+                    para.Add("@enter_date", _dt);
+                    para.Add("@update_date", _dt);
 
                     para.Add("@enter_opera", patient.update_opera);
                     para.Add("@update_opera", patient.update_opera);
@@ -433,7 +436,9 @@ namespace Data.Repository
                         {
                             max_sn = Convert.ToInt32(connection.ExecuteScalar(sql3, null, transaction));
                         }
-                         
+                        
+                        var _dt = GetServerDateTime();
+
                         if (relist.Count > 0)
                         {
                             Serilog.Log.Debug($"获取病人信息{patient_id}");
@@ -444,11 +449,11 @@ namespace Data.Repository
 
                             if (!string.IsNullOrEmpty(patient.birthday))
                             {
-                                DateTime _dtage = DateTime.Now;
+                                DateTime _dtage = _dt;
 
                                 if (DateTime.TryParse(patient.birthday, out _dtage))
                                 {
-                                    patient.age = (DateTime.Now.Year - _dtage.Year).ToString();
+                                    patient.age = (_dt.Year - _dtage.Year).ToString();
                                 }
                             }
 
@@ -472,7 +477,7 @@ namespace Data.Repository
                             para.Add("@ampm", recorditem.ampm);
                             para.Add("@visit_flag", "1");
                             para.Add("@gh_opera", opera);
-                            para.Add("@gh_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@gh_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
 
                             int count = connection.Execute(visit_sql, para, transaction);
 
@@ -507,7 +512,7 @@ namespace Data.Repository
                             para.Add("@max_times", max_times);
                             para.Add("@item_no", ++itemno);
                             para.Add("@ledger_sn", max_ledger_sn);
-                            para.Add("@happen_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@happen_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                             para.Add("@charge_code", charge_code);
                             para.Add("@audit_code", audit_code);
                             para.Add("@bill_code", mz_bill_item);
@@ -518,10 +523,10 @@ namespace Data.Repository
                             para.Add("@charge_amount", "1");
                             para.Add("@charge_group", mz_charge_group);
                             para.Add("@enter_opera", opera);
-                            para.Add("@enter_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@enter_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                             para.Add("@enter_win_no", "0");
                             para.Add("@confirm_opera", opera);
-                            para.Add("@confirm_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@confirm_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                             para.Add("@confirm_win_no", "0");
                             para.Add("@charge_status", "4");
                             para.Add("@trans_flag", "0");
@@ -577,7 +582,7 @@ namespace Data.Repository
                             para.Add("@cheque_type", cheque_type);
                             para.Add("@depo_status", "4");
                             para.Add("@price_opera", opera);
-                            para.Add("@price_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            para.Add("@price_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                             para.Add("@mz_dept_no", "1");
                             para.Add("@out_trade_no", out_trade_no);
 
@@ -647,9 +652,9 @@ namespace Data.Repository
                         para.Add("@pay_unit", "01");
                         para.Add("@charge_total", to_price);
                         para.Add("@settle_opera", opera);
-                        para.Add("@settle_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        para.Add("@settle_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                         para.Add("@price_opera", opera);
-                        para.Add("@price_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                        para.Add("@price_date", _dt.ToString("yyyy-MM-dd HH:mm:ss"));
                         para.Add("@receipt_no", current_no);//gh_op_receipt receipt_no
                         para.Add("@charge_status", "4");
                         para.Add("@mz_dept_no", "1");

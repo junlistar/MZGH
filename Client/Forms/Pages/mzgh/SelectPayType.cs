@@ -1414,7 +1414,7 @@ namespace Client
             //string sql = "select * from rt_report_data_fast_net where report_code = 220001";
             //DataSet Ds = DbHelper.GetDataSet(sql, "REPORT");
 
-            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.mzgh_report_code}");
+            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.MzClientConfigVM.mzgh_report_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
@@ -1474,7 +1474,7 @@ namespace Client
 
                 var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
 
-                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={SessionHelper.mzgh_report_code}&report_com={report_data}");
+                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={SessionHelper.MzClientConfigVM.mzgh_report_code}&report_com={report_data}");
 
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
@@ -1530,7 +1530,7 @@ namespace Client
 
                         #region 接口方式
                         //查询数据 
-                        string paramurl = string.Format($"/api/GuaHao/GetReportParam?code={SessionHelper.mzgh_report_code}");
+                        string paramurl = string.Format($"/api/GuaHao/GetReportParam?code={SessionHelper.MzClientConfigVM.mzgh_report_code}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;

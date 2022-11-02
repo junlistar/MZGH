@@ -19,6 +19,8 @@ namespace Client.Forms.Pages.xt
     {
         private static ILog log = LogManager.GetLogger(typeof(MzClientConfig));//typeof放当前类
 
+        string config_name = "mzgh.ini";
+
         public MzClientConfig()
         {
             InitializeComponent();
@@ -59,6 +61,10 @@ namespace Client.Forms.Pages.xt
                 txt_clientname.Text = SessionHelper.MzClientConfigVM.client_name;
                 txt_clientversion.Text = SessionHelper.MzClientConfigVM.client_version;
                 txt_ghsearchkeylength.Text = SessionHelper.MzClientConfigVM.client_ghsearchkey_length.ToString();
+                txt_mzgh_report_code.Text = SessionHelper.MzClientConfigVM.mzgh_report_code;
+                txt_mzsf_report_code.Text = SessionHelper.MzClientConfigVM.mzsf_report_code;
+                txt_ghrj_report_code.Text = SessionHelper.MzClientConfigVM.ghrj_report_code;
+                txt_sfrj_report_code.Text = SessionHelper.MzClientConfigVM.sfrj_report_code;
                 txt_updatetime.Text = SessionHelper.MzClientConfigVM.update_time.ToString();
             }
             else
@@ -101,6 +107,10 @@ namespace Client.Forms.Pages.xt
                 clientConfig.client_name = txt_clientname.Text.Trim();
                 clientConfig.client_version = txt_clientversion.Text.Trim();
                 clientConfig.client_ghsearchkey_length = int.Parse(txt_ghsearchkeylength.Text);
+                clientConfig.mzgh_report_code = txt_mzgh_report_code.Text.Trim();
+                clientConfig.mzsf_report_code = txt_mzsf_report_code.Text.Trim();
+                clientConfig.ghrj_report_code = txt_ghrj_report_code.Text.Trim();
+                clientConfig.sfrj_report_code = txt_sfrj_report_code.Text.Trim();
 
                 var paramurl = string.Format($"/api/guahao/UpdateMzClientConfig");
                 var json = HttpClientUtil.PostJSON(paramurl, clientConfig);
@@ -142,7 +152,7 @@ namespace Client.Forms.Pages.xt
         private void cbxDefaultPrint_SelectedIndexChanged(object sender, EventArgs e)
         {
             //PrintUtil.SetDefaultPrinter(cbxDefaultPrint.Text);
-            EditFile(5, "default=" + cbxDefaultPrint.Text, Application.StartupPath + "\\config.ini");
+            EditFile("default=", "default=" + cbxDefaultPrint.Text, Application.StartupPath + $"\\{config_name}");
 
         }
 
@@ -150,11 +160,11 @@ namespace Client.Forms.Pages.xt
         public void ReadPrintConfig()
         {
             //判断文件是否存在
-            if (!File.Exists(Application.StartupPath + "\\config.ini"))
+            if (!File.Exists(Application.StartupPath + "\\mzgh.ini"))
             {
                 //File.Create(Application.StartupPath + "\\AlarmSet.txt");//创建该文件
 
-                FileStream fs1 = new FileStream(Application.StartupPath + "\\config.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
+                FileStream fs1 = new FileStream(Application.StartupPath + $"\\{config_name}", FileMode.Create, FileAccess.Write);//创建写入文件 
 
                 StreamWriter sw = new StreamWriter(fs1);
                 sw.WriteLine("[printer]");//开始写入值
@@ -168,14 +178,14 @@ namespace Client.Forms.Pages.xt
             }
             //读取配置
             //读取文件值并显示到窗体
-            FileStream fs = new FileStream(Application.StartupPath + "\\config.ini", FileMode.Open, FileAccess.ReadWrite);
+            FileStream fs = new FileStream(Application.StartupPath + $"\\{config_name}", FileMode.Open, FileAccess.ReadWrite);
             StreamReader sr = new StreamReader(fs);
             string line = sr.ReadLine();
             int curLine = 0;
             while (line != null)
             { 
 
-                if (++curLine == 2)//文件第2行
+                if (line.IndexOf("ghxp=")>=0)//文件第2行
                 {
                     var _ghxp = line.Substring(line.LastIndexOf("=") + 1);//截取=号后边的值
                     if (!string.IsNullOrWhiteSpace(_ghxp))
@@ -183,7 +193,7 @@ namespace Client.Forms.Pages.xt
                         ghprint.Text = _ghxp;
                     } 
                 }
-                else if(++curLine == 3)
+                else if(line.IndexOf("sfxp=") >= 0)
                 {
                     var _sfxp = line.Substring(line.LastIndexOf("=") + 1);
                     if (!string.IsNullOrWhiteSpace(_sfxp))
@@ -191,7 +201,7 @@ namespace Client.Forms.Pages.xt
                         sfprint.Text = _sfxp;
                     }
                 }
-                else if (++curLine == 4)
+                else if (line.IndexOf("jsbb=") >= 0)
                 {
                     var _jsbb = line.Substring(line.LastIndexOf("=") + 1);
                     if (!string.IsNullOrWhiteSpace(_jsbb))
@@ -199,7 +209,7 @@ namespace Client.Forms.Pages.xt
                         jsbbprint.Text = _jsbb;
                     }
                 }
-                else if (++curLine == 5)
+                else if (line.IndexOf("default=") >= 0)
                 {
                     var _def = line.Substring(line.LastIndexOf("=") + 1);
                     if (!string.IsNullOrWhiteSpace(_def))
@@ -216,21 +226,38 @@ namespace Client.Forms.Pages.xt
 
         #region 设置匹配
 
-        public static void EditFile(int curLine, string newLineValue, string patch)
+        public static void EditFile(string flag, string newLineValue, string patch)
         {
             FileStream fs = new FileStream(patch, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("utf-8"));//解决写入文件乱码
-            string line = sr.ReadLine();
+           // string line = sr.ReadLine();
             StringBuilder sb = new StringBuilder();
-            for (int i = 1; line != null; i++)
+            //for (int i = 1; line != null; i++)
+            //{
+            //    sb.Append(line + "\r\n");
+            //    if (i != curLine - 1)
+            //        line = sr.ReadLine();
+            //    else
+            //    {
+            //        sr.ReadLine();
+            //        line = newLineValue;
+            //    }
+            //}
+            while (!sr.EndOfStream)
             {
-                sb.Append(line + "\r\n");
-                if (i != curLine - 1)
-                    line = sr.ReadLine();
+                string line = sr.ReadLine();
+                if (line.IndexOf(flag) >-1)
+                {
+                    line = newLineValue; 
+                }
+
+                if (!sr.EndOfStream)
+                {
+                    sb.Append(line + "\r\n");
+                }
                 else
                 {
-                    sr.ReadLine();
-                    line = newLineValue;
+                    sb.Append(line );
                 }
             }
             sr.Close();
@@ -241,22 +268,22 @@ namespace Client.Forms.Pages.xt
             sw.Close();
             fs.Close();
         }
-
+         
         #endregion
 
         private void ghprint_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            EditFile(2, "ghxp=" + ghprint.Text, Application.StartupPath + "\\config.ini");
+            EditFile("ghxp=", "ghxp=" + ghprint.Text, Application.StartupPath + $"\\{config_name}");
         }
 
         private void sfprint_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            EditFile(3, "sfxp=" + sfprint.Text, Application.StartupPath + "\\config.ini");
+            EditFile("sfxp=", "sfxp=" + sfprint.Text, Application.StartupPath + $"\\{config_name}");
         }
 
         private void jsbbprint_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            EditFile(4, "jsbb=" + jsbbprint.Text, Application.StartupPath + "\\config.ini");
+            EditFile("jsbb=", "jsbb=" + jsbbprint.Text, Application.StartupPath +  $"\\{config_name}");
         }
     }
 }

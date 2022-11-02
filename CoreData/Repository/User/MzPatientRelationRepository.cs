@@ -50,7 +50,7 @@ namespace Data.Repository
                     para.Add("@opera", opera);
                     para.Add("@birth", birth);
                     para.Add("@address", address);
-                    para.Add("@update_date", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    para.Add("@update_date", GetServerDateTime().ToString("yyyy-MM-dd HH:mm:ss"));
 
                     Update(selectSql, para);
 

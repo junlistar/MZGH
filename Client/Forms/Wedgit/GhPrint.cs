@@ -72,7 +72,7 @@ namespace Client.Forms.Wedgit
 
 
             Task<HttpResponseMessage> task = null; var json = "";
-            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.mzgh_report_code}");
+            var paramurl = string.Format($"/api/GuaHao/GetReportDataByCode?code={SessionHelper.MzClientConfigVM.mzgh_report_code}");
 
             log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
             task = SessionHelper.MyHttpClient.GetAsync(paramurl);
@@ -139,7 +139,7 @@ namespace Client.Forms.Wedgit
 
                 var report_data = System.Text.Encoding.UTF8.GetString(stream.ToArray());
 
-                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={SessionHelper.mzgh_report_code}&report_com={report_data}");
+                string paramurl = string.Format($"/api/GuaHao/UpdateReportDataByCode?code={SessionHelper.MzClientConfigVM.mzgh_report_code}&report_com={report_data}");
 
                 log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                 string responseJson = SessionHelper.MyHttpClient.PostAsync(paramurl, null).Result.Content.ReadAsStringAsync().Result;
@@ -176,7 +176,7 @@ namespace Client.Forms.Wedgit
                     {
                         TargetReport.Load(Stream); 
 
-                        string paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.mzgh_report_code}&patient_id={patient_id}&times={times}");
+                        string paramurl = string.Format($"/api/cwgl/GetMzghBill?code={SessionHelper.MzClientConfigVM.mzgh_report_code}&patient_id={patient_id}&times={times}");
 
                         log.Info("接口：" + SessionHelper.MyHttpClient.BaseAddress + paramurl);
                         var responseJson = HttpClientUtil.Get(paramurl);

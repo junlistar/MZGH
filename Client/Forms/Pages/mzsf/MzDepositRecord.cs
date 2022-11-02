@@ -82,7 +82,7 @@ namespace Client.Forms.Pages.mzsf
                 {
                     var _pid = dgv_mzdeposit.Rows[_index].Cells["pid"].Value.ToString();
                     var _ledger_sn = dgv_mzdeposit.Rows[_index].Cells["ledger_sn"].Value.ToString();
-                    Print ghprint = new Print(SessionHelper.mzsf_report_code);
+                    Print ghprint = new Print(SessionHelper.MzClientConfigVM.mzsf_report_code);
                     ghprint._printer = SessionHelper.sf_printer;
                     ghprint._patient_id = _pid;
                     ghprint._ledger_sn = _ledger_sn;
