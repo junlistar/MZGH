@@ -28,37 +28,39 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.SuspendLayout();
             // 
-            // textBox1
+            // webBrowser1
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 38);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(502, 228);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "1.0.0.0\r\n2022-10-24\r\n发布测试版";
+            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webBrowser1.Location = new System.Drawing.Point(0, 35);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(706, 440);
+            this.webBrowser1.TabIndex = 0;
             // 
             // About
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(509, 271);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(706, 475);
+            this.Controls.Add(this.webBrowser1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "About";
+            this.Style = Sunny.UI.UIStyle.Custom;
             this.Text = "关于";
+            this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(95)))), ((int)(((byte)(145)))));
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.Load += new System.EventHandler(this.About_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.About_KeyUp);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.WebBrowser webBrowser1;
     }
 }

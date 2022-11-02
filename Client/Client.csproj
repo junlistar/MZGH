@@ -1081,6 +1081,15 @@
     <Content Include="FastReport\dll\FastReport.Web.dll" />
     <Content Include="FastReport\dll\FastReport.Web.XML" />
     <Content Include="FastReport\dll\FastReport.xml" />
+    <Content Include="webpage\about.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="webpage\about\bootstrap.min.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="webpage\about\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\sys.ico" />
     <Content Include="gux.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

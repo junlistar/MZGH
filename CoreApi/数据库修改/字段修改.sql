@@ -728,6 +728,26 @@ CREATE TABLE [dbo].[mz_client_config](
 insert into mz_client_config(sys_type,client_name,client_version,client_ghsearchkey_length,update_time)
 values('mz','荆州市中医医院','v1.0','1',GETDATE())
 
+if not exists(select * from syscolumns where id=object_id('mz_client_config') and name='mzgh_report_code') begin
+ALTER TABLE mz_client_config ADD mzgh_report_code  varchar(10) default (null)
+end
+
+if not exists(select * from syscolumns where id=object_id('mz_client_config') and name='mzsf_report_code') begin
+ALTER TABLE mz_client_config ADD mzsf_report_code  varchar(10) default (null)
+end
+
+if not exists(select * from syscolumns where id=object_id('mz_client_config') and name='ghrj_report_code') begin
+ALTER TABLE mz_client_config ADD ghrj_report_code  varchar(10) default (null)
+end
+
+if not exists(select * from syscolumns where id=object_id('mz_client_config') and name='sfrj_report_code') begin
+ALTER TABLE mz_client_config ADD sfrj_report_code  varchar(10) default (null)
+end
+
+go
+ 
+update mz_client_config set mzgh_report_code='220001',mzsf_report_code='220007',ghrj_report_code='220008',sfrj_report_code='220010'
+
 
 alter TABLE mz_detail_charge
 add parent_ledger_sn smallint  default (0);

@@ -184,11 +184,13 @@ namespace GuxHis.Mzsf
             // 
             this.lblAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAbout.AutoSize = true;
+            this.lblAbout.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.lblAbout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.lblAbout.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.lblAbout.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.lblAbout.Location = new System.Drawing.Point(729, 0);
+            this.lblAbout.Location = new System.Drawing.Point(729, 4);
             this.lblAbout.Name = "lblAbout";
-            this.lblAbout.Size = new System.Drawing.Size(42, 21);
+            this.lblAbout.Size = new System.Drawing.Size(32, 17);
             this.lblAbout.TabIndex = 7;
             this.lblAbout.TabStop = true;
             this.lblAbout.Text = "关于";
