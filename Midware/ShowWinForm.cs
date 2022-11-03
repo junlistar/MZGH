@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace GuXHis
 {
@@ -30,28 +31,56 @@ namespace GuXHis
             //MessageBox.Show("无参数"); //LoadCompoment();
         }
 
+        public class LoginVM
+        {
+            public string Application { get; set; }
+            public string SubsysRelativePath { get; set; }
+            public string UserMi { get; set; }
+        }
+
         public void SetRunParams(string args)
         {
             try
             {
                 if (!string.IsNullOrEmpty(args))
                 {
-                    //MessageBox.Show(args);
-                    //args = args.Replace("\"", "\\\"");
 
-                    //var _index = args2.IndexOf("UserMi");
-                    //MessageBox.Show(_index.ToString());
-                    //if (_index > 0)
-                    //{
-                    //    args2 = args2.Substring(_index + 7);
-                    //    _index = args2.IndexOf(","); 
-                    //    args2 = args2.Substring(0, _index);
-                    //    MessageBox.Show(args2);
-                    //}
+                    var _vm = Newtonsoft.Json.JsonConvert.DeserializeObject<LoginVM>(args);
 
-                    proexe = Process.Start(Application.StartupPath + @"\mzgh\GuXHisMzsfAndMzgh.exe", args); proexe.WaitForInputIdle();
+                    //MessageBox.Show(_vm.UserMi);
+                    //MessageBox.Show(_vm.SubsysRelativePath);
 
-                    intPtr = proexe.MainWindowHandle; 
+                    proexe = Process.Start(_vm.SubsysRelativePath + @"\GuXHisMzsfAndMzgh.exe", _vm.UserMi); proexe.WaitForInputIdle();
+                    intPtr = proexe.MainWindowHandle;
+
+                    return;
+
+                    
+                   // var _key = "SubsysRelativePath";
+                   // var _index = args.IndexOf("SubsysRelativePath");
+                   //// MessageBox.Show(_index.ToString());
+                   // if (_index > 0)
+                   // {
+                   //     var _args = args.Substring(_index + _key.Length+2);
+                   //     _index = _args.IndexOf(",");
+
+                   //     //MessageBox.Show(_args);
+                   //     _args = _args.Substring(2, _index-3);//去掉收尾引号
+                   //     //MessageBox.Show(_args);
+                   //     MessageBox.Show(_args + @"\GuXHisMzsfAndMzgh.exe");
+
+                   //     proexe = Process.Start(_args + @"\GuXHisMzsfAndMzgh.exe", args); proexe.WaitForInputIdle();
+                   //     intPtr = proexe.MainWindowHandle;
+                   // }
+                   // else
+                   // {
+                   //     MessageBox.Show("没有获取到程序子目录");
+                   // }
+                   // return;
+
+                    //proexe = Process.Start(Application.StartupPath + @"\mzgh\GuXHisMzsfAndMzgh.exe", args); proexe.WaitForInputIdle();
+
+                    
                 }
             }
             catch (Exception ex)

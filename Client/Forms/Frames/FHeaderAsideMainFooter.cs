@@ -49,7 +49,7 @@ namespace GuxHis.Mzsf
         }
         public FHeaderAsideMainFooter()
         {
-            log.Debug($"程序被调用，无参数");
+            //log.Debug($"程序被调用，无参数");
             MessageBox.Show("无参数"); //LoadCompoment();
         }
      
@@ -63,7 +63,7 @@ namespace GuxHis.Mzsf
             arg = args;
             if (args != null && args.Count() > 0)
             {
-                MessageBox.Show($"程序被调用，参数：{args[0]}");
+                //MessageBox.Show($"程序被调用，参数：{args[0]}");
                 log.Debug($"程序被调用，参数：{args[0]}");
                 //不显示标题栏
                 this.ShowTitle = false;
@@ -564,38 +564,39 @@ namespace GuxHis.Mzsf
 
                 if (arg != null && arg.Count() > 0)
                 {
-                    //var _jstr = arg[0];
-                    var _jstr = string.Join("",arg);
-                    
-                    log.Debug($"第三方传递json值：{_jstr}");
-                    var _usermi = ""; 
-                    try
-                    {
-                        var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
+                    var _usermi = arg[0];
+                    //var _jstr = string.Join("",arg);
+                    //MessageBox.Show(_jstr);
+                    //log.Debug($"第三方传递json值：{_jstr}");
+                    //var _usermi = ""; 
+                    //try
+                    //{
+                    //    var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
                         
-                        if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
-                        {
-                            _usermi = _hisloginvm.UserMi;
-                        }
-                        //MessageBox.Show("try:" + _usermi);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error(ex.ToString());
-                        var _index = _jstr.IndexOf("UserMi"); 
-                        if (_index>0)
-                        {
-                            _jstr = _jstr.Substring(_index + 7); 
-                            _index = _jstr.IndexOf(",");
-                            _usermi = _jstr.Substring(0, _index); 
-                        }
-                        //MessageBox.Show("catch:" + _usermi);
-                    } 
-                    if (_usermi != "")
+                    //    if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
+                    //    {
+                    //        _usermi = _hisloginvm.UserMi;
+                    //    }
+                    //    //MessageBox.Show("try:" + _usermi);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    log.Error(ex.ToString());
+                    //    var _index = _jstr.IndexOf("UserMi"); 
+                    //    if (_index>0)
+                    //    {
+                    //        _jstr = _jstr.Substring(_index + 7); 
+                    //        _index = _jstr.IndexOf(",");
+                    //        _usermi = _jstr.Substring(0, _index); 
+                    //    }
+                    //    //MessageBox.Show("catch:" + _usermi);
+                    //}
+                    //MessageBox.Show(_usermi);
+                    if (_usermi.Trim() != "")
                     {
                         //获取用户费别信息 
                         string json;
-                        string paramurl = string.Format($"/api/GuaHao/GetLoginUserByUserMi?usermi={_usermi}");
+                        string paramurl = string.Format($"/api/GuaHao/GetLoginUserByUserMi?usermi={_usermi.Trim()}");
                         json = HttpClientUtil.Get(paramurl);
                         var result = WebApiHelper.DeserializeObject<ResponseResult<List<LoginUsersVM>>>(json);
                         if (result.status == 1)
