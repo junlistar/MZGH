@@ -52,7 +52,7 @@ namespace GuxHis.Mzsf
             //log.Debug($"程序被调用，无参数");
             MessageBox.Show("无参数"); //LoadCompoment();
         }
-     
+
 
         /// <summary>
         /// 构造方法
@@ -76,13 +76,13 @@ namespace GuxHis.Mzsf
             LoadCompoment();
 
         }
-     
+
         public void LoadCompoment()
-        { 
+        {
             InitializeComponent();
 
             string assemblyPath = Assembly.GetExecutingAssembly().GetName().CodeBase;//获取运行项目当前DLL的路径       
-           
+
             assemblyPath = assemblyPath.Remove(0, 8); //去除前缀            
             string configUrl = assemblyPath + ".config"; //添加 .config 后缀，得到配置文件路径
 
@@ -92,7 +92,7 @@ namespace GuxHis.Mzsf
             {
                 SessionHelper.MyHttpClient = HttpClientFactory.GetHttpClient();
                 SessionHelper.MyHttpClient.BaseAddress = new Uri(con.AppSettings.Settings["apihost"].Value);
-            } 
+            }
             //MessageBox.Show(AppDomain.CurrentDomain.BaseDirectory);
             //MessageBox.Show(string.Join(",", con.AppSettings.Settings.AllKeys));
 
@@ -147,7 +147,7 @@ namespace GuxHis.Mzsf
 
             uiStyleManager1.Style = UIStyle.Blue;
             MainTabControl.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
-             
+
         }
 
         private bool MainTabControl_BeforeRemoveTabPage(object sender, int index)
@@ -548,8 +548,8 @@ namespace GuxHis.Mzsf
             try
             {
                 this.Hide();
-                 
-                this.MinimumSize = new Size(this.Width, this.Height);
+
+
 
                 LoadCorlorStyles();
 
@@ -572,7 +572,7 @@ namespace GuxHis.Mzsf
                     //try
                     //{
                     //    var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
-                        
+
                     //    if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
                     //    {
                     //        _usermi = _hisloginvm.UserMi;
@@ -620,9 +620,12 @@ namespace GuxHis.Mzsf
                         this.Close();
                     }
 
-                } 
+                }
                 else
-                { 
+                {
+                    //设置窗体大小
+                    this.MinimumSize = new Size(this.Width, this.Height);
+
                     Login frm = new Login();
                     frm.ShowDialog();
                     if (frm.IsLogin)
@@ -844,10 +847,14 @@ namespace GuxHis.Mzsf
             //{
             //    e.Cancel = true;
             //}
-            if (!UIMessageBox.ShowAsk("确定退出程序吗?"))
+            if (arg == null || arg.Count() == 0)
             {
-                e.Cancel = true;
-            }
+                if (!UIMessageBox.ShowAsk("确定退出程序吗?"))
+                {
+                    e.Cancel = true;
+                }
+            } 
+
         }
 
         private void FHeaderAsideMainFooter_KeyUp(object sender, KeyEventArgs e)

@@ -91,6 +91,7 @@ namespace Data.Repository.Mzsf
                                 string charge_code = obj[2];
                                 string serial = obj[3];
                                 string charge_amount = obj[4];
+                                string charge_price = obj[5];
 
                                 //其他数据根据charge_code查询获取
 
@@ -151,6 +152,12 @@ namespace Data.Repository.Mzsf
                                     para.Add("@audit_code", order_item.audit_code);
                                     para.Add("@exec_sn", order_item.exec_unit);
                                     para.Add("@charge_amount", int.Parse(charge_amount));
+
+                                    if (order_item.orig_price==0)
+                                    {
+                                        order_item.orig_price = decimal.Parse(charge_price);
+                                    }
+
                                     para.Add("@orig_price", order_item.orig_price);
                                     para.Add("@charge_group", order_item.charge_group);
                                     para.Add("@caoyao_fu", 1);
@@ -207,6 +214,11 @@ namespace Data.Repository.Mzsf
                                     para.Add("@audit_code", order_item.audit_code);
                                     para.Add("@exec_sn", order_item.exec_unit);
                                     para.Add("@charge_amount", int.Parse(charge_amount));
+
+                                    if (order_item.orig_price == 0)
+                                    {
+                                        order_item.orig_price = decimal.Parse(charge_price);
+                                    }
                                     para.Add("@orig_price", order_item.orig_price);
                                     para.Add("@charge_group", order_item.charge_group);
                                     para.Add("@caoyao_fu", 1);

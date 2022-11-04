@@ -1222,7 +1222,7 @@ namespace Mzsf.Forms.Pages
                 var item_str = "";
                 foreach (var item in item_list)
                 {
-                    item_str += "," + item.order_type + "-" + item.order_no + "-" + item.charge_code + "-" + item.serial_no + "-" + item.charge_amount;
+                    item_str += "," + item.order_type + "-" + item.order_no + "-" + item.charge_code + "-" + item.serial_no + "-" + item.charge_amount + "-" + item.charge_price;
                 }
                 if (item_str != "")
                 {

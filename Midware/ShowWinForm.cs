@@ -88,7 +88,19 @@ namespace GuXHis
                 MessageBox.Show("客户端出错：" + ex.Message);
             }
         }
-
+        /// <summary>
+        /// 是否可以关闭WinForm
+        /// </summary>
+        /// <param name="aHandle"></param>
+        /// <returns>0不能关闭，1可以关闭</returns>
+        public int CanCloseWinForm(object aHandle)
+        {
+            if (MessageBox.Show("确定要关闭该系统吗？","提示", MessageBoxButtons.OKCancel)== DialogResult.OK)
+            {
+                return 1;
+            }
+            return 0;
+        }
         public void CloseWinForm(object intPtr)
         {
             try

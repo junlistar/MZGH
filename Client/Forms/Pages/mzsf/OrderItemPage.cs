@@ -115,6 +115,7 @@ namespace Mzsf.Forms.Pages
                     var ev = new DataGridViewCellEventArgs(0, dgv.SelectedIndex);
 
                     Dgv_CellClick(sender, ev);
+                    return;
                 }
             }
         }
@@ -371,6 +372,17 @@ namespace Mzsf.Forms.Pages
                     }
                     txtCharge.Text = row.Cells["charge_price"].Value.ToString();
                     txtAmount.Text = row.Cells["charge_amount"].Value.ToString();
+
+                    //如果价格为0，可以编辑
+                    if (Convert.ToDecimal(txtCharge.Text) == 0)
+                    {
+                        txtCharge.ReadOnly = false;
+                         
+                    }
+                    else
+                    {
+                        txtCharge.ReadOnly = true;
+                    }
                 }
                 else
                 {
@@ -821,6 +833,60 @@ namespace Mzsf.Forms.Pages
             if (!dgv.Focused)
             {
                 dgv.Hide();
+            }
+        }
+
+        private void txtCharge_KeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+
+                if (e.KeyCode == Keys.Enter)
+                {
+                    decimal _input = decimal.Parse(txtCharge.Text);
+                    if (_input <= 0)
+                    {
+                        MessageBox.Show($"金额必须大于0");
+                        return;
+                    }
+                     
+
+                    if (dgvOrderDetail.SelectedRows[0].Cells["charge_amount"].Value != null)
+                    {
+                        dgvOrderDetail.SelectedRows[0].Cells["charge_price"].Value = txtCharge.Text;
+                        dgvOrderDetail.SelectedRows[0].Cells["total_price"].Value = _input * int.Parse(dgvOrderDetail.SelectedRows[0].Cells["charge_amount"].Value.ToString());
+                    }
+
+                    //更新金额（当前金额和总金额）
+                    CalcPrice();
+
+                    if (dgvOrderDetail.Rows[dgvOrderDetail.Rows.Count - 1].Cells["charge_code_lookup"].Value != null)
+                    {
+                        try
+                        {
+                            int new_index = dgvOrderDetail.Rows.Add();
+                            //增加新的一行，并设焦点
+                            this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
+                            BindSelectedRowData(new_index);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error(ex.Message);
+                        }
+                    }
+                    else
+                    {
+                        BindSelectedRowData(dgvOrderDetail.Rows.Count - 1);
+                    }
+                    //设焦点
+                    this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, dgvOrderDetail.Rows.Count - 1];
+                    txtName.Focus();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
             }
         }
     }
