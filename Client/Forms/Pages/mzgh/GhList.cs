@@ -31,6 +31,7 @@ namespace Client
         List<UnitVM> units = null;
         List<ClinicTypeVM> clinicTypes = null;
         List<UserDicVM> userDics = null;
+        List<RequestHourVM> rh_list = null;
         private void GhList_Load(object sender, EventArgs e)
         {
             
@@ -81,7 +82,7 @@ namespace Client
             //设置上午下午
             this.cbxSXW.Items.Clear();
 
-            var rh_list = new List<RequestHourVM>();
+            rh_list = new List<RequestHourVM>();
             foreach (var item in SessionHelper.requestHours.ToArray())
             {
                 rh_list.Add(item);
@@ -135,15 +136,24 @@ namespace Client
 
                 var gh_date = txtRiqi.Text;
                 var ampm = "%";
-                switch (cbxSXW.Text)
+                if (rh_list!=null)
                 {
-                    case "上午": ampm = "a"; break;
-                    case "下午": ampm = "p"; break;
-                    case "中午": ampm = "m"; break;
-                    case "夜间": ampm = "e"; break;
-                    default:
-                        break;
+                    var _sxw = rh_list.Where(p => p.name == cbxSXW.Text).FirstOrDefault();
+                    if (_sxw != null)
+                    {
+                        ampm = _sxw.code;
+                    }
+
                 }
+                //switch (cbxSXW.Text)
+                //{
+                //    case "上午": ampm = "a"; break;
+                //    case "下午": ampm = "p"; break;
+                //    case "中午": ampm = "m"; break;
+                //    case "夜间": ampm = "e"; break;
+                //    default:
+                //        break;
+                //}
                 var visit_flag = "";
                 switch (cbxStatus.Text)
                 {

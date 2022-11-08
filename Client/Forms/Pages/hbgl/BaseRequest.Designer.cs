@@ -670,6 +670,7 @@
             this.uiPagination1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiPagination1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiPagination1.Name = "uiPagination1";
+            this.uiPagination1.PageSize = 50;
             this.uiPagination1.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
             this.uiPagination1.ShowText = false;
             this.uiPagination1.Size = new System.Drawing.Size(760, 35);

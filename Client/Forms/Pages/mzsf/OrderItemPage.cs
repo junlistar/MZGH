@@ -103,6 +103,8 @@ namespace Mzsf.Forms.Pages
             dgv.CellClick += Dgv_CellClick;
 
             dgv.KeyDown += Dgv_KeyDown; ;
+
+            StyleHelper.SetGridColor(dgv);//设置样式
         }
 
         private void Dgv_KeyDown(object sender, KeyEventArgs e)

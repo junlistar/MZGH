@@ -61,11 +61,11 @@ namespace Client
             uiToolTip1.SetToolTip(btnEdit, btnEdit.Text + "[F6]");
             uiToolTip1.SetToolTip(btnDelete, btnDelete.Text + "[F7]");
             uiToolTip1.SetToolTip(btnExit, btnExit.Text + "[F4]");
-             
-            dgvhl.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
-            dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color; 
 
-            InitData();
+            dgvhl.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+            dgvghy.RowsDefaultCellStyle.SelectionBackColor = SessionHelper.dgv_row_seleced_color;
+             
+            InitData(); 
         }
 
         public void InitDic()
@@ -100,7 +100,7 @@ namespace Client
         private void btnSearch_Click(object sender, EventArgs e)
         {
             InitData();
-        } 
+        }
         public void InitData()
         {
             log.Info("InitData");
@@ -131,7 +131,7 @@ namespace Client
             if (cbxSXW.Text != "全部")
             {
                 ampm = cbxSXW.SelectedValue.ToString();
-            }  
+            }
 
 
             switch (cbxWeek.Text)
@@ -182,32 +182,31 @@ namespace Client
                 if (result.status == 1 && result.data.Count > 0)
                 {
                     list = result.data;
-                    if (list != null && list.Count > 0)
-                    {
-
-                        var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
-                        {
-                            request_sn = p.request_sn,
-                            unit_name = p.unit_name,
-                            group_name = p.group_name,
-                            doct_name = p.doct_name,
-                            clinic_name = p.clinic_name,
-                            weekstr = p.weekstr,
-                            daystr = p.daystr,
-                            apstr = p.apstr,
-                            workroom = p.workroom,
-                            totle_num = p.totle_num,
-                            open_flag_str = p.open_flag_str,
-                            op_date_str = p.op_date_str,
-                            limit_appoint_percent = p.limit_appoint_percent
-                        }).ToList();
-                        dgvlist.DataSource = ds;
-                        dgvlist.AutoGenerateColumns = false;
-                        dgvlist.AutoResizeColumns();
-                        dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-                        //SetColumnWidth();
-                        SetGridTextColor();
-                    }
+                    //if (list != null && list.Count > 0)
+                    //{ 
+                    //    var ds = list.Skip(0).Take(uiPagination1.PageSize).Select(p => new
+                    //    {
+                    //        request_sn = p.request_sn,
+                    //        unit_name = p.unit_name,
+                    //        group_name = p.group_name,
+                    //        doct_name = p.doct_name,
+                    //        clinic_name = p.clinic_name,
+                    //        weekstr = p.weekstr,
+                    //        daystr = p.daystr,
+                    //        apstr = p.apstr,
+                    //        workroom = p.workroom,
+                    //        totle_num = p.totle_num,
+                    //        open_flag_str = p.open_flag_str,
+                    //        op_date_str = p.op_date_str,
+                    //        limit_appoint_percent = p.limit_appoint_percent
+                    //    }).ToList();
+                    //    dgvlist.DataSource = ds;
+                    //    dgvlist.AutoGenerateColumns = false;
+                    //    dgvlist.AutoResizeColumns();
+                    //    dgvlist.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                    //    //SetColumnWidth();
+                    //    SetGridTextColor();
+                    //}
                 }
                 else
                 {
@@ -241,10 +240,11 @@ namespace Client
         public void BindBottomData()
         {
             lblTotalCount.Text = "总计：" + list.Count.ToString() + "条, 每页 " + 50 + "条";
-            //设置分页控件总数
+            //设置分页控件总数 
             uiPagination1.TotalCount = list.Count;
             //设置分页控件每页数量
-            uiPagination1.PageSize = 50;
+            //uiPagination1.PageSize = 50;
+            uiPagination1.ActivePage = 1;
         }
 
 
@@ -281,7 +281,7 @@ namespace Client
                 dgv.RowHeadersVisible = false;
                 dgv.BackgroundColor = Color.White;
                 dgv.ReadOnly = true;
-                 
+
                 List<UnitVM> vm = units;
 
                 if (!string.IsNullOrWhiteSpace(ipt))
@@ -298,7 +298,7 @@ namespace Client
                 dgv.Columns["yb_ks_code"].Visible = false;
                 dgv.Columns["yb_ks_name"].Visible = false;
                 dgv.AutoResizeColumns();
-                 
+
                 dgv.Show();
             }
 
@@ -565,7 +565,7 @@ namespace Client
             txtzk.Text = "";
             txtDoct.Text = "";
             txtHaobie.Text = "";
-            cbxSXW.Text = "全部"; 
+            cbxSXW.Text = "全部";
             cbxWeek.Text = "";
             cbxDay.Text = "全部";
             cbxOpenFlag.Text = "全部";
@@ -595,7 +595,7 @@ namespace Client
                 weekstr = p.weekstr,
                 daystr = p.daystr,
                 apstr = p.apstr,
-                winnostr = p.winnostr,
+                workroom = p.workroom,
                 totle_num = p.totle_num,
                 open_flag_str = p.open_flag_str,
                 op_date_str = p.op_date_str,
@@ -1045,7 +1045,7 @@ namespace Client
         private void dgvlist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
-            { 
+            {
                 if (e.RowIndex != -1 || e.ColumnIndex == -1)
                 {
                     return;
@@ -1183,7 +1183,7 @@ namespace Client
         {
             return text.Replace("↑", "").Replace("↓", "");
         }
- 
+
 
         public void SetGridTextColor()
         {

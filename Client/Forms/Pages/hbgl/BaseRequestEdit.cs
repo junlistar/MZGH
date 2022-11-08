@@ -560,6 +560,7 @@ namespace Client
                 if (_wookroom=="")
                 {
                     UIMessageTip.Show("诊室数据为空！");
+                    txt_wookroom.Focus();
                      return;
                 }
                 //if (!int.TryParse(_winno, out window_no))

@@ -80,6 +80,7 @@ namespace GuxHis.Mzsf
         public void LoadCompoment()
         {
             InitializeComponent();
+            tsslblTime.Text = "";
 
             string assemblyPath = Assembly.GetExecutingAssembly().GetName().CodeBase;//获取运行项目当前DLL的路径       
 
@@ -664,10 +665,12 @@ namespace GuxHis.Mzsf
                 timer1.Interval = 1000;
                 timer1.Start();
 
-                timerlogout.Interval = 1000;
-                timerlogout.Start();
+                #region 倒计时 超时处理
+                //timerlogout.Interval = 1000;
+                //timerlogout.Start();
+                #endregion
 
-                //加载字典数据 
+                //加载字典数据 (放在加载进度弹窗处理
                 //InitDic();
 
                 //读取打印机配置
@@ -853,7 +856,7 @@ namespace GuxHis.Mzsf
                 {
                     e.Cancel = true;
                 }
-            } 
+            }
 
         }
 
