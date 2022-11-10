@@ -63,7 +63,7 @@
             this.lstunits.Text = "uiListBox1";
             this.lstunits.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.lstunits.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstunits_KeyUp);
-            this.lstunits.ItemClick += new System.EventHandler(this.lstunits_ItemClick);
+            //this.lstunits.ItemClick += new System.EventHandler(this.lstunits_ItemClick);
             // 
             // KeySuggest
             // 

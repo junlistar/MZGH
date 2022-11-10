@@ -108,8 +108,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvpaylist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvpaylist.RowHeight = 0;
+            this.dgvpaylist.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -118,9 +117,7 @@
             this.dgvpaylist.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvpaylist.RowTemplate.Height = 23;
             this.dgvpaylist.SelectedIndex = -1;
-            this.dgvpaylist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvpaylist.ShowGridLine = true;
-            this.dgvpaylist.ShowRect = false;
+            this.dgvpaylist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect; 
             this.dgvpaylist.Size = new System.Drawing.Size(732, 262);
             this.dgvpaylist.Style = Sunny.UI.UIStyle.Custom;
             this.dgvpaylist.StyleCustomMode = true;

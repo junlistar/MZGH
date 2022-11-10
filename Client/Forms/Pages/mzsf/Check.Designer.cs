@@ -526,8 +526,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvfk.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvfk.RowHeight = 0;
+            this.dgvfk.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -537,9 +536,7 @@
             this.dgvfk.RowTemplate.Height = 23;
             this.dgvfk.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.dgvfk.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.dgvfk.SelectedIndex = -1;
-            this.dgvfk.ShowGridLine = false;
-            this.dgvfk.ShowRect = false;
+            this.dgvfk.SelectedIndex = -1; 
             this.dgvfk.Size = new System.Drawing.Size(390, 151);
             this.dgvfk.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.dgvfk.Style = Sunny.UI.UIStyle.Red;
@@ -599,8 +596,7 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvzd.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvzd.RowHeight = 0;
+            this.dgvzd.RowHeadersDefaultCellStyle = dataGridViewCellStyle9; 
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -610,9 +606,7 @@
             this.dgvzd.RowTemplate.Height = 23;
             this.dgvzd.ScrollBarBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.dgvzd.ScrollBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.dgvzd.SelectedIndex = -1;
-            this.dgvzd.ShowGridLine = false;
-            this.dgvzd.ShowRect = false;
+            this.dgvzd.SelectedIndex = -1; 
             this.dgvzd.Size = new System.Drawing.Size(337, 151);
             this.dgvzd.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
             this.dgvzd.Style = Sunny.UI.UIStyle.Red;

@@ -209,8 +209,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvDeposit.RowHeight = 0;
+            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -219,9 +218,7 @@
             this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDeposit.RowTemplate.Height = 23;
             this.dgvDeposit.SelectedIndex = -1;
-            this.dgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvDeposit.ShowGridLine = true;
-            this.dgvDeposit.ShowRect = false;
+            this.dgvDeposit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect; 
             this.dgvDeposit.Size = new System.Drawing.Size(1060, 411);
             this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
             this.dgvDeposit.StyleCustomMode = true;

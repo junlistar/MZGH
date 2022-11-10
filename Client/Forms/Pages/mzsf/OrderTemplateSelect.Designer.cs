@@ -105,8 +105,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTp.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvTp.RowHeight = 0;
+            this.dgvTp.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -114,9 +113,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvTp.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvTp.RowTemplate.Height = 23;
-            this.dgvTp.SelectedIndex = -1;
-            this.dgvTp.ShowGridLine = false;
-            this.dgvTp.ShowRect = false;
+            this.dgvTp.SelectedIndex = -1; 
             this.dgvTp.Size = new System.Drawing.Size(841, 126);
             this.dgvTp.Style = Sunny.UI.UIStyle.Custom;
             this.dgvTp.TabIndex = 2;
@@ -201,8 +198,7 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvTpDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvTpDetails.RowHeight = 0;
+            this.dgvTpDetails.RowHeadersDefaultCellStyle = dataGridViewCellStyle9; 
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -210,9 +206,7 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvTpDetails.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvTpDetails.RowTemplate.Height = 23;
-            this.dgvTpDetails.SelectedIndex = -1;
-            this.dgvTpDetails.ShowGridLine = false;
-            this.dgvTpDetails.ShowRect = false;
+            this.dgvTpDetails.SelectedIndex = -1; 
             this.dgvTpDetails.Size = new System.Drawing.Size(841, 190);
             this.dgvTpDetails.StyleCustomMode = true;
             this.dgvTpDetails.TabIndex = 3;

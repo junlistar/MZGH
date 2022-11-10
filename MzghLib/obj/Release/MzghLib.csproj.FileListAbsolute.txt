@@ -1,0 +1,6 @@
+D:\lijun\github\Mzgh\MzghLib\bin\Release\MzghLib.dll
+D:\lijun\github\Mzgh\MzghLib\bin\Release\MzghLib.pdb
+D:\lijun\github\Mzgh\MzghLib\obj\Release\MzghLib.csproj.AssemblyReference.cache
+D:\lijun\github\Mzgh\MzghLib\obj\Release\MzghLib.csproj.CoreCompileInputs.cache
+D:\lijun\github\Mzgh\MzghLib\obj\Release\MzghLib.dll
+D:\lijun\github\Mzgh\MzghLib\obj\Release\MzghLib.pdb

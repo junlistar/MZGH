@@ -97,8 +97,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_functions.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_functions.RowHeight = 0;
+            this.dgv_functions.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -107,9 +106,7 @@
             this.dgv_functions.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_functions.RowTemplate.Height = 23;
             this.dgv_functions.SelectedIndex = -1;
-            this.dgv_functions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_functions.ShowGridLine = false;
-            this.dgv_functions.ShowRect = false;
+            this.dgv_functions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect; 
             this.dgv_functions.Size = new System.Drawing.Size(920, 671);
             this.dgv_functions.StyleCustomMode = true;
             this.dgv_functions.TabIndex = 13;

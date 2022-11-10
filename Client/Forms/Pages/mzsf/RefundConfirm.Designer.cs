@@ -183,8 +183,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvDeposit.RowHeight = 0;
+            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -192,9 +191,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDeposit.RowTemplate.Height = 23;
-            this.dgvDeposit.SelectedIndex = -1;
-            this.dgvDeposit.ShowGridLine = false;
-            this.dgvDeposit.ShowRect = false;
+            this.dgvDeposit.SelectedIndex = -1; 
             this.dgvDeposit.Size = new System.Drawing.Size(598, 151);
             this.dgvDeposit.Style = Sunny.UI.UIStyle.Custom;
             this.dgvDeposit.TabIndex = 6;
@@ -374,8 +371,7 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCpr.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvCpr.RowHeight = 0;
+            this.dgvCpr.RowHeadersDefaultCellStyle = dataGridViewCellStyle9; 
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -383,9 +379,7 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvCpr.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvCpr.RowTemplate.Height = 23;
-            this.dgvCpr.SelectedIndex = -1;
-            this.dgvCpr.ShowGridLine = false;
-            this.dgvCpr.ShowRect = false;
+            this.dgvCpr.SelectedIndex = -1; 
             this.dgvCpr.Size = new System.Drawing.Size(1132, 332);
             this.dgvCpr.Style = Sunny.UI.UIStyle.Custom;
             this.dgvCpr.TabIndex = 9;

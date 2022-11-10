@@ -193,14 +193,12 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.rowMergeView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.rowMergeView1.RowHeight = 0;
+         
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rowMergeView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.rowMergeView1.RowTemplate.Height = 23;
             this.rowMergeView1.SelectedIndex = -1;
-            this.rowMergeView1.ShowGridLine = false;
-            this.rowMergeView1.ShowRect = false;
             this.rowMergeView1.Size = new System.Drawing.Size(751, 47);
             this.rowMergeView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.rowMergeView1.TabIndex = 0;

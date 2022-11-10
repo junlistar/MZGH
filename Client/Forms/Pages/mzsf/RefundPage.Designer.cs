@@ -403,8 +403,7 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRefund.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvRefund.RowHeight = 0;
+            this.dgvRefund.RowHeadersDefaultCellStyle = dataGridViewCellStyle6; 
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -413,9 +412,7 @@
             this.dgvRefund.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvRefund.RowTemplate.Height = 23;
             this.dgvRefund.SelectedIndex = -1;
-            this.dgvRefund.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRefund.ShowGridLine = false;
-            this.dgvRefund.ShowRect = false;
+            this.dgvRefund.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect; 
             this.dgvRefund.Size = new System.Drawing.Size(870, 485);
             this.dgvRefund.StyleCustomMode = true;
             this.dgvRefund.TabIndex = 5;

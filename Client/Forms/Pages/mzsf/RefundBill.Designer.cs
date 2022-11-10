@@ -191,8 +191,7 @@
             dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            this.dgvDeposit.RowHeight = 0;
+            this.dgvDeposit.RowHeadersDefaultCellStyle = dataGridViewCellStyle9; 
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -200,9 +199,7 @@
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvDeposit.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvDeposit.RowTemplate.Height = 23;
-            this.dgvDeposit.SelectedIndex = -1;
-            this.dgvDeposit.ShowGridLine = false;
-            this.dgvDeposit.ShowRect = false;
+            this.dgvDeposit.SelectedIndex = -1; 
             this.dgvDeposit.Size = new System.Drawing.Size(489, 133);
             this.dgvDeposit.TabIndex = 8;
             this.dgvDeposit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);

@@ -1,0 +1,12 @@
+D:\lijun\work\MzghLib\bin\Debug\MzghLib.dll
+D:\lijun\work\MzghLib\bin\Debug\MzghLib.pdb
+D:\lijun\work\MzghLib\obj\Debug\MzghLib.csproj.AssemblyReference.cache
+D:\lijun\work\MzghLib\obj\Debug\MzghLib.csproj.CoreCompileInputs.cache
+D:\lijun\work\MzghLib\obj\Debug\MzghLib.dll
+D:\lijun\work\MzghLib\obj\Debug\MzghLib.pdb
+D:\lijun\github\Mzgh\MzghLib\bin\Debug\MzghLib.dll
+D:\lijun\github\Mzgh\MzghLib\bin\Debug\MzghLib.pdb
+D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.AssemblyReference.cache
+D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.CoreCompileInputs.cache
+D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.dll
+D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.pdb

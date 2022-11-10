@@ -194,8 +194,7 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRequestHour.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvRequestHour.RowHeight = 0;
+            this.dgvRequestHour.RowHeadersDefaultCellStyle = dataGridViewCellStyle4; 
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
@@ -203,9 +202,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvRequestHour.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvRequestHour.RowTemplate.Height = 23;
-            this.dgvRequestHour.SelectedIndex = -1;
-            this.dgvRequestHour.ShowGridLine = false;
-            this.dgvRequestHour.ShowRect = false;
+            this.dgvRequestHour.SelectedIndex = -1; 
             this.dgvRequestHour.Size = new System.Drawing.Size(615, 506);
             this.dgvRequestHour.StyleCustomMode = true;
             this.dgvRequestHour.TabIndex = 15;
