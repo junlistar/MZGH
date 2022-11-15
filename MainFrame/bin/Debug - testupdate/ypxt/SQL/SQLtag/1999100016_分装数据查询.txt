@@ -1,0 +1,29 @@
+
+declare  @date1 datetime,@date2 datetime ,@group_no varchar(10)
+
+select @date1=:date1,@date2=:date2,@group_no=:group_no
+
+select  out_date,out_seri,charge_code,serial,retprice,fix_price,-issue_amount as issue_amount ,stock_amount,drawer
+  ,group_no_out as group_no
+  ,1 op
+  into #divd
+from yp_out_detl
+where out_type='41' and out_date >=@date1 and out_date < @date2 and
+    group_no_out =@group_no
+
+insert into #divd
+select in_date,in_seri,charge_code,serial,retprice,fix_price,buy_amount,stock_amount,purchaser
+   ,group_no ,2 op 
+ from yp_in_detl
+where in_type='41' and in_date >=@date1 and in_date < @date2 and
+    group_no_out =@group_no
+select a.*,b.drugname,b.specification,
+   c.dept_name,yp_unit3.name as  chinapack_unit,
+   d.name as drawer_name
+from  #divd a left join yp_dict b on a.charge_code=b.charge_code and a.serial=b.serial
+   left join yp_group_name c on a.group_no=c.group_no
+   left join  yp_unit yp_unit3    on  yp_dict.pack_unit=yp_unit3.code
+   left join a_employee_mi d on   a.drawer=d.code
+ order by out_date,op
+ 
+ drop table #divd             

@@ -1,0 +1,28 @@
+declare @patient_id varchar(15),
+      @times int,@ledger_sn int,
+      @group_no varchar(10) ,
+      @confirm_opera varchar(10),
+      @window_no varchar(10),
+      @exec_sn varchar(10),
+      @put_opear varchar(10),
+      @NotOrders varchar(40)
+select @patient_id=:patient_id,
+  @times=:times,
+  @ledger_sn=:ledger_sn,
+  @group_no=:group_no,
+  @confirm_opera=:confirm_opera,
+  @window_no=:window_no,
+  @exec_sn=:exec_sn,
+   @put_opear=:put_opear,
+  @NotOrders=:NotOrders
+
+exec [yp_mz_order_confirm]
+  @patient_id,
+  @times,
+  @ledger_sn,
+  @group_no,
+  @confirm_opera,
+  @window_no ,
+  @exec_sn,
+  @put_opear,
+  @NotOrders          

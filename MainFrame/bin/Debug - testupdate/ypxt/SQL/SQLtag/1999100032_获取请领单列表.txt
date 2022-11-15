@@ -1,0 +1,9 @@
+select distinct page_no,in_date
+from yp_in_plan 
+where flag='0'
+  and isnull(group_no_in,'%') like :group_no_in
+  and isnull(dept_sn,'%') like :dept_sn
+  --and check_flag ='1' /*如果医院请领单要审核，就放开该条件*/
+  and group_no_out =:group_no_out
+  order  by  in_date  desc
+                                                      

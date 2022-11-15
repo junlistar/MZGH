@@ -1,0 +1,9 @@
+SELECT  a.group_no   库房号,   a.dept_name        库房名,
+      a.py_code       拼音码, a.d_code        自定义码,
+a.dept_sn 部门序号
+FROM yp_group_name a
+WHERE a.py_code LIKE :py_code AND 
+a.d_code LIKE :d_code AND 
+a.group_no LIKE :code AND 
+a.dept_name LIKE :name
+order by 1                                

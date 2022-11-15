@@ -1,0 +1,30 @@
+
+--0药品属性
+select code,name,convert(float ,rate ) as  rate
+from yp_drug_type
+where deleted_flag='0' 
+order by 1
+--1招标属性
+select code, name
+from yp_zd_bidding 
+order by 1 
+--2大类infusion_flag
+ select code, name from yp_zd_type 
+ order by 1
+ --3来源 country_flag
+ select code ,name from yp_zd_country
+ --4 毒麻 drug_flag
+ select code ,name from yp_zd_poison_class
+ --5含量单位、体积单位 weight_unit
+ select code,name from yp_unit where deleted_flag='0' 
+ order by name
+ --6住院账单
+ select code ,name from  zy_bill_item
+ --7门诊账单
+ select code ,name from mz_bill_item
+ --8核算码
+ select code ,name from zy_audit_item
+ --9住院门诊分摊
+ select code ,name from zd_charge_group    
+
+                                                        

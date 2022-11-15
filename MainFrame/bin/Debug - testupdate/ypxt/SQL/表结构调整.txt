@@ -1,0 +1,25 @@
+/*
+1.请领单调整
+*/
+alter table yp_in_plan
+add first_Date datetime null,
+first_amount float null,
+second_Date datetime null,
+second_amount float null,
+third_Date datetime null,
+third_amount float null
+/
+2.请领和采购放在同一个表，增加字段plan_type表示类别
+ 1.请领计划，2.采购计划
+/
+alter table yp_in_plan
+add plan_type char(1) null
+
+/*
+ 3.库房表增加字段
+  subsys_id:库房系统ID，在xt_subsys表取值
+  bacth_flag：是否批次管理 1批次管理，0不管理批次，2手工选择批次
+*/
+alter table yp_group_name
+add subsys_id varchar(20) null,
+bacth_flag char(1) null

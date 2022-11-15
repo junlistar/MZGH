@@ -1,0 +1,8 @@
+declare @group_no_out varchar(10),@draw_no varchar(10),@out_date datetime,@opera varchar(10),@InOut_flag varchar(5)
+select @group_no_out=:group_no_out,@draw_no=:draw_no,@out_date=:out_date,@opera=:opera,
+       @InOut_flag=:InOut_flag  
+if @InOut_flag='IN' 
+   exec yp_ykBack_audit @group_no_out,@draw_no,@out_date,@opera
+else 
+   exec yp_ykout_audit @group_no_out,@draw_no,@out_date,@opera
+                                                                                      

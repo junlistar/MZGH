@@ -1,0 +1,89 @@
+/*    
+药库出库查询列表 cx:2022-09-27    
+exec yp_OutDetl_list @startdate,@enddate,@group_no_out,@group_no_in,   
+    @dept_sn,@out_type  
+       
+*/    
+CREATE proc yp_OutDetl_list
+    @startdate datetime,   
+    @enddate datetime,  
+    @group_no_out varchar(10),  
+    @group_no_in varchar(10),        
+    @dept_sn varchar(10),    
+    @out_type varchar(10)   
+as    
+begin    
+
+select     
+   yp_out_detl.out_date ,    
+   yp_out_detl.draw_no  ,    
+   yp_out_detl.group_no_out,    
+   yp_out_detl.accept_flag,    
+   yp_out_detl.report_date    
+   ,isnull(yp_out_detl.cheque_no,'') as cheque_no    
+   ,yp_out_detl.retprice,    
+   yp_out_detl.fix_price,    
+   yp_out_detl.issue_amount,    
+   yp_out_detl.out_type,    
+   yp_out_detl.charge_code,    
+   yp_out_detl.serial,    
+   isnull(yp_out_detl.ward_sn,'') as ward_sn    
+   ,isnull(yp_out_detl.dept_sn,'') as dept_sn    
+   ,isnull(yp_out_detl.group_no_in,'') as group_no_in    
+   ,yp_out_detl.keeper    
+   ,yp_out_detl.drawer    
+   ,isnull(yp_dict.cooperate_flag,0) as cooperate_flag    
+   into #out_detl    
+from  yp_out_detl inner join yp_dict   on  yp_out_detl.charge_code = yp_dict.charge_code  and yp_out_detl.serial = yp_dict.serial    
+where yp_out_detl.group_no_out=@group_no_out    
+   and (yp_out_detl.draw_no <> 0)    
+  and yp_out_detl.out_date >= @startdate    
+  and yp_out_detl.out_date <  cast(@enddate as datetime)+1    
+end      
+    
+
+if @dept_sn <> '%'    
+  delete from #out_detl where  dept_sn <>@dept_sn     
+if @group_no_in<>'%'    
+  delete from #out_detl where group_no_in<>@group_no_in    
+if @out_type<>'%'    
+  delete from #out_detl where out_type<>@out_type     
+ 
+     
+ delete from #out_detl where out_type in(select code from yp_in_out_type where (yp_in_out_type.name  like '%盘%' )    
+    or (yp_in_out_type.name  like '%报%'))    
+      
+ select out_date,    
+     draw_no,    
+     group_no_out,    
+     accept_flag,    
+     a_employee_mi_1.name drawername,    
+     a_employee_mi.name keepername,yp_group_name.dept_name out_deptname,    
+     zd_unit_code.name in_deptname,    
+     yp_in_out_type.name out_type_name,
+     detl.out_type,    
+    round(sum(detl.retprice *detl.issue_amount ),2) ret_je,    
+    round( sum(detl.fix_price *detl.issue_amount ),2) fix_je,    
+    round(sum((detl.retprice *detl.issue_amount )- (detl.fix_price *detl.issue_amount ) ),2) cj_je    
+   ,cooperate_flag  
+   ,in_out_flag      
+ from #out_detl detl left join    a_employee_mi a_employee_mi_1  on detl.drawer        = a_employee_mi_1.emp_sn    
+  left  join    a_employee_mi  on  detl.keeper        = a_employee_mi.emp_sn    
+left  join    yp_group_name  on  detl.group_no_out  = yp_group_name.group_no    
+left join    yp_in_out_type on  detl.out_type       = yp_in_out_type.code    
+left join    zd_unit_code   on detl.dept_sn        = zd_unit_code.unit_sn     
+group by detl.out_date ,    
+   detl.draw_no  ,    
+   detl.group_no_out,    
+   detl.accept_flag,     
+   a_employee_mi_1.name ,    
+   a_employee_mi.name ,    
+   yp_group_name.dept_name ,    
+   zd_unit_code.name ,    
+   yp_in_out_type.name ,
+   out_type,    
+  cooperate_flag,    
+  in_out_flag      
+order by out_date,draw_no desc    
+    
+drop table #out_detl 

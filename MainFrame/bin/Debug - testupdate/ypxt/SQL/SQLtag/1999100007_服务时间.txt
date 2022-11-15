@@ -1,0 +1,2 @@
+select getdate() as serDate
+ from a_hospital with(nolock)        

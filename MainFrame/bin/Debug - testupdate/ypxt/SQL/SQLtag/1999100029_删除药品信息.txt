@@ -1,0 +1,1 @@
+exec  yp_DeleteDict :charge_code                    

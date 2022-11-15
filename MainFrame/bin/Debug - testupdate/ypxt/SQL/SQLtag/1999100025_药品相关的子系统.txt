@@ -1,0 +1,3 @@
+select subsys_id,subsys_name
+from xt_subsys
+where subsys_name like '%药%'        

@@ -897,3 +897,23 @@ go
 
 insert into sys_config values('mzPatientInfo_notNullColumns',1,'门诊挂号-患者基本信息必填字段','p_bar_code','mz')
 go
+
+--子系统维护界面
+CREATE TABLE [dbo].[subsystem](
+	[sys_code] [varchar](50) NOT NULL,
+	[sys_name] [varchar](50) NULL,
+	[sys_no] [int] NULL,
+	[sys_desc] [varchar](2000) NULL,
+	[file_path] [varchar](2000) NULL,
+	[file_type] [varchar](50) NULL,
+	[icon_path] [varchar](2000) NULL,
+	[open_mode] [int] NULL,
+	[active_flag] [int] NULL,
+	[update_time] [datetime] NULL,
+ CONSTRAINT [PK_subsystem] PRIMARY KEY CLUSTERED 
+(
+	[sys_code] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO

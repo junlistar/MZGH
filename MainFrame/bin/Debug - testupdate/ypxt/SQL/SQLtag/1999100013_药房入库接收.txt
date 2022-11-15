@@ -1,0 +1,1 @@
+exec yp_yf_confirm :draw_no,:opera,:split_code,'',''

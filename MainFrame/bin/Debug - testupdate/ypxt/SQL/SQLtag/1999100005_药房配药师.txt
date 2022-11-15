@@ -1,0 +1,7 @@
+/*
+ 药房配药师人员
+*/
+select a.code,a.name ,a.dept_sn,a.emp_tit_code
+from a_employee_mi a left join yp_group_name b on a.dept_sn=b.dept_sn
+where b.group_no= :group_no and 
+ a.emp_tit_code in ('013','014','015','016')         

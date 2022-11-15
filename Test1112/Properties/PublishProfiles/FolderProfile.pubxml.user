@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>D:\lijun\github\Mzgh\Test1112\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-11-12T06:17:46.8632006Z;True|2022-11-12T14:17:19.0432006+08:00;True|2022-11-12T14:16:26.1252006+08:00;True|2022-11-12T14:14:45.1172006+08:00;True|2022-11-12T14:09:49.9142006+08:00;True|2022-11-12T14:07:55.0842006+08:00;</History>
+  </PropertyGroup>
+</Project>

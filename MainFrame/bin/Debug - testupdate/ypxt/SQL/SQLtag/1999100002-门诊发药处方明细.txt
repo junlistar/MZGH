@@ -1,0 +1,160 @@
+declare
+@patient_id      varchar(12),
+@order_type  varchar(30),
+@startdate datetime,
+@enddate   datetime,
+@group_no  varchar(6),
+@windows_no varchar(3),
+@ledger_sn integer,
+@jianyaofei float,
+@charge_sum NUMERIC(10, 2)               
+
+set @patient_id  = :patient_id
+set @order_type  = :order_type                              
+set @startdate = :price_data1
+set @enddate = :price_data2
+set @group_no = :group_no
+set @windows_no = :windows_no
+set @ledger_sn=:ledger_sn
+set nocount on
+SELECT 
+Mz_detail_charge.patient_id,    
+Mz_detail_charge.times,    
+Mz_detail_charge.order_type,
+Mz_detail_charge.order_no,
+Mz_detail_charge.item_no,
+Mz_detail_charge.ledger_sn,                         
+Mz_detail_charge.charge_code,
+Mz_detail_charge.serial_no,
+Mz_detail_charge.group_no,                                        
+Mz_detail_charge.happen_date,
+Mz_detail_charge.charge_status,
+Mz_detail_charge.charge_amount,
+ 'x' + CONVERT(VARCHAR(5),Mz_detail_charge.charge_amount) +Yp_unit.name charge_amount_name, /*数量*/
+isnull((select sum(back.back_amount) from mz_detail_charge_back back
+        where back.patient_id=Mz_detail_charge.patient_id and 
+              back.times=Mz_detail_charge.times and
+              back.ledger_sn=Mz_detail_charge.ledger_sn and
+              back.order_no=Mz_detail_charge.order_no and
+              back.item_no=Mz_detail_charge.item_no),0) charge_amount_ok, --已退数量，注意付数不为零情况    
+Mz_detail_charge.orig_price,
+Mz_detail_charge.charge_price,    
+Mz_detail_charge.caoyao_fu,    
+cast(0 as integer) back_amount,    
+Mz_detail_charge.price_data,    
+Mz_detail_charge.price_opera,    
+Mz_detail_charge.windows_no,    
+Mz_detail_charge.confirm_date,    
+Mz_detail_charge.confirm_opera,
+Mz_detail_charge.confirm_win,    
+Mz_detail_charge.confirm_flag,
+Mz_detail_charge.put_opera,    
+Mz_detail_charge.apply_unit,
+Mz_detail_charge.order_properties,    
+Yp_dict.drugname,
+Yp_dict.specification,
+Yp_dict.retprice,    
+Yp_dict.pack_size,    
+Yp_unit.name unit_name,    
+Mz_detail_charge.name name,    
+A_employee_mi.name doctor_name,
+a_employee_mi.name confir_oper,
+Mz_detail_charge.exec_sn,    
+Mz_detail_charge.dosage,
+
+isnull(case when yz_frequency.name ='ONCE' then '1次/日' else yz_frequency.name end,'') freque,     
+isnull(yz_supply.supply_name,'') supply_name,
+yp_dosage.name dosage_name,    
+yp_zd_goods_where.name goods_name,    
+dbo.yp_getdrugnameBM(Yp_dict.drug_id) as drugname_bm , --常用别名    
+price_mi.name price_name,
+(select   case  when a.sex= '1' then '男' else  '女'  end   from  mz_patient_mi a  
+where a.patient_id   = Mz_detail_charge.patient_id) sex_name ,    
+(select   dbo.BirthToAge(a.birthday)   from  mz_patient_mi a  where a.patient_id   = Mz_detail_charge.patient_id) age ,    
+(select   top 1 name   from  zd_unit_code  a  where a.code   = Mz_detail_charge.apply_unit) dept_name ,
+dbo.GetMzdrugpsjg( Mz_detail_charge.patient_id,Mz_detail_charge.times,Mz_detail_charge.order_no,Mz_detail_charge.item_no) fit_name,--皮试结果    
+dbo.GetMzcfbz(Mz_detail_charge.patient_id,Mz_detail_charge.times,Mz_detail_charge.order_no) remark ,--备注
+( select   top 1 isnull(b.name ,a.icd_code3) from  mz_visit_table a , zd_icd_code b where  a.icd_code = b.code    
+and a.patient_id = Mz_detail_charge.patient_id  and a.times =Mz_detail_charge.times )   icd_name,
+case when Mz_detail_charge.confirm_date is null then '0' else '1' end confirm_ok,
+ mz_receipt.receipt_no
+into #mzDetail    
+FROM mz_detail_charge Mz_detail_charge    
+left  join  a_employee_mi A_employee_mi   on  Mz_detail_charge.doctor_code = A_employee_mi.emp_sn    
+left join  yp_dict Yp_dict  on     Mz_detail_charge.charge_code = Yp_dict.charge_code  AND  Mz_detail_charge.serial_no   = Yp_dict.serial    
+left join  yp_unit Yp_unit  on     Yp_dict.pack_unit            = Yp_unit.code    
+left  join  a_employee_mi    on     Mz_detail_charge.confirm_opera = a_employee_mi.emp_sn    
+left  join  a_employee_mi price_mi  on    Mz_detail_charge.price_opera =price_mi.emp_sn     
+left join   yz_supply    on    Mz_detail_charge.supply_code=yz_supply.supply_code
+left join   yz_frequency on    Mz_detail_charge.freq_code=yz_frequency.code    
+left join   yp_unit  on   Mz_detail_charge.dosage_unit=yp_unit.code     
+left join    yp_base  on   Mz_detail_charge.group_no=yp_base.group_no  and Mz_detail_charge.charge_code=yp_base.charge_code  and  Mz_detail_charge.serial_no=yp_base.serial    
+left join    yp_zd_goods_where  on     yp_base.goods_where_code=yp_zd_goods_where.code  and yp_base.group_no=yp_zd_goods_where.group_no
+left join    yp_dosage  on  Yp_dict.dosage=yp_dosage.code
+left join  mz_receipt  on Mz_detail_charge.patient_id=mz_receipt.patient_id and Mz_detail_charge.ledger_sn=mz_receipt.ledger_sn    
+WHERE   Mz_detail_charge.serial_no <> '**'    
+   AND  (Mz_detail_charge.patient_id =    @patient_id)    
+   AND  (Mz_detail_charge.ledger_sn      = @ledger_sn)    
+   AND  Mz_detail_charge.charge_status='4' 
+   and  Mz_detail_charge.group_no=@group_no
+   --AND  charindex(Mz_detail_charge.order_type ,@order_type)>0 
+   
+if @windows_no<>'%' 
+  delete from #mzDetail where  isnull(confirm_win ,'0')<> @windows_no 
+ --煎药费,serial=** 
+ declare @code_jy varchar(10)
+ select @code_jy=ISNULL(jianyaofei,'') from yp_configure
+ if LEN(@code_jy) >0
+   select @jianyaofei=isnull( sum(charge_amount*charge_price*caoyao_fu),0) 
+   from mz_detail_charge a  
+   where  a.patient_id=@patient_id and a.ledger_sn=@ledger_sn and  charge_code =@code_jy    
+ 
+select @charge_sum =sum(charge_amount * charge_price * caoyao_fu) from #mzDetail
+ 
+
+
+     
+--汇总
+SELECT  
+Mz_zd_order_type.name ordertype,
+mi.p_bar_code,
+Mz_detail_charge.order_no,                        
+Mz_detail_charge.patient_id,
+Mz_detail_charge.order_type,
+Mz_detail_charge.ledger_sn,                 
+Mz_detail_charge.order_properties,
+sum(charge_amount*charge_price*caoyao_fu) as hj,       
+mi.home_tel,
+SPACE(100) as allergy_history ,--过敏史
+SPACE(100) as allergy_drug, --过敏无
+SPACE(100) as symptoms --体征
+into #mzSum 
+FROM #mzDetail Mz_detail_charge left join mz_zd_order_type Mz_zd_order_type
+     on Mz_detail_charge.order_type = Mz_zd_order_type.code
+     left join mz_patient_mi mi on Mz_detail_charge.patient_id=mi.patient_id
+GROUP BY Mz_zd_order_type.name,
+   mi.p_bar_code,
+   Mz_detail_charge.order_no,
+   Mz_detail_charge.patient_id,
+   Mz_detail_charge.order_type,
+   Mz_detail_charge.ledger_sn,
+   Mz_detail_charge.order_properties ,
+   mi.home_tel
+
+ select *,charge_amount * charge_price * caoyao_fu as je ,@jianyaofei as jianyaofei 
+   ,@charge_sum as charge_sum,
+   (select top 1 p_bar_code from #mzSum) as p_bar_code,
+    ' ' as response_name,
+   (select dept_name from yp_group_name where group_no= @group_no ) as group_name
+ from #mzDetail
+ order by order_no,item_no 
+declare @confirm_ok char(1)
+select top 1  @confirm_ok= confirm_ok from #mzDetail  
+
+select *, @confirm_ok as confirm_ok
+from #mzSum  
+order by order_no
+ 
+drop table #mzDetail 
+drop  table #mzSum
+set nocount off

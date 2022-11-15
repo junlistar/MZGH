@@ -1,0 +1,30 @@
+declare @out_date1 datetime ,@out_date2 datetime,
+        @group_no varchar(10),@group_no_out varchar(10),
+        @accept_flag char(1)
+select @out_date1=:out_date1,@out_date2=:out_date2,
+       @group_no=:group_no ,@group_no_out=:group_no_out,
+       @accept_flag=:accept_flag 
+
+if @group_no_out='%' or @group_no_out=''
+begin
+    select a.draw_no,a.out_date,a.group_no_out,group_out.dept_name,t.name out_name,accept_flag
+    from yp_out_detl a left join yp_group_name group_out on a.group_no_out=group_out.group_no
+         left join yp_in_out_type t on a.out_type=t.code
+    where out_date>=@out_date1 and out_date< @out_date2
+     and out_type in('22','21')
+     and group_no_in=@group_no 
+     and accept_flag like @accept_flag
+    group  by a.draw_no,a.out_date,a.group_no_out,group_out.dept_name,t.name,accept_flag
+end 
+else
+begin
+    select a.draw_no,a.out_date,a.group_no_out,group_out.dept_name,t.name out_name,accept_flag
+    from yp_out_detl a left join yp_group_name group_out on a.group_no_out=group_out.group_no
+         left join yp_in_out_type t on a.out_type=t.code
+    where out_date>=@out_date1 and out_date< @out_date2
+     and out_type in('22','21')
+     and group_no_in=@group_no
+     and group_no_in=@group_no_out 
+     and accept_flag like @accept_flag
+    group  by a.draw_no,a.out_date,a.group_no_out,group_out.dept_name,t.name,accept_flag
+end                                                                                                

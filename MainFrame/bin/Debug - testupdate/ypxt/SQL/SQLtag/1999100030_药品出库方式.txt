@@ -1,0 +1,26 @@
+
+declare @group_no varchar(10),@group_name  varchar(50)
+select @group_no=group_no,@group_name=dept_name
+from yp_group_name
+where group_no=:group_no
+if CHARINDEX('房',@group_name)> 0
+begin
+--药房：出库，科室领药，科室退药
+select code,name,in_out_flag
+from yp_in_out_type
+where code in('21','27','28')
+end
+else
+begin
+--药库：出库，退库，科室领药，科室退药
+select code,name,in_out_flag
+from yp_in_out_type
+where code in('21','22','27','28')
+end    
+
+select group_no,dept_name as group_name
+from yp_group_name  
+where deleted_flag='0'
+ and group_no<>@group_no 
+ order by 1
+                                            

@@ -1,0 +1,3 @@
+exec yp_OutDetl_list :startdate,:enddate,
+     :group_no_out,:group_no_in,:dept_sn,:out_type
+                                                                   

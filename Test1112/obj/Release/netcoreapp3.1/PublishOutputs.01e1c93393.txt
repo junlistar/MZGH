@@ -1,0 +1,7 @@
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\Test1112.exe
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.Development.json
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\appsettings.json
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\Test1112.dll
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\Test1112.deps.json
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\Test1112.runtimeconfig.json
+D:\lijun\github\Mzgh\Test1112\obj\Release\netcoreapp3.1\PubTmp\Out\Test1112.pdb

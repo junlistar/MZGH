@@ -1,0 +1,22 @@
+/*
+新建报表获取报表存储 cx:2022-09-13
+*/
+create proc rt_getNewReportCode 
+as
+declare @rCode int,@maxCode varchar(10),@minCode varchar(10)
+--取当天最大报表号
+select @maxCode=CONVERT(char(8),GETDATE(),112)+'99',@minCode=CONVERT(char(8),GETDATE(),112)+'00'
+select @rCode=isnull(MAX(report_code),@minCode)
+from rt_report_data_fast
+where report_code>=@minCode and report_code<=@maxCode
+set @rCode=@rCode+ 1
+--取当月最大值
+if @rCode > @maxCode
+begin
+  select @maxCode=CONVERT(char(6),GETDATE(),112)+'9999',@minCode=CONVERT(char(6),GETDATE(),112)+'0000'
+	select @rCode=isnull(MAX(report_code),@minCode)
+	from rt_report_data_fast
+	where report_code>=@minCode and report_code<=@maxCode
+ set @rCode=@rCode+ 1	
+end
+select @rCode as report_code

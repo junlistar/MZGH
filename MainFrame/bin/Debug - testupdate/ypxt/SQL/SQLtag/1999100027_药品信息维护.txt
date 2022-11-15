@@ -1,0 +1,18 @@
+--1999100027 
+ select  a.*,
+  d.supplyer_name as  supplyer_name,
+  b.name as  class_name,
+  f.name as frequ_name,
+  e.supply_name as supply_name,
+  c.manu_name  as manufactory_name,
+  jx.name as dosage_name,
+  case when (select count(1) from yp_base where yp_base.charge_code=a.charge_code and  stock_amount >0 ) >0   
+  then '1' else '0' end as used_flag 
+ from yp_dict  a left join yp_class b  on a.class_code=b.code  
+   left join yp_manufacture c  on a.manufactory=c.manu_code --制药厂
+   left join yp_supplyer d  on a.supplyer_code=d.supplyer_code --供应商  
+    left join yz_supply e on a.supply_code=e.supply_code --给药方式  
+   left join yz_frequency f on a.frequ_code =f.code
+   left join yp_dosage jx on a.dosage=jx.code 
+  where a.charge_code = :charge_code  
+ order by a.charge_code,a.serial               

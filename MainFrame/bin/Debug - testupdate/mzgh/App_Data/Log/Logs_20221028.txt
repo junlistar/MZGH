@@ -1,0 +1,256 @@
+2022-10-28 11:22:43,472 [1] DEBUG GuXHis.Program - 打开了程序
+2022-10-28 11:22:44,877 [1] DEBUG GuxHis.Mzsf.FHeaderAsideMainFooter - 直接打开程序
+2022-10-28 11:22:47,347 [1] INFO  Client.Forms.Wedgit.Login - http://localhost:5000//api/GuaHao/GetLoginUser?uname=super&pwd=
+2022-10-28 11:22:48,708 [6] INFO  Client.Forms.Wedgit.ProcessingForm - 初始化数据字典：InitDic
+2022-10-28 11:22:48,732 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetDistrictCodes
+2022-10-28 11:22:48,805 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetOccupationCodes
+2022-10-28 11:22:48,816 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetResponceTypes
+2022-10-28 11:22:48,821 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUnits
+2022-10-28 11:22:48,841 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetClinicTypes
+2022-10-28 11:22:48,844 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestTypes
+2022-10-28 11:22:48,847 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUserDic
+2022-10-28 11:22:48,965 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestHours
+2022-10-28 11:22:48,969 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRelativeCodes
+2022-10-28 11:22:48,972 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzChargePatterns
+2022-10-28 11:22:49,048 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzPatternDetails
+2022-10-28 11:22:49,916 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetPageChequeCompares
+2022-10-28 11:22:49,919 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbName
+2022-10-28 11:22:49,923 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbhzzdList
+2022-10-28 11:22:50,295 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetInsutypes
+2022-10-28 11:22:50,298 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMdtrtCertTypes
+2022-10-28 11:22:50,301 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMedTypes
+2022-10-28 11:22:50,304 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetDiagTypes
+2022-10-28 11:22:50,307 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetIcdCodes
+2022-10-28 11:22:51,120 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetBirctrlTypes
+2022-10-28 11:22:51,124 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetMzClientConfig
+2022-10-28 11:22:51,128 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetFPConfig
+2022-10-28 11:22:51,186 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroupsByGroupId?subsys_id=mz&user_group=0
+2022-10-28 11:22:51,208 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroups?subsys_id=mz
+2022-10-28 11:22:59,316 [1] DEBUG Client.GuaHao - Load
+2022-10-28 11:22:59,317 [1] DEBUG Client.GuaHao - GuaHao_Load
+2022-10-28 11:22:59,317 [1] DEBUG Client.GuaHao - 初始化界面控件显示
+2022-10-28 11:22:59,368 [1] DEBUG Client.GuaHao - 加载挂号数据
+2022-10-28 11:22:59,369 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/GetGhRequest?request_date=2022-10-28&ampm=a
+2022-10-28 11:23:00,164 [1] DEBUG Client.Forms.Pages.mzgh.ReceiptInit - 请求接口数据：http://localhost:5000//api/GuaHao/GetOpReceipts?opera=00000
+2022-10-28 11:23:05,369 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/GetGhRequest?request_date=2022-10-28&ampm=a
+2022-10-28 11:23:05,986 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/GetPatientByBarcode?barcode=266966
+2022-10-28 11:23:08,035 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/GetGhRequest?request_date=2022-10-28&ampm=a
+2022-10-28 11:23:08,618 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/GetPatientByBarcode?barcode=2669666
+2022-10-28 11:23:14,459 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/CheckGhRepeat?patient_id=000266966600&record_sn=28910
+2022-10-28 11:23:14,828 [1] DEBUG Client.SelectPayType - 请求接口数据：http://localhost:5000//api/GuaHao/GetChargeItemsByRecordSN?record_sn=28910
+2022-10-28 11:23:17,388 [1] INFO  Client.SelectPayType - 完成支付：1,金额：11.5
+2022-10-28 11:23:17,550 [1] INFO  Client.SelectPayType - 接口：http://localhost:5000//api/GuaHao/GuaHao?patient_id=000266966600&record_sn=28910&pay_string=1-11.5--&max_sn=0&opera=00000
+2022-10-28 11:23:18,160 [1] INFO  Client.SelectPayType - 挂号成功
+2022-10-28 11:23:18,546 [10] DEBUG Client.ClassLib.ElecBillHelper - 初始化电子发票
+2022-10-28 11:23:18,815 [6] INFO  Client.Forms.Wedgit.GhPrint - http://localhost:5000//api/GuaHao/GetReportDataByCode?code=220001
+2022-10-28 11:23:20,151 [6] INFO  Client.Forms.Wedgit.GhPrint - 接口：http://localhost:5000//api/cwgl/GetMzghBill?code=220001&patient_id=000266966600&times=126
+2022-10-28 11:23:24,612 [10] ERROR Client.SelectPayType - System.AggregateException: 发生一个或多个错误。 ---> System.Net.Http.HttpRequestException: 发送请求时出错。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:13526
+   在 System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   在 System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   在 System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- 内部异常堆栈跟踪的结尾 ---
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   在 System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   在 System.Threading.Tasks.Task`1.get_Result()
+   在 Client.ClassLib.HttpClientUtil.Get(String url) 位置 D:\lijun\github\Mzgh\Client\ClassLib\HttpClientUtil.cs:行号 16
+   在 Client.ClassLib.ElecBillHelper.InitCreateElecBillCom(String appid, String key, String weburl, String version, String ip, String port, String dllName, String func) 位置 D:\lijun\github\Mzgh\Client\ClassLib\ElecBillHelper.cs:行号 72
+   在 Client.SelectPayType.CreateElecBill(Int32 new_ledger_sn) 位置 D:\lijun\github\Mzgh\Client\Forms\Pages\mzgh\SelectPayType.cs:行号 1148
+---> (内部异常 #0) System.Net.Http.HttpRequestException: 发送请求时出错。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:13526
+   在 System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   在 System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   在 System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- 内部异常堆栈跟踪的结尾 ---<---
+
+2022-10-28 11:25:32,556 [1] DEBUG Client.GuaHao - 请求接口数据：http://localhost:5000//api/GuaHao/CheckGhRepeat?patient_id=000266966600&record_sn=29015
+2022-10-28 11:25:32,697 [1] DEBUG Client.SelectPayType - 请求接口数据：http://localhost:5000//api/GuaHao/GetChargeItemsByRecordSN?record_sn=29015
+2022-10-28 11:25:35,327 [1] INFO  Client.SelectPayType - 完成支付：1,金额：4.5
+2022-10-28 11:25:35,331 [1] INFO  Client.SelectPayType - 接口：http://localhost:5000//api/GuaHao/GuaHao?patient_id=000266966600&record_sn=29015&pay_string=1-4.5--&max_sn=0&opera=00000
+2022-10-28 11:25:35,412 [1] INFO  Client.SelectPayType - 挂号成功
+2022-10-28 11:25:35,414 [11] DEBUG Client.ClassLib.ElecBillHelper - 初始化电子发票
+2022-10-28 11:25:35,837 [17] INFO  Client.Forms.Wedgit.GhPrint - http://localhost:5000//api/GuaHao/GetReportDataByCode?code=220001
+2022-10-28 11:25:35,850 [17] INFO  Client.Forms.Wedgit.GhPrint - 接口：http://localhost:5000//api/cwgl/GetMzghBill?code=220001&patient_id=000266966600&times=126
+2022-10-28 11:25:37,776 [11] ERROR Client.SelectPayType - System.AggregateException: 发生一个或多个错误。 ---> System.Net.Http.HttpRequestException: 发送请求时出错。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:13526
+   在 System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   在 System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   在 System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- 内部异常堆栈跟踪的结尾 ---
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   在 System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   在 System.Threading.Tasks.Task`1.get_Result()
+   在 Client.ClassLib.HttpClientUtil.Get(String url) 位置 D:\lijun\github\Mzgh\Client\ClassLib\HttpClientUtil.cs:行号 16
+   在 Client.ClassLib.ElecBillHelper.InitCreateElecBillCom(String appid, String key, String weburl, String version, String ip, String port, String dllName, String func) 位置 D:\lijun\github\Mzgh\Client\ClassLib\ElecBillHelper.cs:行号 72
+   在 Client.SelectPayType.CreateElecBill(Int32 new_ledger_sn) 位置 D:\lijun\github\Mzgh\Client\Forms\Pages\mzgh\SelectPayType.cs:行号 1148
+---> (内部异常 #0) System.Net.Http.HttpRequestException: 发送请求时出错。 ---> System.Net.WebException: 无法连接到远程服务器 ---> System.Net.Sockets.SocketException: 由于目标计算机积极拒绝，无法连接。 127.0.0.1:13526
+   在 System.Net.Sockets.Socket.InternalEndConnect(IAsyncResult asyncResult)
+   在 System.Net.Sockets.Socket.EndConnect(IAsyncResult asyncResult)
+   在 System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Net.HttpWebRequest.EndGetResponse(IAsyncResult asyncResult)
+   在 System.Net.Http.HttpClientHandler.GetResponseCallback(IAsyncResult ar)
+   --- 内部异常堆栈跟踪的结尾 ---<---
+
+2022-10-28 11:25:57,264 [1] INFO  Client.GhList - 初始化数据字典：InitDic
+2022-10-28 11:25:58,043 [1] INFO  Client.GhList - InitData
+2022-10-28 11:25:58,043 [1] INFO  Client.GhList - http://localhost:5000//api/GuaHao/GhSearchList?gh_date=2022-10-28&visit_dept=%&clinic_type=%&doctor_code=%&group_sn=%&req_type=%&ampm=%&gh_opera=%&name=%&p_bar_code=%
+2022-10-28 11:27:30,430 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-28 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 11:27:38,945 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-28 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 11:27:43,052 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-27 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 11:27:45,908 [1] DEBUG Mzsf.Forms.Pages.RefundConfirm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzDepositsByPatientId?patient_id=000274144300&ledger_sn=85
+2022-10-28 11:27:46,027 [1] DEBUG Mzsf.Forms.Pages.RefundConfirm - 请求接口数据：http://localhost:5000//api/mzsf/GetDrugDetails?p_id=000274144300&ledger_sn=85&tbl_flag=a
+2022-10-28 11:27:52,414 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-27 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 12:56:29,548 [1] DEBUG GuXHis.Program - 关闭了程序
+2022-10-28 16:26:36,107 [1] DEBUG GuXHis.Program - 打开了程序
+2022-10-28 16:26:36,867 [1] DEBUG GuxHis.Mzsf.FHeaderAsideMainFooter - 直接打开程序
+2022-10-28 16:26:39,524 [1] INFO  Client.Forms.Wedgit.Login - http://localhost:5000//api/GuaHao/GetLoginUser?uname=super&pwd=
+2022-10-28 16:26:40,484 [5] INFO  Client.Forms.Wedgit.ProcessingForm - 初始化数据字典：InitDic
+2022-10-28 16:26:40,497 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetDistrictCodes
+2022-10-28 16:26:40,567 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetOccupationCodes
+2022-10-28 16:26:40,579 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetResponceTypes
+2022-10-28 16:26:40,584 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUnits
+2022-10-28 16:26:40,619 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetClinicTypes
+2022-10-28 16:26:40,625 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestTypes
+2022-10-28 16:26:40,628 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUserDic
+2022-10-28 16:26:40,791 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestHours
+2022-10-28 16:26:40,797 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRelativeCodes
+2022-10-28 16:26:40,800 [5] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzChargePatterns
+2022-10-28 16:26:40,874 [5] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzPatternDetails
+2022-10-28 16:26:41,843 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetPageChequeCompares
+2022-10-28 16:26:41,847 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbName
+2022-10-28 16:26:41,851 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbhzzdList
+2022-10-28 16:26:42,241 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetInsutypes
+2022-10-28 16:26:42,244 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMdtrtCertTypes
+2022-10-28 16:26:42,247 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMedTypes
+2022-10-28 16:26:42,250 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetDiagTypes
+2022-10-28 16:26:42,261 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetIcdCodes
+2022-10-28 16:26:43,110 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetBirctrlTypes
+2022-10-28 16:26:43,114 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetMzClientConfig
+2022-10-28 16:26:43,117 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetFPConfig
+2022-10-28 16:26:43,171 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroupsByGroupId?subsys_id=mz&user_group=0
+2022-10-28 16:26:43,183 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroups?subsys_id=mz
+2022-10-28 16:26:48,279 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/GuaHao/GetPatientByBarcode?barcode=2669666
+2022-10-28 16:26:48,326 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzVisitsByDate?patient_id=000266966600&begin=2022-10-27 00:00:00&end=2022-10-28 23:59:59
+2022-10-28 16:26:48,340 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzOrdersByPatientId?patient_id=000266966600&times=128
+2022-10-28 16:26:51,145 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzOrderItem?order_type=01&py_code=SD
+2022-10-28 16:26:54,064 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/SaveOrder?patient_id=000266966600&times=128&order_string=01-1-106501-**-1&opera=00000
+2022-10-28 16:26:54,203 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzOrdersByPatientId?patient_id=000266966600&times=128
+2022-10-28 16:26:54,222 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetCprCharges?patient_id=000266966600&times=128&charge_status=1
+2022-10-28 16:26:54,369 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/CallCprCharges?user_mi=00000&patient_id=000266966600&times=128&status=2
+2022-10-28 16:26:57,596 [1] INFO  Mzsf.Forms.Pages.Check - 完成支付：1,金额：200
+2022-10-28 16:26:57,723 [1] INFO  Mzsf.Forms.Pages.Check - 接口：http://localhost:5000//api/mzsf/pay?patient_id=000266966600&times=128&pay_string=1-200--&order_no_str=1&opera=00000
+2022-10-28 16:27:00,270 [1] INFO  Mzsf.Forms.Pages.Check - 缴费成功
+2022-10-28 16:27:00,314 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzVisitsByDate?patient_id=000266966600&begin=2022-10-27 00:00:00&end=2022-10-28 23:59:59
+2022-10-28 16:27:00,321 [6] INFO  Client.Forms.Wedgit.Print - http://localhost:5000//api/GuaHao/GetReportDataByCode?code=220007
+2022-10-28 16:27:00,323 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetMzOrdersByPatientId?patient_id=000266966600&times=128
+2022-10-28 16:27:00,391 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/GetCprCharges?patient_id=000266966600&times=128&charge_status=1
+2022-10-28 16:27:00,536 [1] DEBUG Mzsf.Forms.Pages.ChargePage - 请求接口数据：http://localhost:5000//api/mzsf/CallCprCharges?user_mi=00000&patient_id=000266966600&times=128&status=2
+2022-10-28 16:27:00,536 [11] DEBUG Client.ClassLib.ElecBillHelper - 初始化电子发票
+2022-10-28 16:27:01,566 [6] INFO  Client.Forms.Wedgit.Print - 接口：http://localhost:5000//api/cwgl/GetMzsfBill?code=220007&patient_id=000266966600&ledger_sn=161
+2022-10-28 16:27:03,401 [11] DEBUG Mzsf.Forms.Pages.Check - http://127.0.0.1:13526/extend?dllName=NontaxIndustry&func=CallNontaxIndustry&payload=eyJtZXRob2QiOiJpbnZvaWNlRUJpbGxPdXRwYXRpZW50IiwicGFyYW1zIjp7ImFwcGlkIjoiSlpTWlhZWTA1NjExMTYiLCJkYXRhIjoiZXlKaWRYTk9ieUk2SWpBd01ESTJOamsyTmpZd01DMHhOakVpTENKaWRYTlVlWEJsSWpvaU1ESWlMQ0p3WVhsbGNpSTZJdWFjc2VXUW0rV1FteUlzSW1KMWMwUmhkR1ZVYVcxbElqb2lNakF5TWpFd01qZ3hOakF3TURBd01EQWlMQ0p3YkdGalpVTnZaR1VpT2lJd01ERWlMQ0p3WVhsbFpTSTZJakF3TURBd0lpd2lZWFYwYUc5eUlqb2lNREF3TURBaUxDSmphR1ZqYTJWeUlqcHVkV3hzTENKMGIzUmhiRUZ0ZENJNklqSXdNQ0lzSW5CaGRHbGxiblJPYnlJNklqQXdNREkyTmprMk5qWXdNQzB4TmpFaUxDSndZWFJwWlc1MFNXUWlPaUl3TURBeU5qWTVOalkyTURBaUxDSndZWGxsY2xSNWNHVWlPaUl4SWl3aVkyRnlaRlI1Y0dVaU9pSXpNVEF4SWl3aVkyRnlaRTV2SWpvaU1qWTJPVFkyTmlJc0ltRm5aU0k2SWpNaUxDSnpaWGdpT2lMbmxMY2lMQ0poWTJOdmRXNTBVR0Y1SWpwdWRXeHNMQ0ptZFc1a1VHRjVJanB1ZFd4c0xDSnZkR2hsY21aMWJtUlFZWGtpT201MWJHd3NJbTkzYmxCaGVTSTZiblZzYkN3aWMyVnNaa052Ym1ObGFYUmxaRUZ0ZENJNmJuVnNiQ3dpYzJWc1psQmhlVUZ0ZENJNklqSXdNQzR3TUNJc0luTmxiR1pEWVhOb1VHRjVJam9pTWpBd0xqQXdJaXdpY21WcGJXSjFjbk5sYldWdWRFRnRkQ0k2Ym5Wc2JDd2ljR0Y1UTJoaGJtNWxiRVJsZEdGcGJDSTZXM3NpU1hSbGJVNWhiV1VpT2lKd1lYbERhR0Z1Ym1Wc1JHVjBZV2xzSWl3aWNHRjVRMmhoYm01bGJFTnZaR1VpT2lJd01pSXNJbkJoZVVOb1lXNXVaV3hXWVd4MVpTSTZJakl3TUNKOVhTd2lhWE5CY25KbFlYSnpJam9pTVNJc0ltTm9ZWEpuWlVSbGRHRnBiQ0k2VzNzaVNYUmxiVTVoYldVaU9pSmphR0Z5WjJWRVpYUmhhV3dpTENKemIzSjBUbThpT2lJeElpd2lZMmhoY21kbFEyOWtaU0k2SWprd056QTBJaXdpWTJoaGNtZGxUbUZ0WlNJNkl1YWRrT2FXbWVpMHVTSXNJbk4wWkNJNklqSXdNQ0lzSW01MWJXSmxjaUk2SWpFaUxDSmhiWFFpT2lJeU1EQWlMQ0p6Wld4bVFXMTBJam9pTUNKOVhTd2liR2x6ZEVSbGRHRnBiQ0k2VzEwc0luSmxiV0Z5YXlJNkl1YVVyK1M3bU9hV3VlVzhqKys4bXVlT3NPbUhrU0F5TURBdU1EQXdNQ3dpZlE9PSIsIm5vaXNlIjoiYmExZDk4YjgtZjg1MS00NWMwLTgyYTMtZDY1MTYwZTJhYTAwIiwidmVyc2lvbiI6IjEuMCIsInNpZ24iOiIyQ0M5RkI2OUEyRjkzMzBGNzc0ODhCQjREMzQ3RDIwNCJ9fQ==
+2022-10-28 16:27:16,354 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-28 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 16:27:23,352 [1] DEBUG Mzsf.Forms.Pages.RefundConfirm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzDepositsByPatientId?patient_id=000266966600&ledger_sn=161
+2022-10-28 16:27:23,369 [1] DEBUG Mzsf.Forms.Pages.RefundConfirm - 请求接口数据：http://localhost:5000//api/mzsf/GetDrugDetails?p_id=000266966600&ledger_sn=161&tbl_flag=a
+2022-10-28 16:27:25,905 [1] DEBUG Mzsf.Forms.Pages.RefundPage - 请求接口数据：http://localhost:5000//api/mzsf/GetReceipts?cash_opera=00000&begin_date=2022-10-28 00:00:00&end_date=2022-10-28 23:59:59&bar_code=&status=%
+2022-10-28 17:26:16,944 [1] DEBUG GuXHis.Program - 关闭了程序
+2022-10-28 19:41:08,872 [1] DEBUG GuXHis.Program - 打开了程序
+2022-10-28 19:41:08,987 [1] DEBUG GuxHis.Mzsf.FHeaderAsideMainFooter - 程序被调用，参数：{"Application":"75415424","Screen":"75349424","UserMi":"00000","AppServer":"10.102.38.225"}
+2022-10-28 19:41:09,552 [6] INFO  Client.Forms.Wedgit.ProcessingForm - 初始化数据字典：InitDic
+2022-10-28 19:41:09,562 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetDistrictCodes
+2022-10-28 19:41:09,636 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetOccupationCodes
+2022-10-28 19:41:09,647 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetResponceTypes
+2022-10-28 19:41:09,654 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUnits
+2022-10-28 19:41:09,676 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetClinicTypes
+2022-10-28 19:41:09,680 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestTypes
+2022-10-28 19:41:09,684 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUserDic
+2022-10-28 19:41:09,833 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestHours
+2022-10-28 19:41:09,845 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRelativeCodes
+2022-10-28 19:41:09,850 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzChargePatterns
+2022-10-28 19:41:09,919 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzPatternDetails
+2022-10-28 19:41:10,838 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetPageChequeCompares
+2022-10-28 19:41:10,842 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbName
+2022-10-28 19:41:10,846 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbhzzdList
+2022-10-28 19:41:11,278 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetInsutypes
+2022-10-28 19:41:11,282 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMdtrtCertTypes
+2022-10-28 19:41:11,286 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMedTypes
+2022-10-28 19:41:11,303 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetDiagTypes
+2022-10-28 19:41:11,306 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetIcdCodes
+2022-10-28 19:41:12,274 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetBirctrlTypes
+2022-10-28 19:41:12,280 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetMzClientConfig
+2022-10-28 19:41:12,286 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetFPConfig
+2022-10-28 19:41:12,359 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroupsByGroupId?subsys_id=mz&user_group=0
+2022-10-28 19:41:12,370 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroups?subsys_id=mz
+2022-10-28 19:41:27,130 [1] DEBUG GuXHis.Program - 关闭了程序
+2022-10-28 21:25:03,839 [1] DEBUG GuXHis.Program - 打开了程序
+2022-10-28 21:25:03,985 [1] DEBUG GuxHis.Mzsf.FHeaderAsideMainFooter - 直接打开程序
+2022-10-28 21:25:07,594 [1] INFO  Client.Forms.Wedgit.Login - http://localhost:5000//api/GuaHao/GetLoginUser?uname=super&pwd=
+2022-10-28 21:25:07,740 [6] INFO  Client.Forms.Wedgit.ProcessingForm - 初始化数据字典：InitDic
+2022-10-28 21:25:07,746 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetDistrictCodes
+2022-10-28 21:25:07,805 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetOccupationCodes
+2022-10-28 21:25:07,816 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetResponceTypes
+2022-10-28 21:25:07,822 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUnits
+2022-10-28 21:25:07,850 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetClinicTypes
+2022-10-28 21:25:07,854 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestTypes
+2022-10-28 21:25:07,857 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUserDic
+2022-10-28 21:25:08,008 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestHours
+2022-10-28 21:25:08,012 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRelativeCodes
+2022-10-28 21:25:08,015 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzChargePatterns
+2022-10-28 21:25:08,101 [6] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzPatternDetails
+2022-10-28 21:25:09,147 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetPageChequeCompares
+2022-10-28 21:25:09,151 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbName
+2022-10-28 21:25:09,155 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbhzzdList
+2022-10-28 21:25:09,680 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetInsutypes
+2022-10-28 21:25:09,689 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMdtrtCertTypes
+2022-10-28 21:25:09,696 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMedTypes
+2022-10-28 21:25:09,700 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetDiagTypes
+2022-10-28 21:25:09,708 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetIcdCodes
+2022-10-28 21:25:10,791 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetBirctrlTypes
+2022-10-28 21:25:10,796 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetMzClientConfig
+2022-10-28 21:25:10,800 [6] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetFPConfig
+2022-10-28 21:25:10,865 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroupsByGroupId?subsys_id=mz&user_group=0
+2022-10-28 21:25:10,878 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroups?subsys_id=mz
+2022-10-28 21:25:13,665 [1] INFO  Client.GhList - 初始化数据字典：InitDic
+2022-10-28 21:25:14,648 [1] INFO  Client.GhList - InitData
+2022-10-28 21:25:14,649 [1] INFO  Client.GhList - http://localhost:5000//api/GuaHao/GhSearchList?gh_date=2022-10-28&visit_dept=%&clinic_type=%&doctor_code=%&group_sn=%&req_type=%&ampm=%&gh_opera=%&name=%&p_bar_code=%
+2022-10-28 21:25:20,666 [1] DEBUG GuXHis.Program - 关闭了程序
+2022-10-28 23:18:57,456 [1] DEBUG GuXHis.Program - 打开了程序
+2022-10-28 23:18:58,152 [1] DEBUG GuxHis.Mzsf.FHeaderAsideMainFooter - 直接打开程序
+2022-10-28 23:19:01,224 [1] INFO  Client.Forms.Wedgit.Login - http://localhost:5000//api/GuaHao/GetLoginUser?uname=super&pwd=
+2022-10-28 23:19:02,221 [5] INFO  Client.Forms.Wedgit.ProcessingForm - 初始化数据字典：InitDic
+2022-10-28 23:19:02,242 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetDistrictCodes
+2022-10-28 23:19:02,311 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetOccupationCodes
+2022-10-28 23:19:02,325 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetResponceTypes
+2022-10-28 23:19:02,333 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUnits
+2022-10-28 23:19:02,356 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetClinicTypes
+2022-10-28 23:19:02,359 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestTypes
+2022-10-28 23:19:02,375 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetUserDic
+2022-10-28 23:19:02,517 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRequestHours
+2022-10-28 23:19:02,522 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetRelativeCodes
+2022-10-28 23:19:02,525 [5] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzChargePatterns
+2022-10-28 23:19:02,622 [5] DEBUG Client.Forms.Wedgit.ProcessingForm - 请求接口数据：http://localhost:5000//api/mzsf/GetMzPatternDetails
+2022-10-28 23:19:03,692 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetPageChequeCompares
+2022-10-28 23:19:03,708 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbName
+2022-10-28 23:19:03,714 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetYbhzzdList
+2022-10-28 23:19:04,172 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetInsutypes
+2022-10-28 23:19:04,176 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMdtrtCertTypes
+2022-10-28 23:19:04,180 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetMedTypes
+2022-10-28 23:19:04,184 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetDiagTypes
+2022-10-28 23:19:04,202 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetIcdCodes
+2022-10-28 23:19:05,104 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/YbInfo/GetBirctrlTypes
+2022-10-28 23:19:05,109 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetMzClientConfig
+2022-10-28 23:19:05,125 [5] INFO  Client.Forms.Wedgit.ProcessingForm - http://localhost:5000//api/GuaHao/GetFPConfig
+2022-10-28 23:19:05,186 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroupsByGroupId?subsys_id=mz&user_group=0
+2022-10-28 23:19:05,202 [1] INFO  GuxHis.Mzsf.FHeaderAsideMainFooter - http://localhost:5000//api/qxgl/GetXTUserGroups?subsys_id=mz
+2022-10-28 23:19:09,761 [1] INFO  Client.GhList - 初始化数据字典：InitDic
+2022-10-28 23:19:11,075 [1] INFO  Client.GhList - InitData
+2022-10-28 23:19:11,075 [1] INFO  Client.GhList - http://localhost:5000//api/GuaHao/GhSearchList?gh_date=2022-10-28&visit_dept=%&clinic_type=%&doctor_code=%&group_sn=%&req_type=%&ampm=%&gh_opera=%&name=%&p_bar_code=%
+2022-10-28 23:19:15,284 [1] DEBUG GuXHis.Program - 关闭了程序

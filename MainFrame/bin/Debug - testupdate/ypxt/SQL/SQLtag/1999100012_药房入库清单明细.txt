@@ -1,0 +1,26 @@
+select  a.charge_code,a.serial,
+       dict.drugname ,dict.specification,dict.pack_size,
+       a.issue_amount,
+       unit.name,
+       a.retprice,
+       a.retprice * a.issue_amount as retprice_charge, 
+       a.fix_price,
+       a.fix_price * a.issue_amount as fix_charge,
+       b.in_docu_no,
+       a.group_no_out,a.group_no_in,
+       group_in.dept_name dept_in,
+       group_out.dept_name dept_out,
+       a.out_date date_out,b.in_date date_in,
+       a.keeper,ck.name as keeper_name,
+       b.checker, t.name out_name,
+       a.accept_flag
+from yp_out_detl a left join yp_in_detl b on a.charge_code=b.charge_code and 
+      a.serial=b.serial and a.draw_no=b.out_no 
+     and a.issue_amount=b.buy_amount --避免同一个单上有相同的药品
+     left join yp_dict dict on a.charge_code=dict.charge_code and a.serial=dict.serial
+     left join yp_unit  unit on  dict.pack_unit = unit.code 
+     left join yp_group_name group_in on a.group_no_in=group_in.group_no
+     left join yp_group_name group_out on a.group_no_out=group_out.group_no
+     left join yp_in_out_type t on a.out_type=t.code
+     left join a_employee_mi ck on a.keeper=ck.code
+where a.draw_no=  :draw_no  and a.group_no_in=:group_no     

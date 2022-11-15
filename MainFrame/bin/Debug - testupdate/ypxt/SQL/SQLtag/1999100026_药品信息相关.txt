@@ -1,0 +1,15 @@
+--1999100026
+set nocount on
+declare @drug_id varchar(10)
+set @drug_id=:drug_id
+select charge_code,drugname,drug_id,serial,specification
+from yp_dict
+where drug_id=@drug_id
+order by charge_code,serial
+
+select flag,rtrim(drugname) as drugname
+from yp_drugname
+where drug_id=@drug_id
+order by flag desc       
+
+set nocount off              

@@ -1,0 +1,99 @@
+
+/*  
+门诊处方确认 cx 2022-08-23      
+*/  
+CREATE proc [dbo].[yp_mz_order_confirm] (@patient_id varchar(15),@times int,@ledger_sn int,
+ @group_no varchar(10) ,@confirm_opera varchar(10),@window_no varchar(10),@exec_sn varchar(10),@put_opear varchar(10),@NotOrders varchar(40)='')  
+as  
+begin  
+  declare @result_str varchar(100),@confirm_date datetime,@pc_flag varchar(5)  
+  declare @out_pageno int  
+   select  @result_str='',@confirm_date=convert(char(19), GETDATE(),120),  
+      @pc_flag=yf_bacth_flag  
+    from yp_configure  
+  set xact_abort on  
+  BEGIN TRY  
+  begin tran  
+ select *,IDENTITY(int,1,1) as item_sort   
+ into #detail  
+ from mz_detail_charge with(updlock)  
+ where patient_id=@patient_id and times=@times and ledger_sn=@ledger_sn and  
+      group_no=@group_no and  
+    serial_no <> '**' and charge_status<>'1'  
+  order by order_type,order_no,item_no 
+  
+ --不确定处方号
+ select  t as order_no
+ into #NotOrder 
+from dbo.fn_SplitStr2(@NotOrders,',') 
+--去掉不确定处方
+delete from #detail 
+where order_no in (select order_no from #NotOrder)
+   
+ if not exists(select * from #detail) raiserror ('无处方明细确认，请核对',11,2) 
+ if exists(select * from #detail where not confirm_date is null)
+   raiserror ('处方已经确认',11,2)
+   
+ select d.charge_code,d.serial_no,sum(d.charge_amount * d.caoyao_fu) as issue_amount,d.group_no,  
+      yp_base.stock_amount,yp_dict.retprice ,IDENTITY(int,1,1) as item_seri   
+ into #yp  
+ from #detail d left join yp_base on d.charge_code=yp_base.charge_code and d.serial_no=yp_base.serial  
+       and d.group_no=yp_base.group_no  
+       left join yp_dict on d.charge_code=yp_dict.charge_code and d.serial_no=yp_dict.serial  
+ group by d.charge_code,d.serial_no,d.group_no,yp_base.stock_amount,yp_dict.retprice  
+ --1.更新mz_detail_charge   
+ update aa  
+ set confirm_date=@confirm_date,confirm_opera=@confirm_opera,confirm_win=@window_no,  
+     exec_sn=@exec_sn,put_opera=@put_opear /*,charge_status='4',group_no=@group_no */  
+ from mz_detail_charge aa inner join #detail bb on aa.patient_id=bb.patient_id  
+     and aa.times=bb.times and aa.ledger_sn=bb.ledger_sn and aa.order_type=bb.order_type  
+     and aa.order_no=bb.order_no and aa.item_no=bb.item_no
+ where aa.confirm_date is null
+ if @@rowcount = 0 
+    raiserror ('更新处方明细失败',11,2)     
+ --2.更新yp_base的库存  
+ if exists(select * from #yp where stock_amount is null)   
+    raiserror ('当前药房无对应规格的库存',11,2)  
+ if exists(select * from #yp where stock_amount < issue_amount)  
+    raiserror ('药品库存不足',11,2)  
+ update aa  
+ set aa.stock_amount=aa.stock_amount - #yp.issue_amount  
+   /*,aa.stock_amount2=aa.stock_amount2 - #yp.issue_amount 门诊处方确认，虚库存不用更新*/   
+ from yp_base aa inner join #yp on aa.charge_code=#yp.charge_code and aa.serial=#yp.serial_no  
+      and aa.group_no=#yp.group_no  
+ --更新批次库存  
+ if @pc_flag='1'  
+ begin  
+   declare @stp integer,@allNum integer ,@isFirt integer  
+      declare @amount float,@kc_cur float, @code_old varchar(10),@code_cur varchar(10)   
+   --暂未实现  
+ end   
+ --写入表yp_out_patient  
+ select @out_pageno=out_pageno+1 from yp_configure  
+ insert into yp_out_patient(out_date,out_seri,page_no,charge_code,serial,retprice,issue_amount,stock_amount,drawer,keeper,  
+   group_no_out,dept_sn,buy_price)  
+ select @confirm_date,item_seri,@out_pageno,#yp.charge_code,#yp.serial_no,#yp.retprice,#yp.issue_amount,#yp.stock_amount,  
+ @confirm_opera as drawer ,@confirm_opera as keeper, #yp.group_no,@exec_sn,#yp.retprice   
+ from #yp   
+   
+ --更新配置  
+ update yp_configure set out_pageno=@out_pageno   
+   
+ --调价数据yp_reprice 未实现   
+             
+  commit tran  
+  drop table #yp  
+  drop table #detail  
+  SET NOCOUNT OFF   
+  set xact_abort off   
+  --异常处理  
+  end try  
+  begin catch  
+    select @result_str='错误行号：'+convert(varchar(8),ERROR_LINE())+','+ERROR_MESSAGE()  
+    raiserror (@result_str,11,2)    
+ if xact_state()<>0  
+   rollback tran;  
+   
+  end catch    
+end  
+  
