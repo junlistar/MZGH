@@ -34,5 +34,7 @@ namespace Client.ViewModel
         public int active_flag { get; set; }
         public DateTime update_time { get; set; }
 
+        //检查版本更新地址
+        public string system_update_url { get; set; }
     }
 }

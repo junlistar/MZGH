@@ -25,6 +25,8 @@ namespace MainFrame
             InitializeComponent();
             uiTabControl1.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage; ;
         }
+
+        //用于处理tab关闭时，关闭窗体句柄，否则不关闭会出现多个子系统进程
         public static Dictionary<int, IntPtr> clientDic = new Dictionary<int, IntPtr>();
 
         private bool MainTabControl_BeforeRemoveTabPage(object sender, int index)
@@ -68,12 +70,25 @@ namespace MainFrame
             try
             {
                 #region 更新提示/判断是否自动更新
-                // AutoUpdaterStarter();
+                AutoUpdaterStarter();
                 #endregion
 
                 //uiPanel1.Hide();
                 //pnlSystem.FillColor = Color.Transparent;
                 //this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+
+                //设置扩展菜单
+                uiContextMenuStrip1.Items.Add("子系统维护");
+
+                //设置tabcontrol样式 
+                uiTabControl1.ShowActiveCloseButton = true;
+                uiTabControl1.TabVisible = true;
+                //Aside.TabControl.Style = uiStyleManager1.Style;
+                uiTabControl1.StyleCustomMode = true;
+                uiTabControl1.TabSelectedForeColor = Color.Black;
+                uiTabControl1.TabBackColor = Color.FromArgb(60, 95, 145);
+                uiTabControl1.TabSelectedColor = Color.FromArgb(6, 146, 151);
+                uiTabControl1.TabSelectedForeColor = Color.White;
 
                 if (SessionHelper.MyHttpClient == null)
                 {
@@ -165,11 +180,13 @@ namespace MainFrame
         private void AutoUpdaterStarter()
         {
             //XML文件服务器下载地址
-
+           //var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
+           //_myAssembly.
             AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
 
+            //todo：读取本地版本配置文件，
             //通过将其分配给InstalledVersion字段来提供自己的版本
-            //AutoUpdater.InstalledVersion = new Version("1.2");
+            //AutoUpdater.InstalledVersion = new Version("1.0.0.0");
 
             //查看中文版本
             //Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("zh");
@@ -309,7 +326,17 @@ namespace MainFrame
             catch (Exception ex)
             {
                 log.Debug(ex.ToString());
-            } 
+            }
+        }
+
+        private void uiContextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Text== "子系统维护")
+            {
+                AddSystem addSystem = new AddSystem();
+                //addSystem.FormClosing += AddSystem_FormClosing;
+                addSystem.ShowDialog();
+            }
         }
     }
 }

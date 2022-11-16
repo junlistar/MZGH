@@ -180,7 +180,7 @@ namespace GuxHis.Mzsf
         {
             //设置关联
             Aside.TabControl = MainTabControl;
-            Aside.TabControl.ShowCloseButton = true;
+            Aside.TabControl.ShowActiveCloseButton = true;
             Aside.TabControl.TabVisible = true;
             //Aside.TabControl.Style = uiStyleManager1.Style;
             Aside.TabControl.StyleCustomMode = true;

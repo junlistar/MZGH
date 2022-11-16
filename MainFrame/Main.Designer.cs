@@ -37,6 +37,7 @@
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
             this.tsl_time = new System.Windows.Forms.ToolStripLabel();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
+            this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -110,6 +111,15 @@
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // uiContextMenuStrip1
+            // 
+            this.uiContextMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiContextMenuStrip1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiContextMenuStrip1.Name = "uiContextMenuStrip1";
+            this.uiContextMenuStrip1.Size = new System.Drawing.Size(181, 26);
+            this.uiContextMenuStrip1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiContextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.uiContextMenuStrip1_ItemClicked);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -117,7 +127,11 @@
             this.ClientSize = new System.Drawing.Size(1045, 683);
             this.Controls.Add(this.uiTabControl1);
             this.Controls.Add(this.toolStrip1);
+            this.ExtendBox = true;
+            this.ExtendMenu = this.uiContextMenuStrip1;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Main";
             this.ShowTitleIcon = true;
             this.Text = "湖北省荆州市中心医院 一体化信息管理平台";
@@ -143,6 +157,7 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripLabel tsl_time;
         private Sunny.UI.UITabControl uiTabControl1;
+        private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
     }
 }
 

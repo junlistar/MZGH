@@ -69,6 +69,20 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
             }
-        } 
+        }
+
+        public ResponseResult<bool> DeleteSubSystem(string sys_code)
+        {
+            Log.Information($"DeleteSubSystem,{sys_code}");
+            try
+            {  
+                return _subSystemRepository.DeleteSubSystem(sys_code);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
     }
 }

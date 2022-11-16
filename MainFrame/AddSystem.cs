@@ -29,6 +29,12 @@ namespace MainFrame
         }
         private void AddSystem_Load(object sender, EventArgs e)
         {
+
+            //查询初始化界面控件
+            btnSave.Enabled = false;
+            SetControlEnabled(false);
+            InitControlValue();
+
             BindData();
         }
 
@@ -48,6 +54,11 @@ namespace MainFrame
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            //查询初始化界面控件
+            btnSave.Enabled = false;
+            SetControlEnabled(false);
+            InitControlValue();
+
             BindData();
         }
 
@@ -65,7 +76,7 @@ namespace MainFrame
                 var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemVM>>>(json);
                 if (result.status == 1)
                 {
-                    systemList = result.data;
+                    systemList = result.data.OrderBy(p => p.sys_no).ToList();
                     dgvlist.DataSource = systemList.Select(p => new
                     {
                         p.sys_no,
@@ -144,9 +155,14 @@ namespace MainFrame
                 if (result.status == 1)
                 {
                     UIMessageTip.ShowOk("保存成功！");
+                    if (subSystemVM.file_type == FileTypeEnum.DLL.ToString())
+                    {
+                        //注册dll
+                        RegisterDLL(subSystemVM.file_path);
+                    }
 
-                    //注册dll
-                    RegisterDLL(subSystemVM.file_path);
+                    //增加本地配置文件
+                    AddLocalVersionFile(subSystemVM.sys_code);
 
                     SetControlEnabled(false);
                     BindData();
@@ -164,9 +180,52 @@ namespace MainFrame
             }
         }
 
+        public void AddLocalVersionFile(string sys_code)
+        {
+            try
+            { 
+                //判断文件是否存在
+                if (!File.Exists(Application.StartupPath + $"\\version\\{sys_code}.ini"))
+                {
+                    //File.Create(Application.StartupPath + "\\AlarmSet.txt");//创建该文件
+
+                    FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
+
+                    StreamWriter sw = new StreamWriter(fs1);
+                    sw.WriteLine("1.0.0.0");
+
+                    sw.Close();
+                    fs1.Close();
+                }
+                //读取配置
+                ////读取文件值并显示到窗体
+                //FileStream fs = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Open, FileAccess.ReadWrite);
+                //StreamReader sr = new StreamReader(fs);
+                //string line = sr.ReadLine();
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError("创建版本文件失败，请查看日志信息！");
+                log.Error(ex.ToString());
+            }
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            SetControlEnabled(true);
+            if (btnAdd.Text == "新增")
+            {
+                btnSave.Enabled = true;
+                btnAdd.Text = "取消";
+                SetControlEnabled(true); InitControlValue();
+            }
+            else
+            {
+                btnEdit.Enabled = false;
+                btnAdd.Text = "新增";
+                SetControlEnabled(false); InitControlValue();
+            }
+
         }
 
         public void SetControlEnabled(bool enable)
@@ -179,6 +238,17 @@ namespace MainFrame
             txt_iconpath.Enabled = enable;
             txt_openmode.Enabled = enable;
             txt_sysdesc.Enabled = enable;
+
+        }
+
+        public void InitControlValue()
+        {
+            txt_syscode.Text = "";
+            txt_sysname.Text = "";
+            txt_sysno.Text = "";
+            txt_filepath.Text = "";
+            txt_iconpath.Text = "";
+            txt_sysdesc.Text = "";
 
             if (systemList != null)
             {
@@ -219,7 +289,7 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
             try
             {
                 if (File.Exists(filePath))
-                { 
+                {
                     File.Delete(filePath);
                 }
                 FileStream fs1 = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);//创建写入文件
@@ -250,6 +320,76 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
                     else
                     {
                         UIMessageTip.ShowError("不是dll文件，无需注册");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var _index = this.dgvlist.SelectedIndex;
+                if (_index >= 0)
+                {
+                    var _system = systemList[_index];
+
+                    txt_syscode.Text = _system.sys_code;
+                    txt_sysname.Text = _system.sys_name;
+                    txt_sysno.Text = _system.sys_no.ToString();
+                    txt_filepath.Text = _system.file_path;
+                    txt_iconpath.Text = _system.icon_path;
+                    txt_sysdesc.Text = _system.sys_desc;
+
+
+                    txt_filetype.Text = _system.file_type.ToUpper();
+                    txt_openmode.Text = txt_openmode.Items[_system.open_mode - 1].ToString();
+
+                    btnSave.Enabled = true;
+                    SetControlEnabled(true);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var _index = this.dgvlist.SelectedIndex;
+                if (_index >= 0)
+                {
+                    var _system = systemList[_index];
+                    string paramurl = string.Format($"/api/subsystem/DeleteSubSystem?sys_code={_system.sys_code}");
+
+                    if (!UIMessageDialog.ShowAskDialog(this, $"确定要删除子系统: {_system.sys_name} 吗?"))
+                    {
+                        return;
+                    }
+
+                    var json = HttpClientUtil.Get(paramurl);
+                    var result = HttpClientUtil.DeserializeObject<ResponseResult<bool>>(json);
+
+                    if (result.status == 1)
+                    {
+                        UIMessageTip.ShowOk("保存成功！");
+
+                        BindData();
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError(result.message, 2000);
+                        log.Error(result.message);
                     }
                 }
             }

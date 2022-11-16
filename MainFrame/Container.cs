@@ -12,11 +12,13 @@ using System.Windows.Forms;
 using MainFrame.Common;
 using Sunny.UI;
 using System.Runtime.InteropServices;
+using log4net;
 
 namespace MainFrame
 {
     public partial class Container : UIPage
     {
+        private static ILog log = LogManager.GetLogger(typeof(Container));//typeof放当前类
         public Container()
         {
             InitializeComponent();
@@ -57,85 +59,93 @@ namespace MainFrame
 
         public void OpenSubSystem()
         {
-            //参数
-            var _args = EmbeddedExeTool.SerializeObject(Main.vM);
-            //_args = _args.Replace("\"", "\\\"");
-
-            //获取当前系统
-            var _system = Index.systemList.Where(p => p.sys_no == this.PageIndex).FirstOrDefault();
-            if (_system != null)
+            try
             {
-                var _filetype = _system.file_type;
-                if (_filetype == FileTypeEnum.DLL.ToString())
+
+                //参数
+                var _args = EmbeddedExeTool.SerializeObject(Main.vM);
+                //_args = _args.Replace("\"", "\\\"");
+
+                //获取当前系统
+                var _system = Index.systemList.Where(p => p.sys_no == this.PageIndex).FirstOrDefault();
+                if (_system != null)
                 {
-                    //调用已注册的dll
-                    //string path = Application.StartupPath + @"\GuXHisMzsfAndMzgh.dll";
-                    string path = Application.StartupPath + _system.file_path;
-
-                    Assembly assem = Assembly.LoadFile(path);
-
-                    Type[] tys = assem.GetTypes();//只好得到所有的类型名，然后遍历，通过类型名字来区别了
-                    foreach (Type ty in tys)//huoquleiming
+                    var _filetype = _system.file_type;
+                    if (_filetype == FileTypeEnum.DLL.ToString())
                     {
-                        if (ty.Name == "ShowWinForm")
+                        //调用已注册的dll
+                        //string path = Application.StartupPath + @"\GuXHisMzsfAndMzgh.dll";
+                        string path = Application.StartupPath + _system.file_path;
+
+                        Assembly assem = Assembly.LoadFile(path);
+
+                        Type[] tys = assem.GetTypes();//只好得到所有的类型名，然后遍历，通过类型名字来区别了
+                        foreach (Type ty in tys) 
                         {
-                            ConstructorInfo magicConstructor = ty.GetConstructor(Type.EmptyTypes);//获取不带参数的构造函数
-                            object magicClassObject = magicConstructor.Invoke(new object[] { });
-
-                            //object magicClassObject = Activator.CreateInstance(t);//获取无参数的构造实例还可以通过这样
-                            MethodInfo mi = ty.GetMethod("SetRunParams");
-                            object aa = mi.Invoke(magicClassObject, new string[] { _args });
-                            try
+                            if (ty.Name == "ShowWinForm")
                             {
-                                MethodInfo _gethandle = ty.GetMethod("GetWinFormHandle");
-                                object _handle = _gethandle.Invoke(magicClassObject, null);
+                                ConstructorInfo magicConstructor = ty.GetConstructor(Type.EmptyTypes);//获取不带参数的构造函数
+                                object magicClassObject = magicConstructor.Invoke(new object[] { });
 
-                                IntPtr intPtr1 = (IntPtr)_handle;
-                                while (intPtr1.ToString() == "0")
+                                //object magicClassObject = Activator.CreateInstance(t);//获取无参数的构造实例还可以通过这样
+                                MethodInfo mi = ty.GetMethod("SetRunParams");
+                                object aa = mi.Invoke(magicClassObject, new string[] { _args });
+                                try
                                 {
-                                    //System.Threading.Thread.Sleep(100);
-                                    _handle = _gethandle.Invoke(magicClassObject, null);
-                                    intPtr1 = (IntPtr)_handle;
-                                }
+                                    MethodInfo _gethandle = ty.GetMethod("GetWinFormHandle");
+                                    object _handle = _gethandle.Invoke(magicClassObject, null);
 
-                                EmbeddedExeTool exeTool = new EmbeddedExeTool();
-                                exeTool.LoadHandle(intPtr1, this);
-                                Main.clientDic.Add(this.PageIndex, intPtr1);
+                                    IntPtr intPtr1 = (IntPtr)_handle;
+                                    while (intPtr1.ToString() == "0")
+                                    {
+                                        //System.Threading.Thread.Sleep(100);
+                                        _handle = _gethandle.Invoke(magicClassObject, null);
+                                        intPtr1 = (IntPtr)_handle;
+                                    }
+
+                                    EmbeddedExeTool exeTool = new EmbeddedExeTool();
+                                    exeTool.LoadHandle(intPtr1, this);
+                                    Main.clientDic.Add(this.PageIndex, intPtr1);
+                                }
+                                catch (Exception ex1)
+                                {
+                                    MessageBox.Show(ex1.Message);
+                                }
                             }
-                            catch (Exception ex1)
+                            if (ty.Name == "Class2")
                             {
-                                MessageBox.Show(ex1.Message);
+                                //ConstructorInfo magicConstructor = ty.GetConstructor(Type.EmptyTypes);//获取不带参数的构造函数，如果有构造函数且没有不带参数的构造函数时，这儿就不能这样子啦
+                                //object magicClassObject = magicConstructor.Invoke(new object[] { });
+                                //MethodInfo mi = ty.GetMethod("saybeautiful");
+                                //object aa = mi.Invoke(magicClassObject, null);//方法有参数时，需要把null替换为参数的集合
+                                //MessageBox.Show(aa.ToString());
                             }
-                        }
-                        if (ty.Name == "Class2")
-                        {
-                            //ConstructorInfo magicConstructor = ty.GetConstructor(Type.EmptyTypes);//获取不带参数的构造函数，如果有构造函数且没有不带参数的构造函数时，这儿就不能这样子啦
-                            //object magicClassObject = magicConstructor.Invoke(new object[] { });
-                            //MethodInfo mi = ty.GetMethod("saybeautiful");
-                            //object aa = mi.Invoke(magicClassObject, null);//方法有参数时，需要把null替换为参数的集合
-                            //MessageBox.Show(aa.ToString());
                         }
                     }
-                }
-                else if (_filetype == FileTypeEnum.EXE.ToString())
-                {
-                    EmbeddedExeTool exetool = new EmbeddedExeTool();
-                    exetool.LoadEXE(this, Application.StartupPath + _system.file_path, Main.vM.UserMi);
-                    //exetool.LoadEXE(this, Application.StartupPath + @"\mzgh\GuXHisMzsfAndMzgh.exe", Main.vM.UserMi);
-                    Main.clientDic.Add(this.PageIndex, IntPtr.Zero);
+                    else if (_filetype == FileTypeEnum.EXE.ToString())
+                    {
+                        EmbeddedExeTool exetool = new EmbeddedExeTool();
+                        exetool.LoadEXE(this, Application.StartupPath + _system.file_path, Main.vM.UserMi);
+                        //exetool.LoadEXE(this, Application.StartupPath + @"\mzgh\GuXHisMzsfAndMzgh.exe", Main.vM.UserMi);
+                        Main.clientDic.Add(this.PageIndex, IntPtr.Zero);
+                    }
+                    else
+                    {
+                        UIMessageTip.ShowError("未处理的子程序格式:" + _filetype);
+                    }
                 }
                 else
                 {
-                    UIMessageTip.ShowError("未处理的子程序格式:" + _filetype);
+                    UIMessageTip.ShowError("未配置系统");
+                    this.Close();
                 }
-            }
-            else
-            {
-                UIMessageTip.ShowError("未配置系统");
-                this.Close();
-            } 
 
-            return;
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError("系统配置有误！请查看日志文件");
+                log.Error(ex.ToString());
+            }
         }
     }
 }
