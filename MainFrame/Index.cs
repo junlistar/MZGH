@@ -42,6 +42,7 @@ namespace MainFrame
         }
         public void LoadSystem()
         {
+            pnlSystem.Clear();
             int _index = 0;
             foreach (var subSystem in systemList)
             {
@@ -73,6 +74,7 @@ namespace MainFrame
             // pnlSystem.Show();
         }
 
+        SubSystemVM _system = new SubSystemVM();
         private void UIButton_Click(object sender, EventArgs e)
         {
             var _btn = sender as UIButton;
@@ -83,7 +85,7 @@ namespace MainFrame
             int _sysno = int.Parse(_btn.TagString);
 
             //获取当前系统
-            var _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
+            _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
             if (_system == null)
             {
                 UIMessageTip.ShowError("未配置系统");
@@ -159,6 +161,7 @@ namespace MainFrame
         private void AddSystem_FormClosing(object sender, FormClosingEventArgs e)
         {
             BindData();
+            LoadSystem();
         }
         public string ReadLocalVersion(string sys_code)
         {
@@ -194,6 +197,40 @@ namespace MainFrame
             return "";
         }
 
+        public string WriteLocalVersion(string sys_code,string version)
+        {
+            try
+            {
+                //判断文件是否存在
+                if (!File.Exists(Application.StartupPath + $"\\version\\{sys_code}.ini"))
+                {
+                    //File.Create(Application.StartupPath + "\\AlarmSet.txt");//创建该文件
+
+                    FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
+
+                    StreamWriter sw = new StreamWriter(fs1);
+                    sw.WriteLine(version);
+
+                    sw.Close();
+                    fs1.Close();
+                }
+                else
+                {
+                    //读取配置 
+                    //FileStream fs = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Open, FileAccess.ReadWrite);
+
+                    File.WriteAllText(Application.StartupPath + $"\\version\\{sys_code}.ini", version);
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError("写入版本文件失败，请查看日志信息！");
+                log.Error(ex.ToString());
+            }
+            return "";
+        }
+
         private void AutoUpdaterStarter(SubSystemVM vm)
         {
             //XML文件服务器下载地址 
@@ -203,6 +240,7 @@ namespace MainFrame
 
             //读取本地版本配置文件，
             var _version = ReadLocalVersion(vm.sys_code);
+            _syscode = vm.sys_code;
 
             if (!string.IsNullOrWhiteSpace(_version))
             {
@@ -250,7 +288,7 @@ namespace MainFrame
             //AutoUpdater.DownloadPath = Environment.CurrentDirectory;
 
             //设置zip解压路径
-            AutoUpdater.InstallationPath = Environment.CurrentDirectory;
+            AutoUpdater.InstallationPath = Environment.CurrentDirectory+ $@"\{vm.sys_relative_path}";
 
             //处理应用程序在下载完成后如何退出
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
@@ -262,12 +300,15 @@ namespace MainFrame
 
         private void AutoUpdater_ApplicationExitEvent()
         {
-            AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
+
             Text = @"Closing application...";
             System.Threading.Thread.Sleep(5000);
+
+            AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
             //Application.Exit();
         }
-
+        string _newversion = "";
+        string _syscode = "";
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
             AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
@@ -303,9 +344,10 @@ namespace MainFrame
                         try
                         {
                             //You can use Download Update dialog used by AutoUpdater.NET to download the update.
-
+                            _newversion = args.CurrentVersion;
                             if (AutoUpdater.DownloadUpdate(args))
                             {
+                                WriteLocalVersion(_syscode, _newversion);
                                 Application.Exit();
                             }
                         }
@@ -318,6 +360,9 @@ namespace MainFrame
                 }
                 else
                 {
+                    //无需更新
+                    setData(_system.sys_name, _system.sys_no);
+
                     //MessageBox.Show(@"There is no update available. Please try again later.", @"Update Unavailable",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

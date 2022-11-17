@@ -86,7 +86,7 @@ namespace MainFrame
                         p.file_type,
                         p.open_mode_str,
                     }).ToList();
-                    dgvlist.AutoResizeColumns();
+                    dgvlist.AutoResizeColumns(); 
                 }
                 else
                 {
@@ -168,8 +168,7 @@ namespace MainFrame
                     //增加本地配置文件
                     AddLocalVersionFile(subSystemVM.sys_code);
 
-                    SetControlEnabled(false);
-                    BindData();
+                    btnSearch_Click(sender,e);
                 }
                 else
                 {
@@ -227,15 +226,15 @@ namespace MainFrame
             {
                 btnSave.Enabled = true;
                 btnAdd.Text = "取消";
-                SetControlEnabled(true); InitControlValue();
+                SetControlEnabled(true);
             }
             else
             {
                 btnEdit.Enabled = false;
                 btnAdd.Text = "新增";
-                SetControlEnabled(false); InitControlValue();
+                SetControlEnabled(false);  
             }
-
+            InitControlValue();
         }
 
         public void SetControlEnabled(bool enable)
@@ -248,7 +247,8 @@ namespace MainFrame
             txt_iconpath.Enabled = enable;
             txt_openmode.Enabled = enable;
             txt_sysdesc.Enabled = enable; 
-            txt_relative_path.Enabled = enable; 
+            txt_relative_path.Enabled = enable;
+            txt_updateurl.Enabled = enable;
         }
 
         public void InitControlValue()

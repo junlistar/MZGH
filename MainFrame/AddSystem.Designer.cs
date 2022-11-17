@@ -50,6 +50,10 @@
             this.open_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.icon_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
+            this.txt_relative_path = new Sunny.UI.UITextBox();
+            this.uiLabel10 = new Sunny.UI.UILabel();
+            this.txt_updateurl = new Sunny.UI.UITextBox();
+            this.uiLabel9 = new Sunny.UI.UILabel();
             this.txt_openmode = new Sunny.UI.UIComboBox();
             this.uiLabel8 = new Sunny.UI.UILabel();
             this.txt_iconpath = new Sunny.UI.UITextBox();
@@ -67,10 +71,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.uiLabel9 = new Sunny.UI.UILabel();
-            this.txt_updateurl = new Sunny.UI.UITextBox();
-            this.uiLabel10 = new Sunny.UI.UILabel();
-            this.txt_relative_path = new Sunny.UI.UITextBox();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -336,6 +336,60 @@
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // txt_relative_path
+            // 
+            this.txt_relative_path.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_relative_path.Enabled = false;
+            this.txt_relative_path.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_relative_path.Location = new System.Drawing.Point(540, 127);
+            this.txt_relative_path.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_relative_path.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_relative_path.Name = "txt_relative_path";
+            this.txt_relative_path.ShowText = false;
+            this.txt_relative_path.Size = new System.Drawing.Size(368, 29);
+            this.txt_relative_path.TabIndex = 8;
+            this.txt_relative_path.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_relative_path.Watermark = "";
+            this.txt_relative_path.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel10
+            // 
+            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel10.Location = new System.Drawing.Point(443, 130);
+            this.uiLabel10.Name = "uiLabel10";
+            this.uiLabel10.Size = new System.Drawing.Size(97, 23);
+            this.uiLabel10.TabIndex = 13;
+            this.uiLabel10.Text = "子系统目录";
+            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel10.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txt_updateurl
+            // 
+            this.txt_updateurl.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txt_updateurl.Enabled = false;
+            this.txt_updateurl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_updateurl.Location = new System.Drawing.Point(110, 165);
+            this.txt_updateurl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_updateurl.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txt_updateurl.Name = "txt_updateurl";
+            this.txt_updateurl.ShowText = false;
+            this.txt_updateurl.Size = new System.Drawing.Size(798, 29);
+            this.txt_updateurl.TabIndex = 8;
+            this.txt_updateurl.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_updateurl.Watermark = "";
+            this.txt_updateurl.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel9
+            // 
+            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel9.Location = new System.Drawing.Point(15, 169);
+            this.uiLabel9.Name = "uiLabel9";
+            this.uiLabel9.Size = new System.Drawing.Size(88, 23);
+            this.uiLabel9.TabIndex = 12;
+            this.uiLabel9.Text = "更新地址";
+            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel9.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // txt_openmode
             // 
             this.txt_openmode.DataSource = null;
@@ -346,12 +400,12 @@
             this.txt_openmode.Items.AddRange(new object[] {
             "程序内嵌入",
             "外部打开"});
-            this.txt_openmode.Location = new System.Drawing.Point(540, 87);
+            this.txt_openmode.Location = new System.Drawing.Point(779, 46);
             this.txt_openmode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_openmode.MinimumSize = new System.Drawing.Size(63, 0);
             this.txt_openmode.Name = "txt_openmode";
             this.txt_openmode.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txt_openmode.Size = new System.Drawing.Size(150, 29);
+            this.txt_openmode.Size = new System.Drawing.Size(129, 29);
             this.txt_openmode.TabIndex = 9;
             this.txt_openmode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_openmode.Watermark = "";
@@ -360,7 +414,7 @@
             // uiLabel8
             // 
             this.uiLabel8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel8.Location = new System.Drawing.Point(444, 87);
+            this.uiLabel8.Location = new System.Drawing.Point(697, 48);
             this.uiLabel8.Name = "uiLabel8";
             this.uiLabel8.Size = new System.Drawing.Size(75, 23);
             this.uiLabel8.TabIndex = 11;
@@ -373,7 +427,7 @@
             this.txt_iconpath.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_iconpath.Enabled = false;
             this.txt_iconpath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_iconpath.Location = new System.Drawing.Point(540, 126);
+            this.txt_iconpath.Location = new System.Drawing.Point(540, 87);
             this.txt_iconpath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_iconpath.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_iconpath.Name = "txt_iconpath";
@@ -387,7 +441,7 @@
             // uiLabel7
             // 
             this.uiLabel7.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel7.Location = new System.Drawing.Point(443, 129);
+            this.uiLabel7.Location = new System.Drawing.Point(443, 90);
             this.uiLabel7.Name = "uiLabel7";
             this.uiLabel7.Size = new System.Drawing.Size(90, 23);
             this.uiLabel7.TabIndex = 10;
@@ -570,60 +624,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // uiLabel9
-            // 
-            this.uiLabel9.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel9.Location = new System.Drawing.Point(15, 169);
-            this.uiLabel9.Name = "uiLabel9";
-            this.uiLabel9.Size = new System.Drawing.Size(88, 23);
-            this.uiLabel9.TabIndex = 12;
-            this.uiLabel9.Text = "更新地址";
-            this.uiLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel9.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txt_updateurl
-            // 
-            this.txt_updateurl.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_updateurl.Enabled = false;
-            this.txt_updateurl.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_updateurl.Location = new System.Drawing.Point(110, 165);
-            this.txt_updateurl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_updateurl.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_updateurl.Name = "txt_updateurl";
-            this.txt_updateurl.ShowText = false;
-            this.txt_updateurl.Size = new System.Drawing.Size(307, 29);
-            this.txt_updateurl.TabIndex = 8;
-            this.txt_updateurl.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_updateurl.Watermark = "";
-            this.txt_updateurl.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel10
-            // 
-            this.uiLabel10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel10.Location = new System.Drawing.Point(443, 169);
-            this.uiLabel10.Name = "uiLabel10";
-            this.uiLabel10.Size = new System.Drawing.Size(97, 23);
-            this.uiLabel10.TabIndex = 13;
-            this.uiLabel10.Text = "子系统目录";
-            this.uiLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel10.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // txt_relative_path
-            // 
-            this.txt_relative_path.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txt_relative_path.Enabled = false;
-            this.txt_relative_path.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_relative_path.Location = new System.Drawing.Point(540, 167);
-            this.txt_relative_path.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_relative_path.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txt_relative_path.Name = "txt_relative_path";
-            this.txt_relative_path.ShowText = false;
-            this.txt_relative_path.Size = new System.Drawing.Size(368, 29);
-            this.txt_relative_path.TabIndex = 8;
-            this.txt_relative_path.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_relative_path.Watermark = "";
-            this.txt_relative_path.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // AddSystem
             // 

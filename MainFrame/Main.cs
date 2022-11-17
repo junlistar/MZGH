@@ -123,7 +123,7 @@ namespace MainFrame
                     vM.Screen = "75349424";
                     vM.AppServer = "10.102.38.225";
                     vM.UserMi = "00000";
-                    vM.SubsysRelativePath = "mzgh";
+                    vM.SubsysRelativePath = "Modules/mzgh";
                     //LoadSystem();
 
                 }

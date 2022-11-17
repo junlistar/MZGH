@@ -46,7 +46,7 @@ namespace Data.Repository
                         para.Add("@open_mode", subSystem.open_mode); 
                         para.Add("@active_flag", subSystem.active_flag);
                         para.Add("@sys_update_url", subSystem.sys_update_url);
-                        para.Add("@sys_update_url", subSystem.sys_update_url);
+                        para.Add("@sys_relative_path", subSystem.sys_relative_path);
 
                         //查询是否存在，存在即修改，不存在则新增 
                         string sql = GetSqlByTag("subsystem_getbysyscode");  
