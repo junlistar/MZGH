@@ -91,12 +91,15 @@ namespace MainFrame
             else
             {
                 //检查是否需要升级更新子系统
-                if (!string.IsNullOrWhiteSpace(_system.system_update_url))
+                if (!string.IsNullOrWhiteSpace(_system.sys_update_url))
                 {
                     AutoUpdaterStarter(_system);
-                } 
-
-                setData(_btn.Text, _sysno);
+                }
+                else
+                {
+                    setData(_btn.Text, _sysno);
+                }
+                
             }
 
         }
@@ -179,6 +182,8 @@ namespace MainFrame
                 FileStream fs = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Open, FileAccess.ReadWrite);
                 StreamReader sr = new StreamReader(fs);
                 string line = sr.ReadToEnd().Trim();
+                sr.Close();
+                fs.Close();
                 return line;
             }
             catch (Exception ex)
@@ -193,13 +198,24 @@ namespace MainFrame
         {
             //XML文件服务器下载地址 
             //AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
-            AutoUpdater.Start(vm.system_update_url);
+            
+            AutoUpdater.Start(vm.sys_update_url);
 
             //读取本地版本配置文件，
             var _version = ReadLocalVersion(vm.sys_code);
 
-            //通过将其分配给InstalledVersion字段来提供自己的版本
-            AutoUpdater.InstalledVersion = new Version(_version);
+            if (!string.IsNullOrWhiteSpace(_version))
+            {
+                log.Error($"系统：{vm.sys_name}的版本号:{_version}");
+                //通过将其分配给InstalledVersion字段来提供自己的版本
+                AutoUpdater.InstalledVersion = new Version(_version);
+            }
+            else
+            {
+                log.Error($"没有获取到系统：{vm.sys_name}的版本号");
+                return;
+            }
+           
 
             //查看中文版本
             //Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("zh");
@@ -246,6 +262,7 @@ namespace MainFrame
 
         private void AutoUpdater_ApplicationExitEvent()
         {
+            AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
             Text = @"Closing application...";
             System.Threading.Thread.Sleep(5000);
             //Application.Exit();
@@ -253,6 +270,7 @@ namespace MainFrame
 
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
+            AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
             if (args.Error == null)
             {
                 if (args.IsUpdateAvailable)

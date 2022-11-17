@@ -15,7 +15,9 @@ namespace Data.Entities
         public int open_mode { get; set; }
         public int active_flag { get; set; }
         public DateTime update_time { get; set; }
-
+        
+        public string sys_update_url { get; set; } 
+        public string sys_relative_path { get; set; }
     }
      
 }

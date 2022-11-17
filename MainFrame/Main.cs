@@ -233,6 +233,7 @@ namespace MainFrame
 
         private void AutoUpdater_ApplicationExitEvent()
         {
+            AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
             Text = @"Closing application...";
             System.Threading.Thread.Sleep(5000);
             Application.Exit();
@@ -240,6 +241,7 @@ namespace MainFrame
 
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
+            AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
             if (args.Error == null)
             {
                 if (args.IsUpdateAvailable)

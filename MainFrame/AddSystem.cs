@@ -132,6 +132,10 @@ namespace MainFrame
                 subSystemVM.file_type = txt_filetype.Text;
                 subSystemVM.icon_path = txt_iconpath.Text;
                 subSystemVM.sys_desc = txt_sysdesc.Text;
+                subSystemVM.sys_update_url = txt_updateurl.Text;
+                subSystemVM.sys_relative_path = txt_relative_path.Text;
+                
+
                 if (txt_openmode.Text == "程序内嵌入")
                 {
                     subSystemVM.open_mode = 1;
@@ -183,11 +187,17 @@ namespace MainFrame
         public void AddLocalVersionFile(string sys_code)
         {
             try
-            { 
+            {
                 //判断文件是否存在
-                if (!File.Exists(Application.StartupPath + $"\\version\\{sys_code}.ini"))
+                var _versionFileFolder = Application.StartupPath + "\\version";
+                if (!File.Exists($"{_versionFileFolder}\\{sys_code}.ini"))
                 {
-                    //File.Create(Application.StartupPath + "\\AlarmSet.txt");//创建该文件
+                    if (!Directory.Exists(_versionFileFolder))
+                    {
+                        Directory.CreateDirectory(_versionFileFolder);
+                    }
+
+                   // File.Create(Application.StartupPath + $"\\version\\{sys_code}.ini");//创建该文件
 
                     FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
 
@@ -237,8 +247,8 @@ namespace MainFrame
             txt_filetype.Enabled = enable;
             txt_iconpath.Enabled = enable;
             txt_openmode.Enabled = enable;
-            txt_sysdesc.Enabled = enable;
-
+            txt_sysdesc.Enabled = enable; 
+            txt_relative_path.Enabled = enable; 
         }
 
         public void InitControlValue()
@@ -345,14 +355,14 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
                     txt_filepath.Text = _system.file_path;
                     txt_iconpath.Text = _system.icon_path;
                     txt_sysdesc.Text = _system.sys_desc;
-
+                    txt_updateurl.Text = _system.sys_update_url;
+                    txt_relative_path.Text = _system.sys_relative_path;
 
                     txt_filetype.Text = _system.file_type.ToUpper();
                     txt_openmode.Text = txt_openmode.Items[_system.open_mode - 1].ToString();
 
                     btnSave.Enabled = true;
-                    SetControlEnabled(true);
-
+                    SetControlEnabled(true); 
                 }
             }
             catch (Exception ex)

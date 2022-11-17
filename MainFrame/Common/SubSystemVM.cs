@@ -35,6 +35,8 @@ namespace Client.ViewModel
         public DateTime update_time { get; set; }
 
         //检查版本更新地址
-        public string system_update_url { get; set; }
+        public string sys_update_url { get; set; }
+        //子系统相对目录
+        public string sys_relative_path { get; set; }
     }
 }
