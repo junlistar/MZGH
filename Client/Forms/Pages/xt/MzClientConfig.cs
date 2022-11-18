@@ -183,17 +183,17 @@ namespace Client.Forms.Pages.xt
             string line = sr.ReadLine();
             int curLine = 0;
             while (line != null)
-            { 
+            {
 
-                if (line.IndexOf("ghxp=")>=0)//文件第2行
+                if (line.IndexOf("ghxp=") >= 0)//文件第2行
                 {
                     var _ghxp = line.Substring(line.LastIndexOf("=") + 1);//截取=号后边的值
                     if (!string.IsNullOrWhiteSpace(_ghxp))
                     {
                         ghprint.Text = _ghxp;
-                    } 
+                    }
                 }
-                else if(line.IndexOf("sfxp=") >= 0)
+                else if (line.IndexOf("sfxp=") >= 0)
                 {
                     var _sfxp = line.Substring(line.LastIndexOf("=") + 1);
                     if (!string.IsNullOrWhiteSpace(_sfxp))
@@ -217,7 +217,7 @@ namespace Client.Forms.Pages.xt
                         cbxDefaultPrint.Text = _def;
                     }
                 }
-                 
+
                 line = sr.ReadLine();
             }
             sr.Close();
@@ -228,9 +228,10 @@ namespace Client.Forms.Pages.xt
 
         public static void EditFile(string flag, string newLineValue, string patch)
         {
-            FileStream fs = new FileStream(patch, FileMode.Open, FileAccess.Read);
+            FileStream fs= new FileStream(patch, FileMode.Open, FileAccess.Read);
+ 
             StreamReader sr = new StreamReader(fs, Encoding.GetEncoding("utf-8"));//解决写入文件乱码
-           // string line = sr.ReadLine();
+                                                                                  // string line = sr.ReadLine();
             StringBuilder sb = new StringBuilder();
             //for (int i = 1; line != null; i++)
             //{
@@ -246,9 +247,9 @@ namespace Client.Forms.Pages.xt
             while (!sr.EndOfStream)
             {
                 string line = sr.ReadLine();
-                if (line.IndexOf(flag) >-1)
+                if (line.IndexOf(flag) > -1)
                 {
-                    line = newLineValue; 
+                    line = newLineValue;
                 }
 
                 if (!sr.EndOfStream)
@@ -257,33 +258,35 @@ namespace Client.Forms.Pages.xt
                 }
                 else
                 {
-                    sb.Append(line );
+                    sb.Append(line);
                 }
             }
             sr.Close();
             fs.Close();
-            FileStream fs1 = new FileStream(patch, FileMode.Open, FileAccess.Write);
-            StreamWriter sw = new StreamWriter(fs1);
-            sw.Write(sb.ToString());
-            sw.Close();
-            fs.Close();
+
+            File.WriteAllText(patch, sb.ToString(), Encoding.GetEncoding("utf-8"));
+            //FileStream fs1 = new FileStream(patch, FileMode.Open, FileAccess.Write);
+            //StreamWriter sw = new StreamWriter(fs1, Encoding.GetEncoding("utf-8"));
+            //sw.WriteLine(sb.ToString());
+            //sw.Close();
+            //fs.Close();
         }
-         
+
         #endregion
 
         private void ghprint_SelectedIndexChanged(object sender, EventArgs e)
-        { 
+        {
             EditFile("ghxp=", "ghxp=" + ghprint.Text, Application.StartupPath + $"\\{config_name}");
         }
 
         private void sfprint_SelectedIndexChanged(object sender, EventArgs e)
-        { 
+        {
             EditFile("sfxp=", "sfxp=" + sfprint.Text, Application.StartupPath + $"\\{config_name}");
         }
 
         private void jsbbprint_SelectedIndexChanged(object sender, EventArgs e)
-        { 
-            EditFile("jsbb=", "jsbb=" + jsbbprint.Text, Application.StartupPath +  $"\\{config_name}");
+        {
+            EditFile("jsbb=", "jsbb=" + jsbbprint.Text, Application.StartupPath + $"\\{config_name}");
         }
     }
 }

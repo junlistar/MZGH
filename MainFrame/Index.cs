@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -111,15 +112,16 @@ namespace MainFrame
             try
             {
                 pnlSystem.FillColor = Color.Transparent;
-                this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                //this.BackColor =Color.Wheat;
+               // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+                this.BackColor =Color.Wheat;
+                navMenu.SelectFirst();
+                navMenu.BackColor = Color.Wheat;
                 BindData();
                 LoadSystem();
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError("加载背景图片失败！");
-
+                UIMessageTip.ShowError("加载背景图片失败！"); 
             }
         }
         public void BindData()
@@ -305,6 +307,7 @@ namespace MainFrame
             System.Threading.Thread.Sleep(5000);
 
             AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
+            Process.GetCurrentProcess().Kill();
             //Application.Exit();
         }
         string _newversion = "";
@@ -381,6 +384,35 @@ namespace MainFrame
                         MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void navMenu_MenuItemClick(TreeNode node, NavMenuItem item, int pageIndex)
+        {
+            //菜单点击事件
+            var _text = node.Text;
+
+            LoadGroupSystem(_text);
+        }
+
+        public void LoadGroupSystem(string sysname)
+        {
+            pnlSystem.Clear();
+            int _index = 0;
+           
+            for (int i = _index; i < 6; i++)
+            {
+                var _txt = sysname + (i + 1).ToString();
+                UIButton uIButton = new UIButton();
+                uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
+                uIButton.Style = UIStyles.PopularStyles()[i];
+                uIButton.Text = _txt;
+                uIButton.Width = 370;
+                uIButton.Height = 200;
+                uIButton.TagString = "9999";
+                uIButton.Click += UIButton_Click;
+                pnlSystem.Controls.Add(uIButton);
+            }
+            // pnlSystem.Show();
         }
     }
 }

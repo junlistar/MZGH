@@ -1863,6 +1863,7 @@ namespace Client
             if (string.IsNullOrEmpty(lblPatientid.Text))
             {
                 UIMessageTip.Show("没有患者信息，请先查询");
+                txtCode.Focus();
                 return;
             }
 

@@ -236,7 +236,7 @@ namespace GuxHis.Mzsf
                 pageIndex = 1500;
                 parent = Aside.CreateNode("权限管理", 361573, 24, pageIndex);
                 Aside.CreateChildNode(parent, "用户管理", 361875, 24, 1502);
-                //Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
+                Aside.CreateChildNode(parent, "菜单管理", 361875, 24, 1501);
                 Aside.CreateChildNode(parent, "客户端配置", 361875, 24, 1503);
 
                 pageIndex = 1600;
