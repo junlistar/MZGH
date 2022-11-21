@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace Client.ViewModel
 {
+
+    public class SubSystemGroupVM
+    {
+        public string group_code { get; set; }
+        public string group_name { get; set; }
+        public int sort { get; set; }
+        public int active_flag { get; set; }
+        public DateTime update_time { get; set; }
+    }
     public class SubSystemVM
     {
         public string sys_code { get; set; }

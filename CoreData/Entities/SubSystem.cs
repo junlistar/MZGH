@@ -19,5 +19,14 @@ namespace Data.Entities
         public string sys_update_url { get; set; } 
         public string sys_relative_path { get; set; }
     }
-     
+
+    public class SubSystemGroup : BaseModel
+    {
+        public string group_code { get; set; }
+        public string group_name { get; set; }
+        public int active_flag { get; set; }
+        public int sort { get; set; } 
+        public DateTime update_time { get; set; }
+         
+    }
 }

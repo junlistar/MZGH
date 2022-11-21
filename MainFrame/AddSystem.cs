@@ -249,6 +249,7 @@ namespace MainFrame
             txt_sysdesc.Enabled = enable; 
             txt_relative_path.Enabled = enable;
             txt_updateurl.Enabled = enable;
+            txt_sysgroup.Enabled = enable;
         }
 
         public void InitControlValue()

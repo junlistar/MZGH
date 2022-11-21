@@ -79,6 +79,7 @@ namespace MainFrame
 
                 //设置扩展菜单
                 uiContextMenuStrip1.Items.Add("子系统维护");
+                uiContextMenuStrip1.Items.Add("系统分组维护");
 
                 //设置tabcontrol样式 
                 uiTabControl1.ShowActiveCloseButton = true;
@@ -336,6 +337,12 @@ namespace MainFrame
             if (e.ClickedItem.Text== "子系统维护")
             {
                 AddSystem addSystem = new AddSystem();
+                //addSystem.FormClosing += AddSystem_FormClosing;
+                addSystem.ShowDialog();
+            }
+            else if (e.ClickedItem.Text == "系统分组维护")
+            {
+                SystemGroup addSystem = new SystemGroup();
                 //addSystem.FormClosing += AddSystem_FormClosing;
                 addSystem.ShowDialog();
             }

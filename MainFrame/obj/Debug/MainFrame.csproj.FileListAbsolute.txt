@@ -34,3 +34,5 @@ D:\lijun\github\Mzgh\MainFrame\bin\Debug\Microsoft.Web.WebView2.Wpf.xml
 D:\lijun\github\Mzgh\MainFrame\obj\Debug\MainFrame.AddSystem.resources
 D:\lijun\github\Mzgh\MainFrame\bin\Debug\Newtonsoft.Json.dll
 D:\lijun\github\Mzgh\MainFrame\bin\Debug\Newtonsoft.Json.xml
+D:\lijun\github\Mzgh\MainFrame\obj\Debug\MainFrame.SystemGroup.resources
+D:\lijun\github\Mzgh\MainFrame\obj\Debug\MainFrame.AddSystemGroup.resources

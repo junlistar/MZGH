@@ -51,6 +51,7 @@ namespace MainFrame
                 UIButton uIButton = new UIButton();
                 uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
                 uIButton.Style = UIStyles.PopularStyles()[_index++];
+                // this.BackgroundImage =
                 uIButton.Text = _txt;
                 uIButton.Width = 370;
                 uIButton.Height = 200;
@@ -78,12 +79,25 @@ namespace MainFrame
         SubSystemVM _system = new SubSystemVM();
         private void UIButton_Click(object sender, EventArgs e)
         {
+            string _text = "";
+            int _sysno = 0;
+             
             var _btn = sender as UIButton;
 
             //UIPage uIPage = new UIPage();
             //uIPage.Text = _btn.Text;
 
-            int _sysno = int.Parse(_btn.TagString);
+            if (_btn != null )
+            {
+                _text = _btn.Text; _sysno = int.Parse(_btn.TagString);
+            }
+            else
+            {
+                var _btn2= sender as UIImageButton;
+                _text = _btn2.Text; _sysno = int.Parse(_btn2.TagString);
+            }
+
+            //int _sysno = int.Parse(_btn.TagString);
 
             //获取当前系统
             _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
@@ -100,9 +114,9 @@ namespace MainFrame
                 }
                 else
                 {
-                    setData(_btn.Text, _sysno);
+                    setData(_text, _sysno);
                 }
-                
+
             }
 
         }
@@ -112,16 +126,17 @@ namespace MainFrame
             try
             {
                 pnlSystem.FillColor = Color.Transparent;
-               // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                this.BackColor =Color.Wheat;
+                // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+                this.BackColor = Color.Wheat;
                 navMenu.SelectFirst();
                 navMenu.BackColor = Color.Wheat;
                 BindData();
-                LoadSystem();
+                LoadSystem(); 
+
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError("加载背景图片失败！"); 
+                UIMessageTip.ShowError("加载背景图片失败！");
             }
         }
         public void BindData()
@@ -138,7 +153,7 @@ namespace MainFrame
                 var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemVM>>>(json);
                 if (result.status == 1)
                 {
-                    systemList = result.data.OrderBy(p=>p.sys_no).ToList();
+                    systemList = result.data.OrderBy(p => p.sys_no).ToList();
                 }
                 else
                 {
@@ -199,7 +214,7 @@ namespace MainFrame
             return "";
         }
 
-        public string WriteLocalVersion(string sys_code,string version)
+        public string WriteLocalVersion(string sys_code, string version)
         {
             try
             {
@@ -223,7 +238,7 @@ namespace MainFrame
 
                     File.WriteAllText(Application.StartupPath + $"\\version\\{sys_code}.ini", version);
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -237,7 +252,7 @@ namespace MainFrame
         {
             //XML文件服务器下载地址 
             //AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
-            
+
             AutoUpdater.Start(vm.sys_update_url);
 
             //读取本地版本配置文件，
@@ -255,7 +270,7 @@ namespace MainFrame
                 log.Error($"没有获取到系统：{vm.sys_name}的版本号");
                 return;
             }
-           
+
 
             //查看中文版本
             //Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("zh");
@@ -290,7 +305,7 @@ namespace MainFrame
             //AutoUpdater.DownloadPath = Environment.CurrentDirectory;
 
             //设置zip解压路径
-            AutoUpdater.InstallationPath = Environment.CurrentDirectory+ $@"\{vm.sys_relative_path}";
+            AutoUpdater.InstallationPath = Environment.CurrentDirectory + $@"\{vm.sys_relative_path}";
 
             //处理应用程序在下载完成后如何退出
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
@@ -396,19 +411,64 @@ namespace MainFrame
 
         public void LoadGroupSystem(string sysname)
         {
+
             pnlSystem.Clear();
+
             int _index = 0;
-           
+
+
+            if (sysname=="字典维护")
+            {
+                for (int i = _index; i < 6; i++)
+                {
+
+                    UIFlowLayoutPanel flp = new UIFlowLayoutPanel();
+                    flp.Width = 370;
+                    flp.Height = 200;
+
+                    var _txt = sysname + (i + 1).ToString();
+                    UIImageButton uIButton = new UIImageButton();
+                    uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    uIButton.Style = UIStyles.PopularStyles()[i];
+                    //uIButton.Text = _txt;
+                    uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+                    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                    uIButton.Width = 128;
+                    uIButton.Height = 128;
+                    uIButton.TagString = "9999";
+                    uIButton.TextAlign = ContentAlignment.BottomCenter;
+                    uIButton.ForeColor = Color.Red;
+                    uIButton.Click += UIButton_Click;
+
+                    flp.Controls.Add(uIButton);
+
+                    UILabel label = new UILabel();
+                    label.Width = 360;
+                    label.Height = 20;
+                    label.Text = _txt;
+
+                    flp.Controls.Add(label);
+                    flp.FillColor = Color.Transparent;
+
+                    pnlSystem.Controls.Add(flp);
+                }
+                return;
+            } 
+
             for (int i = _index; i < 6; i++)
             {
                 var _txt = sysname + (i + 1).ToString();
-                UIButton uIButton = new UIButton();
-                uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
+                UIImageButton uIButton = new UIImageButton();
+                uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
                 uIButton.Style = UIStyles.PopularStyles()[i];
                 uIButton.Text = _txt;
-                uIButton.Width = 370;
-                uIButton.Height = 200;
+                uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+                uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                uIButton.Width = 128;
+                uIButton.Height = 128;
                 uIButton.TagString = "9999";
+                uIButton.TextAlign = ContentAlignment.BottomCenter;
+                uIButton.ForeColor = Color.Red; 
                 uIButton.Click += UIButton_Click;
                 pnlSystem.Controls.Add(uIButton);
             }

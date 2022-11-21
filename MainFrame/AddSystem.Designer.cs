@@ -71,6 +71,8 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txt_sysgroup = new Sunny.UI.UIComboBox();
+            this.uiLabel11 = new Sunny.UI.UILabel();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -305,6 +307,8 @@
             // 
             // uiPanel2
             // 
+            this.uiPanel2.Controls.Add(this.txt_sysgroup);
+            this.uiPanel2.Controls.Add(this.uiLabel11);
             this.uiPanel2.Controls.Add(this.txt_relative_path);
             this.uiPanel2.Controls.Add(this.uiLabel10);
             this.uiPanel2.Controls.Add(this.txt_updateurl);
@@ -454,12 +458,12 @@
             this.txt_sysno.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_sysno.Enabled = false;
             this.txt_sysno.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_sysno.Location = new System.Drawing.Point(540, 9);
+            this.txt_sysno.Location = new System.Drawing.Point(779, 9);
             this.txt_sysno.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_sysno.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_sysno.Name = "txt_sysno";
             this.txt_sysno.ShowText = false;
-            this.txt_sysno.Size = new System.Drawing.Size(150, 29);
+            this.txt_sysno.Size = new System.Drawing.Size(129, 29);
             this.txt_sysno.TabIndex = 6;
             this.txt_sysno.Text = "0";
             this.txt_sysno.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -470,9 +474,9 @@
             // uiLabel6
             // 
             this.uiLabel6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel6.Location = new System.Drawing.Point(443, 12);
+            this.uiLabel6.Location = new System.Drawing.Point(697, 13);
             this.uiLabel6.Name = "uiLabel6";
-            this.uiLabel6.Size = new System.Drawing.Size(90, 23);
+            this.uiLabel6.Size = new System.Drawing.Size(75, 23);
             this.uiLabel6.TabIndex = 9;
             this.uiLabel6.Text = "系统序号";
             this.uiLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -625,6 +629,42 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // txt_sysgroup
+            // 
+            this.txt_sysgroup.DataSource = null;
+            this.txt_sysgroup.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.txt_sysgroup.Enabled = false;
+            this.txt_sysgroup.FillColor = System.Drawing.Color.White;
+            this.txt_sysgroup.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_sysgroup.Items.AddRange(new object[] {
+            "门诊业务",
+            "住院业务",
+            "医技业务",
+            "数据查询",
+            "系统维护",
+            "字典维护"});
+            this.txt_sysgroup.Location = new System.Drawing.Point(540, 9);
+            this.txt_sysgroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_sysgroup.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txt_sysgroup.Name = "txt_sysgroup";
+            this.txt_sysgroup.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txt_sysgroup.Size = new System.Drawing.Size(150, 29);
+            this.txt_sysgroup.TabIndex = 15;
+            this.txt_sysgroup.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sysgroup.Watermark = "";
+            this.txt_sysgroup.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel11
+            // 
+            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel11.Location = new System.Drawing.Point(443, 13);
+            this.uiLabel11.Name = "uiLabel11";
+            this.uiLabel11.Size = new System.Drawing.Size(90, 23);
+            this.uiLabel11.TabIndex = 14;
+            this.uiLabel11.Text = "所属项目";
+            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // AddSystem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -685,5 +725,7 @@
         private Sunny.UI.UILabel uiLabel9;
         private Sunny.UI.UITextBox txt_relative_path;
         private Sunny.UI.UILabel uiLabel10;
+        private Sunny.UI.UIComboBox txt_sysgroup;
+        private Sunny.UI.UILabel uiLabel11;
     }
 }

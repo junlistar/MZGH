@@ -27,10 +27,12 @@ namespace CoreApi.Controllers
     public class SubSystemController : ApiControllerBase
     {
         private readonly ISubSystemRepository _subSystemRepository; 
+        private readonly ISubSystemGroupRepository _subSystemGroupRepository;
 
-        public SubSystemController(ISubSystemRepository subSystemRepository)
+        public SubSystemController(ISubSystemRepository subSystemRepository, ISubSystemGroupRepository subSystemGroupRepository)
         {
-            _subSystemRepository = subSystemRepository; 
+            _subSystemRepository = subSystemRepository;
+            _subSystemGroupRepository = subSystemGroupRepository;
         }
 
         [HttpGet]
@@ -77,6 +79,51 @@ namespace CoreApi.Controllers
             try
             {  
                 return _subSystemRepository.DeleteSubSystem(sys_code);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<List<SubSystemGroup>> GetSubSystemGroups()
+        {
+            Log.Information($"GetSubSystemGroups,");
+            try
+            {
+                return _subSystemGroupRepository.GetSubSystemGroups();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<SubSystemGroup>>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> UpdateSubSystemGroup()
+        {
+            Log.Information($"UpdateSubSystemGroup,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _subSystemGroupRepository.UpdateSubSystemGroup(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+
+        public ResponseResult<bool> DeleteSubSystemGroup(string sys_code)
+        {
+            Log.Information($"DeleteSubSystemGroup,{sys_code}");
+            try
+            {
+                return _subSystemGroupRepository.DeleteSubSystemGroup(sys_code);
             }
             catch (Exception ex)
             {
