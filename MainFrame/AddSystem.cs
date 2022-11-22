@@ -21,6 +21,7 @@ namespace MainFrame
         private static ILog log = LogManager.GetLogger(typeof(AddSystem));//typeof放当前类
 
         List<SubSystemVM> systemList;
+        List<SubSystemGroupVM> system_groups;
 
         public AddSystem()
         {
@@ -36,6 +37,8 @@ namespace MainFrame
             InitControlValue();
 
             BindData();
+            //加载系统分组
+            GetSystemGroups();
         }
 
         private void txtFilePath_ButtonClick(object sender, EventArgs e)
@@ -62,6 +65,47 @@ namespace MainFrame
             BindData();
         }
 
+        public void GetSystemGroups()
+        {
+            try
+            {
+                string json = "";
+                string paramurl = string.Format($"/api/subsystem/GetSubSystemGroups");
+
+                log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemGroupVM>>>(json);
+                if (result.status == 1)
+                {
+                    system_groups = result.data.OrderBy(p => p.sort).ToList();
+                    txt_sysgroup.DataSource = system_groups;
+                    txt_sysgroup.ValueMember = "group_code";
+                    txt_sysgroup.DisplayMember = "group_name";
+
+                    //dgvlist.DataSource = system_groups.Select(p => new
+                    //{
+                    //    p.group_code,
+                    //    p.group_name,
+                    //    p.sort,
+                    //    p.update_time
+                    //}).ToList();
+                    //dgvlist.AutoResizeColumns();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message, 2000);
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message, 2000);
+                log.Error(ex.ToString());
+            }
+        }
         public void BindData()
         {
             try
@@ -124,6 +168,13 @@ namespace MainFrame
                     txt_filepath.Focus();
                     return;
                 }
+                if (txt_sysgroup.SelectedValue==null)
+                {
+                    UIMessageTip.ShowError("系统分组不能为空", 2000);
+                    txt_sysgroup.Focus();
+                    return;
+                }
+
                 SubSystemVM subSystemVM = new SubSystemVM();
                 subSystemVM.sys_code = txt_syscode.Text;
                 subSystemVM.sys_name = txt_sysname.Text;
@@ -134,7 +185,7 @@ namespace MainFrame
                 subSystemVM.sys_desc = txt_sysdesc.Text;
                 subSystemVM.sys_update_url = txt_updateurl.Text;
                 subSystemVM.sys_relative_path = txt_relative_path.Text;
-                
+                subSystemVM.sys_group_code = txt_sysgroup.SelectedValue.ToString();
 
                 if (txt_openmode.Text == "程序内嵌入")
                 {
@@ -230,7 +281,7 @@ namespace MainFrame
             }
             else
             {
-                btnEdit.Enabled = false;
+                btnSave.Enabled = false;
                 btnAdd.Text = "新增";
                 SetControlEnabled(false);  
             }
@@ -361,6 +412,11 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
 
                     txt_filetype.Text = _system.file_type.ToUpper();
                     txt_openmode.Text = txt_openmode.Items[_system.open_mode - 1].ToString();
+
+                    if (!string.IsNullOrWhiteSpace(_system.sys_group_code))
+                    {
+                        txt_sysgroup.SelectedValue = _system.sys_group_code;
+                    } 
 
                     btnSave.Enabled = true;
                     SetControlEnabled(true); 

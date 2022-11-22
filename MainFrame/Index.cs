@@ -36,6 +36,7 @@ namespace MainFrame
         public delegate void SetData(string clientName, int index);
         public SetData setData;
         public static List<SubSystemVM> systemList;
+        public static List<SubSystemGroupVM> system_groups;
 
         private void Index_Initialize(object sender, EventArgs e)
         {
@@ -51,7 +52,6 @@ namespace MainFrame
                 UIButton uIButton = new UIButton();
                 uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
                 uIButton.Style = UIStyles.PopularStyles()[_index++];
-                // this.BackgroundImage =
                 uIButton.Text = _txt;
                 uIButton.Width = 370;
                 uIButton.Height = 200;
@@ -81,19 +81,19 @@ namespace MainFrame
         {
             string _text = "";
             int _sysno = 0;
-             
+
             var _btn = sender as UIButton;
 
             //UIPage uIPage = new UIPage();
             //uIPage.Text = _btn.Text;
 
-            if (_btn != null )
+            if (_btn != null)
             {
                 _text = _btn.Text; _sysno = int.Parse(_btn.TagString);
             }
             else
             {
-                var _btn2= sender as UIImageButton;
+                var _btn2 = sender as UIImageButton;
                 _text = _btn2.Text; _sysno = int.Parse(_btn2.TagString);
             }
 
@@ -127,11 +127,13 @@ namespace MainFrame
             {
                 pnlSystem.FillColor = Color.Transparent;
                 // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                this.BackColor = Color.Wheat;
+                //this.BackColor = Color.Wheat;
+                this.Style = UIStyle.Green;
                 navMenu.SelectFirst();
                 navMenu.BackColor = Color.Wheat;
+                GetSystemGroupData();
                 BindData();
-                LoadSystem(); 
+                LoadSystem();
 
             }
             catch (Exception ex)
@@ -406,7 +408,106 @@ namespace MainFrame
             //菜单点击事件
             var _text = node.Text;
 
+
             LoadGroupSystem(_text);
+        }
+
+        public void LoadGroups()
+        {
+            int top = 100, left = 180;
+            for (int i = 0; i < system_groups.Count; i++)
+            {
+                UIMarkLabel markLabel = new UIMarkLabel();
+                markLabel.Top = top + (i * 110);
+                markLabel.Left = left;
+                markLabel.Parent = this;
+                markLabel.Text = system_groups[i].group_name;
+
+            }
+            LoadSubSystems();
+        }
+        public void LoadSubSystems()
+        {
+            int top = 100, left = 280;
+            for (int i = 0; i < system_groups.Count; i++)
+            {
+                //UIFlowLayoutPanel flpgroup = new UIFlowLayoutPanel();
+
+                //flpgroup.FillColor = Color.Transparent;
+                //flpgroup.Width = 1000;
+                //flpgroup.Height = 140;
+                //flpgroup.Top = top + (i * 140);
+                //flpgroup.Left = left;
+                //flpgroup.Parent = this;
+
+                //添加子系统
+
+                int _index = 0;
+                for (int j = _index; j < (new Random()).Next(2,15); j++)
+                {
+
+                    var _txt = "子系统" + (j + 1).ToString();
+                    UIImageButton uIButton = new UIImageButton();
+                    uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                    //uIButton.Style = UIStyles.PopularStyles()[i];
+                    //uIButton.Text = _txt;
+                    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                    uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/gux.ico");
+                    uIButton.Width = 70;
+                    uIButton.Height = 70;
+                    uIButton.TagString = "9999";
+                    //uIButton.TextAlign = ContentAlignment.BottomCenter;
+                    uIButton.ForeColor = Color.Red;
+                    uIButton.Click += UIButton_Click;
+
+                    uIButton.Top = top + (i * 110);
+                    uIButton.Left = left + (j * 100);
+                    uIButton.Parent = this;
+
+                    UILabel label = new UILabel();
+                    label.Width = 70;
+                    label.Height = 40;
+                    label.AutoSize = false;
+                    label.Font = new Font("微软雅黑",9, FontStyle.Bold);
+                    label.Text = system_groups[i].group_name + _txt;
+                    label.Top = uIButton.Top + 70;
+                    label.Left = left + (j * 100);
+                    label.Parent = this;
+
+                }
+            }
+        }
+
+        public void GetSystemGroupData()
+        {
+            try
+            {
+                string json = "";
+                string paramurl = string.Format($"/api/subsystem/GetSubSystemGroups");
+
+                log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemGroupVM>>>(json);
+                if (result.status == 1)
+                {
+                    system_groups = result.data.OrderBy(p => p.sort).ToList();
+
+                    LoadGroups();
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message, 2000);
+                    log.Error(result.message);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message, 2000);
+                log.Error(ex.ToString());
+            }
         }
 
         public void LoadGroupSystem(string sysname)
@@ -417,14 +518,14 @@ namespace MainFrame
             int _index = 0;
 
 
-            if (sysname=="字典维护")
+            if (sysname == "字典维护")
             {
                 for (int i = _index; i < 6; i++)
                 {
 
                     UIFlowLayoutPanel flp = new UIFlowLayoutPanel();
-                    flp.Width = 370;
-                    flp.Height = 200;
+                    flp.Width = 100;
+                    flp.Height = 100;
 
                     var _txt = sysname + (i + 1).ToString();
                     UIImageButton uIButton = new UIImageButton();
@@ -433,8 +534,8 @@ namespace MainFrame
                     //uIButton.Text = _txt;
                     uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
                     uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-                    uIButton.Width = 128;
-                    uIButton.Height = 128;
+                    uIButton.Width = 70;
+                    uIButton.Height = 70;
                     uIButton.TagString = "9999";
                     uIButton.TextAlign = ContentAlignment.BottomCenter;
                     uIButton.ForeColor = Color.Red;
@@ -443,7 +544,7 @@ namespace MainFrame
                     flp.Controls.Add(uIButton);
 
                     UILabel label = new UILabel();
-                    label.Width = 360;
+                    label.Width = 70;
                     label.Height = 20;
                     label.Text = _txt;
 
@@ -453,7 +554,7 @@ namespace MainFrame
                     pnlSystem.Controls.Add(flp);
                 }
                 return;
-            } 
+            }
 
             for (int i = _index; i < 6; i++)
             {
@@ -464,11 +565,11 @@ namespace MainFrame
                 uIButton.Text = _txt;
                 uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
                 uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-                uIButton.Width = 128;
-                uIButton.Height = 128;
+                uIButton.Width = 100;
+                uIButton.Height = 100;
                 uIButton.TagString = "9999";
                 uIButton.TextAlign = ContentAlignment.BottomCenter;
-                uIButton.ForeColor = Color.Red; 
+                uIButton.ForeColor = Color.Red;
                 uIButton.Click += UIButton_Click;
                 pnlSystem.Controls.Add(uIButton);
             }

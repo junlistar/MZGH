@@ -150,7 +150,10 @@ namespace MainFrame
                 log.Error(ex.ToString());
             }
         }
-        
 
+        private void SystemGroup_Load(object sender, EventArgs e)
+        {
+            BindData();
+        }
     }
 }

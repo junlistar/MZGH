@@ -47,5 +47,6 @@ namespace Client.ViewModel
         public string sys_update_url { get; set; }
         //子系统相对目录
         public string sys_relative_path { get; set; }
+        public string sys_group_code { get; set; }
     }
 }

@@ -216,6 +216,7 @@
             this.Name = "SystemGroup";
             this.Text = "系统分组管理";
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
+            this.Load += new System.EventHandler(this.SystemGroup_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).EndInit();
             this.uiPanel1.ResumeLayout(false);
             this.ResumeLayout(false);

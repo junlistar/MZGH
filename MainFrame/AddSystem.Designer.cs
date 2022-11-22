@@ -50,6 +50,8 @@
             this.open_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.icon_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
+            this.txt_sysgroup = new Sunny.UI.UIComboBox();
+            this.uiLabel11 = new Sunny.UI.UILabel();
             this.txt_relative_path = new Sunny.UI.UITextBox();
             this.uiLabel10 = new Sunny.UI.UILabel();
             this.txt_updateurl = new Sunny.UI.UITextBox();
@@ -71,8 +73,6 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txt_sysgroup = new Sunny.UI.UIComboBox();
-            this.uiLabel11 = new Sunny.UI.UILabel();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -339,6 +339,42 @@
             this.uiPanel2.Text = null;
             this.uiPanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiPanel2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // txt_sysgroup
+            // 
+            this.txt_sysgroup.DataSource = null;
+            this.txt_sysgroup.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.txt_sysgroup.Enabled = false;
+            this.txt_sysgroup.FillColor = System.Drawing.Color.White;
+            this.txt_sysgroup.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_sysgroup.Items.AddRange(new object[] {
+            "门诊业务",
+            "住院业务",
+            "医技业务",
+            "数据查询",
+            "系统维护",
+            "字典维护"});
+            this.txt_sysgroup.Location = new System.Drawing.Point(540, 9);
+            this.txt_sysgroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txt_sysgroup.MinimumSize = new System.Drawing.Size(63, 0);
+            this.txt_sysgroup.Name = "txt_sysgroup";
+            this.txt_sysgroup.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.txt_sysgroup.Size = new System.Drawing.Size(150, 29);
+            this.txt_sysgroup.TabIndex = 15;
+            this.txt_sysgroup.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sysgroup.Watermark = "";
+            this.txt_sysgroup.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // uiLabel11
+            // 
+            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel11.Location = new System.Drawing.Point(443, 13);
+            this.uiLabel11.Name = "uiLabel11";
+            this.uiLabel11.Size = new System.Drawing.Size(90, 23);
+            this.uiLabel11.TabIndex = 14;
+            this.uiLabel11.Text = "系统分组";
+            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_relative_path
             // 
@@ -628,42 +664,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txt_sysgroup
-            // 
-            this.txt_sysgroup.DataSource = null;
-            this.txt_sysgroup.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.txt_sysgroup.Enabled = false;
-            this.txt_sysgroup.FillColor = System.Drawing.Color.White;
-            this.txt_sysgroup.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_sysgroup.Items.AddRange(new object[] {
-            "门诊业务",
-            "住院业务",
-            "医技业务",
-            "数据查询",
-            "系统维护",
-            "字典维护"});
-            this.txt_sysgroup.Location = new System.Drawing.Point(540, 9);
-            this.txt_sysgroup.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txt_sysgroup.MinimumSize = new System.Drawing.Size(63, 0);
-            this.txt_sysgroup.Name = "txt_sysgroup";
-            this.txt_sysgroup.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.txt_sysgroup.Size = new System.Drawing.Size(150, 29);
-            this.txt_sysgroup.TabIndex = 15;
-            this.txt_sysgroup.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txt_sysgroup.Watermark = "";
-            this.txt_sysgroup.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiLabel11
-            // 
-            this.uiLabel11.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiLabel11.Location = new System.Drawing.Point(443, 13);
-            this.uiLabel11.Name = "uiLabel11";
-            this.uiLabel11.Size = new System.Drawing.Size(90, 23);
-            this.uiLabel11.TabIndex = 14;
-            this.uiLabel11.Text = "所属项目";
-            this.uiLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiLabel11.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // AddSystem
             // 
