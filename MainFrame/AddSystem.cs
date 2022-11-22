@@ -127,6 +127,7 @@ namespace MainFrame
                         p.sys_code,
                         p.sys_name,
                         p.file_path,
+                        p.icon_path,
                         p.file_type,
                         p.open_mode_str,
                     }).ToList();
@@ -464,6 +465,20 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
             {
                 UIMessageTip.ShowError(ex.Message);
                 log.Error(ex.ToString());
+            }
+        }
+
+        private void txt_iconpath_ButtonClick(object sender, EventArgs e)
+        {
+            openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = Application.StartupPath;
+            openFileDialog1.Title = "请选择图片文件";
+            openFileDialog1.Filter = "图片文件|*.jpg;*.gif;*.bmp;*.png;*.ico";
+            openFileDialog1.FilterIndex = 1;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var _filePath = openFileDialog1.FileName;     //显示文件路径 
+                this.txt_iconpath.Text = _filePath.Replace(Application.StartupPath, "");
             }
         }
     }

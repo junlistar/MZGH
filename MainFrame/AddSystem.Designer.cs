@@ -42,13 +42,6 @@
             this.btnSearch = new Sunny.UI.UISymbolButton();
             this.btnExit = new Sunny.UI.UISymbolButton();
             this.dgvlist = new Sunny.UI.UIDataGridView();
-            this.sys_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sys_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sys_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.file_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.file_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.open_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.icon_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel2 = new Sunny.UI.UIPanel();
             this.txt_sysgroup = new Sunny.UI.UIComboBox();
             this.uiLabel11 = new Sunny.UI.UILabel();
@@ -73,6 +66,13 @@
             this.uiLabel2 = new Sunny.UI.UILabel();
             this.uiLabel1 = new Sunny.UI.UILabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.sys_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sys_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sys_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.file_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.file_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.open_mode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.icon_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uiPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvlist)).BeginInit();
             this.uiPanel2.SuspendLayout();
@@ -263,48 +263,6 @@
             this.dgvlist.TabIndex = 1;
             this.dgvlist.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
-            // sys_no
-            // 
-            this.sys_no.DataPropertyName = "sys_no";
-            this.sys_no.HeaderText = "序号";
-            this.sys_no.Name = "sys_no";
-            // 
-            // sys_code
-            // 
-            this.sys_code.DataPropertyName = "sys_code";
-            this.sys_code.HeaderText = "系统标识";
-            this.sys_code.Name = "sys_code";
-            // 
-            // sys_name
-            // 
-            this.sys_name.DataPropertyName = "sys_name";
-            this.sys_name.HeaderText = "系统名称";
-            this.sys_name.Name = "sys_name";
-            // 
-            // file_path
-            // 
-            this.file_path.DataPropertyName = "file_path";
-            this.file_path.HeaderText = "文件路径";
-            this.file_path.Name = "file_path";
-            // 
-            // file_type
-            // 
-            this.file_type.DataPropertyName = "file_type";
-            this.file_type.HeaderText = "文件类型";
-            this.file_type.Name = "file_type";
-            // 
-            // open_mode
-            // 
-            this.open_mode.DataPropertyName = "open_mode_str";
-            this.open_mode.HeaderText = "打开方式";
-            this.open_mode.Name = "open_mode";
-            // 
-            // icon_path
-            // 
-            this.icon_path.DataPropertyName = "icon_path";
-            this.icon_path.HeaderText = "图标路径";
-            this.icon_path.Name = "icon_path";
-            // 
             // uiPanel2
             // 
             this.uiPanel2.Controls.Add(this.txt_sysgroup);
@@ -464,6 +422,7 @@
             // 
             // txt_iconpath
             // 
+            this.txt_iconpath.ButtonSymbol = 61717;
             this.txt_iconpath.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txt_iconpath.Enabled = false;
             this.txt_iconpath.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -471,12 +430,14 @@
             this.txt_iconpath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txt_iconpath.MinimumSize = new System.Drawing.Size(1, 16);
             this.txt_iconpath.Name = "txt_iconpath";
+            this.txt_iconpath.ShowButton = true;
             this.txt_iconpath.ShowText = false;
             this.txt_iconpath.Size = new System.Drawing.Size(368, 29);
             this.txt_iconpath.TabIndex = 7;
             this.txt_iconpath.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_iconpath.Watermark = "";
             this.txt_iconpath.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_iconpath.ButtonClick += new System.EventHandler(this.txt_iconpath_ButtonClick);
             // 
             // uiLabel7
             // 
@@ -665,6 +626,49 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // sys_no
+            // 
+            this.sys_no.DataPropertyName = "sys_no";
+            this.sys_no.HeaderText = "序号";
+            this.sys_no.Name = "sys_no";
+            // 
+            // sys_code
+            // 
+            this.sys_code.DataPropertyName = "sys_code";
+            this.sys_code.HeaderText = "系统标识";
+            this.sys_code.Name = "sys_code";
+            // 
+            // sys_name
+            // 
+            this.sys_name.DataPropertyName = "sys_name";
+            this.sys_name.HeaderText = "系统名称";
+            this.sys_name.Name = "sys_name";
+            // 
+            // file_path
+            // 
+            this.file_path.DataPropertyName = "file_path";
+            this.file_path.HeaderText = "文件路径";
+            this.file_path.Name = "file_path";
+            // 
+            // file_type
+            // 
+            this.file_type.DataPropertyName = "file_type";
+            this.file_type.HeaderText = "文件类型";
+            this.file_type.Name = "file_type";
+            // 
+            // open_mode
+            // 
+            this.open_mode.DataPropertyName = "open_mode_str";
+            this.open_mode.HeaderText = "打开方式";
+            this.open_mode.Name = "open_mode";
+            this.open_mode.Visible = false;
+            // 
+            // icon_path
+            // 
+            this.icon_path.DataPropertyName = "icon_path";
+            this.icon_path.HeaderText = "图标路径";
+            this.icon_path.Name = "icon_path";
+            // 
             // AddSystem
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -713,13 +717,6 @@
         private Sunny.UI.UILabel uiLabel6;
         private Sunny.UI.UILabel uiLabel4;
         private Sunny.UI.UISymbolButton btnSave;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sys_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sys_code;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sys_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn file_path;
-        private System.Windows.Forms.DataGridViewTextBoxColumn file_type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn open_mode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn icon_path;
         private Sunny.UI.UISymbolButton btnRegist;
         private Sunny.UI.UITextBox txt_updateurl;
         private Sunny.UI.UILabel uiLabel9;
@@ -727,5 +724,12 @@
         private Sunny.UI.UILabel uiLabel10;
         private Sunny.UI.UIComboBox txt_sysgroup;
         private Sunny.UI.UILabel uiLabel11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sys_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sys_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sys_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn file_path;
+        private System.Windows.Forms.DataGridViewTextBoxColumn file_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn open_mode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn icon_path;
     }
 }

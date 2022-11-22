@@ -116,9 +116,7 @@ namespace MainFrame
                 {
                     setData(_text, _sysno);
                 }
-
             }
-
         }
 
         private void Index_Load(object sender, EventArgs e)
@@ -128,12 +126,13 @@ namespace MainFrame
                 pnlSystem.FillColor = Color.Transparent;
                 // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
                 //this.BackColor = Color.Wheat;
-                this.Style = UIStyle.Green;
-                navMenu.SelectFirst();
-                navMenu.BackColor = Color.Wheat;
-                GetSystemGroupData();
+                this.Style = UIStyle.Blue;
+                //navMenu.SelectFirst();
+                //navMenu.BackColor = Color.Wheat;
+
                 BindData();
-                LoadSystem();
+                //LoadSystem(); 
+                GetSystemGroupData();
 
             }
             catch (Exception ex)
@@ -180,7 +179,7 @@ namespace MainFrame
         private void AddSystem_FormClosing(object sender, FormClosingEventArgs e)
         {
             BindData();
-            LoadSystem();
+            // LoadSystem();
         }
         public string ReadLocalVersion(string sys_code)
         {
@@ -409,7 +408,7 @@ namespace MainFrame
             var _text = node.Text;
 
 
-            LoadGroupSystem(_text);
+            // LoadGroupSystem(_text);
         }
 
         public void LoadGroups()
@@ -422,7 +421,6 @@ namespace MainFrame
                 markLabel.Left = left;
                 markLabel.Parent = this;
                 markLabel.Text = system_groups[i].group_name;
-
             }
             LoadSubSystems();
         }
@@ -431,21 +429,53 @@ namespace MainFrame
             int top = 100, left = 280;
             for (int i = 0; i < system_groups.Count; i++)
             {
-                //UIFlowLayoutPanel flpgroup = new UIFlowLayoutPanel();
-
-                //flpgroup.FillColor = Color.Transparent;
-                //flpgroup.Width = 1000;
-                //flpgroup.Height = 140;
-                //flpgroup.Top = top + (i * 140);
-                //flpgroup.Left = left;
-                //flpgroup.Parent = this;
-
                 //添加子系统
+                if (i == 0)
+                {
+                    var _subsystems = systemList.Where(p => p.sys_group_code == system_groups[i].group_code).ToList();
+
+                    for (int j = 0; j < _subsystems.Count; j++)
+                    {
+                        var _sub = _subsystems[j];
+                        var _txt = _sub.sys_name;
+                        UIImageButton uIButton = new UIImageButton();
+                        uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
+
+                        var _filepath = Application.StartupPath + "/" + _sub.icon_path;
+                        if (!File.Exists(_filepath))
+                        {
+                            _filepath = Application.StartupPath + "/resource/gux.ico";
+                        }
+                        uIButton.Image = Image.FromFile(_filepath);
+                        uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                        //uIButton.Style = UIStyles.PopularStyles()[_index++];
+                        //uIButton.Text = _txt;
+                        uIButton.Width = 70;
+                        uIButton.Height = 70;
+                        uIButton.TagString = _sub.sys_no.ToString();
+                        uIButton.Click += UIButton_Click;
+                        uIButton.Top = top + (i * 110);
+                        uIButton.Left = left + (j * 100);
+                        uIButton.Parent = this;
+
+                        UILabel label = new UILabel();
+                        label.Width = 70;
+                        label.Height = 40;
+                        label.AutoSize = false;
+                        label.Font = new Font("微软雅黑", 9, FontStyle.Bold);
+                        label.Text = _txt;
+                        label.Top = uIButton.Top + 70;
+                        label.Left = left + (j * 100);
+                        label.Parent = this;
+                    }
+
+                    continue;
+                }
 
                 int _index = 0;
-                for (int j = _index; j < (new Random()).Next(2,15); j++)
+                for (int j = _index; j < (new Random()).Next(2, 15); j++)
                 {
-
                     var _txt = "子系统" + (j + 1).ToString();
                     UIImageButton uIButton = new UIImageButton();
                     uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
@@ -468,7 +498,7 @@ namespace MainFrame
                     label.Width = 70;
                     label.Height = 40;
                     label.AutoSize = false;
-                    label.Font = new Font("微软雅黑",9, FontStyle.Bold);
+                    label.Font = new Font("微软雅黑", 9, FontStyle.Bold);
                     label.Text = system_groups[i].group_name + _txt;
                     label.Top = uIButton.Top + 70;
                     label.Left = left + (j * 100);

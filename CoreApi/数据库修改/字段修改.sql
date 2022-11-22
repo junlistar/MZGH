@@ -898,7 +898,8 @@ go
 insert into sys_config values('mzPatientInfo_notNullColumns',1,'门诊挂号-患者基本信息必填字段','p_bar_code','mz')
 go
 
---子系统维护界面
+--子系统维护表
+
 CREATE TABLE [dbo].[subsystem](
 	[sys_code] [varchar](50) NOT NULL,
 	[sys_name] [varchar](50) NULL,
@@ -910,10 +911,46 @@ CREATE TABLE [dbo].[subsystem](
 	[open_mode] [int] NULL,
 	[active_flag] [int] NULL,
 	[update_time] [datetime] NULL,
+	[sys_update_url] [varchar](2000) NULL,
+	[sys_relative_path] [varchar](2000) NULL,
+	[sys_group_code] [varchar](200) NULL,
  CONSTRAINT [PK_subsystem] PRIMARY KEY CLUSTERED 
 (
 	[sys_code] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[subsystem] ADD  DEFAULT (NULL) FOR [sys_update_url]
+GO
+
+ALTER TABLE [dbo].[subsystem] ADD  DEFAULT (NULL) FOR [sys_relative_path]
+GO
+
+ALTER TABLE [dbo].[subsystem] ADD  DEFAULT (NULL) FOR [sys_group_code]
+GO
+
+--系统分组表
+CREATE TABLE [dbo].[subsystem_group](
+	[group_code] [varchar](50) NOT NULL,
+	[group_name] [varchar](200) NULL,
+	[sort] [smallint] NULL,
+	[update_time] [datetime] NULL,
+	[active_flag] [int] NULL,
+ CONSTRAINT [PK_subsystem_group] PRIMARY KEY CLUSTERED 
+(
+	[group_code] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[subsystem_group] ADD  DEFAULT ((1)) FOR [active_flag]
 GO
