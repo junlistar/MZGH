@@ -70,10 +70,13 @@
             // Index
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1202, 743);
             this.Controls.Add(this.uiLabel1);
             this.Controls.Add(this.pnlSystem);
             this.Name = "Index";
+            this.Style = Sunny.UI.UIStyle.Custom;
+            this.StyleCustomMode = true;
             this.Text = "主页";
             this.Initialize += new System.EventHandler(this.Index_Initialize);
             this.Load += new System.EventHandler(this.Index_Load);

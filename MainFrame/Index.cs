@@ -125,14 +125,14 @@ namespace MainFrame
             {
                 pnlSystem.FillColor = Color.Transparent;
                 // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                //this.BackColor = Color.Wheat;
-                this.Style = UIStyle.Blue;
+                this.BackColor = Color.LightPink;  
                 //navMenu.SelectFirst();
                 //navMenu.BackColor = Color.Wheat;
 
                 BindData();
                 //LoadSystem(); 
                 GetSystemGroupData();
+                 
 
             }
             catch (Exception ex)

@@ -108,8 +108,7 @@ namespace MainFrame
                     tsslblName.Text = SessionHelper.uservm.name;
 
                     tsslblMidhost.Text = SessionHelper.MyHttpClient.BaseAddress.ToString();
-
-
+                     
                     UIMessageTip.ShowOk("登录成功！");
                     this.Show();
                     var _index = new Index();
@@ -117,16 +116,14 @@ namespace MainFrame
                     AddPage(_index, 1000);
 
                     SelectPage(1000);
-
-
+                     
                     vM = new TestHisVM();
                     vM.Application = "75415424";
                     vM.Screen = "75349424";
                     vM.AppServer = "10.102.38.225";
                     vM.UserMi = "00000";
                     vM.SubsysRelativePath = "Modules/mzgh";
-                    //LoadSystem();
-
+                    //LoadSystem(); 
                 }
                 else
                 {
@@ -345,6 +342,10 @@ namespace MainFrame
                 SystemGroup addSystem = new SystemGroup();
                 //addSystem.FormClosing += AddSystem_FormClosing;
                 addSystem.ShowDialog();
+            }
+            else if (e.ClickedItem.Text == "权限管理")
+            {
+                 
             }
         }
     }
