@@ -1,2 +1,0 @@
-select top 0 *
-from mz_detail_charge_back          

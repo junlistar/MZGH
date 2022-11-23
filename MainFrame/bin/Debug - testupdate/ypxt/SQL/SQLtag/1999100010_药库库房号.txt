@@ -1,3 +1,0 @@
-select * from 
-yp_group_name
-order by 1

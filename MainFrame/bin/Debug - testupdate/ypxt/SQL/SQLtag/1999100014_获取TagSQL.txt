@@ -1,2 +1,0 @@
-select sql from wh_tag_sql 
- where tag=:tag

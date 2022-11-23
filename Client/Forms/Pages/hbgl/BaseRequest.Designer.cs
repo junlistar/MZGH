@@ -267,8 +267,9 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
             this.dgvlist.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvlist.RowTemplate.Height = 23;
+            this.dgvlist.ScrollBarRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.dgvlist.SelectedIndex = -1;
-            this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect; 
+            this.dgvlist.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvlist.Size = new System.Drawing.Size(1172, 383);
             this.dgvlist.StyleCustomMode = true;
             this.dgvlist.TabIndex = 3;
@@ -405,6 +406,7 @@
             this.txt_workroom.Size = new System.Drawing.Size(200, 29);
             this.txt_workroom.TabIndex = 26;
             this.txt_workroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_workroom.Watermark = "";
             this.txt_workroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtHaobie
@@ -419,6 +421,7 @@
             this.txtHaobie.Size = new System.Drawing.Size(202, 29);
             this.txtHaobie.TabIndex = 25;
             this.txtHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtHaobie.Watermark = "";
             this.txtHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtHaobie.TextChanged += new System.EventHandler(this.txtHaobie_TextChanged);
             this.txtHaobie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtHaobie_KeyUp);
@@ -456,6 +459,7 @@
             this.cbxWeek.TabIndex = 5;
             this.cbxWeek.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.cbxWeek.Visible = false;
+            this.cbxWeek.Watermark = "";
             this.cbxWeek.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel1
@@ -481,6 +485,7 @@
             this.txtDoct.Size = new System.Drawing.Size(285, 29);
             this.txtDoct.TabIndex = 20;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDoct.Watermark = "";
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtDoct.TextChanged += new System.EventHandler(this.txtDoct_TextChanged);
             this.txtDoct.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDoct_KeyUp);
@@ -498,6 +503,7 @@
             this.txtzk.Size = new System.Drawing.Size(285, 29);
             this.txtzk.TabIndex = 15;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtzk.Watermark = "";
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtzk.TextChanged += new System.EventHandler(this.txtzk_TextChanged);
             this.txtzk.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtzk_KeyUp);
@@ -515,6 +521,7 @@
             this.txtks.Size = new System.Drawing.Size(285, 29);
             this.txtks.TabIndex = 14;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtks.Watermark = "";
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtks.TextChanged += new System.EventHandler(this.txtks_TextChanged);
             this.txtks.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtks_KeyUp);
@@ -543,6 +550,7 @@
             this.cbxDay.Size = new System.Drawing.Size(192, 29);
             this.cbxDay.TabIndex = 4;
             this.cbxDay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxDay.Watermark = "";
             this.cbxDay.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel10
@@ -619,6 +627,7 @@
             this.cbxOpenFlag.Size = new System.Drawing.Size(192, 29);
             this.cbxOpenFlag.TabIndex = 4;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxOpenFlag.Watermark = "";
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel3
@@ -646,6 +655,7 @@
             this.cbxSXW.Size = new System.Drawing.Size(200, 29);
             this.cbxSXW.TabIndex = 3;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxSXW.Watermark = "";
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel2

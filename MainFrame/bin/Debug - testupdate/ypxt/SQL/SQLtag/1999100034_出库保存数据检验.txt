@@ -1,1 +1,0 @@
-exec yp_ypOutSaveCheck :group_no_out,:draw_no,:out_date ,:plan_PageNo       

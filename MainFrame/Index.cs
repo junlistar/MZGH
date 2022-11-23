@@ -40,8 +40,14 @@ namespace MainFrame
 
         private void Index_Initialize(object sender, EventArgs e)
         {
-            //pnlSystem.Hide();
+            
         }
+
+        private void _btn_Click(object sender, EventArgs e)
+        {
+            this.BackColor = (sender as UIButton).FillColor;
+        }
+
         public void LoadSystem()
         {
             pnlSystem.Clear();
@@ -125,21 +131,44 @@ namespace MainFrame
             {
                 pnlSystem.FillColor = Color.Transparent;
                 // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                this.BackColor = Color.LightPink;  
+                //this.BackColor = Color.LightPink;  
                 //navMenu.SelectFirst();
                 //navMenu.BackColor = Color.Wheat;
 
                 BindData();
                 //LoadSystem(); 
                 GetSystemGroupData();
-                 
 
+                BindColorArea();
             }
             catch (Exception ex)
             {
                 UIMessageTip.ShowError("加载背景图片失败！");
             }
         }
+        public void BindColorArea()
+        {
+            pnlColor.Clear();
+            pnlColor.FillColor = Color.Transparent;
+            var styles = UIStyles.PopularStyles();
+            int _count = 0;
+            foreach (UIStyle style in styles)
+            {
+                UIButton _btn = new UIButton();
+                _btn.Text = "";
+                _btn.Style = style;
+                _btn.Width = 30;
+                _btn.Height = 30;
+                _btn.Click += _btn_Click;
+                pnlColor.Add(_btn);
+                _count++;
+                if (_count == 9)
+                {
+                    break;
+                }
+            }
+        }
+
         public void BindData()
         {
             try

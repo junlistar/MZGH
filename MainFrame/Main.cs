@@ -69,6 +69,9 @@ namespace MainFrame
         {
             try
             {
+                //设置窗体大小
+                this.MinimumSize = new Size(this.Width, this.Height);
+
                 #region 更新提示/判断是否自动更新
                 AutoUpdaterStarter();
                 #endregion

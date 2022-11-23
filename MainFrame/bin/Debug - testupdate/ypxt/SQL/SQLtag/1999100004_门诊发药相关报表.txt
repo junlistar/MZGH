@@ -1,4 +1,0 @@
-select item_name,current_value,current_settings,comment
-from sys_config
-where current_settings='report_mzfy' and  subsys_id='yp'   
-order by item_name;                   

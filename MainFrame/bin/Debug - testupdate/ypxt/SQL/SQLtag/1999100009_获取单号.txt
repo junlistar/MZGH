@@ -1,4 +1,0 @@
- declare @page int,@PageName varchar(30)
- set @PageName=:PageName
- exec [yp_getPageNo] @PageName,@page output
- select @page                 

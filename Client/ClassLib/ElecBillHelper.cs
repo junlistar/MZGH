@@ -332,11 +332,11 @@ namespace Client.ClassLib
                 string ermsg = ex.ToString();
                 if (ermsg.IndexOf("无法连接") > -1)
                 {
-                    UIMessageBox.ShowError("生成电子发票失败，请检查财政票据客户端是否运行中");
+                    UIMessageBox.ShowError("操作电子发票失败，请检查财政票据客户端是否运行中");
                 }
                 else
                 {
-                    UIMessageBox.ShowError("生成电子发票失败,参考日志信息");
+                    UIMessageBox.ShowError("操作电子发票失败,参考日志信息");
                 }
                 log.Error(ex.ToString());
             }

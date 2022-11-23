@@ -1,6 +1,0 @@
-declare @group_no varchar(10)
-set @group_no=:group_no
-select *
-from yp_group_name
-where group_no<> @group_no  
-order by 1          

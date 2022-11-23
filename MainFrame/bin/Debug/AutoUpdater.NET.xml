@@ -140,6 +140,11 @@
                 Set this to true if you want to run update check synchronously.
             </summary>
         </member>
+        <member name="F:AutoUpdaterDotNET.AutoUpdater.ClearAppDirectory">
+            <summary>
+                Set this to true if you want to clear application directory before extracting update.
+            </summary>
+        </member>
         <member name="F:AutoUpdaterDotNET.AutoUpdater.Mandatory">
             <summary>
                  Set this to true if you want to ignore previously assigned Remind Later and Skip settings. It will also hide Remind Later and Skip buttons.
