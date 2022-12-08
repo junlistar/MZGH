@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "lQ/Qk6atoO/yG8bO8t+1ZOVnrxQHEFakWaY9z1/9C5BCSJLFZlT5tdXJMfZ75Jzn2Fi+GwAWnn9yiApavA8VEg==",
+  "dgSpecHash": "Yns6hxn0CFhaAZ2TK5yHnilBRm2MTjIX1nGXBXmd+7q2mgWD65xtaBbwDayflmxrep1lf8MnfZgrKBjSUWiobw==",
   "success": true,
-  "projectFilePath": "D:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "F:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\JYYJ2\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\JYYJ2\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\JYYJ2\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\JYYJ2\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.31\\microsoft.netcore.app.host.win-x64.3.1.31.nupkg.sha512"
+  ],
   "logs": []
 }

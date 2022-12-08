@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj": {}
+    "F:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj": {}
   },
   "projects": {
-    "D:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj": {
+    "F:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
+        "projectUniqueName": "F:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
         "projectName": "Test1112",
-        "projectPath": "D:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\lijun\\github\\Mzgh\\Test1112\\obj\\",
+        "projectPath": "F:\\lijun\\github\\Mzgh\\Test1112\\Test1112.csproj",
+        "packagesPath": "C:\\Users\\JYYJ2\\.nuget\\packages\\",
+        "outputPath": "F:\\lijun\\github\\Mzgh\\Test1112\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JYYJ2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,10 +45,29 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.31, 3.1.31]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -57,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

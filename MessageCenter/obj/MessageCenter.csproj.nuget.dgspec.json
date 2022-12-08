@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj": {}
+    "F:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj": {}
   },
   "projects": {
-    "D:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj": {
+    "F:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj",
+        "projectUniqueName": "F:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj",
         "projectName": "CoreData",
-        "projectPath": "D:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\lijun\\github\\Mzgh\\CoreData\\obj\\",
+        "projectPath": "F:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj",
+        "packagesPath": "C:\\Users\\JYYJ2\\.nuget\\packages\\",
+        "outputPath": "F:\\lijun\\github\\Mzgh\\CoreData\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JYYJ2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -79,30 +79,45 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj": {
+    "F:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj",
+        "projectUniqueName": "F:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj",
         "projectName": "MessageCenter",
-        "projectPath": "D:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\lijun\\github\\Mzgh\\MessageCenter\\obj\\",
+        "projectPath": "F:\\lijun\\github\\Mzgh\\MessageCenter\\MessageCenter.csproj",
+        "packagesPath": "C:\\Users\\JYYJ2\\.nuget\\packages\\",
+        "outputPath": "F:\\lijun\\github\\Mzgh\\MessageCenter\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\JYYJ2\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -116,8 +131,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj": {
-                "projectPath": "D:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj"
+              "F:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj": {
+                "projectPath": "F:\\lijun\\github\\Mzgh\\CoreData\\CoreData.csproj"
               }
             }
           }
@@ -137,10 +152,29 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.31, 3.1.31]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -149,7 +183,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -38,10 +38,10 @@ namespace CoreApi.Controllers
         [HttpGet]
         public string GetTest()
         {
-            return "ok";
+            return "ok 1208";
         }
 
-        
+        [HttpGet]
         public ResponseResult<List<SubSystem>> GetSubSystems()
         {
             Log.Information($"GetSubSystems,");
@@ -54,8 +54,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<SubSystem>>(ex.Message);
             }
-        }
-
+        } 
         public ResponseResult<bool> UpdateSubSystem()
         {
             Log.Information($"UpdateSubSystem,");
@@ -72,7 +71,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-
+        [HttpGet]
         public ResponseResult<bool> DeleteSubSystem(string sys_code)
         {
             Log.Information($"DeleteSubSystem,{sys_code}");
@@ -86,7 +85,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
-
+        [HttpGet]
         public ResponseResult<List<SubSystemGroup>> GetSubSystemGroups()
         {
             Log.Information($"GetSubSystemGroups,");
@@ -117,6 +116,7 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+        [HttpGet]
 
         public ResponseResult<bool> DeleteSubSystemGroup(string sys_code)
         {
@@ -131,5 +131,6 @@ namespace CoreApi.Controllers
                 return ErrorResult<bool>(ex.Message);
             }
         }
+
     }
 }

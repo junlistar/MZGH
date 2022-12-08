@@ -183,7 +183,7 @@ namespace MainFrame
             //XML文件服务器下载地址
            //var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
            //_myAssembly.
-            AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
+            AutoUpdater.Start("http://10.102.38.158:8001/Updates/AutoUpdaterStarter.xml");
 
             //todo：读取本地版本配置文件，
             //通过将其分配给InstalledVersion字段来提供自己的版本

@@ -107,9 +107,9 @@ namespace MainFrame
 
             //获取当前系统
             _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
-            if (_system == null)
+            if (_system == null || !File.Exists(Application.StartupPath + _system.file_path))
             {
-                UIMessageTip.ShowError("未配置系统");
+                UIMessageTip.ShowError("未正确配置系统！");
             }
             else
             {
@@ -408,8 +408,6 @@ namespace MainFrame
                 }
                 else
                 {
-                    //无需更新
-                    setData(_system.sys_name, _system.sys_no);
 
                     //MessageBox.Show(@"There is no update available. Please try again later.", @"Update Unavailable",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -429,6 +427,9 @@ namespace MainFrame
                         MessageBoxIcon.Error);
                 }
             }
+
+            //无需更新
+            setData(_system.sys_name, _system.sys_no);
         }
 
         private void navMenu_MenuItemClick(TreeNode node, NavMenuItem item, int pageIndex)
@@ -459,8 +460,8 @@ namespace MainFrame
             for (int i = 0; i < system_groups.Count; i++)
             {
                 //添加子系统
-                if (i == 0)
-                {
+                //if (i == 0)
+                //{
                     var _subsystems = systemList.Where(p => p.sys_group_code == system_groups[i].group_code).ToList();
 
                     for (int j = 0; j < _subsystems.Count; j++)
@@ -500,40 +501,44 @@ namespace MainFrame
                     }
 
                     continue;
-                }
+                //}
+                //string[] files = Directory.GetFiles(Application.StartupPath + "/resource/icons");
 
-                int _index = 0;
-                for (int j = _index; j < (new Random()).Next(2, 15); j++)
-                {
-                    var _txt = "子系统" + (j + 1).ToString();
-                    UIImageButton uIButton = new UIImageButton();
-                    uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    //uIButton.Style = UIStyles.PopularStyles()[i];
-                    //uIButton.Text = _txt;
-                    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-                    uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/gux.ico");
-                    uIButton.Width = 70;
-                    uIButton.Height = 70;
-                    uIButton.TagString = "9999";
-                    //uIButton.TextAlign = ContentAlignment.BottomCenter;
-                    uIButton.ForeColor = Color.Red;
-                    uIButton.Click += UIButton_Click;
 
-                    uIButton.Top = top + (i * 110);
-                    uIButton.Left = left + (j * 100);
-                    uIButton.Parent = this;
 
-                    UILabel label = new UILabel();
-                    label.Width = 70;
-                    label.Height = 40;
-                    label.AutoSize = false;
-                    label.Font = new Font("微软雅黑", 9, FontStyle.Bold);
-                    label.Text = system_groups[i].group_name + _txt;
-                    label.Top = uIButton.Top + 70;
-                    label.Left = left + (j * 100);
-                    label.Parent = this;
 
-                }
+                //int _index = 0;
+                //for (int j = _index; j < (new Random()).Next(2, 15); j++)
+                //{
+                //    var _txt = "子系统" + (j + 1).ToString();
+                //    UIImageButton uIButton = new UIImageButton();
+                //    uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+                //    //uIButton.Style = UIStyles.PopularStyles()[i];
+                //    //uIButton.Text = _txt;
+                //    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+                //    uIButton.Image = Image.FromFile(files[(new Random()).Next(0, files.Length)]); //Image.FromFile(Application.StartupPath + "/resource/gux.ico");
+                //    uIButton.Width = 70;
+                //    uIButton.Height = 70;
+                //    uIButton.TagString = "9999";
+                //    //uIButton.TextAlign = ContentAlignment.BottomCenter;
+                //    uIButton.ForeColor = Color.Red;
+                //    uIButton.Click += UIButton_Click;
+
+                //    uIButton.Top = top + (i * 110);
+                //    uIButton.Left = left + (j * 100);
+                //    uIButton.Parent = this;
+
+                //    UILabel label = new UILabel();
+                //    label.Width = 70;
+                //    label.Height = 40;
+                //    label.AutoSize = false;
+                //    label.Font = new Font("微软雅黑", 9, FontStyle.Bold);
+                //    label.Text = system_groups[i].group_name + _txt;
+                //    label.Top = uIButton.Top + 70;
+                //    label.Left = left + (j * 100);
+                //    label.Parent = this;
+
+                //}
             }
         }
 

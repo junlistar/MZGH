@@ -10,3 +10,9 @@ D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.AssemblyReference.cache
 D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.CoreCompileInputs.cache
 D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.dll
 D:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.pdb
+F:\lijun\github\Mzgh\MzghLib\bin\Debug\MzghLib.dll
+F:\lijun\github\Mzgh\MzghLib\bin\Debug\MzghLib.pdb
+F:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.AssemblyReference.cache
+F:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.csproj.CoreCompileInputs.cache
+F:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.dll
+F:\lijun\github\Mzgh\MzghLib\obj\Debug\MzghLib.pdb
