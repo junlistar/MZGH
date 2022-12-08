@@ -31,7 +31,7 @@ namespace GuXHis
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FHeaderAsideMainFooter(args));
-            //Application.Run(new CreateRequestRecord());
+           // Application.Run(new Client.Form1());
 
             //菜单管理 
             log.Debug("关闭了程序");

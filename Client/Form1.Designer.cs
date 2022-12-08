@@ -71,7 +71,7 @@
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Size = new System.Drawing.Size(114, 35);
             this.uiButton1.TabIndex = 2;
-            this.uiButton1.Text = "uiButton1";
+            this.uiButton1.Text = "测试http";
             this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
@@ -193,11 +193,11 @@
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.rowMergeView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-         
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.rowMergeView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.rowMergeView1.RowTemplate.Height = 23;
+            this.rowMergeView1.ScrollBarRectColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             this.rowMergeView1.SelectedIndex = -1;
             this.rowMergeView1.Size = new System.Drawing.Size(751, 47);
             this.rowMergeView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));

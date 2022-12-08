@@ -40,7 +40,7 @@ namespace MainFrame
 
         private void Index_Initialize(object sender, EventArgs e)
         {
-            
+
         }
 
         private void _btn_Click(object sender, EventArgs e)
@@ -369,9 +369,7 @@ namespace MainFrame
                     {
                         dialogResult =
                             MessageBox.Show(
-                                $@"您有新的版本 {args.CurrentVersion} 可用，当前使用的是{
-                                        args.InstalledVersion
-                                    } 版本，这是必需的更新。",
+                                $@"您有新的版本 {args.CurrentVersion} 可用，当前使用的是{args.InstalledVersion} 版本，这是必需的更新。",
                                 @"Update Available",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -451,6 +449,7 @@ namespace MainFrame
                 markLabel.Left = left;
                 markLabel.Parent = this;
                 markLabel.Text = system_groups[i].group_name;
+                markLabel.Font = new Font("宋体", 12, FontStyle.Regular);
             }
             LoadSubSystems();
         }
@@ -462,45 +461,46 @@ namespace MainFrame
                 //添加子系统
                 //if (i == 0)
                 //{
-                    var _subsystems = systemList.Where(p => p.sys_group_code == system_groups[i].group_code).ToList();
+                var _subsystems = systemList.Where(p => p.sys_group_code == system_groups[i].group_code).ToList();
 
-                    for (int j = 0; j < _subsystems.Count; j++)
+                for (int j = 0; j < _subsystems.Count; j++)
+                {
+                    var _sub = _subsystems[j];
+                    var _txt = _sub.sys_name;
+                    UIImageButton uIButton = new UIImageButton();
+                    //uIButton.Font = new Font("宋体", 16, FontStyle.Regular);
+
+                    var _filepath = Application.StartupPath + "/" + _sub.icon_path;
+                    if (!File.Exists(_filepath))
                     {
-                        var _sub = _subsystems[j];
-                        var _txt = _sub.sys_name;
-                        UIImageButton uIButton = new UIImageButton();
-                        uIButton.Font = new Font("微软雅黑", 16, FontStyle.Regular);
-
-                        var _filepath = Application.StartupPath + "/" + _sub.icon_path;
-                        if (!File.Exists(_filepath))
-                        {
-                            _filepath = Application.StartupPath + "/resource/gux.ico";
-                        }
-                        uIButton.Image = Image.FromFile(_filepath);
-                        uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                        //uIButton.Style = UIStyles.PopularStyles()[_index++];
-                        //uIButton.Text = _txt;
-                        uIButton.Width = 70;
-                        uIButton.Height = 70;
-                        uIButton.TagString = _sub.sys_no.ToString();
-                        uIButton.Click += UIButton_Click;
-                        uIButton.Top = top + (i * 110);
-                        uIButton.Left = left + (j * 100);
-                        uIButton.Parent = this;
-
-                        UILabel label = new UILabel();
-                        label.Width = 70;
-                        label.Height = 40;
-                        label.AutoSize = false;
-                        label.Font = new Font("微软雅黑", 9, FontStyle.Bold);
-                        label.Text = _txt;
-                        label.Top = uIButton.Top + 70;
-                        label.Left = left + (j * 100);
-                        label.Parent = this;
+                        _filepath = Application.StartupPath + "/resource/gux.ico";
                     }
+                    uIButton.Image = Image.FromFile(_filepath);
+                    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
 
-                    continue;
+                    //uIButton.Style = UIStyles.PopularStyles()[_index++];
+                    //uIButton.Text = _txt;
+                    uIButton.Width = 70;
+                    uIButton.Height = 70;
+                    uIButton.TagString = _sub.sys_no.ToString();
+                    uIButton.Click += UIButton_Click;
+                    uIButton.Top = top + (i * 110);
+                    uIButton.Left = left + (j * 100);
+                    uIButton.Parent = this;
+
+                    UILabel label = new UILabel();
+                    label.Width = 70;
+                    label.Height = 40;
+                    label.AutoSize = false;
+                    label.Font = new Font("宋体", 9, FontStyle.Bold);
+                    label.Text = _txt;
+                    label.Top = uIButton.Top + 70;
+                    label.Left = left + (j * 100);
+                    label.TextAlign = ContentAlignment.MiddleCenter;
+                    label.Parent = this;
+                }
+
+                continue;
                 //}
                 //string[] files = Directory.GetFiles(Application.StartupPath + "/resource/icons");
 

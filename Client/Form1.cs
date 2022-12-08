@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Sunny.UI;
 using System.Linq;
 using Client.ClassLib;
+using Client.ViewModel;
 
 namespace Client
 {
@@ -68,35 +69,49 @@ namespace Client
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            uiFlowLayoutPanel1.Clear();
+            //测试webrequest
 
-            for (int i = 0; i < 20; i++)
+            string paramurl = string.Format($"/api/GuaHao/GetChargeTypes");
+            string json = "";
+
+            for (int i = 0; i < 100; i++)
             {
-                UIButton btn1 = new UIButton();
+                int resultCode = WebApiHelper.HttpGet("http://10.102.41.142:5000" + paramurl, out json);
 
-                btn1.Style = UIStyle.LayuiGreen;
-                btn1.StyleCustomMode = true;
-                btn1.Width = 200;
-                btn1.Height = 50;
-                btn1.Text = "按钮" + i;
-                //btn1.TabStop = true;
+                SessionHelper.chargeTypes = WebApiHelper.DeserializeObject<ResponseResult<List<ChargeTypeVM>>>(json).data;
 
-                btn1.Enter += Btn1_Enter;
-                btn1.Leave += Btn1_Leave;
-                btn1.KeyUp += Btn1_KeyUp; ;
-
-                uiFlowLayoutPanel1.Controls.Add(btn1);
-
+                UIMessageTip.Show(resultCode.ToString());
             }
+           
+         
+            //uiFlowLayoutPanel1.Clear();
+
+            //for (int i = 0; i < 20; i++)
+            //{
+            //    UIButton btn1 = new UIButton();
+
+            //    btn1.Style = UIStyle.LayuiGreen;
+            //    btn1.StyleCustomMode = true;
+            //    btn1.Width = 200;
+            //    btn1.Height = 50;
+            //    btn1.Text = "按钮" + i;
+            //    //btn1.TabStop = true;
+
+            //    btn1.Enter += Btn1_Enter;
+            //    btn1.Leave += Btn1_Leave;
+            //    btn1.KeyUp += Btn1_KeyUp; ;
+
+            //    uiFlowLayoutPanel1.Controls.Add(btn1);
+
+            //}
 
 
-            // uiFlowLayoutPanel1.Focus();
-            var _cts = uiFlowLayoutPanel1.GetAllControls();
-            if (_cts.Count > 3)
-            {
-                var _btn = _cts[3] as UIButton;
-                _btn.Focus();
-            }
+            //var _cts = uiFlowLayoutPanel1.GetAllControls();
+            //if (_cts.Count > 3)
+            //{
+            //    var _btn = _cts[3] as UIButton;
+            //    _btn.Focus();
+            //}
         }
 
         private void webView21_Click(object sender, EventArgs e)

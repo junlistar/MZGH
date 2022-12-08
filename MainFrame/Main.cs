@@ -181,7 +181,7 @@ namespace MainFrame
         private void AutoUpdaterStarter()
         {
             //XML文件服务器下载地址
-           //var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
+           var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
            //_myAssembly.
             AutoUpdater.Start("http://10.102.38.158:8001/Updates/AutoUpdaterStarter.xml");
 
@@ -217,7 +217,7 @@ namespace MainFrame
 
             //打开下载页面，不直接下载最新版本*****
             AutoUpdater.OpenDownloadPage = true;
-
+            AutoUpdater.RunUpdateAsAdmin = true;
             //设置为要下载更新文件的文件夹路径。如果没有提供，则默认为临时文件夹。
             //AutoUpdater.DownloadPath = Environment.CurrentDirectory;
 
