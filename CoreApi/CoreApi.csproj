@@ -44,6 +44,9 @@
     <None Update="Properties\launchSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\mainclientconfig_update.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzgh_ghdoctorout_edit.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -77,6 +80,9 @@
     <None Update="SQLS\mzsf_mzdeposit_print_get.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\ypgroup_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\subsystemgroup_add.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -90,6 +96,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\subsystemgroup_getbycode.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\mainclientconfig_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\subsysid_getby_username.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\subsystem_update.sql">

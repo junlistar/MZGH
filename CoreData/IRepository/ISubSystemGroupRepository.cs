@@ -10,6 +10,9 @@ namespace Data.IRepository
         #region 扩展的dapper操作
          
         List<SubSystemGroup> GetSubSystemGroups();
+        List<string> GetSubsysIds(string user_name);
+
+        List<YpGroup> GetGroupNames();
 
         bool UpdateSubSystemGroup(string jsonStr);
 

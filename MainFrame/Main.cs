@@ -14,6 +14,7 @@ using MainFrame.Common;
 using System.Reflection;
 using AutoUpdaterDotNET;
 using System.Configuration;
+using Client.ViewModel;
 
 namespace MainFrame
 {
@@ -28,6 +29,8 @@ namespace MainFrame
 
         //用于处理tab关闭时，关闭窗体句柄，否则不关闭会出现多个子系统进程
         public static Dictionary<int, IntPtr> clientDic = new Dictionary<int, IntPtr>();
+        public static List<int> keylist = new List<int>();
+
 
         private bool MainTabControl_BeforeRemoveTabPage(object sender, int index)
         {
@@ -39,11 +42,12 @@ namespace MainFrame
                 }
                 else
                 {
-                    if (clientDic.Keys.Count > 0)//直接调用exe
-                    {
-
+                   // if (clientDic.Keys.Count > 0)
+                    if (keylist.Count > 0)
+                    { 
                         //杀子系统句柄
-                        var _key = clientDic.Keys.ToArray()[index - 1];
+                        //var _key = clientDic.Keys.ToArray()[index - 1];
+                        var _key = keylist[index - 1];
                         var _intPtr = clientDic[_key];
                         if (_intPtr != null)
                         {
@@ -52,6 +56,7 @@ namespace MainFrame
 
                             exeTool.CloseHandle(_intPtr);
 
+                            keylist.Remove(_key);
                             clientDic.Remove(_key);
                         }
                     }
@@ -73,7 +78,11 @@ namespace MainFrame
                 this.MinimumSize = new Size(this.Width, this.Height);
 
                 #region 更新提示/判断是否自动更新
-                AutoUpdaterStarter();
+                Task.Run(() =>
+                {
+                    AutoUpdaterStarter();
+                });
+
                 #endregion
 
                 //uiPanel1.Hide();
@@ -83,6 +92,7 @@ namespace MainFrame
                 //设置扩展菜单
                 uiContextMenuStrip1.Items.Add("子系统维护");
                 uiContextMenuStrip1.Items.Add("系统分组维护");
+                uiContextMenuStrip1.Items.Add("系统信息配置");
 
                 //设置tabcontrol样式 
                 uiTabControl1.ShowActiveCloseButton = true;
@@ -111,7 +121,7 @@ namespace MainFrame
                     tsslblName.Text = SessionHelper.uservm.name;
 
                     tsslblMidhost.Text = SessionHelper.MyHttpClient.BaseAddress.ToString();
-                     
+
                     UIMessageTip.ShowOk("登录成功！");
                     this.Show();
                     var _index = new Index();
@@ -119,23 +129,33 @@ namespace MainFrame
                     AddPage(_index, 1000);
 
                     SelectPage(1000);
-                     
+
                     vM = new TestHisVM();
                     vM.Application = "75415424";
                     vM.Screen = "75349424";
-                    vM.AppServer = "10.102.38.225";
-                    vM.UserMi = "00000";
+                    vM.AppServer = "10.102.41.142";
+                    vM.UserMi = SessionHelper.uservm.user_mi;
+                    vM.user_mi = SessionHelper.uservm.user_mi;
+                    vM.user_name = SessionHelper.uservm.name;
                     vM.SubsysRelativePath = "Modules/mzgh";
+                    vM.group_no = "101001";
+                    vM.group_name = "门诊西药房";
+                    vM.subsys_id = "yp_yfxt";
                     //LoadSystem(); 
                 }
                 else
                 {
                     this.Close();
                 }
+
+                Task.Run(() =>
+                {
+                    InitDics();
+                });
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError("加载背景图片失败！");
+                //UIMessageTip.ShowError("加载背景图片失败！");
                 log.Error(ex.ToString());
             }
         }
@@ -150,7 +170,11 @@ namespace MainFrame
         {
             var _page = new Container();
             _page.Text = clientName;
-            if (!clientDic.Keys.Contains(index))
+            //获取当前系统
+            var _system = Index.systemList.Where(p => p.sys_no == index).FirstOrDefault();
+            _page.Text = _system.sys_name;
+            //if (!clientDic.Keys.Contains(index))
+            if (!keylist.Contains(index))
             {
                 //index = (new Random()).Next(9999); 
                 _page.FormClosing += Obj_FormClosing;
@@ -173,16 +197,15 @@ namespace MainFrame
             }
 
             MainTabControl.TabPages.Remove(_tabpage);
-            //RemovePage(int.Parse((sender as UIPage).TagString));//
-            //Aside.TabControl.RemovePage(int.Parse((sender as UIPage).TagString));
         }
 
+        #region 系统升级代码
 
         private void AutoUpdaterStarter()
         {
             //XML文件服务器下载地址
-           var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
-           //_myAssembly.
+            var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
+            //_myAssembly.
             AutoUpdater.Start("http://10.102.38.158:8001/Updates/AutoUpdaterStarter.xml");
 
             //todo：读取本地版本配置文件，
@@ -252,9 +275,7 @@ namespace MainFrame
                     {
                         dialogResult =
                             MessageBox.Show(
-                                $@"您有新的版本 {args.CurrentVersion} 可用，当前使用的是{
-                                        args.InstalledVersion
-                                    } 版本，这是必需的更新。",
+                                $@"您有新的版本 {args.CurrentVersion} 可用，当前使用的是{args.InstalledVersion} 版本，这是必需的更新。",
                                 @"Update Available",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Information);
@@ -310,6 +331,8 @@ namespace MainFrame
             }
         }
 
+        #endregion
+
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -334,11 +357,11 @@ namespace MainFrame
 
         private void uiContextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            if (e.ClickedItem.Text== "子系统维护")
+            if (e.ClickedItem.Text == "子系统维护")
             {
-                AddSystem addSystem = new AddSystem();
+                SystemList syslist = new SystemList();
                 //addSystem.FormClosing += AddSystem_FormClosing;
-                addSystem.ShowDialog();
+                syslist.ShowDialog();
             }
             else if (e.ClickedItem.Text == "系统分组维护")
             {
@@ -348,7 +371,39 @@ namespace MainFrame
             }
             else if (e.ClickedItem.Text == "权限管理")
             {
-                 
+
+            }
+            else if (e.ClickedItem.Text == "系统信息配置")
+            {
+                //打开配置信息界面
+
+                ClientConfig clientConfig = new ClientConfig();
+                clientConfig.ShowDialog();
+            }
+        }
+        public void InitDics()
+        {
+            try
+            {
+                string json = "";
+                string paramurl = string.Format($"/api/subsystem/GetGroupNames");
+
+                log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                json = HttpClientUtil.Get(paramurl);
+
+                var result = HttpClientUtil.DeserializeObject<ResponseResult<List<YpGroup>>>(json);
+                if (result.status == 1)
+                {
+                    SessionHelper.ypGroupsList = result.data;
+                }
+                else { log.Error(result.message); }
+
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message, 2000);
+                log.Error(ex.ToString());
             }
         }
     }

@@ -11,12 +11,14 @@ namespace MainFrame.Common
 {
     public class SessionHelper
     {
-       
+
 
         public static HttpClient MyHttpClient = null;
 
         public static LoginUsersVM uservm = new LoginUsersVM();
-        
-         
+
+        public static List<YpGroup> ypGroupsList;
+
+        public static int current_index;
     }
 }

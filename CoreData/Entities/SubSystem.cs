@@ -19,6 +19,9 @@ namespace Data.Entities
         public string sys_update_url { get; set; } 
         public string sys_relative_path { get; set; }
         public string sys_group_code { get; set; }
+        public string subsys_id { get; set; }
+        public string group_no { get; set; }
+        
     }
 
     public class SubSystemGroup : BaseModel
@@ -30,4 +33,16 @@ namespace Data.Entities
         public DateTime update_time { get; set; }
          
     }
+
+    public class MainClientConfig 
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string show_image { get; set; }
+        public string show_title { get; set; }
+        public string title { get; set; }
+        public string show_desc { get; set; } 
+        public DateTime update_time { get; set; }
+
+    }  
 }

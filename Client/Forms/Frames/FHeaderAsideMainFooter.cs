@@ -565,7 +565,28 @@ namespace GuxHis.Mzsf
 
                 if (arg != null && arg.Count() > 0)
                 {
-                    var _usermi = arg[0];
+                    var _usermi =StringUtil.Base64Decode(arg[0]);
+                    log.Debug($"第三方传递json值：{_usermi}");
+                    if (_usermi.IndexOf('{')!=-1)
+                    {
+                        try
+                        {
+                            var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_usermi);
+
+                            if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
+                            {
+                                _usermi = _hisloginvm.UserMi;
+                            }
+                            log.Debug($"解析json值usermi：{_usermi}");
+                            //MessageBox.Show("try:" + _usermi);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.Error("解析json失败:"+ ex.ToString());
+                            
+                            MessageBox.Show("catch:" + _usermi);
+                        }
+                    }
                     //var _jstr = string.Join("",arg);
                     //MessageBox.Show(_jstr);
                     //log.Debug($"第三方传递json值：{_jstr}");

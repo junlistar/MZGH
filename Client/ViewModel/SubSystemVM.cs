@@ -20,4 +20,6 @@ namespace MainFrame.Common
         public DateTime update_time { get; set; }
 
     }
+
+ 
 }

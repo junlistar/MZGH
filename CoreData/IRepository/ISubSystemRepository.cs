@@ -15,6 +15,10 @@ namespace Data.IRepository
 
         bool DeleteSubSystem(string sys_code);
 
+        bool UpdateMainClientConfig(string jsonStr);
+
+        MainClientConfig GetMainClientConfig();
+
         #endregion
     }
 }

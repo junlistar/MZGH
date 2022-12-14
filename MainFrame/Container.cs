@@ -46,6 +46,7 @@ namespace MainFrame
 
         private void Container_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.Red;
 
             switch (sys_key)
             {
@@ -60,16 +61,23 @@ namespace MainFrame
         public void OpenSubSystem()
         {
             try
-            {
-
-                //参数
-                var _args = EmbeddedExeTool.SerializeObject(Main.vM);
-                //_args = _args.Replace("\"", "\\\"");
-
+            { 
                 //获取当前系统
                 var _system = Index.systemList.Where(p => p.sys_no == this.PageIndex).FirstOrDefault();
                 if (_system != null)
                 {
+                    //参数
+                    if (!string.IsNullOrEmpty(_system.group_no))
+                    {
+                        Main.vM.group_no = _system.group_no.Trim();
+                        var _ypgroup = SessionHelper.ypGroupsList.Where(p => p.group_no.Trim() == _system.group_no.Trim()).FirstOrDefault();
+                        Main.vM.group_name = _ypgroup == null ? "" : _ypgroup.dept_name.Trim();
+                    }
+                   
+                    Main.vM.subsys_id = _system.subsys_id.Trim();
+                    var _args = EmbeddedExeTool.SerializeObject(Main.vM);
+                    //_args = _args.Replace("\"", "\\\"");
+
                     var _filetype = _system.file_type;
                     if (_filetype == FileTypeEnum.DLL.ToString())
                     {
@@ -80,7 +88,7 @@ namespace MainFrame
                         Assembly assem = Assembly.LoadFile(path);
 
                         Type[] tys = assem.GetTypes();//只好得到所有的类型名，然后遍历，通过类型名字来区别了
-                        foreach (Type ty in tys) 
+                        foreach (Type ty in tys)
                         {
                             if (ty.Name == "ShowWinForm")
                             {
@@ -105,6 +113,7 @@ namespace MainFrame
 
                                     EmbeddedExeTool exeTool = new EmbeddedExeTool();
                                     exeTool.LoadHandle(intPtr1, this);
+                                    Main.keylist.Add(this.PageIndex);
                                     Main.clientDic.Add(this.PageIndex, intPtr1);
                                 }
                                 catch (Exception ex1)
@@ -125,9 +134,21 @@ namespace MainFrame
                     else if (_filetype == FileTypeEnum.EXE.ToString())
                     {
                         EmbeddedExeTool exetool = new EmbeddedExeTool();
-                        exetool.LoadEXE(this, Application.StartupPath + _system.file_path, Main.vM.UserMi);
-                        //exetool.LoadEXE(this, Application.StartupPath + @"\mzgh\GuXHisMzsfAndMzgh.exe", Main.vM.UserMi);
+                        if (_system.sys_code == "mzgh" || _system.sys_code == "mzsf")
+                        {
+                            //门诊挂号收费需要处理引号，不然会丢失引号，导致json格式不对
+                            //_args = _args.Replace("\"", "\\\"");
+                        }
+                        _args = StringUtil.Base64Encode(_args);
+
+                        SessionHelper.current_index = this.PageIndex;
+                        Main.keylist.Add(this.PageIndex);
                         Main.clientDic.Add(this.PageIndex, IntPtr.Zero);
+                        ///IntPtr intPtr = 
+                        exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args, _system.sys_code);
+                        //exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args);// Main.vM.UserMi; 
+                       
+                       // UIMessageTip.Show(intPtr.ToString());
                     }
                     else
                     {

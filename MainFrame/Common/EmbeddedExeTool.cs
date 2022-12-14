@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sunny.UI.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +16,9 @@ namespace MainFrame.Common
     /// </summary>
     public class EmbeddedExeTool
     {
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, SetWindowPosFlags uFlags);
         [DllImport("User32.dll", EntryPoint = "SetParent")]
         private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
@@ -46,7 +50,48 @@ namespace MainFrame.Common
 
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
-         
+
+        public enum SpecialWindowHandles
+        {
+            HWND_TOP = 0,
+            HWND_BOTTOM = 1,
+            HWND_TOPMOST = -1,
+            HWND_NOTOPMOST = -2
+        }
+        [Flags]
+        public enum SetWindowPosFlags : uint
+        {
+            SWP_ASYNCWINDOWPOS = 0x4000,
+
+            SWP_DEFERERASE = 0x2000,
+
+            SWP_DRAWFRAME = 0x0020,
+
+            SWP_FRAMECHANGED = 0x0020,
+
+            SWP_HIDEWINDOW = 0x0080,
+
+            SWP_NOACTIVATE = 0x0010,
+
+            SWP_NOCOPYBITS = 0x0100,
+
+            SWP_NOMOVE = 0x0002,
+
+            SWP_NOOWNERZORDER = 0x0200,
+
+            SWP_NOREDRAW = 0x0008,
+
+            SWP_NOREPOSITION = 0x0200,
+
+            SWP_NOSENDCHANGING = 0x0400,
+
+            SWP_NOSIZE = 0x0001,
+
+            SWP_NOZORDER = 0x0004,
+
+            SWP_SHOWWINDOW = 0x0040,
+        }
+
         private IntPtr SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong)
         {
             if (IntPtr.Size == 4)
@@ -64,14 +109,14 @@ namespace MainFrame.Common
         public void LoadHandle(IntPtr hWndChild, Control control)
         {
             try
-            { 
+            {
                 IntPtr hWndNewParent = control.Handle;
                 SetParent(hWndChild, hWndNewParent);
                 // Remove border and whatnot               这句话会导致闪屏。。
                 //SetWindowLong(new HandleRef(this, hWndChild), GWL_STYLE, WS_VISIBLE);
 
                 ShowWindow(hWndChild, (int)ProcessWindowStyle.Maximized);
-                MoveWindow(hWndChild, 0, 0, control.Width, control.Height, true); 
+                MoveWindow(hWndChild, 0, 0, control.Width, control.Height, true);
 
 
             }
@@ -98,13 +143,15 @@ namespace MainFrame.Common
             Application.Idle += Application_Idle;
             EmbedProcess(proApp, control);
         }
+        string winname = "";
         /// <summary>
         /// 加载外部exe程序到程序容器中
         /// </summary>
         /// <param name="form">要显示exe的窗体</param>
         /// <param name="exepath">exe的完整绝对路径</param>
-        public void LoadEXE(Form form, string exepath, string args)
+        public void LoadEXE(Form form, string exepath, string args, string windown_name = "")
         {
+            winname = windown_name;
             ContainerControl = form;
             form.SizeChanged += Control_SizeChanged;
             proApp = new Process();
@@ -113,9 +160,22 @@ namespace MainFrame.Common
             proApp.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             proApp.StartInfo.FileName = exepath;
             proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
-            proApp.Start(); //proApp.WaitForInputIdle();
-            Application.Idle += Application_Idle;
+            proApp.Start();
+            //proApp.WaitForInputIdle();
+            //System.Threading.Thread.Sleep(1000);
+
+            if (!string.IsNullOrEmpty(winname) && winname == "mzgh")
+            {
+                Application.Idle += Application_Idle;
+            }
+            else
+            {
+                System.Threading.Thread.Sleep(1000);
+                Application.Idle += Application_Idle_ForDelphi;
+            }
+
             EmbedProcess(proApp, form);
+
         }
         /// <summary>
         /// 确保应用程序嵌入此容器
@@ -133,27 +193,73 @@ namespace MainFrame.Common
             if (proApp.MainWindowHandle == IntPtr.Zero) return;
             Application.Idle -= Application_Idle;
             EmbedProcess(proApp, ContainerControl);
+        } 
+
+        private void Application_Idle_ForDelphi(object sender, EventArgs e)
+        {
+            if (this.proApp == null || this.proApp.HasExited)
+            {
+                this.proApp = null;
+                Application.Idle -= Application_Idle_ForDelphi;
+                return;
+            }
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+            { 
+                IntPtr window = FindWindow(null, "药品管理系统");
+                if (window == IntPtr.Zero) return; 
+            } 
+            Application.Idle -= Application_Idle;
+            EmbedProcess(proApp, ContainerControl);
         }
         /// <summary>
         /// 将指定的程序嵌入指定的控件
         /// </summary>
         private void EmbedProcess(Process app, Control control)
         {
-            // Get the main handle
-            if (app == null || app.MainWindowHandle == IntPtr.Zero || control == null) return;
+            // Get the main handle  || app.MainWindowHandle == IntPtr.Zero
+            if (app == null || control == null) return;// IntPtr.Zero;
             try
             {
+                IntPtr window;
+                if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+                {
+                    window = FindWindow(null, "药品管理系统");
+                    Main.clientDic[SessionHelper.current_index] = window;
+                    // Put it into this form
+                    MoveWindow(window, 0, 0, control.Width, 500, true);
+                    SetWindowPos(window, new IntPtr((int)SpecialWindowHandles.HWND_TOP), 10, 10, 450, 450, SetWindowPosFlags.SWP_SHOWWINDOW);
+                    SetParent(window, control.Handle);
+
+                }
+                else
+                {
+                    window = app.MainWindowHandle;
+                    Main.clientDic[SessionHelper.current_index] = window;
+                    // Put it into this form
+                    SetParent(window, control.Handle);
+                    SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                    ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                }
+                //Main.clientDic[SessionHelper.current_index] = window;
                 // Put it into this form
-                SetParent(app.MainWindowHandle, control.Handle);
+                //SetParent(window, control.Handle);
+                
                 // Remove border and whatnot               
-               // SetWindowLong(new HandleRef(this, app.MainWindowHandle), GWL_STYLE, WS_VISIBLE);
-                ShowWindow(app.MainWindowHandle, (int)ProcessWindowStyle.Maximized);
-                MoveWindow(app.MainWindowHandle, 0, 0, control.Width, control.Height, true);
+                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE); 
+                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
+                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                ////MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                // return window;
+
+
             }
             catch (Exception ex3)
             {
                 Console.WriteLine(ex3.Message);
             }
+           // return IntPtr.Zero;
         }
         /// <summary>
         /// 嵌入容器大小改变事件
@@ -183,6 +289,5 @@ namespace MainFrame.Common
                 throw new Exception("JSONHelper.SerializeObject(object obj): " + ex.Message);
             }
         }
-
     }
 }

@@ -914,6 +914,7 @@ CREATE TABLE [dbo].[subsystem](
 	[sys_update_url] [varchar](2000) NULL,
 	[sys_relative_path] [varchar](2000) NULL,
 	[sys_group_code] [varchar](200) NULL,
+	[subsys_id] [varchar](50) NULL,
  CONSTRAINT [PK_subsystem] PRIMARY KEY CLUSTERED 
 (
 	[sys_code] ASC
@@ -953,4 +954,24 @@ SET ANSI_PADDING OFF
 GO
 
 ALTER TABLE [dbo].[subsystem_group] ADD  DEFAULT ((1)) FOR [active_flag]
+GO
+
+-- ----------------------------
+-- Table structure for MainClientConfig
+-- ----------------------------
+IF EXISTS (SELECT * FROM sys.all_objects WHERE object_id = OBJECT_ID(N'[dbo].[MainClientConfig]') AND type IN ('U'))
+	DROP TABLE [dbo].[MainClientConfig]
+GO
+
+CREATE TABLE [dbo].[MainClientConfig] (
+  [id] int  IDENTITY(1,1) NOT NULL,
+  [name] varchar(255) COLLATE Chinese_PRC_BIN  NOT NULL,
+  [titile] varchar(255) COLLATE Chinese_PRC_BIN  NULL,
+  [show_image] varchar(255) COLLATE Chinese_PRC_BIN  NULL,
+  [show_title] varchar(255) COLLATE Chinese_PRC_BIN  NULL,
+  [show_desc] varchar(255) COLLATE Chinese_PRC_BIN  NULL,
+  [update_time] datetime  NULL
+)
+GO
+INSERT INTO [dbo].[MainClientConfig] ([name], [titile], [show_image], [show_title], [show_desc], [update_time]) VALUES ( N'荆州市中心医院', N'荆州市中心医院', NULL, N'荆州市中心医院', N'荆州市中心医院', N'2022-12-09 15:57:40.000')
 GO

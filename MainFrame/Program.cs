@@ -14,6 +14,9 @@ namespace MainFrame
         [STAThread]
         static void Main()
         {
+            //这段代码要在程序运行的入口进行配置
+            log4net.Config.XmlConfigurator.Configure();//需要配置这段代码，log4才能生效
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());

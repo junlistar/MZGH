@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,25 +21,59 @@ namespace MainFrame
     {
         private static ILog log = LogManager.GetLogger(typeof(AddSystem));//typeof放当前类
 
+        public SubSystemVM vm;
         List<SubSystemVM> systemList;
         List<SubSystemGroupVM> system_groups;
 
         public AddSystem()
         {
             InitializeComponent();
-            this.Text = "GuxHix_子系统模块功能注册";
         }
         private void AddSystem_Load(object sender, EventArgs e)
         {
-
-            //查询初始化界面控件
-            btnSave.Enabled = false;
-            SetControlEnabled(false);
+            //查询初始化界面控件 
             InitControlValue();
 
-            BindData();
             //加载系统分组
             GetSystemGroups();
+            GetSystemIds();
+            GetGroupNames();
+
+            if (vm != null)
+            {
+                BindEditData();
+            }
+        }
+
+        public void BindEditData()
+        {
+            var _system = vm;
+
+            txt_syscode.Text = _system.sys_code;
+            txt_sysname.Text = _system.sys_name;
+            txt_sysno.Text = _system.sys_no.ToString();
+            txt_filepath.Text = _system.file_path;
+            txt_iconpath.Text = _system.icon_path;
+            txt_sysdesc.Text = _system.sys_desc;
+            txt_updateurl.Text = _system.sys_update_url;
+            txt_relative_path.Text = _system.sys_relative_path;
+
+            txt_filetype.Text = _system.file_type.ToUpper();
+            txt_openmode.Text = txt_openmode.Items[_system.open_mode - 1].ToString();
+
+            if (!string.IsNullOrWhiteSpace(_system.subsys_id))
+            {
+                cbx_sysid.Text = _system.subsys_id;
+            }
+
+            if (!string.IsNullOrWhiteSpace(_system.group_no))
+            {
+                cbx_groupno.SelectedValue = _system.group_no;
+            }
+            if (!string.IsNullOrWhiteSpace(_system.sys_group_code))
+            {
+                txt_sysgroup.SelectedValue = _system.sys_group_code;
+            }
         }
 
         private void txtFilePath_ButtonClick(object sender, EventArgs e)
@@ -55,15 +90,6 @@ namespace MainFrame
             }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            //查询初始化界面控件
-            btnSave.Enabled = false;
-            SetControlEnabled(false);
-            InitControlValue();
-
-            BindData();
-        }
 
         public void GetSystemGroups()
         {
@@ -84,14 +110,6 @@ namespace MainFrame
                     txt_sysgroup.ValueMember = "group_code";
                     txt_sysgroup.DisplayMember = "group_name";
 
-                    //dgvlist.DataSource = system_groups.Select(p => new
-                    //{
-                    //    p.group_code,
-                    //    p.group_name,
-                    //    p.sort,
-                    //    p.update_time
-                    //}).ToList();
-                    //dgvlist.AutoResizeColumns();
                 }
                 else
                 {
@@ -106,32 +124,22 @@ namespace MainFrame
                 log.Error(ex.ToString());
             }
         }
-        public void BindData()
+
+        public void GetSystemIds()
         {
             try
             {
                 string json = "";
-                string paramurl = string.Format($"/api/subsystem/GetSubSystems");
+                string paramurl = string.Format($"/api/subsystem/GetSubsysIds?user_name={SessionHelper.uservm.user_name}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
                 json = HttpClientUtil.Get(paramurl);
 
-                var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemVM>>>(json);
+                var result = HttpClientUtil.DeserializeObject<ResponseResult<List<string>>>(json);
                 if (result.status == 1)
                 {
-                    systemList = result.data.OrderBy(p => p.sys_no).ToList();
-                    dgvlist.DataSource = systemList.Select(p => new
-                    {
-                        p.sys_no,
-                        p.sys_code,
-                        p.sys_name,
-                        p.file_path,
-                        p.icon_path,
-                        p.file_type,
-                        p.open_mode_str,
-                    }).ToList();
-                    dgvlist.AutoResizeColumns(); 
+                    cbx_sysid.DataSource = result.data;
                 }
                 else
                 {
@@ -139,6 +147,22 @@ namespace MainFrame
                     log.Error(result.message);
                 }
 
+            }
+            catch (Exception ex)
+            {
+                UIMessageTip.ShowError(ex.Message, 2000);
+                log.Error(ex.ToString());
+            }
+        }
+
+
+        public void GetGroupNames()
+        {
+            try
+            { 
+                cbx_groupno.DataSource = SessionHelper.ypGroupsList;
+                cbx_groupno.DisplayMember = "dept_name";
+                cbx_groupno.ValueMember = "group_no"; 
             }
             catch (Exception ex)
             {
@@ -169,7 +193,7 @@ namespace MainFrame
                     txt_filepath.Focus();
                     return;
                 }
-                if (txt_sysgroup.SelectedValue==null)
+                if (txt_sysgroup.SelectedValue == null)
                 {
                     UIMessageTip.ShowError("系统分组不能为空", 2000);
                     txt_sysgroup.Focus();
@@ -187,6 +211,8 @@ namespace MainFrame
                 subSystemVM.sys_update_url = txt_updateurl.Text;
                 subSystemVM.sys_relative_path = txt_relative_path.Text;
                 subSystemVM.sys_group_code = txt_sysgroup.SelectedValue.ToString();
+                subSystemVM.subsys_id = cbx_sysid.SelectedValue.ToString().Trim();
+                subSystemVM.group_no = cbx_groupno.SelectedValue.ToString().Trim();
 
                 if (txt_openmode.Text == "程序内嵌入")
                 {
@@ -220,7 +246,8 @@ namespace MainFrame
                     //增加本地配置文件
                     AddLocalVersionFile(subSystemVM.sys_code);
 
-                    btnSearch_Click(sender,e);
+                    this.Close();
+
                 }
                 else
                 {
@@ -248,7 +275,7 @@ namespace MainFrame
                         Directory.CreateDirectory(_versionFileFolder);
                     }
 
-                   // File.Create(Application.StartupPath + $"\\version\\{sys_code}.ini");//创建该文件
+                    // File.Create(Application.StartupPath + $"\\version\\{sys_code}.ini");//创建该文件
 
                     FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
 
@@ -272,37 +299,8 @@ namespace MainFrame
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (btnAdd.Text == "新增")
-            {
-                btnSave.Enabled = true;
-                btnAdd.Text = "取消";
-                SetControlEnabled(true);
-            }
-            else
-            {
-                btnSave.Enabled = false;
-                btnAdd.Text = "新增";
-                SetControlEnabled(false);  
-            }
-            InitControlValue();
-        }
 
-        public void SetControlEnabled(bool enable)
-        {
-            txt_syscode.Enabled = enable;
-            txt_sysname.Enabled = enable;
-            txt_sysno.Enabled = enable;
-            txt_filepath.Enabled = enable;
-            txt_filetype.Enabled = enable;
-            txt_iconpath.Enabled = enable;
-            txt_openmode.Enabled = enable;
-            txt_sysdesc.Enabled = enable; 
-            txt_relative_path.Enabled = enable;
-            txt_updateurl.Enabled = enable;
-            txt_sysgroup.Enabled = enable;
-        }
+
 
         public void InitControlValue()
         {
@@ -323,15 +321,11 @@ namespace MainFrame
             }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
 
         public void RegisterDLL(string dllPath)
         {
             var _batContent = $@"@echo off
-C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPath + dllPath }";
+C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPath + dllPath}";
             var filePath = Application.StartupPath + @"\myBat.bat";
             WriteBatFile(filePath, _batContent);
 
@@ -368,105 +362,6 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
             }
         }
 
-        private void btnRegist_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var _index = this.dgvlist.SelectedIndex;
-                if (_index >= 0)
-                {
-                    var _system = systemList[_index];
-                    if (_system.file_type.ToUpper() == FileTypeEnum.DLL.ToString())
-                    {
-                        RegisterDLL(_system.file_path);
-                    }
-                    else
-                    {
-                        UIMessageTip.ShowError("不是dll文件，无需注册");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.ShowError(ex.Message);
-                log.Error(ex.ToString());
-            }
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var _index = this.dgvlist.SelectedIndex;
-                if (_index >= 0)
-                {
-                    var _system = systemList[_index];
-
-                    txt_syscode.Text = _system.sys_code;
-                    txt_sysname.Text = _system.sys_name;
-                    txt_sysno.Text = _system.sys_no.ToString();
-                    txt_filepath.Text = _system.file_path;
-                    txt_iconpath.Text = _system.icon_path;
-                    txt_sysdesc.Text = _system.sys_desc;
-                    txt_updateurl.Text = _system.sys_update_url;
-                    txt_relative_path.Text = _system.sys_relative_path;
-
-                    txt_filetype.Text = _system.file_type.ToUpper();
-                    txt_openmode.Text = txt_openmode.Items[_system.open_mode - 1].ToString();
-
-                    if (!string.IsNullOrWhiteSpace(_system.sys_group_code))
-                    {
-                        txt_sysgroup.SelectedValue = _system.sys_group_code;
-                    } 
-
-                    btnSave.Enabled = true;
-                    SetControlEnabled(true); 
-                }
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.ShowError(ex.Message);
-                log.Error(ex.ToString());
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var _index = this.dgvlist.SelectedIndex;
-                if (_index >= 0)
-                {
-                    var _system = systemList[_index];
-                    string paramurl = string.Format($"/api/subsystem/DeleteSubSystem?sys_code={_system.sys_code}");
-
-                    if (!UIMessageDialog.ShowAskDialog(this, $"确定要删除子系统: {_system.sys_name} 吗?"))
-                    {
-                        return;
-                    }
-
-                    var json = HttpClientUtil.Get(paramurl);
-                    var result = HttpClientUtil.DeserializeObject<ResponseResult<bool>>(json);
-
-                    if (result.status == 1)
-                    {
-                        UIMessageTip.ShowOk("保存成功！");
-
-                        BindData();
-                    }
-                    else
-                    {
-                        UIMessageTip.ShowError(result.message, 2000);
-                        log.Error(result.message);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                UIMessageTip.ShowError(ex.Message);
-                log.Error(ex.ToString());
-            }
-        }
 
         private void txt_iconpath_ButtonClick(object sender, EventArgs e)
         {
@@ -480,6 +375,11 @@ C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe {Application.StartupPat
                 var _filePath = openFileDialog1.FileName;     //显示文件路径 
                 this.txt_iconpath.Text = _filePath.Replace(Application.StartupPath, "");
             }
+        }
+
+        private void uiSymbolButton1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

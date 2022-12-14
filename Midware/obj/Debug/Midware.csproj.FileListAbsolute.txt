@@ -7,3 +7,12 @@ D:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.CoreCompileInputs.cache
 D:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.CopyComplete
 D:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.dll
 D:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.pdb
+F:\lijun\github\Mzgh\Midware\bin\Debug\GuXHisMzsfAndMzgh.dll
+F:\lijun\github\Mzgh\Midware\bin\Debug\GuXHisMzsfAndMzgh.pdb
+F:\lijun\github\Mzgh\Midware\bin\Debug\Newtonsoft.Json.dll
+F:\lijun\github\Mzgh\Midware\bin\Debug\Newtonsoft.Json.xml
+F:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.AssemblyReference.cache
+F:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.CoreCompileInputs.cache
+F:\lijun\github\Mzgh\Midware\obj\Debug\Midware.csproj.CopyComplete
+F:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.dll
+F:\lijun\github\Mzgh\Midware\obj\Debug\GuXHisMzsfAndMzgh.pdb

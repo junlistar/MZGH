@@ -26,7 +26,7 @@ namespace CoreApi.Controllers
     [Route("api/[controller]/[action]")]
     public class SubSystemController : ApiControllerBase
     {
-        private readonly ISubSystemRepository _subSystemRepository; 
+        private readonly ISubSystemRepository _subSystemRepository;
         private readonly ISubSystemGroupRepository _subSystemGroupRepository;
 
         public SubSystemController(ISubSystemRepository subSystemRepository, ISubSystemGroupRepository subSystemGroupRepository)
@@ -54,7 +54,7 @@ namespace CoreApi.Controllers
                 Log.Error(ex.Message);
                 return ErrorResult<List<SubSystem>>(ex.Message);
             }
-        } 
+        }
         public ResponseResult<bool> UpdateSubSystem()
         {
             Log.Information($"UpdateSubSystem,");
@@ -76,7 +76,7 @@ namespace CoreApi.Controllers
         {
             Log.Information($"DeleteSubSystem,{sys_code}");
             try
-            {  
+            {
                 return _subSystemRepository.DeleteSubSystem(sys_code);
             }
             catch (Exception ex)
@@ -97,6 +97,34 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<List<SubSystemGroup>>(ex.Message);
+            }
+        }
+        [HttpGet]
+        public ResponseResult<List<YpGroup>> GetGroupNames()
+        {
+            Log.Information($"GetGroupNames,");
+            try
+            {
+                return _subSystemGroupRepository.GetGroupNames();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<YpGroup>>(ex.Message);
+            }
+        }
+        [HttpGet]
+        public ResponseResult<List<string>> GetSubsysIds(string user_name)
+        {
+            Log.Information($"GetSubsysIds,");
+            try
+            {
+                return _subSystemGroupRepository.GetSubsysIds(user_name);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<string>>(ex.Message);
             }
         }
 
@@ -129,6 +157,36 @@ namespace CoreApi.Controllers
             {
                 Log.Error(ex.Message);
                 return ErrorResult<bool>(ex.Message);
+            }
+        }
+        public ResponseResult<bool> UpdateMainClientConfig()
+        {
+            Log.Information($"UpdateMainClientConfig,");
+            try
+            {   //获取RequestBody流
+                StreamReader sr = new StreamReader(Request.Body, Encoding.GetEncoding("UTF-8"));
+                string strData = sr.ReadToEndAsync().Result;
+                Log.Information($"============== {strData}");
+                return _subSystemRepository.UpdateMainClientConfig(strData);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<bool>(ex.Message);
+            }
+        }
+        [HttpGet]
+        public ResponseResult<MainClientConfig> GetMainClientConfig()
+        {
+            Log.Information($"GetMainClientConfig");
+            try
+            {
+                return _subSystemRepository.GetMainClientConfig();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<MainClientConfig>(ex.Message);
             }
         }
 

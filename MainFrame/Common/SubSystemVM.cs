@@ -48,5 +48,24 @@ namespace Client.ViewModel
         //子系统相对目录
         public string sys_relative_path { get; set; }
         public string sys_group_code { get; set; }
+        public string subsys_id { get; set; }
+        public string group_no { get; set; }
+    }
+
+    public class MainClientConfigVM
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string show_image { get; set; }
+        public string show_title { get; set; }
+        public string title { get; set; }
+        public string show_desc { get; set; }
+        public DateTime update_time { get; set; }
+
+    }
+    public class YpGroup
+    { 
+        public string group_no { get; set; }
+        public string dept_name { get; set; }
     }
 }

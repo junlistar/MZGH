@@ -6,9 +6,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using AutoUpdaterDotNET;
 using Client.ViewModel;
 using log4net;
@@ -40,7 +42,7 @@ namespace MainFrame
 
         private void Index_Initialize(object sender, EventArgs e)
         {
-
+            //this.Visible = false;
         }
 
         private void _btn_Click(object sender, EventArgs e)
@@ -130,45 +132,16 @@ namespace MainFrame
             try
             {
                 pnlSystem.FillColor = Color.Transparent;
-                // this.BackgroundImage = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                //this.BackColor = Color.LightPink;  
-                //navMenu.SelectFirst();
-                //navMenu.BackColor = Color.Wheat;
-
-                BindData();
-                //LoadSystem(); 
+                BindData(); 
                 GetSystemGroupData();
 
-                BindColorArea();
             }
             catch (Exception ex)
             {
-                UIMessageTip.ShowError("加载背景图片失败！");
+                log.Error(ex);
             }
         }
-        public void BindColorArea()
-        {
-            pnlColor.Clear();
-            pnlColor.FillColor = Color.Transparent;
-            var styles = UIStyles.PopularStyles();
-            int _count = 0;
-            foreach (UIStyle style in styles)
-            {
-                UIButton _btn = new UIButton();
-                _btn.Text = "";
-                _btn.Style = style;
-                _btn.Width = 30;
-                _btn.Height = 30;
-                _btn.Click += _btn_Click;
-                pnlColor.Add(_btn);
-                _count++;
-                if (_count == 9)
-                {
-                    break;
-                }
-            }
-        }
-
+   
         public void BindData()
         {
             try
@@ -277,6 +250,9 @@ namespace MainFrame
             }
             return "";
         }
+
+        #region 子系统更新处理
+
 
         private void AutoUpdaterStarter(SubSystemVM vm)
         {
@@ -430,6 +406,8 @@ namespace MainFrame
             setData(_system.sys_name, _system.sys_no);
         }
 
+        #endregion
+
         private void navMenu_MenuItemClick(TreeNode node, NavMenuItem item, int pageIndex)
         {
             //菜单点击事件
@@ -441,7 +419,7 @@ namespace MainFrame
 
         public void LoadGroups()
         {
-            int top = 100, left = 180;
+            int top = 50, left = 180;
             for (int i = 0; i < system_groups.Count; i++)
             {
                 UIMarkLabel markLabel = new UIMarkLabel();
@@ -450,12 +428,15 @@ namespace MainFrame
                 markLabel.Parent = this;
                 markLabel.Text = system_groups[i].group_name;
                 markLabel.Font = new Font("宋体", 12, FontStyle.Regular);
+                markLabel.Parent = this;
             }
             LoadSubSystems();
         }
         public void LoadSubSystems()
         {
-            int top = 100, left = 280;
+            int width = 60;
+            int height =60;
+            int top = 50, left = 280;
             for (int i = 0; i < system_groups.Count; i++)
             {
                 //添加子系统
@@ -480,31 +461,31 @@ namespace MainFrame
 
                     //uIButton.Style = UIStyles.PopularStyles()[_index++];
                     //uIButton.Text = _txt;
-                    uIButton.Width = 70;
-                    uIButton.Height = 70;
+                    uIButton.Width = width;
+                    uIButton.Height = height;
                     uIButton.TagString = _sub.sys_no.ToString();
                     uIButton.Click += UIButton_Click;
                     uIButton.Top = top + (i * 110);
                     uIButton.Left = left + (j * 100);
                     uIButton.Parent = this;
+                    uIButton.BringToFront();
 
                     UILabel label = new UILabel();
-                    label.Width = 70;
-                    label.Height = 40;
+                    label.Width = height;
+                    label.Height = height-20;
                     label.AutoSize = false;
                     label.Font = new Font("宋体", 9, FontStyle.Bold);
                     label.Text = _txt;
-                    label.Top = uIButton.Top + 70;
+                    label.Top = uIButton.Top + 60;
                     label.Left = left + (j * 100);
-                    label.TextAlign = ContentAlignment.MiddleCenter;
+                   // label.TextAlign = ContentAlignment.MiddleCenter;
                     label.Parent = this;
+                    label.BringToFront();
                 }
 
                 continue;
                 //}
                 //string[] files = Directory.GetFiles(Application.StartupPath + "/resource/icons");
-
-
 
 
                 //int _index = 0;
@@ -539,7 +520,19 @@ namespace MainFrame
                 //    label.Parent = this;
 
                 //}
-            }
+            }  
+            this.AutoScroll = true; this.VerticalScroll.Enabled = false;
+            this.VerticalScroll.Visible = false;
+            this.AutoScrollMinSize = new Size(this.Width, this.Height);
+
+
+            //this.Visible = true;
+
+            //pnl_main.AutoScroll = true;
+            //pnl_main.AutoScrollMinSize = new Size(this.Width, this.Height);
+            //pnl_main.Show();
+            //pnl_main.FillColor = Color.Transparent;
+            //pnl_main.BackColor = Color.Transparent;
         }
 
         public void GetSystemGroupData()
@@ -574,70 +567,76 @@ namespace MainFrame
             }
         }
 
-        public void LoadGroupSystem(string sysname)
-        {
+        //public void LoadGroupSystem(string sysname)
+        //{
 
-            pnlSystem.Clear();
+        //    pnlSystem.Clear();
 
-            int _index = 0;
+        //    int _index = 0;
+
+        //    int width = 70;
+        //    int height = 70;
 
 
-            if (sysname == "字典维护")
-            {
-                for (int i = _index; i < 6; i++)
-                {
+        //    if (sysname == "字典维护")
+        //    {
+        //        for (int i = _index; i < 6; i++)
+        //        {
 
-                    UIFlowLayoutPanel flp = new UIFlowLayoutPanel();
-                    flp.Width = 100;
-                    flp.Height = 100;
+        //            UIFlowLayoutPanel flp = new UIFlowLayoutPanel();
+        //            flp.Width = 100;
+        //            flp.Height = 100;
 
-                    var _txt = sysname + (i + 1).ToString();
-                    UIImageButton uIButton = new UIImageButton();
-                    uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                    uIButton.Style = UIStyles.PopularStyles()[i];
-                    //uIButton.Text = _txt;
-                    uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                    uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-                    uIButton.Width = 70;
-                    uIButton.Height = 70;
-                    uIButton.TagString = "9999";
-                    uIButton.TextAlign = ContentAlignment.BottomCenter;
-                    uIButton.ForeColor = Color.Red;
-                    uIButton.Click += UIButton_Click;
+        //            var _txt = sysname + (i + 1).ToString();
+        //            UIImageButton uIButton = new UIImageButton();
+        //            uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+        //            uIButton.Style = UIStyles.PopularStyles()[i];
+        //            //uIButton.Text = _txt;
+        //            uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+        //            uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+        //            uIButton.Width = width;
+        //            uIButton.Height = height;
+        //            uIButton.TagString = "9999";
+        //            uIButton.TextAlign = ContentAlignment.BottomCenter;
+        //            uIButton.ForeColor = Color.Red;
+        //            uIButton.Click += UIButton_Click;
 
-                    flp.Controls.Add(uIButton);
+        //            flp.Controls.Add(uIButton);
 
-                    UILabel label = new UILabel();
-                    label.Width = 70;
-                    label.Height = 20;
-                    label.Text = _txt;
+        //            UILabel label = new UILabel();
+        //            label.Width = width;
+        //            label.Height = 20;
+        //            label.Text = _txt;
 
-                    flp.Controls.Add(label);
-                    flp.FillColor = Color.Transparent;
+        //            flp.Controls.Add(label);
+        //            flp.FillColor = Color.Transparent;
 
-                    pnlSystem.Controls.Add(flp);
-                }
-                return;
-            }
+        //            pnlSystem.Controls.Add(flp);
+        //        }
+        //        return;
+        //    }
 
-            for (int i = _index; i < 6; i++)
-            {
-                var _txt = sysname + (i + 1).ToString();
-                UIImageButton uIButton = new UIImageButton();
-                uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
-                uIButton.Style = UIStyles.PopularStyles()[i];
-                uIButton.Text = _txt;
-                uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
-                uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
-                uIButton.Width = 100;
-                uIButton.Height = 100;
-                uIButton.TagString = "9999";
-                uIButton.TextAlign = ContentAlignment.BottomCenter;
-                uIButton.ForeColor = Color.Red;
-                uIButton.Click += UIButton_Click;
-                pnlSystem.Controls.Add(uIButton);
-            }
-            // pnlSystem.Show();
-        }
+        //    for (int i = _index; i < 6; i++)
+        //    {
+        //        var _txt = sysname + (i + 1).ToString();
+        //        UIImageButton uIButton = new UIImageButton();
+        //        uIButton.Font = new Font("微软雅黑", 16, FontStyle.Bold);
+        //        uIButton.Style = UIStyles.PopularStyles()[i];
+        //        uIButton.Text = _txt;
+        //        uIButton.Image = Image.FromFile(Application.StartupPath + "/resource/index.jpeg");
+        //        uIButton.SizeMode = PictureBoxSizeMode.StretchImage;
+        //        uIButton.Width = 100;
+        //        uIButton.Height = 100;
+        //        uIButton.TagString = "9999";
+        //        uIButton.TextAlign = ContentAlignment.BottomCenter;
+        //        uIButton.ForeColor = Color.Red;
+        //        uIButton.Click += UIButton_Click;
+        //        pnlSystem.Controls.Add(uIButton);
+        //    }
+        //    // pnlSystem.Show();
+        //}
+
+
+       
     }
 }

@@ -56,6 +56,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(1045, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
             // 
             // toolStripLabel1
             // 
@@ -130,8 +131,6 @@
             this.ExtendBox = true;
             this.ExtendMenu = this.uiContextMenuStrip1;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Main";
             this.ShowTitleIcon = true;
             this.Text = "湖北省荆州市中心医院 一体化信息管理平台";
