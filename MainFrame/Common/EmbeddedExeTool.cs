@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -16,9 +17,8 @@ namespace MainFrame.Common
     /// </summary>
     public class EmbeddedExeTool
     {
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, SetWindowPosFlags uFlags);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
         [DllImport("User32.dll", EntryPoint = "SetParent")]
         private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
@@ -51,46 +51,6 @@ namespace MainFrame.Common
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         private static extern int SendMessage(IntPtr hwnd, int wMsg, int wParam, int lParam);
 
-        public enum SpecialWindowHandles
-        {
-            HWND_TOP = 0,
-            HWND_BOTTOM = 1,
-            HWND_TOPMOST = -1,
-            HWND_NOTOPMOST = -2
-        }
-        [Flags]
-        public enum SetWindowPosFlags : uint
-        {
-            SWP_ASYNCWINDOWPOS = 0x4000,
-
-            SWP_DEFERERASE = 0x2000,
-
-            SWP_DRAWFRAME = 0x0020,
-
-            SWP_FRAMECHANGED = 0x0020,
-
-            SWP_HIDEWINDOW = 0x0080,
-
-            SWP_NOACTIVATE = 0x0010,
-
-            SWP_NOCOPYBITS = 0x0100,
-
-            SWP_NOMOVE = 0x0002,
-
-            SWP_NOOWNERZORDER = 0x0200,
-
-            SWP_NOREDRAW = 0x0008,
-
-            SWP_NOREPOSITION = 0x0200,
-
-            SWP_NOSENDCHANGING = 0x0400,
-
-            SWP_NOSIZE = 0x0001,
-
-            SWP_NOZORDER = 0x0004,
-
-            SWP_SHOWWINDOW = 0x0040,
-        }
 
         private IntPtr SetWindowLong(HandleRef hWnd, int nIndex, int dwNewLong)
         {
@@ -153,7 +113,7 @@ namespace MainFrame.Common
         {
             winname = windown_name;
             ContainerControl = form;
-            form.SizeChanged += Control_SizeChanged;
+           // form.SizeChanged += Control_SizeChanged;
             proApp = new Process();
             proApp.StartInfo.UseShellExecute = false;
             proApp.StartInfo.CreateNoWindow = false;
@@ -161,14 +121,15 @@ namespace MainFrame.Common
             proApp.StartInfo.FileName = exepath;
             proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
             proApp.Start();
+             
             //proApp.WaitForInputIdle();
             //System.Threading.Thread.Sleep(1000);
 
-            if (!string.IsNullOrEmpty(winname) && winname == "mzgh")
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzgh" || winname == "mzsf" || winname == "yjxt"))
             {
                 Application.Idle += Application_Idle;
             }
-            else
+            else 
             {
                 System.Threading.Thread.Sleep(1000);
                 Application.Idle += Application_Idle_ForDelphi;
@@ -193,7 +154,7 @@ namespace MainFrame.Common
             if (proApp.MainWindowHandle == IntPtr.Zero) return;
             Application.Idle -= Application_Idle;
             EmbedProcess(proApp, ContainerControl);
-        } 
+        }
 
         private void Application_Idle_ForDelphi(object sender, EventArgs e)
         {
@@ -204,13 +165,14 @@ namespace MainFrame.Common
                 return;
             }
             if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
-            { 
+            {
                 IntPtr window = FindWindow(null, "药品管理系统");
-                if (window == IntPtr.Zero) return; 
-            } 
+                if (window == IntPtr.Zero) return;
+            }
             Application.Idle -= Application_Idle;
             EmbedProcess(proApp, ContainerControl);
         }
+    
         /// <summary>
         /// 将指定的程序嵌入指定的控件
         /// </summary>
@@ -226,8 +188,13 @@ namespace MainFrame.Common
                     window = FindWindow(null, "药品管理系统");
                     Main.clientDic[SessionHelper.current_index] = window;
                     // Put it into this form
-                    MoveWindow(window, 0, 0, control.Width, 500, true);
-                    SetWindowPos(window, new IntPtr((int)SpecialWindowHandles.HWND_TOP), 10, 10, 450, 450, SetWindowPosFlags.SWP_SHOWWINDOW);
+                     
+                    //var scn = Screen.FromHandle(window);
+                    //SetWindowPos(window, control.Handle.ToInt32(), 0, 0, 500, 500, 1 | 2);
+                    //MoveWindow(window, 0, 0, 500, 500, true);
+
+                    //scn = Screen.FromHandle(window);
+
                     SetParent(window, control.Handle);
 
                 }
@@ -244,7 +211,7 @@ namespace MainFrame.Common
                 //Main.clientDic[SessionHelper.current_index] = window;
                 // Put it into this form
                 //SetParent(window, control.Handle);
-                
+
                 // Remove border and whatnot               
                 //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE); 
                 //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
@@ -259,7 +226,7 @@ namespace MainFrame.Common
             {
                 Console.WriteLine(ex3.Message);
             }
-           // return IntPtr.Zero;
+            // return IntPtr.Zero;
         }
         /// <summary>
         /// 嵌入容器大小改变事件
@@ -270,11 +237,22 @@ namespace MainFrame.Common
             {
                 return;
             }
-
-            if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
             {
-                MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+                var window = FindWindow(null, "药品管理系统");
+                if (window != IntPtr.Zero && ContainerControl != null)
+                {
+                    MoveWindow(window, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+                }
             }
+            else
+            {
+                if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
+                {
+                    MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+                }
+            }
+
         }
         public static string SerializeObject(object obj)
         {

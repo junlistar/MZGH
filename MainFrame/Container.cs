@@ -46,7 +46,10 @@ namespace MainFrame
 
         private void Container_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.Red;
+            //this.BackColor = Color.Red;
+
+            this.AutoScroll = true; 
+            this.AutoScrollMinSize = new Size(this.Width, this.Height);
 
             switch (sys_key)
             {
