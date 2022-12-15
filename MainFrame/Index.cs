@@ -109,7 +109,7 @@ namespace MainFrame
 
             //获取当前系统
             _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
-            if (_system == null || !File.Exists(Application.StartupPath + _system.file_path))
+            if (_system == null )
             {
                 UIMessageTip.ShowError("未正确配置系统！");
             }
@@ -120,11 +120,21 @@ namespace MainFrame
                 {
                     AutoUpdaterStarter(_system);
                 }
+                else if (!File.Exists(Application.StartupPath + _system.file_path))
+                {
+                    UIMessageTip.ShowError("指定的系统运行文件不存在！ ");
+                     
+                }
                 else
                 {
                     setData(_text, _sysno);
                 }
             }
+        }
+
+        public void DownLoadSubsystem()
+        {
+
         }
 
         private void Index_Load(object sender, EventArgs e)
@@ -195,7 +205,7 @@ namespace MainFrame
                     FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
 
                     StreamWriter sw = new StreamWriter(fs1);
-                    sw.WriteLine("1.0.0.0");
+                    sw.WriteLine("0.0.0.0");
 
                     sw.Close();
                     fs1.Close();
@@ -312,7 +322,15 @@ namespace MainFrame
 
             //设置zip解压路径
             AutoUpdater.InstallationPath = Environment.CurrentDirectory + $@"\{vm.sys_relative_path}";
-
+            AutoUpdater.InstallationPath = AutoUpdater.InstallationPath.Replace("\\\\","\\");
+            if(AutoUpdater.InstallationPath.EndsWith("\\"))
+            {
+                AutoUpdater.InstallationPath = AutoUpdater.InstallationPath.RemoveRight(1);
+            }
+            if (!Directory.Exists(AutoUpdater.InstallationPath))
+            {
+                Directory.CreateDirectory(AutoUpdater.InstallationPath);
+            }
             //处理应用程序在下载完成后如何退出
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
 
@@ -383,6 +401,8 @@ namespace MainFrame
                 else
                 {
 
+                    //无需更新
+                    setData(_system.sys_name, _system.sys_no);
                     //MessageBox.Show(@"There is no update available. Please try again later.", @"Update Unavailable",MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -400,10 +420,11 @@ namespace MainFrame
                         args.Error.GetType().ToString(), MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
+
+                //无需更新
+                setData(_system.sys_name, _system.sys_no);
             }
 
-            //无需更新
-            setData(_system.sys_name, _system.sys_no);
         }
 
         #endregion

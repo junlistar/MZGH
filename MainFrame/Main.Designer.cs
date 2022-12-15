@@ -56,7 +56,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1045, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.Visible = false;
             // 
             // toolStripLabel1
             // 

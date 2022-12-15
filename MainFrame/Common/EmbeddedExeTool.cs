@@ -125,7 +125,7 @@ namespace MainFrame.Common
             //proApp.WaitForInputIdle();
             //System.Threading.Thread.Sleep(1000);
 
-            if (!string.IsNullOrEmpty(winname) && (winname == "mzgh" || winname == "mzsf" || winname == "yjxt"))
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzgh" || winname == "mzsf" || winname == "yjxt" || winname == "ybbxt"))
             {
                 Application.Idle += Application_Idle;
             }
@@ -204,7 +204,7 @@ namespace MainFrame.Common
                     Main.clientDic[SessionHelper.current_index] = window;
                     // Put it into this form
                     SetParent(window, control.Handle);
-                    SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                    //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
                     ShowWindow(window, (int)ProcessWindowStyle.Maximized);
                     MoveWindow(window, 0, 0, control.Width, control.Height, true);
                 }
