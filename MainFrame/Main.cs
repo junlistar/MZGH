@@ -130,6 +130,7 @@ namespace MainFrame
 
                     SelectPage(1000);
 
+
                     vM = new TestHisVM();
                     vM.Application = "75415424";
                     vM.Screen = "75349424";
@@ -142,6 +143,12 @@ namespace MainFrame
                     vM.group_name = "门诊西药房";
                     vM.subsys_id = "yp_yfxt";
                     //LoadSystem(); 
+
+
+                    //var _page = new TestForm();
+                    //_page.Text = "测试药品系统";
+                    //AddPage(_page, 1000);
+                    //SelectPage(1000);
                 }
                 else
                 {

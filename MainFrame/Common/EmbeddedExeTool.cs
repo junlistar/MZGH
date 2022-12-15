@@ -113,7 +113,7 @@ namespace MainFrame.Common
         {
             winname = windown_name;
             ContainerControl = form;
-           // form.SizeChanged += Control_SizeChanged;
+            form.SizeChanged += Control_SizeChanged;
             proApp = new Process();
             proApp.StartInfo.UseShellExecute = false;
             proApp.StartInfo.CreateNoWindow = false;
@@ -121,21 +121,95 @@ namespace MainFrame.Common
             proApp.StartInfo.FileName = exepath;
             proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
             proApp.Start();
-             
+
             //proApp.WaitForInputIdle();
             //System.Threading.Thread.Sleep(1000);
-
+             
             if (!string.IsNullOrEmpty(winname) && (winname == "mzgh" || winname == "mzsf" || winname == "yjxt" || winname == "ybbxt"))
             {
                 Application.Idle += Application_Idle;
             }
-            else 
+            else
             {
                 System.Threading.Thread.Sleep(1000);
-                Application.Idle += Application_Idle_ForDelphi;
+                //Application.Idle += Application_Idle_ForDelphi;
+                Application.Idle += Application_Idle;
             }
 
             EmbedProcess(proApp, form);
+
+        }
+
+        public void LoadEXE_test(Form form, string exepath, string args)
+        {
+            ContainerControl = form;
+            form.SizeChanged += Control_SizeChanged_test;
+            proApp = new Process();
+            proApp.StartInfo.UseShellExecute = false;
+            proApp.StartInfo.CreateNoWindow = false;
+            proApp.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+            proApp.StartInfo.FileName = exepath;
+            proApp.StartInfo.Arguments = args;
+            proApp.Start();
+
+            System.Threading.Thread.Sleep(1000);
+            EmbedProcessTest(proApp, form);
+
+        }
+        private void EmbedProcessTest(Process app, Control control)
+        {
+            // Get the main handle  || app.MainWindowHandle == IntPtr.Zero
+            if (app == null || control == null) return;// IntPtr.Zero;
+            try
+            {
+                #region 成功代码
+
+                //var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
+                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                //MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                //SetParent(window, control.Handle);
+
+                #endregion
+
+                var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
+                SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+
+                MoveWindow(window, 0, 0, control.Width, control.Height, true);
+
+
+                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
+                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                SetParent(window, control.Handle);
+
+            }
+            catch (Exception ex3)
+            {
+                Console.WriteLine(ex3.Message);
+            }
+            // return IntPtr.Zero;
+        }
+        private void Control_SizeChanged_test(object sender, EventArgs e)
+        {
+            if (proApp == null)
+            {
+                return;
+            }
+            //if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+            //{
+            //    var window = FindWindow(null, "药品管理系统");
+            //    if (window != IntPtr.Zero && ContainerControl != null)
+            //    {
+            //        MoveWindow(window, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+            //    }
+            //}
+            //else
+            //{
+            //    if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
+            //    {
+                    MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+            //    }
+            //}
 
         }
         /// <summary>
@@ -172,7 +246,7 @@ namespace MainFrame.Common
             Application.Idle -= Application_Idle;
             EmbedProcess(proApp, ContainerControl);
         }
-    
+
         /// <summary>
         /// 将指定的程序嵌入指定的控件
         /// </summary>
@@ -182,43 +256,45 @@ namespace MainFrame.Common
             if (app == null || control == null) return;// IntPtr.Zero;
             try
             {
-                IntPtr window;
+                //IntPtr window;
+                //if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+                //{
+                //    window = FindWindow(null, "药品管理系统");
+                //    Main.clientDic[SessionHelper.current_index] = window;
+                //    // Put it into this form
+
+                //    //var scn = Screen.FromHandle(window);
+                //    //SetWindowPos(window, control.Handle.ToInt32(), 0, 0, 500, 500, 1 | 2);
+                //    //MoveWindow(window, 0, 0, 500, 500, true);
+
+                //    //scn = Screen.FromHandle(window);
+
+                //    SetParent(window, control.Handle);
+                //    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                //    //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
+                //    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                //}
+                //else
+                //{
+                //    window = app.MainWindowHandle;
+                //    Main.clientDic[SessionHelper.current_index] = window;
+                //    // Put it into this form
+                //    SetParent(window, control.Handle);
+                //    //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                //    ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                //    MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                //}
+                var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
+                Main.clientDic[SessionHelper.current_index] = window;
+
                 if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
                 {
-                    window = FindWindow(null, "药品管理系统");
-                    Main.clientDic[SessionHelper.current_index] = window;
-                    // Put it into this form
-                     
-                    //var scn = Screen.FromHandle(window);
-                    //SetWindowPos(window, control.Handle.ToInt32(), 0, 0, 500, 500, 1 | 2);
-                    //MoveWindow(window, 0, 0, 500, 500, true);
-
-                    //scn = Screen.FromHandle(window);
-
-                    SetParent(window, control.Handle);
-
+                    //药品系统去除标题栏
+                    SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
                 }
-                else
-                {
-                    window = app.MainWindowHandle;
-                    Main.clientDic[SessionHelper.current_index] = window;
-                    // Put it into this form
-                    SetParent(window, control.Handle);
-                    //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
-                    ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                }
-                //Main.clientDic[SessionHelper.current_index] = window;
-                // Put it into this form
-                //SetParent(window, control.Handle);
-
-                // Remove border and whatnot               
-                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE); 
-                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
-                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                ////MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                // return window;
+                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                SetParent(window, control.Handle);
 
 
             }
@@ -237,20 +313,25 @@ namespace MainFrame.Common
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+            //if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
+            //{
+            //    var window = FindWindow(null, "药品管理系统");
+            //    if (window != IntPtr.Zero && ContainerControl != null)
+            //    {
+            //        MoveWindow(window, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+            //    }
+            //}
+            //else
+            //{
+            //    if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
+            //    {
+            //        MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+            //    }
+            //}
+
+            if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
             {
-                var window = FindWindow(null, "药品管理系统");
-                if (window != IntPtr.Zero && ContainerControl != null)
-                {
-                    MoveWindow(window, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
-                }
-            }
-            else
-            {
-                if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
-                {
-                    MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
-                }
+                MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
             }
 
         }

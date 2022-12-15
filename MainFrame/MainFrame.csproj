@@ -88,6 +88,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\StringUtil.cs" />
+    <Compile Include="TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SystemList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
     <Compile Include="SystemGroup.Designer.cs">
       <DependentUpon>SystemGroup.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SystemList.resx">
       <DependentUpon>SystemList.cs</DependentUpon>
     </EmbeddedResource>

@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,7 +123,7 @@ namespace MainFrame
                 }
                 else if (!File.Exists(Application.StartupPath + _system.file_path))
                 {
-                    UIMessageTip.ShowError("指定的系统运行文件不存在！ ");
+                    UIMessageTip.ShowError("未正确配置系统！请检查配置项！");
                      
                 }
                 else
@@ -588,6 +589,11 @@ namespace MainFrame
             }
         }
 
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+        }
+
         //public void LoadGroupSystem(string sysname)
         //{
 
@@ -658,6 +664,6 @@ namespace MainFrame
         //}
 
 
-       
+
     }
 }

@@ -52,8 +52,7 @@ namespace GuxHis.Mzsf
             //log.Debug($"程序被调用，无参数");
             MessageBox.Show("无参数"); //LoadCompoment();
         }
-
-
+         
         /// <summary>
         /// 构造方法
         /// </summary>
