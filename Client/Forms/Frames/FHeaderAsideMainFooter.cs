@@ -548,10 +548,7 @@ namespace GuxHis.Mzsf
         {
             try
             {
-                this.Hide();
-
-
-
+                this.Hide(); 
                 LoadCorlorStyles();
 
                 //显示默认页面
@@ -559,8 +556,7 @@ namespace GuxHis.Mzsf
 
                 //隐藏框架头部
                 Header.Hide();
-
-
+                 
                 tlsInfo.Text = "";
 
                 if (arg != null && arg.Count() > 0)
@@ -587,33 +583,7 @@ namespace GuxHis.Mzsf
                             MessageBox.Show("catch:" + _usermi);
                         }
                     }
-                    //var _jstr = string.Join("",arg);
-                    //MessageBox.Show(_jstr);
-                    //log.Debug($"第三方传递json值：{_jstr}");
-                    //var _usermi = ""; 
-                    //try
-                    //{
-                    //    var _hisloginvm = WebApiHelper.DeserializeObject<HisLoginVM>(_jstr);
-
-                    //    if (_hisloginvm != null && !string.IsNullOrWhiteSpace(_hisloginvm.UserMi))
-                    //    {
-                    //        _usermi = _hisloginvm.UserMi;
-                    //    }
-                    //    //MessageBox.Show("try:" + _usermi);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    log.Error(ex.ToString());
-                    //    var _index = _jstr.IndexOf("UserMi"); 
-                    //    if (_index>0)
-                    //    {
-                    //        _jstr = _jstr.Substring(_index + 7); 
-                    //        _index = _jstr.IndexOf(",");
-                    //        _usermi = _jstr.Substring(0, _index); 
-                    //    }
-                    //    //MessageBox.Show("catch:" + _usermi);
-                    //}
-                    //MessageBox.Show(_usermi);
+                    
                     if (_usermi.Trim() != "")
                     {
                         //获取用户费别信息 
