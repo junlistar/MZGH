@@ -589,11 +589,7 @@ namespace MainFrame
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            
-        }
-
+         
         //public void LoadGroupSystem(string sysname)
         //{
 

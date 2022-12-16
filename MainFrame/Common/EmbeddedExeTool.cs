@@ -1,4 +1,6 @@
-﻿using Sunny.UI.Win32;
+﻿using log4net;
+using Sunny.UI;
+using Sunny.UI.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +10,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Windows.Forms;
+using System.Windows.Forms; 
 
 namespace MainFrame.Common
 {
@@ -17,6 +19,8 @@ namespace MainFrame.Common
     /// </summary>
     public class EmbeddedExeTool
     {
+        private static ILog log = LogManager.GetLogger(typeof(EmbeddedExeTool));//typeof放当前类
+
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
         [DllImport("User32.dll", EntryPoint = "SetParent")]
@@ -120,25 +124,29 @@ namespace MainFrame.Common
             proApp.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
             proApp.StartInfo.FileName = exepath;
             proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
+             
             proApp.Start();
 
             //proApp.WaitForInputIdle();
             //System.Threading.Thread.Sleep(1000);
-             
-            if (!string.IsNullOrEmpty(winname) && (winname == "mzgh" || winname == "mzsf" || winname == "yjxt" || winname == "ybbxt"))
+
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
             {
+                System.Threading.Thread.Sleep(3000);
                 Application.Idle += Application_Idle;
             }
             else
             {
-                System.Threading.Thread.Sleep(1000);
                 //Application.Idle += Application_Idle_ForDelphi;
+
                 Application.Idle += Application_Idle;
             }
 
             EmbedProcess(proApp, form);
 
         }
+
+    
 
         public void LoadEXE_test(Form form, string exepath, string args)
         {
@@ -152,7 +160,7 @@ namespace MainFrame.Common
             proApp.StartInfo.Arguments = args;
             proApp.Start();
 
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(3000);
             EmbedProcessTest(proApp, form);
 
         }
@@ -165,23 +173,19 @@ namespace MainFrame.Common
                 #region 成功代码
 
                 //var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
-                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE); //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
                 //MoveWindow(window, 0, 0, control.Width, control.Height, true);
                 //SetParent(window, control.Handle);
 
                 #endregion
 
                 var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
+
                 SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
 
                 MoveWindow(window, 0, 0, control.Width, control.Height, true);
-
-
-                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
-                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                SetParent(window, control.Handle);
-
+                 
+                SetParent(window, control.Handle); 
             }
             catch (Exception ex3)
             {
@@ -255,36 +259,13 @@ namespace MainFrame.Common
             // Get the main handle  || app.MainWindowHandle == IntPtr.Zero
             if (app == null || control == null) return;// IntPtr.Zero;
             try
-            {
-                //IntPtr window;
-                //if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
-                //{
-                //    window = FindWindow(null, "药品管理系统");
-                //    Main.clientDic[SessionHelper.current_index] = window;
-                //    // Put it into this form
-
-                //    //var scn = Screen.FromHandle(window);
-                //    //SetWindowPos(window, control.Handle.ToInt32(), 0, 0, 500, 500, 1 | 2);
-                //    //MoveWindow(window, 0, 0, 500, 500, true);
-
-                //    //scn = Screen.FromHandle(window);
-
-                //    SetParent(window, control.Handle);
-                //    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //    //ShowWindow(window, (int)ProcessWindowStyle.Minimized);
-                //    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //}
-                //else
-                //{
-                //    window = app.MainWindowHandle;
-                //    Main.clientDic[SessionHelper.current_index] = window;
-                //    // Put it into this form
-                //    SetParent(window, control.Handle);
-                //    //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
-                //    ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //    MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                //}
+            { 
                 var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
+                 
+                if (window.ToInt32()==0)
+                {
+                    return;
+                } 
                 Main.clientDic[SessionHelper.current_index] = window;
 
                 if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
@@ -292,15 +273,13 @@ namespace MainFrame.Common
                     //药品系统去除标题栏
                     SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
                 }
-                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                SetParent(window, control.Handle); 
+                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
                 MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                SetParent(window, control.Handle);
-
-
             }
             catch (Exception ex3)
             {
-                Console.WriteLine(ex3.Message);
+                log.Error(ex3.ToString());
             }
             // return IntPtr.Zero;
         }

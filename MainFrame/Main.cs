@@ -103,6 +103,7 @@ namespace MainFrame
                 uiTabControl1.TabBackColor = Color.FromArgb(60, 95, 145);
                 uiTabControl1.TabSelectedColor = Color.FromArgb(6, 146, 151);
                 uiTabControl1.TabSelectedForeColor = Color.White;
+                uiTabControl1.MainPage = "主页";
 
                 if (SessionHelper.MyHttpClient == null)
                 {

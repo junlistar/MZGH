@@ -24,21 +24,7 @@ namespace MainFrame
             InitializeComponent();
 
         }
-
         public string sys_key;
-
-        /// <summary>
-        /// 解决页面频繁刷新时界面闪烁问题(自定义控件拖动花屏)
-        /// </summary>
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ExStyle |= 0x02000000;
-        //        return cp;
-        //    }
-        //}
 
         private void Container_Initialize(object sender, EventArgs e)
         {

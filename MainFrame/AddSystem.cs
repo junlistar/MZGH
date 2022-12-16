@@ -280,7 +280,7 @@ namespace MainFrame
                     FileStream fs1 = new FileStream(Application.StartupPath + $"\\version\\{sys_code}.ini", FileMode.Create, FileAccess.Write);//创建写入文件 
 
                     StreamWriter sw = new StreamWriter(fs1);
-                    sw.WriteLine("1.0.0.0");
+                    sw.WriteLine("0.0.0.0");
 
                     sw.Close();
                     fs1.Close();
