@@ -272,8 +272,15 @@ namespace MainFrame
 
             AutoUpdater.Start(vm.sys_update_url);
 
+
             //读取本地版本配置文件，
             var _version = ReadLocalVersion(vm.sys_code);
+            //判断本地文件是否存在
+            if (!File.Exists(Application.StartupPath + vm.file_path))
+            {
+                _version = "0.0.0.0";
+            }
+
             _syscode = vm.sys_code;
 
             if (!string.IsNullOrWhiteSpace(_version))

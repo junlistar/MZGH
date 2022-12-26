@@ -8,9 +8,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Windows.Forms; 
+using System.Windows.Forms;
 
 namespace MainFrame.Common
 {
@@ -20,11 +21,37 @@ namespace MainFrame.Common
     public class EmbeddedExeTool
     {
         private static ILog log = LogManager.GetLogger(typeof(EmbeddedExeTool));//typeof放当前类
+                                                                                // 引入库
+                                                                                // 引入库
+                                                                                //[DllImport("shell32.dll")]
+                                                                                //static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, ShowCommands nShowCmd);
+
+        //public enum ShowCommands
+        //{
+        //    SW_HIDE = 0,  //隐藏
+        //    SW_SHOWNORMAL = 1,  //用最近的大小和位置显示, 激活
+        //    SW_NORMAL = 1,  //同 SW_SHOWNORMAL
+        //    SW_SHOWMINIMIZED = 2,  //最小化, 激活
+        //    SW_SHOWMAXIMIZED = 3,  //最大化, 激活
+        //    SW_MAXIMIZE = 3,  //同 SW_SHOWMAXIMIZED
+        //    SW_SHOWNOACTIVATE = 4,  //用最近的大小和位置显示, 不激活
+        //    SW_SHOW = 5,  //同 SW_SHOWNORMAL
+        //    SW_MINIMIZE = 6,  //最小化, 不激活
+        //    SW_SHOWMINNOACTIVE = 7,  //同 SW_MINIMIZE
+        //    SW_SHOWNA = 8,  //同 SW_SHOWNOACTIVATE
+        //    SW_RESTORE = 9,  //同 SW_SHOWNORMAL
+        //    SW_SHOWDEFAULT = 10, //同 SW_SHOWNORMAL
+        //    SW_MAX = 10, //同 SW_SHOWNORMAL 
+        //}
+
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         private static extern int SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int y, int Width, int Height, int flags);
         [DllImport("User32.dll", EntryPoint = "SetParent")]
         private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("User32.dll", EntryPoint = "GetParent")]
+        private static extern IntPtr GetParent(IntPtr hWndChild);
 
         [DllImport("user32.dll", EntryPoint = "ShowWindow")]
         private static extern int ShowWindow(IntPtr hwnd, int nCmdShow);
@@ -102,7 +129,8 @@ namespace MainFrame.Common
             ProcessStartInfo info = new ProcessStartInfo(exepath);
             info.WindowStyle = ProcessWindowStyle.Minimized;
             info.UseShellExecute = false;
-            info.CreateNoWindow = false; info.Arguments = args;
+            info.CreateNoWindow = false;
+            info.Arguments = args;
             proApp = Process.Start(info);// proApp.WaitForInputIdle();
             Application.Idle += Application_Idle;
             EmbedProcess(proApp, control);
@@ -115,38 +143,43 @@ namespace MainFrame.Common
         /// <param name="exepath">exe的完整绝对路径</param>
         public void LoadEXE(Form form, string exepath, string args, string windown_name = "")
         {
+            // 调用
+            //string filepath = exepath;
+            //IntPtr window = ShellExecute(form.Handle, "open", filepath, args, "", ShowCommands.SW_MAXIMIZE);
+
             winname = windown_name;
             ContainerControl = form;
             form.SizeChanged += Control_SizeChanged;
             proApp = new Process();
             proApp.StartInfo.UseShellExecute = false;
             proApp.StartInfo.CreateNoWindow = false;
-            proApp.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+            proApp.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             proApp.StartInfo.FileName = exepath;
             proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
-             
-            proApp.Start();
+            proApp.Start() ;
+            //proApp.WaitForInputIdle(5000);
 
-            //proApp.WaitForInputIdle();
-            //System.Threading.Thread.Sleep(1000);
+            var _handle = 0;
+            while (_handle == 0)
+            {
+                proApp.Refresh();
+                _handle = (int)proApp.MainWindowHandle;
+            }
 
             if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
             {
-                System.Threading.Thread.Sleep(3000);
-                Application.Idle += Application_Idle;
+                
+               // System.Threading.Thread.Sleep(500);
+
+                Application.Idle += Application_Idle;//Application_Idle_ForDelphi;
             }
             else
             {
-                //Application.Idle += Application_Idle_ForDelphi;
-
-                Application.Idle += Application_Idle;
+                Application.Idle += Application_Idle; 
             }
-
             EmbedProcess(proApp, form);
-
         }
 
-    
 
         public void LoadEXE_test(Form form, string exepath, string args)
         {
@@ -184,8 +217,8 @@ namespace MainFrame.Common
                 SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
 
                 MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                 
-                SetParent(window, control.Handle); 
+
+                SetParent(window, control.Handle);
             }
             catch (Exception ex3)
             {
@@ -211,7 +244,7 @@ namespace MainFrame.Common
             //{
             //    if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
             //    {
-                    MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+            MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
             //    }
             //}
 
@@ -223,14 +256,21 @@ namespace MainFrame.Common
         /// <param name="e"></param>
         private void Application_Idle(object sender, EventArgs e)
         {
+            //log.Debug("进入App_Idle:");
+           
+
             if (this.proApp == null || this.proApp.HasExited)
             {
+                log.Debug("null,:");
                 this.proApp = null;
                 Application.Idle -= Application_Idle;
                 return;
             }
-            if (proApp.MainWindowHandle == IntPtr.Zero) return;
+            proApp.Refresh();
+            if (proApp.MainWindowHandle == IntPtr.Zero) return; 
             Application.Idle -= Application_Idle;
+
+            //UIMessageTip.Show(proApp.MainWindowTitle);
             EmbedProcess(proApp, ContainerControl);
         }
 
@@ -244,10 +284,14 @@ namespace MainFrame.Common
             }
             if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
             {
-                IntPtr window = FindWindow(null, "药品管理系统");
-                if (window == IntPtr.Zero) return;
+                if (proApp.MainWindowHandle == IntPtr.Zero || proApp.MainWindowTitle.IndexOf("系统")==-1)
+                    return;
+                else
+                {
+                   // System.Threading.Thread.Sleep(500);
+                }
             }
-            Application.Idle -= Application_Idle;
+            Application.Idle -= Application_Idle_ForDelphi;
             EmbedProcess(proApp, ContainerControl);
         }
 
@@ -259,23 +303,29 @@ namespace MainFrame.Common
             // Get the main handle  || app.MainWindowHandle == IntPtr.Zero
             if (app == null || control == null) return;// IntPtr.Zero;
             try
-            { 
+            {
                 var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
-                 
-                if (window.ToInt32()==0)
+
+                if (window.ToInt32() == 0 )
                 {
                     return;
-                } 
+                }
                 Main.clientDic[SessionHelper.current_index] = window;
 
                 if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
                 {
                     //药品系统去除标题栏
                     SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                    SetParent(window, control.Handle);
+                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                    
                 }
-                SetParent(window, control.Handle); 
-                //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                else
+                {
+                    SetParent(window, control.Handle);
+                    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                }
             }
             catch (Exception ex3)
             {
@@ -283,6 +333,8 @@ namespace MainFrame.Common
             }
             // return IntPtr.Zero;
         }
+         
+
         /// <summary>
         /// 嵌入容器大小改变事件
         /// </summary>

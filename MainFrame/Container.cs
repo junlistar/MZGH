@@ -133,8 +133,8 @@ namespace MainFrame
                         SessionHelper.current_index = this.PageIndex;
                         Main.keylist.Add(this.PageIndex);
                         Main.clientDic.Add(this.PageIndex, IntPtr.Zero);
-                        ///IntPtr intPtr = 
-                        exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args, _system.sys_code);
+                  
+                        exetool.LoadEXE(this,Application.StartupPath + _system.file_path, _args, _system.sys_code);
                         //exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args);// Main.vM.UserMi; 
                        
                        // UIMessageTip.Show(intPtr.ToString());

@@ -42,9 +42,9 @@ namespace MainFrame
                 }
                 else
                 {
-                   // if (clientDic.Keys.Count > 0)
+                    // if (clientDic.Keys.Count > 0)
                     if (keylist.Count > 0)
-                    { 
+                    {
                         //杀子系统句柄
                         //var _key = clientDic.Keys.ToArray()[index - 1];
                         var _key = keylist[index - 1];
@@ -213,8 +213,10 @@ namespace MainFrame
         {
             //XML文件服务器下载地址
             var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
-            //_myAssembly.
-            AutoUpdater.Start("http://10.102.38.158:8001/Updates/AutoUpdaterStarter.xml");
+
+            var _updatewebsiet = ConfigurationManager.AppSettings["uploadwebsite"];
+
+            AutoUpdater.Start(_updatewebsiet);
 
             //todo：读取本地版本配置文件，
             //通过将其分配给InstalledVersion字段来提供自己的版本
@@ -295,7 +297,7 @@ namespace MainFrame
                                 $@"您有新的版本 {args.CurrentVersion} 可用，当前使用的是{args.InstalledVersion} 版本，
                                 您现在要更新应用程序吗？", @"Update Available",
                                 MessageBoxButtons.YesNo,
-                                MessageBoxIcon.Information);
+                                MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                     }
 
 
