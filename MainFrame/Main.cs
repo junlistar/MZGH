@@ -214,7 +214,7 @@ namespace MainFrame
             //XML文件服务器下载地址
             var _myAssembly = Assembly.GetEntryAssembly().GetName().Version;
 
-            var _updatewebsiet = ConfigurationManager.AppSettings["uploadwebsite"];
+            var _updatewebsiet = ConfigurationManager.AppSettings["updatewebsite"];
 
             AutoUpdater.Start(_updatewebsiet);
 

@@ -269,9 +269,7 @@ namespace MainFrame
         {
             //XML文件服务器下载地址 
             //AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
-
-            AutoUpdater.Start(vm.sys_update_url);
-
+             
 
             //读取本地版本配置文件，
             var _version = ReadLocalVersion(vm.sys_code);
@@ -294,6 +292,8 @@ namespace MainFrame
                 log.Error($"没有获取到系统：{vm.sys_name}的版本号");
                 return;
             }
+
+            AutoUpdater.Start(vm.sys_update_url);
 
 
             //查看中文版本
@@ -340,9 +340,11 @@ namespace MainFrame
                 Directory.CreateDirectory(AutoUpdater.InstallationPath);
             }
             //处理应用程序在下载完成后如何退出
+            AutoUpdater.ApplicationExitEvent -= AutoUpdater_ApplicationExitEvent;
             AutoUpdater.ApplicationExitEvent += AutoUpdater_ApplicationExitEvent;
 
             //自定义处理更新逻辑事件
+            AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
             AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
         }
 
