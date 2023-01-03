@@ -155,23 +155,19 @@ namespace MainFrame.Common
             proApp.StartInfo.CreateNoWindow = false;
             proApp.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
             proApp.StartInfo.FileName = exepath;
-            proApp.StartInfo.Arguments = args;// Process.GetCurrentProcess().Id.ToString();
+            proApp.StartInfo.Arguments = args;
             proApp.Start() ;
-            //proApp.WaitForInputIdle(5000);
-
-            var _handle = 0;
-            while (_handle == 0)
+             
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf" ))
             {
-                proApp.Refresh();
-                _handle = (int)proApp.MainWindowHandle;
-            }
-
-            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
-            {
-                
-               // System.Threading.Thread.Sleep(500);
-
-                Application.Idle += Application_Idle;//Application_Idle_ForDelphi;
+               
+                var _handle = 0;
+                while (_handle == 0)
+                {
+                    proApp.Refresh();
+                    _handle = (int)proApp.MainWindowHandle;
+                }
+                Application.Idle += Application_Idle;
             }
             else
             {
@@ -179,76 +175,7 @@ namespace MainFrame.Common
             }
             EmbedProcess(proApp, form);
         }
-
-
-        public void LoadEXE_test(Form form, string exepath, string args)
-        {
-            ContainerControl = form;
-            form.SizeChanged += Control_SizeChanged_test;
-            proApp = new Process();
-            proApp.StartInfo.UseShellExecute = false;
-            proApp.StartInfo.CreateNoWindow = false;
-            proApp.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-            proApp.StartInfo.FileName = exepath;
-            proApp.StartInfo.Arguments = args;
-            proApp.Start();
-
-            System.Threading.Thread.Sleep(3000);
-            EmbedProcessTest(proApp, form);
-
-        }
-        private void EmbedProcessTest(Process app, Control control)
-        {
-            // Get the main handle  || app.MainWindowHandle == IntPtr.Zero
-            if (app == null || control == null) return;// IntPtr.Zero;
-            try
-            {
-                #region 成功代码
-
-                //var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
-                //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE); //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                //MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                //SetParent(window, control.Handle);
-
-                #endregion
-
-                var window = app.MainWindowHandle;// FindWindow(null, "药品管理系统");
-
-                SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
-
-                MoveWindow(window, 0, 0, control.Width, control.Height, true);
-
-                SetParent(window, control.Handle);
-            }
-            catch (Exception ex3)
-            {
-                Console.WriteLine(ex3.Message);
-            }
-            // return IntPtr.Zero;
-        }
-        private void Control_SizeChanged_test(object sender, EventArgs e)
-        {
-            if (proApp == null)
-            {
-                return;
-            }
-            //if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
-            //{
-            //    var window = FindWindow(null, "药品管理系统");
-            //    if (window != IntPtr.Zero && ContainerControl != null)
-            //    {
-            //        MoveWindow(window, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
-            //    }
-            //}
-            //else
-            //{
-            //    if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
-            //    {
-            MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
-            //    }
-            //}
-
-        }
+  
         /// <summary>
         /// 确保应用程序嵌入此容器
         /// </summary>
@@ -256,44 +183,24 @@ namespace MainFrame.Common
         /// <param name="e"></param>
         private void Application_Idle(object sender, EventArgs e)
         {
-            //log.Debug("进入App_Idle:");
-           
-
             if (this.proApp == null || this.proApp.HasExited)
             {
-                log.Debug("null,:");
                 this.proApp = null;
                 Application.Idle -= Application_Idle;
                 return;
             }
-            proApp.Refresh();
+            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf" || winname == "mzys"))
+            {
+                System.Threading.Thread.Sleep(500);
+                proApp.Refresh();
+            }
             if (proApp.MainWindowHandle == IntPtr.Zero) return; 
             Application.Idle -= Application_Idle;
 
-            //UIMessageTip.Show(proApp.MainWindowTitle);
             EmbedProcess(proApp, ContainerControl);
         }
 
-        private void Application_Idle_ForDelphi(object sender, EventArgs e)
-        {
-            if (this.proApp == null || this.proApp.HasExited)
-            {
-                this.proApp = null;
-                Application.Idle -= Application_Idle_ForDelphi;
-                return;
-            }
-            if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
-            {
-                if (proApp.MainWindowHandle == IntPtr.Zero || proApp.MainWindowTitle.IndexOf("系统")==-1)
-                    return;
-                else
-                {
-                   // System.Threading.Thread.Sleep(500);
-                }
-            }
-            Application.Idle -= Application_Idle_ForDelphi;
-            EmbedProcess(proApp, ContainerControl);
-        }
+      
 
         /// <summary>
         /// 将指定的程序嵌入指定的控件
@@ -318,13 +225,20 @@ namespace MainFrame.Common
                     SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
                     SetParent(window, control.Handle);
                     MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                    
-                }
+                    log.Debug($"首次嵌入：Width:{control.Width},Height:{control.Height}");
+
+                } 
                 else
                 {
+                    //SetParent(window, control.Handle);
+                    ////ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                    //MoveWindow(window, 0, 0, control.Width, control.Height, true);
+
                     SetParent(window, control.Handle);
-                    //ShowWindow(window, (int)ProcessWindowStyle.Maximized);
+                    ShowWindow(window, (int)ProcessWindowStyle.Maximized);
                     MoveWindow(window, 0, 0, control.Width, control.Height, true);
+                    log.Debug($"首次嵌入：Width:{control.Width},Height:{control.Height}");
+
                 }
             }
             catch (Exception ex3)
@@ -363,6 +277,7 @@ namespace MainFrame.Common
             if (proApp.MainWindowHandle != IntPtr.Zero && ContainerControl != null)
             {
                 MoveWindow(proApp.MainWindowHandle, 0, 0, ContainerControl.Width, ContainerControl.Height, true);
+                log.Debug($"SizeChanged：Width:{ContainerControl.Width},Height:{ContainerControl.Height}");
             }
 
         }

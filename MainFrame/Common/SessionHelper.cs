@@ -17,6 +17,9 @@ namespace MainFrame.Common
 
         public static LoginUsersVM uservm = new LoginUsersVM();
 
+        //用户
+        public static List<UserDicVM> userDics;
+
         public static List<YpGroup> ypGroupsList;
 
         public static int current_index;

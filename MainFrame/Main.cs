@@ -21,6 +21,9 @@ namespace MainFrame
     public partial class Main : UIForm
     {
         private static ILog log = LogManager.GetLogger(typeof(Main));//typeof放当前类
+
+        string head_text = "荆州市中心医院  一体化信息管理平台V1.000(谷翔科技)";
+
         public Main()
         {
             InitializeComponent();
@@ -74,6 +77,8 @@ namespace MainFrame
         {
             try
             {
+                this.Text = $"{head_text} 当前操作系统-首页";
+
                 //设置窗体大小
                 this.MinimumSize = new Size(this.Width, this.Height);
 
@@ -92,7 +97,8 @@ namespace MainFrame
                 //设置扩展菜单
                 uiContextMenuStrip1.Items.Add("子系统维护");
                 uiContextMenuStrip1.Items.Add("系统分组维护");
-                uiContextMenuStrip1.Items.Add("系统信息配置");
+                uiContextMenuStrip1.Items.Add("权限管理");
+                //uiContextMenuStrip1.Items.Add("系统信息配置");
 
                 //设置tabcontrol样式 
                 uiTabControl1.ShowActiveCloseButton = true;
@@ -104,6 +110,8 @@ namespace MainFrame
                 uiTabControl1.TabSelectedColor = Color.FromArgb(6, 146, 151);
                 uiTabControl1.TabSelectedForeColor = Color.White;
                 uiTabControl1.MainPage = "主页";
+                uiTabControl1.ItemSize = new Size(150, 30);
+                uiTabControl1.TabVisible = false;//不显示tab
 
                 if (SessionHelper.MyHttpClient == null)
                 {
@@ -381,7 +389,9 @@ namespace MainFrame
             }
             else if (e.ClickedItem.Text == "权限管理")
             {
-
+                //系统权限管理
+                UserManage umForm = new UserManage();
+                umForm.ShowDialog();
             }
             else if (e.ClickedItem.Text == "系统信息配置")
             {
@@ -409,12 +419,56 @@ namespace MainFrame
                 }
                 else { log.Error(result.message); }
 
+
+                //获取用户 
+                json = "";
+                paramurl = string.Format($"/api/GuaHao/GetUserDic");
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                json = HttpClientUtil.Get(paramurl);
+                SessionHelper.userDics = HttpClientUtil.DeserializeObject<ResponseResult<List<UserDicVM>>>(json).data;
+
             }
             catch (Exception ex)
             {
                 UIMessageTip.ShowError(ex.Message, 2000);
                 log.Error(ex.ToString());
             }
+        }
+
+        private void uiTabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Text = $"{head_text} 当前操作系统-{uiTabControl1.SelectedTab.Text}";
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            log.Debug("子程序关闭事件"); 
+            if (keylist != null && keylist.Count > 0)
+            {
+                foreach (var _key in keylist)
+                { 
+                    var _intPtr = clientDic[_key];
+                    if (_intPtr != null)
+                    {
+                        EmbeddedExeTool exeTool = new EmbeddedExeTool();
+                        exeTool.CloseHandle(_intPtr);
+                    }
+
+                    RemovePage(_key);
+                } 
+
+                keylist.Clear();
+                clientDic.Clear(); 
+                SelectPage(1000);
+            } 
         }
     }
 }

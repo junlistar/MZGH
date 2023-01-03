@@ -35,4 +35,16 @@ namespace MainFrame.Common
         public string name { get; set; }
 
     }
+    public class UserDicVM
+    {
+        public string emp_sn { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public string py_code { get; set; }
+        public string d_code { get; set; }
+
+        public string dept_sn { get; set; }
+        public string dept_name { get; set; }
+        public string yb_ys_code { get; set; }
+    }
 }

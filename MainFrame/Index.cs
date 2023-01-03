@@ -5,10 +5,16 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
+using System.Net.Cache;
+using System.Net.Mime;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -16,6 +22,7 @@ using AutoUpdaterDotNET;
 using Client.ViewModel;
 using log4net;
 using MainFrame.Common;
+using MainFrame.Properties;
 using Sunny.UI;
 
 namespace MainFrame
@@ -27,15 +34,15 @@ namespace MainFrame
         {
             InitializeComponent();
         }
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams paras = base.CreateParams;
-                paras.ExStyle |= 0x02000000;
-                return paras;
-            }
-        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        CreateParams paras = base.CreateParams;
+        //        paras.ExStyle |= 0x02000000;
+        //        return paras;
+        //    }
+        //}
         public delegate void SetData(string clientName, int index);
         public SetData setData;
         public static List<SubSystemVM> systemList;
@@ -110,7 +117,7 @@ namespace MainFrame
 
             //获取当前系统
             _system = Index.systemList.Where(p => p.sys_no == _sysno).FirstOrDefault();
-            if (_system == null )
+            if (_system == null)
             {
                 UIMessageTip.ShowError("未正确配置系统！");
             }
@@ -124,7 +131,7 @@ namespace MainFrame
                 else if (!File.Exists(Application.StartupPath + _system.file_path))
                 {
                     UIMessageTip.ShowError("未正确配置系统！请检查配置项！");
-                     
+
                 }
                 else
                 {
@@ -143,7 +150,7 @@ namespace MainFrame
             try
             {
                 pnlSystem.FillColor = Color.Transparent;
-                BindData(); 
+                BindData();
                 GetSystemGroupData();
 
             }
@@ -152,7 +159,7 @@ namespace MainFrame
                 log.Error(ex);
             }
         }
-   
+
         public void BindData()
         {
             try
@@ -269,7 +276,7 @@ namespace MainFrame
         {
             //XML文件服务器下载地址 
             //AutoUpdater.Start("http://10.102.38.158/Updates/AutoUpdaterStarter.xml");
-             
+
 
             //读取本地版本配置文件，
             var _version = ReadLocalVersion(vm.sys_code);
@@ -330,8 +337,8 @@ namespace MainFrame
 
             //设置zip解压路径
             AutoUpdater.InstallationPath = Environment.CurrentDirectory + $@"\{vm.sys_relative_path}";
-            AutoUpdater.InstallationPath = AutoUpdater.InstallationPath.Replace("\\\\","\\");
-            if(AutoUpdater.InstallationPath.EndsWith("\\"))
+            AutoUpdater.InstallationPath = AutoUpdater.InstallationPath.Replace("\\\\", "\\");
+            if (AutoUpdater.InstallationPath.EndsWith("\\"))
             {
                 AutoUpdater.InstallationPath = AutoUpdater.InstallationPath.RemoveRight(1);
             }
@@ -361,6 +368,12 @@ namespace MainFrame
         }
         string _newversion = "";
         string _syscode = "";
+
+        MyWebClient _webClient;
+        string _tempFile;
+        UpdateInfoEventArgs _args;
+        private BackgroundWorker _backgroundWorker;
+
         private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
         {
             AutoUpdater.CheckForUpdateEvent -= AutoUpdaterOnCheckForUpdateEvent;
@@ -395,11 +408,39 @@ namespace MainFrame
                         {
                             //You can use Download Update dialog used by AutoUpdater.NET to download the update.
                             _newversion = args.CurrentVersion;
-                            if (AutoUpdater.DownloadUpdate(args))
+                            //if (AutoUpdater.DownloadUpdate(args))
+                            //{
+                            //    WriteLocalVersion(_syscode, _newversion);
+                            //    Application.Exit();
+                            //}
+
+                            //override code
+                            UIMessageTip.ShowOk("开始下载......");
+
+                            _args = args;
+                            var uri = new Uri(_args.DownloadURL);
+
+                            _webClient = UpdateHelper.GetWebClient(uri, AutoUpdater.BasicAuthDownload);
+
+                            if (string.IsNullOrEmpty(AutoUpdater.DownloadPath))
                             {
-                                WriteLocalVersion(_syscode, _newversion);
-                                Application.Exit();
+                                _tempFile = Path.GetTempFileName();
                             }
+                            else
+                            {
+                                _tempFile = Path.Combine(AutoUpdater.DownloadPath, $"{Guid.NewGuid().ToString()}.tmp");
+                                if (!Directory.Exists(AutoUpdater.DownloadPath))
+                                {
+                                    Directory.CreateDirectory(AutoUpdater.DownloadPath);
+                                }
+                            }
+
+                            _webClient.DownloadProgressChanged += OnDownloadProgressChanged;
+
+                            _webClient.DownloadFileCompleted += WebClientOnDownloadFileCompleted;
+
+                            _webClient.DownloadFileAsync(uri, _tempFile);
+
                         }
                         catch (Exception exception)
                         {
@@ -436,6 +477,332 @@ namespace MainFrame
             }
 
         }
+        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            //if (_startedAt == default(DateTime))
+            //{
+            //    _startedAt = DateTime.Now;
+            //}
+            //else
+            //{
+            //    var timeSpan = DateTime.Now - _startedAt;
+            //    long totalSeconds = (long)timeSpan.TotalSeconds;
+            //    if (totalSeconds > 0)
+            //    {
+            //        var bytesPerSecond = e.BytesReceived / totalSeconds;
+            //        labelInformation.Text =
+            //            string.Format(Resources.DownloadSpeedMessage, BytesToString(bytesPerSecond));
+            //    }
+            //}
+
+            //labelSize.Text = $@"{BytesToString(e.BytesReceived)} / {BytesToString(e.TotalBytesToReceive)}";
+            //progressBar.Value = e.ProgressPercentage;
+        }
+        private void WebClientOnDownloadFileCompleted(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
+        {
+            if (asyncCompletedEventArgs.Cancelled)
+            {
+                return;
+            }
+
+            try
+            {
+                if (asyncCompletedEventArgs.Error != null)
+                {
+                    throw asyncCompletedEventArgs.Error;
+                }
+
+                if (_args.CheckSum != null)
+                {
+                    CompareChecksum(_tempFile, _args.CheckSum);
+                }
+
+                ContentDisposition contentDisposition = null;
+                if (!String.IsNullOrWhiteSpace(_webClient.ResponseHeaders?["Content-Disposition"]))
+                {
+                    contentDisposition = new ContentDisposition(_webClient.ResponseHeaders["Content-Disposition"]);
+                }
+
+                var fileName = string.IsNullOrEmpty(contentDisposition?.FileName)
+                    ? Path.GetFileName(_webClient.ResponseUri.LocalPath)
+                    : contentDisposition.FileName;
+
+                var tempPath =
+                    Path.Combine(
+                        string.IsNullOrEmpty(AutoUpdater.DownloadPath) ? Path.GetTempPath() : AutoUpdater.DownloadPath,
+                        fileName);
+
+                if (File.Exists(tempPath))
+                {
+                    File.Delete(tempPath);
+                }
+
+                File.Move(_tempFile, tempPath);
+
+                string installerArgs = null;
+                if (!string.IsNullOrEmpty(_args.InstallerArgs))
+                {
+                    installerArgs = _args.InstallerArgs.Replace("%path%",
+                        Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName));
+                }
+
+                var processStartInfo = new ProcessStartInfo
+                {
+                    FileName = tempPath,
+                    UseShellExecute = true,
+                    Arguments = installerArgs ?? string.Empty
+                };
+                try
+                {
+                    var extension = Path.GetExtension(tempPath);
+                    if (extension.Equals(".zip", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string installerPath = Path.Combine(Path.GetDirectoryName(tempPath) ?? throw new InvalidOperationException(), "ZipExtractor.exe");
+
+                       // File.WriteAllBytes(installerPath, Resources.ZipExtractor);
+
+                        string executablePath = Process.GetCurrentProcess().MainModule?.FileName;
+                        string extractionPath = Path.GetDirectoryName(executablePath);
+
+                        if (!string.IsNullOrEmpty(AutoUpdater.InstallationPath) &&
+                            Directory.Exists(AutoUpdater.InstallationPath))
+                        {
+                            extractionPath = AutoUpdater.InstallationPath;
+                        }
+
+                        StringBuilder arguments =
+                            new StringBuilder($"\"{tempPath}\" \"{extractionPath}\" \"{executablePath}\"");
+                        string[] args = Environment.GetCommandLineArgs();
+                        for (int i = 1; i < args.Length; i++)
+                        {
+                            if (i.Equals(1))
+                            {
+                                arguments.Append(" \"");
+                            }
+
+                            arguments.Append(args[i]);
+                            arguments.Append(i.Equals(args.Length - 1) ? "\"" : " ");
+                        }
+
+                        processStartInfo = new ProcessStartInfo
+                        {
+                            FileName = installerPath,
+                            UseShellExecute = true,
+                            Arguments = arguments.ToString()
+                        };
+
+
+                        // Extract all the files.
+                        _backgroundWorker = new BackgroundWorker
+                        {
+                            WorkerReportsProgress = true,
+                            WorkerSupportsCancellation = true
+                        };
+
+                        _backgroundWorker.DoWork += (_, eventArgs) =>
+                        {
+                            //foreach (var process in Process.GetProcessesByName(Path.GetFileNameWithoutExtension(executablePath)))
+                            //{
+                            //    try
+                            //    {
+                            //        if (process.MainModule !=null && process.MainModule.FileName.Equals(executablePath))
+                            //        {
+                            //           // _logBuilder.AppendLine("Waiting for application process to exit...");
+
+                            //            _backgroundWorker.ReportProgress(0, "Waiting for application to exit...");
+                            //            process.WaitForExit();
+                            //        }
+                            //    }
+                            //    catch (Exception exception)
+                            //    {
+                            //        Debug.WriteLine(exception.Message);
+                            //    }
+                            //}
+
+                            // _logBuilder.AppendLine("BackgroundWorker started successfully.");
+
+                            var path = extractionPath;// args[2];
+
+                            // Ensures that the last character on the extraction path
+                            // is the directory separator char.
+                            // Without this, a malicious zip file could try to traverse outside of the expected
+                            // extraction path.
+                            if (!path.EndsWith(Path.DirectorySeparatorChar.ToString(), StringComparison.Ordinal))
+                            {
+                                path += Path.DirectorySeparatorChar;
+                            }
+                            var archive = ZipFile.OpenRead(tempPath);//args[1]
+
+                            var entries = archive.Entries;
+
+                            //_logBuilder.AppendLine($"Found total of {entries.Count} files and folders inside the zip file.");
+
+                            try
+                            {
+                                int progress = 0;
+                                for (var index = 0; index < entries.Count; index++)
+                                {
+                                    if (_backgroundWorker.CancellationPending)
+                                    {
+                                        eventArgs.Cancel = true;
+                                        break;
+                                    }
+
+                                    var entry = entries[index];
+
+                                    string currentFile = string.Format("Extracting {0}", entry.FullName);
+                                    _backgroundWorker.ReportProgress(progress, currentFile);
+                                    int retries = 0;
+                                    bool notCopied = true;
+                                    while (notCopied)
+                                    {
+                                        string filePath = String.Empty;
+                                        try
+                                        {
+                                            filePath = Path.Combine(path, entry.FullName);
+                                            if (!entry.IsDirectory())
+                                            {
+                                                var parentDirectory = Path.GetDirectoryName(filePath);
+                                                if (!Directory.Exists(parentDirectory))
+                                                {
+                                                    Directory.CreateDirectory(parentDirectory);
+                                                }
+                                                entry.ExtractToFile(filePath, true);
+                                            }
+                                            notCopied = false;
+                                        }
+                                        catch (IOException exception)
+                                        {
+                                            const int errorSharingViolation = 0x20;
+                                            const int errorLockViolation = 0x21;
+                                            var errorCode = Marshal.GetHRForException(exception) & 0x0000FFFF;
+                                            if (errorCode == errorSharingViolation || errorCode == errorLockViolation)
+                                            {
+                                                retries++;
+                                                if (retries > 100)
+                                                {
+                                                    throw;
+                                                }
+
+                                                List<Process> lockingProcesses = null;
+                                                if (Environment.OSVersion.Version.Major >= 6 && retries >= 2)
+                                                {
+                                                    try
+                                                    {
+                                                        lockingProcesses = UpdateHelper.WhoIsLocking(filePath);
+                                                    }
+                                                    catch (Exception)
+                                                    {
+                                                        // ignored
+                                                    }
+                                                }
+
+                                                if (lockingProcesses == null)
+                                                {
+                                                    Thread.Sleep(5000);
+                                                }
+                                                else
+                                                {
+                                                    foreach (var lockingProcess in lockingProcesses)
+                                                    {
+                                                        //var dialogResult = MessageBox.Show(
+                                                        //    string.Format(Resources.FileStillInUseMessage,
+                                                        //        lockingProcess.ProcessName, filePath),
+                                                        //    Resources.FileStillInUseCaption,
+                                                        //    MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                                                        //if (dialogResult == DialogResult.Cancel)
+                                                        //{
+                                                        //    throw;
+                                                        //}
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                throw;
+                                            }
+                                        }
+                                    }
+
+                                    progress = (index + 1) * 100 / entries.Count;
+                                    _backgroundWorker.ReportProgress(progress, currentFile);
+
+                                   // _logBuilder.AppendLine($"{currentFile} [{progress}%]");
+                                }
+                                WriteLocalVersion(_syscode, _newversion);
+                                UIMessageTip.ShowOk("安装完成！",2000);
+                            }
+                            finally
+                            {
+                                archive.Dispose();
+                            }
+                        };
+
+                        _backgroundWorker.RunWorkerAsync();
+                    }
+                }
+                catch (Win32Exception exception)
+                {
+                    if (exception.NativeErrorCode == 1223)
+                    {
+                        _webClient = null;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, e.GetType().ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _webClient = null;
+            }
+            finally
+            {
+                DialogResult = _webClient == null ? DialogResult.Cancel : DialogResult.OK;
+                FormClosing -= DownloadUpdateDialog_FormClosing;
+                //Close();
+            }
+        }
+        private void DownloadUpdateDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (AutoUpdater.Mandatory && AutoUpdater.UpdateMode == Mode.ForcedDownload)
+            {
+                if (ModifierKeys == Keys.Alt || ModifierKeys == Keys.F4)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+            //if (_webClient is { IsBusy: true })
+            //{
+            //    _webClient.CancelAsync();
+            //    DialogResult = DialogResult.Cancel;
+            //}
+        }
+        private static void CompareChecksum(string fileName, CheckSum checksum)
+        {
+            using (var hashAlgorithm =
+                HashAlgorithm.Create(
+                    string.IsNullOrEmpty(checksum.HashingAlgorithm) ? "MD5" : checksum.HashingAlgorithm))
+            {
+                using (var stream = File.OpenRead(fileName))
+                {
+                    if (hashAlgorithm != null)
+                    {
+                        var hash = hashAlgorithm.ComputeHash(stream);
+                        var fileChecksum = BitConverter.ToString(hash).Replace("-", string.Empty).ToLowerInvariant();
+
+                        if (fileChecksum == checksum.Value.ToLower()) return;
+
+                        throw new Exception("CompareChecksum error");
+                    }
+
+                    throw new Exception("CompareChecksum error");
+                }
+            }
+        }
 
         #endregion
 
@@ -466,7 +833,7 @@ namespace MainFrame
         public void LoadSubSystems()
         {
             int width = 60;
-            int height =60;
+            int height = 60;
             int top = 50, left = 280;
             for (int i = 0; i < system_groups.Count; i++)
             {
@@ -503,13 +870,13 @@ namespace MainFrame
 
                     UILabel label = new UILabel();
                     label.Width = height;
-                    label.Height = height-20;
+                    label.Height = height - 20;
                     label.AutoSize = false;
                     label.Font = new Font("宋体", 9, FontStyle.Bold);
                     label.Text = _txt;
                     label.Top = uIButton.Top + 60;
                     label.Left = left + (j * 100);
-                   // label.TextAlign = ContentAlignment.MiddleCenter;
+                    // label.TextAlign = ContentAlignment.MiddleCenter;
                     label.Parent = this;
                     label.BringToFront();
                 }
@@ -551,7 +918,7 @@ namespace MainFrame
                 //    label.Parent = this;
 
                 //}
-            }  
+            }
             this.AutoScroll = true; this.VerticalScroll.Enabled = false;
             this.VerticalScroll.Visible = false;
             this.AutoScrollMinSize = new Size(this.Width, this.Height);
@@ -598,7 +965,7 @@ namespace MainFrame
             }
         }
 
-         
+
         //public void LoadGroupSystem(string sysname)
         //{
 

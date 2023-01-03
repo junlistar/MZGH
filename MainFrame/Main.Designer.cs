@@ -38,6 +38,7 @@
             this.tsl_time = new System.Windows.Forms.ToolStripLabel();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
+            this.uiButton1 = new Sunny.UI.UIButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,7 @@
             // uiTabControl1
             // 
             this.uiTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.Frame = null;
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
@@ -109,6 +111,7 @@
             this.uiTabControl1.TabIndex = 1;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiTabControl1.SelectedIndexChanged += new System.EventHandler(this.uiTabControl1_SelectedIndexChanged);
             // 
             // uiContextMenuStrip1
             // 
@@ -119,11 +122,27 @@
             this.uiContextMenuStrip1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiContextMenuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.uiContextMenuStrip1_ItemClicked);
             // 
+            // uiButton1
+            // 
+            this.uiButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton1.Location = new System.Drawing.Point(514, 659);
+            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Size = new System.Drawing.Size(99, 21);
+            this.uiButton1.TabIndex = 2;
+            this.uiButton1.Text = "回到主页";
+            this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            // 
             // Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1045, 683);
+            this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.uiTabControl1);
             this.Controls.Add(this.toolStrip1);
             this.ExtendBox = true;
@@ -132,7 +151,7 @@
             this.Name = "Main";
             this.ShowTitleIcon = true;
             this.Text = "湖北省荆州市中心医院 一体化信息管理平台";
-            this.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.TextAlignment = System.Drawing.StringAlignment.Far;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
@@ -155,6 +174,7 @@
         private System.Windows.Forms.ToolStripLabel tsl_time;
         private Sunny.UI.UITabControl uiTabControl1;
         private Sunny.UI.UIContextMenuStrip uiContextMenuStrip1;
+        private Sunny.UI.UIButton uiButton1;
     }
 }
 

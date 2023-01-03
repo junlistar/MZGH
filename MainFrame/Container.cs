@@ -13,6 +13,9 @@ using MainFrame.Common;
 using Sunny.UI;
 using System.Runtime.InteropServices;
 using log4net;
+using Microsoft.Win32;
+using System.Windows.Input;
+using System.IO;
 
 namespace MainFrame
 {
@@ -34,7 +37,7 @@ namespace MainFrame
         {
             //this.BackColor = Color.Red;
 
-            this.AutoScroll = true; 
+            this.AutoScroll = true;
             this.AutoScrollMinSize = new Size(this.Width, this.Height);
 
             switch (sys_key)
@@ -50,7 +53,7 @@ namespace MainFrame
         public void OpenSubSystem()
         {
             try
-            { 
+            {
                 //获取当前系统
                 var _system = Index.systemList.Where(p => p.sys_no == this.PageIndex).FirstOrDefault();
                 if (_system != null)
@@ -61,8 +64,9 @@ namespace MainFrame
                         Main.vM.group_no = _system.group_no.Trim();
                         var _ypgroup = SessionHelper.ypGroupsList.Where(p => p.group_no.Trim() == _system.group_no.Trim()).FirstOrDefault();
                         Main.vM.group_name = _ypgroup == null ? "" : _ypgroup.dept_name.Trim();
+                        Main.vM.SubsysRelativePath = _system.sys_relative_path;
                     }
-                   
+
                     Main.vM.subsys_id = _system.subsys_id.Trim();
                     var _args = EmbeddedExeTool.SerializeObject(Main.vM);
                     //_args = _args.Replace("\"", "\\\"");
@@ -128,16 +132,29 @@ namespace MainFrame
                             //门诊挂号收费需要处理引号，不然会丢失引号，导致json格式不对
                             //_args = _args.Replace("\"", "\\\"");
                         }
+                        else if (_system.sys_code == "mzys")
+                        {
+                            log.Debug("门诊医生path开始:");
+
+                            //门诊医生，添加path 
+                            var dllDirectory = Application.StartupPath + _system.sys_relative_path + "\\Modules\\rtl";
+                            Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + ";" + dllDirectory);
+                             
+                            log.Debug("门诊医生path结束:");
+                            //门诊医生，写入注册表操作
+                            //RegistryKey key = Registry.LocalMachine;
+                            //RegistryKey software = key.CreateSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers\"+ Application.StartupPath + _system.file_path);
+                        }
                         _args = StringUtil.Base64Encode(_args);
 
                         SessionHelper.current_index = this.PageIndex;
                         Main.keylist.Add(this.PageIndex);
                         Main.clientDic.Add(this.PageIndex, IntPtr.Zero);
-                  
-                        exetool.LoadEXE(this,Application.StartupPath + _system.file_path, _args, _system.sys_code);
+
+                        exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args, _system.sys_code);
                         //exetool.LoadEXE(this, Application.StartupPath + _system.file_path, _args);// Main.vM.UserMi; 
-                       
-                       // UIMessageTip.Show(intPtr.ToString());
+
+                        // UIMessageTip.Show(intPtr.ToString());
                     }
                     else
                     {

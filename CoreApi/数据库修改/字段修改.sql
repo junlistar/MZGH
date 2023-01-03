@@ -975,3 +975,10 @@ CREATE TABLE [dbo].[MainClientConfig] (
 GO
 INSERT INTO [dbo].[MainClientConfig] ([name], [titile], [show_image], [show_title], [show_desc], [update_time]) VALUES ( N'荆州市中心医院', N'荆州市中心医院', NULL, N'荆州市中心医院', N'荆州市中心医院', N'2022-12-09 15:57:40.000')
 GO
+
+--主程序 添加门诊医生子程序关联
+insert into xt_subsys(subsys_id,subsys_name,short_name,pass_status,py_code,d_code)
+values('mzcpr3','门诊电子病历子系统3','门诊医生',1,'MZCPR3','MZCPR')
+
+insert into xt_user(user_name,subsys_id,user_group,create_pw_date,user_mi)
+values('super','mzcpr3',0,GETDATE(),'00000')
