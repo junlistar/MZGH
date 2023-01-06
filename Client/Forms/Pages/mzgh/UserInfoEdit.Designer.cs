@@ -147,6 +147,7 @@
             this.txtCardId.Style = Sunny.UI.UIStyle.Custom;
             this.txtCardId.TabIndex = 2;
             this.txtCardId.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtCardId.Watermark = "";
             this.txtCardId.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtCardId.Leave += new System.EventHandler(this.txtCardId_Leave);
             // 
@@ -163,6 +164,7 @@
             this.txtUserName.Style = Sunny.UI.UIStyle.Custom;
             this.txtUserName.TabIndex = 3;
             this.txtUserName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtUserName.Watermark = "";
             this.txtUserName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtTel
@@ -178,6 +180,7 @@
             this.txtTel.Style = Sunny.UI.UIStyle.Custom;
             this.txtTel.TabIndex = 4;
             this.txtTel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtTel.Watermark = "";
             this.txtTel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel8
@@ -219,6 +222,7 @@
             this.txthomestreet.Style = Sunny.UI.UIStyle.Custom;
             this.txthomestreet.TabIndex = 15;
             this.txthomestreet.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txthomestreet.Watermark = "";
             this.txthomestreet.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtZhiye
@@ -234,6 +238,7 @@
             this.txtZhiye.Style = Sunny.UI.UIStyle.Custom;
             this.txtZhiye.TabIndex = 14;
             this.txtZhiye.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtZhiye.Watermark = "";
             this.txtZhiye.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtpatientid
@@ -250,6 +255,7 @@
             this.txtpatientid.Style = Sunny.UI.UIStyle.Custom;
             this.txtpatientid.TabIndex = 1111;
             this.txtpatientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtpatientid.Watermark = "";
             this.txtpatientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLine1
@@ -298,6 +304,7 @@
             this.cbxmarrycode.Style = Sunny.UI.UIStyle.Custom;
             this.cbxmarrycode.TabIndex = 8;
             this.cbxmarrycode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxmarrycode.Watermark = "";
             this.cbxmarrycode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.cbxmarrycode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxmarrycode_KeyDown);
             // 
@@ -375,6 +382,7 @@
             this.cbxSex.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSex.TabIndex = 6;
             this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxSex.Watermark = "";
             this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtshebaohao
@@ -390,6 +398,7 @@
             this.txtshebaohao.Style = Sunny.UI.UIStyle.Custom;
             this.txtshebaohao.TabIndex = 11;
             this.txtshebaohao.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtshebaohao.Watermark = "";
             this.txtshebaohao.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel12
@@ -418,6 +427,7 @@
             this.txtemployername.Style = Sunny.UI.UIStyle.Custom;
             this.txtemployername.TabIndex = 13;
             this.txtemployername.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtemployername.Watermark = "";
             this.txtemployername.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label32
@@ -449,6 +459,7 @@
             this.cbxShenfen.Style = Sunny.UI.UIStyle.Custom;
             this.cbxShenfen.TabIndex = 10;
             this.cbxShenfen.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxShenfen.Watermark = "";
             this.cbxShenfen.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel5
@@ -468,6 +479,7 @@
             // 
             this.txthomedistrict.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txthomedistrict.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txthomedistrict.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.txthomedistrict.Location = new System.Drawing.Point(133, 196);
             this.txthomedistrict.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txthomedistrict.MinimumSize = new System.Drawing.Size(1, 16);
@@ -477,6 +489,7 @@
             this.txthomedistrict.Style = Sunny.UI.UIStyle.Custom;
             this.txthomedistrict.TabIndex = 9;
             this.txthomedistrict.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txthomedistrict.Watermark = "";
             this.txthomedistrict.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // cbxChargeType
@@ -499,6 +512,7 @@
             this.cbxChargeType.Style = Sunny.UI.UIStyle.Custom;
             this.cbxChargeType.TabIndex = 12;
             this.cbxChargeType.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxChargeType.Watermark = "";
             this.cbxChargeType.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // sfz_birthday
@@ -520,6 +534,7 @@
             this.sfz_birthday.Text = "1900-01-01";
             this.sfz_birthday.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.sfz_birthday.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.sfz_birthday.Watermark = "";
             this.sfz_birthday.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label8
@@ -579,7 +594,9 @@
             this.sfz_card_no.Style = Sunny.UI.UIStyle.Custom;
             this.sfz_card_no.TabIndex = 5;
             this.sfz_card_no.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.sfz_card_no.Watermark = "";
             this.sfz_card_no.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.sfz_card_no.Leave += new System.EventHandler(this.txtsfz_Leave);
             // 
             // label11
             // 
@@ -610,6 +627,7 @@
             this.cbxRelation.Style = Sunny.UI.UIStyle.Custom;
             this.cbxRelation.TabIndex = 18;
             this.cbxRelation.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRelation.Watermark = "";
             this.cbxRelation.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txtRelationName
@@ -625,6 +643,7 @@
             this.txtRelationName.Style = Sunny.UI.UIStyle.Custom;
             this.txtRelationName.TabIndex = 16;
             this.txtRelationName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtRelationName.Watermark = "";
             this.txtRelationName.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label20
@@ -691,6 +710,7 @@
             this.cbx_relsex.Style = Sunny.UI.UIStyle.Custom;
             this.cbx_relsex.TabIndex = 19;
             this.cbx_relsex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbx_relsex.Watermark = "";
             this.cbx_relsex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel10
@@ -719,6 +739,7 @@
             this.txt_rel_address.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_address.TabIndex = 22;
             this.txt_rel_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_rel_address.Watermark = "";
             this.txt_rel_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label1
@@ -743,6 +764,7 @@
             this.txt_rel_tel.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_tel.TabIndex = 17;
             this.txt_rel_tel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_rel_tel.Watermark = "";
             this.txt_rel_tel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel11
@@ -777,6 +799,7 @@
             this.txt_rel_birth.Text = "1990-01-01";
             this.txt_rel_birth.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_rel_birth.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
+            this.txt_rel_birth.Watermark = "";
             this.txt_rel_birth.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_rel_sfzid
@@ -792,6 +815,7 @@
             this.txt_rel_sfzid.Style = Sunny.UI.UIStyle.Custom;
             this.txt_rel_sfzid.TabIndex = 20;
             this.txt_rel_sfzid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_rel_sfzid.Watermark = "";
             this.txt_rel_sfzid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label2
@@ -821,6 +845,7 @@
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(99, 36);
+            this.btnSave.Style = Sunny.UI.UIStyle.Custom;
             this.btnSave.TabIndex = 23;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -836,6 +861,7 @@
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(99, 36);
+            this.btnCancel.Style = Sunny.UI.UIStyle.Custom;
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 42;
             this.btnCancel.Text = "取消";

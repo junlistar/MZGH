@@ -22,6 +22,11 @@ namespace MainFrame
 
         string subsys_id = "his_main";
 
+        List<SubSystemGroupVM> system_groups;
+        List<SubSystemVM> systemList;
+
+        List<XTUserGroupVM> functions;
+
         public UserManage()
         {
             InitializeComponent();
@@ -29,6 +34,9 @@ namespace MainFrame
 
         private void UserManage_Load(object sender, EventArgs e)
         {
+            BindSystemGroupData();
+            BindSystemData();
+
             InitGroupsData();
 
             LoadMouseKeyMenu();
@@ -48,7 +56,7 @@ namespace MainFrame
                 var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemGroupVM>>>(json);
                 if (result.status == 1)
                 {
-                    //system_groups = result.data.OrderBy(p => p.sort).ToList();
+                    system_groups = result.data.OrderBy(p => p.sort).ToList();
                     //dgvlist.DataSource = system_groups.Select(p => new
                     //{
                     //    p.group_code,
@@ -85,7 +93,7 @@ namespace MainFrame
                 var result = HttpClientUtil.DeserializeObject<ResponseResult<List<SubSystemVM>>>(json);
                 if (result.status == 1)
                 {
-                    //systemList = result.data.OrderBy(p => p.sys_no).ToList();
+                    systemList = result.data.OrderBy(p => p.sys_no).ToList();
                     //dgvlist.DataSource = systemList.Select(p => new
                     //{
                     //    p.sys_no,
@@ -360,7 +368,7 @@ namespace MainFrame
         public void BindOtherTreeView(string user_group)
         { 
             InitUserData(user_group);
-            //InitUserGroupData(user_group);
+            InitUserGroupData(user_group);
             //InitUserReportsData(user_group);
 
             LoadFuncTreeData();
@@ -415,6 +423,51 @@ namespace MainFrame
             }
 
         }
+
+        public void InitUserGroupData(string user_group)
+        {
+            try
+            {
+                var d = new
+                {
+                    subsys_id = subsys_id,
+                    user_group = user_group
+                };
+
+                var param = $"subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var paramurl = string.Format($"/api/qxgl/GetXTUserSystemsByGroupId?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+                string json = HttpClientUtil.Get(paramurl);
+
+                var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTUserGroupVM>>>(json);
+               // tv_functions.Nodes.Clear();
+                if (result.status == 1)
+                {
+                    functions = result.data;
+                    //foreach (var item in result.data)
+                    //{
+                    //    tv_functions.Nodes.Add(item.func_name, item.func_desc);
+                    //}
+                    //if (tv_functions.Nodes.Count > 0)
+                    //{
+                    //    tv_functions.SelectedNode = tv_functions.Nodes[0];
+                    //}
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+
+        }
         /// <summary>
         /// 加载树形选择控件
         /// </summary>
@@ -422,44 +475,58 @@ namespace MainFrame
         {
             try
             {
-                var d = new
+                tv_func_select.Nodes.Clear();
+                foreach (var group in system_groups)
                 {
-                    subsys_id = subsys_id
-                };
-
-                var param = $"subsys_id={d.subsys_id}";
-
-                var paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
-
-                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
-                string json = HttpClientUtil.Get(paramurl);
-                var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json);
-
-                if (result.status == 1)
-                {
-                    tv_func_select.Nodes.Clear();
-                    foreach (var item in result.data)
-                    {
-                        if (string.IsNullOrWhiteSpace(item.parent_func))
-                        {
-                            tv_func_select.Nodes.Add(item.func_name.Trim(), item.func_desc.Trim());
-                        }
-                    }
-                    if (tv_func_select.Nodes.Count > 0)
-                    {
-                        LoadSubFuncItems(tv_func_select.Nodes, result.data);
-
-                        tv_func_select.ExpandAll();
-                    }
-                    //选中已经有的
-                    //SetCheckBox(tv_func_select.Nodes);
-
+                    tv_func_select.Nodes.Add(group.group_code, group.group_name);
                 }
-                else
+                if (tv_func_select.Nodes.Count > 0)
                 {
-                    UIMessageTip.ShowError(result.message);
-                    log.Error(result.message);
+                    LoadSubFuncItems(tv_func_select.Nodes, systemList);
+
+                    tv_func_select.ExpandAll();
                 }
+                //选中已经有的
+                SetCheckBox(tv_func_select.Nodes);
+
+                //var d = new
+                //{
+                //    subsys_id = subsys_id
+                //};
+
+                //var param = $"subsys_id={d.subsys_id}";
+
+                //var paramurl = string.Format($"/api/qxgl/GetXTUserGroups?{param}");
+
+                //log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                //string json = HttpClientUtil.Get(paramurl);
+                //var result = WebApiHelper.DeserializeObject<ResponseResult<List<XTFunctionsVM>>>(json);
+
+                //if (result.status == 1)
+                //{
+                //    tv_func_select.Nodes.Clear();
+                //    foreach (var item in result.data)
+                //    {
+                //        if (string.IsNullOrWhiteSpace(item.parent_func))
+                //        {
+                //            tv_func_select.Nodes.Add(item.func_name.Trim(), item.func_desc.Trim());
+                //        }
+                //    }
+                //    if (tv_func_select.Nodes.Count > 0)
+                //    {
+                //        LoadSubFuncItems(tv_func_select.Nodes, result.data);
+
+                //        tv_func_select.ExpandAll();
+                //    }
+                //    //选中已经有的
+                //    //SetCheckBox(tv_func_select.Nodes);
+
+                //}
+                //else
+                //{
+                //    UIMessageTip.ShowError(result.message);
+                //    log.Error(result.message);
+                //}
 
             }
             catch (Exception ex)
@@ -473,22 +540,135 @@ namespace MainFrame
         /// </summary>
         /// <param name="treeNodeCollection"></param>
         /// <param name="data"></param>
-        public void LoadSubFuncItems(TreeNodeCollection treeNodeCollection, List<XTFunctionsVM> data)
+        public void LoadSubFuncItems(TreeNodeCollection treeNodeCollection, List<SubSystemVM> data)
         {
 
             foreach (TreeNode node in treeNodeCollection)
             {
-                var items = data.Where(p => p.parent_func != null && p.parent_func.Trim() == node.Name).ToList();
+                var items = data.Where(p => p.sys_group_code != null && p.sys_group_code.Trim() == node.Name).ToList();
                 if (items != null && items.Count > 0)
                 {
                     foreach (var subitem in items)
                     {
-                        node.Nodes.Add(subitem.func_name.Trim(), subitem.func_desc.Trim());
+                        node.Nodes.Add(subitem.sys_code, subitem.sys_name);
                     }
-                    LoadSubFuncItems(node.Nodes, data);
+                    //LoadSubFuncItems(node.Nodes, data);
                 }
             }
         }
+        /// <summary>
+        /// 设置树形菜单选中
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <returns></returns>
+        public bool SetCheckBox(TreeNodeCollection nodes)
+        {
+            bool _re = false;
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    if (SetCheckBox(node.Nodes))
+                    {
+                        node.Checked = true;
+                    }
+                }
+                else
+                {
+                    if (functions.Where(p => p.func_name.Trim() == node.Name).Count() > 0)
+                    {
+                        node.Checked = true;
+                        _re = true;
+                    }
+                }
+            }
+            return _re;
+        }
 
+        /// <summary>
+        /// 保存菜单权限
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSaveMenu_Click(object sender, EventArgs e)
+        {
+            var func_str = "";
+
+            //获取选中的菜单项
+            GetChildNode(tv_func_select.Nodes, ref func_str);
+
+
+            string user_group = tv_groups.SelectedNode.Name;
+
+            if (func_str != "")
+            {
+                func_str = func_str.Substring(1);
+            }
+            try
+            {
+                //UIMessageBox.Show(func_str);
+
+                var d = new
+                {
+                    func_str = func_str,
+                    subsys_id = subsys_id,
+                    user_group = user_group
+                };
+
+                var param = $"func_str={d.func_str}&subsys_id={d.subsys_id}&user_group={d.user_group}";
+
+                var paramurl = string.Format($"/api/qxgl/AddXtUserGroups?{param}");
+
+                log.Info(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+                string json = HttpClientUtil.Get(paramurl);
+                var result = WebApiHelper.DeserializeObject<ResponseResult<bool>>(json);
+
+                if (result.status == 1)
+                {
+                    UIMessageTip.Show("修改成功！");
+                    InitUserGroupData(user_group);
+                }
+                else
+                {
+                    UIMessageTip.ShowError(result.message);
+                    log.Error(result.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+        /// <summary>
+        /// 获取树形菜单子项
+        /// </summary>
+        /// <param name="nodes"></param>
+        /// <param name="func_str"></param>
+        /// <returns></returns>
+        public string GetChildNode(TreeNodeCollection nodes, ref string func_str)
+        {
+            var node_str = "";
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    var _re = GetChildNode(node.Nodes, ref func_str);
+                    if (_re != "")
+                    {
+                        node_str += "," + node.Name;
+                    }
+                }
+                else
+                {
+                    if (node.Checked)
+                    {
+                        node_str += "," + node.Name;
+                    }
+                }
+
+            }
+            func_str += node_str;
+            return node_str;
+        }
     }
 }

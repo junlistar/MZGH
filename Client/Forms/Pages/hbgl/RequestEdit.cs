@@ -518,7 +518,10 @@ namespace Client
                 }
 
                 if (UIMessageDialog.ShowAskDialog(this, "修改将重新生成分时段挂号数据，是否确认修改？"))
-                { 
+                {
+
+                    LoadingHelper.ShowLoadingScreen();//显示
+
                     var d = new
                     {
                         record_sn = _record_sn,
@@ -540,6 +543,8 @@ namespace Client
                     var paramurl = string.Format($"/api/GuaHao/EditRequest?record_sn={d.record_sn}&request_date={d.request_date}&unit_sn={d.unit_sn}&group_sn={d.group_sn}&doctor_sn={d.doctor_sn}&clinic_type={d.clinic_type}&request_type={d.request_type}&ampm={d.ampm}&totle_num={d.totle_num}&workroom={d.workroom}&open_flag={d.open_flag}&op_id={d.op_id}&temp_flag={_temp_flag}&limit_appoint_percent={d.limit_appoint_percent}");
 
                     string res = SessionHelper.MyHttpClient.PostAsync(paramurl, httpContent).Result.Content.ReadAsStringAsync().Result;
+
+                    LoadingHelper.CloseForm();
 
                     var responseJson = WebApiHelper.DeserializeObject<ResponseResult<int>>(res);
 

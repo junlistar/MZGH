@@ -10,12 +10,14 @@ using System.Threading.Tasks;
 namespace MainFrame.Common
 {
     public class SessionHelper
-    {
-
+    { 
 
         public static HttpClient MyHttpClient = null;
 
         public static LoginUsersVM uservm = new LoginUsersVM();
+
+        //用户子系统列表 
+        public static List<UserGroupSystemVM> userGroupSystems;
 
         //用户
         public static List<UserDicVM> userDics;

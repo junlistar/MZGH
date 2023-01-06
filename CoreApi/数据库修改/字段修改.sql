@@ -982,3 +982,12 @@ values('mzcpr3','门诊电子病历子系统3','门诊医生',1,'MZCPR3','MZCPR'
 
 insert into xt_user(user_name,subsys_id,user_group,create_pw_date,user_mi)
 values('super','mzcpr3',0,GETDATE(),'00000')
+go
+
+insert into xt_user(user_name,subsys_id,user_group,create_pw_date,user_mi)
+values('super','his_main',0,GETDATE(),'00000')
+go
+
+if not exists(select * from syscolumns where id=object_id('mz_client_config') and name='older_age') begin
+ALTER TABLE mz_client_config ADD older_age  smallint default (60)
+end

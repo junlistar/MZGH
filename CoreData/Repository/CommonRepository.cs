@@ -81,8 +81,9 @@ namespace Data.Repository
                 para.Add("@mzsf_report_code", clientConfig.mzsf_report_code);
                 para.Add("@ghrj_report_code", clientConfig.ghrj_report_code);
                 para.Add("@sfrj_report_code", clientConfig.sfrj_report_code);
+                para.Add("@older_age", clientConfig.older_age);
                 para.Add("@sys_type", clientConfig.sys_type);
-
+                
                 return connection.Execute(sql, para) > 0;
             }
         }

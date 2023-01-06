@@ -43,13 +43,16 @@ namespace Mzsf.Forms.Pages
         {
             if (_is_charge)
             {
-                btnAddItem.Visible = false;
-                btnDeleteItem.Visible = false;
-                dgvOrderDetail.Visible = false;
-                uiPanel1.Visible = false;
+                //btnAddItem.Visible = false;
+                //btnDeleteItem.Visible = false;
+                //dgvOrderDetail.Visible = false;
+                //uiPanel1.Visible = false;
 
-                lblNodata.Text = "已收费处方";
-                lblNodata.Show();
+                //lblNodata.Text = "已收费处方";
+                //lblNodata.Show();
+
+                InitUI();
+                GetData();
             }
             else
             {

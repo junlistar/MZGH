@@ -25,7 +25,7 @@ namespace MainFrame
         public Container()
         {
             InitializeComponent();
-
+            CheckForIllegalCrossThreadCalls = false;
         }
         public string sys_key;
 
@@ -68,6 +68,7 @@ namespace MainFrame
                     }
 
                     Main.vM.subsys_id = _system.subsys_id.Trim();
+                    Main.vM.ParentHandle = this.Handle.ToString();
                     var _args = EmbeddedExeTool.SerializeObject(Main.vM);
                     //_args = _args.Replace("\"", "\\\"");
 

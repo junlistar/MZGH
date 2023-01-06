@@ -191,6 +191,7 @@
             this.txt_wookroom.Style = Sunny.UI.UIStyle.Custom;
             this.txt_wookroom.TabIndex = 8;
             this.txt_wookroom.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_wookroom.Watermark = "";
             this.txt_wookroom.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_limit
@@ -208,6 +209,7 @@
             this.txt_limit.Text = "0";
             this.txt_limit.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_limit.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.txt_limit.Watermark = "";
             this.txt_limit.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // lbl_temp_flag
@@ -239,6 +241,7 @@
             this.txtTotalNum.Text = "100";
             this.txtTotalNum.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txtTotalNum.Type = Sunny.UI.UITextBox.UIEditType.Integer;
+            this.txtTotalNum.Watermark = "";
             this.txtTotalNum.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel9
@@ -270,6 +273,7 @@
             this.cbxHaobie.Style = Sunny.UI.UIStyle.Custom;
             this.cbxHaobie.TabIndex = 4;
             this.cbxHaobie.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxHaobie.Watermark = "";
             this.cbxHaobie.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel6
@@ -309,6 +313,7 @@
             this.txtDoct.Style = Sunny.UI.UIStyle.Custom;
             this.txtDoct.TabIndex = 3;
             this.txtDoct.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDoct.Watermark = "";
             this.txtDoct.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtDoct.TextChanged += new System.EventHandler(this.txtDoct_TextChanged);
             this.txtDoct.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDoct_KeyUp);
@@ -327,6 +332,7 @@
             this.txtzk.Style = Sunny.UI.UIStyle.Custom;
             this.txtzk.TabIndex = 2;
             this.txtzk.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtzk.Watermark = "";
             this.txtzk.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtzk.TextChanged += new System.EventHandler(this.txtzk_TextChanged);
             this.txtzk.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtzk_KeyUp);
@@ -345,9 +351,10 @@
             this.txtks.Style = Sunny.UI.UIStyle.Custom;
             this.txtks.TabIndex = 1;
             this.txtks.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtks.Watermark = "";
             this.txtks.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.txtks.TextChanged += new System.EventHandler(this.txtks_TextChanged);
-            this.txtks.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtks_KeyUp);
+            this.txtks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtks_KeyUp);
             this.txtks.Leave += new System.EventHandler(this.txtks_Leave);
             // 
             // cbxDay
@@ -372,6 +379,7 @@
             this.cbxDay.Style = Sunny.UI.UIStyle.Custom;
             this.cbxDay.TabIndex = 5;
             this.cbxDay.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxDay.Watermark = "";
             this.cbxDay.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel10
@@ -439,6 +447,7 @@
             this.cbxOpenFlag.Style = Sunny.UI.UIStyle.Custom;
             this.cbxOpenFlag.TabIndex = 9;
             this.cbxOpenFlag.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxOpenFlag.Watermark = "";
             this.cbxOpenFlag.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel3
@@ -472,6 +481,7 @@
             this.cbxSXW.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSXW.TabIndex = 6;
             this.cbxSXW.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxSXW.Watermark = "";
             this.cbxSXW.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel2
@@ -494,6 +504,7 @@
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(84, 32);
+            this.btnSave.Style = Sunny.UI.UIStyle.Custom;
             this.btnSave.TabIndex = 11;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -508,6 +519,7 @@
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(93, 33);
+            this.btnCancel.Style = Sunny.UI.UIStyle.Custom;
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "取消";

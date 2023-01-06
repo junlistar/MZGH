@@ -324,7 +324,7 @@ namespace Client.ClassLib
                 //var reslt = HttpClientUtil.Get(url);
                 //Task.Run(() =>
                 //{
-                    HttpClientUtil.Get(url);
+                  HttpClientUtil.Get(url);
                 //});
             }
             catch (Exception ex)

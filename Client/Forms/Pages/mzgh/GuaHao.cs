@@ -104,6 +104,7 @@ namespace Client
                 //查询并设置发票
                 ReceiptInit receiptInit = new ReceiptInit();
                 receiptInit.Style = this.Style;
+                receiptInit.Owner = this;
                 receiptInit.ShowDialog();
 
                 Task.Run(async () =>

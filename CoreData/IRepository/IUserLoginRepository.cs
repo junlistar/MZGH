@@ -24,6 +24,10 @@ namespace Data.IRepository
 
         List<LoginUsers> GetLoginUser(string uname,string pwd);
 
+        List<LoginUsers> GetLoginUser(string uname, string pwd, string subsys_id);
+
+        List<UserGroupSystem> GetUsergroupSystem(string subsys_id, string user_group, string sys_type);
+
         List<LoginUsers> GetLoginUserByUserMi(string usermi);
 
         int UpdateUserPassWord(string uname, string pwd);

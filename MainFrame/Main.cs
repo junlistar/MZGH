@@ -27,7 +27,8 @@ namespace MainFrame
         public Main()
         {
             InitializeComponent();
-            uiTabControl1.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage; ;
+            CheckForIllegalCrossThreadCalls = false;
+            uiTabControl1.BeforeRemoveTabPage += MainTabControl_BeforeRemoveTabPage;
         }
 
         //用于处理tab关闭时，关闭窗体句柄，否则不关闭会出现多个子系统进程

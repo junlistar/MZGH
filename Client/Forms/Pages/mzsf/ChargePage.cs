@@ -528,6 +528,7 @@ namespace Mzsf.Forms.Pages
                                 //uiTabControl1.TabPages[pageIndex].showclo
                                 pageIndex++;
                             }
+                            uiTabControl1.SelectedIndex = uiTabControl1.TabCount - 1;
                             uiTabControl1.Show();
                             BindBottomChargeInfo(0);
                             pblSum.Show();
@@ -713,7 +714,7 @@ namespace Mzsf.Forms.Pages
             }
             catch (Exception ex)
             {
-                UIMessageBox.Show(ex.Message);
+                //UIMessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
         }

@@ -1144,7 +1144,7 @@ namespace Client
                         DateTime time = new DateTime();
                         if (DateTime.TryParse(birth, out time))
                         {
-                            //this.dtpBirth.Value = time;
+                            this.sfz_birthday.Value = time;
                         }
                     }
                     else if (cardId.Length == 15)
@@ -1153,7 +1153,7 @@ namespace Client
                         DateTime time = new DateTime();
                         if (DateTime.TryParse(birth, out time))
                         {
-                            //this.dtpBirth.Value = time;
+                            this.sfz_birthday.Value = time;
                         }
                     }
                 }
@@ -1234,7 +1234,7 @@ namespace Client
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                SaveData();
+                //SaveData();
             }
         }
 

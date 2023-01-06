@@ -4,6 +4,8 @@ using Data.IRepository;
 using System;
 using System.Collections.Generic;
 using Serilog;
+using System.Data;
+using System.Linq;
 
 namespace Data.Repository
 {
@@ -45,6 +47,54 @@ namespace Data.Repository
             return Select(sql, para);
 
         }
+
+        public List<LoginUsers> GetLoginUser(string uname, string pwd,string subsys_id)
+        { 
+            var para = new DynamicParameters();
+           
+            string sql = GetSqlByTag("hismain_xtuser_login");
+            if (string.IsNullOrEmpty(pwd))
+            {
+                pwd = "";
+            }
+            para.Add("@uname", uname);
+            para.Add("@pwd", pwd);
+            para.Add("@subsys_id", subsys_id);
+
+            Log.Debug($"准备执行登录查询mzgh_xtuser_login,uname={uname},pwd={pwd},subsys_id={subsys_id}");
+
+            return Select(sql, para);
+
+        }
+
+
+        //
+        public List<UserGroupSystem> GetUsergroupSystem(string subsys_id, string user_group, string sys_type)
+        {
+            try
+            {
+                //todo:实现获取用户组 子系统数据列表
+
+                DynamicParameters para = new DynamicParameters();
+
+                using (IDbConnection connection = DataBaseConfig.GetSqlConnection())
+                {
+                    string sql = GetSqlByTag("hismain_usergroup_system");
+
+                    para.Add("@subsys_id", subsys_id);
+                    para.Add("@user_group", user_group);
+                    para.Add("@sys_type", sys_type);
+
+                    return connection.Query<UserGroupSystem>(sql, para).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            } 
+
+        }
+
         public List<LoginUsers> GetLoginUserByUserMi(string usermi)
         {
             

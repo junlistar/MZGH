@@ -36,6 +36,7 @@
             this.tv_users = new Sunny.UI.UITreeView();
             this.cms_user = new Sunny.UI.UIContextMenuStrip();
             this.cms_group = new Sunny.UI.UIContextMenuStrip();
+            this.uiLabel1 = new Sunny.UI.UILabel();
             this.uiTitlePanel1.SuspendLayout();
             this.uiTitlePanel5.SuspendLayout();
             this.uiTitlePanel2.SuspendLayout();
@@ -96,6 +97,7 @@
             // 
             this.uiTitlePanel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.uiTitlePanel5.Controls.Add(this.uiLabel1);
             this.uiTitlePanel5.Controls.Add(this.tv_func_select);
             this.uiTitlePanel5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTitlePanel5.Location = new System.Drawing.Point(356, 40);
@@ -106,7 +108,7 @@
             this.uiTitlePanel5.ShowText = false;
             this.uiTitlePanel5.Size = new System.Drawing.Size(382, 632);
             this.uiTitlePanel5.TabIndex = 23;
-            this.uiTitlePanel5.Text = "菜单选择";
+            this.uiTitlePanel5.Text = "系统选择";
             this.uiTitlePanel5.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.uiTitlePanel5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiTitlePanel5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
@@ -188,6 +190,18 @@
             this.cms_group.Size = new System.Drawing.Size(61, 4);
             this.cms_group.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // uiLabel1
+            // 
+            this.uiLabel1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiLabel1.Location = new System.Drawing.Point(332, 11);
+            this.uiLabel1.Name = "uiLabel1";
+            this.uiLabel1.Size = new System.Drawing.Size(46, 23);
+            this.uiLabel1.TabIndex = 1;
+            this.uiLabel1.Text = "保存";
+            this.uiLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiLabel1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiLabel1.Click += new System.EventHandler(this.btnSaveMenu_Click);
+            // 
             // UserManage
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -218,5 +232,6 @@
         private Sunny.UI.UITreeView tv_users;
         private Sunny.UI.UIContextMenuStrip cms_user;
         private Sunny.UI.UIContextMenuStrip cms_group;
+        private Sunny.UI.UILabel uiLabel1;
     }
 }

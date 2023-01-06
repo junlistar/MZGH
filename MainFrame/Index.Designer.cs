@@ -32,6 +32,8 @@
             this.pnlSystem = new Sunny.UI.UIFlowLayoutPanel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.progressBar = new Sunny.UI.UIProcessBar();
+            this.pnlinstall = new Sunny.UI.UIPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -80,11 +82,47 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.progressBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.progressBar.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.progressBar.Location = new System.Drawing.Point(273, 286);
+            this.progressBar.MinimumSize = new System.Drawing.Size(70, 3);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(651, 29);
+            this.progressBar.Style = Sunny.UI.UIStyle.Custom;
+            this.progressBar.TabIndex = 0;
+            this.progressBar.Text = "uiProcessBar1";
+            this.progressBar.Visible = false;
+            this.progressBar.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
+            // pnlinstall
+            // 
+            this.pnlinstall.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pnlinstall.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.pnlinstall.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
+            this.pnlinstall.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pnlinstall.Location = new System.Drawing.Point(484, 236);
+            this.pnlinstall.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pnlinstall.MinimumSize = new System.Drawing.Size(1, 1);
+            this.pnlinstall.Name = "pnlinstall";
+            this.pnlinstall.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.pnlinstall.Size = new System.Drawing.Size(240, 42);
+            this.pnlinstall.Style = Sunny.UI.UIStyle.Red;
+            this.pnlinstall.TabIndex = 10;
+            this.pnlinstall.Text = "正在安装...";
+            this.pnlinstall.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pnlinstall.Visible = false;
+            this.pnlinstall.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // Index
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1202, 743);
+            this.Controls.Add(this.pnlinstall);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pnlSystem);
@@ -105,5 +143,7 @@
         private Sunny.UI.UIFlowLayoutPanel pnlSystem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private Sunny.UI.UIProcessBar progressBar;
+        private Sunny.UI.UIPanel pnlinstall;
     }
 }

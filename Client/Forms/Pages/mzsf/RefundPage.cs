@@ -205,7 +205,7 @@ namespace Mzsf.Forms.Pages
 
                 if (!string.IsNullOrEmpty(dat.backfee_date) || dat.charge_total < 0)
                 {
-                    UIMessageTip.ShowWarning("该记录已经退号！");
+                    UIMessageTip.ShowWarning("该记录已经退费！");
                     return;
                 }
 

@@ -221,23 +221,19 @@ namespace MainFrame.Common
 
                 if (!string.IsNullOrEmpty(winname) && (winname == "mzxyf" || winname == "zyxyf"))
                 {
-                    //药品系统去除标题栏
-                    SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
-                    SetParent(window, control.Handle);
-                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                    log.Debug($"首次嵌入：Width:{control.Width},Height:{control.Height}");
+                    //由药品系统自己处理嵌入功能实现
+                    
+                    ////药品系统去除标题栏
+                    //SetWindowLong(new HandleRef(this, window), GWL_STYLE, WS_VISIBLE);
+                    //SetParent(window, control.Handle);
+                    //MoveWindow(window, 0, 0, control.Width, control.Height, true);
 
                 } 
                 else
-                {
-                    //SetParent(window, control.Handle);
-                    ////ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                    //MoveWindow(window, 0, 0, control.Width, control.Height, true);
-
+                { 
                     SetParent(window, control.Handle);
                     ShowWindow(window, (int)ProcessWindowStyle.Maximized);
-                    MoveWindow(window, 0, 0, control.Width, control.Height, true);
-                    log.Debug($"首次嵌入：Width:{control.Width},Height:{control.Height}");
+                    MoveWindow(window, 0, 0, control.Width, control.Height, true); 
 
                 }
             }

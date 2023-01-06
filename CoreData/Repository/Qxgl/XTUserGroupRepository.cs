@@ -21,7 +21,17 @@ namespace Data.Repository
             return Select(ghsql, para);
 
         }
+        public List<XTUserGroup> GetXTUserSystemsByGroupId(string subsys_id, string user_group)
+        {
+            string ghsql = GetSqlByTag("xt_system_getbygroup");
+            var para = new DynamicParameters();
 
+            para.Add("@subsys_id", subsys_id);
+            para.Add("@user_group", user_group);
+            return Select(ghsql, para);
+
+        }
+        
         public List<XTUserGroup> GetXTUserGroups(string subsys_id)
         {
             string ghsql = GetSqlByTag("xt_func_getbysysid");

@@ -65,6 +65,7 @@ namespace Client.Forms.Pages.xt
                 txt_mzsf_report_code.Text = SessionHelper.MzClientConfigVM.mzsf_report_code;
                 txt_ghrj_report_code.Text = SessionHelper.MzClientConfigVM.ghrj_report_code;
                 txt_sfrj_report_code.Text = SessionHelper.MzClientConfigVM.sfrj_report_code;
+                txt_older_age.Text = SessionHelper.MzClientConfigVM.older_age.ToString();
                 txt_updatetime.Text = SessionHelper.MzClientConfigVM.update_time.ToString();
             }
             else
@@ -111,6 +112,8 @@ namespace Client.Forms.Pages.xt
                 clientConfig.mzsf_report_code = txt_mzsf_report_code.Text.Trim();
                 clientConfig.ghrj_report_code = txt_ghrj_report_code.Text.Trim();
                 clientConfig.sfrj_report_code = txt_sfrj_report_code.Text.Trim();
+                clientConfig.older_age = int.Parse(txt_older_age.Text);
+                
 
                 var paramurl = string.Format($"/api/guahao/UpdateMzClientConfig");
                 var json = HttpClientUtil.PostJSON(paramurl, clientConfig);

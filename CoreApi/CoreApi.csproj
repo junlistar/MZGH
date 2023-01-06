@@ -44,6 +44,9 @@
     <None Update="Properties\launchSettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\hismain_usergroup_system.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mainclientconfig_update.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -77,7 +80,13 @@
     <None Update="SQLS\mzgh_xtuser_autologin.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="SQLS\hismain_xtuser_login.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="SQLS\mzsf_mzdeposit_print_get.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SQLS\xt_system_getbygroup.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="SQLS\ypgroup_get.sql">

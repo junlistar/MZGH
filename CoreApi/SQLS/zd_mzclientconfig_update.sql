@@ -4,5 +4,6 @@
  mzsf_report_code=@mzsf_report_code,
  ghrj_report_code=@ghrj_report_code,
  sfrj_report_code=@sfrj_report_code,
+ older_age=@older_age,
  update_time=getdate()
 where sys_type=@sys_type

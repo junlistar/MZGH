@@ -14,5 +14,7 @@ namespace Data.Entities
         public string mzsf_report_code { get; set; }
         public string ghrj_report_code { get; set; }
         public string sfrj_report_code { get; set; }
+
+        public int older_age { get; set; }
     }
 }

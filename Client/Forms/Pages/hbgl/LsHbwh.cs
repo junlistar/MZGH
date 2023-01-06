@@ -76,8 +76,8 @@ namespace Client
             cbxRequestType.ValueMember = "code";
 
             var _dt_now = DateTime.Now.ToShortDateString();
-            txtDate.Text = _dt_now;
-            txtDate2.Text = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToShortDateString();
+            txtDate.Value = DateTime.Now;
+            txtDate2.Value = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1);
 
             //设置上午下午 
             this.cbxSXW.Items.Clear();
@@ -134,8 +134,8 @@ namespace Client
 
             LoadingHelper.ShowLoadingScreen();//显示
 
-            var begin = txtDate.Value.ToShortDateString();
-            var end = txtDate2.Value.ToShortDateString();
+            var begin = txtDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            var end = txtDate2.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
             //var gh_date = txtRiqi.Text;
             var visit_dept = string.IsNullOrWhiteSpace(txtks.Text) ? "%" : txtks.TagString;
@@ -1243,11 +1243,11 @@ namespace Client
         {
             try
             {
-                var dt_from = DateTime.Now.ToShortDateString();
-                var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1).ToShortDateString();
+                var dt_from = DateTime.Now;
+                var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + 1);
 
-                txtDate.Text = dt_from;
-                txtDate2.Text = dt_to;
+                txtDate.Value = dt_from;
+                txtDate2.Value = dt_to;
 
                 InitData();
             }
@@ -1262,13 +1262,12 @@ namespace Client
         private void btnWeek2_Click(object sender, EventArgs e)
         {
             try
-            {
+            { 
+                var dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1);
+                var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1);
 
-                var dt_from = DateTime.Now.AddDays(0 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToShortDateString();
-                var dt_to = DateTime.Now.AddDays(6 - Convert.ToInt16(DateTime.Now.DayOfWeek) + ((2 - 1) * 7) + 1).ToShortDateString();
-
-                txtDate.Text = dt_from;
-                txtDate2.Text = dt_to;
+                txtDate.Value = dt_from;
+                txtDate2.Value = dt_to;
 
                 InitData();
             }

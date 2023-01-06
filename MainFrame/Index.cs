@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -24,6 +25,7 @@ using log4net;
 using MainFrame.Common;
 using MainFrame.Properties;
 using Sunny.UI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ScrollBar;
 
 namespace MainFrame
 {
@@ -415,7 +417,9 @@ namespace MainFrame
                             //}
 
                             //override code
-                            UIMessageTip.ShowOk("开始下载......");
+                            UIMessageTip.ShowOk("开始下载......", -1);
+                            pnlinstall.Text = "正在下载系统...";
+                            pnlinstall.Show();
 
                             _args = args;
                             var uri = new Uri(_args.DownloadURL);
@@ -434,7 +438,8 @@ namespace MainFrame
                                     Directory.CreateDirectory(AutoUpdater.DownloadPath);
                                 }
                             }
-
+                            progressBar.Show();
+                            Application.DoEvents();
                             _webClient.DownloadProgressChanged += OnDownloadProgressChanged;
 
                             _webClient.DownloadFileCompleted += WebClientOnDownloadFileCompleted;
@@ -462,8 +467,8 @@ namespace MainFrame
                 if (args.Error is System.Net.WebException)
                 {
                     MessageBox.Show(
-                        @"There is a problem reaching update server. Please check your internet connection and try again later.",
-                        @"Update Check Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        @"访问更新站点服务器失败. 请检查您的网络配置并再次尝试.",
+                        @"检查更新失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -477,6 +482,7 @@ namespace MainFrame
             }
 
         }
+        DateTime _startedAt = DateTime.Now;
         private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             //if (_startedAt == default(DateTime))
@@ -490,16 +496,42 @@ namespace MainFrame
             //    if (totalSeconds > 0)
             //    {
             //        var bytesPerSecond = e.BytesReceived / totalSeconds;
-            //        labelInformation.Text =
-            //            string.Format(Resources.DownloadSpeedMessage, BytesToString(bytesPerSecond));
+            //        labelInformation.Text = string.Format("以{0}/s下载", BytesToString(bytesPerSecond));
             //    }
             //}
 
             //labelSize.Text = $@"{BytesToString(e.BytesReceived)} / {BytesToString(e.TotalBytesToReceive)}";
-            //progressBar.Value = e.ProgressPercentage;
+            progressBar.Value = e.ProgressPercentage;
+            //log.Debug("下载进度：" + e.ProgressPercentage);
+        }
+        private static string BytesToString(long byteCount)
+        {
+            try
+            {
+
+                string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" };
+                if (byteCount == 0)
+                    return "0" + suf[0];
+                long bytes = Math.Abs(byteCount);
+                int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+                double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+                return $"{(Math.Sign(byteCount) * num).ToString(CultureInfo.InvariantCulture)} {suf[place]}";
+
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.ToString());
+            }
+            return "";
         }
         private void WebClientOnDownloadFileCompleted(object sender, AsyncCompletedEventArgs asyncCompletedEventArgs)
         {
+            UIMessageTip.ShowOk("开始安装......", -1);
+
+            progressBar.Hide();
+            pnlinstall.Text = "下载完成，正在安装系统...";
+            pnlinstall.Show();
+
             if (asyncCompletedEventArgs.Cancelled)
             {
                 return;
@@ -559,7 +591,7 @@ namespace MainFrame
                     {
                         string installerPath = Path.Combine(Path.GetDirectoryName(tempPath) ?? throw new InvalidOperationException(), "ZipExtractor.exe");
 
-                       // File.WriteAllBytes(installerPath, Resources.ZipExtractor);
+                        // File.WriteAllBytes(installerPath, Resources.ZipExtractor);
 
                         string executablePath = Process.GetCurrentProcess().MainModule?.FileName;
                         string extractionPath = Path.GetDirectoryName(executablePath);
@@ -727,10 +759,17 @@ namespace MainFrame
                                     progress = (index + 1) * 100 / entries.Count;
                                     _backgroundWorker.ReportProgress(progress, currentFile);
 
-                                   // _logBuilder.AppendLine($"{currentFile} [{progress}%]");
+                                    // _logBuilder.AppendLine($"{currentFile} [{progress}%]");
                                 }
                                 WriteLocalVersion(_syscode, _newversion);
-                                UIMessageTip.ShowOk("安装完成！",2000);
+                                UIMessageTip.ShowOk("安装成功，正在启动系统...", 3000);
+                                pnlinstall.Hide();
+                                //打开系统 
+                                Action action = () =>
+                                {
+                                    setData(_system.sys_name, _system.sys_no);
+                                };
+                                Invoke(action);
                             }
                             finally
                             {
@@ -765,6 +804,7 @@ namespace MainFrame
                 //Close();
             }
         }
+
         private void DownloadUpdateDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (AutoUpdater.Mandatory && AutoUpdater.UpdateMode == Mode.ForcedDownload)
@@ -818,16 +858,63 @@ namespace MainFrame
         public void LoadGroups()
         {
             int top = 50, left = 180;
-            for (int i = 0; i < system_groups.Count; i++)
+
+            if (SessionHelper.uservm.user_mi != "00000")
             {
-                UIMarkLabel markLabel = new UIMarkLabel();
-                markLabel.Top = top + (i * 110);
-                markLabel.Left = left;
-                markLabel.Parent = this;
-                markLabel.Text = system_groups[i].group_name;
-                markLabel.Font = new Font("宋体", 12, FontStyle.Regular);
-                markLabel.Parent = this;
+                //不是管理员，显示权限部分系统
+                if (SessionHelper.userGroupSystems == null || SessionHelper.userGroupSystems.Count == 0)
+                {
+                    UIMessageBox.Show("没有子系统权限！");
+                }
+                
+
+                string _sysgroup = "";
+                List<SubSystemGroupVM> subSystemGroups= new List<SubSystemGroupVM>();
+                int _topCount = 0;
+                for (int i = 0; i < SessionHelper.userGroupSystems.Count; i++)
+                {
+                    var _group_item = SessionHelper.userGroupSystems[i];
+                    if (_group_item.group_code != _sysgroup)
+                    {
+                        _sysgroup = _group_item.group_code;
+                        UIMarkLabel markLabel = new UIMarkLabel();
+                        markLabel.Top = top + (_topCount * 110); _topCount++;
+                        markLabel.Left = left;
+                        markLabel.Parent = this;
+                        markLabel.Text = _group_item.group_name;
+                        markLabel.Font = new Font("宋体", 12, FontStyle.Regular);
+                        markLabel.Parent = this;
+
+                        var _vm = new SubSystemGroupVM();
+                        _vm.group_code = _group_item.group_code;
+                        _vm.group_name = _group_item.group_name;
+                        subSystemGroups.Add(_vm); 
+                    }
+                }
+                system_groups = subSystemGroups;
+                foreach (var item in systemList.ToArray())
+                {
+                    if (SessionHelper.userGroupSystems.Count(p=>p.func_name.Trim() == item.sys_code.Trim())==0)
+                    {
+                        systemList.Remove(item);
+                    }
+                }
             }
+            else
+            {
+
+                for (int i = 0; i < system_groups.Count; i++)
+                {
+                    UIMarkLabel markLabel = new UIMarkLabel();
+                    markLabel.Top = top + (i * 110);
+                    markLabel.Left = left;
+                    markLabel.Parent = this;
+                    markLabel.Text = system_groups[i].group_name;
+                    markLabel.Font = new Font("宋体", 12, FontStyle.Regular);
+                    markLabel.Parent = this;
+                }
+            }
+
             LoadSubSystems();
         }
         public void LoadSubSystems()
@@ -933,6 +1020,7 @@ namespace MainFrame
             //pnl_main.BackColor = Color.Transparent;
         }
 
+     
         public void GetSystemGroupData()
         {
             try

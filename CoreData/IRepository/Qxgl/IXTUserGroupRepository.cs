@@ -12,6 +12,8 @@ namespace Data.IRepository
 
         List<XTUserGroup> GetXTUserGroupsByGroupId(string subsys_id, string user_group);
 
+        List<XTUserGroup> GetXTUserSystemsByGroupId(string subsys_id, string user_group);
+
         List<XTUserGroup> GetXTUserGroups(string subsys_id);
 
         bool AddXtUserGroups(string func_str, string subsys_id, string user_group);

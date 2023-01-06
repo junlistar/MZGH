@@ -19,6 +19,8 @@ using System.Net.Http;
 using System.IO;
 using System.Text;
 using System.Web.Script.Serialization;
+using Data.Repository;
+using System.Data.SqlClient;
 
 namespace CoreApi.Controllers
 {
@@ -31,22 +33,70 @@ namespace CoreApi.Controllers
         private readonly IYbkInfoRepository _ybkInfoRepository;
         private readonly IMzPatientRelationRepository _mzPatientRelationRepository;
         private readonly IPatientRepository _patientRepository;
+        private readonly IUserLoginRepository _userLoginRepository;
 
         public UserController(IMzPatientSfzRepository mzPatientSfzRepository, ISfzInfoRepository sfzInfoRepository, IYbkInfoRepository ybkInfoRepository,
-            IMzPatientRelationRepository mzPatientRelationRepository, IPatientRepository patientRepository)
+            IMzPatientRelationRepository mzPatientRelationRepository, IPatientRepository patientRepository,IUserLoginRepository userLoginRepository)
         {
             _mzPatientSfzRepository = mzPatientSfzRepository;
             _sfzInfoRepository = sfzInfoRepository;
             _ybkInfoRepository = ybkInfoRepository;
             _mzPatientRelationRepository = mzPatientRelationRepository;
             _patientRepository = patientRepository;
+            _userLoginRepository = userLoginRepository;
         }
 
         [HttpGet]
         public string GetTest()
         {
             return "ok";
+        } 
+        public ResponseResult<List<LoginUsers>> GetLoginUser(string uname, string pwd,string subsys_id)
+        {
+            Log.Information($"GetLoginUser,{uname},{pwd},{subsys_id}");
+            var list = new List<LoginUsers>();
+            try
+            {
+                list = _userLoginRepository.GetLoginUser(uname, pwd, subsys_id);
+            }
+            catch (SqlException ex)
+            {
+                string errormsg = ex.Message;
+                if (ex.Message.Contains("Timeout"))
+                {
+                    errormsg = "连接数据库超时！";
+                }
+                else if (ex.Message.Contains("not found"))
+                {
+                    errormsg = "无法连接到数据库！";
+                }
+                Log.Error(errormsg);
+                return ErrorResult<List<LoginUsers>>(errormsg);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<LoginUsers>>(ex.Message);
+            }
+            return list;
         }
+
+        public ResponseResult<List<UserGroupSystem>> GetUserGroupSystems(string subsys_id,string user_group,string sys_type)
+        {
+            Log.Information($"GetUserGroupSystems,{subsys_id},{user_group},{sys_type}");
+            List<UserGroupSystem> list;
+            try
+            {
+                list = _userLoginRepository.GetUsergroupSystem(subsys_id, user_group, sys_type);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<UserGroupSystem>>(ex.Message);
+            }
+            return list;
+        }
+
 
         /// <summary>
         /// 查询病人Id关联身份证信息

@@ -14,6 +14,7 @@ using Client.ClassLib;
 using System.Net.Http.Headers;
 using Client.ViewModel;
 using log4net;
+using Mzsf.ViewModel;
 
 namespace Client
 {
@@ -76,6 +77,28 @@ namespace Client
                     UIMessageTip.Show("请输入身份证！"); txt_sfzid.Focus();
                     return;
                 }
+
+                //检查身份证和电话号码格式
+                if (!string.IsNullOrWhiteSpace(_sfz_id))
+                {
+                    //验证卡号是否是身份证号
+                    if (!StringUtil.CheckIDCard(_sfz_id))
+                    {
+                        UIMessageTip.ShowError("身份证号码不正确!");
+                        txt_sfzid.Focus();
+                        return;
+                    } 
+                }
+                if (!string.IsNullOrWhiteSpace(_tel))
+                {
+                    if (!StringUtil.IsMobile(_tel))
+                    {
+                        UIMessageTip.ShowWarning("手机号码格式有误!");
+                        txt_tel.Focus();
+                        return;
+                    }
+                }
+
                 string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");
 
                 var json = HttpClientUtil.Get(paramurl);

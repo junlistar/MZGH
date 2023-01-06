@@ -148,6 +148,21 @@ namespace CoreApi.Controllers
             }
             return list;
         }
+        public ResponseResult<List<XTUserGroup>> GetXTUserSystemsByGroupId(string subsys_id, string user_group)
+        {
+            Log.Information($"GetXTUserSystemsByGroupId,{subsys_id},{user_group}");
+            List<XTUserGroup> list;
+            try
+            {
+                list = _xTUserGroupRepository.GetXTUserSystemsByGroupId(subsys_id, user_group);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                return ErrorResult<List<XTUserGroup>>(ex.Message);
+            }
+            return list;
+        }
         public ResponseResult<List<XTUserGroup>> GetXTUserGroups(string subsys_id)
         {
             Log.Information($"GetXTUserGroups,{subsys_id}");

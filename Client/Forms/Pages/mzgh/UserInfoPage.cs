@@ -448,6 +448,7 @@ namespace Client.Forms.Pages
 
                 var _patientVM = new PatientVM();
                 _patientVM.patient_id = _pid;
+                _patientVM.p_bar_code = txt_barcode.Text;
                 _patientVM.name = _name;
                 _patientVM.sex = _sex;
                 _patientVM.marry_code = _marry_code.ToString();

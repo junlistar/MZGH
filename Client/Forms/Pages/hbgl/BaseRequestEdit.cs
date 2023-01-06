@@ -191,7 +191,7 @@ namespace Client
             txt_limit.Text = "1";
 
             dgv.CellClick += dgvks_CellContentClick;
-            dgv.KeyDown += dgvks_KeyDown;
+            dgv.KeyUp += dgvks_KeyDown;
 
             dgvzk.CellClick += dgvzk_CellContentClick;
             dgvzk.KeyDown += Dgvzk_KeyDown;
@@ -687,6 +687,7 @@ namespace Client
 
                     dgvks_CellContentClick(sender, ev);
                 }
+                e.Handled= true;
             }
 
         }
@@ -777,7 +778,7 @@ namespace Client
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                SaveData();
+                //SaveData();
             }
         }
     }

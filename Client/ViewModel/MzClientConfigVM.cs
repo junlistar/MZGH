@@ -19,5 +19,6 @@ namespace Client.ViewModel
         public string ghrj_report_code { get; set; }
         public string sfrj_report_code { get; set; }
         
+        public int older_age { get; set; }
     }
 }

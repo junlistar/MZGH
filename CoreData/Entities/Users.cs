@@ -25,8 +25,19 @@ namespace Data.Entities
         public string dept_sn { get; set; }
         public string dept_name { get; set; }
         public string yb_ys_code { get; set; }
-
-
-
     }
+
+    public class UserGroupSystem : BaseModel {
+
+        public string subsys_id { get; set; }
+        public string user_group { get; set; }
+        public string func_name { get; set; }
+        public string sys_type { get; set; }
+        public string sys_code { get; set; }
+        public string sys_name { get; set; }
+        public string group_no { get; set; }
+        public string group_code { get; set; }
+        public string group_name { get; set; } 
+    }
+
 }

@@ -48,7 +48,7 @@ namespace MainFrame
                 //this.Close();
                  
                 string json = "";
-                string paramurl = string.Format($"/api/GuaHao/GetLoginUser?uname={username}&pwd={password}");
+                string paramurl = string.Format($"api/user/GetLoginUser?uname={username}&pwd={password}&subsys_id={"his_main"}");
 
                 log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
 
@@ -62,6 +62,9 @@ namespace MainFrame
                     {
                         SessionHelper.uservm = result.data[0];
                         IsLogin = true;
+
+                        //获取用户子系统权限 
+                        GetUserGroupSystem();
                         this.Close();
                     }
                     else
@@ -97,6 +100,22 @@ namespace MainFrame
                     UIMessageTip.ShowError(ex.Message);
                 }
             }
+        }
+        public void GetUserGroupSystem()
+        {
+            string json = "";//GetUserGroupSystems(string subsys_id,string user_group,string sys_type)
+            string paramurl = string.Format($"/api/user/GetUserGroupSystems?subsys_id={"his_main"}&user_group={SessionHelper.uservm.user_group}&sys_type={"2.0"}");
+
+            log.InfoFormat(SessionHelper.MyHttpClient.BaseAddress + paramurl);
+
+            json = HttpClientUtil.Get(paramurl);
+
+            var result = HttpClientUtil.DeserializeObject<ResponseResult<List<UserGroupSystemVM>>>(json);
+            if (result.status == 1)
+            {
+                SessionHelper.userGroupSystems = result.data;
+            }
+
         }
 
         private void txtName_KeyUp(object sender, KeyEventArgs e)
