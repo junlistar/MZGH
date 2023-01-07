@@ -64,9 +64,10 @@ namespace MainFrame
                         Main.vM.group_no = _system.group_no.Trim();
                         var _ypgroup = SessionHelper.ypGroupsList.Where(p => p.group_no.Trim() == _system.group_no.Trim()).FirstOrDefault();
                         Main.vM.group_name = _ypgroup == null ? "" : _ypgroup.dept_name.Trim();
-                        Main.vM.SubsysRelativePath = _system.sys_relative_path;
+                        
                     }
-
+                    //Main.vM.Application = _system.sys_name;
+                    Main.vM.SubsysRelativePath = _system.sys_relative_path;
                     Main.vM.subsys_id = _system.subsys_id.Trim();
                     Main.vM.ParentHandle = this.Handle.ToString();
                     var _args = EmbeddedExeTool.SerializeObject(Main.vM);
@@ -174,6 +175,11 @@ namespace MainFrame
                 UIMessageTip.ShowError("系统配置有误！请查看日志文件");
                 log.Error(ex.ToString());
             }
+        }
+
+        private void appContainer1_Click(object sender, EventArgs e)
+        {
+            UIMessageBox.Show("click");
         }
     }
 }

@@ -90,6 +90,20 @@ namespace Client.ViewModel
         public string sex { get; set; }
         public DateTime? birthday { get; set; }
         public string age { get; set; }
+        public int userAge { get 
+            {
+                if (birthday.HasValue)
+                {
+                    DateTime now = DateTime.Now;
+                    int age = now.Year - birthday.Value.Year;
+                    if (now.Month < birthday.Value.Month || (now.Month == birthday.Value.Month && now.Day < birthday.Value.Day))
+                    {
+                        age--;
+                    }
+                    return age < 0 ? 0 : age; 
+                }
+                return 0;
+            } }
         public string response_type { get; set; }
         public string contract_code { get; set; }
         public string occupation_type { get; set; }

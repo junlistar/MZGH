@@ -87,7 +87,7 @@ namespace Client
 
                 log.Debug("初始化界面控件显示");
                 InitUIText();
-                 
+
                 parentForm = this.Parent as UIHeaderAsideMainFooterFrame;
 
                 log.Debug("加载挂号数据");
@@ -154,10 +154,10 @@ namespace Client
                     btn1.Style = UIStyle.Green;
                     btn1.StyleCustomMode = true;
                     btn1.Text = hourslist[i].name;
-                    btn1.TagString = hourslist[i].code; 
+                    btn1.TagString = hourslist[i].code;
                     btn1.Width = 86;
                     btn1.Height = 31;
-                     
+
                     uiToolTip1.SetToolTip(btn1, hourslist[i].desc);
 
                     if (i == 0)
@@ -244,7 +244,7 @@ namespace Client
             //log.Debug("打开编辑界面，关闭读卡器");
             //timer1.Stop();
 
-
+            ue.Owner = this;
             ue.ShowDialog();
             ue.Refresh();
 
@@ -461,7 +461,7 @@ namespace Client
                     btn1.Leave += Btn1_Leave;
                     btn1.KeyUp += Btn1_KeyUp;
 
-                    gbxUnits.Add(btn1); 
+                    gbxUnits.Add(btn1);
                 }
 
                 //如果是回车操作，默认选择第一项
@@ -475,7 +475,7 @@ namespace Client
                         _btn.Focus();
                     }
                 }
-               
+
 
 
                 #endregion
@@ -627,7 +627,7 @@ namespace Client
                 btn1.Text += " (￥" + list[i].je + "元)";
 
                 btn1.Click += btnClinic_Click;
-                 
+
                 btn1.Enter += Btn1_Enter;
                 btn1.Leave += Btn1_Leave;
                 btn1.KeyDown += Btn2_KeyUp;
@@ -658,6 +658,12 @@ namespace Client
                 {
                     if (item.record_sn == btn.TagString)
                     {
+                        if (item.clinic_name.Contains("老年号") && PatientVM.userAge < SessionHelper.MzClientConfigVM.older_age)
+                        {
+                            UIMessageTip.ShowWarning("不允许挂老年号，年龄不符合要求！");
+                            break;
+                        }
+
                         if (CheckGhRepeat(btnEditUser1.TagString, item.record_sn))
                         {
                             UIMessageTip.ShowWarning("同时段存在相同挂号记录！");
@@ -672,7 +678,7 @@ namespace Client
                         //打印发票
                         if (SessionHelper.do_gh_print)
                         {
-                           // GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
+                            // GuaHao.PatientVM.max_times = GuaHao.PatientVM.max_times + 1;
                             SessionHelper.do_gh_print = false;
 
                             Task.Run(() =>
@@ -970,8 +976,8 @@ namespace Client
                 //log.Debug(parm[2]);
 
                 //YBResponse<UserInfoResponseModel> yBResponse = WebApiHelper.DeserializeObject<YBResponse<UserInfoResponseModel>>(parm[2].ToString());
-                  
-                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs(YBHelper.mdtrtarea_admvs, YBHelper.recer_sys_code, YBHelper.infver, YBHelper.opter_type, 
+
+                YbjsLib.Ybjs ybjs = new YbjsLib.Ybjs(YBHelper.mdtrtarea_admvs, YBHelper.recer_sys_code, YBHelper.infver, YBHelper.opter_type,
                     YBHelper.fixmedins_code, YBHelper.fixmedins_name, YBHelper.edit_diseinfo, YBHelper.yb_identity_only);
 
                 var param2 = ybjs.M1101(SessionHelper.uservm.user_mi, SessionHelper.uservm.name);
@@ -1005,7 +1011,7 @@ namespace Client
 
         }
 
-    
+
 
         private void btnTuihao_Click(object sender, EventArgs e)
         {
@@ -1188,7 +1194,7 @@ namespace Client
 
                 case Keys.F1:
                     Reset();//重新
-                    break; 
+                    break;
                 case Keys.F2:
                     // ShowSearchWindow();//搜索
                     Refund();//退号
@@ -1248,8 +1254,8 @@ namespace Client
             lblrelationname.Text = "";
             lblshenfen.Text = "";
             lblfeibie.Text = "";
-        } 
-      
+        }
+
 
         public void SearchUser()
         {
@@ -1351,7 +1357,7 @@ namespace Client
                         //记录医保日志
                         paramurl = string.Format($"/api/YbInfo/AddYB1101");
                         YBHelper.currentYBInfo.output.patient_id = userInfo.patient_id;
-                        YBHelper.currentYBInfo.output.admiss_times = (userInfo.max_times+1).ToString();
+                        YBHelper.currentYBInfo.output.admiss_times = (userInfo.max_times + 1).ToString();
                         HttpClientUtil.PostJSON(paramurl, YBHelper.currentYBInfo.output);
 
                         //保存用户的医保信息
@@ -1808,7 +1814,7 @@ namespace Client
             {
                 isKeyEnter = true;
                 FilterGuahaoData();
-            } 
+            }
         }
         private void lstunits_KeyUp(object sender, KeyEventArgs e)
         {
@@ -1856,7 +1862,7 @@ namespace Client
             ReadCika rc = new ReadCika("ID号");
             rc.FormClosed += Rc_FormClosed;
             rc.ShowDialog();
-        } 
+        }
 
         private void btnRePrint_Click(object sender, EventArgs e)
         {
@@ -1987,10 +1993,10 @@ namespace Client
                                 int _index = Convert.ToInt32(_btn.TagString);
                                 //计算每行摆放的按钮数量
                                 int _boxWidth = gbxUnits.Width;
-                                int _btnWidth = _btn.Width+4;
+                                int _btnWidth = _btn.Width + 4;
 
                                 int _rowCount = _boxWidth / _btnWidth;
-                                 
+
                                 if (keyData == Keys.Down)
                                 {
                                     if (_index + _rowCount < _list.Count)
@@ -2006,7 +2012,7 @@ namespace Client
                                         _list[_index - _rowCount].Focus();
                                     }
                                 }
-                                return true; 
+                                return true;
                             }
                         }
                     }
@@ -2014,8 +2020,8 @@ namespace Client
                 catch (Exception ex)
                 {
 
-                }  
-            } 
+                }
+            }
             return base.ProcessCmdKey(ref msg, keyData);
         }
     }

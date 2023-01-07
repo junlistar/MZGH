@@ -41,6 +41,7 @@
             this.appContainer1.Name = "appContainer1";
             this.appContainer1.Size = new System.Drawing.Size(800, 450);
             this.appContainer1.TabIndex = 0;
+            this.appContainer1.Click += new System.EventHandler(this.appContainer1_Click);
             // 
             // Container
             // 

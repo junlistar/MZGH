@@ -144,7 +144,7 @@ namespace MainFrame
                     vM = new TestHisVM();
                     vM.Application = "75415424";
                     vM.Screen = "75349424";
-                    vM.AppServer = "10.102.41.142";
+                    vM.AppServer = ConfigurationManager.AppSettings["appServer"];
                     vM.UserMi = SessionHelper.uservm.user_mi;
                     vM.user_mi = SessionHelper.uservm.user_mi;
                     vM.user_name = SessionHelper.uservm.name;
@@ -380,6 +380,8 @@ namespace MainFrame
             {
                 SystemList syslist = new SystemList();
                 //addSystem.FormClosing += AddSystem_FormClosing;
+
+                //syslist.Owner = this;
                 syslist.ShowDialog();
             }
             else if (e.ClickedItem.Text == "系统分组维护")
