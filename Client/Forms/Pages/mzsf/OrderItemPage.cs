@@ -68,7 +68,7 @@ namespace Mzsf.Forms.Pages
 
                 InitUI();
                 GetData();
-
+                 
                 txtName.Focus();
             }
 
@@ -737,7 +737,7 @@ namespace Mzsf.Forms.Pages
                 {
                     int new_index = dgvOrderDetail.Rows.Add();
                     //增加新的一行，并设焦点
-                    this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
+                    //this.dgvOrderDetail.CurrentCell = this.dgvOrderDetail[0, new_index];
                     BindSelectedRowData(new_index);
 
                     txtName.Focus();
@@ -893,6 +893,12 @@ namespace Mzsf.Forms.Pages
             {
                 log.Error(ex.Message);
             }
+        }
+
+        private void OrderItemPage_Activated(object sender, EventArgs e)
+        {
+            UIMessageTip.Show("activated");
+            txtName.Focus(); 
         }
     }
 }

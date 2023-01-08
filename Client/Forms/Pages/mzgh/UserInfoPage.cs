@@ -446,6 +446,8 @@ namespace Client.Forms.Pages
                 var _home_address = sfz_home_address.Text;
                 var _opera = SessionHelper.uservm.user_mi;
 
+
+
                 var _patientVM = new PatientVM();
                 _patientVM.patient_id = _pid;
                 _patientVM.p_bar_code = txt_barcode.Text;
@@ -469,6 +471,27 @@ namespace Client.Forms.Pages
 
                 _patientVM.update_opera = _opera;
 
+                //检查身份证和电话号码格式
+                if (!string.IsNullOrWhiteSpace(txt_sfz_no.Text))
+                {
+                    //验证卡号是否是身份证号
+                    if (!StringUtil.CheckIDCard(txt_sfz_no.Text))
+                    {
+                        UIMessageTip.ShowError("身份证号码不正确!");
+                        txt_sfz_no.Focus();
+                        return;
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(txthometel.Text))
+                {
+                    if (!StringUtil.IsMobile(txthometel.Text))
+                    {
+                        UIMessageTip.ShowWarning("手机号码格式有误!");
+                        txthometel.Focus();
+                        return;
+                    }
+                }
+
                 //非空验证
                 var paramurl1 = string.Format($"/api/GuaHao/GetSysConfig?item_name={"mzPatientInfo_notNullColumns"}");
 
@@ -484,6 +507,7 @@ namespace Client.Forms.Pages
                         if (string.IsNullOrWhiteSpace(_patientVM.p_bar_code))
                         {
                             UIMessageTip.ShowError("卡号不能为空!");
+                            txt_barcode.Focus();
                             return;
                         }
                     }
@@ -543,6 +567,7 @@ namespace Client.Forms.Pages
                         if (string.IsNullOrWhiteSpace(_patientVM.hic_no))
                         {
                             UIMessageTip.ShowWarning("身份证号码不能为空!");
+                            txt_sfz_no.Focus();
                             return;
                         }
                     }
@@ -560,11 +585,12 @@ namespace Client.Forms.Pages
                 if (result.status == 1)
                 {
                     //更新监护人信息
-                    UpdateRelationInfo();
-
-                    UIMessageTip.Show("保存成功！");
-                    BindBaseInfo(_pid);
-                    BindRelativeInfo(_pid);
+                    if (UpdateRelationInfo())
+                    {
+                        UIMessageTip.Show("保存成功！");
+                        BindBaseInfo(_pid);
+                        BindRelativeInfo(_pid);
+                    }
                 }
                 else
                 {
@@ -599,7 +625,7 @@ namespace Client.Forms.Pages
         /// <summary>
         /// 更新监护人信息
         /// </summary>
-        public void UpdateRelationInfo()
+        public bool UpdateRelationInfo()
         {
 
             try
@@ -618,28 +644,53 @@ namespace Client.Forms.Pages
                 if (_code == null || string.IsNullOrEmpty(_code.ToString()))
                 {
                     UIMessageTip.Show("请选择关系！"); cbx_rel_relation.Focus();
-                    return;
+                    return false;
                 }
                 if (string.IsNullOrEmpty(_name))
                 {
                     UIMessageTip.Show("请输入姓名！"); txt_relationname.Focus();
-                    return;
+                    return false;
                 }
                 if (string.IsNullOrEmpty(_sfz_id))
                 {
                     UIMessageTip.Show("请输入身份证！"); txt_rel_sfzid.Focus();
-                    return;
+                    return false;
                 }
+                //检查身份证和电话号码格式
+                if (!string.IsNullOrWhiteSpace(txt_rel_sfzid.Text))
+                {
+                    //验证卡号是否是身份证号
+                    if (!StringUtil.CheckIDCard(txt_rel_sfzid.Text))
+                    {
+                        UIMessageTip.ShowError("身份证号码不正确!");
+                        txt_rel_sfzid.Focus();
+                        return false;
+                    }
+                }
+                if (!string.IsNullOrWhiteSpace(txt_rel_tel.Text))
+                {
+                    if (!StringUtil.IsMobile(txt_rel_tel.Text))
+                    {
+                        UIMessageTip.ShowWarning("手机号码格式有误!");
+                        txt_rel_tel.Focus();
+                        return false;
+                    }
+                }
+
                 string paramurl = string.Format($"/api/user/UpdateMzPatientRelation?patient_id={_pid}&relation_code={_code}&sfz_id={_sfz_id}&username={_name}&sex={_sex}&tel={_tel}&opera={_opera}&birth={_birth}&address={_addr}");
 
                 var json = HttpClientUtil.Get(paramurl);
 
+                return true;
             }
             catch (Exception ex)
             {
                 UIMessageTip.Show(ex.Message);
                 log.Error(ex.ToString());
             }
+
+            return false;
+
         }
 
 

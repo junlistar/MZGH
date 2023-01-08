@@ -660,7 +660,7 @@ namespace Client
             }
             else if (e.KeyCode == Keys.Enter)
             {
-                if (dgv.Rows.Count > 0)
+                if (dgv.Rows.Count > 0 && dgv.Visible == true)
                 {
 
                     var unit_sn = dgv.Rows[0].Cells["unit_sn"].Value.ToString();

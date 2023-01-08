@@ -338,8 +338,8 @@ namespace MainFrame
                 if (args.Error is System.Net.WebException)
                 {
                     MessageBox.Show(
-                        @"There is a problem reaching update server. Please check your internet connection and try again later.",
-                        @"Update Check Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        @"访问更新站点服务器失败. 请检查您的网络配置并再次尝试.",
+                        @"检查更新失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

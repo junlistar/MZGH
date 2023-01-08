@@ -105,6 +105,7 @@
             this.txt_tel.Style = Sunny.UI.UIStyle.Custom;
             this.txt_tel.TabIndex = 4;
             this.txt_tel.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_tel.Watermark = "";
             this.txt_tel.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_patientid
@@ -121,6 +122,7 @@
             this.txt_patientid.Style = Sunny.UI.UIStyle.Custom;
             this.txt_patientid.TabIndex = 15;
             this.txt_patientid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_patientid.Watermark = "";
             this.txt_patientid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLine1
@@ -150,6 +152,7 @@
             this.cbxRelationCode.Style = Sunny.UI.UIStyle.Custom;
             this.cbxRelationCode.TabIndex = 1;
             this.cbxRelationCode.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxRelationCode.Watermark = "";
             this.cbxRelationCode.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiGroupBox1
@@ -200,6 +203,7 @@
             this.cbxSex.Style = Sunny.UI.UIStyle.Custom;
             this.cbxSex.TabIndex = 2;
             this.cbxSex.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cbxSex.Watermark = "";
             this.cbxSex.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel3
@@ -228,6 +232,7 @@
             this.txt_address.Style = Sunny.UI.UIStyle.Custom;
             this.txt_address.TabIndex = 7;
             this.txt_address.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_address.Watermark = "";
             this.txt_address.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label1
@@ -262,6 +267,7 @@
             this.txt_relationname.Style = Sunny.UI.UIStyle.Custom;
             this.txt_relationname.TabIndex = 3;
             this.txt_relationname.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_relationname.Watermark = "";
             this.txt_relationname.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // label21
@@ -292,6 +298,7 @@
             this.txt_birthday.Text = "1990-01-01";
             this.txt_birthday.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.txt_birthday.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
+            this.txt_birthday.Watermark = "";
             this.txt_birthday.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // txt_sfzid
@@ -307,7 +314,9 @@
             this.txt_sfzid.Style = Sunny.UI.UIStyle.Custom;
             this.txt_sfzid.TabIndex = 5;
             this.txt_sfzid.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txt_sfzid.Watermark = "";
             this.txt_sfzid.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.txt_sfzid.Leave += new System.EventHandler(this.txt_sfzid_Leave);
             // 
             // label11
             // 
@@ -336,6 +345,7 @@
             this.btnSave.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(97, 35);
+            this.btnSave.Style = Sunny.UI.UIStyle.Custom;
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "保存";
             this.btnSave.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -351,6 +361,7 @@
             this.btnCancel.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(97, 35);
+            this.btnCancel.Style = Sunny.UI.UIStyle.Custom;
             this.btnCancel.Symbol = 61453;
             this.btnCancel.TabIndex = 42;
             this.btnCancel.Text = "取消";

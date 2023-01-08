@@ -691,6 +691,8 @@ namespace Client
 
                         }
 
+                        txtCode.Focus();
+
                     }
                 }
             }

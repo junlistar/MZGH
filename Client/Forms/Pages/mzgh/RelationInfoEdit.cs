@@ -213,6 +213,41 @@ namespace Client
                 MessageBox.Show(ex.Message);
                 log.Error(ex.ToString());
             }
-        } 
+        }
+
+        private void txt_sfzid_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                var cardId = txt_sfzid.Text.Trim();
+                //验证卡号是否是身份证号
+                if (StringUtil.CheckIDCard(cardId))
+                {
+                    if (cardId.Length == 18)
+                    {
+                        string birth = cardId.Substring(6, 8).Insert(6, "-").Insert(4, "-");
+                        DateTime time = new DateTime();
+                        if (DateTime.TryParse(birth, out time))
+                        {
+                            this.txt_birthday.Value = time;
+                        }
+                    }
+                    else if (cardId.Length == 15)
+                    {
+                        string birth = cardId.Substring(6, 6).Insert(4, "-").Insert(2, "-");
+                        DateTime time = new DateTime();
+                        if (DateTime.TryParse(birth, out time))
+                        {
+                            this.txt_birthday.Value = time;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                log.Error(ex.ToString());
+            }
+        }
     }
 }

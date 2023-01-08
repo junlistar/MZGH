@@ -126,9 +126,9 @@ namespace Data.Repository
             baseRequest.day =int.Parse(day);
             baseRequest.week = int.Parse(week);
 
-            if (IsExistBaseRecord(baseRequest))
+            if (IsExistBaseRecord(baseRequest) && open_flag=="1")
             {
-                throw new Exception("存在相同记录号！");
+                throw new Exception("存在相同记录号(或存在同时段不同科室记录)！");
             }
 
             //修改
